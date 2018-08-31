@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "新建收货人",
+  "usingComponents": {
+    "nyz_area_picker": "../../../assembly/area/area"
+  }
+}

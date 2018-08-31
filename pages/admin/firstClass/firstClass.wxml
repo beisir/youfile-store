@@ -1,0 +1,33 @@
+<swiper current="{{currentTab}}" duration="300">
+    <swiper-item>
+     <view class='shop-cont shop-cont1'>
+        <view class='shop-size'>常选择的类目</view>
+        <view>珠宝 > 戒指 > 婚戒</view>
+        <view>服装 > 女装 > 连衣裙</view>
+        <view>家用电器 > 厨房电器 > 咖啡机</view>
+      </view>
+      <view class='shop-cont'>
+        <view wx:for='{{dataList}}' wx:key='{{index}}' bindtap='twoClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
+        {{item.name}}
+          <!-- <navigator url='../secondClass/secondClass?code={{item.categoryCode}}&name=' ></navigator> -->
+        </view>
+      </view>
+    </swiper-item>
+     <swiper-item>
+      <view class='shop-cont shop-cont2'>
+        <view class='shop-size'>已选定<text>{{name}}</text></view>
+        <view wx:for='{{dataListTwo}}' wx:key='{{index}}' bindtap='twothreeClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
+          {{item.name}}
+          <!-- <navigator url='../thirdClass/thirdClass?code={{item.categoryCode}}&name={{item.name}}&pName={{name}}'></navigator> -->
+        </view>
+      </view>
+    </swiper-item>
+    <swiper-item>
+      <view class='shop-cont shop-cont2'>
+        <view class='shop-size'>已选定 {{pName}} ><text>{{name}}</text></view>
+        <view wx:for='{{dataListThree}}' wx:key='{{index}}'  data-id='{{item.categoryCode}}' bindtap='classFun'>
+          {{item.name}}
+        </view>
+      </view>
+    </swiper-item>
+</swiper>

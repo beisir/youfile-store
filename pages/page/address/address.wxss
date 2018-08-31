@@ -1,0 +1,140 @@
+@import '../cartList/cartList.wxss';
+
+.ad-tel{
+  font-size: 26rpx;
+  color: #999;
+  background: #fff;
+  margin:15rpx 0;
+  padding:0  30rpx; 
+  height: 100rpx;
+  line-height: 100rpx;
+  overflow: hidden;
+  position: relative;
+}
+.ad-tel image{
+  width: 45rpx;
+  height: 45rpx;
+  margin-right:20rpx;
+  margin-top: -2rpx;
+  vertical-align: middle;
+}
+.ad-tel .ad-itimg{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 6rpx;
+  width: 171rpx;
+}
+.ad-tel .ad-itimg1{left: 171rpx;}
+.ad-tel .ad-itimg2{left: 342rpx;}
+.ad-tel .ad-itimg3{left: 513rpx;}
+.ad-tel .ad-itimg4{left: 684rpx;}
+.ad-tel button{
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 160rpx;
+  position: absolute;
+  top: 20rpx;
+  border:2rpx solid #D1B285;
+  color: #CDAC7A;
+  font-size:28rpx;
+  padding:0;
+  background: #fff;
+  border-radius: 20rpx;
+  right: 30rpx;
+}
+.cart-list{
+  padding-left:230rpx;
+  margin-left: 0;
+  border-bottom: 10rpx solid #fff;
+}
+.cart-list .cart-thumb{
+  left: 30rpx;
+}
+.c-title .itimg{
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+}
+.c-title{
+  background: #fff;
+  margin-left: 0;
+  border-bottom: 0;
+  padding-left: 20rpx;
+}
+.c-title image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.cart-footer{
+  height: 120rpx;
+  background: #fff;
+  border-top: 0;
+  border-bottom: 0;
+  bottom: 0;
+}
+.order-icon{
+  line-height: 120rpx;
+  height: 122rpx;
+}
+.order-all{
+  top: 30rpx;
+  right: 280rpx;
+  color: #999;
+}
+.ad-tel .itimg{
+  position: absolute;
+  right: 20rpx;
+  top: 40rpx;
+  width:30rpx;
+  height: 30rpx;
+}
+.ad-send,.ad-self{
+  margin-bottom: 120rpx;
+}
+.ad-fp{
+  color: #333;
+  font-size: 24rpx;
+  height: 100rpx;
+  background: #fff;
+  padding:0 20rpx;
+  position: relative;
+  margin-bottom: 10rpx;
+  line-height: 100rpx;
+}
+.ad-fp text{
+  color:#999;
+  float: right;
+  margin-right: 50rpx;
+}
+.ad-fp image{
+  width: 26rpx;
+  height: 26rpx;
+  position: absolute;
+  right: 30rpx;
+  top:40rpx;
+}
+.cart-list .cart-pro-name{
+  padding-left:0;
+}
+.ad-fp input{
+  display: inline-block;
+  width: 80%;
+  color: #999;
+  vertical-align: middle;
+  margin-top: -3rpx;
+  padding-left:10rpx;
+}
+.ad-monery{
+  background: #fff;
+  font-size: 26rpx;
+  height: 120rpx;
+  padding: 30rpx 20rpx 0 20rpx;
+}
+.ad-monery text{
+  float: right;
+  color: #CDAC7A;
+}
+.ad-monery view{
+  margin-top: 10rpx;
+}

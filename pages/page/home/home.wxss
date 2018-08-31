@@ -1,0 +1,174 @@
+@import '../userDetails/userDetails';
+.banner{
+  position: relative;
+}
+.hm-fx image{
+  width: 35rpx;height: 35rpx;vertical-align: middle;margin-right: 10rpx;margin-top: -3rpx;
+}
+.hm-fx{
+  position: absolute;right: 0;background: #CCAA77;color: #fff;font-size: 30rpx;width: 140rpx;height: 58rpx;text-align: center;
+  border-top-left-radius:65rpx;border-bottom-left-radius:65rpx;padding-top: 7rpx;top: 25rpx;
+}
+.slide-image{    
+   width: 100%;    
+}
+.ym_sydtdmgzs {
+    text-shadow: none !important;
+     color: #fff;
+}
+.ym_sydtdmgzs {
+    font-size: 28rpx;
+    line-height: 40rpx;
+}
+.ym_sydtstore {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 10rpx;
+    padding-bottom: 20rpx;
+    padding-top: 30rpx;
+    z-index: 12;
+}
+.ym_sydtlogo {
+    float: left;
+    width: 80rpx;
+    height: 80rpx;
+    margin-right: 20rpx;
+    margin-left: 25rpx;
+}
+.ym_sydtlogo .logoimg {
+    border-radius: 100%;
+    width: 80rpx;
+    height: 80rpx;
+}
+.ym_sydtdmgzs .store_name {
+    font-size:30rpx;
+    color: #fff;
+}
+
+.ym_sydtdmgzs text {
+    font-size: 24rpx;
+     color: #fff;
+}
+.ym_sydtdmgzs image{
+  width: 24rpx;
+  height: 25rpx;
+  vertical-align: middle;
+  margin-right: 10rpx;
+}
+.ym_sydtgzbtn {
+    color: #CCAA77 !important;
+    font-weight: normal !important;
+    text-shadow: none !important;
+    border: none;
+}
+.ym_sydtgzbtn {
+    display: block;
+    height: 50rpx;
+    position: absolute;
+    right: 30rpx;width: 130rpx;
+    bottom: 40rpx;padding: 0;
+    background: #F6F7F8;
+    line-height: 50rpx;
+    text-align: center;
+    font-size: 26rpx;
+    border-radius: 10rpx;
+    z-index: 13;
+}
+.goods-ser{
+  height: 80rpx;
+  position: relative;
+  background: #fff;
+}
+.goods-ser input{
+  color: #888888;
+  font-size: 28rpx;
+  height: 80rpx;max-width:515rpx;
+  padding-left: 90rpx;
+}
+.home-ser{
+  height: 40rpx;
+  width: 40rpx;
+  position: absolute;
+  left: 30rpx;
+  top: 20rpx;
+}
+.home-img{
+  height: 70rpx;
+  width: 48rpx;
+  position: absolute;
+  right: 25rpx;
+  top:25rpx;
+  text-align: center;
+  z-index: 10;
+  font-size: 20rpx;
+  color: #A8A8A8;
+}
+.home-img1{
+  right: 90rpx;
+}
+.home-img image{
+  height: 42rpx;
+  width: 42rpx;
+}
+.swiper-tab{ 
+  width: 100%; 
+  margin-top: -9rpx;
+  text-align: center; 
+  background: #fff;
+  line-height: 80rpx;} 
+.swiper-tab-item{ 
+  font-size: 28rpx; 
+  display: inline-block; 
+  width: 33.33%; 
+  color: #666; 
+} 
+.swiper-tab-item image{
+  width: 25rpx;
+  vertical-align: middle;
+  margin-left: 5rpx;
+  height: 25rpx;
+}
+.on{ 
+  color: #C79359; position: relative;
+  } 
+.swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden; } 
+.swiper-box view{ 
+  text-align: center; 
+} 
+.on view{
+  height: 2rpx;
+  width: 80rpx;
+  background:#C79359;
+  left: 50%;
+  margin:0 auto;
+}
+.goods-total{
+  position: fixed;
+  font-size: 20rpx;
+  color: #666;
+  padding-top: 5rpx;
+  height: 85rpx;
+  width: 90rpx;
+  bottom: 30rpx;
+  right: 30rpx;
+  border-radius: 50%;
+  border:2rpx solid #E7E7E7;
+  box-shadow: 0 5rpx 10rpx #E7E7E7;
+  background: #FDFDFD;
+  text-align: center
+}
+.goods-total view{width: 65rpx;height: 2rpx;background: #E7E7E7;margin:0 auto;}
+.store_name view{display: inline-block;background: #CCAA77;font-size: 24rpx;padding:0 15rpx;border-radius: 30rpx;margin-left:10px;line-height:1.3;}
+.add-firend{font-size: 24rpx;height: 80rpx;background: #fff;padding-left: 40rpx;margin-top: -10rpx;}
+.add-firend view{background:#CCAA77;color:#fff;display: inline-block;padding:0 5rpx;line-height: 1.3;margin-right: 15rpx;margin-top: 30rpx;}
+.add-firend image{ width: 40rpx;height: 40rpx;float: right;margin-right: 40rpx;margin-top: 10rpx;}
+.add-firend1 view{background:#C181EA}
+.add-firend2 view{background:#FF5C52}
+.add-firend2{height: 60rpx;}
+.add-firend2 image{margin-top: 20rpx;}
+.add-firend3 view{background:#F7AC25}
+.add-firend3{padding-bottom: 20rpx;}
+.store_name image{width: 35rpx;height: 35rpx;margin-left: 10rpx;}
+.result-list .result-text1 image.h-img{height:40rpx;width: 40rpx;float: right;margin-right: 10rpx;}
+

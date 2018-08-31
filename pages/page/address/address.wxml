@@ -1,0 +1,45 @@
+<view class='ad-top'>
+  <view class="{{currentTab==0?'ad-active':''}}" data-current="0" data-current="0" bindtap="swichNav"><image src="{{currentTab==0?'/image/men.png':'/image/men0.png'}}"></image>门店自提</view>
+  <view class="{{currentTab==1?'ad-active':''}}" data-current="1" data-current="1" bindtap="swichNav"><image src="{{currentTab==0?'/image/car0.png':'/image/car.png'}}"></image>物流配送</view>
+</view>
+<view class='ad-send'>
+  <view class='ad-tel' hidden="{{hiddenSelt}}">
+    <image src="/image/tel.png"></image>为确保正常取货，请预留您的手机号码
+    <button>自动填写</button>
+  </view>
+  <navigator class='ad-tel'  hidden="{{hiddenSend}}" url='../addressWe/addressWe'>
+    <image src="/image/ad.png"></image>添加收货人信息
+    <image class='itimg' src="/image/icl.png"></image> 
+     <image class='ad-itimg' src="/image/addrbg.png"></image><image class='ad-itimg ad-itimg1' src="/image/addrbg.png"></image><image class='ad-itimg ad-itimg2' src="/image/addrbg.png"></image> <image class='ad-itimg ad-itimg3' src="/image/addrbg.png"></image> <image class='ad-itimg ad-itimg4' src="/image/addrbg.png"></image> 
+  </navigator>
+  <view class='c-title'>
+      <image src="/image/ic1.png"></image> 周大福国贸店 <image class='itimg' src="/image/icl.png"></image> 
+  </view>
+  <view class="cart-box">
+    <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
+      <navigator url="../goodsdetails/goodsdetails?id={{item.id}}"><image class="cart-thumb" src="{{item.image}}"></image></navigator> 
+      <view class='ct-text ct-text1'>￥{{item.price}}<view>x {{item.num}}</view></view>
+      <view class='ct-title ct-title1'>{{item.title}}</view> 
+      <text class="cart-pro-name">规格：{{item.small}}</text>
+    </view>
+  </view>
+  <navigator class='ad-fp' url="../invoice/invoice">
+    发票：<text>不开发票</text>
+    <image class='itimg' src="/image/icl.png"></image> 
+  </navigator>
+  <view class='ad-fp'>
+    买家留言：<input placeholder="选填：给商家留言（45字以内）" value="{{value}}"  bindblur="blurInputEvent" />
+  </view>
+  <view class='ad-monery' hidden="{{hiddenSend}}">
+    <view>商品金额<text>￥2323.00</text></view>
+    <view>运费<text>+￥23.00</text></view>
+  </view>
+</view>
+<view class="cart-footer">
+  <view class='order-all'>
+    实付款：<text>￥2811.00</text>
+  </view>
+  <navigator class="order-icon" url='../success/success'>
+    提交订单
+  </navigator>
+</view>

@@ -1,0 +1,77 @@
+@import '../../page/mesEdit/mesEdit';
+.floor-box{
+   padding: 20rpx 20rpx 130rpx; 
+}
+.company-logo{
+  width: 33rpx;
+  height: 33rpx;
+  padding-top: 2rpx;
+}
+.company-name{
+  font-size: 34rpx;
+  font-weight: 600;
+  padding-left: 20rpx;
+}
+.more{
+  float: right;
+  width: 30rpx;
+}
+.more image{
+  
+  width: 7rpx;
+  height: 43rpx;
+}
+/* 楼层块 */
+.floor-part-box{
+  margin-top: 20rpx;
+}
+.floor-title{
+  font-size:36rpx;
+  font-weight: 600;
+}
+.floor-admin{
+  width:60rpx;
+  height:60rpx;
+}
+/* 区 */
+.area-box{
+  border-top: 2rpx solid #eee;
+  font-size:26rpx;
+}
+.area-title{
+  font-weight: 600;
+}
+.title-box{
+  width: 100rpx;
+}
+.area-img-list{
+  position: relative;
+}
+.area-admin{
+  position: absolute;
+}
+/* 新建 */
+.new-floor{
+  height: 120rpx;
+  line-height: 120rpx;
+  width: 100%;
+  font-size: 34rpx;
+  font-weight: 600;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+}  
+/* 公用样式 */
+.floor-part{
+  border-radius: 5px;
+  background: white;    
+  padding: 40rpx 30rpx; 
+}
+.flex-box{
+  display: flex;
+  justify-content: space-between;
+}
+.column-box{
+  display: flex;
+}

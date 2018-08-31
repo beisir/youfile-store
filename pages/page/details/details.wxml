@@ -1,0 +1,25 @@
+<view class='page'>
+<view class='my-top-line'></view>
+   <view class='page__hd page__hd1'>
+    <navigator class='weui-cell weui-cell_access' url='../serList/serList'>
+      <view class='weui-cell__bd'>
+        <view class='my-info'>全部商品</view>
+      </view>
+      <view class='weui-img'>
+       <image src="/image/icl.png"></image>
+      </view>
+    </navigator>
+  </view> 
+  <view class='page__bd'>
+    <view class=''>
+      <navigator class='weui-cell weui-cell_access' url='../serList/serList' wx:for="{{list}}" wx:key="{{index}}">
+        <view class='weui-cell__bd'>
+           {{item.title}}
+        </view>
+        <view class='weui-img'>
+         <image src="/image/icl.png"></image>
+        </view>
+      </navigator>
+    </view>
+  </view>
+</view>

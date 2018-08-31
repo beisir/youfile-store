@@ -1,0 +1,33 @@
+@import '../com/com.wxss';
+@import '../../page/cartList/cartList.wxss';
+.record,.record-box{
+  height: 340rpx;border-radius: 10rpx;
+}
+ .record-box{
+  margin:20rpx 0;position: relative;width: 95%;margin-left: 2.5%;
+}
+.delete-box{
+  height: 340rpx;line-height: 340rpx;border-bottom-right-radius: 10rpx;border-top-right-radius: 10rpx;
+}
+.st-d-status {
+  margin-top: 10rpx;
+}
+.st-details{
+  position: relative;
+}
+.st-d-status view{
+  margin-bottom: 0;
+}
+.st-cont .warn{
+  width: 28rpx;height: 28rpx;position: relative;border:0;vertical-align: middle;margin-top: -2rpx;
+}
+.st-cont .not{
+  color: #fff;background:rgba(0, 0, 0, 0.5);font-size: 24rpx;position: absolute;width: 180rpx;height: 75rpx;z-index: 10;
+  padding:15rpx 20rpx 0rpx 20rpx;border-radius: 10rpx;text-align: center;top: 70rpx;left: 190rpx;line-height:30rpx;
+}
+.triangle_border_up{
+    width:0;height:0;border-width:0rpx 15rpx 25rpx;
+    border-style:solid;float: left;margin-left: -38rpx;
+    border-color:transparent transparent #858585;
+    position:relative;transform:rotate(-90deg);margin-top: 25rpx;
+}

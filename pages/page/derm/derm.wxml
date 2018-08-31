@@ -1,0 +1,8 @@
+<view class='erm-cont'>
+  <image src="/image/dimg.png"></image>
+  <view>分享小程序码，获得更多流量吧</view>
+</view>
+<view class='add-bottom'>
+  <view bindtap='addGit'><image  src="/image/downimg.png"></image>保存至相册</view>
+  <view><image  src="/image/fenxiang.png"></image>推广给朋友</view>
+</view>

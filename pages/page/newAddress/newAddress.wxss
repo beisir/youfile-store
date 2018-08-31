@@ -1,0 +1,14 @@
+@import '../details/details.wxss';
+@import '../addressWe/addressWe.wxss';
+.weui-img .na-clo{
+   height: 37rpx;
+   width: 37rpx;
+}
+.weui-cell__bd input{
+  position: absolute;
+  top: 28rpx;
+  color: #999;
+  font-size: 28rpx;
+  left: 180rpx;
+  width: 400rpx;
+}

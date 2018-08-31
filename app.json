@@ -1,0 +1,111 @@
+{
+  "pages":[
+    "pages/login/register/register",
+    
+    "pages/admin/batchSet/batchSet",
+    
+    "pages/admin/status/status",
+    
+    "pages/page/home/home",
+    
+    "pages/page/order/order",
+    
+    "pages/role/order/order",
+    
+    "pages/admin/spec/spec",
+    "pages/admin/addGoods/addGoods",
+    
+    "pages/admin/firstClass/firstClass",
+    
+    "pages/login/login/login",
+    
+    
+    
+    
+    "pages/page/goodsDetails/goodsDetails",
+    
+    "pages/role/supplyOrder/supplyOrder",
+    
+    "pages/admin/editGoods/editGoods",
+    "pages/admin/set/set",
+    "pages/admin/serStatus/serStatus",
+    
+    "pages/admin/class/class",
+    
+    "pages/admin/batch/batch",
+    "pages/admin/shopClass/shopClass",
+    "pages/page/mesEdit/mesEdit",
+    "pages/page/mes/mes",
+    "pages/admin/editMesTitle/editMesTitle",
+    "pages/admin/writeCont/writeCont",
+    "pages/page/derm/derm",
+    "pages/page/newAddress/newAddress",
+    "pages/admin/success/success",
+    "pages/admin/classList/classList",
+    "pages/page/serList/serList",
+    "pages/page/serStatus/serStatus",
+    "pages/admin/classEdit/classEdit",
+    "pages/page/cartList/cartList",
+    "pages/page/addressWe/addressWe",
+    "pages/admin/thirdClass/thirdClass",
+    "pages/admin/secondClass/secondClass",
+    "pages/page/address/address",
+    "pages/role/orderSelf/orderSelf",
+    "pages/role/orderDetails/orderDetails",
+    "pages/role/supplyDetails/supplyDetails",
+    "pages/role/supplySelf/supplySelf",
+    "pages/page/userDetails/userDetails",
+    "pages/page/update/update",
+    "pages/page/help/help",
+    "pages/page/nopay/nopay",
+    "pages/page/self/self",
+    "pages/page/user/user",
+    "pages/page/set/set",
+    "pages/page/updataPhone/updataPhone",
+    "pages/page/updataPwd/updataPwd",
+    "pages/page/details/details",
+    "pages/page/success/success",
+    "pages/page/invoice/invoice",
+    "pages/page/germ/germ",
+    "pages/page/goodWe/goodWe",
+    "pages/page/goodsList/goodsList",
+    "pages/page/index/index",
+    "pages/page/logs/logs",
+    "pages/admin/batchClass/batchClass"
+  ],
+  "window":{
+    "backgroundTextStyle":"black",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black",
+    "backgroundColor":"#F7F7F7",
+    "enablePullDownRefresh":true,
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "selectedColor": "#CCAA77",
+    "color": "#888",
+    "list": [
+      {
+        "pagePath": "pages/page/home/home",
+        "iconPath": "image/12.png",
+        "selectedIconPath": "image/11.png",
+        "text": "小云店"
+      },
+      {
+        "pagePath": "pages/page/cartList/cartList",
+        "iconPath": "image/22.png",
+        "selectedIconPath": "image/21.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/page/user/user",
+        "iconPath": "image/42.png",
+        "selectedIconPath": "image/41.png",
+        "text": "客户"
+      }
+    ]
+  }
+}

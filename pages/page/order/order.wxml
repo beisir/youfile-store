@@ -1,0 +1,126 @@
+<!-- 确认收货 -->
+<mes
+  show="{{show}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>是否确认收货？</text>
+  <button bindtap='confirm'>确定</button>
+</view>
+</mes>
+<!-- 删除订单 -->
+<mes
+  show="{{show1}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确认删除订单？</text>
+  <button bindtap='confirm'>确定</button>
+</view>
+</mes>
+<!-- 售后服务 -->
+<mes
+  show="{{show2}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>如有疑问，请咨询客服人员</text>
+  <view class='mes-tel'>010-5664164</view>
+</view>
+</mes>
+<!-- 取消订单 -->
+<clo
+  show="{{show3}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view wx:for='{{reson}}' wx:key='{{index}}'  data-current="{{index}}" bindtap='swichNav'>
+  <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select"/>
+  <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" bindtap="selecRes"/>
+  {{item.title}}
+ </view>
+</clo>
+<!-- 获取取件码 -->
+<mes
+  show="{{show4}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>取货码</text>
+  <view class='mes-tel1'>1234</view>
+  <view class='mes-text'>请您安排好时间，在营业时间内到店取货</view>
+</view>
+</mes>
+<view class='od-status'>
+  <view wx:for='{{nav}}' wx:key='{{index}}' class="od-view {{index==navindex?'active':''}}" data-current="{{index}}" bindtap='swichNav'><view></view>{{item.title}}</view>
+</view>
+<view wx:if="{{carts.length>0}}">
+  <view class='cf-cont'  wx:for="{{carts}}" wx:key="{{index}}">
+        <navigator class='c-title' url='{{item.status<5?"../nopay/nopay":"../self/self"}}?status={{item.status}}'>
+          <image src="/image/ic1.png"></image>  {{item.name}} <image class='itimg' src="/image/icl.png"></image> <view class='order-zt' wx:if="{{item.status>4}}" >自提</view>
+          <view  bindtap="onChangeShowState">
+            <text wx:if="{{item.status==0}}">待付款</text>
+            <text wx:if="{{item.status==1}}">待发货</text>
+            <text wx:if="{{item.status==2}}">待收货</text>
+            <text wx:if="{{item.status==3}}">交易成功 </text>
+            <text wx:if="{{item.status==4}}">交易关闭</text>
+            <text wx:if="{{item.status==5}}">待付款</text>
+            <text wx:if="{{item.status==6}}">待取货</text>
+            <text wx:if="{{item.status==7}}">交易成功</text>
+            <text wx:if="{{item.status==8}}">交易关闭</text>
+          </view>
+        </navigator>
+        <view >
+            <view class="cart-box">
+                <view class="cart-list" wx:for="{{item.list}}" wx:key="{{index}}">
+                    <navigator><image class="cart-thumb" src="{{item.image}}"></image></navigator>
+                    <view class='ct-text ct-text1'>￥{{item.price}}<view>x {{item.num}}</view></view>
+                    <view class='ct-title ct-title1'>{{item.title}}</view> 
+                    <text class="cart-pro-name">规格：{{item.small}}</text>
+                </view>
+            </view>
+        </view>
+      <view class='cf-button'  wx:if="{{item.status==0}}"> 
+          <view class='or-time'>距订单取消 <text>00:30:00</text></view>
+          <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <button  class='or-active'> 付款 </button><button  bindtap='closeAlert'>取消订单</button> 
+      </view>
+      <view class='cf-button'  wx:if="{{item.status==1}}"> 
+          <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <button>提醒发货</button> 
+      </view>
+      <view class='cf-button'  wx:if="{{item.status==2}}"> 
+           <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+         <button  class='or-active'   bindtap='chooseAddress'> 确定收货 </button><button>查看物流</button> 
+      </view>
+      <view class='cf-button'  wx:if="{{item.status==3}}"> 
+          <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <button  class='or-active'  bindtap='chooseAddress2'> 售后服务 </button> <button>查看物流</button> <button  bindtap='chooseAddress1'>删除订单</button>
+      </view>
+       <view class='cf-button'  wx:if="{{item.status==4}}"> 
+         <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <button  bindtap='chooseAddress1'>删除订单</button> 
+      </view>
+      <view class='cf-button'  wx:if="{{item.status==5}}"> 
+          <view class='or-time'>距订单取消 <text>00:30:00</text></view>
+          <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <button  class='or-active' > 付款 </button><button bindtap='closeAlert'>取消订单</button> 
+      </view>
+      <view class='cf-button'  wx:if="{{item.status==6}}"> 
+         <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <button  class='or-active'  bindtap='closeAlert2'> 取货码 </button>
+      </view>
+      <view class='cf-button'  wx:if="{{item.status==7}}"> 
+         <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <button  class='or-active'  bindtap='chooseAddress2'> 售后服务 </button><button  bindtap='chooseAddress1'>删除订单</button>
+      </view>
+      <view class='cf-button'  wx:if="{{item.status==8}}"> 
+         <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <button  bindtap='chooseAddress1'>删除订单</button>
+      </view>
+  </view>
+</view>
+    <view wx:else class="order-no-data">
+      <view class='nocar'><image src="/image/no1.png"></image></view>
+         您还没有相关的订单
+    </view>
+

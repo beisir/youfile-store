@@ -1,0 +1,51 @@
+<view class='floor-box'>
+  <view class='floor-part'>
+    <image class='company-logo' src='{{companyLogo}}'></image>
+    <text class='company-name'>{{companyName}}</text>
+    <view class='more' bindtap='more'>
+      <image src='{{moreSrc}}' ></image>
+    </view>
+  
+  </view>
+
+  <block wx:for='{{floorList}}'>
+    <view class='floor-part-box'>
+      <view class='floor-part flex-box'>
+        <view class='column-box'>
+          <view class='floor-title title-box'>{{item.floorTitle}}</view>
+          <text class='floor-type floor-title'>{{item.floorType}}</text>
+        </view>
+        <view>
+        <image class='floor-admin' src='{{item.admin}}'></image>
+          
+        </view>
+      </view>
+
+      <!-- 区 -->
+      <block wx:for="{{item.area}}">
+        <view class='floor-part flex-box area-box'>
+          <view class='column-box'>
+            <view class='area-title title-box'>{{item.areaName}}</view>
+            <text class='area-type'>{{item.areaType}}</text>
+          </view>
+          <view class='area-img-list'>
+            <block wx:for='{{item.admin}}' wx:for-item='ad'>
+              <image style='right:{{40*index}}rpx;' class='floor-admin area-admin' src='{{ad}}'></image>
+            </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+
+  <!-- 新建楼层 -->
+  <view class='new-floor' bindtap='createFloor'>新建楼层</view>
+</view>
+  <view class='showHide' wx:if="{{showMenu == true}}">
+    <view class='sh-cont'>
+      <view class='sh-title'>{{companyName}}</view>
+      <view bindtap='uploadImg'>重命名</view>
+      <view>添加楼层管理员</view>
+      <view bindtap='closeShow'>取消</view>
+    </view>
+  </view>

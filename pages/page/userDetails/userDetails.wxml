@@ -1,0 +1,58 @@
+<view class='wd-pic'>
+    <view class='weui-cell'>
+        <view class='weui-cell__bd'  bindtap='chooseAddress'>
+          <text>用户头像</text>
+          <image class='pic' src="/image/userphoto.png"></image>
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </view>
+</view>
+  <view class='page_bd'>
+    <view class='weui-back'>
+      <navigator class='weui-cell' url='../update/update'>
+        <view class='weui-cell__bd'>
+          用户昵称
+          <text>晨晨 EEEE</text>
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </navigator>
+     <view class='weui-cell'>
+        <view class='weui-cell__bd'  bindtap='updataSex'>
+          性别
+          <text>{{sex}}</text>
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'>
+          出生日期
+          <text>1993-07-14</text>
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </view>
+      <view class='weui-cell'>
+        <view class='weui-cell__bd'  bindtap='chooseAddress'>
+          微信号
+          <text>cc2392788</text>
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='showHide' hidden='{{show}}'>
+    <view class='sh-cont'>
+      <view wx:for='{{sexData}}'  wx:key="index"  data-text="{{item}}" bindtap='choseSex'>{{item.sex}}</view>
+      <view bindtap='closeShow'>取消</view>
+    </view>
+  </view>
+

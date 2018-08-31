@@ -1,0 +1,23 @@
+<view wx:if="{{list.length>0}}">
+  <view class='aw-cont'>
+    <view class='aw-list' wx:for="{{list}}" wx:key="{{index}}">
+      <view>{{item.title}} <text>{{item.phone}}</text></view>
+      <text>{{item.adress}}</text>
+      <view class='aw-edit'>
+        <icon wx:if="{{item.selected}}" type="success" size='17' color="#CCAA77" data-index="{{index}}" bindtap="selectList"/>
+        <icon wx:else  type="circle" size='17' data-index="{{index}}" bindtap="selectList"/>
+        设置默认
+        <view class='aw-view'>
+          <view><image  src="/image/edit.png"></image>编辑</view>
+          <view data-index="{{index}}" bindtap="deleteList"><image  src="/image/remove.png" ></image>删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <button class='aw-but' bindtap='newAddress'><image  src="/image/add1.png"></image>新建地址</button>
+</view>
+<view class='aw-no' wx:else>
+  <image  src="/image/nono.png"></image>
+  <view>您还没有添加收货地址哦！</view>
+  <button  bindtap='newAddress'>新建地址</button>
+</view>

@@ -1,0 +1,8 @@
+@import '../class/class.wxss';
+.shop-cont{font-size: 30rpx;padding:0;}
+.shop-cont>view view{border:0;color: #999;top: 28rpx;right: 60rpx;}
+.shop-cont>view{height: 100rpx;line-height: 100rpx;padding:0;padding-right: 25rpx;margin-left: 25rpx;}
+.shop-cont>view:last-child{border-top: 2rpx solid #F2F2F2;}
+.weui-img{margin-top: 32rpx;}
+.su-cont{height: 390rpx;background: #fff;text-align: center;padding-top: 40rpx;}
+.su-cont image{width: 170rpx;margin-bottom: 40rpx;}

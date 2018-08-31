@@ -1,0 +1,220 @@
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
+   <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+    <swiper-item>
+      <image src="{{item.imageUrl}}" class="slide-image" mode="widthFix" bindload='imgHeight'/>
+    </swiper-item>
+   </block>
+</swiper>
+<view class='gd-details'>
+  <view class='gd-title'>
+    <view>{{name}}<image src="/image/fx.png"></image></view>
+    <view class='gd-font'>零售价：<text>￥{{wholesalePrice}}</text></view>
+    <view class='gd-font'>批发价：<image src='/image/wh.png'></image><text class='gd-yan'>商友验证中</text><button>享受批发价</button></view>
+  </view>
+  <!-- <view class='gd-title'>
+    <view>{{name}}<image src="/image/fx.png"></image></view>
+    <view class='gd-font gd-font1'>零售价：￥333</view>
+    <view class='gd-font'>批发价：<text>￥333</text></view>
+  </view> -->
+  <!-- <view class='gd-title'>
+    <view>{{name}}<image src="/image/fx.png"></image></view>
+    <view class='gd-font gd-font2'>零售价：￥333</view>
+    <view class='gd-font'>批发价：<text>￥333</text><button class='btn'><text>3</text>件起批</button></view>
+    <view class='gd-view-n'><button>混批</button>全场满￥5000可混批</view>
+  </view> -->
+  <view class="weui_cells">
+      <image  src="/image/positionico.png"></image>
+      <text class="store-address">北京 </text>
+      <view class='weui-view'>
+        <image src="/image/ewmico.png"></image><image class='img' src="/image/icl.png"></image>
+      </view>
+  </view>
+  <view class='gd-content'>
+    <view><image src="/image/xin.png"></image>推荐心语</view>
+    <text>{{recommendDesc}}</text>
+  </view>
+</view>
+<view class="weui_cells weui_cells1" bindtap='showAlert'>
+      <text class="store-address">选择规格 </text>
+      <view class='weui-view'>
+        <image class='img' src="/image/icl.png"></image>
+      </view>
+  </view>
+  <view class="ym_goodsstore">
+            <view class="ym_goodsstoreh">
+                <view class="ym_goodsstorelogo"><image src="http://pic.youlife.me/v1/tfs/T18RKTB4ET1RXrhCrK.jpg"></image></view>
+                <view class="ym_goodsstorename">
+                    <view class="store-name-data">周大福珠宝国贸店</view>
+                    <view class="ym_gfrz"><image src="/image/dp.png"></image> 百荣世贸</view>
+                </view>
+            </view>
+            <view class="ym_goodsstoresprs">
+                <view class="ym_goodsstorel"><view class="store-goodsNum-data">35</view>全部商品</view>
+                <view class="ym_goodsstorer"><view class='store-goodsNum-data'>0</view>关注人数</view>
+                <view class="ym_goodsstorer"><view class='store-goodsNum-data'>0</view>进货商</view>
+            </view>
+            <view class="ym_goodsstoreop">
+                <navigator class="ui-link"><text class="ym_qzjoin_add1">+</text>关注</navigator>
+                <navigator class="ui-link ui-link1">进店</navigator>
+            </view>
+        </view>
+  <view class='gd_readCont'>
+    <!-- <image src="http://pic.youlife.me/v1/tfs/T1Ka_TB4dT1RXrhCrK.jpg" mode="widthFix" bindload='imgHeight' />
+    <view class='gd_r-title'>
+      <view>I`WITH YOU —— 我就在你的身边</view>
+      <text>你眉眼低垂，融进世间柔和，身边的萤火虫翩 翩，从此眼里只有你，采用“萤火虫”为主题，以 及闪耀的钻石光芒，提炼了“Y”字点缀，化身与众不同的萤火虫。</text>
+    </view> -->
+    <view class='gd_r-title'>
+      <text>{{introduction}}</text>
+    </view>
+  </view>
+  
+  <view class='gd_dp'>
+    <view class="weui_cells weui_cells1 gd_r_text">
+        <text>优店介绍 </text>
+    </view>
+      <image src="http://pic.youlife.me/v1/tfs/T18RKTB4ET1RXrhCrK.jpg"></image>
+      <view>周大福珠宝国贸店</view>
+      <view class='gd-dp-text'>源自「真诚 · 永恒」历久不变的理念和价值，承传八十余载光辉悠久的历史，周大福以匠心独运的设计与千锤百炼的工艺，创造令人目眩心动的珠宝珍品，价值恒久，世代相传。以产品的设计、质量与价值闻名。</view>
+  </view>
+<view class='gd_bottom'>
+    <view class='gd_b_left'>
+        <view>
+          <view><button class='mesImage' open-type="contact" session-from="weapp"><image src="/image/mes.png"></image></button>  联系客服</view>
+        </view>
+        <view>
+        <navigator url="../goodWe/goodWe"><image src="/image/i22.png"></image></navigator>
+          进店
+        </view>
+        <view>
+        <view bindtap='CratHome'><image src="/image/i33.png"></image></view>
+          购物车
+        </view>
+        <!-- <view bindtap='CratHome'><image src="/image/i33.png"></image></view>
+          进货车
+        </view> -->
+    </view>
+    <view class='gd_b_right' bindtap='showAlert'>
+       <navigator>
+          加入购物车
+        </navigator>
+    </view>
+    <!-- <view class='gd_b_right' bindtap='showAlert'>
+       <navigator>
+          立即进货
+        </navigator>
+    </view> -->
+</view>
+<view hidden="{{!hidden}}" class='alertAdd'>
+    <view class='gd-alert' animation='{{animationData}}'>
+      <view class='gd-top'>
+        <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
+        <view class='gd-image'>
+          <image  src="{{mainImgUrl}}"></image>
+        </view>
+        <view class='gd-ins'>
+          <view class='gd-title1'>{{name}}</view>
+          <view>15<text class='lt-text'>件起批</text></view>
+        </view>
+      </view>
+       <view wx:for='{{goodsSpecificationVOList}}' wx:key="{{index}}">
+        <view  class='gd-gg' wx:if='{{index==0}}'>
+          <text>{{item.specName}}</text>
+          <view>
+          <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
+              <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="lt-view {{specsTab==index?'active':''}}" data-current="{{index}}" bindtap='changeButton'>{{item.specValueName}}</view></view>
+            </block>
+          </view>
+        </view>
+        <view  class='gd-gg lt-attr'  wx:if='{{index==1}}'>
+           <view class="lt-table">
+              <view class="lt-tr">
+                  <view>重量</view>
+                  <view>零售价</view>
+                  <view>批发价</view>
+                  <view>
+                    <view class="lt-add-cart">
+                      <view class="lt-down" bindtap="minusCount"><image  src="/image/lt-jian.png"></image></view>
+                      <view class="lt-num">批量</view>
+                      <view class="lt-add"  bindtap="addCount"><image  src="/image/lt-add.png"></image></view>
+                    </view>
+                </view>
+              </view>
+              <view class="lt-tr lt-tr1"  wx:for="{{goodsSkuVOList}}" wx:key="{{index}}">
+                  <view>重量</view>
+                  <view>{{item.sellPrice}}</view>
+                  <view>{{item.wholesalePrice}}</view>
+                  <view>
+                    <view class="lt-add-cart">
+                      <view class="lt-down" bindtap="minusCount"><image  src="/image/jian.png"></image></view>
+                      <view class="lt-num"><input value='1'></input></view>
+                      <view class="lt-add"  bindtap="addCount"><image  src="/image/lt-a.png"></image></view>
+                    </view>
+                </view>
+              </view>
+              <view class="tr"  wx:for="{{item.goodsSkuVOList}}" wx:key="{{index}}">
+                  <view>{{item}}</view>
+                  <view>{{item.sellPrice}}</view>
+                  <view>{{item.wholesalePrice}}</view>
+                  <view>222</view>
+              </view>
+          </view>
+        </view>
+      </view>
+      <view class='weui-bottom lt-weui-bottom'>
+        <view>￥96000.00<text>共<text>3</text>种<text>3</text>件商品</text></view>
+        <view >加入购物车</view>
+        <view>立即下单</view>
+      </view>
+    </view>
+</view>
+<!-- <view hidden="{{hidden}}" class='alertAdd'>
+    <view class='gd-alert' animation='{{animationData}}'>
+      <view class='gd-top'>
+        <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
+        <view class='gd-image'>
+          <image  src="{{mainImgUrl}}"></image>
+        </view>
+        <view class='gd-ins'>
+          <view class='gd-title1'>{{name}}</view>
+          <view>￥{{sell}}</view>
+          <text>库存：{{stockNum}}件</text>
+        </view>
+      </view>
+       <view wx:for='{{goodsSpecificationVOList}}' wx:key="{{index}}">
+        <view  class='gd-gg' wx:if='{{index==0}}'>
+          <text>{{item.specName}}</text>
+          <view>
+          <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
+              <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{specsTab==index?'active':''}}" data-current="{{index}}" bindtap='changeButton'>{{item.specValueName}}</view></view>
+            </block>
+          </view>
+        </view>
+        <view  class='gd-gg gd-gg1'  wx:if='{{index==1}}'>
+          <text>{{item.specName}}</text>
+          <view>
+          <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
+              <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.specValueName}}</view></view>
+            </block>
+          </view>
+        </view>
+      </view>
+      <view class='gd-gg gd-gg1'>
+        <text>购买数量</text>
+        <view class='cart-list gd-cart-list'>
+          <view class="cart-count-box">
+            <text class="cart-count-down" bindtap="minusCount">
+                <text wx:if="{{numbers!=1}}" class='ct-xian'></text>
+                <text wx:if="{{numbers==1}}"><text class='ct-xian ct-xian1'></text></text> 
+              </text>
+              <text class="cart-count-num">{{numbers}}</text>
+              <view class="cart-count-add"  bindtap="addCount"><image  src="/image/add.png"></image></view>
+          </view>
+        </view>
+      </view>
+      <view class='weui-bottom'>
+        <view bindtap='CratHome'>加入购物车</view>
+        <view><navigator url="../address/address">立即购买</navigator></view>
+      </view>
+    </view>
+</view> -->

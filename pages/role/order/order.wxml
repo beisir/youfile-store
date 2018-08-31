@@ -1,0 +1,99 @@
+<!-- 验证取货码 -->
+<mes
+  show="{{show}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>验证取货码</text>
+  <view class='inputCon'><input class='alertInput' placeholder='请输入取货码（买家提货时出示） '></input></view>
+  <button bindtap='confirm'>确定</button>
+</view>
+</mes>
+<!-- 我要发货 -->
+<mes
+  show="{{show1}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>填写运单号</text>
+  <view class='inputCon'>
+    <input class='alertInput' placeholder='请输入物流公司名称 '></input>
+    <input class='alertInput' placeholder='请输入运单号 '></input>
+  </view>
+  <button bindtap='confirm' class='confirm1'>先发货，再填单</button><button bindtap='confirm'>确定</button>
+</view>
+</mes>
+<!-- 待填表 -->
+<mes
+  show="{{show2}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>填写运单号</text>
+  <view class='inputCon'>
+    <input class='alertInput' placeholder='请输入物流公司名称 '></input>
+    <input class='alertInput' placeholder='请输入运单号 '></input>
+  </view>
+  <button bindtap='confirm'>确定</button>
+</view>
+</mes>
+<!-- 取消订单 -->
+<clo
+  show="{{show3}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view wx:for='{{reson}}' wx:key='{{index}}'  data-current="{{index}}" bindtap='swichNav'>
+  <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select"/>
+  <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" bindtap="selecRes"/>
+  {{item.title}}
+ </view>
+</clo>
+<image class='serchImg {{style?"serchImg1":""}}' src="/image/search.png"></image>
+<input placeholder="输入订单号/商品名称/昵称/手机号/运单号"  class='serInput {{style?"serInput1":""}}'  bindinput="searchBtn" placeholder-class="phcolor"   value="{{value}}"   />
+<view class='od-status'>
+  <view wx:for='{{nav}}' wx:key='{{index}}' class="od-view {{index==navindex?'active':''}}" data-current="{{index}}" bindtap='swichNav'><view></view>{{item.title}}</view>
+</view>
+<view wx:if="{{carts.length>0}}">
+  <view class='cf-cont'  wx:for="{{carts}}" wx:key="{{index}}">
+        <navigator class='c-title' url='{{item.status<6?"../orderDetails/orderDetails":"../orderSelf/orderSelf"}}?status={{item.status}}'>
+          <image src="/image/preson.png"></image> {{item.name}}<text class='or-phone'>{{item.phone}}</text> <view wx:if="{{item.status>5}}" class='order-zt'>自提</view>
+          <view  bindtap="onChangeShowState">
+            <text wx:if="{{item.status==0}}">待付款</text>
+            <text wx:if="{{item.status==1}}">已付款</text>
+            <text wx:if="{{item.status==2}}">待填表</text>
+            <text wx:if="{{item.status==3}}">已发货 </text>
+            <text wx:if="{{item.status==4}}">交易成功</text>
+            <text wx:if="{{item.status==5}}">交易关闭</text>
+            <text wx:if="{{item.status==6}}">待付款</text>
+            <text wx:if="{{item.status==7}}">已付款</text>
+            <text wx:if="{{item.status==8}}">交易成功</text>
+            <text wx:if="{{item.status==9}}">交易关闭</text>
+          </view>
+        </navigator>
+        <view >
+            <view class="cart-box">
+                <view class="cart-list" wx:for="{{item.list}}" wx:key="{{index}}">
+                    <navigator><image class="cart-thumb" src="{{item.image}}"></image></navigator>
+                    <view class='ct-text ct-text1'>￥{{item.price}}<view>x {{item.num}}</view></view>
+                    <view class='ct-title ct-title1'>{{item.title}}</view> 
+                    <text class="cart-pro-name">规格：{{item.small}}</text>
+                </view>
+            </view>
+        </view>
+      <view class='cf-button'> 
+          <view class='or-text'>共<text class='or-font1'>1</text>件商品 <text class='or-font2'>合计：</text><text class='or-font3'>￥1234.00</text></view>
+          <view class='or-last' wx:if="{{item.status==0}}"><button  class='or-active'> 提醒付款 </button><button bindtap='payfun' class='or-active'> 改价 </button><button bindtap='closeAlert'>关闭订单</button> </view>
+          <view class='or-last' wx:if="{{item.status==1}}"><button  class='or-active'  bindtap='chooseAddress1'> 我要发货 </button></view>
+          <view class='or-last' wx:if="{{item.status==2}}"><button  class='or-active'  bindtap='chooseAddress2'> 填写运单号 </button></view>
+          <view class='or-last'  wx:if="{{item.status==3}}"><button  class='or-active'> 查看物流 </button></view>
+          <view class='or-last' wx:if="{{item.status==4}}"><button  class='or-active'> 查看物流 </button></view>
+          <view class='or-last' wx:if="{{item.status==6}}"><button  class='or-active'> 提醒付款 </button><button  class='or-active'> 改价 </button><button>关闭订单</button> </view>
+          <view class='or-last'  wx:if="{{item.status==7}}"><button  class='or-active'  bindtap='chooseAddress'> 验证取货码 </button> </view>
+      </view>
+  </view>
+</view>
+    <view wx:else class="order-no-data">
+      <view class='nocar'><image src="/image/no1.png"></image></view>
+         您还没有相关的订单
+    </view>
+

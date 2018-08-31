@@ -1,0 +1,66 @@
+<!--pages/user/user.wxml-->
+<view class='u-title'>
+  <view class='u-t-cont'>
+    <navigator url='../userDetails/userDetails'><image class='u-t-ewmico' src='/image/userphoto.png'></image></navigator>
+    <view class='u-pic'>
+      <view>晨晨 EEDDD</view>
+      <button>已绑定手机</button>
+    </view>
+  </view>
+</view>
+<view class='u-order'>
+  <navigator class='u-o-div'url='../order/order'>
+    <image src='/image/order.png'></image>
+    <view>我的订单</view>
+  </navigator>
+  <navigator class='u-o-div'>
+    <image src='/image/mes1.png'></image>
+    <view>我的消息</view>
+  </navigator>
+</view>
+  <view class='page_bd'>
+    <view class='weui-back'>
+      <navigator class='weui-cell weui-cell_access' url='../addressWe/addressWe'>
+        <image src='/image/u1.jpg' class='user-img'></image>
+        <view class='weui-cell__bd'  bindtap='chooseAddress'>
+          地址管理
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </navigator>
+      <view class='weui-cell weui-cell_access'>
+       <image src='/image/u2.jpg' class='user-img'></image>
+        <button class="kf_button" open-type="contact" session-from="weapp"></button> 
+          <view class='weui-cell__bd'>
+            联系客服
+          </view>
+          <view class='weui-img'>
+            <image src="/image/icl.png"></image>
+          </view>
+      </view>
+      <navigator class='weui-cell weui-cell_access'  url='../set/set'>
+      <image src='/image/u3.jpg' class='user-img user-img1'></image>
+        <view class='weui-cell__bd'>
+          设置
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </navigator>
+    </view>
+  </view>
+   <view class='page_bd page_hd1'>
+    <view class='weui-back'>
+      <navigator class='weui-cell weui-cell_access'  url=''>
+      <image src='/image/u4.jpg' class='user-img user-img1'></image>
+        <view class='weui-cell__bd'>
+          申请小云店
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </navigator>
+    </view>
+  </view>
+

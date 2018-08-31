@@ -1,0 +1,80 @@
+<view class='mes-cont'>
+  <view class="ym_jpstorename">
+  <view class="ym_jpstorelogo">
+      <navigator url='../goodWe/goodWe'><image class="store-logo" src="/image/font.png" ></image></navigator>
+    </view>
+    爱恋珠宝华北区总店<image class='xyd' src="/image/edit2.png" bindtap='editFun'></image>
+    <view><text> 云商号 ECP0580881</text></view>
+  </view>
+  <view class="ym_jpstoredesc">
+    <text class="leftyh">“</text>爱恋珠宝在秉同时，吸收不同风格的时尚元素，努力创新发展，形成了“仁、义、礼、智、信、爱”的经营理念...<text class="rightyh">”</text>
+  </view>
+</view>
+<view class="weui_cells">
+    <view>
+      <image  src="/image/positionico.png"></image>
+      <text>北京市东城区永定门外大街101号</text>
+      <view class='weui-view'>
+      <image class='img' src="/image/icl.png"></image>
+    </view>
+    </view>
+    <view>
+      <image  src="/image/lou.png"></image>
+      <text> 所属商城</text>
+      <view class='new-left'>
+       北京市百荣世贸<image class='img' src="/image/icl.png"></image>
+      </view>
+    </view>
+    <view>
+      <image  src="/image/lou.png"></image>
+      <text>  楼层区域</text>
+      <view class='new-left'>
+        二期 F5 B区 5210<image class='img' src="/image/icl.png"></image>
+      </view>
+    </view>
+</view>
+<view class="weui_cells">
+    <view>
+      <text> 业态</text>
+      <view class='new-left new-left1'>
+       购物
+      </view>
+    </view>
+    <view>
+      <text>  主营范围</text>
+      <view class='new-left'>
+        男装、女装<image class='img' src="/image/icl.png"></image>
+      </view>
+    </view>
+</view>
+<view class="weui_cells">
+    <image  src="/image/mes12.png"></image>
+    <text class="store-address">小云店信息 </text>
+    <view class='weui-view'>
+      <image class='m-img' src="/image/xcx.png"></image><image class='img' src="/image/icl.png"></image>
+    </view>
+   <view class='weui-xian weui-xian1'></view>
+</view>
+<view class='weui-time'>
+  <view>营业时间<text>10:00~22:00</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
+  <view>客服电话<text>010-68593566</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
+  <view>客服微信<text>linmufan666</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
+  <view>公众号<text>戴俪名珠宝</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
+</view>
+<view class="weui_cells">
+    <image  src="/image/mes12.png"></image>
+    <text class="store-address">其他设置 </text>
+   <view class='weui-xian weui-xian1'></view>
+</view>
+<view class='weui-time'>
+  <view>发票设置<view class='mes-tel'><image src="/image/icl.png"></image></view></view>
+  <view>邮费设置<view class='mes-tel'><image src="/image/icl.png"></image></view></view>
+</view>
+  <view class='showHide' hidden='{{showHide}}'>
+    <view class='sh-cont'>
+      <view class='sh-title'>更换小云店logo</view>
+      <view bindtap='uploadImg'>拍照</view>
+      <view>从手机相册选取</view>
+      <view bindtap='closeShow'>取消</view>
+    </view>
+  </view>

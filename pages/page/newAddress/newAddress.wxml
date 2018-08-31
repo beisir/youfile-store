@@ -1,0 +1,37 @@
+<view class='page'>
+<nyz_area_picker
+  show="{{show}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+</nyz_area_picker>
+  <view class='page__bd'>
+      <view class='weui-cell weui-cell_access'>
+        <view class='weui-cell__bd'>
+           收货人：<input></input>
+        </view>
+        <view class='weui-img'>
+         <image class="na-clo" src="/image/clo.png"></image>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_access'>
+        <view class='weui-cell__bd'>
+           联系方式：<input></input>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_access'>
+        <view class='weui-cell__bd'  bindtap='chooseAddress'>
+           所在地区：<input disabled="true" value="{{province == ''?'':province + '、' + city + '、' + area}}"></input>
+        </view>
+        <view class='weui-img'>
+         <image src="/image/icl.png"></image>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_access'>
+        <view class='weui-cell__bd'>
+           详情街道：<input></input>
+        </view>
+      </view>
+  </view>
+  <button class='aw-but'>保存</button>
+</view>
+
