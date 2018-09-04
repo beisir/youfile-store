@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 var recordStartX = 0;
 var currentOffsetX = 0;
 Page({
@@ -69,11 +70,13 @@ Page({
     });
   },
   swichNavLast:function(){
-    this.setData({
-      hidden: false,
-      sImg: '/image/xl1.png',
-      classStatus:true,
-    })
+    if (this.data.currentTab>-1){
+      this.setData({
+        hidden: false,
+        sImg: '/image/xl1.png',
+        classStatus: true,
+      })
+    }
   },
   swichNav: function (e) {
     var that = this,
@@ -127,18 +130,16 @@ Page({
         hasList: false
       });
     }
-    app.http.deleteRequest('/admin/shop/goods/{{goodId}}', { goodId: goodId})
+    Api.adminGoodsDelete({ goodId: goodId })
       .then(res => {
-       console.log(res)
         wx.showToast({
           title: '删除成功',
           icon: 'none',
           duration: 2000
         })
       })
-   
   },
-  // 下架
+  // 上下架
   changeStatus:function(e){
     const goodId = e.currentTarget.dataset.id,
           index = e.currentTarget.dataset.index,
@@ -146,10 +147,10 @@ Page({
           detailList = this.data.detailList,
           goodsIdList=[]
     goodsIdList.push(goodId)
-    app.http.postRequest('/admin/shop/store/{{storeId}}/goods/status/on',goodsIdList)
+    Api.adminGoodsUp(goodsIdList)
       .then(res => {
-        detailList[index].status="1"
-        detailList.splice(index,1)
+        detailList[index].status = "1"
+        detailList.splice(index, 1)
         _this.setData({
           detailList: detailList,
         })
@@ -159,6 +160,7 @@ Page({
           duration: 2000
         })
       })
+      
   },
   upStatus:function(e){
     const goodId = e.currentTarget.dataset.id,
@@ -167,7 +169,7 @@ Page({
       detailList = this.data.detailList,
       goodsIdList = []
     goodsIdList.push(goodId)
-    app.http.postRequest('/admin/shop/store/{{storeId}}/goods/status/off',goodsIdList)
+    Api.adminGoodsDown(goodsIdList)
       .then(res => {
         detailList[index].status = "0"
         detailList.splice(index, 1)
@@ -188,12 +190,12 @@ Page({
   getList: function () {
     var _this = this,
       keyword = this.data.keyword
-    app.pageRequest.pageGet('/admin/shop/store/{{storeId}}/goods', { keyword: keyword})
+    Api.adminGoodsList({ keyword: '' })
       .then(res => {
         var detailList = res.obj.result,
-            datas = _this.data.detailList,
-            totalCount = res.obj.totalCount,
-            newArr = app.pageRequest.addDataList(datas, detailList)
+          datas = _this.data.detailList,
+          totalCount = res.obj.totalCount,
+          newArr = app.pageRequest.addDataList(datas, detailList)
         _this.setData({
           detailList: newArr,
           totalCount: totalCount
@@ -209,10 +211,10 @@ Page({
    */
   onReady: function () {
     var that = this
-    app.http.getRequest('/admin/shop/customcategory/store/{{storeId}}')
+    Api.adminShopCate()
       .then(res => {
-        var obj=res.obj
-        obj.unshift({ name: "全部商品",customCategoryCode:"0000"})
+        var obj = res.obj
+        obj.unshift({ name: "全部商品", customCategoryCode: "0000" })
         that.setData({
           list: obj
         })
@@ -221,7 +223,7 @@ Page({
   classCode:function(code){
     var _this = this,
       goodsStatus =this.data.goodsStatus
-    app.pageRequest.pageGet('/admin/shop/goods/{{storeId}}/goods/status/{{goodsStatus}}', {goodsStatus: goodsStatus, customCategoryCodes:code})
+    Api.adminGoodsStatus({ goodsStatus: goodsStatus, customCategoryCodes: code })
       .then(res => {
         var detailList = res.obj.result,
           datas = _this.data.detailList,
@@ -291,7 +293,8 @@ Page({
    */
   onPullDownRefresh: function () {
     this.setData({
-      currentTab:-1
+      currentTab:-1,
+      detailList: []
     })
     app.pageRequest.pageData.pageNum = 0
     this.getList()

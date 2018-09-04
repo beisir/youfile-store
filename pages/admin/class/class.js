@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
 
   /**
@@ -13,7 +14,7 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    app.pageRequest.pageGet('/admin/shop/customcategory/store/{{storeId}}',{})
+    Api.classList()
       .then(res => {
         const obj = res.obj
         for (var i = 0; i < obj.length; i++) {
@@ -53,7 +54,7 @@ Page({
       tempArr = {},
       name = this.data.value
     if (_this.data.watchInput){
-      app.http.postRequest('/admin/shop/customcategory/save',{name:name})
+      Api.addClass({ name: name })
         .then(res => {
           const obj = res.obj
           _this.setData({
@@ -78,7 +79,6 @@ Page({
   classList:function(e){
     var code = e.target.dataset.code,
         name=e.target.dataset.name
-        console.log(name+"//"+code)
     wx.navigateTo({
       url: '../classList/classList?name='+name+'&code='+code,
     })

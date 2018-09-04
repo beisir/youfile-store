@@ -1,3 +1,5 @@
+const app = getApp();
+console.log(app)
 Component({
   properties: {
     // 这里定义了innerText属性，属性值可以在组件使用时指定
@@ -8,7 +10,7 @@ Component({
   },
   data: {
     //登录头信息
-    loginTitle:'快捷登录',
+    loginTitle: '快捷登录',
     //界面显示隐藏
     pageShow: false,
     //获取验证码按钮
@@ -85,6 +87,28 @@ Component({
         })
         return
       }
+
+      app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
+
+      let obj = {
+        mobile: this.data.telephone,
+        password: this.data.password,
+        smsCode: this.data.verificationCode
+      }
+
+      app.http.postRequest("/api/user/resetPassword", obj).then(res => {
+        if (res.code == 1) {
+          wx.showToast({
+            title: '密码修改成功',
+            icon: 'none',
+          })
+        } else {
+          wx.showToast({
+            title: res.message,
+            icon: 'none',
+          })
+        }
+      })
     },
     //登录
     login() {
@@ -104,10 +128,9 @@ Component({
         return;
       }
 
-      let obj = {
-        telephone: this.data.telephone
-      };
 
+      app.http._headerGet.Authorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=';
+      app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
       if (this.data.loginType == 'code') {
         if (this.data.verificationCode.length == 0) {
           wx.showToast({
@@ -116,7 +139,15 @@ Component({
           })
           return;
         }
-        obj.verificationCode = this.data.verificationCode;
+        let obj = {
+          mobile: this.data.telephone,
+          smsCode: this.data.verificationCode
+        };
+        app.http.postRequest("/mobile/token", obj).then(res => {
+
+        })
+
+
       } else {
 
         if (this.data.password.length < 6 || this.data.password.length > 16) {
@@ -126,15 +157,23 @@ Component({
           })
           return
         }
-        obj.password = this.data.password;
-      }
-      // wx.request({
-      //   url: "",
-      //   data:obj,
-      //   success:()=>{
 
-      //   }
-      // })
+        let obj = {
+          grant_type: 'password',
+          username: this.data.telephone,
+          password: this.data.password
+        };
+
+        app.http.postRequest("/oauth/token", obj).then(res => {
+          this.closePage()
+          wx.setStorage({
+            key: 'access_token',
+            data: res.access_token,
+          })
+          wx.startPullDownRefresh()
+        })
+      }
+
     },
     //显示隐藏密码
     showHide() {
@@ -200,6 +239,11 @@ Component({
           icon: 'none',
         })
       } else {
+
+        app.http.getRequest("/code/smsCode", { mobile: this.data.telephone }).then(res => {
+
+        })
+
         //获取验证码倒计时
         let sec = this.data.btnSec;
         this.setData({
@@ -233,9 +277,9 @@ Component({
       this.setData({
         pageShow: false,
         forget: false,
-        telephone:"",
-        password:"",
-        verificationCode:"",
+        telephone: "",
+        password: "",
+        verificationCode: "",
         loginType: 'code'
       })
     },
@@ -246,6 +290,8 @@ Component({
     }
   }
 })
+
+
 // pages/lpgin/login.js
 // Page({
 

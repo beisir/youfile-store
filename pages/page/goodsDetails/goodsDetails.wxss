@@ -15,7 +15,7 @@
   background: rgba(0, 0, 0, 0.2)
 }
 .gd-alert{
-  height:95%;
+  height:90%;
   width: 100%;
   position:fixed;
   bottom: 0;
@@ -84,7 +84,7 @@
 .gd-gg .gd-view {
   display:inline-block;
   text-align: center;
-  margin-right: 10rpx;
+  margin-right: 20rpx;
 }
 .gd-gg .gd-view view{
   font-size: 28rpx;
@@ -102,8 +102,8 @@
   margin-top: 25rpx;
 }
 .gd-gg .gd-view view.lt-view{
-  border-radius: 20rpx;background: #EEEEEE;
-}                                                                                                                                                       
+  border-radius: 20rpx;background: #EEEEEE;position: relative;
+}                                                                                                                                                  
 .gd-gg view.active,.gd-gg .gd-view view.active{
   color: #fff;
   background: #CCAA77;
@@ -436,12 +436,9 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   height: 120rpx;
   position: absolute;
   right: 0;
-  top:0;
-  line-height: 120rpx;
-}
-.gd_b_right navigator{
-  font-size: 36rpx;
+  top:0;font-size: 36rpx;
   color: #fff;
+  line-height: 120rpx;
 }
 .gd_b_left image{
   width: 40rpx;
@@ -494,6 +491,12 @@ color: #666;font-weight: normal;height: 400rpx;overflow: scroll
 .lt-tr>view:last-child{
  padding-top: 20rpx;line-height: 60rpx;width: 32%;
 }
+.lt-tr>view.add-xian{
+  text-decoration: line-through;
+}
+.lt-tr1>view:nth-child(3){
+  color: #CCAA77
+}
 .lt-weui-bottom view{
   width: 33%;color: #CCAA77;position: relative;
 }
@@ -515,3 +518,14 @@ color: #666;font-weight: normal;height: 400rpx;overflow: scroll
 .lt-tr1 .lt-num{
   border-top: 0;border-bottom: 0;color: #333;
 }
+.new-man{
+  height: 60rpx;line-height: 60rpx;background: #CCAA77;color: #fff;
+  text-align: center;font-size: 24rpx;
+}
+.new-man text{
+  font-size: 30rpx;
+}
+.gd-gg .gd-view .new-red{
+  height: 40rpx;width: 40rpx;border-radius: 50%;color: #fff;background: #F55353;
+  border:2rpx solid #fff;position: absolute;top:-20rpx;right:-20rpx;line-height:40rpx;
+} 

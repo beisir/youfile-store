@@ -9,7 +9,7 @@
 </view>
 </mes>
  <view class="goods-ser">
-    <input placeholder="搜索店铺内商品"  bindconfirm="searchBtn"   value="{{value}}"   />
+    <navigator url="../../admin/serStatus/serStatus"><input placeholder="搜索店铺内商品"  disabled='disabled' bindconfirm="searchBtn"   value="{{value}}"/></navigator>
     <image class="home-ser"  src="/image/search1.png"></image>
     <view class='home-img home-img1'>
       <navigator url="../derm/derm">

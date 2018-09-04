@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 var recordStartX = 0;
 var currentOffsetX = 0;
 Page({
@@ -12,13 +13,11 @@ Page({
     obj:{
         name:"hello"
     },
+    storeMes:[],
     hidden: true,
     idnex:'',
     leftVal:'',
-    detailList: [
-      { id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻...', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true },
-      { id: 2, title: '周大福新款珠宝', price: '1200', small: '14号', image: '/image/s6.png', num: 1, selected: true }
-    ],
+    userId:'123',
     items: [{
       message: '18K锦囊金宝石',
       status: 0,
@@ -35,27 +34,17 @@ Page({
   // 规格
   //选择规格
   showAlert: function () {
-    // 用that取代this，防止不必要的情况发生
     var that = this;
-    // 创建一个动画实例
     var animation = wx.createAnimation({
-      // 动画持续时间
       duration: 300,
-      // 定义动画效果，当前是匀速
       timingFunction: 'linear'
     })
-    // 将该变量赋值给当前动画
     that.animation = animation
-    // 先在y轴偏移，然后用step()完成一个动画
     animation.translateY(300).step()
-    // 用setData改变当前动画
     that.setData({
-      // 通过export()方法导出数据
       animationData: animation.export(),
-      // 改变view里面的Wx：if
       hidden: false
     })
-    // 设置setTimeout来改变y轴偏移量，实现有感觉的滑动
     setTimeout(function () {
       animation.translateY(0).step()
       that.setData({
@@ -177,34 +166,49 @@ Page({
       detailList: detailList
     });
   },
-  onLoad: function (options) {
-
-
-  },
-  onShow() {
-    var that=this
-    app.http.getRequest('/api/shop/shoppingcart/findByGoodsId/'+1)
+  getList:function(){
+    var _this=this,
+      userId = this.data.userId
+    Api.cartList()
       .then(res => {
-        const obj = res.obj
-        console.log(obj)
-        that.setData({
-          carts: obj,
-          hasList: true,
+        const obj=res.obj,
+          effectiveList = obj.effectiveList[0].goodsList,
+          store = obj.effectiveList[0].store,
+          failureList = obj.failureList[0].goodsList,
+          storeMes=[]
+        for (var i = 0; i < effectiveList.length;i++){
+          effectiveList[i].num = 1
+          effectiveList[i].selected=true
+        }
+        if (effectiveList.length>0){
+          _this.setData({
+            hasList: true,
+
+          });
+        }
+        if (failureList.length > 0) {
+          _this.setData({
+            lostList: true,
+
+          });
+        }
+        console.log(failureList)
+        storeMes.push(store)
+        _this.setData({
+          detailList: effectiveList,
+          lostcarts: failureList,
+          storeMes: storeMes
+        },function(){
+          _this.getTotalPrice();
         })
       })
-    this.setData({
-      hasList: true,
-      carts:[
-        { id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻...', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true },
-        { id: 2, title: '周大福新款珠宝', price: '1200', small: '14号', image: '/image/s6.png', num: 1, selected: true }
-      ],
-      lostList: true,
-      lostcarts: [
-        { id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻...', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true },
-        { id: 2, title: '周大福新款珠宝', price: '1200', small: '14号', image: '/image/s6.png', num: 1, selected: true }
-      ],
-    });
-    this.getTotalPrice();
+  },
+  onLoad: function (options) {
+    this.getList()
+    
+  },
+  onShow() {
+    
   },
   /**
    * 当前商品选中事件
@@ -315,8 +319,8 @@ Page({
     let detailList = this.data.detailList;                  // 获取购物车列表
     let total = 0;
     for (let i = 0; i < detailList.length; i++) {         // 循环列表得到每个数据
-      if (detailList[i].selected) {                     // 判断选中才会计算价格
-        total += detailList[i].num * detailList[i].price;   // 所有价格加起来
+      if (detailList[i].selected) {  
+        total += detailList[i].num * detailList[i].sellPrice;   // 所有价格加起来
       }
     }
     this.setData({                                // 最后赋值到data中渲染到页面

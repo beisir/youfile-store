@@ -39,7 +39,7 @@
 }
 .aw-view view{
   display: inline-block;
-  margin-left: 30rpx;
+  margin-right: 30rpx;
 }
 .aw-but{
   position:fixed;
@@ -60,7 +60,7 @@
   vertical-align: middle;
 }
 .aw-cont{
-  margin-bottom: 90rpx;
+  margin-bottom: 150rpx;
 }
 .aw-no{
   text-align: center;

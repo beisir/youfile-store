@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
   /**
    * 页面的初始数据
@@ -8,6 +9,7 @@ Page({
     switch2Change: true,
     watchInput: false,
     value:'',
+    value1:'',
     together:false,
     batch:false
   },
@@ -50,6 +52,7 @@ Page({
   },
   // 监听input
   watchInput: function (event) {
+    console.log(event.detail.value)
     if (event.detail.value == '') {
       this.setData({
         watchInput: false
@@ -74,6 +77,7 @@ Page({
     }
   },
   togetherFun:function(){
+    console.log(this.data.value)
     this.setData({
       together: true,
     })
@@ -83,23 +87,80 @@ Page({
       batch: true,
     })
   },
+  setSuccess:function(){
+    wx.showToast({
+      title: '设置成功',
+      icon: 'none',
+      duration: 2000
+    })
+  },
+  setMes: function () {
+    wx.showToast({
+      title: '请输入有效值',
+      icon: 'none',
+      duration: 2000
+    })
+    return
+  },
   confirm:function(){
     var _this=this,
-        value=this.data.value
+      value =this.data.value
     console.log(value)
-    app.http.postRequest('/admin/config/store/salebatchnum', {saleBatchNum:value})
-      .then(res => {
-        console.log(res)
-      })
-    this.cancel()
+    if (value==''){
+      _this.setMes()
+    }else{
+      Api.saleBatchNum(value)
+        .then(res => {
+          _this.cancel()
+          _this.setSuccess()
+        })
+    }
+  },
+  confirm1: function () {
+    var _this = this,
+      value = this.data.value1
+    if (value == '') {
+      _this.setMes()
+    } else {
+      Api.saleBatchAmount(value)
+        .then(res => {
+          _this.cancel()
+          _this.setSuccess()
+        })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+    this.getSet()
   },
-
+  // switch1Change: true,
+  // switch2Change: true,
+  // watchInput: false,
+  // value: '',
+  // value1: '',
+  getSet:function(){
+    var _this=this
+    Api.saleBatch()
+      .then(res => {
+        if (res.obj.saleBatchNum) {
+          _this.setData({
+            switch1Change:false,
+            value: res.obj.saleBatchNum
+          })
+        }
+        if (res.obj.saleBatchAmount){
+          _this.setData({
+            switch2Change: false,
+            value1: res.obj.saleBatchAmount
+          })
+        }
+        console.log(res)
+        // _this.cancel()
+        // _this.setSuccess()
+      })
+  },
   /**
    * 生命周期函数--监听页面显示
    */

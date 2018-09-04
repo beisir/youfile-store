@@ -6,22 +6,22 @@
    </block>
 </swiper>
 <view class='gd-details'>
-  <view class='gd-title'>
-    <view>{{name}}<image src="/image/fx.png"></image></view>
-    <view class='gd-font'>零售价：<text>￥{{wholesalePrice}}</text></view>
-    <view class='gd-font'>批发价：<image src='/image/wh.png'></image><text class='gd-yan'>商友验证中</text><button>享受批发价</button></view>
-  </view>
   <!-- <view class='gd-title'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
-    <view class='gd-font gd-font1'>零售价：￥333</view>
+    <view class='gd-font'>零售价：<text>￥{{sellPrice}}</text></view>
+    <view class='gd-font'>批发价：<image src='/image/wh.png'></image><text class='gd-yan'>商友验证中</text><button>享受批发价</button></view>
+  </view> -->
+  <!-- <view class='gd-title'>
+    <view>{{name}}<image src="/image/fx.png"></image></view>
+    <view class='gd-font gd-font1'>零售价：￥{{sellPrice}}</view>
     <view class='gd-font'>批发价：<text>￥333</text></view>
   </view> -->
-  <!-- <view class='gd-title'>
+  <view class='gd-title'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
-    <view class='gd-font gd-font2'>零售价：￥333</view>
-    <view class='gd-font'>批发价：<text>￥333</text><button class='btn'><text>3</text>件起批</button></view>
-    <view class='gd-view-n'><button>混批</button>全场满￥5000可混批</view>
-  </view> -->
+    <view class='gd-font gd-font2'>零售价：￥{{sell}}</view>
+    <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text><button class='btn'><text>{{saleBatchNum}}</text>件起批</button></view>
+    <view class='gd-view-n'><button>混批</button>全场满￥{{saleBatchAmount}}可混批</view>
+  </view>
   <view class="weui_cells">
       <image  src="/image/positionico.png"></image>
       <text class="store-address">北京 </text>
@@ -95,9 +95,7 @@
         </view> -->
     </view>
     <view class='gd_b_right' bindtap='showAlert'>
-       <navigator>
           加入购物车
-        </navigator>
     </view>
     <!-- <view class='gd_b_right' bindtap='showAlert'>
        <navigator>
@@ -107,6 +105,7 @@
 </view>
 <view hidden="{{!hidden}}" class='alertAdd'>
     <view class='gd-alert' animation='{{animationData}}'>
+    <view class='new-man'>已享受批发价，共优惠<text>2000</text>元</view>
       <view class='gd-top'>
         <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
         <view class='gd-image'>
@@ -114,7 +113,7 @@
         </view>
         <view class='gd-ins'>
           <view class='gd-title1'>{{name}}</view>
-          <view>15<text class='lt-text'>件起批</text></view>
+          <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view>
         </view>
       </view>
        <view wx:for='{{goodsSpecificationVOList}}' wx:key="{{index}}">
@@ -122,53 +121,53 @@
           <text>{{item.specName}}</text>
           <view>
           <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
-              <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="lt-view {{specsTab==index?'active':''}}" data-current="{{index}}" bindtap='changeButton'>{{item.specValueName}}</view></view>
+              <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="lt-view {{swichNav==index?'active':''}}" data-current="{{index}}" bindtap='swichNav' data-cide='{{item.specValueCode}}'>{{item.specValueName}}<text class='new-red'>2</text></view></view>
             </block>
           </view>
         </view>
         <view  class='gd-gg lt-attr'  wx:if='{{index==1}}'>
            <view class="lt-table">
               <view class="lt-tr">
-                  <view>重量</view>
+                  <view>{{nameTwo}}</view>
                   <view>零售价</view>
                   <view>批发价</view>
                   <view>
                     <view class="lt-add-cart">
-                      <view class="lt-down" bindtap="minusCount"><image  src="/image/lt-jian.png"></image></view>
-                      <view class="lt-num">批量</view>
-                      <view class="lt-add"  bindtap="addCount"><image  src="/image/lt-add.png"></image></view>
+                      <view class="lt-down" bindtap="minusCountAll"><image  src="/image/lt-jian.png"></image></view>
+                      <view class="lt-num"><input disabled='disabled' value='批量'></input></view>
+                      <view class="lt-add"  bindtap="addCountAll"><image  src="/image/lt-add.png"></image></view>
                     </view>
                 </view>
               </view>
-              <view class="lt-tr lt-tr1"  wx:for="{{goodsSkuVOList}}" wx:key="{{index}}">
-                  <view>重量</view>
-                  <view>{{item.sellPrice}}</view>
-                  <view>{{item.wholesalePrice}}</view>
+              <view class="lt-tr lt-tr1"  wx:for="{{newSkuArrTwo}}" wx:key="{{index}}">
+                  <view>{{item.name}}</view>
+                  <view class='add-xian'>￥{{item.sellPrice}}</view>
+                  <view>￥{{item.wholesalePrice}}</view>
                   <view>
                     <view class="lt-add-cart">
-                      <view class="lt-down" bindtap="minusCount"><image  src="/image/jian.png"></image></view>
-                      <view class="lt-num"><input value='1'></input></view>
-                      <view class="lt-add"  bindtap="addCount"><image  src="/image/lt-a.png"></image></view>
+                      <view class="lt-down" data-index='{{index}}' bindtap="minusCount1"><image  src="/image/jian.png"></image></view>
+                      <view class="lt-num"><input value='{{item.num}}'  data-index='{{index}}' bindinput='changeNum'></input></view>
+                      <view class="lt-add"  data-index='{{index}}' bindtap="addCount1"><image  src="/image/lt-a.png"></image></view>
                     </view>
                 </view>
               </view>
-              <view class="tr"  wx:for="{{item.goodsSkuVOList}}" wx:key="{{index}}">
+              <!-- <view class="tr"  wx:for="{{item.goodsSkuVOList}}" wx:key="{{index}}">
                   <view>{{item}}</view>
                   <view>{{item.sellPrice}}</view>
                   <view>{{item.wholesalePrice}}</view>
                   <view>222</view>
-              </view>
+              </view> -->
           </view>
         </view>
       </view>
       <view class='weui-bottom lt-weui-bottom'>
-        <view>￥96000.00<text>共<text>3</text>种<text>3</text>件商品</text></view>
+        <view>￥{{totalPrice}}<text>共<text>3</text>种<text>3</text>件商品</text></view>
         <view >加入购物车</view>
         <view>立即下单</view>
       </view>
     </view>
 </view>
-<!-- <view hidden="{{hidden}}" class='alertAdd'>
+<view hidden="{{hidden}}" class='alertAdd'>
     <view class='gd-alert' animation='{{animationData}}'>
       <view class='gd-top'>
         <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
@@ -213,8 +212,8 @@
         </view>
       </view>
       <view class='weui-bottom'>
-        <view bindtap='CratHome'>加入购物车</view>
+        <view bindtap='cratHome'>加入购物车</view>
         <view><navigator url="../address/address">立即购买</navigator></view>
       </view>
     </view>
-</view> -->
+</view>

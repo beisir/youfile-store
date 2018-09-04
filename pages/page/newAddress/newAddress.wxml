@@ -7,15 +7,15 @@
   <view class='page__bd'>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-           收货人：<input></input>
+           收货人：<input value='{{nameVal}}' bindinput='nameValFun'></input>
         </view>
         <view class='weui-img'>
-         <image class="na-clo" src="/image/clo.png"></image>
+         <image class="na-clo" bindtap='deleteVal' src="/image/clo.png"></image>
         </view>
       </view>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-           联系方式：<input></input>
+           联系方式：<input  value='{{telephone}}'  bindinput='savePhone'></input>
         </view>
       </view>
       <view class='weui-cell weui-cell_access'>
@@ -28,10 +28,11 @@
       </view>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-           详情街道：<input></input>
+           详情街道：<input value='{{addressVal}}' bindinput='addressValFun'></input>
         </view>
       </view>
   </view>
-  <button class='aw-but'>保存</button>
+  <button class='aw-but' bindtap='saveAddress' hidden='{{isEdit}}'>保存</button>
+  <button class='aw-but' bindtap='editAddress' hidden='{{!isEdit}}'>编辑</button>
 </view>
 

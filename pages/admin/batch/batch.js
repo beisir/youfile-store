@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
 
   /**
@@ -24,7 +25,7 @@ Page({
   },
 getList:function(){
   var _this = this
-  app.pageRequest.pageGet('/admin/shop/store/{{storeId}}/goods', {})
+  Api.adminGoodsList({})
     .then(res => {
       var detailList = res.obj.result,
         datas = _this.data.datas,
@@ -98,7 +99,8 @@ getList:function(){
       showBottom:false,
       setCode:[],
       numSle:0,
-      pageNum:1
+      pageNum:1,
+      datas:[]
     })
     this.classCode()
     if (e.target.dataset.current==2){
@@ -117,7 +119,7 @@ getList:function(){
   classCode: function () {
     var _this = this,
       goodsStatus = this.data.goodsStatus
-    app.pageRequest.pageGet('/admin/shop/goods/{{storeId}}/goods/status/{{goodsStatus}}', { goodsStatus: goodsStatus,customCategoryCodes:''})
+    Api.adminGoodsStatus({ goodsStatus: goodsStatus, customCategoryCodes: '' })
       .then(res => {
         var detailList = res.obj.result,
           datas = _this.data.datas,
@@ -134,7 +136,7 @@ getList:function(){
       newArr=[],
       goodsIdList = this.data.setCode
     if (goodsIdList.length==0){return}
-    app.http.postRequest('/admin/shop/store/{{storeId}}/goods/status/on',goodsIdList)
+    Api.adminGoodsUp(goodsIdList)
       .then(res => {
         for (var i = 0; i < datas.length; i++) {
           if (this.IsInArray(goodsIdList, datas[i].id)) {
@@ -163,7 +165,7 @@ getList:function(){
           newArr=[],
           goodsIdList = this.data.setCode
     if (goodsIdList.length == 0) { return }
-    app.http.postRequest('/admin/shop/store/{{storeId}}/goods/status/off',goodsIdList)
+    Api.adminGoodsDown(goodsIdList)
       .then(res => {
         for (var i = 0; i < datas.length; i++) {
           if (this.IsInArray(goodsIdList, datas[i].id)) {

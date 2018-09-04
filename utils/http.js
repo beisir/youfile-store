@@ -10,10 +10,16 @@ class request {
     this.newData={}
   }
   /**
+   * PUT类型的网络请求
+   */
+  putRequest(url, data) {
+    return  this.requestAll(url, data, 'PUT')
+  }
+  /**
    * GET类型的网络请求
    */
   getRequest(url, data) {
-    return  this.requestAll(url, data, 'GET')
+    return this.requestAll(url, data, 'GET')
   }
   /**
    * DELETE类型的网络请求
@@ -52,6 +58,14 @@ class request {
         data.storeId = this.storeId
         url = this.analysisUrl(url, data)
       }
+      // wx.clearStorageSync('access_token')
+      // if (url !== "/oauth/token"){
+      //   let token = wx.getStorageSync('access_token')
+      //   if (token) {
+      //     this._headerGet['Authorization'] = 'Bearer ' + token;
+      //   }
+      // }
+      this._headerGet['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsIm1lcmNoYW50TnVtYmVyIjoiMDQ5NTg2MTMiLCJ1c2VyX25hbWUiOiIxNjg4ODg4ODg4OCIsInNjb3BlIjpbImFsbCJdLCJleHAiOjE1MzY1NDY1NTcsInVzZXJJZCI6IjJhOTE1M2JmZmIyYmRjZjVjZWRjOTIwMTlmYmJhNzliIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6ImFhNzM4Y2E2LTQyNjUtNGFlZS05Zjc4LTI2ZTVjY2M1YmQwYiIsImNsaWVudF9pZCI6IkJlaUppbmdCYWlSb25nU2hpTWFvQ2xpZW50In0.u8g0uarWHF3IKi-z8CcJWLMxkRca-9R_SwMBSeuN2u8';
       wx.request({
         url: this._baseUrl +url,
         data: data,
@@ -59,9 +73,14 @@ class request {
         method: method,
         success: (res => {
         if(res.statusCode === 200) {
-        //200: 服务端业务处理正常结束
         resolve(res.data)
-      } else {
+        } else if (res.statusCode === 401) {
+          let pages = getCurrentPages()
+          let curPage = pages[pages.length - 1]
+          this.__page = curPage
+          curPage.loginCom = curPage.selectComponent("#login");
+          curPage.loginCom.showPage();
+        }else {
         //其它错误，提示用户错误信息
         if (this._errorHandler != null) {
           //如果有统一的异常处理，就先调用统一异常处理函数对异常进行处理

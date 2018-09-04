@@ -1,4 +1,4 @@
-// pages/newAddress/newAddress.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
@@ -8,14 +8,95 @@ Page({
     province: '',
     city: '',
     area: '',
-    show: false
+    show: false,
+    nameVal:'',
+    addressVal:'',
+    telephone:'',
+    userId: '123',
+    isEdit:false,
+    id:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  goBack:function(){
+    var pages = getCurrentPages();             //  获取页面栈
+    var currPage = pages[pages.length - 1];
+    var prevPage = pages[pages.length - 2];    // 上一个页面
+    prevPage.setData({
+      mydata: 1
+    })
+    wx.navigateBack({
+      data: 1
+    })
+  },
+  getDetails:function(id){ 
+    var _this=this
+    Api.addressInfo({id:id})
+      .then(res => {
+        const obj=res.obj
+        console.log(obj)
+        _this.setData({
+          province: obj.province,
+          city: obj.city,
+          area: obj.county,
+          nameVal: obj.userName,
+          addressVal: obj.detailAddress,
+          telephone: obj.userPhone,
+        })
+      })
+
+    
+  },
   onLoad: function (options) {
-  
+    if (options.id){
+      wx.setNavigationBarTitle({
+        title:'修改地址'
+      })
+      this.getDetails(options.id)
+      this.setData({
+        isEdit:true,
+        id: options.id
+      })
+    }
+  },
+  // 信息验证
+  deleteVal:function(){
+    this.setData({
+      nameVal:''
+    })
+  },
+  nameValFun: function (event){
+    this.setData({
+      nameVal: event.detail.value
+    })
+  },
+  addressValFun: function (event){
+    this.setData({
+      addressVal: event.detail.value
+    })
+  },
+  savePhone(e) {
+    this.setData({
+      telephone: e.detail.value
+    })
+  },
+  checkTel:function(){
+    if (!this.testTel()) {
+      wx.showToast({
+        title: '请输入正确手机号码',
+        icon: 'none',
+      })
+      return;
+    }
+  },
+  testTel() {
+    let phone = this.data.telephone;
+    if (!phone || phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
+      return false;
+    }
+    return true;
   },
   //城市选择
   sureSelectAreaListener: function (e) {
@@ -39,6 +120,51 @@ Page({
     this.setData({
       region: e.detail.value
     })
+  },
+  /**
+   * 添加地址
+   */
+  getInputVal:function(){
+    this.checkTel();
+    var _this = this,
+      userName = this.data.nameVal,
+      userPhone = this.data.telephone,
+      isDefault = false,
+      userId = this.data.userId,
+      county = this.data.area,
+      province = this.data.province,
+      city = this.data.city,
+      detailAddress = this.data.addressVal,
+      addressArr = {}
+    addressArr = { userName: userName, userPhone: userPhone, isDefault: isDefault, userId: userId, county: county, province: province, city: city, detailAddress: detailAddress }
+    return addressArr
+  },
+  saveAddress:function(){
+    var _this = this
+    Api.saveAddress(this.getInputVal())
+      .then(res => {
+        wx.showToast({
+          title: '添加成功',
+          icon: 'none',
+          duration: 2000
+        })
+        _this.goBack()
+      })
+
+  },
+  editAddress:function(){
+    var list = this.getInputVal(),
+        _this=this
+    list.id=this.data.id
+    Api.editAddress(list)
+      .then(res => {
+        wx.showToast({
+          title: '编辑成功',
+          icon: 'none',
+          duration: 2000
+        })
+        _this.goBack()
+      })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

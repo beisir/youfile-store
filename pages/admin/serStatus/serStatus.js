@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
   data: {
     history: ["戒指", "项链", "钻戒"],
@@ -8,7 +9,6 @@ Page({
     showResult: false,
     closeCont: false,
   },
-
   searchInput(e) {
     if (e.detail.value == '') {
       this.setData({
@@ -27,7 +27,11 @@ Page({
   getList:function(){
     var keyword = this.data.value,
       _this = this
-    app.pageRequest.pageGet('/admin/shop/store/{{storeId}}/goods',{ keyword: keyword})
+    this.setData({
+      result: [],
+    })
+    Api.goodsSearchList({ keyword: keyword })
+    // app.pageRequest.pageGet('/admin/shop/store/{{storeId}}/goods',)
       .then(res => {
         var obj = res.obj.result,
           datas = _this.data.result,
@@ -55,7 +59,6 @@ Page({
     })
   },
   keywordHandle(e) {
-    console.log(e.target.dataset)
     const text = e.target.dataset.name;
     this.setData({
       value: text,
@@ -91,10 +94,8 @@ Page({
       this.setData({
         history: JSON.parse(history)
       })
-      console.log(this.data.history);
     }
     var _this = this
-    _this.getList()
     wx.getSystemInfo({
       success: function (res) {
         _this.setData({
@@ -107,8 +108,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    app.pageRequest.pageData.pageNum = 0
-    this.getList()
+    app.pageRequest.pageData.pageSize = 0
+    this.setData({
+      result: [],
+    })
+    if (this.data.value != '') {
+      this.getList()
+    }
   },
 
   /**

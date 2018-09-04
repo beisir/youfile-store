@@ -1,3 +1,4 @@
+<login-component id='login' inner-text="Some text"></login-component>
 <!-- 新建分类 -->
 <spec
   show="{{show}}"
@@ -14,9 +15,9 @@
   </view>
 </view>
 <view class='shop-cont'>
-  <view wx:for='{{list}}' wx:key='{{index}}'bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' >
-     {{item.name}}<view>{{item.count}}件</view>
-      <image class='weui-img' src="/image/icl.png"></image>
+  <view wx:for='{{list}}' wx:key='{{index}}' bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' >
+     {{item.name}}<view bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'>{{item.count}}件</view>
+      <image class='weui-img' src="/image/icl.png" bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'></image>
   </view>
 </view>
 <view class='add-bottom'>

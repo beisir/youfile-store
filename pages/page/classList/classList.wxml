@@ -1,6 +1,5 @@
 <view>
   <view class="result result-box" wx:if="{{result.length > 0}}">
-  <scroll-view scroll-y="true" style="height:100%;" >
     <view class="result-list" wx:for="{{result}}" wx:key="index">
       <navigator url="../goodsDetails/goodsDetails">
         <image src="{{item.mainImgUrl}}"></image>
@@ -12,7 +11,6 @@
         </view>
       </navigator>
     </view>
-  </scroll-view>
     <view class='nomore'>没有更多了</view>
   </view>
   <view class="result-null" wx:else>

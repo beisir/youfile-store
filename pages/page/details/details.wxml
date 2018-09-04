@@ -12,9 +12,9 @@
   </view> 
   <view class='page__bd'>
     <view class=''>
-      <navigator class='weui-cell weui-cell_access' url='../serList/serList' wx:for="{{list}}" wx:key="{{index}}">
+      <navigator class='weui-cell weui-cell_access' url='../classList/classList?name={{item.name}}&code={{item.customCategoryCode}}' wx:for="{{list}}" wx:key="{{index}}">
         <view class='weui-cell__bd'>
-           {{item.title}}
+           {{item.name}}
         </view>
         <view class='weui-img'>
          <image src="/image/icl.png"></image>

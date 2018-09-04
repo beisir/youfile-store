@@ -249,7 +249,12 @@
  align-items: center;
  justify-content: center;
 }
-  
 .record-box:last-child {
  border-bottom: 0;
+}
+.table {
+  border-bottom: 0;padding-bottom: 40rpx;
+}
+.cart-list {
+  border-bottom: 0;
 }

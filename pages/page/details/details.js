@@ -1,20 +1,29 @@
-// pages/details/details.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list: [
-      { id: 1, title: "戒指", num: "123" }, { id: 1, title: "项链", num: "23" }, { id: 1, title: "耳钉", num: "13" }, { id: 1, title: "手链", num: "123" }
-    ],
+    list: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var _this =this
+    Api.classList()
+      .then(res => {
+        const obj = res.obj
+        console.log(obj)
+        for (var i = 0; i < obj.length; i++) {
+          obj[i].selected = false
+        }
+        _this.setData({
+          list: obj
+        })
+      })
   },
 
   /**

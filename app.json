@@ -1,56 +1,61 @@
 {
   "pages":[
-    "pages/login/register/register",
-    
-    "pages/admin/batchSet/batchSet",
-    
-    "pages/admin/status/status",
-    
-    "pages/page/home/home",
-    
     "pages/page/order/order",
     
-    "pages/role/order/order",
-    
-    "pages/admin/spec/spec",
-    "pages/admin/addGoods/addGoods",
-    
-    "pages/admin/firstClass/firstClass",
-    
-    "pages/login/login/login",
-    
-    
-    
+    "pages/page/cartList/cartList",
     
     "pages/page/goodsDetails/goodsDetails",
     
+    "pages/page/home/home",
+    
+    
+    
+    
     "pages/role/supplyOrder/supplyOrder",
+    
+    "pages/role/order/order",
+    
+    "pages/role/orderSelf/orderSelf",
+    
+    
+    "pages/admin/spec/spec",
+    
+    
+    
+    "pages/page/addressWe/addressWe",
+    
+    "pages/page/newAddress/newAddress",
+    "pages/page/details/details",
+    "pages/admin/class/class",
+    "pages/page/classList/classList",
+    "pages/page/serList/serList",
+    "pages/admin/firstClass/firstClass",
+    "pages/page/serStatus/serStatus",
+    "pages/admin/status/status",
+    "pages/admin/serStatus/serStatus",
+    "pages/admin/batch/batch",
+    "pages/admin/batchSet/batchSet",
+    "pages/login/register/register",
+    "pages/page/address/address",
+    "pages/admin/addGoods/addGoods",
+    "pages/login/login/login",
+    
     
     "pages/admin/editGoods/editGoods",
     "pages/admin/set/set",
-    "pages/admin/serStatus/serStatus",
     
-    "pages/admin/class/class",
     
-    "pages/admin/batch/batch",
     "pages/admin/shopClass/shopClass",
     "pages/page/mesEdit/mesEdit",
     "pages/page/mes/mes",
     "pages/admin/editMesTitle/editMesTitle",
     "pages/admin/writeCont/writeCont",
     "pages/page/derm/derm",
-    "pages/page/newAddress/newAddress",
     "pages/admin/success/success",
     "pages/admin/classList/classList",
-    "pages/page/serList/serList",
-    "pages/page/serStatus/serStatus",
     "pages/admin/classEdit/classEdit",
-    "pages/page/cartList/cartList",
-    "pages/page/addressWe/addressWe",
     "pages/admin/thirdClass/thirdClass",
     "pages/admin/secondClass/secondClass",
-    "pages/page/address/address",
-    "pages/role/orderSelf/orderSelf",
     "pages/role/orderDetails/orderDetails",
     "pages/role/supplyDetails/supplyDetails",
     "pages/role/supplySelf/supplySelf",
@@ -63,7 +68,6 @@
     "pages/page/set/set",
     "pages/page/updataPhone/updataPhone",
     "pages/page/updataPwd/updataPwd",
-    "pages/page/details/details",
     "pages/page/success/success",
     "pages/page/invoice/invoice",
     "pages/page/germ/germ",

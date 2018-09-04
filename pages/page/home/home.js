@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
   /**
    * 页面的初始数据
@@ -46,37 +47,23 @@ Page({
       showDp: false,
     })
   }, 
-
   getList: function () {
     var _this = this,
       keyword = this.data.keyword
-    app.pageRequest.pageGet('/admin/shop/store/{{storeId}}/goods', { keyword: keyword })
+    Api.adminGoodsList({ keyword: '' })
       .then(res => {
         var detailList = res.obj.result,
           datas = _this.data.result,
           totalCount = res.obj.totalCount,
           newArr = app.pageRequest.addDataList(datas, detailList)
-          console.log(newArr)
         _this.setData({
           result: newArr,
         })
       })
   },
   onLoad: function (options) {
-
     var that = this;
     that.getList()
-    // wx.navigateToMiniProgram({
-    //   appId: 'wx339cc894ccbde5ab',
-    //   path: 'pages/index/index?id=123',
-    //   extraData: {
-    //     foo: 'bar'
-    //   },
-    //   envVersion: 'develop',
-    //   success(res) {
-    //     // 打开成功
-    //   }
-    // })
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -94,8 +81,13 @@ Page({
     that.setData({ currentTab: e.detail.current });
 
   },
-
+  emptyArr: function () {
+    this.setData({
+      result: []
+    });
+  },
   swichNav: function (e) {
+    this.emptyArr()
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -140,7 +132,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    console.log(111)
+    this.emptyArr()
+    this.setData({
+      currentTab: -1
+    })
     app.pageRequest.pageData.pageNum = 0
     this.getList()
   },
@@ -149,12 +144,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log(111)
     this.getList()
   },
-  bindDownLoad: function () {
-    this.getList()
-  },
+  
   /**
    * 用户点击右上角分享
    */
@@ -166,7 +158,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getList()
   },
 
   /**

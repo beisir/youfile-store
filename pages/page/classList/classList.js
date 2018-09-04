@@ -11,7 +11,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  getList:function(){
+  getList: function () {
     var _this = this,
       customCategoryCode = this.data.customCategoryCode
     Api.classCodeList({ customCategoryCode: customCategoryCode })
@@ -70,7 +70,7 @@ Page({
   onPullDownRefresh: function () {
     app.pageRequest.pageData.pageNum = 0
     this.setData({
-      result:[]
+      result: []
     })
     this.getList()
   },

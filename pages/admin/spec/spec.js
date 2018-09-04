@@ -1,7 +1,7 @@
-// import http from '../../../utils/util';
 const app = getApp();
+import Api from '../../../utils/api.js'
 var getTempList = function (that) {
-  app.http.getRequest('/admin/shop/specificationTemplate/findList',{})
+  Api.template()
     .then(res => {
       const obj = res.obj
       const templateCont = (that.data.templateCont).concat(obj)
@@ -34,7 +34,8 @@ Page({
     notemp: { templateName: "衣服" },
     specName: '',
     value: '',
-    goodsListData: []
+    goodsListData: [],
+    show1:false
 
   },
   // 返回上一页
@@ -110,7 +111,8 @@ Page({
       addSpec: false,
       addSpecAttc: false,
       updateSpec: false,
-      editSpec: false
+      editSpec: false,
+      show1:false
     })
   },
   // 添加规格值
@@ -217,24 +219,21 @@ Page({
     var index = _this.data.currentTab
     var tempArr = {}
     var listData = _this.data.templateCont[index]
-    console.log(listData["specificationTemplateContentVOList"])
     tempArr["specificationTemplateContentVOList"] = listData["specificationTemplateContentVOList"]
     tempArr["userId"] = "00000000"
     if (_this.data.value != '') {
       tempArr["templateName"] = _this.data.value
     }
-    app.http.postRequest('/admin/shop/specificationTemplate/addTemplateAndContent',tempArr)
+    Api.addTemplate(tempArr)
       .then(res => {
-        const code = res.code
-        if (code == 1) {
           wx.showToast({
             title: '添加成功',
             icon: 'none',
             duration: 1000,
             mask: true
           })
+          getTempList(_this);
           _this.cancel()
-        }
       })
   },
   // 排序
@@ -311,39 +310,30 @@ Page({
   // 删除模板
   unsetSpec: function () {
     var _this = this
-    var templateId = this.data.templateId
-    var currentTab = this.data.currentTab
-    var templateCont = _this.data.templateCont
-    templateCont.splice(currentTab, 1)
-    wx.showModal({
-      title: '提示',
-      content: '是否要删除？',
-      success: function (res) {
-        if (res.confirm) {
-          _this.setData({
-            templateCont: templateCont
-          })
-          app.http.deleteRequest('/admin/shop/specificationTemplate/deleteTemplateById?templateId=' + templateId,{})
-            .then(res => {
-              const code = res.code
-              if (code == 1) {
-                wx.showToast({
-                  title: '删除成功',
-                  icon: 'none',
-                  duration: 1000,
-                  mask: true
-                })
-              }
-            })
-        }
-      }
+    _this.setData({
+      show1:true
     })
+   
+  },
+  confirmDetele:function(){
+    var _this = this
+    var templateId = this.data.templateId
+    Api.templateDelete({ templateId: templateId })
+      .then(res => {
+        wx.showToast({
+          title: '删除成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+        getTempList(_this);
+        _this.cancel()
+      })
   },
   // 删除模板内容
   deleteTemplateContentId: function (e) {
     var _this = this
     var templateContentId = e.target.dataset.id
-
     var templateId = this.data.templateId
     var currentTab = this.data.currentTab
     var templateCont = _this.data.templateCont
@@ -392,11 +382,9 @@ Page({
     _this.setData({
       templateCont: templateCont
     })
-    if (templateName == '') { return }
-    app.http.postRequest('/admin/shop/specificationTemplate/updateTemplateName?templateId=' + templateId + '&templateName=' + templateName,{})
+    if (templateName == '') { _this.checkName() }
+    Api.updateTemplateNameUrl({ templateId: templateId, templateName: templateName})
       .then(res => {
-        const code = res.code
-        if (code == 1) {
           wx.showToast({
             title: '更新成功',
             icon: 'none',
@@ -404,7 +392,6 @@ Page({
             mask: true
           })
           _this.cancel()
-        }
       })
   },
   // 更新规格名字
@@ -415,7 +402,7 @@ Page({
     _this.setData({
       editSpec: true,
       editId: editId,
-      value: name,
+      value1: name,
       specName: name
     })
   },
@@ -423,9 +410,7 @@ Page({
     var _this = this
     var templateContentId = this.data.editId
     var specName = this.data.value
-    if (specName == '') {
-      return
-    }
+      _this.checkName()
     var templateId = _this.data.templateId
     var index = _this.data.currentTab
     var templateCont = _this.data.templateCont
@@ -437,24 +422,32 @@ Page({
       }
     }
     templateCont[index].specificationTemplateContentVOList = tempArr
-    console.log(tempArr)
     _this.setData({
       templateCont: templateCont,
       editSpec: false
     })
-    app.http.postRequest('/admin/shop/specificationTemplate/updateSpecNameByTemplateContentId?templateContentId='+templateContentId+'&specName='+specName,{})
+    Api.updateSpecNameUrl({ templateContentId: templateContentId, specName: specName})
       .then(res => {
-        const code = res.code
-        if (code == 1) {
           wx.showToast({
             title: '更新成功',
             icon: 'none',
             duration: 1000,
             mask: true
           })
-        }
+          _this.cancel()
       })
 
+  },
+  checkName:function(){
+    if(this.data.value==''){
+      wx.showToast({
+        title: '请输入文字！',
+        icon: 'none',
+        duration: 1000,
+        mask: true
+      })
+      return
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

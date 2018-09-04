@@ -1,50 +1,100 @@
-// pages/addressWe/addressWe.js
+const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:[
-      { title: "晨晨", phone: 13133337898, adress: "北京市朝阳区三环到四环之间 左安门时点新坐标家园（方庄东 路西）10AM新坐标",selected:true},
-      { title: "晨晨", phone: 13133337898, adress: "北京市朝阳区三环到四环之间 左安门时点新坐标家园（方庄东 路西）10AM新坐标",selected: false },
-      { title: "晨晨", phone: 13133337898, adress: "北京市朝阳区三环到四环之间 左安门时点新坐标家园（方庄东 路西）10AM新坐标",selected: false }
-    ]
+    list:[],
+    userId:'123',
+    show1:false,
+    id:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
   
+  onLoad: function (options) {
+    this.getList()
+  },
+  getList:function(){
+    var _this = this,
+      userId = this.data.userId
+    Api.addressList({ userId: userId })
+      .then(res => {
+        var res = res.obj
+        _this.setData({
+          list: res,
+          show1: false,
+        })
+      })
   },
   selectList(e){
-    const index1=e.currentTarget.dataset.index;
-    var array = this.data.list
+    const index1=e.currentTarget.dataset.index,
+          id = e.target.dataset.id,
+          userId=this.data.userId,
+          array = this.data.list
     array.forEach((item, index, arr) => {
-      var sItem = "list[" + index + "].selected"
+      var sItem = "list[" + index + "].isDefault"
       this.setData({
         [sItem]: false,
       })
     })
-    array[index1].selected = true
+    array[index1].isDefault = true
+    Api.addressDefault({userId: userId,id: id})
+      .then(res => {
+        var res = res.obj
+      })
     this.setData({
       list: array
     })
   },
   // 删除
   deleteList(e) {
-    const index = e.currentTarget.dataset.index;
-    let detailList = this.data.list;
-    detailList.splice(index, 1);
     this.setData({
-      list: detailList
-    });
-    wx.showToast({
-      title: '删除成功',
-      icon: 'success',
-      duration: 2000
+      show1:true,
+      id: e.target.dataset.id,
     })
+   
+  },
+  confirm:function(){
+    var _this=this
+    Api.addressDelete({ id:this.data.id})
+      .then(res => {
+        wx.showToast({
+          title: '删除成功',
+          icon: 'none',
+          duration: 2000,
+        })
+        this.getList()
+      })
+  },
+  // 编辑
+  editList(e) {
+    var id=e.target.dataset.id
+    wx.navigateTo({
+      url: '../newAddress/newAddress?id='+id,
+    })
+    // const index = e.currentTarget.dataset.index,
+    //   id = e.target.dataset.id,
+    //   _this = this
+    //   console.log(id)
+    // let detailList = this.data.list;
+    // detailList.splice(index, 1);
+    // app.http.deleteRequest('/admin/user/usershopaddress/{{id}}', { id: id })
+    //   .then(res => {
+    //     var res = res.obj
+    //     _this.setData({
+    //       list: detailList
+    //     })
+    //     wx.showToast({
+    //       title: '成功',
+    //       icon: 'none',
+    //       duration: 2000
+    //     })
+    //   })
   },
   newAddress(e){
     wx.navigateTo({
@@ -62,7 +112,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getList()
   },
 
   /**

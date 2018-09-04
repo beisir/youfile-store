@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "批量管理"
+  "navigationBarTitleText": "批量管理",
+  "usingComponents": {
+    "login-component": "../../login/login/login"
+  }
 }

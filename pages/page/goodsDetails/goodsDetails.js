@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
 
   /**
@@ -8,13 +9,16 @@ Page({
     imgUrls: [],
     goodsSpecificationVOList:[],
     goodsSkuVOList:[],
+    skuArrTwo: [],
+    newSkuArrTwo:[],
+    nameTwo:'',
     className:'active',
     indicatorDots: true,
     autoplay: true,
     interval: 2000,
     duration: 500,
     bg: '#C79C77',
-    Height: ""  ,
+    Height: "" ,
     hidden: true,
     numbers: 1,
     name:'',
@@ -22,11 +26,16 @@ Page({
     recommendDesc:'',
     introduction:'',
     swichNavCode:true,
+    swichNav:-1,
     changeButtonCode:true,
     mainImgUrl:'',
     wholesale: '',
     sell:'',
-    stockNum:''
+    stockNum:'',
+    saleBatchNum:'',
+    saleBatchAmount:'',
+    totalPrice:'',
+    goodsId:''
   },
   /**
   * 生命周期函数--监听页面加载
@@ -34,11 +43,27 @@ Page({
   onLoad: function (options) {
     var that = this,
       goodsId = options.goodsId
-    console.log(goodsId)
-    app.http.getRequest('/admin/shop/goods/180821182851051cbe48')
+    that.setData({
+      goodsId: '180831183155243d4de6'
+    })
+    Api.batchNum({ goodsId: '180831183155243d4de6'})
       .then(res => {
         var obj = res.obj
-        console.log(obj.goodsSkuVOList)
+        that.setData({
+          saleBatchNum: obj.saleBatchNum,
+          saleBatchAmount: obj.saleBatchAmount
+        })
+      })
+    Api.goodsDetails({ goodsId: '180831183155243d4de6' })
+      .then(res => {
+        var obj = res.obj,
+          skuArrTwo=[],
+          name=''
+        console.log(obj)
+        if (obj.goodsSpecificationVOList.length>1){
+          skuArrTwo.push(obj.goodsSpecificationVOList[1])
+          name = obj.goodsSpecificationVOList[1].specName
+        }
         that.setData({
           imgUrls: obj.goodsImageVOList,
           name: obj.name,
@@ -47,9 +72,11 @@ Page({
           introduction: obj.introduction,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
           goodsSkuVOList: obj.goodsSkuVOList,
+          skuArrTwo: skuArrTwo,
           sell: obj.sellPrice,
           stockNum: obj.stockNum,
-          mainImgUrl: obj.mainImgUrl
+          mainImgUrl: obj.mainImgUrl,
+          nameTwo: name
         })
       })
   },
@@ -141,19 +168,43 @@ Page({
       })
     }
   },
-  // swichNav: function (e) {
-  //   var swichNavCode = e.target.dataset.code
-  //   console.log(swichNavCode)
-  //   var that = this;
-  //   if (this.data.currentTab === e.target.dataset.current) {
-  //     return false;
-  //   } else {
-  //     that.setData({
-  //       currentTab: e.target.dataset.current,
-  //       swichNavCode: swichNavCode
-  //     })
-  //   }
-  // },
+  swichNav: function (e) {
+    var that = this,
+        swichNavCode = e.target.dataset.current,
+        code = e.target.dataset.code,
+        skuArrTwo = this.data.skuArrTwo,
+        skuArr = this.data.goodsSkuVOList,
+        skuValueVOList=[],
+        newSkuArrTwo=[],
+      codeName = this.data.goodsSpecificationVOList,
+        newList={}
+    if (skuArrTwo.length==1){
+      skuValueVOList=skuArrTwo[0].goodsSpecificationValueVOList
+    }
+    for (var i = 0; i < skuArr.length;i++){
+      var childArr = skuArr[i].specValueCodeList
+      if(childArr.indexOf(code)!=-1){
+        newSkuArrTwo.push(skuArr[i])
+      }
+    }
+    for (var i = 0; i < newSkuArrTwo.length;i++){
+      for (var j = 0; j < skuValueVOList.length; j++) {
+        if ((newSkuArrTwo[j].specValueCodeList).indexOf(skuValueVOList[j].specValueCode)!=-1){
+          newSkuArrTwo[j].name = skuValueVOList[j].specValueName
+          newSkuArrTwo[j].num=0
+        }
+      }
+    }
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        swichNav: swichNavCode,
+        newSkuArrTwo: newSkuArrTwo
+      })
+    }
+    this.getTotalPrice();
+  },
   //关闭弹框
   closeAlert:function(){
     var that = this;
@@ -181,9 +232,33 @@ Page({
       url:'../home/home'
     })
   },
-  CratHome: function () {
-    wx.switchTab({
-      url: '../cartList/cartList'
+  cratHome: function () {
+    var _this=this,
+      num = this.data.numbers,
+      goodsId = this.data.goodsId,
+      status = this.data.status,
+      skuCode='',
+      changeButtonCode = this.data.changeButtonCode,
+      swichNavCode = this.data.swichNavCode,
+      goodsSkuVOList = this.data.goodsSkuVOList
+    console.log(changeButtonCode + '[[[[' + swichNavCode)
+    for (var i = 0; i < goodsSkuVOList.length;i++){
+      var  childArr = goodsSkuVOList[i].specValueCodeList
+      if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1){
+       skuCode=goodsSkuVOList[i].skuCode
+      }
+    }
+    Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode})
+    .then(res =>{
+      wx.showToast({
+        title: '添加成功',
+        icon: 'none',
+        duration: 1000,
+        mask: true
+      })
+      wx.switchTab({
+        url: '../cartList/cartList'
+      })
     })
   },
 
@@ -206,7 +281,96 @@ Page({
       numbers:num
     })
   },
- 
+  /**
+  * 绑定加数量事件
+  */
+  addCount1(e) {
+    const index = e.currentTarget.dataset.index;
+    let newSkuArrTwo = this.data.newSkuArrTwo;
+    let num = newSkuArrTwo[index].num;
+    num = num + 1;
+    newSkuArrTwo[index].num = num;
+    this.setData({
+      newSkuArrTwo: newSkuArrTwo
+    });
+    this.getTotalPrice();
+  },
+
+  /**
+   * 绑定减数量事件
+   */
+  minusCount1(e) {
+    const index = e.currentTarget.dataset.index;
+    const obj = e.currentTarget.dataset.obj;
+    let newSkuArrTwo = this.data.newSkuArrTwo;
+    let num = newSkuArrTwo[index].num;
+    if (num <= 0) {
+      return false;
+    }
+    num = num - 1;
+    newSkuArrTwo[index].num = num;
+    this.setData({
+      newSkuArrTwo: newSkuArrTwo
+    });
+    this.getTotalPrice();
+  },
+  /**
+  * 计算总价
+  */
+  getTotalPrice() {
+    let newSkuArrTwo = this.data.newSkuArrTwo;        
+    let total = 0;
+    for (let i = 0; i < newSkuArrTwo.length; i++) {       
+        total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+    }
+    this.setData({                    
+      newSkuArrTwo: newSkuArrTwo,
+      totalPrice: total.toFixed(2)
+    });
+  },
+  minusCountAll:function(){
+    let newSkuArrTwo = this.data.newSkuArrTwo;
+    let total = 0;
+    for (let i = 0; i < newSkuArrTwo.length; i++) {
+      newSkuArrTwo[i].num = newSkuArrTwo[i].num-1
+      total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+    }
+    this.setData({
+      newSkuArrTwo: newSkuArrTwo,
+      totalPrice: total.toFixed(2)
+    });
+  },
+  addCountAll: function () {
+    let newSkuArrTwo = this.data.newSkuArrTwo;
+    let total = 0;
+    for (let i = 0; i < newSkuArrTwo.length; i++) {
+      newSkuArrTwo[i].num = newSkuArrTwo[i].num + 1
+      total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+    }
+    this.setData({
+      newSkuArrTwo: newSkuArrTwo,
+      totalPrice: total.toFixed(2)
+    });
+  },
+  changeNum: function (e){
+    const index = e.currentTarget.dataset.index;
+    const obj = e.currentTarget.dataset.obj;
+    var value = e.detail.value
+    if (value < 0 || isNaN(value)){
+      wx.showToast({
+        title: '请输入有效数字！',
+        icon: 'none',
+        duration: 2000
+      })
+      value=0
+    }
+    let newSkuArrTwo = this.data.newSkuArrTwo;
+    newSkuArrTwo[index].num = value;
+    this.setData({
+      newSkuArrTwo: newSkuArrTwo
+    });
+    this.getTotalPrice();
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
