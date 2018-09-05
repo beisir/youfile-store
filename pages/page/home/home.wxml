@@ -57,7 +57,7 @@
     <scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
     <view class="result-list" wx:for="{{result}}" wx:key="index">
       <view>
-        <navigator  url="../goodsDetails/goodsDetails?goodsId={{item.id}}"><image src="{{item.mainImgUrl}}"></image></navigator>
+        <navigator  url="../goodsDetails/goodsDetails?goodsId={{item.id}}"><view class='ho-img'><image src="{{item.mainImgUrl}}" mode="widthFix"></image></view></navigator>
         <view class="result-text">
           <text>{{item.name}}</text>
         </view>

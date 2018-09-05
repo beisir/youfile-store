@@ -51,7 +51,6 @@ function adminShopCate(data) {
 }
 /**商品状态筛选**/
 function adminGoodsStatus(data) {
-  console.log(data)
   return app.pageRequest.pageGet(adminGoodsStatusUrl, data)
 }
 /**店铺设置起批量**/
@@ -140,7 +139,7 @@ function updateSpecName(data) {
 } 
 /**添加到购物车**/
 function addCart(data) {
-  return app.http.putRequest(addCartUrl, data)
+  return app.http.postRequest(addCartUrl, data)
 }
 module.exports = {
   adminGoodsList: adminGoodsList,

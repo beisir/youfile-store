@@ -151,7 +151,7 @@
   height: 85rpx;
   width: 90rpx;
   bottom: 30rpx;
-  right: 30rpx;
+  right: 30rpx;z-index: 100;
   border-radius: 50%;
   border:2rpx solid #E7E7E7;
   box-shadow: 0 5rpx 10rpx #E7E7E7;

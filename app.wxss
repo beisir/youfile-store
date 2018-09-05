@@ -120,19 +120,21 @@ border: none;
     display: inline-block;
     width: 330rpx;
     overflow: hidden;
-    height: 525rpx;
     background: #fff;
     margin:0 20rpx 20rpx 0;
     font-size: 26rpx;
     color:#333;
+    padding-bottom: 20rpx;
     border-radius: 8rpx;
     text-align: left;
     border:1rpx solid #F5F5F5;
 }
+.ho-img{
+  width: 330rpx;height: 300rpx;overflow: hidden;margin-bottom: 20rpx;
+}
 .result-list image{
     width: 330rpx;
     background: #EBEAEA;
-    height: 330rpx;
 }
 .result-list .result-text{
   margin-left: 20rpx;

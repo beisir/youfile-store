@@ -103,7 +103,7 @@
         </navigator>
     </view> -->
 </view>
-<view hidden="{{!hidden}}" class='alertAdd'>
+<!-- <view hidden="{{!hidden}}" class='alertAdd'>
     <view class='gd-alert' animation='{{animationData}}'>
     <view class='new-man'>已享受批发价，共优惠<text>2000</text>元</view>
       <view class='gd-top'>
@@ -150,14 +150,14 @@
                       <view class="lt-add"  data-index='{{index}}' bindtap="addCount1"><image  src="/image/lt-a.png"></image></view>
                     </view>
                 </view>
-              </view>
+              </view> -->
               <!-- <view class="tr"  wx:for="{{item.goodsSkuVOList}}" wx:key="{{index}}">
                   <view>{{item}}</view>
                   <view>{{item.sellPrice}}</view>
                   <view>{{item.wholesalePrice}}</view>
                   <view>222</view>
               </view> -->
-          </view>
+          <!-- </view>
         </view>
       </view>
       <view class='weui-bottom lt-weui-bottom'>
@@ -166,7 +166,7 @@
         <view>立即下单</view>
       </view>
     </view>
-</view>
+</view> -->
 <view hidden="{{hidden}}" class='alertAdd'>
     <view class='gd-alert' animation='{{animationData}}'>
       <view class='gd-top'>
