@@ -4,8 +4,12 @@ var getTempList = function (that) {
   Api.template()
     .then(res => {
       const obj = res.obj
-      const templateCont = (that.data.templateCont).concat(obj)
       that.setData({
+        templateCont: []
+      })
+      const templateCont = (that.data.oneTemplateCont).concat(obj)
+      that.setData({
+        templateCont:[],
         templateCont: templateCont
       })
     })
@@ -21,21 +25,25 @@ Page({
   data: {
     navindex: -1,
     currentTab: 0,
-    templateCont: [{
-    templateName: "不用模板", specificationTemplateContentVOList: [{id:'010',specName: "颜色", specValueList: ["如图", "米白色"] }] }],
+    oneTemplateCont: [{ templateName: "不用模板",id:'', specificationTemplateContentVOList: [{ id: '010', specName: "颜色", specValueList: ["如图", "米白色"] }] }],
+    templateCont: [],
     addSpec: false,
     addSpecAttc: false,
     watchInput: false,
     updateSpec: false,
     editSpec: false,
+    contentShow:false,
     editId: '',
     templateId: '',
     templateContentId: '',
     notemp: { templateName: "衣服" },
     specName: '',
     value: '',
+    valueEdit:'',
     goodsListData: [],
-    show1:false
+    show1:false,
+    tempNewArr:[],
+    tempNewId:''
 
   },
   // 返回上一页
@@ -96,12 +104,15 @@ Page({
   watchInput: function (event) {
     if (event.detail.value == '') {
       this.setData({
-        watchInput: false
+        watchInput: false,
+        value:'',
+        valueEdit:''
       })
     } else {
       this.setData({
         watchInput: true,
-        value: event.detail.value
+        value: event.detail.value,
+        valueEdit: event.detail.value
       })
     }
   },
@@ -112,7 +123,8 @@ Page({
       addSpecAttc: false,
       updateSpec: false,
       editSpec: false,
-      show1:false
+      show1:false,
+      watchInput:false
     })
   },
   // 添加规格值
@@ -135,6 +147,7 @@ Page({
     var templateCont = _this.data.templateCont
     var tempArr = templateCont[index].specificationTemplateContentVOList
     var parentName = _this.data.specName
+    if (specName == '') { _this.checkName(); return}
     for (var i = 0; i < tempArr.length; i++) {
       if (tempArr[i].specName == parentName) {
         if (tempArr[i].specValueList==null){
@@ -157,18 +170,16 @@ Page({
       templateCont: templateCont
     })
     _this.cancel()
-    if(templateContentId==''){return}
-    app.http.postRequest('/admin/shop/specificationTemplate/updateTemplateContentSpecValue?templateContentId='+templateContentId+'&specValueList='+str,{})
+    if(templateContentId=='010'){return}
+    Api.addTempCont(templateContentId, str)
       .then(res => {
         const code = res.code
-        if (code == 1) {
           wx.showToast({
             title: '新建成功',
             icon: 'none',
             duration: 1000,
             mask: true
           })
-        }
       })
   },
   saveTemplate: function (e) {
@@ -215,7 +226,6 @@ Page({
   // 确定 保存模板
   confirm1: function () {
     var _this = this
-    var templateId = _this.data.templateId
     var index = _this.data.currentTab
     var tempArr = {}
     var listData = _this.data.templateCont[index]
@@ -223,6 +233,8 @@ Page({
     tempArr["userId"] = "00000000"
     if (_this.data.value != '') {
       tempArr["templateName"] = _this.data.value
+    }else{
+      tempArr["templateName"]='默认模板'
     }
     Api.addTemplate(tempArr)
       .then(res => {
@@ -236,27 +248,29 @@ Page({
           _this.cancel()
       })
   },
-  // 排序
-  zIndexUp:function (arr, index, length){
-    if(index+ 1 != length){
-        swapArray(arr, index, index + 1);
-      console.log(swapArray)
-      }else {
-        console.log('已经处于置顶，无法上移');
-      }
-  },
   upTop:function(){
     var _this = this,
         templateId = _this.data.templateId,
-        templateCont= _this.data.templateCont
+        templateCont= _this.data.templateCont,
+        newArr=[],
+        index=''
     for (var i = 0; i < templateCont.length;i++){
       if (templateCont[i].id == templateId){
-        var specList = templateCont[i]
-        _this.zIndexUp(specList,1,0)
-        console.log(templateCont[i])
+        console.log(templateCont[i].specificationTemplateContentVOList)
+        var specList = templateCont[i].specificationTemplateContentVOList
+        index=i
+        templateCont[i].specificationTemplateContentVOList = specList.reverse()
       }
     }
-
+    _this.setData({
+      templateCont: templateCont
+    })
+    console.log(templateCont[index])
+    Api.addTemplate(templateCont[index])
+      .then(res => {
+        _this.cancel()
+      })
+    
   },
   // 属性切换
   swichNav(e) {
@@ -264,29 +278,26 @@ Page({
         pName= e.target.dataset.name,
         code= e.target.dataset.code,
         list={},
+        hash = {},
+        addArr=[],
+        templateCont = this.data.templateCont,
         listChi=[],
         goodsList=[],
         addIndex = false,
         addIndexChi=false,
         goodsListData = this.data.goodsListData,
-        codeTd = this.data.templateId
+        codeTd = this.data.templateId,
+        num='',
+        pId = e.target.dataset.id
         code+=code+""+code
     for (var i = 0; i < goodsListData.length;i++){
-      if(goodsListData[i].specName==pName){
-        addIndex=true
-        if (goodsListData[i].goodsSpecificationValueVOList.length>0){
-          for (var j = 0; j < goodsListData[i].goodsSpecificationValueVOList.length; j++) {
-            if (goodsListData[i].goodsSpecificationValueVOList[j].specValueName==e.target.dataset.namechi) {
-              addIndexChi=true
-            }
-          }
-          if (!addIndexChi){
-            goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi })
-          }
-        }else{
-          goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi })
-        }
+      if (goodsListData[i].id == pId){
+        console.log(pId)
+        addIndex = true
+        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi })
       }
+    }
+    if (addIndexChi){
     }
     if (codeTd == '') {
       codeTd = '000'
@@ -294,16 +305,27 @@ Page({
     if(!addIndex){
       listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi })
       list.specName = pName
+      list.id = pId
       list.goodsSpecificationValueVOList = listChi
       list.specCode = codeTd + code
       goodsListData.push(list)
     }
+    // for (var i = 0; i < goodsListData.length;i++){
+    //   if (goodsListData[i].goodsSpecificationValueVOList.length>1){
+    //     var newArr = goodsListData[0].goodsSpecificationValueVOList.reduceRight((item, next) => {
+    //       hash[next.specValueCode] ? '' : hash[next.specValueCode] = true && item.push(next);
+    //       return item
+    //     }, []);
+    //     goodsListData[i].goodsSpecificationValueVOList = newArr
+    //   }
+    // }
+    console.log(goodsListData)
     if (current == this.data.navindex) {
       return false;
     } else {
       this.setData({
         navindex: current,
-        goodsListData: goodsListData
+        goodsListData: goodsListData,
       })
     }
   },
@@ -318,7 +340,7 @@ Page({
   confirmDetele:function(){
     var _this = this
     var templateId = this.data.templateId
-    Api.templateDelete({ templateId: templateId })
+    Api.templateDelete(templateId)
       .then(res => {
         wx.showToast({
           title: '删除成功',
@@ -326,8 +348,8 @@ Page({
           duration: 1000,
           mask: true
         })
-        getTempList(_this);
         _this.cancel()
+        getTempList(_this);
       })
   },
   // 删除模板内容
@@ -341,29 +363,29 @@ Page({
     var len = tempContList.length
     tempContList.pop()
     templateCont[currentTab].specificationTemplateContentVOList = tempContList
-    wx.showModal({
-      title: '提示',
-      content: '是否要删除？',
-      success: function (res) {
-        if (res.confirm) {
-          _this.setData({
-            templateCont: templateCont
-          })
-          app.http.deleteRequest('/admin/shop/specificationTemplate/deleteTemplateContentByTemplateContentId?templateContentId=' + templateContentId)
-            .then(res => {
-              const code = res.code
-              if (code == 1) {
-                wx.showToast({
-                  title: '删除成功',
-                  icon: 'none',
-                  duration: 1000,
-                  mask: true
-                })
-              }
-            })
-        }
-      }
+    _this.setData({
+      tempNewArr: templateCont,
+      contentShow:true,
+      tempNewId: templateContentId
     })
+  },
+  contentDetele:function(){
+    var _this=this,
+      templateContentId = this.data.tempNewId,
+        templateCont=this.data.tempNewArr
+    Api.deleteTemplate(templateContentId)
+      .then(res => {
+        wx.showToast({
+          title: '删除成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+        _this.setData({
+          templateCont: templateCont,
+          contentShow:false
+        })
+      })
   },
   // 更新模板名称
   updateTemplate: function () {
@@ -378,12 +400,12 @@ Page({
     var templateCont = _this.data.templateCont
     var templateName = this.data.value
     var templateCont = _this.data.templateCont
+    if (templateName == '') { _this.checkName();return}
     templateCont[currentTab].templateName = templateName
     _this.setData({
       templateCont: templateCont
     })
-    if (templateName == '') { _this.checkName() }
-    Api.updateTemplateNameUrl({ templateId: templateId, templateName: templateName})
+    Api.updateTemplateName(templateId, templateName)
       .then(res => {
           wx.showToast({
             title: '更新成功',
@@ -402,20 +424,21 @@ Page({
     _this.setData({
       editSpec: true,
       editId: editId,
-      value1: name,
-      specName: name
+      valueEdit: name,
+      specName: name,
+      watchInput:true
     })
   },
   confirm3: function () {
     var _this = this
     var templateContentId = this.data.editId
-    var specName = this.data.value
-      _this.checkName()
+    var specName = this.data.valueEdit
     var templateId = _this.data.templateId
     var index = _this.data.currentTab
     var templateCont = _this.data.templateCont
     var tempArr = templateCont[index].specificationTemplateContentVOList
     var parentName = _this.data.specName
+    if (specName == '') { _this.checkName(); return }
     for (var i = 0; i < tempArr.length; i++) {
       if (tempArr[i].specName == parentName) {
         tempArr[i].specName = specName
@@ -426,7 +449,8 @@ Page({
       templateCont: templateCont,
       editSpec: false
     })
-    Api.updateSpecNameUrl({ templateContentId: templateContentId, specName: specName})
+    if (templateId == '') { return }
+    Api.updateSpecName(templateContentId,specName)
       .then(res => {
           wx.showToast({
             title: '更新成功',
@@ -446,7 +470,6 @@ Page({
         duration: 1000,
         mask: true
       })
-      return
     }
   },
   /**

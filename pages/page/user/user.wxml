@@ -15,30 +15,24 @@
   </navigator>
   <navigator class='u-o-div'>
     <image src='/image/mes1.png'></image>
-    <view>我的消息</view>
+    <view>进货单</view>
+  </navigator>
+  <navigator class='u-o-div'>
+    <image src='/image/mes1.png'></image>
+    <view>我的商友</view>
   </navigator>
 </view>
   <view class='page_bd'>
     <view class='weui-back'>
       <navigator class='weui-cell weui-cell_access' url='../addressWe/addressWe'>
         <image src='/image/u1.jpg' class='user-img'></image>
-        <view class='weui-cell__bd'  bindtap='chooseAddress'>
+        <view class='weui-cell__bd'>
           地址管理
         </view>
         <view class='weui-img'>
           <image src="/image/icl.png"></image>
         </view>
       </navigator>
-      <view class='weui-cell weui-cell_access'>
-       <image src='/image/u2.jpg' class='user-img'></image>
-        <button class="kf_button" open-type="contact" session-from="weapp"></button> 
-          <view class='weui-cell__bd'>
-            联系客服
-          </view>
-          <view class='weui-img'>
-            <image src="/image/icl.png"></image>
-          </view>
-      </view>
       <navigator class='weui-cell weui-cell_access'  url='../set/set'>
       <image src='/image/u3.jpg' class='user-img user-img1'></image>
         <view class='weui-cell__bd'>

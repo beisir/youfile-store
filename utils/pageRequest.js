@@ -8,6 +8,9 @@ class pageRequest extends http {
     }
   }
   pageGet(url, data){
+    if (data == undefined) {
+      var data = {}
+    }
     this.pageData.pageNum++
     return this.getRequest(url, Object.assign(data, this.pageData))
   }

@@ -49,8 +49,17 @@ Page({
   }, 
   getList: function () {
     var _this = this,
-      keyword = this.data.keyword
-    Api.adminGoodsList({ keyword: '' })
+      keyword = this.data.keyword,
+      currentTab = this.data.currentTab,
+      sortType=''
+    if (currentTab == 0) {
+      sortType = 'multiple'
+    } else if (currentTab == 1) {
+      sortType = 'sales'
+    } else if (currentTab == 2) {
+      sortType = 'prices_asc'
+    }
+    Api.shopList({ keyword: '', sortType: sortType})
       .then(res => {
         var detailList = res.obj.result,
           datas = _this.data.result,
@@ -62,6 +71,7 @@ Page({
       })
   },
   onLoad: function (options) {
+    console.log(options)
     var that = this;
     that.getList()
     wx.getSystemInfo({
@@ -74,8 +84,6 @@ Page({
 
     });
   },
-
-
   bindChange: function (e) {
     var that = this;
     that.setData({ currentTab: e.detail.current });
@@ -89,6 +97,8 @@ Page({
   swichNav: function (e) {
     this.emptyArr()
     var that = this;
+    app.pageRequest.pageData.pageNum = 0
+    this.getList()
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -100,6 +110,28 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
+  likeStore:function(){
+    Api.likeStore()
+    .then(res=>{
+      wx.showToast({
+        title: '关注成功',
+        icon: 'none',
+        duration: 1000,
+        mask: true
+      })
+    })
+  }, 
+  deteleLikeStore: function() {
+    Api.deteleLikeStore()
+      .then(res => {
+        wx.showToast({
+          title: '取消关注成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+      })
+  },
   onReady: function () {
 
 

@@ -1,3 +1,5 @@
+<import src='../../login/login/login.wxml'/>
+<login-component id='login' inner-text="Some text"></login-component>
 <!-- 提示 -->
 <mes
   show="{{show}}"
@@ -27,8 +29,8 @@
   <image src="http://pic.youlife.me/v1/tfs/T1yt_TBC_T1RXrhCrK.jpg" class="slide-image" mode="widthFix"/>    
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
-      <navigator url="../mes/mes">
-        <image class='logoimg' src="http://pic.youlife.me/v1/tfs/T18RKTB4ET1RXrhCrK.jpg"/>  
+      <navigator  class='logoimg' url="../mes/mes">
+        <image mode="aspectFill" src="http://pic.youlife.me/v1/tfs/T18RKTB4ET1RXrhCrK.jpg"/>  
       </navigator>
     </view>
      <view class="ym_sydtdmgzs">
@@ -37,7 +39,8 @@
         <text>百荣世贸</text>
       </view>
     </view>
-    <button class="ym_sydtgzbtn">+ 关注</button>
+    <button class="ym_sydtgzbtn" bindtap='likeStore'>+ 关注</button>
+    <button class="ym_sydtgzbtn" style='right:200rpx' bindtap='deteleLikeStore'>已关注</button>
 </view>
 <view class='add-firend' hidden='{{isShow}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>
 <view class='add-firend add-firend1'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view>
@@ -57,7 +60,7 @@
     <scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
     <view class="result-list" wx:for="{{result}}" wx:key="index">
       <view>
-        <navigator  url="../goodsDetails/goodsDetails?goodsId={{item.id}}"><view class='ho-img'><image src="{{item.mainImgUrl}}" mode="widthFix"></image></view></navigator>
+        <navigator  url="../goodsDetails/goodsDetails?goodsId={{item.id}}"><view class='ho-img'><image src="{{item.mainImgUrl}}" mode="aspectFill"></image></view></navigator>
         <view class="result-text">
           <text>{{item.name}}</text>
         </view>

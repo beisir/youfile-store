@@ -1,0 +1,21 @@
+<view class='bf-cont'>
+  <view class='bf-title'>批发商数据</view>
+  <text>海量数据，最需要的数据信息</text>
+  <view class='bt-view'>
+    <view><view>4444</view>批发商总数</view>
+    <view><view>4444</view>待验证</view>
+    <view><view>4444</view>等待通过</view>
+  </view>
+  <button class='bf-btn'>扫一扫 添加批发商</button>
+  <view>
+    <!-- <view class="weui_cells " bindtap='tel'>
+    <view>
+        <image  src="/image/role.png"></image>
+        <text class="store-address">联系优生活 </text>
+        <view class='weui-view'>
+          <image class='img' src="/image/icl.png"></image>
+        </view>
+    </view> -->
+<!-- </view> -->
+  </view>
+</view>

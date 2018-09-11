@@ -36,10 +36,10 @@
     margin-right: 20rpx;
     margin-left: 25rpx;
 }
-.ym_sydtlogo .logoimg {
+.ym_sydtlogo image {
     border-radius: 100%;
-    width: 80rpx;
-    height: 80rpx;
+    max-width: 80rpx;
+    max-height: 80rpx;
 }
 .ym_sydtdmgzs .store_name {
     font-size:30rpx;

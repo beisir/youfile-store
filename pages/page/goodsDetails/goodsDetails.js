@@ -35,50 +35,26 @@ Page({
     saleBatchNum:'',
     saleBatchAmount:'',
     totalPrice:'',
-    goodsId:''
+    goodsId:'',
+    numAll:0,
+    moreCode:'',
+    nums:0,
+    getSpecDetails:true,
+    classNums:0,
+    newTotal:0,
+    discountShow:true,
+    spectArrDifference:[]
   },
   /**
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
+    console.log(options.goodsId)
     var that = this,
       goodsId = options.goodsId
     that.setData({
-      goodsId: '180831183155243d4de6'
+      goodsId: "180831183155243d4de6"
     })
-    Api.batchNum({ goodsId: '180831183155243d4de6'})
-      .then(res => {
-        var obj = res.obj
-        that.setData({
-          saleBatchNum: obj.saleBatchNum,
-          saleBatchAmount: obj.saleBatchAmount
-        })
-      })
-    Api.goodsDetails({ goodsId: '180831183155243d4de6' })
-      .then(res => {
-        var obj = res.obj,
-          skuArrTwo=[],
-          name=''
-        console.log(obj)
-        if (obj.goodsSpecificationVOList.length>1){
-          skuArrTwo.push(obj.goodsSpecificationVOList[1])
-          name = obj.goodsSpecificationVOList[1].specName
-        }
-        that.setData({
-          imgUrls: obj.goodsImageVOList,
-          name: obj.name,
-          wholesalePrice: obj.wholesalePrice,
-          recommendDesc: obj.recommendDesc,
-          introduction: obj.introduction,
-          goodsSpecificationVOList: obj.goodsSpecificationVOList,
-          goodsSkuVOList: obj.goodsSkuVOList,
-          skuArrTwo: skuArrTwo,
-          sell: obj.sellPrice,
-          stockNum: obj.stockNum,
-          mainImgUrl: obj.mainImgUrl,
-          nameTwo: name
-        })
-      })
   },
 
   imgHeight: function (e) {
@@ -168,42 +144,63 @@ Page({
       })
     }
   },
-  swichNav: function (e) {
+  getSpecDetails:function(index,code){
     var that = this,
-        swichNavCode = e.target.dataset.current,
-        code = e.target.dataset.code,
-        skuArrTwo = this.data.skuArrTwo,
-        skuArr = this.data.goodsSkuVOList,
-        skuValueVOList=[],
-        newSkuArrTwo=[],
+      swichNavCode = index,
+      code = code,
+      skuArrTwo = this.data.skuArrTwo,
+      skuArr = this.data.goodsSkuVOList,
+      skuValueVOList = [],
+      newSkuArrTwo =[],
       codeName = this.data.goodsSpecificationVOList,
-        newList={}
-    if (skuArrTwo.length==1){
-      skuValueVOList=skuArrTwo[0].goodsSpecificationValueVOList
+      newList = {},
+      returnStop=false,
+      spectArrDifference = this.data.spectArrDifference
+    if (skuArrTwo.length == 1) {
+      skuValueVOList = skuArrTwo[0].goodsSpecificationValueVOList
     }
-    for (var i = 0; i < skuArr.length;i++){
+    for (var i = 0; i < skuArr.length; i++) {
       var childArr = skuArr[i].specValueCodeList
-      if(childArr.indexOf(code)!=-1){
+      if (childArr.indexOf(code) != -1) {
         newSkuArrTwo.push(skuArr[i])
       }
     }
-    for (var i = 0; i < newSkuArrTwo.length;i++){
+    for (var i = 0; i < newSkuArrTwo.length; i++) {
       for (var j = 0; j < skuValueVOList.length; j++) {
-        if ((newSkuArrTwo[j].specValueCodeList).indexOf(skuValueVOList[j].specValueCode)!=-1){
+        if ((newSkuArrTwo[j].specValueCodeList).indexOf(skuValueVOList[j].specValueCode) != -1) {
           newSkuArrTwo[j].name = skuValueVOList[j].specValueName
-          newSkuArrTwo[j].num=0
+          newSkuArrTwo[j].num = 0
         }
       }
     }
-    if (this.data.currentTab === e.target.dataset.current) {
+    if (spectArrDifference.length==0){
+      spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
+    }else{
+      for (var i = 0; i < spectArrDifference.length; i++) {
+        if (code == spectArrDifference[i].code) {
+          returnStop=true
+        }
+      }
+      if (!returnStop) {
+        spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
+      }
+    }
+    if (this.data.currentTab ===index) {
       return false;
     } else {
       that.setData({
         swichNav: swichNavCode,
-        newSkuArrTwo: newSkuArrTwo
+        newSkuArrTwo: newSkuArrTwo,
+        moreCode: code,
+        spectArrDifference:spectArrDifference
       })
     }
     this.getTotalPrice();
+  },
+  swichNav: function (e) {
+    var index = e.target.dataset.current,
+      code = e.target.dataset.code
+    this.getSpecDetails(index,code)
   },
   //关闭弹框
   closeAlert:function(){
@@ -230,6 +227,11 @@ Page({
   urlHome:function(){
     wx.switchTab({
       url:'../home/home'
+    })
+  },
+  urlCart:function(){
+    wx.switchTab({
+      url: '../cartList/cartList'
     })
   },
   cratHome: function () {
@@ -261,7 +263,38 @@ Page({
       })
     })
   },
+  // 批量添加购物车
+  moreAddCart:function(){
+    var specFirst = this.data.goodsSpecificationVOList[0].goodsSpecificationValueVOList,
+      moreCode = this.data.moreCode,
+      goodsId = this.data.goodsId,
+      spectArrDifference = this.data.spectArrDifference,
+      newArr=[],
+      newSkuArrTwo=[]
 
+    for (var j = 0; j < spectArrDifference.length; j++) {
+      newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
+      for (var i = 0; i < newSkuArrTwo.length; i++) {
+        if (newSkuArrTwo[i].num > 0) {
+          newArr.push({ goodsId: goodsId, num: newSkuArrTwo[i].num, skuCode: newSkuArrTwo[i].skuCode,storeId:wx.getStorageSync('storeId')})
+
+        }
+      }
+    }
+    console.log(JSON.stringify([{ "goodsId": "180831183155243d4de6", "num": 1, "skuCode": "180831183155243d4de6_8a1", "storeId": "123" }]))
+    Api.addMoreCart(JSON.stringify(newArr))
+      .then(res => {
+        wx.showToast({
+          title: '添加成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+        wx.switchTab({
+          url: '../cartList/cartList'
+        })
+      })
+  },
   // 购买数量
   minusCount:function(){
     let num = this.data.numbers
@@ -286,12 +319,15 @@ Page({
   */
   addCount1(e) {
     const index = e.currentTarget.dataset.index;
-    let newSkuArrTwo = this.data.newSkuArrTwo;
-    let num = newSkuArrTwo[index].num;
-    num = num + 1;
-    newSkuArrTwo[index].num = num;
+    let spectArrDifference = this.data.spectArrDifference
+    let code = this.data.moreCode
+    for (var i = 0; i < spectArrDifference.length; i++) {
+      if (spectArrDifference[i].code == code) {
+        spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num+1
+      }
+    }
     this.setData({
-      newSkuArrTwo: newSkuArrTwo
+      spectArrDifference: spectArrDifference
     });
     this.getTotalPrice();
   },
@@ -301,16 +337,18 @@ Page({
    */
   minusCount1(e) {
     const index = e.currentTarget.dataset.index;
-    const obj = e.currentTarget.dataset.obj;
-    let newSkuArrTwo = this.data.newSkuArrTwo;
-    let num = newSkuArrTwo[index].num;
-    if (num <= 0) {
-      return false;
+    let spectArrDifference = this.data.spectArrDifference
+    let code = this.data.moreCode
+    for (var i = 0; i < spectArrDifference.length; i++) {
+      if (spectArrDifference[i].code == code) {
+        if (spectArrDifference[i].newSkuArrTwo[index].num <= 0) {
+          return false;
+        }
+        spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num -1
+      }
     }
-    num = num - 1;
-    newSkuArrTwo[index].num = num;
     this.setData({
-      newSkuArrTwo: newSkuArrTwo
+      spectArrDifference: spectArrDifference
     });
     this.getTotalPrice();
   },
@@ -318,56 +356,126 @@ Page({
   * 计算总价
   */
   getTotalPrice() {
-    let newSkuArrTwo = this.data.newSkuArrTwo;        
+    var childArr=[],
+    code=this.data.moreCode,
+    colorNum=0
+    let newSkuArrTwo =[];
+    let spectArrDifference = this.data.spectArrDifference     
     let total = 0;
-    for (let i = 0; i < newSkuArrTwo.length; i++) {       
-        total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+    let newTotal = 0;
+    let discount = 0;
+    let nums=0;
+    let classNums=0;
+    let saleBatchAmount = this.data.saleBatchAmount
+    let saleBatchNum = this.data.saleBatchNum
+    let difference=0
+    let goodsSpecificationVOList = this.data.goodsSpecificationVOList
+    if (goodsSpecificationVOList.length>0){
+      var  childArr=goodsSpecificationVOList[0].goodsSpecificationValueVOList
     }
+    for (var j = 0; j< spectArrDifference.length; j++) {
+      newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
+      for (let i = 0; i < newSkuArrTwo.length; i++) {
+        if (newSkuArrTwo[i].num > 0) {
+          for (var h = 0; h < childArr.length; h++) {
+            if (childArr[h].specValueCode == code) {
+              colorNum += newSkuArrTwo[i].num
+              childArr[h].num = colorNum
+            }
+          }
+          classNums += 1
+          nums += newSkuArrTwo[i].num
+          total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+          if (nums > saleBatchNum - 1 || total.toFixed(2) > saleBatchAmount) {
+            newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
+            difference = total - newTotal
+            this.setData({
+              discountShow: false,
+              newTotal: newTotal,
+            })
+          } else {
+            this.setData({
+              discountShow: true,
+            })
+          }
+        }
+      }
+    }
+    goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
     this.setData({                    
       newSkuArrTwo: newSkuArrTwo,
-      totalPrice: total.toFixed(2)
+      totalPrice: total.toFixed(2),
+      nums: nums,
+      classNums: classNums,
+      newTotal: newTotal,
+      difference: difference,
+      goodsSpecificationVOList: goodsSpecificationVOList
     });
   },
   minusCountAll:function(){
-    let newSkuArrTwo = this.data.newSkuArrTwo;
+    let newSkuArrTwo =[];
     let total = 0;
-    for (let i = 0; i < newSkuArrTwo.length; i++) {
-      newSkuArrTwo[i].num = newSkuArrTwo[i].num-1
-      total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+    let spectArrDifference = this.data.spectArrDifference
+    let code = this.data.moreCode
+    let index = null
+    for (var i = 0; i < spectArrDifference.length; i++) {
+      if (spectArrDifference[i].code == code) {
+        index = i
+        newSkuArrTwo = spectArrDifference[i].newSkuArrTwo
+      }
     }
+    for (let i = 0; i < newSkuArrTwo.length; i++) {
+      if(newSkuArrTwo[i].num>0){
+        newSkuArrTwo[i].num = newSkuArrTwo[i].num - 1
+        total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+      }
+    }
+    spectArrDifference[index].newSkuArrTwo = newSkuArrTwo
+    this.getTotalPrice();
     this.setData({
-      newSkuArrTwo: newSkuArrTwo,
+      spectArrDifference: spectArrDifference,
       totalPrice: total.toFixed(2)
     });
   },
   addCountAll: function () {
-    let newSkuArrTwo = this.data.newSkuArrTwo;
+    let newSkuArrTwo = [];
     let total = 0;
+    let spectArrDifference = this.data.spectArrDifference
+    let code = this.data.moreCode
+    let index=null
+    for (var i = 0; i < spectArrDifference.length;i++){
+      if(spectArrDifference[i].code==code){
+        index=i
+        console.log(i)
+        newSkuArrTwo=spectArrDifference[i].newSkuArrTwo
+      }
+    }
     for (let i = 0; i < newSkuArrTwo.length; i++) {
       newSkuArrTwo[i].num = newSkuArrTwo[i].num + 1
       total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
     }
+    spectArrDifference[index].newSkuArrTwo = newSkuArrTwo
+    this.getTotalPrice();
     this.setData({
-      newSkuArrTwo: newSkuArrTwo,
+      spectArrDifference: spectArrDifference,
       totalPrice: total.toFixed(2)
     });
   },
+  
   changeNum: function (e){
     const index = e.currentTarget.dataset.index;
+    const code = e.currentTarget.dataset.code;
     const obj = e.currentTarget.dataset.obj;
-    var value = e.detail.value
+    var value = parseInt(e.detail.value)
     if (value < 0 || isNaN(value)){
-      wx.showToast({
-        title: '请输入有效数字！',
-        icon: 'none',
-        duration: 2000
-      })
       value=0
     }
-    let newSkuArrTwo = this.data.newSkuArrTwo;
-    newSkuArrTwo[index].num = value;
+    let spectArrDifference = this.data.spectArrDifference;
+    for (let i = 0; i < spectArrDifference.length; i++) {
+      spectArrDifference[i].newSkuArrTwo[index].num = value
+    }
     this.setData({
-      newSkuArrTwo: newSkuArrTwo
+      spectArrDifference: spectArrDifference
     });
     this.getTotalPrice();
   },
@@ -381,8 +489,69 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+  getDetails:function(){
+    var that=this
+    Api.batchNum({ goodsId: this.data.goodsId })
+      .then(res => {
+        var obj = res.obj,
+          saleBatchNum = obj.saleBatchNum,
+          saleBatchAmount1 = obj.saleBatchAmount
+        that.setData({
+          saleBatchNum: saleBatchNum,
+          saleBatchAmount: saleBatchAmount1
+        })
+        if (saleBatchNum==null){
+          Api.saleBatch()
+          .then(res=>{
+            var obj = res.obj,
+              saleBatchNum = obj.saleBatchNum,
+              saleBatchAmount = obj.saleBatchAmount
+              console.log(obj)
+            that.setData({
+              saleBatchNum: saleBatchNum
+            })
+            if (saleBatchAmount1== null){
+              that.setData({
+                saleBatchAmount: saleBatchAmount
+              })
+            }
+          })
+        }
+      })
+    Api.goodsDetails({ goodsId: this.data.goodsId })
+      .then(res => {
+        var obj = res.obj,
+          skuArrTwo = [],
+          name = ''
+        if (obj.goodsSpecificationVOList.length > 1) {
+          skuArrTwo.push(obj.goodsSpecificationVOList[1])
+          name = obj.goodsSpecificationVOList[1].specName
+        }
+        that.setData({
+          imgUrls: obj.goodsImageVOList,
+          name: obj.name,
+          wholesalePrice: obj.wholesalePrice,
+          recommendDesc: obj.recommendDesc,
+          introduction: obj.introduction,
+          goodsSpecificationVOList: obj.goodsSpecificationVOList,
+          goodsSkuVOList: obj.goodsSkuVOList,
+          skuArrTwo: skuArrTwo,
+          sell: obj.sellPrice,
+          stockNum: obj.stockNum,
+          mainImgUrl: obj.mainImgUrl,
+          nameTwo: name
+        },function(){
+          if (that.data.getSpecDetails) {
+            if (obj.goodsSpecificationVOList.length != 0) {
+              var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
+              that.getSpecDetails(0, arr[0].specValueCode)
+            }
+          }
+        })
+      })
+  },
   onShow: function () {
-  
+    this.getDetails()
   },
 
   /**
@@ -396,7 +565,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+   
   },
 
   /**

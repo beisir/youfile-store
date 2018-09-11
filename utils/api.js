@@ -26,7 +26,16 @@ import {
   templateDeleteUrl,
   updateTemplateNameUrl,
   updateSpecNameUrl,
-  addCartUrl
+  addCartUrl,
+  deleteTemplateUrl,
+  addTempContUrl,
+  deteleCartGoodsUrl,
+  deteleCartFaiUrl,
+  addMoreCartUrl,
+  likeStoreUrl,
+  deteleLikeStoreUrl,
+  saveSpecTemplateContentUrl,
+  shopListUrl
 } from './constUrl.js'
 const app = getApp()
 /**云享品管理 列表**/ 
@@ -121,25 +130,61 @@ function cartList(data) {
 function addTemplate(data) {
   return app.http.postRequest(addTemplateUrl, data)
 } 
+/**调换规格位置**/
+function saveSpecTemplateContent(data) {
+  return app.http.postRequest(saveSpecTemplateContentUrl, data)
+}
 /**模板列表**/
 function template(data) {
   return app.http.getRequest(templateUrl, data)
 }
 /**模板 删除**/
 function templateDelete(data) {
-  return app.http.deleteRequest(templateDeleteUrl, data)
+  return app.http.deleteRequest(templateDeleteUrl + '?templateId=' + data)
 }
 /**更新模板**/
-function updateTemplateName(data) {
-  return app.http.postRequest(updateTemplateNameUrl, data)
+function updateTemplateName(templateId, templateName ) {
+  return app.http.putRequest(updateTemplateNameUrl+'?templateId='+templateId+'&templateName='+templateName )
 } 
 /**更新规格**/
-function updateSpecName(data) {
-  return app.http.postRequest(updateSpecNameUrl, data)
+function updateSpecName(templateContentId,specName) {
+  return app.http.putRequest(updateSpecNameUrl+'?templateContentId='+templateContentId+'&specName='+specName)
 } 
 /**添加到购物车**/
 function addCart(data) {
   return app.http.postRequest(addCartUrl, data)
+}
+/**批量添加到购物车**/
+function addMoreCart(data) {
+  return app.http.postRequest(addMoreCartUrl, data)
+}
+/**删除购物车商品**/
+function deteleCartGoods(data) {
+  return app.http.deleteRequest(deteleCartGoodsUrl,data)
+}
+/**情况购物车失效商品**/
+function deteleCartFai() {
+  return app.http.deleteRequest(deteleCartFaiUrl)
+}
+/**删除规格**/
+function deleteTemplate(data) {
+  return app.http.deleteRequest(deleteTemplateUrl+'?templateContentId='+data)
+}
+/**添加规格**/
+function addTempCont(templateContentId, specValueList) {
+  return app.http.putRequest(addTempContUrl+'?templateContentId='+templateContentId+'&specValueList='+specValueList)
+}
+/**取消关注**/
+function deteleLikeStore(data) {
+  return app.http.deleteRequest(deteleLikeStoreUrl, data)
+}
+/**关注店铺**/
+function likeStore(data) {
+  return app.http.putRequest(likeStoreUrl, data)
+}
+/**店铺信息**/
+function shopList(data) {
+  return app.pageRequest.pageGet(shopListUrl, data)
 }
 module.exports = {
   adminGoodsList: adminGoodsList,
@@ -168,6 +213,15 @@ module.exports = {
   template: template,
   templateDelete: templateDelete,
   updateTemplateName: updateTemplateName,
-  updateSpecName: updateSpecNameUrl,
-  addCart:addCart
+  updateSpecName: updateSpecName,
+  addCart:addCart,
+  deleteTemplate: deleteTemplate,
+  addTempCont: addTempCont,
+  deteleCartGoods: deteleCartGoods,
+  deteleCartFai:deteleCartFai,
+  addMoreCart: addMoreCart,
+  deteleLikeStore: deteleLikeStore,
+  likeStore: likeStore,
+  saveSpecTemplateContent,
+  shopList: shopList
 }

@@ -8,6 +8,16 @@
   <button bindtap='confirmDetele'>确定</button>
 </view>
 </mes>
+<!-- 删除规格-->
+<mes
+  show="{{contentShow}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确认删除？</text>
+  <button bindtap='contentDetele'>确定</button>
+</view>
+</mes>
 <!-- 新建规格 -->
 <spec
   show="{{addSpec}}"
@@ -41,7 +51,7 @@
   bind:sureSelectArea="sureSelectAreaListener"
 >
   <view class='spec-title'>编辑规格</view>
-  <input placeholder-class='spec-class'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入文字，最多10个字' />
+  <input placeholder-class='spec-class'  bindinput='watchInput' value='{{valueEdit}}'  class='spec-input'  placeholder='请输入文字，最多10个字' />
   <view class='spec-view' bindtap='cancel'>取消</view><view  class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm3'>确定</view>
 </spec>
 <view>
@@ -54,7 +64,7 @@
       <view class='sp-cont' wx:for='{{cont.specificationTemplateContentVOList}}' wx:for-item="list" wx:key='{{index}}'>
         <view class="sp-color">{{list.specName}}<image class='img' wx:if='{{index==1}}' bindtap='upTop'  src="/image/ups.png"></image><image src="/image/editSpec.png" data-name="{{list.specName}}" data-id="{{list.id}}"   bindtap='editName'></image></view>
         <view class='sp-button'>
-          <view wx:for='{{list.specValueList}}'wx:key='{{index}}' class="{{index==navindex?'act':''}}" data-name='{{list.specName}}' data-current="{{index}}" data-code='2018{{index}}{{list.id}}' data-nameChi='{{item}}' bindtap='swichNav'>{{item}}<text data-index='{{index}}' data-name='{{list.specName}}' data-id='{{list.id}}' hidden='true'  bindtap='removeTemp' >删除</text><image hidden='true'  src="/image/downs.png"></image></view>
+          <view wx:for='{{list.specValueList}}'wx:key='{{index}}' class="{{index==navindex?'act':''}}" data-name='{{list.specName}}' data-current="{{index}}" data-code='2018{{index}}{{list.id}}' data-nameChi='{{item}}'  data-id='{{list.id}}'  bindtap='swichNav'>{{item}}<text data-index='{{index}}' data-name='{{list.specName}}' data-id='{{list.id}}' hidden='true'  bindtap='removeTemp' >删除</text><image hidden='true'  src="/image/downs.png"></image></view>
           <view class='active'  bindtap='addSpec'  data-id="{{list.id}}"  data-name="{{list.specName}}">+</view>
         </view>
       </view>

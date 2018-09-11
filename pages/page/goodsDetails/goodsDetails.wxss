@@ -28,8 +28,8 @@
   border-radius: 10rpx;
 }
 .gd-image image{
-  width: 250rpx;
-  height: 250rpx;
+  max-width: 250rpx;
+  max-height: 250rpx;
 }
 .gd-top{
   border-bottom: 2rpx dashed #E2E2E2;
@@ -297,8 +297,8 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
     padding-top:10rpx;
 }
 .ym_goodsstorelogo image {
-    width: 100rpx;
-    height: 100rpx;
+    max-width: 100rpx;
+    max-height: 100rpx;
 }
 .ym_goodsstorename .store-name-data {
     font-size: 30rpx;
@@ -400,10 +400,13 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   font-size: 32rpx;
   margin-top: 20rpx;
 }
-.gd_dp image{
-  width: 160rpx;
-  height: 160rpx;
+.gd-new-img{
   margin-bottom: 20rpx;
+  width: 160rpx;margin:0 auto;height: 160rpx;
+}
+.gd_dp image{
+  max-width: 160rpx;
+  max-height: 160rpx;
   border-radius:160rpx;
 }
 .gd_dp .gd-dp-text{
@@ -497,7 +500,7 @@ color: #666;font-weight: normal;height: 400rpx;overflow: scroll
 .lt-tr1>view:nth-child(3){
   color: #CCAA77
 }
-.lt-weui-bottom view{
+.lt-weui-bottom>view{
   width: 33%;color: #CCAA77;position: relative;
 }
 .lt-weui-bottom view>text{
@@ -509,8 +512,11 @@ color: #666;font-weight: normal;height: 400rpx;overflow: scroll
 .lt-weui-bottom{
   border-top: 2rpx solid #F3F3F3;
 }
-.lt-weui-bottom view:nth-child(1){
+.lt-weui-bottom>view:nth-child(1){
   border-right: 2rpx solid #F3F3F3;
+}
+.weui-bottom view>view{
+  width: auto;
 }
 .lt-tr1 .lt-add-cart,.lt-tr1 .lt-num{
   background: #FAFAFA;border:2rpx solid #E1E1E1;
@@ -520,7 +526,7 @@ color: #666;font-weight: normal;height: 400rpx;overflow: scroll
 }
 .new-man{
   height: 60rpx;line-height: 60rpx;background: #CCAA77;color: #fff;
-  text-align: center;font-size: 24rpx;
+  text-align: center;font-size: 24rpx;position:absolute;width:100%;top:-60rpx;
 }
 .new-man text{
   font-size: 30rpx;

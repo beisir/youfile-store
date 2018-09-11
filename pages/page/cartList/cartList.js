@@ -166,33 +166,52 @@ Page({
       detailList: detailList
     });
   },
+  urlHome: function () {
+    wx.switchTab({
+      url: '../home/home'
+    })
+  },
   getList:function(){
     var _this=this,
       userId = this.data.userId
     Api.cartList()
       .then(res => {
+        console.log(res.obj)
         const obj=res.obj,
-          effectiveList = obj.effectiveList[0].goodsList,
-          store = obj.effectiveList[0].store,
-          failureList = obj.failureList[0].goodsList,
+          newEffectiveListLen = res.obj.effectiveList.length,
+          newFailureListLen= res.obj.failureList.length,
           storeMes=[]
+        if (newEffectiveListLen>0){
+         var  effectiveList = obj.effectiveList[0].goodsList,
+           store = obj.effectiveList[0].store
+        }else{
+          var effectiveList=[]
+        }
+        if (newFailureListLen > 0) {
+          var failureList = obj.failureList[0].goodsList,
+            store = obj.failureList[0].store
+        } else {
+          var failureList = []
+        }
         for (var i = 0; i < effectiveList.length;i++){
           effectiveList[i].num = 1
-          effectiveList[i].selected=true
+          effectiveList[i].selected = true
+          if(effectiveList[i].shoppingCartSkuList==null){
+            effectiveList[i].height =270
+          }else{
+            effectiveList[i].height = effectiveList[i].shoppingCartSkuList.length*75+270
+          }
         }
         if (effectiveList.length>0){
           _this.setData({
             hasList: true,
-
           });
         }
         if (failureList.length > 0) {
           _this.setData({
             lostList: true,
-
           });
         }
-        console.log(failureList)
         storeMes.push(store)
         _this.setData({
           detailList: effectiveList,
@@ -204,11 +223,11 @@ Page({
       })
   },
   onLoad: function (options) {
-    this.getList()
+    
     
   },
   onShow() {
-    
+    this.getList()
   },
   /**
    * 当前商品选中事件
@@ -230,34 +249,33 @@ Page({
    * 清空失效宝贝
    */
   emptyAll(e) {
-    this.setData({
-      lostcarts: [],
-      lostList: false
-    });
+    Api.deteleCartFai()
+     .then(res => {
+        wx.showToast({
+          title: '清空成功',
+          icon: 'none',
+          duration: 2000
+        })
+        this.getList()
+    })
   },
 
   /**
    * 删除购物车当前商品
    */
   deleteList(e) {
-    const index = e.currentTarget.dataset.index;
-    let detailList = this.data.detailList;
-    detailList.splice(index, 1);
-    this.setData({
-      detailList: detailList
-    });
-    if (!detailList.length) {
-      this.setData({
-        hasList: false
-      });
-    } else {
-      this.getTotalPrice();
-    }
-    wx.showToast({
-      title: '删除成功',
-      icon: 'success',
-      duration: 2000
+    const index = e.currentTarget.dataset.index,
+          goodsId=e.target.dataset.id;
+    Api.deteleCartGoods({ goodsId: goodsId})
+    .then(res=>{
+      wx.showToast({
+        title: '删除成功',
+        icon: 'none',
+        duration: 2000
+      })
+      this.getList()
     })
+    
   },
 
   /**

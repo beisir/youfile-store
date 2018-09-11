@@ -23,7 +23,7 @@ App({
     // // 获取用户信息
     // wx.getSetting({
     //   success: res => {
-    //     if (res.authSetting['scope.userInfo']) {
+    //     if (res.authSetting['scope.userInfo']) eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsIm1lcmNoYW50TnVtYmVyIjoiMDQ5NTg2MTMiLCJ1c2VyX25hbWUiOiIxNTg4ODg4ODg4OCIsInNjb3BlIjpbImFsbCJdLCJleHAiOjE1MzY4MDc5MTMsInVzZXJJZCI6IjBiODNiMzQ5ODMzYTY2YmZiM2UxZTg3YjVjNjc2YjBiIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6ImQ5NmRiMTExLTUzMjUtNDNhMS1hNzI0LWNmNzJhNGU3Zjc2NiIsImNsaWVudF9pZCI6IkJlaUppbmdCYWlSb25nU2hpTWFvQ2xpZW50In0.E9XneRhVBO1mu5kCIVwrnF5lDiaFQIi4E
     //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
     //       wx.getUserInfo({
     //         success: res => {

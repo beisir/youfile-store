@@ -76,7 +76,7 @@
 .aw-no button{
   height: 60rpx;
   width: 200rpx;
-  color: #CCAA77;
+  color: #fff;
   line-height: 55rpx;
   position: relative;
   border-radius: 0;

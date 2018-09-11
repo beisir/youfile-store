@@ -139,9 +139,9 @@ Page({
   },
   onLoad: function (options) {
     this.setData({
-      goodsId:"1808211828502751996e"
+      goodsId:"180831183155243d4de6"
     })
-    this.getDetails("1808211828502751996e")
+    this.getDetails("180831183155243d4de6")
   },
   // tab切换
   swichNav: function (e) {
