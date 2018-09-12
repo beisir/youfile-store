@@ -5,6 +5,14 @@ wx.setStorage({
   key: 'storeId',
   data: "123",
 })
+wx.setStorage({
+  key: 'purchaserUserId',
+  data: "123",
+})
+wx.setStorage({
+  key: 'userId',
+  data: "123",
+})
 class request {
   constructor() {
     this._baseUrl = 'https://xyk-doctor.com',
@@ -71,7 +79,7 @@ class request {
           this._headerGet['Authorization'] = 'Bearer ' + token;
         }
       }
-      this._headerGet['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsIm1lcmNoYW50TnVtYmVyIjoiMDQ5NTg2MTMiLCJ1c2VyX25hbWUiOiIxNTg4ODg4ODg4OCIsInNjb3BlIjpbImFsbCJdLCJleHAiOjE1MzY4MDc5MTMsInVzZXJJZCI6IjBiODNiMzQ5ODMzYTY2YmZiM2UxZTg3YjVjNjc2YjBiIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6ImQ5NmRiMTExLTUzMjUtNDNhMS1hNzI0LWNmNzJhNGU3Zjc2NiIsImNsaWVudF9pZCI6IkJlaUppbmdCYWlSb25nU2hpTWFvQ2xpZW50In0.E9XneRhVBO1mu5kCIVwrnF5lDiaFQIi4EN2daVQnlHo';
+      this._headerGet['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsInVzZXJfbmFtZSI6IjEzNjgxNTQ3NDQwIiwic2NvcGUiOlsiYWxsIl0sImV4cCI6MTUzNzI1OTQ5NywidXNlcklkIjoiNzlmM2JiZjg2YzA1Y2Q4NTQyNmIxNWQ3YjAwMzY3YWIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiOWQ1MWNmNzgtOTVkNC00YzUyLWI0ODctNzg3MWQ5MTY0NWY0IiwiY2xpZW50X2lkIjoiQmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQifQ.DhSaIP8ew13B3x1BJxAdDEO1oqhDpCOUfWhTMTd-4tw';
       wx.request({
         url: this._baseUrl +url,
         data: data,

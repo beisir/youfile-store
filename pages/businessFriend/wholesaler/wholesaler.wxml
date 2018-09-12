@@ -1,0 +1,46 @@
+ <view class="goods-ser">
+    <input placeholder="输入小云店名、手机号、备注名"   bindconfirm=""   value="{{value}}"/>
+    <image class="home-ser"  src="/image/search1.png"></image>
+    <view class='home-img'>
+        筛选
+    </view>
+  </view>
+<view class='bf-cont'>
+  <view class='bf-weui'>
+    <view class="weui_cells">
+      <image  mode="widthFix" src="/image/role.png"></image>
+      <text class="bf-font">添加批发商 </text>
+      <view class='weui-view'>
+        <image  mode="widthFix" src="/image/icl.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='bf-all'>全部批发商</view>
+<scroll-view scroll-y="true" style="height:100%;">
+<view class='bf-cont'>
+  <view class='bf-weui'>
+    <view class="weui_cells">
+      <image  mode="widthFix" src="/image/role.png"></image>
+      <text >EMPIRE </text>
+      <view class='weui-view'>
+        <image  mode="widthFix" src="/image/11.png"></image>
+      </view>
+    </view>
+    <view class="weui_cells">
+      <image  mode="widthFix" src="/image/role.png"></image>
+      <text>EMPIRE </text>
+      <view class='weui-view'>
+        <image  mode="widthFix" src="/image/11.png"></image>
+      </view>
+    </view>
+    <view class="weui_cells">
+      <image  mode="widthFix" src="/image/role.png"></image>
+      <text>EMPIRE </text>
+      <view class='weui-view'>
+        <image  mode="widthFix" src="/image/11.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+</scroll-view>

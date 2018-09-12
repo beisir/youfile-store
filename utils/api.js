@@ -35,7 +35,13 @@ import {
   likeStoreUrl,
   deteleLikeStoreUrl,
   saveSpecTemplateContentUrl,
-  shopListUrl
+  shopListUrl,
+  indexUrl,
+  mewWholesalerUrl,
+  setNameUrl,
+  addWholesalerUrl,
+  passUrl,
+  wholesalerAllUrl
 } from './constUrl.js'
 const app = getApp()
 /**云享品管理 列表**/ 
@@ -186,6 +192,31 @@ function likeStore(data) {
 function shopList(data) {
   return app.pageRequest.pageGet(shopListUrl, data)
 }
+/**批发商数据**/
+function index(data) {
+  return app.http.getRequest(indexUrl, data)
+}
+/**新增批发商列表**/
+function mewWholesaler(data) {
+  return app.pageRequest.pageGet(mewWholesalerUrl, data)
+}
+/**设置备注**/
+function setName(data) {
+  return app.http.postRequest(setNameUrl, data)
+}
+/**添加批发商**/
+function addWholesaler(data) {
+  return app.http.postRequest(addWholesalerUrl, data)
+}
+/**批发商通过验证**/
+function pass(data) {
+  return app.http.postRequest(passUrl, data)
+}
+/**批发商列表**/
+function wholesalerAll(data) {
+  return app.pageRequest.pageGet(wholesalerAllUrl, data)
+}
+
 module.exports = {
   adminGoodsList: adminGoodsList,
   adminGoodsDelete: adminGoodsDelete,
@@ -223,5 +254,11 @@ module.exports = {
   deteleLikeStore: deteleLikeStore,
   likeStore: likeStore,
   saveSpecTemplateContent,
-  shopList: shopList
+  shopList: shopList,
+  index:index,
+  mewWholesaler: mewWholesaler,
+  setName: setName,
+  addWholesaler: addWholesaler,
+  pass:pass,
+  wholesalerAll:wholesalerAll
 }

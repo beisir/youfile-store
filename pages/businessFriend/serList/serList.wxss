@@ -1,0 +1,10 @@
+@import '../addWholesaler/addWholesaler';
+.weui_cells text text{
+  color:#CCAA77;
+}
+.bf-imput{
+  background: #fff;padding:10rpx 30rpx;margin-bottom: 40rpx;
+}
+.goods-ser{
+  background: #F6F6F6
+}

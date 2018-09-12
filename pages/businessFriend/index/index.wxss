@@ -22,3 +22,21 @@
 .bf-btn{
   background: #CCAA77;color: #fff;font-size: 30rpx;height: 80rpx;margin-top: 50rpx;
 }
+.bf-weui .weui_cells{
+  font-size: 28rpx;height: 100rpx;line-height: 100rpx;border-bottom: 2rpx solid #F2F2F2;margin-left: 100rpx;position: relative;margin-right:-20rpx;
+}
+.weui_cells>image{
+  width: 60rpx;position: absolute;left: -100rpx;top: 23rpx;
+}
+.weui-view{
+  position: absolute;right:25rpx;top: 13rpx;
+}
+.weui-view image{
+  width: 30rpx;
+}
+.bf-weui{
+  margin-top: 25rpx;
+}
+.bf-weui .weui_cells:last-child{
+  border-bottom: 0;
+}

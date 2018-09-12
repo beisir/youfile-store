@@ -1,34 +1,54 @@
-import Api from '../../../utils/api.js'
+// pages/businessFriend/information/information.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    waitPass:0,
-    waitVerify:0,
-    merchantNumber:0
+    watchInput: false,
+    value: '',
+    addSpec: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  getInfo:function(){
-    var _this=this
-    Api.index({purchaserUserId:wx.getStorageSync('purchaserUserId')})
-    .then(res=>{
-      var obj=res.obj
-      _this.setData({
-        waitPass: obj.waitPass,
-        waitVerify: obj.waitVerify,
-        merchantNumber: obj.merchantNumber
+  onLoad: function (options) {
+
+  },
+  // 监听input
+  watchInput: function (event) {
+    if (event.detail.value == '') {
+      this.setData({
+        watchInput: false,
+        value: '',
       })
+    } else {
+      this.setData({
+        watchInput: true,
+        value: event.detail.value,
+      })
+    }
+  },
+  setName: function () {
+    this.setData({
+      addSpec: true,
     })
   },
-  onLoad: function (options) {
-    this.getInfo()
+  // 取消
+  cancel: function () {
+    this.setData({
+      addSpec: false
+    })
   },
-
+  confirm: function () {
+    this.cancel()
+  },
+  invitation: function () {
+    wx: wx.navigateTo({
+      url: '../invitation/invitation',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -42,11 +62,7 @@ Page({
   onShow: function () {
 
   },
-  addWholesaler:function(){
-    wx.navigateTo({
-      url: '../addWholesaler/addWholesaler',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

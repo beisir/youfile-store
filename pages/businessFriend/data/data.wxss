@@ -1,0 +1,13 @@
+@import '../information/information';
+.data-cont{
+  color: #333;font-size: 26rpx;padding:25rpx 0 25rpx 5rpx;border-top: 2rpx solid #F8F8F8;
+}
+.data-cont>view{
+  position: relative;margin-top: 20rpx;
+}
+.data-cont>view view{
+  margin-left: 190rpx;
+}
+.data-cont text{
+  color: #999;position: absolute
+}

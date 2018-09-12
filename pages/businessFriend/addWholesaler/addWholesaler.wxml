@@ -1,0 +1,34 @@
+ <view class="goods-ser">
+    <input placeholder="输入小云店名、手机号"   bindinput="searchBtn"   value="{{value}}"/>
+    <image class="home-ser"  src="/image/search1.png"></image>
+  </view>
+<view class='bf-cont'>
+  <view class='bf-weui add-bf-weui'>
+    <view class="weui_cells">
+      <image  mode="widthFix" src="/image/role.png"></image>
+      <text class="bf-font">扫一扫 </text>
+    </view>
+  </view>
+</view>
+<view class='bf-all'>搜索结果</view>
+<view class='bf-cont'>
+  <scroll-view scroll-y="true" style="height:100%;">
+    <view class='bf-weui'>
+      <view class="weui_cells">
+        <view class='bf-img'><image  mode="aspectFill" src="/image/role.png"></image></view>
+        <text >EMPIRE </text>
+        <view class='nbf-font'>手机号：93458973845784</view>
+      </view>
+      <view class="weui_cells">
+        <view class='bf-img'><image  mode="aspectFill" src="/image/role.png"></image></view>
+        <text>EMPIRE </text>
+        <view class='nbf-font'>手机号：93458973845784</view>
+      </view>
+      <view class="weui_cells">
+        <view class='bf-img'><image  mode="aspectFill" src="/image/role.png"></image></view>
+        <text >EMPIRE </text>
+        <view class='nbf-font'>手机号：93458973845784</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

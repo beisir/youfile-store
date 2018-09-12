@@ -1,32 +1,18 @@
-import Api from '../../../utils/api.js'
+// pages/businessFriend/serList/serList.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    waitPass:0,
-    waitVerify:0,
-    merchantNumber:0
+    value:'简美'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  getInfo:function(){
-    var _this=this
-    Api.index({purchaserUserId:wx.getStorageSync('purchaserUserId')})
-    .then(res=>{
-      var obj=res.obj
-      _this.setData({
-        waitPass: obj.waitPass,
-        waitVerify: obj.waitVerify,
-        merchantNumber: obj.merchantNumber
-      })
-    })
-  },
   onLoad: function (options) {
-    this.getInfo()
+
   },
 
   /**
@@ -42,11 +28,7 @@ Page({
   onShow: function () {
 
   },
-  addWholesaler:function(){
-    wx.navigateTo({
-      url: '../addWholesaler/addWholesaler',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面隐藏
    */

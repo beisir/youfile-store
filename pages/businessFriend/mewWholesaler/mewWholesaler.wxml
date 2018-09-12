@@ -1,0 +1,22 @@
+<view class="goods-ser">
+    <input placeholder="输入小云店名、手机号、备注名"  bindconfirm="searchBtn"   value="{{value}}"/>
+    <image class="home-ser"  src="/image/search1.png"></image>
+</view>
+<view class='bf-cont'>
+  <view class='bf-weui'>
+  <scroll-view scroll-y="true" style="height:100%;">
+    <navigator class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}' url="../information/information?status={{item.status}}&send={{item.send}}&accept={{item.accept}}">
+     <view class='bf-img'><image  mode="aspectFill" src="/image/role.png"></image></view>
+      <text >{{item.storeName}} </text>
+      <view class='nbf-font'>{{item.greet}}</view>
+      <view class='weui-view' wx:if='{{item.status==2}}'>
+        已添加
+      </view>
+      <view class='weui-view' wx:if='{{item.status==1}}'>
+        <text  wx:if='{{item.send==send}}'>等待验证</text>
+        <button  wx:if='{{item.send!=send}}'>验证</button>
+      </view>
+    </navigator>
+    </scroll-view>
+  </view>
+</view>

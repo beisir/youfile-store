@@ -49,11 +49,10 @@ Page({
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
-    console.log(options.goodsId)
     var that = this,
       goodsId = options.goodsId
     that.setData({
-      goodsId: "180831183155243d4de6"
+      goodsId: goodsId
     })
   },
 
