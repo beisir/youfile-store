@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "爱恋珠宝华北区总店"
+  "navigationBarTitleText": "爱恋珠宝华北区总店",
+  "usingComponents": {
+    "mes": "../../../../assembly/tips/tips"
+  }
 }
