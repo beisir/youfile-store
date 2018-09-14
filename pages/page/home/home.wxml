@@ -1,5 +1,4 @@
-<import src='../../login/login/login.wxml'/>
-<login-component id='login' inner-text="Some text"></login-component>
+
 <!-- 提示 -->
 <mes
   show="{{show}}"
