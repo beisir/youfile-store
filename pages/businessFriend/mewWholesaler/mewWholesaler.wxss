@@ -25,9 +25,3 @@ color: #999;
   top:33rpx;
 }
 
-.bf-img{
-  position: absolute;width: 60rpx;height: 60rpx;position: absolute;left:-100rpx;top: 35rpx;
-}
-.bf-img image{
-  max-width: 60rpx;max-height: 60rpx;
-}

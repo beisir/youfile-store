@@ -213,6 +213,7 @@ Page({
           });
         }
         storeMes.push(store)
+        console.log(effectiveList)
         _this.setData({
           detailList: effectiveList,
           lostcarts: failureList,

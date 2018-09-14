@@ -9,7 +9,7 @@
   </view>
 </view>
 <view class='u-order'>
-  <navigator class='u-o-div'url='../order/order'>
+  <navigator class='u-o-div' url='../order/order'>
     <image src='/image/order.png'></image>
     <view>我的订单</view>
   </navigator>
@@ -17,7 +17,7 @@
     <image src='/image/mes1.png'></image>
     <view>进货单</view>
   </navigator>
-  <navigator class='u-o-div'>
+  <navigator class='u-o-div' url='../../businessFriend/index/index'>
     <image src='/image/mes1.png'></image>
     <view>我的商友</view>
   </navigator>
@@ -46,7 +46,7 @@
   </view>
    <view class='page_bd page_hd1'>
     <view class='weui-back'>
-      <navigator class='weui-cell weui-cell_access'  url=''>
+      <navigator class='weui-cell weui-cell_access'  url='../../businessFriend/merchant/index/index'>
       <image src='/image/u4.jpg' class='user-img user-img1'></image>
         <view class='weui-cell__bd'>
           申请小云店

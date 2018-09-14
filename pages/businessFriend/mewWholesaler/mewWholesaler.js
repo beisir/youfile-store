@@ -7,7 +7,7 @@ Page({
    */
   data: {
     detailList:[],
-    send: wx.getStorageSync('storeId'),
+    send: wx.getStorageSync('userId'),
   },
 
   /**

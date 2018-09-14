@@ -6,7 +6,10 @@ Page({
    */
   data: {
     value:'我是陈晨，期待与您合作。',
-    accept:''
+    accept:'',
+    logo:'',
+    name:'',
+    send:''
   },
   goBack:function(){
     wx.navigateBack({
@@ -28,11 +31,9 @@ Page({
     var _this=this,
       accept = this.data.accept,
       greet=this.data.value,
-      send = wx.getStorageSync('userId'),
+      send = this.data.send,
       remark = this.data.remark
-    // if()
-    console.log(greet)
-    Api.addWholesaler({ accept: accept, send:send, greet: greet})
+    Api.addWholesaler({ accept: accept, send: send, greet: greet, remark: remark})
     .then(res=>{
       wx.showToast({
         title: '发送成功',
@@ -49,10 +50,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.accept)
       this.setData({
         accept:options.accept,
-        remark: options.remark
+        remark: options.remark,
+        logo: options.logo,
+        name: options.name,
+        send:options.send
       })
   },
 

@@ -1,0 +1,22 @@
+<view class='bf-imput'>
+   <view class="goods-ser">
+    <input placeholder="输入小云店名、手机号"   bindconfirm="searchBtn"   value="{{value}}"/>
+    <image class="home-ser"  src="/image/search.png"></image>
+    <view class='home-img'>
+      <image  src="/image/ser.png"></image>
+    </view>
+  </view>
+</view>
+<view class='bf-all'>搜索结果</view>
+<view class='bf-cont'>
+  <scroll-view scroll-y="true" style="height:100%;">
+  <view class='bf-weui'>
+    <navigator wx:for='{{detailList}}' wx:key='{{index}}' class="weui_cells"  url="../merchantInfo/merchantInfo?status=0&send={{storeId}}&accept={{item.userId}}&remark=&greet=&name={{item.nickName}}&logo={{item.headPic}}&phone={{item.mobile}}">
+      <view class='bf-img'><image  mode="aspectFill" src="{{item.headPic}}"></image></view>
+      <text><text></text>{{item.nickName}} </text>
+      <view class='nbf-font'>手机号：{{item.mobile}}</view>
+    </navigator>
+  </view>
+  </scroll-view>
+</view>
+

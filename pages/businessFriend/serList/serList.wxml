@@ -1,6 +1,6 @@
 <view class='bf-imput'>
    <view class="goods-ser">
-    <input placeholder="输入小云店名、手机号"   bindconfirm=""   value="{{value}}"/>
+    <input placeholder="输入小云店名、手机号"   bindconfirm="searchBtn"   value="{{value}}"/>
     <image class="home-ser"  src="/image/search.png"></image>
     <view class='home-img'>
       <image  src="/image/ser.png"></image>
@@ -9,21 +9,13 @@
 </view>
 <view class='bf-all'>搜索结果</view>
 <view class='bf-cont'>
+  <scroll-view scroll-y="true" style="height:100%;">
   <view class='bf-weui'>
-    <navigator class="weui_cells" url="../information/information">
-      <view class='bf-img'><image  mode="aspectFill" src="/image/role.png"></image></view>
-      <text><text>简美</text>EMPIRE </text>
-      <view class='nbf-font'>手机号：93458973845784</view>
-    </navigator>
-    <navigator class="weui_cells"  url="../information/information">
-      <view class='bf-img'><image  mode="aspectFill" src="/image/role.png"></image></view>
-      <text><text>简美</text>EMPIRE </text>
-      <view class='nbf-font'>手机号：93458973845784</view>
-    </navigator>
-    <navigator class="weui_cells"  url="../information/information">
-      <view class='bf-img'><image  mode="aspectFill" src="/image/role.png"></image></view>
-      <text><text>简美</text>EMPIRE </text>
-      <view class='nbf-font'>手机号：93458973845784</view>
+    <navigator wx:for='{{detailList}}' wx:key='{{index}}' class="weui_cells"  url="../information/information?status=0&send={{userId}}&accept={{item.storeId}}&remark=&logo={{item.logo}}&name={{item.name}}">
+      <view class='bf-img'><image  mode="aspectFill" src="{{item.logo}}"></image></view>
+      <text><text></text>{{item.name}} </text>
+      <view class='nbf-font'>手机号：{{item.mobile}}</view>
     </navigator>
   </view>
+  </scroll-view>
 </view>

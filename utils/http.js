@@ -2,6 +2,10 @@
  请求
  */
 wx.setStorage({
+  key: 'admin',
+  data: 2,//1进货商 2店主  3批发商
+})
+wx.setStorage({
   key: 'storeId',
   data: "123",
 })

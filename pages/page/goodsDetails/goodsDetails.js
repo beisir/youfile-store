@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    limitShow: app.pageRequest.limitShow(),
     imgUrls: [],
     goodsSpecificationVOList:[],
     goodsSkuVOList:[],
@@ -50,7 +51,7 @@ Page({
   */
   onLoad: function (options) {
     var that = this,
-      goodsId = options.goodsId
+      goodsId = '180904092152685923df'
     that.setData({
       goodsId: goodsId
     })

@@ -15,30 +15,87 @@ Page({
     oneGreet: false,
     aginGreet: false,
     accept:'',
-    remark:null,
+    logo:'',
+    name:'',
+    addShow:false,
+    storeName:'',
+    address:'',
+    servicePhone:'',    
+    floor:'',
+    wechatNumber:'',
+    businessScope:'',
+    area:'',
+    goodsList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  getMession: function (data,status) {
+  var _this = this,
+      url=''
+    if (status == 2) {
+      url ='/admin/store/merchantinfo/{{storeId}}/{{purchaserUserId}}'
+    }else{
+      url ='/admin/store/applyinfo/{{storeId}}/{{purchaserUserId}}'
+    }
+    Api.purchaserUserId(data,url)
+    .then(res => {
+      var obj = res.obj,
+        store = obj.store[0],
+        goodsList = store.goodsList,
+        storeMes = store.store,
+        floor = obj.floor,
+        info=''
+      console.log(obj)
+      console.log(goodsList)
+      if (goodsList!=null){
+        _this.setData({
+          goodsList:goodsList
+        })
+      }
+      if (floor!=null){
+        info = floor.floorInfo
+        _this.setData({
+          area: info.area,
+          floor: info.floor,
+          mallName: info.mallName,
+          balcony: info.balcony
+        })
+      }
+      if (obj != null) {
+        _this.setData({
+          address: storeMes.address,
+          servicePhone: storeMes.servicePhone,
+          wechatNumber: storeMes.wechatNumber, 
+          businessScope: storeMes.businessScope, 
+        })
+      }
+    })
+},
   onLoad: function (options) {
     console.log(options)
     var status = options.status,
         send=options.send,
         storeId = this.data.storeId,
         accept = options.accept,
+        logo = options.logo,
+        name=options.name,
         remark = options.remark
     this.setData({
       status:status,
       send:send,
       accept: accept,
-      remark: remark
+      value: remark,
+      name:name,
+      logo:logo
     })
+  this.getMession({ purchaserUserId: accept }, status)
   if(status==2){
     this.setData({
       success:true
     })
-  }else{
+  } else if (status == 1){
     if (storeId==send) {
       this.setData({
         aginGreet: true
@@ -48,6 +105,10 @@ Page({
         oneGreet: true
       })
     }
+  }else if(status==0){
+    this.setData({
+      addShow:true
+    })
   }
    
   },
@@ -66,6 +127,11 @@ Page({
     }
   },
   setName:function(){
+    if(this.data.value!=''){
+      this.setData({
+        watchInput: true,
+      })
+    }
     this.setData({
       addSpec: true,
     })
@@ -77,29 +143,26 @@ Page({
     })
   },
   confirm:function(){
-    var val = this.data.value,
-    status=this.data.status
-    if (status==1){
-
-    }else{
-      if (val != '') {
-        Api.setName({ purchaserUserId: wx.getStorageSync('purchaserUserId'), remark: val })
-          .then(res => {
-            wx.showToast({
-              title: '设置成功',
-              icon: 'none',
-              duration: 1000,
-              mask: true
-            })
-            this.cancel()
-          })
-      }
+    var _this=this,
+      purchaserUserId = this.data.accept,
+      remark = this.data.value
+    this.cancel()
+    if (this.data.status==2){
+      Api.setName({ purchaserUserId: purchaserUserId, remark: remark})
+      .then(res=>{
+        console.log(res)
+        wx.showToast({
+          title: '修改成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+      })
     }
-    
   },
   invitation:function(){
     wx.navigateTo({
-      url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remark,
+      url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.value+"&name="+this.data.name+"&logo="+this.data.logo+"&send="+this.data.send,
     })
   },
   /**
@@ -114,7 +177,21 @@ Page({
     })
   },
   passFunc:function(){
-
+    var send = this.data.send,
+      accept = this.data.accept,
+      remark = this.data.value
+    Api.acceptmerchant({ accept: accept, send: send, remark: remark })
+      .then(res => {
+        wx.showToast({
+          title: '添加成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+        wx.navigateTo({
+          url: '../mewWholesaler/mewWholesaler'
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面显示

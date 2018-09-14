@@ -187,19 +187,19 @@ Page({
         _this.setData({
           pics: pics
         })
-        // var tempFilePaths = res.tempFilePaths
+        var tempFilePaths = res.tempFilePaths
         // wx.uploadFile({
-        //   url: 'http://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
+        //   url: 'https://xyk-doctor.com/image', //仅为示例，非真实的接口地址
         //   filePath: tempFilePaths[0],
         //   name: 'file',
         // header: {
         //   "Content-Type": "multipart/form-data"
-        // }
+        // },
         //   formData: {
-        //     'user': 'test'
+        //     'type': 'GOODS'
         //   },
         //   success: function (res) {
-        //     var data = res.data
+        //     console.log(res)
         //     //do something
         //   }
         // })

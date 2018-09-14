@@ -14,3 +14,12 @@ input{
 .weui-view{
   z-index: 1000
 }
+textarea {
+  height: 100rpx;padding-top: 15rpx;
+}
+.add-bf-weui1 .weui_cells{
+  line-height: 40rpx;
+}
+.add-bf-weui1 .weui-view{
+  top: 43rpx;
+}

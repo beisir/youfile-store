@@ -41,7 +41,19 @@ import {
   setNameUrl,
   addWholesalerUrl,
   passUrl,
-  wholesalerAllUrl
+  wholesalerAllUrl,
+  merchantIndexUrl,
+  merchantListUrl,
+  newMerchantUrl,
+  applyUrl,
+  acceptPurchaserUrl,
+  userInfoUrl,
+  saveDetailsUrl,
+  serWholesalerListUrl,
+  purchaserListUrl,
+  remakInfoUrl,
+  acceptmerchantUrl,
+  purchaserUserIdUrl
 } from './constUrl.js'
 const app = getApp()
 /**云享品管理 列表**/ 
@@ -212,9 +224,57 @@ function addWholesaler(data) {
 function pass(data) {
   return app.http.postRequest(passUrl, data)
 }
+/**进货商通过验证**/
+function acceptmerchant(data) {
+  return app.http.postRequest(acceptmerchantUrl, data)
+}
 /**批发商列表**/
 function wholesalerAll(data) {
   return app.pageRequest.pageGet(wholesalerAllUrl, data)
+}
+/**进货商数据**/
+function merchantIndex(data) {
+  return app.http.getRequest(merchantIndexUrl, data)
+}
+/**进货商列表**/
+function merchantList(data) {
+  return app.pageRequest.pageGet(merchantListUrl, data)
+}
+/**新增进货商列表**/
+function newMerchant(data) {
+  return app.pageRequest.pageGet(newMerchantUrl, data)
+}
+/**发送商友申请 添加到进货商**/
+function apply(data) {
+  return app.http.postRequest(applyUrl, data)
+}
+/**接受申请添加到进货商**/
+function acceptPurchaser(data) {
+  return app.http.postRequest(acceptPurchaserUrl, data)
+}
+/**客户信息**/
+function userInfo(data) {
+  return app.http.getRequest(userInfoUrl, data)
+}
+/**保存客户信息**/
+function saveDetails(data) {
+  return app.http.postRequest(saveDetailsUrl, data)
+}
+/**添加批发商分页查询列表**/
+function serWholesalerList(data) {
+  return app.pageRequest.pageGet(serWholesalerListUrl, data)
+}
+/**添加进货商分页查询列表**/
+function purchaserList(data) {
+  return app.pageRequest.pageGet(purchaserListUrl, data)
+}
+/**进货商资料**/
+function remakInfo(data) {
+  return app.http.getRequest(remakInfoUrl, data)
+}
+/**批发商资料**/
+function purchaserUserId(data,url) {
+  return app.http.getRequest(url, data)
 }
 
 module.exports = {
@@ -260,5 +320,17 @@ module.exports = {
   setName: setName,
   addWholesaler: addWholesaler,
   pass:pass,
-  wholesalerAll:wholesalerAll
+  wholesalerAll:wholesalerAll,
+  merchantIndex: merchantIndex,
+  merchantList: merchantList,
+  newMerchant: newMerchant,
+  apply: apply,
+  acceptPurchaser: acceptPurchaser,
+  userInfo: userInfo,
+  saveDetails: saveDetails,
+  serWholesalerList: serWholesalerList,
+  purchaserList: purchaserList,
+  remakInfo: remakInfo,
+  acceptmerchant: acceptmerchant,
+  purchaserUserId: purchaserUserId
 }

@@ -25,7 +25,7 @@
     </view>
   </view>
 <view class='banner'>
-  <view class='hm-fx'><image  src="/image/fx1.png"></image>分享</view>
+  <view class='hm-fx' wx:if='{{limitShow==2}}'><image  src="/image/fx1.png"></image>分享</view>
   <image src="http://pic.youlife.me/v1/tfs/T1yt_TBC_T1RXrhCrK.jpg" class="slide-image" mode="widthFix"/>    
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
@@ -34,18 +34,18 @@
       </navigator>
     </view>
      <view class="ym_sydtdmgzs">
-        <view class="store_name">爱恋珠宝华北区总店<view>新批零</view><image bindtap='editDp' src="/image/edit1.png"/></view>
+        <view class="store_name">爱恋珠宝华北区总店<view>新批零</view><image wx:if='{{limitShow==2}}' bindtap='editDp'  src="/image/edit1.png"/></view>
         <image class='logoimg' src="/image/dp.png"/>   
         <text>百荣世贸</text>
       </view>
     </view>
-    <button class="ym_sydtgzbtn" bindtap='likeStore'>+ 关注</button>
-    <button class="ym_sydtgzbtn" style='right:200rpx' bindtap='deteleLikeStore'>已关注</button>
+    <button class="ym_sydtgzbtn"  hidden='{{likeShow}}'  bindtap='likeStore'>+ 关注</button>
+    <button class="ym_sydtgzbtn"  hidden='{{!likeShow}}' bindtap='deteleLikeStore'>已关注</button>
 </view>
-<view class='add-firend' hidden='{{isShow}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>
-<view class='add-firend add-firend1'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view>
-<!-- <view class='add-firend add-firend2'><view>友</view>已成商友，现可查看批发价！<image src='/image/sy.png'></image></view>
-<view class='add-firend add-firend3'><view>混</view>全场满3000元可混批！</view> -->
+<view class='add-firend'  wx:if='{{limitShow!=3}}' hidden='{{isShow}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>
+<view class='add-firend add-firend1' wx:if='{{limitShow==1}}'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view>
+<view class='add-firend add-firend2' wx:if='{{limitShow==3}}'><view>友</view>已成商友，现可查看批发价！<image src='/image/sy.png'></image></view>
+<view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view>
 <view class="swiper-tab"> 
   <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合<view></view></view> 
   <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量<view></view></view> 
@@ -67,8 +67,7 @@
         <view class="result-text result-text1">
           零售<text>￥ {{item.sellPrice}}</text>
           <view>
-          <!-- <text class='h-font'>￥ {{item.wholesalePrice}}</text>-->
-            批发<image src='/image/wh.png'></image><image class='h-img' bindtap='editFun' src="/image/edit2.png"/>
+          批发<text class='h-font'  wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text><image wx:if='{{limitShow==1}}'src='/image/wh.png'></image><image  wx:if='{{limitShow==2}}' class='h-img' bindtap='editFun' src="/image/edit2.png"/>
           </view>
         </view>
       </view>

@@ -13,7 +13,7 @@
   height: 145rpx;padding-top: 0;margin-left:170rpx;padding-top: 35rpx;
 }
 .bf-weui .new-weui text{
-  font-size: 32rpx;
+  font-size: 32rpx;font-weight: bold;
 }
 .weui_cells .nbf-font{
   font-size:24rpx;color: #666;line-height: 35rpx;
@@ -49,7 +49,7 @@
   margin:50rpx;
 }
 .in-cont-img{
-  float: right;margin-right: 32rpx;border-left: 2rpx solid #EFEFEF;padding-left: 20rpx;
+  float: right;margin-right: 32rpx;border-left: 2rpx solid #EFEFEF;padding-left: 20rpx;height: 53rpx;
 }
 .in-more-img{
   height:100rpx;width: 100rpx;display: inline-block;margin-right: 10rpx;

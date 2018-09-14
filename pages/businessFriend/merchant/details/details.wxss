@@ -1,0 +1,4 @@
+@import '../merchantInfo/merchantInfo';
+.in-cont .weui-view{
+  width:30rpx;top: 40rpx;right: 30rpx;
+}

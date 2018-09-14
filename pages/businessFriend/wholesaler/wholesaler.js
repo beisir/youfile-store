@@ -7,7 +7,8 @@ Page({
    */
   data: {
     detailList: [],
-    value: ''
+    value: '',
+    totalCount:0
   },
 
   /**
@@ -26,20 +27,32 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  searchBtn: function (e) {
+  changeValue:function(e){
     var val = e.detail.value
+    this.setData({
+      value:val
+    })
+  },
+  searchBtn: function (e) {
+    console.log(888)
+    var val = this.data.value
+    console.log(val)
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       detailList: []
     })
-    this.getList({ purchaserUserId: wx.getStorageSync('purchaserUserId'), keyword: val })
+    this.getList({purchaserUserId: wx.getStorageSync('purchaserUserId'),keyword:val})
   },
-  getList: function () {
+  getList: function (data) {
     var _this = this
-    Api.wholesalerAll({ purchaserUserId: wx.getStorageSync('purchaserUserId') })
+    Api.wholesalerAll(data)
       .then(res => {
-        var detailList = res.obj.result
+        var detailList = res.obj.result,
+          totalCount = res.obj.totalCount
         console.log(detailList)
+        _this.setData({
+          totalCount: totalCount
+        })
         if (detailList != null) {
           var datas = _this.data.detailList,
             newArr = app.pageRequest.addDataList(datas, detailList)
@@ -58,7 +71,7 @@ Page({
       })
   },
   onShow: function () {
-    this.getList()
+    this.getList({ purchaserUserId: wx.getStorageSync('purchaserUserId')})
   },
 
   /**

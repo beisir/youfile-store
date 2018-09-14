@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "客户信息",
+  "usingComponents": {
+    "nyz_area_picker": "../../../../assembly/area/area"
+  }
+}

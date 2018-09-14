@@ -21,5 +21,8 @@ class pageRequest extends http {
   }
   return data
   }
+  limitShow() {
+    return wx.getStorageSync('admin')
+  }
 }
 export default pageRequest

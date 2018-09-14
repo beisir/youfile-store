@@ -1,0 +1,29 @@
+<view class="goods-ser">
+    <input placeholder="输入小云店名、手机号、备注名"  bindconfirm="searchBtn"   value="{{value}}"/>
+    <image class="home-ser"  src="/image/search1.png"></image>
+</view>
+<view class='bf-cont'>
+  <view class='bf-weui'>
+  <scroll-view scroll-y="true" style="height:100%;">
+    <view class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}'>
+      <navigator wx:if='{{item.status==2}}'  url="../reach/reach?accept={{item.accept}}">
+        <view class='bf-img'><image  mode="aspectFill" src="{{item.headPic}}"></image></view>
+          <text >{{item.remark==null?item.storeName:item.remark}}</text>
+          <view class='nbf-font'>{{item.greet}}</view>
+          <view class='weui-view'>
+            已添加
+          </view>
+      </navigator>
+      <navigator wx:if='{{item.status==1}}'  url="../merchantInfo/merchantInfo?status={{item.status}}&send={{item.send}}&accept={{item.accept}}&remark={{item.remark}}&greet={{item.greet}}&name={{item.storeName}}&logo={{item.headPic}}&phone={{item.phone}}">
+        <view class='bf-img'><image  mode="aspectFill" src="{{item.headPic}}"></image></view>
+          <text >{{item.remark==null?item.storeName:item.remark}}</text>
+          <view class='nbf-font'>{{item.greet}}</view>
+          <view class='weui-view' wx:if='{{item.status==1}}'>
+            <text  wx:if='{{item.send==send}}'>等待验证</text>
+            <button  wx:if='{{item.send!=send}}'>验证</button>
+          </view>
+      </navigator>
+    </view>
+    </scroll-view>
+  </view>
+</view>

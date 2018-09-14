@@ -5,16 +5,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-    winWidth: 0,
+    winWidth:0,
     winHeight: 0,
     show:false,
     isShow:false,
     showHide:true,
     showDp:true,
-    // tab切换 
     currentTab: 0,
     result: [],
     keyword:'',
+    likeShow:false,
+    limitShow: app.pageRequest.limitShow()
   },
 
   /**
@@ -59,6 +60,7 @@ Page({
     } else if (currentTab == 2) {
       sortType = 'prices_asc'
     }
+    console.log(currentTab)
     Api.shopList({ keyword: '', sortType: sortType})
       .then(res => {
         var detailList = res.obj.result,
@@ -95,15 +97,16 @@ Page({
     });
   },
   swichNav: function (e) {
-    this.emptyArr()
     var that = this;
-    app.pageRequest.pageData.pageNum = 0
-    this.getList()
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
       that.setData({
         currentTab: e.target.dataset.current,
+      },function(){
+        this.emptyArr()
+        app.pageRequest.pageData.pageNum = 0
+        this.getList()
       })
     }
   },
@@ -111,24 +114,32 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   likeStore:function(){
+    var _this=this
     Api.likeStore()
     .then(res=>{
       wx.showToast({
         title: '关注成功',
         icon: 'none',
         duration: 1000,
-        mask: true
+        mask: true,
+      })
+      _this.setData({
+        likeShow: true
       })
     })
   }, 
   deteleLikeStore: function() {
+    var _this = this
     Api.deteleLikeStore()
       .then(res => {
         wx.showToast({
           title: '取消关注成功',
           icon: 'none',
           duration: 1000,
-          mask: true
+          mask: true,
+        })
+        _this.setData({
+          likeShow: false
         })
       })
   },
