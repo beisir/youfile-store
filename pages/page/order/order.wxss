@@ -28,6 +28,14 @@
 }
 .cart-list .cart-thumb{
   left: 30rpx;
+  text-align: center;
+  line-height: 150rpx;
+}
+/* 图 */
+.goods-icon{
+  max-width: 150rpx;
+  max-height: 150rpx;
+  display: inline;
 }
 .c-title{
   border-bottom: 0;font-weight: bold;
@@ -73,13 +81,14 @@
   color:#CCAA77;
 }
 .cf-button button{
-  width: 135rpx;
+  /* width: 135rpx; */
+  width:auto;
+  padding:0 20rpx;
   height: 55rpx;
   margin-left: 15rpx;
   float: right;
   line-height:50rpx;
   color: #999;
-  padding:0;
   margin-top: 10rpx;
   border:2rpx solid #D8D8D8;
   background: #fff;

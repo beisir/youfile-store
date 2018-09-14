@@ -137,3 +137,8 @@
 .os-mon1 view{
   color: #999;font-size: 24rpx;padding-left: 20rpx;padding-top: 25rpx;
 }
+.cf-button button{
+  font-size:22rpx;
+  width: 155rpx;
+  font-weight: 600;
+}

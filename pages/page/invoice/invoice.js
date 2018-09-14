@@ -13,6 +13,7 @@ Page({
     ],
     ordinary:true,
     com:true,
+    invoice:{}  //发票信息
   },
   selectList(e){
     const index1=e.currentTarget.dataset.index;
@@ -45,17 +46,81 @@ Page({
     this.setData({
       dataInvoice: dataInvoice
     })
+
+    switch (index1){
+      case 0:
+        this.setData({
+          ["invoice.invoiceCategory"]: "",
+          ["invoice.invoiceType"]: ""
+        });break;   
+      case 1:
+        this.setData({
+          ["invoice.invoiceCategory"]: "普通发票",
+          ["invoice.invoiceType"]: "个人"
+        }); break;  
+      case 2:
+        this.setData({
+          ["invoice.invoiceCategory"]: "普通发票",
+          ["invoice.invoiceType"]: "公司"
+        }); break;  
+      case 3:
+        this.setData({
+          ["invoice.invoiceCategory"]: "增值税专用发票",
+          ["invoice.invoiceType"]: "公司"
+        }); break;  
+    }
   },
-  addWrite(e){
-    wx.navigateTo({
-      url: '../address/address', 
+  // 监听输入
+  watchInput(e){
+    let type = e.currentTarget.dataset.type,
+      val = e.detail.value;
+    this.setData({
+      ["invoice."+type+""]: val
     })
+  },
+
+  addWrite(e){
+    var pages = getCurrentPages();
+    if (pages.length > 1) {
+      //上一个页面实例对象
+      var prePage = pages[pages.length - 2];
+      prePage.getInvoice(this.data.invoice);
+      wx.navigateBack();
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    // if (options != {}){
+    //   let index = 0;
+    //   if (options.invoiceType=="个人"){
+    //     index = 1;
+    //   }else{
+    //     if (options.invoiceCategory == "普通发票"){
+    //       index = 2;
+    //     }else{
+    //       index = 3;
+    //     }
+    //   }
+    //   var array = this.data.dataInvoice
+    //   array.forEach((item, i, arr) => {
+    //     var sItem = "dataInvoice[" + i + "].selected"
+    //     if(i==index){
+    //       this.setData({
+    //         [sItem]: true,
+    //       })
+    //     }
+    //     this.setData({
+    //       [sItem]: false,
+    //     })
+    //   })
+
+      
+    //   this.setData({
+    //     invoice: options
+    //   })
+    // }
   },
 
   /**

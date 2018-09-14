@@ -15,7 +15,7 @@ wx.setStorage({
 })
 class request {
   constructor() {
-    this._baseUrl = 'https://xyk-doctor.com',
+    this._baseUrl = 'https://mall.youlife.me',
     this._headerGet = {'content-type': 'application/json'},
     this._headerPost = { "Content-Type": "application/json;charset=UTF-8"},
     this.storeId = 123,

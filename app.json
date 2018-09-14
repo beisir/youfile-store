@@ -1,20 +1,30 @@
 {
   "pages":[
-    "pages/page/home/home",
+    "pages/page/address/address",
     
+    "pages/page/stockDetail/stockDetail",
+    
+    "pages/page/order/order",
+    
+    
+    "pages/page/stockSelf/stockSelf",
+    
+    
+    "pages/page/addressWe/addressWe",
+    
+    
+    "pages/page/home/home",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
     "pages/businessFriend/index/index",
     "pages/businessFriend/wholesaler/wholesaler",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/invitation/invitation",
-    "pages/page/goodsDetails/goodsDetails",
     "pages/businessFriend/information/information",
     "pages/businessFriend/serList/serList",
     "pages/businessFriend/setUp/setUp",
     "pages/admin/batchSet/batchSet",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",
-    "pages/admin/status/status",
     "pages/page/mes/mes",
     "pages/page/newAddress/newAddress",
     "pages/page/user/user",
@@ -24,12 +34,34 @@
     "pages/page/userDetails/userDetails",
     "pages/admin/editGoods/editGoods",
     "pages/admin/class/class",
-    "pages/page/addressWe/addressWe",
-    "pages/page/order/order",
-    "pages/page/self/self",
-    "pages/admin/addGoods/addGoods",
+        
+    "pages/page/stockOrder/stockOrder",
+   
     "pages/role/supplyOrder/supplyOrder",
     "pages/role/order/order",
+    
+
+    
+    
+    
+      
+  
+   
+   "pages/role/supplyDetails/supplyDetails",
+   "pages/role/supplySelf/supplySelf",
+   
+    "pages/role/orderDetails/orderDetails",
+    "pages/page/self/self",
+    
+    "pages/role/supplyVoucher/supplyVoucher",
+    
+
+    "pages/page/goodsDetails/goodsDetails",
+    
+    "pages/admin/status/status",
+    "pages/admin/addGoods/addGoods",
+    
+    
     "pages/role/orderSelf/orderSelf",
     "pages/page/details/details",
     "pages/page/serList/serList",
@@ -38,7 +70,6 @@
     "pages/admin/serStatus/serStatus",
     "pages/admin/batch/batch",
     "pages/login/register/register",
-    "pages/page/address/address",
     "pages/login/login/login",
     "pages/admin/shopClass/shopClass",
     "pages/page/mesEdit/mesEdit",
@@ -50,9 +81,6 @@
     "pages/admin/classEdit/classEdit",
     "pages/admin/thirdClass/thirdClass",
     "pages/admin/secondClass/secondClass",
-    "pages/role/orderDetails/orderDetails",
-    "pages/role/supplyDetails/supplyDetails",
-    "pages/role/supplySelf/supplySelf",
     "pages/page/update/update",
     "pages/page/help/help",
     "pages/page/nopay/nopay",

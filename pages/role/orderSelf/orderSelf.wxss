@@ -14,3 +14,8 @@
 .getcode text{
   color: #CCAA77;font-size: 30rpx;
 }
+.cf-button button{
+  font-size:22rpx;
+  width: 155rpx;
+  font-weight: 600;
+}

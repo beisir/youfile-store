@@ -4,6 +4,6 @@
     <view class="modal-title"><image src="/image/clo12.png"  bindtap='cancel'></image></view>
       <view class='clo'>请选择取消理由</view>
       <view class='slot'><slot></slot></view>
-       <button bindtap='confirm'>确定</button>
+       <!-- <button bindtap='confirm'>确定</button> -->
   </view>
 </view>
