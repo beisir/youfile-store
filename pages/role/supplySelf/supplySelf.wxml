@@ -1,149 +1,306 @@
 <!-- 待付款 -->
 <view class='os-title' hidden='{{status6}}'>
-  <view>买家剩余支付时间<text>24时10分</text></view>
-  <image  src="/image/sl1.png"></image>
-  <view class='os-status'><view class='active'>已下单</view><view>待取货</view><view>已取货</view></view>
+  <view>买家剩余支付时间
+    <text>{{order.claimGoodsNum}}</text>
+  </view>
+  <image src="/image/sl1.png"></image>
+  <view class='os-status'>
+    <view class='active'>已下单</view>
+    <view>待取货</view>
+    <view>已取货</view>
+  </view>
 </view>
 <!-- 已付款 -->
-<view class='os-title'  hidden='{{status7}}'>
+<view class='os-title' hidden='{{status7}}'>
   <view>买家已付款</view>
-  <image  src="/image/sl2.png"></image>
-  <view class='os-status'><view class='active'>已下单</view><view class='active'>待取货</view><view>已取货</view></view>
+  <image src="/image/sl2.png"></image>
+  <view class='os-status'>
+    <view class='active'>已下单</view>
+    <view class='active'>待取货</view>
+    <view>已取货</view>
+  </view>
 </view>
 <!-- 已完成 -->
-<view class='os-title'  hidden='{{status8}}'>
+<view class='os-title' hidden='{{status8}}'>
   <view>交易完成</view>
-  <image  src="/image/sl3.png"></image>
-  <view class='os-status'><view class='active'>已下单</view><view class='active'>待取货</view><view class='active'>已取货</view></view>
+  <image src="/image/sl3.png"></image>
+  <view class='os-status'>
+    <view class='active'>已下单</view>
+    <view class='active'>待取货</view>
+    <view class='active'>已取货</view>
+  </view>
 </view>
 <!-- 交易关闭 -->
 <view class='os-title' hidden='{{status9}}'>
-  <view><image  src="/image/closeS.png"></image>订单已取消</view>
+  <view>
+    <image src="/image/closeS.png"></image>订单已取消</view>
   <view class='os-close-res'>取消原因：逾期未付款</view>
 </view>
 <!-- 正文 -->
 <view class='np-ct'>
-  <view class='getcode'  hidden='{{status8}}'><image  src="/image/suo.png"></image>取货码：<text>1022</text></view>
+  <view class='getcode' hidden='{{status8}}'>
+    <image src="/image/suo.png"></image>取货码：
+    <text>{{order.claimGoodsNum}}</text>
+  </view>
   <view class='np-view'>
-    <image  src="/image/ad.png"></image>
-    <text class='np-text'>13164115211</text>
-    <view>取货人：珍妮</view>
+    <image src="/image/ad.png"></image>
+    <text class='np-text'>{{order.consigneeInfo.userPhone}}</text>
+    <view>取货人：{{order.consigneeInfo.userName}}</view>
   </view>
   <view class='np-view np-view1'>
-    <image  src="/image/mes2.png"></image>
+    <image src="/image/mes2.png"></image>
     <view>留言</view>
-    <text>我明天上午到店里拿</text>
+    <text>{{order.userMemo}}</text>
   </view>
 </view>
 <view class='np-mes'>
-  <view><image  src="/image/mes.png"></image>联系进货商<button class="kf_button" open-type="contact" session-from="weapp"></button> </view>
-  <view bindtap='tel'><image  src="/image/tel1.png"></image>拨打电话</view><view><image  src="/image/pre.png"></image>客户资料</view>
+  <view>
+    <image src="/image/mes.png"></image>联系进货商
+    <!-- <button class="kf_button" open-type="contact" session-from="weapp"></button> -->
+  </view>
+  <view bindtap='tel'>
+    <image src="/image/tel1.png"></image>拨打电话</view>
+  <view>
+    <image src="/image/pre.png"></image>客户资料</view>
 </view>
 <view class='cf-cont'>
-      <view class='c-title'>
-        <image src="/image/ic1.png"></image> 流星落  <view class='order-zt'>自提</view>
+  <view class='c-title'>
+    <image src="/image/ic1.png"></image> {{order.storeInfo.storeName}}
+    <view class='order-zt'>自提</view>
+  </view>
+  <!-- 商品 -->
+  <view>
+    <view class="cart-box" wx:for="{{order.goodsInfos}}" wx:key="{{index}}">
+      <view class="cart-list">
+        <navigator>
+          <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+        </navigator>
+        <view class='ct-title ct-title1'>{{item.goodsName}}</view>
+        <view class="heji">共
+          <text>{{item.num}}</text>件商品</view>
       </view>
-      <view  wx:for="{{carts}}" wx:key="{{index}}">
-          <view class="cart-box">
-              <view class="cart-list">
-                  <navigator><image class="cart-thumb" src="{{item.image}}"></image></navigator>
-                  <view class='ct-title ct-title1'>{{item.title}}</view> 
-                  <view class="heji">共<text>15</text>件商品</view>
-              </view>
-          </view>
-          <!-- 表格 -->
-          <view class="table">
-            <view class="tr">
-                <view class="th">颜色</view>
-                <view class="th">重量</view>
-                <view class="th">数量</view>
-                <view class="th">金额</view>
-            </view>
-            <view class="tr" wx:for="{{item.attribute}}" wx:key="{{index}}">
-                <view class="td">{{item.name}}</view>
-                <view class="td">{{item.weight}}</view>
-                <view class="td">{{item.num}}件</view>
-                <view class="td">￥{{item.mon}}</view>
-            </view>
+
+      <!-- 表格 -->
+      <view class="table">
+        <view class="tr">
+          <view class="th">规格</view>
+          <view class="th">数量</view>
+          <view class="th">金额</view>
+        </view>
+        <view class="tr" wx:for="{{item.orderDetails}}" wx:key="{{index}}">
+          <view class="td">{{item.goodsName}}</view>
+          <view class="td">{{item.num}}件</view>
+          <view class="td">￥{{item.wholesalePrice}}</view>
         </view>
       </view>
-</view>
-<!-- 待付款 -->
-<view  hidden='{{status6}}'>
-  <view class='np-order'>
-    <view>供货单号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-  </view>
-  <view class='np-fapiao'>
-    <view >
-      <view>发票信息<text>不开发票</text></view>
+
     </view>
   </view>
-  <view class='os-mon'>配送方式<text>门店自提</text></view>
-  <view class='os-mon os-mon1'>备注信息 <view>周大福绝色系列热情似火 18K金镶红宝石钻石吊坠 V54668要 一个，明天下午我过去拿。</view></view>
-  <view class='cf-button'> 
-    <button  class='or-active' > 提醒付款 </button><button  class='or-active' > 改价 </button><button>关闭供货单</button> 
+
+</view>
+<!-- 待付款 -->
+<view hidden='{{status6}}'>
+  <view class='np-order'>
+    <view>订单号
+      <text>{{order.orderNumber}}</text>
+    </view>
+    <view>创建时间
+      <text>{{order.createDate}}</text>
+    </view>
+  </view>
+  <view class='np-fapiao'>
+    <view>
+      <view>发票信息
+        <text>不开发票</text>
+      </view>
+      <view>支付方式
+        <text>其他支付方式</text>
+      </view>
+    </view>
+  </view>
+  <view class='os-mon'>配送方式
+    <text>门店自提</text>
+  </view>
+  <view class='os-mon os-mon1'>备注信息
+    <view>{{}}</view>
+  </view>
+  <view class='cf-button'>
+    <button class='or-active'> 提醒付款 </button>
+        <button bindtap='showModal' data-type='change' data-num='{{order.orderNumber}}' class='or-active'> 整体改价 </button>
+        <button wx:if="{{order.orderType==2}}" class='or-active' data-type='ex' bindtap='showModal' data-num="{{order.orderNumber}}">收款发货</button>
+        <button wx:if="{{order.orderType==1}}" class='or-active' data-type='sureGet' bindtap='showModal' data-num="{{order.orderNumber}}">确认收款</button>
+        <button data-num="{{order.orderNumber}}" data-type='cancel' bindtap='showModal'>取消订单</button>
   </view>
 </view>
 <!-- 已付款 -->
-<view  hidden='{{status7}}'>
+<view hidden='{{status7}}'>
   <view class='np-order'>
-    <view>供货单号<text>83578475389</text></view>
-    <view>交易单号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-    <view>支付时间<text>2018-09-09 23:12:33</text></view>
-  </view>
-  <view class='np-fapiao'>
-    <view >
-      <view>发票信息<text>不开发票</text></view>
+    <view>订单号
+      <text>{{order.orderNumber}}</text>
+    </view>
+    <!-- <view>交易单号
+      <text>83578475389</text>
+    </view> -->
+    <view>创建时间
+      <text>{{order.createDate}}</text>
+    </view>
+    <view>支付时间
+      <text>{{order.payDate}}</text>
     </view>
   </view>
-  <view class='os-mon'>配送方式<text>门店自提</text></view>
-  <view class='os-mon os-mon1'>备注信息 <view>周大福绝色系列热情似火 18K金镶红宝石钻石吊坠 V54668要 一个，明天下午我过去拿。</view></view>
-  <view class='cf-button'> 
-    <button  class='or-active' > 验证取货码 </button> 
+  <view class='np-fapiao'>
+    <view>
+      <view>发票信息
+        <text>不开发票</text>
+      </view>
+    </view>
+  </view>
+  <view class='os-mon'>配送方式
+    <text>门店自提</text>
+  </view>
+  <view class='os-mon os-mon1'>备注信息
+    <view>{{}}</view>
+  </view>
+  <view class='cf-button'>
+    <button class='or-active' data-type='goodCode' data-num='{{item.orderNumber}}' bindtap='showModal'> 验证取货码 </button>
   </view>
 </view>
 <!-- 已完成 -->
-<view  hidden='{{status8}}'>
-   <view class='np-order'>
-    <view>供货单号<text>83578475389</text></view>
-    <view>交易单号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-    <view>支付时间<text>2018-09-09 23:12:33</text></view>
-    <view>成交时间<text>2018-09-09 23:12:33</text></view>
-  </view>
-  <view class='np-fapiao'>
-    <view >
-      <view>发票信息<text>增值税专用发票</text></view>
-      <view>公司名称<text>阿里巴巴有限公司</text></view>
-      <view>纳税人识别号<text>5515454545454545</text></view>
-      <view>注册地址<text>北京市朝阳区望京SOHO</text></view>
-      <view>注册电话<text>010-4971417</text></view>
-      <view>开户银行<text>中国农业银行</text></view>
-      <view>开户账号<text>4012 5846 1982 0019</text></view>
+<view hidden='{{status8}}'>
+  <view class='np-order'>
+    <view>订单号
+      <text>{{order.orderNumber}}</text>
+    </view>
+    <!-- <view>交易单号
+      <text>83578475389</text>
+    </view> -->
+    <view>创建时间
+      <text>{{order.createDate}}</text>
+    </view>
+    <view>支付时间
+      <text>{{order.payDate}}</text>
+    </view>
+    <view>成交时间
+      <text>{{order.finishTime}}</text>
     </view>
   </view>
-  <view class='os-mon'>配送方式<text>门店自提</text></view>
-  <view class='os-mon os-mon1'>备注信息 <view>备注信息</view></view>
+  <view class='np-fapiao'>
+    <view>
+      <view>发票信息
+        <text>{{order.receiptInfo.invoiceCategory}}</text>
+      </view>
+      <view>公司名称
+        <text>{{order.receiptInfo.invoiceTitle}}</text>
+      </view>
+      <view>纳税人识别号
+        <text>{{order.receiptInfo.identificationNumber}}</text>
+      </view>
+      <view>注册地址
+        <text>{{order.receiptInfo.registeredAddress}}</text>
+      </view>
+      <view>注册电话
+        <text>{{order.receiptInfo.registererMobile}}</text>
+      </view>
+      <view>开户银行
+        <text>{{order.receiptInfo.depositBank}}</text>
+      </view>
+      <view>开户账号
+        <text>{{order.receiptInfo.depositBankNumber}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='os-mon'>配送方式
+    <text>门店自提</text>
+  </view>
+  <view class='os-mon os-mon1'>备注信息
+    <view>备注信息</view>
+  </view>
 </view>
 <!-- 交易关闭 -->
 <view hidden='{{status9}}'>
   <view class='np-order'>
-    <view>供货单号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-    <view>关闭时间<text>2018-09-09 23:12:33</text></view>
+    <view>订单号
+      <text>{{order.orderNumber}}</text>
+    </view>
+    <view>创建时间
+      <text>{{order.createDate}}</text>
+    </view>
+    <view>关闭时间
+      <text>{{order.finishTime}}</text>
+    </view>
   </view>
-  <view class='os-mon'>配送方式<text>门店自提</text></view>
-  <view class='os-mon os-mon1'>备注信息 <view>周大福绝色系列热情似火 18K金镶红宝石钻石吊坠 V54668要 一个，明天下午我过去拿。</view></view>
+  <view class='os-mon'>配送方式
+    <text>门店自提</text>
+  </view>
+  <view class='os-mon os-mon1'>备注信息
+    <view>{{order.userMemo}}</view>
+  </view>
 </view>
 <view class='np-order {{allStatus==true?"np-order-bar1":"np-order-bar"}} '>
-  <view>优惠改价<text>￥1222.00</text><text class='os-text'>￥1992.00</text></view>
-  <view class='np-o-view' hidden='{{status6}}'>应付金额<text>￥1222.00</text></view>
+  <view>优惠改价
+    <text>￥{{order.payAmount}}</text>
+    <text class='os-text'>￥1992.00</text>
+  </view>
+  <view class='np-o-view' hidden='{{status6}}'>应付金额
+    <text>￥{{order.payAmount}}</text>
+  </view>
   <view class='np-o-view' hidden='{{!status6}}'>
-    <view hidden='{{!status9}}'>实收金额<text>￥1222.00</text></view>
-    <view hidden='{{status9}}'>应收金额<text>￥1222.00</text></view>
+    <view hidden='{{!status9}}'>实收金额
+      <text>￥{{order.payAmount}}</text>
+    </view>
+    <view hidden='{{status9}}'>应收合计
+      <text>￥{{order.payAmount}}</text>
+    </view>
   </view>
 </view>
 
 
+<!-- 确认收款 -->
+<mes show="{{sureModal}}">
+  <view>
+    <text>是否确认收款？</text>
+    <button bindtap='receiveMoney'>确定</button>
+  </view>
+</mes>
+<!-- 验证取货码 -->
+<mes show="{{codeModal}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view class='modal-box'>
+    <text>验证取货码</text>
+    <view class='inputCon'>
+      <input class='alertInput' value='{{getGoodCode}}' placeholder='请输入取货码（买家提货时出示）' bindinput='watchInput' data-type='goodCode'></input>
+    </view>
+    <button bindtap='testCode'>确定</button>
+  </view>
+</mes>
+<!-- 我要发货 -->
+<mes show="{{expressage}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view class='modal-box'>
+    <text>填写运单号</text>
+    <view class='inputCon'>
+      <input class='alertInput' value='{{expressageCom}}' bindinput='watchInput' data-type='exCom' placeholder='请输入物流公司名称 '></input>
+      <input class='alertInput' value='{{expressageCode}}' bindinput='watchInput' data-type='exCode' placeholder='请输入运单号 '></input>
+    </view>
+    <view style='display:flex;'>
+      <button wx:if="{{noBtn}}" data-type='no' bindtap='sendGoods'>先发货，再填单</button>
+      <button bindtap='sendGoods'>确定</button>
+    </view>
+  </view>
+</mes>
+<!-- 取消订单 -->
+<clo show="{{cancelModal}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view wx:for='{{reson}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
+    <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select" />
+    <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
+  </view>
+  <button bindtap='sureCancel'>确定</button>
+</clo>
+<!-- 改价 -->
+<mes show="{{changeModal}}">
+  <view class='modal-box'>
+    <text>修改价格</text>
+    <view class='inputCon'>
+      <input type='digit' value="{{changeMoney}}" class='alertInput' placeholder='请输入修改后价格' data-type='change' bindinput='watchInput'></input>
+    </view>
+    <button bindtap='sureChange'>确定</button>
+  </view>
+</mes>

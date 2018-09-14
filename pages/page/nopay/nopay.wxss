@@ -1,4 +1,12 @@
 @import '../order/order';
+.order-title-box{
+  background-size: cover;
+}
+.flex-box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .ct-text{
   color:#CCAA77;
 }
@@ -27,8 +35,9 @@
   margin-right: 20rpx;
 }
 .np-right{
-  position: absolute;
-  right: 25rpx;
+  /* position: absolute; */
+  /* right: 25rpx; */
+  padding-right: 25rpx;
   font-size: 24rpx;
   color: #fff;
   top:30rpx;
@@ -165,7 +174,7 @@
 }
 .cf-button button{
   height: 75rpx;
-  width: 190rpx;
+  /* width: 190rpx; */
   font-size:30rpx;
   color: #666;
   line-height: 75rpx; 

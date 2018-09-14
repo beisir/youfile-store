@@ -10,9 +10,11 @@
 </mes>
 <view wx:if="{{list.length>0}}">
   <view class='aw-cont'>
-    <view class='aw-list' wx:for="{{list}}" wx:key="{{index}}">
-      <view>{{item.userName}} <text>{{item.userPhone}}</text></view>
-      <text>{{item.detailAddress}}</text>
+    <view class='aw-list' wx:for="{{list}}" wx:key="{{index}}" >
+      <view data-index='{{index}}' bindtap="selectAdd">
+        <view>{{item.userName}} <text>{{item.userPhone}}</text></view>
+        <text>{{item.detailAddress}}</text>
+      </view>
       <view class='aw-edit'>
         <icon wx:if="{{item.isDefault}}" type="success" size='17' data-id='{{item.id}}' color="#CCAA77" data-index="{{index}}" bindtap="selectList"/>
         <icon wx:else  type="circle" size='17' data-index="{{index}}" data-id='{{item.id}}' bindtap="selectList"/>

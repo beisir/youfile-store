@@ -1,4 +1,5 @@
 // pages/nopay/nopay.js
+const app = getApp();
 Page({
 
   /**
@@ -14,13 +15,116 @@ Page({
     status2: true,
     status3: true,
     status4: true,
-    statusAll:true
+    statusAll:true,
+    //取消订单
+    reason: [{ title: "我不想买了", selected: true }, { title: "信息填写错误，重新拍", selected: false }, { title: "卖家缺货", selected: false }, { title: "同城见面交易", selected: false }, { title: "其他", selected: false }],
+    cancelIndex: 0
   },
+
+  showModal(e) {
+    let type = e.currentTarget.dataset.type,
+      num = e.currentTarget.dataset.num,
+      obj = {};
+    switch (type) {
+      case 'get':
+        obj = {
+          sureModal: true,
+          getNum: e.currentTarget.dataset.num
+        }; break;
+      case 'del':
+        let index = e.currentTarget.dataset.index;
+        obj = {
+          delModal: true,
+          delNum: { num: num, index: index }
+        }; break;
+      case 'cancel':
+        obj = {
+          cancelModal: true,
+          cancelNum: num
+        }; break;
+      case 'after':
+        obj = {
+          afterModal: true,
+          afterTel: e.currentTarget.dataset.tel
+        }
+    }
+    this.setData(obj)
+  },
+  closeModal() {
+    this.setData({
+      codeModal: false,  //取货码
+      sureModal: false,  //收款
+      delModal: false,  //删除
+      cancelModal: false, //取消订单
+      afterModal: false //售后
+    })
+  },
+
+  // 确认收货
+  sureSure(e) {
+    let num = this.data.num;
+    app.http.requestAll("/api/order/" + num + "/receive", {}, "PUT").then((res) => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+    })
+  },
+  //取消理由
+  swichReason(e) {
+    var current = e.currentTarget.dataset.current;
+    var array = this.data.reason
+    array.forEach((item, index, arr) => {
+      if (current == index) {
+        item.selected = true;
+      } else {
+        item.selected = false;
+      }
+    })
+    this.setData({
+      reason: array,
+      cancelIndex: current
+    })
+  },
+  sureCancel() {
+    let num = this.data.num,
+      index = this.data.cancelIndex;
+    app.http.requestAll("/api/order/" + num + "/cancel", {
+      reason: this.data.reason[index].title
+    }, "PUT").then((res) => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+    })
+  },
+  // 上传凭证
+  uploadVoucher(){
+    wx.navigateTo({
+      url: '../../role/supplyVoucher/supplyVoucher',
+    })
+  },
+  //删除
+  sureDel() {
+    let del = this.data.num,
+      list = this.data.showList;
+
+    app.http.deleteRequest("/api/order/" + del).then((res) => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+    })
+  },
+
+
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    options.status = 4;
     if(options.status==0){
       this.setData({
         status0:false

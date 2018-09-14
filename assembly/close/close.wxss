@@ -3,8 +3,6 @@
   width: 636rpx;
   height: 770rpx;
   background: #fff;
-  margin-left:-318rpx;
-  margin-top: -385rpx;
 }
 .clo{
   border-bottom: 2rpx solid #EBEBEB;

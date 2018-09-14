@@ -2,11 +2,23 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/page/address/address",
+    
+    "pages/page/stockDetail/stockDetail",
+    
+    "pages/page/order/order",
+    
     "pages/page/goodsDetails/goodsDetails",
     
     "pages/page/user/user",
     
     "pages/businessFriend/addWholesaler/addWholesaler",
+    
+    
+    
+    "pages/page/stockSelf/stockSelf",
+    
+    
     
     
     "pages/businessFriend/mewWholesaler/mewWholesaler",
@@ -40,16 +52,36 @@
     "pages/admin/batchSet/batchSet",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",
-    "pages/admin/status/status",
     "pages/page/mes/mes",
     "pages/admin/spec/spec",
     "pages/page/classList/classList",
     "pages/admin/editGoods/editGoods",
     "pages/admin/class/class",
-    "pages/page/order/order",
     "pages/page/self/self",
+        
+    "pages/page/stockOrder/stockOrder",
     "pages/role/supplyOrder/supplyOrder",
     "pages/role/order/order",
+    
+
+    
+    
+    
+      
+  
+   
+   "pages/role/supplyDetails/supplyDetails",
+   "pages/role/supplySelf/supplySelf",
+   
+    "pages/role/orderDetails/orderDetails",
+    
+    "pages/role/supplyVoucher/supplyVoucher",
+    
+
+    
+    "pages/admin/status/status",
+    
+    
     "pages/role/orderSelf/orderSelf",
     "pages/page/details/details",
     "pages/page/serList/serList",
@@ -58,7 +90,6 @@
     "pages/admin/serStatus/serStatus",
     "pages/admin/batch/batch",
     "pages/login/register/register",
-    "pages/page/address/address",
     "pages/login/login/login",
     "pages/admin/shopClass/shopClass",
     "pages/page/mesEdit/mesEdit",
@@ -70,9 +101,6 @@
     "pages/admin/classEdit/classEdit",
     "pages/admin/thirdClass/thirdClass",
     "pages/admin/secondClass/secondClass",
-    "pages/role/orderDetails/orderDetails",
-    "pages/role/supplyDetails/supplyDetails",
-    "pages/role/supplySelf/supplySelf",
     "pages/page/update/update",
     "pages/page/help/help",
     "pages/page/nopay/nopay",

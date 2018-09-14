@@ -1,5 +1,34 @@
 @import '../cartList/cartList.wxss';
 
+/* 收货人 */
+.receive-box{
+  padding:10rpx 30rpx;
+  background: #fff;
+  margin: 15rpx 0;
+  font-size:26rpx;
+}
+.receive-man{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+.receive-man image{
+  width: 35rpx;
+  height: 35rpx;
+  margin-right:30rpx;
+}
+.receive-address{
+  padding:25rpx 65rpx;
+  color:#5c5c5c;
+  border-bottom:1rpx solid #ddd;
+}
+
+/* 商品 */
+.cart-box{
+  background: #fff;
+}
+
 .ad-tel{
   font-size: 26rpx;
   color: #999;
@@ -59,7 +88,6 @@
 .c-title{
   background: #fff;
   margin-left: 0;
-  border-bottom: 0;
   padding-left: 20rpx;
 }
 .c-title image{

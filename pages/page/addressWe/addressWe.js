@@ -11,6 +11,17 @@ Page({
     show1:false,
     id:'',
   },
+  
+  selectAdd(e){
+    let obj = this.data.list[e.currentTarget.dataset.index];
+    var pages = getCurrentPages();
+    if (pages.length > 1) {
+      //上一个页面实例对象
+      var prePage = pages[pages.length - 2];
+      prePage.getAddress(obj)
+      wx.navigateBack();
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载

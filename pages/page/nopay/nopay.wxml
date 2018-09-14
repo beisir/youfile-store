@@ -1,165 +1,265 @@
-<image src="/image/back.png" class='slide-image' mode="widthFix"></image>
-<!-- 待付款 -->
-<view  hidden='{{status0}}'>
-  <view class='np-title'>
-    <image src="/image/nz.png"></image>等待买家付款
+<!-- 确认收货 -->
+<mes show="{{sureModal}}">
+  <view>
+    <text>是否确认收货？</text>
+    <button bindtap='sureSure'>确定</button>
   </view>
-  <view class='np-right'>
+</mes>
+<!-- 取消订单 -->
+<clo show="{{cancelModal}}">
+  <view wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
+    <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select" />
+    <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
+  </view>
+  <button bindtap='sureCancel'>确定</button>
+</clo>
+<!-- 删除订单 -->
+<mes show="{{delModal}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确认删除订单？</text>
+    <button bindtap='sureDel'>确定</button>
+  </view>
+</mes>
+
+
+<!-- <image src="/image/back.png" class='slide-image' mode="widthFix"></image> -->
+<view class='order-title-box' style='background-image:url(/image/back.png);'>
+  <!-- 待付款 -->
+  <view class='flex-box' hidden='{{status0}}'>
+    <view class='np-title'>
+      <image src="/image/nz.png"></image>等待买家付款
+    </view>
+    <view class='np-right'>
       <view>剩余时间：24时10分</view>
       <view>需付款：￥2324:00</view>
+    </view>
   </view>
-</view>
 
-<!-- 已付款 -->
-<view class='np-title' hidden='{{status1}}'>
-  <image src="/image/wuliu.png"></image>等待卖家发货
-</view>
-<!-- 待收货 -->
-<view  hidden='{{status2}}'>
-  <view class='np-title'>
-    <image src="/image/nz.png"></image>卖家已发货
+  <!-- 已付款 -->
+  <view class='np-title' hidden='{{status1}}'>
+    <image src="/image/wuliu.png"></image>等待卖家发货
   </view>
-  <view class='np-right np-right1'>
+  <!-- 待收货 -->
+  <view class='flex-box' hidden='{{status2}}'>
+    <view class='np-title'>
+      <image src="/image/nz.png"></image>卖家已发货
+    </view>
+    <view class='np-right np-right1'>
       <view>21天15小时 后自动确认收货</view>
+    </view>
   </view>
-</view>
-<!-- 交易成功 -->
-<view class='np-title' hidden='{{status3}}'>
-  <image src="/image/mon.png"></image>交易成功
-</view>
-<!-- 交易关闭 -->
-<view class='np-title' hidden='{{status4}}'>
-  <image src="/image/mon.png"></image>交易关闭
+  <!-- 交易成功 -->
+  <view class='np-title' hidden='{{status3}}'>
+    <image src="/image/mon.png"></image>交易成功
+  </view>
+  <!-- 交易关闭 -->
+  <view class='np-title' hidden='{{status4}}'>
+    <image src="/image/mon.png"></image>交易关闭
+  </view>
 </view>
 <view class='np-ct'>
- <view class='np-view np-code np-coden1'  hidden='{{statusAll}}'>
-    <image  src="/image/wl-car.png"></image>
+  <view class='np-view np-code np-coden1' hidden='{{statusAll}}'>
+    <image src="/image/wl-car.png"></image>
     <view>物流信息</view>
     <text>承运公司：申通快递</text>
-    <view ><text>运单编号：9567547878</text></view>
+    <view>
+      <text>运单编号：9567547878</text>
+    </view>
     <!-- <text>卖家暂未填写订单信息</text> -->
   </view>
   <view class='np-view'>
-    <image  src="/image/ad.png"></image>
-    <text class='np-text'>13164115211</text>
-    <view>收货人：珍妮</view>
-    <text>收货地址：北京市 朝阳区 阜通东大街1号 望京SOHO T1 B座 500</text>
+    <image src="/image/ad.png"></image>
+    <text class='np-text'>{{order.consigneeInfo.userPhone}}</text>
+    <view>收货人：{{order.consigneeInfo.userName}}</view>
+    <text>收货地址：{{order.consigneeInfo.detailAddress}}</text>
   </view>
   <view class='np-view np-view1'>
-    <image  src="/image/mes2.png"></image>
-    <view>买家留言</view>
-    <text>请将商品以及保养指南起放在收拾盒,已经与客服沟通好了。</text>
+    <image src="/image/mes2.png"></image>
+    <view>留言</view>
+    <text>{{order.userMemo}}</text>
   </view>
 </view>
 <view class='np-mes'>
-  <view><image  src="/image/mes.png"></image>联系卖家<button class="kf_button" open-type="contact" session-from="weapp"></button> </view>
-  <view bindtap='tel'><image  src="/image/tel1.png"></image>拨打电话</view>
+  <view>
+    <image src="/image/mes.png"></image>联系卖家
+    <!-- <button class="kf_button" open-type="contact" session-from="weapp"></button> -->
+  </view>
+  <view bindtap='tel'>
+    <image src="/image/tel1.png"></image>拨打电话</view>
 </view>
 <view class='cf-cont'>
-      <view class='c-title'>
-        <image src="/image/ic1.png"></image> 周大福国贸店 <image class='itimg' src="/image/icl.png"></image> 
+  <view class='c-title'>
+    <image src="/image/ic1.png"></image> {{order.storeInfo.storeName}}
+    <image class='itimg' src="/image/icl.png"></image>
+  </view>
+  <view>
+    <view class="cart-box">
+      <view class="cart-list" wx:for="{{showList}}" wx:key="{{index}}">
+        <navigator>
+          <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+        </navigator>
+        <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
+          <view>x {{item.orderDetails.num}}</view>
+        </view>
+        <view class='ct-title ct-title1'>{{item.goodsName}}</view>
+        <text class="cart-pro-name">规格：{{item.orderDetails.goodsDesc}}</text>
       </view>
-      <view >
-          <view class="cart-box">
-              <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
-                  <navigator><image class="cart-thumb" src="{{item.image}}"></image></navigator>
-                  <view class='ct-text ct-text1'>￥{{item.price}}<view>x {{item.num}}</view></view>
-                  <view class='ct-title ct-title1'>{{item.title}}</view> 
-                  <text class="cart-pro-name">规格：{{item.small}}</text>
-              </view>
-          </view>
-      </view>
+    </view>
+  </view>
 </view>
 <!-- 待付款 -->
 <view hidden='{{status0}}'>
   <view class='np-order'>
-    <view>订单号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-  </view>
-  <view class='np-fapiao'>
-    <view >
-      <view>发票信息<text>不开发票</text></view>
+    <view>订单号
+      <text>{{order.orderNumber}}</text>
+    </view>
+    <view>创建时间
+      <text>{{order.createDate}}</text>
     </view>
   </view>
-  <view class='cf-button'> 
-    <button  class='or-active' > 付款 </button><button>取消订单</button> 
+  <view class='np-fapiao'>
+    <view>
+      <view>发票信息
+        <text>不开发票</text>
+      </view>
+    </view>
+  </view>
+  <view class='cf-button'>
+    <button style='' bindtap="uploadVoucher" class='or-active'> 上传支付凭证 </button>
+    <button bindtap='showModal' data-type='cancel'>取消订单</button>
   </view>
 </view>
 <!-- 已付款 -->
 <view hidden='{{status1}}'>
   <view class='np-order'>
-    <view>订单号<text>83578475389</text></view>
-    <view>支付交易号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-    <view>付款时间<text>2018-09-09 23:12:33</text></view>
-  </view>
-  <view class='np-fapiao'>
-    <view >
-      <view>发票信息<text>不开发票</text></view>
+    <view>订单号
+      <text>{{order.orderNumber}}</text>
+    </view>
+    <!-- <view>支付交易号
+      <text>83578475389</text>
+    </view> -->
+    <view>创建时间
+      <text>{{order.createDate}}</text>
+    </view>
+    <view>付款时间
+      <text>{{order.payDate}}</text>
     </view>
   </view>
-  <view class='cf-button'> 
-    <button  class='or-active' > 提醒发货 </button>
+  <view class='np-fapiao'>
+    <view>
+      <view>发票信息
+        <text>不开发票</text>
+      </view>
+    </view>
+  </view>
+  <view class='cf-button'>
+    <button class='or-active'> 提醒发货 </button>
   </view>
 </view>
 <!-- 待收货 -->
 <view hidden='{{status2}}'>
   <view class='np-order'>
-    <view>订单号<text>83578475389</text></view>
-    <view>订单号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-    <view>付款时间<text>2018-09-09 23:12:33</text></view>
-    <view>发货时间<text>2018-09-09 23:12:33</text></view>
-  </view>
-  <view class='np-fapiao'>
-    <view >
-      <view>发票信息<text>不开发票</text></view>
+    <view>订单号
+      <text>{{order.orderNumber}}</text>
+    </view>
+    <!-- <view>支付交易号
+      <text>83578475389</text>
+    </view> -->
+    <view>创建时间
+      <text>{{order.createDate}}</text>
+    </view>
+    <view>付款时间
+      <text>{{order.payDate}}</text>
+    </view>
+    <view>发货时间
+      <text>2018-09-09 23:12:33</text>
     </view>
   </view>
-  <view class='cf-button'> 
-    <button  class='or-active' > 确认收货 </button><button>查看物流</button> 
+  <view class='np-fapiao'>
+    <view>
+      <view>发票信息
+        <text>不开发票</text>
+      </view>
+    </view>
+  </view>
+  <view class='cf-button'>
+    <button class='or-active' data-type='get' bindtap='showModal'> 确认收货 </button>
+    <button>查看物流</button>
   </view>
 </view>
 <!-- 交易成功 -->
 <view hidden='{{status3}}'>
   <view class='np-order'>
-    <view>订单号<text>83578475389</text></view>
-    <view>支付交易号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-    <view>付款时间<text>2018-09-09 23:12:33</text></view>
-    <view>发货时间<text>2018-09-09 23:12:33</text></view>
-    <view>成交时间<text>2018-09-09 23:12:33</text></view>
-  </view>
-  <view class='np-fapiao'>
-    <view >
-      <view>发票信息<text>不开发票</text></view>
+    <view>订单号
+      <text>{{order.orderNumber}}</text>
+    </view>
+    <!-- <view>支付交易号
+      <text>83578475389</text>
+    </view> -->
+    <view>创建时间
+      <text>{{order.createDate}}</text>
+    </view>
+    <view>付款时间
+      <text>{{order.payDate}}</text>
+    </view>
+    <view>发货时间
+      <text>2018-09-09 23:12:33</text>
+    </view>
+    <view>成交时间
+      <text>2018-09-09 23:12:33</text>
     </view>
   </view>
-  <view class='cf-button'> 
-    <button  class='or-active' > 售后服务 </button><button>查看物流</button> <button>删除订单</button>
+  <view class='np-fapiao'>
+    <view>
+      <view>发票信息
+        <text>不开发票</text>
+      </view>
+    </view>
+  </view>
+  <view class='cf-button'>
+    <button class='or-active'> 售后服务 </button>
+    <button>查看物流</button>
+    <button data-index='{{index}}' data-type='del' bindtap='showModal'>删除订单</button>
   </view>
 </view>
 <!-- 交易关闭 -->
 <view hidden='{{status4}}'>
   <view class='np-order'>
-    <view>订单号<text>83578475389</text></view>
-    <view>创建时间<text>2018-09-09 23:12:33</text></view>
-    <view>关闭时间<text>2018-09-09 23:12:33</text></view>
-  </view>
-  <view class='np-fapiao'>
-    <view >
-      <view>发票信息<text>增值税普通发票</text></view>
-      <view>发票抬头<text>增值税普通发票</text></view>
-      <view>创建时间<text>2018-09-09 23:12:33</text></view>
+    <view>订单号
+      <text>83578475389</text>
+    </view>
+    <view>创建时间
+      <text>2018-09-09 23:12:33</text>
+    </view>
+    <view>关闭时间
+      <text>2018-09-09 23:12:33</text>
     </view>
   </view>
-  <view class='cf-button'> 
-   <button>删除订单</button>
+  <view class='np-fapiao'>
+    <view>
+      <view>发票信息
+        <text>增值税普通发票</text>
+      </view>
+      <view>发票抬头
+        <text>增值税普通发票</text>
+      </view>
+      <view>创建时间
+        <text>2018-09-09 23:12:33</text>
+      </view>
+    </view>
+  </view>
+  <view class='cf-button'>
+    <button data-index='{{index}}' data-type='del' bindtap='showModal'>删除订单</button>
   </view>
 </view>
 <view class='np-order np-order-bar'>
-  <view>商品总额<text>￥1222.00</text></view>
-  <view>运费(快递)<text>+￥13.00</text></view>
-  <view class='np-o-view'>实付金额<text>￥1222.00</text></view>
+  <view>商品总额
+    <text>￥1222.00</text>
+  </view>
+  <view>快递类型
+    <text>全场包邮</text>
+  </view>
+  <view class='np-o-view'>实付金额
+    <text>￥1222.00</text>
+  </view>
 </view>
-
