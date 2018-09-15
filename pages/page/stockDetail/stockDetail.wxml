@@ -278,7 +278,7 @@
   <view>商品总额
     <text>￥1222.00</text>
   </view>
-  <view>快递类型
+  <view>运费类型
     <text>全场包邮</text>
   </view>
   <view class='np-o-view'>实付金额

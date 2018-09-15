@@ -1,0 +1,53 @@
+<view class="weui_cells weui_cells_n">
+   <view class="weui-cell">
+    <view class="weui-cell__hd">
+      <image src="/image/userphoto.png" mode="widthFix"></image>
+    </view>
+    <view class="weui-cell__name">
+      陈晨 Fanny<image src='/image/ermR.png'></image><view class='floor-admin'>正式店主</view>
+      <view class="weui-dp">
+        <image src='/image/dp.png' mode="widthFix"></image>百荣世贸 商务部
+      </view>
+    </view>
+    <!-- <view class='weui-view'>
+        <image class='img' src="/image/icl.png"></image>
+      </view> -->
+  </view>
+</view>
+<view class="weui_cells ">
+    <navigator  url='../../floor/floorList/floorList'>
+        <text class="store-address">云产品订单</text>
+        <view class='weui-view'>
+          <image class='img' src="/image/icl.png"></image>
+        </view>
+        <view class='weui-xian weui-xian1'></view>
+    </navigator>
+    <navigator  url='../../floor/floorList/floorList'>
+        <text class="store-address">商友权限</text>
+        <view class='weui-view'>
+          <image class='img' src="/image/icl.png"></image>
+        </view>
+        <view class='weui-xian weui-xian1'></view>
+    </navigator>
+    <!-- <view>
+        <text class="store-address">设置 </text>
+        <view class='weui-view'>
+          <image class='img' src="/image/icl.png"></image>
+        </view>
+    </view> -->
+</view>
+<view class="weui_cells " bindtap='tel'>
+    <view>
+        <image  src="/image/u2.png"></image>
+        <text class="store-address">联系优生活 </text>
+        <view class='weui-view'>
+          <image class='img' src="/image/icl.png"></image>
+        </view>
+    </view>
+</view>
+
+<view class='bottom_M'>
+  <view><image  src="/image/work.png"></image><view>工作台</view></view>
+  <view><image  src="/image/12.png"></image><view>店铺</view></view>
+  <view><image  src="/image/41.png"></image><view class='active'>我的</view></view>
+</view>

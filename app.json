@@ -1,11 +1,37 @@
 {
   "pages":[
     "pages/page/home/home",
+<<<<<<< HEAD
     "pages/page/mes/mes",
     "pages/page/goodsDetails/goodsDetails",
+=======
+    
+    "assembly/partnerAlert/partnerAlert",
+    
+    "pages/page/userM/userM",
+    
+    
+
+    "pages/page/order/order",
+    "pages/page/stockOrder/stockOrder",
+    "pages/role/supplyOrder/supplyOrder",
+    "pages/role/order/order",
+    "pages/role/orderDetails/orderDetails",
+    "pages/role/orderSelf/orderSelf",
+    
+
+    
+>>>>>>> 43895bc31666310743b81071ef68f6764c91d7a5
     "pages/page/address/address",
     "pages/page/stockDetail/stockDetail",
+<<<<<<< HEAD
     "pages/page/order/order",
+=======
+    
+    
+    "pages/page/goodsDetails/goodsDetails",
+    
+>>>>>>> 43895bc31666310743b81071ef68f6764c91d7a5
     "pages/page/user/user",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/page/stockSelf/stockSelf",
@@ -20,7 +46,6 @@
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/businessFriend/merchant/details/details",
     "pages/page/userDetails/userDetails",
-    "pages/page/newAddress/newAddress",
     "pages/page/addressWe/addressWe",
     "pages/businessFriend/merchant/reach/reach",
     "pages/businessFriend/merchant/merchantInfo/merchantInfo",
@@ -33,14 +58,24 @@
     "pages/admin/batchSet/batchSet",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",
+<<<<<<< HEAD
+=======
+    "pages/page/mes/mes",
+    "pages/page/newAddress/newAddress",
+>>>>>>> 43895bc31666310743b81071ef68f6764c91d7a5
     "pages/admin/spec/spec",
     "pages/page/classList/classList",
     "pages/admin/editGoods/editGoods",
     "pages/admin/class/class",
     "pages/page/self/self",
+<<<<<<< HEAD
     "pages/page/stockOrder/stockOrder",
     "pages/role/supplyOrder/supplyOrder",
     "pages/role/order/order",
+=======
+        
+    
+>>>>>>> 43895bc31666310743b81071ef68f6764c91d7a5
     
 
     
@@ -52,7 +87,6 @@
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
    
-    "pages/role/orderDetails/orderDetails",
     
     "pages/role/supplyVoucher/supplyVoucher",
     
@@ -61,7 +95,6 @@
     "pages/admin/status/status",
     
     
-    "pages/role/orderSelf/orderSelf",
     "pages/page/details/details",
     "pages/page/serList/serList",
     "pages/admin/firstClass/firstClass",
