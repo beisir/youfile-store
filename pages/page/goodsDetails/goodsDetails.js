@@ -23,6 +23,7 @@ Page({
     hidden: true,
     numbers: 1,
     name:'',
+    likeShow: false,
     wholesalePrice:'',
     recommendDesc:'',
     introduction:'',
@@ -153,9 +154,10 @@ Page({
       skuValueVOList = [],
       newSkuArrTwo =[],
       codeName = this.data.goodsSpecificationVOList,
-      newList = {},
+      newList = {}, 
       returnStop=false,
       spectArrDifference = this.data.spectArrDifference
+    console.log(spectArrDifference)
     if (skuArrTwo.length == 1) {
       skuValueVOList = skuArrTwo[0].goodsSpecificationValueVOList
     }
@@ -169,7 +171,9 @@ Page({
       for (var j = 0; j < skuValueVOList.length; j++) {
         if ((newSkuArrTwo[j].specValueCodeList).indexOf(skuValueVOList[j].specValueCode) != -1) {
           newSkuArrTwo[j].name = skuValueVOList[j].specValueName
-          newSkuArrTwo[j].num = 0
+          if (newSkuArrTwo[j].num==undefined){
+            newSkuArrTwo[j].num = 0
+          }
         }
       }
     }
@@ -185,6 +189,7 @@ Page({
         spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
       }
     }
+    console.log(spectArrDifference)
     if (this.data.currentTab ===index) {
       return false;
     } else {
@@ -234,44 +239,65 @@ Page({
       url: '../cartList/cartList'
     })
   },
-  cratHome: function () {
+  cratHome: function (e) {
     var _this=this,
       num = this.data.numbers,
       goodsId = this.data.goodsId,
-      status = this.data.status,
+      status = e.target.dataset.status,
       skuCode='',
       changeButtonCode = this.data.changeButtonCode,
       swichNavCode = this.data.swichNavCode,
+      goodsSpecificationVOList = this.data.goodsSpecificationVOList,
       goodsSkuVOList = this.data.goodsSkuVOList
-    console.log(changeButtonCode + '[[[[' + swichNavCode)
     for (var i = 0; i < goodsSkuVOList.length;i++){
       var  childArr = goodsSkuVOList[i].specValueCodeList
       if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1){
        skuCode=goodsSkuVOList[i].skuCode
       }
     }
-    Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode})
-    .then(res =>{
-      wx.showToast({
-        title: '添加成功',
-        icon: 'none',
-        duration: 1000,
-        mask: true
+    if(goodsSpecificationVOList.length>0){
+      if (skuCode==''){
+        wx.showToast({
+          title: '请选择商品属性',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+        return
+      }
+    }
+    if (status==0){
+      Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
+        .then(res => {
+          console.log(res)
+          wx.showToast({
+            title: '添加成功',
+            icon: 'none',
+            duration: 1000,
+            mask: true
+          })
+          wx.switchTab({
+            url: '../cartList/cartList'
+          })
+        })
+    }else{
+      var model = { goodsId: goodsId, num: num, skuCode: skuCode }
+      wx.navigateTo({
+        url: '../address/address?model=' + model,
       })
-      wx.switchTab({
-        url: '../cartList/cartList'
-      })
-    })
+    }
+   
   },
   // 批量添加购物车
-  moreAddCart:function(){
+  moreAddCart:function(e){
     var specFirst = this.data.goodsSpecificationVOList[0].goodsSpecificationValueVOList,
       moreCode = this.data.moreCode,
       goodsId = this.data.goodsId,
       spectArrDifference = this.data.spectArrDifference,
+      goodsSpecificationVOList = this.data.goodsSpecificationVOList,
       newArr=[],
-      newSkuArrTwo=[]
-
+      newSkuArrTwo=[],
+      status=e.target.dataset.status
     for (var j = 0; j < spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
       for (var i = 0; i < newSkuArrTwo.length; i++) {
@@ -281,19 +307,37 @@ Page({
         }
       }
     }
-    console.log(JSON.stringify([{ "goodsId": "180831183155243d4de6", "num": 1, "skuCode": "180831183155243d4de6_8a1", "storeId": "123" }]))
-    Api.addMoreCart(JSON.stringify(newArr))
-      .then(res => {
+    if (goodsSpecificationVOList.length>0){
+      if(newArr.length==0){
         wx.showToast({
-          title: '添加成功',
+          title: '请选择商品属性',
           icon: 'none',
           duration: 1000,
           mask: true
         })
-        wx.switchTab({
-          url: '../cartList/cartList'
+        return
+      }
+    }
+    if(status==0){
+      console.log(newArr)
+      Api.addMoreCart(JSON.stringify(newArr))
+        .then(res => {
+          wx.showToast({
+            title: '添加成功',
+            icon: 'none',
+            duration: 1000,
+            mask: true
+          })
+          wx.switchTab({
+            url: '../cartList/cartList'
+          })
         })
+    }else{
+      var model = JSON.stringify(newArr);
+      wx.navigateTo({
+        url: '../address/address?model=' + model,
       })
+    }
   },
   // 购买数量
   minusCount:function(){
@@ -360,6 +404,7 @@ Page({
     code=this.data.moreCode,
     colorNum=0
     let newSkuArrTwo =[];
+    let swichNav = this.data.swichNav;
     let spectArrDifference = this.data.spectArrDifference     
     let total = 0;
     let newTotal = 0;
@@ -375,14 +420,14 @@ Page({
     }
     for (var j = 0; j< spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
+      
       for (let i = 0; i < newSkuArrTwo.length; i++) {
+        if (spectArrDifference[j].code == code) {
+          console.log(newSkuArrTwo[i].num)
+          colorNum += newSkuArrTwo[i].num
+          childArr[swichNav].num = colorNum
+        }
         if (newSkuArrTwo[i].num > 0) {
-          for (var h = 0; h < childArr.length; h++) {
-            if (childArr[h].specValueCode == code) {
-              colorNum += newSkuArrTwo[i].num
-              childArr[h].num = colorNum
-            }
-          }
           classNums += 1
           nums += newSkuArrTwo[i].num
           total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
@@ -490,31 +535,31 @@ Page({
    * 生命周期函数--监听页面显示
    */
   getDetails:function(){
-    var that=this
-    Api.batchNum({ goodsId: this.data.goodsId })
+    var _this=this,
+      storeId = this.data.storeId
+    Api.config({ goodsId: this.data.goodsId})
       .then(res => {
         var obj = res.obj,
-          saleBatchNum = obj.saleBatchNum,
-          saleBatchAmount1 = obj.saleBatchAmount
-        that.setData({
-          saleBatchNum: saleBatchNum,
-          saleBatchAmount: saleBatchAmount1
-        })
-        if (saleBatchNum==null){
-          Api.saleBatch()
-          .then(res=>{
-            var obj = res.obj,
-              saleBatchNum = obj.saleBatchNum,
-              saleBatchAmount = obj.saleBatchAmount
-              console.log(obj)
-            that.setData({
-              saleBatchNum: saleBatchNum
-            })
-            if (saleBatchAmount1== null){
-              that.setData({
-                saleBatchAmount: saleBatchAmount
-              })
-            }
+          goodsSaleBatchNum = obj.goodsSaleBatchNum,
+          goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
+          storeSaleBatchNum = obj.storeSaleBatchNum,
+          storeSaleBatchAmount = obj.storeSaleBatchAmount
+        if (goodsSaleBatchNum==null){
+          _this.setData({
+            saleBatchNum: storeSaleBatchNum
+          })
+        }else{
+          _this.setData({
+            saleBatchNum: goodsSaleBatchNum
+          })
+        }
+        if (goodsSaleBatchAmount == null) {
+          _this.setData({
+            saleBatchAmount: storeSaleBatchAmount
+          })
+        } else {
+          _this.setData({
+            saleBatchAmount: goodsSaleBatchAmount
           })
         }
       })
@@ -527,7 +572,7 @@ Page({
           skuArrTwo.push(obj.goodsSpecificationVOList[1])
           name = obj.goodsSpecificationVOList[1].specName
         }
-        that.setData({
+        _this.setData({
           imgUrls: obj.goodsImageVOList,
           name: obj.name,
           wholesalePrice: obj.wholesalePrice,
@@ -541,10 +586,10 @@ Page({
           mainImgUrl: obj.mainImgUrl,
           nameTwo: name
         },function(){
-          if (that.data.getSpecDetails) {
+          if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {
               var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
-              that.getSpecDetails(0, arr[0].specValueCode)
+              _this.getSpecDetails(0, arr[0].specValueCode)
             }
           }
         })
@@ -553,7 +598,37 @@ Page({
   onShow: function () {
     this.getDetails()
   },
-
+  likeStore: function () {
+    console.log(7878)
+    var _this = this
+    Api.likeStore()
+      .then(res => {
+        wx.showToast({
+          title: '关注成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true,
+        })
+        _this.setData({
+          likeShow: true
+        })
+      })
+  },
+  deteleLikeStore: function () {
+    var _this = this
+    Api.deteleLikeStore()
+      .then(res => {
+        wx.showToast({
+          title: '取消关注成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true,
+        })
+        _this.setData({
+          likeShow: false
+        })
+      })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

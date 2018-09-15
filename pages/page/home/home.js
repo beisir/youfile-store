@@ -14,6 +14,8 @@ Page({
     currentTab: 0,
     result: [],
     keyword:'',
+    totalCount:0,
+    store:'',
     likeShow:false,
     limitShow: app.pageRequest.limitShow()
   },
@@ -59,23 +61,25 @@ Page({
       sortType = 'sales'
     } else if (currentTab == 2) {
       sortType = 'prices_asc'
+    } else if (currentTab == 3) {
+      sortType = 'prices_desc'
     }
-    console.log(currentTab)
     Api.shopList({ keyword: '', sortType: sortType})
       .then(res => {
         var detailList = res.obj.result,
           datas = _this.data.result,
-          totalCount = res.obj.totalCount,
           newArr = app.pageRequest.addDataList(datas, detailList)
         _this.setData({
-          result: newArr,
+          result: newArr
         })
       })
   },
+  chooseImage:function(){
+    Api.updateCover("GOODS")
+  },
   onLoad: function (options) {
-    console.log(options)
+    
     var that = this;
-    that.getList()
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -83,13 +87,21 @@ Page({
           winHeight: res.windowHeight
         });
       }
-
     });
+    Api.homeIndex()
+    .then(res=>{
+      var obj=res.obj
+      console.log(obj)
+      that.setData({
+        store: obj.store,
+        result: obj.goods.result,
+        totalCount: obj.goods.totalCount
+      })
+    })    
   },
   bindChange: function (e) {
     var that = this;
     that.setData({ currentTab: e.detail.current });
-
   },
   emptyArr: function () {
     this.setData({
@@ -99,7 +111,27 @@ Page({
   swichNav: function (e) {
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {
-      return false;
+      if (e.target.dataset.current == 2) {
+        that.setData({
+          currentTab: 3,
+        }, function () {
+          this.emptyArr()
+          app.pageRequest.pageData.pageNum = 0
+          this.getList()
+          return false;
+        })
+      }
+      if (e.target.dataset.current == 3) {
+        that.setData({
+          currentTab: 2,
+        }, function () {
+          this.emptyArr()
+          app.pageRequest.pageData.pageNum = 0
+          this.getList()
+          return false;
+        })
+      }
+      
     } else {
       that.setData({
         currentTab: e.target.dataset.current,

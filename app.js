@@ -2,6 +2,11 @@ import http from './utils/http.js'
 import pageRequest from './utils/pageRequest.js'
 App({
   onLaunch: function (options) {
+    console.log(options.storeId)
+    wx.setStorage({
+      key: 'storeId',
+      data: "123",
+    })
     // 购物车
     if (wx.getStorageSync('admin')==3){
       wx.setTabBarItem({
@@ -17,12 +22,14 @@ App({
     // wx.setStorageSync('logs', logs)
     
   },
+ 
   globalData: {
     userInfo: null,
     skin: "normal",
   },
   http: new http(),
-  pageRequest: new pageRequest()
+  pageRequest: new pageRequest(),
+  
 });
 
 

@@ -53,7 +53,11 @@ import {
   purchaserListUrl,
   remakInfoUrl,
   acceptmerchantUrl,
-  purchaserUserIdUrl
+  purchaserUserIdUrl,
+  configUrl,
+  homeIndexUrl,
+  storeIdInfoUrl,
+  updateCoverUrl
 } from './constUrl.js'
 const app = getApp()
 /**云享品管理 列表**/ 
@@ -95,6 +99,10 @@ function saleBatch(data) {
 /**商品搜索列表**/
 function goodsSearchList(data) {
   return app.pageRequest.pageGet(goodsSearchListUrl, data)
+}
+/**店铺首页**/
+function homeIndex(data) {
+  return app.pageRequest.pageGet(homeIndexUrl, data)
 }
 /**获取店内分类列表**/
 function classList(data) {
@@ -276,6 +284,18 @@ function remakInfo(data) {
 function purchaserUserId(data,url) {
   return app.http.getRequest(url, data)
 }
+/**满足起批配置信息**/
+function config(data) {
+  return app.http.getRequest(configUrl, data)
+}
+/**店铺详情**/
+function storeIdInfo(data) {
+  return app.http.getRequest(storeIdInfoUrl, data)
+}
+/**更换背景**/
+function updateCover(types) {
+  return app.http.chooseImageUpload(updateCoverUrl, types)
+}
 
 module.exports = {
   adminGoodsList: adminGoodsList,
@@ -332,5 +352,9 @@ module.exports = {
   purchaserList: purchaserList,
   remakInfo: remakInfo,
   acceptmerchant: acceptmerchant,
-  purchaserUserId: purchaserUserId
+  purchaserUserId: purchaserUserId,
+  config: config,
+  homeIndex: homeIndex,
+  storeIdInfo: storeIdInfo,
+  updateCover: updateCover
 }

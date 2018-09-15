@@ -1,3 +1,4 @@
+import Api from './api.js'
 /* 时间格式化 */
 const formatTime = date => {
   const year = date.getFullYear()
@@ -58,7 +59,32 @@ function date_format(micro_second) {
 function fill_zero_prefix(num) {
   return num < 10 ? "0" + num : num
 }
+// 满足起批配置信息判断
+function configFun(data) {
+  Api.config(data)
+    .then(res => {
+      var obj = res.obj,
+        goodsSaleBatchNum = obj.goodsSaleBatchNum,
+        goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
+        storeSaleBatchNum = obj.storeSaleBatchNum,
+        storeSaleBatchAmount = obj.storeSaleBatchAmount,
+        saleBatchNum=null,
+        saleBatchAmount=null
+      if (goodsSaleBatchNum == null) {
+          saleBatchNum=storeSaleBatchNum
+      } else {
+          saleBatchNum=goodsSaleBatchNum
+      }
+      if (goodsSaleBatchAmount == null) {
+          saleBatchAmount=storeSaleBatchAmount
+      } else {
+          saleBatchAmount=goodsSaleBatchAmount
+      }
+      return saleBatchNum
+    })
+}
 module.exports = {
   formatTime: formatTime,
-  count_down:count_down
+  count_down:count_down,
+  configFun: configFun
 }

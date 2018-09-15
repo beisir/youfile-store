@@ -15,7 +15,7 @@
   background: rgba(0, 0, 0, 0.2)
 }
 .gd-alert{
-  height:90%;
+  height:auto;
   width: 100%;
   position:fixed;
   bottom: 0;
@@ -114,7 +114,7 @@
   border:2rpx solid #F5F5F5;
 }
 .gd-gg1{
-  margin-top: 45rpx;
+  margin-top: 45rpx;margin-bottom: 20rpx;
 }
 .gd-gg1 .gd-view view{
   padding:0 30rpx;

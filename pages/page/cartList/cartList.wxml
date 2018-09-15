@@ -1,5 +1,4 @@
-<import src='../../login/login/login.wxml'/>
-<login-component id='login' inner-text="Some text"></login-component>
+<login id="login"></login>
 <view class="main" bindtap='rightList' >
     <view class='cf-cont'  wx:if="{{hasList}}" >
       <view class='c-title'  wx:for="{{storeMes}}" wx:key="{{index}}">

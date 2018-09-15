@@ -1,41 +1,49 @@
 <view class='mes-cont'>
-  <view class='new-e'><image src="/image/edit1.png"></image></view>
+  <view class='new-e' wx:if='{{limitShow==2}}'><image src="/image/edit1.png"></image></view>
   <view class="ym_jpstorename">
   <view class="ym_jpstorelogo">
-      <navigator url='../goodWe/goodWe'><image class="store-logo" src="/image/font.png" ></image></navigator>
+      <navigator url='../goodWe/goodWe'><image class="store-logo" src="{{storeMes.logo}}" ></image></navigator>
     </view>
     爱恋珠宝华北区总店
-    <view><text> 云商号 ECP0580881</text></view>
   </view>
   <view class="ym_jpstoredesc">
-    <text class="leftyh">“</text>爱恋珠宝在秉同时，吸收不同风格的时尚元素，努力创新发展，形成了“仁、义、礼、智、信、爱”的经营理念...<text class="rightyh">”</text>
+    <text class="leftyh">“</text>{{storeMes.description}}<text class="rightyh">”</text>
   </view>
 </view>
 <view class="weui_cells new-weui">
     <view>
       <text>运营数据</text>
     </view>
-    <view class='new-view'><view>342</view>商品总量</view>
-    <view class='new-view'><view>342</view>30天上新</view>
-    <view class='new-view'><view>342</view>30天销量</view>
+    <view class='new-view'><view>{{countData.goodsNum}}</view>商品总量</view>
+    <view class='new-view'><view>{{countData.goodsNew}}</view>30天上新</view>
+    <view class='new-view'><view>{{countData.saleNum}}</view>30天销量</view>
+</view>
+<view class="weui_cells">
+    <image  src="/image/labelico.png"></image>
+    <text class="store-address">小云店认证 </text>
+    <view class='weui-xian weui-xian1'></view>
+</view>
+<view class='weui-time wt-font'>
+  <view><image  src=" {{floor.mallLogo}}"></image> {{floor.mallName}}</view>
+  <view>该商家已通过北京百荣世贸商城认证</view>
 </view>
 <view class="weui_cells">
     <view>
       <image  src="/image/positionico.png"></image>
-      <text>北京市东城区永定门外大街101号</text>
+      <text>{{storeMes.address}}</text>
     </view>
     <view>
       <image  src="/image/lou.png"></image>
       <text> 所属商城</text>
       <view class='new-left'>
-       北京市百荣世贸
+       {{floor.mallName}}
       </view>
     </view>
     <view>
       <image  src="/image/lou.png"></image>
-      <text>  楼层区域</text>
+      <text> 楼层区域</text>
       <view class='new-left'>
-        二期 F5 B区 5210
+         {{floor.balcony}}{{floor.floor}}{{floor.area}}
       </view>
     </view>
 </view>
@@ -47,14 +55,10 @@
     </view>
    <view class='weui-xian weui-xian1'></view>
    <view class='up-new-img'>
-    <image  src="/image/userphoto.png"></image>
-    <image  src="/image/userphoto.png"></image>
-    <image  src="/image/userphoto.png"></image>
-    <image  src="/image/userphoto.png"></image>
-    <image  src="/image/userphoto.png"></image>
+    <image wx:for='{{storeGoods}}' wx:key='{{index}}'  src="{{item.mainImgUrl}}"></image>
    </view>
 </view>
-<view class="weui_cells">
+<view class="weui_cells"  wx:if='{{limitShow==3}}'>
     <image  src="/image/12.png"></image>
     <text class="store-address">采购记录 </text>
     <view class='weui-view'>
@@ -69,26 +73,12 @@
     </view>
    <view class='weui-xian weui-xian1'></view>
 </view>
-<view class='weui-time'>
-  <view>营业时间<text>10:00~22:00</text></view>
-  <view>客服电话<text>010-68593566</text><view class='mes-tel'><image src="/image/tel1.png"></image></view></view>
-  <view>客服微信<text>linmufan666</text></view>
-  <view>公众号<text>戴俪名珠宝</text></view>
+<view class='weui-time wt-font1'>
+  <view>营业时间<text>{{storeMes.openingTime}}</text></view>
+  <view>客服电话<text>{{storeMes.openingTime}}</text><view class='mes-tel'><image src="/image/tel1.png"></image></view></view>
+  <view>客服微信<text>{{storeMes.wechatNumber}}</text></view>
+  <view>公众号<text></text></view>
 </view>
-<view class="weui_cells">
-    <image  src="/image/labelico.png"></image>
-    <text class="store-address">小云店认证 </text>
-    <view class='weui-xian weui-xian1'></view>
+<view class='weui-one-bottom'>
+  √ {{storeMes.collectionNum}} 已关注
 </view>
-<view class='weui-time wt-font'>
-  <view><image  src="/image/dp.png"></image>百荣世贸</view>
-  <view>该商家已通过北京百荣世贸商城认证</view>
-</view>
-<view class='weui-bottom'>
-  <view>+ 1289人关注</view>
-  <view>发消息</view>
-</view>
-<!-- <view class='weui-bottom'>
-  <view class='new-b-font'>√ 已关注</view>
-  <view>发消息</view>
-</view> -->
