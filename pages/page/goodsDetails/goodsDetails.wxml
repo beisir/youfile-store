@@ -1,3 +1,4 @@
+<login id="login"></login>
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
@@ -6,17 +7,19 @@
    </block>
 </swiper>
 <view class='gd-details'>
-  <view class='gd-title'>
+  <view class='gd-title' wx:if='{{limitShow!=3}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
-    <view class='gd-font'>零售价：<text>￥{{sellPrice}}</text></view>
-    <view class='gd-font'>批发价：<image src='/image/wh.png'></image><text class='gd-yan'>商友验证中</text><button>享受批发价</button></view>
+    <view class='gd-font'>零售价：<text>￥{{sell}}</text></view>
+    <view class='gd-font'>批发价：<image src='/image/wh.png'></image>
+    <!-- <text class='gd-yan'>商友验证中</text> -->
+    <button>享受批发价</button></view>
   </view>
-  <view class='gd-title'>
+  <!-- <view class='gd-title'  wx:if='{{limitShow==1}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
     <view class='gd-font gd-font1'>零售价：￥{{sellPrice}}</view>
-    <view class='gd-font'>批发价：<text>￥333</text></view>
-  </view>
-  <view class='gd-title'>
+    <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text></view>
+  </view> -->
+  <view class='gd-title' wx:if='{{limitShow==3}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
     <view class='gd-font gd-font2'>零售价：￥{{sell}}</view>
     <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text><button class='btn'><text>{{saleBatchNum}}</text>件起批</button></view>
@@ -53,8 +56,12 @@
                 <view class="ym_goodsstorer"><view class='store-goodsNum-data'>0</view>关注人数</view>
                 <view class="ym_goodsstorer"><view class='store-goodsNum-data'>0</view>进货商</view>
             </view>
-            <view class="ym_goodsstoreop">
-                <view class="ui-link"><text class="ym_qzjoin_add1">+</text>关注</view>
+            <view class="ym_goodsstoreop"  hidden='{{likeShow}}'>
+                <view class="ui-link"   bindtap='likeStore'><text class="ym_qzjoin_add1">+</text>关注</view>
+                <view class="ui-link ui-link1" bindtap='urlHome'>进店</view>
+            </view>
+              <view class="ym_goodsstoreop"  hidden='{{!likeShow}}'>
+                <view class="ui-link"    bindtap='deteleLikeStore'><text class="ym_qzjoin_add1" ></text>已关注</view>
                 <view class="ui-link ui-link1" bindtap='urlHome'>进店</view>
             </view>
         </view>
@@ -80,28 +87,29 @@
 <view class='gd_bottom'>
     <view class='gd_b_left'>
         <view>
-          <view><button class='mesImage' open-type="contact" session-from="weapp"><image src="/image/mes.png"></image></button>  联系客服</view>
+          <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/follow/follow" extra-data="" version="trial"><image src="/image/mes.png"></image></navigator>逛商城</view>
         </view>
         <view>
         <view bindtap='urlHome'><image src="/image/i22.png"></image></view>
           进店
         </view>
-        <view>
+        <view  wx:if='{{limitShow!=3}}'>
         <view bindtap='urlCart'><image src="/image/i33.png"></image></view>
           购物车
         </view>
-        <!-- <view bindtap='urlCart'><image src="/image/i33.png"></image></view>
+        <view  wx:if='{{limitShow==3}}'>
+        <view bindtap='urlCart'><image src="/image/i33.png"></image></view>
           进货车
-        </view> -->
+        </view>
     </view>
-    <view class='gd_b_right' bindtap='showAlert'>
+    <view class='gd_b_right' wx:if='{{limitShow!=3}}' bindtap='showAlert'>
           加入购物车
     </view>
-    <!-- <view class='gd_b_right' bindtap='showAlert'>
+    <view class='gd_b_right' wx:if='{{limitShow==3}}' bindtap='showAlert'>
        <navigator>
           立即进货
         </navigator>
-    </view> -->
+    </view>
 </view>
 <view wx:if='{{limitShow==3}}'>
   <view hidden="{{hidden}}" class='alertAdd'>
@@ -126,7 +134,7 @@
               </block>
             </view>
           </view>
-          <view  class='gd-gg lt-attr'>
+          <view  class='gd-gg lt-attr' wx:if='{{index==0}}'>
             <view class="lt-table">
                 <view class="lt-tr">
                     <view>{{nameTwo}}</view>
@@ -159,13 +167,13 @@
         </view>
         <view class='weui-bottom lt-weui-bottom'>
           <view>￥<view wx:if='{{discountShow==true}}'>{{totalPrice}}</view><view wx:if='{{discountShow==false}}'>{{newTotal}}.00</view><text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text></view>
-          <view bindtap='moreAddCart'>加入购物车</view>
-          <view>立即下单</view>
+          <view data-status='0' bindtap='moreAddCart'>加入进货车</view>
+          <view data-status='1' bindtap='moreAddCart'>立即下单</view>
         </view>
       </view>
   </view>
 </view>
-<view wx:if='{{limitShow!=2}}'>
+<view wx:if='{{limitShow!=3}}'>
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
         <view class='gd-top'>
@@ -211,8 +219,8 @@
           </view>
         </view>
         <view class='weui-bottom'>
-          <view bindtap='cratHome'>加入购物车</view>
-          <view><navigator url="../address/address">立即购买</navigator></view>
+          <view  data-status='0' bindtap='cratHome'>加入购物车</view>
+          <view  data-status='1' bindtap='cratHome'>立即购买</view>
         </view>
       </view>
   </view>

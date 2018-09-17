@@ -35,6 +35,10 @@ export const addMoreCartUrl ='/api/shop/shoppingcart/goods/batch'
 export const likeStoreUrl = '/api/shop/user/favorite/store?storeId=' + wx.getStorageSync('storeId')
 export const deteleLikeStoreUrl = '/api/shop/user/favorite/store?storeId=' + wx.getStorageSync('storeId')
 export const shopListUrl='/api/shop/store/{{storeId}}/user/goods/'
+export const configUrl ='/api/config/goods/salebatch/'
+export const homeIndexUrl='/api/store/index/{{storeId}}'
+export const storeIdInfoUrl='/api/{{storeId}}/info'
+export const updateCoverUrl='/admin/store/{{storeId}}/coverUrl'
 // 批发商管理信息
 export const indexUrl = '/admin/purchasermerchant/{{purchaserUserId}}'
 export const mewWholesalerUrl='/admin/bizfriend/{{userId}}/merchantapply'

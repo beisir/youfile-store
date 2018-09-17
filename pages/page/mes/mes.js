@@ -1,18 +1,33 @@
-// pages/mes/mes.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showHide:true
+    showHide:true,
+    countData:'',
+    floor:'',
+    storeMes:[],
+    storeGoods:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var _this=this
+    Api.storeIdInfo()
+    .then(res=>{
+      var obj=res.obj
+      console.log(obj.store[0].store)
+      _this.setData({
+        countData: obj.countData,
+        floor: obj.floor.floorInfo,
+        storeMes: obj.store[0].store,
+        storeGoods: obj.store[0].goodsList
+      })
+    })
   },
   editFun: function () {
     this.setData({

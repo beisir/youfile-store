@@ -214,6 +214,18 @@ border: none;
   height: 120rpx;
   z-index:9999;
 }
+.weui-one-bottom{
+  position: fixed;
+  bottom: 0;
+  color: #666;
+  font-size: 36rpx;
+  background:#fff;
+  width: 100%;
+  line-height: 120rpx;
+  height: 120rpx;
+  z-index:9999;text-align: center;
+  border-top:1rpx solid #EDEDED;
+}
 .weui-bottom view{
   width: 50%;
   text-align: center;
