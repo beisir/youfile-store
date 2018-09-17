@@ -1,5 +1,4 @@
-const app = getApp();
-console.log(app)
+const loginApp = getApp();
 Component({
   properties: {
     // 这里定义了innerText属性，属性值可以在组件使用时指定
@@ -88,7 +87,7 @@ Component({
         return
       }
 
-      app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
+      loginApp.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
 
       let obj = {
         mobile: this.data.telephone,
@@ -96,7 +95,7 @@ Component({
         smsCode: this.data.verificationCode
       }
 
-      app.http.postRequest("/api/user/resetPassword", obj).then(res => {
+      loginApp.http.postRequest("/api/user/resetPassword", obj).then(res => {
         if (res.code == 1) {
           wx.showToast({
             title: '密码修改成功',
@@ -129,8 +128,8 @@ Component({
       }
 
 
-      app.http._headerGet.Authorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=';
-      app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
+      loginApp.http._headerGet.Authorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=';
+      loginApp.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
       if (this.data.loginType == 'code') {
         if (this.data.verificationCode.length == 0) {
           wx.showToast({
@@ -143,8 +142,8 @@ Component({
           mobile: this.data.telephone,
           smsCode: this.data.verificationCode
         };
-        app.http.postRequest("/mobile/token", obj).then(res => {
-
+        loginApp.authHandler.loginByMobile(this.data.telephone, this.data.verificationCode).then(res => {
+          this.loginAfter(res);
         })
 
 
@@ -163,17 +162,31 @@ Component({
           username: this.data.telephone,
           password: this.data.password
         };
-
-        app.http.postRequest("/oauth/token", obj).then(res => {
-          this.closePage()
-          wx.setStorage({
-            key: 'access_token',
-            data: res.access_token,
-          })
-          wx.startPullDownRefresh()
+        loginApp.authHandler.loginByUser(this.data.telephone, this.data.password).then(res => {
+          this.loginAfter(res);
         })
       }
 
+    },
+    loginAfter(res){
+      if (res.message) {
+        wx.showToast({
+          title: res.message,
+          icon: 'none'
+        })
+        return
+      }
+      this.closePage()
+      if (res.access_token) {
+        wx.setStorage({
+          key: 'access_token',
+          data: res.access_token,
+        })
+        let pages = getCurrentPages();
+        let curPage = pages[pages.length - 1];
+        curPage.onLoad();
+        curPage.onShow();
+      }
     },
     //显示隐藏密码
     showHide() {
@@ -240,7 +253,7 @@ Component({
         })
       } else {
 
-        app.http.getRequest("/code/smsCode", { mobile: this.data.telephone }).then(res => {
+        loginApp.http.getRequest("/code/sms", { mobile: this.data.telephone }).then(res => {
 
         })
 

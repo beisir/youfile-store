@@ -1,13 +1,14 @@
+<login id="login"></login>
 <view class="weui_cells weui_cells_n">
    <view class="weui-cell">
     <view class="weui-cell__hd">
-      <image src="/image/userphoto.png" mode="widthFix"></image>
+      <image src="{{user.headPic?user.headPic:'/image/userphoto.png'}}" mode="widthFix"></image>
     </view>
-    <view class="weui-cell__name">
-      陈晨 Fanny<image src='/image/ermR.png'></image><view class='floor-admin'>正式店主</view>
-      <view class="weui-dp">
+    <view class="weui-cell__name" wx:if="{{user.nickName}}">
+      {{user.nickName}}<view style='margin-left:10rpx;' class='floor-admin'>新批零店主</view>
+      <!-- <view class="weui-dp">
         <image src='/image/dp.png' mode="widthFix"></image>百荣世贸 商务部
-      </view>
+      </view> -->
     </view>
     <!-- <view class='weui-view'>
         <image class='img' src="/image/icl.png"></image>
