@@ -1,4 +1,5 @@
 // pages/page/manageM/manageM.js
+const app = getApp();
 Page({
 
   /**
@@ -8,13 +9,21 @@ Page({
 
   },
 
-  
+  getData(){
+    app.http.getRequest("/api/user/byuserid").then(res=>{
+        if(res.success){
+          this.setData({
+            user:res.obj
+          })
+        }
+    })
+  },  
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getData()
   },
   //打电话
   tel: function () {
@@ -33,7 +42,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

@@ -81,7 +81,7 @@
       </view>
 
       <view class='flex-box login-register'>
-        <navigator class='text-yellow ' url="../register/register"  hover-class="navigator-hover">注册账户</navigator>
+        <navigator class='text-yellow ' url="/pages/login/register/register"  hover-class="navigator-hover">注册账户</navigator>
         <text bindtap='forgetPass' wx:if="{{loginType=='pass'}}" style='color: #8c8c8c;'>忘记密码</text>
       </view>
       

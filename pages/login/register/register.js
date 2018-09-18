@@ -1,4 +1,5 @@
 // pages/register/register.js
+const app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -44,6 +45,17 @@ Page({
       })
       return
     }
+    app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
+    app.http.postRequest("/api/user/register", { 
+      mobile: this.data.telephone,
+      smsCode: this.data.verificationCode,
+      password: this.data.password
+    }).then(res => {
+      wx.showToast({
+        title: res.message,
+        icon:'none'
+      })
+    })
   },
   //显示隐藏密码
   showHide() {
@@ -106,6 +118,10 @@ Page({
         icon: 'none',
       })
     } else {
+      app.http.getRequest("/api/smsCode", { mobile: this.data.telephone }).then(res => {
+
+      })
+
       //获取验证码倒计时
       let sec = this.data.btnSec;
       this.setData({

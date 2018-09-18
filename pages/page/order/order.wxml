@@ -1,3 +1,4 @@
+<login id="login"></login>
 <!-- 确认收货 -->
 <mes show="{{sureModal}}">
   <view>

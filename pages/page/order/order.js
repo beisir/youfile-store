@@ -191,7 +191,7 @@ Page({
   },
   //获取订单列表
   getList(){
-    app.http.getRequest("/api/order/store/1111/ordercategory/3/orderstatus/" + this.data.whitch+"/user/1111",{
+    app.http.getRequest("/api/order/store/" + this.data.storeId +"/ordercategory/3/orderstatus/" + this.data.whitch+"/user/1111",{
       // pageNum:1,
       // pageSize:5
     }).then((res) => {
@@ -230,7 +230,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      storeId : wx.getStorageSync("storeId")
+    })
   },
 
   /**

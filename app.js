@@ -1,5 +1,6 @@
 import http from './utils/http.js'
 import pageRequest from './utils/pageRequest.js'
+import AuthHandler from './utils/authHandler.js'
 App({
   onLaunch: function (options) {
     console.log(options.storeId)
@@ -33,7 +34,7 @@ App({
   },
   http: new http(),
   pageRequest: new pageRequest(),
-  
+  authHandler: new AuthHandler()
 });
 
 
