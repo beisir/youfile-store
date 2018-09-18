@@ -5,7 +5,11 @@ App({
     console.log(options.storeId)
     wx.setStorage({
       key: 'storeId',
-      data: "123",
+      data: "180500",
+    })
+    wx.setStorage({
+      key: 'baseUrl',
+      data: 'https://dev.image.youlife.me/',
     })
     // 购物车
     if (wx.getStorageSync('admin')==3){

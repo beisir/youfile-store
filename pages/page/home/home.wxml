@@ -25,17 +25,17 @@
   </view>
 <view class='banner'>
   <view class='hm-fx' wx:if='{{limitShow==2}}'><image  src="/image/fx1.png"></image>分享</view>
-  <image src="{{store.coverUrl}}" class="slide-image" mode="widthFix"/>    
+  <image src="{{baseUrl}}{{store.coverUrl}}" class="slide-image" mode="widthFix"/>    
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
       <navigator  class='logoimg' url="../mes/mes">
-        <image mode="aspectFill" src="{{store.mallLogo}}"/>  
+        <image mode="aspectFill" src="{{store.logo}}"/>  
       </navigator>
     </view>
      <view class="ym_sydtdmgzs">
         <view class="store_name">{{store.storeName}}<view wx:if='{{store.storeNature=="wholesale"}}'>新批零</view><view wx:if='{{store.storeNature!="wholesale"}}'>新零售</view><image wx:if='{{limitShow==2}}' bindtap='editDp'  src="/image/edit1.png"/></view>
-        <image class='logoimg' src="{{store.mallName}}"/>   
-        <text>{{store.mallLogo}}</text>
+        <image class='logoimg' src="{{store.mallLogo}}"/>   
+        <text>{{store.mallName}}</text>
       </view>
     </view>
     <button class="ym_sydtgzbtn"  hidden='{{likeShow}}'  bindtap='likeStore'>+ 关注</button>

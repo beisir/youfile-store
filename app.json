@@ -1,6 +1,14 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/page/cartList/cartList",
+    "pages/admin/addGoods/addGoods",
+    "pages/businessFriend/merchant/index/index",
+    "pages/businessFriend/index/index",
+    "pages/businessFriend/wholesaler/wholesaler",
+    "pages/businessFriend/mewWholesaler/mewWholesaler",
+    "pages/businessFriend/addWholesaler/addWholesaler",
+    "pages/businessFriend/serList/serList",
     "assembly/partnerAlert/partnerAlert",
     "pages/page/userM/userM",
     "pages/page/stockOrder/stockOrder",
@@ -13,16 +21,9 @@
     "pages/page/order/order",
     "pages/page/goodsDetails/goodsDetails",
     "pages/page/user/user",
-    "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/page/stockSelf/stockSelf",
-    "pages/businessFriend/mewWholesaler/mewWholesaler",
-    "pages/admin/addGoods/addGoods",
-    "pages/page/cartList/cartList",
-    "pages/businessFriend/index/index",
     "pages/businessFriend/merchant/newMerchant/newMerchant",
     "pages/businessFriend/merchant/serList/serList",
-    "pages/businessFriend/merchant/index/index",
-    "pages/businessFriend/serList/serList",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/businessFriend/merchant/details/details",
     "pages/page/userDetails/userDetails",
@@ -30,7 +31,6 @@
     "pages/businessFriend/merchant/reach/reach",
     "pages/businessFriend/merchant/merchantInfo/merchantInfo",
     "pages/businessFriend/merchant/list/list",
-    "pages/businessFriend/wholesaler/wholesaler",
     "pages/businessFriend/merchant/invite/invite",
     "pages/businessFriend/invitation/invitation",
     "pages/businessFriend/information/information",
@@ -47,14 +47,8 @@
     "pages/page/self/self",
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
-    
     "pages/role/supplyVoucher/supplyVoucher",
-    
-
-    
     "pages/admin/status/status",
-    
-    
     "pages/page/details/details",
     "pages/page/serList/serList",
     "pages/admin/firstClass/firstClass",

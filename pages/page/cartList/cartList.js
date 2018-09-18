@@ -17,40 +17,46 @@ Page({
     hidden: true,
     idnex:'',
     leftVal:'',
-    userId:'123',
-    items: [{
-      message: '18K锦囊金宝石',
-      status: 0,
-    }, {
-      message: '18K锦囊金宝石',
-      status: 0,
-    }, {
-      message: '18K锦囊金宝石',
-      status: 1,
-    }],
-    weight: [{ weight: '500g' }, { weight: '600g' }],
     numbers: 1,
+    limitShow: app.pageRequest.limitShow(),
+    saleBatchAmount:'',
+    saleBatchNum:'',
+    editDetailList:''
   },
   // 规格
   //选择规格
-  showAlert: function () {
-    var that = this;
-    var animation = wx.createAnimation({
-      duration: 300,
-      timingFunction: 'linear'
-    })
-    that.animation = animation
-    animation.translateY(300).step()
-    that.setData({
-      animationData: animation.export(),
-      hidden: false
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      that.setData({
-        animationData: animation.export()
-      })
-    }, 30)
+  showAlert: function (e) {
+    var that = this,
+      name=e.target.dataset.name
+      if(name=="more"){
+        var index = e.target.dataset.index,
+          detailList = this.data.detailList[index]
+        wx.navigateTo({
+          url: '../goodsDetails/goodsDetails?goodsId=' + detailList["goodsId"] + "&code=" + index+"&name=more",
+        })
+      }else{
+        var gid = e.target.dataset.gid
+        wx.navigateTo({
+          url: '../goodsDetails/goodsDetails?goodsId=' +gid+ "&code=" + index+"&name=one",
+        })
+      }
+    // var animation = wx.createAnimation({
+    //   duration: 300,
+    //   timingFunction: 'linear'
+    // })
+    // that.animation = animation
+    // animation.translateY(300).step()
+    // that.setData({
+    //   animationData: animation.export(),
+    //   hidden: false,
+    //   editDetailList
+    // })
+    // setTimeout(function () {
+    //   animation.translateY(0).step()
+    //   that.setData({
+    //     animationData: animation.export()
+    //   })
+    // }, 30)
   },
   //选择规格属性
   changeButton: function (e) {
@@ -172,8 +178,7 @@ Page({
     })
   },
   getList:function(){
-    var _this=this,
-      userId = this.data.userId
+    var _this=this
     Api.cartList()
       .then(res => {
         console.log(res.obj)
@@ -194,12 +199,13 @@ Page({
           var failureList = []
         }
         for (var i = 0; i < effectiveList.length;i++){
-          effectiveList[i].num = 1
           effectiveList[i].selected = true
           if(effectiveList[i].shoppingCartSkuList==null){
             effectiveList[i].height =270
           }else{
-            effectiveList[i].height = effectiveList[i].shoppingCartSkuList.length*75+270
+           if(effectiveList[i].shoppingCartSkuList.length>1){
+             effectiveList[i].height = effectiveList[i].shoppingCartSkuList.length * 75 + 270
+           }
           }
         }
         if (effectiveList.length>0){
@@ -213,7 +219,6 @@ Page({
           });
         }
         storeMes.push(store)
-        console.log(effectiveList)
         _this.setData({
           detailList: effectiveList,
           lostcarts: failureList,
@@ -229,6 +234,11 @@ Page({
   },
   onShow() {
     this.getList()
+   if(this.data.limitShow==3){
+     wx.setNavigationBarTitle({
+       title:'进货车'
+     })
+   }
   },
   /**
    * 当前商品选中事件
@@ -303,9 +313,11 @@ Page({
   addCount(e) {
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;
-    let num = detailList[index].num;
+    let num = detailList[index].shoppingCartSkuList[0].num;
     num = num + 1;
-    detailList[index].num = num;
+    detailList[index].shoppingCartSkuList[0].num = num;
+    detailList[index].num=num
+    console.log(detailList[index].goodsId)
     this.setData({
       detailList: detailList
     });
@@ -319,30 +331,63 @@ Page({
     const index = e.currentTarget.dataset.index;
     const obj = e.currentTarget.dataset.obj;
     let detailList = this.data.detailList;
-    let num = detailList[index].num;
+    let num = detailList[index].shoppingCartSkuList[0].num;
     if (num <= 1) {
       return false;
     }
     num = num - 1;
-    detailList[index].num = num;
+    detailList[index].shoppingCartSkuList[0].num = num;
+    detailList[index].num = num
     this.setData({
       detailList: detailList
     });
     this.getTotalPrice();
   },
-
+  getConfig(goodsId){
+    Api.config({ goodsId: goodsId})
+      .then(res => {
+        var obj = res.obj,
+          goodsSaleBatchNum = obj.goodsSaleBatchNum,
+          goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
+          storeSaleBatchNum = obj.storeSaleBatchNum,
+          storeSaleBatchAmount = obj.storeSaleBatchAmount
+        if (goodsSaleBatchNum == null) {
+          _this.setData({
+            saleBatchNum: storeSaleBatchNum
+          })
+        } else {
+          _this.setData({
+            saleBatchNum: goodsSaleBatchNum
+          })
+        }
+        if (goodsSaleBatchAmount == null) {
+          _this.setData({
+            saleBatchAmount: storeSaleBatchAmount
+          })
+        } else {
+          _this.setData({
+            saleBatchAmount: goodsSaleBatchAmount
+          })
+        }
+      })
+  },
   /**
    * 计算总价
    */
   getTotalPrice() {
-    let detailList = this.data.detailList;                  // 获取购物车列表
+  
+    let detailList = this.data.detailList;// 获取购物车列表
     let total = 0;
-    for (let i = 0; i < detailList.length; i++) {         // 循环列表得到每个数据
-      if (detailList[i].selected) {  
-        total += detailList[i].num * detailList[i].sellPrice;   // 所有价格加起来
+    for (let i = 0; i < detailList.length; i++) { 
+      if (detailList[i].selected) { 
+        var arr = detailList[i].shoppingCartSkuList 
+        console.log(arr)
+        for (var j = 0; j <arr.length;j++){
+          total += arr[j].num * arr[j].sellPrice;
+        }
       }
     }
-    this.setData({                                // 最后赋值到data中渲染到页面
+    this.setData({ 
       detailList: detailList,
       totalPrice: total.toFixed(2)
     });

@@ -292,9 +292,13 @@ function config(data) {
 function storeIdInfo(data) {
   return app.http.getRequest(storeIdInfoUrl, data)
 }
-/**更换背景**/
-function updateCover(types) {
-  return app.http.chooseImageUpload(updateCoverUrl, types)
+/**上传图片**/
+function uploadImage(types) {
+  return app.http.chooseImageUpload(types)
+}
+/**更换小云店封面**/
+function updateCover(data) {
+  return app.http.putRequest(updateCoverUrl, data)
 }
 
 module.exports = {
@@ -356,5 +360,6 @@ module.exports = {
   config: config,
   homeIndex: homeIndex,
   storeIdInfo: storeIdInfo,
+  uploadImage: uploadImage,
   updateCover: updateCover
 }

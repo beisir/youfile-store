@@ -44,18 +44,56 @@ Page({
     getSpecDetails:true,
     classNums:0,
     newTotal:0,
+    showCart:true,
+    showCartOne:true,
     discountShow:true,
-    spectArrDifference:[]
+    spectArrDifference:[],
+    editCode:false,
+    newCartList:[],
+    editOneName:false
   },
   /**
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
     var that = this,
-      goodsId = '180904092152685923df'
+        goodsId='',
+        arr=[]
+    goodsId = options.goodsId
     that.setData({
       goodsId: goodsId
     })
+    if (options.code){
+      that.setData({
+        editCode: true,
+      })
+      Api.cartList()
+        .then(res => {
+          var res = res.obj.effectiveList[0].goodsList
+          for (var i = 0; i < res.length; i++) {
+            if (res[i].goodsId == options.goodsId) {
+              arr = res[i].shoppingCartSkuList
+            }
+          }
+          if (options.name == "more") {
+            that.setData({
+              showCart: false,
+            })
+          }else{
+            that.setData({
+              showCartOne: false,
+              editOneName: true
+            })
+          }
+          that.setData({
+            newCartList: arr,
+          }, function () {
+            that.getDetails(goodsId)
+          })
+        })
+    }else{
+      this.getDetails(goodsId)
+    }
   },
 
   imgHeight: function (e) {
@@ -157,7 +195,6 @@ Page({
       newList = {}, 
       returnStop=false,
       spectArrDifference = this.data.spectArrDifference
-    console.log(spectArrDifference)
     if (skuArrTwo.length == 1) {
       skuValueVOList = skuArrTwo[0].goodsSpecificationValueVOList
     }
@@ -177,6 +214,47 @@ Page({
         }
       }
     }
+
+    // 修改购物车
+    if (that.data.editCode) {
+      var arr=[]
+      arr = this.data.newCartList
+      for (var i = 0; i < arr.length; i++) {
+        if (this.data.editOneName) {
+          var newArr = codeName[0].goodsSpecificationValueVOList
+          if (newArr.length > 1) {
+            var newArrLast = codeName[1].goodsSpecificationValueVOList
+            for (var l = 0; l < newArrLast.length; l++) {
+              if (arr[i].specValueCodes.indexOf(newArrLast[l].specValueCode) != -1) {
+                that.setData({
+                  currentTab: l,
+                })
+              }
+            }
+          }
+          for (var l = 0; l < newArr.length; l++) {
+            if (arr[i].specValueCodes.indexOf(newArr[l].specValueCode) != -1) {
+              newSkuArrTwo[i].num = arr[i].num
+              that.setData({
+                specsTab: l,
+                numbers: arr[i].num
+              })
+            }
+          }
+          that.setData({
+            goodsSpecificationVOList: codeName
+          })
+        }else{
+          var skuCode = arr[i].skuCode
+          for (var j = 0; j < newSkuArrTwo.length; j++) {
+            if (newSkuArrTwo[j].skuCode == skuCode) {
+              newSkuArrTwo[j].num = arr[i].num
+            }
+          }
+        }
+      }
+      
+    }
     if (spectArrDifference.length==0){
       spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
     }else{
@@ -189,7 +267,6 @@ Page({
         spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
       }
     }
-    console.log(spectArrDifference)
     if (this.data.currentTab ===index) {
       return false;
     } else {
@@ -209,25 +286,39 @@ Page({
   },
   //关闭弹框
   closeAlert:function(){
-    var that = this;
-    var animation = wx.createAnimation({
-      duration: 500,
-      timingFunction: 'linear'
-    })
-    that.animation = animation
-    animation.translateY(1000).step()
-    that.setData({
-      animationData: animation.export(),
-
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
+    if(this.data.editCode){
+      var index = this.data.currentTab
+      var pages = getCurrentPages();             //  获取页面栈
+      var currPage = pages[pages.length - 1];
+      var prevPage = pages[pages.length - 2];    // 上一个页面
+      prevPage.setData({
+        mydata: this.data.goodsListData
+      })
+      wx.navigateBack({
+        data: 1
+      })
+    }else{
+      var that = this;
+      var animation = wx.createAnimation({
+        duration: 500,
+        timingFunction: 'linear'
+      })
+      that.animation = animation
+      animation.translateY(1000).step()
       that.setData({
         animationData: animation.export(),
-        hidden: true
-        
+
       })
-    }, 300)
+      setTimeout(function () {
+        animation.translateY(0).step()
+        that.setData({
+          animationData: animation.export(),
+          hidden: true
+
+        })
+      }, 300)
+    }
+    
   }, 
   urlHome:function(){
     wx.switchTab({
@@ -269,7 +360,6 @@ Page({
     if (status==0){
       Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
         .then(res => {
-          console.log(res)
           wx.showToast({
             title: '添加成功',
             icon: 'none',
@@ -318,8 +408,12 @@ Page({
         return
       }
     }
-    if(status==0){
-      console.log(newArr)
+    if(status==1){
+      var model = JSON.stringify(newArr);
+      wx.navigateTo({
+        url: '../address/address?model=' + model,
+      })
+    }else{
       Api.addMoreCart(JSON.stringify(newArr))
         .then(res => {
           wx.showToast({
@@ -332,11 +426,6 @@ Page({
             url: '../cartList/cartList'
           })
         })
-    }else{
-      var model = JSON.stringify(newArr);
-      wx.navigateTo({
-        url: '../address/address?model=' + model,
-      })
     }
   },
   // 购买数量
@@ -423,7 +512,6 @@ Page({
       
       for (let i = 0; i < newSkuArrTwo.length; i++) {
         if (spectArrDifference[j].code == code) {
-          console.log(newSkuArrTwo[i].num)
           colorNum += newSkuArrTwo[i].num
           childArr[swichNav].num = colorNum
         }
@@ -491,7 +579,6 @@ Page({
     for (var i = 0; i < spectArrDifference.length;i++){
       if(spectArrDifference[i].code==code){
         index=i
-        console.log(i)
         newSkuArrTwo=spectArrDifference[i].newSkuArrTwo
       }
     }
@@ -534,10 +621,10 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  getDetails:function(){
+  getDetails: function (goodsId){
     var _this=this,
       storeId = this.data.storeId
-    Api.config({ goodsId: this.data.goodsId})
+    Api.config({ goodsId:goodsId})
       .then(res => {
         var obj = res.obj,
           goodsSaleBatchNum = obj.goodsSaleBatchNum,
@@ -563,7 +650,7 @@ Page({
           })
         }
       })
-    Api.goodsDetails({ goodsId: this.data.goodsId })
+    Api.goodsDetails({ goodsId:goodsId })
       .then(res => {
         var obj = res.obj,
           skuArrTwo = [],
@@ -592,14 +679,13 @@ Page({
               _this.getSpecDetails(0, arr[0].specValueCode)
             }
           }
+         
         })
       })
   },
   onShow: function () {
-    this.getDetails()
   },
   likeStore: function () {
-    console.log(7878)
     var _this = this
     Api.likeStore()
       .then(res => {

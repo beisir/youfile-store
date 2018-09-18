@@ -192,7 +192,7 @@
   text-overflow: ellipsis;
 }
 .cart-list .cart-pro-name1{
-  padding-right: 30rpx;
+  padding-right: 40rpx;padding-left:10rpx;
 }
 .record .cart-list{
   width:100%

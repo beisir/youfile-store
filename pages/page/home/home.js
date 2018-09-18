@@ -16,6 +16,7 @@ Page({
     keyword:'',
     totalCount:0,
     store:'',
+    baseUrl:wx.getStorageSync('baseUrl'),
     likeShow:false,
     limitShow: app.pageRequest.limitShow()
   },
@@ -75,7 +76,15 @@ Page({
       })
   },
   chooseImage:function(){
-    Api.updateCover("GOODS")
+    Api.uploadImage("STORE")
+    .then(res=>{
+      console.log(res)
+      var url = JSON.parse(res).obj
+      Api.updateCover({ coverUrl:url})
+        .then(res => {
+          console.log(res)
+        })
+    })
   },
   onLoad: function (options) {
     
@@ -91,11 +100,11 @@ Page({
     Api.homeIndex()
     .then(res=>{
       var obj=res.obj
-      console.log(obj)
       that.setData({
         store: obj.store,
         result: obj.goods.result,
-        totalCount: obj.goods.totalCount
+        totalCount: obj.goods.totalCount,
+        likeShow: obj.isFollow
       })
     })    
   },

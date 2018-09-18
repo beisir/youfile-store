@@ -34,10 +34,17 @@ Page({
   getMession: function (data,status) {
   var _this = this,
       url=''
-    if (status == 2) {
-      url ='/admin/store/merchantinfo/{{storeId}}/{{purchaserUserId}}'
-    }else{
-      url ='/admin/store/applyinfo/{{storeId}}/{{purchaserUserId}}'
+    if (status == 1 || status == 0) {
+      url ='/admin/bizfriend/store/applyinfo/{{storeId}}'
+    }
+    if(status == 0) {
+      url = '/api/store/{{storeId}}/floorinfo'
+    }
+    if (status == 2){
+      url ='/admin/bizfriend/store/merchantinfo/{{storeId}}'
+    }
+    if(status == 3) {
+      url = '/admin/bizfriend/store/applyinfo/{{storeId}}'
     }
     Api.purchaserUserId(data,url)
     .then(res => {
@@ -48,7 +55,6 @@ Page({
         floor = obj.floor,
         info=''
       console.log(obj)
-      console.log(goodsList)
       if (goodsList!=null){
         _this.setData({
           goodsList:goodsList
@@ -74,7 +80,6 @@ Page({
     })
 },
   onLoad: function (options) {
-    console.log(options)
     var status = options.status,
         send=options.send,
         storeId = this.data.storeId,
@@ -95,17 +100,18 @@ Page({
     this.setData({
       success:true
     })
-  } else if (status == 1){
-    if (storeId==send) {
-      this.setData({
-        aginGreet: true
-      })
-    } else {
-      this.setData({
-        oneGreet: true
-      })
-    }
-  }else if(status==0){
+  } 
+  if (status == 1){
+    this.setData({
+      aginGreet: true
+    })
+  }
+  if (status == 3) {
+    this.setData({
+      oneGreet: true
+    })
+  } 
+  if(status==0){
     this.setData({
       addShow:true
     })
@@ -148,7 +154,7 @@ Page({
       remark = this.data.value
     this.cancel()
     if (this.data.status==2){
-      Api.setName({ purchaserUserId: purchaserUserId, remark: remark})
+      Api.setName({remark: remark})
       .then(res=>{
         console.log(res)
         wx.showToast({

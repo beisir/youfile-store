@@ -3,17 +3,9 @@
  */
 wx.setStorage({
   key: 'admin',
-  data: 1,//1普通用户 2店主  3
+  data: 2,//1普通用户 2店主  3
 })
 
-wx.setStorage({
-  key: 'purchaserUserId',
-  data: "123",
-})
-wx.setStorage({
-  key: 'userId',
-  data: "123",
-})
 class request {
   constructor() {
     this._baseUrl = 'https://xyk-doctor.com',
@@ -79,7 +71,7 @@ class request {
           this._headerGet['Authorization'] = 'Bearer ' + token;
         }
       }
-      this._headerGet['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsInVzZXJfbmFtZSI6IjEzNjgxNTQ3NDQwIiwic2NvcGUiOlsiYWxsIl0sImV4cCI6MTUzNzI1OTQ5NywidXNlcklkIjoiNzlmM2JiZjg2YzA1Y2Q4NTQyNmIxNWQ3YjAwMzY3YWIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiOWQ1MWNmNzgtOTVkNC00YzUyLWI0ODctNzg3MWQ5MTY0NWY0IiwiY2xpZW50X2lkIjoiQmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQifQ.DhSaIP8ew13B3x1BJxAdDEO1oqhDpCOUfWhTMTd-4tw';
+      this._headerGet['Authorization'] = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsInVzZXJfbmFtZSI6IjEzNjgxNTQ3NDQwIiwic2NvcGUiOlsiYWxsIl0sImV4cCI6MTUzNzUyODQxNCwidXNlcklkIjoiNzlmM2JiZjg2YzA1Y2Q4NTQyNmIxNWQ3YjAwMzY3YWIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiZmQ3NTMyZTctYzYwNC00ZWUyLWE1MWUtNDk4YjM2ZmMwNDY4IiwiY2xpZW50X2lkIjoiQmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQifQ.JGLxjbyyOb4hvcKHt20k-Ebcw42kGNXuxHFSvucKdwQ';
       wx.request({
         url: this._baseUrl +url,
         data: data,
@@ -119,10 +111,10 @@ class request {
   /**
    * 上传图片
    */
-  chooseImageUpload(url, types) {
-    return this.chooseImage(url, types)
+  chooseImageUpload(types) {
+    return this.chooseImage(types)
   }
-  chooseImage(url, types) {
+  chooseImage(types) {
     wx.showNavigationBarLoading()
     wx.showLoading({
       title: "正在加载",
@@ -136,9 +128,8 @@ class request {
             var imgSrc = res.tempFilePaths;
             var tempFilePaths = res.tempFilePaths
             wx.uploadFile({
-              url: 'https://xyk-doctor.com'+ url,
+              url: 'https://xyk-doctor.com/image',
               filePath: tempFilePaths[0],
-              // method:"PUT",
               name: 'file',
               header: {
                 "Content-Type": "multipart/form-data",
@@ -148,7 +139,6 @@ class request {
                 'type': types
               },
               success: (res => {
-                console.log(res)
                 if (res.statusCode === 200) {
                   resolve(res.data)
                 } else {
