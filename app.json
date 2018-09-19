@@ -1,6 +1,54 @@
 {
   "pages":[
+    "pages/page/userDetails/userDetails",
+    
+    "pages/page/user/user",
     "pages/page/userM/userM",
+  
+
+    "pages/page/stockSelf/stockSelf",
+    
+    "pages/page/stockOrder/stockOrder",
+    
+    "pages/page/order/order",
+    
+    "pages/role/order/order",
+    
+    "pages/role/supplyOrder/supplyOrder",
+    
+    
+  
+    
+    "pages/page/home/home",
+    
+    
+    
+
+    
+
+    
+    
+    
+
+    
+    
+    
+    "pages/role/orderSelf/orderSelf",
+
+    "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
+    
+    "pages/cloudOrder/orderDetail/orderDetail",
+    
+    "pages/cloudOrder/orderList/orderList",
+
+    
+    
+    
+    "pages/cloudOrder/myOrder/myOrder",
+
+    "pages/role/supplyVoucher/supplyVoucher",
+    
+    
     
     "pages/role/orderDetails/orderDetails",
     
@@ -11,24 +59,17 @@
     
     
     
-    "pages/page/home/home",
     "assembly/partnerAlert/partnerAlert",
     
     "pages/login/login/login",
     
     
 
-    "pages/page/stockOrder/stockOrder",
-    "pages/role/supplyOrder/supplyOrder",
-    "pages/role/order/order",
-    "pages/role/orderSelf/orderSelf",
+    
     "pages/page/address/address",
     "pages/page/stockDetail/stockDetail",
-    "pages/page/order/order",
     "pages/page/goodsDetails/goodsDetails",
-    "pages/page/user/user",
     "pages/businessFriend/addWholesaler/addWholesaler",
-    "pages/page/stockSelf/stockSelf",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
     "pages/admin/addGoods/addGoods",
     "pages/page/cartList/cartList",
@@ -39,7 +80,6 @@
     "pages/businessFriend/serList/serList",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/businessFriend/merchant/details/details",
-    "pages/page/userDetails/userDetails",
     "pages/page/addressWe/addressWe",
     "pages/businessFriend/merchant/reach/reach",
     "pages/businessFriend/merchant/merchantInfo/merchantInfo",
@@ -62,7 +102,6 @@
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
     
-    "pages/role/supplyVoucher/supplyVoucher",
     
 
     

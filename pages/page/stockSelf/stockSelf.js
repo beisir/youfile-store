@@ -169,7 +169,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    let num = options.num
+    this.setData({
+      num: options.num,
+      status: options.status
+    })
     this.getData()
 
     this.setData({

@@ -7,6 +7,7 @@ Page({
    */
   // 0待付款 1待发货 2待填表  3待收货   4供货成功 5 交易关闭  6自提待付款 7自提待取货 8交易供货自提 9自提交易关闭
   data: {
+    showList: [],
     hasList: false,
     nav: [{
       title: "全部",
@@ -25,18 +26,6 @@ Page({
       state: "finish"
     }],
     reson: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
-    carts: [
-      { status: 0, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 6, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 1, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 7, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 2, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 3, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 4, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 5, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 8, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-      { status: 9, name: "流星落", phone: 13161447522, list: [{ id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true }], attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] },
-    ],
     navindex: 0,
     cancelIndex: 0,
     inputActive: 'inputActive ',
@@ -270,10 +259,11 @@ Page({
     } else {
       this.setData({
         navindex: current,
-        whitch: state
+        whitch: state,
+        showList: []
       })
     }
-    this.getList();
+    this.getList(true);
   },
 
  
@@ -285,46 +275,21 @@ Page({
   },
 
   //获取订单列表
-  getList() {
-    app.http.getRequest("/admin/order/store/123/ordercategory/1/orderstatus/" + this.data.whitch, {
+  getList(re) {
+    if(re){
+      app.pageRequest.pageData.pageNum = 0;
+    }
+    app.pageRequest.pageGet("/admin/order/store/123/ordercategory/1/orderstatus/" + this.data.whitch, {
       //pageNum:1,
       //pageSize:100
     }).then((res) => {
-      //this.resetData(res.obj.result);
-      //this.resetData(this.data.orderList.obj.result)
       this.setData({
-        showList: this.data.orderList.obj.result
-        //showList: res.obj.result
+        showList: this.data.showList.concat(this.data.orderList.obj.result)
       })
     })
 
   },
-  // resetData(data) {
-  //   let arr = [];
-  //   for (let i = 0; i < data.length; i++) { // 循环订单
-  //     let oldGoods = data[i].goodsInfos, //商品数组
-  //       newGoods = [];
-  //     for (let j = 0; j < oldGoods.length; j++) { //货品循环
-
-  //       let type = oldGoods[j].orderDetails; //规格数组
-
-  //       for (let k = 0; k < type.length; k++) {
-  //         //当前货物,类型变为对象
-  //         let nowGood = {};
-  //         Object.assign(nowGood, oldGoods[j]);
-  //         nowGood.orderDetails = type[k];
-  //         newGoods.push(nowGood);
-  //       }
-  //     }
-  //     //编辑新订单数组
-  //     let newOrder = data[i];
-  //     newOrder.goodsInfos = newGoods;
-  //     arr.push(newOrder)
-  //   }
-  //   this.setData({
-  //     showList: arr
-  //   })
-  // },
+ 
   //跳转
   toOrderDetail(e) {
     let type = e.currentTarget.dataset.type,
@@ -344,23 +309,24 @@ Page({
     // 0待付款 1已付款 2待收货 3交易成功 4交易关闭  5自提待付款 6自提待取货 7交易成功自提 8自提交易关闭
     // 0待付款 1已付款 2待填表  3已发货   4交易成功 5 交易关闭  6自提待付款 7自提已付款 8交易成功自提 9自提交易关闭
 
-    switch (status) {
-      case "unpaid":
-        type == 1 ? url += "5" : url += "0";
-        break;
-      case "paid":
-        type == 1 ? url += "6" : url += "1";
-        break;
-      case "shipped":
-        url += "2";
-        break;
-      case "closed":
-        type == 1 ? url += "8" : url += "4";
-        break;
-      case "finish":
-        type == 1 ? url += "7" : url += "3";
-        break;
-    }
+    // switch (status) {
+    //   case "unpaid":
+    //     type == 1 ? url += "5" : url += "0";
+    //     break;
+    //   case "paid":
+    //     type == 1 ? url += "6" : url += "1";
+    //     break;
+    //   case "shipped":
+    //     url += "2";
+    //     break;
+    //   case "closed":
+    //     type == 1 ? url += "8" : url += "4";
+    //     break;
+    //   case "finish":
+    //     type == 1 ? url += "7" : url += "3";
+    //     break;
+    // }
+    url += status;
     url += '&num=' + num;
     wx.navigateTo({
       url
@@ -477,8 +443,8 @@ Page({
             //    "shipped":
             //    "closed":
             //  "finish":
-            "orderStatus": "paid",
-            "orderType": "2",
+            "orderStatus": "finish",
+            "orderType": "1",
             "payAmount": 100,
             "payDate": "2018-09-06T02:53:22.470Z",
             "payWay": "string",
@@ -542,14 +508,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+     
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getList()
   },
 
   /**

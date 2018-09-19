@@ -41,7 +41,7 @@ class TokenHandler {
           if (res.statusCode === 200) {
             this.saveTokenInfo(res.data);
           }
-          resolve(res);
+          resolve(res.data);
         })
       })
     });
@@ -54,7 +54,7 @@ class TokenHandler {
   loginByMobile(mobile, smsCode) {
     return new Promise((resolve, reject) => {
       wx.request({
-        url: this.baseUrl + '/mobile/token',
+        url: this.baseUrl + '/oauth/mobile/token',
         data: {
           'grant_type': 'password',
           'mobile': mobile,
@@ -69,7 +69,7 @@ class TokenHandler {
           if (res.statusCode === 200) {
             this.saveTokenInfo(res.data);
           }
-          resolve(res);
+          resolve(res.data);
         })
       })
     });

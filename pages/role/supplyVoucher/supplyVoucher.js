@@ -22,6 +22,11 @@ Page({
     })
 
   },
+  showImg(){
+    wx.previewImage({
+      urls: this.data.url,
+    })
+  },
   //输入
   input(e){
     let val = e.detail.value;

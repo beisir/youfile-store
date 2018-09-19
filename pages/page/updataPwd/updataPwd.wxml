@@ -3,21 +3,21 @@
     <view class='weui-cell weui-cell_access'>
       <view class='weui-cell__bd'>
         <view class='my-info'>登录密码</view>
-        <input placeholder='请输入原密码' ></input>
+        <input bindinput='watchInput' data-type='old' password='true' placeholder='请输入原密码' ></input>
       </view>
     </view>
   </view>
   <view class='page__bd'>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-           设置密码<input placeholder='请设置新密码'></input>
+           设置密码<input bindinput='watchInput' data-type='new'  password='true' placeholder='请设置新密码'></input>
         </view>
       </view>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-           重置密码<input placeholder='请再次输入'></input>
+           重置密码<input bindinput='watchInput' data-type='re'  password='true' placeholder='请再次输入'></input>
         </view>
       </view>
   </view>
-  <button class='aw-but'>完成</button>
+  <button bindtap='sure' class='aw-but'>完成</button>
 </view>

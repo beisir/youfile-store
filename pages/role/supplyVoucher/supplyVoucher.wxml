@@ -2,7 +2,7 @@
   <textarea bindinput='input' class='textarea' placeholder="请输入凭证描述..."></textarea>
   
   <view class='add-voucher' wx:if='{{url}}'>
-    <image class='user-img' mode='aspectFit' src='{{url}}'></image>
+    <image bindtap='showImg' class='user-img' mode='aspectFit' src='{{url}}'></image>
   </view>
   <view  wx:else class='add-voucher' bindtap='choseImg'>
     <image class='add-img' src='/image/add3.png'></image>
