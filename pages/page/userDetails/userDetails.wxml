@@ -34,7 +34,7 @@
       <view class='weui-cell__bd'>
         <picker class='picker' mode="date" value="{{order.date}}" start="1900-01-01" end="2017-09-01" bindchange="bindDateChange">
           出生日期
-          <text>{{order.birthday}}</text>
+          <text>{{user.birthday}}</text>
         </picker>
       </view>
       <view class='weui-img'>
