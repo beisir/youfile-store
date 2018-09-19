@@ -30,4 +30,4 @@
    <text>生日</text><view>{{birthday}}</view>
   </view>
 </view>
-<view class='re-bottom' bindtap='urlHome'>91笔进货单</view>
+<view class='re-bottom'  hidden='{{showMes}}' bindtap='urlHome'>91笔进货单</view>

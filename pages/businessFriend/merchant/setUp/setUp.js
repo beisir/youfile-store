@@ -1,5 +1,5 @@
 const app = getApp();
-import Api from '../../../utils/api.js'
+import Api from '../../../../utils/api.js'
 Page({
 
   /**
@@ -28,7 +28,7 @@ Page({
    */
   getSet:function(){
     var _this = this
-    Api.apiSetUser()
+    Api.adminSetUser()
       .then(res => {
         var bfPermission = res.obj.bfPermission
         if (bfPermission == 1) {
@@ -48,7 +48,7 @@ Page({
   switch1Change:function(e){
     var index=e.target.dataset.index,
     _this=this
-    Api.apiAddUser(index)
+    Api.adminAddUser(index)
     .then(res=>{
       _this.getSet()
     })

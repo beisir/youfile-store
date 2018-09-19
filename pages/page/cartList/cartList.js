@@ -19,8 +19,10 @@ Page({
     leftVal:'',
     numbers: 1,
     limitShow: app.pageRequest.limitShow(),
-    saleBatchAmount:'',
-    saleBatchNum:'',
+    storeAmount: '',
+    goodsAmount:'',
+    storeNum: '',
+    goodsNum:'',
     editDetailList:''
   },
   // 规格
@@ -181,7 +183,6 @@ Page({
     var _this=this
     Api.cartList()
       .then(res => {
-        console.log(res.obj)
         const obj=res.obj,
           newEffectiveListLen = res.obj.effectiveList.length,
           newFailureListLen= res.obj.failureList.length,
@@ -229,7 +230,7 @@ Page({
       })
   },
   onLoad: function (options) {
-    
+   
     
   },
   onShow() {
@@ -310,6 +311,17 @@ Page({
   /**
    * 绑定加数量事件
    */
+  addCart(data){
+    Api.updateMoreCart(data)
+      .then(res => {
+        wx.showToast({
+          title: '修改成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+      })
+  },
   addCount(e) {
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;
@@ -317,7 +329,10 @@ Page({
     num = num + 1;
     detailList[index].shoppingCartSkuList[0].num = num;
     detailList[index].num=num
-    console.log(detailList[index].goodsId)
+    var data = detailList[index].shoppingCartSkuList
+    var dataArr=[]
+    dataArr.push({goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"] })
+    // this.addCart({ goodsId: data[0]["goodsId"], shoppingCartVOList: JSON.stringify(dataArr)})
     this.setData({
       detailList: detailList
     });
@@ -338,6 +353,8 @@ Page({
     num = num - 1;
     detailList[index].shoppingCartSkuList[0].num = num;
     detailList[index].num = num
+    var data = detailList[index].shoppingCartSkuList
+    // this.addCart({ goodsId: data[0]["goodsId"], num:num, skuCode: data[0]["skuCode"] })
     this.setData({
       detailList: detailList
     });
@@ -351,39 +368,30 @@ Page({
           goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
           storeSaleBatchNum = obj.storeSaleBatchNum,
           storeSaleBatchAmount = obj.storeSaleBatchAmount
-        if (goodsSaleBatchNum == null) {
-          _this.setData({
-            saleBatchNum: storeSaleBatchNum
-          })
-        } else {
-          _this.setData({
-            saleBatchNum: goodsSaleBatchNum
-          })
-        }
-        if (goodsSaleBatchAmount == null) {
-          _this.setData({
-            saleBatchAmount: storeSaleBatchAmount
-          })
-        } else {
-          _this.setData({
-            saleBatchAmount: goodsSaleBatchAmount
-          })
-        }
+        console.log(obj)
+        _this.setData({
+          storeAmount: storeSaleBatchAmount,
+          goodsAmount: goodsSaleBatchAmount,
+          storeNum: storeSaleBatchNum,
+          goodsNum: goodsSaleBatchNum
+        })
       })
   },
   /**
    * 计算总价
    */
   getTotalPrice() {
-  
+    var limitShow = this.data.limitShow
     let detailList = this.data.detailList;// 获取购物车列表
+    console.log(detailList)
     let total = 0;
     for (let i = 0; i < detailList.length; i++) { 
-      if (detailList[i].selected) { 
-        var arr = detailList[i].shoppingCartSkuList 
-        console.log(arr)
-        for (var j = 0; j <arr.length;j++){
-          total += arr[j].num * arr[j].sellPrice;
+      if (detailList[i].selected) {
+        if (detailList[i].shoppingCartSkuList!=null){
+          var arr = detailList[i].shoppingCartSkuList
+          for (var j = 0; j < arr.length; j++) {
+            total += arr[j].num * arr[j].sellPrice;
+          }
         }
       }
     }

@@ -10,10 +10,10 @@
 .bt-view{
   color: #999;margin-top: 70rpx;
 }
-.bt-view>view{
+.bt-view>view,.bt-view>navigator{
   width: 33.1%;display: inline-block;text-align: center;height:50rpx;line-height:20rpx;
 }
-.bt-view>view view{
+.bt-view>view view,.bt-view>navigator view{
   color: #333;font-size: 50rpx;margin-bottom: 30rpx;
 }
 .bt-view>view:nth-child(2){

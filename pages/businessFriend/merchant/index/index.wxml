@@ -2,9 +2,9 @@
   <view class='bf-title'>用户统计</view>
   <text>高价值客户交易行为数据</text>
   <view class='bt-view'>
-    <view><view>{{followUsers}}</view>关注用户</view>
-    <view><view>{{buyPurchasers}}</view>成交客户</view>
-    <view><view>{{buyUsers}}</view>成交进货商</view>
+    <navigator url='../follow/follow'><view>{{followUsers}}</view>关注用户</navigator>
+    <navigator url='../dealUser/dealUser'><view>{{buyUsers}}</view>成交客户</navigator>
+    <navigator url='../dealCus/dealCus'><view>{{buyPurchasers}}</view>成交进货商</navigator>
   </view>
 </view>
 <view class='bf-cont'>

@@ -25,7 +25,7 @@ Page({
   data: {
     navindex: -1,
     currentTab: 0,
-    oneTemplateCont: [{ templateName: "不用模板",id:'', specificationTemplateContentVOList: [{ id: '010', specName: "颜色", specValueList: ["如图", "米白色"] }] }],
+    oneTemplateCont: [{ templateName: "不用模板",id:'', specificationTemplateContentVOList: [{ id: '010', specName: "颜色", specValueList: ["如图"] }] }],
     templateCont: [],
     addSpec: false,
     addSpecAttc: false,
@@ -277,6 +277,7 @@ Page({
     var current= e.target.dataset.current,
         pName= e.target.dataset.name,
         code= e.target.dataset.code,
+        newGoodsListData=[],
         list={},
         hash = {},
         addArr=[],
@@ -292,33 +293,28 @@ Page({
         code+=code+""+code
     for (var i = 0; i < goodsListData.length;i++){
       if (goodsListData[i].id == pId){
-        console.log(pId)
         addIndex = true
+        var codeArr = goodsListData[i].goodsSpecificationValueVOList
+        for (var l = 0; l < codeArr.length; l++) {
+        if(codeArr[l].specValueCode==code){
+          codeArr.splice(l,1)
+         }
+        }
         goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi })
       }
-    }
-    if (addIndexChi){
     }
     if (codeTd == '') {
       codeTd = '000'
     }
     if(!addIndex){
-      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi })
+      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi,selected:false})
       list.specName = pName
       list.id = pId
       list.goodsSpecificationValueVOList = listChi
       list.specCode = codeTd + code
       goodsListData.push(list)
     }
-    // for (var i = 0; i < goodsListData.length;i++){
-    //   if (goodsListData[i].goodsSpecificationValueVOList.length>1){
-    //     var newArr = goodsListData[0].goodsSpecificationValueVOList.reduceRight((item, next) => {
-    //       hash[next.specValueCode] ? '' : hash[next.specValueCode] = true && item.push(next);
-    //       return item
-    //     }, []);
-    //     goodsListData[i].goodsSpecificationValueVOList = newArr
-    //   }
-    // }
+    console.log(listChi[current])
     console.log(goodsListData)
     if (current == this.data.navindex) {
       return false;
@@ -346,10 +342,15 @@ Page({
           title: '删除成功',
           icon: 'none',
           duration: 1000,
-          mask: true
+          mask: true,
+          success:function(){
+            getTempList(_this);
+            _this.cancel()
+            _this.setData({
+              currentTab:0
+            })
+          }
         })
-        _this.cancel()
-        getTempList(_this);
       })
   },
   // 删除模板内容

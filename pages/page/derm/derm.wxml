@@ -4,5 +4,5 @@
 </view>
 <view class='add-bottom'>
   <view bindtap='addGit'><image  src="/image/downimg.png"></image>保存至相册</view>
-  <view><image  src="/image/fenxiang.png"></image>推广给朋友</view>
+  <view><button class='shre_btn' open-type='share'><image  src="/image/fenxiang.png"></image>推广给朋友</button></view>
 </view>

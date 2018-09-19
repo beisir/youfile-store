@@ -8,7 +8,6 @@ Page({
     watchInput: false,
     value:'',
     addSpec:false,
-    storeId: wx.getStorageSync('storeId'),
     send:'',
     status:'',
     success: false,
@@ -31,22 +30,22 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  getMession: function (data,status) {
+  getMession: function (status, accept) {
   var _this = this,
       url=''
     if (status == 1 || status == 0) {
-      url ='/admin/bizfriend/store/applyinfo/{{storeId}}'
+      url = '/admin/bizfriend/store/applyinfo/' + accept
     }
     if(status == 0) {
-      url = '/api/store/{{storeId}}/floorinfo'
+      url = '/api/store/' + accept+'/floorinfo'
     }
     if (status == 2){
-      url ='/admin/bizfriend/store/merchantinfo/{{storeId}}'
+      url = '/admin/bizfriend/store/merchantinfo/' + accept
     }
     if(status == 3) {
-      url = '/admin/bizfriend/store/applyinfo/{{storeId}}'
+      url = '/admin/bizfriend/store/applyinfo/' + accept
     }
-    Api.purchaserUserId(data,url)
+    Api.purchaserUserId(url)
     .then(res => {
       var obj = res.obj,
         store = obj.store[0],
@@ -82,7 +81,6 @@ Page({
   onLoad: function (options) {
     var status = options.status,
         send=options.send,
-        storeId = this.data.storeId,
         accept = options.accept,
         logo = options.logo,
         name=options.name,
@@ -95,7 +93,7 @@ Page({
       name:name,
       logo:logo
     })
-  this.getMession({ purchaserUserId: accept }, status)
+    this.getMession(status, accept)
   if(status==2){
     this.setData({
       success:true

@@ -1,32 +1,32 @@
 {
   "pages":[
     "pages/page/home/home",
-    
-    "pages/page/userM/userM",
-    
-    "pages/role/orderDetails/orderDetails",
-    
-    "pages/login/register/register",
-    
-    "pages/admin/batch/batch",
-    
-    
-    
-    
+    "pages/page/mesEdit/mesEdit",
+    "pages/page/updateMes/updateMes",
+    "pages/page/user/user",
+    "pages/admin/spec/spec",
     "pages/page/cartList/cartList",
-    "pages/admin/addGoods/addGoods",
-    "pages/businessFriend/merchant/index/index",
+    "pages/page/mes/mes",
+    "pages/admin/editGoods/editGoods",
     "pages/businessFriend/index/index",
+    "pages/businessFriend/merchant/follow/follow",
+    "pages/businessFriend/merchant/merchantInfo/merchantInfo",
+    "pages/businessFriend/merchant/index/index",
+    "pages/businessFriend/merchant/dealUser/dealUser",
+    "pages/businessFriend/merchant/dealCus/dealCus",
+    "pages/login/register/register",
+    "pages/businessFriend/merchant/setUp/setUp",
+    "pages/businessFriend/setUp/setUp",
+    "pages/page/userM/userM",
+    "pages/role/orderDetails/orderDetails",
+    "pages/admin/batch/batch",
+    "pages/admin/addGoods/addGoods",
     "pages/businessFriend/wholesaler/wholesaler",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/serList/serList",
     "assembly/partnerAlert/partnerAlert",
-    
     "pages/login/login/login",
-    
-    
-
     "pages/page/stockOrder/stockOrder",
     "pages/role/supplyOrder/supplyOrder",
     "pages/role/order/order",
@@ -35,7 +35,6 @@
     "pages/page/stockDetail/stockDetail",
     "pages/page/order/order",
     "pages/page/goodsDetails/goodsDetails",
-    "pages/page/user/user",
     "pages/page/stockSelf/stockSelf",
     "pages/businessFriend/merchant/newMerchant/newMerchant",
     "pages/businessFriend/merchant/serList/serList",
@@ -44,20 +43,15 @@
     "pages/page/userDetails/userDetails",
     "pages/page/addressWe/addressWe",
     "pages/businessFriend/merchant/reach/reach",
-    "pages/businessFriend/merchant/merchantInfo/merchantInfo",
     "pages/businessFriend/merchant/list/list",
     "pages/businessFriend/merchant/invite/invite",
     "pages/businessFriend/invitation/invitation",
     "pages/businessFriend/information/information",
-    "pages/businessFriend/setUp/setUp",
     "pages/admin/batchSet/batchSet",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",
-    "pages/page/mes/mes",
     "pages/page/newAddress/newAddress",
-    "pages/admin/spec/spec",
     "pages/page/classList/classList",
-    "pages/admin/editGoods/editGoods",
     "pages/admin/class/class",
     "pages/page/self/self",
    "pages/role/supplyDetails/supplyDetails",
@@ -72,7 +66,6 @@
 
    
     "pages/admin/shopClass/shopClass",
-    "pages/page/mesEdit/mesEdit",
     "pages/admin/editMesTitle/editMesTitle",
     "pages/admin/writeCont/writeCont",
     "pages/page/derm/derm",

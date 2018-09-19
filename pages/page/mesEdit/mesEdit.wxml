@@ -1,19 +1,19 @@
 <view class='mes-cont'>
   <view class="ym_jpstorename">
   <view class="ym_jpstorelogo">
-      <navigator url='../goodWe/goodWe'><image class="store-logo" src="/image/font.png" ></image></navigator>
+     <image class="store-logo" src="{{storeMes.logo}}" ></image>
     </view>
-    爱恋珠宝华北区总店<image class='xyd' src="/image/edit2.png" bindtap='editFun'></image>
-    <view><text> 云商号 ECP0580881</text></view>
+    {{storeMes.name}}<image class='xyd' src="/image/edit2.png" bindtap='editFun'></image>
+    <navigator url='../updateMes/updateMes?name=name&value={{storeMes.name}}&types=小云店名称'><text> 云商号 ECP0580881</text></navigator>
   </view>
-  <view class="ym_jpstoredesc">
-    <text class="leftyh">“</text>爱恋珠宝在秉同时，吸收不同风格的时尚元素，努力创新发展，形成了“仁、义、礼、智、信、爱”的经营理念...<text class="rightyh">”</text>
-  </view>
+  <navigator url='../updateMes/updateMes?name=description&value={{storeMes.description}}&types=小云店简介' class="ym_jpstoredesc">
+    <text class="leftyh">“</text>{{storeMes.description}}<text class="rightyh">”</text>
+  </navigator>
 </view>
 <view class="weui_cells">
     <view>
       <image  src="/image/positionico.png"></image>
-      <text>北京市东城区永定门外大街101号</text>
+      <text>{{storeMes.address}}</text>
       <view class='weui-view'>
       <image class='img' src="/image/icl.png"></image>
     </view>
@@ -22,14 +22,14 @@
       <image  src="/image/lou.png"></image>
       <text> 所属商城</text>
       <view class='new-left'>
-       北京市百荣世贸<image class='img' src="/image/icl.png"></image>
+       {{floor.mallName}}<image class='img' src="/image/icl.png"></image>
       </view>
     </view>
     <view>
       <image  src="/image/lou.png"></image>
       <text>  楼层区域</text>
       <view class='new-left'>
-        二期 F5 B区 5210<image class='img' src="/image/icl.png"></image>
+        {{floor.balcony}}{{floor.floor}}{{floor.area}}<image class='img' src="/image/icl.png"></image>
       </view>
     </view>
 </view>
@@ -37,13 +37,13 @@
     <view>
       <text> 业态</text>
       <view class='new-left new-left1'>
-       购物
+       {{storeMes.retailFormat}}
       </view>
     </view>
     <view>
       <text>  主营范围</text>
       <view class='new-left'>
-        男装、女装<image class='img' src="/image/icl.png"></image>
+        {{storeMes.businessScope}}<image class='img' src="/image/icl.png"></image>
       </view>
     </view>
 </view>
@@ -56,10 +56,10 @@
    <view class='weui-xian weui-xian1'></view>
 </view>
 <view class='weui-time'>
-  <view>营业时间<text>10:00~22:00</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-  <view>客服电话<text>010-68593566</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-  <view>客服微信<text>linmufan666</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-  <view>公众号<text>戴俪名珠宝</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
+  <navigator url='../updateMes/updateMes?name=openingTime&value={{storeMes.openingTime}}&types=营业时间'>营业时间<text>{{storeMes.openingTime}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator url='../updateMes/updateMes?name=servicePhone&value={{storeMes.servicePhone}}&types=客服电话'>客服电话<text>{{storeMes.servicePhone}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator  url='../updateMes/updateMes?name=wechatNumber&value={{storeMes.wechatNumber}}&types=客服微信'>客服微信<text>{{storeMes.wechatNumber}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator  url='../updateMes/updateMes?name=wechatPublicAccount&value={{storeMes.wechatPublicAccount}}&types=公众号'>公众号<text>{{storeMes.wechatPublicAccount}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
 </view>
 <view class="weui_cells">
     <image  src="/image/mes12.png"></image>

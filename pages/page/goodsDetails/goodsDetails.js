@@ -59,7 +59,11 @@ Page({
     var that = this,
         goodsId='',
         arr=[]
-    goodsId = options.goodsId
+    if(options.query){
+      goodsId = options.query.goodsId
+    }else{
+      goodsId = options.goodsId
+    }
     that.setData({
       goodsId: goodsId
     })
@@ -156,32 +160,40 @@ Page({
      }
    
   },
-  //选择规格属性
-  changeButton: function (e) {
-    var changeButtonCode =e.target.dataset.code
-    this.goodsSku(changeButtonCode,0)
+  getNewData: function (current, changeButtonCode){
+    this.goodsSku(changeButtonCode, 0)
     var that = this;
-    if (this.data.specsTab === e.target.dataset.current) {
+    if (this.data.specsTab === current) {
       return false;
     } else {
       that.setData({
-        specsTab: e.target.dataset.current,
+        specsTab: current,
         changeButtonCode: changeButtonCode
       })
     }
   },
-  weghtSwi: function (e) {
-    var swichNavCode = e.target.dataset.code
+  getNewData1:function(current, swichNavCode){
     this.goodsSku(swichNavCode, 1)
     var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
+    if (this.data.currentTab === current) {
       return false;
     } else {
       that.setData({
-        currentTab: e.target.dataset.current,
+        currentTab: current,
         swichNavCode: swichNavCode
       })
     }
+  },
+  //选择规格属性
+  changeButton: function (e) {
+    var changeButtonCode =e.target.dataset.code,
+      current = e.target.dataset.current
+    this.getNewData(current,changeButtonCode)
+  },
+  weghtSwi: function (e) {
+    var swichNavCode = e.target.dataset.code,
+    current = e.target.dataset.current
+    this.getNewData1(current, swichNavCode)
   },
   getSpecDetails:function(index,code){
     var that = this,
@@ -226,17 +238,15 @@ Page({
             var newArrLast = codeName[1].goodsSpecificationValueVOList
             for (var l = 0; l < newArrLast.length; l++) {
               if (arr[i].specValueCodes.indexOf(newArrLast[l].specValueCode) != -1) {
-                that.setData({
-                  currentTab: l,
-                })
+                this.getNewData(l,newArrLast[l].specValueCode)
               }
             }
           }
           for (var l = 0; l < newArr.length; l++) {
             if (arr[i].specValueCodes.indexOf(newArr[l].specValueCode) != -1) {
               newSkuArrTwo[i].num = arr[i].num
+              this.getNewData1(l, newArr[l].specValueCode)
               that.setData({
-                specsTab: l,
                 numbers: arr[i].num
               })
             }
@@ -292,7 +302,7 @@ Page({
       var currPage = pages[pages.length - 1];
       var prevPage = pages[pages.length - 2];    // 上一个页面
       prevPage.setData({
-        mydata: this.data.goodsListData
+        mydata:0
       })
       wx.navigateBack({
         data: 1
@@ -446,6 +456,20 @@ Page({
     this.setData({
       numbers:num
     })
+    if (this.data.editOneName){
+      var newSkuArrTwo = this.data.newSkuArrTwo
+      for (var i = 0; i < newSkuArrTwo.length;i++){
+        if (newSkuArrTwo[i].num>0){
+          newSkuArrTwo[i].num = num
+        }
+      }
+      this.setData({
+        newSkuArrTwo: newSkuArrTwo
+      },function(){
+        this.getTotalPrice();
+      })
+    }
+    
   },
   /**
   * 绑定加数量事件
@@ -509,7 +533,6 @@ Page({
     }
     for (var j = 0; j< spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
-      
       for (let i = 0; i < newSkuArrTwo.length; i++) {
         if (spectArrDifference[j].code == code) {
           colorNum += newSkuArrTwo[i].num
