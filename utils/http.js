@@ -73,7 +73,7 @@ class request {
           delete this._headerGet['Authorization'];
         }
         // wx.clearStorageSync('access_token')
-        this._headerGet['Authorization'] = 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsInVzZXJfbmFtZSI6IjEzMzYzNTI3NDI1Iiwic2NvcGUiOlsiYWxsIl0sImV4cCI6MTUzNzc3MDg4NiwidXNlcklkIjoiYzI5ZjRjOWQ2YjQ0NmU5NzdjMTZiYjg3OWE0NjNlOTIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiMWQ4YWI5NWUtNjA0OS00ZmZlLThjYmYtMmFhYWU3Y2VkYmYxIiwiY2xpZW50X2lkIjoiQmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQifQ.H0Bqq3mOhfjH4n_x7ZX_nOH9DItiugKUO6Q0HH5QbZg';
+        // this._headerGet['Authorization'] = 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsInVzZXJfbmFtZSI6IjEzMzYzNTI3NDI1Iiwic2NvcGUiOlsiYWxsIl0sImV4cCI6MTUzNzc3MDg4NiwidXNlcklkIjoiYzI5ZjRjOWQ2YjQ0NmU5NzdjMTZiYjg3OWE0NjNlOTIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiMWQ4YWI5NWUtNjA0OS00ZmZlLThjYmYtMmFhYWU3Y2VkYmYxIiwiY2xpZW50X2lkIjoiQmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQifQ.H0Bqq3mOhfjH4n_x7ZX_nOH9DItiugKUO6Q0HH5QbZg';
         wx.request({
           url: this._baseUrl + url,
           data: data,
