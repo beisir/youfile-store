@@ -1,0 +1,14 @@
+<view class='page__hd page__hd1'>
+    <view class='weui-cell'>
+      <view class='weui-cell__bd'>
+        是否提供发票
+      </view>
+      <view  class='weui-img' bindtap='emptyVal'><switch color="#CCAA77" checked='{{switch1Change}}' bindchange="switch1Change"/></view>
+    </view>
+    <view class='weui-cell' wx:for='{{data}}'>
+      <view class='weui-cell__bd'>
+        {{item.name}}
+      </view>
+      <view  class='weui-img' bindtap='emptyVal'><switch color="#CCAA77" checked='{{switch1Change}}' bindchange="switch1Change"/></view>
+    </view>
+  </view>

@@ -67,8 +67,8 @@
    <view class='weui-xian weui-xian1'></view>
 </view>
 <view class='weui-time'>
-  <view>发票设置<view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-  <view>邮费设置<view class='mes-tel'><image src="/image/icl.png"></image></view></view>
+  <navigator url='../editInvoice/editInvoice?code={{storeMes.isReceipt}}&name={{storeMes.receiptInfo}}'>发票设置{{storeMes.receiptInfo}}<view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator>邮费设置<view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
 </view>
   <view class='showHide' hidden='{{showHide}}'>
     <view class='sh-cont'>

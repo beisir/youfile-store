@@ -1,0 +1,4 @@
+@import '../updateMes/updateMes';
+.page__hd1{
+  height: auto;
+}

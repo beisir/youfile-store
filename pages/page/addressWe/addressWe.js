@@ -33,7 +33,7 @@ Page({
   getList:function(){
     var _this = this,
       userId = this.data.userId
-    Api.addressList({ userId: userId })
+    Api.addressList()
       .then(res => {
         var res = res.obj
         _this.setData({

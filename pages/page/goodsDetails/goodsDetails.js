@@ -383,7 +383,7 @@ Page({
     }else{
       var model = { goodsId: goodsId, num: num, skuCode: skuCode }
       wx.navigateTo({
-        url: '../address/address?model=' + model,
+        url: '../address/address?model=' + JSON.stringify(model),
       })
     }
    
