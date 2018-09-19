@@ -6,9 +6,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    carts: [
-      { id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻...', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true, attribute: [{ name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }, { name: "金镶h红宝石", weight: "600g", num: 5, mon: 787.00 }] }
-    ],
     reson: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
     status6: true,
     status7: true,
@@ -288,6 +285,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      num: options.num,
+      status: options.status
+    }); 
+
     // if (options.status == 5) {
     //   wx.setNavigationBarTitle({
     //     title: "待付款"

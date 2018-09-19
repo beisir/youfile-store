@@ -1,6 +1,6 @@
 <view class='page'>
   <view class='page__bd'>
-      <navigator class='weui-cell weui-cell_access' url='/pages/updataPwd/updataPwd'>
+      <navigator class='weui-cell weui-cell_access' url='../updataPwd/updataPwd'>
         <view class='weui-cell__bd'>
           修改密码
         </view>
@@ -25,5 +25,5 @@
         </view>
       </navigator>
   </view>
-  <button class='aw-but'>退出登录</button>
+  <button wx:if="{{token}}" bindtap='quit' class='aw-but'>退出登录</button>
 </view>

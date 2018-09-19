@@ -6,20 +6,32 @@ Page({
    * 页面的初始数据
    */
   data: {
+    hasUser: false
+  },
+
+  showLogin() {
+    this.selectComponent("#login").showPage();
+  },
+  getUser() {
+
+    app.http.getRequest("/admin/user/byuserid").then((res) => {
+      if (res.success) {
+        this.setData({
+          user: res.obj,
+          hasUser: true
+        })
+      }
+    }).catch(e => {
+      this.setData({
+        user: {},
+        hasUser: false
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    wx.getStorage({
-      key: 'skins',
-      success: function (res) {
-        that.setData({
-          SkinStyle: res.data
-        })
-      },
-    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -31,6 +43,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getUser();
   
   },
 

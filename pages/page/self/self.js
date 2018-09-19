@@ -108,26 +108,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.status == 6) {
-      this.setData({
-        status6: false,
-      })
-    } else if (options.status == 7) {
-      this.setData({
-        status7: false,
-      })
-    } else if (options.status == 8) {
-      this.setData({
-        status8: false,
-      })
-    }else if (options.status == 5) {
-      this.setData({
-        status5: false
-      })
-    }
+    // if (options.status == 6) {
+    //   this.setData({
+    //     status6: false,
+    //   })
+    // } else if (options.status == 7) {
+    //   this.setData({
+    //     status7: false,
+    //   })
+    // } else if (options.status == 8) {
+    //   this.setData({
+    //     status8: false,
+    //   })
+    // }else if (options.status == 5) {
+    //   this.setData({
+    //     status5: false
+    //   })
+    // }
 
     this.setData({
-      num: options.num
+      num: options.num,
+      status: options.status
     })
     this.getData();
   },

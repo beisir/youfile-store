@@ -172,6 +172,7 @@ Page({
   //跳转
   toOrderDetail(e){
     let num = e.currentTarget.dataset.num,
+      status = e.currentTarget.dataset.status,
       type = e.currentTarget.dataset.type,
       tourl="";
     if(type == 1){
@@ -180,8 +181,9 @@ Page({
     }else{
       tourl = "../stockDetail/stockDetail";
     }  
+  
     wx.navigateTo({
-      url: tourl+"?num="+num,
+      url: tourl + "?status=" + status+"&num="+num,
     })
   }, 
 
@@ -197,7 +199,7 @@ Page({
   //获取订单列表
   getList() {
     
-    app.http.getRequest("/api/order/store/123/ordercategory/1/orderstatus/" + this.data.whitch + "/user/" + this.data.userId, {
+    app.http.getRequest("/api/order/user/store/123/ordercategory/1/orderstatus/" + this.data.whitch , {
       //pageNum:1,
       //pageSize:100
     }).then((res) => {
@@ -301,7 +303,7 @@ Page({
             //    "shipped":
             //    "closed":
             //  "finish":
-            "orderStatus": "closed",
+            "orderStatus": "unpaid",
             "orderType": "2",
             "payAmount": 100,
             "payDate": "2018-09-06T02:53:22.470Z",

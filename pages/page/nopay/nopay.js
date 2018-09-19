@@ -124,30 +124,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    options.status = 4;
-    if(options.status==0){
-      this.setData({
-        status0:false
-      })
-    } else if (options.status == 1){
-      this.setData({
-        status1: false
-      })
-    } else if (options.status == 2) {
-      this.setData({
-        status2: false,
-        statusAll:false
-      })
-    } else if (options.status == 3) {
-      this.setData({
-        status3: false,
-        statusAll: false
-      })
-    } else if (options.status == 4) {
-      this.setData({
-        status4: false
-      })
-    }
+    this.setData({
+      num: options.num,
+      status: options.status
+    })
+    // options.status = 4;
+    // if(options.status==0){
+    //   this.setData({
+    //     status0:false
+    //   })
+    // } else if (options.status == 1){
+    //   this.setData({
+    //     status1: false
+    //   })
+    // } else if (options.status == 2) {
+    //   this.setData({
+    //     status2: false,
+    //     statusAll:false
+    //   })
+    // } else if (options.status == 3) {
+    //   this.setData({
+    //     status3: false,
+    //     statusAll: false
+    //   })
+    // } else if (options.status == 4) {
+    //   this.setData({
+    //     status4: false
+    //   })
+    // }
   },
   //打电话
   tel: function () {

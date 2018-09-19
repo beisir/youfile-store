@@ -26,7 +26,7 @@
 
 <view class='order-title-box' style='background-image:url(/image/back.png);'>
   <!-- 待付款 -->
-  <view class='flex-box' hidden='{{status5}}'>
+  <view class='flex-box' wx:if="{{status=='unpaid'}}">
     <view class='np-title'>
       <image src="/image/nz.png"></image>等待买家付款
     </view>
@@ -36,28 +36,29 @@
     </view>
   </view>
   <!-- 自提  待取货-->
-  <view class='flex-box' hidden='{{status6}}'>
+  <view class='flex-box' wx:if="{{status=='paid'}}">
     <view class='np-title'>
       <image src="/image/nz.png"></image>请在营业时间内提取您的商品
     </view>
   </view>
   <!-- 交易成功 -->
-  <view class='np-title' hidden='{{status7}}'>
+  <view class='np-title' wx:if="{{status=='finish'}}">
     <image src="/image/mon.png"></image>交易成功
   </view>
   <!-- 交易关闭 -->
-  <view class='np-title' hidden='{{status8}}'>
-    <image src="/image/qx.png"></image>交易关闭
+  <view class='flex-box' wx:if="{{status=='closed'}}">
+    <view class='np-title'>
+      <image src="/image/qx.png"></image>交易关闭
+    </view>
+    <view class='np-right'>
+      <view>原因：{{order.closedReason}}</view>
+    </view>
   </view>
 </view>
 <view class='np-ct'>
-  <view class='getcode' hidden='{{status7}}'>
-    <image src="/image/suo.png"></image>取货码：
-    <text>{{order.claimGoodsNum}}</text>
-  </view>
   <view class='np-view np-view1'>
     <image src="/image/ad.png"></image>
-    <view>门店自提：{{order.storeInfo.address}}</view>
+    <view>门店地址：{{order.storeInfo.address}}</view>
     <text>营业时间: {{order.storeInfo.openingTime}}</text>
     <view class='sf-tel'>
       <image src="/image/pre.png"></image>商家电话：{{order.storeInfo.servicePhone}}</view>
@@ -90,134 +91,88 @@
     </view>
   </view>
 </view>
-<!-- 待付款 -->
-<view hidden='{{status5}}'>
-  <view class='np-order'>
-    <view>订单号
-      <text>{{order.orderNumber}}</text>
-    </view>
-    <view>创建时间
-      <text>{{order.createDate}}</text>
-    </view>
+
+
+
+<!-- 显示字段 -->
+<view class='np-order'>
+  <view>订单号
+    <text>{{order.orderNumber}}</text>
   </view>
-  <view class='np-fapiao'>
-    <view>
-      <view>发票信息
-        <text>不开发票</text>
+  <view>创建时间
+    <text>{{order.createDate}}</text>
+  </view>
+
+  <block wx:if="{{status!='closed'}}">
+    <block wx:if="{{status!='unpaid'}}">
+      <!-- <view>交易单号
+    <text>83578475389</text>
+  </view> -->
+      <view>支付时间
+        <text>{{order.payDate}}</text>
       </view>
-    </view>
-  </view>
-  <view class='np-order np-order-bar'>
-    <view class='np-o-view'>实付金额
-      <text>￥{{order.orderAmount}}</text>
-    </view>
-  </view>
-  <view class='cf-button'>
-    <button class='or-active'> 上传付款凭证 </button>
-    <button bindtap='showModal' data-type='cancel'>取消订单</button>
-  </view>
-</view>
-<!-- 6自提待取货 -->
-<view hidden='{{status6}}'>
-  <view class='np-order'>
-    <view>订单号
-      <text>{{order.orderNumber}}</text>
-    </view>
-    <!-- <view>支付交易号
-      <text>83578475389</text>
-    </view> -->
-    <view>创建时间
-      <text>{{order.createDate}}</text>
-    </view>
-    <view>付款时间
-      <text>{{order.payDate}}</text>
-    </view>
-  </view>
-  <view class='np-fapiao'>
-    <view>
-      <view>发票信息
-        <text>不开发票</text>
+    </block>
+    <block wx:if="{{status=='finish'}}">
+      <view>成交时间
+        <text>{{order.finishTime}}</text>
       </view>
-    </view>
-  </view>
-  <view class='np-order np-order-bar'>
-    <view class='np-o-view'>实付金额
-      <text>￥{{order.orderAmount}}</text>
-    </view>
-  </view>
-  <view class='cf-button'>
-    <button class='or-active' bindtap='getCode'> 获取取货码 </button>
-  </view>
-</view>
-<!-- 交易完成 -->
-<view hidden='{{status7}}'>
-  <view class='np-order'>
-    <view>订单号
-      <text>{{order.orderNumber}}</text>
-    </view>
-    <view>支付交易号
-      <text>83578475389</text>
-    </view>
-    <view>创建时间
-      <text>2018-09-09 23:12:33</text>
-    </view>
-    <view>付款时间
-      <text>2018-09-09 23:12:33</text>
-    </view>
-    <view>成交时间
-      <text>2018-09-09 23:12:33</text>
-    </view>
-  </view>
-  <view class='np-fapiao'>
-    <view>
-      <view>发票信息
-        <text>不开发票</text>
-      </view>
-    </view>
-  </view>
-  <view class='np-order np-order-bar'>
-    <view class='np-o-view'>实付金额
-      <text>￥1222.00</text>
-    </view>
-  </view>
-  <view class='cf-button'>
-    <button class='or-active'> 售后服务 </button>
-    <button data-index='{{index}}' data-type='del' bindtap='showModal'>删除订单</button>
-  </view>
-</view>
-<!-- 交易关闭 -->
-<view hidden='{{status8}}'>
-  <view class='np-order'>
-    <view>订单号
-      <text>{{order.orderNumber}}</text>
-    </view>
-    <view>创建时间
-      <text>2018-09-09 23:12:33</text>
-    </view>
+    </block>
+  </block>
+  <block wx:if="{{status=='closed'}}">
     <view>关闭时间
-      <text>2018-09-09 23:12:33</text>
+      <text>{{order.finishTime}}</text>
     </view>
+  </block>
+</view>
+
+<view class='np-fapiao'>
+  <view>发票信息
+    <text>{{order.receiptInfo?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
-  <view class='np-fapiao'>
-    <view>
-      <view>发票信息
-        <text>增值税普通发票</text>
-      </view>
-      <view>发票抬头
-        <text>增值税普通发票</text>
-      </view>
-      <view>创建时间
-        <text>2018-09-09 23:12:33</text>
-      </view>
+  <view wx:if="{{item.invoiceType=='公司'}}">
+    <view>公司名称
+      <text>{{order.receiptInfo.invoiceTitle}}</text>
     </view>
-  </view>
-  <view class='np-order np-order-bar'>
-    <view class='np-o-view'>实付金额
-      <text>￥1222.00</text>
+    <view>纳税人识别号
+      <text>{{order.receiptInfo.identificationNumber}}</text>
     </view>
-  </view>
-  <view class='cf-button'>
-     <button data-index='{{index}}' data-type='del' bindtap='showModal'>删除订单</button>
+    <block wx:if="{{item.invoiceCategory=='增值税专用发票'}}">
+      <view>注册地址
+        <text>{{order.receiptInfo.registeredAddress}}</text>
+      </view>
+      <view>注册电话
+        <text>{{order.receiptInfo.registererMobile}}</text>
+      </view>
+      <view>开户银行
+        <text>{{order.receiptInfo.depositBank}}</text>
+      </view>
+      <view>开户账号
+        <text>{{order.receiptInfo.depositBankNumber}}</text>
+      </view>
+    </block>
   </view>
 </view>
 
+<!-- 金额 -->
+<view class='np-order np-order-bar'>
+  <view class='np-o-view'>实付金额
+    <text>￥{{order.orderAmount}}</text>
+  </view>
+</view>
+
+<view class='cf-button'>
+  <block wx:if="{{status=='unpaid'}}">
+    <button class='or-active'> 上传付款凭证 </button>
+    <button bindtap='showModal' data-type='cancel'>取消订单</button>
+  </block>
+
+
+  <block wx:if="{{status=='paid'}}">
+    <button class='or-active' bindtap='getCode'> 获取取货码 </button>
+  </block>
+
+  <button wx:if="{{status=='finish'}}" class='or-active'> 售后服务 </button>
+  <block wx:if="{{status=='finish' || status=='closed'}}">
+    <button data-index='{{index}}' data-type='del' bindtap='showModal'>删除订单</button>
+  </block>
+</view>
