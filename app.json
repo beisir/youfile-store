@@ -1,5 +1,6 @@
 {
   "pages":[
+
     
     
     "pages/cloudOrder/orderDetail/orderDetail",
@@ -23,14 +24,43 @@
     
     
     "pages/page/userDetails/userDetails",
+
     
     "pages/page/userM/userM",
-  
-
-    "pages/page/stockSelf/stockSelf",
     
+    
+    
+    
+    "pages/page/cartList/cartList",
+    
+    
+    
+    
+    
+    
+    "pages/page/goodsDetails/goodsDetails",
+    
+    
+    "pages/page/mesEdit/mesEdit",
+    "pages/page/editStoreAddress/editStoreAddress",
+    "pages/page/main/main",
+    "pages/page/cost/cost",
+    "pages/page/editInvoice/editInvoice",
+    "pages/page/addressWe/addressWe",
+    "pages/page/updateMes/updateMes",
+    "pages/admin/spec/spec",
+    "pages/page/mes/mes",
+    "pages/admin/editGoods/editGoods",
+    "pages/businessFriend/index/index",
+    "pages/businessFriend/merchant/follow/follow",
+    "pages/businessFriend/merchant/merchantInfo/merchantInfo",
+    "pages/businessFriend/merchant/dealUser/dealUser",
+    "pages/businessFriend/merchant/dealCus/dealCus",
+    "pages/login/register/register",
+    "pages/businessFriend/merchant/setUp/setUp",
+    "pages/businessFriend/setUp/setUp",
+    "pages/page/userDetails/userDetails",
     "pages/page/stockOrder/stockOrder",
-    
     "pages/page/order/order",
     
     "pages/role/order/order",
@@ -39,18 +69,6 @@
     
     
   
-    
-    "pages/page/home/home",
-    
-    
-    
-
-    
-
-    
-    
-    
-
     
     
     
@@ -62,62 +80,41 @@
     
     
     "pages/role/orderDetails/orderDetails",
-    
-    "pages/login/register/register",
-    
     "pages/admin/batch/batch",
+    "pages/businessFriend/wholesaler/wholesaler",
+    "pages/businessFriend/serList/serList",
     
     
     
     
     "assembly/partnerAlert/partnerAlert",
-    
     "pages/login/login/login",
-    
-    
 
-    
     "pages/page/stockDetail/stockDetail",
-    "pages/page/goodsDetails/goodsDetails",
+    "pages/page/stockSelf/stockSelf",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
     "pages/admin/addGoods/addGoods",
-    "pages/page/cartList/cartList",
-    "pages/businessFriend/index/index",
     "pages/businessFriend/merchant/newMerchant/newMerchant",
     "pages/businessFriend/merchant/serList/serList",
-    "pages/businessFriend/merchant/index/index",
-    "pages/businessFriend/serList/serList",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/businessFriend/merchant/details/details",
-    "pages/page/addressWe/addressWe",
     "pages/businessFriend/merchant/reach/reach",
-    "pages/businessFriend/merchant/merchantInfo/merchantInfo",
     "pages/businessFriend/merchant/list/list",
-    "pages/businessFriend/wholesaler/wholesaler",
     "pages/businessFriend/merchant/invite/invite",
     "pages/businessFriend/invitation/invitation",
     "pages/businessFriend/information/information",
-    "pages/businessFriend/setUp/setUp",
     "pages/admin/batchSet/batchSet",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",
-    "pages/page/mes/mes",
     "pages/page/newAddress/newAddress",
-    "pages/admin/spec/spec",
     "pages/page/classList/classList",
-    "pages/admin/editGoods/editGoods",
     "pages/admin/class/class",
     "pages/page/self/self",
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
-    
-    
 
-    
     "pages/admin/status/status",
-    
-    
     "pages/page/details/details",
     "pages/page/serList/serList",
     "pages/admin/firstClass/firstClass",
@@ -126,7 +123,6 @@
 
    
     "pages/admin/shopClass/shopClass",
-    "pages/page/mesEdit/mesEdit",
     "pages/admin/editMesTitle/editMesTitle",
     "pages/admin/writeCont/writeCont",
     "pages/page/derm/derm",

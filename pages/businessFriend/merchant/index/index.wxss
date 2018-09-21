@@ -8,3 +8,6 @@
 .me-title view{
   position: absolute;height: 30rpx;width: 4rpx;background: #CFA272;left:15rpx;top: 40rpx;
 }
+.bf-cont2{
+  margin-bottom:150rpx;
+}

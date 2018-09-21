@@ -48,7 +48,7 @@
 </view>
 
 <view class='bottom_M'>
-  <view><image  src="/image/work.png"></image><view>工作台</view></view>
-  <view><image  src="/image/12.png"></image><view>店铺</view></view>
-  <view><image  src="/image/41.png"></image><view class='active'>我的</view></view>
+  <navigator url='../workIndex/workIndex'><image  src="/image/12.png"></image><view>工作台</view></navigator>
+  <navigator url='../../businessFriend/merchant/index/index'><image  src="/image/admin2.png"></image><view>商友录</view></navigator>
+  <navigator><image  src="/image/41.png"></image><view   class='active'>我的</view></navigator>
 </view>

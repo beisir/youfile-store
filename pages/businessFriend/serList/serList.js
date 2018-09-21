@@ -8,7 +8,6 @@ Page({
   data: {
     detailList: [],
     value: '',
-    userId: wx.getStorageSync('userId')
   },
 
   /**

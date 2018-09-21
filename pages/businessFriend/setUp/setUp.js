@@ -1,11 +1,12 @@
-// pages/businessFriend/setUp/setUp.js
+const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    switch1Change:true
   },
 
   /**
@@ -25,10 +26,33 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  getSet:function(){
+    var _this = this
+    Api.apiSetUser()
+      .then(res => {
+        var bfPermission = res.obj.bfPermission
+        if (bfPermission == 1) {
+          _this.setData({
+            switch1Change: true
+          })
+        } else {
+          _this.setData({
+            switch1Change: false
+          })
+        }
+      })
   },
-
+  onShow: function () {
+    this.getSet()
+  },
+  switch1Change:function(e){
+    var index=e.target.dataset.index,
+    _this=this
+    Api.apiAddUser(index)
+    .then(res=>{
+      _this.getSet()
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

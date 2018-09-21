@@ -1,0 +1,4 @@
+@import '../set/set';
+.nyz_area_view_btns {
+  display: none
+}

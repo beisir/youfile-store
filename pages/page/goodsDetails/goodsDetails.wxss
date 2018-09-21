@@ -12,7 +12,7 @@
   position:fixed;
   top:0;
   z-index: 10;
-  background: rgba(0, 0, 0, 0.2)
+  background: rgba(0, 0, 0, 0.5)
 }
 .gd-alert{
   height:auto;
@@ -535,3 +535,12 @@ color: #666;font-weight: normal;height: 400rpx;overflow: scroll
   height: 40rpx;width: 40rpx;border-radius: 50%;color: #fff;background: #F55353;
   border:2rpx solid #fff;position: absolute;top:-20rpx;right:-20rpx;line-height:40rpx;
 } 
+.lt-weui-bottom1 view:last-child{
+  color:#CCAA77;background: none;position: relative;width: 57%
+}
+.lt-weui-bottom1>view {
+  width: 40%
+}
+.lt-weui-bottom1 view>text{
+  left: 70rpx
+}

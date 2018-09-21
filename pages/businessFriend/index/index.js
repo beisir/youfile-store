@@ -15,7 +15,7 @@ Page({
    */
   getInfo:function(){
     var _this=this
-    Api.index({purchaserUserId:wx.getStorageSync('purchaserUserId')})
+    Api.index()
     .then(res=>{
       var obj=res.obj
       _this.setData({

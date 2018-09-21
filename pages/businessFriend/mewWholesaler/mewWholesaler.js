@@ -7,7 +7,6 @@ Page({
    */
   data: {
     detailList:[],
-    send: wx.getStorageSync('userId'),
   },
 
   /**
@@ -42,7 +41,7 @@ Page({
     this.setData({
       detailList:[]
     })
-    this.getList({ userId: wx.getStorageSync('userId'), keyword:val})
+    this.getList({keyword:val})
   },
   onLoad: function (options) {
   },
@@ -62,7 +61,7 @@ Page({
       detailList: []
     })
     app.pageRequest.pageData.pageNum = 0
-    this.getList({ userId: wx.getStorageSync('userId') })
+    this.getList()
   },
 
   /**

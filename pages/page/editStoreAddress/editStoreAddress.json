@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "小云店地址",
+  "usingComponents": {
+    "nyz_area_picker": "../../../assembly/area/area"
+  }
+}

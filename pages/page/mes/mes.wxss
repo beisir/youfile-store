@@ -125,7 +125,7 @@
   color: #666;
 }
 
-.weui-time>view{
+.weui-time>view,.weui-time>navigator{
   border-bottom: 2rpx solid #F4F4F4;padding-bottom: 27rpx;margin-top: 27rpx;position: relative;
 }
 .weui-time .mes-tel{
@@ -138,7 +138,7 @@
 .weui-time view:nth-child(2) .mes-tel image{
   width: 45rpx;height: 45rpx;
 }
-.weui-time view:first-child{
+.weui-time view:first-child,.weui-time navigator:first-child{
   margin-top:0rpx;
 }
 .weui-time image{

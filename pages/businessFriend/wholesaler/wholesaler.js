@@ -34,14 +34,12 @@ Page({
     })
   },
   searchBtn: function (e) {
-    console.log(888)
     var val = this.data.value
-    console.log(val)
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       detailList: []
     })
-    this.getList({purchaserUserId: wx.getStorageSync('purchaserUserId'),keyword:val})
+    this.getList({keyword:val})
   },
   getList: function (data) {
     var _this = this
@@ -71,7 +69,7 @@ Page({
       })
   },
   onShow: function () {
-    this.getList({ purchaserUserId: wx.getStorageSync('purchaserUserId')})
+    this.getList({})
   },
 
   /**

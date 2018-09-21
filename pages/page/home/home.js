@@ -16,6 +16,8 @@ Page({
     keyword:'',
     totalCount:0,
     store:'',
+    coverUrl:'',
+    baseUrl:wx.getStorageSync('baseUrl'),
     likeShow:false,
     limitShow: app.pageRequest.limitShow()
   },
@@ -34,11 +36,51 @@ Page({
       isShow:true,
     })
   },
-  editFun:function(){
+  editFun:function(e){
+    var goodsId=e.target.dataset.id
     this.setData({
       showHide: false,
+      goodsId: goodsId
     })
   }, 
+  // 分享
+  // onShareAppMessage: function (res) {
+  //   console.log(res.from)
+  //   var goodsId = this.data.goodsId
+  //   return {
+  //     title: '弹出分享时显示的分享标题',
+  //     desc: '分享页面的内容',
+  //     path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + goodsId
+  //   }
+  // },
+  // 下架商品
+  upGoods:function(e){
+    var _this=this,
+      goodsIdList=[],
+      goodsId = this.data.goodsId
+    goodsIdList.push(goodsId)
+    Api.adminGoodsDown(goodsIdList)
+      .then(res => {
+        wx.showToast({
+          title: '下架成功',
+          icon: 'none',
+          duration: 2000,
+          success: function () {
+            _this.setData({
+              showHide: true,
+              currentTab:0
+            })
+            _this.emptyArr()
+          }
+        })
+      })
+  },
+  editGoods:function(){
+    var goodsId = this.data.goodsId
+    wx.navigateTo({
+      url: '../../admin/editGoods/editGoods?goodsId=' + goodsId,
+    })
+  },
   closeShow: function() {
     this.setData({
       showHide: true,
@@ -75,10 +117,43 @@ Page({
       })
   },
   chooseImage:function(){
-    Api.updateCover("GOODS")
+    var _this=this
+    Api.uploadImage("STORE")
+    .then(res=>{
+      var url = JSON.parse(res).obj
+      _this.setData({
+        coverUrl: url
+      })
+      Api.updateCover({ coverUrl:url})
+        .then(res => {
+          wx.showToast({
+            title: res.message,
+            icon: 'none',
+            duration: 1000,
+            mask: true,
+            success:function(){
+              _this.closeShow()
+            }
+          })
+        })
+    })
+  },
+  homeIndex:function(){
+    var that = this;
+    Api.homeIndex()
+      .then(res => {
+        var obj = res.obj
+        that.setData({
+          store: obj.store,
+          coverUrl: obj.store.coverUrl,
+          result: obj.goods.result,
+          totalCount: obj.goods.totalCount,
+          likeShow: obj.isFollow
+        })
+      })    
   },
   onLoad: function (options) {
-    
+    console.log(options)
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -88,16 +163,7 @@ Page({
         });
       }
     });
-    Api.homeIndex()
-    .then(res=>{
-      var obj=res.obj
-      console.log(obj)
-      that.setData({
-        store: obj.store,
-        result: obj.goods.result,
-        totalCount: obj.goods.totalCount
-      })
-    })    
+    this.homeIndex()
   },
   bindChange: function (e) {
     var that = this;
@@ -107,17 +173,18 @@ Page({
     this.setData({
       result: []
     });
+    app.pageRequest.pageData.pageNum = 0
+    this.getList()
   },
   swichNav: function (e) {
     var that = this;
+
     if (this.data.currentTab === e.target.dataset.current) {
       if (e.target.dataset.current == 2) {
         that.setData({
           currentTab: 3,
         }, function () {
           this.emptyArr()
-          app.pageRequest.pageData.pageNum = 0
-          this.getList()
           return false;
         })
       }
@@ -126,21 +193,35 @@ Page({
           currentTab: 2,
         }, function () {
           this.emptyArr()
-          app.pageRequest.pageData.pageNum = 0
-          this.getList()
           return false;
         })
       }
-      
+      return false;
     } else {
       that.setData({
         currentTab: e.target.dataset.current,
       },function(){
         this.emptyArr()
-        app.pageRequest.pageData.pageNum = 0
-        this.getList()
       })
     }
+  },
+  // 置顶
+  topGoods:function(){
+    var goodsId = this.data.goodsId,
+      _this=this
+    Api.topGoods({ goodsId: goodsId, isTop:true})
+    .then(res=>{
+      wx.showToast({
+        title: "置顶成功",
+        icon: 'none',
+        duration: 1000,
+        mask: true,
+        success: function () {
+          _this.closeShow()
+          _this.emptyArr()
+        }
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -209,10 +290,8 @@ Page({
   onPullDownRefresh: function () {
     this.emptyArr()
     this.setData({
-      currentTab: -1
+      currentTab:0
     })
-    app.pageRequest.pageData.pageNum = 0
-    this.getList()
   },
 
   /**

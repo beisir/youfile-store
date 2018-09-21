@@ -7,7 +7,9 @@ Page({
    */
   data: {
     limitShow: app.pageRequest.limitShow(),
+    storeId: wx.getStorageSync('storeId'),
     imgUrls: [],
+    baseUrl: wx.getStorageSync('baseUrl'),
     goodsSpecificationVOList:[],
     goodsSkuVOList:[],
     skuArrTwo: [],
@@ -44,18 +46,61 @@ Page({
     getSpecDetails:true,
     classNums:0,
     newTotal:0,
+    showCart:true,
+    showCartOne:true,
     discountShow:true,
-    spectArrDifference:[]
+    spectArrDifference:[],
+    editCode:false,
+    newCartList:[],
+    editOneName:false,
+    store:''
   },
   /**
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
     var that = this,
-      goodsId = '180904092152685923df'
+        arr=[],
+        goodsId=''
+    if(options.query){
+      goodsId = options.query.goodsId
+    }else{
+      goodsId = options.goodsId
+    }
     that.setData({
       goodsId: goodsId
     })
+    if (options.code){
+      that.setData({
+        editCode: true,
+      })
+      Api.cartList()
+        .then(res => {
+          var res = res.obj.effectiveList[0].goodsList
+          for (var i = 0; i < res.length; i++) {
+            if (res[i].goodsId == options.goodsId) {
+              arr = res[i].shoppingCartSkuList
+            }
+          }
+          if (options.name == "more") {
+            that.setData({
+              showCart: false,
+            })
+          }else{
+            that.setData({
+              showCartOne: false,
+              editOneName: true
+            })
+          }
+          that.setData({
+            newCartList: arr,
+          }, function () {
+            that.getDetails(goodsId)
+          })
+        })
+    }else{
+      this.getDetails(goodsId)
+    }
   },
 
   imgHeight: function (e) {
@@ -118,32 +163,40 @@ Page({
      }
    
   },
-  //选择规格属性
-  changeButton: function (e) {
-    var changeButtonCode =e.target.dataset.code
-    this.goodsSku(changeButtonCode,0)
+  getNewData: function (current, changeButtonCode){
+    this.goodsSku(changeButtonCode, 0)
     var that = this;
-    if (this.data.specsTab === e.target.dataset.current) {
+    if (this.data.specsTab === current) {
       return false;
     } else {
       that.setData({
-        specsTab: e.target.dataset.current,
+        specsTab: current,
         changeButtonCode: changeButtonCode
       })
     }
   },
-  weghtSwi: function (e) {
-    var swichNavCode = e.target.dataset.code
+  getNewData1:function(current, swichNavCode){
     this.goodsSku(swichNavCode, 1)
     var that = this;
-    if (this.data.currentTab === e.target.dataset.current) {
+    if (this.data.currentTab === current) {
       return false;
     } else {
       that.setData({
-        currentTab: e.target.dataset.current,
+        currentTab: current,
         swichNavCode: swichNavCode
       })
     }
+  },
+  //选择规格属性
+  changeButton: function (e) {
+    var changeButtonCode =e.target.dataset.code,
+      current = e.target.dataset.current
+    this.getNewData(current,changeButtonCode)
+  },
+  weghtSwi: function (e) {
+    var swichNavCode = e.target.dataset.code,
+    current = e.target.dataset.current
+    this.getNewData1(current, swichNavCode)
   },
   getSpecDetails:function(index,code){
     var that = this,
@@ -157,7 +210,6 @@ Page({
       newList = {}, 
       returnStop=false,
       spectArrDifference = this.data.spectArrDifference
-    console.log(spectArrDifference)
     if (skuArrTwo.length == 1) {
       skuValueVOList = skuArrTwo[0].goodsSpecificationValueVOList
     }
@@ -177,6 +229,45 @@ Page({
         }
       }
     }
+
+    // 修改购物车
+    if (that.data.editCode) {
+      var arr=[]
+      arr = this.data.newCartList
+      for (var i = 0; i < arr.length; i++) {
+        if (this.data.editOneName) {
+          var newArr = codeName[0].goodsSpecificationValueVOList
+          if (newArr.length > 1) {
+            var newArrLast = codeName[1].goodsSpecificationValueVOList
+            for (var l = 0; l < newArrLast.length; l++) {
+              if (arr[i].specValueCodes.indexOf(newArrLast[l].specValueCode) != -1) {
+                this.getNewData(l,newArrLast[l].specValueCode)
+              }
+            }
+          }
+          for (var l = 0; l < newArr.length; l++) {
+            if (arr[i].specValueCodes.indexOf(newArr[l].specValueCode) != -1) {
+              newSkuArrTwo[i].num = arr[i].num
+              this.getNewData1(l, newArr[l].specValueCode)
+              that.setData({
+                numbers: arr[i].num
+              })
+            }
+          }
+          that.setData({
+            goodsSpecificationVOList: codeName
+          })
+        }else{
+          var skuCode = arr[i].skuCode
+          for (var j = 0; j < newSkuArrTwo.length; j++) {
+            if (newSkuArrTwo[j].skuCode == skuCode) {
+              newSkuArrTwo[j].num = arr[i].num
+            }
+          }
+        }
+      }
+      
+    }
     if (spectArrDifference.length==0){
       spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
     }else{
@@ -189,7 +280,6 @@ Page({
         spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
       }
     }
-    console.log(spectArrDifference)
     if (this.data.currentTab ===index) {
       return false;
     } else {
@@ -209,25 +299,39 @@ Page({
   },
   //关闭弹框
   closeAlert:function(){
-    var that = this;
-    var animation = wx.createAnimation({
-      duration: 500,
-      timingFunction: 'linear'
-    })
-    that.animation = animation
-    animation.translateY(1000).step()
-    that.setData({
-      animationData: animation.export(),
-
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
+    if(this.data.editCode){
+      var index = this.data.currentTab
+      var pages = getCurrentPages();             //  获取页面栈
+      var currPage = pages[pages.length - 1];
+      var prevPage = pages[pages.length - 2];    // 上一个页面
+      prevPage.setData({
+        mydata:0
+      })
+      wx.navigateBack({
+        data: 1
+      })
+    }else{
+      var that = this;
+      var animation = wx.createAnimation({
+        duration: 500,
+        timingFunction: 'linear'
+      })
+      that.animation = animation
+      animation.translateY(1000).step()
       that.setData({
         animationData: animation.export(),
-        hidden: true
-        
+
       })
-    }, 300)
+      setTimeout(function () {
+        animation.translateY(0).step()
+        that.setData({
+          animationData: animation.export(),
+          hidden: true
+
+        })
+      }, 300)
+    }
+    
   }, 
   urlHome:function(){
     wx.switchTab({
@@ -255,6 +359,11 @@ Page({
        skuCode=goodsSkuVOList[i].skuCode
       }
     }
+    if (this.data.editOneName) {
+
+    }else{
+      
+    }
     if(goodsSpecificationVOList.length>0){
       if (skuCode==''){
         wx.showToast({
@@ -267,19 +376,35 @@ Page({
       }
     }
     if (status==0){
-      Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
-        .then(res => {
-          console.log(res)
-          wx.showToast({
-            title: '添加成功',
-            icon: 'none',
-            duration: 1000,
-            mask: true
+      if (this.data.editOneName){
+        var data=[]
+        data.push({ goodsId: goodsId, num: num, skuCode: skuCode, storeId: this.data.storeId})
+        Api.updateMoreCart(JSON.stringify(data))
+          .then(res => {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+            wx.switchTab({
+              url: '../cartList/cartList'
+            })
           })
-          wx.switchTab({
-            url: '../cartList/cartList'
+      }else{
+        Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
+          .then(res => {
+            wx.showToast({
+              title: '添加成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+            wx.switchTab({
+              url: '../cartList/cartList'
+            })
           })
-        })
+      }
     }else{
       var model = { goodsId: goodsId, num: num, skuCode: skuCode }
       wx.navigateTo({
@@ -318,25 +443,39 @@ Page({
         return
       }
     }
-    if(status==0){
-      console.log(newArr)
-      Api.addMoreCart(JSON.stringify(newArr))
-        .then(res => {
-          wx.showToast({
-            title: '添加成功',
-            icon: 'none',
-            duration: 1000,
-            mask: true
-          })
-          wx.switchTab({
-            url: '../cartList/cartList'
-          })
-        })
-    }else{
+    if(status==1){
       var model = JSON.stringify(newArr);
       wx.navigateTo({
         url: '../address/address?model=' + model,
       })
+    }else{
+      if (this.data.editCode){
+        Api.updateMoreCart(JSON.stringify(newArr))
+          .then(res => {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+            wx.switchTab({
+              url: '../cartList/cartList'
+            })
+          })
+      }else{
+        Api.addMoreCart(JSON.stringify(newArr))
+          .then(res => {
+            wx.showToast({
+              title: '添加成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+            wx.switchTab({
+              url: '../cartList/cartList'
+            })
+          })
+      }
     }
   },
   // 购买数量
@@ -357,6 +496,20 @@ Page({
     this.setData({
       numbers:num
     })
+    if (this.data.editOneName){
+      var newSkuArrTwo = this.data.newSkuArrTwo
+      for (var i = 0; i < newSkuArrTwo.length;i++){
+        if (newSkuArrTwo[i].num>0){
+          newSkuArrTwo[i].num = num
+        }
+      }
+      this.setData({
+        newSkuArrTwo: newSkuArrTwo
+      },function(){
+        this.getTotalPrice();
+      })
+    }
+    
   },
   /**
   * 绑定加数量事件
@@ -420,10 +573,8 @@ Page({
     }
     for (var j = 0; j< spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
-      
       for (let i = 0; i < newSkuArrTwo.length; i++) {
         if (spectArrDifference[j].code == code) {
-          console.log(newSkuArrTwo[i].num)
           colorNum += newSkuArrTwo[i].num
           childArr[swichNav].num = colorNum
         }
@@ -491,7 +642,6 @@ Page({
     for (var i = 0; i < spectArrDifference.length;i++){
       if(spectArrDifference[i].code==code){
         index=i
-        console.log(i)
         newSkuArrTwo=spectArrDifference[i].newSkuArrTwo
       }
     }
@@ -534,10 +684,10 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  getDetails:function(){
+  getDetails: function (goodsId){
     var _this=this,
       storeId = this.data.storeId
-    Api.config({ goodsId: this.data.goodsId})
+    Api.config({ goodsId:goodsId})
       .then(res => {
         var obj = res.obj,
           goodsSaleBatchNum = obj.goodsSaleBatchNum,
@@ -563,11 +713,22 @@ Page({
           })
         }
       })
-    Api.goodsDetails({ goodsId: this.data.goodsId })
+    Api.goodsDetails({ goodsId:goodsId })
       .then(res => {
-        var obj = res.obj,
+        var obj = res.obj.goodsVO,
+          store = res.obj.store,
           skuArrTwo = [],
           name = ''
+        console.log(store)
+        if (store.isFollow){
+          _this.setData({
+            likeShow:true
+          })
+        }else{
+          _this.setData({
+            likeShow: false
+          })
+        }
         if (obj.goodsSpecificationVOList.length > 1) {
           skuArrTwo.push(obj.goodsSpecificationVOList[1])
           name = obj.goodsSpecificationVOList[1].specName
@@ -584,7 +745,8 @@ Page({
           sell: obj.sellPrice,
           stockNum: obj.stockNum,
           mainImgUrl: obj.mainImgUrl,
-          nameTwo: name
+          nameTwo: name,
+          store: store
         },function(){
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {
@@ -592,14 +754,13 @@ Page({
               _this.getSpecDetails(0, arr[0].specValueCode)
             }
           }
+         
         })
       })
   },
   onShow: function () {
-    this.getDetails()
   },
   likeStore: function () {
-    console.log(7878)
     var _this = this
     Api.likeStore()
       .then(res => {

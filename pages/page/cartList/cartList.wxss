@@ -192,7 +192,7 @@
   text-overflow: ellipsis;
 }
 .cart-list .cart-pro-name1{
-  padding-right: 30rpx;
+  padding-right: 40rpx;padding-left:10rpx;
 }
 .record .cart-list{
   width:100%
@@ -270,4 +270,10 @@
 }
 .cart-list {
   border-bottom: 0;
+}
+.new-c-t{
+  position: absolute;right: 30rpx;color: #CCAA77;font-size:24rpx;
+}
+.new-c-t text{
+  position: relative;padding:0rpx 10rpx;border:2rpx solid #CCAA77;right: 0;margin-left:15rpx;
 }

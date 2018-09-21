@@ -3,10 +3,18 @@ import pageRequest from './utils/pageRequest.js'
 import AuthHandler from './utils/authHandler.js'
 App({
   onLaunch: function (options) {
-    console.log(options.storeId)
+    // options.query.storeId
     wx.setStorage({
       key: 'storeId',
-      data: "123",
+      data:'123',
+    })
+    wx.setStorage({
+      key: 'admin',
+      data:2, //1yon 2店主  3批发商
+    })
+    wx.setStorage({
+      key: 'baseUrl',
+      data: 'https://dev.image.youlife.me/',
     })
     // 购物车
     if (wx.getStorageSync('admin')==3){
@@ -21,9 +29,7 @@ App({
     // var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
     // wx.setStorageSync('logs', logs)
-    
   },
- 
   globalData: {
     userInfo: null,
     skin: "normal",

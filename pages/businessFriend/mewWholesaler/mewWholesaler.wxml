@@ -13,8 +13,10 @@
         已添加
       </view>
       <view class='weui-view' wx:if='{{item.status==1}}'>
-        <text  wx:if='{{item.send==send}}'>等待验证</text>
-        <button  wx:if='{{item.send!=send}}'>验证</button>
+        <text>等待验证</text>
+      </view>
+      <view class='weui-view' wx:if='{{item.status==3}}'>
+        <button>验证</button>
       </view>
     </navigator>
     </scroll-view>

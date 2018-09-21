@@ -188,21 +188,21 @@ Page({
           pics: pics
         })
         var tempFilePaths = res.tempFilePaths
-        // wx.uploadFile({
-        //   url: 'https://xyk-doctor.com/image', //仅为示例，非真实的接口地址
-        //   filePath: tempFilePaths[0],
-        //   name: 'file',
-        // header: {
-        //   "Content-Type": "multipart/form-data"
-        // },
-        //   formData: {
-        //     'type': 'GOODS'
-        //   },
-        //   success: function (res) {
-        //     console.log(res)
-        //     //do something
-        //   }
-        // })
+        wx.uploadFile({
+          url: 'https://xyk-doctor.com/image', //仅为示例，非真实的接口地址
+          filePath: tempFilePaths[0],
+          name: 'file',
+        header: {
+          "Content-Type": "multipart/form-data"
+        },
+          formData: {
+            'type': 'GOODS'
+          },
+          success: function (res) {
+            console.log(res)
+            //do something
+          }
+        })
       },
       fail: function () {
         // fail

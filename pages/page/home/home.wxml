@@ -24,18 +24,18 @@
     </view>
   </view>
 <view class='banner'>
-  <view class='hm-fx' wx:if='{{limitShow==2}}'><image  src="/image/fx1.png"></image>分享</view>
-  <image src="{{store.coverUrl}}" class="slide-image" mode="widthFix"/>    
+  <view class='hm-fx' wx:if='{{limitShow==2}}'><button class='shre_btn' open-type='share'><image  src="/image/fx1.png"></image>分享</button></view>
+  <image src="{{baseUrl}}{{coverUrl}}" class="slide-image" mode="widthFix"/>    
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
       <navigator  class='logoimg' url="../mes/mes">
-        <image mode="aspectFill" src="{{store.mallLogo}}"/>  
+        <image mode="aspectFill" src="{{store.logo}}"/>  
       </navigator>
     </view>
      <view class="ym_sydtdmgzs">
         <view class="store_name">{{store.storeName}}<view wx:if='{{store.storeNature=="wholesale"}}'>新批零</view><view wx:if='{{store.storeNature!="wholesale"}}'>新零售</view><image wx:if='{{limitShow==2}}' bindtap='editDp'  src="/image/edit1.png"/></view>
-        <image class='logoimg' src="{{store.mallName}}"/>   
-        <text>{{store.mallLogo}}</text>
+        <image class='logoimg' src="{{store.mallLogo}}"/>   
+        <text>{{store.mallName}}</text>
       </view>
     </view>
     <button class="ym_sydtgzbtn"  hidden='{{likeShow}}'  bindtap='likeStore'>+ 关注</button>
@@ -67,7 +67,7 @@
         <view class="result-text result-text1">
           零售<text>￥ {{item.sellPrice}}</text>
           <view>
-          批发<text class='h-font'  wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text><image wx:if='{{limitShow==1}}'src='/image/wh.png'></image><image  wx:if='{{limitShow==2}}' class='h-img' bindtap='editFun' src="/image/edit2.png"/>
+          批发<text class='h-font'  wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text><image wx:if='{{limitShow==1}}'src='/image/wh.png'></image><image  wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' bindtap='editFun' src="/image/edit2.png"/>
           </view>
         </view>
       </view>
@@ -84,9 +84,9 @@
  <view class='showHide' hidden='{{showHide}}'>
     <view class='sh-cont'>
       <view>分享</view>
-      <view>置顶</view>
-      <view>编辑</view>
-      <view>下架</view>
+      <view bindtap='topGoods'>置顶</view>
+      <view bindtap='editGoods'>编辑</view>
+      <view bindtap='upGoods'>下架</view>
       <view bindtap='closeShow'>取消</view>
     </view>
   </view>
@@ -94,7 +94,7 @@
     <view class='sh-cont'>
       <view class='sh-title'>更换小云店封面</view>
       <view bindtap="chooseImage">拍照</view>
-      <view>从手机相册选取</view>
+      <view bindtap="chooseImage">从手机相册选取</view>
       <view bindtap='closeShow'>取消</view>
     </view>
   </view>

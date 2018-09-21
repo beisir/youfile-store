@@ -1,4 +1,5 @@
 import Api from '../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
@@ -9,7 +10,8 @@ Page({
     countData:'',
     floor:'',
     storeMes:[],
-    storeGoods:[]
+    storeGoods:[],
+    limitShow: app.pageRequest.limitShow()
   },
 
   /**

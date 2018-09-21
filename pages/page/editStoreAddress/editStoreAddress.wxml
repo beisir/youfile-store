@@ -1,0 +1,17 @@
+<nyz_area_picker show="{{show}}" bind:sureSelectArea="sureSelectAreaListener"
+>
+</nyz_area_picker>
+<view class='page'>
+  <view class='page__bd'>
+      <view class='weui-cell weui-cell_access'>
+        <view class='weui-cell__bd'  bindtap='chooseAddress'>
+           选择地区<input disabled="true" value="{{province == ''?'':province + '、' + city + '、' + area}}"></input>
+        </view>
+      </view>
+      <view class='weui-cell weui-cell_access'>
+        <view class='weui-cell__bd'>
+           详细地址<input bindinput='watchInput' value='{{value}}' placeholder='请输入详细地址详情'></input>
+        </view>
+      </view>
+  </view>
+</view>

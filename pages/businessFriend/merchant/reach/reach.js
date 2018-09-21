@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    userId:''
+    userId:'',
+    showMes:false
   },
 
   /**
@@ -38,6 +39,11 @@ Page({
       userId: accept
     })
     this.getMession({ userId: accept})
+    if (options.code){
+      this.setData({
+        showMes: true
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

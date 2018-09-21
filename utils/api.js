@@ -27,6 +27,7 @@ import {
   updateTemplateNameUrl,
   updateSpecNameUrl,
   addCartUrl,
+  topGoodsUrl,
   deleteTemplateUrl,
   addTempContUrl,
   deteleCartGoodsUrl,
@@ -57,7 +58,16 @@ import {
   configUrl,
   homeIndexUrl,
   storeIdInfoUrl,
-  updateCoverUrl
+  updateCoverUrl,
+  apiSetUserUrl,
+  apiAddUserUrl,
+  adminSetUserUrl,
+  adminAddUserUrl,
+  dealUserUrl,
+  favoriteusersUrl,
+  updateMoreCartUrl,
+  updateMesUrl,
+  uploadLogoImgUrl
 } from './constUrl.js'
 const app = getApp()
 /**云享品管理 列表**/ 
@@ -100,6 +110,10 @@ function saleBatch(data) {
 function goodsSearchList(data) {
   return app.pageRequest.pageGet(goodsSearchListUrl, data)
 }
+/**关注用户列表**/
+function favoriteusers(data) {
+  return app.pageRequest.pageGet(favoriteusersUrl, data)
+}
 /**店铺首页**/
 function homeIndex(data) {
   return app.pageRequest.pageGet(homeIndexUrl, data)
@@ -112,6 +126,10 @@ function classList(data) {
 function addClass(data) {
   return app.http.postRequest(addClassUrl, data)
 } 
+/**商品置顶**/
+function topGoods(data) {
+  return app.http.putRequest(topGoodsUrl, data)
+}
 /**商品状态筛选**/
 function classCodeList(data) {
   return app.pageRequest.pageGet(classCodeListUrl, data)
@@ -188,6 +206,10 @@ function addMoreCart(data) {
 function deteleCartGoods(data) {
   return app.http.deleteRequest(deteleCartGoodsUrl,data)
 }
+/**修改购物车**/
+function updateMoreCart(data) {
+  return app.http.putRequest(updateMoreCartUrl, data)
+}
 /**情况购物车失效商品**/
 function deteleCartFai() {
   return app.http.deleteRequest(deteleCartFaiUrl)
@@ -248,6 +270,10 @@ function merchantIndex(data) {
 function merchantList(data) {
   return app.pageRequest.pageGet(merchantListUrl, data)
 }
+/**成交信息**/
+function dealUser(data) {
+  return app.pageRequest.pageGet(dealUserUrl, data)
+}
 /**新增进货商列表**/
 function newMerchant(data) {
   return app.pageRequest.pageGet(newMerchantUrl, data)
@@ -281,8 +307,8 @@ function remakInfo(data) {
   return app.http.getRequest(remakInfoUrl, data)
 }
 /**批发商资料**/
-function purchaserUserId(data,url) {
-  return app.http.getRequest(url, data)
+function purchaserUserId(url) {
+  return app.http.getRequest(url)
 }
 /**满足起批配置信息**/
 function config(data) {
@@ -292,11 +318,36 @@ function config(data) {
 function storeIdInfo(data) {
   return app.http.getRequest(storeIdInfoUrl, data)
 }
-/**更换背景**/
-function updateCover(types) {
-  return app.http.chooseImageUpload(updateCoverUrl, types)
+/**上传图片**/
+function uploadImage(types) {
+  return app.http.chooseImageUpload(types)
 }
-
+/**更换小云店封面**/
+function updateCover(data) {
+  return app.http.putRequest(updateCoverUrl, data)
+}
+/**更换小云店名称**/
+function updateMes(data) {
+  return app.http.putRequest(updateMesUrl, data)
+}
+/**更换小云店logo**/
+function uploadLogoImg(data) {
+  return app.http.putRequest(uploadLogoImgUrl, data)
+}
+/**获取用户权限设置**/
+function apiSetUser(data) {
+  return app.http.getRequest(apiSetUserUrl, data)
+}
+function adminSetUser(data) {
+  return app.http.getRequest(adminSetUserUrl, data)
+}
+/**权限设置**/
+function apiAddUser(data) {
+  return app.http.putRequest(apiAddUserUrl+"?bfPripermission="+data)
+}
+function adminAddUser(data) {
+  return app.http.putRequest(adminAddUserUrl + "?bfPripermission=" + data)
+}
 module.exports = {
   adminGoodsList: adminGoodsList,
   adminGoodsDelete: adminGoodsDelete,
@@ -356,5 +407,16 @@ module.exports = {
   config: config,
   homeIndex: homeIndex,
   storeIdInfo: storeIdInfo,
-  updateCover: updateCover
+  uploadImage: uploadImage,
+  updateCover: updateCover,
+  apiSetUser: apiSetUser,
+  apiAddUser: apiAddUser,
+  adminAddUser: adminAddUser,
+  adminSetUser: adminSetUser,
+  dealUser:dealUser,
+  favoriteusers: favoriteusers,
+  updateMoreCart: updateMoreCart,
+  updateMes: updateMes,
+  uploadLogoImg: uploadLogoImg,
+  topGoods: topGoods
 }
