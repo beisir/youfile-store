@@ -61,7 +61,7 @@
           <view class="tr"  wx:for="{{item.preOrderGoodsSkuList}}" wx:key="{{index}}">
             <view class="td">{{item.skuName}}</view>
             <view class="td">{{item.num}}件</view>
-            <view class="td">￥{{item.wholesalePrice}}</view>
+            <view class="td">￥{{item.sellPrice}}</view>
           </view>
         </view>
 

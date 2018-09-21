@@ -48,7 +48,7 @@
 <view wx:if="{{showList.length>0}}">
   <view class='cf-cont' wx:for="{{showList}}" wx:key="{{index}}">
     <view class='c-title' bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.orderType}}' data-num="{{item.orderNumber}}">
-      <image src="/image/preson.png"></image> {{item.consigneeInfo.userName}}
+      <image src="/image/preson.png"></image> {{item.storeInfo.storeName}}
       <text class='or-phone'>{{item.consigneeInfo.userPhone}}</text>
       <view wx:if="{{item.orderType==1}}" class='order-zt'>自提</view>
       <view bindtap="onChangeShowState">
@@ -72,12 +72,12 @@
     </view>
     <!-- 商品 -->
     <view>
-      <view class="cart-box" wx:for="{{item.goodsInfos}}" wx:key="{{index}}">
+      <view class="cart-box" wx:for="{{item.goodsInfos}}" wx:for-item="good" wx:key="{{index}}">
         <view class="cart-list">
           <navigator>
-            <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+            <image class="cart-thumb" src="{{good.mainImgUrl}}"></image>
           </navigator>
-          <view class='ct-title ct-title1'>{{item.goodsName}}</view>
+          <view class='ct-title ct-title1'>{{good.goodsName}}</view>
           <view class="heji">共
             <text>{{item.num}}</text>件商品</view>
         </view>
@@ -89,8 +89,8 @@
             <view class="th">数量</view>
             <view class="th">金额</view>
           </view>
-          <view class="tr" wx:for="{{item.orderDetails}}" wx:key="{{index}}">
-            <view class="td">{{item.goodsName}}</view>
+          <view class="tr" wx:for="{{good.orderDetails}}" wx:key="{{index}}">
+            <view class="td">{{item.goodsDesc}}</view>
             <view class="td">{{item.num}}件</view>
             <view class="td">￥{{item.wholesalePrice}}</view>
           </view>
@@ -103,7 +103,7 @@
     <view class='cf-button' style='postion:relative;'>
       <block wx:if="{{item.orderStatus=='unpaid'}}">
         <view class='or-time' style='bottom:28rpx;'>距进货单取消
-          <text>00:30:00</text>
+          <text>{{item.timeoutExpressSecond}}</text>
         </view>
       </block>
       <view class='or-text'>

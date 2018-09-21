@@ -401,11 +401,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.pageRequest.pageData.pageNum = app.pageRequest.pageData.pageNum == 0 ? app.pageRequest.pageData.pageNum:app.pageRequest.pageData.pageNum-1;
-    this.setData({
-      showList:[]
-    })
-    this.getList();
+    // app.pageRequest.pageData.pageNum = app.pageRequest.pageData.pageNum == 0 ? app.pageRequest.pageData.pageNum:app.pageRequest.pageData.pageNum-1;
+    this.getList(true);
   },
 
   /**

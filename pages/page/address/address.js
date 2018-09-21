@@ -7,70 +7,6 @@ Page({
    */
   data: {
     currentTab: 0,
-    carts: [{
-      "goodEnName": "脉动",
-      "goodsId": 1000001,
-      "goodsName": "脉动",
-      "mainImgUrl": "脉动",
-      "orderDetails": [{
-        "amount": 4.5,
-        "cover": "string",
-        "goodsDesc": "颜色:红色",
-        "goodsId": 1000001,
-        "goodsName": "脉动",
-        "id": 0,
-        "marketPrice": 4.5,
-        "num": 2,
-        "orderDetailNumber": 1000001,
-        "orderNumber": 1000001,
-        "sellPrice": 4.5,
-        "skuAmount": 4.5,
-        "skuCode": 1000001,
-        "wholesalePrice": 4.5
-      }],
-      "qrcode": "脉动",
-      "storeId": "脉动"
-    }, {
-      "goodEnName": "脉动",
-      "goodsId": 1000001,
-      "goodsName": "脉动",
-      "mainImgUrl": "脉动",
-      "orderDetails": [{
-        "amount": 4.5,
-        "cover": "string",
-        "goodsDesc": "颜色:红色",
-        "goodsId": 1000001,
-        "goodsName": "脉动",
-        "id": 0,
-        "marketPrice": 4.5,
-        "num": 2,
-        "orderDetailNumber": 1000001,
-        "orderNumber": 1000001,
-        "sellPrice": 4.5,
-        "skuAmount": 4.5,
-        "skuCode": 1000001,
-        "wholesalePrice": 4.5
-      },
-      {
-        "amount": 4.5,
-        "cover": "string",
-        "goodsDesc": "颜色:蓝色",
-        "goodsId": 1000001,
-        "goodsName": "脉动",
-        "id": 0,
-        "marketPrice": 4.5,
-        "num": 2,
-        "orderDetailNumber": 1000001,
-        "orderNumber": 1000001,
-        "sellPrice": 4.5,
-        "skuAmount": 4.5,
-        "skuCode": 1000001,
-        "wholesalePrice": 4.5
-      },
-      ],
-      "qrcode": "脉动",
-      "storeId": "脉动"
-    }],
     hiddenSelt: false,
     hiddenSend: true,
     address:"",  //地址
@@ -99,7 +35,7 @@ Page({
     }else if(type == 1){
       //物流
       let add = this.data.address;
-      if(add={}){
+      if(add=={}||!add){
         wx.showToast({
           title: '请选择收货人信息',
           icon: 'none'
@@ -192,7 +128,7 @@ Page({
   //获取默认地址
   getDefaultAdress(){
     //userid
-    app.http.getRequest("/admin/user/usershopaddress/123/default").then((res)=>{
+    app.http.getRequest("/admin/user/usershopaddress/default").then((res)=>{
       if(res.obj){
         this.setData({
           address:res.obj
@@ -234,15 +170,19 @@ Page({
    */
   onLoad: function (options) {
     //订单分类[1 进货单|2 普通订单|3 购物车订单]
+    let userType = wx.getStorageSync('identity'),
+      storeId = wx.getStorageSync('storeId');
+
+
     let type = options.type;
-    let model = options.model;
-    model = { "goodsId": "180904092152685923df", "num": 1, "skuCode": "180904092152685923df_38a" }
+    let model = JSON.parse(options.model);
+    //model = { "goodsId": "180904092152685923df", "num": 1, "skuCode": "180904092152685923df_38a" }
     if(!Array.isArray(model)){
       model = [model]
     }
     this.setData({
-      //orderCategory : type,
-      storeId : 123,    //delit
+      orderCategory: 3,//delit
+      storeId: storeId ?storeId:123,    
       sendData: model
     })
     this.getData();
