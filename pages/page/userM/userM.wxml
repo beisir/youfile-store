@@ -23,7 +23,11 @@
         </view>
         <view class='weui-xian weui-xian1'></view>
     </navigator>
+<<<<<<< HEAD
     <navigator  url='../../businessFriend/merchant/setUp/setUp'>
+=======
+    <navigator  url='../../businessFriend/merchant/index/index'>
+>>>>>>> b3996740caf1dcec77e9f27d8c750e87e250f801
         <text class="store-address">商友权限</text>
         <view class='weui-view'>
           <image class='img' src="/image/icl.png"></image>

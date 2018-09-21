@@ -8,14 +8,6 @@
          <image src="/image/icl.png"></image>
         </view>
       </navigator>
-      <navigator class='weui-cell weui-cell_access' url='/pages/updataPhone/updataPhone'>
-        <view class='weui-cell__bd'>
-          修改手机号
-        </view>
-        <view class='weui-img'>
-         <image src="/image/icl.png"></image>
-        </view>
-      </navigator>
       <navigator class='weui-cell weui-cell_access' url='/pages/help/help'>
         <view class='weui-cell__bd'>
            帮助与反馈

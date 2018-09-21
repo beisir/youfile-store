@@ -1,5 +1,6 @@
 {
   "pages":[
+<<<<<<< HEAD
     "pages/page/user/user",
     "pages/page/cartList/cartList",
     "pages/businessFriend/merchant/dealUser/dealUser",
@@ -15,6 +16,34 @@
     "pages/page/home/home",
     "pages/businessFriend/information/information",
     "pages/page/workIndex/workIndex",
+=======
+
+    
+    
+    "pages/cloudOrder/orderDetail/orderDetail",
+    
+    
+    "pages/cloudOrder/applyStore/applyStore",
+    
+    "pages/cloudOrder/congratulation/congratulation",
+    "pages/page/user/user",
+    
+    
+    "pages/cloudOrder/myOrder/myOrder",
+    
+    
+    
+
+    
+    "pages/role/supplyVoucher/supplyVoucher",
+    
+    "pages/page/address/address",
+    
+    
+    "pages/page/userDetails/userDetails",
+
+    
+>>>>>>> b3996740caf1dcec77e9f27d8c750e87e250f801
     "pages/page/userM/userM",
     "pages/page/goodsDetails/goodsDetails",
     "pages/page/mesEdit/mesEdit",
@@ -37,6 +66,7 @@
     "pages/role/order/order",
     "pages/role/supplyOrder/supplyOrder",
     "pages/role/orderSelf/orderSelf",
+<<<<<<< HEAD
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
     "pages/cloudOrder/orderDetail/orderDetail",
     
@@ -44,10 +74,11 @@
 
     
     
-    
-    "pages/cloudOrder/myOrder/myOrder",
+=======
 
-    "pages/role/supplyVoucher/supplyVoucher",
+>>>>>>> b3996740caf1dcec77e9f27d8c750e87e250f801
+    
+
     
     
     
@@ -61,7 +92,6 @@
     "assembly/partnerAlert/partnerAlert",
     "pages/login/login/login",
 
-    "pages/page/address/address",
     "pages/page/stockDetail/stockDetail",
     "pages/page/stockSelf/stockSelf",
     "pages/businessFriend/addWholesaler/addWholesaler",

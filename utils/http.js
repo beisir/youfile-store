@@ -63,7 +63,7 @@ class request {
           this.newData.storeId = wx.getStorageSync('storeId')
           url = this.analysisUrl(url, this.newData)
         } else {
-          data.storeId = wx.getStorageSync('storeId')
+          //data.storeId = wx.getStorageSync('storeId')
           url = this.analysisUrl(url, data)
         }
       }else{
