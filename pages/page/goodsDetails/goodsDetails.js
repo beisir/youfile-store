@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    limitShow: app.pageRequest.limitShow(),
+    limitShow: wx.getStorageSync('identity'),
     storeId: wx.getStorageSync('storeId'),
     imgUrls: [],
     baseUrl: wx.getStorageSync('baseUrl'),

@@ -11,7 +11,7 @@ Page({
     floor:'',
     storeMes:[],
     storeGoods:[],
-    limitShow: app.pageRequest.limitShow()
+    limitShow: wx.getStorageSync('identity'),
   },
 
   /**

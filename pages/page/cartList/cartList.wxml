@@ -14,8 +14,10 @@
                   <icon wx:if="{{record.selected}}" type="success" color="#CCAA77" data-index="{{index}}"  class="cart-pro-select" bindtap="selectList"/>
                   <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList"/>
                   <navigator><image class="cart-thumb" src="{{record.mainUrl}}"></image></navigator>
-                  <view class='ct-text ct-text1'>￥{{record.shoppingCartSkuList[0].sellPrice}}</view>
-                  <view style='width:365rpx' class='ct-title ct-title1'>{{record.goodsName}}</view> 
+                  <view class='ct-text ct-text1' wx:if='{{record.goodsNum>record.num}}'>{{record.goodsNum>record.num}}11￥{{record.shoppingCartSkuList[0].sellPrice}}</view>
+                  <view class='ct-text ct-text1' wx:if='{{record.goodsNum<record.num}}'>{{record.goodsNum<record.num}}33￥{{record.shoppingCartSkuList[0].wholesalePrice}}</view>
+                  <!-- {{record.goodsName}} -->
+                  <view style='width:365rpx' class='ct-title ct-title1'></view> 
                   <view class="cart-pro-name cart-pro-name1"  wx:if="{{record.shoppingCartSkuList.length==1}}" wx:for="{{record.shoppingCartSkuList}}" bindtap='showAlert' data-name="one" data-gid='{{item.goodsId}}'  wx:key="{{index}}">规格：{{item.skuName}}<image class='down' src="/image/down.png"></image></view>
                    <view class="cart-pro-name cart-pro-name1" data-name="more"  data-index="{{index}}" wx:if="{{record.shoppingCartSkuList.length>1}}" bindtap='showAlert'>修改规格<image class='down' src="/image/down.png"></image></view>
                   <view class="table"  wx:if="{{record.shoppingCartSkuList.length>1}}" >
@@ -102,7 +104,7 @@
           合计：<text>￥{{totalPrice}}</text>
           <view>(不含运费)</view>
         </view>
-        <view class="order-icon">
+        <view class="order-icon" bindtap='creatOrder'>
            结算(1)
         </view>
         <text>全选</text>

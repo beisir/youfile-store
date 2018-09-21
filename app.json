@@ -1,32 +1,22 @@
 {
   "pages":[
-    "pages/page/home/home",
-    
     "pages/page/user/user",
-    
-    
-    "pages/businessFriend/merchant/index/index",
-    
-    "pages/page/workIndex/workIndex",
-    
-    
-    
-    
-    "pages/page/userM/userM",
-    
-    
-    
-    
     "pages/page/cartList/cartList",
-    
-    
-    
-    
-    
-    
+    "pages/businessFriend/merchant/dealUser/dealUser",
+    "pages/businessFriend/merchant/dealCus/dealCus",
+    "pages/businessFriend/merchant/follow/follow",
+    "pages/businessFriend/merchant/details/details",
+    "pages/businessFriend/merchant/merchantInfo/merchantInfo",
+    "pages/businessFriend/merchant/lookInfo/lookInfo",
+    "pages/businessFriend/merchant/reach/reach",
+    "pages/businessFriend/merchant/setUp/setUp",
+    "pages/businessFriend/wholesaler/wholesaler",
+    "pages/businessFriend/merchant/index/index",
+    "pages/page/home/home",
+    "pages/businessFriend/information/information",
+    "pages/page/workIndex/workIndex",
+    "pages/page/userM/userM",
     "pages/page/goodsDetails/goodsDetails",
-    
-    
     "pages/page/mesEdit/mesEdit",
     "pages/page/editStoreAddress/editStoreAddress",
     "pages/page/main/main",
@@ -38,30 +28,16 @@
     "pages/page/mes/mes",
     "pages/admin/editGoods/editGoods",
     "pages/businessFriend/index/index",
-    "pages/businessFriend/merchant/follow/follow",
-    "pages/businessFriend/merchant/merchantInfo/merchantInfo",
-    "pages/businessFriend/merchant/dealUser/dealUser",
-    "pages/businessFriend/merchant/dealCus/dealCus",
+    
     "pages/login/register/register",
-    "pages/businessFriend/merchant/setUp/setUp",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",
     "pages/page/stockOrder/stockOrder",
     "pages/page/order/order",
-    
     "pages/role/order/order",
-    
     "pages/role/supplyOrder/supplyOrder",
-    
-    
-  
-    
-    
-    
     "pages/role/orderSelf/orderSelf",
-
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
-    
     "pages/cloudOrder/orderDetail/orderDetail",
     
     "pages/cloudOrder/orderList/orderList",
@@ -77,7 +53,6 @@
     
     "pages/role/orderDetails/orderDetails",
     "pages/admin/batch/batch",
-    "pages/businessFriend/wholesaler/wholesaler",
     "pages/businessFriend/serList/serList",
     
     
@@ -95,12 +70,9 @@
     "pages/businessFriend/merchant/newMerchant/newMerchant",
     "pages/businessFriend/merchant/serList/serList",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
-    "pages/businessFriend/merchant/details/details",
-    "pages/businessFriend/merchant/reach/reach",
     "pages/businessFriend/merchant/list/list",
     "pages/businessFriend/merchant/invite/invite",
     "pages/businessFriend/invitation/invitation",
-    "pages/businessFriend/information/information",
     "pages/admin/batchSet/batchSet",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",

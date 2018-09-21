@@ -1,30 +1,31 @@
 <view class='wk-cont'>
   <view class='wk-title'>
     <text>今日收入（元）</text>
-    <view>36588.00</view>
-    <image mode='widthFix' src='/image/xcx2.png'></image>
+    <view>{{todaySaleNum}}.00</view>
+    <image mode='widthFix' bindtap='goDerm' src='/image/xcx2.png'></image>
   </view>
   <view class='wk-bot'>
-    <view>343<view>关注人数</view><view class='wk-xian'></view></view>
-    <view>343<view>进货单数</view><view class='wk-xian'></view></view>
-    <view>343<view>付款订单</view></view>
+    <view>{{followNum}}<view>关注人数</view><view class='wk-xian'></view></view>
+    <view>{{payPurchaseOrders}}<view>付款进货单</view><view class='wk-xian'></view></view>
+    <view>{{payOrders}}<view>付款订单</view></view>
     <view class='wk-fg'></view>
-    <view>343<view>销售数量</view><view class='wk-xian'></view></view>
-    <view>343<view>待发货</view><view class='wk-xian'></view></view>
-    <view>343<view>待验证商友</view></view>
+    <view>{{verifyFriends}}<view>待验证商友</view></view>
+    <view>{{unshippedPurchaseOrders}}<view>待发货进货单</view><view class='wk-xian'></view></view>
+    <view>{{unshippedOrders}}<view>待发货订单</view><view class='wk-xian'></view></view>
   </view>
 </view>
 <view class='wk-cont wk-cont'>
   <view class='wx-bot-cont'>
-    <view><view><image mode='widthFix' src='/image/ad1.png'></image></view><view>供货单</view></view>
-    <view><view><image mode='widthFix' src='/image/ad2.png'></image></view><view>订单管理</view></view>
-    <view><view><image mode='widthFix' src='/image/ad3.png'></image></view><view>云享品</view></view>
-    <view><view><image mode='widthFix' src='/image/ad4.png'></image></view><view>商友录</view></view>
-    <view><view><image mode='widthFix' src='/image/ad5.png'></image></view><view>小云店</view></view>
+    <navigator   url='../../role/supplyOrder/supplyOrder'><view><image mode='widthFix' src='/image/ad1.png'></image></view><view>供货单</view></navigator>
+    <navigator   url='../../page/order/order'><view><image mode='widthFix' src='/image/ad2.png'></image></view><view>订单管理</view></navigator>
+    <navigator   url='../../admin/status/status'><view><image mode='widthFix' src='/image/ad3.png'></image></view><view>云享品</view></navigator>
+    <navigator   url='../../businessFriend/merchant/index/index'><view><image mode='widthFix' src='/image/ad4.png'></image></view><view>商友录</view></navigator>
+    <navigator   url='../../page/mesEdit/mesEdit'><view><image mode='widthFix' src='/image/ad5.png'></image></view><view>小云店</view></navigator>
   </view>
 </view>
+<view class='goHome' bindtap='goHome'><view><image src="/image/home.png"></image></view>回首页</view>
 <view class='bottom_M'>
   <navigator><image  src="/image/11.png"></image><view  class='active'>工作台</view></navigator>
   <navigator  url='../../businessFriend/merchant/index/index'><image  src="/image/admin2.png"></image><view>商友录</view></navigator>
-  <navigator  url='../userM/userM'><image  src="/image/pre.png"></image><view>我的</view></navigator>
+  <navigator  url='../userM/userM'><image  src="/image/w11.png"></image><view>我的</view></navigator>
 </view>

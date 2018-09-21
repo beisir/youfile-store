@@ -64,7 +64,8 @@
     <navigator class='weui-cell weui-cell_access' url='../userM/userM'>
       <image src='/image/u4.jpg' class='user-img user-img1'></image>
       <view class='weui-cell__bd'>
-        申请小云店
+        <!-- 申请小云店 -->
+        小云店工作台
       </view>
       <view class='weui-img'>
         <image src="/image/icl.png"></image>

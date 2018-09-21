@@ -16,7 +16,7 @@
 .wk-bot>view view{
   font-size: 28rpx;
 }
-.wx-bot-cont>view{
+.wx-bot-cont>view,.wx-bot-cont>navigator{
   width: 25%;margin-top: 30rpx;margin-bottom: 30rpx;display: inline-block;text-align: center;
 }
 .wk-bot>view .wk-xian{

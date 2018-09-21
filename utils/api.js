@@ -67,7 +67,10 @@ import {
   favoriteusersUrl,
   updateMoreCartUrl,
   updateMesUrl,
-  uploadLogoImgUrl
+  uploadLogoImgUrl,
+  storeIndexUrl,
+  setUserNameUrl,
+  getUserDetaislUrl
 } from './constUrl.js'
 const app = getApp()
 /**云享品管理 列表**/ 
@@ -89,6 +92,10 @@ function adminGoodsDown(data) {
 /**本店分类**/
 function adminShopCate(data) {
   return app.http.getRequest(adminShopCateUrl, data)
+}
+/**工作台**/
+function storeIndex(data) {
+  return app.http.getRequest(storeIndexUrl, data)
 }
 /**商品状态筛选**/
 function adminGoodsStatus(data) {
@@ -128,12 +135,17 @@ function addClass(data) {
 } 
 /**商品置顶**/
 function topGoods(data) {
-  return app.http.putRequest(topGoodsUrl, data)
+  return app.http.putRequest(topGoodsUrl+"?isTop=true", data)
 }
 /**商品状态筛选**/
 function classCodeList(data) {
   return app.pageRequest.pageGet(classCodeListUrl, data)
 }
+/**设置用户备注**/
+function setUserName(data) {
+  return app.http.postRequest(setUserNameUrl, data)
+} 
+
 /**商品详情**/
 function goodsDetails(data) {
   return app.http.getRequest(goodsDetailsUrl, data)
@@ -341,6 +353,10 @@ function apiSetUser(data) {
 function adminSetUser(data) {
   return app.http.getRequest(adminSetUserUrl, data)
 }
+/**获取用户信息**/
+function getUserDetaisl(data) {
+  return app.http.getRequest(getUserDetaislUrl, data)
+}
 /**权限设置**/
 function apiAddUser(data) {
   return app.http.putRequest(apiAddUserUrl+"?bfPripermission="+data)
@@ -418,5 +434,8 @@ module.exports = {
   updateMoreCart: updateMoreCart,
   updateMes: updateMes,
   uploadLogoImg: uploadLogoImg,
-  topGoods: topGoods
+  topGoods: topGoods,
+  storeIndex: storeIndex,
+  setUserName: setUserName,
+  getUserDetaisl: getUserDetaisl
 }

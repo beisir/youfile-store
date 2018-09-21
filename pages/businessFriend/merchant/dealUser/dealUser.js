@@ -11,7 +11,8 @@ Page({
     totalCount: 0,
     currentTab:-1,
     sortKey:'',
-    sortValue:''
+    sortValue:'',
+    value:''
   },
   emptyArr: function () {
     this.setData({
@@ -78,10 +79,13 @@ Page({
     var data = { orderCategory:3}
     if (sortKey!=''){
       data["sortKey"] = sortKey
+      data["sortValue"] = ""
     }
+    data["keyWords"] = value
+    
+    
     Api.dealUser(data)
       .then(res => {
-        console.log(res)
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
         console.log(detailList)

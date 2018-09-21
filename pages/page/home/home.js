@@ -19,7 +19,7 @@ Page({
     coverUrl:'',
     baseUrl:wx.getStorageSync('baseUrl'),
     likeShow:false,
-    limitShow: app.pageRequest.limitShow()
+    limitShow: wx.getStorageSync('identity')
   },
 
   /**
@@ -106,6 +106,7 @@ Page({
     } else if (currentTab == 3) {
       sortType = 'prices_desc'
     }
+    console.log(currentTab)
     Api.shopList({ keyword: '', sortType: sortType})
       .then(res => {
         var detailList = res.obj.result,
@@ -209,7 +210,7 @@ Page({
   topGoods:function(){
     var goodsId = this.data.goodsId,
       _this=this
-    Api.topGoods({ goodsId: goodsId, isTop:true})
+    Api.topGoods({goodsId: goodsId})
     .then(res=>{
       wx.showToast({
         title: "置顶成功",
