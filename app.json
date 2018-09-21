@@ -1,8 +1,29 @@
 {
   "pages":[
+    
+    
+    "pages/cloudOrder/orderDetail/orderDetail",
+    
+    
+    "pages/cloudOrder/applyStore/applyStore",
+    
+    "pages/cloudOrder/congratulation/congratulation",
+    "pages/page/user/user",
+    
+    
+    "pages/cloudOrder/myOrder/myOrder",
+    
+    
+    
+
+    
+    "pages/role/supplyVoucher/supplyVoucher",
+    
+    "pages/page/address/address",
+    
+    
     "pages/page/userDetails/userDetails",
     
-    "pages/page/user/user",
     "pages/page/userM/userM",
   
 
@@ -35,18 +56,8 @@
     
     "pages/role/orderSelf/orderSelf",
 
-    "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
     
-    "pages/cloudOrder/orderDetail/orderDetail",
-    
-    "pages/cloudOrder/orderList/orderList",
 
-    
-    
-    
-    "pages/cloudOrder/myOrder/myOrder",
-
-    "pages/role/supplyVoucher/supplyVoucher",
     
     
     
@@ -66,7 +77,6 @@
     
 
     
-    "pages/page/address/address",
     "pages/page/stockDetail/stockDetail",
     "pages/page/goodsDetails/goodsDetails",
     "pages/businessFriend/addWholesaler/addWholesaler",

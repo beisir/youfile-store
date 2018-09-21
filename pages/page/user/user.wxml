@@ -61,7 +61,7 @@
 </view>
 <view class='page_bd page_hd1'>
   <view class='weui-back'>
-    <navigator class='weui-cell weui-cell_access' url='../../businessFriend/merchant/index/index'>
+    <navigator class='weui-cell weui-cell_access' url='../userM/userM'>
       <image src='/image/u4.jpg' class='user-img user-img1'></image>
       <view class='weui-cell__bd'>
         申请小云店

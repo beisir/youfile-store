@@ -138,6 +138,13 @@ Page({
       obj
     ).then((res)=>{
       //'../success/success'
+      wx.showToast({
+        title: res.message,
+        icon: "none"
+      })
+      if(res.success){
+
+      }
     })
   },
 
@@ -228,28 +235,18 @@ Page({
   onLoad: function (options) {
     //订单分类[1 进货单|2 普通订单|3 购物车订单]
     let type = options.type;
+    let model = options.model;
+    model = { "goodsId": "180904092152685923df", "num": 1, "skuCode": "180904092152685923df_38a" }
+    if(!Array.isArray(model)){
+      model = [model]
+    }
     this.setData({
       //orderCategory : type,
       storeId : 123,    //delit
-      sendData: [
-        {
-          "goodsId": "180831183155243d4de6",
-          "num": 20,
-          "skuCode": "180831183155243d4de6_793"
-        }, {
-          "goodsId": "180831183155243d4de6",
-          "num": 50,
-          "skuCode": "180831183155243d4de6_edd"
-        }, {
-          "goodsId": "18090409224959318bf1",
-          "num": 100,
-          "skuCode": "0"
-        }
-      ]
+      sendData: model
     })
     this.getData();
     this.getDefaultAdress();
-        
 
   },
   swichNav: function (e) {

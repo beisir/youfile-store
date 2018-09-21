@@ -5,9 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-
   },
 
+  getData(){
+    app.getRequest("/api/ystore/order").then(res=>{
+      wx.showToast({
+        title: res.message,
+        icon:'none'
+      })
+      if(res.success){
+        this.setData({
+          msg:res.obj
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
