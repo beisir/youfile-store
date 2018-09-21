@@ -564,7 +564,7 @@ input:focus{
 .bottom_M{
   width:100%;position: fixed;bottom: 0;
 }
-.bottom_M>view{
+.bottom_M>view,.bottom_M>navigator{
   width: 33%;text-align: center;color: #888;font-size: 20rpx;display: inline-block;
   background: #fff;height: 104rpx;padding-top: 20rpx;
 }

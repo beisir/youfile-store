@@ -9,7 +9,8 @@ Page({
     countData: '',
     floor: '',
     storeMes: [],
-    storeGoods: []
+    storeGoods: [],
+    logo:''
   },
 
   /**
@@ -25,7 +26,8 @@ Page({
           countData: obj.countData,
           floor: obj.floor.floorInfo,
           storeMes: obj.store[0].store,
-          storeGoods: obj.store[0].goodsList
+          storeGoods: obj.store[0].goodsList,
+          logo: obj.store[0].store.logo
         })
       })
   },
@@ -38,6 +40,28 @@ Page({
     this.setData({
       showHide: true,
     })
+  },
+  chooseImage: function () {
+    var _this = this
+    Api.uploadImage("STORE")
+      .then(res => {
+        var url = JSON.parse(res).obj
+        _this.setData({
+          coverUrl: url
+        })
+        Api.uploadLogoImg({logo:url})
+          .then(res => {
+            wx.showToast({
+              title: res.message,
+              icon: 'none',
+              duration: 1000,
+              mask: true,
+              success: function () {
+                _this.closeShow()
+              }
+            })
+          })
+      })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -7,7 +7,9 @@ Page({
    */
   data: {
     limitShow: app.pageRequest.limitShow(),
+    storeId: wx.getStorageSync('storeId'),
     imgUrls: [],
+    baseUrl: wx.getStorageSync('baseUrl'),
     goodsSpecificationVOList:[],
     goodsSkuVOList:[],
     skuArrTwo: [],
@@ -50,15 +52,16 @@ Page({
     spectArrDifference:[],
     editCode:false,
     newCartList:[],
-    editOneName:false
+    editOneName:false,
+    store:''
   },
   /**
   * 生命周期函数--监听页面加载
   */
   onLoad: function (options) {
     var that = this,
-        goodsId='',
-        arr=[]
+        arr=[],
+        goodsId=''
     if(options.query){
       goodsId = options.query.goodsId
     }else{
@@ -356,6 +359,11 @@ Page({
        skuCode=goodsSkuVOList[i].skuCode
       }
     }
+    if (this.data.editOneName) {
+
+    }else{
+      
+    }
     if(goodsSpecificationVOList.length>0){
       if (skuCode==''){
         wx.showToast({
@@ -368,18 +376,35 @@ Page({
       }
     }
     if (status==0){
-      Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
-        .then(res => {
-          wx.showToast({
-            title: '添加成功',
-            icon: 'none',
-            duration: 1000,
-            mask: true
+      if (this.data.editOneName){
+        var data=[]
+        data.push({ goodsId: goodsId, num: num, skuCode: skuCode, storeId: this.data.storeId})
+        Api.updateMoreCart(JSON.stringify(data))
+          .then(res => {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+            wx.switchTab({
+              url: '../cartList/cartList'
+            })
           })
-          wx.switchTab({
-            url: '../cartList/cartList'
+      }else{
+        Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
+          .then(res => {
+            wx.showToast({
+              title: '添加成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+            wx.switchTab({
+              url: '../cartList/cartList'
+            })
           })
-        })
+      }
     }else{
       var model = { goodsId: goodsId, num: num, skuCode: skuCode }
       wx.navigateTo({
@@ -424,18 +449,33 @@ Page({
         url: '../address/address?model=' + model,
       })
     }else{
-      Api.addMoreCart(JSON.stringify(newArr))
-        .then(res => {
-          wx.showToast({
-            title: '添加成功',
-            icon: 'none',
-            duration: 1000,
-            mask: true
+      if (this.data.editCode){
+        Api.updateMoreCart(JSON.stringify(newArr))
+          .then(res => {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+            wx.switchTab({
+              url: '../cartList/cartList'
+            })
           })
-          wx.switchTab({
-            url: '../cartList/cartList'
+      }else{
+        Api.addMoreCart(JSON.stringify(newArr))
+          .then(res => {
+            wx.showToast({
+              title: '添加成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+            wx.switchTab({
+              url: '../cartList/cartList'
+            })
           })
-        })
+      }
     }
   },
   // 购买数量
@@ -675,9 +715,20 @@ Page({
       })
     Api.goodsDetails({ goodsId:goodsId })
       .then(res => {
-        var obj = res.obj,
+        var obj = res.obj.goodsVO,
+          store = res.obj.store,
           skuArrTwo = [],
           name = ''
+        console.log(store)
+        if (store.isFollow){
+          _this.setData({
+            likeShow:true
+          })
+        }else{
+          _this.setData({
+            likeShow: false
+          })
+        }
         if (obj.goodsSpecificationVOList.length > 1) {
           skuArrTwo.push(obj.goodsSpecificationVOList[1])
           name = obj.goodsSpecificationVOList[1].specName
@@ -694,7 +745,8 @@ Page({
           sell: obj.sellPrice,
           stockNum: obj.stockNum,
           mainImgUrl: obj.mainImgUrl,
-          nameTwo: name
+          nameTwo: name,
+          store: store
         },function(){
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {

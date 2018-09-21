@@ -1,0 +1,30 @@
+<view class='wk-cont'>
+  <view class='wk-title'>
+    <text>今日收入（元）</text>
+    <view>36588.00</view>
+    <image mode='widthFix' src='/image/xcx2.png'></image>
+  </view>
+  <view class='wk-bot'>
+    <view>343<view>关注人数</view><view class='wk-xian'></view></view>
+    <view>343<view>进货单数</view><view class='wk-xian'></view></view>
+    <view>343<view>付款订单</view></view>
+    <view class='wk-fg'></view>
+    <view>343<view>销售数量</view><view class='wk-xian'></view></view>
+    <view>343<view>待发货</view><view class='wk-xian'></view></view>
+    <view>343<view>待验证商友</view></view>
+  </view>
+</view>
+<view class='wk-cont wk-cont'>
+  <view class='wx-bot-cont'>
+    <view><view><image mode='widthFix' src='/image/ad1.png'></image></view><view>供货单</view></view>
+    <view><view><image mode='widthFix' src='/image/ad2.png'></image></view><view>订单管理</view></view>
+    <view><view><image mode='widthFix' src='/image/ad3.png'></image></view><view>云享品</view></view>
+    <view><view><image mode='widthFix' src='/image/ad4.png'></image></view><view>商友录</view></view>
+    <view><view><image mode='widthFix' src='/image/ad5.png'></image></view><view>小云店</view></view>
+  </view>
+</view>
+<view class='bottom_M'>
+  <navigator><image  src="/image/11.png"></image><view  class='active'>工作台</view></navigator>
+  <navigator  url='../../businessFriend/merchant/index/index'><image  src="/image/admin2.png"></image><view>商友录</view></navigator>
+  <navigator  url='../userM/userM'><image  src="/image/pre.png"></image><view>我的</view></navigator>
+</view>

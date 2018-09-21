@@ -205,6 +205,24 @@ Page({
       })
     }
   },
+  // 置顶
+  topGoods:function(){
+    var goodsId = this.data.goodsId,
+      _this=this
+    Api.topGoods({ goodsId: goodsId, isTop:true})
+    .then(res=>{
+      wx.showToast({
+        title: "置顶成功",
+        icon: 'none',
+        duration: 1000,
+        mask: true,
+        success: function () {
+          _this.closeShow()
+          _this.emptyArr()
+        }
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

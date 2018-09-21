@@ -45,16 +45,16 @@
   </view>
   <view class="ym_goodsstore">
             <view class="ym_goodsstoreh">
-                <view class="ym_goodsstorelogo"><image mode="aspectFill" src="http://pic.youlife.me/v1/tfs/T18RKTB4ET1RXrhCrK.jpg"></image></view>
+                <view class="ym_goodsstorelogo"><image mode="aspectFill" src="{{baseUrl}}{{store.logo}}"></image></view>
                 <view class="ym_goodsstorename">
-                    <view class="store-name-data">周大福珠宝国贸店</view>
-                    <view class="ym_gfrz"><image src="/image/dp.png"></image> 百荣世贸</view>
+                    <view class="store-name-data">{{store.storeName}}</view>
+                    <view class="ym_gfrz"><image src="{{baseUrl}}{{store.mallLogo}}"></image> {{store.mallName}}</view>
                 </view>
             </view>
             <view class="ym_goodsstoresprs">
-                <view class="ym_goodsstorel"><view class="store-goodsNum-data">35</view>全部商品</view>
-                <view class="ym_goodsstorer"><view class='store-goodsNum-data'>0</view>关注人数</view>
-                <view class="ym_goodsstorer"><view class='store-goodsNum-data'>0</view>进货商</view>
+                <view class="ym_goodsstorel"><view class="store-goodsNum-data">{{store.goodsNum}}</view>全部商品</view>
+                <view class="ym_goodsstorer"><view class='store-goodsNum-data'>{{store.favoriteNum.obj}}</view>关注人数</view>
+                <view class="ym_goodsstorer"><view class='store-goodsNum-data'>{{store.purchaserNum}}</view>进货商</view>
             </view>
             <view class="ym_goodsstoreop"  hidden='{{likeShow}}'>
                 <view class="ui-link"   bindtap='likeStore'><text class="ym_qzjoin_add1">+</text>关注</view>

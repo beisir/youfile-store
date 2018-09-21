@@ -84,7 +84,7 @@
  <view class='showHide' hidden='{{showHide}}'>
     <view class='sh-cont'>
       <view>分享</view>
-      <view>置顶</view>
+      <view bindtap='topGoods'>置顶</view>
       <view bindtap='editGoods'>编辑</view>
       <view bindtap='upGoods'>下架</view>
       <view bindtap='closeShow'>取消</view>

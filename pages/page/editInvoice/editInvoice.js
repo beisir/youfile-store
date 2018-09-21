@@ -1,29 +1,66 @@
-// pages/page/editInvoice/editInvoice.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    switch1Change: true,
+    switch1Change: '',
+    name:'',
+    show:true,
+    id: wx.getStorageSync("storeId"),
     data: [{ name: "个人发票", selected: false }, { name: "提供增值税普通发票", selected: false }, { name: "提供增值税专用发票", selected: false }]
   },
   switch1Change: function (e) {
-    console.log(e.detail.value)
-    // var code = this.data.switch1Change
-    // this.setData({
-    //   switch1Change:!code
-    // })
+   var checked=e.detail.value
+    if (checked){
+      this.setData({
+        show:false
+      })
+    }else{
+      this.setData({
+        show: true
+      })
+    }
+  },
+  selectList(e) {
+    const index1 = e.currentTarget.dataset.index;
+    let data = this.data.data;
+    data[index1].selected = !data[index1].selected
+    this.setData({
+      data: data
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var code = options.code,
-      name=options.name
-    this.setData({
-      switch1Change:code
-    })
+      name = options.name,
+      arr=[],
+     data = this.data.data
+    arr = name.split(",")
+    if (code=="true"){
+      console.log(333)
+      this.setData({
+        show:false,
+        switch1Change:true
+      })
+      for (var i = 0; i < data.length; i++) {
+        if (arr.indexOf(data[i].name) != -1) {
+          data[i].selected = true
+        }
+      }
+      this.setData({
+        data:data
+      })
+    } 
+    if (code=="false"){
+      this.setData({
+        show: true,
+        switch1Change:false
+      })
+    }
   },
 
   /**
@@ -51,7 +88,30 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    var _this = this,
+      isReceipt = this.data.show,
+      data = this.data.data,
+      id=wx.getStorageSync("storeId"),
+      receiptInfo=''
+    for(var i=0;i<data.length;i++){
+      if(data[i].selected){
+        receiptInfo += data[i].name+","
+      }
+    }
+    var data = { isReceipt:!isReceipt, id: id, receiptInfo: receiptInfo.slice(0, -1)}
+    Api.updateMes(data)
+      .then(res => {
+        wx.showToast({
+          title: '修改成功',
+          icon: 'none',
+          duration: 2000,
+          success: function () {
+            wx.navigateTo({
+              url: '../mesEdit/mesEdit',
+            })
+          }
+        })
+      })
   },
 
   /**

@@ -27,6 +27,7 @@ import {
   updateTemplateNameUrl,
   updateSpecNameUrl,
   addCartUrl,
+  topGoodsUrl,
   deleteTemplateUrl,
   addTempContUrl,
   deteleCartGoodsUrl,
@@ -65,7 +66,8 @@ import {
   dealUserUrl,
   favoriteusersUrl,
   updateMoreCartUrl,
-  updateMesUrl
+  updateMesUrl,
+  uploadLogoImgUrl
 } from './constUrl.js'
 const app = getApp()
 /**云享品管理 列表**/ 
@@ -124,6 +126,10 @@ function classList(data) {
 function addClass(data) {
   return app.http.postRequest(addClassUrl, data)
 } 
+/**商品置顶**/
+function topGoods(data) {
+  return app.http.putRequest(topGoodsUrl, data)
+}
 /**商品状态筛选**/
 function classCodeList(data) {
   return app.pageRequest.pageGet(classCodeListUrl, data)
@@ -324,7 +330,10 @@ function updateCover(data) {
 function updateMes(data) {
   return app.http.putRequest(updateMesUrl, data)
 }
-
+/**更换小云店logo**/
+function uploadLogoImg(data) {
+  return app.http.putRequest(uploadLogoImgUrl, data)
+}
 /**获取用户权限设置**/
 function apiSetUser(data) {
   return app.http.getRequest(apiSetUserUrl, data)
@@ -407,5 +416,7 @@ module.exports = {
   dealUser:dealUser,
   favoriteusers: favoriteusers,
   updateMoreCart: updateMoreCart,
-  updateMes: updateMes
+  updateMes: updateMes,
+  uploadLogoImg: uploadLogoImg,
+  topGoods: topGoods
 }

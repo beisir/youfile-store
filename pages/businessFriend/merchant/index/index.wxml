@@ -7,7 +7,7 @@
     <navigator url='../dealCus/dealCus'><view>{{buyPurchasers}}</view>成交进货商</navigator>
   </view>
 </view>
-<view class='bf-cont'>
+<view class='bf-cont bf-cont2'>
   <view class='me-title'><view></view>进货商管理</view>
   <view class='bt-view'>
     <view><view>{{purchaserNumber}}</view>进货商总数</view>
@@ -38,4 +38,9 @@
       </view>
     </navigator>
   </view>
+</view>
+<view class='bottom_M'>
+  <navigator url='../../../page/workIndex/workIndex'><image  src="/image/12.png"></image><view>工作台</view></navigator>
+  <navigator><image  src="/image/admin1.png"></image><view   class='active'>商友录</view></navigator>
+  <navigator  url='../../../page/userM/userM'><image  src="/image/pre.png"></image><view>我的</view></navigator>
 </view>

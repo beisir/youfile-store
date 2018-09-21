@@ -1,7 +1,7 @@
 <view class='mes-cont'>
   <view class="ym_jpstorename">
   <view class="ym_jpstorelogo">
-     <image class="store-logo" src="{{storeMes.logo}}" ></image>
+     <image class="store-logo" src="{{baseUrl}}{{logo}}" ></image>
     </view>
     {{storeMes.name}}<image class='xyd' src="/image/edit2.png" bindtap='editFun'></image>
     <navigator url='../updateMes/updateMes?name=name&value={{storeMes.name}}&types=小云店名称'><text> 云商号 ECP0580881</text></navigator>
@@ -11,13 +11,13 @@
   </navigator>
 </view>
 <view class="weui_cells">
-    <view>
+    <navigator url='../editStoreAddress/editStoreAddress?address={{storeMes.address}}&province={{storeMes.province}}&city={{storeMes.city}}&county={{storeMes.county}}'>
       <image  src="/image/positionico.png"></image>
       <text>{{storeMes.address}}</text>
       <view class='weui-view'>
       <image class='img' src="/image/icl.png"></image>
     </view>
-    </view>
+    </navigator>
     <view>
       <image  src="/image/lou.png"></image>
       <text> 所属商城</text>
@@ -42,9 +42,9 @@
     </view>
     <view>
       <text>  主营范围</text>
-      <view class='new-left'>
+      <navigator class='new-left' url='../main/main?name={{storeMes.businessScope}}'>
         {{storeMes.businessScope}}<image class='img' src="/image/icl.png"></image>
-      </view>
+      </navigator>
     </view>
 </view>
 <view class="weui_cells">
@@ -67,14 +67,14 @@
    <view class='weui-xian weui-xian1'></view>
 </view>
 <view class='weui-time'>
-  <navigator url='../editInvoice/editInvoice?code={{storeMes.isReceipt}}&name={{storeMes.receiptInfo}}'>发票设置{{storeMes.receiptInfo}}<view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator url='../editInvoice/editInvoice?code={{storeMes.isReceipt}}&name={{storeMes.receiptInfo}}'>发票设置<view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
   <navigator>邮费设置<view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
 </view>
   <view class='showHide' hidden='{{showHide}}'>
     <view class='sh-cont'>
       <view class='sh-title'>更换小云店logo</view>
-      <view bindtap='uploadImg'>拍照</view>
-      <view>从手机相册选取</view>
+      <view  bindtap="chooseImage">拍照</view>
+      <view  bindtap="chooseImage">从手机相册选取</view>
       <view bindtap='closeShow'>取消</view>
     </view>
   </view>

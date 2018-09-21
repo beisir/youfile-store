@@ -14,6 +14,7 @@ Page({
         name:"hello"
     },
     storeMes:[],
+    storeId: wx.getStorageSync('storeId'),
     hidden: true,
     idnex:'',
     leftVal:'',
@@ -42,23 +43,6 @@ Page({
           url: '../goodsDetails/goodsDetails?goodsId=' +gid+ "&code=" + index+"&name=one",
         })
       }
-    // var animation = wx.createAnimation({
-    //   duration: 300,
-    //   timingFunction: 'linear'
-    // })
-    // that.animation = animation
-    // animation.translateY(300).step()
-    // that.setData({
-    //   animationData: animation.export(),
-    //   hidden: false,
-    //   editDetailList
-    // })
-    // setTimeout(function () {
-    //   animation.translateY(0).step()
-    //   that.setData({
-    //     animationData: animation.export()
-    //   })
-    // }, 30)
   },
   //选择规格属性
   changeButton: function (e) {
@@ -277,17 +261,19 @@ Page({
    */
   deleteList(e) {
     const index = e.currentTarget.dataset.index,
-          goodsId=e.target.dataset.id;
+      goodsId = e.currentTarget.dataset.id,
+          _this=this
     Api.deteleCartGoods({ goodsId: goodsId})
     .then(res=>{
       wx.showToast({
         title: '删除成功',
         icon: 'none',
-        duration: 2000
+        duration: 2000,
+        success:function(){
+          _this.getList()
+        }
       })
-      this.getList()
     })
-    
   },
 
   /**
@@ -311,7 +297,7 @@ Page({
   /**
    * 绑定加数量事件
    */
-  addCart(data){
+  addCart(goodsId,data){
     Api.updateMoreCart(data)
       .then(res => {
         wx.showToast({
@@ -327,12 +313,13 @@ Page({
     let detailList = this.data.detailList;
     let num = detailList[index].shoppingCartSkuList[0].num;
     num = num + 1;
+    let storeId = this.data.storeId
     detailList[index].shoppingCartSkuList[0].num = num;
     detailList[index].num=num
     var data = detailList[index].shoppingCartSkuList
     var dataArr=[]
-    dataArr.push({goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"] })
-    // this.addCart({ goodsId: data[0]["goodsId"], shoppingCartVOList: JSON.stringify(dataArr)})
+    dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId:storeId})
+    this.addCart(JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
     });
@@ -346,6 +333,7 @@ Page({
     const index = e.currentTarget.dataset.index;
     const obj = e.currentTarget.dataset.obj;
     let detailList = this.data.detailList;
+    let storeId = this.data.storeId
     let num = detailList[index].shoppingCartSkuList[0].num;
     if (num <= 1) {
       return false;
@@ -354,7 +342,9 @@ Page({
     detailList[index].shoppingCartSkuList[0].num = num;
     detailList[index].num = num
     var data = detailList[index].shoppingCartSkuList
-    // this.addCart({ goodsId: data[0]["goodsId"], num:num, skuCode: data[0]["skuCode"] })
+    var dataArr = []
+    dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId: storeId })
+    this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
     });

@@ -12,6 +12,7 @@ class request {
         "Content-Type": "application/json;charset=UTF-8"
       },
       this.newData = {},
+      this.arrUrl = ["/api/shop/shoppingcart/goods/batch", "/admin/shop/specificationTemplate/addTemplateAndContent", "/api/shop/shoppingcart/shop/goods/batch/", "/api/user/register", "/api/smsCode", "/api/user/register", "/api/user/resetpassword", "/oauth/code/sms"],
       this.authHandler = new AuthHandler()
 
   }
@@ -57,13 +58,18 @@ class request {
       title: "正在加载",
     })
     return new Promise((resolve, reject) => {
-      if (url !== "/api/shop/shoppingcart/goods/batch" && url !== '/admin/shop/specificationTemplate/addTemplateAndContent') {
+      if (this.arrUrl.indexOf(url)==-1) {
         if (Array.isArray(data) || data == undefined) {
           this.newData.storeId = wx.getStorageSync('storeId')
           url = this.analysisUrl(url, this.newData)
         } else {
           data.storeId = wx.getStorageSync('storeId')
           url = this.analysisUrl(url, data)
+        }
+      }else{
+        if (url =='/api/shop/shoppingcart/shop/goods/batch/'){
+         var goodsId=JSON.parse(data)[0]["goodsId"]
+          url = '/api/shop/shoppingcart/shop/goods/batch/'+goodsId
         }
       }
       this.authHandler.getTokenOrRefresh().then(token => {

@@ -1,30 +1,50 @@
 {
   "pages":[
-    "pages/page/addressWe/addressWe",
+    "pages/page/home/home",
+    
+    "pages/page/user/user",
+    
+    
+    "pages/businessFriend/merchant/index/index",
+    
+    "pages/page/workIndex/workIndex",
+    
+    
+    
+    
+    "pages/page/userM/userM",
+    
+    
+    
     
     "pages/page/cartList/cartList",
     
-    "pages/page/editInvoice/editInvoice",
     
-    "pages/page/home/home",
+    
+    
+    
+    
+    "pages/page/goodsDetails/goodsDetails",
+    
     
     "pages/page/mesEdit/mesEdit",
-    
+    "pages/page/editStoreAddress/editStoreAddress",
+    "pages/page/main/main",
+    "pages/page/cost/cost",
+    "pages/page/editInvoice/editInvoice",
+    "pages/page/addressWe/addressWe",
     "pages/page/updateMes/updateMes",
-    "pages/page/user/user",
     "pages/admin/spec/spec",
     "pages/page/mes/mes",
     "pages/admin/editGoods/editGoods",
     "pages/businessFriend/index/index",
     "pages/businessFriend/merchant/follow/follow",
     "pages/businessFriend/merchant/merchantInfo/merchantInfo",
-    "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/merchant/dealUser/dealUser",
     "pages/businessFriend/merchant/dealCus/dealCus",
     "pages/login/register/register",
     "pages/businessFriend/merchant/setUp/setUp",
     "pages/businessFriend/setUp/setUp",
-    "pages/page/userM/userM",
     "pages/page/userDetails/userDetails",
     "pages/page/stockOrder/stockOrder",
     "pages/page/order/order",
@@ -68,7 +88,6 @@
 
     "pages/page/address/address",
     "pages/page/stockDetail/stockDetail",
-    "pages/page/goodsDetails/goodsDetails",
     "pages/page/stockSelf/stockSelf",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
