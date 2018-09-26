@@ -1,5 +1,6 @@
 // pages/self/self.js
 const app = getApp();
+const util = require('../../../utils/util.js')
 Page({
 
   /**
@@ -59,11 +60,16 @@ Page({
       list = this.data.showList;
 
     app.http.deleteRequest("/api/order/" + del).then((res) => {
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
       })
+      if (res.success) {
+        setTimeout(() => {
+          wx.navigateBack({})
+        }, 800)
+      }
+    })
   },
 
 
@@ -130,7 +136,6 @@ Page({
       num: options.num,
       status: options.status
     })
-    this.getData();
   },
  
   resetData(data) {
@@ -161,94 +166,31 @@ Page({
   },
   getData(){
     app.http.getRequest("/api/order/byordernumber/"+this.data.num).then((res)=>{
+      //创建时间
+      try {
+        res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
+      } catch (e) { }
+
       this.setData({
-        order: res.obj
+        order: res.obj,
+        status: res.obj.orderStatus //状态
       })
+      this.resetData([this.data.order]);
+      
+      //倒计时
+      this.total_micro_second = res.timeoutExpressSecond
+      util.count_down(this)
+
     })
-    this.setData({
-      order: {
-          "bizSystemNo": "string",
-          "cancelReason": "string",
-          "claimGoodsNum": "string",
-          "closedReason": "string",
-          "expressCompany": "string",
-          "expressNumber": "string",
-          "expressStatus": "string",
-          "goodsInfos": [
-            {
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [
-                {
-                  "amount": 4.5,
-                  "cover": "string",
-                  "goodsDesc": "颜色:红色",
-                  "goodsId": 1000001,
-                  "goodsName": "脉动",
-                  "id": 0,
-                  "marketPrice": 4.5,
-                  "num": 2,
-                  "orderDetailNumber": 1000001,
-                  "orderNumber": 1000001,
-                  "sellPrice": 4.5,
-                  "skuCode": 1000001,
-                  "unitPrice": 4.5,
-                  "wholesalePrice": 4.5
-                }
-              ]
-            }
-          ],
-          "id": 1,
-          "num": 0,
-          "orderAmount": 1000001,
-          "orderCategory": "string",
-          "orderNumber": 1000001,
-          "orderStatus": "string",
-          "orderType": "string",
-          "payAmount": 100,
-          "payDate": "2018-09-06T11:08:03.058Z",
-          "payWay": "string",
-          "postageinfo": {
-            "postagePrice": 0,
-            "postageType": "string"
-          },
-          "receiptInfo": {
-            "depositBank": "string",
-            "depositBankNumber": "string",
-            "identificationNumber": "string",
-            "invoiceCategory": "string",
-            "invoiceTitle": "string",
-            "invoiceType": "string",
-            "isInvoice": false,
-            "registeredAddress": "string",
-            "registererMobile": "string"
-          },
-          "receiveMerchant": {
-            "merchantNumber": 100001
-          },
-          "sort": 0,
-          "storeInfo": {
-            "storeEnName": "nike",
-            "storeId": 100001,
-            "storeName": "耐克"
-          },
-          "timeoutDate": "2018-09-06T11:08:03.058Z",
-          "timeoutExpress": 0,
-          "timeoutExpressSecond": 0,
-          "timeoutExpressType": "string",
-          "totalRefundAmount": 0,
-          "totalRefundTimes": 0,
-          "userInfo": {
-            "nickName": "string",
-            "userId": 100011,
-            "userName": "string"
-          },
-          "userMemo": "string"
-        }
-    })
-    this.resetData([this.data.order]);
+  },
+  //电话
+  call() {
+    let tel = this.data.order.storeInfo.servicePhone;
+    if (tel) {
+      wx.makePhoneCall({
+        phoneNumber: tel,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -261,7 +203,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getData()
   },
 
   /**

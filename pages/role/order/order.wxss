@@ -25,6 +25,10 @@
   
 }
 .textarea{
-width: 100%;
+  width: 680rpx;
+display: block;
 height: 120rpx;
+border:1px solid #dedede;
+padding: 10rpx;
+margin: 10rpx auto;
 }

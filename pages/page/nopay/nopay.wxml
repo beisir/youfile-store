@@ -30,8 +30,8 @@
       <image src="/image/nz.png"></image>等待买家付款
     </view>
     <view class='np-right'>
-      <view>剩余时间：24时10分</view>
-      <view>需付款：￥2324:00</view>
+      <view>剩余时间：{{clock}}</view>
+      <view>需付款：￥{{order.orderAmount}}</view>
     </view>
   </view>
 
@@ -53,8 +53,16 @@
     <image src="/image/mon.png"></image>交易成功
   </view>
   <!-- 交易关闭 -->
-  <view class='np-title' wx:if="{{status=='closed'}}">
-    <image src="/image/mon.png"></image>交易关闭
+  <view class='flex-box' wx:if="{{status=='closed' || status=='cancelled' }}">
+    <view class='np-title'>
+      <image src="/image/qx.png"></image>交易关闭
+    </view>
+    <view class='np-right'>
+      <view>原因：
+        <text wx:if="{{status=='closed'}}">{{order.closedReason}}</text>
+        <text wx:if="{{status=='cancelled'}}">{{order.cancelReason}}</text>
+      </view>
+    </view>
   </view>
 </view>
 <view class='np-ct'>
@@ -119,7 +127,7 @@
     <text>{{order.createDate}}</text>
   </view>
 
-  <block wx:if="{{status!='closed'}}">
+  <block wx:if="{{status!='closed'&& status!='cancelled'}}">
     <block wx:if="{{status!='unpaid'}}">
       <!-- <view>交易单号
     <text>83578475389</text>
@@ -139,9 +147,9 @@
       </view>
     </block>
   </block>
-  <block wx:if="{{status=='closed'}}">
+  <block wx:if="{{status=='closed'|| status=='cancelled'}}">
     <view>关闭时间
-      <text>{{order.finishTime}}</text>
+      <text></text>
     </view>
   </block>
 </view>
@@ -150,14 +158,14 @@
   <view>发票信息
     <text>{{order.receiptInfo?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
-  <view wx:if="{{item.invoiceType=='公司'}}">
+  <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
       <text>{{order.receiptInfo.invoiceTitle}}</text>
     </view>
     <view>纳税人识别号
       <text>{{order.receiptInfo.identificationNumber}}</text>
     </view>
-    <block wx:if="{{item.invoiceCategory=='增值税专用发票'}}">
+    <block wx:if="{{order.receiptInfo.invoiceCategory=='增值税专用发票'}}">
       <view>注册地址
         <text>{{order.receiptInfo.registeredAddress}}</text>
       </view>
@@ -207,7 +215,7 @@
     <button>查看物流</button>
   </block>
 
-  <block wx:if="{{status=='finish' || status=='closed'}}">
+  <block wx:if="{{status=='finish' || status=='closed'|| status=='cancelled'}}">
     <button data-index='{{index}}' data-type='del' bindtap='showModal'>删除订单</button>
   </block>
 </view>

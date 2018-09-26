@@ -1,4 +1,5 @@
 // pages/role/supplyVoucher/supplyVoucher.js
+const app = getApp();
 Page({
 
   /**
@@ -10,21 +11,27 @@ Page({
   },
   choseImg(){
 
-    wx.chooseImage({
-      count:1,
-      success: (res)=> {
-        var tempFilePaths = res.tempFilePaths
-        this.setData({
-          url: tempFilePaths
-        })
+    // wx.chooseImage({
+    //   count:1,
+    //   success: (res)=> {
+    //     var tempFilePaths = res.tempFilePaths
+    //     this.setData({
+    //       url: tempFilePaths
+    //     })
         
-      }
-    })
-
+    //   }
+    // })
+    app.http.chooseImage().then(res=>{
+      res = JSON.parse(res)
+      this.setData({
+        url:res.obj,
+        showUrl: this.data.base + res.obj
+      })
+    });
   },
   showImg(){
     wx.previewImage({
-      urls: this.data.url,
+      urls: [this.data.url],
     })
   },
   //输入
@@ -35,30 +42,41 @@ Page({
     })
   },
   upload(){
-    let url = this.data.url.trim(),
-        txt = this.data.val.trim();
+    let url = this.data.url,
+        txt = this.data.val.trim(),
+        num = this.data.num;
+    console.log(url[0])    
     if(url && txt){
-      wx.uploadFile({
-        url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
-        filePath: tempFilePaths[0],
-        name: 'file',
-        formData: {
-          'user': 'test'
-        },
-        success: (res) => {
-          var data = res.data
-          //do something
+      app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
+      app.http.postRequest("/api/order/orderpayment/"+num+"/uploadpayvoucher",{
+        orderNumber:num,
+        payVoucher:this.data.url,
+        voucherDesc:txt
+      }).then(res=>{
+        wx.showToast({
+          title: res.message,
+          icon:'none'
+        })
+        if(res.success){
+          setTimeout(()=>{
+            wx.navigateBack()
+          },800)
         }
       })
     }else{
-      
+      wx.showToast({
+        title: '请上传凭证并填写描述',
+      })
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      num:options.num,
+      base:"https://dev.image.youlife.me/"
+    })
   },
 
   /**

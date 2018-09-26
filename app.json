@@ -1,6 +1,15 @@
 {
   "pages":[
     "pages/page/home/home",
+<<<<<<< HEAD
+=======
+    "pages/page/stockOrder/stockOrder",
+    
+    "pages/role/supplyOrder/supplyOrder",
+    
+    "pages/role/order/order",
+    "pages/page/user/user",
+>>>>>>> 1358b0af20b1433e0de95c366c9a260a4ac2a336
     
     "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
@@ -26,7 +35,6 @@
     "pages/cloudOrder/applyStore/applyStore",
     
     "pages/cloudOrder/congratulation/congratulation",
-    "pages/page/user/user",
     
     
     "pages/cloudOrder/myOrder/myOrder",
@@ -57,10 +65,15 @@
     "pages/login/register/register",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",
-    "pages/page/stockOrder/stockOrder",
-    "pages/page/order/order",
-    "pages/role/order/order",
-    "pages/role/supplyOrder/supplyOrder",
+    
+    
+    
+    
+  
+    
+    
+    
+
     "pages/role/orderSelf/orderSelf",
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
     

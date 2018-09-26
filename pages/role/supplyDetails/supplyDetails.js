@@ -1,5 +1,6 @@
 // pages/nopay/nopay.js
 let orderCom = require('../order/orderCommon.js');
+const util = require('../../../utils/util.js');
 const app = getApp();
 Page({
 
@@ -222,7 +223,7 @@ Page({
   afterOperation() {
     this.closeModal();
     setTimeout(() => {
-      this.getData();
+      this.getData(true);
     }, 800)
   },
   closeModal() {
@@ -354,129 +355,37 @@ Page({
       phoneNumber: '15010443530',
     })
   },
+  // 保存备注
+  saveRemark(e) {
+    let val = e.detail.value;
+    app.http.putRequest("/admin/order/{orderNumber}/addRemark", {
+      orderNumber: this.data.num,
+      remark: val
+    }).then(res => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+      if (res.success) {
 
+      }
+    })
+  },
 
   getData() {
     app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {
-      // this.setData({
-      //   order: res.obj
-      // })
-      console.log(orderCom)
+      this.setData({
+        order: res.obj,
+        status: res.obj.orderStatus  //状态
+      })
       this.setData({
         'order.createDate': orderCom.timeFormat(this.data.order.createDate),
         'order.payDate': orderCom.timeFormat(this.data.order.payDate),
         'order.finishTime': orderCom.timeFormat(this.data.order.finishTime),
       })
-    })
-    this.setData({
-      order: {
-        "goodsInfos": [
-          {
-            "orderDetails": [
-              {
-                "id": 53,
-                "orderDetailNumber": "201809071509355464096",
-                "orderNumber": "1037961561102090240",
-                "skuCode": "180831183155243d4de6_793",
-                "goodsId": "180831183155243d4de6",
-                "goodsName": " BR4066 L码",
-                "num": 2,
-                "unitPrice": 500,
-                "amount": 1000,
-                "marketPrice": 500,
-                "sellPrice": 500,
-                "wholesalePrice": 300,
-                "cover": null,
-                "goodsDesc": null
-              },
-              {
-                "id": 54,
-                "orderDetailNumber": "201809071509355474096",
-                "orderNumber": "1037961561102090240",
-                "skuCode": "180831183155243d4de6_8a1",
-                "goodsId": "180831183155243d4de6",
-                "goodsName": "短袖T恤",
-                "num": 2,
-                "unitPrice": 600,
-                "amount": 1200,
-                "marketPrice": 600,
-                "sellPrice": 600,
-                "wholesalePrice": 400,
-                "cover": null,
-                "goodsDesc": null
-              }
-            ],
-            "goodsId": "180831183155243d4de6",
-            "goodsName": "阿迪达斯ADIDAS 2018夏季",
-            "goodEnName": "adidas",
-            "mainImgUrl": "http://img2.imgtn.bdimg.com/it/u=1758226492,603315287&fm=214&gp=0.jpg"
-          }
-        ],
-        "storeInfo": {
-          "storeId": "123",
-          "storeName": "三只松鼠",
-          "storeEnName": "three",
-          "logo": "松鼠logo",
-          "merchantNumber": "04958613",
-          "openingTime": "7:00-15:00",
-          "servicePhone": "18231565894",
-          "wechatNumber": "wechart1",
-          "address": "北京海淀"
-        },
-        "userInfo": {
-          "userId": "2a9153bffb2bdcf5cedc92019fbba79b",
-          "userName": "16888888888",
-          "nickName": "youkedmin"
-        },
-        "receiveMerchant": {
-          "merchantNumber": "04958613"
-        },
-        "receiptInfo": null,
-        "postageinfo": {
-          "postageType": "0",
-          "postagePrice": 10
-        },
-        "consigneeInfo": {
-          "provinceCode": null,
-          "province": null,
-          "cityCode": null,
-          "city": null,
-          "countyCode": null,
-          "county": null,
-          "detailAddress": "北京市朝阳区望京sohu t1 502",
-          "userName": "老王",
-          "userPhone": "8888888888",
-          "postCode": "00000"
-        },
-        "id": 33,
-        "orderNumber": "1037961561102090240",
-        "orderAmount": 2210,
-        "timeoutExpress": 72,
-        "timeoutExpressType": "hour",
-        "timeoutExpressSecond": 2592000,
-        "timeoutDate": 1538896295000,
-        "orderStatus": "cancelled",
-        "orderStatusChildSta": "cancelled",
-        "userMemo": "请尽快出货",
-        "num": 4,
-        "totalRefundAmount": null,
-        "totalRefundTimes": null,
-        "bizSystemNo": "00",
-        "payAmount": null,
-        "payDate": null,
-        "payWay": null,
-        "sort": 0,
-        "orderType": "2",
-        "orderCategory": "3",
-        "claimGoodsNum": null,
-        "cancelReason": "不想要了",
-        "closedReason": null,
-        "expressStatus": null,
-        "expressNumber": null,
-        "expressCompany": null,
-        "createDate": 1536304295000,
-        "finishTime": null
-      }
+      //倒计时
+      this.total_micro_second = res.timeoutExpressSecond
+      util.count_down(this)
     })
   },
   /**

@@ -1,5 +1,6 @@
 // pages/nopay/nopay.js
 const app = getApp();
+const util = require('../../../utils/util.js');
 Page({
 
   /**
@@ -132,7 +133,8 @@ Page({
     this.setData({
       changeModal: fasle,
       show: false,
-      sureModal:false
+      sureModal:false,
+      show3:false
     })
   },
   showModal(e) {
@@ -163,12 +165,6 @@ Page({
         }; break;  
     }
     this.setData(obj)
-  },
-  closeModal() {
-    this.setData({
-      changeModal: fasle,
-      show: false
-    })
   },
   resetData(data) {
     let arr = [];
@@ -209,15 +205,21 @@ Page({
     }
     app.http.requestAll("/admin/order/" + num + "/updatetotal", {
       orderNumber: num,
-      totalOrderUpdateVO: {
-        orderAmount: money
-      }
+      orderAmount: money
     }, "PUT").then((res) => {
       wx.showToast({
         title: res.message,
         icon: none
       })
+      this.afterOperation()
     })
+  },
+  //刷新数据
+  afterOperation() {
+    this.closeModal();
+    setTimeout(() => {
+      this.getData();
+    }, 800)
   },
   //确认收款
   sureGet(){
@@ -230,7 +232,23 @@ Page({
         title: res.message,
         icon: none
       })
-      this.closeModal()
+      this.afterOperation()
+    })
+  },
+  // 保存备注
+  saveRemark(e) {
+    let val = e.detail.value;
+    app.http.putRequest("/admin/order/{orderNumber}/addRemark", {
+      orderNumber: this.data.num,
+      remark: val
+    }).then(res => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+      if (res.success) {
+
+      }
     })
   },
   // 关闭订单
@@ -240,6 +258,7 @@ Page({
       show3: true,
       closeNum: num
     })
+    
   },
   sureClose() {
 
@@ -252,6 +271,7 @@ Page({
         title: res.message,
         icon: none
       })
+      this.afterOperation()
     })
   },
   selecRes(e) {
@@ -282,6 +302,7 @@ Page({
   },
 //时间戳转化成时间格式
   timeFormat(timestamp) {
+    if(!timestamp){return ""}
     //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
     var time = new Date(timestamp);
     var year = time.getFullYear();
@@ -297,7 +318,8 @@ Page({
   getData() {
     app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {
       this.setData({
-        order: res.obj
+        order: res.obj,
+        status: res.obj.orderStatus  //状态
       })
       this.resetData([this.data.order]);
       this.setData({
@@ -305,6 +327,9 @@ Page({
         'order.payDate': this.timeFormat(this.data.order.payDate),
         'order.finishTime': this.timeFormat(this.data.order.finishTime),
       })
+      //倒计时
+      this.total_micro_second = res.timeoutExpressSecond
+      util.count_down(this)
     })
   },
   /**

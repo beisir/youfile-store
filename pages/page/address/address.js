@@ -7,74 +7,10 @@ Page({
    */
   data: {
     currentTab: 0,
-    carts: [{
-      "goodEnName": "脉动",
-      "goodsId": 1000001,
-      "goodsName": "脉动",
-      "mainImgUrl": "脉动",
-      "orderDetails": [{
-        "amount": 4.5,
-        "cover": "string",
-        "goodsDesc": "颜色:红色",
-        "goodsId": 1000001,
-        "goodsName": "脉动",
-        "id": 0,
-        "marketPrice": 4.5,
-        "num": 2,
-        "orderDetailNumber": 1000001,
-        "orderNumber": 1000001,
-        "sellPrice": 4.5,
-        "skuAmount": 4.5,
-        "skuCode": 1000001,
-        "wholesalePrice": 4.5
-      }],
-      "qrcode": "脉动",
-      "storeId": "脉动"
-    }, {
-      "goodEnName": "脉动",
-      "goodsId": 1000001,
-      "goodsName": "脉动",
-      "mainImgUrl": "脉动",
-      "orderDetails": [{
-        "amount": 4.5,
-        "cover": "string",
-        "goodsDesc": "颜色:红色",
-        "goodsId": 1000001,
-        "goodsName": "脉动",
-        "id": 0,
-        "marketPrice": 4.5,
-        "num": 2,
-        "orderDetailNumber": 1000001,
-        "orderNumber": 1000001,
-        "sellPrice": 4.5,
-        "skuAmount": 4.5,
-        "skuCode": 1000001,
-        "wholesalePrice": 4.5
-      },
-      {
-        "amount": 4.5,
-        "cover": "string",
-        "goodsDesc": "颜色:蓝色",
-        "goodsId": 1000001,
-        "goodsName": "脉动",
-        "id": 0,
-        "marketPrice": 4.5,
-        "num": 2,
-        "orderDetailNumber": 1000001,
-        "orderNumber": 1000001,
-        "sellPrice": 4.5,
-        "skuAmount": 4.5,
-        "skuCode": 1000001,
-        "wholesalePrice": 4.5
-      },
-      ],
-      "qrcode": "脉动",
-      "storeId": "脉动"
-    }],
     hiddenSelt: false,
     hiddenSend: true,
     address:"",  //地址
-    invoice:{},  //发票
+    invoice:"",  //发票
     phone:"", //电话
     msg:"",  //留言
     sendData:{} //获取列表传递参数
@@ -99,14 +35,14 @@ Page({
     }else if(type == 1){
       //物流
       let add = this.data.address;
-      if(add={}){
+      if(add=={}||!add){
         wx.showToast({
           title: '请选择收货人信息',
           icon: 'none'
         })
         return false;
       }
-      obj.address = add;
+      obj.consigneeInfo = add;
       obj.orderType = 2;
     }
 
@@ -129,11 +65,13 @@ Page({
         });
       }
     })
-    obj.receiptInfo = this.data.invoice;  //发票
+    if (this.data.invoice){
+      obj.receiptInfo = this.data.invoice;  //发票
+    }
     obj.userMemo = this.data.msg  //留言
     obj.orderGoods = goodsArr;  //商品
-    obj.orderCategory = 1 //this.data.orderCategory //订单种类
-    obj.valuationWay = 1 //delit
+    obj.orderCategory = this.data.orderCategory //订单种类
+    obj.valuationWay = 1 //delit 计价方式
     app.http.postRequest("/api/order/",
       obj
     ).then((res)=>{
@@ -192,7 +130,7 @@ Page({
   //获取默认地址
   getDefaultAdress(){
     //userid
-    app.http.getRequest("/admin/user/usershopaddress/123/default").then((res)=>{
+    app.http.getRequest("/admin/user/usershopaddress/default").then((res)=>{
       if(res.obj){
         this.setData({
           address:res.obj
@@ -233,16 +171,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
+    let userType = wx.getStorageSync('identity'),
+      storeId = wx.getStorageSync('storeId'),
+      adminType= wx.getStorageSync("admin");
+
     //订单分类[1 进货单|2 普通订单|3 购物车订单]
-    let type = options.type;
-    let model = options.model;
-    model = { "goodsId": "180904092152685923df", "num": 1, "skuCode": "180904092152685923df_38a" }
+    let orderType = 1;
+    adminType=1;//delit
+    if (adminType==1){
+      //普通用户
+      orderType = 3;
+    } else if (adminType == 3){
+      //批发商
+      orderType = 1;  
+    }
+
+    //let type = options.type;
+    let model = JSON.parse(options.model);
+    //model = { "goodsId": "180904092152685923df", "num": 1, "skuCode": "180904092152685923df_38a" }
     if(!Array.isArray(model)){
       model = [model]
     }
     this.setData({
-      //orderCategory : type,
-      storeId : 123,    //delit
+      orderCategory: orderType,
+      storeId: storeId ?storeId:123,    
       sendData: model
     })
     this.getData();

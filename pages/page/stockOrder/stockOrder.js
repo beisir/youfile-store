@@ -27,13 +27,28 @@ Page({
     navindex: 0,
     whitch: 'all', //切换
     //理由
-    reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
+    reason: [{
+      title: "无法联系上买家",
+      selected: true
+    }, {
+      title: "买家误拍或重拍",
+      selected: false
+    }, {
+      title: "买家无诚意完成交易",
+      selected: false
+    }, {
+      title: "缺货无法交易",
+      selected: false
+    }, {
+      title: "其他",
+      selected: false
+    }],
     cancelIndex: 0,
-   
+
 
   },
-  
-  
+
+
   showModal(e) {
     let type = e.currentTarget.dataset.type,
       num = e.currentTarget.dataset.num,
@@ -49,18 +64,24 @@ Page({
         obj = {
           sureModal: true,
           getNum: e.currentTarget.dataset.num
-        }; break;
+        };
+        break;
       case 'del':
         let index = e.currentTarget.dataset.index;
         obj = {
           delModal: true,
-          delNum: { num: num, index: index }
-        }; break;
+          delNum: {
+            num: num,
+            index: index
+          }
+        };
+        break;
       case 'cancel':
         obj = {
           cancelModal: true,
           cancelNum: num
-        }; break;
+        };
+        break;
       case 'after':
         obj = {
           afterModal: true,
@@ -71,9 +92,9 @@ Page({
   },
   closeModal() {
     this.setData({
-      codeModal: false,  //取货码
-      sureModal: false,  //收款
-      delModal: false,  //删除
+      codeModal: false, //取货码
+      sureModal: false, //收款
+      delModal: false, //删除
       cancelModal: false, //取消订单
       afterModal: false //售后
     })
@@ -103,15 +124,15 @@ Page({
       this.afterOperation();
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: "none"
       })
     })
   },
   //上传还款凭证
-  uploadVoucher(e){
+  uploadVoucher(e) {
     let num = e.currentTarget.dataset.num;
     wx.navigateTo({
-      url: '../../role/supplyVoucher/supplyVoucher?num'+ num,
+      url: '../../role/supplyVoucher/supplyVoucher?num=' + num,
     })
   },
   // 确认收货
@@ -137,11 +158,12 @@ Page({
           icon: 'none'
         })
         //删除成功剔除
-        if (code == 0) {
-          list.splice(del.index, 1);
-          this.setData({
-            showList: list
-          })
+        if (res.success ) {
+          // list.splice(del.index, 1);
+          // this.setData({
+          //   showList: list
+          // })
+          this.afterOperation();
         }
       })
     }
@@ -161,7 +183,7 @@ Page({
         whitch: state
       })
     }
-    this.getList();
+    this.getList(true);
   },
   searchBtn(e) {
     this.setData({
@@ -170,239 +192,116 @@ Page({
   },
 
   //跳转
-  toOrderDetail(e){
+  toOrderDetail(e) {
     let num = e.currentTarget.dataset.num,
       status = e.currentTarget.dataset.status,
       type = e.currentTarget.dataset.type,
-      tourl="";
-    if(type == 1){
+      tourl = "";
+    if (type == 1) {
       //自提
       tourl = "../stockSelf/stockSelf";
-    }else{
+    } else {
       tourl = "../stockDetail/stockDetail";
-    }  
-  
+    }
+
     wx.navigateTo({
-      url: tourl + "?status=" + status+"&num="+num,
+      url: tourl + "?status=" + status + "&num=" + num,
     })
-  }, 
+  },
 
   //刷新数据
   afterOperation() {
     this.closeModal();
     setTimeout(() => {
-      this.getList();
+      this.getList(true);
     }, 800)
   },
 
 
   //获取订单列表
-  getList() {
-    
-    app.http.getRequest("/api/order/user/store/123/ordercategory/1/orderstatus/" + this.data.whitch , {
+  getList(re) {
+    if (re) {
+      app.pageRequest.pageData.pageNum = 0;
+      this.setData({
+        showList: []
+      })
+    }
+    app.pageRequest.pageGet("/api/order/user/store/123/ordercategory/1/orderstatus/" + this.data.whitch, {
       //pageNum:1,
       //pageSize:100
     }).then((res) => {
       //this.resetData(res.obj.result);
       //this.resetData(this.data.orderList.obj.result)
-      this.setData({
-        showList: this.data.orderList.obj.result
-        //showList: res.obj.result
-      })
-    })
-
-    this.setData({
-      orderList: {
-        "code": 0,
-        "message": "string",
-        "obj": {
-          "result": [{
-            "bizSystemNo": "string",
-            "cancelReason": "string",
-            "claimGoodsNum": "string",
-            "closedReason": "string",
-            "expressCompany": "string",
-            "expressNumber": "string",
-            "expressStatus": "string",
-            "consigneeInfo": {
-              "userName": 'zzz',
-              "ueerPhone": 13333333333
-            },
-            "orderStatusChildSta": "unForm",
-            "goodsInfos": [{
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [{
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:红色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              }],
-              "qrcode": "脉动",
-              "storeId": "脉动"
-            }, {
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [{
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:红色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              },
-              {
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:蓝色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              },
-              ],
-              "qrcode": "脉动",
-              "storeId": "脉动"
-            }],
-            "id": 1,
-            "num": 10,
-            "orderAmount": 1000001,
-            "orderCategory": "string",
-            "orderNumber": 1000001,
-            //   "unpaid":
-            //   "paid":
-            //    "shipped":
-            //    "closed":
-            //  "finish":
-            "orderStatus": "unpaid",
-            "orderType": "2",
-            "payAmount": 100,
-            "payDate": "2018-09-06T02:53:22.470Z",
-            "payWay": "string",
-            "postageinfo": {
-              "postagePrice": 0,
-              "postageType": "string"
-            },
-            "receiptInfo": {
-              "depositBank": "string",
-              "depositBankNumber": "string",
-              "identificationNumber": "string",
-              "invoiceCategory": "string",
-              "invoiceTitle": "string",
-              "invoiceType": "string",
-              "isInvoice": false,
-              "registeredAddress": "string",
-              "registererMobile": "string"
-            },
-            "sort": 0,
-            "storeInfo": {
-              "merchantNumber": 100001,
-              "storeEnName": "nike",
-              "storeId": 100001,
-              "storeName": "耐克"
-            },
-            "timeoutDate": "2018-09-06T02:53:22.470Z",
-            "timeoutExpress": 0,
-            "timeoutExpressSecond": 0,
-            "timeoutExpressType": "string",
-            "totalRefundAmount": 0,
-            "totalRefundTimes": 0,
-            "userInfo": {
-              "nickName": "string",
-              "userId": 100011,
-              "userName": "string"
-            },
-            "userMemo": "string"
-          }],
-          "totalCount": 0
-        },
-        "success": true
+      if (res.obj && res.obj.result) {
+        this.setData({
+          showList: res.obj.result
+        })
       }
     })
-  },
 
+  },
+  //变化时间
+  // formateDate(data){
+  //   data.forEach(el=>{
+  //     if (el.timeoutExpressSecond){
+  //       util.total_micro_second = el.timeoutExpressSecond
+  //       el.timeoutExpressSecond = util.count_down(this);
+  //     }
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function(options) {
+
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    this.getList();
+  onShow: function() {
+    this.getList(true);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+    this.getList();
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function() {
+
   }
 })
