@@ -4,12 +4,13 @@ var recordStartX = 0;
 var currentOffsetX = 0;
 Page({
   data: {
-    detailList:[],               // 购物车列表
-    hasList:false,          // 列表是否有数据
-    lostcarts: [],              //失效列表
-    lostList: false,          //失效列表是否有数据
-    totalPrice:0,           // 总价，初始为0
-    selectAllStatus:true,    // 全选状态，默认全选
+    detailList:[],
+    detailList1:[],
+    hasList:false,
+    lostcarts: [],
+    lostList: false,
+    totalPrice:0, 
+    selectAllStatus:true, 
     obj:{
         name:"hello"
     },
@@ -19,12 +20,14 @@ Page({
     idnex:'',
     leftVal:'',
     numbers: 1,
-    limitShow: app.pageRequest.limitShow(),
+    baseUrl: app.globalData.imageUrl,
+    limitShow: wx.getStorageSync('admin'),
     storeAmount: '',
     goodsAmount:'',
     storeNum: '',
     goodsNum:'',
-    editDetailList:''
+    editDetailList:'',
+    goodsConfig:[]
   },
   // 规格
   //选择规格
@@ -184,6 +187,7 @@ Page({
           var failureList = []
         }
         for (var i = 0; i < effectiveList.length;i++){
+          _this.getConfig(effectiveList[i]["goodsId"])
           effectiveList[i].selected = true
           if(effectiveList[i].shoppingCartSkuList==null){
             effectiveList[i].height =270
@@ -205,16 +209,16 @@ Page({
         }
         storeMes.push(store)
         _this.setData({
-          detailList: effectiveList,
+          detailList1: effectiveList,
           lostcarts: failureList,
           storeMes: storeMes
         },function(){
           _this.getTotalPrice();
         })
       })
+    
   },
   onLoad: function (options) {
-   
     
   },
   onShow() {
@@ -351,20 +355,43 @@ Page({
     this.getTotalPrice();
   },
   getConfig(goodsId){
+    var _this=this
     Api.config({ goodsId: goodsId})
       .then(res => {
         var obj = res.obj,
           goodsSaleBatchNum = obj.goodsSaleBatchNum,
           goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
           storeSaleBatchNum = obj.storeSaleBatchNum,
-          storeSaleBatchAmount = obj.storeSaleBatchAmount
-        console.log(obj)
-        _this.setData({
-          storeAmount: storeSaleBatchAmount,
-          goodsAmount: goodsSaleBatchAmount,
-          storeNum: storeSaleBatchNum,
-          goodsNum: goodsSaleBatchNum
-        })
+          storeSaleBatchAmount = obj.storeSaleBatchAmount,
+          arr = this.data.goodsConfig,
+          detailList=this.data.detailList1
+        arr.push({ goodsNum: goodsSaleBatchNum, goodsAmount: goodsSaleBatchAmount})
+        var len = detailList.length
+        for (var i = 0; i < detailList.length;i++){
+          if (i == len - 1 && arr.length==len-1){
+            for (var j = 0; j < arr.length;j++){
+                if (arr[j]["goodsNum"] != null) {
+                  detailList[j].goodsNum = arr[j]["goodsNum"]
+                } else {
+                  detailList[j].goodsNum = 0
+                }
+                if (arr[j]["goodsAmount"] != null) {
+                  detailList[j].goodsAmount = arr[j]["goodsAmount"]
+                } else {
+                  detailList[j].goodsAmount = 0
+                }
+                console.log(detailList)
+                _this.setData({
+                  detailList: detailList,
+                  storeAmount: storeSaleBatchAmount,
+                  storeNum: storeSaleBatchNum,
+                  goodsConfig: arr
+                })
+            }
+           
+          }
+        }
+        
       })
   },
   /**
@@ -390,6 +417,20 @@ Page({
       totalPrice: total.toFixed(2)
     });
   },
- 
- 
+  creatOrder:function(){
+    var data=this.data.detailList,
+        model=[]
+    for(var i=0;i<data.length;i++){
+      if (data[i].selected){
+        var dataArr = data[i].shoppingCartSkuList
+        for (var j = 0; j < dataArr.length;j++){
+          model.push({ goodsId: data[i].goodsId, num: dataArr[j].num, skuCode: dataArr[j].skuCode})
+        }
+      }
+    }
+    var model = JSON.stringify(model);
+    wx.navigateTo({
+      url: '../address/address?model=' + model,
+    })
+  },
 })

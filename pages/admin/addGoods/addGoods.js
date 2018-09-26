@@ -1,6 +1,6 @@
 const app = getApp();
 var x, y, x1, y1, x2, y2, index, currindex, n, yy;
-// var util = require('../../../utils/util.js');
+import Api from '../../../utils/api.js'
 Page({
   /**
    * 页面的初始数据
@@ -16,7 +16,8 @@ Page({
     hiddenSelt: false,
     hiddenSend: true,
     clickSpecShow:false,
-    stock:'4',
+    stock:'',
+    codeName:'',
     strName:'',
     skuListAll:[],
     skuNum:'',
@@ -26,19 +27,75 @@ Page({
     description:'',
     categoryCustomCode:'',
     categoryCode:'',
-    marketPrice: 100,
+    marketPrice:'10',
     introduction: '',
     sellPrice: 0,
     wholesalePrice:0,
-    storeId:'123',
-    goodsImageVOList: [{ "imageUrl": "http://img2.imgtn.bdimg.com/it/u=1758226492,603315287&fm=214&gp=0.jpg" }],
-    mainImgUrl: "http://img2.imgtn.bdimg.com/it/u=1758226492,603315287&fm=214&gp=0.jpg",
+    baseUrl: app.globalData.imageUrl,
+    goodsImageVOList: [],
+    mainImgUrl:'',
+    addGoodsDetails: [{ input: true, value: '' }, { textInput: true, value: ''}]
+  },
+  // 输入描述内容
+  addTitle:function(){
+    var _this=this,
+      data = this.data.addGoodsDetails
+    data.push({ input: true,value: '' })
+    _this.setData({
+      addGoodsDetails:data
+    })
+  },
+  watchInput:function(e){
+    var value = e.detail.value,
+      index=e.target.dataset.index,
+      data = this.data.addGoodsDetails
+    data[index].value = e.detail.value
+    this.setData({
+      addGoodsDetails: data
+    })
+  },
+  watchDec: function (e) {
+    var value = e.detail.value,
+      index = e.target.dataset.index,
+      data = this.data.addGoodsDetails
+    data[index].value = e.detail.value
+    this.setData({
+      addGoodsDetails: data
+    })
+  },
+  addCont:function(){
+    var _this = this,
+      data = this.data.addGoodsDetails
+    data.push({ textInput: true, value: '' })
+    _this.setData({
+      addGoodsDetails: data
+    })
+  },
+  addImage: function () {
+    var _this = this
+    Api.uploadImage("GOODS")
+      .then(res => {
+        var data = this.data.addGoodsDetails
+        var url = JSON.parse(res).obj
+        console.log(url)
+        data.push({ img:baseUrl+url})
+        _this.setData({
+          addGoodsDetails: data
+        })
+      })
   },
   watchName: function (event) {
     var _this = this,
       val = event.detail.value
     this.setData({
       name: val
+    })
+  },
+  stockFun:function(e){
+    var _this = this,
+      val = event.detail.value
+    this.setData({
+      stock: val
     })
   },
   watchRec: function (event) {
@@ -48,13 +105,7 @@ Page({
       recommendDesc: val
     })
   },
-  watchDec: function (event) {
-    var _this = this,
-      val = event.detail.value
-    this.setData({
-      description: val
-    })
-  },
+
   wholesalePrice: function (event) {
     var _this = this,
       val = event.detail.value
@@ -72,7 +123,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  getConfig:function(){
+    var _this=this
+    Api.saleBatch()
+    .then(res=>{
+      var obj=res.obj
+      _this.setData({
+        stock: obj.saleBatchNum
+      })
+    })
+  },
   onLoad: function (options) {
+    this.getConfig()
   },
   // tab切换
   swichNav: function (e) {
@@ -105,18 +167,22 @@ Page({
   },
   // 分别设置价格和库存
   clickSpec:function(e){
-   if(e.target.dataset.id=='000'){
-     var model = JSON.stringify(this.data.skuListAll);
-     wx.navigateTo({
-       url: '../set/set?model=' + model,
-     })
-   }else{
-     var model = JSON.stringify(this.data.pageall);
-     console.log(model)
-     wx.navigateTo({
-       url: '../set/set?model=' + model,
-     })
-   }
+    var model = JSON.stringify(this.data.pageall);
+    wx.navigateTo({
+      url: '../set/set?model=' + model,
+    })
+  //  if(e.target.dataset.id=='000'){
+  //    var model = JSON.stringify(this.data.skuListAll);
+  //    wx.navigateTo({
+  //      url: '../set/set?model=' + model,
+  //    })
+  //  }else{
+  //    var model = JSON.stringify(this.data.pageall);
+  //    console.log(model)
+  //    wx.navigateTo({
+  //      url: '../set/set?model=' + model,
+  //    })
+  //  }
    
   },
   //长按拖动图片
@@ -166,51 +232,24 @@ Page({
     })
     var _this = this,
       pics = this.data.pics;
-    wx.chooseImage({
-      count:6,
-      sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-      success: function (res) {
-        // success
-        var imgSrc = res.tempFilePaths;
-        pics = pics.concat(imgSrc);
-        // 控制触发添加图片的最多时隐藏
-        if (pics.length >= 9) {
-          _this.setData({
-            isShow: (!_this.data.isShow)
+    var _this = this
+    Api.uploadImage("GOODS")
+      .then(res => {
+        var url = JSON.parse(res).obj
+        pics = pics.concat(url);
+       console.log(url)
+        if (pics.length >6) {
+          wx.showToast({
+            title: '最多上传6张',
+            icon: 'none',
+            duration: 2000
           })
         } else {
           _this.setData({
-            isShow: (_this.data.isShow)
+            pics: pics
           })
         }
-        _this.setData({
-          pics: pics
-        })
-        var tempFilePaths = res.tempFilePaths
-        wx.uploadFile({
-          url: 'https://xyk-doctor.com/image', //仅为示例，非真实的接口地址
-          filePath: tempFilePaths[0],
-          name: 'file',
-        header: {
-          "Content-Type": "multipart/form-data"
-        },
-          formData: {
-            'type': 'GOODS'
-          },
-          success: function (res) {
-            console.log(res)
-            //do something
-          }
-        })
-      },
-      fail: function () {
-        // fail
-      },
-      complete: function () {
-        // complete
-      }
-    })
+      })
   },
   // 图片预览
   previewImage: function (e) {
@@ -222,31 +261,55 @@ Page({
   },
   // 放入仓库
   addGit:function(e){
-    var status=e.target.dataset.status
+    var status=e.target.dataset.status,
+      pics = this.data.pics,
+      mainImgUrl='',
+      saleBatchNum=this.data.stock,
+      goodsImageVOList=[],
+      description='',
+      addGoodsDetails = this.data.addGoodsDetails
+    for (var i = 0; i < addGoodsDetails.length;i++){
+      if (addGoodsDetails[i].input){
+        description += '<h4>' + addGoodsDetails[i].value+'</h4>'
+      } else if (addGoodsDetails[i].textInput){
+        description += '<p>' + addGoodsDetails[i].value+'</p>'
+      }else{
+        description += '<img src="' + addGoodsDetails[i].img+'"/>'
+      }
+    }
+    for (var i = 0; i < pics.length;i++){
+      if(i==0){
+        mainImgUrl = pics[i]
+      }
+      goodsImageVOList.push({imageUrl:pics[i]})
+    }
     var goodsVO =  {
       "categoryCode": this.data.categoryCode,
       "categoryCustomCode": this.data.categoryCustomCode,
-      "description": this.data.description,
-      "goodsImageVOList": this.data.goodsImageVOList,
-      "goodsSkuVOList": this.data.goodsSkuVOList,
+      "description": description,
+      "goodsImageVOList":goodsImageVOList,
+      "goodsSkuVOList": this.data.skuListAll,
       "goodsSpecificationVOList": this.data.pageall,
-      "mainImgUrl": this.data.mainImgUrl,
+      "mainImgUrl":mainImgUrl,
       "marketPrice": this.data.marketPrice,
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,
       "sellPrice": this.data.sellPrice,
       "status":status,
+      "saleBatchNum": saleBatchNum,
       "wholesalePrice": this.data.wholesalePrice
     }
-    app.http.postRequest('/admin/shop/goods/',goodsVO)
+    app.http.postRequest('/admin/shop/shop/goods/',goodsVO)
       .then(res => {
         wx.showToast({
           title: '添加成功',
           icon: 'none',
-          duration: 2000
-        })
-        wx.navigateTo({
-          url: '../status/status',
+          duration: 2000,
+          success:function(){
+            wx.navigateTo({
+              url: '../success/success',
+            })
+          }
         })
     })
   },
@@ -266,7 +329,8 @@ Page({
     var currPage=pages[pages.length-1]
     if (currPage.data.code){
       that.setData({
-        categoryCode: currPage.data.code
+        categoryCode: currPage.data.code,
+        codeName: currPage.data.codeName,
       })
     }
     if (currPage.data.skuListAll!='') {

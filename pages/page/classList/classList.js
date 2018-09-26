@@ -7,22 +7,39 @@ Page({
   data: {
     customCategoryCode: '',
     result: [],
+    baseUrl: app.globalData.imageUrl,
+    allCode:false
   },
   /**
    * 生命周期函数--监听页面加载
    */
   getList: function () {
     var _this = this,
+      allCode = this.data.allCode,
       customCategoryCode = this.data.customCategoryCode
-    Api.classCodeList({ customCategoryCode: customCategoryCode })
-      .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.result,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          result: newArr,
+    if (!allCode){
+      Api.classCodeList({ customCategoryCode: customCategoryCode })
+        .then(res => {
+          var detailList = res.obj.result,
+            datas = _this.data.result,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            result: newArr,
+          })
         })
-      })
+    }else{
+      Api.goodsSearchList()
+        .then(res => {
+          console.log(res)
+          var detailList = res.obj.result,
+            datas = _this.data.result,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            result: newArr,
+          })
+        })
+    }
+   
   },
   onLoad: function (options) {
     app.pageRequest.pageData.pageNum = 0
@@ -30,9 +47,15 @@ Page({
     wx.setNavigationBarTitle({
       title: options.name
     })
-    this.setData({
-      customCategoryCode: options.code
-    })
+    if (options.allCode){
+      this.setData({
+        allCode:true
+      })
+    }else{
+      this.setData({
+        customCategoryCode: options.code
+      })
+    }
     this.getList()
   },
 

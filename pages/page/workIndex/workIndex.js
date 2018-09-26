@@ -1,20 +1,51 @@
-// pages/page/workIndex/workIndex.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    followNum: 0,
+    payOrders: 0,
+    todaySaleNum: 0,
+    unshippedOrders: 0,
+    verifyFriends:0,
+    unshippedPurchaseOrders:0,
+    payPurchaseOrders:0
+  }, 
+  goHome: function () {
+    wx.switchTab({
+      url: '../../page/user/user'
+    })
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getMes()
   },
-
+  goDerm:function(){
+    wx.navigateTo({
+      url: '../../page/derm/derm',
+    })
+  },
+ getMes:function(){
+   var _this=this
+   Api.storeIndex()
+   .then(res=>{
+     var obj=res.obj
+     console.log(obj)
+     _this.setData({
+       followNum: obj.followNum,
+       payOrders: obj.payOrders,
+       unshippedPurchaseOrders: obj.unshippedPurchaseOrders,
+       payPurchaseOrders: obj.payPurchaseOrders,
+       todaySaleNum: obj.todaySaleNum,
+       unshippedOrders: obj.unshippedOrders,
+       verifyFriends: obj.verifyFriends,
+     })
+   })
+ },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

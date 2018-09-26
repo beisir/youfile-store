@@ -1,6 +1,7 @@
 import http from './utils/http.js'
 import pageRequest from './utils/pageRequest.js'
 import AuthHandler from './utils/authHandler.js'
+import { imageUrl } from './utils/const.js'
 App({
   onLaunch: function (options) {
     // options.query.storeId
@@ -11,10 +12,6 @@ App({
     wx.setStorage({
       key: 'admin',
       data:2, //1yon 2店主  3批发商
-    })
-    wx.setStorage({
-      key: 'baseUrl',
-      data: 'https://dev.image.youlife.me/',
     })
     // 购物车
     if (wx.getStorageSync('admin')==3){
@@ -33,10 +30,11 @@ App({
   globalData: {
     userInfo: null,
     skin: "normal",
+    imageUrl: imageUrl
   },
   http: new http(),
   pageRequest: new pageRequest(),
-  authHandler: new AuthHandler()
+  authHandler: new AuthHandler(),
 });
 
 

@@ -43,7 +43,9 @@ Page({
     goodsListData: [],
     show1:false,
     tempNewArr:[],
-    tempNewId:''
+    tempNewId:'',
+    arrIndex: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
+    arrIndex1: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }]
 
   },
   // 返回上一页
@@ -68,7 +70,15 @@ Page({
   //点击切换
   clickTab: function (e) {
     var that = this;
-    var templateId = e.target.dataset.id
+    var templateId = e.target.dataset.id,
+      arrIndex = this.data.arrIndex,
+      arrIndex1 = this.data.arrIndex1
+    for (var i = 0; i < arrIndex.length;i++){
+      arrIndex[i].selected=false
+    }
+    for (var i = 0; i < arrIndex1.length; i++) {
+      arrIndex1[i].selected = false
+    }
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -77,7 +87,9 @@ Page({
         templateId: templateId,
         navindex:-1,
         navindex1:-1,
-        goodsListData:[]
+        goodsListData:[],
+        arrIndex:arrIndex,
+        arrIndex1: arrIndex1
       })
     }
   },
@@ -275,7 +287,8 @@ Page({
   // 属性切换
   swichNav(e) {
     var current= e.target.dataset.current,
-        pName= e.target.dataset.name,
+        pName = e.target.dataset.name,
+        switchi = e.target.dataset.switchi,
         code= e.target.dataset.code,
         newGoodsListData=[],
         list={},
@@ -289,18 +302,36 @@ Page({
         goodsListData = this.data.goodsListData,
         codeTd = this.data.templateId,
         num='',
+      arrIndex=[],
         pId = e.target.dataset.id
         code+=code+""+code
+    if(switchi==0){
+      var arrIndex = this.data.arrIndex
+      arrIndex[current].selected = !arrIndex[current].selected
+      this.setData({
+        arrIndex: arrIndex
+      })
+    }else{
+      var arrIndex = this.data.arrIndex1
+      arrIndex[current].selected = !arrIndex[current].selected
+      this.setData({
+        arrIndex1: arrIndex
+      })
+    }
+    
     for (var i = 0; i < goodsListData.length;i++){
       if (goodsListData[i].id == pId){
         addIndex = true
         var codeArr = goodsListData[i].goodsSpecificationValueVOList
         for (var l = 0; l < codeArr.length; l++) {
         if(codeArr[l].specValueCode==code){
-          codeArr.splice(l,1)
+          codeArr.splice(l, 1)
          }
         }
         goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi })
+        if (arrIndex[current].selected != true) {
+          goodsListData[i].goodsSpecificationValueVOList.pop()
+        }
       }
     }
     if (codeTd == '') {
@@ -314,7 +345,6 @@ Page({
       list.specCode = codeTd + code
       goodsListData.push(list)
     }
-    console.log(listChi[current])
     console.log(goodsListData)
     if (current == this.data.navindex) {
       return false;

@@ -1,3 +1,4 @@
+<login id="login"></login>
 <!-- 取消进货单 -->
 <clo show="{{cancelModal}}">
   <view wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>

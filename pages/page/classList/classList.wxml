@@ -1,8 +1,8 @@
 <view>
   <view class="result result-box" wx:if="{{result.length > 0}}">
     <view class="result-list" wx:for="{{result}}" wx:key="index">
-      <navigator url="../goodsDetails/goodsDetails">
-        <image src="{{item.mainImgUrl}}"></image>
+      <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
+        <image src="{{baseUrl}}{{item.mainImgUrl}}"></image>
         <view class="result-text">
           <text>{{item.name}}</text>
         </view>

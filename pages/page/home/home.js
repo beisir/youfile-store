@@ -1,5 +1,6 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+
 Page({
   /**
    * 页面的初始数据
@@ -14,12 +15,13 @@ Page({
     currentTab: 0,
     result: [],
     keyword:'',
+    descShow:false,
     totalCount:0,
     store:'',
     coverUrl:'',
-    baseUrl:wx.getStorageSync('baseUrl'),
+    baseUrl: app.globalData.imageUrl,
     likeShow:false,
-    limitShow: app.pageRequest.limitShow()
+    limitShow: wx.getStorageSync('admin')
   },
 
   /**
@@ -96,16 +98,19 @@ Page({
     var _this = this,
       keyword = this.data.keyword,
       currentTab = this.data.currentTab,
+      descShow = this.data.descShow,
       sortType=''
     if (currentTab == 0) {
       sortType = 'multiple'
     } else if (currentTab == 1) {
       sortType = 'sales'
     } else if (currentTab == 2) {
-      sortType = 'prices_asc'
-    } else if (currentTab == 3) {
-      sortType = 'prices_desc'
-    }
+      if (descShow){
+        sortType = 'prices_asc'
+      }else{
+        sortType = 'prices_desc'
+      }
+    } 
     Api.shopList({ keyword: '', sortType: sortType})
       .then(res => {
         var detailList = res.obj.result,
@@ -153,7 +158,6 @@ Page({
       })    
   },
   onLoad: function (options) {
-    console.log(options)
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -177,23 +181,14 @@ Page({
     this.getList()
   },
   swichNav: function (e) {
-    var that = this;
-
+    var that = this,
+      descShow = this.data.descShow
     if (this.data.currentTab === e.target.dataset.current) {
       if (e.target.dataset.current == 2) {
         that.setData({
-          currentTab: 3,
+          descShow: !descShow
         }, function () {
           this.emptyArr()
-          return false;
-        })
-      }
-      if (e.target.dataset.current == 3) {
-        that.setData({
-          currentTab: 2,
-        }, function () {
-          this.emptyArr()
-          return false;
         })
       }
       return false;
@@ -209,7 +204,7 @@ Page({
   topGoods:function(){
     var goodsId = this.data.goodsId,
       _this=this
-    Api.topGoods({ goodsId: goodsId, isTop:true})
+    Api.topGoods({goodsId: goodsId})
     .then(res=>{
       wx.showToast({
         title: "置顶成功",

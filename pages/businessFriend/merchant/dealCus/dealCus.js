@@ -78,7 +78,9 @@ Page({
     var data = { orderCategory:1}
     if (sortKey != '') {
       data["sortKey"] = sortKey
+      data["sortValue"] = ''
     }
+    data["keyWords"] = value
     Api.dealUser(data)
       .then(res => {
         console.log(res)

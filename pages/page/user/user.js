@@ -15,7 +15,7 @@ Page({
   getUser() {
 
     app.http.getRequest("/api/user/byuserid").then((res) => {
-      if (res.success) {
+      if (res.obj) {
         this.setData({
           user: res.obj,
           hasUser: true
@@ -23,7 +23,7 @@ Page({
       }
     }).catch(e => {
       this.setData({
-        user: {},
+        user: "",
         hasUser: false
       })
     })

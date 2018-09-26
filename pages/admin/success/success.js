@@ -1,20 +1,45 @@
-// pages/admin/success/success.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    postageInfo:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  getMes:function(){
+    var _this=this
+    Api.storeIdInfo()
+      .then(res => {
+        var obj = res.obj,
+        postageInfo=obj.store[0].store.postageInfo
+        _this.setData({
+          postageInfo: postageInfo
+        })
+      })
   },
-
+  onLoad: function (options) {
+   
+  },
+  postageInfo:function(){
+    wx.navigateTo({
+      url: '../../page/postageInfo/postageInfo?code='+this.data.postageInfo,
+    })
+  },
+  costFun: function () {
+    wx.navigateTo({
+      url: '../batchSet/batchSet',
+    })
+  },
+  setFun:function(){
+    wx.navigateTo({
+      url: '../batchSet/batchSet',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -26,7 +51,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getMes()
   },
 
   /**

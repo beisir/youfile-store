@@ -1,30 +1,34 @@
 {
   "pages":[
     "pages/page/home/home",
-    
     "pages/page/stockOrder/stockOrder",
     
     "pages/role/supplyOrder/supplyOrder",
     
     "pages/role/order/order",
-    
-    
-    
-    
-    "pages/page/order/order",
-    
-    
-    
-    
-    
-    
-    
-    
     "pages/page/user/user",
     
+    "pages/admin/addGoods/addGoods",
+    "pages/page/workIndex/workIndex",
+    "pages/admin/success/success",
+    "pages/page/postageInfo/postageInfo",
+    "pages/page/mesEdit/mesEdit",
+    "pages/admin/batchSet/batchSet",
+    "pages/businessFriend/merchant/setUp/setUp",
+    "pages/admin/status/status",
+    "pages/admin/spec/spec",
+    "pages/page/cartList/cartList",
+    "pages/businessFriend/merchant/dealUser/dealUser",
+    "pages/businessFriend/merchant/dealCus/dealCus",
+    "pages/businessFriend/merchant/follow/follow",
+    "pages/businessFriend/merchant/details/details",
+    "pages/businessFriend/merchant/merchantInfo/merchantInfo",
+    "pages/businessFriend/merchant/lookInfo/lookInfo",
+    "pages/businessFriend/merchant/reach/reach",
+    "pages/businessFriend/wholesaler/wholesaler",
+    "pages/businessFriend/merchant/index/index",
+    "pages/businessFriend/information/information",
     "pages/cloudOrder/orderDetail/orderDetail",
-    
-    
     "pages/cloudOrder/applyStore/applyStore",
     
     "pages/cloudOrder/congratulation/congratulation",
@@ -44,37 +48,18 @@
 
     
     "pages/page/userM/userM",
-    
-    
-    
-    
-    "pages/page/cartList/cartList",
-    
-    
-    
-    
-    
-    
     "pages/page/goodsDetails/goodsDetails",
-    
-    
-    "pages/page/mesEdit/mesEdit",
     "pages/page/editStoreAddress/editStoreAddress",
     "pages/page/main/main",
     "pages/page/cost/cost",
     "pages/page/editInvoice/editInvoice",
     "pages/page/addressWe/addressWe",
     "pages/page/updateMes/updateMes",
-    "pages/admin/spec/spec",
     "pages/page/mes/mes",
     "pages/admin/editGoods/editGoods",
     "pages/businessFriend/index/index",
-    "pages/businessFriend/merchant/follow/follow",
-    "pages/businessFriend/merchant/merchantInfo/merchantInfo",
-    "pages/businessFriend/merchant/dealUser/dealUser",
-    "pages/businessFriend/merchant/dealCus/dealCus",
+    
     "pages/login/register/register",
-    "pages/businessFriend/merchant/setUp/setUp",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",
     
@@ -85,16 +70,14 @@
     
     
     
+
     "pages/role/orderSelf/orderSelf",
+    "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
+    
+    "pages/cloudOrder/orderList/orderList",
 
-    
-
-    
-    
-    
     "pages/role/orderDetails/orderDetails",
     "pages/admin/batch/batch",
-    "pages/businessFriend/wholesaler/wholesaler",
     "pages/businessFriend/serList/serList",
     
     
@@ -107,17 +90,12 @@
     "pages/page/stockSelf/stockSelf",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
-    "pages/admin/addGoods/addGoods",
     "pages/businessFriend/merchant/newMerchant/newMerchant",
     "pages/businessFriend/merchant/serList/serList",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
-    "pages/businessFriend/merchant/details/details",
-    "pages/businessFriend/merchant/reach/reach",
     "pages/businessFriend/merchant/list/list",
     "pages/businessFriend/merchant/invite/invite",
     "pages/businessFriend/invitation/invitation",
-    "pages/businessFriend/information/information",
-    "pages/admin/batchSet/batchSet",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",
     "pages/page/newAddress/newAddress",
@@ -127,7 +105,6 @@
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
 
-    "pages/admin/status/status",
     "pages/page/details/details",
     "pages/page/serList/serList",
     "pages/admin/firstClass/firstClass",
@@ -139,7 +116,6 @@
     "pages/admin/editMesTitle/editMesTitle",
     "pages/admin/writeCont/writeCont",
     "pages/page/derm/derm",
-    "pages/admin/success/success",
     "pages/admin/classList/classList",
     "pages/admin/classEdit/classEdit",
     "pages/admin/thirdClass/thirdClass",
@@ -165,8 +141,13 @@
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black",
     "backgroundColor":"#F7F7F7",
-    "enablePullDownRefresh":true,
-    "onReachBottomDistance": 50
+    "enablePullDownRefresh":true
+  },
+  "networkTimeout": {
+    "request": 3000,
+    "connectSocket": 3000,
+    "uploadFile": 3000,
+    "downloadFile": 3000
   },
   "tabBar": {
     "borderStyle": "white",

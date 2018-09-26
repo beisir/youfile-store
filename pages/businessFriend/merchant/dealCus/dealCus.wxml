@@ -1,5 +1,5 @@
  <view class="goods-ser">
-    <input placeholder="输入进货商名称、手机号、备注名"   bindinput='changeValue'   value="{{value}}"/>
+    <input placeholder="输入进货商名称、手机号、备注名"   bindinput='changeValue' bindconfirm='searchBtn'    value="{{value}}"/>
     <image class="home-ser"  src="/image/search1.png"></image>
   </view>
 <view class='du-title'>

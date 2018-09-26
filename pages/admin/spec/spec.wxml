@@ -63,8 +63,12 @@
     <swiper-item  wx:for='{{templateCont}}' wx:key='{{index}}' wx:for-item="cont">
       <view class='sp-cont' wx:for='{{cont.specificationTemplateContentVOList}}' wx:for-item="list" wx:key='{{index}}'>
         <view class="sp-color">{{list.specName}}<image class='img' wx:if='{{index==1}}' bindtap='upTop'  src="/image/ups.png"></image><image src="/image/editSpec.png" data-name="{{list.specName}}" data-id="{{list.id}}"   bindtap='editName'></image></view>
-        <view class='sp-button'>
-          <view wx:for='{{list.specValueList}}'wx:key='{{index}}' class="{{index==navindex?'act':''}}" data-name='{{list.specName}}' data-current="{{index}}" data-code='2018{{index}}{{list.id}}' data-nameChi='{{item}}'  data-id='{{list.id}}'  bindtap='swichNav'>{{item}}<text data-index='{{index}}' data-name='{{list.specName}}' data-id='{{list.id}}' hidden='true'  bindtap='removeTemp' >删除</text><image hidden='true'  src="/image/downs.png"></image></view>
+        <view class='sp-button'  wx:if='{{index==0}}'>
+          <view wx:for='{{list.specValueList}}'wx:key='{{index}}' class="{{arrIndex[index].selected?'act':''}}" data-name='{{list.specName}}' data-current="{{index}}" data-code='2018{{index}}{{list.id}}' data-switchI='0' data-nameChi='{{item}}'  data-id='{{list.id}}'  bindtap='swichNav'>{{item}}<text data-index='{{index}}' data-name='{{list.specName}}' data-id='{{list.id}}' hidden='true'  bindtap='removeTemp' >删除</text><image hidden='true'  src="/image/downs.png"></image></view>
+          <view class='active'  bindtap='addSpec'  data-id="{{list.id}}"  data-name="{{list.specName}}">+</view>
+        </view>
+         <view class='sp-button'  wx:if='{{index==1}}'>
+          <view wx:for='{{list.specValueList}}'wx:key='{{index}}' class="{{arrIndex1[index].selected?'act':''}}" data-name='{{list.specName}}' data-current="{{index}}" data-code='2018{{index}}{{list.id}}' data-switchI='1' data-nameChi='{{item}}'  data-id='{{list.id}}'  bindtap='swichNav'>{{item}}<text data-index='{{index}}' data-name='{{list.specName}}' data-id='{{list.id}}' hidden='true'  bindtap='removeTemp' >删除</text><image hidden='true'  src="/image/downs.png"></image></view>
           <view class='active'  bindtap='addSpec'  data-id="{{list.id}}"  data-name="{{list.specName}}">+</view>
         </view>
       </view>
