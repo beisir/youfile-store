@@ -350,11 +350,17 @@ Page({
     this.getTotalPrice();
   },
   getConfig(data){
-    var _this=this,
-      data=data
-      console.log(data)
+    // var _this=this,
+    //   data=data,
+    //   dataLen = data.length-1
     // for (var i = 0; i < data.length;i++){
-    //   var dataMes = data[i]
+    //   console.log(i+"00000")
+    //   var dataMes = data[i],
+    //       index=i
+
+    //   if (index==dataLen){
+    //     console.log(888)
+    //   }
     //   Api.config({ goodsId: data[i].goodsId})
     //   .then(res=>{
     //     var obj = res.obj,
@@ -363,16 +369,16 @@ Page({
     //       storeSaleBatchNum = obj.storeSaleBatchNum,
     //       storeSaleBatchAmount = obj.storeSaleBatchAmount,
     //       arr = this.data.goodsConfig
-    //     arr.push({ goodsNum: goodsSaleBatchNum, goodsAmount: goodsSaleBatchAmount })
-    //     if (goodsSaleBatchNum==null){
-    //       goodsSaleBatchNum=0
-    //     }
-    //     if (goodsSaleBatchAmount == null) {
-    //       goodsSaleBatchAmount = 0
-    //     }
+    //      arr.push({ goodsNum: goodsSaleBatchNum, goodsAmount: goodsSaleBatchAmount })
+    //     if (!Api.isEmpty(goodsSaleBatchNum)) { goodsSaleBatchNum = 0 }
+    //     if (!Api.isEmpty(goodsSaleBatchAmount)) { goodsSaleBatchAmount = 0}
     //     dataMes.goodsSaleBatchNum = goodsSaleBatchNum
     //     dataMes.goodsSaleBatchAmount = goodsSaleBatchAmount
-    //     console.log(dataMes)
+    //     console.log(dataLen + "///" + index+"////")
+    //     if(dataLen==index){
+    //       console.log(888)
+    //       console.log(dataMes)
+    //     }
     //   })
     // }
     // Api.config({ goodsId: goodsId})
