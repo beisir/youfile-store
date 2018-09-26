@@ -137,19 +137,48 @@ Page({
       try {
         res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
         res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
+        res.obj.deliverDate = util.formatTime(new Date(res.obj.deliverDate));
+        res.obj.finishDate = util.formatTime(new Date(res.obj.finishDate));
+        
       } catch (e) { }
 
       this.setData({
         order: res.obj,
         status: res.obj.orderStatus  //状态
       })
+      this.resetData([this.data.order]);
 
       //倒计时
       this.total_micro_second = res.timeoutExpressSecond
       util.count_down(this)
     })
   },  
+  resetData(data) {
+    let arr = [];
+    for (let i = 0; i < data.length; i++) { // 循环订单
+      let oldGoods = data[i].goodsInfos,  //商品数组
+        newGoods = [];
+      for (let j = 0; j < oldGoods.length; j++) { //货品循环
 
+        let type = oldGoods[j].orderDetails;  //规格数组
+
+        for (let k = 0; k < type.length; k++) {
+          //当前货物,类型变为对象
+          let nowGood = {};
+          Object.assign(nowGood, oldGoods[j]);
+          nowGood.orderDetails = type[k];
+          newGoods.push(nowGood);
+        }
+      }
+      //编辑新订单数组
+      let newOrder = data[i];
+      newOrder.goodsInfos = newGoods;
+      arr.push(newOrder)
+    }
+    this.setData({
+      showList: arr[0].goodsInfos
+    })
+  },
 
 
   /**
@@ -158,7 +187,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       num: options.num,
-      status: options.status
+      status: options.status,
+      baseUrl: app.globalData.imageUrl
     })
     
   },

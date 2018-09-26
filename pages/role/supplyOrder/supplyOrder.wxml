@@ -86,12 +86,12 @@
     </view>
     <!-- 商品 -->
     <view>
-      <view class="cart-box" wx:for="{{item.goodsInfos}}" wx:key="{{index}}">
+      <view class="cart-box" wx:for="{{item.goodsInfos}}" wx:for-item="good" wx:key="{{index}}">
         <view class="cart-list">
           <navigator>
-            <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+            <image class="cart-thumb" src="{{baseUrl+good.mainImgUrl}}"></image>
           </navigator>
-          <view class='ct-title ct-title1'>{{item.goodsName}}</view>
+          <view class='ct-title ct-title1'>{{good.goodsName}}</view>
           <view class="heji">共
             <text>{{item.num}}</text>件商品</view>
         </view>
@@ -103,7 +103,7 @@
             <view class="th">数量</view>
             <view class="th">金额</view>
           </view>
-          <view class="tr" wx:for="{{item.orderDetails}}" wx:key="{{index}}">
+          <view class="tr" wx:for="{{good.orderDetails}}" wx:key="{{index}}">
             <view class="td">{{item.goodsName}}</view>
             <view class="td">{{item.num}}件</view>
             <view class="td">￥{{item.wholesalePrice}}</view>

@@ -95,7 +95,7 @@
     <view class="cart-box" wx:for="{{order.goodsInfos}}" wx:key="{{index}}">
       <view class="cart-list">
         <navigator>
-          <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
         </navigator>
         <view class='ct-title ct-title1'>{{item.goodsName}}</view>
         <view class="heji">共
@@ -142,7 +142,7 @@
     </block>
     <block wx:if="{{status=='finish'}}">
       <view>成交时间
-        <text>{{order.finishTime}}</text>
+        <text>{{order.finishDate}}</text>
       </view>
     </block>
   </block>

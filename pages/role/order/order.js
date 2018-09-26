@@ -63,7 +63,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
+    this.setData({
+      storeId: wx.getStorageSync("storeId"),   //列表请求
+      baseUrl: app.globalData.imageUrl      //图片
+    })
   },
   //查看凭证
   seeVoucher(e){
@@ -375,7 +378,7 @@ Page({
         showList:[]
       })
     }
-    app.pageRequest.pageGet("/admin/order/store/123/ordercategory/3/orderstatus/" + this.data.whitch, {
+    app.pageRequest.pageGet("/admin/order/store/" + this.data.storeId +"/ordercategory/3/orderstatus/" + this.data.whitch, {
        //pageNum:1,
        //pageSize:100
     }).then((res) => {

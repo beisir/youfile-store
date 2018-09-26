@@ -68,7 +68,7 @@
 <!-- 已发货 待填单-->
 <view class='os-title' wx:if='{{status=="paid" && order.orderStatusChildSta !=="waitShip"}}'>
   <view>买家剩余收货时间
-    <text>14天24时10分</text>
+    <text>{{order.autoReviceTime}}</text>
   </view>
   <image src="/image/xian2.png"></image>
   <view class='os-status'>
@@ -81,7 +81,7 @@
 <!-- 已发货-->
 <view class='os-title' wx:if="{{status=='shipped'}}">
   <view>买家剩余收货时间
-    <text>14天24时10分</text>
+    <text>{{order.autoReviceTime}}</text>
   </view>
   <image src="/image/xian2.png"></image>
   <view class='os-status'>
@@ -147,7 +147,7 @@
     <view class="cart-box">
       <view class="cart-list" wx:for="{{order.goodsInfos}}" wx:key="{{index}}">
         <navigator>
-          <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
         </navigator>
         <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
           <view>x {{item.orderDetails.num}}</view>
@@ -180,18 +180,18 @@
 
     <block wx:if="{{status!='unpaid'&& status!='paid'}}">
       <view>发货时间
-        <text>2018-09-09 23:12:33</text>
+        <text>{{order.deliverDate}}</text>
       </view>
     </block>
     <block wx:if="{{status=='finish'}}">
       <view>成交时间
-        <text>{{order.finishTime}}</text>
+        <text>{{order.finishDate}}</text>
       </view>
     </block>
   </block>
   <block wx:if="{{status=='closed'|| status=='cancelled'}}">
     <view>关闭时间
-      <text>{{order.finishTime}}</text>
+      <text></text>
     </view>
   </block>
 </view>
@@ -200,14 +200,14 @@
   <view>发票信息
     <text>{{order.receiptInfo?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
-  <view wx:if="{{item.invoiceType=='公司'}}">
+  <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
       <text>{{order.receiptInfo.invoiceTitle}}</text>
     </view>
     <view>纳税人识别号
       <text>{{order.receiptInfo.identificationNumber}}</text>
     </view>
-    <block wx:if="{{item.invoiceCategory=='增值税专用发票'}}">
+    <block wx:if="{{order.receiptInfo.invoiceCategory=='增值税专用发票'}}">
       <view>注册地址
         <text>{{order.receiptInfo.registeredAddress}}</text>
       </view>
@@ -227,12 +227,12 @@
 <view class='os-mon'>
   配送方式
   <text>物流配送</text>
-  <block wx:if="{{item.expressStatus}}">
+  <block wx:if="{{order.expressStatus}}">
     <view>物流公司
-      <text>{{order.expressCompany}}</text>
+      <text>{{order.expressCompany?order.expressCompany:""}}</text>
     </view>
     <view>快递单号
-      <text>{{order.expressNumber}}</text>
+      <text>{{order.expressNumber?order.expressNumber:""}}</text>
     </view>
   </block>
 </view>

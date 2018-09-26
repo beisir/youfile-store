@@ -111,7 +111,7 @@
     <view class="cart-box">
       <view class="cart-list" wx:for="{{order.goodsInfos}}" wx:key="{{index}}">
         <navigator>
-          <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
         </navigator>
         <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
           <view>x {{item.orderDetails.num}}</view>
@@ -144,13 +144,13 @@
     </block>
     <block wx:if="{{status=='finish'}}">
       <view>成交时间
-        <text>{{order.finishTime}}</text>
+        <text>{{order.finishDate}}</text>
       </view>
     </block>
   </block>
   <block wx:if="{{status=='closed' || status=='cancelled'}}">
     <view>关闭时间
-      <text>{{order.finishTime}}</text>
+      <text></text>
     </view>
   </block>
 </view>

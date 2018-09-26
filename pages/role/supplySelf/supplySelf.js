@@ -97,7 +97,7 @@ Page({
 
   // 验证取货码
   testCode() {
-    let num = this.data.testNum;
+    let num = this.data.num;
     let money = this.data.getGoodCode;
     if (!money || money < 0) {
       wx.showToast({
@@ -106,6 +106,7 @@ Page({
       })
       return
     }
+    app.http['_headerGet']['content-type'] = "application/x-www-form-urlencoded";
     app.http.requestAll("/admin/order/" + num + "/claim", {
       orderNumber: num,
       claimGoodsNum: money
@@ -114,12 +115,13 @@ Page({
         title: res.message,
         icon: 'none'
       })
+      this.afterOperation();
     })
   },
 
   // 取消订单
   sureCancel() {
-    let num = this.data.closeNum,
+    let num = this.data.num,
       index = this.data.cancelIndex;
     app.http.requestAll("/admin/order/" + num + "/closed", {
       reason: this.data.reson[index].title
@@ -152,7 +154,7 @@ Page({
   // 待填表
   sendGoods(e) {
     let type = e.currentTarget.dataset.type,
-      num = this.data.exNum,
+      num = this.data.num,
       obj = {
         orderNumber: num
       };
@@ -181,7 +183,7 @@ Page({
   },
   // 整体改价
   sureChange() {
-    let num = this.data.changeNum;
+    let num = this.data.num;
     let money = this.data.changeMoney;
     if (!money || money < 0) {
       wx.showToast({
@@ -203,7 +205,7 @@ Page({
   },
   //确认收款
   receiveMoney(e) {
-    let num = this.data.sureNum;
+    let num = this.data.num;
     app.http.requestAll("/admin/order/orderpayment/" + num + "/confirm", {
       orderNumber: num
     }, "POST").then((res) => {
@@ -288,7 +290,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       num: options.num,
-      status: options.status
+      status: options.status,
+      baseUrl: app.globalData.imageUrl
     }); 
   },
   //打电话
@@ -304,16 +307,30 @@ Page({
         order: res.obj,
         status: res.obj.orderStatus  //状态
       })
-      this.resetData([this.data.order]);
       this.setData({
         'order.createDate': this.timeFormat(this.data.order.createDate),
         'order.payDate': this.timeFormat(this.data.order.payDate),
-        'order.finishTime': this.timeFormat(this.data.order.finishTime),
+        'order.finishDate': this.timeFormat(this.data.order.finishDate),
       })
       //倒计时
       this.total_micro_second = res.timeoutExpressSecond
       util.count_down(this)
     })
+  },
+  //时间戳转化成时间格式
+  timeFormat(timestamp) {
+    if (!timestamp) { return "" }
+    //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+    var time = new Date(timestamp);
+    var year = time.getFullYear();
+    var month = time.getMonth() + 1;
+    var date = time.getDate();
+    var hours = time.getHours();
+    var minutes = time.getMinutes();
+    var seconds = time.getSeconds();
+    return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+    function add0(m) { return m < 10 ? '0' + m : m }
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

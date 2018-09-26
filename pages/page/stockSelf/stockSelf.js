@@ -133,6 +133,8 @@ Page({
         //创建时间
         try{
           res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
+          res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
+          res.obj.finishDate = util.formatTime(new Date(res.obj.finishDate));
         }catch(e){}
 
         this.setData({
@@ -151,7 +153,8 @@ Page({
   onLoad: function (options) {
     this.setData({
       num: options.num,
-      status: options.status
+      status: options.status,
+      baseUrl: app.globalData.imageUrl
     })
   },
 
