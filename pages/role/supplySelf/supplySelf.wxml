@@ -1,7 +1,7 @@
 <!-- 待付款 -->
 <view class='os-title' wx:if="{{status=='unpaid'}}">
   <view>买家剩余支付时间
-    <text>{{order.claimGoodsNum}}</text>
+    <text>{{clock}}</text>
   </view>
   <image src="/image/sl1.png"></image>
   <view class='os-status'>

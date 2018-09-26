@@ -1,14 +1,25 @@
 {
   "pages":[
+    "pages/role/supplyOrder/supplyOrder",
+    
+    "pages/page/user/user",
+    
+    
+    "pages/role/order/order",
+    
+    
+    
     "pages/page/home/home",
-    "pages/page/stockOrder/stockOrder",
     
     "pages/page/orderSuccess/orderSuccess",
     
-    "pages/role/supplyOrder/supplyOrder",
+    "pages/page/address/address",
     
-    "pages/role/order/order",
-    "pages/page/user/user",
+    
+    
+    "pages/page/stockOrder/stockOrder",
+    
+    
     
     "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
@@ -44,7 +55,6 @@
     
     "pages/role/supplyVoucher/supplyVoucher",
     
-    "pages/page/address/address",
     
     
 

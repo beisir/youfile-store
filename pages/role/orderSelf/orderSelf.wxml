@@ -157,16 +157,16 @@
 
 <view class='np-fapiao'>
   <view>发票信息
-    <text>{{order.receiptInfo?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
+    <text>{{order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
-  <view wx:if="{{item.invoiceType=='公司'}}">
+  <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
       <text>{{order.receiptInfo.invoiceTitle}}</text>
     </view>
     <view>纳税人识别号
       <text>{{order.receiptInfo.identificationNumber}}</text>
     </view>
-    <block wx:if="{{item.invoiceCategory=='增值税专用发票'}}">
+    <block wx:if="{{order.receiptInfo.invoiceCategory=='增值税专用发票'}}">
       <view>注册地址
         <text>{{order.receiptInfo.registeredAddress}}</text>
       </view>

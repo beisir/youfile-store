@@ -1,4 +1,5 @@
 // pages/page/manageM/manageM.js
+import Api from '../../../utils/api.js';
 const app = getApp();
 Page({
 
@@ -23,7 +24,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getData()
+    this.getData();
+    this.setData({
+      baseUrl: app.globalData.imageUrl
+    })
   },
   //打电话
   tel: function () {

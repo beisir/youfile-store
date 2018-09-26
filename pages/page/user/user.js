@@ -1,6 +1,6 @@
 // pages/user/user.js
+import Api from '../../../utils/api.js';
 var app = getApp();
-console.log(app)
 Page({
 
   /**
@@ -21,6 +21,11 @@ Page({
           user: res.obj,
           hasUser: true
         })
+      }else{
+        this.setData({
+          user: "",
+          hasUser: false
+        })
       }
     }).catch(e => {
       this.setData({
@@ -33,6 +38,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      baseUrl: app.globalData.imageUrl
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

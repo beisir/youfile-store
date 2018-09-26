@@ -90,6 +90,7 @@ class request {
           header: this._headerGet,
           method: method,
           success: (res => {
+            
             if (res.statusCode === 200) {
               resolve(res.data)
             } else if (res.statusCode === 401) {
@@ -118,6 +119,10 @@ class request {
             wx.hideNavigationBarLoading()
           }
         })
+        this._headerGet = {
+          'content-type': 'application/json'
+        }
+        
       })
     });
   }

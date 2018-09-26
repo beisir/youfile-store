@@ -80,9 +80,12 @@ Page({
         title: res.message,
         icon: "none"
       })
-      if(res.success){
-
-      }
+      
+      setTimeout(()=>{
+        wx.redirectTo({
+          url: '../orderSuccess/orderSuccess?num=' + res.obj.orderNumber
+        })
+      },800)
     })
   },
 
