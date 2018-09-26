@@ -78,7 +78,7 @@ Page({
         var data = this.data.addGoodsDetails
         var url = JSON.parse(res).obj
         console.log(url)
-        data.push({ img:baseUrl+url})
+        data.push({ img:this.data.baseUrl+url})
         _this.setData({
           addGoodsDetails: data
         })
@@ -93,7 +93,7 @@ Page({
   },
   stockFun:function(e){
     var _this = this,
-      val = event.detail.value
+      val = e.detail.value
     this.setData({
       stock: val
     })

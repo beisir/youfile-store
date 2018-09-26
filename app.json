@@ -1,7 +1,6 @@
 {
   "pages":[
     "pages/page/home/home",
-    
     "pages/page/stockOrder/stockOrder",
     
     "pages/page/orderSuccess/orderSuccess",
