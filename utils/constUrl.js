@@ -51,7 +51,7 @@ export const getUserDetaislUrl='/api/user/bymobile/{{mobile}}'
 export const userIdentityUrl='/api/store/{{storeId}}/user/identity'
 // 批发商管理信息
 export const indexUrl = '/admin/purchasermerchant/index'
-export const mewWholesalerUrl='/admin/bizfriend/{{userId}}/merchantapply'
+export const mewWholesalerUrl ='/admin/bizfriend/merchantapply'
 export const setNameUrl ='/admin/purchasermerchant/remark/{{storeId}}/{{remark}}'
 export const addWholesalerUrl ='/admin/bizfriend/merchantapply'
 export const passUrl='/admin/bizfriend/acceptpurchaser'

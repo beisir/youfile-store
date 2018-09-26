@@ -1,11 +1,11 @@
 {
   "pages":[
-    "pages/role/supplyOrder/supplyOrder",
+    "pages/page/address/address",
+    
     
     "pages/page/user/user",
     
     
-    "pages/role/order/order",
     
     
     
@@ -13,11 +13,9 @@
     
     "pages/page/orderSuccess/orderSuccess",
     
-    "pages/page/address/address",
     
     
     
-    "pages/page/stockOrder/stockOrder",
     
     
     
@@ -74,15 +72,10 @@
     "pages/login/register/register",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",
-    
-    
-    
-    
-  
-    
-    
-    
-
+    "pages/page/stockOrder/stockOrder",
+    "pages/page/order/order",
+    "pages/role/order/order",
+    "pages/role/supplyOrder/supplyOrder",
     "pages/role/orderSelf/orderSelf",
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
     

@@ -187,13 +187,13 @@ Page({
           var failureList = []
         }
         for (var i = 0; i < effectiveList.length;i++){
-          _this.getConfig(effectiveList[i]["goodsId"])
+          // _this.getConfig(effectiveList[i]["goodsId"])
           effectiveList[i].selected = true
           if(effectiveList[i].shoppingCartSkuList==null){
             effectiveList[i].height =270
           }else{
            if(effectiveList[i].shoppingCartSkuList.length>1){
-             effectiveList[i].height = effectiveList[i].shoppingCartSkuList.length * 75 + 270
+             effectiveList[i].height = effectiveList[i].shoppingCartSkuList.length * 90 + 270
            }
           }
         }
@@ -208,8 +208,9 @@ Page({
           });
         }
         storeMes.push(store)
+        _this.getConfig(effectiveList)
         _this.setData({
-          detailList1: effectiveList,
+          detailList: effectiveList,
           lostcarts: failureList,
           storeMes: storeMes
         },function(){
@@ -269,14 +270,8 @@ Page({
           _this=this
     Api.deteleCartGoods({ goodsId: goodsId})
     .then(res=>{
-      wx.showToast({
-        title: '删除成功',
-        icon: 'none',
-        duration: 2000,
-        success:function(){
-          _this.getList()
-        }
-      })
+      Api.showToast("删除成功")
+      _this.getList()
     })
   },
 
@@ -354,45 +349,75 @@ Page({
     });
     this.getTotalPrice();
   },
-  getConfig(goodsId){
-    var _this=this
-    Api.config({ goodsId: goodsId})
-      .then(res => {
-        var obj = res.obj,
-          goodsSaleBatchNum = obj.goodsSaleBatchNum,
-          goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
-          storeSaleBatchNum = obj.storeSaleBatchNum,
-          storeSaleBatchAmount = obj.storeSaleBatchAmount,
-          arr = this.data.goodsConfig,
-          detailList=this.data.detailList1
-        arr.push({ goodsNum: goodsSaleBatchNum, goodsAmount: goodsSaleBatchAmount})
-        var len = detailList.length
-        for (var i = 0; i < detailList.length;i++){
-          if (i == len - 1 && arr.length==len-1){
-            for (var j = 0; j < arr.length;j++){
-                if (arr[j]["goodsNum"] != null) {
-                  detailList[j].goodsNum = arr[j]["goodsNum"]
-                } else {
-                  detailList[j].goodsNum = 0
-                }
-                if (arr[j]["goodsAmount"] != null) {
-                  detailList[j].goodsAmount = arr[j]["goodsAmount"]
-                } else {
-                  detailList[j].goodsAmount = 0
-                }
-                console.log(detailList)
-                _this.setData({
-                  detailList: detailList,
-                  storeAmount: storeSaleBatchAmount,
-                  storeNum: storeSaleBatchNum,
-                  goodsConfig: arr
-                })
-            }
+  getConfig(data){
+    // var _this=this,
+    //   data=data,
+    //   dataLen = data.length-1
+    // for (var i = 0; i < data.length;i++){
+    //   console.log(i+"00000")
+    //   var dataMes = data[i],
+    //       index=i
+
+    //   if (index==dataLen){
+    //     console.log(888)
+    //   }
+    //   Api.config({ goodsId: data[i].goodsId})
+    //   .then(res=>{
+    //     var obj = res.obj,
+    //       goodsSaleBatchNum = obj.goodsSaleBatchNum,
+    //       goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
+    //       storeSaleBatchNum = obj.storeSaleBatchNum,
+    //       storeSaleBatchAmount = obj.storeSaleBatchAmount,
+    //       arr = this.data.goodsConfig
+    //      arr.push({ goodsNum: goodsSaleBatchNum, goodsAmount: goodsSaleBatchAmount })
+    //     if (!Api.isEmpty(goodsSaleBatchNum)) { goodsSaleBatchNum = 0 }
+    //     if (!Api.isEmpty(goodsSaleBatchAmount)) { goodsSaleBatchAmount = 0}
+    //     dataMes.goodsSaleBatchNum = goodsSaleBatchNum
+    //     dataMes.goodsSaleBatchAmount = goodsSaleBatchAmount
+    //     console.log(dataLen + "///" + index+"////")
+    //     if(dataLen==index){
+    //       console.log(888)
+    //       console.log(dataMes)
+    //     }
+    //   })
+    // }
+    // Api.config({ goodsId: goodsId})
+    //   .then(res => {
+        // var obj = res.obj,
+        //   goodsSaleBatchNum = obj.goodsSaleBatchNum,
+        //   goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
+        //   storeSaleBatchNum = obj.storeSaleBatchNum,
+        //   storeSaleBatchAmount = obj.storeSaleBatchAmount,
+        //   arr = this.data.goodsConfig,
+    //       detailList=this.data.detailList1
+    //     arr.push({ goodsNum: goodsSaleBatchNum, goodsAmount: goodsSaleBatchAmount})
+    //     var len = detailList.length
+    //     for (var i = 0; i < detailList.length;i++){
+    //       if (i == len - 1 && arr.length==len-1){
+    //         for (var j = 0; j < arr.length;j++){
+    //             if (arr[j]["goodsNum"] != null) {
+    //               detailList[j].goodsNum = arr[j]["goodsNum"]
+    //             } else {
+    //               detailList[j].goodsNum = 0
+    //             }
+    //             if (arr[j]["goodsAmount"] != null) {
+    //               detailList[j].goodsAmount = arr[j]["goodsAmount"]
+    //             } else {
+    //               detailList[j].goodsAmount = 0
+    //             }
+    //             console.log(detailList)
+    //             _this.setData({
+    //               detailList: detailList,
+    //               storeAmount: storeSaleBatchAmount,
+    //               storeNum: storeSaleBatchNum,
+    //               goodsConfig: arr
+    //             })
+    //         }
            
-          }
-        }
+    //       }
+    //     }
         
-      })
+    //   })
   },
   /**
    * 计算总价

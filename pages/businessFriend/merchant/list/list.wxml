@@ -21,7 +21,7 @@
 <view class='bf-cont'>
   <view class='bf-weui'>
     <navigator class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}' url="../reach/reach?status=2&send={{item.send}}&accept=0&remark={{item.remark}}">
-      <view class='bf-img'><image  mode="aspectFill" src="{{item.headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}"></image></view>
       <text>{{item.remark==null?item.nickName:item.remark}}</text>
     </navigator>
   </view>

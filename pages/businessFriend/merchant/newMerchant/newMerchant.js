@@ -8,6 +8,7 @@ Page({
   data: {
     detailList: [],
     send: wx.getStorageSync('storeId'),
+    baseUrl: app.globalData.imageUrl,
   },
 
   /**

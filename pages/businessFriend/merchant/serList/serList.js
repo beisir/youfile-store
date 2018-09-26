@@ -8,7 +8,8 @@ Page({
   data: {
     detailList: [],
     value: '',
-    storeId: wx.getStorageSync('storeId')
+    storeId: wx.getStorageSync('storeId'),
+    baseUrl: app.globalData.imageUrl,
   },
 
   /**

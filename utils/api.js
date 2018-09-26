@@ -74,6 +74,22 @@ import {
   userIdentityUrl
 } from './constUrl.js'
 const app = getApp()
+/**判断是否为空**/
+function isEmpty(str) {
+  if (str == '' || str == undefined || str == null){
+    return false
+  }else{
+    return true
+  }
+}
+/**提示**/
+function showToast(message) {
+  wx.showToast({
+    title: message,
+    icon: 'none',
+    duration: 2000,
+  })
+}
 /**用户身份判断**/
 function userIdentity(data) {
   return app.http.getRequest(userIdentityUrl, data)
@@ -370,6 +386,8 @@ function adminAddUser(data) {
   return app.http.putRequest(adminAddUserUrl + "?bfPripermission=" + data)
 }
 module.exports = {
+  isEmpty: isEmpty,
+  showToast: showToast,
   adminGoodsList: adminGoodsList,
   adminGoodsDelete: adminGoodsDelete,
   adminGoodsUp: adminGoodsUp,

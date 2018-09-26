@@ -7,6 +7,7 @@ Page({
    */
   data: {
     detailList:[],
+    baseUrl: app.globalData.imageUrl,
   },
 
   /**
