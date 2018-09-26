@@ -231,13 +231,28 @@ Page({
       this.afterOperation();
     })
   },
+  // 保存备注
+  saveRemark(e) {
+    let val = e.detail.value;
+    app.http.putRequest("/admin/order/{orderNumber}/addRemark", {
+      orderNumber: this.data.num,
+      remark: val
+    }).then(res => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+      if (res.success) {
 
+      }
+    })
+  },
 
   //刷新数据
   afterOperation() {
     this.closeModal();
     setTimeout(() => {
-      this.getList();
+      this.getList(true);
     }, 800)
   },
   closeModal() {
@@ -278,13 +293,16 @@ Page({
   getList(re) {
     if(re){
       app.pageRequest.pageData.pageNum = 0;
+      this.setData({
+        showList: []
+      })
     }
     app.pageRequest.pageGet("/admin/order/store/123/ordercategory/1/orderstatus/" + this.data.whitch, {
       //pageNum:1,
       //pageSize:100
     }).then((res) => {
       this.setData({
-        showList: this.data.showList.concat(this.data.orderList.obj.result)
+        showList: this.data.showList.concat(res.obj.result)
       })
     })
 
@@ -350,144 +368,6 @@ Page({
    */
   onShow: function () {
     this.getList();
-
-    this.setData({
-      orderList: {
-        "code": 0,
-        "message": "string",
-        "obj": {
-          "result": [{
-            "bizSystemNo": "string",
-            "cancelReason": "string",
-            "claimGoodsNum": "string",
-            "closedReason": "string",
-            "expressCompany": "string",
-            "expressNumber": "string",
-            "expressStatus": "string",
-            "consigneeInfo": {
-              "userName": 'zzz',
-              "ueerPhone": 13333333333
-            },
-            "orderStatusChildSta":"unForm",
-            "goodsInfos": [{
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [{
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:红色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              }],
-              "qrcode": "脉动",
-              "storeId": "脉动"
-            }, {
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [{
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:红色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              },
-              {
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:蓝色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              },
-              ],
-              "qrcode": "脉动",
-              "storeId": "脉动"
-            }],
-            "id": 1,
-            "num": 10,
-            "orderAmount": 1000001,
-            "orderCategory": "string",
-            "orderNumber": 1000001,
-            //   "unpaid":
-            //   "paid":
-            //    "shipped":
-            //    "closed":
-            //  "finish":
-            "orderStatus": "finish",
-            "orderType": "1",
-            "payAmount": 100,
-            "payDate": "2018-09-06T02:53:22.470Z",
-            "payWay": "string",
-            "postageinfo": {
-              "postagePrice": 0,
-              "postageType": "string"
-            },
-            "receiptInfo": {
-              "depositBank": "string",
-              "depositBankNumber": "string",
-              "identificationNumber": "string",
-              "invoiceCategory": "string",
-              "invoiceTitle": "string",
-              "invoiceType": "string",
-              "isInvoice": false,
-              "registeredAddress": "string",
-              "registererMobile": "string"
-            },
-            "sort": 0,
-            "storeInfo": {
-              "merchantNumber": 100001,
-              "storeEnName": "nike",
-              "storeId": 100001,
-              "storeName": "耐克"
-            },
-            "timeoutDate": "2018-09-06T02:53:22.470Z",
-            "timeoutExpress": 0,
-            "timeoutExpressSecond": 0,
-            "timeoutExpressType": "string",
-            "totalRefundAmount": 0,
-            "totalRefundTimes": 0,
-            "userInfo": {
-              "nickName": "string",
-              "userId": 100011,
-              "userName": "string"
-            },
-            "userMemo": "string"
-          }],
-          "totalCount": 0
-        },
-        "success": true
-      }
-    })
   },
 
   /**

@@ -41,7 +41,7 @@
       <input class='alertInput' value='{{expressageCode}}' bindinput='watchInput' data-type='exCode' placeholder='请输入运单号 '></input>
     </view>
     <view style='display:flex;'>
-      <button wx:if="{{noBtn}}" data-type='no' bindtap='sendGoods'>先发货，再填单</button>
+      <button hidden="{{noBtn}}" data-type='no' bindtap='sendGoods'>先发货，再填单</button>
       <button bindtap='sendGoods'>确定</button>
     </view>
   </view>
@@ -78,6 +78,7 @@
         <text wx:if="{{item.orderStatus=='shipped'  }}">待收货</text>
         <text wx:if="{{item.orderStatus=='finish' }}">交易成功 </text>
         <text wx:if="{{item.orderStatus=='closed' }}">交易关闭</text>
+        <text wx:if="{{item.orderStatus=='cancelled' }}">交易取消</text>
         <text wx:if="{{item.orderStatus=='paid' && item.orderType==1}}">待取货</text>
         <text wx:if="{{item.orderStatus=='paid' && item.orderType==2 && item.orderStatusChildSta=='unForm'}}">待填表</text>
 
@@ -127,7 +128,7 @@
         <button bindtap='showModal' data-type='change' data-num='{{item.orderNumber}}' class='or-active'> 整体改价 </button>
         <button wx:if="{{item.orderType==2}}" class='or-active' data-type='ex' bindtap='showModal' data-num="{{item.orderNumber}}">收款发货</button>
         <button wx:if="{{item.orderType==1}}" class='or-active' data-type='sureGet' bindtap='showModal' data-num="{{item.orderNumber}}">确认收款</button>
-        <button data-num="{{item.orderNumber}}" data-type='cancel' bindtap='showModal'>取消订单</button>
+        <button data-num="{{item.orderNumber}}" data-type='cancel' bindtap='showModal'>关闭订单</button>
       </view>
 
       <!-- 已付款  -->
@@ -145,22 +146,22 @@
         <button class='or-active' data-type='ex2' bindtap='showModal'> 填写运单号 </button>
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
       </view>
-      <view class='or-last' wx:if="{{item.orderStatus=='shipped' && item.orderType==2}}">
-        <button class='or-active'> 查看物流 </button>
+      <view class='or-last' wx:if="{{item.orderStatus=='shipped'}}">
+        <button wx:if="{{item.orderType==2}}" class='or-active'> 查看物流 </button>
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
       </view>
 
       <!-- 已完成 -->
       <view class='or-last' wx:if="{{item.orderStatus=='finish'}}">
-        <button class='or-active'> 售后服务 </button>
         <button class='or-active' wx:if="{{item.orderType==2}}"> 查看物流 </button>
-        <button data-num="{{item.orderNumber}}" data-type="del" bindtap='showModal'> 删除订单 </button>
+        <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
+        <!-- <button data-num="{{item.orderNumber}}" data-type="del" bindtap='showModal'> 删除订单 </button> -->
       </view>
 
       <!-- 已关闭 -->
-      <view class='or-last' wx:if="{{item.orderStatus=='closed'}}">
+      <!-- <view class='or-last' wx:if="{{item.orderStatus=='closed' || item.orderStatus=='cancelled'}}">
         <button data-num="{{item.orderNumber}}" data-type="del" bindtap='showModal'> 删除订单 </button>
-      </view>
+      </view> -->
 
 
       <!-- <view class='or-last' wx:if="{{item.status==6}}"><button  class='or-active'> 提醒付款 </button><button  class='or-active'> 改价 </button><button>关闭订单</button> </view> -->

@@ -53,6 +53,7 @@
         <text wx:if="{{item.orderStatus=='shipped'  }}">待收货</text>
         <text wx:if="{{item.orderStatus=='finish' }}">交易成功 </text>
         <text wx:if="{{item.orderStatus=='closed' }}">交易关闭</text>
+        <text wx:if="{{item.orderStatus=='cancelled' }}">交易取消</text>
         <text wx:if="{{item.orderStatus==5}}">待付款</text>
         <text wx:if="{{item.orderStatus=='paid' && item.orderType==1}}">待取货</text>
         <text wx:if="{{item.orderStatus==7}}">交易成功</text>
@@ -90,7 +91,9 @@
 
       <!-- 待支付 -->
       <block wx:if="{{item.orderStatus=='unpaid'}}">
-        <button class='or-active'> 上传还款凭证 </button>
+        <navigator url='../../role/supplyVoucher/supplyVoucher?num={{item.orderNumber}}'>
+          <button class='or-active'> 上传还款凭证 </button>
+        </navigator>
         <button bindtap='showModal' data-type='cancel' data-num="{{item.orderNumber}}">取消订单</button>
       </block>
       <!-- 已支付 -->
@@ -121,7 +124,7 @@
       </block>
 
       <!-- 订单取消 -->
-      <block wx:if="{{item.orderStatus=='closed'}}">
+      <block wx:if="{{item.orderStatus=='closed' || item.orderStatus=='cancelled'}}">
         <button data-index='{{index}}' data-type='del' data-num='{{item.orderNumber}}' bindtap='showModal'>删除订单</button>
       </block>
     </view>

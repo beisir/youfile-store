@@ -82,17 +82,18 @@ Page({
 
     if (del) {
       app.http.deleteRequest("/api/order/" + del.num).then((res) => {
+        this.afterOperation()
         wx.showToast({
           title: res.message,
           icon: 'none'
         })
         //删除成功剔除
-        if (code == 0) {
-          list.splice(del.index, 1);
-          this.setData({
-            showList: list
-          })
-        }
+        // if (code == 0) {
+        //   list.splice(del.index, 1);
+        //   this.setData({
+        //     showList: list
+        //   })
+        // }
       })
     }
   },
@@ -120,9 +121,10 @@ Page({
     app.http.requestAll("/api/order/" + num + "/cancel", {
       reason: this.data.reason[index].title
     }, "PUT").then((res) => {
+      this.afterOperation();
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: "none"
       })
     })
   },
@@ -132,7 +134,7 @@ Page({
   afterOperation() {
     this.closeModal();
     setTimeout(() => {
-      this.getList();
+      this.getList(true);
     }, 800)
   },
   // 切换列表
@@ -207,7 +209,6 @@ Page({
       if (res.obj && res.obj.result){
         this.resetData(res.obj.result);
       }
-      //this.resetData(this.data.orderList.obj.result)
     })
   },
   resetData(data){
@@ -232,7 +233,6 @@ Page({
       newOrder.goodsInfos = newGoods;
       arr.push(newOrder)
     }
-    console.log(this.data.showList,arr)
     this.setData({
       showList: this.data.showList.concat(arr)
     })
@@ -243,145 +243,6 @@ Page({
   onLoad: function (options) {
     this.setData({
       storeId : wx.getStorageSync("storeId")
-    })
-
-
-    this.setData({
-      orderList: {
-        "code": 0,
-        "message": "string",
-        "obj": {
-          "result": [{
-            "bizSystemNo": "string",
-            "cancelReason": "string",
-            "claimGoodsNum": "string",
-            "closedReason": "string",
-            "expressCompany": "string",
-            "expressNumber": "string",
-            "expressStatus": "string",
-            "consigneeInfo": {
-              "userName": 'zzz',
-              "ueerPhone": 13333333333
-            },
-            "orderStatusChildSta": "unForm",
-            "goodsInfos": [{
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [{
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:红色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              }],
-              "qrcode": "脉动",
-              "storeId": "脉动"
-            }, {
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [{
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:红色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              },
-              {
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:蓝色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              },
-              ],
-              "qrcode": "脉动",
-              "storeId": "脉动"
-            }],
-            "id": 1,
-            "num": 10,
-            "orderAmount": 1000001,
-            "orderCategory": "string",
-            "orderNumber": 1000001,
-            //   "unpaid":
-            //   "paid":
-            //    "shipped":
-            //    "closed":
-            //  "finish":
-            "orderStatus": "finish",
-            "orderType": "2",
-            "payAmount": 100,
-            "payDate": "2018-09-06T02:53:22.470Z",
-            "payWay": "string",
-            "postageinfo": {
-              "postagePrice": 0,
-              "postageType": "string"
-            },
-            "receiptInfo": {
-              "depositBank": "string",
-              "depositBankNumber": "string",
-              "identificationNumber": "string",
-              "invoiceCategory": "string",
-              "invoiceTitle": "string",
-              "invoiceType": "string",
-              "isInvoice": false,
-              "registeredAddress": "string",
-              "registererMobile": "string"
-            },
-            "sort": 0,
-            "storeInfo": {
-              "merchantNumber": 100001,
-              "storeEnName": "nike",
-              "storeId": 100001,
-              "storeName": "耐克"
-            },
-            "timeoutDate": "2018-09-06T02:53:22.470Z",
-            "timeoutExpress": 0,
-            "timeoutExpressSecond": 0,
-            "timeoutExpressType": "string",
-            "totalRefundAmount": 0,
-            "totalRefundTimes": 0,
-            "userInfo": {
-              "nickName": "string",
-              "userId": 100011,
-              "userName": "string"
-            },
-            "userMemo": "string"
-          }],
-          "totalCount": 0
-        },
-        "success": true
-      }
     })
   },
 

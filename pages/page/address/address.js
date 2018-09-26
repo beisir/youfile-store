@@ -10,7 +10,7 @@ Page({
     hiddenSelt: false,
     hiddenSend: true,
     address:"",  //地址
-    invoice:{},  //发票
+    invoice:"",  //发票
     phone:"", //电话
     msg:"",  //留言
     sendData:{} //获取列表传递参数
@@ -42,7 +42,7 @@ Page({
         })
         return false;
       }
-      obj.address = add;
+      obj.consigneeInfo = add;
       obj.orderType = 2;
     }
 
@@ -65,11 +65,13 @@ Page({
         });
       }
     })
-    obj.receiptInfo = this.data.invoice;  //发票
+    if (this.data.invoice){
+      obj.receiptInfo = this.data.invoice;  //发票
+    }
     obj.userMemo = this.data.msg  //留言
     obj.orderGoods = goodsArr;  //商品
-    obj.orderCategory = 1 //this.data.orderCategory //订单种类
-    obj.valuationWay = 1 //delit
+    obj.orderCategory = this.data.orderCategory //订单种类
+    obj.valuationWay = 1 //delit 计价方式
     app.http.postRequest("/api/order/",
       obj
     ).then((res)=>{
@@ -169,19 +171,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //订单分类[1 进货单|2 普通订单|3 购物车订单]
+    
     let userType = wx.getStorageSync('identity'),
-      storeId = wx.getStorageSync('storeId');
+      storeId = wx.getStorageSync('storeId'),
+      adminType= wx.getStorageSync("admin");
 
+    //订单分类[1 进货单|2 普通订单|3 购物车订单]
+    let orderType = 1;
+    adminType=1;//delit
+    if (adminType==1){
+      //普通用户
+      orderType = 3;
+    } else if (adminType == 3){
+      //批发商
+      orderType = 1;  
+    }
 
-    let type = options.type;
+    //let type = options.type;
     let model = JSON.parse(options.model);
     //model = { "goodsId": "180904092152685923df", "num": 1, "skuCode": "180904092152685923df_38a" }
     if(!Array.isArray(model)){
       model = [model]
     }
     this.setData({
-      orderCategory: 3,//delit
+      orderCategory: orderType,
       storeId: storeId ?storeId:123,    
       sendData: model
     })

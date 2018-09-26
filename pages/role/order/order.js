@@ -63,18 +63,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    
   },
   //查看凭证
   seeVoucher(e){
     let num = e.currentTarget.dataset.num;
     app.http.getRequest("/admin/order/orderpayment/"+num).then((res)=>{
-        if(res.obj){
-          // wx.previewImage({
-          //   current: current, // 当前显示图片的http链接
-          //   urls: this.data.imgalist // 需要预览的图片http链接列表
-          // })
-        }
+      if (res.success && res.obj.payVoucher){
+        wx.previewImage({
+          current: 1, // 当前显示图片的http链接
+          urls: [app.authHandler.baseUrl + "/" +res.obj.payVoucher] // 需要预览的图片http链接列表
+        })
+      }else{
+        wx.showToast({
+          title: '未上传支付凭证',
+          icon:'none'
+        })
+      }
     })
     
 
@@ -194,7 +199,8 @@ Page({
       })
       return
     }
-    app.http.requestAll("/admin/order/" + num + "/claim", {
+    app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
+    app.http.requestAll("/admin/order/{{orderNumber}}/claim", {
         orderNumber : num ,
         claimGoodsNum : money
     }, "PUT").then((res) => {
@@ -202,12 +208,15 @@ Page({
         title: res.message,
         icon: 'none'
       })
+      if(res.success){
+        this.afterOperation();
+      }
     })
   },
   //确认收款
   receiveMoney(e){
     let num = this.data.sureNum;
-    app.http.requestAll("/admin/order/orderpayment/" + num + "/confirm", {
+    app.http.requestAll("/admin/order/orderpayment/{{orderNumber}}/confirm", {
       orderNumber: num
     }, "POST").then((res) => {
       wx.showToast({
@@ -239,14 +248,17 @@ Page({
         return
       }
     }
-    app.http.putRequest("/admin/order/" + num + "/addexpress", obj).then((res) => {
-      this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+    app.http.postRequest("/admin/order/orderpayment/{{orderNumber}}/confirm", { orderNumber: obj.orderNumber }).then((res) => {
+      if(res.success){
+        app.http.putRequest("/admin/order/{{orderNumber}}/addexpress", obj).then((res) => {
+          this.afterOperation();
+          wx.showToast({
+            title: res.message,
+            icon: 'none'
+          })
+        })
+      }
     })
-    
   },
   //删除订单
   delOrder(e) {
@@ -277,7 +289,7 @@ Page({
   afterOperation(){
     this.closeModal();
     setTimeout(()=>{
-      this.getList();
+      this.getList(true);
     },800)
   },
   //切换导航
@@ -359,16 +371,18 @@ Page({
   getList(re) {
     if(re){
       app.pageRequest.pageData.pageNum  = 0;
+      this.setData({
+        showList:[]
+      })
     }
     app.pageRequest.pageGet("/admin/order/store/123/ordercategory/3/orderstatus/" + this.data.whitch, {
        //pageNum:1,
        //pageSize:100
     }).then((res) => {
       if (res.obj.result) {
+        
         this.resetData(res.obj.result);
-       }
-      
-      //this.resetData(this.data.orderList.obj.result)
+      }
     })
 
   },
@@ -414,7 +428,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getList();
+    this.getList(true);
   },
 
   /**

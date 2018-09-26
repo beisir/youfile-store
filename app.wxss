@@ -427,9 +427,13 @@ input:focus{
 }
 .tr,.td{
   text-align: center; 
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
 }
 .tr{
-  font-weight: 400;height: 75rpx;line-height: 75rpx;
+  font-weight: 400;
+  /* height: 75rpx; */
+  /* line-height: 75rpx; */
 }
 .table .tr:first-child{
   height: 50rpx;line-height: 30rpx;

@@ -67,6 +67,7 @@
         <text wx:if="{{item.orderStatus=='shipped'  }}">待收货</text>
         <text wx:if="{{item.orderStatus=='finish' }}">交易成功 </text>
         <text wx:if="{{item.orderStatus=='closed' }}">交易关闭</text>
+        <text wx:if="{{item.orderStatus=='cancelled' }}">交易取消</text>
         <text wx:if="{{item.orderStatus=='paid' && item.orderType==1}}">待取货</text>
       </view>
     </view>
@@ -140,7 +141,7 @@
       </view>
 
       <!-- 已关闭 -->
-      <view class='or-last' wx:if="{{item.orderStatus=='closed'}}">
+      <view class='or-last' wx:if="{{item.orderStatus=='closed' || item.orderStatus=='cancelled'}}">
         <button data-index='{{index}}' data-type='del' data-num='{{item.orderNumber}}' bindtap='showModal'>删除进货单</button>
       </view>
 

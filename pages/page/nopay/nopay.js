@@ -1,5 +1,6 @@
 // pages/nopay/nopay.js
 const app = getApp();
+const util = require('../../../utils/util.js');
 Page({
 
   /**
@@ -59,6 +60,13 @@ Page({
       afterModal: false //售后
     })
   },
+  //刷新数据
+  afterOperation() {
+    this.closeModal();
+    setTimeout(() => {
+      this.getData(true);
+    }, 800)
+  },
 
   // 确认收货
   sureSure(e) {
@@ -68,6 +76,7 @@ Page({
         title: res.message,
         icon: 'none'
       })
+      this.afterOperation();
     })
   },
   //取消理由
@@ -96,12 +105,13 @@ Page({
         title: res.message,
         icon: 'none'
       })
+      this.afterOperation();
     })
   },
   // 上传凭证
   uploadVoucher(){
     wx.navigateTo({
-      url: '../../role/supplyVoucher/supplyVoucher',
+      url: '../../role/supplyVoucher/supplyVoucher?num='+this.data.num,
     })
   },
   //删除
@@ -114,9 +124,31 @@ Page({
         title: res.message,
         icon: 'none'
       })
+      if (res.success) {
+        setTimeout(() => {
+          wx.navigateBack({})
+        }, 800)
+      }
     })
   },
 
+  getData() {
+    app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {
+      try {
+        res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
+        res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
+      } catch (e) { }
+
+      this.setData({
+        order: res.obj,
+        status: res.obj.orderStatus  //状态
+      })
+
+      //倒计时
+      this.total_micro_second = res.timeoutExpressSecond
+      util.count_down(this)
+    })
+  },  
 
 
 
@@ -128,30 +160,7 @@ Page({
       num: options.num,
       status: options.status
     })
-    // options.status = 4;
-    // if(options.status==0){
-    //   this.setData({
-    //     status0:false
-    //   })
-    // } else if (options.status == 1){
-    //   this.setData({
-    //     status1: false
-    //   })
-    // } else if (options.status == 2) {
-    //   this.setData({
-    //     status2: false,
-    //     statusAll:false
-    //   })
-    // } else if (options.status == 3) {
-    //   this.setData({
-    //     status3: false,
-    //     statusAll: false
-    //   })
-    // } else if (options.status == 4) {
-    //   this.setData({
-    //     status4: false
-    //   })
-    // }
+    
   },
   //打电话
   tel: function () {
@@ -170,7 +179,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getData();
   },
 
   /**

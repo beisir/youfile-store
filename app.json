@@ -4,6 +4,22 @@
     
     "pages/page/stockOrder/stockOrder",
     
+    "pages/role/supplyOrder/supplyOrder",
+    
+    "pages/role/order/order",
+    
+    
+    
+    
+    "pages/page/order/order",
+    
+    
+    
+    
+    
+    
+    
+    
     "pages/page/user/user",
     
     "pages/cloudOrder/orderDetail/orderDetail",
@@ -61,11 +77,8 @@
     "pages/businessFriend/merchant/setUp/setUp",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",
-    "pages/page/order/order",
     
-    "pages/role/order/order",
     
-    "pages/role/supplyOrder/supplyOrder",
     
     
   

@@ -1,5 +1,6 @@
 // pages/page/stockSelf/stockSelf.js
 const app = getApp();
+const util = require('../../../utils/util.js')
 Page({
 
   /**
@@ -60,7 +61,12 @@ Page({
           title: res.message,
           icon: 'none'
         })
-        this.afterOperation();
+        //this.afterOperation();
+        if(res.success){
+          setTimeout(()=>{
+            wx.navigateBack({})
+          },800)
+        }
       })
   },
 
@@ -68,7 +74,7 @@ Page({
   afterOperation() {
     this.closeModal();
     setTimeout(() => {
-      this.getData();
+      this.getData(true);
     }, 800)
   },
   showModal(e) {
@@ -110,60 +116,34 @@ Page({
       afterModal: false //售后
     })
   },
+  //电话
+  call(){
+    let tel = this.data.order.storeInfo.servicePhone;
+    if(tel){
+      wx.makePhoneCall({
+        phoneNumber: tel,
+      })
+    }
+  },
 
 
   getData(){
     let num = this.data.num;
     app.http.getRequest("/api/order/byordernumber/"+num).then((res)=>{
+        //创建时间
+        try{
+          res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
+        }catch(e){}
 
+        this.setData({
+          order:res.obj,
+          status: res.obj.orderStatus //状态
+        })
+        
+        //倒计时
+        this.total_micro_second = res.timeoutExpressSecond
+        util.count_down(this)
     })
-    this.orderStatus()
-  },
-  //获取状态调整显示内容
-  orderStatus(status, isForm) {
-    let a = "closed"
-    switch (a) {
-      case "unpaid":
-        wx.setNavigationBarTitle({
-          title: "待付款"
-        })
-        this.setData({
-          status5: false
-        })
-        break;
-      case "paid":
-        wx.setNavigationBarTitle({
-          title: "已付款"
-        })
-        this.setData({
-          status6: false
-        })
-        break;
-      case "shipped":
-
-        break;
-      case "cancelled":
-
-        break;
-      case "closed":
-        wx.setNavigationBarTitle({
-          title: "已关闭"
-        })
-        this.setData({
-          status8: false,
-          allStatus: true
-        })
-        break;
-      case "finish":
-        wx.setNavigationBarTitle({
-          title: "已完成",
-        })
-        this.setData({
-          status7: false,
-          allStatus: true
-        })
-        break;
-    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -173,119 +153,6 @@ Page({
       num: options.num,
       status: options.status
     })
-    this.getData()
-
-    this.setData({
-      order: {
-        "goodsInfos": [
-          {
-            "orderDetails": [
-              {
-                "id": 53,
-                "orderDetailNumber": "201809071509355464096",
-                "orderNumber": "1037961561102090240",
-                "skuCode": "180831183155243d4de6_793",
-                "goodsId": "180831183155243d4de6",
-                "goodsName": " BR4066 L码",
-                "num": 2,
-                "unitPrice": 500,
-                "amount": 1000,
-                "marketPrice": 500,
-                "sellPrice": 500,
-                "wholesalePrice": 300,
-                "cover": null,
-                "goodsDesc": null
-              },
-              {
-                "id": 54,
-                "orderDetailNumber": "201809071509355474096",
-                "orderNumber": "1037961561102090240",
-                "skuCode": "180831183155243d4de6_8a1",
-                "goodsId": "180831183155243d4de6",
-                "goodsName": "短袖T恤",
-                "num": 2,
-                "unitPrice": 600,
-                "amount": 1200,
-                "marketPrice": 600,
-                "sellPrice": 600,
-                "wholesalePrice": 400,
-                "cover": null,
-                "goodsDesc": null
-              }
-            ],
-            "goodsId": "180831183155243d4de6",
-            "goodsName": "阿迪达斯ADIDAS 2018夏季",
-            "goodEnName": "adidas",
-            "mainImgUrl": "http://img2.imgtn.bdimg.com/it/u=1758226492,603315287&fm=214&gp=0.jpg"
-          }
-        ],
-        "storeInfo": {
-          "storeId": "123",
-          "storeName": "三只松鼠",
-          "storeEnName": "three",
-          "logo": "松鼠logo",
-          "merchantNumber": "04958613",
-          "openingTime": "7:00-15:00",
-          "servicePhone": "18231565894",
-          "wechatNumber": "wechart1",
-          "address": "北京海淀"
-        },
-        "userInfo": {
-          "userId": "2a9153bffb2bdcf5cedc92019fbba79b",
-          "userName": "16888888888",
-          "nickName": "youkedmin"
-        },
-        "receiveMerchant": {
-          "merchantNumber": "04958613"
-        },
-        "receiptInfo": null,
-        "postageinfo": {
-          "postageType": "0",
-          "postagePrice": 10
-        },
-        "consigneeInfo": {
-          "provinceCode": null,
-          "province": null,
-          "cityCode": null,
-          "city": null,
-          "countyCode": null,
-          "county": null,
-          "detailAddress": "北京市朝阳区望京sohu t1 502",
-          "userName": "老王",
-          "userPhone": "8888888888",
-          "postCode": "00000"
-        },
-        "id": 33,
-        "orderNumber": "1037961561102090240",
-        "orderAmount": 2210,
-        "timeoutExpress": 72,
-        "timeoutExpressType": "hour",
-        "timeoutExpressSecond": 2592000,
-        "timeoutDate": 1538896295000,
-        "orderStatus": "cancelled",
-        "orderStatusChildSta": "cancelled",
-        "userMemo": "请尽快出货",
-        "num": 4,
-        "totalRefundAmount": null,
-        "totalRefundTimes": null,
-        "bizSystemNo": "00",
-        "payAmount": null,
-        "payDate": null,
-        "payWay": null,
-        "sort": 0,
-        "orderType": "2",
-        "orderCategory": "3",
-        "claimGoodsNum": null,
-        "cancelReason": "不想要了",
-        "closedReason": null,
-        "expressStatus": null,
-        "expressNumber": null,
-        "expressCompany": null,
-        "createDate": 1536304295000,
-        "finishTime": null
-      }
-    })
-    
   },
 
   /**
@@ -299,7 +166,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getData()
   },
 
   /**

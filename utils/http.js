@@ -12,7 +12,7 @@ class request {
         "Content-Type": "application/json;charset=UTF-8"
       },
       this.newData = {},
-      this.arrUrl = ["/api/shop/shoppingcart/goods/batch", "/admin/shop/specificationTemplate/addTemplateAndContent", "/api/shop/shoppingcart/shop/goods/batch/", "/api/user/register", "/api/smsCode", "/api/user/register", "/api/user/resetpassword", "/oauth/code/sms"],
+      this.arrUrl = ["/api/shop/shoppingcart/goods/batch", "/admin/shop/specificationTemplate/addTemplateAndContent", "/api/shop/shoppingcart/shop/goods/batch/", "/api/user/register", "/api/smsCode", "/api/user/register", "/api/user/resetpassword", "/oauth/code/sms", "/admin/order/{{orderNumber}}/addexpress", "/admin/order/orderpayment/{orderNumber}/confirm", "/admin/order/{{orderNumber}}/claim"],
       this.authHandler = new AuthHandler()
 
   }
@@ -72,6 +72,7 @@ class request {
           url = '/api/shop/shoppingcart/shop/goods/batch/'+goodsId
         }
       }
+      url = this.analysisUrl(url, data);
       this.authHandler.getTokenOrRefresh().then(token => {
         if (token) {
           this._headerGet['Authorization'] = token;

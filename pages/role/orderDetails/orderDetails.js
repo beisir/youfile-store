@@ -1,5 +1,6 @@
 // pages/nopay/nopay.js
 const app = getApp();
+const util = require('../../../utils/util.js');
 Page({
 
   /**
@@ -125,7 +126,7 @@ Page({
     }, "PUT").then((res) => {
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: 'none'
       })
     })
   },
@@ -158,7 +159,7 @@ Page({
         icon: 'none'
       })
     })
-    closeModal();
+    this.afterOperation();
   },
   // 监听输入
   watchInput(e) {
@@ -169,18 +170,36 @@ Page({
       case "goodCode": key = "getGoodCode"; break;
       case "exCom": key = "expressageCom"; break;
       case "exCode": key = "expressageCode"; break;
+
     }
 
     this.setData({
       [key]: e.detail.value
     })
   },
+  saveRemark(e){
+    let val = e.detail.value;
+    app.http.putRequest("/admin/order/{orderNumber}/addRemark",{
+      orderNumber:this.data.num,
+      remark : val
+    }).then(res=>{
+      wx.showToast({
+        title: res.message,
+        icon:'none'
+      })
+      if(res.success){
+        
+      }
+    })
+  },
   closeModal() {
     this.setData({
-      changeModal: fasle,
+      changeModal: false,
       show: false,
       sureModal: false,
-      expressage: false
+      expressage: false,
+      sureModal:false,
+      show3:false
     })
   },
   showModal(e) {
@@ -215,12 +234,6 @@ Page({
         }
     }
     this.setData(obj)
-  },
-  closeModal() {
-    this.setData({
-      changeModal: fasle,
-      show: false
-    })
   },
   resetData(data) {
     let arr = [];
@@ -261,28 +274,28 @@ Page({
     }
     app.http.requestAll("/admin/order/" + num + "/updatetotal", {
       orderNumber: num,
-      totalOrderUpdateVO: {
-        orderAmount: money
-      }
+      orderAmount: money
     }, "PUT").then((res) => {
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: 'none'
       })
+      this.afterOperation()
+
     })
   },
   //确认收款
   sureGet() {
     let num = this.data.num;
-
+    app.http[""]
     app.http.requestAll("/admin/order/orderpayment/" + num + "/confirm", {
       orderNumber: num
     }, "POST").then((res) => {
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: 'none'
       })
-      this.closeModal()
+      this.afterOperation()
     })
   },
   // 关闭订单
@@ -302,10 +315,19 @@ Page({
     }, "PUT").then((res) => {
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: 'none'
       })
+      this.afterOperation()
     })
   },
+  //刷新数据
+  afterOperation() {
+    this.closeModal();
+    setTimeout(() => {
+      this.getData();
+    }, 800)
+  },
+
   selecRes(e) {
     const index1 = this.data.navindex;
     let reson = this.data.reson;
@@ -350,7 +372,8 @@ Page({
   getData() {
     app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {
       this.setData({
-        order: res.obj
+        order: res.obj,
+        status: res.obj.orderStatus  //状态
       })
       this.resetData([this.data.order]);
       this.setData({
@@ -358,6 +381,10 @@ Page({
         'order.payDate': this.timeFormat(this.data.order.payDate),
         'order.finishTime': this.timeFormat(this.data.order.finishTime),
       })
+
+      //倒计时
+      this.total_micro_second = res.timeoutExpressSecond
+      util.count_down(this)
     })
   },
   /**
