@@ -740,6 +740,7 @@ Page({
           skuArrTwo.push(obj.goodsSpecificationVOList[1])
           name = obj.goodsSpecificationVOList[1].specName
         }
+        console.log(obj)
         _this.setData({
           imgUrls: obj.goodsImageVOList,
           name: obj.name,

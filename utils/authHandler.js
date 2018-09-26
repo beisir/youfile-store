@@ -1,10 +1,16 @@
-// 认证token处理类
+import {
+  baseUrl,
+  basicAuthorization
+} from './const.js'
+/**
+ *  认证token处理类
+ * */
 class TokenHandler {
   //构造函数
   constructor() {
     //初始化基础的认证常量
-    this.basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=',
-      this.baseUrl = "https://mall.youlife.me";
+    this.basicAuthorization = basicAuthorization,
+      this.baseUrl = baseUrl;
   }
   /**
    * 获取商户编号
@@ -81,28 +87,28 @@ class TokenHandler {
    */
   getTokenOrRefresh() {
     return new Promise((resolve, reject) => {
-        let expiresIn = wx.getStorageSync('expires_in');
-        if (!expiresIn) {
-          resolve(null);
-          return;
-        }
-        let timestamp = Date.parse(new Date);
-        let isExpire = (expiresIn < timestamp);
-        let accessToken;
-        //如果token过期
-        if (isExpire) {
-          //强制刷新token
-          this.forceRefreshToken().then(() => {
-            let accessToken = wx.getStorageSync('token_type') + " " + wx.getStorageSync('access_token');
-            resolve(accessToken);
-          });
-
-        } else {
-          if (wx.getStorageSync('access_token')) {
-            accessToken = wx.getStorageSync('token_type') + " " + wx.getStorageSync('access_token');
-          }
+      let expiresIn = wx.getStorageSync('expires_in');
+      if (!expiresIn) {
+        resolve(null);
+        return;
+      }
+      let timestamp = Date.parse(new Date);
+      let isExpire = (expiresIn < timestamp);
+      let accessToken;
+      //如果token过期
+      if (isExpire) {
+        //强制刷新token
+        this.forceRefreshToken().then(() => {
+          let accessToken = wx.getStorageSync('token_type') + " " + wx.getStorageSync('access_token');
           resolve(accessToken);
+        });
+
+      } else {
+        if (wx.getStorageSync('access_token')) {
+          accessToken = wx.getStorageSync('token_type') + " " + wx.getStorageSync('access_token');
         }
+        resolve(accessToken);
+      }
     });
   }
 
@@ -135,10 +141,10 @@ class TokenHandler {
           if (res.statusCode === 200) {
             this.saveTokenInfo(res.data);
           }
-          //  else {
-          //   //强制刷新失败，清除本地的token信息，token返回为空
-          //   this.flushTokenInfo();
-          // }
+          else {
+            //强制刷新失败，清除本地的token信息，token返回为空
+            this.flushTokenInfo();
+          }
           resolve();
         })
       })

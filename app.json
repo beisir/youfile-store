@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    
     "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
     "pages/admin/success/success",

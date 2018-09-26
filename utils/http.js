@@ -1,10 +1,13 @@
 import AuthHandler from './authHandler.js';
+import {
+  baseUrl
+} from './const.js'
 /**
  请求
  */
 class request {
   constructor() {
-    this._baseUrl = 'https://mall.youlife.me',
+    this._baseUrl = baseUrl,
       this._headerGet = {
         'content-type': 'application/json'
       },
