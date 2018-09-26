@@ -44,7 +44,7 @@
       <view class="cart-box" wx:for="{{goods}}" wx:key="{{index}}">
         <view class="cart-list">
           <navigator>
-            <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+            <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
           </navigator>
           <view class='ct-title ct-title1'>{{item.goodsName}}</view>
           <view class="heji">共

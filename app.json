@@ -1,6 +1,18 @@
 {
   "pages":[
     "pages/page/home/home",
+<<<<<<< HEAD
+=======
+    "pages/page/stockOrder/stockOrder",
+    
+    "pages/page/orderSuccess/orderSuccess",
+    
+    "pages/role/supplyOrder/supplyOrder",
+    
+    "pages/role/order/order",
+    "pages/page/user/user",
+    
+>>>>>>> 26348bcf558221a9b938463812449839b71d7f88
     "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
     "pages/admin/success/success",

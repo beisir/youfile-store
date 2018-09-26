@@ -175,6 +175,10 @@ Page({
     let userType = wx.getStorageSync('identity'),
       storeId = wx.getStorageSync('storeId'),
       adminType= wx.getStorageSync("admin");
+    
+    this.setData({
+      baseUrl: app.globalData.imageUrl
+    })
 
     //订单分类[1 进货单|2 普通订单|3 购物车订单]
     let orderType = 1;
