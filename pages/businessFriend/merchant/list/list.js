@@ -8,7 +8,8 @@ Page({
   data: {
     detailList: [],
     value: '',
-    totalCount: 0
+    totalCount: 0,
+    baseUrl: app.globalData.imageUrl,
   },
 
   /**

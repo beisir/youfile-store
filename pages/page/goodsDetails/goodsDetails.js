@@ -59,6 +59,9 @@ Page({
   /**
   * 生命周期函数--监听页面加载
   */
+  showLogo:function(){
+    this.selectComponent("#login").showPage();
+  },
   onLoad: function (options) {
     var that = this,
         arr=[],
@@ -344,7 +347,7 @@ Page({
       url: '../cartList/cartList'
     })
   },
-  cratHome: function (e) {
+  cratHome: function (e) { 
     var _this=this,
       num = this.data.numbers,
       goodsId = this.data.goodsId,
@@ -375,6 +378,10 @@ Page({
         })
         return
       }
+    }
+    if (!Api.isEmpty(wx.getStorageSync("access_token"))){
+      _this.showLogo()
+      return
     }
     if (status==0){
       if (this.data.editOneName){
@@ -740,7 +747,6 @@ Page({
           skuArrTwo.push(obj.goodsSpecificationVOList[1])
           name = obj.goodsSpecificationVOList[1].specName
         }
-        console.log(obj)
         _this.setData({
           imgUrls: obj.goodsImageVOList,
           name: obj.name,

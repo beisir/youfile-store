@@ -53,7 +53,6 @@ Page({
         storeMes = store.store,
         floor = obj.floor,
         info=''
-      console.log(obj)
       if (goodsList!=null){
         _this.setData({
           goodsList:goodsList

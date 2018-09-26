@@ -20,8 +20,8 @@
 <scroll-view scroll-y="true" style="height:100%;">
 <view class='bf-cont'>
   <view class='bf-weui'>
-    <navigator class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}' url="../information/information?status=2&send={{item.send}}&accept=0&remark={{item.remark}}&name={{item.storeName}}&logo={{item.storeLogo}}">
-      <image  mode="widthFix" src="{{item.storeLogo}}"></image>
+    <navigator class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}' url="../information/information?status=2&send={{item.send}}&accept=0&remark={{item.remark}}&name={{item.storeName}}&logo={{baseUrl}}{{item.storeLogo}}">
+      <image  mode="widthFix" src="{{baseUrl}}{{item.storeLogo}}"></image>
       <text>{{item.remark==null?item.storeName:item.remark}}</text>
       <view class='weui-view'>
         <image  mode="widthFix" src="/image/11.png"></image>
