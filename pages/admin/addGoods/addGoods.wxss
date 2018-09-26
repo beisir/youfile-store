@@ -5,6 +5,9 @@
 .uploadImg image{
   height: 150rpx;width: 150rpx;margin-top: 40rpx;margin-bottom: 10rpx;
 }
+.write image{
+  width:50%;margin-left: 25%;
+}
 .page__category-content{
   margin:0 20rpx;background: #fff;color: #333;padding-bottom: 10rpx;margin-bottom: 30rpx;
   border-radius: 20rpx;font-size: 30rpx;padding-right:30rpx;overflow: hidden;
@@ -106,7 +109,7 @@
 .ad-top view{height: 120rpx;line-height: 120rpx;width: 45.6%}
 .stock{color:#333;font-weight: bold;font-size:36rpx;text-align: right;padding-right: 30rpx;}
 .sendmessage {  
-  background-color: white;  width: 100%;  position: fixed;  bottom: 0rpx;  display: flex;  flex-direction: row;  
+  background-color: white;  width: 100%;  position: fixed;  bottom: 0rpx;  display: flex;  flex-direction: row;z-index: 1000;
 }  
 .sendmessage input{  
   width: 100%;  height: 80rpx; background-color: white;  line-height: 80rpx;  font-size: 28rpx;  
@@ -119,8 +122,14 @@ border: 2rpx solid #d0d0d0;  padding-left: 20rpx;
 .weui-plac{
   color: #999;font-size:24rpx
 }
-.write .value,.write textarea{
-  font-size: 28rpx;padding:0rpx 5%;word-wrap: break-word; word-break: normal; width: 90%;
+.write .value,.write textarea,.write input{
+  font-size: 28rpx;padding:0rpx 5%;word-wrap: break-word; word-break: normal;
+}
+.write input{
+  font-size:32rpx;
+}
+.write textarea{
+  height: 200rpx;width: 90%;
 }
 .write .value{
   background: red;position: absolute;
@@ -130,7 +139,7 @@ border: 2rpx solid #d0d0d0;  padding-left: 20rpx;
 }
 .write-cont{
   background: #F9F9F9;border-top: 2rpx solid #E6E6E5;border-bottom: 2rpx solid #E6E6E5;width: 100%;
-  padding: 15rpx 30rpx;padding-bottom: 0;position: absolute;bottom: 88rpx;z-index: 1000;
+  padding: 15rpx 30rpx;padding-bottom: 0;position: absolute;bottom: 83rpx;z-index: 1000;
 }
 .write-cont image{
   width:50rpx;height: 50rpx;margin-right: 30rpx;

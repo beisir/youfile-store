@@ -5,7 +5,7 @@
           <view class="weui-uploader__files">
               <view wx:for="{{pics}}" wx:for-item="image" wx:key="index"  bindtouchmove="move" bindtouchstart="movestart"
 bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weui-uploader__file  {{mainx ==index+1? 'mainmove':'mainend'}}" style="left:{{start.x}}px; top:{{start.y}}px" >
-                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                <image class="weui-uploader__img" src="{{baseUrl}}{{image}}" data-src="{{baseUrl}}{{image}}" bindtap="previewImage"></image>
               </view>
           </view>
           <view class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">
@@ -51,7 +51,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         </view>
         <view class="weui-cell__ft1"><image  src="/image/icl.png"></image></view>
       </navigator>
-      <input class="weui-input" type="text" disabled='disabled' placeholder="未选择"></input>
+      <input class="weui-input" type="text" value='{{codeName}}' disabled='disabled' placeholder="未选择"></input>
       <navigator class="weui-cell" url="../shopClass/shopClass">
         <view class="weui-cell__hd"><image  src="/image/ic4.png"></image></view>
         <view class="weui-cell__bd">
@@ -111,22 +111,28 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         <view class="weui-cell__bd">
           <text>起批量</text>
         </view>
-        <input class="stock" type="text" value='{{stock}}'></input>
+        <input class="stock" type="text" bindinput='stockFun' value='{{stock}}'></input>
         <view class="weui-cell__ft" bindtap='clearInput'><image  src="/image/clo.png"></image></view>
       </view>
-      <view class="weui-cell">
+      <!-- <view class="weui-cell">
         <view class="weui-cell__bd">
           <text>运费</text>
         </view>
         <view class="weui-cell__ft">邮费到付</view>
-      </view>
+      </view> -->
     </view>
   </view>
   <view hidden='{{hiddenSend}}'>
-    <view class='write'><textarea  placeholder-class='weui-plac' value='{{description}}' bindinput='watchDec' placeholder='请填写商品介绍及照片、真实、直观的表达商品卖点...'></textarea></view>
+    <view class='write'>
+      <view wx:for='{{addGoodsDetails}}' wx:key='index'>
+      <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' wx:if='{{item.input}}' placeholder='请输入标题'></input>
+      <textarea  data-index='{{index}}' value='{{item.value}}' wx:if='{{item.textInput}}' placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
+       <image mode='widthFix'  data-index='{{index}}' wx:if='{{item.img}}'  src="{{baseUrl}}{{item.img}}"></image>
+      </view>
+    </view>
     <view class="sendmessage">
       <view class='write-cont'>
-        <image src="/image/font.png"></image><image  src="/image/color.png"></image><image src="/image/image.png" ></image><image src="/image/down1.png"></image>
+        <image bindtap='addTitle' src="/image/font.png"></image><image bindtap='addCont'  src="/image/color.png"></image><image  bindtap='addImage' src="/image/image.png" ></image><image src="/image/down1.png"></image>
       </view>
       <input class="chat-input" type="emoji" placeholder="" />
       <input style='display:none' type="" bindinput="" confirm-type="done" placeholder="" />

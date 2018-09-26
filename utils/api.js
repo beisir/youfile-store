@@ -70,9 +70,14 @@ import {
   uploadLogoImgUrl,
   storeIndexUrl,
   setUserNameUrl,
-  getUserDetaislUrl
+  getUserDetaislUrl,
+  userIdentityUrl
 } from './constUrl.js'
 const app = getApp()
+/**用户身份判断**/
+function userIdentity(data) {
+  return app.http.getRequest(userIdentityUrl, data)
+}
 /**云享品管理 列表**/ 
 function adminGoodsList(data){
   return app.pageRequest.pageGet(adminGoodsListUrl, data)
@@ -437,5 +442,6 @@ module.exports = {
   topGoods: topGoods,
   storeIndex: storeIndex,
   setUserName: setUserName,
-  getUserDetaisl: getUserDetaisl
+  getUserDetaisl: getUserDetaisl,
+  userIdentity: userIdentity
 }

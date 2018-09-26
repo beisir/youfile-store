@@ -48,6 +48,7 @@ export const topGoodsUrl='/admin/shop/goods/top/{{goodsId}}'
 export const storeIndexUrl='/admin/store/{{storeId}}/index'
 export const setUserNameUrl='/admin/shop/storecustomer/remark/{{storeId}}/{{userId}}/{{remark}}'
 export const getUserDetaislUrl='/api/user/bymobile/{{mobile}}'
+export const userIdentityUrl='/api/store/{{storeId}}/user/identity'
 // 批发商管理信息
 export const indexUrl = '/admin/purchasermerchant/index'
 export const mewWholesalerUrl='/admin/bizfriend/{{userId}}/merchantapply'

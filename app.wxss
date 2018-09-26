@@ -153,10 +153,10 @@ border: none;
     border:1rpx solid #F5F5F5;
 }
 .ho-img{
-  width: 330rpx;height: 300rpx;margin-bottom: 20rpx;
+  width: 330rpx;height: 330rpx;margin-bottom: 20rpx;overflow: hidden;text-align: center;line-height: 330rpx
 }
 .result-list image{
-    background: #EBEAEA;max-width: 330rpx;max-height: 300rpx;
+    background: #EBEAEA;max-width: 330rpx;max-height: 330rpx;
 }
 .result-list .result-text{
   margin-left: 20rpx;

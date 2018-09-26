@@ -76,12 +76,16 @@ Page({
       })
   },
   classFun: function (e) {
-      var code=e.target.dataset.id
+      var code=e.target.dataset.id,
+        name = this.data.name,
+        nameLast = e.target.dataset.name,
+        names=this.data.names
     var pages = getCurrentPages();             //  获取页面栈
     var currPage = pages[pages.length - 1];
     var prevPage = pages[pages.length - 2];    // 上一个页面
     prevPage.setData({
-      code: code
+      code: code,
+      codeName:name+">"+names+">"+nameLast
     })
     wx.navigateBack({
       data: 1

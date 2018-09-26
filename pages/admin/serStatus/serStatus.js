@@ -4,6 +4,7 @@ Page({
   data: {
     history: ["戒指", "项链", "钻戒"],
     hidden: false,
+    baseUrl: app.globalData.imageUrl,
     result: [],
     value: '',
     showResult: false,
@@ -31,8 +32,8 @@ Page({
       result: [],
     })
     Api.goodsSearchList({ keyword: keyword })
-    // app.pageRequest.pageGet('/admin/shop/store/{{storeId}}/goods',)
       .then(res => {
+        console.log(res)
         var obj = res.obj.result,
           datas = _this.data.result,
           newArr = app.pageRequest.addDataList(datas, obj)
@@ -47,6 +48,7 @@ Page({
       })
   },
   searchBtn(e) {
+    app.pageRequest.pageData.pageNum = 0
     this.getList()
   },
   // 清空input的内容
@@ -108,7 +110,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    app.pageRequest.pageData.pageSize = 0
+    app.pageRequest.pageData.pageNum = 0
     this.setData({
       result: [],
     })
@@ -121,6 +123,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-      this.getList()
+      // this.getList()
   }
 })

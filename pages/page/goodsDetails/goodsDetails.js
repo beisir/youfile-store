@@ -1,5 +1,6 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+var WxParse = require('../../../wxParse/wxParse.js');
 Page({
 
   /**
@@ -9,7 +10,7 @@ Page({
     limitShow: wx.getStorageSync('identity'),
     storeId: wx.getStorageSync('storeId'),
     imgUrls: [],
-    baseUrl: wx.getStorageSync('baseUrl'),
+    baseUrl: app.globalData.imageUrl,
     goodsSpecificationVOList:[],
     goodsSkuVOList:[],
     skuArrTwo: [],
@@ -687,6 +688,7 @@ Page({
   getDetails: function (goodsId){
     var _this=this,
       storeId = this.data.storeId
+  
     Api.config({ goodsId:goodsId})
       .then(res => {
         var obj = res.obj,
@@ -719,6 +721,11 @@ Page({
           store = res.obj.store,
           skuArrTwo = [],
           name = ''
+        var that = this;
+        var article = obj.description
+        console.log(obj.description)
+        WxParse.wxParse('article', 'html', article, that, 5);
+        console.log(obj)
         console.log(store)
         if (store.isFollow){
           _this.setData({
@@ -738,7 +745,7 @@ Page({
           name: obj.name,
           wholesalePrice: obj.wholesalePrice,
           recommendDesc: obj.recommendDesc,
-          introduction: obj.introduction,
+          description: obj.description,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
           goodsSkuVOList: obj.goodsSkuVOList,
           skuArrTwo: skuArrTwo,

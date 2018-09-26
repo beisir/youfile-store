@@ -19,6 +19,7 @@ Page({
     detailList: [],
     goodsStatus:'',
     classStatus:false,
+    baseUrl: app.globalData.imageUrl,
     code:'',
     alertData:["全部商品","引用商品","自建商品"],
   },
@@ -87,7 +88,7 @@ Page({
       classStatus:false,
       detailList: []
     })
-    app.pageRequest.pageData.pageNum =0
+    app.pageRequest.pageData.pageNum = 0
     this.classCode('')
     if (this.data.currentTab === e.target.dataset.current) {
       return false;

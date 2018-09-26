@@ -63,7 +63,7 @@ class request {
           this.newData.storeId = wx.getStorageSync('storeId')
           url = this.analysisUrl(url, this.newData)
         } else {
-          //data.storeId = wx.getStorageSync('storeId')
+          data.storeId = wx.getStorageSync('storeId')
           url = this.analysisUrl(url, data)
         }
       }else{
@@ -79,7 +79,7 @@ class request {
           delete this._headerGet['Authorization'];
         }
         // wx.clearStorageSync('access_token')
-        // this._headerGet['Authorization'] = 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsInVzZXJfbmFtZSI6IjEzMzYzNTI3NDI1Iiwic2NvcGUiOlsiYWxsIl0sImV4cCI6MTUzNzc3MDg4NiwidXNlcklkIjoiYzI5ZjRjOWQ2YjQ0NmU5NzdjMTZiYjg3OWE0NjNlOTIiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwianRpIjoiMWQ4YWI5NWUtNjA0OS00ZmZlLThjYmYtMmFhYWU3Y2VkYmYxIiwiY2xpZW50X2lkIjoiQmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQifQ.H0Bqq3mOhfjH4n_x7ZX_nOH9DItiugKUO6Q0HH5QbZg';
+        // this._headerGet['Authorization'] = 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsIm1lcmNoYW50TnVtYmVyIjoiMDQ5NTg2MTMiLCJ1c2VyX25hbWUiOiIxNjg4ODg4ODg4OCIsInNjb3BlIjpbImFsbCJdLCJleHAiOjE1Mzg0NzI4NTcsInVzZXJJZCI6IjJhOTE1M2JmZmIyYmRjZjVjZWRjOTIwMTlmYmJhNzliIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6IjEzMTUwNmE4LTA4NGQtNGViOS04YWE3LWNkNzNiYTk5OWRmNiIsImNsaWVudF9pZCI6IkJlaUppbmdCYWlSb25nU2hpTWFvQ2xpZW50In0.ro5z1rEES2NDOCLYM-ACqLAsMHzxsCLSHe3g-Yf2WVs';
         wx.request({
           url: this._baseUrl + url,
           data: data,

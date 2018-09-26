@@ -30,7 +30,7 @@
  <view class="record-box"  wx:for="{{detailList}}" wx:key="{{index}}" wx:for-item="record">
   <view class="record" style="left:{{record.offsetX}}px;left:{{leftVal}}px" data-index="{{index}}" bindtouchstart="recordStart" catchtouchmove="recordMove" bindtouchend="recordEnd">
     <view class="st-cont">
-          <image class="cart-thumb" src="{{record.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl}}{{record.mainImgUrl}}"></image>
                <view  class='st-d-t'>{{record.name}}</view> 
                 <view class='st-details'>
                   <view class='st-d-status'>
