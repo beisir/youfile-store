@@ -14,7 +14,7 @@
     <view class='aw-list' wx:for="{{list}}" wx:key="{{index}}" >
       <view data-index='{{index}}' bindtap="selectAdd">
         <view>{{item.userName}} <text>{{item.userPhone}}</text></view>
-        <text>{{item.province}} {{item.city}} {{item.county}} {{item.detailAddress}}</text>
+        <view class='two-view'>{{item.province}} {{item.city}} {{item.county}} {{item.detailAddress}}</view>
       </view>
       <view class='aw-edit'>
         <icon wx:if="{{item.isDefault}}" data-code='0' type="success" size='17' data-id='{{item.id}}' color="#CCAA77" data-index="{{index}}" bindtap="selectList"/>

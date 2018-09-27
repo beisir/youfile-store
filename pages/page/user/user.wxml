@@ -36,7 +36,7 @@
     <image src='/image/mes1.png'></image>
     <view>进货单</view>
   </navigator>
-  <navigator class='u-o-div' url='../../businessFriend/index/index'>
+  <navigator wx:if='{{limitShow==3}}' class='u-o-div' url='../../businessFriend/index/index'>
     <image src='/image/mes1.png'></image>
     <view>我的商友</view>
   </navigator>

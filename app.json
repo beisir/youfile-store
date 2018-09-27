@@ -1,7 +1,9 @@
 {
   "pages":[
-    
     "pages/page/home/home",
+    
+    "pages/businessFriend/merchant/index/index",
+    
     
     "pages/page/cartList/cartList",
     
@@ -11,7 +13,6 @@
     "pages/page/address/address",
     
     
-    "pages/businessFriend/merchant/index/index",
     
     "pages/businessFriend/index/index",
     

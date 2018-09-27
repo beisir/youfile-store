@@ -100,9 +100,9 @@ Page({
       status:status,
       send:send,
       accept: accept,
-      value: remark,
+      value: remark == null ? '' : remark,
       remarkName: remark,
-      name:name,
+      name: name == null ? '' : name,
       logo:logo
     })
     this.getMession(status, accept)
@@ -205,7 +205,7 @@ Page({
   passFunc:function(){
     var send = this.data.send,
       accept = this.data.accept,
-      remark = this.data.value
+      remark = this.data.remarkName
     Api.acceptmerchant({ accept: accept, send: send, remark: remark })
       .then(res => {
         wx.showToast({

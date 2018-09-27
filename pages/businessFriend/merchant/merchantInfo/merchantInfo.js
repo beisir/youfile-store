@@ -53,7 +53,7 @@ Page({
       value: remark,
       showName:remark,
       greet: greetArr,
-      userName:name,
+      userName:name==null?'':name,
       headPic: headPic,
       mobile: mobile
     })
@@ -135,8 +135,7 @@ Page({
   passFunc:function(){
     var  send = this.data.send,
       accept = this.data.accept,
-      remark = this.data.value
-    console.log({ accept: accept, send: send, remark: remark })
+      remark = this.data.showName
     Api.acceptPurchaser({ accept: accept, send: send, remark: remark})
     .then(res=>{
       wx.showToast({
