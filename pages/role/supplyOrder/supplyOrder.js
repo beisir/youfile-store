@@ -1,5 +1,6 @@
 // pages/order/order.js
 const app = getApp();
+import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -123,10 +124,10 @@ Page({
       })
       return
     }
-    app.http.requestAll("/admin/order/" + num + "/claim", {
+    API.testGoodCode({
       orderNumber: num,
       claimGoodsNum: money
-    }, "PUT").then((res) => {
+    }).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'
@@ -138,9 +139,10 @@ Page({
   sureCancel() {
     let num = this.data.closeNum,
       index = this.data.cancelIndex;
-    app.http.requestAll("/admin/order/" + num + "/closed", {
-      reason: this.data.reson[index].title
-    }, "PUT").then((res) => {
+    API.closeOrder({
+      reason: this.data.reson[index].title,
+      orderNumber: num
+    }).then((res) => {
       this.afterOperation();
       wx.showToast({
         title: res.message,
@@ -187,7 +189,7 @@ Page({
         return
       }
     }
-    app.http.putRequest("/admin/order/" + num + "/addexpress", obj).then((res) => {
+    API.addExpress(obj).then((res) => {
       this.afterOperation();
       wx.showToast({
         title: res.message,
@@ -234,7 +236,7 @@ Page({
   // 保存备注
   saveRemark(e) {
     let val = e.detail.value;
-    app.http.putRequest("/admin/order/{orderNumber}/addRemark", {
+    API.addRemark({
       orderNumber: this.data.num,
       remark: val
     }).then(res => {

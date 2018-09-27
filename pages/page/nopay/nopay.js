@@ -1,6 +1,7 @@
 // pages/nopay/nopay.js
 const app = getApp();
 const util = require('../../../utils/util.js');
+import API from "../../../utils/api.js";
 Page({
 
   /**
@@ -98,9 +99,10 @@ Page({
   sureCancel() {
     let num = this.data.num,
       index = this.data.cancelIndex;
-    app.http.requestAll("/api/order/" + num + "/cancel", {
-      reason: this.data.reason[index].title
-    }, "PUT").then((res) => {
+    API.cancelOrder({
+      reason: this.data.reason[index].title,
+      orderNumber: num
+    }).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'

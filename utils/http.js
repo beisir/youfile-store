@@ -15,7 +15,7 @@ class request {
         "Content-Type": "application/json;charset=UTF-8"
       },
       this.newData = {},
-      this.arrUrl = ["/api/shop/shoppingcart/goods/batch", "/admin/shop/specificationTemplate/addTemplateAndContent", "/api/shop/shoppingcart/shop/goods/batch/", "/api/user/register", "/api/smsCode", "/api/user/register", "/api/user/resetpassword", "/oauth/code/sms", "/admin/order/{{orderNumber}}/addexpress", "/admin/order/orderpayment/{orderNumber}/confirm", "/admin/order/{{orderNumber}}/claim"],
+      this.arrUrl = ["/api/shop/shoppingcart/goods/batch", "/admin/shop/specificationTemplate/addTemplateAndContent", "/api/shop/shoppingcart/shop/goods/batch/", "/api/user/register", "/api/smsCode", "/api/user/register", "/api/user/resetpassword", "/oauth/code/sms", "/admin/order/{{orderNumber}}/addexpress", "/admin/order/orderpayment/{orderNumber}/confirm", "/admin/order/{{orderNumber}}/claim", "/admin/order/{{orderNumber}}/addexpress", "/admin/order/{{orderNumber}}/closed"],
       this.authHandler = new AuthHandler()
 
   }
@@ -119,10 +119,6 @@ class request {
             wx.hideNavigationBarLoading()
           }
         })
-        this._headerGet = {
-          'content-type': 'application/json'
-        }
-        
       })
     });
   }

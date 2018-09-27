@@ -154,20 +154,25 @@ Page({
   },
   //重置goods
   resetGoods(){
-    let goods = this.data.goods;
+    let goods = this.data.goods,
+        price = 0;
     goods.forEach((el)=>{
       if (!el.num && el.preOrderGoodsSkuList){
         let num = 0;
         el.preOrderGoodsSkuList.forEach((item)=>{
           if (item.num){
             num += item.num;
+            if(!isNaN(item.sellPrice * item.num)){
+              price += item.sellPrice * item.num;
+            }
           }
         })
         el.num = num;
       }
     })
     this.setData({
-      goods
+      goods,
+      price
     })
   },
   /**

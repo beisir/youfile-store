@@ -46,7 +46,6 @@ Page({
       case "goodCode":
         obj = {
           codeModal: true,
-          testNum: num,
           getGoodCode: ""
         }; break;
       case "ex2":
@@ -120,12 +119,13 @@ Page({
     
   },
 
-  // 取消订单
+  // 关闭订单
   sureCancel() {
     let num = this.data.num,
       index = this.data.cancelIndex;
-    app.http.requestAll("/admin/order/" + num + "/closed", {
-      reason: this.data.reson[index].title
+    app.http.requestAll("/admin/order/{{orderNumber}}/closed", {
+      reason: this.data.reson[index].title,
+      orderNumber : num
     }, "PUT").then((res) => {
       this.afterOperation();
       wx.showToast({
@@ -173,7 +173,7 @@ Page({
         return
       }
     }
-    app.http.putRequest("/admin/order/" + num + "/addexpress", obj).then((res) => {
+    API.addExpress(obj).then((res) => {
       this.afterOperation();
       wx.showToast({
         title: res.message,

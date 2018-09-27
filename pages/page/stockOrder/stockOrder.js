@@ -1,5 +1,6 @@
 // pages/page/stockOrder/stockOrder.js
 const app = getApp();
+import API from "../../../utils/api.js";
 Page({
 
   /**
@@ -118,9 +119,10 @@ Page({
   sureCancel() {
     let num = this.data.cancelNum,
       index = this.data.cancelIndex;
-    app.http.requestAll("/api/order/" + num + "/cancel", {
-      reason: this.data.reason[index].title
-    }, "PUT").then((res) => {
+    API.cancelOrder({
+      reason: this.data.reason[index].title,
+      orderNumber: num
+    }).then((res) => {
       this.afterOperation();
       wx.showToast({
         title: res.message,

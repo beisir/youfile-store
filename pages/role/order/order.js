@@ -252,7 +252,7 @@ Page({
     }
     app.http.postRequest("/admin/order/orderpayment/{{orderNumber}}/confirm", { orderNumber: obj.orderNumber }).then((res) => {
       if(res.success){
-        app.http.putRequest("/admin/order/{{orderNumber}}/addexpress", obj).then((res) => {
+        API.addExpress(obj).then((res) => {
           this.afterOperation();
           wx.showToast({
             title: res.message,
@@ -278,9 +278,10 @@ Page({
   sureCancel(){
     let num = this.data.closeNum,
       index = this.data.cancelIndex;
-    app.http.requestAll("/admin/order/" + num + "/closed", {
-      reason: this.data.reson[index].title
-    }, "PUT").then((res) => {
+    API.closeOrder({
+      reason: this.data.reson[index].title,
+      orderNumber: num
+    }).then((res) => {
       this.afterOperation();
       wx.showToast({
         title: res.message,

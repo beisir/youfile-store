@@ -32,14 +32,16 @@
     <image src='/image/order.png'></image>
     <view>我的订单</view>
   </navigator>
-  <navigator class='u-o-div' url='../stockOrder/stockOrder'>
-    <image src='/image/mes1.png'></image>
-    <view>进货单</view>
-  </navigator>
-  <navigator class='u-o-div' url='../../businessFriend/index/index'>
-    <image src='/image/mes1.png'></image>
-    <view>我的商友</view>
-  </navigator>
+  <block wx:if='{{limitShow==3}}'>
+    <navigator class='u-o-div' url='../stockOrder/stockOrder'>
+      <image src='/image/mes1.png'></image>
+      <view>进货单</view>
+    </navigator>
+    <navigator class='u-o-div' url='../../businessFriend/index/index'>
+      <image src='/image/mes1.png'></image>
+      <view>我的商友</view>
+    </navigator>
+  </block>
 </view>
 <view class='page_bd'>
   <view class='weui-back'>
