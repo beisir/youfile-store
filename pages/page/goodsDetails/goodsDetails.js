@@ -774,11 +774,8 @@ Page({
           skuArrTwo = [],
           name = ''
         var that = this;
-        var article = obj.description
-        console.log(obj.description)
+        var article = '<div>' + obj.description+'</div>'
         WxParse.wxParse('article', 'html', article, that, 5);
-        console.log(obj)
-        console.log(store)
         if (store.isFollow){
           _this.setData({
             likeShow:true
