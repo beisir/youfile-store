@@ -1,4 +1,5 @@
 import Api from '../../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
@@ -6,7 +7,9 @@ Page({
    */
   data: {
     value: '我是欧泊珠宝供应商，我的优店，精挑细 选优质商品，快来和我一起赚钱吧！',
-    accept: ''
+    accept: '',
+    baseUrl: app.globalData.imageUrl,
+    headPic:''
   },
   goBack: function () {
     wx.navigateBack({
@@ -32,7 +35,6 @@ Page({
       remark = this.data.remark
     Api.apply({ accept: accept, send: send, greet: greet, remark: remark })
       .then(res => {
-        console.log(res)
         wx.showToast({
           title: '发送成功',
           icon: 'none',
@@ -48,7 +50,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.accept)
+    if (options.headPic){
+      this.setData({
+        headPic: options.headPic,
+      })
+    }
     this.setData({
       accept: options.accept,
       remark: options.remark

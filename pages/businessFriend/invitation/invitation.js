@@ -1,4 +1,5 @@
 import Api from '../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
@@ -8,7 +9,10 @@ Page({
     value:'我是陈晨，期待与您合作。',
     accept:'',
     logo:'',
+    baseUrl: app.globalData.imageUrl,
     name:'',
+    mallLogo:'',
+    mallName:'',
     send:''
   },
   goBack:function(){
@@ -55,7 +59,9 @@ Page({
         remark: options.remark,
         logo: options.logo,
         name: options.name,
-        send:options.send
+        send:options.send,
+        mallLogo: options.mallLogo,
+        mallName: options.mallName,
       })
   },
 

@@ -1,4 +1,5 @@
 import Api from '../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
@@ -21,10 +22,18 @@ Page({
     address:'',
     servicePhone:'',    
     floor:'',
+    baseUrl: app.globalData.imageUrl,
     wechatNumber:'',
     businessScope:'',
     area:'',
-    goodsList:[]
+    goodsList:[],
+    remarkChange:false,
+    remarkName:'',
+    mallLogo:'',
+    area:'',
+    floor:'',
+    balcony:'',
+    doorNum:'',
   },
 
   /**
@@ -64,7 +73,10 @@ Page({
           area: info.area,
           floor: info.floor,
           mallName: info.mallName,
-          balcony: info.balcony
+          mallLogo: info.mallLogo,
+          balcony: info.balcony,
+          doorNum: info.doorNum,
+          
         })
       }
       if (obj != null) {
@@ -89,6 +101,7 @@ Page({
       send:send,
       accept: accept,
       value: remark,
+      remarkName: remark,
       name:name,
       logo:logo
     })
@@ -149,23 +162,29 @@ Page({
     var _this=this,
       purchaserUserId = this.data.accept,
       remark = this.data.value
-    this.cancel()
-    if (this.data.status==2){
-      Api.setName({remark: remark})
-      .then(res=>{
-        console.log(res)
-        wx.showToast({
-          title: '修改成功',
-          icon: 'none',
-          duration: 1000,
-          mask: true
-        })
-      })
+    _this.setData({
+      remarkName: remark
+    })
+    if (Api.isEmpty(remark)){
+      this.cancel()
+      if (this.data.status == 2) {
+        Api.setName({ remark: remark })
+          .then(res => {
+            console.log(res)
+            wx.showToast({
+              title: '修改成功',
+              icon: 'none',
+              duration: 1000,
+              mask: true
+            })
+          })
+      }
     }
+    
   },
   invitation:function(){
     wx.navigateTo({
-      url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.value+"&name="+this.data.name+"&logo="+this.data.logo+"&send="+this.data.send,
+      url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remarkName + "&name=" + this.data.name + "&logo=" + this.data.logo + "&send=" + this.data.send + "&mallName=" + this.data.mallName + "&mallLogo=" + this.data.mallLogo,
     })
   },
   /**

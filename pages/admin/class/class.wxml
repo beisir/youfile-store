@@ -9,13 +9,13 @@
   <view class='spec-view' bindtap='cancel'>取消</view><view  class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm'>确定</view>
 </spec>
 <view class='shop-cont shop-cont-c'>
-  <view>
-      未分类<view>111件</view>
-      <image class='weui-img' src="/image/icl.png"></image>
+  <view wx:for='{{list}}' wx:key='{{index}}' bindtap='classList' wx:if="{{item.customCategoryCode==0}}" data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'>
+      未分类<view  bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'>{{item.count}}件</view>
+      <image bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' class='weui-img' src="/image/icl.png"></image>
   </view>
 </view>
-<view class='shop-cont'>
-  <view wx:for='{{list}}' wx:key='{{index}}' bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' >
+<view class='shop-cont' wx:if='{{list.length>1}}'>
+  <view  wx:for='{{list}}' wx:key='{{index}}' wx:if="{{item.customCategoryCode!=0}}" bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' >
      {{item.name}}<view bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'>{{item.count}}件</view>
       <image class='weui-img' src="/image/icl.png" bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'></image>
   </view>

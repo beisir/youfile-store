@@ -1,4 +1,5 @@
 import Api from '../../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
@@ -6,7 +7,8 @@ Page({
    */
   data: {
     userId:'',
-    showMes:false
+    showMes:false,
+    baseUrl: app.globalData.imageUrl,
   },
 
   /**
@@ -17,18 +19,19 @@ Page({
     Api.remakInfo(data)
       .then(res => {
         var obj = res.obj
+        console.log(obj)
         if (obj != null) {
           _this.setData({
-            buyAmount: obj.buyCount.buyAmount,
-            buyTimes: obj.buyCount.buyTimes,
-            recentBuy: obj.buyCount.recentBuy,
-            name: obj.storeCustomer.name,
-            note: obj.storeCustomer.note,
-            birthday: obj.storeCustomer.birthday,
-            phone: obj.storeCustomer.phone,
-            headPic: obj.storeCustomer.headPic,
-            nickName: obj.storeCustomer.nickName,
-            wechart: obj.storeCustomer.wechart,
+            buyAmount: obj.countData.buyAmount,
+            buyTimes: obj.countData.buyTimes,
+            recentBuy: obj.countData.recentBuy,
+            name: obj.name,
+            note: obj.note,
+            birthday: obj.birthday,
+            phone: obj.phone,
+            headPic: obj.headPic,
+            nickName: obj.nickName,
+            wechart: obj.wechart,
           })
         }
       })
@@ -38,7 +41,7 @@ Page({
     this.setData({
       userId: accept
     })
-    this.getMession({ userId: accept})
+    this.getMession({purchaserUserId : accept})
     if (options.code){
       this.setData({
         showMes: true

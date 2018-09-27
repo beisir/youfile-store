@@ -21,16 +21,20 @@ Page({
       Api.classCodeList({ customCategoryCode: customCategoryCode })
         .then(res => {
           var detailList = res.obj.result,
-            datas = _this.data.result,
-            newArr = app.pageRequest.addDataList(datas, detailList)
-          _this.setData({
-            result: newArr,
-          })
+            datas = _this.data.result
+          if (detailList.length==0){
+            Api.showToast("暂无更多数据了！")
+          }else{
+            var newArr = app.pageRequest.addDataList(datas, detailList)
+            _this.setData({
+              result: newArr,
+            })
+          }
+          
         })
     }else{
       Api.goodsSearchList()
         .then(res => {
-          console.log(res)
           var detailList = res.obj.result,
             datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
@@ -43,7 +47,6 @@ Page({
   },
   onLoad: function (options) {
     app.pageRequest.pageData.pageNum = 0
-    console.log(options)
     wx.setNavigationBarTitle({
       title: options.name
     })
@@ -70,7 +73,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

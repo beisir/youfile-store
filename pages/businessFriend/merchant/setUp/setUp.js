@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    switch1Change:true
+    switch1Change:true,
+    index:''
   },
 
   /**
@@ -47,11 +48,35 @@ Page({
   },
   switch1Change:function(e){
     var index=e.target.dataset.index,
-    _this=this
-    Api.adminAddUser(index)
-    .then(res=>{
-      _this.getSet()
+      swiIndex = this.data.index,
+      _this=this
+    if (swiIndex==index){
+      console.log(index)
+      if (index==0){
+        _this.changeApi(1)
+        _this.setData({
+          index: 1
+        })
+        return
+      }else{
+        _this.changeApi(0)
+        _this.setData({
+          index: 0
+        })
+        return
+      }
+    }
+    _this.setData({
+      index:index
     })
+    _this.changeApi(index)
+  },
+  changeApi: function (index){
+    var _this=this
+    Api.adminAddUser(index)
+      .then(res => {
+        _this.getSet()
+      })
   },
   /**
    * 生命周期函数--监听页面隐藏

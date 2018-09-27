@@ -3,12 +3,12 @@
     <input placeholder="输入小云店名、手机号"   bindconfirm="searchBtn"   value="{{value}}"/>
     <image class="home-ser"  src="/image/search.png"></image>
     <view class='home-img'>
-      <image  src="/image/ser.png"></image>
+      <image bindtap='removeVal' src="/image/ser.png"></image>
     </view>
   </view>
 </view>
 <view class='bf-all'>搜索结果</view>
-<view class='bf-cont'>
+<view class='bf-cont' wx:if='{{detailList.length>0}}'>
   <scroll-view scroll-y="true" style="height:100%;">
   <view class='bf-weui'>
     <navigator wx:for='{{detailList}}' wx:key='{{index}}' class="weui_cells"  url="../information/information?status=0&send={{userId}}&accept={{item.storeId}}&remark=&logo={{item.logo}}&name={{item.name}}">

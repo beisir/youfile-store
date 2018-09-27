@@ -2,6 +2,56 @@ const app = getApp();
 import Api from '../../../utils/api.js'
 var recordStartX = 0;
 var currentOffsetX = 0;
+function getIdentity(_this) {
+  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+    Api.userIdentity()
+      .then(res => {
+        var obj = res.obj,
+          isStoreOwner = obj.isStoreOwner,
+          isPurchaser = obj.isPurchaser
+        if (isStoreOwner) {
+          wx.setStorage({
+            key: 'admin',
+            data: 2, //1yon 2店主  3批发商
+          })
+          _this.setData({
+            limitShow: 2
+          })
+        }
+        if (isPurchaser) {
+          wx.setStorage({
+            key: 'admin',
+            data: 3,
+          })
+          wx.setTabBarItem({
+            index: 1,
+            text: '进货车',
+            iconPath: '/image/22.png',
+            selectedIconPath: '/image/21.png'
+          })
+          wx.setNavigationBarTitle({
+            title: '进货车'
+          })
+          _this.setData({
+            limitShow: 3,
+            showText:'进货车'
+          })
+        }
+        if (!isPurchaser && !isStoreOwner) {
+          wx.setStorage({
+            key: 'admin',
+            data: 1,
+          })
+          _this.setData({
+            limitShow: 1
+          })
+        }
+        _this.getList()
+      })
+  }else{
+    _this.getList()
+  }
+}
 Page({
   data: {
     detailList:[],
@@ -10,6 +60,7 @@ Page({
     lostcarts: [],
     lostList: false,
     totalPrice:0, 
+    showText:'购物车',
     selectAllStatus:true, 
     obj:{
         name:"hello"
@@ -21,7 +72,7 @@ Page({
     leftVal:'',
     numbers: 1,
     baseUrl: app.globalData.imageUrl,
-    limitShow: wx.getStorageSync('admin'),
+    limitShow: 1,
     storeAmount: '',
     goodsAmount:'',
     storeNum: '',
@@ -208,7 +259,7 @@ Page({
           });
         }
         storeMes.push(store)
-        _this.getConfig(effectiveList)
+        // _this.getConfig(effectiveList)
         _this.setData({
           detailList: effectiveList,
           lostcarts: failureList,
@@ -220,15 +271,9 @@ Page({
     
   },
   onLoad: function (options) {
-    
   },
   onShow() {
-    this.getList()
-   if(this.data.limitShow==3){
-     wx.setNavigationBarTitle({
-       title:'进货车'
-     })
-   }
+    getIdentity(this)
   },
   /**
    * 当前商品选中事件
@@ -354,13 +399,9 @@ Page({
     //   data=data,
     //   dataLen = data.length-1
     // for (var i = 0; i < data.length;i++){
-    //   console.log(i+"00000")
     //   var dataMes = data[i],
     //       index=i
-
-    //   if (index==dataLen){
-    //     console.log(888)
-    //   }
+    //   console.log(data[i])
     //   Api.config({ goodsId: data[i].goodsId})
     //   .then(res=>{
     //     var obj = res.obj,
@@ -369,15 +410,18 @@ Page({
     //       storeSaleBatchNum = obj.storeSaleBatchNum,
     //       storeSaleBatchAmount = obj.storeSaleBatchAmount,
     //       arr = this.data.goodsConfig
-    //      arr.push({ goodsNum: goodsSaleBatchNum, goodsAmount: goodsSaleBatchAmount })
-    //     if (!Api.isEmpty(goodsSaleBatchNum)) { goodsSaleBatchNum = 0 }
-    //     if (!Api.isEmpty(goodsSaleBatchAmount)) { goodsSaleBatchAmount = 0}
+    //     if (!Api.isEmpty(goodsSaleBatchNum)) { goodsSaleBatchNum = storeSaleBatchNum }
     //     dataMes.goodsSaleBatchNum = goodsSaleBatchNum
-    //     dataMes.goodsSaleBatchAmount = goodsSaleBatchAmount
-    //     console.log(dataLen + "///" + index+"////")
     //     if(dataLen==index){
-    //       console.log(888)
-    //       console.log(dataMes)
+    //       console.log(goodsSaleBatchNum)
+    //       arr.push(dataMes)
+    //       console.log()
+    //       _this.setData({
+    //         // detailList: detailList,
+    //         // storeAmount: storeSaleBatchAmount,
+    //         // storeNum: storeSaleBatchNum,
+    //         // goodsConfig: arr
+    //       })
     //     }
     //   })
     // }
@@ -406,12 +450,12 @@ Page({
     //               detailList[j].goodsAmount = 0
     //             }
     //             console.log(detailList)
-    //             _this.setData({
-    //               detailList: detailList,
-    //               storeAmount: storeSaleBatchAmount,
-    //               storeNum: storeSaleBatchNum,
-    //               goodsConfig: arr
-    //             })
+                // _this.setData({
+                //   detailList: detailList,
+                //   storeAmount: storeSaleBatchAmount,
+                //   storeNum: storeSaleBatchNum,
+                //   goodsConfig: arr
+                // })
     //         }
            
     //       }
@@ -425,7 +469,6 @@ Page({
   getTotalPrice() {
     var limitShow = this.data.limitShow
     let detailList = this.data.detailList;// 获取购物车列表
-    console.log(detailList)
     let total = 0;
     for (let i = 0; i < detailList.length; i++) { 
       if (detailList[i].selected) {

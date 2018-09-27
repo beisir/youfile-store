@@ -41,7 +41,7 @@ Page({
     this.setData({
       detailList: []
     })
-    this.getList({ purchaserUserId: wx.getStorageSync('purchaserUserId'), keyword: val })
+    this.getList({keyword: val })
   },
   getList: function (data) {
     var _this = this
@@ -49,7 +49,6 @@ Page({
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        console.log(detailList)
         _this.setData({
           totalCount: totalCount
         })
@@ -75,7 +74,7 @@ Page({
     this.setData({
       detailList: []
     })
-    this.getList({ purchaserUserId: wx.getStorageSync('purchaserUserId') })
+    this.getList({})
   },
 
   /**
@@ -101,7 +100,7 @@ Page({
       value: ''
     })
     app.pageRequest.pageData.pageNum = 0
-    this.getList({ purchaserUserId: wx.getStorageSync('purchaserUserId') })
+    this.getList()
   },
 
   /**
@@ -110,9 +109,9 @@ Page({
   onReachBottom: function () {
     var val = this.data.value
     if (val == '') {
-      this.getList({ purchaserUserId: wx.getStorageSync('purchaserUserId') })
+      this.getList()
     } else {
-      this.getList({ purchaserUserId: wx.getStorageSync('purchaserUserId'), keyword: val })
+      this.getList({keyword: val })
     }
   },
 

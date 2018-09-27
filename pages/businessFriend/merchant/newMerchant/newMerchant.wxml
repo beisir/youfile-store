@@ -7,7 +7,7 @@
   <scroll-view scroll-y="true" style="height:100%;">
     <view class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}'>
       <navigator wx:if='{{item.status==2}}'  url="../reach/reach?accept={{item.accept}}">
-        <view class='bf-img'><image  mode="aspectFill" src="{{item.headPic}}"></image></view>
+        <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}"></image></view>
           <text >{{item.remark==null?item.storeName:item.remark}}</text>
           <view class='nbf-font'>{{item.greet}}</view>
           <view class='weui-view'>

@@ -11,7 +11,8 @@ Page({
     floor:'',
     storeMes:[],
     storeGoods:[],
-    limitShow: wx.getStorageSync('identity'),
+    baseUrl: app.globalData.imageUrl,
+    limitShow: wx.getStorageSync('admin'),
   },
 
   /**

@@ -41,10 +41,10 @@
     <button class="ym_sydtgzbtn"  hidden='{{likeShow}}'  bindtap='likeStore'>+ 关注</button>
     <button class="ym_sydtgzbtn"  hidden='{{!likeShow}}' bindtap='deteleLikeStore'>已关注</button>
 </view>
-<view class='add-firend'  wx:if='{{limitShow!=3}}' hidden='{{isShow}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>
+<!-- <view class='add-firend'  wx:if='{{limitShow!=3}}' hidden='{{isShow}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>
 <view class='add-firend add-firend1' wx:if='{{limitShow==1}}'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view>
 <view class='add-firend add-firend2' wx:if='{{limitShow==3}}'><view>友</view>已成商友，现可查看批发价！<image src='/image/sy.png'></image></view>
-<view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view>
+<view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view> -->
 <view class="swiper-tab"> 
   <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合<view></view></view> 
   <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量<view></view></view> 

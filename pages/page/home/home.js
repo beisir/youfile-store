@@ -1,6 +1,51 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
-
+function getIdentity(_this) {
+  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+    Api.userIdentity()
+      .then(res => {
+        var obj=res.obj,
+          isStoreOwner = obj.isStoreOwner,
+          isPurchaser = obj.isPurchaser
+        if (isStoreOwner){
+          wx.setStorage({
+            key: 'admin',
+            data: 2, //1yon 2店主  3批发商
+          })
+          _this.setData({
+            limitShow:2
+          })
+        }
+        if (isPurchaser){
+          wx.setStorage({
+            key: 'admin',
+            data: 3,
+          })
+          wx.setTabBarItem({
+            index: 1,
+            text: '进货车',
+            iconPath: '/image/22.png',
+            selectedIconPath: '/image/21.png'
+          })
+          _this.setData({
+            limitShow: 3
+          })
+        }
+        if (!isPurchaser && !isStoreOwner){
+          wx.setStorage({
+            key: 'admin',
+            data: 1,
+          })
+          _this.setData({
+            limitShow: 1
+          })
+        }
+        _this.homeIndex()
+      })
+  }else{
+    _this.homeIndex()
+  }
+}
 Page({
   /**
    * 页面的初始数据
@@ -19,9 +64,10 @@ Page({
     totalCount:0,
     store:'',
     coverUrl:'',
+    identity:'',
     baseUrl: app.globalData.imageUrl,
     likeShow:false,
-    limitShow: wx.getStorageSync('admin')
+    limitShow:1
   },
 
   /**
@@ -158,6 +204,7 @@ Page({
       })    
   },
   onLoad: function (options) {
+    getIdentity(this)
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -167,7 +214,7 @@ Page({
         });
       }
     });
-    this.homeIndex()
+    
   },
   bindChange: function (e) {
     var that = this;

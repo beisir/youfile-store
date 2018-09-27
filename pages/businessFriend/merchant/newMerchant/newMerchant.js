@@ -19,8 +19,11 @@ Page({
     Api.newMerchant(data)
       .then(res => {
         var detailList = res.obj.result
-        console.log(detailList)
         if (detailList != null) {
+          for (var i = 0; i < detailList.length;i++){
+            var greet = (detailList[i].greet).split("#;#")
+            detailList[i].greet=greet[0]
+          }
           var datas = _this.data.detailList,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
@@ -63,7 +66,7 @@ Page({
       detailList: []
     })
     app.pageRequest.pageData.pageNum = 0
-    this.getList({})
+    this.getList()
   },
 
   /**

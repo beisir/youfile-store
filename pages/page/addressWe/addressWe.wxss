@@ -6,7 +6,7 @@
   margin-bottom: 20rpx;
 }
 .aw-list view>text{
-  margin-left: 20rpx;
+  /* margin-left: 20rpx; */
 }
 .aw-list>text{
   color: #999;
