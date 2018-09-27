@@ -2,6 +2,9 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/page/cartList/cartList",
+    
+    
     "pages/page/address/address",
     
     
@@ -13,7 +16,6 @@
     "pages/admin/class/class",
     "pages/page/classList/classList",
     "pages/page/addressWe/addressWe",
-    "pages/page/cartList/cartList",
     "pages/page/orderSuccess/orderSuccess",
     "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",

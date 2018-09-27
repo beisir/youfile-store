@@ -42,17 +42,17 @@ Page({
   getMession: function (status, accept) {
   var _this = this,
       url=''
-    if (status == 1 || status == 0) {
-      url = '/admin/bizfriend/store/applyinfo/' + accept
+    if (status == 1) {
+      url = '/admin/bizfriend/store/applyinfo/'+accept
     }
     if(status == 0) {
       url = '/api/store/' + accept+'/floorinfo'
     }
     if (status == 2){
-      url = '/admin/bizfriend/store/merchantinfo/' + accept
+      url = '/admin/bizfriend/store/merchantinfo/'+accept
     }
     if(status == 3) {
-      url = '/admin/bizfriend/store/applyinfo/' + accept
+      url = '/admin/bizfriend/store/applyinfo/'+accept
     }
     Api.purchaserUserId(url)
     .then(res => {
@@ -194,6 +194,10 @@ Page({
 
   },
   urlHome: function () {
+    wx.setStorage({
+      key: 'storeId',
+      data: this.data.accept,
+    })
     wx.switchTab({
       url: '../../page/home/home'
     })
