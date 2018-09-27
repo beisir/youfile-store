@@ -11,6 +11,7 @@ import {
   goodsSearchListUrl,
   classListUrl,
   addClassUrl,
+  customCategoryCodeUrl,
   classCodeListUrl,
   goodsDetailsUrl,
   batchNumUrl,
@@ -76,6 +77,7 @@ import {
   updataPwdUrl,
   changeIconUrl,
   testGoodCodeUrl,
+  addGoodsUrl,
   uploadPayVoucherUrl,
   resetPasswordUrl,
   phoneMessageUrl,
@@ -142,11 +144,21 @@ function adminGoodsStatus(data) {
 }
 /**店铺设置起批量**/
 function saleBatchNum(data) {
-  return app.http.postRequest(saleBatchNumUrl+'?saleBatchNum='+data)
+  return app.http.putRequest(saleBatchNumUrl+'?saleBatchNum='+data)
 } 
+/**添加商品**/
+function addGoods(data) {
+  data = initStoreId(data);
+  return app.http.postRequest(addGoodsUrl,data)
+} 
+
+/**分类**/
+function customCategoryCode(data) {
+  return app.http.putRequest(customCategoryCodeUrl,data)
+}
 /**店铺设置起批量**/
 function saleBatchAmount(data) {
-  return app.http.postRequest(salebatchamountUrl+'?amount='+data)
+  return app.http.putRequest(salebatchamountUrl+'?amount='+data)
 } 
 /**获取店铺起批配置**/
 function saleBatch(data) {
@@ -564,7 +576,9 @@ module.exports = {
   setUserName: setUserName,
   getUserDetaisl: getUserDetaisl,
   userIdentity: userIdentity,
+  customCategoryCode: customCategoryCode,
   quit: quit,
+  addGoods: addGoods,
   updataPwd: updataPwd,
   changeIcon: changeIcon
 }

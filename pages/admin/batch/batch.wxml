@@ -10,13 +10,13 @@
     <view class='st-cont' wx:for="{{datas}}" wx:key="{{index}}">
     <icon type="success"  wx:if="{{item.selected}}" color="#CCAA77" data-index="{{index}}"  data-id='{{item.id}}' bindtap="selectList"/>
     <icon wx:else type="circle"  data-index="{{index}}" data-id='{{item.id}}' bindtap="selectList"/>
-      <image  src="{{item.mainImgUrl}}"></image>
+      <image  src="{{baseUrl}}{{item.mainImgUrl}}"></image>
       <view class='st-details'>
         <view class='st-d-t'>{{item.name}}</view>
         <view class='st-d-status'>
           <view><text>批发:</text><text class='st-mom'>￥{{item.wholesalePrice}}</text></view>
           <view><text>零售:</text><text class='st-mom'>￥{{item.sellPrice}}</text></view>
-          <view>供货：122</view><view>零售：144</view>
+          <!-- <view>供货：122</view><view>零售：144</view> -->
           <view>库存：{{item.stockNum}}</view>
         </view>
       </view>

@@ -23,9 +23,7 @@ Page({
     baseUrl: app.globalData.imageUrl,
     limitShow: wx.getStorageSync('admin'),
     storeAmount: '',
-    goodsAmount:'',
     storeNum: '',
-    goodsNum:'',
     editDetailList:'',
     goodsConfig:[]
   },
@@ -208,8 +206,9 @@ Page({
         }
         console.log(effectiveList)
         storeMes.push(store)
-        console.log(storeMes)
         _this.setData({
+          storeAmount:store.saleBatchAmount,
+          storeNum: store.saleBatchNum,
           detailList: effectiveList,
           lostcarts: failureList,
           storeMes: storeMes

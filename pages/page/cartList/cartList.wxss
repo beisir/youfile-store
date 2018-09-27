@@ -6,6 +6,12 @@
 .cart-list .hide_mes{
   display: none
 }
+.man-j{
+  font-size: 24rpx;
+}
+.man-j text{
+  color: #CCAA77
+}
 .cart-del{
     position: absolute;
     right:-120rpx;

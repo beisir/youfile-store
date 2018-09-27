@@ -299,7 +299,7 @@ Page({
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": this.data.wholesalePrice
     }
-    app.http.postRequest('/admin/shop/shop/goods/',goodsVO)
+    Api.addGoods(goodsVO)
       .then(res => {
         wx.showToast({
           title: '添加成功',
