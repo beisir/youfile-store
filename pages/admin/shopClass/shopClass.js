@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
   /**
    * 页面的初始数据
@@ -22,14 +23,17 @@ Page({
        codeArr:arr
      })
     }
+    this.getList()
+  },
+  getList:function(){
     var that = this
-    app.http.getRequest('/admin/shop/customcategory/store/{{storeId}}',{})
-        .then(res => {
-          const obj = res.obj
-          that.setData({
-            dataList: obj
-          })
+    Api.adminShopCate()
+      .then(res => {
+        const obj = res.obj
+        that.setData({
+          dataList: obj
         })
+      })
   },
   /**
      * 当前商品选中事件
@@ -55,7 +59,8 @@ Page({
       }
     }
     if (this.data.shouTitile) {
-        app.http.postRequest('/admin/shop/goods/customcategory/'+strCode+'/goods', this.data.codeArr)
+      // Api.getUserDetaisl()
+        app.http.putRequest('/admin/shop/goods/customcategory/'+strCode+'/goods', this.data.codeArr)
           .then(res => {
             wx.showToast({
               title: '分类成功',
@@ -91,14 +96,17 @@ Page({
     var _this=this,
         tempArr={},
         name=this.data.value
-    app.http.postRequest('/admin/shop/customCategory/save', { name: name})
+    Api.addClass({name: name})
       .then(res => {
         wx.showToast({
           title: '新建成功',
           duration: 1000,
-          mask: true
+          mask: true,
+          success:function(){
+            _this.getList()
+            _this.cancel()
+          }
         })
-        _this.cancel()
       })
   },
   // 监听input

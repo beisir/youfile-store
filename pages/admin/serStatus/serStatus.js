@@ -2,7 +2,7 @@ const app = getApp();
 import Api from '../../../utils/api.js'
 Page({
   data: {
-    history: ["戒指", "项链", "钻戒"],
+    history:[],
     hidden: false,
     baseUrl: app.globalData.imageUrl,
     result: [],
@@ -33,11 +33,14 @@ Page({
     })
     Api.goodsSearchList({ keyword: keyword })
       .then(res => {
-        console.log(res)
         var obj = res.obj.result,
           datas = _this.data.result,
           newArr = app.pageRequest.addDataList(datas, obj)
         if (newArr.length > 0) {
+          _this.setData({
+            showResult: true,
+          })
+        }else{
           _this.setData({
             showResult: true,
           })
@@ -49,6 +52,10 @@ Page({
   },
   searchBtn(e) {
     app.pageRequest.pageData.pageNum = 0
+    this.setData({
+      result:[]
+    })
+    this.historyHandle(this.data.value)
     this.getList()
   },
   // 清空input的内容
@@ -123,6 +130,5 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-      // this.getList()
   }
 })

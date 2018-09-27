@@ -52,7 +52,6 @@ Page({
   },
   // 监听input
   watchInput: function (event) {
-    console.log(event.detail.value)
     if (event.detail.value == '') {
       this.setData({
         watchInput: false
@@ -105,7 +104,6 @@ Page({
   confirm:function(){
     var _this=this,
       value =this.data.value
-    console.log(value)
     if (value==''){
       _this.setMes()
     }else{
@@ -135,11 +133,6 @@ Page({
   onReady: function () {
     this.getSet()
   },
-  // switch1Change: true,
-  // switch2Change: true,
-  // watchInput: false,
-  // value: '',
-  // value1: '',
   getSet:function(){
     var _this=this
     Api.saleBatch()
@@ -156,9 +149,6 @@ Page({
             value1: res.obj.saleBatchAmount
           })
         }
-        console.log(res)
-        // _this.cancel()
-        // _this.setSuccess()
       })
   },
   /**

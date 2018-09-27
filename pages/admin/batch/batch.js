@@ -8,6 +8,7 @@ Page({
   data: {
     hasList: true, 
     datas: [],
+    baseUrl: app.globalData.imageUrl,
     currentTab:-1,
     allSelected:false,
     goodsStatus:'',
@@ -20,20 +21,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this
-    _this.getList()
+    
   },
 getList:function(){
   var _this = this
   Api.adminGoodsList({})
     .then(res => {
-      var detailList = res.obj.result,
-        datas = _this.data.datas,
-        totalCount = res.obj.totalCount,
-        newArr = app.pageRequest.addDataList(datas, detailList)
-      _this.setData({
-        datas: newArr,
-      })
+      var detailList = res.obj.result
+      if (detailList.length==0){
+        Api.showToast("暂无更多数据了！")
+      }else{
+        var datas = _this.data.datas,
+          totalCount = res.obj.totalCount,
+          newArr = app.pageRequest.addDataList(datas, detailList)
+        _this.setData({
+          datas: newArr,
+        })
+      }
     })
 },
  indexOf(val,arr){
@@ -121,12 +125,16 @@ getList:function(){
       goodsStatus = this.data.goodsStatus
     Api.adminGoodsStatus({ goodsStatus: goodsStatus, customCategoryCodes: '' })
       .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.datas,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          datas: newArr,
-        })
+        var detailList = res.obj.result
+        if (detailList.length == 0) {
+          Api.showToast("暂无更多数据了！")
+        }else{
+          var datas = _this.data.datas,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            datas: newArr,
+          })
+        }
       })
   },
   // 下架
@@ -194,7 +202,12 @@ getList:function(){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    app.pageRequest.pageData.pageNum = 0
+    this.setData({
+      datas: []
+    })
+    var _this = this
+    _this.getList()
   },
 
   /**
@@ -219,6 +232,9 @@ getList:function(){
       currentTab: -1
     })
     app.pageRequest.pageData.pageNum = 0
+    this.setData({
+      datas: []
+    })
     this.getList()
   },
 
