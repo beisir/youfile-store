@@ -84,13 +84,17 @@ Page({
   },
   //查看凭证
   seeVoucher(e) {
-    let num = e.currentTarget.dataset.num;
-    app.http.getRequest("/admin/order/orderpayment/" + num).then((res) => {
-      if (res.obj) {
-        // wx.previewImage({
-        //   current: current, // 当前显示图片的http链接
-        //   urls: this.data.imgalist // 需要预览的图片http链接列表
-        // })
+    let num = this.data.num;
+    API.seeVoucher({ orderNumber: num }).then((res) => {
+      if (res.obj.payVoucher) {
+        wx.previewImage({
+          urls: [this.data.baseUrl + res.obj.payVoucher]
+        })
+      } else {
+        wx.showToast({
+          title: '未上传支付凭证',
+          icon: 'none'
+        })
       }
     })
   },

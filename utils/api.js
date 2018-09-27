@@ -87,7 +87,8 @@ import {
   closedOrderUrl,
   cancelOrderUrl,
   addDxpressUrl,
-  addRemarkUrl
+  addRemarkUrl,
+  seeVoucherUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -502,6 +503,10 @@ function addExpress(data){
 function addRemark(data){
   return app.http.putRequest(cancelOrderUrl +"?remark=" + data.remark, data)
 }  
+// 查看凭证
+function seeVoucher(data){
+  return app.http.getRequest(seeVoucherUrl, data)
+}
 /**
  * 初始化storeId
  */
@@ -513,6 +518,7 @@ function initStoreId(data) {
   return data;
 }
 module.exports = {
+  seeVoucher: seeVoucher,
   addRemark: addRemark,
   addExpress: addExpress,
   cancelOrder: cancelOrder,

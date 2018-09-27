@@ -17,7 +17,7 @@ page{
   height:853rpx;
   width: 610rpx;
   position: fixed;
-  top: 96rpx;
+  top: 60rpx;
   left: 0;
   /* bottom: 0; */
   right: 0;
@@ -30,7 +30,7 @@ page{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin: 34rpx 0;
+  margin: 30rpx 0;
 }
 .login-title-text{
   font-size: 46rpx;
@@ -67,6 +67,7 @@ page{
   width: 225rpx!important;
   font-size:30rpx!important;
   margin: 0!important;
+  border-radius:0;
 }
 /* 密码图 */
 .pass-img{
@@ -101,7 +102,7 @@ page{
 /*关闭  */
 .close-btn{
   position: fixed;
-  top:1054rpx;
+  top:1011rpx;
   left: 0;
   right: 0;
   width: 62rpx;

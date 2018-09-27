@@ -34,11 +34,11 @@
   </navigator>
   <block wx:if='{{limitShow==3}}'>
     <navigator class='u-o-div' url='../stockOrder/stockOrder'>
-      <image src='/image/mes1.png'></image>
+      <image src='/image/supplyOrder.png'></image>
       <view>进货单</view>
     </navigator>
-    <navigator class='u-o-div' url='../../businessFriend/index/index'>
-      <image src='/image/mes1.png'></image>
+    <navigator class='u-o-div' url='../../businessFriend/merchant/index/index'>
+      <image src='/image/firend.png'></image>
       <view>我的商友</view>
     </navigator>
   </block>
