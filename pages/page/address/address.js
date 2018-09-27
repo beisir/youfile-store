@@ -80,9 +80,12 @@ Page({
         title: res.message,
         icon: "none"
       })
-      if(res.success){
-
-      }
+      
+      setTimeout(()=>{
+        wx.redirectTo({
+          url: '../orderSuccess/orderSuccess?num=' + res.obj.orderNumber
+        })
+      },800)
     })
   },
 
@@ -182,11 +185,11 @@ Page({
 
     //订单分类[1 进货单|2 普通订单|3 购物车订单]
     let orderType = 1;
-    adminType=1;//delit
+    //adminType=1;//delit
     if (adminType==1){
       //普通用户
       orderType = 3;
-    } else if (adminType == 3){
+    } else if (adminType == 3 || adminType == 2){
       //批发商
       orderType = 1;  
     }

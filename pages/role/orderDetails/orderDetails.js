@@ -48,59 +48,10 @@ Page({
   onLoad: function (options) {
     this.setData({
       num: options.num,
-      status: options.status
+      status: options.status,
+      baseUrl: app.globalData.imageUrl 
     });
     this.getData();
-    
-    
-
-
-
-    if (options.status == 0) {
-      wx.setNavigationBarTitle({
-        title: "待付款"
-      })
-      this.setData({
-        status0: false
-      })
-    } else if (options.status == 1) {
-      wx.setNavigationBarTitle({
-        title: "已付款"
-      })
-      this.setData({
-        status1: false
-      })
-    } else if (options.status == 2) {
-      wx.setNavigationBarTitle({
-        title: "已发货"
-      })
-      this.setData({
-        status2: false,
-      })
-    } 
-    // else if (options.status == 3) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已发货"
-    //   })
-    //   this.setData({
-    //     status3: false,
-    //   })
-    // } 
-    else if (options.status == 3) {
-      wx.setNavigationBarTitle({
-        title: "交易完成"
-      })
-      this.setData({
-        status4: false
-      })
-    } else if (options.status == 4) {
-      wx.setNavigationBarTitle({
-        title: "已关闭"
-      })
-      this.setData({
-        status5: false
-      })
-    }
   },
   //打电话
   tel: function () {
@@ -379,7 +330,8 @@ Page({
       this.setData({
         'order.createDate': this.timeFormat(this.data.order.createDate),
         'order.payDate': this.timeFormat(this.data.order.payDate),
-        'order.finishTime': this.timeFormat(this.data.order.finishTime),
+        'order.finishDate': this.timeFormat(this.data.order.finishDate),
+        'order.deliverDate': this.timeFormat(this.data.order.deliverDate),
       })
 
       //倒计时

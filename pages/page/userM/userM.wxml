@@ -2,7 +2,7 @@
 <view class="weui_cells weui_cells_n">
    <view class="weui-cell">
     <view class="weui-cell__hd">
-      <image src="{{user.headPic?user.headPic:'/image/userphoto.png'}}" mode="widthFix"></image>
+      <image src="{{user.headPic?baseUrl+user.headPic:'/image/userphoto.png'}}" mode="widthFix"></image>
     </view>
     <view class="weui-cell__name" wx:if="{{user.nickName}}">
       {{user.nickName}}<view style='margin-left:10rpx;' class='floor-admin'>新批零店主</view>
@@ -48,7 +48,7 @@
 </view>
 
 <view class='bottom_M'>
-  <navigator url='../workIndex/workIndex'><image  src="/image/12.png"></image><view>工作台</view></navigator>
-  <navigator url='../../businessFriend/merchant/index/index'><image  src="/image/admin2.png"></image><view>商友录</view></navigator>
+  <navigator open-type='redirect' url='../workIndex/workIndex'><image  src="/image/12.png"></image><view>工作台</view></navigator>
+  <navigator open-type='redirect' url='../../businessFriend/merchant/index/index'><image  src="/image/admin2.png"></image><view>商友录</view></navigator>
   <navigator><image  src="/image/w12.png"></image><view   class='active'>我的</view></navigator>
 </view>

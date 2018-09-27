@@ -69,9 +69,9 @@
   <view class='np-view np-code np-coden1' wx:if="{{status=='finish'||status=='shipped'}}">
     <image src="/image/wl-car.png"></image>
     <view>物流信息</view>
-    <text>承运公司：{{order.expressCompany}}</text>
+    <text>承运公司：{{order.expressCompany?order.expressCompany:""}}</text>
     <view>
-      <text>运单编号：{{order.expressNumber}}</text>
+      <text>运单编号：{{order.expressNumber?order.expressNumber:""}}</text>
     </view>
     <!-- <text>卖家暂未填写订单信息</text> -->
   </view>
@@ -104,7 +104,7 @@
     <view class="cart-box">
       <view class="cart-list" wx:for="{{showList}}" wx:key="{{index}}">
         <navigator>
-          <image class="cart-thumb" src="{{item.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
         </navigator>
         <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
           <view>x {{item.orderDetails.num}}</view>
@@ -143,7 +143,7 @@
     </block>
     <block wx:if="{{status=='finish'}}">
       <view>成交时间
-        <text>{{order.finishTime}}</text>
+        <text>{{order.finishDate}}</text>
       </view>
     </block>
   </block>

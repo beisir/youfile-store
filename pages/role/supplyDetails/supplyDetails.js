@@ -1,5 +1,4 @@
 // pages/nopay/nopay.js
-let orderCom = require('../order/orderCommon.js');
 const util = require('../../../utils/util.js');
 const app = getApp();
 Page({
@@ -155,7 +154,7 @@ Page({
   // 待填表
   sendGoods(e) {
     let type = e.currentTarget.dataset.type,
-      num = this.data.exNum,
+      num = this.data.num,
       obj = {
         orderNumber: num
       };
@@ -302,52 +301,10 @@ Page({
   onLoad: function (options) {
     this.setData({
       status: options.status,
-      num: options.num
+      num: options.num,
+      baseUrl: app.globalData.imageUrl 
     })
 
-    // if (options.status == 0) {
-    //   wx.setNavigationBarTitle({
-    //     title: "待付款"
-    //   })
-    //   this.setData({
-    //     status0: false
-    //   })
-    // } else if (options.status == 1) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已付款"
-    //   })
-    //   this.setData({
-    //     status1: false
-    //   })
-    // } else if (options.status == 2) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已发货"
-    //   })
-    //   this.setData({
-    //     status2: false,
-    //   })
-    // } else if (options.status == 3) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已发货"
-    //   })
-    //   this.setData({
-    //     status3: false,
-    //   })
-    // } else if (options.status == 4) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已完成"
-    //   })
-    //   this.setData({
-    //     status4: false
-    //   })
-    // } else if (options.status == 5) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已关闭"
-    //   })
-    //   this.setData({
-    //     status5: false
-    //   })
-    // }
   },
   //打电话
   tel: function () {
@@ -379,14 +336,30 @@ Page({
         status: res.obj.orderStatus  //状态
       })
       this.setData({
-        'order.createDate': orderCom.timeFormat(this.data.order.createDate),
-        'order.payDate': orderCom.timeFormat(this.data.order.payDate),
-        'order.finishTime': orderCom.timeFormat(this.data.order.finishTime),
+        'order.createDate': this.timeFormat(this.data.order.createDate),
+        'order.payDate': this.timeFormat(this.data.order.payDate),
+        'order.finishDate': this.timeFormat(this.data.order.finishDate),
+        'order.deliverDate': this.timeFormat(this.data.order.deliverDate),
       })
       //倒计时
       this.total_micro_second = res.timeoutExpressSecond
       util.count_down(this)
     })
+  },
+  //时间戳转化成时间格式
+  timeFormat(timestamp) {
+    if (!timestamp) { return "" }
+    //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+    var time = new Date(timestamp);
+    var year = time.getFullYear();
+    var month = time.getMonth() + 1;
+    var date = time.getDate();
+    var hours = time.getHours();
+    var minutes = time.getMinutes();
+    var seconds = time.getSeconds();
+    return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
+    function add0(m) { return m < 10 ? '0' + m : m }
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

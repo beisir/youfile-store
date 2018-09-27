@@ -1,5 +1,6 @@
 // pages/userdetails/userdetails.js
 const app = getApp();
+import Api from '../../../utils/api.js';
 Page({
 
   /**
@@ -46,12 +47,33 @@ Page({
   },
   //改头像
   changeIcon() {
-
+    Api.uploadImage()
+      .then(res => {
+        var url = JSON.parse(res).obj
+        if (url) {
+          app.http['_headerGet']['content-type'] = 'application/x-www-form-urlencoded';
+          app.http.putRequest("/api/user/headpic", {
+            headPic: url
+          }).then(res => {
+            wx.showToast({
+              title: res.message,
+              icon: 'none'
+            })
+            this.setData({
+              ['user.headPic']: url
+            })
+          })
+        }
+      })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      baseUrl: app.globalData.imageUrl
+    })
+
   },
   updataSex(e) {
     this.setData({

@@ -45,7 +45,6 @@ Page({
     let url = this.data.url,
         txt = this.data.val.trim(),
         num = this.data.num;
-    console.log(url[0])    
     if(url && txt){
       app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
       app.http.postRequest("/api/order/orderpayment/"+num+"/uploadpayvoucher",{

@@ -99,7 +99,7 @@
       <view class="cart-box">
         <view class="cart-list" wx:for="{{item.goodsInfos}}" wx:key="{{index}}">
           <navigator>
-            <image class="cart-thumb" src="{{item.image}}"></image>
+            <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
           </navigator>
           <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
             <view>x {{item.orderDetails.num}}</view>

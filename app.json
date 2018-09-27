@@ -1,7 +1,17 @@
 {
   "pages":[
+    "pages/page/address/address",
+    
+    
+    "pages/page/user/user",
+    
+    
+    
+    
+    
     "pages/page/home/home",
     
+<<<<<<< HEAD
     "pages/businessFriend/merchant/index/index",
     
     "pages/businessFriend/index/index",
@@ -12,6 +22,16 @@
     "pages/page/addressWe/addressWe",
     "pages/page/cartList/cartList",
     "pages/page/orderSuccess/orderSuccess",
+=======
+    "pages/page/orderSuccess/orderSuccess",
+    
+    
+    
+    
+    
+    
+    
+>>>>>>> f5d60d5d51dad2b8f937e8eccd429762368d5bc2
     "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
     "pages/admin/success/success",
@@ -44,7 +64,6 @@
     
     "pages/role/supplyVoucher/supplyVoucher",
     
-    "pages/page/address/address",
     
     
 

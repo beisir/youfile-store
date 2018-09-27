@@ -1,5 +1,7 @@
 // pages/user/user.js
+import Api from '../../../utils/api.js';
 var app = getApp();
+<<<<<<< HEAD
 import Api from '../../../utils/api.js'
 function getIdentity(_this) {
   if (Api.isEmpty(wx.getStorageSync("access_token"))) {
@@ -47,6 +49,8 @@ function getIdentity(_this) {
     _this.getUser()
   }
 }
+=======
+>>>>>>> f5d60d5d51dad2b8f937e8eccd429762368d5bc2
 Page({
 
   /**
@@ -67,6 +71,11 @@ Page({
           user: res.obj,
           hasUser: true
         })
+      }else{
+        this.setData({
+          user: "",
+          hasUser: false
+        })
       }
     }).catch(e => {
       this.setData({
@@ -79,6 +88,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      baseUrl: app.globalData.imageUrl
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

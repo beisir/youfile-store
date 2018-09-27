@@ -18,12 +18,10 @@ Page({
         title: res.message,
         icon: "none"
       })
-      if (res.success) {
-        app.authHandler.flushTokenInfo();
-        this.setData({
-          token: ""
-        })
-      }
+      app.authHandler.flushTokenInfo();
+      this.setData({
+        token: ""
+      })
     })
   },
 

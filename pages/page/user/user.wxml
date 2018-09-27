@@ -2,10 +2,14 @@
 <login id="login"></login>
 
 <view class='u-title'>
+
   <view class='u-t-cont'>
+    <navigator url='../derm/derm' class='init-page'>
+      <image src='/image/er.png'></image>
+    </navigator>
     <navigator url='../userDetails/userDetails'>
       <view class='u-t-ewmico'>
-        <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?user.headPic:"/image/42.png"}}'></image>
+        <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic:"/image/42.png"}}'></image>
         <view hidden='{{hasUser}}'>
           <open-data class='user-headPic' type="userAvatarUrl"></open-data>
         </view>

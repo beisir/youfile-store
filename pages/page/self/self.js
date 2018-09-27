@@ -114,27 +114,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // if (options.status == 6) {
-    //   this.setData({
-    //     status6: false,
-    //   })
-    // } else if (options.status == 7) {
-    //   this.setData({
-    //     status7: false,
-    //   })
-    // } else if (options.status == 8) {
-    //   this.setData({
-    //     status8: false,
-    //   })
-    // }else if (options.status == 5) {
-    //   this.setData({
-    //     status5: false
-    //   })
-    // }
-
     this.setData({
       num: options.num,
-      status: options.status
+      status: options.status,
+      baseUrl: app.globalData.imageUrl
     })
   },
  
@@ -169,6 +152,8 @@ Page({
       //创建时间
       try {
         res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
+        res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
+        res.obj.finishDate = util.formatTime(new Date(res.obj.finishDate));
       } catch (e) { }
 
       this.setData({

@@ -96,17 +96,10 @@ Component({
       }
 
       loginApp.http.postRequest("/api/user/resetPassword", obj).then(res => {
-        if (res.code == 1) {
-          wx.showToast({
-            title: '密码修改成功',
-            icon: 'none',
-          })
-        } else {
           wx.showToast({
             title: res.message,
             icon: 'none',
           })
-        }
       })
     },
     //登录

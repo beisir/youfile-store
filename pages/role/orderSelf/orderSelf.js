@@ -45,47 +45,10 @@ Page({
   onLoad: function (options) {
     this.setData({
       num:options.num,
-      status: options.status
+      status: options.status,
+      baseUrl: app.globalData.imageUrl
     });  
     this.getData();
-
-    
-    
-
-    // wx.setNavigationBarTitle({
-    //   title: "待付款"
-    // })
-    // if (options.status == 5) {
-    //   wx.setNavigationBarTitle({
-    //     title: "待付款"
-    //   })
-    //   this.setData({
-    //     status6: false
-    //   })
-    // } else if (options.status == 6) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已付款"
-    //   })
-    //   this.setData({
-    //     status7: false
-    //   })
-    // } else if (options.status == 7) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已完成",
-    //   })
-    //   this.setData({
-    //     status8: false,
-    //     allStatus: true
-    //   })
-    // } else if (options.status == 8) {
-    //   wx.setNavigationBarTitle({
-    //     title: "已关闭"
-    //   })
-    //   this.setData({
-    //     status9: false,
-    //     allStatus: true
-    //   })
-    // }
   },
   //打电话
   tel: function () {
@@ -104,6 +67,7 @@ Page({
       })
       return
     }
+    app.http['_headerGet']['content-type'] = "application/x-www-form-urlencoded";
     app.http.requestAll("/admin/order/" + num + "/claim", {
         orderNumber: num,
         claimGoodsNum: money
@@ -112,6 +76,7 @@ Page({
         title: res.message,
         icon: 'none'
       })
+      this.afterOperation()
     })
   }, 
   // 监听输入
@@ -131,7 +96,7 @@ Page({
   },
   closeModal() {
     this.setData({
-      changeModal: fasle,
+      changeModal: false,
       show: false,
       sureModal:false,
       show3:false
@@ -209,7 +174,7 @@ Page({
     }, "PUT").then((res) => {
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: 'none'
       })
       this.afterOperation()
     })
@@ -230,7 +195,7 @@ Page({
     }, "POST").then((res) => {
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: 'none'
       })
       this.afterOperation()
     })
@@ -269,7 +234,7 @@ Page({
     }, "PUT").then((res) => {
       wx.showToast({
         title: res.message,
-        icon: none
+        icon: 'none'
       })
       this.afterOperation()
     })
@@ -325,7 +290,7 @@ Page({
       this.setData({
         'order.createDate': this.timeFormat(this.data.order.createDate),
         'order.payDate': this.timeFormat(this.data.order.payDate),
-        'order.finishTime': this.timeFormat(this.data.order.finishTime),
+        'order.finishDate': this.timeFormat(this.data.order.finishDate),
       })
       //倒计时
       this.total_micro_second = res.timeoutExpressSecond
