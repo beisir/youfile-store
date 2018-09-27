@@ -109,10 +109,6 @@ class request {
             wx.hideNavigationBarLoading()
           }
         })
-        this._headerGet = {
-          'content-type': 'application/json'
-        }
-        
       })
     });
   }

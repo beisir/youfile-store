@@ -1,6 +1,7 @@
 // pages/nopay/nopay.js
 const app = getApp();
 const util = require('../../../utils/util.js');
+import API from "../../../utils/api.js";
 Page({
 
   /**
@@ -71,10 +72,10 @@ Page({
       })
       return
     }
-    app.http.requestAll("/admin/order/" + num + "/claim", {
+    API.testGoodCode({
       orderNumber: num,
       claimGoodsNum: money
-    }, "PUT").then((res) => {
+    }).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'
@@ -104,13 +105,13 @@ Page({
       }
       
     }
-    app.http.putRequest("/admin/order/" + num + "/addexpress", obj).then((res)=>{
+    API.addExpress(obj).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'
       })
+      this.afterOperation();
     })
-    this.afterOperation();
   },
   // 监听输入
   watchInput(e) {
@@ -130,16 +131,16 @@ Page({
   },
   saveRemark(e){
     let val = e.detail.value;
-    app.http.putRequest("/admin/order/{orderNumber}/addRemark",{
-      orderNumber:this.data.num,
-      remark : val
-    }).then(res=>{
+    API.addRemark({
+      orderNumber: this.data.num,
+      remark: val
+    }).then(res => {
       wx.showToast({
         title: res.message,
-        icon:'none'
+        icon: 'none'
       })
-      if(res.success){
-        
+      if (res.success) {
+
       }
     })
   },
@@ -261,9 +262,10 @@ Page({
 
     let num = this.data.num,
       index = this.data.navindex;
-    app.http.requestAll("/admin/order/" + num + "/closed", {
-      reason: this.data.reson[index].title
-    }, "PUT").then((res) => {
+    API.closeOrder({
+      reason: this.data.reson[index].title,
+      orderNumber: num
+    }).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'

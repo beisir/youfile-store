@@ -83,7 +83,11 @@ import {
   phoneMessageUrl,
   registerUrl,
   registerPhoneMsgUrl,
-  removeDefaultUrl
+  removeDefaultUrl,
+  closedOrderUrl,
+  cancelOrderUrl,
+  addDxpressUrl,
+  addRemarkUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -460,7 +464,7 @@ function changeIcon(data){
 }
 // 验证取货码
 function testGoodCode(data){
-  return app.http.putRequest(testGoodCodeUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.putRequest(testGoodCodeUrl +"?claimGoodsNum="+data.claimGoodsNum, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 // 上传凭证
 function uploadVoucher(data){
@@ -482,6 +486,22 @@ function register(data) {
 function registerPhoneMsg(data) {
   return app.http.getRequest(registerPhoneMsgUrl, data)
 }
+// 关闭订单
+function closeOrder(data){
+  return app.http.putRequest(closedOrderUrl+"?reason="+data.reason, data)
+}
+// 取消订单
+function cancelOrder(data){
+  return app.http.putRequest(cancelOrderUrl + "?reason=" + data.reason, data)
+}
+// 添加快递
+function addExpress(data){
+  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + data.expressCompany + "&expressNumber=" + data.expressNumber, data)
+}
+// 订单填写商家备注
+function addRemark(data){
+  return app.http.putRequest(cancelOrderUrl +"?remark=" + data.remark, data)
+}  
 /**
  * 初始化storeId
  */
@@ -493,6 +513,10 @@ function initStoreId(data) {
   return data;
 }
 module.exports = {
+  addRemark: addRemark,
+  addExpress: addExpress,
+  cancelOrder: cancelOrder,
+  closeOrder: closeOrder,
   resetPassword: resetPassword,
   phoneMessage: phoneMessage,
   register: register,
