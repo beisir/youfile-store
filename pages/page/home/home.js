@@ -206,6 +206,7 @@ Page({
   onLoad: function (options) {
     getIdentity(this)
     var that = this;
+  
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
