@@ -46,6 +46,16 @@ class TokenHandler {
         success: (res => {
           if (res.statusCode === 200) {
             this.saveTokenInfo(res.data);
+          } else if (res.statusCode === 400) {
+            wx.showToast({
+              title: '用户名或密码错误',
+              icon: 'none'
+            });
+          } else {
+            wx.showToast({
+              title: '认证异常',
+              icon: 'none'
+            });
           }
           resolve(res.data);
         })
@@ -74,6 +84,16 @@ class TokenHandler {
         success: (res => {
           if (res.statusCode === 200) {
             this.saveTokenInfo(res.data);
+          } else if (res.statusCode === 400) {
+            wx.showToast({
+              title: '验证码错误',
+              icon: 'none'
+            });
+          } else {
+            wx.showToast({
+              title: '认证异常',
+              icon: 'none'
+            });
           }
           resolve(res.data);
         })
@@ -125,6 +145,8 @@ class TokenHandler {
         resolve()
         return
       }
+      //移除refreshToken
+      wx.removeStorageSync('refresh_token');
 
       wx.request({
         url: this.baseUrl + '/oauth/token',
@@ -143,7 +165,10 @@ class TokenHandler {
           }
           else {
             //强制刷新失败，清除本地的token信息，token返回为空
-            this.flushTokenInfo();
+            let newRefreshToken = wx.getStorageSync('refresh_token');
+            if (refreshToken == newRefreshToken) {
+              this.flushTokenInfo();
+            }
           }
           resolve();
         })
@@ -191,6 +216,15 @@ class TokenHandler {
     } catch (e) {
       console.log(e);
     }
+  }
+
+
+  /**
+   * 判断用户是否登录
+   */
+  static isLogin() {
+    let token = wx.getStorageSync('access_token')
+    return token != null && token != undefined && token != "";
   }
 
   /**

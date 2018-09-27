@@ -16,7 +16,6 @@ Page({
     Api.classList()
       .then(res => {
         const obj = res.obj
-        console.log(obj)
         for (var i = 0; i < obj.length; i++) {
           obj[i].selected = false
         }
