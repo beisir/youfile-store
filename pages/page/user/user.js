@@ -29,7 +29,7 @@ function getIdentity(_this) {
             selectedIconPath: '/image/21.png'
           })
           _this.setData({
-            limitShow: 2,
+            limitShow: 3,
           })
         }
         if (!isPurchaser && !isStoreOwner) {
