@@ -14,7 +14,7 @@
       <image bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' class='weui-img' src="/image/icl.png"></image>
   </view>
 </view>
-<view class='shop-cont' wx:if='{{list.length>1}}'>
+<view class='shop-cont'>
   <view  wx:for='{{list}}' wx:key='{{index}}' wx:if="{{item.customCategoryCode!=0}}" bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' >
      {{item.name}}<view bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'>{{item.count}}件</view>
       <image class='weui-img' src="/image/icl.png" bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'></image>
