@@ -78,11 +78,11 @@
       </view>
     </view>
     <view class='cf-button'>
-      <block wx:if="{{item.orderStatus=='unpaid'}}">
+      <!-- <block wx:if="{{item.orderStatus=='unpaid'}}">
         <view class='or-time'>距订单取消
           <text>00:30:00</text>
         </view>
-      </block>
+      </block> -->
       <view class='or-text'>共
         <text class='or-font1'>{{item.num}}</text>件商品
         <text class='or-font2'>合计：</text>
