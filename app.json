@@ -1,6 +1,13 @@
 {
   "pages":[
+    "pages/page/cartList/cartList",
+    
+    "pages/admin/status/status",
+    
+    "pages/admin/addGoods/addGoods",
+    
     "pages/page/home/home",
+    
     "pages/page/order/order",
     
     "pages/role/order/order",
@@ -9,8 +16,6 @@
     
     
     "pages/role/supplyOrder/supplyOrder",
-    "pages/admin/status/status",
-    "pages/page/cartList/cartList",
     "pages/businessFriend/merchant/index/index",
     "pages/page/address/address",
     "pages/businessFriend/index/index",
@@ -19,7 +24,6 @@
     "pages/page/classList/classList",
     "pages/page/addressWe/addressWe",
     "pages/page/orderSuccess/orderSuccess",
-    "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
     "pages/admin/success/success",
     "pages/page/postageInfo/postageInfo",

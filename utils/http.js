@@ -16,26 +16,26 @@ class request {
   /**
    * PUT类型的网络请求
    */
-  putRequest(url, data) {
-    return this.requestAll(url, data, 'PUT')
+  putRequest(url, data, header) {
+    return this.requestAll(url, data, 'PUT', header)
   }
   /**
    * GET类型的网络请求
    */
-  getRequest(url, data) {
-    return this.requestAll(url, data, 'GET')
+  getRequest(url, data, header) {
+    return this.requestAll(url, data, 'GET', header)
   }
   /**
    * DELETE类型的网络请求
    */
-  deleteRequest(url, data) {
-    return this.requestAll(url, data, 'DELETE')
+  deleteRequest(url, data, header) {
+    return this.requestAll(url, data, 'DELETE', header)
   }
   /**
    * POST类型的网络请求
    */
-  postRequest(url, data) {
-    return this.requestAll(url, data, 'POST')
+  postRequest(url, data, header) {
+    return this.requestAll(url, data, 'POST', header)
   }
   /**
    * 解析URL
