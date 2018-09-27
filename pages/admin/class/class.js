@@ -12,7 +12,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  getList:function(){
     var that = this
     Api.classList()
       .then(res => {
@@ -24,6 +24,9 @@ Page({
           list: obj
         })
       })
+  },
+  onLoad: function (options) {
+    this.getList()
   },
   // 新建分类
    watchInput: function (event) {
@@ -57,15 +60,9 @@ Page({
       Api.addClass({ name: name })
         .then(res => {
           const obj = res.obj
-          _this.setData({
-            list: obj
-          })
-          wx.showToast({
-            title: '新建成功',
-            icon: 'none',
-            duration: 2000
-          })
+          Api.showToast("新建成功")
           _this.cancel()
+          _this.getList()
         })
     }
    
@@ -79,9 +76,9 @@ Page({
   classList:function(e){
     var code = e.target.dataset.code,
         name=e.target.dataset.name
-    wx.navigateTo({
-      url: '../classList/classList?name='+name+'&code='+code,
-    })
+        wx.navigateTo({
+          url: '../../page/classList/classList?name='+name+'&code='+code
+        })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

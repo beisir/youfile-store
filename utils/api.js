@@ -80,7 +80,8 @@ import {
   resetPasswordUrl,
   phoneMessageUrl,
   registerUrl,
-  registerPhoneMsgUrl
+  registerPhoneMsgUrl,
+  removeDefaultUrl
 } from './constUrl.js'
 const app = getApp()
 /**判断是否为空**/
@@ -166,6 +167,10 @@ function addClass(data) {
 /**商品置顶**/
 function topGoods(data) {
   return app.http.putRequest(topGoodsUrl+"?isTop=true", data)
+}
+/**取消默认地址**/
+function removeDefault(data) {
+  return app.http.putRequest(removeDefaultUrl, data)
 }
 /**商品状态筛选**/
 function classCodeList(data) {
@@ -462,6 +467,7 @@ module.exports = {
   addressInfo: addressInfo,
   editAddress: editAddress,
   cartList: cartList,
+  removeDefault: removeDefault,
   addTemplate: addTemplate,
   template: template,
   templateDelete: templateDelete,

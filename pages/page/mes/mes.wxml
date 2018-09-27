@@ -2,7 +2,7 @@
   <navigator class='new-e' url='../mesEdit/mesEdit' wx:if='{{limitShow==2}}'><image src="/image/edit1.png"></image></navigator>
   <view class="ym_jpstorename">
   <view class="ym_jpstorelogo">
-      <navigator url='../goodWe/goodWe'><image class="store-logo" src="{{storeMes.logo}}" ></image></navigator>
+      <navigator url='../goodWe/goodWe'><image class="store-logo" src="{{baseUrl}}{{storeMes.logo}}" ></image></navigator>
     </view>
     {{storeMes.name}}
   </view>
@@ -24,7 +24,7 @@
     <view class='weui-xian weui-xian1'></view>
 </view>
 <view class='weui-time wt-font'>
-  <view><image  src=" {{floor.mallLogo}}"></image> {{floor.mallName}}</view>
+  <view><image  src=" {{baseUrl}}{{floor.mallLogo}}"></image> {{floor.mallName}}</view>
   <view>该商家已通过北京百荣世贸商城认证</view>
 </view>
 <view class="weui_cells">
@@ -55,7 +55,7 @@
     </view>
    <view class='weui-xian weui-xian1'></view>
    <view class='up-new-img'>
-    <image wx:for='{{storeGoods}}' wx:key='{{index}}'  src="{{item.mainImgUrl}}"></image>
+    <image wx:for='{{storeGoods}}' wx:key='{{index}}'  src="{{baseUrl}}{{item.mainImgUrl}}"></image>
    </view>
 </view>
 <view class="weui_cells"  wx:if='{{limitShow==3}}'>

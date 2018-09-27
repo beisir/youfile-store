@@ -4,7 +4,7 @@
   background: #fff;border-radius: 8rpx;margin:20rpx;margin-bottom: 150rpx;padding:30rpx;font-size: 28rpx;padding-bottom: 0;
 }
 .shop-cont .shop-size{
-  font-size: 60rpx;margin-bottom: 50rpx;margin-top: 0;padding-top: 0;
+  font-size: 60rpx;padding-bottom: 50rpx;margin-top: 0;padding-top: 0;
 }
 .shop-cont .shop-size-new{
   font-size:36rpx;margin-bottom: 0;

@@ -27,7 +27,11 @@ Page({
     }
   
   },
-
+  removeVal:function(){
+    this.setData({
+      value:''
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -56,7 +60,9 @@ Page({
     Api.serWholesalerList(data)
       .then(res => {
         var detailList = res.obj.result
-        console.log(detailList)
+        if (detailList.length==0){
+          Api.showToast("暂无更多了")
+        }
         if (detailList != null) {
           var datas = _this.data.detailList,
             newArr = app.pageRequest.addDataList(datas, detailList)
@@ -64,12 +70,7 @@ Page({
             detailList: newArr,
           })
         } else {
-          wx.showToast({
-            title: '暂无更多了',
-            icon: 'none',
-            duration: 1000,
-            mask: true
-          })
+          Api.showToast("暂无更多了")
         }
 
       })

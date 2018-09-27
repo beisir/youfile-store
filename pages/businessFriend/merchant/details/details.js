@@ -167,9 +167,19 @@ Page({
         duration: 1000,
         mask: true
       })
-      wx.navigateTo({
-        url: '../newMerchant/newMerchant',
-      })
+      _this.goback()
+    })
+  },
+  // 返回上一页
+  goback: function () {
+    var pages = getCurrentPages();             //  获取页面栈
+    var currPage = pages[pages.length - 1];
+    var prevPage = pages[pages.length - 2];    // 上一个页面
+    prevPage.setData({
+      mydata:1
+    })
+    wx.navigateBack({
+      data: 1
     })
   },
   /**

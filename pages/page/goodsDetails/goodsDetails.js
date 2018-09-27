@@ -1,13 +1,59 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
 var WxParse = require('../../../wxParse/wxParse.js');
+function getIdentity(_this,goodsId) {
+  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+    Api.userIdentity()
+      .then(res => {
+        var obj = res.obj,
+          isStoreOwner = obj.isStoreOwner,
+          isPurchaser = obj.isPurchaser
+        if (isStoreOwner) {
+          wx.setStorage({
+            key: 'admin',
+            data: 2, //1yon 2店主  3批发商
+          })
+          _this.setData({
+            limitShow: 2
+          })
+        }
+        if (isPurchaser) {
+          wx.setStorage({
+            key: 'admin',
+            data: 3,
+          })
+          wx.setTabBarItem({
+            index: 1,
+            text: '进货车',
+            iconPath: '/image/22.png',
+            selectedIconPath: '/image/21.png'
+          })
+          _this.setData({
+            limitShow: 3,
+          })
+        }
+        if (!isPurchaser && !isStoreOwner) {
+          wx.setStorage({
+            key: 'admin',
+            data: 1,
+          })
+          _this.setData({
+            limitShow: 1
+          })
+        }
+        _this.getDetails(goodsId)
+      })
+  }else{
+    _this.getDetails(goodsId)
+  }
+}
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    limitShow: wx.getStorageSync('identity'),
+    limitShow:1,
     storeId: wx.getStorageSync('storeId'),
     imgUrls: [],
     baseUrl: app.globalData.imageUrl,
@@ -99,11 +145,11 @@ Page({
           that.setData({
             newCartList: arr,
           }, function () {
-            that.getDetails(goodsId)
+            getIdentity(this,goodsId)
           })
         })
     }else{
-      this.getDetails(goodsId)
+      getIdentity(this,goodsId)
     }
   },
 
@@ -695,7 +741,6 @@ Page({
   getDetails: function (goodsId){
     var _this=this,
       storeId = this.data.storeId
-  
     Api.config({ goodsId:goodsId})
       .then(res => {
         var obj = res.obj,

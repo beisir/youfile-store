@@ -1,4 +1,5 @@
 import Api from '../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
@@ -10,6 +11,7 @@ Page({
     floor: '',
     storeMes: [],
     storeGoods: [],
+    baseUrl: app.globalData.imageUrl,
     logo:''
   },
 

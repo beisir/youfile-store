@@ -10,9 +10,9 @@
 <view class='bf-cont'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{logo}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{logo}}"></image></view>
       <text>{{name}}</text><text  wx:if='{{success}}'>（战略合作）</text>
-      <view class='nbf-font'><image  mode="widthFix" src="/image/dp.png"></image>百荣世贸</view>
+      <view class='nbf-font'><image  mode="widthFix" src="{{baseUrl}}{{mallLogo}}"></image>{{mallName}}</view>
     </view>
   </view>
 </view>
@@ -37,7 +37,7 @@
    <text>所属商城</text><view>{{mallName}}</view>
   </view>
   <view class='in-cont'>
-   <text>楼层区域</text><view>{{balcony}}{{floor}}{{area}}</view>
+   <text>楼层区域</text><view>{{balcony}}{{floor}}{{area}}{{doorNum}}</view>
   </view>
   <view class='in-cont'>
    <text>小云店</text>

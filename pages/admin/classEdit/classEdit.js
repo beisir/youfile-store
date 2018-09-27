@@ -15,6 +15,8 @@ Page({
   onLoad: function (options) {
     var list = JSON.parse(options.model),
         _this=this
+    console.log(list)
+        
     _this.setData({
       list:list
     })

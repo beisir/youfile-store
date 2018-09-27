@@ -1,7 +1,7 @@
 <navigator class='bf-cont' url='../details/details?userId={{userId}}'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{headPic}}"></image></view>
       <text>{{name}}</text><image  class='re-img' mode="widthFix" src="/image/re1.png"></image><view class='re-name'>进货商</view>
       <view class='nbf-font'>昵称：{{nickName}}</view>
     </view>

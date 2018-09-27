@@ -70,6 +70,7 @@ Page({
       })
   },
   onShow: function () {
+    app.pageRequest.pageData.pageNum = 0
     this.getList({})
   },
 

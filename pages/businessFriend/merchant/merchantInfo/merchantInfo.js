@@ -1,4 +1,5 @@
 import Api from '../../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
@@ -11,6 +12,7 @@ Page({
     storeId: wx.getStorageSync('storeId'),
     send:'',
     status:'',
+    baseUrl: app.globalData.imageUrl,
     success: false,
     oneGreet: false,
     aginGreet: false,
@@ -21,7 +23,7 @@ Page({
     headPic:'',
     userName:'',
     mobile:'',
-
+    showName:''
   },
 
   /**
@@ -29,6 +31,7 @@ Page({
    */
 
   onLoad: function (options) {
+    console.log(options)
     var _this=this,
         status = options.status,
         send=options.send,
@@ -48,6 +51,7 @@ Page({
       send:send,
       accept: accept,
       value: remark,
+      showName:remark,
       greet: greetArr,
       userName:name,
       headPic: headPic,
@@ -108,10 +112,13 @@ Page({
   },
   confirm:function(){
     this.cancel()
+    this.setData({
+      showName:this.data.value
+    })
   },
   invitation:function(){
     wx.navigateTo({
-      url: '../invite/invite?accept=' + this.data.accept + "&remark=" + this.data.value,
+      url: '../invite/invite?accept=' + this.data.accept + "&remark=" + this.data.showName + "&headPic=" + this.data.headPic,
     })
   },
   /**
