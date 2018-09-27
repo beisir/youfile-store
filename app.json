@@ -2,6 +2,9 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/admin/status/status",
+    
+    
     "pages/businessFriend/merchant/index/index",
     
     
@@ -28,7 +31,6 @@
     "pages/page/mesEdit/mesEdit",
     "pages/admin/batchSet/batchSet",
     "pages/businessFriend/merchant/setUp/setUp",
-    "pages/admin/status/status",
     "pages/admin/spec/spec",
     "pages/businessFriend/merchant/dealUser/dealUser",
     "pages/businessFriend/merchant/dealCus/dealCus",

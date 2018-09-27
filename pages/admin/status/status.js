@@ -205,7 +205,7 @@ Page({
   },
   
   onLoad: function (options) {
-    this.getList()
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -224,7 +224,7 @@ Page({
   classCode:function(code){
     var _this = this,
       goodsStatus =this.data.goodsStatus
-    Api.adminGoodsStatus({ goodsStatus: goodsStatus, customCategoryCodes: code })
+    Api.adminGoodsStatus({ goodsStatus: goodsStatus})
       .then(res => {
         var detailList = res.obj.result,
           datas = _this.data.detailList,
@@ -258,7 +258,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    app.pageRequest.pageData.pageNum = 0
+    this.getList()
   },
   bindDownLoad: function () {
     var that = this,
