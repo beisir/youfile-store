@@ -1,5 +1,6 @@
 // pages/order/order.js
 const app = getApp();
+import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -202,19 +203,17 @@ Page({
       })
       return
     }
-    app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
-    app.http.requestAll("/admin/order/{{orderNumber}}/claim", {
-        orderNumber : num ,
-        claimGoodsNum : money
-    }, "PUT").then((res) => {
+    API.testGoodCode({
+      orderNumber: num,
+      claimGoodsNum: money
+    }).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'
       })
-      if(res.success){
-        this.afterOperation();
-      }
+      this.afterOperation();
     })
+    
   },
   //确认收款
   receiveMoney(e){

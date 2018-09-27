@@ -1,6 +1,7 @@
 // pages/nopay/nopay.js
 const app = getApp();
 const util = require('../../../utils/util.js');
+import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -67,17 +68,17 @@ Page({
       })
       return
     }
-    app.http['_headerGet']['content-type'] = "application/x-www-form-urlencoded";
-    app.http.requestAll("/admin/order/" + num + "/claim", {
-        orderNumber: num,
-        claimGoodsNum: money
-    }, "PUT").then((res) => {
+    API.testGoodCode({
+      orderNumber: num,
+      claimGoodsNum: money
+    }).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'
       })
-      this.afterOperation()
+      this.afterOperation();
     })
+    
   }, 
   // 监听输入
   watchInput(e) {

@@ -1,5 +1,6 @@
 // pages/role/supplyVoucher/supplyVoucher.js
 const app = getApp();
+import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -46,22 +47,22 @@ Page({
         txt = this.data.val.trim(),
         num = this.data.num;
     if(url && txt){
-      app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
-      app.http.postRequest("/api/order/orderpayment/"+num+"/uploadpayvoucher",{
-        orderNumber:num,
-        payVoucher:this.data.url,
-        voucherDesc:txt
-      }).then(res=>{
+      API.uploadVoucher({
+        orderNumber: num,
+        payVoucher: this.data.url,
+        voucherDesc: txt
+      }).then(res => {
         wx.showToast({
           title: res.message,
-          icon:'none'
+          icon: 'none'
         })
-        if(res.success){
-          setTimeout(()=>{
+        if (res.success) {
+          setTimeout(() => {
             wx.navigateBack()
-          },800)
+          }, 800)
         }
       })
+      
     }else{
       wx.showToast({
         title: '请上传凭证并填写描述',

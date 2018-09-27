@@ -1,4 +1,5 @@
 const loginApp = getApp();
+import API from '../../../utils/api.js';
 Component({
   properties: {
     // 这里定义了innerText属性，属性值可以在组件使用时指定
@@ -86,20 +87,16 @@ Component({
         })
         return
       }
-
-      loginApp.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
-
       let obj = {
         mobile: this.data.telephone,
         password: this.data.password,
         smsCode: this.data.verificationCode
       }
-
-      loginApp.http.postRequest("/api/user/resetPassword", obj).then(res => {
-          wx.showToast({
-            title: res.message,
-            icon: 'none',
-          })
+      API.resetPassword(obj).then(res => {
+        wx.showToast({
+          title: res.message,
+          icon: 'none',
+        })
       })
     },
     //登录
@@ -119,10 +116,6 @@ Component({
         })
         return;
       }
-
-
-      loginApp.http._headerGet.Authorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=';
-      loginApp.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
       if (this.data.loginType == 'code') {
         if (this.data.verificationCode.length == 0) {
           wx.showToast({
@@ -157,11 +150,16 @@ Component({
         };
         loginApp.authHandler.loginByUser(this.data.telephone, this.data.password).then(res => {
           this.loginAfter(res);
+        }).catch(e => {
+          wx.showToast({
+            title: '账户密码错误',
+            icon: 'none'
+          })
         })
       }
 
     },
-    loginAfter(res){
+    loginAfter(res) {
       if (res.message) {
         wx.showToast({
           title: res.message,
@@ -170,9 +168,10 @@ Component({
         return
       }
       if (res.access_token) {
-        this.closePage()        
+        this.closePage()
         let pages = getCurrentPages();
         let curPage = pages[pages.length - 1];
+        console.log(curPage)
         curPage.onLoad();
         curPage.onShow();
         wx.showToast({
@@ -180,7 +179,6 @@ Component({
           icon: 'none'
         })
       }
-      
     },
     //显示隐藏密码
     showHide() {
@@ -246,10 +244,16 @@ Component({
           icon: 'none',
         })
       } else {
-
-        loginApp.http.getRequest("/oauth/code/sms", { mobile: this.data.telephone }).then(res => {
+        API.phoneMessage({
+          mobile: this.data.telephone
+        }).then(res => {
 
         })
+        // loginApp.http.getRequest("/oauth/code/sms", {
+        //   mobile: this.data.telephone
+        // }).then(res => {
+
+        // })
 
         //获取验证码倒计时
         let sec = this.data.btnSec;

@@ -1,6 +1,7 @@
 // pages/nopay/nopay.js
 const util = require('../../../utils/util.js');
 const app = getApp();
+import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -106,17 +107,17 @@ Page({
       })
       return
     }
-    app.http['_headerGet']['content-type'] = "application/x-www-form-urlencoded";
-    app.http.requestAll("/admin/order/" + num + "/claim", {
+    API.testGoodCode({
       orderNumber: num,
       claimGoodsNum: money
-    }, "PUT").then((res) => {
+    }).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'
       })
       this.afterOperation();
     })
+    
   },
 
   // 取消订单

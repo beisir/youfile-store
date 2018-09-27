@@ -51,8 +51,7 @@ Page({
       .then(res => {
         var url = JSON.parse(res).obj
         if (url) {
-          app.http['_headerGet']['content-type'] = 'application/x-www-form-urlencoded';
-          app.http.putRequest("/api/user/headpic", {
+          Api.changeIcon({
             headPic: url
           }).then(res => {
             wx.showToast({
@@ -63,6 +62,7 @@ Page({
               ['user.headPic']: url
             })
           })
+          
         }
       })
   },
