@@ -1,8 +1,6 @@
 // pages/user/user.js
 import Api from '../../../utils/api.js';
 var app = getApp();
-<<<<<<< HEAD
-import Api from '../../../utils/api.js'
 function getIdentity(_this) {
   if (Api.isEmpty(wx.getStorageSync("access_token"))) {
     Api.userIdentity()
@@ -49,8 +47,7 @@ function getIdentity(_this) {
     _this.getUser()
   }
 }
-=======
->>>>>>> f5d60d5d51dad2b8f937e8eccd429762368d5bc2
+
 Page({
 
   /**
