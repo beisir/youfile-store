@@ -74,3 +74,13 @@ export const apiSetUserUrl='/api/user/set'
 export const apiAddUserUrl='/api/user/set/bfpripermission'
 export const adminSetUserUrl='/admin/user/set'
 export const adminAddUserUrl = '/admin/user/set/bfpripermission'
+// 退出
+export const quitUrl = "/oauth/authentication/removetoken"
+export const updataPwdUrl = "/oauth/authentication/changepassword"
+export const changeIconUrl = "/api/user/headpic"
+export const testGoodCodeUrl = "/admin/order/{{orderNumber}}/claim"
+export const uploadPayVoucherUrl = "/api/order/orderpayment/{{orderNumber}}/uploadpayvoucher"
+export const resetPasswordUrl = "/api/user/resetpassword"
+export const phoneMessageUrl = "/oauth/code/sms"
+export const registerUrl = "/api/user/register"
+export const registerPhoneMsgUrl = "/api/smsCode"

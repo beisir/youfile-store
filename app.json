@@ -1,9 +1,10 @@
 {
   "pages":[
+    "pages/page/user/user",
+    
     "pages/page/address/address",
     
     
-    "pages/page/user/user",
     
     
     

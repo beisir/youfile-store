@@ -71,7 +71,16 @@ import {
   storeIndexUrl,
   setUserNameUrl,
   getUserDetaislUrl,
-  userIdentityUrl
+  userIdentityUrl,
+  quitUrl,
+  updataPwdUrl,
+  changeIconUrl,
+  testGoodCodeUrl,
+  uploadPayVoucherUrl,
+  resetPasswordUrl,
+  phoneMessageUrl,
+  registerUrl,
+  registerPhoneMsgUrl
 } from './constUrl.js'
 const app = getApp()
 /**判断是否为空**/
@@ -385,7 +394,50 @@ function apiAddUser(data) {
 function adminAddUser(data) {
   return app.http.putRequest(adminAddUserUrl + "?bfPripermission=" + data)
 }
+// 退出登录
+function quit(data){
+  return app.http.postRequest(quitUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+// 修改密码
+function updataPwd(data){
+  return app.http.postRequest(updataPwdUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+// 修改头像
+function changeIcon(data){
+  return app.http.putRequest(changeIconUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+// 验证取货码
+function testGoodCode(data){
+  return app.http.putRequest(testGoodCodeUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+// 上传凭证
+function uploadVoucher(data){
+  return app.http.postRequest(uploadPayVoucherUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+/**重置密码**/
+function resetPassword(data) {
+  return app.http.postRequest(resetPasswordUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+/**短信验证码**/
+function phoneMessage(data) {
+  return app.http.getRequest(phoneMessageUrl, data)
+}
+/**注册**/
+function register(data) {
+  return app.http.postRequest(registerUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+/**注册短信验证码**/
+function registerPhoneMsg(data) {
+  return app.http.getRequest(registerPhoneMsgUrl, data)
+}
+
 module.exports = {
+  resetPassword: resetPassword,
+  phoneMessage: phoneMessage,
+  register: register,
+  registerPhoneMsg: registerPhoneMsg,
+  uploadVoucher: uploadVoucher,
+  testGoodCode: testGoodCode,
   isEmpty: isEmpty,
   showToast: showToast,
   adminGoodsList: adminGoodsList,
@@ -461,5 +513,8 @@ module.exports = {
   storeIndex: storeIndex,
   setUserName: setUserName,
   getUserDetaisl: getUserDetaisl,
-  userIdentity: userIdentity
+  userIdentity: userIdentity,
+  quit: quit,
+  updataPwd: updataPwd,
+  changeIcon: changeIcon
 }

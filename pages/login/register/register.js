@@ -1,5 +1,6 @@
-// pages/register/register.js
 const app = getApp();
+import API from '../../../utils/api.js';
+// pages/register/register.js
 Page({
   /**
    * 页面的初始数据
@@ -21,9 +22,9 @@ Page({
     ifhide: true,
     //密码图片src
     see: '/image/pass-hide.png',
-    tip:""
+    tip: ""
   },
-  register(){
+  register() {
     if (!this.testTel()) {
       wx.showToast({
         title: '请输入正确手机号码',
@@ -45,17 +46,20 @@ Page({
       })
       return
     }
-    app.http['_headerGet']["content-type"] = "application/x-www-form-urlencoded";
-    app.http.postRequest("/api/user/register", { 
+
+    let obj = {
       mobile: this.data.telephone,
-      smsCode: this.data.verificationCode,
-      password: this.data.password
-    }).then(res => {
+      password: this.data.password,
+      smsCode: this.data.verificationCode
+    }
+
+    API.register(obj).then(res => {
       wx.showToast({
         title: res.message,
-        icon:'none'
+        icon: 'none'
       })
     })
+
   },
   //显示隐藏密码
   showHide() {
@@ -73,7 +77,7 @@ Page({
       })
     }
   },
-  showPage(){
+  showPage() {
     this.loginCom.showPage();
   },
   //存入手机号
@@ -100,12 +104,12 @@ Page({
   //判断是否输入完整
   checkComplete() {
     if (this.data.telephone.length > 0 && this.data.verificationCode.length > 0 && this.data.password.length > 0) {
-        this.setData({
-          btnID: 'loginBtnAc'
-        })
-        return
-      }
-      
+      this.setData({
+        btnID: 'loginBtnAc'
+      })
+      return
+    }
+
     this.setData({
       btnID: 'loginBtnDis'
     })
@@ -118,10 +122,9 @@ Page({
         icon: 'none',
       })
     } else {
-      app.http.getRequest("/api/smsCode", { mobile: this.data.telephone }).then(res => {
+      API.registerPhoneMsg({ mobile: this.data.telephone }).then(res => {
 
       })
-
       //获取验证码倒计时
       let sec = this.data.btnSec;
       this.setData({
@@ -143,7 +146,7 @@ Page({
         }
       }, 1000)
     }
-  }, 
+  },
   testTel() {
     let phone = this.data.telephone;
     if (!phone || phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
@@ -170,41 +173,41 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })
