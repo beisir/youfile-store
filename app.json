@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/page/home/home",
     
     "pages/page/order/order",
     
@@ -17,7 +18,6 @@
     "pages/admin/status/status",
     
     
-    "pages/page/home/home",
     
     
     

@@ -37,7 +37,7 @@
       <image src='/image/mes1.png'></image>
       <view>进货单</view>
     </navigator>
-    <navigator class='u-o-div' url='../../businessFriend/index/index'>
+    <navigator class='u-o-div' url='../../businessFriend/merchant/index/index'>
       <image src='/image/mes1.png'></image>
       <view>我的商友</view>
     </navigator>

@@ -46,7 +46,7 @@ class TokenHandler {
         success: (res => {
           if (res.statusCode === 200) {
             this.saveTokenInfo(res.data);
-          } else if (res.statusCode === 400) {
+          } else if (res.statusCode === 400 || res.statusCode === 401) {
             wx.showToast({
               title: '用户名或密码错误',
               icon: 'none'
