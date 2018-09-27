@@ -19,19 +19,18 @@ Page({
     Api.remakInfo(data)
       .then(res => {
         var obj = res.obj
-        console.log(obj)
         if (obj != null) {
           _this.setData({
             buyAmount: obj.countData.buyAmount,
             buyTimes: obj.countData.buyTimes,
             recentBuy: obj.countData.recentBuy,
-            name: obj.name,
-            note: obj.note,
-            birthday: obj.birthday,
-            phone: obj.phone,
-            headPic: obj.headPic,
-            nickName: obj.nickName,
-            wechart: obj.wechart,
+            name: obj.name==null? '' : obj.name,
+            note: obj.note == null ? '' : obj.note,
+            birthday: obj.birthday == null ? '' : obj.birthday,
+            phone: obj.phone == null ? '' : obj.phone,
+            headPic: obj.headPic == null ? '' : obj.headPic,
+            nickName: obj.nickName == null ? '' : obj.nickName,
+            wechart: obj.wechart == null ? '' : obj.wechart,
           })
         }
       })

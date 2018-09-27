@@ -2,56 +2,6 @@ const app = getApp();
 import Api from '../../../utils/api.js'
 var recordStartX = 0;
 var currentOffsetX = 0;
-function getIdentity(_this) {
-  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
-    Api.userIdentity()
-      .then(res => {
-        var obj = res.obj,
-          isStoreOwner = obj.isStoreOwner,
-          isPurchaser = obj.isPurchaser
-        if (isStoreOwner) {
-          wx.setStorage({
-            key: 'admin',
-            data: 2, //1yon 2店主  3批发商
-          })
-          _this.setData({
-            limitShow: 2
-          })
-        }
-        if (isPurchaser) {
-          wx.setStorage({
-            key: 'admin',
-            data: 3,
-          })
-          wx.setTabBarItem({
-            index: 1,
-            text: '进货车',
-            iconPath: '/image/22.png',
-            selectedIconPath: '/image/21.png'
-          })
-          wx.setNavigationBarTitle({
-            title: '进货车'
-          })
-          _this.setData({
-            limitShow: 3,
-            showText:'进货车'
-          })
-        }
-        if (!isPurchaser && !isStoreOwner) {
-          wx.setStorage({
-            key: 'admin',
-            data: 1,
-          })
-          _this.setData({
-            limitShow: 1
-          })
-        }
-        _this.getList()
-      })
-  }else{
-    _this.getList()
-  }
-}
 Page({
   data: {
     detailList:[],
@@ -60,7 +10,6 @@ Page({
     lostcarts: [],
     lostList: false,
     totalPrice:0, 
-    showText:'购物车',
     selectAllStatus:true, 
     obj:{
         name:"hello"
@@ -72,7 +21,7 @@ Page({
     leftVal:'',
     numbers: 1,
     baseUrl: app.globalData.imageUrl,
-    limitShow: 1,
+    limitShow: wx.getStorageSync('admin'),
     storeAmount: '',
     goodsAmount:'',
     storeNum: '',
@@ -238,7 +187,6 @@ Page({
           var failureList = []
         }
         for (var i = 0; i < effectiveList.length;i++){
-          // _this.getConfig(effectiveList[i]["goodsId"])
           effectiveList[i].selected = true
           if(effectiveList[i].shoppingCartSkuList==null){
             effectiveList[i].height =270
@@ -258,8 +206,9 @@ Page({
             lostList: true,
           });
         }
+        console.log(effectiveList)
         storeMes.push(store)
-        // _this.getConfig(effectiveList)
+        console.log(storeMes)
         _this.setData({
           detailList: effectiveList,
           lostcarts: failureList,
@@ -271,9 +220,10 @@ Page({
     
   },
   onLoad: function (options) {
+ 
   },
   onShow() {
-    getIdentity(this)
+    this.getList(this)
   },
   /**
    * 当前商品选中事件

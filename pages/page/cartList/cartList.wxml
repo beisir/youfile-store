@@ -58,7 +58,7 @@
     <view wx:else>
         <view class="cart-no-data">
           <view class='nocar'><image src="/image/nocar.png"></image></view>
-          {{showText}}还是空的哦
+          {{limitShow==3?'进货车':'购物车'}}还是空的哦
           <view>去挑几件吧</view>
           <button bindtap='urlHome'>去逛逛</button>
         </view>

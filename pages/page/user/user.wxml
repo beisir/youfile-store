@@ -42,6 +42,7 @@
       <view>我的商友</view>
     </navigator>
   </block>
+
 </view>
 <view class='page_bd'>
   <view class='weui-back'>
