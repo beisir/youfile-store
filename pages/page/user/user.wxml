@@ -5,7 +5,7 @@
 
   <view class='u-t-cont'>
     <navigator url='../derm/derm' class='init-page'>
-      <image src='/image/er.png'></image>
+      <image hidden='{{!hasUser}}' src='/image/er.png'></image>
     </navigator>
     <navigator url='../userDetails/userDetails'>
       <view class='u-t-ewmico'>

@@ -469,7 +469,7 @@ function testGoodCode(data){
 }
 // 上传凭证
 function uploadVoucher(data){
-  return app.http.postRequest(uploadPayVoucherUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.postRequest(uploadPayVoucherUrl, data, {'content-type':'application/x-www-form-urlencoded'})
 }
 /**重置密码**/
 function resetPassword(data) {

@@ -2,11 +2,15 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/page/order/order",
+    
     "pages/role/order/order",
     
     "pages/role/supplyOrder/supplyOrder",
     
-    "pages/page/order/order",
+    
+    
+    
     
     
     "pages/role/orderDetails/orderDetails",
