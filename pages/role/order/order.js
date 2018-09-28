@@ -1,5 +1,6 @@
 // pages/order/order.js
 const app = getApp();
+let timer;
 import API from '../../../utils/api.js';
 Page({
 
@@ -344,23 +345,6 @@ Page({
     // 0待付款 1已付款 2待收货 3交易成功 4交易关闭  5自提待付款 6自提待取货 7交易成功自提 8自提交易关闭
     // 0待付款 1已付款 2待填表  3已发货   4交易成功 5 交易关闭  6自提待付款 7自提已付款 8交易成功自提 9自提交易关闭
 
-    // switch (status) {
-    //   case "unpaid":
-    //     type == 1 ? url += "5" : url += "0";
-    //     break;
-    //   case "paid":
-    //     type == 1 ? url += "6" : url += "1";
-    //     break;
-    //   case "shipped":
-    //     url += "2";
-    //     break;
-    //   case "finish":
-    //     type == 1 ? url += "7" : url += "3";
-    //     break;
-    //   case "closed":
-    //     type == 1 ? url += "8" : url += "4";
-    //     break;
-    // }
     url += status;    
     url += '&num=' + num;
     wx.navigateTo({
@@ -376,11 +360,9 @@ Page({
       })
     }
     app.pageRequest.pageGet("/admin/order/store/" + this.data.storeId +"/ordercategory/3/orderstatus/" + this.data.whitch, {
-       //pageNum:1,
-       //pageSize:100
+      keyWords: this.data.keyword ? this.data.keyword:""
     }).then((res) => {
-      if (res.obj.result) {
-        
+      if (res.obj && res.obj.result) {
         this.resetData(res.obj.result);
       }
     })
@@ -419,9 +401,14 @@ Page({
 
   },
   searchBtn(e) {
+    clearTimeout(timer);
     this.setData({
       style: true,
+      keyword: e.detail.value
     })
+    timer = setTimeout(()=>{
+      this.getList(true);
+    },1000)
   },
   
   /**

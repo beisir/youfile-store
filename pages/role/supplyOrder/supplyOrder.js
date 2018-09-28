@@ -1,6 +1,7 @@
 // pages/order/order.js
 const app = getApp();
 import API from '../../../utils/api.js';
+let timer;
 Page({
 
   /**
@@ -290,9 +291,14 @@ Page({
  
   
   searchBtn(e) {
+    clearTimeout(timer);
     this.setData({
       style: true,
+      keyword: e.detail.value
     })
+    timer = setTimeout(() => {
+      this.getList(true);
+    }, 1000)
   },
 
   //获取订单列表
@@ -304,8 +310,7 @@ Page({
       })
     }
     app.pageRequest.pageGet("/admin/order/store/" + this.data.storeId+"/ordercategory/1/orderstatus/" + this.data.whitch, {
-      //pageNum:1,
-      //pageSize:100
+      keyWords: this.data.keyword ? this.data.keyword : ""
     }).then((res) => {
       if (!res.obj){return}
       this.setData({
@@ -377,7 +382,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getList();
+    this.getList(true);
   },
 
   /**
