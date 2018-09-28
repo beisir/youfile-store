@@ -61,7 +61,8 @@ Page({
       }else{
         goodsArr.push({
           goodsId: el.goodsId,
-          num: el.num
+          num: el.num,
+          // skuCode: 0
         });
       }
     })
@@ -157,6 +158,7 @@ Page({
     let goods = this.data.goods,
         price = 0;
     goods.forEach((el)=>{
+      //有sku
       if (!el.num && el.preOrderGoodsSkuList){
         let num = 0;
         el.preOrderGoodsSkuList.forEach((item)=>{
@@ -168,6 +170,12 @@ Page({
           }
         })
         el.num = num;
+      }
+      //没有sku
+      if (el.num && !el.preOrderGoodsSkuList){
+        if (!isNaN(el.sellPrice * el.num)) {
+          price += el.sellPrice * el.num;
+        }
       }
     })
     this.setData({

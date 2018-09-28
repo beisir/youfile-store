@@ -41,7 +41,7 @@
     </navigator>
   </block>
     
-    <navigator class='u-o-div' url='../../businessFriend/merchant/index/index'>
+    <navigator class='u-o-div' url='../../businessFriend/index/index'>
       <image src='/image/firend.png'></image>
       <view>我的商友</view>
     </navigator>
