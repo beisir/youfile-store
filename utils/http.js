@@ -14,8 +14,8 @@ class request {
       this.authHandler = new AuthHandler()
   }
   /**
-   * PUT类型的网络请求
-   */
+    * PUT类型的网络请求
+    */
   putRequest(url, data, header) {
     return this.requestAll(url, data, 'PUT', header)
   }
