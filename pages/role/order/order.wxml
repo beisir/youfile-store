@@ -67,8 +67,8 @@
     <view class='c-title' bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.orderType}}' data-num="{{item.orderNumber}}">
       <!-- <navigator class='c-title' url='{{item.status<6?"../orderDetails/orderDetails":"../orderSelf/orderSelf"}}?status={{item.status}}'> -->
 
-      <image src="/image/preson.png"></image> {{item.consigneeInfo.userName}}
-      <text class='or-phone'>{{item.consigneeInfo.userPhone}}</text>
+      <image src="/image/preson.png"></image> {{item.userInfo.nickName}}
+      <text class='or-phone'>{{item.userInfo.mobile}}</text>
       <view wx:if="{{item.orderType==1}}" class='order-zt'>自提</view>
 
       <view bindtap="onChangeShowState">

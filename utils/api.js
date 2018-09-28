@@ -467,7 +467,7 @@ function changeIcon(data){
 }
 // 验证取货码
 function testGoodCode(data){
-  return app.http.putRequest(testGoodCodeUrl +"?claimGoodsNum="+data.claimGoodsNum, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.putRequest(testGoodCodeUrl,data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 // 上传凭证
 function uploadVoucher(data){
@@ -499,11 +499,13 @@ function cancelOrder(data){
 }
 // 添加快递
 function addExpress(data){
-  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + data.expressCompany + "&expressNumber=" + data.expressNumber, data)
+  let expressCompany = data.expressCompany ? data.expressCompany:"";
+  let expressNumber = data.expressNumber ? data.expressNumber:"";
+  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + expressCompany + "&expressNumber=" + expressNumber, data)
 }
 // 订单填写商家备注
 function addRemark(data){
-  return app.http.putRequest(cancelOrderUrl +"?remark=" + data.remark, data)
+  return app.http.putRequest(addRemarkUrl +"?remark=" + data.remark, data)
 }  
 // 查看凭证
 function seeVoucher(data){

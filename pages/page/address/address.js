@@ -198,7 +198,7 @@ Page({
 
     //订单分类[1 进货单|2 普通订单|3 购物车订单]
     let orderType = 1;
-    //adminType=1;//delit
+    //adminType=3;//delit
     if (adminType==1){
       //普通用户
       orderType = 3;

@@ -34,20 +34,20 @@
 <view class='os-title' wx:if="{{status=='closed'}}">
   <view>
     <image src="/image/closeS.png"></image>订单已取消</view>
-  <view class='os-close-res'>关闭原因：{{order.closedReason}}</view>
+  <view class='os-close-res'>关闭原因：{{order.closedReason?order.closedReason:""}}</view>
 </view>
 <!-- 交易取消 -->
 <view class='os-title' wx:if="{{status=='cancelled'}}">
   <view>
     <image src="/image/closeS.png"></image>订单已取消</view>
-  <view class='os-close-res'>取消原因：{{order.canceledReason}}</view>
+  <view class='os-close-res'>取消原因：{{order.cancelReason?order.cancelReason:""}}</view>
 </view>
 <!-- 正文 -->
 <view class='np-ct'>
   <view class='np-view'>
     <image src="/image/ad.png"></image>
-    <text class='np-text'>{{order.consigneeInfo.userPhone}}</text>
-    <view>取货人：{{order.consigneeInfo.userName}}</view>
+    <text class='np-text'>{{order.userInfo.mobile}}</text>
+    <view>取货人：{{order.userInfo.nickName}}</view>
   </view>
   <view class='np-view np-view1'>
     <image src="/image/mes2.png"></image>
@@ -167,7 +167,7 @@
 </view>
 
 <view class='os-mon os-mon1'>备注信息
-  <textarea bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'></textarea>
+  <textarea value='{{order.remark?order.remark:""}}' bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'></textarea>
 </view>
 
 <!-- 金额 -->

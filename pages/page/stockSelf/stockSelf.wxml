@@ -59,8 +59,8 @@
     </view>
     <view class='np-right'>
       <view>原因：
-        <text wx:if="{{status=='closed'}}">{{order.closedReason}}</text>
-        <text wx:if="{{status=='cancelled'}}">{{order.cancelReason}}</text>
+        <text wx:if="{{status=='closed'}}">{{order.closedReason?order.closedReason:""}}</text>
+        <text wx:if="{{status=='cancelled'}}">{{order.cancelReason?order.cancelReason:""}}</text>
       </view>
     </view>
   </view>

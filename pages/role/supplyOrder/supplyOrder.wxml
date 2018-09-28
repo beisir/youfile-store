@@ -60,8 +60,8 @@
 <view wx:if="{{showList.length>0}}">
   <view class='cf-cont' wx:for="{{showList}}" wx:key="{{index}}">
     <view class='c-title' bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.orderType}}' data-num="{{item.orderNumber}}">
-      <image src="/image/preson.png"></image> {{item.consigneeInfo.userName}}
-      <text class='or-phone'>{{item.consigneeInfo.userPhone}}</text>
+      <image src="/image/preson.png"></image> {{item.userInfo.nickName}}
+      <text class='or-phone'>{{item.userInfo.mobile}}</text>
       <view wx:if="{{item.orderType==1}}" class='order-zt'>自提</view>
       <view bindtap="onChangeShowState">
         <!-- <text wx:if="{{item.status==0}}">待付款</text>

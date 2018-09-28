@@ -33,7 +33,17 @@ Page({
     }],
     cancelIndex: 0
   },
-
+  // 确认收货
+  sureSure(e) {
+    let num = this.data.num;
+    app.http.requestAll("/api/order/" + num + "/receive", {}, "PUT").then((res) => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+      this.afterOperation();
+    })
+  },
   //取消理由
   swichReason(e) {
     var current = e.currentTarget.dataset.current;
@@ -105,11 +115,11 @@ Page({
           codeModal: true,
         };
         break;
-        // case 'sureGet':
-        //   obj = {
-        //     sureModal: true,
-        //     sureNum: num,
-        //   }; break;
+        case 'sureGet':
+          obj = {
+            sureModal: true,
+            sureNum: num,
+          }; break;
       case 'del':
         obj = {
           delModal: true,

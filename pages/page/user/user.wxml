@@ -1,6 +1,6 @@
-  <view  hidden='{{indexEmpty}}'>
-    <no></no>
-  </view>
+<view hidden='{{indexEmpty}}'>
+  <no></no>
+</view>
 <login id="login"></login>
 
 <view class='u-title'>
@@ -9,14 +9,16 @@
     <navigator url='../derm/derm' class='init-page'>
       <image hidden='{{!hasUser}}' src='/image/er.png'></image>
     </navigator>
-    <navigator url='../userDetails/userDetails'>
-      <view class='u-t-ewmico'>
+    <view class='u-t-ewmico'>
+      <navigator url='../userDetails/userDetails'>
+
         <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic:"/image/42.png"}}'></image>
         <view hidden='{{hasUser}}'>
           <open-data class='user-headPic' type="userAvatarUrl"></open-data>
         </view>
-      </view>
-    </navigator>
+      </navigator>
+
+    </view>
 
     <view class='u-pic'>
       <view hidden='{{!hasUser}}' wx:if="{{user.nickName}}">{{user.nickName}}</view>
@@ -40,11 +42,11 @@
       <view>进货单</view>
     </navigator>
   </block>
-    
-    <navigator class='u-o-div' url='../../businessFriend/index/index'>
-      <image src='/image/firend.png'></image>
-      <view>我的商友</view>
-    </navigator>
+
+  <navigator class='u-o-div' url='../../businessFriend/index/index'>
+    <image src='/image/firend.png'></image>
+    <view>我的商友</view>
+  </navigator>
 
 </view>
 <view class='page_bd'>

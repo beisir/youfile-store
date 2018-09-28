@@ -1,6 +1,9 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/page/workIndex/workIndex",
+    
+    
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
     "pages/businessFriend/merchant/index/index",
@@ -18,7 +21,6 @@
     "pages/page/classList/classList",
     "pages/page/addressWe/addressWe",
     "pages/page/orderSuccess/orderSuccess",
-    "pages/page/workIndex/workIndex",
     "pages/admin/success/success",
     "pages/page/postageInfo/postageInfo",
     "pages/page/mesEdit/mesEdit",
