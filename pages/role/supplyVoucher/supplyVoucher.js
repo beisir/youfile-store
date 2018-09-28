@@ -75,7 +75,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       num:options.num,
-      base:"https://dev.image.youlife.me/"
+      base: app.globalData.imageUrl
     })
   },
 
