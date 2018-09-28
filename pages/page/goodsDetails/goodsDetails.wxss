@@ -374,7 +374,6 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   color: #333;
   font-size: 34rpx;
   background:#fff;
-  padding:50rpx 70rpx 60rpx 70rpx;
 }
 .gd_r-title text,.wxParse-p{
   color: #666;
