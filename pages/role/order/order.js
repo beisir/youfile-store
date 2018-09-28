@@ -362,7 +362,7 @@ Page({
     app.pageRequest.pageGet("/admin/order/store/" + this.data.storeId +"/ordercategory/3/orderstatus/" + this.data.whitch, {
       keyWords: this.data.keyword ? this.data.keyword:""
     }).then((res) => {
-      if (res.obj.result) {
+      if (res.obj && res.obj.result) {
         this.resetData(res.obj.result);
       }
     })

@@ -1,14 +1,17 @@
 {
   "pages":[
     "pages/page/home/home",
+    
+    "pages/role/supplyOrder/supplyOrder",
+    
+    "pages/role/order/order",
+    
     "pages/page/indexEmpty/indexEmpty",
     "pages/page/cartList/cartList",
-    "pages/role/order/order",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
     "pages/page/order/order",
     "pages/role/orderDetails/orderDetails",
-    "pages/role/supplyOrder/supplyOrder",
     "pages/businessFriend/merchant/index/index",
     "pages/page/address/address",
     "pages/businessFriend/index/index",
