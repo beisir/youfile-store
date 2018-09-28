@@ -7,10 +7,13 @@
   display: none
 }
 .man-j{
-  font-size: 24rpx;
+  font-size: 24rpx;position:absolute;
 }
 .man-j text{
   color: #CCAA77
+}
+.classTd{
+  color: #999;text-decoration: line-through;
 }
 .cart-del{
     position: absolute;

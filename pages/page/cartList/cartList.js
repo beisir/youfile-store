@@ -4,6 +4,7 @@ var recordStartX = 0;
 var currentOffsetX = 0;
 Page({
   data: {
+    enjoyCost:false,
     detailList:[],
     detailList1:[],
     hasList:false,
@@ -27,6 +28,7 @@ Page({
     editDetailList:'',
     goodsConfig:[]
   },
+  
   // 规格
   //选择规格
   showAlert: function (e) {
@@ -204,7 +206,6 @@ Page({
             lostList: true,
           });
         }
-        console.log(effectiveList)
         storeMes.push(store)
         _this.setData({
           storeAmount:store.saleBatchAmount,
@@ -222,6 +223,17 @@ Page({
  
   },
   onShow() {
+    if (wx.getStorageSync('admin') == 3) {
+      wx.setNavigationBarTitle({
+        title:'进货车'
+      })
+      wx.setTabBarItem({
+        index: 1,
+        text: '进货车',
+        iconPath: '/image/22.png',
+        selectedIconPath: '/image/21.png'
+      })
+    }
     this.getList(this)
   },
   /**
@@ -312,7 +324,7 @@ Page({
     var data = detailList[index].shoppingCartSkuList
     var dataArr=[]
     dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId:storeId})
-    this.addCart(JSON.stringify(dataArr))
+    this.addCart(data[0]["goodsId"],JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
     });
@@ -343,92 +355,75 @@ Page({
     });
     this.getTotalPrice();
   },
-  getConfig(data){
-    // var _this=this,
-    //   data=data,
-    //   dataLen = data.length-1
-    // for (var i = 0; i < data.length;i++){
-    //   var dataMes = data[i],
-    //       index=i
-    //   console.log(data[i])
-    //   Api.config({ goodsId: data[i].goodsId})
-    //   .then(res=>{
-    //     var obj = res.obj,
-    //       goodsSaleBatchNum = obj.goodsSaleBatchNum,
-    //       goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
-    //       storeSaleBatchNum = obj.storeSaleBatchNum,
-    //       storeSaleBatchAmount = obj.storeSaleBatchAmount,
-    //       arr = this.data.goodsConfig
-    //     if (!Api.isEmpty(goodsSaleBatchNum)) { goodsSaleBatchNum = storeSaleBatchNum }
-    //     dataMes.goodsSaleBatchNum = goodsSaleBatchNum
-    //     if(dataLen==index){
-    //       console.log(goodsSaleBatchNum)
-    //       arr.push(dataMes)
-    //       console.log()
-    //       _this.setData({
-    //         // detailList: detailList,
-    //         // storeAmount: storeSaleBatchAmount,
-    //         // storeNum: storeSaleBatchNum,
-    //         // goodsConfig: arr
-    //       })
-    //     }
-    //   })
-    // }
-    // Api.config({ goodsId: goodsId})
-    //   .then(res => {
-        // var obj = res.obj,
-        //   goodsSaleBatchNum = obj.goodsSaleBatchNum,
-        //   goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
-        //   storeSaleBatchNum = obj.storeSaleBatchNum,
-        //   storeSaleBatchAmount = obj.storeSaleBatchAmount,
-        //   arr = this.data.goodsConfig,
-    //       detailList=this.data.detailList1
-    //     arr.push({ goodsNum: goodsSaleBatchNum, goodsAmount: goodsSaleBatchAmount})
-    //     var len = detailList.length
-    //     for (var i = 0; i < detailList.length;i++){
-    //       if (i == len - 1 && arr.length==len-1){
-    //         for (var j = 0; j < arr.length;j++){
-    //             if (arr[j]["goodsNum"] != null) {
-    //               detailList[j].goodsNum = arr[j]["goodsNum"]
-    //             } else {
-    //               detailList[j].goodsNum = 0
-    //             }
-    //             if (arr[j]["goodsAmount"] != null) {
-    //               detailList[j].goodsAmount = arr[j]["goodsAmount"]
-    //             } else {
-    //               detailList[j].goodsAmount = 0
-    //             }
-    //             console.log(detailList)
-                // _this.setData({
-                //   detailList: detailList,
-                //   storeAmount: storeSaleBatchAmount,
-                //   storeNum: storeSaleBatchNum,
-                //   goodsConfig: arr
-                // })
-    //         }
-           
-    //       }
-    //     }
-        
-    //   })
-  },
   /**
    * 计算总价
    */
   getTotalPrice() {
-    var limitShow = this.data.limitShow
+    var limitShow = this.data.limitShow,
+      storeNum = this.data.storeNum,
+      storeAmount = this.data.storeAmount,
+      allTotalNum=0,
+      totals=0,
+      allStoreAmount=0
     let detailList = this.data.detailList;// 获取购物车列表
     let total = 0;
+    this.setData({
+      enjoyCost: false
+    })
     for (let i = 0; i < detailList.length; i++) { 
       if (detailList[i].selected) {
+        if (limitShow==3){
+          if (Api.isEmpty(detailList[i].saleBatchNum)) {
+            allTotalNum += parseInt(detailList[i].num)
+            allStoreAmount += parseInt(detailList[i].sellPrice)
+            if (detailList[i].saleBatchNum < parseInt(detailList[i].num + 1)) {
+              detailList[i].enjoyPrice = true
+              detailList[i].allNum = detailList[i].saleBatchNum
+            }else{
+              detailList[i].enjoyPrice = false
+              detailList[i].allNum = detailList[i].saleBatchNum
+            }
+          }else{
+            detailList[i].enjoyPrice = false
+            detailList[i].allNum = storeNum
+          }
+        }
         if (detailList[i].shoppingCartSkuList!=null){
           var arr = detailList[i].shoppingCartSkuList
           for (var j = 0; j < arr.length; j++) {
             total += arr[j].num * arr[j].sellPrice;
           }
+          if (total > storeAmount || allStoreAmount > storeAmount){
+            detailList[i].enjoyPrice = true
+            this.setData({
+              enjoyCost: true
+            })
+          }
         }
       }
     }
+    for (var i = 0; i < detailList.length;i++){
+      if (detailList[i].selected){
+        console.log(detailList[i].enjoyPrice)
+        if(detailList[i].enjoyPrice){
+          
+          if (detailList[i].shoppingCartSkuList != null) {
+            var arr = detailList[i].shoppingCartSkuList
+            for (var j = 0; j < arr.length; j++) {
+              total += arr[j].num * arr[j].wholesalePrice;
+            }
+          }else{
+            if (detailList[i].shoppingCartSkuList != null) {
+              var arr = detailList[i].shoppingCartSkuList
+              for (var j = 0; j < arr.length; j++) {
+                totals += arr[j].num * arr[j].sellPrice;
+              }
+            }
+          }
+        }
+      }
+    }
+    console.log(totals+"///"+total)
     this.setData({ 
       detailList: detailList,
       totalPrice: total.toFixed(2)

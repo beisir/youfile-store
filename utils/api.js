@@ -274,7 +274,7 @@ function updateSpecName(templateContentId,specName) {
   return app.http.putRequest(updateSpecNameUrl+'?templateContentId='+templateContentId+'&specName='+specName)
 } 
 /**添加到购物车**/
-function addCart(data) {
+function addCart(goodsId,data) {
   return app.http.postRequest(addCartUrl, data)
 }
 /**批量添加到购物车**/
