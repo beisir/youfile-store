@@ -189,7 +189,7 @@
 </view>
 
 <view class='os-mon os-mon1'>备注信息
-  <textarea bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'>{{user.remark?user.remark:""}}</textarea>
+  <textarea value='{{order.remark?order.remark:""}}' bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'></textarea>
 </view>
 
 <!-- 金额 -->
