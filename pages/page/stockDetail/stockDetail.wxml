@@ -38,7 +38,7 @@
 </mes>
 
 
-<view class='order-title-box' style='background-image:url(/image/back.png);'>
+<view class='order-title-box order-title-img'>
   <!-- 待付款 -->
   <view class='flex-box' wx:if="{{status=='unpaid'}}">
     <view class='np-title'>
