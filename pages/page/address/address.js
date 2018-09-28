@@ -62,7 +62,7 @@ Page({
         goodsArr.push({
           goodsId: el.goodsId,
           num: el.num,
-          // skuCode: 0
+          skuCode: 0
         });
       }
     })
