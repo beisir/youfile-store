@@ -74,6 +74,7 @@ Page({
         title: res.message,
         icon: 'none'
       })
+      this.afterOperation();
     })
   },
   //删除
