@@ -67,7 +67,7 @@
   position: absolute;top:-4rpx;right: 60rpx;text-align: right;font-size: 36rpx;font-weight: 600;
 }
 .add-cont{
-  margin-bottom: 160rpx;
+  margin-bottom: 220rpx;
 }
 
 .weui-uploader__input-box{

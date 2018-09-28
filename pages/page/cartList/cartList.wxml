@@ -77,7 +77,7 @@
              <view class="cart-list">
                   <image class='noimg' src="/image/no.png"></image>
                   <image class='posimg' src="/image/alert.png"></image>
-                  <navigator ><image class="cart-thumb" src="{{item.mainUrl}}"></image></navigator>
+                  <navigator ><image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}"></image></navigator>
                   <text class='ct-text'>￥{{item.sellPrice}}</text>
                   <view   style='width:365rpx' class='ct-title ct-t-title'>{{item.goodsName}}</view>
                   <!-- <text class="cart-pro-name">规格：{{item.small}}</text> -->
