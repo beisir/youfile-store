@@ -13,7 +13,7 @@
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
       <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{headPic}}"></image></view>
-      <text>简美佳珠宝</text>
+      <text>{{name}}</text>
     </view>
   </view>
   <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>邀请成功后，该进货商将以批发价购买您店铺的 商品</view>

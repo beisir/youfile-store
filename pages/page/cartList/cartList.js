@@ -234,9 +234,9 @@ Page({
     this.setData({
       detailList:[]
     })
-    if (Api.isEmpty(wx.getStorageSync("storeId")) == false) {
+    if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '') {
       this.setData({
-        indexEmpty: true
+        indexEmpty: false
       })
     }
     if (wx.getStorageSync('admin') == 3) {

@@ -8,7 +8,7 @@
     <view class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}'>
       <navigator wx:if='{{item.status==2}}'  url="../reach/reach?accept={{item.send}}">
         <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}"></image></view>
-          <text >{{item.remark==null?item.nickName:item.remark}}</text>
+          <text >{{item.nickName}}</text>
           <view class='nbf-font'>{{item.greet}}</view>
           <view class='weui-view'>
             已添加
@@ -16,7 +16,8 @@
       </navigator>
       <navigator wx:if='{{item.status!=2}}'  url="../merchantInfo/merchantInfo?status={{item.status}}&send={{item.send}}&accept={{item.accept}}&remark={{item.remark}}&greet={{item.greet}}&name={{item.nickName}}&logo={{item.headPic}}&phone={{item.phone}}">
         <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}"></image></view>
-          <text >{{item.remark==null?item.nickName:item.remark}}</text>
+          <text wx:if='{{item.status!=3}}'>{{item.remark==null?item.nickName:item.remark}}</text>
+          <text wx:if='{{item.status==3}}'>{{item.nickName}}</text>
           <view class='nbf-font'>{{item.greet}}</view>
           <view class='weui-view' wx:if='{{item.status==1}}'>
             <text>等待验证</text>

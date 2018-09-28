@@ -40,6 +40,7 @@ function getIdentity(_this) {
             limitShow: 1
           })
         }
+        
         _this.homeIndex()
       })
   }else{
@@ -208,21 +209,12 @@ Page({
       })    
   },
   onLoad: function (options) {
-    if (Api.isEmpty(wx.getStorageSync("storeId"))==false){
-      this.setData({
-        indexEmpty:true
+    if (options.storeId) {
+      wx.setStorage({
+        key: 'storeId',
+        data: options.storeId,
       })
     }
-    getIdentity(this)
-    var that = this;
-    wx.getSystemInfo({
-      success: function (res) {
-        that.setData({
-          winWidth: res.windowWidth,
-          winHeight: res.windowHeight
-        });
-      }
-    });
     
   },
   bindChange: function (e) {
@@ -320,6 +312,24 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
+    app.pageRequest.pageData.pageNum = 0
+    if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId")==''){
+      this.setData({
+        indexEmpty: false
+      })
+    }else{
+      getIdentity(this)
+      var that = this;
+      wx.getSystemInfo({
+        success: function (res) {
+          that.setData({
+            winWidth: res.windowWidth,
+            winHeight: res.windowHeight
+          });
+        }
+      });
+    }
+    
   },
 
   /**
@@ -349,7 +359,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList()
+   
   },
   
   /**
@@ -363,7 +373,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList()
   },
 
   /**

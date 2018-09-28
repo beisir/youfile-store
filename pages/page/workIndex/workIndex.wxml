@@ -1,3 +1,4 @@
+<login id="login"></login>
 <view class='wk-cont'>
   <view class='wk-title'>
     <text>今日收入（元）</text>

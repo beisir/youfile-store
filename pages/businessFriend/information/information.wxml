@@ -47,10 +47,10 @@
    </view>
   </view>
   <view class='in-cont'>
-   <text>手机号</text><view>{{servicePhone}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+   <text>手机号</text><view>{{servicePhone==null?'':servicePhone}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
-   <text>微信号</text><view>{{wechatNumber}}</view>
+   <text>微信号</text><view>{{wechatNumber==null?'':wechatNumber}}</view>
   </view>
   <view class='in-cont'>
     <text>更多经营信息</text>

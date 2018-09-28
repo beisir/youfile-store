@@ -1,6 +1,9 @@
 .m-title{
   color: #000;font-size: 48rpx;margin-bottom: 70rpx;
 }
+page{
+  height: 100%;
+}
 .m-title text{
   font-size: 24rpx;color: #666;
 }

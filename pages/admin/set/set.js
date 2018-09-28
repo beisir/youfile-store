@@ -29,14 +29,14 @@ Page({
       if (goodsListData.length == 1) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList
         for (var i = 0; i < skuList0.length; i++) {
-          skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNumber: newConst, wholesalePrice: wholesalePrice })
+          skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
         }
       } else if (goodsListData.length = 2) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList
         skuList1 = goodsListData[1].goodsSpecificationValueVOList
         for (var i = 0; i < skuList0.length; i++) {
           for (var j = 0; j < skuList1.length; j++) {
-            skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNumber: newConst, wholesalePrice: wholesalePrice})
+            skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice})
           }
         }
       }
@@ -48,7 +48,7 @@ Page({
           if (goodsSkuVOList[i].specValueCodeList.sort().toString() == skuListAll[j].specValueCodeList.sort().toString()) {
             skuListAll[j].sellPrice = goodsSkuVOList[i].sellPrice
             skuListAll[j].wholesalePrice = goodsSkuVOList[i].wholesalePrice
-            skuListAll[j].stockNumber = goodsSkuVOList[i].stockNum
+            skuListAll[j].stockNum = goodsSkuVOList[i].stockNum
           }
         }
       }
@@ -87,8 +87,8 @@ Page({
       delete skuListAll[i].specValueName
       delete skuListAll[i].id
       delete skuListAll[i].specValueCode
-      if(skuListAll[i].stockNumber!=''){
-        skuNum += parseInt(skuListAll[i].stockNumber)
+      if (skuListAll[i].stockNum!=''){
+        skuNum += parseInt(skuListAll[i].stockNum)
       }
     }
     prevPage.setData({

@@ -2,6 +2,9 @@
 .sp-color image{
   width: 40rpx;height: 40rpx;position: absolute;right: 0;top:6rpx;
 }
+page{
+  height: 100%;
+}
 .sp-color image.img{
   right: 70rpx;
 }

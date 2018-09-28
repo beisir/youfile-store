@@ -4,7 +4,7 @@
   <view>
     <view><input bindinput='monitor' data-id='{{item.id}}' data-name='wholesalePrice' value='{{item.wholesalePrice}}' placeholder-class='pal-class' placeholder='批发价'></input></view>
     <view><input bindinput='monitor' data-id='{{item.id}}' data-name='sellPrice' value='{{item.sellPrice}}' placeholder='零售价'></input></view>
-    <view><input bindinput='monitor' data-id='{{item.id}}' data-name='stockNumber' value='{{item.stockNumber}}' placeholder='库存'></input></view>
+    <view><input bindinput='monitor' data-id='{{item.id}}' data-name='stockNum' value='{{item.stockNum}}' placeholder='库存'></input></view>
   </view>
 </view>
 </view>

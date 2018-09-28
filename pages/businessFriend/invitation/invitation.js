@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value:'我是陈晨，期待与您合作。',
+    value:'期待与您合作。',
     accept:'',
     logo:'',
     baseUrl: app.globalData.imageUrl,

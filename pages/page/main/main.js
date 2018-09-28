@@ -7,15 +7,17 @@ Page({
   data: {
     id: wx.getStorageSync("storeId"),
     data: [
-      { name: "男装", selected: false, color: "#fff", colorTrue: "#CDE6DC"},
-      { name: "皮草/皮衣", selected: false, color: "#fff", colorTrue: "#D4E6CD"}, 
-      { name: "女装", selected: false, color: "#fff", colorTrue: "#D1DEE5"},
-      { name: "运动休闲", selected: false, color: "#fff", colorTrue: "#AAFAE3"},
-      { name: "床品", selected: false, color: "#fff", colorTrue: "#D6C1AA"},
-      { name: "鞋", selected: false, color: "#fff", colorTrue: "#D1DEE5"},
-      { name: "办公用品", selected: false, color: "#fff", colorTrue: "#F57158"},
-      { name: "商务男装", selected: false, color: "#fff", colorTrue: "#D1DEE5"},
-      { name: "休闲装", selected: false, color: "#fff", colorTrue: "#AA8EAD"}],
+      { name: "服饰内衣", selected: false, color: "#fff", colorTrue: "#CDE6DC"},
+      { name: "母婴玩具", selected: false, color: "#fff", colorTrue: "#D4E6CD"}, 
+      { name: "鞋类箱包", selected: false, color: "#fff", colorTrue: "#D1DEE5"},
+      { name: "运动户外", selected: false, color: "#fff", colorTrue: "#AAFAE3"},
+      { name: "珠宝配饰", selected: false, color: "#fff", colorTrue: "#D6C1AA"},
+      { name: "化妆品", selected: false, color: "#fff", colorTrue: "#D1DEE5"},
+      { name: "家居家纺", selected: false, color: "#fff", colorTrue: "#F57158"},
+      { name: "日用百货", selected: false, color: "#fff", colorTrue: "#D1DEE5"},
+      { name: "休闲装", selected: false, color: "#fff", colorTrue: "#AA8EAD"},
+      { name: "礼品婚庆", selected: false, color: "#fff", colorTrue: "#F57158" },
+      { name: "仿真花艺", selected: false, color: "#fff", colorTrue: "#D1DEE5" },],
     name:''
   },
 

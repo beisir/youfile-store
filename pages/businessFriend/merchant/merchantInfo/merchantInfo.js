@@ -23,7 +23,8 @@ Page({
     headPic:'',
     userName:'',
     mobile:'',
-    showName:''
+    showName:'',
+    name:''
   },
 
   /**
@@ -31,7 +32,6 @@ Page({
    */
 
   onLoad: function (options) {
-    console.log(options)
     var _this=this,
         status = options.status,
         send=options.send,
@@ -53,6 +53,7 @@ Page({
       value: remark,
       showName:remark,
       greet: greetArr,
+      name:name,
       userName:name==null?'':name,
       headPic: headPic,
       mobile: mobile
@@ -118,7 +119,7 @@ Page({
   },
   invitation:function(){
     wx.navigateTo({
-      url: '../invite/invite?accept=' + this.data.accept + "&remark=" + this.data.showName + "&headPic=" + this.data.headPic,
+      url: '../invite/invite?accept=' + this.data.accept + "&remark=" + this.data.showName + "&headPic=" + this.data.headPic + "&name="+ this.data.name,
     })
   },
   /**

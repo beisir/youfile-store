@@ -109,6 +109,12 @@ Page({
     this.selectComponent("#login").showPage();
   },
   onLoad: function (options) {
+    if (options.storeId) {
+      wx.setStorage({
+        key: 'storeId',
+        data: options.storeId,
+      })
+    }
     var that = this,
         arr=[],
         goodsId=''

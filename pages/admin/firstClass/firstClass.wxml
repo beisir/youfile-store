@@ -6,7 +6,7 @@
         <view>服装 > 女装 > 连衣裙</view>
         <view>家用电器 > 厨房电器 > 咖啡机</view>
       </view>
-      <view class='shop-cont'>
+      <view class='shop-cont' style='height:800rpx;overflow:scroll'>
         <view wx:for='{{dataList}}' wx:key='{{index}}' bindtap='twoClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
         {{item.name}}
           <!-- <navigator url='../secondClass/secondClass?code={{item.categoryCode}}&name=' ></navigator> -->

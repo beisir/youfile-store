@@ -5,10 +5,16 @@ import { imageUrl } from './utils/const.js'
 App({
   onLaunch: function (options) {
     // options.query.storeId
-    wx.setStorage({
-      key: 'storeId',
-      data:'S1000349',
-    })
+    if (options.query.storeId){
+      wx.setStorage({
+        key: 'storeId',
+        data: options.query.storeId,
+      })
+    }
+    // wx.setStorage({
+    //   key: 'storeId',
+    //   data:'S1000349',
+    // })
     // wx.setStorage({
     //   key: 'admin',xyd
     //   data:2, //1yon 2店主  3批发商
