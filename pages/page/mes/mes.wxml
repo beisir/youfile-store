@@ -2,7 +2,7 @@
   <navigator class='new-e' url='../mesEdit/mesEdit' wx:if='{{limitShow==2}}'><image src="/image/edit1.png"></image></navigator>
   <view class="ym_jpstorename">
   <view class="ym_jpstorelogo">
-      <navigator url='../goodWe/goodWe'><image class="store-logo" src="{{baseUrl}}{{storeMes.logo}}" ></image></navigator>
+      <navigator ><image class="store-logo" src="{{baseUrl}}{{storeMes.logo}}" ></image></navigator>
     </view>
     {{storeMes.name}}
   </view>

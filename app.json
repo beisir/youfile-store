@@ -1,8 +1,8 @@
 {
   "pages":[
     "pages/page/home/home",
-    "pages/page/indexEmpty/indexEmpty",
     "pages/page/cartList/cartList",
+    "pages/page/indexEmpty/indexEmpty",
     "pages/role/order/order",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",

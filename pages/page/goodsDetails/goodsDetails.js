@@ -776,6 +776,7 @@ Page({
           skuArrTwo = [],
           name = ''
         var that = this;
+        console.log(obj.description)
         var article = '<div>' + obj.description+'</div>'
         WxParse.wxParse('article', 'html', article, that, 5);
         if (store.isFollow){

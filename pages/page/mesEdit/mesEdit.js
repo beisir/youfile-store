@@ -23,7 +23,6 @@ Page({
     Api.storeIdInfo()
       .then(res => {
         var obj = res.obj
-        console.log(obj)
         _this.setData({
           countData: obj.countData,
           floor: obj.floor.floorInfo,
@@ -51,7 +50,7 @@ Page({
         _this.setData({
           coverUrl: url
         })
-        Api.uploadLogoImg({logo:url})
+        Api.uploadLogoImg(url)
           .then(res => {
             wx.showToast({
               title: res.message,

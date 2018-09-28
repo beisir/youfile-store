@@ -14,7 +14,8 @@
                   <icon wx:if="{{record.selected}}" type="success" color="#CCAA77" data-index="{{index}}"  class="cart-pro-select" bindtap="selectList"/>
                   <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList"/>
                   <navigator><image class="cart-thumb" src="{{baseUrl}}{{record.mainUrl}}"></image></navigator>
-                  <view class='ct-text ct-text1' wx:if='{{limitShow!=3}}'>￥{{record.shoppingCartSkuList[0].sellPrice}}</view>
+<view class='ct-text ct-text1' wx:if='{{limitShow!=3 && record.shoppingCartSkuList==null}}'>￥{{record.sellPrice}}</view>
+                  <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && record.shoppingCartSkuList!=null}}'>￥{{record.shoppingCartSkuList[0].sellPrice}}</view>
                   <view class='ct-text ct-text1' wx:if='{{limitShow==3}}'>￥{{record.enjoyPrice?record.shoppingCartSkuList[0].wholesalePrice:record.shoppingCartSkuList[0].sellPrice}}</view>
                   <view style='width:365rpx' class='ct-title ct-title1'>{{record.goodsName}}<view wx:if='{{limitShow==3}}' class='man-j'>满<text>{{record.allNum}}</text>起批</view></view>
                   <view class="cart-pro-name cart-pro-name1"  wx:if="{{record.shoppingCartSkuList.length==1}}" wx:for="{{record.shoppingCartSkuList}}" bindtap='showAlert' data-name="one" data-gid='{{item.goodsId}}'  wx:key="{{index}}">规格：{{item.skuName}}<image class='down' src="/image/down.png"></image></view>
@@ -41,7 +42,11 @@
                     <view class='cc-add'>{{record.num}}</view>
                     <view bindtap="addCount" data-index="{{index}}">+</view>
                   </view>
-
+                   <view class="cc-coun-new" wx:if="{{record.shoppingCartSkuList==null}}">
+                    <view bindtap="minusCountNew" data-obj="{{obj}}"  data-index="{{index}}">-</view>
+                    <view class='cc-add'>{{record.num}}</view>
+                    <view bindtap="addCountNew" data-index="{{index}}">+</view>
+                  </view>
                 </view>
                 
               </view>
