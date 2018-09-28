@@ -56,6 +56,7 @@ Page({
   data: {
     hasUser: false,
     limitShow:1,
+    indexEmpty: true,
   },
 
   showLogin() {
@@ -99,7 +100,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    if (Api.isEmpty(wx.getStorageSync("storeId")) == false) {
+      this.setData({
+        indexEmpty: true
+      })
+    }
     getIdentity(this)
   },
 

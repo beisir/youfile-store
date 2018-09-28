@@ -97,3 +97,8 @@
       <view bindtap='closeShow'>取消</view>
     </view>
   </view>
+  <view  hidden='{{indexEmpty}}'>
+    <no></no>
+  </view>
+
+

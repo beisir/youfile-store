@@ -4,6 +4,7 @@ var recordStartX = 0;
 var currentOffsetX = 0;
 Page({
   data: {
+    indexEmpty: true,
     enjoyCost:false,
     detailList:[],
     detailList1:[],
@@ -223,6 +224,11 @@ Page({
  
   },
   onShow() {
+    if (Api.isEmpty(wx.getStorageSync("storeId")) == false) {
+      this.setData({
+        indexEmpty: true
+      })
+    }
     if (wx.getStorageSync('admin') == 3) {
       wx.setNavigationBarTitle({
         title:'进货车'
@@ -363,7 +369,6 @@ Page({
       storeNum = this.data.storeNum,
       storeAmount = this.data.storeAmount,
       allTotalNum=0,
-      totals=0,
       allStoreAmount=0
     let detailList = this.data.detailList;// 获取购物车列表
     let total = 0;
@@ -387,13 +392,19 @@ Page({
             detailList[i].enjoyPrice = false
             detailList[i].allNum = storeNum
           }
+          if (allTotalNum > storeNum || allStoreAmount>storeAmount){
+            detailList[i].enjoyPrice = true
+            this.setData({
+              enjoyCost:true
+            })
+          }
         }
         if (detailList[i].shoppingCartSkuList!=null){
           var arr = detailList[i].shoppingCartSkuList
           for (var j = 0; j < arr.length; j++) {
             total += arr[j].num * arr[j].sellPrice;
           }
-          if (total > storeAmount || allStoreAmount > storeAmount){
+          if (total > storeAmount){
             detailList[i].enjoyPrice = true
             this.setData({
               enjoyCost: true
@@ -402,28 +413,6 @@ Page({
         }
       }
     }
-    for (var i = 0; i < detailList.length;i++){
-      if (detailList[i].selected){
-        console.log(detailList[i].enjoyPrice)
-        if(detailList[i].enjoyPrice){
-          
-          if (detailList[i].shoppingCartSkuList != null) {
-            var arr = detailList[i].shoppingCartSkuList
-            for (var j = 0; j < arr.length; j++) {
-              total += arr[j].num * arr[j].wholesalePrice;
-            }
-          }else{
-            if (detailList[i].shoppingCartSkuList != null) {
-              var arr = detailList[i].shoppingCartSkuList
-              for (var j = 0; j < arr.length; j++) {
-                totals += arr[j].num * arr[j].sellPrice;
-              }
-            }
-          }
-        }
-      }
-    }
-    console.log(totals+"///"+total)
     this.setData({ 
       detailList: detailList,
       totalPrice: total.toFixed(2)

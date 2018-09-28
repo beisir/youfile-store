@@ -1,4 +1,6 @@
-<!--pages/user/user.wxml-->
+  <view  hidden='{{indexEmpty}}'>
+    <no></no>
+  </view>
 <login id="login"></login>
 
 <view class='u-title'>

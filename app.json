@@ -1,20 +1,13 @@
 {
   "pages":[
-    "pages/page/cartList/cartList",
-    
-    "pages/admin/status/status",
-    
-    "pages/admin/addGoods/addGoods",
-    
     "pages/page/home/home",
+    "pages/page/indexEmpty/indexEmpty",
+    "pages/page/cartList/cartList",
+    "pages/admin/status/status",
+    "pages/admin/addGoods/addGoods",
     "pages/page/order/order",
-    
-    
     "pages/role/orderDetails/orderDetails",
-    
-    
     "pages/role/supplyOrder/supplyOrder",
-    
     "pages/businessFriend/merchant/index/index",
     "pages/page/address/address",
     "pages/businessFriend/index/index",
@@ -41,22 +34,9 @@
     "pages/businessFriend/information/information",
     "pages/cloudOrder/orderDetail/orderDetail",
     "pages/cloudOrder/applyStore/applyStore",
-    
     "pages/cloudOrder/congratulation/congratulation",
-    
-    
     "pages/cloudOrder/myOrder/myOrder",
-    
-    
-    
-
-    
     "pages/role/supplyVoucher/supplyVoucher",
-    
-    
-    
-
-    
     "pages/page/userM/userM",
     "pages/page/goodsDetails/goodsDetails",
     "pages/page/editStoreAddress/editStoreAddress",
@@ -66,7 +46,6 @@
     "pages/page/updateMes/updateMes",
     "pages/page/mes/mes",
     "pages/admin/editGoods/editGoods",
-    
     "pages/login/register/register",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",

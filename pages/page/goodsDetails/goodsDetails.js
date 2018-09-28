@@ -424,6 +424,8 @@ Page({
         })
         return
       }
+    }else{
+      skuCode=0
     }
     if (!Api.isEmpty(wx.getStorageSync("access_token"))){
       _this.showLogo()
@@ -446,6 +448,7 @@ Page({
             })
           })
       }else{
+        console.log({ goodsId: goodsId, num: num, skuCode: skuCode })
         Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
           .then(res => {
             wx.showToast({
@@ -785,10 +788,18 @@ Page({
             likeShow: false
           })
         }
-        if (obj.goodsSpecificationVOList.length > 1) {
-          skuArrTwo.push(obj.goodsSpecificationVOList[1])
-          name = obj.goodsSpecificationVOList[1].specName
+        if (Api.isEmpty(obj.goodsSpecificationVOList)){
+          if (obj.goodsSpecificationVOList.length > 1) {
+            skuArrTwo.push(obj.goodsSpecificationVOList[1])
+            name = obj.goodsSpecificationVOList[1].specName
+          }
+        }else{
+          obj.goodsSpecificationVOList=[]
+        } 
+        if (!Api.isEmpty(obj.goodsSkuVOList)){
+          obj.goodsSkuVOList=[]
         }
+        console.log(obj)
         _this.setData({
           imgUrls: obj.goodsImageVOList,
           name: obj.name,

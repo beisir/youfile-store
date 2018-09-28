@@ -63,8 +63,6 @@ class request {
         } else {
           delete header['Authorization'];
         }
-        // wx.clearStorageSync('access_token')
-        // this._headerGet['Authorization'] = 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsIm1lcmNoYW50TnVtYmVyIjoiMDQ5NTg2MTMiLCJ1c2VyX25hbWUiOiIxNjg4ODg4ODg4OCIsInNjb3BlIjpbImFsbCJdLCJleHAiOjE1Mzg0NzI4NTcsInVzZXJJZCI6IjJhOTE1M2JmZmIyYmRjZjVjZWRjOTIwMTlmYmJhNzliIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6IjEzMTUwNmE4LTA4NGQtNGViOS04YWE3LWNkNzNiYTk5OWRmNiIsImNsaWVudF9pZCI6IkJlaUppbmdCYWlSb25nU2hpTWFvQ2xpZW50In0.ro5z1rEES2NDOCLYM-ACqLAsMHzxsCLSHe3g-Yf2WVs';
         wx.request({
           url: this._baseUrl + url,
           data: data,

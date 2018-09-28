@@ -51,6 +51,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    indexEmpty: true,
     winWidth:0,
     winHeight: 0,
     show:false,
@@ -204,9 +205,13 @@ Page({
       })    
   },
   onLoad: function (options) {
+    if (Api.isEmpty(wx.getStorageSync("storeId"))==false){
+      this.setData({
+        indexEmpty:true
+      })
+    }
     getIdentity(this)
     var that = this;
-  
     wx.getSystemInfo({
       success: function (res) {
         that.setData({

@@ -4,14 +4,13 @@ import AuthHandler from './utils/authHandler.js'
 import { imageUrl } from './utils/const.js'
 App({
   onLaunch: function (options) {
-    console.log(999)
     // options.query.storeId
     wx.setStorage({
       key: 'storeId',
-      data:'123',
+      data:'S1000349',
     })
     // wx.setStorage({
-    //   key: 'admin',
+    //   key: 'admin',xyd
     //   data:2, //1yon 2店主  3批发商
     // })
     // 购物车
