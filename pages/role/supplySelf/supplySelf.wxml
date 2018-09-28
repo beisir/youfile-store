@@ -46,8 +46,8 @@
 <view class='np-ct'>
   <view class='np-view'>
     <image src="/image/ad.png"></image>
-    <text class='np-text'>{{order.consigneeInfo.userPhone}}</text>
-    <view>取货人：{{order.consigneeInfo.userName}}</view>
+    <text class='np-text'>{{order.userInfo.mobile}}</text>
+    <view>取货人：{{order.userInfo.nickName}}</view>
   </view>
   <view class='np-view np-view1'>
     <image src="/image/mes2.png"></image>
