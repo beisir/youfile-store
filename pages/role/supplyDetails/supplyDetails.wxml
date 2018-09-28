@@ -77,7 +77,7 @@
 <!-- 已发货 待填单-->
 <view class='os-title' wx:if="{{status=='shipped'}}">
   <view>买家剩余收货时间
-    <text>{{order.claimGoodsNum}}</text>
+    <text>{{order.autoReviceTime}}</text>
   </view>
   <image src="/image/xian2.png"></image>
   <view class='os-status'>
@@ -90,7 +90,7 @@
 <!-- 已发货-->
 <view class='os-title' hidden='{{status3}}'>
   <view>买家剩余收货时间
-    <text>{{order.claimGoodsNum}}</text>
+    <text>{{order.autoReviceTime}}</text>
   </view>
   <image src="/image/xian2.png"></image>
   <view class='os-status'>

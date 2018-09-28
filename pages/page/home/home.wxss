@@ -173,3 +173,6 @@
 .store_name image{width: 35rpx;height: 35rpx;margin-left: 10rpx;}
 .result-list .result-text1 image.h-img{height:40rpx;width: 40rpx;float: right;margin-right: 10rpx;}
 
+.result-list{
+  height: 530rpx;
+}

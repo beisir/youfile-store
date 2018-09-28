@@ -43,7 +43,7 @@
 <!-- 待付款 -->
 <view class='os-title' wx:if="{{status=='unpaid'}}">
   <view>买家剩余支付时间
-    <text>{{clock}}</text>
+    <text>{{clock?clock:""}}</text>
   </view>
   <image src="/image/xian.png"></image>
   <view class='os-status'>
