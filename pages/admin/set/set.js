@@ -15,9 +15,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.modeList)
+    console.log(options)
     let _this=this,
-      goodsListData = JSON.parse(options.model),
+        goodsListData = JSON.parse(options.model),
+        sellPrice = options.sellPrice,
+        wholesalePrice = options.wholesalePrice,
+        newConst = options.newConst,
         skuList0=[],
         skuList1=[],
         skuListAll=[],
@@ -26,14 +29,14 @@ Page({
       if (goodsListData.length == 1) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList
         for (var i = 0; i < skuList0.length; i++) {
-          skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: '', stockNumber: '', wholesalePrice: '' })
+          skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNumber: newConst, wholesalePrice: wholesalePrice })
         }
       } else if (goodsListData.length = 2) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList
         skuList1 = goodsListData[1].goodsSpecificationValueVOList
         for (var i = 0; i < skuList0.length; i++) {
           for (var j = 0; j < skuList1.length; j++) {
-            skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: '', stockNumber: '', wholesalePrice: '' })
+            skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNumber: newConst, wholesalePrice: wholesalePrice})
           }
         }
       }
@@ -50,6 +53,7 @@ Page({
         }
       }
     }
+    console.log(skuListAll)
     _this.setData({
       skuListAll: skuListAll
     })

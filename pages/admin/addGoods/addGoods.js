@@ -10,6 +10,7 @@ Page({
     isShow: true,
     uploadImg:false,
     mainx: 0,
+    newConst:'',
     pageall:[],
     pageShow:true,
     currentTab: 0,
@@ -18,6 +19,7 @@ Page({
     clickSpecShow:false,
     stock:'',
     codeName:'',
+    allTotalNew:'',
     strName:'',
     skuListAll:[],
     skuNum:'',
@@ -29,8 +31,8 @@ Page({
     categoryCode:'',
     marketPrice:'10',
     introduction: '',
-    sellPrice: 0,
-    wholesalePrice:0,
+    sellPrice: '',
+    wholesalePrice:'',
     baseUrl: app.globalData.imageUrl,
     goodsImageVOList: [],
     mainImgUrl:'',
@@ -83,6 +85,21 @@ Page({
           addGoodsDetails: data
         })
       })
+  },
+  newConst: function (event) {
+    var _this = this,
+      val = event.detail.value,
+      pageall = this.data.pageall,
+      len=1
+    console.log(pageall)
+    for (var i = 0; i < pageall.length;i++){
+      var data = pageall[i].goodsSpecificationValueVOList.length
+      len=data*data
+    }
+    this.setData({
+      newConst: val,
+      allTotalNew: len * val
+    })
   },
   watchName: function (event) {
     var _this = this,
@@ -168,8 +185,11 @@ Page({
   // 分别设置价格和库存
   clickSpec:function(e){
     var model = JSON.stringify(this.data.pageall);
+    var sellPrice = this.data.sellPrice
+    var newConst = this.data.newConst
+    var wholesalePrice = this.data.wholesalePrice
     wx.navigateTo({
-      url: '../set/set?model=' + model,
+      url: '../set/set?model=' + model + "&sellPrice=" + sellPrice + "&wholesalePrice=" + wholesalePrice + "&newConst=" + newConst,
     })
   //  if(e.target.dataset.id=='000'){
   //    var model = JSON.stringify(this.data.skuListAll);
@@ -296,6 +316,7 @@ Page({
       "recommendDesc": this.data.recommendDesc,
       "sellPrice": this.data.sellPrice,
       "status":status,
+      "stockNum": this.data.skuNum,
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": this.data.wholesalePrice
     }

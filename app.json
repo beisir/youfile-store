@@ -1,29 +1,18 @@
 {
   "pages":[
     "pages/page/home/home",
-    
-    "pages/admin/spec/spec",
-    
-    "pages/admin/addGoods/addGoods",
-    
-    
     "pages/admin/status/status",
-    
-    
-    
+    "pages/admin/addGoods/addGoods",
+    "pages/businessFriend/merchant/index/index",
+    "pages/businessFriend/index/index",
+    "pages/admin/spec/spec",
     "pages/page/cartList/cartList",
-    
-    
-    
     "pages/role/order/order",
     "pages/role/supplyOrder/supplyOrder",
-    
     "pages/page/indexEmpty/indexEmpty",
     "pages/page/order/order",
     "pages/role/orderDetails/orderDetails",
-    "pages/businessFriend/merchant/index/index",
     "pages/page/address/address",
-    "pages/businessFriend/index/index",
     "pages/page/user/user",
     "pages/admin/class/class",
     "pages/page/classList/classList",

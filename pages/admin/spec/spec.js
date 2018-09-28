@@ -34,6 +34,7 @@ Page({
     editSpec: false,
     contentShow:false,
     editId: '',
+    timestamp:Date.parse(new Date()) + parseInt(89999999 * Math.random() + 10000000 + 1),
     templateId: '',
     templateContentId: '',
     notemp: { templateName: "衣服" },
@@ -50,12 +51,20 @@ Page({
   },
   // 返回上一页
   goback: function () {
+    var goodsListData=this.data.goodsListData
+    for (var i = 0; i < goodsListData.length; i++) {
+      var data = goodsListData[i].goodsSpecificationValueVOList
+      for (var j = 0; j < data.length; j++) {
+        data[j].specValueCode = data[j].timestampCode
+        delete (data[j].timestampCode)
+      }
+    }
     var index = this.data.currentTab
     var pages = getCurrentPages();             //  获取页面栈
     var currPage = pages[pages.length - 1];
     var prevPage = pages[pages.length - 2];    // 上一个页面
     prevPage.setData({
-      mydata:this.data.goodsListData
+      mydata:goodsListData
     })
     wx.navigateBack({
       data: 1
@@ -294,7 +303,7 @@ Page({
         code= e.target.dataset.code,
         newGoodsListData=[],
         list={},
-        timestamp = Date.parse(new Date()),
+      timestamp = this.data.timestamp,
         hash = {},
         addArr=[],
         templateCont = this.data.templateCont,
@@ -305,10 +314,9 @@ Page({
         goodsListData = this.data.goodsListData,
         codeTd = this.data.templateId,
         num='',
-      arrIndex=[],
+        arrIndex=[],
         pId = e.target.dataset.id
         code+=code+""+code
-    console.log(timestamp)
     if(switchi==0){
       var arrIndex = this.data.arrIndex
       arrIndex[current].selected = !arrIndex[current].selected
@@ -322,7 +330,7 @@ Page({
         arrIndex1: arrIndex
       })
     }
-    
+    // timestamp
     for (var i = 0; i < goodsListData.length;i++){
       if (goodsListData[i].id == pId){
         addIndex = true
@@ -332,7 +340,7 @@ Page({
           codeArr.splice(l, 1)
          }
         }
-        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode:timestamp, specValueName: e.target.dataset.namechi })
+        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current+pId})
         if (arrIndex[current].selected != true) {
           goodsListData[i].goodsSpecificationValueVOList.pop()
         }
@@ -342,11 +350,11 @@ Page({
       codeTd = '000'
     }
     if(!addIndex){
-      listChi.push({ specValueCode:timestamp, specValueName: e.target.dataset.namechi,selected:false})
+      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi, selected: false, timestampCode: timestamp + current + pId})
       list.specName = pName
       list.id = pId
       list.goodsSpecificationValueVOList = listChi
-      list.specCode = timestamp
+      list.specCode = timestamp +parseInt(89999 * Math.random() + 10000 + 1)
       goodsListData.push(list)
     }
     if (current == this.data.navindex) {

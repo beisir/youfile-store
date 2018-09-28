@@ -197,6 +197,7 @@ Page({
           datas = _this.data.detailList,
           totalCount = res.obj.totalCount,
           newArr = app.pageRequest.addDataList(datas, detailList)
+        console.log(detailList)
         _this.setData({
           detailList: newArr,
           totalCount: totalCount

@@ -403,6 +403,7 @@ Page({
       swichNavCode = this.data.swichNavCode,
       goodsSpecificationVOList = this.data.goodsSpecificationVOList,
       goodsSkuVOList = this.data.goodsSkuVOList
+    console.log(swichNavCode)
     for (var i = 0; i < goodsSkuVOList.length;i++){
       var  childArr = goodsSkuVOList[i].specValueCodeList
       if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1){

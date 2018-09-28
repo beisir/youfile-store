@@ -168,6 +168,12 @@ Page({
     })
   },
   getList:function(){
+    this.setData({
+      detailList: [],
+      lostcarts:[],
+    }, function () {
+      _this.getTotalPrice();
+    })
     var _this=this
     Api.cartList()
       .then(res => {

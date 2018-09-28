@@ -176,7 +176,7 @@ Page({
       _this.setData({
         coverUrl: url
       })
-      Api.updateCover({ coverUrl:url})
+      Api.updateCover(url)
         .then(res => {
           wx.showToast({
             title: res.message,

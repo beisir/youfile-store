@@ -18,6 +18,9 @@
 .st-d-status view{
   margin-bottom: 0;
 }
+.st-all{
+  margin-bottom: 250rpx;
+}
 .st-cont .warn{
   width: 28rpx;height: 28rpx;position: relative;border:0;vertical-align: middle;margin-top: -2rpx;
 }

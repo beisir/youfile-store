@@ -36,7 +36,7 @@
                   <view class='st-d-status'>
                     <view><text>批发:</text><text class='st-mom'>￥{{record.wholesalePrice}}</text></view>
                     <view><text>零售:</text><text class='st-mom'>￥{{record.sellPrice}}</text></view>
-                    <view>供货：400</view><view>零售：400</view>
+                    <!-- <view>供货：400</view><view>零售：400</view> -->
                     <view>库存：{{record.stockNum}}<image class='warn' src="/image/warn.png"></image></view>
                   </view>
                    <!-- <view class='not'><view class='triangle_border_up'></view>该商品库存不足 请及时补货</view> -->
@@ -56,7 +56,7 @@
             </view>
           </view>
   </view>
-  <view class='st-all'>{{totalCount}}件商品</view>
+  <view class='st-all'>{{detailList.length}}件商品</view>
 </scroll-view>
 <view class='st-bottom st-bottom1'>
     <view><navigator url="../addGoods/addGoods">添加商品</navigator></view>
