@@ -188,7 +188,7 @@
     <text>￥{{order.orderAmount}}</text>
   </view>
   <view>运费类型
-    <text>全场包邮</text>
+    <text>货到付款</text>
   </view>
   <view class='np-o-view'>实付金额
     <text>￥{{order.orderAmount}}</text>

@@ -52,7 +52,7 @@
 <!-- 待付款 -->
 <view class='os-title' wx:if="{{status=='unpaid'}}">
   <view>买家剩余支付时间
-    <text>{{clock}}</text>
+    <text>{{clock?clock:""}}</text>
   </view>
   <image src="/image/xian.png"></image>
   <view class='os-status'>
@@ -254,10 +254,10 @@
   <text>物流配送</text>
   <block wx:if="{{item.expressStatus}}">
     <view>物流公司
-      <text>{{order.expressCompany}}</text>
+      <text>{{order.expressCompany?order.expressCompany:""}}</text>
     </view>
     <view>快递单号
-      <text>{{order.expressNumber}}</text>
+      <text>{{order.expressNumber?order.expressNumber:""}}</text>
     </view>
   </block>
 </view>
@@ -268,12 +268,12 @@
 
 <!-- 金额 -->
 <view class='np-order {{status!="closed"?"np-order-bar":"np-order-bar1"}} '>
-  <view>优惠改价
+  <!-- <view>优惠改价
     <text>￥{{order.orderAmount}}</text>
     <text class='os-text'>￥1992.00</text>
-  </view>
-  <view>运费(快递)
-    <text>全场包邮</text>
+  </view> -->
+  <view>运费类型
+    <text>货到付款</text>
   </view>
   <view class='np-o-view'>
     <!-- 未支付 -->
