@@ -70,13 +70,13 @@
 <view class='os-title' wx:if="{{status=='closed'}}">
   <view>
     <image src="/image/closeS.png"></image>订单已关闭</view>
-  <view class='os-close-res'>关闭原因：{{order.closedReason}}</view>
+  <view class='os-close-res'>关闭原因：{{order.closedReason?order.closedReason:""}}</view>
 </view> 
 <!-- 交易取消 -->
 <view class='os-title' wx:if="{{status=='cancelled'}}">
   <view>
     <image src="/image/closeS.png"></image>订单已取消</view>
-  <view class='os-close-res'>取消原因：{{order.cancelReason}}</view>
+  <view class='os-close-res'>取消原因：{{order.cancelReason?order.cancelReason:""}}</view>
 </view> 
 <!-- 正文 -->
 <view class='np-ct'>
@@ -189,7 +189,7 @@
 </view>
 
 <view class='os-mon os-mon1'>备注信息
-  <textarea bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'></textarea>
+  <textarea bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'>{{user.remark?user.remark:""}}</textarea>
 </view>
 
 <!-- 金额 -->

@@ -467,7 +467,7 @@ function changeIcon(data){
 }
 // 验证取货码
 function testGoodCode(data){
-  return app.http.putRequest(testGoodCodeUrl, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.putRequest(testGoodCodeUrl,data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 // 上传凭证
 function uploadVoucher(data){
