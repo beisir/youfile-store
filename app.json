@@ -6,9 +6,6 @@
     "pages/role/order/order",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
-    
-    
-    
     "pages/page/order/order",
     "pages/role/orderDetails/orderDetails",
     "pages/role/supplyOrder/supplyOrder",

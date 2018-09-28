@@ -448,7 +448,6 @@ Page({
             })
           })
       }else{
-        console.log({ goodsId: goodsId, num: num, skuCode: skuCode })
         Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
           .then(res => {
             wx.showToast({

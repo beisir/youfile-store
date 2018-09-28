@@ -274,7 +274,9 @@ function updateSpecName(templateContentId,specName) {
   return app.http.putRequest(updateSpecNameUrl+'?templateContentId='+templateContentId+'&specName='+specName)
 } 
 /**添加到购物车**/
-function addCart(goodsId,data) {
+function addCart(data) {
+  console.log(data)
+  data = initStoreId(data);
   return app.http.postRequest(addCartUrl, data)
 }
 /**批量添加到购物车**/
@@ -286,7 +288,7 @@ function deteleCartGoods(data) {
   return app.http.deleteRequest(deteleCartGoodsUrl,data)
 }
 /**修改购物车**/
-function updateMoreCart(data) {
+function updateMoreCart(goodsId,data) {
   var goodsId = JSON.parse(data)[0]["goodsId"]
   var url = '/api/shop/shoppingcart/shop/goods/batch/'+goodsId
   return app.http.putRequest(url, data)

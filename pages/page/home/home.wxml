@@ -33,7 +33,7 @@
       </navigator>
     </view>
      <view class="ym_sydtdmgzs">
-        <view class="store_name">{{store.storeName}}<view wx:if='{{store.storeNature=="wholesale"}}'>新批零</view><view wx:if='{{store.storeNature!="wholesale"}}'>新零售</view><image wx:if='{{limitShow==2}}' bindtap='editDp'  src="/image/edit1.png"/></view>
+        <view class="store_name">{{store.storeName}}<view>{{store.storeNature}}</view><image wx:if='{{limitShow==2}}' bindtap='editDp'  src="/image/edit1.png"/></view>
         <image class='logoimg' src="{{baseUrl}}{{store.mallLogo}}"/>   
         <text>{{store.mallName}}</text>
       </view>
