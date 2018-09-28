@@ -25,7 +25,7 @@ Page({
   data: {
     navindex: -1,
     currentTab: 0,
-    oneTemplateCont: [{ templateName: "不用模板",id:'', specificationTemplateContentVOList: [{ id: '010', specName: "颜色", specValueList: ["如图"] }] }],
+    oneTemplateCont: [{ templateName: "不用模板",id:'', specificationTemplateContentVOList: [{ id: '010', specName: "颜色", specValueList: [] }] }],
     templateCont: [],
     addSpec: false,
     addSpecAttc: false,
@@ -197,7 +197,8 @@ Page({
   saveTemplate: function (e) {
     var _this = this
     _this.setData({
-      addSpecAttc: true
+      addSpecAttc: true,
+      value:''
     })
   },
   // 删除规格值
@@ -248,6 +249,7 @@ Page({
     }else{
       tempArr["templateName"]='默认模板'
     }
+    console.log(tempArr)
     Api.addTemplate(tempArr)
       .then(res => {
           wx.showToast({
@@ -292,6 +294,7 @@ Page({
         code= e.target.dataset.code,
         newGoodsListData=[],
         list={},
+        timestamp = Date.parse(new Date()),
         hash = {},
         addArr=[],
         templateCont = this.data.templateCont,
@@ -305,6 +308,7 @@ Page({
       arrIndex=[],
         pId = e.target.dataset.id
         code+=code+""+code
+    console.log(timestamp)
     if(switchi==0){
       var arrIndex = this.data.arrIndex
       arrIndex[current].selected = !arrIndex[current].selected
@@ -328,7 +332,7 @@ Page({
           codeArr.splice(l, 1)
          }
         }
-        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi })
+        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode:timestamp, specValueName: e.target.dataset.namechi })
         if (arrIndex[current].selected != true) {
           goodsListData[i].goodsSpecificationValueVOList.pop()
         }
@@ -338,14 +342,13 @@ Page({
       codeTd = '000'
     }
     if(!addIndex){
-      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi,selected:false})
+      listChi.push({ specValueCode:timestamp, specValueName: e.target.dataset.namechi,selected:false})
       list.specName = pName
       list.id = pId
       list.goodsSpecificationValueVOList = listChi
-      list.specCode = codeTd + code
+      list.specCode = timestamp
       goodsListData.push(list)
     }
-    console.log(goodsListData)
     if (current == this.data.navindex) {
       return false;
     } else {

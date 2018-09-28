@@ -48,7 +48,8 @@ Page({
       .then(res => {
         var url = JSON.parse(res).obj
         _this.setData({
-          coverUrl: url
+          coverUrl: url,
+          logo:url
         })
         Api.uploadLogoImg(url)
           .then(res => {

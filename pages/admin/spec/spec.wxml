@@ -72,7 +72,7 @@
           <view class='active'  bindtap='addSpec'  data-id="{{list.id}}"  data-name="{{list.specName}}">+</view>
         </view>
       </view>
-      <view class='sp-add' wx:if='{{cont.specificationTemplateContentVOList.length<2}}'   bindtap='addAttrc'><image src="/image/add3.png"></image>添加规格<view class='spec-mes'>最多创建6个规格模板哦！</view></view>
+      <view class='sp-add' wx:if='{{cont.specificationTemplateContentVOList.length<2}}'   bindtap='addAttrc'><image src="/image/add3.png"></image>添加规格<view class='spec-mes' hidden='true'>最多创建6个规格模板哦！</view></view>
       <view class='sp-add sp-add1'   wx:for='{{cont.specificationTemplateContentVOList}}' wx:if='{{index+1==cont.specificationTemplateContentVOList.length && cont.specificationTemplateContentVOList.length==2}}' wx:key='{{index}}'  data-id="{{item.id}}" bindtap='deleteTemplateContentId'><image src="/image/rev.png"></image>删除规格</view>
     </swiper-item>
 </swiper>

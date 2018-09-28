@@ -19,13 +19,13 @@
     <navigator   url='../../role/supplyOrder/supplyOrder'><view><image mode='widthFix' src='/image/ad1.png'></image></view><view>供货单</view></navigator>
     <navigator   url='../../page/order/order'><view><image mode='widthFix' src='/image/ad2.png'></image></view><view>订单管理</view></navigator>
     <navigator   url='../../admin/status/status'><view><image mode='widthFix' src='/image/ad3.png'></image></view><view>云享品</view></navigator>
-    <navigator   url='../../businessFriend/index/index'><view><image mode='widthFix' src='/image/ad4.png'></image></view><view>商友录</view></navigator>
+    <navigator   url='../../businessFriend/merchant/index/index'><view><image mode='widthFix' src='/image/ad4.png'></image></view><view>商友录</view></navigator>
     <navigator   url='../../page/mesEdit/mesEdit'><view><image mode='widthFix' src='/image/ad5.png'></image></view><view>小云店</view></navigator>
   </view>
 </view>
 <view class='goHome' bindtap='goHome'><view><image src="/image/home.png"></image></view>回首页</view>
 <view class='bottom_M'>
   <navigator><image  src="/image/11.png"></image><view  class='active'>工作台</view></navigator>
-  <navigator  open-type='redirect'  url='../../businessFriend/index/index'><image  src="/image/admin2.png"></image><view>商友录</view></navigator>
+  <navigator  open-type='redirect'  url='../../businessFriend/merchant/index/index'><image  src="/image/admin2.png"></image><view>商友录</view></navigator>
   <navigator  open-type='redirect'  url='../userM/userM'><image  src="/image/w11.png"></image><view>我的</view></navigator>
 </view>

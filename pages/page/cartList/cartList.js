@@ -178,6 +178,7 @@ Page({
         if (newEffectiveListLen>0){
          var  effectiveList = obj.effectiveList[0].goodsList,
            store = obj.effectiveList[0].store
+          console.log(effectiveList)
         }else{
           var effectiveList=[]
         }
