@@ -29,6 +29,13 @@
     <view class='mes-tel'>{{order.storeInfo.servicePhone}}</view>
   </view>
 </mes>
+<!-- 确认收货 -->
+<mes show="{{sureModal}}">
+  <view>
+    <text>是否确认收货？</text>
+    <button bindtap='sureSure'>确定</button>
+  </view>
+</mes>
 
 
 <view class='order-title-box' style='background-image:url(/image/back.png);'>
@@ -227,7 +234,7 @@
   </block>
 
   <block wx:if="{{status=='shipped'}}">
-    <button class='or-active' data-type='get' bindtap='showModal'> 确认收货 </button>
+    <button class='or-active' data-type='sureGet' bindtap='showModal'> 确认收货 </button>
     <button>查看物流</button>
   </block>
 

@@ -499,7 +499,9 @@ function cancelOrder(data){
 }
 // 添加快递
 function addExpress(data){
-  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + data.expressCompany + "&expressNumber=" + data.expressNumber, data)
+  let expressCompany = data.expressCompany ? data.expressCompany:"";
+  let expressNumber = data.expressNumber ? data.expressNumber:"";
+  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + expressCompany + "&expressNumber=" + expressNumber, data)
 }
 // 订单填写商家备注
 function addRemark(data){
