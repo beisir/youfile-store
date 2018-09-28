@@ -1,10 +1,8 @@
 {
   "pages":[
     "pages/page/home/home",
-    
-    "pages/role/supplyOrder/supplyOrder",
-    
     "pages/role/order/order",
+    "pages/role/supplyOrder/supplyOrder",
     
     "pages/page/indexEmpty/indexEmpty",
     "pages/page/cartList/cartList",

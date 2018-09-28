@@ -431,9 +431,9 @@ function updateMes(data) {
   return app.http.putRequest(updateMesUrl, data)
 }
 /**更换小云店logo**/
-function uploadLogoImg(data) {
+function uploadLogoImg(url,data) {
   data = initStoreId(data);
-  return app.http.putRequest(uploadLogoImgUrl, data)
+  return app.http.putRequest(uploadLogoImgUrl+'?logo='+url, data)
 }
 /**获取用户权限设置**/
 function apiSetUser(data) {

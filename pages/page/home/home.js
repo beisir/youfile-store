@@ -195,6 +195,9 @@ Page({
     Api.homeIndex()
       .then(res => {
         var obj = res.obj
+        wx.setNavigationBarTitle({
+          title: obj.store.storeName
+        })
         that.setData({
           store: obj.store,
           coverUrl: obj.store.coverUrl,
