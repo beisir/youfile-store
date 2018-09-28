@@ -64,8 +64,8 @@
   height: 105rpx;
 }
 .user-img{
-  width: 44rpx;
-  height: 41rpx;
+  width: 50rpx;
+  height: 50rpx;
   margin-right:30rpx;
 }
 .user-img1{
@@ -109,3 +109,7 @@
   z-index: 10;
 }
 
+.init-page image{
+  height: 50rpx;
+  width: 50rpx;
+} 

@@ -61,7 +61,7 @@
       </view>
     </navigator>
     <navigator class='weui-cell weui-cell_access' url='../set/set'>
-      <image src='/image/u3.png' class='user-img user-img1'></image>
+      <image src='/image/u3.png' class='user-img'></image>
       <view class='weui-cell__bd'>
         设置
       </view>
