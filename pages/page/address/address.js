@@ -180,7 +180,7 @@ Page({
     })
     this.setData({
       goods,
-      price
+      price: Math.floor(price * 100) / 100
     })
   },
   /**
