@@ -49,6 +49,14 @@ Page({
           title: res.message,
           icon: 'none'
         })
+          setTimeout(() => {
+            wx.navigateBack({})
+          }, 1000)
+      }).catch(e=>{
+        wx.showToast({
+          title: e.data.message,
+          icon:'none'
+        })
       })
     } else {
       wx.showToast({
