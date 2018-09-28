@@ -84,9 +84,9 @@
   <view class='np-view np-code np-coden1' wx:if="{{status=='finish'||status=='shipped'}}">
     <image src="/image/wl-car.png"></image>
     <view>物流信息</view>
-    <text>承运公司：{{order.expressCompany}}</text>
+    <text>承运公司：{{order.expressCompany?order.expressCompany:""}}</text>
     <view>
-      <text>运单编号：{{order.expressNumber}}</text>
+      <text>运单编号：{{order.expressNumber?order.expressNumber:""}}</text>
     </view>
     <!-- <text>卖家暂未填写订单信息</text> -->
   </view>
@@ -216,7 +216,7 @@
     <text>￥{{order.orderAmount}}</text>
   </view>
   <view>运费类型
-    <text>全场包邮</text>
+    <text>货到付款</text>
   </view>
   <view class='np-o-view'>实付金额
     <text>￥{{order.orderAmount}}</text>

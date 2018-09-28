@@ -25,3 +25,6 @@
 .getcode text{
   color: #CCAA77;font-size: 30rpx;
 }
+.cart-list{
+  background: #fff;
+}

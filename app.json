@@ -2,6 +2,9 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/page/stockOrder/stockOrder",
+    
+    
     "pages/page/workIndex/workIndex",
     
     
@@ -63,7 +66,6 @@
     "pages/login/register/register",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",
-    "pages/page/stockOrder/stockOrder",
     
     "pages/role/orderSelf/orderSelf",
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
