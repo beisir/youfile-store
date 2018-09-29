@@ -77,7 +77,7 @@ Page({
    */
   addTip:function(){
     var Id = wx.getStorageSync("storeId"),
-      logo = this.data.baseUrl+this.data.store.logo,
+      logo =this.data.store.logo,
       name = this.data.store.storeName
     
     wx.navigateTo({

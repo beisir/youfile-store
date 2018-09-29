@@ -1,21 +1,12 @@
 {
   "pages":[
     "pages/page/home/home",
-    
-    "pages/admin/addGoods/addGoods",
-    
-    
-    "pages/admin/status/status",
-    
-    
-    "pages/admin/spec/spec",
-    
-    
-    
-    
-    "pages/admin/firstClass/firstClass",
-    "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/index/index",
+    "pages/businessFriend/merchant/index/index",
+    "pages/admin/addGoods/addGoods",
+    "pages/admin/status/status",
+    "pages/admin/spec/spec",
+    "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",
     "pages/page/workIndex/workIndex",
     "pages/page/cartList/cartList",

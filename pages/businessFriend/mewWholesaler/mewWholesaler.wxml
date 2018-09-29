@@ -6,7 +6,7 @@
   <view class='bf-weui'>
   <scroll-view scroll-y="true" style="height:100%;">
     <navigator class="weui_cells" wx:for='{{detailList}}'  wx:if='{{item.status!=2}}' wx:key='{{index}}' url="../information/information?status={{item.status}}&send={{item.send}}&accept={{item.accept}}&remark={{item.remark}}&name={{item.storeName}}&logo={{item.storeLogo}}">
-     <view class='bf-img'><image  mode="aspectFill" src="{{item.storeLogo}}"></image></view>
+     <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.storeLogo}}"></image></view>
       <text  wx:if='{{item.status!=3}}'>{{item.remark==null?item.storeName:item.remark}}</text>
       <text  wx:if='{{item.status==3}}'>{{item.storeName}}</text>
       <view class='nbf-font'>{{item.greet}}</view>
@@ -18,7 +18,7 @@
       </view>
     </navigator>
     <navigator class="weui_cells" wx:for='{{detailList}}'  wx:if='{{item.status==2}}' wx:key='{{index}}' url="../information/information?status={{item.status}}&send={{item.send}}&accept={{item.send}}&remark={{item.remark}}&name={{item.storeName}}&logo={{item.storeLogo}}">
-     <view class='bf-img'><image  mode="aspectFill" src="{{item.storeLogo}}"></image></view>
+     <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.storeLogo}}"></image></view>
       <text >{{item.storeName}}</text>
       <view class='nbf-font'>{{item.greet}}</view>
       <view class='weui-view'>

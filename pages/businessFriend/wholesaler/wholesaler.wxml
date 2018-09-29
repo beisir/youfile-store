@@ -9,14 +9,14 @@
   <view class='bf-weui'>
     <navigator class="weui_cells" url="../addWholesaler/addWholesaler">
       <image  mode="widthFix" src="/image/w1.png"></image>
-      <text class="bf-font">添加批发商 </text>
+      <text class="bf-font">添加供应商 </text>
       <view class='weui-view'>
         <image  mode="widthFix" src="/image/icl.png"></image>
       </view>
     </navigator>
   </view>
 </view>
-<view class='bf-all'>全部批发商</view>
+<view class='bf-all'>全部供应商</view>
 <scroll-view scroll-y="true" style="height:100%;">
 <view class='bf-cont'>
   <view class='bf-weui'>
@@ -29,6 +29,6 @@
     </navigator>
   </view>
 </view>
-<view class='allData'>{{totalCount}}位批发商</view>
+<view class='allData'>{{totalCount}}位供应商</view>
 </scroll-view>
 
