@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "",
+  "navigationBarTitleText": "小云店",
   "usingComponents": {
     "mes": "../../../../assembly/tips/tips",
     "login": "../../login/login/login",
