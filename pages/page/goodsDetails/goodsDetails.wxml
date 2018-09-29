@@ -13,7 +13,7 @@
     <view class='gd-font'>零售价：<text>￥{{sell}}</text></view>
     <view class='gd-font'>批发价：<image src='/image/wh.png'></image>
     <!-- <text class='gd-yan'>商友验证中</text> -->
-    <button>享受批发价</button></view>
+    <button  bindtap='addTip'>享受批发价</button></view>
   </view>
   <!-- <view class='gd-title'  wx:if='{{limitShow==1}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
@@ -123,7 +123,7 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
-            <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view>
+            <!-- <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view> -->
           </view>
         </view>
         <view wx:for='{{goodsSpecificationVOList}}' wx:for-item="list" wx:key="{{index}}">
@@ -236,7 +236,7 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
-            <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view>
+            <!-- <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view> -->
           </view>
         </view>
         <view wx:for='{{goodsSpecificationVOList}}' wx:for-item="list" wx:key="{{index}}">

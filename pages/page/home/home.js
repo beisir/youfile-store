@@ -76,9 +76,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   addTip:function(){
-    this.setData({
-      show:true
+    var Id = wx.getStorageSync("storeId"),
+      logo = this.data.baseUrl+this.data.store.logo,
+      name = this.data.store.storeName
+    
+    wx.navigateTo({
+      url: '../../businessFriend/information/information?status=0&send=&accept='+Id+'&remark=&logo='+logo+'&name='+name,
     })
+    // this.setData({
+    //   show:true
+    // })
   },
   confirm:function(){
     this.setData({

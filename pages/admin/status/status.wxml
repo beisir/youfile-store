@@ -25,7 +25,7 @@
       <view wx:for='{{list}}' wx:key='{{index}}' data-code='{{item.customCategoryCode}}' class="{{currentTabSer==index? 'active' : ''}}" data-current="{{index}}"  bindtap="swichSer">{{item.name}}<image src="/image/dui.png"></image></view>
   </view>
 </view>
-<scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
+<scroll-view style='overflow:scroll' scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
   <view>
  <view class="record-box"  wx:for="{{detailList}}" wx:key="{{index}}" wx:for-item="record">
   <view class="record" style="left:{{record.offsetX}}px;left:{{leftVal}}px" data-index="{{index}}" bindtouchstart="recordStart" catchtouchmove="recordMove" bindtouchend="recordEnd">

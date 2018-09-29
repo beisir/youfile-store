@@ -45,8 +45,8 @@ Page({
     show1:false,
     tempNewArr:[],
     tempNewId:'',
-    arrIndex: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
-    arrIndex1: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }]
+    arrIndex: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
+    arrIndex1: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }]
 
   },
   // 返回上一页
@@ -303,7 +303,7 @@ Page({
         code= e.target.dataset.code,
         newGoodsListData=[],
         list={},
-      timestamp = this.data.timestamp,
+       timestamp = this.data.timestamp,
         hash = {},
         addArr=[],
         templateCont = this.data.templateCont,
@@ -317,6 +317,9 @@ Page({
         arrIndex=[],
         pId = e.target.dataset.id
         code+=code+""+code
+    if (pId == undefined || pId==''){
+      pId='002'
+    }
     if(switchi==0){
       var arrIndex = this.data.arrIndex
       arrIndex[current].selected = !arrIndex[current].selected
@@ -340,7 +343,7 @@ Page({
           codeArr.splice(l, 1)
          }
         }
-        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current+pId})
+        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code})
         if (arrIndex[current].selected != true) {
           goodsListData[i].goodsSpecificationValueVOList.pop()
         }
@@ -350,7 +353,7 @@ Page({
       codeTd = '000'
     }
     if(!addIndex){
-      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi, selected: false, timestampCode: timestamp + current + pId})
+      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi, selected: false, timestampCode: timestamp + current + pId + code})
       list.specName = pName
       list.id = pId
       list.goodsSpecificationValueVOList = listChi

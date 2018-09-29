@@ -12,18 +12,22 @@ Page({
     storeMes:[],
     storeGoods:[],
     baseUrl: app.globalData.imageUrl,
-    limitShow: wx.getStorageSync('admin'),
+    limitShow:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.code){
+      this.setData({
+        limitShow: options.code
+      })
+    }
     var _this=this
     Api.storeIdInfo()
     .then(res=>{
       var obj=res.obj
-      console.log(obj.store[0].store)
       _this.setData({
         countData: obj.countData,
         floor: obj.floor.floorInfo,

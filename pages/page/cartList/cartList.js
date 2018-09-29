@@ -485,7 +485,7 @@ Page({
     }
     var model = JSON.stringify(model);
     wx.navigateTo({
-      url: '../address/address?model=' + model,
+      url: '../address/address?model=' + model + '&enjoyCost=' + this.data.enjoyCost + '&totalPrice=' + this.data.totalPrice,
     })
   },
 })

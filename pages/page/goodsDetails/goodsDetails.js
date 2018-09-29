@@ -108,7 +108,19 @@ Page({
   showLogo:function(){
     this.selectComponent("#login").showPage();
   },
+  addTip: function () {
+    var Id = this.data.store.storeId,
+      logo =this.data.store.logo,
+      name = this.data.store.storeName
+    wx.navigateTo({
+      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=&logo='+logo + '&name=' + name,
+    })
+    // this.setData({
+    //   show:true
+    // })
+  },
   onLoad: function (options) {
+    console.log(options)
     if (options.storeId) {
       wx.setStorage({
         key: 'storeId',
@@ -255,6 +267,7 @@ Page({
     this.getNewData1(current, swichNavCode)
   },
   getSpecDetails:function(index,code){
+    console.log(code)
     var that = this,
       swichNavCode = index,
       code = code,
@@ -336,6 +349,7 @@ Page({
         spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
       }
     }
+    console.log(spectArrDifference)
     if (this.data.currentTab ===index) {
       return false;
     } else {
@@ -509,7 +523,7 @@ Page({
     if(status==1){
       var model = JSON.stringify(newArr);
       wx.navigateTo({
-        url: '../address/address?model=' + model,
+        url: '../address/address?model=' + model + '&enjoyCost=' + !this.data.discountShow + '&totalPrice=' + this.data.newTotal,
       })
     }else{
       if (this.data.editCode){

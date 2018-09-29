@@ -138,7 +138,7 @@ Page({
       value = options.value
     this.setData({
       name:name,
-      value: value,
+      value: value==null?'':value,
       num: value.length,
      
     })
