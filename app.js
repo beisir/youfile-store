@@ -13,7 +13,7 @@ App({
     }
     // wx.setStorage({
     //   key: 'storeId',
-    //   data:'S1000349',
+    //   data:'S1000409',
     // })
     // wx.setStorage({
     //   key: 'admin',xyd
