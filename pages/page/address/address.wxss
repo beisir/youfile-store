@@ -2,7 +2,7 @@
 
 /* 收货人 */
 .receive-box{
-  padding:10rpx 30rpx;
+  padding:10rpx 60rpx 10rpx 30rpx;
   background: #fff;
   margin: 15rpx 0;
   font-size:26rpx;
@@ -21,7 +21,7 @@
 .receive-address{
   padding:25rpx 65rpx;
   color:#5c5c5c;
-  border-bottom:1rpx solid #ddd;
+  /* border-bottom:1rpx solid #ddd; */
 }
 
 /* 商品 */
@@ -40,24 +40,27 @@
   overflow: hidden;
   position: relative;
 }
-.ad-tel image{
+.receive-box{
+  position: relative;
+}
+.ad-tel image,.receive-box image{
   width: 45rpx;
   height: 45rpx;
   margin-right:20rpx;
   margin-top: -2rpx;
   vertical-align: middle;
 }
-.ad-tel .ad-itimg{
+.ad-tel .ad-itimg,.receive-box .ad-itimg{
   position: absolute;
   bottom: 0;
   left: 0;
   height: 6rpx;
   width: 171rpx;
 }
-.ad-tel .ad-itimg1{left: 171rpx;}
-.ad-tel .ad-itimg2{left: 342rpx;}
-.ad-tel .ad-itimg3{left: 513rpx;}
-.ad-tel .ad-itimg4{left: 684rpx;}
+.ad-tel .ad-itimg1,.receive-box .ad-itimg1{left: 171rpx;}
+.ad-tel .ad-itimg2,.receive-box .ad-itimg2{left: 342rpx;}
+.ad-tel .ad-itimg3,.receive-box .ad-itimg3{left: 513rpx;}
+.ad-tel .ad-itimg4,.receive-box .ad-itimg4{left: 684rpx;}
 .ad-tel button{
   height: 60rpx;
   line-height: 60rpx;
@@ -84,6 +87,14 @@
   position: absolute;
   right: 30rpx;
   top: 30rpx;
+}
+.receive-box .itimg{
+  position: absolute;
+  right: 9rpx;
+  top: 30rpx;
+  width:24rpx;
+  height:29rpx;
+
 }
 .c-title{
   background: #fff;
