@@ -1,3 +1,4 @@
+ <login id="login"></login>
 <!-- 设置备注 -->
 <spec
   show="{{addSpec}}"

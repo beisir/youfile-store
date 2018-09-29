@@ -460,7 +460,7 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   margin-top: 10rpx;
 }
 .lt-add-cart{
-  border-radius:10rpx;width: 210rpx;border:2rpx solid #D5B98F;height:48rpx;position: absolute;top:18rpx;
+  border-radius:10rpx;width: 210rpx;border:2rpx solid #D5B98F;height:48rpx;position: absolute;top:18rpx;overflow: hidden
 }
 .lt-add-cart view{
   display: inline-block;color: #CCAA77;font-size: 50rpx;width: 50rpx;
@@ -484,7 +484,9 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   height:48rpx;border-left:2rpx solid #D5B98F;border-right:2rpx solid #D5B98F;
 }
 .lt-table{
-color: #666;font-weight: normal;height: 400rpx;overflow: scroll
+color: #666;font-weight: normal;height: 400rpx;overflow: scroll;height:350rpx;
+margin-bottom:150rpx;
+
 }
 .lt-tr{
   position: relative;
@@ -519,8 +521,15 @@ color: #666;font-weight: normal;height: 400rpx;overflow: scroll
 .weui-bottom view>view{
   width: auto;
 }
-.lt-tr1 .lt-add-cart,.lt-tr1 .lt-num{
-  background: #FAFAFA;border:2rpx solid #E1E1E1;
+.lt-tr1 .lt-add-cart,.lt-add-cart .lt-num,.lt-tr1 .lt-num{
+  background: #FAFAFA;border:2rpx solid #E1E1E1;position: relative;overflow: hidden
+}
+.
+.lt-tr1 .lt-num input{
+  position:absolute;
+}
+.lt-add-cart input{
+  position:absolute;background:#fff;
 }
 .lt-tr1 .lt-num{
   border-top: 0;border-bottom: 0;color: #333;

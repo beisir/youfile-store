@@ -79,6 +79,6 @@
   <view>客服微信<text>{{storeMes.wechatNumber==null?'':storeMes.wechatNumber}}</text></view>
   <view>公众号<text></text></view>
 </view>
-<view class='weui-one-bottom'>
+<!-- <view class='weui-one-bottom'>
   √ {{storeMes.collectionNum}} 已关注
-</view>
+</view> -->

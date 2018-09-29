@@ -22,10 +22,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     if (options.storeId) {
       wx.setStorage({
         key: 'storeId',
         data: options.storeId,
+      })
+    }
+    if (!Api.isEmpty(wx.getStorageSync("access_token"))){
+      wx.switchTab({
+        url: '../../home/home'
       })
     }
     this.getMes()
@@ -40,7 +46,6 @@ Page({
    Api.storeIndex()
    .then(res=>{
      var obj=res.obj
-     console.log(obj)
      _this.setData({
        followNum: obj.followNum,
        payOrders: obj.payOrders,

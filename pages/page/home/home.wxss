@@ -121,7 +121,7 @@
 .swiper-tab-item{ 
   font-size: 28rpx; 
   display: inline-block; 
-  width: 33.33%; 
+  width:29%; 
   color: #666; 
 } 
 .swiper-tab-item image{

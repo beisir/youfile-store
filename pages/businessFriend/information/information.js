@@ -35,7 +35,9 @@ Page({
     balcony:'',
     doorNum:'',
   },
-
+  showLogo: function () {
+    this.selectComponent("#login").showPage();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -183,6 +185,10 @@ Page({
     
   },
   invitation:function(){
+    if (!Api.isEmpty(wx.getStorageSync("access_token"))) {
+      this.showLogo()
+      return
+    }
     wx.navigateTo({
       url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remarkName + "&name=" + this.data.name + "&logo=" + this.data.logo + "&send=" + this.data.send + "&mallName=" + this.data.mallName + "&mallLogo=" + this.data.mallLogo,
     })

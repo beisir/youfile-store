@@ -275,7 +275,6 @@ function updateSpecName(templateContentId,specName) {
 } 
 /**添加到购物车**/
 function addCart(data) {
-  console.log(data)
   data = initStoreId(data);
   return app.http.postRequest(addCartUrl, data)
 }
@@ -294,8 +293,9 @@ function updateMoreCart(goodsId,data) {
   return app.http.putRequest(url, data)
 }
 /**情况购物车失效商品**/
-function deteleCartFai() {
-  return app.http.deleteRequest(deteleCartFaiUrl)
+function deteleCartFai(data) {
+  data = initStoreId(data);
+  return app.http.deleteRequest(deteleCartFaiUrl,data)
 }
 /**删除规格**/
 function deleteTemplate(data) {
