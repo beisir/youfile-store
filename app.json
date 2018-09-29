@@ -2,6 +2,9 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/page/stockOrder/stockOrder",
+    
+    
     "pages/role/supplyOrder/supplyOrder",
     
     "pages/role/supplyVoucher/supplyVoucher",
@@ -28,7 +31,6 @@
     "pages/admin/firstClass/firstClass",
     "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/index/index",
-    "pages/page/stockOrder/stockOrder",
     "pages/page/workIndex/workIndex",
     "pages/page/cartList/cartList",
     "pages/role/order/order",
@@ -85,7 +87,6 @@
     "pages/login/login/login",
 
     "pages/page/stockDetail/stockDetail",
-    "pages/page/stockSelf/stockSelf",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
     "pages/businessFriend/merchant/newMerchant/newMerchant",

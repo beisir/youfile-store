@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    dan:"订单"
   },
   getData() {
     app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {
@@ -46,6 +47,11 @@ Page({
       num: options.num,
       admin:wx.getStorageSync('admin')
     })
+    if(this.data.admin==3){
+      this.setData({
+        dan:"进货单"
+      })
+    }
     this.getData();
   },
 
