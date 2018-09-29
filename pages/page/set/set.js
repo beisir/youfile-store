@@ -21,6 +21,9 @@ Page({
       this.setData({
         token: ""
       })
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 800)
     })
    
   },
