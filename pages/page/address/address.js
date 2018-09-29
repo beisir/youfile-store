@@ -72,7 +72,12 @@ Page({
     obj.userMemo = this.data.msg  //留言
     obj.orderGoods = goodsArr;  //商品
     obj.orderCategory = this.data.orderCategory //订单种类
-    obj.valuationWay = 1 //delit 计价方式
+    //计价方式[1;商品零售价格;2商品批发价格]
+    if (this.data.enjoyCost){
+      obj.valuationWay = 2
+    }else{
+      obj.valuationWay = 1
+    }
     app.http.postRequest("/api/order/",
       obj
     ).then((res)=>{
@@ -197,7 +202,7 @@ Page({
     })
 
     //订单分类[1 进货单|2 普通订单|3 购物车订单]
-    let orderType = 1;
+    let orderType = 3;
     //adminType=3;//delit
     if (adminType==1){
       //普通用户
@@ -210,13 +215,18 @@ Page({
     //let type = options.type;
     let model = JSON.parse(options.model);
     //model = { "goodsId": "180904092152685923df", "num": 1, "skuCode": "180904092152685923df_38a" }
+    
+    //读取数据
+
     if(!Array.isArray(model)){
       model = [model]
     }
     this.setData({
       orderCategory: orderType,
       storeId: storeId ?storeId:123,    
-      sendData: model
+      sendData: model,
+      enjoyCost: options.enjoyCost,
+      totalPrice: options.totalPrice
     })
     this.getData();
     this.getDefaultAdress();

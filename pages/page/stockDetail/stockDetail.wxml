@@ -112,7 +112,6 @@
   <view class='c-title'>
     <image src="/image/ic1.png"></image>{{order.storeInfo.storeName}}
     <image class='itimg' src="/image/icl.png"></image>
-    <view class='order-zt'>自提</view>
   </view>
   <!-- 商品 -->
   <view>

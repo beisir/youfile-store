@@ -92,7 +92,7 @@
       <!-- 待支付 -->
       <block wx:if="{{item.orderStatus=='unpaid'}}">
         <navigator url='../../role/supplyVoucher/supplyVoucher?num={{item.orderNumber}}'>
-          <button class='or-active'> 上传还款凭证 </button>
+          <button class='or-active'> 上传支付凭证 </button>
         </navigator>
         <button bindtap='showModal' data-type='cancel' data-num="{{item.orderNumber}}">取消订单</button>
       </block>

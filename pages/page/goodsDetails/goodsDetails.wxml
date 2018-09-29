@@ -88,7 +88,7 @@
 <view class='gd_bottom'>
     <view class='gd_b_left'>
         <view>
-          <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/follow/follow" extra-data="" version="trial"><image src="/image/mes.png"></image></navigator>逛商城</view>
+          <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/follow/follow" extra-data="" version="trial"><image src="/image/home.png"></image></navigator>逛商城</view>
         </view>
         <view>
         <view bindtap='urlHome'><image src="/image/i22.png"></image></view>

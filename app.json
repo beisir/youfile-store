@@ -1,26 +1,32 @@
 {
   "pages":[
     "pages/page/home/home",
-    "pages/businessFriend/index/index",
-    "pages/businessFriend/merchant/index/index",
+    "pages/role/supplyOrder/supplyOrder",
+    
+    "pages/role/supplyVoucher/supplyVoucher",
+    
+    
+    "pages/page/orderSuccess/orderSuccess",
+    
+    "pages/page/order/order",
+    
     "pages/admin/addGoods/addGoods",
     "pages/admin/status/status",
     "pages/admin/spec/spec",
     "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",
+    "pages/businessFriend/merchant/index/index",
+    "pages/businessFriend/index/index",
     "pages/page/workIndex/workIndex",
     "pages/page/cartList/cartList",
     "pages/role/order/order",
-    "pages/role/supplyOrder/supplyOrder",
     "pages/page/indexEmpty/indexEmpty",
-    "pages/page/order/order",
     "pages/role/orderDetails/orderDetails",
     "pages/page/address/address",
     "pages/page/user/user",
     "pages/admin/class/class",
     "pages/page/classList/classList",
     "pages/page/addressWe/addressWe",
-    "pages/page/orderSuccess/orderSuccess",
     "pages/admin/success/success",
     "pages/page/postageInfo/postageInfo",
     "pages/page/mesEdit/mesEdit",
@@ -39,7 +45,6 @@
     "pages/cloudOrder/applyStore/applyStore",
     "pages/cloudOrder/congratulation/congratulation",
     "pages/cloudOrder/myOrder/myOrder",
-    "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/userM/userM",
     "pages/page/goodsDetails/goodsDetails",
     "pages/page/editStoreAddress/editStoreAddress",
@@ -68,7 +73,6 @@
     "pages/login/login/login",
 
     "pages/page/stockDetail/stockDetail",
-    "pages/page/stockSelf/stockSelf",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
     "pages/businessFriend/merchant/newMerchant/newMerchant",

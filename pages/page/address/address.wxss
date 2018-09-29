@@ -2,7 +2,7 @@
 
 /* 收货人 */
 .receive-box{
-  padding:10rpx 60rpx 10rpx 30rpx;
+  padding:30rpx 60rpx 30rpx 30rpx;
   background: #fff;
   margin: 15rpx 0;
   font-size:26rpx;
@@ -72,7 +72,7 @@
   font-size:28rpx;
   padding:0;
   background: #fff;
-  border-radius: 20rpx;
+  border-radius: 10rpx;
   right: 30rpx;
 }
 .cart-list{
@@ -91,7 +91,7 @@
 .receive-box .itimg{
   position: absolute;
   right: 9rpx;
-  top: 30rpx;
+  top: 40rpx;
   width:24rpx;
   height:29rpx;
 
@@ -133,10 +133,10 @@
 }
 .ad-fp{
   color: #333;
-  font-size: 24rpx;
+  font-size: 26rpx;
   height: 100rpx;
   background: #fff;
-  padding:0 20rpx;
+  padding:0 30rpx;
   position: relative;
   margin-bottom: 10rpx;
   line-height: 100rpx;
@@ -158,7 +158,7 @@
 }
 .ad-fp input{
   display: inline-block;
-  width: 80%;
+  width: 75%;
   color: #999;
   vertical-align: middle;
   margin-top: -3rpx;
@@ -168,7 +168,7 @@
   background: #fff;
   font-size: 26rpx;
   height: 120rpx;
-  padding: 30rpx 20rpx 0 20rpx;
+  padding: 30rpx 30rpx 0 ;
 }
 .ad-monery text{
   float: right;
@@ -176,4 +176,9 @@
 }
 .ad-monery view{
   margin-top: 10rpx;
+}
+.heji{
+  font-size:28rpx;
+  color:#333;
+  padding-top:10rpx;
 }

@@ -116,7 +116,7 @@
       <!-- 代收款 1自提-->
       <view class='or-last' wx:if="{{item.orderStatus=='unpaid'}}">
       
-        <button data-num="{{item.orderNumber}}" bindtap='uploadVoucher' class='or-active'> 上传还款凭证 </button>
+        <button data-num="{{item.orderNumber}}" bindtap='uploadVoucher' class='or-active'> 上传支付凭证 </button>
         <button bindtap='showModal' data-type='cancel' data-num="{{item.orderNumber}}">取消进货单</button>
       </view>
 

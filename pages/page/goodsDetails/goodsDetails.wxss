@@ -536,7 +536,7 @@ margin-bottom:150rpx;
 }
 .new-man{
   height: 60rpx;line-height: 60rpx;background: #CCAA77;color: #fff;
-  text-align: center;font-size: 24rpx;position:absolute;width:100%;top:-60rpx;
+  text-align: center;font-size: 24rpx;position:absolute;width:100%;top:-59rpx;
 }
 .new-man text{
   font-size: 30rpx;
