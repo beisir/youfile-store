@@ -43,7 +43,8 @@ Page({
   onLoad: function(options) {
 
     this.setData({
-      num: options.num
+      num: options.num,
+      admin:wx.getStorageSync('admin')
     })
     this.getData();
   },

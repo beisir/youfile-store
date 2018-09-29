@@ -5,9 +5,9 @@
     <image src="{{currentTab==0?'/image/car0.png':'/image/car.png'}}"></image>物流配送</view>
 </view>
 <view class='ad-send'>
-  <view class='ad-tel' hidden="{{hiddenSelt}}">
+  <view class='ad-tel flex-tel' hidden="{{hiddenSelt}}">
     <image src="/image/tel.png"></image>
-    <input style='display:inline-block;width:442rpx;top:20rpx;position:absolute;' value='{{phone}}' type='number' data-type='phone' bindinput='watchInput' placeholder='为确保正常取货，请预留您的手机号码' />
+    <input style='display:inline-block;width:442rpx;top:27rpx;position:absolute;' value='{{phone}}' type='number' data-type='phone' bindinput='watchInput' placeholder='为确保正常取货，请预留您的手机号码' />
     <button>自动填写</button>
   </view>
   <navigator hidden="{{hiddenSend}}" url='../addressWe/addressWe'>

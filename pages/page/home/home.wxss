@@ -175,4 +175,17 @@
 
 .result-list{
   height: 530rpx;
+  margin: 0 0 30rpx;
+}
+.flex-boxx{
+  display:flex;justify-content: space-between;
+  flex-wrap: wrap; align-content: flex-start;
+  width: 680rpx;
+  margin: 0 auto;
+}
+.result{
+  padding: 0;
+}
+.result-list .result-text{
+  height: 80rpx;
 }
