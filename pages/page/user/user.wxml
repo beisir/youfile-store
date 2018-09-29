@@ -74,7 +74,7 @@
 <view class='page_bd page_hd1' wx:if='{{limitShow==2}}'>
   <view class='weui-back'>
     <navigator class='weui-cell weui-cell_access' url='../workIndex/workIndex'>
-      <image src='/image/u4.png' class='user-img user-img1'></image>
+      <image src='/image/u4.png' class='user-img'></image>
       <view class='weui-cell__bd'>
         <!-- 申请小云店 -->
         小云店工作台
