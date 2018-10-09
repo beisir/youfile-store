@@ -199,7 +199,7 @@
           </view>
           <view  class='gd-gg gd-gg1'  wx:if='{{index==1}}'>
             <text>{{item.specName}}</text>
-            <view>
+            <view style='height:250rpx;overflow:scroll;'>
             <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                 <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.specValueName}}</view></view>
               </block>

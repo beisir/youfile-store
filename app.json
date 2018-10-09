@@ -31,7 +31,6 @@
     
     "pages/page/order/order",
     
-    "pages/page/stockOrder/stockOrder",
     
     
     
@@ -53,21 +52,11 @@
     "pages/page/orderSuccess/orderSuccess",
     
     
-    
-    
-    
     "pages/admin/addGoods/addGoods",
-    
-    
     "pages/admin/status/status",
-    
-    
     "pages/admin/spec/spec",
-    
-    
-    
-    
     "pages/admin/firstClass/firstClass",
+    "pages/page/stockOrder/stockOrder",
     "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/index/index",
     "pages/page/workIndex/workIndex",

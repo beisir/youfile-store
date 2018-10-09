@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value: '我是供应商，我的优店，精挑细 选优质商品，快来和我一起赚钱吧！',
+    value: '我是进货商，我的优店，精挑细 选优质商品，快来和我一起赚钱吧！',
     accept: '',
     baseUrl: app.globalData.imageUrl,
     headPic:'',

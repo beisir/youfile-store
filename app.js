@@ -11,10 +11,10 @@ App({
         data: options.query.storeId,
       })
     }
-    wx.setStorage({
-      key: 'storeId',
-      data:'S1000349',
-    })
+    // wx.setStorage({
+    //   key: 'storeId',
+    //   data:'S1000409',
+    // })
     // wx.setStorage({
     //   key: 'admin',xyd
     //   data:2, //1yon 2店主  3批发商
