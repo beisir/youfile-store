@@ -48,26 +48,6 @@
   </view>
 </mes>
 
-<!-- 头信息 -->
-<view class='os-title' >
-  <block wx:if="{{status=='unpaid'}}">
-    <view>买家剩余支付时间
-      <text>{{clock?clock:""}}</text>
-    </view>
-    <image src="/image/xian.png"></image>
-  </block>
-  <block wx:if="{{status=='paid'}}">
-    <view>买家已付款</view>
-    <image src="/image/xian1.png"></image>
-  </block>
-  <view class='os-status'>
-    <view class='active'>已下单</view>
-    <view>已付款</view>
-    <view>已发货</view>
-    <view>已收货</view>
-  </view>
-</view>  
-
 
 
 <!-- 待付款 -->
@@ -75,38 +55,49 @@
   <view>买家剩余支付时间
     <text>{{clock?clock:""}}</text>
   </view>
-  <image src="/image/xian.png"></image>
-  <view class='os-status'>
-    <view class='active'>已下单</view>
-    <view>已付款</view>
-    <view>已发货</view>
-    <view>已收货</view>
-  </view>
+
+  <block wx:if="{{self=='true'}}">
+    <image src="/image/xian.png"></image>
+    <view class='os-status'>
+      <view class='active'>已下单</view>
+      <view>已付款</view>
+      <view>已发货</view>
+      <view>已收货</view>
+    </view>
+  </block>
+  <block wx:else>
+    <image src="/image/sl1.png"></image>
+    <view class='os-status'>
+      <view class='active'>已下单</view>
+      <view>待取货</view>
+      <view>已取货</view>
+    </view>
+  </block>
+
 </view>
 
 <!-- 已付款 -->
 <view class='os-title' wx:if="{{status=='paid'}}">
   <view>买家已付款</view>
-  <image src="/image/xian1.png"></image>
-  <view class='os-status'>
-    <view class='active'>已下单</view>
-    <view class='active'>已付款</view>
-    <view>已发货</view>
-    <view>已收货</view>
-  </view>
-</view>
-<!-- 已发货 待填单-->
-<view class='os-title' wx:if='{{status=="paid" && order.orderStatusChildSta !=="waitShip"}}'>
-  <view>买家剩余收货时间
-    <text>{{order.autoReviceTime}}</text>
-  </view>
-  <image src="/image/xian2.png"></image>
-  <view class='os-status'>
-    <view class='active'>已下单</view>
-    <view class='active'>已付款</view>
-    <view class='active'>已发货</view>
-    <view>已收货</view>
-  </view>
+
+  <block wx:if="{{self=='true'}}">
+    <image src="/image/xian1.png"></image>
+    <view class='os-status'>
+      <view class='active'>已下单</view>
+      <view class='active'>已付款</view>
+      <view>已发货</view>
+      <view>已收货</view>
+    </view>
+  </block>
+  <block wx:else>
+    <image src="/image/sl2.png"></image>
+    <view class='os-status'>
+      <view class='active'>已下单</view>
+      <view class='active'>待取货</view>
+      <view>已取货</view>
+    </view>
+  </block>
+
 </view>
 <!-- 已发货-->
 <view class='os-title' wx:if="{{status=='shipped'}}">
@@ -124,13 +115,25 @@
 <!-- 交易成功 -->
 <view class='os-title' wx:if="{{status=='finish'}}">
   <view>交易完成</view>
-  <image src="/image/xian3.png"></image>
-  <view class='os-status'>
-    <view class='active'>已下单</view>
-    <view class='active'>已付款</view>
-    <view class='active'>已发货</view>
-    <view class='active'>已收货</view>
-  </view>
+
+  <block wx:if="{{self=='true'}}">
+    <image src="/image/xian3.png"></image>
+    <view class='os-status'>
+      <view class='active'>已下单</view>
+      <view class='active'>已付款</view>
+      <view class='active'>已发货</view>
+      <view class='active'>已收货</view>
+    </view>
+  </block>
+  <block wx:else>
+    <image src="/image/sl3.png"></image>
+    <view class='os-status'>
+      <view class='active'>已下单</view>
+      <view class='active'>待取货</view>
+      <view class='active'>已取货</view>
+    </view>
+  </block>
+
 </view>
 <!-- 交易关闭 -->
 <view class='os-title' wx:if="{{status=='closed'}}">
@@ -172,6 +175,7 @@
   <view class='c-title'>
     <image src="/image/12.png"></image> {{order.storeInfo.storeName}}
     <image class='itimg' src="/image/icl.png"></image>
+    <view wx:if="{{self=='true'}}" class='order-zt'>自提</view>
   </view>
   <view>
     <view class="cart-box">
@@ -208,7 +212,7 @@
       </view>
     </block>
 
-    <block wx:if="{{status!='unpaid'&& status!='paid'}}">
+    <block wx:if="{{status!='unpaid'&& status!='paid' && self=='false'}}">
       <view>发货时间
         <text>{{order.deliverDate}}</text>
       </view>

@@ -12,7 +12,7 @@
 <view wx:if="{{list.length>0}}">
   <view class='aw-cont'>
     <view class='aw-list' wx:for="{{list}}" wx:key="{{index}}" >
-      <view data-index='{{index}}' bindtap="selectAdd">
+      <view data-index='{{index}}' bindtap="selectAdd" style='padding-top:0rpx;'>
         <view>{{item.userName}} <text>{{item.userPhone}}</text></view>
         <view class='two-view'>{{item.province}} {{item.city}} {{item.county}} {{item.detailAddress}}</view>
       </view>

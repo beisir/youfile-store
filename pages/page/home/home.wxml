@@ -8,7 +8,7 @@
 </mes>
 <view class="goods-ser">
   <navigator url="../../admin/serStatus/serStatus">
-    <input placeholder="搜索店铺内商品" disabled='disabled' bindconfirm="searchBtn" value="{{value}}" />
+    <input placeholder="搜索店铺内商品" placeholder-class='pre-input' disabled='disabled' bindconfirm="searchBtn" value="{{value}}" />
   </navigator>
   <image class="home-ser" src="/image/search1.png"></image>
   <view class='home-img home-img1'>
@@ -43,7 +43,7 @@
       <text>{{store.mallName}}</text>
     </view>
   </view>
-  <button class="ym_sydtgzbtn" hidden='{{likeShow}}' bindtap='likeStore'>+ 关注</button>
+  <button class="ym_sydtgzbtn" hidden='{{likeShow}}' bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
   <button class="ym_sydtgzbtn" hidden='{{!likeShow}}' bindtap='deteleLikeStore'>已关注</button>
 </view>
 <view class='add-firend'  wx:if='{{limitShow!=3}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>

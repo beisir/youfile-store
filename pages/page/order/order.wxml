@@ -64,11 +64,9 @@
     <view>
       <view class="cart-box">
         <view class="cart-list" wx:for="{{item.goodsInfos}}" wx:key="{{index}}">
-          <navigator url='{{item.status<5?"../nopay/nopay":"../self/self"}}?status={{item.status}}'>
             <view class="cart-thumb">
               <image class='goods-icon' mode="aspectFit" src="{{baseUrl+item.mainImgUrl}}"></image>
             </view>
-          </navigator>
           <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
             <view>x {{item.orderDetails.num}}</view>
           </view>

@@ -196,9 +196,12 @@ Page({
   },
   //打电话
   tel: function () {
-    wx.makePhoneCall({
-      phoneNumber: '15010443530',
-    })
+    let tel = this.data.order.storeInfo.servicePhone;
+    if (tel) {
+      wx.makePhoneCall({
+        phoneNumber: tel,
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

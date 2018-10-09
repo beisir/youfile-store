@@ -172,28 +172,19 @@ Page({
     let type = e.currentTarget.dataset.type,
       status = e.currentTarget.dataset.status,
       num = e.currentTarget.dataset.num,
-        url = "";
+      url = "../allOrder/allOrder";
     //是否自提
     switch (type){
-      case '1': url = "../self/self?status=";break;
-      case '2': url = "../nopay/nopay?status="; break;
+      case '1': 
+        //url = "../self/self?status=";break;
+        url += "?self=true"; break;
+      case '2': 
+        //url = "../nopay/nopay?status="; break;
+        url += "?self=false"; break;
     }
-    //状态
-    // 0待付款 1已付款 2待收货 3交易成功 4交易关闭  5自提待付款 6自提待取货 7交易成功自提 8自提交易关闭
-    // switch (status){
-    //   case "unpaid" : 
-    //     type == 1 ? url += "5" : url += "0";break;
-    //   case "paid" :
-    //     type == 1 ? url += "6" : url += "1"; break;
-    //   case "shipped":
-    //     url += "2"; break;
-    //   case "closed":
-    //     type == 1 ? url += "8" : url += "4"; break;
-    //   case "finish":
-    //     type == 1 ? url += "7" : url += "3"; break;    
-    // }
-    url += status;
+    url += '&status='+status;
     url += '&num=' + num;
+    url += "&type=order"
     wx.navigateTo({
       url
     })

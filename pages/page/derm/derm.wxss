@@ -25,3 +25,35 @@ button {
   display: flex;
   align-items: center;
 }
+
+.bottom-box{
+  width: 100%;
+  position: fixed;
+  bottom: 0;border-top: 2rpx solid #E8E8E8;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 122rpx;
+  background: #fff;
+
+}
+.bottom-box image{
+  height:45rpx;
+  width:45rpx;
+  margin-right: 10rpx;
+}
+.bottom-item{
+  width: 49%;
+  font-size:36rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color:#000;
+  font-weight: 300;
+}
+.line{
+  width: 1px;
+  height: 50rpx;
+  background: #E8E8E8;
+}

@@ -6,9 +6,9 @@
 }
 .weui-cell__bd input{
   position: absolute;
-  top: 28rpx;
+  top: 33rpx;
   font-weight: 600;
   font-size: 28rpx;
-  left: 180rpx;
+  left: 192rpx;
   width: 400rpx;
 }

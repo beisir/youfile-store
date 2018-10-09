@@ -98,7 +98,7 @@
   background: #fff;
   border:0;
   border:2rpx solid #F5F5F5;
-  border-radius: 70rpx;
+  border-radius: 10rpx;
   margin-top: 25rpx;
 }
 .gd-gg .gd-view view.lt-view{
@@ -140,10 +140,10 @@
   margin-bottom: 10rpx;
 }
 .gd-title view:first-child{
- position: relative;padding-right:40rpx;
+ position: relative;padding-right:70rpx;
 }
 .gd-title view:first-child image{
-  width: 38rpx;height:38rpx;position: absolute;right: 0;top: 12rpx;
+  width: 38rpx;height:38rpx;position: absolute;right: 10rpx;top: 10rpx;
 }
 .gd-title view.gd-font{
   font-size: 30rpx;color: #C7945A;
@@ -161,7 +161,7 @@
    font-size: 28rpx;color: #999;margin-left: 10rpx;
 }
 .gd-title view.gd-font image{
-  width: 40rpx;height: 40rpx;vertical-align: middle;
+  width: 40rpx;height: 40rpx;vertical-align: middle;margin-top:-4rpx;
 }
 .gd-title button{
   width: 180rpx;
@@ -397,7 +397,7 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   text-align: center;
   color: #333;
   background: #fff;
-  padding:0rpx 40rpx 165rpx 40rpx;
+  padding:0rpx 40rpx 280rpx 40rpx;
   font-size: 32rpx;
   margin-top: 20rpx;
 }
@@ -455,9 +455,7 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   height: 60rpx;padding:0;
 }
 .mesImage image{
-  width: 60rpx;
-  height: 60rpx;
-  margin-top: 10rpx;
+  margin-top:18rpx;
 }
 .lt-add-cart{
   border-radius:10rpx;width: 210rpx;border:2rpx solid #D5B98F;height:48rpx;position: absolute;top:18rpx;overflow: hidden

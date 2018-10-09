@@ -205,7 +205,7 @@
         <text>{{order.payDate}}</text>
       </view>
     </block>
-    <block wx:if="{{status=='shipped'}}">
+    <block wx:if="{{status!='unpaid'&& status!='paid' && self=='false'}}">
       <view>发货时间
         <text>{{order.deliverDate}}</text>
       </view>

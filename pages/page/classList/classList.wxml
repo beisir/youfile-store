@@ -6,9 +6,18 @@
         <view class="result-text">
           <text>{{item.name}}</text>
         </view>
-        <view class="result-text">
+        <!-- <view class="result-text">
           <text>￥ {{item.marketPrice}}</text>
+        </view> -->
+        <view class="result-text result-text1">
+          零售
+          <text>￥ {{item.sellPrice}}</text>
+          <view>
+            批发
+            <image src='/image/wh.png'></image>
+          </view>
         </view>
+
       </navigator>
     </view>
     <view class='nomore'>没有更多了</view>
