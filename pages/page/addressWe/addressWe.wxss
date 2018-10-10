@@ -4,6 +4,7 @@
   font-size: 30rpx;
   padding-left: 30rpx;
   margin-bottom: 20rpx;
+  border-radius: 10rpx;
 }
 .aw-list view>text{
   margin-left: 20rpx;
@@ -64,6 +65,8 @@
 }
 .aw-cont{
   margin-bottom: 150rpx;
+  width: 690rpx;
+  margin: 20rpx auto;
 }
 .aw-no{
   text-align: center;

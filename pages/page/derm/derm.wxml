@@ -10,7 +10,8 @@
   <view class='erm-img'><image  mode="widthFix" src="{{baseUrl+user.qrcode}}"></image></view>
   <view style='margin-top:0;'>扫一扫二维码图案，加我商友</view>
 </view>
-<view class='add-bottom' style='font-weight:100;'>
-  <view bindtap='saveImg'><image  src="/image/downimg.png"></image>保存至相册</view>
-  <button open-type="share"><image  src="/image/fenxiang.png"></image>推广给朋友</button>
+<view class='bottom-box' style='font-weight:100;'>
+  <view class='bottom-item' bindtap='saveImg'><image  src="/image/downimg.png"></image>保存至相册</view>
+  <view class='line'></view>
+  <button class='bottom-item' open-type="share"><image  src="/image/fenxiang.png"></image>推广给朋友</button>
 </view>

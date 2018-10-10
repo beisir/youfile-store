@@ -6,16 +6,19 @@
 .weui-img image{
   width:24rpx;
   height: 29rpx;
-  margin-top:0rpx;
+  margin-top:8rpx;
   vertical-align: middle;
   margin-left: 6rpx;
 }
 .weui-cell__bd{
-  font-size: 30rpx;
+  font-size: 32rpx;
   color: #333;
 }
 .page__bd{
   background: #fff;
+  width: 690rpx;
+  margin: 20rpx auto;
+  border-radius: 10rpx;
 }
 .page__hd1{
   background:#fff;
@@ -25,4 +28,7 @@
 .weui-cell{
   padding:0 35rpx;
   height: 105rpx;
+}
+.my-info{
+  font-size: 32rpx;
 }

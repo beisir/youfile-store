@@ -198,16 +198,16 @@ Page({
     let num = e.currentTarget.dataset.num,
       status = e.currentTarget.dataset.status,
       type = e.currentTarget.dataset.type,
-      tourl = "";
+      tourl = "../allOrder/allOrder";
     if (type == 1) {
       //自提
-      tourl = "../stockSelf/stockSelf";
+      tourl += "?self=true";
     } else {
-      tourl = "../stockDetail/stockDetail";
+      tourl += "?self=false";
     }
 
     wx.navigateTo({
-      url: tourl + "?status=" + status + "&num=" + num,
+      url: tourl + "&status=" + status + "&num=" + num + "&type=list",
     })
   },
 

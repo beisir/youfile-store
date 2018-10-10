@@ -8,19 +8,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    carts: [
-      { id: 1, title: '周大福 绝色系列 热情似火 18K金镶红宝石钻...', price: '1200', small: '约1.66mm*0.23cm', image: '/image/s5.png', num: 4, selected: true },
-      { id: 2, title: '周大福新款珠宝', price: '1200', small: '14号', image: '/image/s6.png', num: 1, selected: true }
-    ],
-    status0: true,
-    status1: true,
-    status2: true,
-    status3: true,
-    status4: true,
-    statusAll:true,
     //取消订单
     reason: [{ title: "我不想买了", selected: true }, { title: "信息填写错误，重新拍", selected: false }, { title: "卖家缺货", selected: false }, { title: "同城见面交易", selected: false }, { title: "其他", selected: false }],
-    cancelIndex: 0
+    cancelIndex: 0,
+    orderName:"订单"
   },
 
   showModal(e) {
@@ -48,7 +39,12 @@ Page({
         obj = {
           afterModal: true,
           afterTel: e.currentTarget.dataset.tel
-        }
+        };break;
+      case "goodCode":
+        obj = {
+          codeModal: true,
+          testNum: num,
+        }; break;  
     }
     this.setData(obj)
   },
@@ -111,9 +107,9 @@ Page({
     })
   },
   // 上传凭证
-  uploadVoucher(){
+  uploadVoucher() {
     wx.navigateTo({
-      url: '../../role/supplyVoucher/supplyVoucher?num='+this.data.num,
+      url: '../../role/supplyVoucher/supplyVoucher?num=' + this.data.num,
     })
   },
   //删除
@@ -141,20 +137,23 @@ Page({
         res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
         res.obj.deliverDate = util.formatTime(new Date(res.obj.deliverDate));
         res.obj.finishDate = util.formatTime(new Date(res.obj.finishDate));
-        
+
       } catch (e) { }
 
       this.setData({
         order: res.obj,
         status: res.obj.orderStatus  //状态
       })
-      this.resetData([this.data.order]);
+      //订单
+      if(this.data.orderType == 'order'){
+        this.resetData([this.data.order]);
+      }
 
       //倒计时
       this.total_micro_second = res.timeoutExpressSecond
       util.count_down(this)
     })
-  },  
+  },
   resetData(data) {
     let arr = [];
     for (let i = 0; i < data.length; i++) { // 循环订单
@@ -181,21 +180,8 @@ Page({
       showList: arr[0].goodsInfos
     })
   },
-
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    this.setData({
-      num: options.num,
-      status: options.status,
-      baseUrl: app.globalData.imageUrl
-    })
-    
-  },
-  //打电话
-  tel: function () {
+  //电话
+  call() {
     let tel = this.data.order.storeInfo.servicePhone;
     if (tel) {
       wx.makePhoneCall({
@@ -204,10 +190,32 @@ Page({
     }
   },
   /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    if (options.type =='list'){
+      wx.setNavigationBarTitle({
+        title: "进货单详情"
+      })
+      this.setData({
+        orderName:'进货单'
+      })
+    }
+    this.setData({
+      num: options.num,
+      status: options.status,
+      baseUrl: app.globalData.imageUrl,
+      orderType: options.type, //order订单 list进货单
+      self: options.self  //是否自提
+    })
+
+  },
+ 
+  /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
@@ -221,34 +229,34 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+
   },
 
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+
   }
 })

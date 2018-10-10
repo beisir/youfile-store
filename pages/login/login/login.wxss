@@ -33,16 +33,15 @@ page{
   margin: 30rpx 0;
 }
 .login-title-text{
-  font-size: 46rpx;
+  font-size: 50rpx;
   font-weight: 600;
 }
 .login-tip-box{
-  margin-bottom:67rpx;
+  margin-bottom:60rpx;
 }
 /*登录  */
 .login-icon{
   margin-right: 18rpx;
-  margin-top:12rpx;
   width: 26rpx;
   height: 31rpx;
 }
@@ -52,13 +51,17 @@ page{
   display: flex;
   justify-content: space-between;
   border-bottom:2rpx solid  #ddd;
-  padding: 30rpx 0;
+  /* padding: 30rpx 0; */
+  height: 100rpx;
+  align-items: center;
 }
 .code-box{
   width: 370rpx;
+  height: 100rpx;
   border-bottom:2rpx solid  #ddd;
-  padding-bottom:30rpx; 
+  /* padding-bottom:30rpx;  */
   display: flex;
+  align-items: center;
 }
 /* 获取验证码 */
 .get-code{
@@ -68,6 +71,8 @@ page{
   font-size:30rpx!important;
   margin: 0!important;
   border-radius:0;
+  line-height: 100rpx;
+  height: 100rpx;
 }
 /* 密码图 */
 .pass-img{
@@ -82,9 +87,8 @@ page{
 /* 登录按钮 */
 .loginBtnDis{
   background: #eee;
-  color: #999;
+  color: #aaa;
   font-weight: 600;
-  letter-spacing:25rpx;
   font-size: 30rpx;
 }
 .loginBtnAc{
@@ -113,9 +117,10 @@ page{
 .flex-box{
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .padding-box{
-  padding:15rpx 0;
+  padding:25rpx 0;
 }
 .btn{
   height:100rpx;
@@ -132,8 +137,12 @@ page{
 }
 .text-sm{
   color: #8c8c8c;
-  font-size:24rpx;
+  font-size:26rpx;
 }
 .text-underline{
   text-decoration: underline;
+}
+
+.pre-input{
+  color:#aaa;
 }

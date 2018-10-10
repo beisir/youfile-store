@@ -2,6 +2,29 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/page/updataPwd/updataPwd",
+    
+    
+    "pages/page/derm/derm",
+    
+    
+    "pages/page/addressWe/addressWe",
+    
+    
+    "pages/page/details/details",
+    
+    
+    "pages/page/user/user",
+    
+    "pages/login/register/register",
+    
+    
+    
+    "pages/role/allOrder/allOrder",
+    
+    
+    "pages/page/allOrder/allOrder",
+    
     "pages/admin/editGoods/editGoods",
     
     "pages/admin/editSpec/editSpec",
@@ -10,7 +33,6 @@
     
     "pages/admin/spec/spec",
     
-    "pages/page/cartList/cartList",
     "pages/admin/status/status",
     "pages/role/supplyOrder/supplyOrder",
     "pages/role/supplyVoucher/supplyVoucher",
@@ -23,13 +45,12 @@
     "pages/businessFriend/index/index",
     "pages/page/workIndex/workIndex",
     "pages/role/order/order",
+    "pages/page/cartList/cartList",
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
     "pages/page/address/address",
-    "pages/page/user/user",
     "pages/admin/class/class",
     "pages/page/classList/classList",
-    "pages/page/addressWe/addressWe",
     "pages/admin/success/success",
     "pages/page/postageInfo/postageInfo",
     "pages/page/mesEdit/mesEdit",
@@ -56,7 +77,6 @@
     "pages/page/editInvoice/editInvoice",
     "pages/page/updateMes/updateMes",
     "pages/page/mes/mes",
-    "pages/login/register/register",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",
     
@@ -90,7 +110,6 @@
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
 
-    "pages/page/details/details",
     "pages/page/serList/serList",
     "pages/page/serStatus/serStatus",
     "pages/admin/serStatus/serStatus",
@@ -99,7 +118,6 @@
     "pages/admin/shopClass/shopClass",
     "pages/admin/editMesTitle/editMesTitle",
     "pages/admin/writeCont/writeCont",
-    "pages/page/derm/derm",
     "pages/admin/classList/classList",
     "pages/admin/classEdit/classEdit",
     "pages/admin/thirdClass/thirdClass",
@@ -109,7 +127,6 @@
     "pages/page/nopay/nopay",
     "pages/page/set/set",
     "pages/page/updataPhone/updataPhone",
-    "pages/page/updataPwd/updataPwd",
     "pages/page/success/success",
     "pages/page/invoice/invoice",
     "pages/page/germ/germ",
