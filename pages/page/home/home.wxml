@@ -11,11 +11,11 @@
     <input placeholder="搜索店铺内商品" placeholder-class='pre-input' disabled='disabled' bindconfirm="searchBtn" value="{{value}}" />
   </navigator>
   <image class="home-ser" src="/image/search1.png"></image>
-  <view class='home-img home-img1'>
+  <!-- <view class='home-img home-img1'>
     <navigator url="../derm/derm">
       <image src="/image/xcx.png"></image>
     </navigator>
-  </view>
+  </view> -->
   <view class='home-img'>
     <navigator url="../details/details">
       <image src="/image/youbao.png"></image>

@@ -16,7 +16,7 @@
 .nyz_area_colum_view{
   line-height: 35px;
   text-align: center;
-  font-size: 28rpx;
+  font-size: 30rpx;
 }
 
 .hide{

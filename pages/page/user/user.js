@@ -45,6 +45,13 @@ function getIdentity(_this) {
       })
   } else {
     _this.getUser()
+    wx.setStorage({
+      key: 'admin',
+      data: 1,
+    })
+    _this.setData({
+      limitShow: 1
+    })
   }
 }
 

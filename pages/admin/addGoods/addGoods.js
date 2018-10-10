@@ -91,7 +91,6 @@ Page({
       val = event.detail.value,
       pageall = this.data.pageall,
       len=1
-    console.log(pageall)
     for (var i = 0; i < pageall.length;i++){
       var data = pageall[i].goodsSpecificationValueVOList.length
       len=data*data
@@ -338,7 +337,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(this.data.skuListAll)
   },
 
   /**

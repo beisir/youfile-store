@@ -18,19 +18,87 @@
 .st-d-status view{
   margin-bottom: 0;
 }
-.st-all{
-  margin-bottom: 250rpx;
-}
 .st-cont .warn{
   width: 28rpx;height: 28rpx;position: relative;border:0;vertical-align: middle;margin-top: -2rpx;
 }
 .st-cont .not{
   color: #fff;background:rgba(0, 0, 0, 0.5);font-size: 24rpx;position: absolute;width: 180rpx;height: 75rpx;z-index: 10;
-  padding:15rpx 20rpx 0rpx 20rpx;border-radius: 10rpx;text-align: center;top: 70rpx;left: 190rpx;line-height:30rpx;
+  padding:15rpx 20rpx 0rpx 20rpx;border-radius: 10rpx;text-align: center;top: 36rpx;left: 190rpx;line-height:30rpx;
 }
 .triangle_border_up{
     width:0;height:0;border-width:0rpx 15rpx 25rpx;
     border-style:solid;float: left;margin-left: -38rpx;
     border-color:transparent transparent #858585;
     position:relative;transform:rotate(-90deg);margin-top: 25rpx;
+}
+
+
+
+.touch-item {
+  display: flex;position: relative;
+  justify-content: space-between;
+  background: #fff;border-radius:10rpx;
+  overflow: hidden;margin:20rpx;
+}
+ 
+.content {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 20rpx;
+  line-height: 50rpx;
+  margin-right: 0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(130rpx);
+  transform: translateX(130rpx);
+  margin-left: -130rpx;
+}
+page{
+  height:unset !important;
+}
+.del {
+  background-color: #FF4141;
+  width: 130rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(130rpx);
+  transform: translateX(130rpx);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+ 
+.touch-move-active .content, .touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+ 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+ 
+.column {
+  display: flex;width: 100%;
+  flex-direction: column;margin-left: 210rpx;
+}
+.st-cont{
+  width: 100%
+}
+.st-d-status view{
+  width: 35%
+}
+.goods-ser{
+  position: fixed;top: 0;width: 100%;z-index: 1000;
+}
+.st-title{
+  position: fixed;top:80rpx;width: 100%;z-index: 1000;
+}
+.st-all{
+  padding-top: 50rpx;
+}
+scroll-view{
+  margin-top: 170rpx;padding-bottom: 100rpx;
 }

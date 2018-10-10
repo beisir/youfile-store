@@ -2,7 +2,7 @@
 <view class="main" bindtap='rightList' >
     <view class='cf-cont'  wx:if="{{hasList}}" >
       <view class='c-title'  wx:for="{{storeMes}}" wx:key="{{index}}">
-        <image src="/image/ic1.png"></image> {{item.storeName}} <image class='itimg' src="/image/icl.png"></image> <view wx:if='{{limitShow==3}}' wx:if='{{enjoyCost}}' class='new-c-t'>全场已满{{storeAmount==null?'0':'storeAmount'}}元<text>混批</text></view>
+        <image src="/image/ic1.png"></image> {{item.storeName}} <image class='itimg' src="/image/icl.png"></image> <view wx:if='{{limitShow==3}}' wx:if='{{enjoyCost}}' class='new-c-t'><view wx:if='{{storeAmount!=null}}'>全场已满{{storeAmount}}元<text>混批</text></view></view>
       </view>
       <!--编辑  -->
       <view>
@@ -57,16 +57,7 @@
               
             </view>
           </view>
-      </view>
-       
-    </view>
-    <view wx:else>
-        <view class="cart-no-data">
-          <view class='nocar'><image src="/image/nocar.png"></image></view>
-          {{limitShow==3?'进货车':'购物车'}}还是空的哦
-          <view>去挑几件吧</view>
-          <button bindtap='urlHome'>去逛逛</button>
-        </view>
+      </view> 
     </view>
     <view class='cf-cont'>
       <view class="c-title c-title1 hide{{lostList?'show':''}}">
@@ -74,7 +65,7 @@
       </view>
       <view>
           <view class="cart-box">
-          <view  wx:for="{{lostcarts}}" wx:key="{{index}}">
+          <navigator  wx:for="{{lostcarts}}" wx:key="{{index}}" url='../goodsDetails/goodsDetails?goodsId={{item.goodsId}}'>
              <view class="cart-list">
                   <image class='noimg' src="/image/no.png"></image>
                   <image class='posimg' src="/image/alert.png"></image>
@@ -97,7 +88,7 @@
                           <view class="td">￥{{item.wholesalePrice}}</view>
                       </view>
                 </view>
-            </view>
+            </navigator>
           </view>
           <view class='bot-back'></view>
       </view>
@@ -120,3 +111,11 @@
   <view  hidden='{{indexEmpty}}'>
     <no></no>
   </view>
+    <view hidden='{{allEmpty}}'>
+        <view class="cart-no-data">
+          <view class='nocar'><image src="/image/nocar.png"></image></view>
+          {{limitShow==3?'进货车':'购物车'}}还是空的哦
+          <view>去挑几件吧</view>
+          <button bindtap='urlHome'>去逛逛</button>
+        </view>
+    </view>

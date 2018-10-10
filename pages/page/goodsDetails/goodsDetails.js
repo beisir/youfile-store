@@ -120,18 +120,15 @@ Page({
     // })
   },
   onLoad: function (options) {
-    console.log(options)
     if (options.storeId) {
-      wx.setStorage({
-        key: 'storeId',
-        data: options.storeId,
-      })
+      wx.setStorageSync("storeId", options.storeId)
     }
     var that = this,
         arr=[],
         goodsId=''
     if(options.query){
       goodsId = options.query.goodsId
+      wx.setStorageSync("storeId", options.query.storeId)
     }else{
       goodsId = options.goodsId
     }
@@ -423,7 +420,6 @@ Page({
       swichNavCode = this.data.swichNavCode,
       goodsSpecificationVOList = this.data.goodsSpecificationVOList,
       goodsSkuVOList = this.data.goodsSkuVOList
-    console.log(swichNavCode)
     for (var i = 0; i < goodsSkuVOList.length;i++){
       var  childArr = goodsSkuVOList[i].specValueCodeList
       if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1){
@@ -456,6 +452,7 @@ Page({
       if (this.data.editOneName){
         var data=[]
         data.push({ goodsId: goodsId, num: num, skuCode: skuCode, storeId: this.data.storeId})
+        console.log(data)
         Api.updateMoreCart(JSON.stringify(data))
           .then(res => {
             wx.showToast({
@@ -764,7 +761,7 @@ Page({
   getDetails: function (goodsId){
     var _this=this,
       storeId = this.data.storeId
-    Api.config({ goodsId:goodsId})
+    Api.config(goodsId)
       .then(res => {
         var obj = res.obj,
           goodsSaleBatchNum = obj.goodsSaleBatchNum,

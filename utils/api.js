@@ -11,6 +11,7 @@ import {
   goodsSearchListUrl,
   classListUrl,
   addClassUrl,
+  adminGoodsDetailsUrl,
   customCategoryCodeUrl,
   classCodeListUrl,
   goodsDetailsUrl,
@@ -88,6 +89,7 @@ import {
   cancelOrderUrl,
   addDxpressUrl,
   addRemarkUrl,
+  updateGoodsUrl,
   seeVoucherUrl
 } from './constUrl.js'
 
@@ -156,7 +158,14 @@ function addGoods(data) {
   data = initStoreId(data);
   return app.http.postRequest(addGoodsUrl,data)
 } 
-
+/**更新商品**/
+function updateGoods(data) {
+  return app.http.putRequest(updateGoodsUrl,data)
+} 
+/**编辑商品详情**/
+function adminGetDetails(data) {
+  return app.http.getRequest(adminGoodsDetailsUrl, data)
+}
 /**分类**/
 function customCategoryCode(data) {
   return app.http.putRequest(customCategoryCodeUrl,data)
@@ -287,7 +296,8 @@ function deteleCartGoods(data) {
   return app.http.deleteRequest(deteleCartGoodsUrl,data)
 }
 /**修改购物车**/
-function updateMoreCart(goodsId,data) {
+function updateMoreCart(data) {
+  console.log(data)
   var goodsId = JSON.parse(data)[0]["goodsId"]
   var url = '/api/shop/shoppingcart/shop/goods/batch/'+goodsId
   return app.http.putRequest(url, data)
@@ -307,13 +317,11 @@ function addTempCont(templateContentId, specValueList) {
 }
 /**取消关注**/
 function deteleLikeStore(data) {
-  data = initStoreId(data);
-  return app.http.deleteRequest(deteleLikeStoreUrl, data)
+  return app.http.deleteRequest(deteleLikeStoreUrl+'?storeId='+wx.getStorageSync('storeId'))
 }
 /**关注店铺**/
 function likeStore(data) {
-  data = initStoreId(data);
-  return app.http.putRequest(likeStoreUrl, data)
+  return app.http.putRequest(likeStoreUrl+'?storeId='+wx.getStorageSync('storeId'))
 }
 /**店铺信息**/
 function shopList(data) {
@@ -408,8 +416,9 @@ function purchaserUserId(url) {
   return app.http.getRequest(url)
 }
 /**满足起批配置信息**/
-function config(data) {
-  return app.http.getRequest(configUrl, data)
+function config(goodsId) {
+  var storeId = wx.getStorageSync('storeId')
+  return app.http.getRequest(configUrl+'?storeId='+storeId+'&goodsId='+goodsId)
 }
 /**店铺详情**/
 function storeIdInfo(data) {
@@ -578,6 +587,7 @@ module.exports = {
   setName: setName,
   addWholesaler: addWholesaler,
   pass:pass,
+  updateGoods: updateGoods,
   wholesalerAll:wholesalerAll,
   merchantIndex: merchantIndex,
   merchantList: merchantList,
@@ -606,6 +616,7 @@ module.exports = {
   updateMes: updateMes,
   uploadLogoImg: uploadLogoImg,
   topGoods: topGoods,
+  adminGetDetails: adminGetDetails,
   storeIndex: storeIndex,
   setUserName: setUserName,
   getUserDetaisl: getUserDetaisl,

@@ -26,35 +26,30 @@
   </view>
 </view>
 <scroll-view style='overflow:scroll' scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
-  <view>
- <view class="record-box"  wx:for="{{detailList}}" wx:key="{{index}}" wx:for-item="record">
-  <view class="record" style="left:{{record.offsetX}}px;left:{{leftVal}}px" data-index="{{index}}" bindtouchstart="recordStart" catchtouchmove="recordMove" bindtouchend="recordEnd">
-    <view class="st-cont">
-          <image class="cart-thumb" src="{{baseUrl}}{{record.mainImgUrl}}"></image>
-               <view  class='st-d-t'>{{record.name}}</view> 
-                <view class='st-details'>
-                  <view class='st-d-status'>
-                    <view><text>批发:</text><text class='st-mom'>￥{{record.wholesalePrice}}</text></view>
-                    <view><text>零售:</text><text class='st-mom'>￥{{record.sellPrice}}</text></view>
-                    <!-- <view>供货：400</view><view>零售：400</view> -->
-                    <view>库存：{{record.stockNum}}<image class='warn' src="/image/warn.png"></image></view>
-                  </view>
-                   <!-- <view class='not'><view class='triangle_border_up'></view>该商品库存不足 请及时补货</view> -->
-                  </view>
-             
-              </view>
-              <view class='st-bottom'>
-                <view>转发</view>
-                <view><navigator url='../editGoods/editGoods?goodsId={{record.id}}'>预览 </navigator></view>
-                <view wx:if='{{record.status==0}}' data-id='{{record.id}}' data-index='{{index}}' bindtap='changeStatus'>上架</view>
-                <view wx:if='{{record.status==1}}' data-id='{{record.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
-                <view wx:if='{{record.status==2}}'>已下架</view>
-              </view>
-            </view>
-            <view class="delete-box" bindtap="deleteList" data-id='{{record.id}}' data-index="{{index}}">
-            <view>删除</view>
-            </view>
+  <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{detailList}}" wx:key="">
+    <view class='content st-cont' bindtap='showDetail' data-index="{{index}}">
+      <view class='column'>
+       <image class="cart-thumb" src="{{baseUrl}}{{item.mainImgUrl}}"></image>
+       <view  class='st-d-t'>{{item.name}}</view> 
+       <view class='st-details'>
+          <view class='st-d-status'>
+            <view><text>批发:</text><text class='st-mom'>￥{{item.wholesalePrice}}</text></view>
+            <view><text>零售:</text><text class='st-mom'>￥{{item.sellPrice}}</text></view>
+            <!-- <view>供货：400</view><view>零售：400</view> -->
+            <view>库存：{{item.stockNum}}<image class='warn' wx:if='{{item.stockNum<10}}' src="/image/warn.png"></image></view>
           </view>
+          <view class='not' wx:if='{{item.stockNum<10}}'><view class='triangle_border_up'></view>该商品库存不足 请及时补货</view>
+        </view>
+      </view>
+      <view class='st-bottom'>
+          <view>转发</view>
+          <view><navigator url='../editGoods/editGoods?goodsId={{item.id}}'>预览 </navigator></view>
+          <view wx:if='{{item.status==0}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架</view>
+          <view wx:if='{{item.status==1}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
+          <view wx:if='{{item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
+        </view>
+      </view>
+      <view class="del" catchtap="del" data-index="{{index}}">删除</view>
   </view>
   <view class='st-all'>{{detailList.length}}件商品</view>
 </scroll-view>
@@ -63,4 +58,4 @@
     <view><navigator url="../batch/batch">批量管理</navigator></view>
     <view><navigator url="../batchSet/batchSet">起批设置</navigator></view>
     <view><navigator url="../class/class">本店分类</navigator></view>
-  </view>
+</view>

@@ -8,13 +8,6 @@
     
     "pages/page/home/home",
     
-    "pages/role/order/order",
-    
-    
-    
-    
-    
-    
     
     
     "pages/page/derm/derm",
@@ -34,37 +27,29 @@
     
     "pages/role/allOrder/allOrder",
     
-    "pages/page/order/order",
-    
-    
-    
-    
     
     "pages/page/allOrder/allOrder",
     
+    "pages/admin/editGoods/editGoods",
+    
+    "pages/admin/editSpec/editSpec",
     
     
     
-
-    
-    
-    
-    "pages/role/supplyOrder/supplyOrder",
-    
-    "pages/role/supplyVoucher/supplyVoucher",
-    
-    
-    "pages/page/orderSuccess/orderSuccess",
-    
-    
-    "pages/admin/addGoods/addGoods",
-    "pages/admin/status/status",
     "pages/admin/spec/spec",
+    
+    "pages/admin/status/status",
+    "pages/role/supplyOrder/supplyOrder",
+    "pages/role/supplyVoucher/supplyVoucher",
+    "pages/page/orderSuccess/orderSuccess",
+    "pages/page/order/order",
+    "pages/admin/addGoods/addGoods",
     "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",
     "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/index/index",
     "pages/page/workIndex/workIndex",
+    "pages/role/order/order",
     "pages/page/cartList/cartList",
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
@@ -97,7 +82,6 @@
     "pages/page/editInvoice/editInvoice",
     "pages/page/updateMes/updateMes",
     "pages/page/mes/mes",
-    "pages/admin/editGoods/editGoods",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",
     

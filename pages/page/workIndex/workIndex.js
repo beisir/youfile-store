@@ -22,12 +22,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     if (options.storeId) {
-      wx.setStorage({
-        key: 'storeId',
-        data: options.storeId,
-      })
+      // wx.setStorage({
+      //   key: 'storeId',
+      //   data: options.storeId,
+      // })
+      wx.setStorageSync("storeId", options.storeId)
     }
     if (!Api.isEmpty(wx.getStorageSync("access_token"))){
       wx.switchTab({
