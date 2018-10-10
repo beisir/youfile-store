@@ -5,10 +5,25 @@
    width: 37rpx;
 }
 .weui-cell__bd input{
-  position: absolute;
-  top: 33rpx;
-  font-weight: 600;
+  /* position: absolute;
+  top: 33rpx; */
+  color: #999;
   font-size: 28rpx;
-  left: 192rpx;
+  /* left: 180rpx; */
   width: 400rpx;
+  padding-top: 2rpx;
+}
+.page__bd {
+  width:690rpx;
+  margin:20rpx auto;
+  border-radius:10rpx;
+}
+
+.weui-cell__bd{
+  display: flex;
+  align-items: center;
+}
+
+.input-title{
+  width: 170rpx;
 }

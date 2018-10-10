@@ -39,7 +39,6 @@
         
         <view class='padding-box'></view>
         <view class='padding-box'></view>
-        <view class='padding-box'></view>
 
         <view class='btn loginBtnAc' bindtap='creatNewPassword'>确定</view>
 

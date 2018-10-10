@@ -1,11 +1,16 @@
 {
   "pages":[
+    "pages/page/newAddress/newAddress",
+    
+    "pages/page/updataPwd/updataPwd",
+    
+    
+    
     "pages/page/home/home",
     
     "pages/role/order/order",
     
     
-    "pages/page/updataPwd/updataPwd",
     
     
     
@@ -121,7 +126,6 @@
     "pages/businessFriend/invitation/invitation",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",
-    "pages/page/newAddress/newAddress",
     "pages/page/self/self",
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
