@@ -1,5 +1,6 @@
 // pages/order/order.js
 const app = getApp();
+var seeImg = false;
 import API from '../../../utils/api.js';
 let timer;
 Page({
@@ -106,6 +107,7 @@ Page({
     let num = e.currentTarget.dataset.num;
     API.seeVoucher({ orderNumber: num }).then((res) => {
       if (res.obj.payVoucher) {
+        seeImg = true;
         wx.previewImage({
           urls: [this.data.baseUrl + res.obj.payVoucher]
         })
@@ -325,39 +327,34 @@ Page({
     let type = e.currentTarget.dataset.type,
       status = e.currentTarget.dataset.status,
       num = e.currentTarget.dataset.num,
-      url = "";
+    //   url = "";
+    // //是否自提
+    // switch (type) {
+    //   case '1':
+    //     url = "../supplySelf/supplySelf?status=";
+    //     break;
+    //   case '2':
+    //     url = "../supplyDetails/supplyDetails?status=";
+    //     break;
+    // }
+    // url += status;
+    // url += '&num=' + num;
+
+    url = "../allOrder/allOrder";
     //是否自提
     switch (type) {
       case '1':
-        url = "../supplySelf/supplySelf?status=";
+        //url = "../orderSelf/orderSelf?status=";
+        url += "?self=true";
         break;
       case '2':
-        url = "../supplyDetails/supplyDetails?status=";
+        //url = "../orderDetails/orderDetails?status=";
+        url += "?self=false";
         break;
     }
-    //状态
-    // 0待付款 1已付款 2待收货 3交易成功 4交易关闭  5自提待付款 6自提待取货 7交易成功自提 8自提交易关闭
-    // 0待付款 1已付款 2待填表  3已发货   4交易成功 5 交易关闭  6自提待付款 7自提已付款 8交易成功自提 9自提交易关闭
-
-    // switch (status) {
-    //   case "unpaid":
-    //     type == 1 ? url += "5" : url += "0";
-    //     break;
-    //   case "paid":
-    //     type == 1 ? url += "6" : url += "1";
-    //     break;
-    //   case "shipped":
-    //     url += "2";
-    //     break;
-    //   case "closed":
-    //     type == 1 ? url += "8" : url += "4";
-    //     break;
-    //   case "finish":
-    //     type == 1 ? url += "7" : url += "3";
-    //     break;
-    // }
-    url += status;
+    url += "&status=" + status;
     url += '&num=' + num;
+    url += "&type=list"
     wx.navigateTo({
       url
     })
@@ -382,6 +379,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (seeImg) {
+      seeImg = false;
+      return;
+    }
     this.getList(true);
   },
 

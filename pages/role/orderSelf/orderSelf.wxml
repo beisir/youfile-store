@@ -211,12 +211,12 @@
 
 <view class='cf-button' wx:if="{{status!='closed' && status!='cancelled'}}">
   <block wx:if="{{status=='unpaid'}}">
-      <button class='or-active'> 提醒付款 </button>
-      <button data-type='change' bindtap='showModal' class='or-active'> 整单改价 </button>
-      <button data-type='sureGet' bindtap='showModal' class='or-active'> 确认收款 </button>
-      <button bindtap='closeOrder'>关闭订单</button>
-    </block>
-    <block wx:if="{{status=='paid'}}">
-      <button data-type='goodCode' bindtap='showModal' class='or-active'> 验证取货码 </button>
-    </block>
+    <button class='or-active'> 提醒付款 </button>
+    <button data-type='change' bindtap='showModal' class='or-active'> 整单改价 </button>
+    <button data-type='sureGet' bindtap='showModal' class='or-active'> 确认收款 </button>
+    <button bindtap='closeOrder'>关闭订单</button>
+  </block>
+  <block wx:if="{{status=='paid'}}">
+    <button data-type='goodCode' bindtap='showModal' class='or-active'> 验证取货码 </button>
+  </block>
 </view>

@@ -16,9 +16,9 @@ const formatNumber = n => {
 }
 
 /**倒计时   定义一个总毫秒数，以一分钟为例。TODO，传入一个时间点，转换成总毫秒数**/
-var total_micro_second = 10000 * 40;
 /* 毫秒级倒计时 */
-function count_down(that) {
+function count_down(that,sec) {
+  var total_micro_second = sec?sec:0;  
   // 渲染倒计时时钟
   that.setData({
     clock: date_format(total_micro_second)
@@ -34,7 +34,7 @@ function count_down(that) {
   setTimeout(function () {
     // 放在最后--
     total_micro_second -= 1000;
-    count_down(that);
+    count_down(that,total_micro_second);
   }, 1000)
 }
 

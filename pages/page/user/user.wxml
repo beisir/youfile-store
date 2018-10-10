@@ -10,7 +10,7 @@
       <image hidden='{{!hasUser}}' src='/image/er.png'></image>
     </navigator>
     <view class='u-t-ewmico'>
-      <navigator url='../userDetails/userDetails'>
+      <navigator url='{{hasUser?"../userDetails/userDetails":""}}'>
 
         <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic:"/image/42.png"}}'></image>
         <view hidden='{{hasUser}}'>

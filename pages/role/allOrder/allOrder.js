@@ -36,19 +36,16 @@ Page({
       case "change":
         obj = {
           changeModal: true,
-          changeNum: num,
           changeMoney: ""
         }; break;
       case "goodCode":
         obj = {
           codeModal: true,
-          testNum: num,
           getGoodCode: ""
         }; break;
-      case "ex2":
+      case "yundan":
         obj = {
           expressage: true,
-          exNum: num,
           expressageCom: "",
           expressageCode: "",
           noBtn: true
@@ -56,7 +53,6 @@ Page({
       case "ex":
         obj = {
           expressage: true,
-          exNum: num,
           expressageCom: "",
           expressageCode: "",
           noBtn: false
@@ -64,17 +60,14 @@ Page({
       case 'sureGet':
         obj = {
           sureModal: true,
-          sureNum: num,
         }; break;
       case 'del':
         obj = {
           delModal: true,
-          delNum: num
         }; break;
       case 'cancel':
         obj = {
           cancelModal: true,
-          closeNum: num
         }; break;
     }
     this.setData(obj)
@@ -98,7 +91,7 @@ Page({
 
   // 验证取货码
   testCode() {
-    let num = this.data.testNum;
+    let num = this.data.num;
     let money = this.data.getGoodCode;
     if (!money || money < 0) {
       wx.showToast({
@@ -111,6 +104,7 @@ Page({
       orderNumber: num,
       claimGoodsNum: money
     }).then((res) => {
+      this.afterOperation();
       wx.showToast({
         title: res.message,
         icon: 'none'
@@ -120,7 +114,7 @@ Page({
 
   // 取消订单
   sureCancel() {
-    let num = this.data.closeNum,
+    let num = this.data.num,
       index = this.data.cancelIndex;
     API.closeOrder({
       reason: this.data.reson[index].title,
@@ -149,6 +143,7 @@ Page({
       cancelIndex: current
     })
   },
+  
 
   // 我要发货
   // 待填表
@@ -183,7 +178,7 @@ Page({
   },
   // 整体改价
   sureChange() {
-    let num = this.data.changeNum;
+    let num = this.data.num;
     let money = this.data.changeMoney;
     if (!money || money < 0) {
       wx.showToast({
@@ -205,7 +200,7 @@ Page({
   },
   //确认收款
   receiveMoney(e) {
-    let num = this.data.sureNum;
+    let num = this.data.num;
     app.http.requestAll("/admin/order/orderpayment/" + num + "/confirm", {
       orderNumber: num
     }, "POST").then((res) => {
@@ -216,7 +211,22 @@ Page({
       this.afterOperation();
     })
   },
+  // 保存备注
+  saveRemark(e) {
+    let val = e.detail.value;
+    API.addRemark({
+      orderNumber: this.data.num,
+      remark: val
+    }).then(res => {
+      wx.showToast({
+        title: res.message,
+        icon: 'none'
+      })
+      if (res.success) {
 
+      }
+    })
+  },
 
   //刷新数据
   afterOperation() {
@@ -235,66 +245,6 @@ Page({
       expressage: false, //发货
     })
   },
-
-  //获取状态调整显示内容
-  orderStatus(status, isForm) {
-    switch (status) {
-      case "unpaid":
-        wx.setNavigationBarTitle({
-          title: "待付款"
-        })
-        this.setData({
-          status0: false
-        })
-        break;
-      case "paid":
-        wx.setNavigationBarTitle({
-          title: "已付款"
-        })
-        this.setData({
-          status1: false
-        })
-        break;
-      case "shipped":
-        if (isForm == 'unForm') {
-          //未填单
-          wx.setNavigationBarTitle({
-            title: "已发货"
-          })
-          this.setData({
-            status3: false,
-          })
-        } else {
-          wx.setNavigationBarTitle({
-            title: "已发货"
-          })
-          this.setData({
-            status2: false,
-          })
-        }
-        break;
-      case "cancelled":
-
-        break;
-      case "closed":
-        wx.setNavigationBarTitle({
-          title: "已关闭"
-        })
-        this.setData({
-          status5: false
-        })
-        break;
-      case "finish":
-        wx.setNavigationBarTitle({
-          title: "已完成"
-        })
-        this.setData({
-          status4: false
-        })
-        break;
-    }
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -318,9 +268,11 @@ Page({
   },
   //打电话
   tel: function () {
-    wx.makePhoneCall({
-      phoneNumber: '15010443530',
-    })
+    if (this.data.order.userInfo.mobile){
+      wx.makePhoneCall({
+        phoneNumber: this.data.order.userInfo.mobile,
+      })
+    }
   },
   // 保存备注
   saveRemark(e) {
@@ -345,6 +297,9 @@ Page({
         order: res.obj,
         status: res.obj.orderStatus  //状态
       })
+      if(this.data.orderType=='order'){
+        this.resetData([this.data.order]);
+      }
       this.setData({
         'order.createDate': this.timeFormat(this.data.order.createDate),
         'order.payDate': this.timeFormat(this.data.order.payDate),
@@ -352,8 +307,7 @@ Page({
         'order.deliverDate': this.timeFormat(this.data.order.deliverDate),
       })
       //倒计时
-      this.total_micro_second = res.timeoutExpressSecond
-      util.count_down(this)
+      util.count_down(this, res.obj.timeoutExpressSecond)
     })
   },
   //时间戳转化成时间格式
@@ -370,6 +324,32 @@ Page({
     return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
     function add0(m) { return m < 10 ? '0' + m : m }
 
+  },
+  resetData(data) {
+    let arr = [];
+    for (let i = 0; i < data.length; i++) { // 循环订单
+      let oldGoods = data[i].goodsInfos,  //商品数组
+        newGoods = [];
+      for (let j = 0; j < oldGoods.length; j++) { //货品循环
+
+        let type = oldGoods[j].orderDetails;  //规格数组
+
+        for (let k = 0; k < type.length; k++) {
+          //当前货物,类型变为对象
+          let nowGood = {};
+          Object.assign(nowGood, oldGoods[j]);
+          nowGood.orderDetails = type[k];
+          newGoods.push(nowGood);
+        }
+      }
+      //编辑新订单数组
+      let newOrder = data[i];
+      newOrder.goodsInfos = newGoods;
+      arr.push(newOrder)
+    }
+    this.setData({
+      order: arr[0]
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
