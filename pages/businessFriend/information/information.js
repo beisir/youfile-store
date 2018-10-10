@@ -200,10 +200,11 @@ Page({
 
   },
   urlHome: function () {
-    wx.setStorage({
-      key: 'storeId',
-      data: this.data.accept,
-    })
+    // wx.setStorage({
+    //   key: 'storeId',
+    //   data: this.data.accept,
+    // })
+    wx.setStorageSync("storeId", this.data.accept)
     wx.switchTab({
       url: '../../page/home/home'
     })

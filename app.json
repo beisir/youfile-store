@@ -1,24 +1,27 @@
 {
   "pages":[
     "pages/page/home/home",
-    "pages/role/supplyOrder/supplyOrder",
     
-    "pages/role/supplyVoucher/supplyVoucher",
+    "pages/admin/editGoods/editGoods",
+    
+    "pages/admin/editSpec/editSpec",
     
     
-    "pages/page/orderSuccess/orderSuccess",
     
-    "pages/page/order/order",
-    
-    "pages/admin/addGoods/addGoods",
-    "pages/admin/status/status",
     "pages/admin/spec/spec",
+    
+    "pages/page/cartList/cartList",
+    "pages/admin/status/status",
+    "pages/role/supplyOrder/supplyOrder",
+    "pages/role/supplyVoucher/supplyVoucher",
+    "pages/page/orderSuccess/orderSuccess",
+    "pages/page/order/order",
+    "pages/admin/addGoods/addGoods",
     "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",
     "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/index/index",
     "pages/page/workIndex/workIndex",
-    "pages/page/cartList/cartList",
     "pages/role/order/order",
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
@@ -53,7 +56,6 @@
     "pages/page/editInvoice/editInvoice",
     "pages/page/updateMes/updateMes",
     "pages/page/mes/mes",
-    "pages/admin/editGoods/editGoods",
     "pages/login/register/register",
     "pages/businessFriend/setUp/setUp",
     "pages/page/userDetails/userDetails",

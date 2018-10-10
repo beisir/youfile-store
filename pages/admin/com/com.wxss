@@ -100,7 +100,7 @@
   font-size: 28rpx;
 }
 .st-d-t{
-  width:430rpx; 
+  width:450rpx; 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

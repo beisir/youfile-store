@@ -23,8 +23,9 @@
   <view class='gd-title' wx:if='{{limitShow==3}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
     <view class='gd-font gd-font2'>零售价：￥{{sell}}</view>
-    <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text><button class='btn'><text>{{saleBatchNum}}</text>件起批</button></view>
-    <view class='gd-view-n'><button>混批</button>全场满￥{{saleBatchAmount}}可混批</view>
+    <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text><button wx:if='{{saleBatchNum!=null}}' class='btn'><text>{{saleBatchNum}}</text>件起批</button></view>
+    <view class='gd-view-n' style='min-height:50rpx'><button>混批</button></view>
+    <view class='gd-view-n'  wx:if='{{saleBatchNum!=null}}'><button>混批</button>全场满￥{{saleBatchAmount}}可混批</view>
   </view>
   <view class="weui_cells">
       <image  src="/image/positionico.png"></image>

@@ -1,7 +1,7 @@
 const app = getApp();
+var that
 import Api from '../../../utils/api.js'
-var recordStartX = 0;
-var currentOffsetX = 0;
+
 Page({
   /**
    * 页面的初始数据
@@ -23,52 +23,40 @@ Page({
     code:'',
     alertData:["全部商品","引用商品","自建商品"],
   },
-  recordStart: function (e) {
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.detailList)
     this.setData({
-      leftVal: ''
-    });
-    var index1 = this.data.index;
-    recordStartX = e.touches[0].clientX;
-    var detailList = this.data.detailList;
-    if (index1 != undefined) {
-      detailList[index1].offsetX =0;
-    }
-    var index = e.currentTarget.dataset.index
-    currentOffsetX = this.data.detailList[index].offsetX;
-  }
-  ,
-  recordMove: function (e) {
-    var detailList = this.data.detailList;
-    var index = e.currentTarget.dataset.index
-    var item = detailList[index];
-    var x = e.touches[0].clientX;
-    var mx = recordStartX - x;
-    var result = currentOffsetX - mx;
-    if (result >= -80 && result <= 0) {
-      item.offsetX = result;
-    }
-    this.setData({
-      detailList: detailList
-    });
-  }
-  ,
-  recordEnd: function (e) {
-    var detailList = this.data.detailList;
-    var index = e.currentTarget.dataset.index
-    var item = detailList[index];
-    this.setData({
-      index: index
-    });
-    if (item.offsetX < -40) {
-      item.offsetX = -80;
+      detailList: data
+    })
+  },
 
-    } else {
-      item.offsetX = 0;
-
-    }
+  //滑动事件处理
+  touchmove: function (e) {
+    let data = app.touch._touchmove(e, this.data.detailList)
     this.setData({
-      detailList: detailList
-    });
+      detailList: data
+    })
+  },
+
+  //删除事件
+  del: function (e) {
+    wx.showModal({
+      title: '提示',
+      content: '确认要删除此条信息么？',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          that.data.detailList.splice(e.currentTarget.dataset.index, 1)
+          that.setData({
+            detailList: that.data.detailList
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
   },
   swichNavLast:function(){
     if (this.data.currentTab>-1){

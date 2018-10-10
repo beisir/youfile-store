@@ -44,7 +44,7 @@ Page({
   },
   chooseImage: function () {
     var _this = this
-    Api.uploadImage("STORE")
+    Api.uploadImage("STORE_IMAGE")
       .then(res => {
         var url = JSON.parse(res).obj
         _this.setData({

@@ -1,6 +1,6 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 var x, y, x1, y1, x2, y2, index, currindex, n, yy;
-// var util = require('../../../utils/util.js');
 Page({
   /**
    * 页面的初始数据
@@ -9,7 +9,9 @@ Page({
     pics: [],
     isShow: true,
     mainx: 0,
+    newConst:'',
     pageall: [],
+    allTotalNew: '',
     pageShow: true,
     currentTab: 0,
     hiddenSelt: false,
@@ -30,9 +32,46 @@ Page({
     introduction: '',
     sellPrice: '',
     stockNum:0,
+    baseUrl: app.globalData.imageUrl,
     wholesalePrice: '',
     goodsId:'',
-    mainImgUrl: "http://img2.imgtn.bdimg.com/it/u=1758226492,603315287&fm=214&gp=0.jpg",
+    addGoodsDetails: [{ input: true, value: '' }, { textInput: true, value: '' }],
+    mainImgUrl: "",
+  },
+  // 输入描述内容
+  addTitle: function () {
+    var _this = this,
+      data = this.data.addGoodsDetails
+    data.push({ input: true, value: '' })
+    _this.setData({
+      addGoodsDetails: data
+    })
+  },
+  watchInput: function (e) {
+    var value = e.detail.value,
+      index = e.target.dataset.index,
+      data = this.data.addGoodsDetails
+    data[index].value = e.detail.value
+    this.setData({
+      addGoodsDetails: data
+    })
+  },
+  watchDec: function (e) {
+    var value = e.detail.value,
+      index = e.target.dataset.index,
+      data = this.data.addGoodsDetails
+    data[index].value = e.detail.value
+    this.setData({
+      addGoodsDetails: data
+    })
+  },
+  addCont: function () {
+    var _this = this,
+      data = this.data.addGoodsDetails
+    data.push({ textInput: true, value: '' })
+    _this.setData({
+      addGoodsDetails: data
+    })
   },
   watchName: function (event) {
     var _this = this,
@@ -54,6 +93,18 @@ Page({
     this.setData({
       description: val
     })
+  },
+  addImage: function () {
+    var _this = this
+    Api.uploadImage("GOODS")
+      .then(res => {
+        var data = this.data.addGoodsDetails
+        var url = JSON.parse(res).obj
+        data.push({ img: this.data.baseUrl + url })
+        _this.setData({
+          addGoodsDetails: data
+        })
+      })
   },
   wholesalePrice: function (event) {
     var _this = this,
@@ -81,7 +132,7 @@ Page({
    */
   getClassList: function (customCategoryCode){
     var _this=this
-    app.http.getRequest('/admin/shop/customcategory/store/{{storeId}}', {})
+    Api.adminShopCate()
       .then(res => {
         var obj = res.obj
         for(var i=0;i<obj.length;i++){
@@ -106,13 +157,14 @@ Page({
 
   getDetails: function (goodsId){
     var _this=this
-    app.http.getRequest('/admin/shop/goods/{{goodsId}}', { goodsId: goodsId})
+    Api.adminGetDetails({ goodsId: goodsId})
       .then(res => {
         var obj = res.obj,
             arrs=[],
           skuTotal = this.data.skuNum,
           skuNum = obj.goodsSkuVOList,
           objImg = obj.goodsImageVOList
+        console.log(obj)
         for (var i = 0; i <objImg.length;i++){
           arrs.push(objImg[i].imageUrl)
         }
@@ -121,27 +173,79 @@ Page({
         }
         _this.getClassList(obj.customCategoryCode)
         _this.getCodeList(obj.categoryCode)
+        var modelData = JSON.stringify(obj.goodsSpecificationVOList)
+        if (obj.goodsSkuVOList.length>0){
+         _this.setData({
+           clickSpecShow: true
+         })
+        }
+        console.log(obj.description.match(/<h4>([\s\S]*?)<\/h4>/)[1])
+        console.log(obj.description.match(/<p>([\s\S]*?)<\/p>/)[1])
+        console.log(obj.description.match(/src=[\'\"]?([^\'\"]*)[\'\"]?/i))
+        return
+        var str = obj.description
+        //匹配图片（g表示匹配所有结果i表示区分大小写）
+        var  imgReg = /<img.*?(?:>|\/>)/gi;
+        var  srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+        
+        var arr = str.match(imgReg);
+        for (var i = 0; i < arr.length; i++) {
+           var src = arr[i].match(srcReg);
+           if (src[1]) {
+             console.log(src[1]);
+           }
+        }
         _this.setData({
           pics: arrs,
           name: obj.name,
+          mainImgUrl: obj.mainImgUrl,
           recommendDesc: obj.recommendDesc,
           pageall: obj.goodsSpecificationVOList,
           sellPrice: obj.sellPrice,
           stockNum: obj.stockNum,
+          model: modelData,
+          storeId: obj.storeId,
+          storeName: obj.storeName,
           wholesalePrice: obj.wholesalePrice,
           skuNum: skuTotal,
+          newConst: skuTotal,
           skuListAll: obj.goodsSkuVOList,
-          description: obj.introduction,
+          description: obj.description,
           categoryCode: obj.categoryCode,
           categoryCustomCode: obj.customCategoryCode
         })
       })
   },
-  onLoad: function (options) {
+  wholesalePrice: function (event) {
+    var _this = this,
+      val = event.detail.value
     this.setData({
-      goodsId:"180831183155243d4de6"
+      wholesalePrice: val
     })
-    this.getDetails("180831183155243d4de6")
+  },
+  sellPrice: function (event) {
+    var _this = this,
+      val = event.detail.value
+    this.setData({
+      sellPrice: val
+    })
+  },
+  getConfig: function () {
+    var _this = this
+    Api.saleBatch()
+      .then(res => {
+        var obj = res.obj
+        _this.setData({
+          stock: obj.saleBatchNum == null ? 0 : obj.saleBatchNum
+        })
+      })
+  },
+  onLoad: function (options) {
+    this.getConfig()
+    this.setData({
+      goodsId:"180929210000"
+    })
+    this.getDetails("180929210000")
   },
   // tab切换
   swichNav: function (e) {
@@ -172,13 +276,38 @@ Page({
       stock: ''
     })
   },
+  newConst: function (event) {
+    var _this = this,
+      val = event.detail.value,
+      pageall = this.data.pageall,
+      len = 1
+    for (var i = 0; i < pageall.length; i++) {
+      var data = pageall[i].goodsSpecificationValueVOList.length
+      len = data * data
+    }
+    this.setData({
+      newConst: val,
+      allTotalNew: len * val
+    })
+  },
   // 分别设置价格和库存
   clickSpec: function (e) {
     var model = JSON.stringify(this.data.pageall),
-      modeList = JSON.stringify(this.data.skuListAll)
-    wx.navigateTo({
-      url: '../set/set?model=' + model + '&modeList=' + modeList,
-    })
+        skuListAll=this.data.skuListAll,
+      sellPrice = this.data.sellPrice,
+      newConst = this.data.newConst,
+      wholesalePrice = this.data.wholesalePrice
+    if (skuListAll.length>0){
+     var  modeList = JSON.stringify(this.data.skuListAll)
+      wx.navigateTo({
+        url: '../set/set?model=' + model + '&modeList=' + modeList
+      })
+    }else{
+      wx.navigateTo({
+        url: '../set/set?model=' + model + "&sellPrice=" + sellPrice + "&wholesalePrice=" + wholesalePrice + "&newConst=" + newConst,
+      })
+    }
+    
   },
   //长按拖动图片
   movestart: function (e) {
@@ -222,53 +351,28 @@ Page({
   },
   // 图片上传
   chooseImage: function () {
+    this.setData({
+      uploadImg: true
+    })
     var _this = this,
       pics = this.data.pics;
-    wx.chooseImage({
-      count: 9 - pics.length, // 最多可以选择的图片张数，默认9
-      sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-      success: function (res) {
-        // success
-        var imgSrc = res.tempFilePaths;
-        pics = pics.concat(imgSrc);
-        // 控制触发添加图片的最多时隐藏
-        if (pics.length >= 9) {
-          _this.setData({
-            isShow: (!_this.data.isShow)
+    var _this = this
+    Api.uploadImage("GOODS")
+      .then(res => {
+        var url = JSON.parse(res).obj
+        pics = pics.concat(url);
+        if (pics.length > 6) {
+          wx.showToast({
+            title: '最多上传6张',
+            icon: 'none',
+            duration: 2000
           })
         } else {
           _this.setData({
-            isShow: (_this.data.isShow)
+            pics: pics
           })
         }
-        _this.setData({
-          pics: pics
-        })
-        // var tempFilePaths = res.tempFilePaths
-        // wx.uploadFile({
-        //   url: 'http://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
-        //   filePath: tempFilePaths[0],
-        //   name: 'file',
-        // header: {
-        //   "Content-Type": "multipart/form-data"
-        // }
-        //   formData: {
-        //     'user': 'test'
-        //   },
-        //   success: function (res) {
-        //     var data = res.data
-        //     //do something
-        //   }
-        // })
-      },
-      fail: function () {
-        // fail
-      },
-      complete: function () {
-        // complete
-      }
-    })
+      })
   },
   // 图片预览
   previewImage: function (e) {
@@ -300,42 +404,56 @@ Page({
       url: '../status/status',
     })
   },
-  // 放入仓库
-  addGit: function (e) {
-    var status = e.target.dataset.status,
-        _this=this
+  // 更新
+  updateGoods: function (e) {
+    var _this=this,
+      pics = this.data.pics,
+      mainImgUrl = '',
+      goodsImageVOList = []
+    for (var i = 0; i < pics.length; i++) {
+      if (i == 0) {
+        mainImgUrl = pics[i]
+      }
+      goodsImageVOList.push({ imageUrl: pics[i] })
+    } 
+    console.log(this.data.skuListAll)
     var goodsVO = {
       "categoryCode": this.data.categoryCode,
-      "categoryCustomCode": this.data.categoryCustomCode,
+      "customCategoryCode": this.data.customCategoryCode,
       "description": this.data.description,
-      "goodsImageVOList": this.data.pics,
+      "goodsImageVOList": goodsImageVOList,
       "goodsSkuVOList": this.data.skuListAll,
       "goodsSpecificationVOList": this.data.pageall,
+      "id": this.data.goodsId,
       "mainImgUrl": this.data.mainImgUrl,
-      "marketPrice": this.data.marketPrice,
+      "marketPrice": 10,
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,
+      "saleBatchNum":10,
       "sellPrice": this.data.sellPrice,
-      "status": status,
+      "status": "1",
+      "stockNum": this.data.skuNum,
+      "storeId": this.data.storeId,
+      "storeName": this.data.storeName,
+      "top": false,
       "wholesalePrice": this.data.wholesalePrice
     }
-    app.http.postRequest('/admin/shop/goods/',goodsVO)
+    console.log(goodsVO)
+    Api.updateGoods(goodsVO)
       .then(res => {
-        wx.showToast({
-          title: '保存成功',
-          icon: 'none',
-          duration: 2000
-        })
-        _this.goback()
+    //   //   wx.showToast({
+    //   //     title: '保存成功',
+    //   //     icon: 'none',
+    //   //     duration: 2000
+    //   //   })
+    //   //   _this.goback()
       })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(this.data.skuListAll)
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
@@ -343,16 +461,16 @@ Page({
     var that = this
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]
-    if (currPage.data.skuListAll != '') {
+    if (currPage.data.code) {
       that.setData({
-        skuListAll: currPage.data.skuListAll,
-        skuNum: currPage.data.skuNum,
-        clickSpecShow: true
+        categoryCode: currPage.data.code,
+        codeName: currPage.data.codeName,
       })
     }
+ 
     if (currPage.data.codeList) {
       var codeList = currPage.data.codeList,
-        strName = this.data.strName,
+        strName = '',
         code = ''
       for (var i = 0; i < codeList.length; i++) {
         strName += codeList[i].name + ","
@@ -363,12 +481,29 @@ Page({
         strName: strName.slice(0, -1)
       })
     }
+    if (currPage.data.skuListAll != '') {
+      that.setData({
+        skuListAll: currPage.data.skuListAll,
+        skuNum: currPage.data.skuNum,
+        clickSpecShow: true
+      })
+    }
+
     if (currPage.data.mydata) {
+      var modelData = JSON.stringify(currPage.data.mydata)
       that.setData({
         pageall: currPage.data.mydata,
+        model: modelData,
+        // skuListAll:[],
+        skuNum:'',
+        sellPrice:'',
+        wholesalePrice:'',
+        newConst:'',
+        clickSpecShow: false,
         pageShow: false
       })
     }
+    
   },
   /**
    * 生命周期函数--监听页面隐藏

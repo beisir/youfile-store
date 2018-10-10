@@ -5,7 +5,7 @@
           <view class="weui-uploader__files">
               <view wx:for="{{pics}}" wx:for-item="image" wx:key="index"  bindtouchmove="move" bindtouchstart="movestart"
 bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weui-uploader__file  {{mainx ==index+1? 'mainmove':'mainend'}}" style="left:{{start.x}}px; top:{{start.y}}px" >
-                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
+                <image class="weui-uploader__img" src="{{baseUrl}}{{image}}" data-src="{{baseUrl}}{{image}}" bindtap="previewImage"></image>
               </view>
           </view>
           <view class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">
@@ -38,7 +38,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
       </view>
       <input class="weui-input" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder="请输入推荐语（选填）"></input>
     </view>
-    <view class="page__category-content">
+       <view class="page__category-content">
       <view class='weui-title'>商品类目</view>
       <navigator class="weui-cell1"  url='../firstClass/firstClass'>
         <view class="weui-cell__hd"><image  src="/image/ic3.png"></image></view>
@@ -47,7 +47,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         </view>
         <view class="weui-cell__ft1"><image  src="/image/icl.png"></image></view>
       </navigator>
-      <input class="weui-input"  type="text" disabled='disabled' value='{{code}}' placeholder="未选择"></input>
+      <input class="weui-input" type="text" value='{{codeName}}' disabled='disabled' placeholder="未选择"></input>
       <navigator class="weui-cell" url="../shopClass/shopClass">
         <view class="weui-cell__hd"><image  src="/image/ic4.png"></image></view>
         <view class="weui-cell__bd">
@@ -58,7 +58,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
       <input class="weui-input" disabled='disabled'  type="text" value='{{strName}}' placeholder="未设置（选填）"></input>
     </view>
     <view class="page__category-content">
-      <navigator url='../spec/spec' class='weui-title'>商品规格<view>{{pageall.length>0?'已设置':'未设置'}}<image  src="/image/icl.png"></image></view></navigator>
+      <navigator url='../spec/spec?model={{model}}' class='weui-title'>商品规格<view>{{pageall.length>0?'已设置':'未设置'}}<image  src="/image/icl.png"></image></view></navigator>
       <view class='page-weui {{index==0?"page-weui-active":""}}' wx:for="{{pageall}}" wx:key="index">
           <view class="weui-cell">
             <view class="weui-cell__hd"><image  src="/image/ic5.png"></image></view>
@@ -70,7 +70,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
       </view>
       <input  wx:if="{{pageall.length<1}}" class="weui-input" type="text" disabled='disabled'  placeholder="不设置即仅一个规格（选填）"></input>
     </view>
-    <!-- <view class="page__category-content" hidden='{{clickSpecShow}}'>
+        <view class="page__category-content" hidden='{{clickSpecShow}}'>
       <view class='weui-title'>商品价格库存</view>
       <view class="weui-cell1">
         <view class="weui-cell__hd"><image  src="/image/ic6.png"></image></view>
@@ -78,8 +78,8 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
           <text>价格</text>
         </view>
       </view>
-      <view class='weui-input'>每个规格批发价<input bindinput='wholesalePrice' value='{{wholesalePrice}}' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""></input><text>元</text></view>
-      <view class='weui-input'>每个规格零售价<input bindinput='sellPrice' value='{{sellPrice}}' placeholder-class='pla-input' class="weui-input" type="text" placeholder="不填写即不零售（选填）"></input><text>元</text></view>
+      <view class='weui-input'>每个规格批发价<input bindinput='wholesalePrice' placeholder-class='pla-input' class="weui-input" type="text" placeholder="" value='{{wholesalePrice}}'></input><text>元</text></view>
+      <view class='weui-input'>每个规格零售价<input bindinput='sellPrice' placeholder-class='pla-input' class="weui-input" type="text" placeholder="不填写即不零售（选填）" value='{{sellPrice}}'></input><text>元</text></view>
       <view class="weui-cell">
         <view class="weui-cell__hd"><image  src="/image/ic7.png"></image></view>
         <view class="weui-cell__bd">
@@ -87,10 +87,10 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         </view>
           <view class="weui-cell__ft weui-active" bindtap='clickSpec'  wx:if="{{!pageShow}}">分别设置价格和库存</view>
       </view>
-      <view class='weui-input'   wx:if="{{!pageShow}}">每个规格库存<input placeholder-class='pla-input' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
-      <view class='weui-input'>总库存<input placeholder-class='pla-input' bindinput='stockNum' value='{{stockNum}}' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
-    </view> -->
-    <view class="page__category-content">
+      <view class='weui-input'   wx:if="{{!pageShow}}">每个规格库存<input  bindinput='newConst' value='{{newConst}}' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
+      <view class='weui-input'>总库存<input disabled='disabled' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""  value='{{allTotalNew}}' ></input><text>件</text></view>
+    </view>
+    <view class="page__category-content" hidden='{{!clickSpecShow}}'>
       <view class='weui-title'>商品价格库存</view>
       <view class="weui-cell1">
         <view class="weui-cell__hd"><image  src="/image/ic7.png"></image></view>
@@ -119,10 +119,16 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
     </view>
   </view>
   <view hidden='{{hiddenSend}}'>
-    <view class='write'><textarea  placeholder-class='weui-plac' value='{{description}}' bindinput='watchDec' placeholder='请填写商品介绍及照片、真实、直观的表达商品卖点...'></textarea></view>
+    <view class='write'>
+      <view wx:for='{{addGoodsDetails}}' wx:key='index'>
+      <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' wx:if='{{item.input}}' placeholder='请输入标题'></input>
+      <textarea  data-index='{{index}}' value='{{item.value}}' wx:if='{{item.textInput}}' placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
+       <image mode='widthFix'  data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image>
+      </view>
+    </view>
     <view class="sendmessage">
       <view class='write-cont'>
-        <image src="/image/font.png"></image><image  src="/image/color.png"></image><image src="/image/image.png" ></image><image src="/image/down1.png"></image>
+        <image bindtap='addTitle' src="/image/font.png"></image><image bindtap='addCont'  src="/image/color.png"></image><image  bindtap='addImage' src="/image/image.png" ></image><image src="/image/down1.png"></image>
       </view>
       <input class="chat-input" type="emoji" placeholder="" />
       <input style='display:none' type="" bindinput="" confirm-type="done" placeholder="" />
@@ -132,5 +138,5 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
  <view class='add-bottom add-bottom1'  hidden='{{!hiddenSend}}'>
   <view bindtap='addGit' data-status='0'>上架</view>
   <view bindtap='deleteList'>删除</view>
-  <view bindtap='addGit' data-status='0'>保存</view>
+  <view bindtap='updateGoods' data-status='0'>保存</view>
 </view>

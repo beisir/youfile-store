@@ -13,6 +13,7 @@ Page({
     lostList: false,
     totalPrice:0, 
     selectAllStatus:true, 
+    allEmpty:true,
     obj:{
         name:"hello"
     },
@@ -177,8 +178,14 @@ Page({
     var _this=this
     Api.cartList()
       .then(res => {
-        const obj=res.obj,
-          newEffectiveListLen = res.obj.effectiveList.length,
+        const obj=res.obj
+        if (obj==null){
+          _this.setData({
+            allEmpty: false
+          })
+          return
+        }
+          var newEffectiveListLen = res.obj.effectiveList.length,
           newFailureListLen= res.obj.failureList.length,
           storeMes=[]
         if (newEffectiveListLen>0){
@@ -213,6 +220,11 @@ Page({
           _this.setData({
             lostList: true,
           });
+        }
+        if (effectiveList.length == 0 && failureList.length==0){
+          _this.setData({
+            allEmpty:false
+          })
         }
         storeMes.push(store)
         _this.setData({
@@ -319,14 +331,8 @@ Page({
    * 绑定加数量事件
    */
   addCart(goodsId,data){
-    Api.updateMoreCart(goodsId,data)
+    Api.updateMoreCart(data)
       .then(res => {
-        wx.showToast({
-          title: '修改成功',
-          icon: 'none',
-          duration: 1000,
-          mask: true
-        })
       })
   },
   addCount(e) {

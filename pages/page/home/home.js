@@ -45,6 +45,13 @@ function getIdentity(_this) {
       })
   }else{
     _this.homeIndex()
+    wx.setStorage({
+      key: 'admin',
+      data: 1,
+    })
+    _this.setData({
+      limitShow: 1
+    })
   }
 }
 Page({
@@ -135,7 +142,7 @@ Page({
   editGoods:function(){
     var goodsId = this.data.goodsId
     wx.navigateTo({
-      url: '../../admin/editGoods/editGoods?goodsId=' + goodsId,
+      url: '../../admin/editGoods/editGoods?goodsId='+goodsId,
     })
   },
   closeShow: function() {
@@ -178,7 +185,7 @@ Page({
   },
   chooseImage:function(){
     var _this=this
-    Api.uploadImage("STORE")
+    Api.uploadImage("STORE_IMAGE")
     .then(res=>{
       var url = JSON.parse(res).obj
       _this.setData({
@@ -216,13 +223,12 @@ Page({
       })    
   },
   onLoad: function (options) {
-    if (options.storeId) {
-      wx.setStorage({
-        key: 'storeId',
-        data: options.storeId,
-      })
+    if (options.query) {
+      wx.setStorageSync("storeId", options.query.storeId)
     }
-    
+    if (options.storeId) {
+      wx.setStorageSync("storeId", options.storeId)
+    }
   },
   bindChange: function (e) {
     var that = this;
