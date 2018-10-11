@@ -4,7 +4,7 @@
   </view>
 <view class='bf-cont'>
   <view class='bf-weui add-bf-weui'>
-    <view class="weui_cells">
+    <view class="weui_cells" bindtap='click'>
       <image  mode="widthFix" src="/image/w4.png"></image>
       <text class="bf-font">扫一扫 </text>
     </view>

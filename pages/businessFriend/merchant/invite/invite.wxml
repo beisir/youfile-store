@@ -12,7 +12,7 @@
 <view class='bf-cont'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{headPic}}"></image></view>
       <text>{{name}}</text>
     </view>
   </view>

@@ -1,45 +1,44 @@
 {
   "pages":[
     "pages/page/home/home",
+    
+    "pages/businessFriend/addWholesaler/addWholesaler",
+    
+    
+    
+    
+    
+    "pages/businessFriend/merchant/addMerchant/addMerchant",
+    
+    
+    
+    "pages/admin/addGoods/addGoods",
+    "pages/admin/set/set",
+    "pages/admin/status/status",
+    
+    
+    
+    
+    "pages/page/storeIcon/storeIcon",
+    
     "pages/admin/editGoods/editGoods",
     "pages/role/order/order",
     "pages/page/self/self",
     "pages/page/user/user",
     "pages/page/newAddress/newAddress",
     "pages/page/updataPwd/updataPwd",
-    
     "pages/page/derm/derm",
-    
-    
     "pages/page/addressWe/addressWe",
-    
-    
     "pages/page/details/details",
-    
-    
-    
     "pages/login/register/register",
-    
-    
-    
     "pages/role/allOrder/allOrder",
-    
-    
     "pages/page/allOrder/allOrder",
-    
-    
     "pages/admin/editSpec/editSpec",
-    
-    
-    
     "pages/admin/spec/spec",
-    
     "pages/role/supplyOrder/supplyOrder",
     "pages/page/orderSuccess/orderSuccess",
     "pages/page/order/order",
-    "pages/admin/status/status",
     "pages/role/supplyVoucher/supplyVoucher",
-    "pages/admin/addGoods/addGoods",
     "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",
     "pages/businessFriend/merchant/index/index",
@@ -82,32 +81,21 @@
     
     "pages/role/orderSelf/orderSelf",
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
-    
     "pages/cloudOrder/orderList/orderList",
-
     "pages/admin/batch/batch",
     "pages/businessFriend/serList/serList",
-    
-    
-    
-    
     "assembly/partnerAlert/partnerAlert",
     "pages/login/login/login",
-
     "pages/page/stockDetail/stockDetail",
-    "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/mewWholesaler/mewWholesaler",
     "pages/businessFriend/merchant/newMerchant/newMerchant",
     "pages/businessFriend/merchant/serList/serList",
-    "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/businessFriend/merchant/list/list",
     "pages/businessFriend/merchant/invite/invite",
     "pages/businessFriend/invitation/invitation",
-    "pages/admin/set/set",
     "pages/businessFriend/data/data",
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
-
     "pages/page/serList/serList",
     "pages/page/serStatus/serStatus",
     "pages/admin/serStatus/serStatus",

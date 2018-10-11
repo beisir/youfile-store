@@ -34,20 +34,7 @@ Page({
       detailList: data
     })
   },
-
-  //滑动事件处理
-  touchmove: function (e) {
-    let data = app.touch._touchmove(e, this.data.detailList)
-    this.setData({
-      detailList: data
-    })
-  },
-  // 取消
-  cancel: function () {
-    this.setData({
-      show1: false,
-    })
-  },
+ 
   //删除事件
   del: function (e) {
     var indexDel = e.currentTarget.dataset.index,
@@ -189,7 +176,7 @@ Page({
   },
   
   onLoad: function (options) {
-    
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -298,11 +285,57 @@ Page({
   onReachBottom: function () {
   
   },
+  lookGoodsDetails: function (e) {
+    var id = e.target.dataset.id
+    wx.navigateTo({
+      url: '/pages/page/goodsDetails/goodsDetails?goodsId='+ id,
+    })
+  },
+  editGoods:function(e){
+    var id=e.target.dataset.id
+    wx.navigateTo({
+      url: '../editGoods/editGoods?goodsId='+id,
+    })
+  }, 
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.detailList)
+    this.setData({
+      detailList: data
+    })
+  },
 
+  //滑动事件处理
+  touchmove: function (e) {
+    let data = app.touch._touchmove(e, this.data.detailList)
+    this.setData({
+      detailList: data
+    })
+  },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
-  }
+  onShareAppMessage: (res) => {
+    var img='',
+    name='',
+    id=''
+    if (res.from === 'button') {
+     var res=res.target.dataset
+      img =res.img;
+      id=res.id
+      name=res.name
+    }
+    return {
+      title:name,
+      path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id,
+      imageUrl: img,
+      success: (res) => {
+        console.log("转发成功", res);
+      },
+      fail: (res) => {
+        console.log("转发失败", res);
+      }
+    }
+  },
 })

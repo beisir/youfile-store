@@ -84,6 +84,7 @@ import {
   resetPasswordUrl,
   phoneMessageUrl,
   registerUrl,
+  newUserInforUrl,
   registerPhoneMsgUrl,
   removeDefaultUrl,
   closedOrderUrl,
@@ -92,7 +93,9 @@ import {
   addRemarkUrl,
   classCodeParUrl,
   updateGoodsUrl,
-  seeVoucherUrl
+  seeVoucherUrl,
+  getStoreDetailsUrl,
+  userInforUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -117,6 +120,10 @@ function userIdentity(data) {
   data = initStoreId(data);
   return app.http.getRequest(userIdentityUrl, data)
 }
+/**根据id获取店铺ID**/
+function getStoreDetails(data) {
+  return app.http.getRequest(getStoreDetailsUrl, data)
+}
 /**云享品管理 列表**/ 
 function adminGoodsList(data){
   data = initStoreId(data);
@@ -125,6 +132,14 @@ function adminGoodsList(data){
 /**商品 删除**/
 function adminGoodsDelete(data) {
   return app.http.deleteRequest(adminGoodsDeleteUrl, data)
+}
+/**获取进货商资料**/
+function userInfor(data) {
+  return app.http.getRequest(userInforUrl, data)
+}
+/**获取批发商商资料**/
+function newUserInfor(data) {
+  return app.http.getRequest(newUserInforUrl, data)
 }
 
 /**分类列表**/
@@ -578,7 +593,9 @@ module.exports = {
   saveAddress: saveAddress,
   addressInfo: addressInfo,
   editAddress: editAddress,
+  getStoreDetails: getStoreDetails,
   cartList: cartList,
+  newUserInfor: newUserInfor,
   removeDefault: removeDefault,
   addTemplate: addTemplate,
   template: template,
@@ -636,6 +653,7 @@ module.exports = {
   userIdentity: userIdentity,
   customCategoryCode: customCategoryCode,
   quit: quit,
+  userInfor: userInfor,
   classCodePar: classCodePar,
   addGoods: addGoods,
   classListApi: classListApi,

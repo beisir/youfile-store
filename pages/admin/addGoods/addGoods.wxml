@@ -127,7 +127,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
       <view wx:for='{{addGoodsDetails}}' wx:key='index'>
       <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' wx:if='{{item.input}}' placeholder='请输入标题'></input>
       <textarea  data-index='{{index}}' value='{{item.value}}' wx:if='{{item.textInput}}' placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
-       <image mode='widthFix'  data-index='{{index}}' wx:if='{{item.img}}'  src="{{baseUrl}}{{item.img}}"></image>
+       <image mode='widthFix'  data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image>
       </view>
     </view>
     <view class="sendmessage">

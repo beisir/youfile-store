@@ -42,16 +42,16 @@
   </view>
   <view class='in-cont'>
    <text>小云店</text>
-   <view style='min-height:120rpx'>
+   <view style='min-height:120rpx' >
     <view wx:for='{{goodsList}}' wx:key='{{index}}' wx:if='{{index<4}}' class='in-more-img'><image  mode="widthFix" src="{{baseUrl}}{{item.mainImgUrl}}"></image></view>
     <view class='in-img'><image  mode="widthFix" src="/image/icl.png"></image></view>
    </view>
   </view>
   <view class='in-cont'>
-   <text>手机号</text><view>{{servicePhone==null?'':servicePhone}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+   <text>手机号</text><view wx:if='{{servicePhone!=null}}'>{{servicePhone==null?'':servicePhone}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
-   <text>微信号</text><view>{{wechatNumber==null?'':wechatNumber}}</view>
+   <text>微信号</text><view wx:if='{{wechatNumber!=null}}'>{{wechatNumber==null?'':wechatNumber}}</view>
   </view>
   <view class='in-cont'>
     <text>更多经营信息</text>

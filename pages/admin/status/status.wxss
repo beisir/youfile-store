@@ -31,9 +31,9 @@
     border-color:transparent transparent #858585;
     position:relative;transform:rotate(-90deg);margin-top: 25rpx;
 }
-
-
-
+.st-bottom view button,.button-hover{
+ background: #fff;position:absolute;margin-top: 0;border:0;color:#666;width: 200rpx;font-size: 28rpx;top: 18rpx;
+}
 .touch-item {
   display: flex;position: relative;
   justify-content: space-between;
@@ -79,7 +79,9 @@ page{
   display: flex;
   flex-direction: row;
 }
- 
+.st-cont .editGoods{
+  height: 50rpx;width: 50rpx;right: 20rpx;left: unset;position: absolute;top: 110rpx;z-index: 1000;
+}
 .column {
   display: flex;width: 100%;
   flex-direction: column;margin-left: 210rpx;

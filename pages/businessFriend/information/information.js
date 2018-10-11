@@ -98,6 +98,11 @@ Page({
         logo = options.logo,
         name=options.name,
         remark = options.remark
+    if (options.addCode){
+      this.getMession(status, accept,0)
+    }else{
+      this.getMession(status, accept)
+    }
     this.setData({
       status:status,
       send:send,
@@ -107,7 +112,6 @@ Page({
       name: name == null ? '' : name,
       logo:logo
     })
-    this.getMession(status, accept)
   if(status==2){
     this.setData({
       success:true

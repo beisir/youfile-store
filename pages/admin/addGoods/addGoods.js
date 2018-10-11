@@ -79,7 +79,7 @@ Page({
       .then(res => {
         var data = this.data.addGoodsDetails
         var url = JSON.parse(res).obj
-        data.push({ img:url})
+        data.push({ img:_this.data.baseUrl.url})
         _this.setData({
           addGoodsDetails: data
         })

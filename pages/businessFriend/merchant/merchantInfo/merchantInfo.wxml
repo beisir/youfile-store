@@ -10,7 +10,7 @@
 <view class='bf-cont'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{headPic}}"></image></view>
       <text>{{userName}}</text><text  wx:if='{{success}}'>（战略合作）</text>
     </view>
   </view>
@@ -33,7 +33,7 @@
    <text>手机号</text><view>{{mobile}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
-   <text>微信号</text>
+   <text>微信号</text><view wx:if='{{weixinNumber!=null}}'>{{weixinNumber==null?'':weixinNumber}}</view>
   </view>
 </view>
 <button class='bf-btn'  wx:if='{{success}}'  bindtap='urlHome'>去进货</button>
