@@ -1,24 +1,12 @@
 {
   "pages":[
     "pages/page/home/home",
-    
+    "pages/page/cartList/cartList",
     "pages/businessFriend/addWholesaler/addWholesaler",
-    
-    
-    
-    
-    
-    "pages/businessFriend/merchant/addMerchant/addMerchant",
-    
-    
-    
     "pages/admin/addGoods/addGoods",
+    "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/admin/set/set",
     "pages/admin/status/status",
-    
-    
-    
-    
     "pages/page/storeIcon/storeIcon",
     
     "pages/admin/editGoods/editGoods",
@@ -44,7 +32,6 @@
     "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/index/index",
     "pages/page/workIndex/workIndex",
-    "pages/page/cartList/cartList",
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
     "pages/page/address/address",

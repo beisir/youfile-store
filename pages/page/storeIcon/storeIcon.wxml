@@ -1,5 +1,5 @@
 <view class='erm-cont' style='padding:100rpx;'>
-  <view class='erm-img'><image  mode="widthFix" src="https://dev-image.youlife.me/store/qrcode/7a0ff1e5-ad31-4376-b429-ad2bf8dc2535.jpg"></image></view>
+  <view class='erm-img'><image  mode="widthFix" src="{{baseUrl}}{{urlCode}}"></image></view>
   <view style='margin-top:0;'>分享小程序，获取更多流量吧</view>
 </view>
 <view class='bottom-box' style='font-weight:100;'>

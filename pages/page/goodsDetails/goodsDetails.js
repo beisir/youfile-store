@@ -331,7 +331,6 @@ Page({
           }
         }
       }
-      
     }
     if (spectArrDifference.length==0){
       spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
@@ -424,11 +423,7 @@ Page({
        skuCode=goodsSkuVOList[i].skuCode
       }
     }
-    if (this.data.editOneName) {
-
-    }else{
-      
-    }
+   
     if(goodsSpecificationVOList.length>0){
       if (skuCode==''){
         wx.showToast({
@@ -848,7 +843,13 @@ Page({
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {
               var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
-              _this.getSpecDetails(0, arr[0].specValueCode)
+              if (_this.data.editCode){
+                for (var i = arr.length - 1; i >= 0; i--) {
+                  _this.getSpecDetails(i, arr[i].specValueCode)
+                }
+              }else{
+                _this.getSpecDetails(0, arr[0].specValueCode)
+              }
             }
           }
           let num = this.data.numbers

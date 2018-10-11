@@ -59,6 +59,7 @@ export const storeIndexUrl='/admin/store/{{storeId}}/index'
 export const setUserNameUrl='/admin/shop/storecustomer/remark/{{storeId}}/{{userId}}/{{remark}}'
 export const getUserDetaislUrl='/api/user/bymobile/{{mobile}}'
 export const userIdentityUrl='/api/store/{{storeId}}/user/identity'
+export const miniProgramCodeUrl='/api/store/{{storeId}}'
 // 批发商管理信息
 export const indexUrl = '/admin/purchasermerchant/index'
 export const mewWholesalerUrl ='/admin/bizfriend/merchantapply'

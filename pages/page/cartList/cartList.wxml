@@ -16,7 +16,7 @@
         <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{detailList}}" wx:key="index">
           <view class='content st-cont'  data-index="{{index}}">
  <view class="cart-list">
-                  <view class='cart-xian-new'></view>
+                  <!-- <view class='cart-xian-new'></view> -->
                   <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}"  class="cart-pro-select" bindtap="selectList"/>
                   <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList"/>
                   <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}"><image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}"></image></navigator>

@@ -196,7 +196,6 @@ Page({
     Api.cartList()
       .then(res => {
         const obj=res.obj
-        console.log(obj)
         if (obj==null){
           _this.setData({
             allEmpty: false
@@ -387,7 +386,6 @@ Page({
     if (num <= 1) {
       return false;
     }
-    console.log(detailList)
     num = num - 1;
     detailList[index].num = num;
     var dataArr = []
@@ -475,7 +473,6 @@ Page({
         }else{
           if (detailList[i].shoppingCartSkuList != null) {
             var arr = detailList[i].shoppingCartSkuList
-            console.log(arr)
             for (var j = 0; j < arr.length; j++) {
               total += arr[j].num * arr[j].sellPrice;
             }
@@ -517,7 +514,6 @@ Page({
         }
       }
     }
-    console.log(detailList)
     this.setData({ 
       detailList: detailList,
       totalPrice: (total + totalNew).toFixed(2)

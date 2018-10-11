@@ -89,6 +89,7 @@ import {
   removeDefaultUrl,
   closedOrderUrl,
   cancelOrderUrl,
+  miniProgramCodeUrl,
   addDxpressUrl,
   addRemarkUrl,
   classCodeParUrl,
@@ -123,6 +124,10 @@ function userIdentity(data) {
 /**根据id获取店铺ID**/
 function getStoreDetails(data) {
   return app.http.getRequest(getStoreDetailsUrl, data)
+}
+/**获取店铺的小程序码**/
+function miniProgramCode(data) {
+  return app.http.getRequest(miniProgramCodeUrl, data)
 }
 /**云享品管理 列表**/ 
 function adminGoodsList(data){
@@ -653,6 +658,7 @@ module.exports = {
   userIdentity: userIdentity,
   customCategoryCode: customCategoryCode,
   quit: quit,
+  miniProgramCode: miniProgramCode,
   userInfor: userInfor,
   classCodePar: classCodePar,
   addGoods: addGoods,

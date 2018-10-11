@@ -78,15 +78,19 @@ Page({
           mallLogo: info.mallLogo,
           balcony: info.balcony,
           doorNum: info.doorNum,
-          
         })
       }
+      console.log(storeMes)
       if (obj != null) {
+        console.log(storeMes.name)
         _this.setData({
           address: storeMes.address,
           servicePhone: storeMes.servicePhone,
           wechatNumber: storeMes.wechatNumber, 
           businessScope: storeMes.businessScope, 
+          send: storeMes.id,
+          name: storeMes.name == null ? '' :storeMes.name,
+          logo: storeMes.logo,
         })
       }
     })
@@ -98,19 +102,12 @@ Page({
         logo = options.logo,
         name=options.name,
         remark = options.remark
-    if (options.addCode){
-      this.getMession(status, accept,0)
-    }else{
-      this.getMession(status, accept)
-    }
+    this.getMession(status, accept)
     this.setData({
       status:status,
-      send:send,
       accept: accept,
       value: remark == null ? '' : remark,
       remarkName: remark,
-      name: name == null ? '' : name,
-      logo:logo
     })
   if(status==2){
     this.setData({

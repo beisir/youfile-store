@@ -7,6 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    baseUrl: app.globalData.imageUrl,
+    urlCode:''
   },
   saveImg() {
     if (this.data.user.qrcode) {
@@ -30,9 +32,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      baseUrl: app.globalData.imageUrl
-    })
+ 
   },
 
   /**
@@ -46,7 +46,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var _this=this
+    var storeId = wx.getStorageSync("storeId")
+    Api.miniProgramCode({ storeId: storeId})
+    .then(res=>{
+      var obj = res.obj.miniProgramCode
+      _this.setData({
+        urlCode: obj
+      })
+    })
   },
 
   /**
