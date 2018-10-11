@@ -58,9 +58,27 @@ Page({
         title: res.message,
         icon: 'none'
       })
-      setTimeout(() => {
-        wx.navigateBack({})
-      }, 1000)
+
+      //登录
+      app.authHandler.loginByUser(obj.mobile, obj.password).then(res => {
+        //获取上一页
+        let pages = getCurrentPages();
+        let curPage = pages[pages.length - 2];
+        curPage.selectComponent("#login").closePage()
+        setTimeout(() => {
+          wx.navigateBack({})
+        }, 500)
+      }).catch(e => {
+        // wx.showToast({
+        //   title: '账户密码错误',
+        //   icon: 'none'
+        // })
+      })
+    }).catch(e => {
+      wx.showToast({
+        title: e.message,
+        icon: 'none'
+      })
     })
 
   },

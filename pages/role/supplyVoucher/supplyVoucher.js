@@ -66,6 +66,7 @@ Page({
     }else{
       wx.showToast({
         title: '请上传凭证并填写描述',
+        icon:'none'
       })
     }
   },

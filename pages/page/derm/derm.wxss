@@ -2,7 +2,7 @@ page{background: #fff;}
 .add-bottom{color: #333;border-top: 2rpx solid #E8E8E8;}
 .add-bottom image{height: 45rpx;width: 45rpx;}
 .weui-cell__hd{height: 90rpx;width: 90rpx;border-radius:50%;}
-.weui-cell__name{color: #333;font-size: 36rpx;margin-left: 20rpx;}
+.weui-cell__name{color: #333;font-size: 36rpx;margin-left: 20rpx;display: flex;align-items: center;}
 .weui-cell__hd image{max-height: 90rpx;max-width: 90rpx;border-radius: 100%;}
 .weui-cell{align-items:unset;padding:80rpx 120rpx;padding-bottom: 0;}
 .weui-cell__name image{height:40rpx;width: 40rpx;vertical-align: middle;margin-left: 20rpx;}

@@ -1,6 +1,12 @@
 {
   "pages":[
+    "pages/page/user/user",
+    
+    "pages/page/userDetails/userDetails",
+    
     "pages/page/home/home",
+    
+    "pages/page/upload/upload",
     
     "pages/role/supplyOrder/supplyOrder",
     
@@ -17,7 +23,6 @@
     
     
     
-    "pages/page/user/user",
     
     
     "pages/page/newAddress/newAddress",
@@ -98,7 +103,6 @@
     "pages/page/updateMes/updateMes",
     "pages/page/mes/mes",
     "pages/businessFriend/setUp/setUp",
-    "pages/page/userDetails/userDetails",
     
     "pages/role/orderSelf/orderSelf",
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",

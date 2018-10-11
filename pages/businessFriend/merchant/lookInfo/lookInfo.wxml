@@ -14,7 +14,7 @@
       <view class='bf-img'><image  mode="aspectFill" src="{{data.headPic}}"></image></view>
       <text>{{data.userName}}</text>
       <image  class='re-img' wx:if='{{data.gender!=1}}' mode="widthFix" src="/image/ermR.png"></image>
-      <image  class='re-img' wx:if='{{data.gender==1}}' mode="widthFix" src="/image/re1.png"></image>
+      <image  class='re-img' wx:if='{{data.gender==1}}' mode="widthFix" src="/image/man.png"></image>
     </view>
   </navigator>
 </view>

@@ -520,6 +520,16 @@ function addRemark(data){
 function seeVoucher(data){
   return app.http.getRequest(seeVoucherUrl, data)
 }
+// 裁剪图片跳转
+function toCuttingImg(url,quality){
+  if(url){
+    let add = '../upload/upload?src=' + url;
+    quality?add+="&quality=true":"";
+    wx.navigateTo({
+      url: add,
+    })
+  }
+}
 /**
  * 初始化storeId
  */
@@ -531,6 +541,7 @@ function initStoreId(data) {
   return data;
 }
 module.exports = {
+  toCuttingImg: toCuttingImg,
   seeVoucher: seeVoucher,
   addRemark: addRemark,
   addExpress: addExpress,
