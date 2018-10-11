@@ -97,6 +97,11 @@ Component({
           title: res.message,
           icon: 'none',
         })
+        this.setData({
+          forget: false,
+          password: "",
+          verificationCode: ""
+        })
       })
     },
     //登录

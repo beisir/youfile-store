@@ -150,8 +150,7 @@ Page({
       }
 
       //倒计时
-      this.total_micro_second = res.timeoutExpressSecond
-      util.count_down(this)
+      util.count_down(this, res.obj.timeoutExpressSecond)
     })
   },
   resetData(data) {

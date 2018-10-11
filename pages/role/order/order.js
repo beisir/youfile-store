@@ -1,5 +1,6 @@
 // pages/order/order.js
 const app = getApp();
+var seeImg = false;
 let timer;
 import API from '../../../utils/api.js';
 Page({
@@ -75,6 +76,7 @@ Page({
     let num = e.currentTarget.dataset.num;
     API.seeVoucher({ orderNumber: num }).then((res) => {
       if (res.obj.payVoucher) {
+        seeImg = true;
         wx.previewImage({
           urls: [this.data.baseUrl + res.obj.payVoucher]
         })
@@ -331,41 +333,33 @@ Page({
     let type = e.currentTarget.dataset.type,
       status = e.currentTarget.dataset.status,
       num = e.currentTarget.dataset.num,
-      url = "";
-    //是否自提
-    switch (type) {
-      case '1':
-        url = "../orderSelf/orderSelf?status=";
-        break;
-      case '2':
-        url = "../orderDetails/orderDetails?status=";
-        break;
-    }
-    //状态
-    // 0待付款 1已付款 2待收货 3交易成功 4交易关闭  5自提待付款 6自提待取货 7交易成功自提 8自提交易关闭
-    // 0待付款 1已付款 2待填表  3已发货   4交易成功 5 交易关闭  6自提待付款 7自提已付款 8交易成功自提 9自提交易关闭
-
-    url += status;    
-    url += '&num=' + num;
-    //   url = "../allOrder/allOrder";
+    //   url = "";
     // //是否自提
     // switch (type) {
     //   case '1':
-    //     //url = "../orderSelf/orderSelf?status=";
-    //     url += "?self=true";
+    //     url = "../orderSelf/orderSelf?status=";
     //     break;
     //   case '2':
-    //     //url = "../orderDetails/orderDetails?status=";
-    //     url += "?self=false";
+    //     url = "../orderDetails/orderDetails?status=";
     //     break;
     // }
-    // //状态
-    // // 0待付款 1已付款 2待收货 3交易成功 4交易关闭  5自提待付款 6自提待取货 7交易成功自提 8自提交易关闭
-    // // 0待付款 1已付款 2待填表  3已发货   4交易成功 5 交易关闭  6自提待付款 7自提已付款 8交易成功自提 9自提交易关闭
-
-    // url += "&status="+status;    
+    // url += status;    
     // url += '&num=' + num;
-    // url += "&type=order"
+      url = "../allOrder/allOrder";
+    //是否自提
+    switch (type) {
+      case '1':
+        //url = "../orderSelf/orderSelf?status=";
+        url += "?self=true";
+        break;
+      case '2':
+        //url = "../orderDetails/orderDetails?status=";
+        url += "?self=false";
+        break;
+    }
+    url += "&status="+status;    
+    url += '&num=' + num;
+    url += "&type=order"
     wx.navigateTo({
       url
     })
@@ -434,6 +428,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if(seeImg){
+      seeImg = false;
+      return;
+    }
     this.getList(true);
   },
 

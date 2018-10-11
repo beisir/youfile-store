@@ -1,21 +1,12 @@
 {
   "pages":[
-    "pages/page/cartList/cartList",
-    
     "pages/page/home/home",
-    
-    
-    
-    
-    
-    
-    "pages/admin/status/status",
-    "pages/admin/addGoods/addGoods",
     "pages/admin/editGoods/editGoods",
-    
-    
+    "pages/role/order/order",
+    "pages/page/self/self",
+    "pages/page/user/user",
+    "pages/page/newAddress/newAddress",
     "pages/page/updataPwd/updataPwd",
-    
     
     "pages/page/derm/derm",
     
@@ -26,7 +17,6 @@
     "pages/page/details/details",
     
     
-    "pages/page/user/user",
     
     "pages/login/register/register",
     
@@ -45,15 +35,17 @@
     "pages/admin/spec/spec",
     
     "pages/role/supplyOrder/supplyOrder",
-    "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/orderSuccess/orderSuccess",
     "pages/page/order/order",
+    "pages/admin/status/status",
+    "pages/role/supplyVoucher/supplyVoucher",
+    "pages/admin/addGoods/addGoods",
     "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",
     "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/index/index",
     "pages/page/workIndex/workIndex",
-    "pages/role/order/order",
+    "pages/page/cartList/cartList",
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
     "pages/page/address/address",
@@ -113,8 +105,6 @@
     "pages/businessFriend/invitation/invitation",
     "pages/admin/set/set",
     "pages/businessFriend/data/data",
-    "pages/page/newAddress/newAddress",
-    "pages/page/self/self",
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
 

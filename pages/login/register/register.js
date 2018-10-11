@@ -125,29 +125,40 @@ Page({
         icon: 'none',
       })
     } else {
-      API.registerPhoneMsg({ mobile: this.data.telephone }).then(res => {
-
-      })
-      //获取验证码倒计时
-      let sec = this.data.btnSec;
-      this.setData({
-        buttonTimer: sec + "s",
-        disabled: true
-      })
-      let timer = setInterval(() => {
-        sec--;
-        this.setData({
-          buttonTimer: sec + "s"
+      this.testAlreadyRegister().then(res=>{
+        wx.showToast({
+          title: '该手机号已注册，请登录',
+          icon: 'none'
         })
+        setTimeout(()=>{
+          wx.navigateBack()
+        },1000)
+      }).catch(e=>{
+        API.registerPhoneMsg({ mobile: this.data.telephone }).then(res => {
 
-        if (sec <= 1) {
-          clearInterval(timer)
+        })
+        //获取验证码倒计时
+        let sec = this.data.btnSec;
+        this.setData({
+          buttonTimer: sec + "s",
+          disabled: true
+        })
+        let timer = setInterval(() => {
+          sec--;
           this.setData({
-            buttonTimer: "获取验证码",
-            disabled: false
+            buttonTimer: sec + "s"
           })
-        }
-      }, 1000)
+
+          if (sec <= 1) {
+            clearInterval(timer)
+            this.setData({
+              buttonTimer: "获取验证码",
+              disabled: false
+            })
+          }
+        }, 1000)
+      })
+      
     }
   },
   testTel() {
@@ -156,6 +167,15 @@ Page({
       return false;
     }
     return true;
+  },
+  testAlreadyRegister(){
+    return new Promise((resolve,reject)=>{
+      app.http.getRequest("/api/user/mobileexist/" + this.data.telephone).then((res) => {
+        resolve(res);
+      }).catch(e => {
+        reject(e);
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载

@@ -67,7 +67,7 @@
       <image src="/image/nz.png"></image>卖家已发货
     </view>
     <view class='np-right np-right1'>
-      <view>21天15小时 后自动确认收货</view>
+      <view>{{order.autoReviceTime}} 后自动确认收货</view>
     </view>
   </view>
   <!-- 交易成功 -->
@@ -116,7 +116,7 @@
     <view>收货人：{{order.consigneeInfo.userName}}</view>
     <text>收货地址：{{order.consigneeInfo.detailAddress}}</text>
   </view>
-  <view class='np-view np-view1'>
+  <view wx:if="{{order.userMemo}}" class='np-view np-view1'>
     <image src="/image/mes2.png"></image>
     <view>留言</view>
     <text>{{order.userMemo}}</text>

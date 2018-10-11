@@ -155,7 +155,7 @@
   border-top: 0;
   font-size: 28rpx;
   color: #333;
-  margin-top: 0;
+  font-weight: bold;
 }
 .np-order view.np-o-view text{
   color:#C79359;
@@ -197,4 +197,14 @@
 }
 .np-fapiao text{
   float: right;font-weight: bold;
+}
+.np-ct .np-view .sf-tel{
+  font-size:26rpx;
+  color: #999;
+  font-weight: normal;
+  padding-top:10rpx;
+  position: relative
+}
+.sf-tel image{
+  top: 13rpx;
 }
