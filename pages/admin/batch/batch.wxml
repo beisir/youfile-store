@@ -2,7 +2,7 @@
 <view class='st-title'>
   <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中</view>
   <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中</view>
-  <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='2' bindtap="swichNav">已售完</view>
+  <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完</view>
 </view>
 <view class='bt-cont' wx:if="{{datas.length>0}}">
   <view class='bt-title'>已选定{{numSle}}项</view>

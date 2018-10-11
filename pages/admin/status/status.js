@@ -11,9 +11,12 @@ Page({
     alertTab:0,
     hidden:true,
     keyword:'',
+    indexDel:'',
     currentTabSer:0,
     showXl:true,
     list:[],
+    goodsIdDel:'',
+    show1: false,
     totalCount:'',
     sImg:'/image/xl.png',
     detailList: [],
@@ -31,32 +34,35 @@ Page({
       detailList: data
     })
   },
-
-  //滑动事件处理
-  touchmove: function (e) {
-    let data = app.touch._touchmove(e, this.data.detailList)
-    this.setData({
-      detailList: data
-    })
-  },
-
+ 
   //删除事件
   del: function (e) {
-    wx.showModal({
-      title: '提示',
-      content: '确认要删除此条信息么？',
-      success: function (res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-          that.data.detailList.splice(e.currentTarget.dataset.index, 1)
-          that.setData({
-            detailList: that.data.detailList
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
+    var indexDel = e.currentTarget.dataset.index,
+      goodsIdDel = e.currentTarget.dataset.id
+    var _this = this
+    _this.setData({
+      show1: true,
+      indexDel: indexDel,
+      goodsIdDel: goodsIdDel
     })
+  },
+  confirmDetele: function () {
+    var that=this,
+      indexDel = this.data.indexDel,
+      goodsIdDel = this.data.goodsIdDel
+    that.data.detailList.splice(indexDel, 1)
+    Api.adminGoodsDelete({ goodId: goodsIdDel })
+      .then(res => {
+        wx.showToast({
+          title: '删除成功',
+          icon: 'none',
+          duration: 2000
+        })
+        that.setData({
+          detailList: that.data.detailList
+        })
+        that.cancel()
+      })
   },
   swichNavLast:function(){
     if (this.data.currentTab>-1){
@@ -103,31 +109,7 @@ Page({
       hidden: true,
     })
   },
-  /**
- * 删除
- */
-  deleteList(e) {
-    const index = e.currentTarget.dataset.index,
-      goodId = e.currentTarget.dataset.id
-    let detailList = this.data.detailList;
-    detailList.splice(index, 1);
-    this.setData({
-      detailList: detailList
-    });
-    if (!detailList.length) {
-      this.setData({
-        hasList: false
-      });
-    }
-    Api.adminGoodsDelete({ goodId: goodId })
-      .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none',
-          duration: 2000
-        })
-      })
-  },
+ 
   // 上下架
   changeStatus:function(e){
     const goodId = e.currentTarget.dataset.id,
@@ -194,7 +176,7 @@ Page({
   },
   
   onLoad: function (options) {
-    
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -213,6 +195,9 @@ Page({
   classCode:function(code){
     var _this = this,
       goodsStatus =this.data.goodsStatus
+    if (goodsStatus==0){
+      goodsStatus="0,2"
+    }
     Api.adminGoodsStatus({ goodsStatus: goodsStatus})
       .then(res => {
         var detailList = res.obj.result,
@@ -300,11 +285,57 @@ Page({
   onReachBottom: function () {
   
   },
+  lookGoodsDetails: function (e) {
+    var id = e.target.dataset.id
+    wx.navigateTo({
+      url: '/pages/page/goodsDetails/goodsDetails?goodsId='+ id,
+    })
+  },
+  editGoods:function(e){
+    var id=e.target.dataset.id
+    wx.navigateTo({
+      url: '../editGoods/editGoods?goodsId='+id,
+    })
+  }, 
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.detailList)
+    this.setData({
+      detailList: data
+    })
+  },
 
+  //滑动事件处理
+  touchmove: function (e) {
+    let data = app.touch._touchmove(e, this.data.detailList)
+    this.setData({
+      detailList: data
+    })
+  },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
-  }
+  onShareAppMessage: (res) => {
+    var img='',
+    name='',
+    id=''
+    if (res.from === 'button') {
+     var res=res.target.dataset
+      img =res.img;
+      id=res.id
+      name=res.name
+    }
+    return {
+      title:name,
+      path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id,
+      imageUrl: img,
+      success: (res) => {
+        console.log("转发成功", res);
+      },
+      fail: (res) => {
+        console.log("转发失败", res);
+      }
+    }
+  },
 })

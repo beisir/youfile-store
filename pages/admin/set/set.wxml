@@ -1,4 +1,4 @@
-<view style='margin-bottom:150rpx'>
+<view style='padding-bottom:130rpx'>
 <view class='shop-cont' wx:for='{{skuListAll}}' wx:key='{{index}}'>
   <view class='s-title'><image src="/image/ic5.png"></image>商品规格{{index+1}}：{{item.specValueName}}，{{item.specValueCode}}</view>
   <view>

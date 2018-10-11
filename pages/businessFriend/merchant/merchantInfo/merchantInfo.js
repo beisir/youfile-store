@@ -24,6 +24,7 @@ Page({
     userName:'',
     mobile:'',
     showName:'',
+    weixinNumber:'',
     name:''
   },
 
@@ -32,6 +33,7 @@ Page({
    */
 
   onLoad: function (options) {
+    console.log(options)
     var _this=this,
         status = options.status,
         send=options.send,
@@ -45,6 +47,15 @@ Page({
         headPic=options.logo
     for (var i = 0; i < greet.length;i++){
       greetArr.push({ mes: greet[i], name: name})
+    }
+    if(accept){
+      Api.newUserInfor({ userId: accept })
+        .then(res => {
+          var obj=res.obj
+          _this.setData({
+            weixinNumber: obj.weixinNumber
+          })
+        })
     }
     this.setData({
       status:status,

@@ -264,7 +264,6 @@ Page({
     this.getNewData1(current, swichNavCode)
   },
   getSpecDetails:function(index,code){
-    console.log(code)
     var that = this,
       swichNavCode = index,
       code = code,
@@ -303,18 +302,18 @@ Page({
       for (var i = 0; i < arr.length; i++) {
         if (this.data.editOneName) {
           var newArr = codeName[0].goodsSpecificationValueVOList
-          if (newArr.length > 1) {
+          if (newArr.length > 0) {
             var newArrLast = codeName[1].goodsSpecificationValueVOList
             for (var l = 0; l < newArrLast.length; l++) {
               if (arr[i].specValueCodes.indexOf(newArrLast[l].specValueCode) != -1) {
-                this.getNewData(l,newArrLast[l].specValueCode)
+                this.getNewData1(l,newArrLast[l].specValueCode)
               }
             }
           }
           for (var l = 0; l < newArr.length; l++) {
             if (arr[i].specValueCodes.indexOf(newArr[l].specValueCode) != -1) {
               newSkuArrTwo[i].num = arr[i].num
-              this.getNewData1(l, newArr[l].specValueCode)
+              this.getNewData(l, newArr[l].specValueCode)
               that.setData({
                 numbers: arr[i].num
               })
@@ -332,7 +331,6 @@ Page({
           }
         }
       }
-      
     }
     if (spectArrDifference.length==0){
       spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
@@ -346,7 +344,6 @@ Page({
         spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
       }
     }
-    console.log(spectArrDifference)
     if (this.data.currentTab ===index) {
       return false;
     } else {
@@ -426,11 +423,7 @@ Page({
        skuCode=goodsSkuVOList[i].skuCode
       }
     }
-    if (this.data.editOneName) {
-
-    }else{
-      
-    }
+   
     if(goodsSpecificationVOList.length>0){
       if (skuCode==''){
         wx.showToast({
@@ -452,7 +445,6 @@ Page({
       if (this.data.editOneName){
         var data=[]
         data.push({ goodsId: goodsId, num: num, skuCode: skuCode, storeId: this.data.storeId})
-        console.log(data)
         Api.updateMoreCart(JSON.stringify(data))
           .then(res => {
             wx.showToast({
@@ -563,6 +555,19 @@ Page({
         numbers: num
       })
     }
+    if (this.data.editOneName) {
+      var newSkuArrTwo = this.data.newSkuArrTwo
+      for (var i = 0; i < newSkuArrTwo.length; i++) {
+        if (newSkuArrTwo[i].num > 0) {
+          newSkuArrTwo[i].num = num
+        }
+      }
+      this.setData({
+        newSkuArrTwo: newSkuArrTwo
+      }, function () {
+        this.getTotalPrice();
+      })
+    }
   },
   addCount:function(){
     let num=this.data.numbers
@@ -641,6 +646,7 @@ Page({
     let saleBatchAmount = this.data.saleBatchAmount
     let saleBatchNum = this.data.saleBatchNum
     let difference=0
+    let limitShow = this.data.limitShow
     let goodsSpecificationVOList = this.data.goodsSpecificationVOList
     if (goodsSpecificationVOList.length>0){
       var  childArr=goodsSpecificationVOList[0].goodsSpecificationValueVOList
@@ -656,17 +662,19 @@ Page({
           classNums += 1
           nums += newSkuArrTwo[i].num
           total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
-          if (nums > saleBatchNum - 1 || total.toFixed(2) > saleBatchAmount) {
-            newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
-            difference = total - newTotal
-            this.setData({
-              discountShow: false,
-              newTotal: newTotal,
-            })
-          } else {
-            this.setData({
-              discountShow: true,
-            })
+          if (limitShow==3){
+            if (nums > saleBatchNum - 1 || total.toFixed(2) > saleBatchAmount) {
+              newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
+              difference = total - newTotal
+              this.setData({
+                discountShow: false,
+                newTotal: newTotal,
+              })
+            } else {
+              this.setData({
+                discountShow: true,
+              })
+            }
           }
         }
       }
@@ -794,7 +802,6 @@ Page({
           skuArrTwo = [],
           name = ''
         var that = this;
-        console.log(obj)
         var article = '<div>' + obj.description+'</div>'
         WxParse.wxParse('article', 'html', article, that, 5);
         if (store.isFollow){
@@ -817,7 +824,7 @@ Page({
         if (!Api.isEmpty(obj.goodsSkuVOList)){
           obj.goodsSkuVOList=[]
         }
-        console.log(obj)
+        wx.setStorageSync("storeId", obj.storeId)
         _this.setData({
           imgUrls: obj.goodsImageVOList,
           name: obj.name,
@@ -836,10 +843,33 @@ Page({
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {
               var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
-              _this.getSpecDetails(0, arr[0].specValueCode)
+              if (_this.data.editCode){
+                for (var i = arr.length - 1; i >= 0; i--) {
+                  _this.getSpecDetails(i, arr[i].specValueCode)
+                }
+              }else{
+                _this.getSpecDetails(0, arr[0].specValueCode)
+              }
             }
           }
-         
+          let num = this.data.numbers
+          this.setData({
+            numbers: num
+          })
+          if (this.data.editOneName) {
+            var newSkuArrTwo = this.data.newSkuArrTwo
+            for (var i = 0; i < newSkuArrTwo.length; i++) {
+              if (newSkuArrTwo[i].num > 0) {
+                newSkuArrTwo[i].num = num
+              }
+            }
+            this.setData({
+              newSkuArrTwo: newSkuArrTwo
+            }, function () {
+              this.getTotalPrice();
+            })
+          }
+          
         })
       })
   },

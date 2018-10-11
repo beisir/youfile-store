@@ -24,8 +24,8 @@
     <view>{{name}}<image src="/image/fx.png"></image></view>
     <view class='gd-font gd-font2'>零售价：￥{{sell}}</view>
     <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text><button wx:if='{{saleBatchNum!=null}}' class='btn'><text>{{saleBatchNum}}</text>件起批</button></view>
-    <view class='gd-view-n' style='min-height:50rpx'><button>混批</button></view>
-    <view class='gd-view-n'  wx:if='{{saleBatchNum!=null}}'><button>混批</button>全场满￥{{saleBatchAmount}}可混批</view>
+    <view class='gd-view-n' wx:if='{{saleBatchAmount==null}}' style='min-height:50rpx'><button>混批</button></view>
+    <view class='gd-view-n'  wx:if='{{saleBatchAmount!=null}}'><button>混批</button>全场满￥{{saleBatchAmount}}可混批</view>
   </view>
   <view class="weui_cells">
       <image  src="/image/positionico.png"></image>
@@ -289,6 +289,7 @@
   </view>
   <view hidden="{{showCartOne}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
+      <view class='new-man' hidden='{{discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
@@ -296,7 +297,7 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
-            <view>￥{{sell}}</view>
+            <view>￥{{limitShow==3 && discountShow==false?wholesalePrice:sell}}</view>
             <text>库存：{{stockNum}}件</text>
           </view>
         </view>

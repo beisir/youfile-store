@@ -55,6 +55,7 @@ Page({
   goback: function () {
     var goodsListData=this.data.goodsListData,
       editDataModel = this.data.editDataModel,
+      isEmptySku=false,
       newDataSku=[],
       editShowModel = this.data.editShowModel,
       templateId = this.data.templateId
@@ -89,12 +90,16 @@ Page({
       }
       newDataSku =goodsListData
     }
+    if ( goodsListData.length<1){
+      isEmptySku=1
+    }
     var index = this.data.currentTab
     var pages = getCurrentPages();             //  获取页面栈
     var currPage = pages[pages.length - 1];
     var prevPage = pages[pages.length - 2];    // 上一个页面
     prevPage.setData({
-      mydata:newDataSku
+      mydata:newDataSku,
+      isEmptySku: isEmptySku
     })
     wx.navigateBack({
       data: 1
@@ -129,7 +134,7 @@ Page({
         editShowModel: true
       })
     }else{
-      specificationTemplateContentVOList.push({ specCode: model[i].specCode, specName: model[i].specName, specValueList: [{id: '010', specName: "颜色", specValueList: []}] })
+      specificationTemplateContentVOList.push({ id: '010', specName: "颜色", specValueList: []})
       oneTemplateCont[0].specificationTemplateContentVOList = specificationTemplateContentVOList
       this.setData({
         oneTemplateCont: oneTemplateCont,

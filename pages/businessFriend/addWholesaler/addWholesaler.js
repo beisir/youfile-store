@@ -9,7 +9,47 @@ Page({
     detailList: [],
     value:''
   },
-
+  click: function () {
+    var that = this;
+    var show;
+    wx.scanCode({
+      success: (res) => {
+        console.log(res)
+       var userId=res.result
+        if (userId != "*") {
+          var userId = userId.split("user_")[1]
+          Api.getStoreDetails({ userId: userId })
+            .then(res => {
+              var obj=res.obj
+              if (Api.isEmpty(obj)){
+                console.log(obj)
+                var isBizFriend = obj.isBizFriend
+                if (isBizFriend){
+                  var status=2
+                }else{
+                  var status =0
+                }
+                wx.navigateTo({
+                  url: '../information/information?status='+status+'&send=&accept=' + obj.storeId + '&remark=&logo=&name=',
+                })
+              }else{
+                Api.showToast("未找到此供应商！")
+              }
+              console.log(res)
+              
+            })
+        } else {
+          Api.showToast("未获取信息！")
+        }
+      },
+      fail: (res) => {
+        Api.showToast("失败")
+      },
+      complete: (res) => {
+      }
+    })
+  }
+  ,
   /**
    * 生命周期函数--监听页面加载
    */

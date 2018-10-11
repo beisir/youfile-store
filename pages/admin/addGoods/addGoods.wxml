@@ -5,7 +5,7 @@
           <view class="weui-uploader__files">
               <view wx:for="{{pics}}" wx:for-item="image" wx:key="index"  bindtouchmove="move" bindtouchstart="movestart"
 bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weui-uploader__file  {{mainx ==index+1? 'mainmove':'mainend'}}" style="left:{{start.x}}px; top:{{start.y}}px" >
-                <image class="weui-uploader__img" src="{{baseUrl}}{{image}}" data-src="{{baseUrl}}{{image}}" bindtap="previewImage"></image>
+                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
               </view>
           </view>
           <view class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">

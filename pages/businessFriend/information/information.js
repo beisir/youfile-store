@@ -78,15 +78,19 @@ Page({
           mallLogo: info.mallLogo,
           balcony: info.balcony,
           doorNum: info.doorNum,
-          
         })
       }
+      console.log(storeMes)
       if (obj != null) {
+        console.log(storeMes.name)
         _this.setData({
           address: storeMes.address,
           servicePhone: storeMes.servicePhone,
           wechatNumber: storeMes.wechatNumber, 
           businessScope: storeMes.businessScope, 
+          send: storeMes.id,
+          name: storeMes.name == null ? '' :storeMes.name,
+          logo: storeMes.logo,
         })
       }
     })
@@ -98,16 +102,13 @@ Page({
         logo = options.logo,
         name=options.name,
         remark = options.remark
+    this.getMession(status, accept)
     this.setData({
       status:status,
-      send:send,
       accept: accept,
       value: remark == null ? '' : remark,
       remarkName: remark,
-      name: name == null ? '' : name,
-      logo:logo
     })
-    this.getMession(status, accept)
   if(status==2){
     this.setData({
       success:true

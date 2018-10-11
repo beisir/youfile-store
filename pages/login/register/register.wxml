@@ -16,8 +16,6 @@
         </view>
         <!-- <text class='text-yellow'>自动获取</text> -->
       </view>
-
-
       <view class='padding-box'></view>
         <view class='flex-box' style='height:100rpx;'>
           <view class='code-box'>

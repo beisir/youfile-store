@@ -206,6 +206,9 @@
 .record .cart-list{
   width:100%
 }
+.cart-list{
+  height: auto
+}
 .record {
  display: flex;
  flex-direction: row;
@@ -219,7 +222,7 @@
 .cart-list .table{
   width:144%;position: relative;
   background:#fff;
-  margin-left:-270rpx;
+  margin-left:-245rpx;
   margin-top:30rpx;
   padding-left: 30rpx;
   padding-right: 60rpx
@@ -278,11 +281,70 @@
   border-bottom: 0;padding-bottom: 40rpx;
 }
 .cart-list {
-  border-bottom: 0;
+  border-bottom: 0;margin-left:245rpx;padding-top: 25rpx;
 }
 .new-c-t{
   position: absolute;right: 30rpx;color: #CCAA77;font-size:24rpx;
 }
 .new-c-t text{
   position: relative;padding:0rpx 10rpx;border:2rpx solid #CCAA77;right: 0;margin-left:15rpx;
+}
+
+
+.touch-item {
+  display: flex;position: relative;
+  justify-content: space-between;
+  background: #fff;
+  overflow: hidden;margin:20rpx;
+}
+ 
+.content {
+  padding-left: 20rpx;
+  line-height: 50rpx;
+  margin-right: 0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(130rpx);
+  transform: translateX(130rpx);
+  margin-left: -130rpx;
+}
+.del {
+  background-color: #FF4141;
+  width: 130rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(130rpx);
+  transform: translateX(130rpx);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+ 
+.touch-move-active .content, .touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+ 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+ 
+.column {
+  display: flex;width: 100%;
+  flex-direction: column;margin-left: 210rpx;
+}
+.st-cont{
+  width: 100%
+}
+.st-d-status view{
+  width: 35%
+}
+.st-all{
+  padding-top: 50rpx;
+}
+scroll-view{
+  margin-top: 0rpx;padding-bottom: 100rpx;
 }

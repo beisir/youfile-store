@@ -78,7 +78,7 @@
   padding-top: 30rpx;width: 65%;
   background:#fff;border-radius: 10rpx;
 }
-.st-cont image{
+.st-cont image.cart-thumb{
   height: 180rpx;
   width: 180rpx;
   left:30rpx;
@@ -118,14 +118,14 @@
 .st-bottom view{
   width: 33%;
   color: #666;
-  border-right: 2rpx solid #EDEDED;
   font-size: 28rpx;
   height: 40rpx;
-  margin-top: 25rpx;
+  margin-top: 20rpx;
   display: inline-block;
 }
-.st-bottom view:last-child{
-  border-right: 0;
+.st-bottom view:nth-child(2){
+  border-right: 2rpx solid #EDEDED;
+  border-left: 2rpx solid #EDEDED;
 }
 .st-bottom navigator{
   height: 80rpx;

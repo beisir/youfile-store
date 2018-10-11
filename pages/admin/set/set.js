@@ -15,6 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     let _this=this,
         goodsListData = JSON.parse(options.model),
         sellPrice = options.sellPrice,
@@ -71,8 +72,11 @@ Page({
     })
   },
   goback:function(){
-    wx.navigateTo({
-      url: '../addGoods/addGoods'
+    var pages = getCurrentPages();             //  获取页面栈
+    var currPage = pages[pages.length - 1];
+    var prevPage = pages[pages.length - 2];    // 上一个页面
+    wx.navigateBack({
+      data: 1
     })
   },
   setFun:function(e){

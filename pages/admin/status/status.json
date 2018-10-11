@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "云享品管理",
   "usingComponents": {
-    "login-component": "../../login/login/login"
+    "login-component": "../../login/login/login",
+    "mes": "../../../../assembly/tips/tips"
   }
 }
