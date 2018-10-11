@@ -13,7 +13,7 @@ Page({
    */
   onLoad: function (options) {
     var _this =this
-    Api.classList()
+    Api.classListApi()
       .then(res => {
         const obj = res.obj
         for (var i = 0; i < obj.length; i++) {

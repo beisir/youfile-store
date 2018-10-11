@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
 
   /**
@@ -20,10 +21,9 @@ Page({
   onLoad: function (options) {
     var that=this,
       parentCategoryCode = this.data.parentCategoryCode
-    app.http.getRequest('/admin/shop/category/sublist/{{parentCategoryCode}}', { parentCategoryCode: parentCategoryCode})
+    Api.classCodePar({ parentCategoryCode: parentCategoryCode})
       .then(res => {
         const obj = res.obj
-        console.log(obj)
         that.setData({
           dataList: obj
         })
@@ -46,10 +46,9 @@ Page({
     wx.setNavigationBarTitle({
       title: '选择二级分类'
     })
-    app.http.getRequest('/admin/shop/category/sublist/{{parentCategoryCode}}', { parentCategoryCode: code })
+    Api.classCodePar({ parentCategoryCode: code })
       .then(res => {
         const obj = res.obj
-        console.log(obj)
         _this.setData({
           dataListTwo:obj,
           name:name,
@@ -64,10 +63,9 @@ Page({
     wx.setNavigationBarTitle({
       title: '选择三级分类'
     })
-    app.http.getRequest('/admin/shop/category/sublist/{{parentCategoryCode}}', { parentCategoryCode: code })
+    Api.classCodePar({ parentCategoryCode: code })
       .then(res => {
         const obj = res.obj
-        console.log(obj)
         _this.setData({
           dataListThree: obj,
           names: name,

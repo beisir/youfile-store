@@ -90,15 +90,9 @@ page{
 .st-d-status view{
   width: 35%
 }
-.goods-ser{
-  position: fixed;top: 0;width: 100%;z-index: 1000;
-}
-.st-title{
-  position: fixed;top:80rpx;width: 100%;z-index: 1000;
-}
 .st-all{
   padding-top: 50rpx;
 }
 scroll-view{
-  margin-top: 170rpx;padding-bottom: 100rpx;
+  margin-top: 0rpx;padding-bottom: 100rpx;
 }

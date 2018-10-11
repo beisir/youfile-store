@@ -223,6 +223,14 @@ Page({
       })    
   },
   onLoad: function (options) {
+    if (options.scene) {
+      let scene = decodeURIComponent(options.scene);
+      console.log(scene)
+      // let userId = options.scene.split("&")[0];
+      // let recommendId = options.scene.split('&')[1];
+    }
+
+  
     if (options.query) {
       wx.setStorageSync("storeId", options.query.storeId)
     }
@@ -325,6 +333,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
+    this.closeShow()
     app.pageRequest.pageData.pageNum = 0
     if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId")==''){
       this.setData({

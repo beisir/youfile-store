@@ -36,7 +36,7 @@ Page({
     baseUrl: app.globalData.imageUrl,
     goodsImageVOList: [],
     mainImgUrl:'',
-    addGoodsDetails: [{ input: true, value: '' }, { textInput: true, value: ''}]
+    addGoodsDetails: []
   },
   // 输入描述内容
   addTitle:function(){
@@ -79,8 +79,7 @@ Page({
       .then(res => {
         var data = this.data.addGoodsDetails
         var url = JSON.parse(res).obj
-        console.log(url)
-        data.push({ img:this.data.baseUrl+url})
+        data.push({ img:url})
         _this.setData({
           addGoodsDetails: data
         })
@@ -90,11 +89,19 @@ Page({
     var _this = this,
       val = event.detail.value,
       pageall = this.data.pageall,
-      len=1
-    for (var i = 0; i < pageall.length;i++){
+      index1 = 1,
+      index2 = 1,
+      len = 1
+    console.log(pageall)
+    for (var i = 0; i < pageall.length; i++) {
       var data = pageall[i].goodsSpecificationValueVOList.length
-      len=data*data
+      if (i == 0) {
+        index1 = pageall[i].goodsSpecificationValueVOList.length
+      } else {
+        index2 = pageall[i].goodsSpecificationValueVOList.length
+      }
     }
+    len = index1 * index2
     this.setData({
       newConst: val,
       allTotalNew: len * val
@@ -255,8 +262,7 @@ Page({
     Api.uploadImage("GOODS")
       .then(res => {
         var url = JSON.parse(res).obj
-        pics = pics.concat(url);
-       console.log(url)
+        pics = pics.concat(_this.data.baseUrl+url);
         if (pics.length >6) {
           wx.showToast({
             title: '最多上传6张',
@@ -298,18 +304,18 @@ Page({
     }
     for (var i = 0; i < pics.length;i++){
       if(i==0){
-        mainImgUrl = pics[i]
+        mainImgUrl = pics[i].replace(this.data.baseUrl, '')
       }
-      goodsImageVOList.push({imageUrl:pics[i]})
+      goodsImageVOList.push({ imageUrl: pics[i].replace(this.data.baseUrl, '') })
     }
     var goodsVO =  {
       "categoryCode": this.data.categoryCode,
-      "categoryCustomCode": this.data.categoryCustomCode,
+      "customCategoryCode": this.data.categoryCustomCode,
       "description": description,
       "goodsImageVOList":goodsImageVOList,
       "goodsSkuVOList": this.data.skuListAll,
       "goodsSpecificationVOList": this.data.pageall,
-      "mainImgUrl":mainImgUrl,
+      "mainImgUrl": mainImgUrl,
       "marketPrice": this.data.marketPrice,
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,

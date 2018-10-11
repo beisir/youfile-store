@@ -1,3 +1,14 @@
+ <!-- 删除-->
+<mes
+  show="{{show1}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确认删除？</text>
+  <button bindtap='confirmDetele'>确定</button>
+</view>
+</mes>
+{{html}}
   <view class="weui-cell weui-upload">
     <view class="weui-cell__bd">
       <view class="weui-uploader">
@@ -5,7 +16,7 @@
           <view class="weui-uploader__files">
               <view wx:for="{{pics}}" wx:for-item="image" wx:key="index"  bindtouchmove="move" bindtouchstart="movestart"
 bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weui-uploader__file  {{mainx ==index+1? 'mainmove':'mainend'}}" style="left:{{start.x}}px; top:{{start.y}}px" >
-                <image class="weui-uploader__img" src="{{baseUrl}}{{image}}" data-src="{{baseUrl}}{{image}}" bindtap="previewImage"></image>
+                <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
               </view>
           </view>
           <view class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">
@@ -88,7 +99,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
           <view class="weui-cell__ft weui-active" bindtap='clickSpec'  wx:if="{{!pageShow}}">分别设置价格和库存</view>
       </view>
       <view class='weui-input'   wx:if="{{!pageShow}}">每个规格库存<input  bindinput='newConst' value='{{newConst}}' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
-      <view class='weui-input'>总库存<input disabled='disabled' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""  value='{{allTotalNew}}' ></input><text>件</text></view>
+      <view class='weui-input'>总库存<input disabled='disabled' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""  value='{{skuNum}}' ></input><text>件</text></view>
     </view>
     <view class="page__category-content" hidden='{{!clickSpecShow}}'>
       <view class='weui-title'>商品价格库存</view>
@@ -123,7 +134,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
       <view wx:for='{{addGoodsDetails}}' wx:key='index'>
       <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' wx:if='{{item.input}}' placeholder='请输入标题'></input>
       <textarea  data-index='{{index}}' value='{{item.value}}' wx:if='{{item.textInput}}' placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
-       <image mode='widthFix'  data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image>
+       <image mode='widthFix'  data-index='{{index}}' wx:if='{{item.img}}'  src="{{baseUrl}}{{item.img}}"></image>
       </view>
     </view>
     <view class="sendmessage">
@@ -136,7 +147,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
   </view>
 </view>
  <view class='add-bottom add-bottom1'  hidden='{{!hiddenSend}}'>
-  <view bindtap='addGit' data-status='0'>上架</view>
+  <view bindtap='updateGoods' data-status='1'>上架</view>
   <view bindtap='deleteList'>删除</view>
   <view bindtap='updateGoods' data-status='0'>保存</view>
 </view>

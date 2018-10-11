@@ -74,6 +74,7 @@ import {
   setUserNameUrl,
   getUserDetaislUrl,
   userIdentityUrl,
+  classListApiUrl,
   quitUrl,
   updataPwdUrl,
   changeIconUrl,
@@ -89,6 +90,7 @@ import {
   cancelOrderUrl,
   addDxpressUrl,
   addRemarkUrl,
+  classCodeParUrl,
   updateGoodsUrl,
   seeVoucherUrl
 } from './constUrl.js'
@@ -123,6 +125,11 @@ function adminGoodsList(data){
 /**商品 删除**/
 function adminGoodsDelete(data) {
   return app.http.deleteRequest(adminGoodsDeleteUrl, data)
+}
+
+/**分类列表**/
+function classCodePar(data) {
+  return app.http.getRequest(classCodeParUrl, data)
 }
 /**商品 上架**/
 function adminGoodsUp(data) {
@@ -199,6 +206,11 @@ function classList(data) {
   data = initStoreId(data);
   return app.http.getRequest(classListUrl,data)
 }
+/**无登录状态获取店内分类列表**/
+function classListApi(data) {
+  data = initStoreId(data);
+  return app.http.getRequest(classListApiUrl, data)
+}
 /**新建分类**/
 function addClass(data) {
   data = initStoreId(data);
@@ -256,6 +268,7 @@ function editAddress(data) {
 }
 /**用户购物车列表**/
 function cartList(data) {
+  data = initStoreId(data);
   return app.http.getRequest(cartListUrl, data)
 }
 /**保存模板**/
@@ -623,7 +636,9 @@ module.exports = {
   userIdentity: userIdentity,
   customCategoryCode: customCategoryCode,
   quit: quit,
+  classCodePar: classCodePar,
   addGoods: addGoods,
+  classListApi: classListApi,
   updataPwd: updataPwd,
   changeIcon: changeIcon
 }

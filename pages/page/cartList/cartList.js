@@ -1,7 +1,8 @@
 const app = getApp();
+var that
 import Api from '../../../utils/api.js'
-var recordStartX = 0;
-var currentOffsetX = 0;
+// var recordStartX = 0;
+// var currentOffsetX = 0;
 Page({
   data: {
     indexEmpty: true,
@@ -116,53 +117,69 @@ Page({
       leftVal:0
     });
   },
-  recordStart: function (e) {
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.detailList)
     this.setData({
-      leftVal:''
-    });
-    var index1 = this.data.index;
-    recordStartX = e.touches[0].clientX;
-    var detailList = this.data.detailList;
-    if (index1 != undefined) {
-      detailList[index1].offsetX = 0;
-    }
-    var index = e.currentTarget.dataset.index
-    currentOffsetX = this.data.detailList[index].offsetX;
-  }
-  ,
-  recordMove: function (e) {
-    var detailList = this.data.detailList;
-    var index=e.currentTarget.dataset.index
-    var item = detailList[index];
-    var x = e.touches[0].clientX;
-    var mx = recordStartX - x;
-    var result = currentOffsetX - mx;
-    if (result >= -80 && result <= 0) {
-      item.offsetX = result;
-    }
-    this.setData({
-      detailList: detailList
-    });
-  }
-  ,
-  recordEnd: function (e) {
-    var detailList = this.data.detailList;
-    var index = e.currentTarget.dataset.index
-    var item = detailList[index];
-    this.setData({
-      index: index
-    });
-    if (item.offsetX < -40) {
-      item.offsetX = -80;
-
-    } else {
-      item.offsetX = 0;
-
-    }
-    this.setData({
-      detailList: detailList
-    });
+      detailList: data
+    })
   },
+
+  //滑动事件处理
+  touchmove: function (e) {
+    let data = app.touch._touchmove(e, this.data.detailList)
+    this.setData({
+      detailList: data
+    })
+  },
+  // recordStart: function (e) {
+  //   this.setData({
+  //     leftVal:''
+  //   });
+  //   var index1 = this.data.index;
+  //   recordStartX = e.touches[0].clientX;
+  //   var detailList = this.data.detailList;
+  //   if (index1 != undefined) {
+  //     detailList[index1].offsetX = 0;
+  //   }
+  //   var index = e.currentTarget.dataset.index
+  //   currentOffsetX = this.data.detailList[index].offsetX;
+  // }
+  // ,
+  // recordMove: function (e) {
+  //   var detailList = this.data.detailList;
+  //   var index=e.currentTarget.dataset.index
+  //   var item = detailList[index];
+  //   var x = e.touches[0].clientX;
+  //   var mx = recordStartX - x;
+  //   var result = currentOffsetX - mx;
+  //   if (result >= -80 && result <= 0) {
+  //     item.offsetX = result;
+  //   }
+  //   this.setData({
+  //     detailList: detailList
+  //   });
+  // }
+  // ,
+  // recordEnd: function (e) {
+  //   var detailList = this.data.detailList;
+  //   var index = e.currentTarget.dataset.index
+  //   var item = detailList[index];
+  //   this.setData({
+  //     index: index
+  //   });
+  //   if (item.offsetX < -40) {
+  //     item.offsetX = -80;
+
+  //   } else {
+  //     item.offsetX = 0;
+
+  //   }
+  //   this.setData({
+  //     detailList: detailList
+  //   });
+  // },
   urlHome: function () {
     wx.switchTab({
       url: '../home/home'
@@ -179,11 +196,16 @@ Page({
     Api.cartList()
       .then(res => {
         const obj=res.obj
+        console.log(obj)
         if (obj==null){
           _this.setData({
             allEmpty: false
           })
           return
+        }else{
+          _this.setData({
+            allEmpty: true
+          })
         }
           var newEffectiveListLen = res.obj.effectiveList.length,
           newFailureListLen= res.obj.failureList.length,
@@ -191,7 +213,6 @@ Page({
         if (newEffectiveListLen>0){
          var  effectiveList = obj.effectiveList[0].goodsList,
            store = obj.effectiveList[0].store
-          console.log(effectiveList)
         }else{
           var effectiveList=[]
         }
@@ -451,23 +472,52 @@ Page({
               enjoyCost:true
             })
           }
-        }
-        if (detailList[i].shoppingCartSkuList!=null){
-          var arr = detailList[i].shoppingCartSkuList
-          for (var j = 0; j < arr.length; j++) {
-            total += arr[j].num * arr[j].sellPrice;
-          }
-          if (total > storeAmount){
-            detailList[i].enjoyPrice = true
-            this.setData({
-              enjoyCost: true
-            })
-          }
         }else{
-          totalNew += detailList[i].num * detailList[i].sellPrice;
+          if (detailList[i].shoppingCartSkuList != null) {
+            var arr = detailList[i].shoppingCartSkuList
+            console.log(arr)
+            for (var j = 0; j < arr.length; j++) {
+              total += arr[j].num * arr[j].sellPrice;
+            }
+          } else {
+            totalNew += detailList[i].num * detailList[i].sellPrice;
+          }
+        }
+        
+      }
+    }
+    if (limitShow == 3){
+      for (var i = 0; i < detailList.length;i++){
+        if (detailList[i].selected){
+          var enjoy = detailList[i].enjoyPrice
+          if (detailList[i].shoppingCartSkuList != null) {
+            var arr = detailList[i].shoppingCartSkuList
+            if (enjoy) {
+              for (var j = 0; j < arr.length; j++) {
+                total += arr[j].num * arr[j].wholesalePrice;
+              }
+            } else {
+              for (var j = 0; j < arr.length; j++) {
+                total += arr[j].num * arr[j].sellPrice;
+              }
+            }
+            if (total > storeAmount) {
+              detailList[i].enjoyPrice = true
+              this.setData({
+                enjoyCost: true
+              })
+            }
+          } else {
+            if (enjoy) {
+              totalNew += detailList[i].num * detailList[i].wholesalePrice;
+            } else {
+              totalNew += detailList[i].num * detailList[i].sellPrice;
+            }
+          }
         }
       }
     }
+    console.log(detailList)
     this.setData({ 
       detailList: detailList,
       totalPrice: (total + totalNew).toFixed(2)
@@ -479,7 +529,6 @@ Page({
     for(var i=0;i<data.length;i++){
       if (data[i].selected){
         var dataArr = data[i].shoppingCartSkuList
-        console.log(dataArr)
         if (dataArr!=null){
           for (var j = 0; j < dataArr.length; j++) {
             model.push({ goodsId: data[i].goodsId, num: dataArr[j].num, skuCode: dataArr[j].skuCode })
@@ -489,6 +538,10 @@ Page({
         }
       }
     }
+   if(model.length==0){
+     Api.showToast("请勾选商品！")
+     return
+   }
     var model = JSON.stringify(model);
     wx.navigateTo({
       url: '../address/address?model=' + model + '&enjoyCost=' + this.data.enjoyCost + '&totalPrice=' + this.data.totalPrice,

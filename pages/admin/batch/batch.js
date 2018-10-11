@@ -123,6 +123,9 @@ getList:function(){
   classCode: function () {
     var _this = this,
       goodsStatus = this.data.goodsStatus
+    if (goodsStatus == 0) {
+      goodsStatus = "0,2"
+    }
     Api.adminGoodsStatus({ goodsStatus: goodsStatus, customCategoryCodes: '' })
       .then(res => {
         var detailList = res.obj.result
