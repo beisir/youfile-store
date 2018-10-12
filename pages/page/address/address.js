@@ -1,5 +1,6 @@
 // pages/address/address.js
 const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
 
   /**
@@ -72,15 +73,8 @@ Page({
     obj.userMemo = this.data.msg  //留言
     obj.orderGoods = goodsArr;  //商品
     obj.orderCategory = this.data.orderCategory //订单种类
-    //计价方式[1;商品零售价格;2商品批发价格]
-    if (this.data.enjoyCost){
-      obj.valuationWay = 2
-    }else{
-      obj.valuationWay = 1
-    }
-    app.http.postRequest("/api/order/",
-      obj
-    ).then((res)=>{
+   
+    Api.supplyOrde(obj).then((res)=>{
       //'../success/success'
       wx.showToast({
         title: res.message,
@@ -163,14 +157,25 @@ Page({
     let goods = this.data.goods,
         price = 0;
     goods.forEach((el)=>{
+      //是否优惠
+      let off = el.satisfiedWholesale;
+
       //有sku
       if (!el.num && el.preOrderGoodsSkuList){
         let num = 0;
         el.preOrderGoodsSkuList.forEach((item)=>{
           if (item.num){
             num += item.num;
-            if(!isNaN(item.sellPrice * item.num)){
-              price += item.sellPrice * item.num;
+            let thisPrice = 0;
+            //价格
+            if(off=='true'){
+              thisPrice = item.wholesalePrice;
+            }else{
+              thisPrice = item.sellPrice;
+            }
+
+            if (!isNaN(thisPrice * item.num)){
+              price += thisPrice * item.num;
             }
           }
         })
@@ -178,8 +183,15 @@ Page({
       }
       //没有sku
       if (el.num && !el.preOrderGoodsSkuList){
-        if (!isNaN(el.sellPrice * el.num)) {
-          price += el.sellPrice * el.num;
+        let thisPrice = 0;
+        //价格
+        if (off=='true') {
+          thisPrice = el.wholesalePrice;
+        } else {
+          thisPrice = el.sellPrice;
+        }
+        if (!isNaN(thisPrice * el.num)) {
+          price += thisPrice * el.num;
         }
       }
     })
@@ -225,8 +237,6 @@ Page({
       orderCategory: orderType,
       storeId: storeId ?storeId:123,    
       sendData: model,
-      enjoyCost: options.enjoyCost,
-      totalPrice: options.totalPrice
     })
     this.getData();
     this.getDefaultAdress();

@@ -96,7 +96,8 @@ import {
   updateGoodsUrl,
   seeVoucherUrl,
   getStoreDetailsUrl,
-  userInforUrl
+  userInforUrl,
+  supplyOrderUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -563,6 +564,11 @@ function toCuttingImg(url,quality){
     })
   }
 }
+// 提交订单
+function supplyOrde(data){
+  data = initStoreId(data);
+  return app.http.postRequest(supplyOrderUrl, data);
+}
 /**
  * 初始化storeId
  */
@@ -574,6 +580,7 @@ function initStoreId(data) {
   return data;
 }
 module.exports = {
+  supplyOrde: supplyOrde,
   toCuttingImg: toCuttingImg,
   seeVoucher: seeVoucher,
   addRemark: addRemark,
