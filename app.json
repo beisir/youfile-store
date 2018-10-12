@@ -6,7 +6,18 @@
     
     "pages/page/home/home",
     
+    "pages/page/cartList/cartList",
+    
+    
+    
+    
+    
+    
     "pages/admin/addGoods/addGoods",
+    
+    
+    
+    
     
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
@@ -20,7 +31,6 @@
     
     
     
-    "pages/page/cartList/cartList",
     
     "pages/admin/status/status",
     

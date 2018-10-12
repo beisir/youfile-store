@@ -139,7 +139,7 @@
           <view  class='gd-gg lt-attr' wx:if='{{index==0}}'>
             <view class="lt-table">
                 <view class="lt-tr">
-                    <view>{{nameTwo}}</view>
+                    <view  wx:if='{{!newSkuOnly}}'>{{nameTwo}}</view>
                     <view>零售价</view>
                     <view>批发价</view>
                     <view>
@@ -152,7 +152,7 @@
                 </view>
                 <view  wx:for="{{spectArrDifference}}" wx:for-item="pItem" wx:key="{{index}}" >
                   <view class="lt-tr lt-tr1"  wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
-                      <view>{{item.name}}</view>
+                      <view wx:if='{{!newSkuOnly}}'>{{item.name}}</view>
                       <view class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
                       <view>￥{{item.wholesalePrice}}</view>
                       <view>
@@ -168,7 +168,11 @@
           </view>
         </view>
         <view class='weui-bottom lt-weui-bottom'>
-          <view>￥<view wx:if='{{discountShow==true}}'>{{totalPrice}}</view><view wx:if='{{discountShow==false}}'>{{newTotal}}.00</view><text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text></view>
+          <view>￥
+            <view wx:if='{{discountShow==true}}'>{{totalPrice}}</view>
+            <view wx:if='{{discountShow==false}}'>{{newTotal}}.00</view>
+            <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
+          </view>
           <view data-status='0' bindtap='moreAddCart'>加入进货车</view>
           <view data-status='1' bindtap='moreAddCart'>立即下单</view>
         </view>

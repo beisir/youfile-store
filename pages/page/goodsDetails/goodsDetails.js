@@ -1,7 +1,7 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
 var WxParse = require('../../../wxParse/wxParse.js');
-function getIdentity(_this,goodsId) {
+function getIdentity(_this,goodsId,isTrue) {
   if (Api.isEmpty(wx.getStorageSync("access_token"))) {
     Api.userIdentity()
       .then(res => {
@@ -41,10 +41,10 @@ function getIdentity(_this,goodsId) {
             limitShow: 1
           })
         }
-        _this.getDetails(goodsId)
+        _this.getDetails(goodsId,isTrue)
       })
   }else{
-    _this.getDetails(goodsId)
+    _this.getDetails(goodsId, isTrue)
   }
 }
 Page({
@@ -62,6 +62,7 @@ Page({
     skuArrTwo: [],
     newSkuArrTwo:[],
     nameTwo:'',
+    newSkuOnly:false,
     className:'active',
     indicatorDots: true,
     autoplay: true,
@@ -83,8 +84,8 @@ Page({
     wholesale: '',
     sell:'',
     stockNum:'',
-    saleBatchNum:'',
-    saleBatchAmount:'',
+    saleBatchNum:null,
+    saleBatchAmount:null,
     totalPrice:'',
     goodsId:'',
     numAll:0,
@@ -160,11 +161,15 @@ Page({
           that.setData({
             newCartList: arr,
           }, function () {
-            getIdentity(this,goodsId)
+            if (options.name == "more"){
+              getIdentity(this, goodsId, true)
+            }else{
+              getIdentity(this, goodsId, false)
+            }
           })
         })
     }else{
-      getIdentity(this,goodsId)
+      getIdentity(this,goodsId,false)
     }
   },
 
@@ -208,21 +213,17 @@ Page({
      for (var i = 0; i < dataList.length; i++) {
        if (dataList[i].specValueCodeList.indexOf(code) != -1) {
         if(index==0){
-          if (dataList[i].specValueCodeList.indexOf(_this.data.swichNavCode) != -1) {
             _this.setData({
               wholesale: dataList[i].wholesalePrice,
               stockNum: dataList[i].stockNum,
               sell: dataList[i].sellPrice
             })
-          }
         }else{
-          if (dataList[i].specValueCodeList.indexOf(_this.data.changeButtonCode) != -1) {
             _this.setData({
               wholesale: dataList[i].wholesalePrice,
               stockNum: dataList[i].stockNum,
               sell: dataList[i].sellPrice
             })
-          }
         }
        }
      }
@@ -302,6 +303,7 @@ Page({
       for (var i = 0; i < arr.length; i++) {
         if (this.data.editOneName) {
           var newArr = codeName[0].goodsSpecificationValueVOList
+
           if (newArr.length > 0) {
             var newArrLast = codeName[1].goodsSpecificationValueVOList
             for (var l = 0; l < newArrLast.length; l++) {
@@ -419,8 +421,14 @@ Page({
       goodsSkuVOList = this.data.goodsSkuVOList
     for (var i = 0; i < goodsSkuVOList.length;i++){
       var  childArr = goodsSkuVOList[i].specValueCodeList
-      if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1){
-       skuCode=goodsSkuVOList[i].skuCode
+      if (childArr.length==1){
+        if (childArr.indexOf(changeButtonCode) != -1) {
+          skuCode = goodsSkuVOList[0].skuCode
+        }
+      }else{
+        if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
+          skuCode = goodsSkuVOList[i].skuCode
+        }
       }
     }
    
@@ -646,6 +654,7 @@ Page({
     let saleBatchAmount = this.data.saleBatchAmount
     let saleBatchNum = this.data.saleBatchNum
     let difference=0
+    let newSkuOnly = this.data.newSkuOnly
     let limitShow = this.data.limitShow
     let goodsSpecificationVOList = this.data.goodsSpecificationVOList
     if (goodsSpecificationVOList.length>0){
@@ -664,7 +673,11 @@ Page({
           total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
           if (limitShow==3){
             if (nums > saleBatchNum - 1 || total.toFixed(2) > saleBatchAmount) {
-              newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
+              if (this.data.editCode){
+                newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
+              }else{
+                newTotal = nums * newSkuArrTwo[i].wholesalePrice;
+              }
               difference = total - newTotal
               this.setData({
                 discountShow: false,
@@ -732,10 +745,11 @@ Page({
       total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
     }
     spectArrDifference[index].newSkuArrTwo = newSkuArrTwo
-    this.getTotalPrice();
     this.setData({
       spectArrDifference: spectArrDifference,
       totalPrice: total.toFixed(2)
+    },function(){
+      this.getTotalPrice();
     });
   },
   
@@ -766,33 +780,25 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  getDetails: function (goodsId){
+  getDetails: function (goodsId,isTrue){
     var _this=this,
       storeId = this.data.storeId
     Api.config(goodsId)
       .then(res => {
-        var obj = res.obj,
-          goodsSaleBatchNum = obj.goodsSaleBatchNum,
-          goodsSaleBatchAmount = obj.goodsSaleBatchAmount,
-          storeSaleBatchNum = obj.storeSaleBatchNum,
-          storeSaleBatchAmount = obj.storeSaleBatchAmount
-        if (goodsSaleBatchNum==null){
-          _this.setData({
-            saleBatchNum: storeSaleBatchNum
-          })
-        }else{
-          _this.setData({
-            saleBatchNum: goodsSaleBatchNum
-          })
-        }
-        if (goodsSaleBatchAmount == null) {
-          _this.setData({
-            saleBatchAmount: storeSaleBatchAmount
-          })
-        } else {
-          _this.setData({
-            saleBatchAmount: goodsSaleBatchAmount
-          })
+        var obj = res.obj
+        if(obj!=null){
+          var  storeSaleBatchNum = obj.storeSaleBatchNum,
+            storeSaleBatchAmount = obj.storeSaleBatchAmount
+          if (storeSaleBatchAmount != null) {
+            _this.setData({
+              saleBatchNum: storeSaleBatchNum
+            })
+            if (storeSaleBatchNum != null) {
+              _this.setData({
+                saleBatchAmount: storeSaleBatchAmount
+              })
+            }
+          }
         }
       })
     Api.goodsDetails({ goodsId:goodsId })
@@ -842,8 +848,13 @@ Page({
         },function(){
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {
+              if(obj.goodsSpecificationVOList.length==1){
+                _this.setData({
+                  newSkuOnly:true
+                })
+              }
               var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
-              if (_this.data.editCode){
+              if (isTrue){
                 for (var i = arr.length - 1; i >= 0; i--) {
                   _this.getSpecDetails(i, arr[i].specValueCode)
                 }
