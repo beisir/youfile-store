@@ -38,7 +38,6 @@ Component({
   methods: {
     handleNYZAreaChange:function(e){
       var that = this;
-      console.log("e:" + JSON.stringify(e));
       var value = e.detail.value;
       /**
        * 滚动的是省
@@ -92,7 +91,6 @@ Component({
      * 确定按钮的点击事件
      */
     handleNYZAreaSelect:function(e){
-      //console.log("e:" + JSON.stringify(e));
       var myEventDetail = e; // detail对象，提供给事件监听函数
       var myEventOption = {}; // 触发事件的选项
       this.triggerEvent('sureSelectArea', myEventDetail, myEventOption)
@@ -102,7 +100,6 @@ Component({
      */
     handleNYZAreaCancle:function(e){
       var that = this;
-      console.log("e:" + JSON.stringify(e))
       that.setData({
         show:false
       })

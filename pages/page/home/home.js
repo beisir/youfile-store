@@ -109,7 +109,6 @@ Page({
   }, 
   // 分享
   // onShareAppMessage: function (res) {
-  //   console.log(res.from)
   //   var goodsId = this.data.goodsId
   //   return {
   //     title: '弹出分享时显示的分享标题',
@@ -223,12 +222,8 @@ Page({
       })    
   },
   onLoad: function (options) {
-    console.log(options)
-    console.log(9898)
-    console.log(options.scene)
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
-      console.log(scene)
       // let userId = options.scene.split("&")[0];
       // let recommendId = options.scene.split('&')[1];
     }
