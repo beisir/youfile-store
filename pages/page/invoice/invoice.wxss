@@ -1,7 +1,6 @@
 .invoice{
   background: #fff;
   border-radius: 8rpx;
-  min-height: 400rpx;
   margin: 40rpx 20rpx;
   margin-bottom: 20rpx;
 }

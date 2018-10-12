@@ -168,7 +168,7 @@ Page({
             num += item.num;
             let thisPrice = 0;
             //价格
-            if(off=='true'){
+            if(off==true){
               thisPrice = item.wholesalePrice;
             }else{
               thisPrice = item.sellPrice;
@@ -185,7 +185,7 @@ Page({
       if (el.num && !el.preOrderGoodsSkuList){
         let thisPrice = 0;
         //价格
-        if (off=='true') {
+        if (off==true) {
           thisPrice = el.wholesalePrice;
         } else {
           thisPrice = el.sellPrice;

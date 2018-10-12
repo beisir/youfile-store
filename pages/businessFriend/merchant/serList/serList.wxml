@@ -1,6 +1,6 @@
 <view class='bf-imput'>
    <view class="goods-ser">
-    <input placeholder="输入小云店名、手机号"   bindconfirm="searchBtn"   value="{{value}}"/>
+    <input placeholder="输入进货商名称、手机号"   bindconfirm="searchBtn"   value="{{value}}"/>
     <image class="home-ser"  src="/image/search.png"></image>
     <view class='home-img'>
       <image  src="/image/ser.png"></image>
