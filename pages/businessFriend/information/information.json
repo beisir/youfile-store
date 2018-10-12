@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "供应商资料",
+  "enablePullDownRefresh": false,
   "usingComponents": {
     "spec": "../../../../assembly/specifications/spec",
     "login": "../../login/login/login"

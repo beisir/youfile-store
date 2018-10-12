@@ -7,6 +7,7 @@ Page({
    */
   data: {
     pics: [],
+    skuNumTrue:false,
     isShow: true,
     uploadImg:false,
     mainx: 0,
@@ -94,7 +95,6 @@ Page({
       index1 = 1,
       index2 = 1,
       len = 1
-    console.log(pageall)
     for (var i = 0; i < pageall.length; i++) {
       var data = pageall[i].goodsSpecificationValueVOList.length
       if (i == 0) {
@@ -167,6 +167,19 @@ Page({
       })
     }
   },
+  skuNumTrue:function(event){
+    var _this = this,
+      val = event.detail.value,
+      val = val.replace(/[^\d.]/g, ''),
+      num = val.length
+    if (num > 16) {
+      Api.showToast("超过最长数字限制")
+    } else {
+      this.setData({
+        allTotalNew: val.substring(0, 15),
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -175,7 +188,6 @@ Page({
     Api.saleBatch()
     .then(res=>{
       var obj=res.obj
-      console.log(obj)
       if (obj.saleBatchNum){
         _this.setData({
           stock: obj.saleBatchNum
@@ -191,6 +203,8 @@ Page({
   },
   onLoad: function (options) {
     this.getConfig()
+    // var str ='<h4>标题1</h4><p>这是内容1</p><img src="https://dev-image.youlife.me/goods/baec9167-286b-4510-9990-8a452522923a.jpg"/><h4>标题</h4><p>这是内容1</p><p>这是内容1</p><p>这是内容1</p><img src="https://dev-image.youlife.me/goods/e2c1a317-d41d-401c-b8dc-b6771e6f214a.jpg"/><p>这是内容1</p><h4>企鹅</h4>'
+    // console.log(Api.parseGoodsDescription(str))
   },
   // tab切换
   swichNav: function (e) {
@@ -230,19 +244,6 @@ Page({
     wx.navigateTo({
       url: '../set/set?model=' + model + "&sellPrice=" + sellPrice + "&wholesalePrice=" + wholesalePrice + "&newConst=" + newConst,
     })
-  //  if(e.target.dataset.id=='000'){
-  //    var model = JSON.stringify(this.data.skuListAll);
-  //    wx.navigateTo({
-  //      url: '../set/set?model=' + model,
-  //    })
-  //  }else{
-  //    var model = JSON.stringify(this.data.pageall);
-  //    console.log(model)
-  //    wx.navigateTo({
-  //      url: '../set/set?model=' + model,
-  //    })
-  //  }
-   
   },
   //长按拖动图片
   movestart: function (e) {
@@ -285,18 +286,24 @@ Page({
     }
   },
   // 图片上传
-  chooseImage: function () {
+  chooseImage() {
+    app.http.onlychoseImg().then(res => {
+      let url = res.tempFilePaths[0];
+      Api.toCuttingImg(url,true)
+    })
+  },
+  afterCuttingImg(url) {
     this.setData({
-      uploadImg:true
+      uploadImg: true
     })
     var _this = this,
       pics = this.data.pics;
     var _this = this
-    Api.uploadImage("GOODS")
-      .then(res => {
-        var url = JSON.parse(res).obj
-        pics = pics.concat(_this.data.baseUrl+url);
-        if (pics.length >6) {
+    app.http.onlyUploadImg(url).then(res => {
+      var url = JSON.parse(res).obj
+      if (url) {
+        pics = pics.concat(_this.data.baseUrl + url);
+        if (pics.length > 6) {
           wx.showToast({
             title: '最多上传6张',
             icon: 'none',
@@ -307,7 +314,8 @@ Page({
             pics: pics
           })
         }
-      })
+      }
+    })
   },
   // 图片预览
   previewImage: function (e) {
@@ -322,9 +330,16 @@ Page({
     var status=e.target.dataset.status,
       pics = this.data.pics,
       mainImgUrl='',
+      wholesalePrice=this.data.wholesalePrice,
+      newConst = this.data.newConst,
       saleBatchNum=this.data.stock,
       goodsImageVOList=[],
       description='',
+      skuList0 = [],
+      skuList1 = [],
+      sellPrice=this.data.sellPrice,
+      skuListAll=this.data.skuListAll,
+      pageall=this.data.pageall,
       addGoodsDetails = this.data.addGoodsDetails
     for (var i = 0; i < addGoodsDetails.length;i++){
       if (addGoodsDetails[i].input){
@@ -341,22 +356,41 @@ Page({
       }
       goodsImageVOList.push({ imageUrl: pics[i].replace(this.data.baseUrl, '') })
     }
+    console.log(pageall)
+    if(pageall.length>0){
+      if (pageall.length ==0){
+        if (pageall.length == 1) {
+          skuList0 = pageall[0].goodsSpecificationValueVOList
+          for (var i = 0; i < skuList0.length; i++) {
+            skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+          }
+        } else if (pageall.length = 2) {
+          skuList0 = pageall[0].goodsSpecificationValueVOList
+          skuList1 = pageall[1].goodsSpecificationValueVOList
+          for (var i = 0; i < skuList0.length; i++) {
+            for (var j = 0; j < skuList1.length; j++) {
+              skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+            }
+          }
+        }
+      }
+    }
     var goodsVO =  {
       "categoryCode": this.data.categoryCode,
       "customCategoryCode": this.data.categoryCustomCode,
       "description": description,
       "goodsImageVOList":goodsImageVOList,
-      "goodsSkuVOList": this.data.skuListAll,
-      "goodsSpecificationVOList": this.data.pageall,
+      "goodsSkuVOList":skuListAll,
+      "goodsSpecificationVOList": pageall,
       "mainImgUrl": mainImgUrl,
       "marketPrice": this.data.marketPrice,
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,
-      "sellPrice": this.data.sellPrice,
+      "sellPrice":sellPrice,
       "status":status,
       "stockNum": this.data.skuNum,
       "saleBatchNum": saleBatchNum,
-      "wholesalePrice": this.data.wholesalePrice
+      "wholesalePrice": wholesalePrice
     }
     Api.addGoods(goodsVO)
       .then(res => {

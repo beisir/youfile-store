@@ -556,7 +556,7 @@ function seeVoucher(data){
 // 裁剪图片跳转
 function toCuttingImg(url,quality){
   if(url){
-    let add = '../upload/upload?src=' + url;
+    let add = '/pages/page/upload/upload?src=' + url;
     quality?add+="&quality=true":"";
     wx.navigateTo({
       url: add,
