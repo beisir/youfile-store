@@ -87,9 +87,13 @@ const saveImgToPhone = imgUrl => {
 }
 
 /**
- * 解析商品的描述内容
+ * 解析商品的描述内容 
+ * 返回示例：[{"tag":"img","content":"https://image.youlife.me/goods.jpg"}]
  */
 function parseGoodsDescription(htmlContent) {
+  if(htmlContent==null||htmlContent==undefined||htmlContent==""){
+    return [];
+  }
   var htmlJson = [];
   var transData = HtmlToJson.html2json(htmlContent, 'htmlContent');
   for (var i = 0; i < transData.nodes.length; i++) {
