@@ -1,10 +1,11 @@
 {
   "pages":[
+    "pages/page/home/home",
+    
     "pages/page/user/user",
     
     "pages/page/invoice/invoice",
     
-    "pages/page/home/home",
     
     "pages/admin/status/status",
     
