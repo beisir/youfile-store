@@ -249,7 +249,7 @@ border: none;
 }
 .home-ser-new{
   position: absolute;
-  top: 32rpx;
+  top: 30rpx;
   left: 45rpx;
   height: 40rpx;
   width: 40rpx;

@@ -10,25 +10,25 @@
 </view>
 </mes>
 <view class="goods-ser">
-  <navigator url='../serStatus/serStatus'><input placeholder="输入商品名称" value="{{value}}"  bindblur="blurInputEvent" /></navigator>
+  <input placeholder='输入商品名称' value="{{value}}" bindinput='changeValue' />
     <image class="home-ser"  src="/image/search.png"></image>
-    <view class='home-img'  bindtap='showXl'>
-      <view>
+    <view class='home-img'>
+      <view bindtap='blurInputEvent'>
         筛选
       </view>
-      <view hidden='{{showXl}}' class='st-xiala alert-xiala'>
+      <!-- <view hidden='{{showXl}}' class='st-xiala alert-xiala'>
         <image class="xiala"  src="/image/xiala.png"></image>
         <view class="{{alertTab==0 ? 'active' : ''}}" data-current="0" bindtap="alertNav">全部商品</view>
         <view class="{{alertTab==1 ? 'active' : ''}}" data-current="1" bindtap="alertNav">批零商品</view>
         <view class="{{alertTab==2 ? 'active' : ''}}" data-current="2" bindtap="alertNav">仅批发</view>
-    </view>
+    </view> -->
     </view>
 </view>
 <view class='st-title'>
-  <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中</view>
-  <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中</view>
-  <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完</view>
-  <view class="{{classStatus? 'active' : ''}}" bindtap="swichNavLast">本店分类<image  src="{{sImg}}"></image></view>
+  <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中<view></view></view>
+  <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中<view></view></view>
+  <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完<view></view></view>
+  <view class="{{classStatus? 'active' : ''}}" bindtap="swichNavLast">本店分类<image  src="{{sImg}}"></image><view></view></view>
 </view>
 <view class='hideSer' hidden='{{hidden}}' bindtap='hideSer'>
   <view  class='serList'>
@@ -63,7 +63,8 @@
       </view>
       <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>删除</view>
   </view>
-  <view class='st-all'>{{detailList.length}}件商品</view>
+  <view class='st-all' wx:if='{{detailList.length>0}}'>{{detailList.length}}件商品</view>
+  <view class='st-all' wx:if='{{detailList.length==0}}'>暂无商品</view>
 </scroll-view>
 <view class='st-bottom st-bottom1'>
     <view><navigator url="../addGoods/addGoods">添加商品</navigator></view>

@@ -1,26 +1,27 @@
 {
   "pages":[
-    "pages/page/user/user",
-    
-    "pages/page/userDetails/userDetails",
-    
     "pages/page/home/home",
-    "pages/page/cartList/cartList",
-    "pages/businessFriend/addWholesaler/addWholesaler",
+    
     "pages/admin/addGoods/addGoods",
+    
+    "pages/page/cartList/cartList",
+    
+    "pages/admin/status/status",
+    
+    
+    "pages/page/serStatus/serStatus",
+    
+    
+    "pages/admin/serStatus/serStatus",
+    "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/admin/set/set",
-    "pages/admin/status/status",
     "pages/page/storeIcon/storeIcon",
-    
-    "pages/page/upload/upload",
-    
     
     "pages/admin/editGoods/editGoods",
     "pages/role/order/order",
     "pages/page/self/self",
-    
-    
+    "pages/page/user/user",
     "pages/page/newAddress/newAddress",
     "pages/page/updataPwd/updataPwd",
     "pages/page/derm/derm",
@@ -72,6 +73,7 @@
     "pages/page/updateMes/updateMes",
     "pages/page/mes/mes",
     "pages/businessFriend/setUp/setUp",
+    "pages/page/userDetails/userDetails",
     
     "pages/role/orderSelf/orderSelf",
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
@@ -91,8 +93,6 @@
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
     "pages/page/serList/serList",
-    "pages/page/serStatus/serStatus",
-    "pages/admin/serStatus/serStatus",
 
    
     "pages/admin/shopClass/shopClass",

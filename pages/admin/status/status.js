@@ -13,10 +13,10 @@ Page({
     keyword:'',
     indexDel:'',
     currentTabSer:0,
-    showXl:true,
     list:[],
     goodsIdDel:'',
     show1: false,
+    value:'',
     totalCount:'',
     sImg:'/image/xl.png',
     detailList: [],
@@ -25,6 +25,17 @@ Page({
     baseUrl: app.globalData.imageUrl,
     code:'',
     alertData:["全部商品","引用商品","自建商品"],
+  },
+  changeValue:function(e){
+    var value = e.detail.value
+    this.setData({
+      value:value
+    })
+  },
+  blurInputEvent:function(){
+    wx.navigateTo({
+      url: '../serStatus/serStatus?value='+this.data.value,
+    })
   },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
