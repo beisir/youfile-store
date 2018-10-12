@@ -7,8 +7,8 @@ page{background: #fff;}
 .weui-cell{align-items:unset;padding:80rpx 120rpx;padding-bottom: 0;}
 .weui-cell__name image{height:40rpx;width: 40rpx;vertical-align: middle;margin-left: 20rpx;}
 .erm-cont .erm-img{
-  width: 550rpx;margin:0 auto;
-  height: 550rpx;padding-top:40rpx;padding-bottom:50rpx;
+  margin:0 auto;
+  padding-top:40rpx;padding-bottom:50rpx;
 }
 
 .add-bottom view {
