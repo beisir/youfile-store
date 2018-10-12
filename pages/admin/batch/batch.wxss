@@ -27,9 +27,12 @@
   .st-d-status{
     margin-top: 10rpx;
   }
-  .st-cont image{
-    left: 65rpx;
+  .st-cont image.cart-thumb {
+    left: 70rpx;
   }
+ .nomore{
+   margin-top: 50rpx;
+ }
   .bt-cont .st-cont:last-child{
     border-bottom: 0;
   }

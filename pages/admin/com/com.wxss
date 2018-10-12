@@ -56,7 +56,7 @@
 .st-title>view{
   width: 25%;
   display: inline-block;
-  height: 90rpx;
+  height: 90rpx;position: relative;
   line-height: 90rpx;
 }
 .st-title>view image{
@@ -67,6 +67,9 @@
 }
 .st-title>view.active{
   color: #C79359;
+}
+.st-title>view.active view{
+ background:#C79359;height: 2rpx;width: 100rpx;position: absolute;bottom:0;left: 50%;margin-left:-50rpx;
 }
 .st-cont{
   height:314rpx;
@@ -101,7 +104,7 @@
 }
 .st-d-t{
   width:450rpx; 
-  overflow: hidden;
+  overflow: hidden;font-weight: bold;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -118,9 +121,9 @@
 .st-bottom view{
   width: 33%;
   color: #666;
-  font-size: 28rpx;
-  height: 40rpx;
-  margin-top: 20rpx;
+  font-size: 28rpx;line-height: 50rpx;
+  height: 50rpx;overflow: hidden;
+  margin-top: 22rpx;
   display: inline-block;
 }
 .st-bottom view:nth-child(2){

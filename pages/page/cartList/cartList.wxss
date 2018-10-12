@@ -71,7 +71,7 @@
 }
 
 .cart-no-data{
-    padding:140rpx 0;
+    padding: 0;
     color: #ddd;
     font-size: 26rpx;
     text-align: center;
@@ -344,7 +344,4 @@
 }
 .st-all{
   padding-top: 50rpx;
-}
-scroll-view{
-  margin-top: 0rpx;padding-bottom: 100rpx;
 }

@@ -12,12 +12,13 @@ Page({
     mainx: 0,
     newConst:'',
     pageall:[],
+    stockHide:false,
     pageShow:true,
     currentTab: 0,
     hiddenSelt: false,
     hiddenSend: true,
     clickSpecShow:false,
-    stock:'',
+    stock:0,
     codeName:'',
     allTotalNew:'',
     strName:'',
@@ -110,10 +111,15 @@ Page({
   },
   watchName: function (event) {
     var _this = this,
-      val = event.detail.value
-    this.setData({
-      name: val
-    })
+      val = event.detail.value,
+      num=val.length
+    if (num > 56) {
+      Api.showToast("超过最长数字限制")
+    } else {
+      this.setData({
+        name: val.substring(0, 55),
+      })
+    }
   },
   stockFun:function(e){
     var _this = this,
@@ -124,25 +130,42 @@ Page({
   },
   watchRec: function (event) {
     var _this = this,
-      val = event.detail.value
-    this.setData({
-      recommendDesc: val
-    })
+      val = event.detail.value,
+    num = val.length
+    if (num > 51) {
+      Api.showToast("超过最长数字限制")
+    } else {
+      this.setData({
+        recommendDesc: val.substring(0, 50),
+      })
+    }
   },
 
   wholesalePrice: function (event) {
     var _this = this,
-      val = event.detail.value
-    this.setData({
-      wholesalePrice: val
-    })
+      val = event.detail.value,
+      val = val.replace(/[^\d.]/g, ''),
+      num = val.length
+    if (num > 10) {
+      Api.showToast("超过最长数字限制")
+    } else {
+      this.setData({
+        wholesalePrice: val.substring(0, 9),
+      })
+    }
   },
   sellPrice: function (event) {
     var _this = this,
-      val = event.detail.value
-    this.setData({
-      sellPrice: val
-    })
+      val = event.detail.value,
+      val = val.replace(/[^\d.]/g, ''),
+      num = val.length
+    if (num > 10) {
+      Api.showToast("超过最长数字限制")
+    } else {
+      this.setData({
+        sellPrice: val.substring(0, 9),
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -152,9 +175,18 @@ Page({
     Api.saleBatch()
     .then(res=>{
       var obj=res.obj
-      _this.setData({
-        stock: obj.saleBatchNum
-      })
+      console.log(obj)
+      if (obj.saleBatchNum){
+        _this.setData({
+          stock: obj.saleBatchNum
+        })
+      }else{
+        _this.setData({
+          stock:null,
+          stockHide:true
+        })
+      }
+     
     })
   },
   onLoad: function (options) {

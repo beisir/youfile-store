@@ -247,6 +247,11 @@ Page({
           })
         }
         storeMes.push(store)
+        if(effectiveList.length==0){
+          _this.setData({
+            hasList:false
+          })
+        }
         _this.setData({
           storeAmount:store.saleBatchAmount,
           storeNum: store.saleBatchNum,
