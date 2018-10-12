@@ -204,7 +204,7 @@ Page({
     }, 30)
   },
   goodsSku:function(code,index){
-    console.log(code+"////"+index)
+    // console.log(code+"////"+index)
     var _this=this,
       dataList = _this.data.goodsSkuVOList
      for (var i = 0; i < dataList.length; i++) {
