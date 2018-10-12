@@ -92,7 +92,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
           <view class="weui-cell__ft weui-active" bindtap='clickSpec'  wx:if="{{!pageShow}}">分别设置价格和库存</view>
       </view>
       <view class='weui-input'   wx:if="{{!pageShow}}">每个规格库存<input  bindinput='newConst' value='{{newConst}}' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
-      <view class='weui-input'>总库存<input disabled='disabled' placeholder-class='pla-input' value='{{allTotalNew}}' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
+      <view class='weui-input'>总库存<input disabled='{{skuNumTrue}}' bindinput='skuNumTrue' placeholder-class='pla-input' value='{{allTotalNew}}' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
     </view>
     <view class="page__category-content" hidden='{{!clickSpecShow}}'>
       <view class='weui-title'>商品价格库存</view>

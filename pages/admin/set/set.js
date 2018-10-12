@@ -15,7 +15,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     let _this=this,
         goodsListData = JSON.parse(options.model),
         sellPrice = options.sellPrice,
@@ -93,7 +92,6 @@ Page({
         skuNum += parseInt(skuListAll[i].stockNum)
       }
     }
-    console.log(skuNum)
     prevPage.setData({
       skuListAll: skuListAll,
       editShowSet:true,

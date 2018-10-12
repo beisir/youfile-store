@@ -4,6 +4,19 @@
     
     "pages/admin/addGoods/addGoods",
     
+    "pages/businessFriend/addWholesaler/addWholesaler",
+    "pages/businessFriend/merchant/addMerchant/addMerchant",
+    
+    "pages/page/user/user",
+    
+    "pages/page/upload/upload",
+    
+    
+    
+    
+    
+    
+    
     "pages/page/cartList/cartList",
     
     "pages/admin/status/status",
@@ -13,15 +26,13 @@
     
     
     "pages/admin/serStatus/serStatus",
-    "pages/businessFriend/addWholesaler/addWholesaler",
-    "pages/businessFriend/merchant/addMerchant/addMerchant",
+ 
     "pages/admin/set/set",
     "pages/page/storeIcon/storeIcon",
     
     "pages/admin/editGoods/editGoods",
     "pages/role/order/order",
     "pages/page/self/self",
-    "pages/page/user/user",
     "pages/page/newAddress/newAddress",
     "pages/page/updataPwd/updataPwd",
     "pages/page/derm/derm",
