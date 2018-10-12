@@ -10,9 +10,9 @@
 <view class='bf-cont bf-cont2'>
   <view class='me-title'><view></view>进货商管理</view>
   <view class='bt-view'>
-    <view><view>{{purchaserNumber}}</view>进货商总数</view>
-    <view><view>{{waitVerify}}</view>待验证</view>
-    <view><view>{{waitPass}}</view>等待通过</view>
+    <view><navigator class="weui_cells" url='../list/list'><view>{{purchaserNumber}}</view>进货商总数</navigator></view>
+    <view><navigator class="weui_cells"  url='../newMerchant/newMerchant'><view>{{waitVerify}}</view>待验证</navigator></view>
+    <view><navigator class="weui_cells"  url='../newMerchant/newMerchant'><view>{{waitPass}}</view>等待通过</navigator></view>
   </view>
   <button class='bf-btn' bindtap='addWholesaler'>添加进货商</button>
   <view class='bf-weui'>

@@ -130,6 +130,11 @@ function getStoreDetails(data) {
 function miniProgramCode(data) {
   return app.http.getRequest(miniProgramCodeUrl, data)
 }
+/**获取店铺信息**/
+function getStoreInfo() {
+  let data = initStoreId({})
+  return app.http.getRequest(miniProgramCodeUrl, data)
+}
 /**云享品管理 列表**/ 
 function adminGoodsList(data){
   data = initStoreId(data);
@@ -580,6 +585,7 @@ function initStoreId(data) {
   return data;
 }
 module.exports = {
+  getStoreInfo: getStoreInfo,
   supplyOrde: supplyOrde,
   toCuttingImg: toCuttingImg,
   seeVoucher: seeVoucher,

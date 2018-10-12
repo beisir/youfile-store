@@ -1,5 +1,5 @@
 <view class='invoice'>
-  <view class='in-title' wx:for="{{dataInvoice}}" wx:if='{{index<3}}' wx:key="{{index}}">{{item.title}}
+  <view class='in-title' wx:for="{{dataInvoice}}" wx:if='{{index<3 && item.show}}' wx:key="{{index}}">{{item.title}}
     <icon type="success" color="#CCAA77" data-index="{{index}}" wx:if="{{item.selected}}" class="cart-pro-select" bindtap="selectList"/>
     <icon type="circle" color="#CCAA77" data-index="{{index}}" wx:else class="cart-pro-select" bindtap="selectList"/>
   </view>
@@ -7,7 +7,7 @@
     <input value="{{invoice.invoiceTitle}}" bindinput='watchInput' data-type='invoiceTitle'  placeholder='请输入公司发票抬头'></input>
     <input value="{{invoice.identificationNumber}}" bindinput='watchInput' data-type='identificationNumber' placeholder='请输入纳税人识别号'></input>
   </view>
-  <view class='in-title' wx:for="{{dataInvoice}}" wx:if='{{index>2}}' wx:key="{{index}}">{{item.title}}
+  <view class='in-title' wx:for="{{dataInvoice}}" wx:if='{{index>2 && item.show}}' wx:key="{{index}}">{{item.title}}
     <icon type="success" color="#CCAA77" data-index="{{index}}" wx:if="{{item.selected}}" class="cart-pro-select" bindtap="selectList"/>
     <icon type="circle" color="#CCAA77" data-index="{{index}}" wx:else class="cart-pro-select" bindtap="selectList"/>
   </view>

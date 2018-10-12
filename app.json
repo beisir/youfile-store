@@ -1,5 +1,9 @@
 {
   "pages":[
+    "pages/page/user/user",
+    
+    "pages/page/invoice/invoice",
+    
     "pages/page/home/home",
     
     "pages/admin/addGoods/addGoods",
@@ -7,7 +11,6 @@
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     
-    "pages/page/user/user",
     
     "pages/page/upload/upload",
     
@@ -119,7 +122,6 @@
     "pages/page/set/set",
     "pages/page/updataPhone/updataPhone",
     "pages/page/success/success",
-    "pages/page/invoice/invoice",
     "pages/page/germ/germ",
     "pages/page/goodWe/goodWe",
     "pages/page/goodsList/goodsList",

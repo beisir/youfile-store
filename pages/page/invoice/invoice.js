@@ -1,4 +1,5 @@
 // pages/invoice/invoice.js
+const Api = require("../../../utils/api.js");
 Page({
 
   /**
@@ -6,10 +7,10 @@ Page({
    */
   data: {
     dataInvoice:[
-      { title: "不开发票", selected: true },
-      { title: "个人", selected: false },
-      { title: "普通发票", selected: false },
-      { title: "增值税专用发票", selected:false},
+      { title: "不开发票", selected: true ,show:true},
+      { title: "个人", selected: false, show: false},
+      { title: "普通发票", selected: false, show: false},
+      { title: "增值税专用发票", selected: false, show: false},
     ],
     ordinary:true,
     com:true,
@@ -88,10 +89,41 @@ Page({
       wx.navigateBack();
     }
   },
+  cancelShow(){
+    console.log(Api)
+    Api.getStoreInfo().then(res=>{
+      this.setData({
+        show: res.obj.isReceipt
+      })
+      console.log(res.obj.isReceipt)
+      if (res.obj.isReceipt == true){
+        let str = res.obj.receiptInfo;
+        let arr = str.split(",");
+        if (arr.indexOf("个人发票") > -1){
+          this.setData({
+            ["dataInvoice[1].show"]:true
+          })
+        }
+        if (arr.indexOf("提供增值税普通发票") > -1) {
+          this.setData({
+            ["dataInvoice[2].show"]: true
+          })
+        }
+        if (arr.indexOf("提供增值税专用发票") > -1) {
+          this.setData({
+            ["dataInvoice[3].show"]: true
+          })
+        }
+        
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.cancelShow()
+
     // if (options != {}){
     //   let index = 0;
     //   if (options.invoiceType=="个人"){
