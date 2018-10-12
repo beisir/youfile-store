@@ -69,10 +69,10 @@ Page({
           icon: 'none',
           duration: 2000
         })
+        that.cancel()
         that.setData({
           detailList: that.data.detailList
         })
-        that.cancel()
       })
   },
   swichNavLast:function(){

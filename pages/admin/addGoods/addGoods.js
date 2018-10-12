@@ -388,7 +388,7 @@ Page({
       "recommendDesc": this.data.recommendDesc,
       "sellPrice":sellPrice,
       "status":status,
-      "stockNum": this.data.skuNum,
+      "stockNum": this.data.skuNum == '' ? this.data.allTotalNew:this.data.skuNum,
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": wholesalePrice
     }

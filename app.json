@@ -6,16 +6,18 @@
     
     "pages/page/home/home",
     
-    "pages/page/cartList/cartList",
-    
-    
-    
-    
-    
+    "pages/admin/status/status",
     
     "pages/admin/addGoods/addGoods",
     
     
+    
+    
+    
+    
+    
+    
+    "pages/page/cartList/cartList",
     
     
     
@@ -32,7 +34,6 @@
     
     
     
-    "pages/admin/status/status",
     
     
     "pages/page/serStatus/serStatus",
