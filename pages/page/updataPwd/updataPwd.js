@@ -39,6 +39,15 @@ Page({
     let newpass = this.data.new,
       re = this.data.re,
       old = this.data.old;
+
+    if (newpass.length < 6 || newpass.length > 16) {
+      wx.showToast({
+        title: '密码必须是6 - 16位的数字或字母',
+        icon: 'none'
+      })
+      return
+    }
+
     if (newpass == re & newpass != "") {
 
       API.updataPwd({

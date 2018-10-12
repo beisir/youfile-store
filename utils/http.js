@@ -8,14 +8,18 @@ import {
  */
 class request {
   constructor() {
-      this._baseUrl = baseUrl,
-      this.defaultHeader = { 'content-type': 'application/json;charset=UTF-8' },
-      this.defaultUploadHeader = { 'content-type': 'multipart/form-data' },
+    this._baseUrl = baseUrl,
+      this.defaultHeader = {
+        'content-type': 'application/json;charset=UTF-8'
+      },
+      this.defaultUploadHeader = {
+        'content-type': 'multipart/form-data'
+      },
       this.authHandler = new AuthHandler()
   }
   /**
-    * PUT类型的网络请求
-    */
+   * PUT类型的网络请求
+   */
   putRequest(url, data, header) {
     return this.requestAll(url, data, 'PUT', header)
   }
@@ -94,7 +98,7 @@ class request {
                 this._errorHandler(res)
               }
               reject(res)
-            }  
+            }
           }),
           fail: (res => {
             if (this._errorHandler != null) {
@@ -102,7 +106,7 @@ class request {
             }
             reject(res)
           }),
-          complete: function () {
+          complete: function() {
             wx.hideLoading()
             wx.hideNavigationBarLoading()
           }
@@ -116,6 +120,7 @@ class request {
   chooseImageUpload(types) {
     return this.chooseImage(types)
   }
+
   chooseImage(types) {
     wx.showNavigationBarLoading()
     wx.showLoading({
@@ -129,15 +134,15 @@ class request {
         } else {
           delete header['Authorization'];
         }
-      wx.chooseImage({
-        count: 6,
-        sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-        success: function (res) {
-          var imgSrc = res.tempFilePaths;
-          var tempFilePaths = res.tempFilePaths
+        wx.chooseImage({
+          count: 6,
+          sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+          sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+          success: function(res) {
+            var imgSrc = res.tempFilePaths;
+            var tempFilePaths = res.tempFilePaths
             wx.uploadFile({
-              
+
               url: uploadImg,
               filePath: tempFilePaths[0],
               name: 'file',
@@ -156,20 +161,71 @@ class request {
                 }
               }),
             })
-        },
-        fail: (res => {
-          if (this._errorHandler != null) {
-            this._errorHandler(res)
+          },
+          fail: (res => {
+            if (this._errorHandler != null) {
+              this._errorHandler(res)
+            }
+            reject(res)
+          }),
+          complete: function() {
+            wx.hideLoading()
+            wx.hideNavigationBarLoading()
           }
-          reject(res)
-        }),
-        complete: function () {
-          wx.hideLoading()
-          wx.hideNavigationBarLoading()
-        }
+        })
       })
     })
+  }
+  onlychoseImg() {
+    return new Promise((resolve, reject) => {
+      wx.chooseImage({
+        count: 6,
+        sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+        sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
+        success: function(res) {
+          resolve(res)
+        },
+        fail: (e => {
+          reject(e)
+        })
+      })
     })
+  }
+  onlyUploadImg(url, types) {
+    if(!url){
+      console.warn('no upload url')
+      return
+    }
+    return new Promise((resolve, reject) => {
+      this.authHandler.getTokenOrRefresh().then(token => {
+        var header = this.defaultUploadHeader
+        if (token) {
+          header['Authorization'] = token;
+        } else {
+          delete header['Authorization'];
+        }
+        wx.uploadFile({
+          url: uploadImg,
+          filePath: url,
+          name: 'file',
+          header: header,
+          formData: {
+            'type': types
+          },
+          success: (res => {
+            if (res.statusCode === 200) {
+              resolve(res.data)
+            } else {
+              if (this._errorHandler != null) {
+                this._errorHandler(res)
+              }
+              reject(res)
+            }
+          }),
+        })
+      })
+    })
+
   }
 }
 export default request

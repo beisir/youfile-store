@@ -3,7 +3,9 @@
     <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic:"/image/42.png"}}'></image>
   </view>
   <view class="weui-cell__name">
-    {{user.nickName}}<image src='/image/ermR.png'></image>
+    {{user.nickName}}
+    <image wx:if="{{user.gender==1}}" src='/image/man.png'></image>
+    <image wx:if="{{user.gender==2}}" src='/image/ermR.png'></image>
   </view>
 </view>
 <view class='erm-cont' style='padding:0;'>

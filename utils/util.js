@@ -58,7 +58,35 @@ function date_format(micro_second) {
 function fill_zero_prefix(num) {
   return num < 10 ? "0" + num : num
 }
+
+// 保存至相册
+const saveImgToPhone = imgUrl => {
+  wx.downloadFile({
+    url: imgUrl,
+    success: function (res) {
+      if (res.statusCode === 200) {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success(res) {
+            wx.showToast({
+              title: '保存图片成功！',
+              icon: 'none'
+            })
+          },
+          fail(res) {
+            wx.showToast({
+              title: '保存图片失败！',
+              icon: 'none'
+            })
+          }
+        })
+      }
+    }
+  })
+}
 module.exports = {
   formatTime: formatTime,
   count_down:count_down,
+  saveImgToPhone: saveImgToPhone
 }
+
