@@ -1,4 +1,5 @@
 import Api from './api.js'
+import HtmlToJson from '../wxParse/html2json.js'
 /* 时间格式化 */
 const formatTime = date => {
   const year = date.getFullYear()
@@ -84,9 +85,32 @@ const saveImgToPhone = imgUrl => {
     }
   })
 }
+
+/**
+ * 解析商品的描述内容
+ */
+function parseGoodsDescription(htmlContent) {
+  var htmlJson = [];
+  var transData = HtmlToJson.html2json(htmlContent, 'htmlContent');
+  for (var i = 0; i < transData.nodes.length; i++) {
+    var item = transData.nodes[i];
+    var tag = item.tag;
+    var content = null;
+    if ("img" == tag) {
+      content = item.attr.src;
+    } else {
+      content = item.nodes[0].text;
+    }
+    if (content != null && content != undefined) {
+      htmlJson.push({ "tag": tag, "content": content });
+    }
+  }
+  return htmlJson;
+}
 module.exports = {
   formatTime: formatTime,
   count_down:count_down,
-  saveImgToPhone: saveImgToPhone
+  saveImgToPhone: saveImgToPhone,
+  parseGoodsDescription: parseGoodsDescription
 }
 
