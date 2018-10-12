@@ -1,6 +1,7 @@
 const app = getApp();
 var x, y, x1, y1, x2, y2, index, currindex, n, yy;
 import Api from '../../../utils/api.js'
+import util from '../../../utils/util.js'
 Page({
   /**
    * 页面的初始数据
@@ -204,7 +205,7 @@ Page({
   onLoad: function (options) {
     this.getConfig()
     // var str ='<h4>标题1</h4><p>这是内容1</p><img src="https://dev-image.youlife.me/goods/baec9167-286b-4510-9990-8a452522923a.jpg"/><h4>标题</h4><p>这是内容1</p><p>这是内容1</p><p>这是内容1</p><img src="https://dev-image.youlife.me/goods/e2c1a317-d41d-401c-b8dc-b6771e6f214a.jpg"/><p>这是内容1</p><h4>企鹅</h4>'
-    // console.log(Api.parseGoodsDescription(str))
+    // console.log(util.parseGoodsDescription(str))
   },
   // tab切换
   swichNav: function (e) {
@@ -356,9 +357,8 @@ Page({
       }
       goodsImageVOList.push({ imageUrl: pics[i].replace(this.data.baseUrl, '') })
     }
-    console.log(pageall)
     if(pageall.length>0){
-      if (pageall.length ==0){
+      if (skuListAll.length ==0){
         if (pageall.length == 1) {
           skuList0 = pageall[0].goodsSpecificationValueVOList
           for (var i = 0; i < skuList0.length; i++) {

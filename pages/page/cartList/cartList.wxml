@@ -124,8 +124,12 @@
       <view class="cart-footer">
         <icon wx:if="{{selectAllStatus}}" type="success" color="#CCAA77" class="total-select" bindtap="selectAll"/>
         <icon wx:else type="circle" color="#A5A5A5" class="total-select" bindtap="selectAll"/>
-        <view class='order-all'>
+        <view class='order-all' wx:if='{{!enjoyCost}}'>
           合计：<text>￥{{totalPrice}}</text>
+          <view>(不含运费)</view>
+        </view>
+        <view class='order-all' wx:if='{{enjoyCost}}'>
+          合计：<text>￥{{total1}}</text>
           <view>(不含运费)</view>
         </view>
         <view class="order-icon" bindtap='creatOrder'>

@@ -15,6 +15,7 @@ Page({
     totalPrice:0, 
     selectAllStatus:true, 
     allEmpty:true,
+    total1:0,
     obj:{
         name:"hello"
     },
@@ -133,53 +134,6 @@ Page({
       detailList: data
     })
   },
-  // recordStart: function (e) {
-  //   this.setData({
-  //     leftVal:''
-  //   });
-  //   var index1 = this.data.index;
-  //   recordStartX = e.touches[0].clientX;
-  //   var detailList = this.data.detailList;
-  //   if (index1 != undefined) {
-  //     detailList[index1].offsetX = 0;
-  //   }
-  //   var index = e.currentTarget.dataset.index
-  //   currentOffsetX = this.data.detailList[index].offsetX;
-  // }
-  // ,
-  // recordMove: function (e) {
-  //   var detailList = this.data.detailList;
-  //   var index=e.currentTarget.dataset.index
-  //   var item = detailList[index];
-  //   var x = e.touches[0].clientX;
-  //   var mx = recordStartX - x;
-  //   var result = currentOffsetX - mx;
-  //   if (result >= -80 && result <= 0) {
-  //     item.offsetX = result;
-  //   }
-  //   this.setData({
-  //     detailList: detailList
-  //   });
-  // }
-  // ,
-  // recordEnd: function (e) {
-  //   var detailList = this.data.detailList;
-  //   var index = e.currentTarget.dataset.index
-  //   var item = detailList[index];
-  //   this.setData({
-  //     index: index
-  //   });
-  //   if (item.offsetX < -40) {
-  //     item.offsetX = -80;
-
-  //   } else {
-  //     item.offsetX = 0;
-
-  //   }
-  //   this.setData({
-  //     detailList: detailList
-  //   });
-  // },
   urlHome: function () {
     wx.switchTab({
       url: '../home/home'
@@ -445,6 +399,7 @@ Page({
       storeNum = this.data.storeNum,
       storeAmount = this.data.storeAmount,
       allTotalNum=0,
+      total1=0,
       totalNew=0,
       allStoreAmount=0
     let detailList = this.data.detailList;// 获取购物车列表
@@ -494,14 +449,9 @@ Page({
           var enjoy = detailList[i].enjoyPrice
           if (detailList[i].shoppingCartSkuList != null) {
             var arr = detailList[i].shoppingCartSkuList
-            if (enjoy) {
-              for (var j = 0; j < arr.length; j++) {
-                total += arr[j].num * arr[j].wholesalePrice;
-              }
-            } else {
-              for (var j = 0; j < arr.length; j++) {
-                total += arr[j].num * arr[j].sellPrice;
-              }
+            for (var j = 0; j < arr.length; j++) {
+              total1 += arr[j].num * arr[j].wholesalePrice;
+              total += arr[j].num * arr[j].sellPrice;
             }
             if (total > storeAmount) {
               detailList[i].enjoyPrice = true
@@ -521,6 +471,7 @@ Page({
     }
     this.setData({ 
       detailList: detailList,
+      total1: total1.toFixed(2),
       totalPrice: (total + totalNew).toFixed(2)
     });
   },
