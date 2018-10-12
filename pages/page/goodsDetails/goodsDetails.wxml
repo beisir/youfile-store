@@ -113,7 +113,7 @@
         </navigator>
     </view>
 </view>
-<view wx:if='{{limitShow==3}}'>
+<view wx:if='{{limitShow==3 && isShowNewOne==false}}'>
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
       <view class='new-man' hidden='{{discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
@@ -175,6 +175,58 @@
           </view>
           <view data-status='0' bindtap='moreAddCart'>加入进货车</view>
           <view data-status='1' bindtap='moreAddCart'>立即下单</view>
+        </view>
+      </view>
+  </view>
+</view>
+<view wx:if='{{isShowNewOne}}'>
+  <view hidden="{{hidden}}" class='alertAdd'>
+      <view class='gd-alert' animation='{{animationData}}'>
+        <view class='gd-top'>
+          <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
+          <view class='gd-image'>
+            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}"></image>
+          </view>
+          <view class='gd-ins'>
+            <view class='gd-title1'>{{name}}</view>
+            <view>￥{{sell}}</view>
+            <text>库存：{{stockNum}}件</text>
+          </view>
+        </view>
+        <view wx:for='{{goodsSpecificationVOList}}' wx:key="{{index}}">
+          <view  class='gd-gg' wx:if='{{index==0}}'>
+            <text>{{item.specName}}</text>
+            <view>
+            <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
+                <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{specsTab==index?'active':''}}" data-current="{{index}}" bindtap='changeButton'>{{item.specValueName}}</view></view>
+              </block>
+            </view>
+          </view>
+          <view  class='gd-gg gd-gg1'  wx:if='{{index==1}}'>
+            <text>{{item.specName}}</text>
+            <view style='height:250rpx;overflow:scroll;'>
+            <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
+                <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.specValueName}}</view></view>
+              </block>
+            </view>
+          </view>
+        </view>
+        <view class='gd-gg gd-gg1'>
+          <text>购买数量</text>
+          <view class='cart-list gd-cart-list'>
+            <view class="cart-count-box">
+              <text class="cart-count-down" bindtap="minusCount">
+                  <text wx:if="{{numbers!=1}}" class='ct-xian'></text>
+                  <text wx:if="{{numbers==1}}"><text class='ct-xian ct-xian1'></text></text> 
+                </text>
+                <text class="cart-count-num">{{numbers}}</text>
+                <view class="cart-count-add"  bindtap="addCount"><image  src="/image/add.png"></image></view>
+            </view>
+          </view>
+        </view>
+        <view class='weui-bottom'>
+          <view  data-status='0' bindtap='cratHome'>加入购物车</view>
+          <view  data-status='1' bindtap='cratHome'>立即购买</view>
         </view>
       </view>
   </view>

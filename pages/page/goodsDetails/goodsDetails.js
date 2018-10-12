@@ -58,6 +58,8 @@ Page({
     imgUrls: [],
     baseUrl: app.globalData.imageUrl,
     goodsSpecificationVOList:[],
+    isShowNew:false,
+    isShowNewOne: false,
     goodsSkuVOList:[],
     skuArrTwo: [],
     newSkuArrTwo:[],
@@ -654,6 +656,7 @@ Page({
     let saleBatchAmount = this.data.saleBatchAmount
     let saleBatchNum = this.data.saleBatchNum
     let difference=0
+    let isShowNew = this.data.isShowNew
     let newSkuOnly = this.data.newSkuOnly
     let limitShow = this.data.limitShow
     let goodsSpecificationVOList = this.data.goodsSpecificationVOList
@@ -693,6 +696,12 @@ Page({
       }
     }
     goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
+    if (isShowNew){
+      for (var i = 0; i < goodsSpecificationVOList[0].goodsSpecificationValueVOList.length;i++){
+        // goodsSpecificationVOList[0].goodsSpecificationValueVOList[i].num=0
+      }
+    }
+    
     this.setData({                    
       newSkuArrTwo: newSkuArrTwo,
       totalPrice: total.toFixed(2),
@@ -819,13 +828,22 @@ Page({
             likeShow: false
           })
         }
+
         if (Api.isEmpty(obj.goodsSpecificationVOList)){
           if (obj.goodsSpecificationVOList.length > 1) {
             skuArrTwo.push(obj.goodsSpecificationVOList[1])
             name = obj.goodsSpecificationVOList[1].specName
           }
+          if (obj.goodsSpecificationVOList.length==1){
+            _this.setData({
+              isShowNew:true
+            })
+          }
         }else{
           obj.goodsSpecificationVOList=[]
+          _this.setData({
+            isShowNewOne:true
+          })
         } 
         if (!Api.isEmpty(obj.goodsSkuVOList)){
           obj.goodsSkuVOList=[]
