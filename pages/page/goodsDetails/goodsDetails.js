@@ -161,7 +161,11 @@ Page({
           that.setData({
             newCartList: arr,
           }, function () {
-            getIdentity(this,goodsId,true)
+            if (options.name == "more"){
+              getIdentity(this, goodsId, true)
+            }else{
+              getIdentity(this, goodsId, false)
+            }
           })
         })
     }else{
@@ -204,7 +208,6 @@ Page({
     }, 30)
   },
   goodsSku:function(code,index){
-    // console.log(code+"////"+index)
     var _this=this,
       dataList = _this.data.goodsSkuVOList
      for (var i = 0; i < dataList.length; i++) {
