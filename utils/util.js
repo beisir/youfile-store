@@ -61,27 +61,42 @@ function fill_zero_prefix(num) {
 
 // 保存至相册
 const saveImgToPhone = imgUrl => {
-  wx.downloadFile({
-    url: imgUrl,
-    success: function (res) {
-      if (res.statusCode === 200) {
-        wx.saveImageToPhotosAlbum({
-          filePath: res.tempFilePath,
-          success(res) {
-            wx.showToast({
-              title: '保存图片成功！',
-              icon: 'none'
-            })
-          },
-          fail(res) {
-            wx.showToast({
-              title: '保存图片失败！',
-              icon: 'none'
-            })
-          }
-        })
+    wx.downloadFile({
+      url: imgUrl,
+      success: function (res) {
+        console.log(res)
+        if (res.statusCode === 200) {
+          wx.saveImageToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success(res) {
+              wx.showToast({
+                title: '保存图片成功！',
+                icon: 'none'
+              })
+            },
+            fail(res) {
+              wx.showToast({
+                title: '保存图片失败！',
+                icon: 'none'
+              })
+            }
+          })
+        }
       }
-    }
+    })
+}
+// 获取授权种类
+function getUserSetting(){
+  return new Promise((resolve,reject)=>{
+    wx.getSetting({
+      success:(res)=>{
+        resolve(res)
+      },
+      fail:(e)=>{
+        reject(e)
+      }
+    })
+    
   })
 }
 module.exports = {
