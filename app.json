@@ -2,6 +2,11 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/page/cartList/cartList",
+    
+    "pages/admin/status/status",
+    
+    
     "pages/page/user/user",
     
     "pages/page/order/order",
@@ -11,12 +16,9 @@
     
     "pages/role/order/order",
     
-    
-    
     "pages/page/workIndex/workIndex",
     
     
-    "pages/page/cartList/cartList",
     
     
     
@@ -30,7 +32,6 @@
     
     
     
-    "pages/admin/status/status",
     
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
