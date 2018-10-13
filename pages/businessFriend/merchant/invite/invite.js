@@ -6,10 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value: '我是进货商，我的优店，精挑细选优质商品，快来和我一起赚钱吧！',
+    value: '',
     accept: '',
     baseUrl: app.globalData.imageUrl,
     headPic:'',
+    storeName:'',
     name:''
   },
   goBack: function () {
@@ -34,7 +35,12 @@ Page({
       greet = this.data.value,
       send = wx.getStorageSync('storeId'),
       remark = this.data.remark
-    Api.apply({ accept: accept, send: send, greet: greet, remark: remark })
+    if (Api.isEmpty(remark)){
+      var data = { accept: accept, send: send, greet: greet, remark: remark }
+    }else{
+      var data = { accept: accept, send: send, greet: greet, remark: null }
+    }
+    Api.apply(data)
       .then(res => {
         wx.showToast({
           title: '发送成功',
@@ -50,7 +56,18 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  getStoreName:function(){
+    var _this=this
+    Api.getStoreName()
+    .then(res=>{
+      var storeName = res.obj.name
+      _this.setData({
+        storeName: storeName
+      })
+    })
+  },
   onLoad: function (options) {
+    this.getStoreName()
     if (options.headPic){
       this.setData({
         headPic: options.headPic,

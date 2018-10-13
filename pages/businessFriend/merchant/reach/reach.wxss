@@ -1,5 +1,7 @@
 @import '../../information/information';
-
+.bt-view>view view,.bt-view>navigator view{
+  font-size:26rpx;
+}
 .weui_cells  .nbf-font{
   color: #999;font-size: 28rpx;margin-top: 10rpx;
 }

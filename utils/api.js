@@ -6,6 +6,7 @@ import {
   adminShopCateUrl,
   adminGoodsStatusUrl,
   saleBatchNumUrl,
+  cusNewDetailsUrl,
   salebatchamountUrl,
   saleBatchUrl,
   goodsSearchListUrl,
@@ -95,6 +96,7 @@ import {
   classCodeParUrl,
   updateGoodsUrl,
   seeVoucherUrl,
+  getStoreNameUrl,
   getStoreDetailsUrl,
   userInforUrl,
   supplyOrderUrl
@@ -148,6 +150,12 @@ function adminGoodsDelete(data) {
 function userInfor(data) {
   return app.http.getRequest(userInforUrl, data)
 }
+/**获取店铺客户关系资料**/
+function cusNewDetails(data) {
+  data = initStoreId(data);
+  return app.http.getRequest(cusNewDetailsUrl, data)
+}
+
 /**获取批发商商资料**/
 function newUserInfor(data) {
   return app.http.getRequest(newUserInforUrl, data)
@@ -435,6 +443,7 @@ function userInfo(data) {
 }
 /**保存客户信息**/
 function saveDetails(data) {
+  data = initStoreId(data);
   return app.http.postRequest(saveDetailsUrl, data)
 }
 /**添加批发商分页查询列表**/
@@ -490,6 +499,12 @@ function apiSetUser(data) {
 function adminSetUser(data) {
   return app.http.getRequest(adminSetUserUrl, data)
 }
+/**获取店铺名称**/
+function getStoreName(data) {
+  data = initStoreId(data);
+  return app.http.getRequest(getStoreNameUrl, data)
+}
+
 /**获取用户信息**/
 function getUserDetaisl(data) {
   return app.http.getRequest(getUserDetaislUrl, data)
@@ -662,11 +677,13 @@ module.exports = {
   purchaserUserId: purchaserUserId,
   config: config,
   homeIndex: homeIndex,
+  getStoreName: getStoreName,
   storeIdInfo: storeIdInfo,
   uploadImage: uploadImage,
   updateCover: updateCover,
   apiSetUser: apiSetUser,
   apiAddUser: apiAddUser,
+  cusNewDetails: cusNewDetails,
   adminAddUser: adminAddUser,
   adminSetUser: adminSetUser,
   dealUser:dealUser,

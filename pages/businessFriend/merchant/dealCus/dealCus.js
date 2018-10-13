@@ -10,6 +10,7 @@ Page({
     value: '',
     totalCount: 0,
     currentTab: -1,
+    baseUrl: app.globalData.imageUrl,
     sortKey: '',
     sortValue: ''
   },

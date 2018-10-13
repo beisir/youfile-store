@@ -197,6 +197,7 @@ Page({
           })
         }
         for (var i = 0; i < effectiveList.length;i++){
+          effectiveList[i].selected = true
           var newSkvArr = effectiveList[i].shoppingCartSkuList
           if (Api.isEmpty(newSkvArr)){
             var num=0;
@@ -204,15 +205,15 @@ Page({
             var allGoodsPf=0
             for (var j = 0; j < newSkvArr.length;j++){
               num+= newSkvArr[j].num
-              allGoodsAmount += newSkvArr[j].sellPrice
-              allGoodsPf += newSkvArr[j].wholesalePrice
-              effectiveList[i].num = num
-              effectiveList[i].allGoodsAmount = allGoodsAmount
-              effectiveList[i].allGoodsPf = allGoodsPf
+              allGoodsAmount += newSkvArr[j].sellPrice * newSkvArr[j].num
+              allGoodsPf += newSkvArr[j].wholesalePrice * newSkvArr[j].num
             }
+            effectiveList[i].num = num
+            effectiveList[i].allGoodsAmount = allGoodsAmount
+            effectiveList[i].allGoodsPf = allGoodsPf
           }else{
-            effectiveList[i].allGoodsAmount = effectiveList[i].sellPrice
-            effectiveList[i].allGoodsPf = effectiveList[i].allGoodsPf
+            effectiveList[i].allGoodsAmount = effectiveList[i].sellPrice*effectiveList[i].num
+            effectiveList[i].allGoodsPf = effectiveList[i].wholesalePrice*effectiveList[i].num
           }
         }
         _this.setData({
@@ -410,7 +411,8 @@ Page({
       allTotalNum=0,
       total1=0,
       totalNew=0,
-      allStoreAmount=0
+      saleBatchGoodsNum=0,
+      allGoodsAmount=0
     let detailList = this.data.detailList;// 获取购物车列表
     let total = 0;
     this.setData({
@@ -420,7 +422,10 @@ Page({
     for (let i = 0; i < detailList.length; i++) { 
       if (detailList[i].selected) {
         if (limitShow==3){
-          if (Api.isEmpty(detailList[i].saleBatchNum)) {
+          allTotalNum = parseInt(detailList[i].num)
+          allGoodsAmount = parseInt(detailList[i].allGoodsAmount)
+          saleBatchGoodsNum = detailList[i].saleBatchNum
+          if (Api.isEmpty(saleBatchGoodsNum)) {
             // allTotalNum += parseInt(detailList[i].num)
             // allStoreAmount += parseInt(detailList[i].sellPrice)
             // if (detailList[i].saleBatchNum < parseInt(detailList[i].num + 1)) {
@@ -434,12 +439,12 @@ Page({
             // detailList[i].enjoyPrice = false
             // detailList[i].allNum = storeNum
           }
-          if (allTotalNum > storeNum || allStoreAmount>storeAmount){
-            detailList[i].enjoyPrice = true
-            this.setData({
-              enjoyCost:true
-            })
-          }
+          // if (allTotalNum > storeNum || allStoreAmount>storeAmount){
+          //   detailList[i].enjoyPrice = true
+          //   this.setData({
+          //     enjoyCost:true
+          //   })
+          // }
         }else{
           totalNew += detailList[i].allGoodsAmount;
           // if (detailList[i].shoppingCartSkuList != null) {
@@ -472,9 +477,9 @@ Page({
             }
           } else {
             if (enjoy) {
-              totalNew += detailList[i].num * detailList[i].wholesalePrice;
+              totalNew = detailList[i].num * detailList[i].wholesalePrice;
             } else {
-              totalNew += detailList[i].num * detailList[i].sellPrice;
+              totalNew = detailList[i].num * detailList[i].sellPrice;
             }
           }
         }

@@ -7,7 +7,7 @@
   </view>
 <view class='bf-cont'>
   <view class='bf-weui'>
-    <navigator class="weui_cells" url="../serList/serList">
+    <navigator class="weui_cells" url="../addMerchant/addMerchant">
       <image  mode="widthFix" src="/image/w1.png"></image>
       <text class="bf-font">添加进货商 </text>
       <view class='weui-view'>
@@ -22,7 +22,7 @@
   <view class='bf-weui'>
     <navigator class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}' url="../reach/reach?status=2&send={{item.send}}&accept={{item.purchaserUserId}}&remark={{item.remark}}">
       <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}"></image></view>
-      <text>{{item.remark==null?item.nickName:item.remark}}</text>
+      <text>{{item.remark==null || item.remark==''?item.nickName:item.remark}}</text>
     </navigator>
   </view>
 </view>

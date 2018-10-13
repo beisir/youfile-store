@@ -11,7 +11,7 @@
   <view class='lk-img'><image  mode="widthFix" src="/image/icl.png"></image></view>
   <navigator class='bf-weui' url='../details/details?userId={{userId}}'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{data.headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{data.headPic}}"></image></view>
       <text>{{data.userName}}</text>
       <image  class='re-img' wx:if='{{data.gender!=1}}' mode="widthFix" src="/image/ermR.png"></image>
       <image  class='re-img' wx:if='{{data.gender==1}}' mode="widthFix" src="/image/man.png"></image>
@@ -33,9 +33,9 @@
    <text>手机号</text><view>{{data.mobile}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
-   <text>微信号</text><view>{{data.mobile}}</view>
+   <text>微信号</text><view wx:if='{{data.mobile!=null}}'>{{data.mobile}}</view>
   </view>
   <view class='in-cont'>
-   <text>生日</text><view>{{data.birthday}}</view>
+   <text>生日</text><view wx:if='{{data.birthday!=null}}'>{{data.birthday}}</view>
   </view>
 </view>

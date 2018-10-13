@@ -2,9 +2,9 @@
   <view class='bf-title'>供应商数据</view>
   <text>海量数据，最需要的数据信息</text>
   <view class='bt-view'>
-    <view><view>{{merchantNumber}}</view>供应商总数</view>
-    <view><view>{{waitVerify}}</view>待验证</view>
-    <view><view>{{waitPass}}</view>等待通过</view>
+    <navigator url='../wholesaler/wholesaler'><view>{{merchantNumber}}</view>供应商总数</navigator>
+    <navigator  url='../mewWholesaler/mewWholesaler'><view>{{waitVerify}}</view>待验证</navigator>
+    <navigator  url='../mewWholesaler/mewWholesaler'><view>{{waitPass}}</view>等待通过</navigator>
   </view>
   <button class='bf-btn' bindtap='addWholesaler'>扫一扫 添加供应商</button>
   <view class='bf-weui'>

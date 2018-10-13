@@ -52,9 +52,9 @@ Page({
         phone: obj.phone,
         wechart: obj.wechart,
         birthday: obj.birthday,
-        province: obj.province,
-        city: obj.city,
-        area: obj.county,
+        province: obj.province == null ? '' : obj.province,
+        city: obj.city == null ? '' : obj.city,
+        area: obj.county == null ? '' : obj.county,
         detailAddress: obj.detailAddress,
         userId: obj.userId
       })
