@@ -7,7 +7,7 @@
   <view class='page__bd'>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-           <text class='input-title'>收货人：</text>
+           <text class='input-title'>收货人</text>
            <input value='{{nameVal}}' bindinput='nameValFun'></input>
         </view>
         <view class='weui-img'>
@@ -16,12 +16,12 @@
       </view>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-           <text class='input-title'>联系方式：</text><input  value='{{telephone}}'  bindinput='savePhone'></input>
+           <text class='input-title'>联系方式</text><input type='number' value='{{telephone}}'  bindinput='savePhone'></input>
         </view>
       </view>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'  bindtap='chooseAddress'>
-           <text class='input-title'>所在地区：</text><input disabled="true" value="{{province == ''?'':province + '、' + city + '、' + area}}"></input>
+           <text class='input-title'>所在地区</text><input disabled="true" value="{{province == ''?'':province + '、' + city + '、' + area}}"></input>
         </view>
         <view class='weui-img'>
          <image src="/image/icl.png"></image>
@@ -29,7 +29,7 @@
       </view>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-           <text class='input-title'>详情街道：</text><input value='{{addressVal}}' bindinput='addressValFun'></input>
+           <text class='input-title'>详情街道</text><input value='{{addressVal}}' bindinput='addressValFun'></input>
         </view>
       </view>
   </view>

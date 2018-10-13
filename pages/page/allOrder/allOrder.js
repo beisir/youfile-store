@@ -11,7 +11,12 @@ Page({
     //取消订单
     reason: [{ title: "我不想买了", selected: true }, { title: "信息填写错误，重新拍", selected: false }, { title: "卖家缺货", selected: false }, { title: "同城见面交易", selected: false }, { title: "其他", selected: false }],
     cancelIndex: 0,
-    orderName:"订单"
+    orderName:"订单",
+    timeOnce: true
+  },
+
+  toHome() {
+    API.toHome();
   },
 
   showModal(e) {
@@ -150,7 +155,11 @@ Page({
       }
 
       //倒计时
-      util.count_down(this, res.obj.timeoutExpressSecond)
+      let timm = this.data.timeOnce;
+      if (timm) {
+        util.count_down(this, res.obj.timeoutExpressSecond)
+        this.setData({ timeOnce: false })
+      }
     })
   },
   resetData(data) {

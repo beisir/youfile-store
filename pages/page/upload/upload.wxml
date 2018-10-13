@@ -11,4 +11,4 @@
     </view>
   </view>
 </view>
-<canvas style='width:5000px;height:5000px;position:fixed;left:9000px;' canvas-id='hideCanvas'></canvas>
+<canvas style='width:2000px;height:2000px;position:fixed;left:9000px;' canvas-id='hideCanvas'></canvas>

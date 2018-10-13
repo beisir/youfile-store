@@ -22,7 +22,7 @@
     </view>
 
     <view class='item-box'>
-      <view class='item-title'>商户全程</view>
+      <view class='item-title'>商户全称</view>
       <view class='item-msg'>{{user.storeInfo.storeName}}</view>
     </view>
 

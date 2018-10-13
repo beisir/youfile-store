@@ -54,7 +54,7 @@
 
 .np-ct .np-view{
   margin-left:80rpx;
-  min-height: 190rpx;
+  /* min-height: 190rpx; */
   padding-right: 100rpx;
   border-bottom: 2rpx solid #f3f3f3;
   position: relative;

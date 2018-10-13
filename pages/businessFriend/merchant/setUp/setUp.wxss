@@ -2,3 +2,7 @@
 .shop-cont view.nView{
   padding-bottom: 0;
 }
+
+.nView{
+  padding-right: 36rpx;
+}
