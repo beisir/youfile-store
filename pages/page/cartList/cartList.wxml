@@ -45,14 +45,14 @@
                           <view class="th">规格</view>
                           <view class="th">数量</view>
                           <view class="th">零售价</view>
-                          <view class="th">批发价</view>
+                          <view class="th"  wx:if='{{item.enjoyPrice}}'>批发价</view>
                       </view>
                       <view class="tr" wx:if='{{limitShow==3}}'  wx:for="{{item.shoppingCartSkuList}}" wx:for-item="record" wx:key="{{index}}">
                           <view class="td">{{record.skuName}}</view>
                           <view class="td">{{record.num}}件</view>
                           <view class="td classTd" wx:if='{{item.enjoyPrice}}'>￥{{record.sellPrice}}</view>
                           <view class="td" wx:if='{{!item.enjoyPrice}}'>￥{{record.sellPrice}}</view>
-                          <view class="td">￥{{record.wholesalePrice}}</view>
+                          <view class="td"  wx:if='{{item.enjoyPrice}}'>￥{{record.wholesalePrice}}</view>
                       </view>
                       <!-- <view class="delete-box" bindtap="deleteList" data-id='{{record.goodsId}}' data-index="{{index}}">
                       </view> -->

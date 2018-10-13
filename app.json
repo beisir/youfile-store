@@ -1,11 +1,15 @@
 {
   "pages":[
-    "pages/page/workIndex/workIndex",
-    
-    "pages/page/user/user",
-    
     "pages/page/home/home",
     
+    "pages/page/workIndex/workIndex",
+    
+    "pages/page/cartList/cartList",
+    
+    "pages/admin/status/status",
+    
+    
+    "pages/page/user/user",
     
     "pages/page/order/order",
     
@@ -13,13 +17,6 @@
     "pages/role/supplyOrder/supplyOrder",
     
     "pages/role/order/order",
-    
-    
-    
-    
-    
-    "pages/page/cartList/cartList",
-    
     
     
     "pages/businessFriend/merchant/index/index",
@@ -32,7 +29,6 @@
     
     
     
-    "pages/admin/status/status",
     
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/merchant/addMerchant/addMerchant",

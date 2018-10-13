@@ -217,8 +217,8 @@ Page({
           }
         }
         _this.setData({
-          storeAmount: store.saleBatchAmount == null ? 0 : store.saleBatchAmount,
-          storeNum: store.saleBatchNum == null ? 0 : store.saleBatchNum,
+          storeAmount: Api.isEmpty(store.saleBatchAmount) ? store.saleBatchAmount:1,
+          storeNum: Api.isEmpty(store.saleBatchNum) ? store.saleBatchNum:1,
           detailList: effectiveList,
           lostcarts: failureList,
           storeMes: storeMes
@@ -428,7 +428,7 @@ Page({
             detailList[i].saleBatchNum = storeNum
           }
         }else{
-          totalNew += detailList[i].allGoodsAmount;
+          total += detailList[i].allGoodsAmount;
         }
         
       }
@@ -438,8 +438,8 @@ Page({
       var allGoodsTotal=0
       for (var i = 0; i < detailList.length;i++){
         if (detailList[i].selected){
-          allTotalNum = parseInt(detailList[i].num)
-          allGoodsAmount = parseInt(detailList[i].allGoodsAmount)
+          allTotalNum = detailList[i].num
+          allGoodsAmount = detailList[i].allGoodsAmount
           saleBatchGoodsNum = detailList[i].saleBatchNum
           allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
@@ -454,7 +454,15 @@ Page({
             if (allTotalNum > saleBatchGoodsNum){
               detailList[i].enjoyPrice = true
             }else{
-              detailList[i].enjoyPrice = false
+              if (allGoodsNum > storeNum || allGoodsTotal > storeAmount) {
+                detailList[i].enjoyPrice = true
+                enjoyCost = true
+                this.setData({
+                  enjoyCost: true
+                })
+              }else{
+                detailList[i].enjoyPrice = false
+              }
             }
             enjoyCost = false
             this.setData({
@@ -508,6 +516,7 @@ Page({
         }
       }
     }
+    console.log(detailList)
     this.setData({ 
       detailList: detailList,
       total1: total1.toFixed(2),
