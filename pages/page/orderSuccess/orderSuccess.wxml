@@ -23,7 +23,7 @@
 
     <view class='item-box'>
       <view class='item-title'>商户全称</view>
-      <view class='item-msg'>{{user.storeInfo.storeName}}</view>
+      <view class='item-msg'>{{user.storeInfo.storeName?user.storeInfo.storeName:""}}</view>
     </view>
 
     <!-- <view class='item-box'>
@@ -33,17 +33,17 @@
 
     <view class='item-box'>
       <view class='item-title'>客服电话</view>
-      <view class='item-msg'>{{user.storeInfo.servicePhone}}</view>
+      <view class='item-msg'>{{user.storeInfo.servicePhone?user.storeInfo.servicePhone:""}}</view>
     </view>
 
     <view class='item-box'>
       <view class='item-title'>营业时间</view>
-      <view class='item-msg'>{{user.storeInfo.openingTime}}</view>
+      <view class='item-msg'>{{user.storeInfo.openingTime?user.storeInfo.openingTime:""}}</view>
     </view>
 
     <view class='item-box'>
       <view class='item-title'>客服微信</view>
-      <view class='item-msg'>{{user.storeInfo.wechatNumber}}</view>
+      <view class='item-msg'>{{user.storeInfo.wechatNumber?user.storeInfo.wechatNumber:""}}</view>
     </view>
 
     <!-- <view class='item-box'>

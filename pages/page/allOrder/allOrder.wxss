@@ -2,6 +2,9 @@
 .order-title-box{
   background-size: cover;
 }
+.no-border{
+  border-bottom:0!important; 
+}
 .flex-box{
   display: flex;
   align-items: center;
@@ -49,7 +52,7 @@
 .np-ct{
   background: #fff;
   color: #333;font-size: 30rpx;
-  padding: 10rpx 0 20rpx;
+  padding: 10rpx 0 0;
 }
 
 .np-ct .np-view{
@@ -58,6 +61,7 @@
   padding-right: 100rpx;
   border-bottom: 2rpx solid #f3f3f3;
   position: relative;
+  padding-bottom:30rpx;
 }
 .np-ct .np-view1{
   border-bottom: 0;

@@ -17,6 +17,18 @@ Page({
   toHome(){
     API.toHome();
   },
+  //复制订单号
+  copyCode(){
+    wx.setClipboardData({
+      data: this.data.order.orderNumber,
+      success: ()=>{
+        wx.showToast({
+          title: '复制' + this.data.orderName+'号成功',
+          icon:"none"
+        })
+      }
+    })
+  },
 
   // 监听输入
   watchInput(e) {

@@ -1,3 +1,6 @@
+.cf-button button{
+  font-weight: 600;
+}
 .od-status{
   background: #fff;
   font-size: 28rpx;

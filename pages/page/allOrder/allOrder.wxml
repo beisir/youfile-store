@@ -91,7 +91,7 @@
 
 <!-- 自提地址 -->
 <view class='np-ct' wx:if="{{self=='true'}}">
-  <view class='np-view np-view1'>
+  <view class='np-view {{order.userMemo?"":"no-border"}}'>
     <image src="/image/ad.png"></image>
     <view>门店地址：{{order.storeInfo.address}}</view>
     <text>营业时间: {{order.storeInfo.openingTime}}</text>
@@ -110,15 +110,15 @@
     </view>
     <!-- <text>卖家暂未填写订单信息</text> -->
   </view>
-  <view class='np-view'>
+  <view class='np-view {{order.userMemo?"":"no-border"}}'>
     <image src="/image/ad.png"></image>
     <text class='np-text'>{{order.consigneeInfo.userPhone}}</text>
     <view>收货人：{{order.consigneeInfo.userName}}</view>
     <text>收货地址：{{order.consigneeInfo.detailAddress}}</text>
   </view>
 </view>
-<view class='np-ct'>
-  <view wx:if="{{order.userMemo}}" class='np-view np-view1'>
+<view class='np-ct' wx:if="{{order.userMemo}}">
+  <view class='np-view np-view1'>
     <image src="/image/mes2.png"></image>
     <view>留言</view>
     <text>{{order.userMemo}}</text>
@@ -192,7 +192,7 @@
 <!-- 显示字段 -->
 <view class='np-order'>
   <view>{{orderName}}号
-    <text>{{order.orderNumber}}</text>
+    <text bindtap='copyCode'>{{order.orderNumber}}</text>
   </view>
   <view>创建时间
     <text>{{order.createDate}}</text>

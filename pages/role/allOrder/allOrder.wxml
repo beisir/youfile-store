@@ -177,7 +177,9 @@
   <view bindtap='tel'>
     <image src="/image/tel1.png"></image>拨打电话</view>
   <view>
-    <image src="/image/role.png"></image>客户资料</view>
+    <navigator url="../../businessFriend/merchant/dealUserDetails/dealUserDetails?accept={{order.userInfo.userId}}&&code=0">
+    <image src="/image/role.png"></image>客户资料</navigator></view>
+    
 </view>
 <view class='cf-cont'>
     <view bindtap='toHome' class='c-title'>
@@ -235,7 +237,7 @@
 <!-- 显示字段 -->
 <view class='np-order'>
   <view>{{orderName}}号
-    <text>{{order.orderNumber}}</text>
+    <text bindtap='copyCode'>{{order.orderNumber}}</text>
   </view>
   <view>创建时间
     <text>{{order.createDate}}</text>

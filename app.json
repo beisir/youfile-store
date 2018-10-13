@@ -2,6 +2,9 @@
   "pages":[
     "pages/page/user/user",
     
+    "pages/page/order/order",
+    
+    
     "pages/role/supplyOrder/supplyOrder",
     
     "pages/role/order/order",
@@ -84,7 +87,6 @@
     "pages/admin/editSpec/editSpec",
     "pages/admin/spec/spec",
     "pages/page/orderSuccess/orderSuccess",
-    "pages/page/order/order",
     "pages/role/supplyVoucher/supplyVoucher",
     "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",

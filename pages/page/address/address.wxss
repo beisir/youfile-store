@@ -1,5 +1,15 @@
 @import '../cartList/cartList.wxss';
-
+.td{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-list{
+  min-height: 164rpx;
+}
+.table{
+  padding-bottom:20rpx;
+}
 /* 收货人 */
 .receive-box{
   padding:30rpx 60rpx 30rpx 30rpx;
