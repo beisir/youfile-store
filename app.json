@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/workIndex/workIndex",
+    "pages/page/home/home",
     
     "pages/page/user/user",
     
@@ -14,9 +15,10 @@
     
     
     
-    "pages/page/home/home",
     
     "pages/page/cartList/cartList",
+    
+    
     
     "pages/businessFriend/merchant/index/index",
     
