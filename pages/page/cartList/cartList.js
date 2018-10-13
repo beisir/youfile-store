@@ -217,8 +217,8 @@ Page({
           }
         }
         _this.setData({
-          storeAmount:store.saleBatchAmount,
-          storeNum: store.saleBatchNum,
+          storeAmount: store.saleBatchAmount == null ? 0 : store.saleBatchAmount,
+          storeNum: store.saleBatchNum == null ? 0 : store.saleBatchNum,
           detailList: effectiveList,
           lostcarts: failureList,
           storeMes: storeMes
@@ -412,76 +412,99 @@ Page({
       total1=0,
       totalNew=0,
       saleBatchGoodsNum=0,
-      allGoodsAmount=0
-    let detailList = this.data.detailList;// 获取购物车列表
-    let total = 0;
+      allGoodsAmount=0,
+      enjoyCost=false
     this.setData({
       enjoyCost: false
     })
-    console.log(detailList)
+    storeNum = storeNum-1
+    let detailList = this.data.detailList;// 获取购物车列表
+    let total = 0;
     for (let i = 0; i < detailList.length; i++) { 
       if (detailList[i].selected) {
         if (limitShow==3){
-          allTotalNum = parseInt(detailList[i].num)
-          allGoodsAmount = parseInt(detailList[i].allGoodsAmount)
           saleBatchGoodsNum = detailList[i].saleBatchNum
-          if (Api.isEmpty(saleBatchGoodsNum)) {
-            // allTotalNum += parseInt(detailList[i].num)
-            // allStoreAmount += parseInt(detailList[i].sellPrice)
-            // if (detailList[i].saleBatchNum < parseInt(detailList[i].num + 1)) {
-            //   detailList[i].enjoyPrice = true
-            //   detailList[i].allNum = detailList[i].saleBatchNum
-            // }else{
-            //   detailList[i].enjoyPrice = false
-            //   detailList[i].allNum = detailList[i].saleBatchNum
-            // }
-          }else{
-            // detailList[i].enjoyPrice = false
-            // detailList[i].allNum = storeNum
+          if (!Api.isEmpty(saleBatchGoodsNum)) {
+            detailList[i].saleBatchNum = storeNum
           }
-          // if (allTotalNum > storeNum || allStoreAmount>storeAmount){
-          //   detailList[i].enjoyPrice = true
-          //   this.setData({
-          //     enjoyCost:true
-          //   })
-          // }
         }else{
           totalNew += detailList[i].allGoodsAmount;
-          // if (detailList[i].shoppingCartSkuList != null) {
-          //   // var arr = detailList[i].shoppingCartSkuList
-          //   // for (var j = 0; j < arr.length; j++) {
-          //   //   total += arr[j].num * arr[j].sellPrice;
-          //   // }
-          // } else {
-            
-          // }
         }
         
       }
     }
     if (limitShow == 3){
+      var allGoodsNum=0
+      var allGoodsTotal=0
       for (var i = 0; i < detailList.length;i++){
         if (detailList[i].selected){
-          var enjoy = detailList[i].enjoyPrice
-          if (detailList[i].shoppingCartSkuList != null) {
-            var arr = detailList[i].shoppingCartSkuList
-            for (var j = 0; j < arr.length; j++) {
-              total1 += arr[j].num * arr[j].wholesalePrice;
-              total += arr[j].num * arr[j].sellPrice;
-            }
-            if (total > storeAmount) {
+          allTotalNum = parseInt(detailList[i].num)
+          allGoodsAmount = parseInt(detailList[i].allGoodsAmount)
+          saleBatchGoodsNum = detailList[i].saleBatchNum
+          allGoodsNum += allTotalNum
+          allGoodsTotal += allGoodsAmount
+          if (allGoodsNum > storeNum || allGoodsTotal > storeAmount){
+            detailList[i].enjoyPrice = true
+            enjoyCost=true
+            this.setData({
+              enjoyCost: true
+            })
+          }
+          if (allGoodsNum < storeNum && allGoodsTotal < storeAmount) {
+            if (allTotalNum > saleBatchGoodsNum){
               detailList[i].enjoyPrice = true
-              this.setData({
-                enjoyCost: true
-              })
+            }else{
+              detailList[i].enjoyPrice = false
             }
-          } else {
-            if (enjoy) {
-              totalNew = detailList[i].num * detailList[i].wholesalePrice;
-            } else {
-              totalNew = detailList[i].num * detailList[i].sellPrice;
+            enjoyCost = false
+            this.setData({
+              enjoyCost: false
+            })
+          }
+        }else{
+          detailList[i].enjoyPrice = false
+        }
+      }
+      var newTotalPrice = 0
+      var newTotalPrice1=0
+      var newChild1 = 0
+      var newChild2=0
+      for (var i = 0; i < detailList.length; i++) {
+        if (detailList[i].selected) {
+          if (enjoyCost){
+              if (detailList[i].shoppingCartSkuList != null) {
+                var arr = detailList[i].shoppingCartSkuList
+                for (var j = 0; j < arr.length; j++) {
+                  newTotalPrice += arr[j].num * arr[j].wholesalePrice;
+                }
+              } else {
+                newTotalPrice1 += detailList[i].num * detailList[i].wholesalePrice
+              }
+          }else{
+            var enjoy = detailList[i].enjoyPrice
+            if (enjoy){
+              if (detailList[i].shoppingCartSkuList != null) {
+                var arr = detailList[i].shoppingCartSkuList
+                for (var j = 0; j < arr.length; j++) {
+                  newChild1 += arr[j].num * arr[j].wholesalePrice;
+                }
+              } else {
+                newChild2 += detailList[i].num * detailList[i].wholesalePrice
+              }
+              newTotalPrice = newChild1 + newChild2
+            }else{
+              if (detailList[i].shoppingCartSkuList != null) {
+                var arr = detailList[i].shoppingCartSkuList
+                for (var j = 0; j < arr.length; j++) {
+                  newChild1 += arr[j].num * arr[j].sellPrice;
+                }
+              } else {
+                newChild2 += detailList[i].num * detailList[i].sellPrice
+              }
+              newTotalPrice1 = newChild1 + newChild2
             }
           }
+          total1 = newTotalPrice1 + newTotalPrice
         }
       }
     }

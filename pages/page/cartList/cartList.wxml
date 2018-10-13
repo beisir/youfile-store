@@ -22,10 +22,11 @@
                   <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}"><image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}"></image></navigator>
 <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList==null}}'>￥{{item.sellPrice}}</view>
                   <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList!=null}}'>￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
-                  <view class='ct-text ct-text1'  wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}'>￥{{item.sellPrice}}</view>
+                  <view class='ct-text ct-text1'  wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}'>￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
                   <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList!=null}}'>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
                   <view style='width:335rpx' class='ct-title ct-title1'>{{item.goodsName}}
-                  <view  wx:if='{{limitShow==3}}' class='man-j'>满<text>{{item.allNum}}</text>起批</view></view>
+                  <!-- <view  wx:if='{{limitShow==3}}' class='man-j'>满<text>{{item.allNum}}</text>起批</view> -->
+                  </view>
                   <view class="cart-pro-name cart-pro-name1"  wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" bindtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record"  wx:key="{{index}}">规格：{{record.skuName}}<image class='down' src="/image/down.png"></image></view>
                    <view class="cart-pro-name cart-pro-name1" data-name="more"  data-index="{{index}}" wx:if="{{item.shoppingCartSkuList.length>1}}" bindtap='showAlert'>修改规格/数量<image class='down' src="/image/down.png"></image></view>
                   <view class="table"  wx:if="{{item.shoppingCartSkuList.length>1}}" >
@@ -125,14 +126,14 @@
       <view class="cart-footer">
         <icon wx:if="{{selectAllStatus}}" type="success" color="#CCAA77" class="total-select" bindtap="selectAll"/>
         <icon wx:else type="circle" color="#A5A5A5" class="total-select" bindtap="selectAll"/>
-        <view class='order-all' wx:if='{{!enjoyCost}}'>
-          合计：<text>￥{{totalPrice}}</text>
-          <view>(不含运费)</view>
-        </view>
-        <view class='order-all' wx:if='{{enjoyCost}}'>
+        <view class='order-all'>
           合计：<text>￥{{total1}}</text>
           <view>(不含运费)</view>
         </view>
+        <!-- <view class='order-all' wx:if='{{enjoyCost}}'>
+          合计：<text>￥{{total1}}</text>
+          <view>(不含运费)</view>
+        </view> -->
         <view class="order-icon" bindtap='creatOrder'>
            结算
         </view>
