@@ -2,7 +2,7 @@
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
       <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{headPic}}"></image></view>
-      <text>{{name==''?nickName:name}}</text><image  class='re-img' mode="widthFix" src="/image/man.png"></image><view class='re-name'>进货商</view>
+      <text>{{name==''?nickName:name}}</text><image  class='re-img' mode="widthFix" src="/image/man.png"></image><view class='re-name'>客户</view>
       <view class='nbf-font'>昵称：{{nickName}}</view>
     </view>
     <view class='weui-view'>
@@ -14,9 +14,9 @@
 <view class='bf-cont'>
   <view class='re-title'>交易数据</view>
     <view class='bt-view'>
-      <view><view>{{buyTimes}}</view>交易次数</view>
+      <view><view>{{buyTimes}}次</view>交易次数</view>
       <view><view>{{recentBuy}}</view>最近购买</view>
-      <view><view>{{buyAmount}}</view>总交易额</view>
+      <view><view>￥{{buyAmount}}</view>总交易额</view>
     </view>
 </view>
 <view class='bf-cont info-cont'>
@@ -30,4 +30,3 @@
    <text>生日</text><view>{{birthday}}</view>
   </view>
 </view>
-<!-- <view class='re-bottom'  hidden='{{showMes}}' bindtap='urlHome'>91笔进货单</view> -->

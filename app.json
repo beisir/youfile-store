@@ -12,6 +12,24 @@
     
     "pages/page/home/home",
     
+    "pages/page/cartList/cartList",
+    
+    "pages/businessFriend/merchant/index/index",
+    
+    "pages/businessFriend/index/index",
+    
+    
+    
+    "pages/businessFriend/merchant/dealUserDetails/dealUserDetails",
+    
+    
+    
+    "pages/admin/status/status",
+    
+    "pages/businessFriend/addWholesaler/addWholesaler",
+    "pages/businessFriend/merchant/addMerchant/addMerchant",
+    
+    
     
     "pages/admin/addGoods/addGoods",
     
@@ -21,7 +39,6 @@
     "pages/page/invoice/invoice",
     
     
-    "pages/admin/status/status",
     
     
     
@@ -31,12 +48,8 @@
     
     
     
-    "pages/page/cartList/cartList",
     
-    
-    
-    "pages/businessFriend/addWholesaler/addWholesaler",
-    "pages/businessFriend/merchant/addMerchant/addMerchant",
+
     
     
     "pages/page/upload/upload",
@@ -75,8 +88,7 @@
     "pages/role/supplyVoucher/supplyVoucher",
     "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",
-    "pages/businessFriend/merchant/index/index",
-    "pages/businessFriend/index/index",
+  
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
     "pages/page/address/address",

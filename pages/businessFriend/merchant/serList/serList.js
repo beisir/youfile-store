@@ -18,7 +18,9 @@ Page({
   onLoad: function (options) {
     if (options.value) {
       app.pageRequest.pageData.pageNum = 0
-      this.getList({ keyword: options.value })
+      this.setData({
+        value: options.value
+      })
     }
 
   },
@@ -71,6 +73,9 @@ Page({
   },
   onShow: function () {
     app.pageRequest.pageData.pageNum = 0
+    this.setData({
+      detailList:[],
+    })
     this.getList({ keyword: this.data.value })
   },
 

@@ -17,9 +17,9 @@
       <view class='nbf-font'><image  mode="widthFix" src="{{baseUrl}}{{mallLogo}}"></image>{{mallName}}</view>
     </view>
   </view>
-  <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>邀请成功后，您即可以批发价购买该批发商店铺 的商品</view>
+  <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>申请成功后，您即可以批发价购买该供应商店铺的商品</view>
 </view>
 <view class='add-bottom'>
   <view bindtap='goBack'>取消</view>
-  <view bindtap='invita'>邀请</view>
+  <view bindtap='invita'>申请</view>
 </view>

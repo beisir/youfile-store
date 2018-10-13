@@ -102,7 +102,6 @@ Page({
         logo = options.logo,
         name=options.name,
         remark = options.remark
-    this.getMession(status, accept)
     this.setData({
       status:status,
       accept: accept,
@@ -113,21 +112,25 @@ Page({
     this.setData({
       success:true
     })
+    this.getMession(status, accept)
   } 
   if (status == 1){
     this.setData({
       aginGreet: true
     })
+    this.getMession(status, accept)
   }
   if (status == 3) {
     this.setData({
       oneGreet: true
     })
+    this.getMession(status, send)
   } 
   if(status==0){
     this.setData({
       addShow:true
     })
+    this.getMession(status, accept)
   }
    
   },

@@ -42,15 +42,22 @@ Page({
       showHide: true,
     })
   },
-  chooseImage: function () {
-    var _this = this
-    Api.uploadImage("STORE_IMAGE")
-      .then(res => {
-        var url = JSON.parse(res).obj
-        _this.setData({
-          coverUrl: url,
-          logo:url
-        })
+  // 上传logo
+  chooseImage() {
+    app.http.onlychoseImg().then(res => {
+      let url = res.tempFilePaths[0];
+      Api.toCuttingImg(url)
+    })
+  },
+  afterCuttingImg(url) {
+    var _this=this
+    app.http.onlyUploadImg(url).then(res => {
+      var url = JSON.parse(res).obj
+      _this.setData({
+        coverUrl: url,
+        logo: url
+      })
+      if (url) {
         Api.uploadLogoImg(url)
           .then(res => {
             wx.showToast({
@@ -63,8 +70,10 @@ Page({
               }
             })
           })
-      })
+      }
+    })
   },
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

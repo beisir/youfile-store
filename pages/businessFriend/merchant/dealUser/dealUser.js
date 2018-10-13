@@ -9,28 +9,38 @@ Page({
     detailList: [],
     value: '',
     totalCount: 0,
+    baseUrl: app.globalData.imageUrl,
     currentTab:-1,
     sortKey:'',
+    descShow: false,
     sortValue:'',
     value:''
   },
   emptyArr: function () {
     this.setData({
       detailList: [],
-      totalCount:0
+      totalCount: 0
     });
+    app.pageRequest.pageData.pageNum = 0
+    this.getList()
   },
   swichNav: function (e) {
-    var that = this;
+    var that = this,
+      descShow = this.data.descShow
     if (this.data.currentTab === e.target.dataset.current) {
+      if (e.target.dataset.current == 0) {
+        that.setData({
+          descShow: !descShow
+        }, function () {
+          that.emptyArr()
+        })
+      }
       return false;
     } else {
       that.setData({
         currentTab: e.target.dataset.current,
-      },function(){
+      }, function () {
         that.emptyArr()
-        app.pageRequest.pageData.pageNum = 0
-        that.getList()
       })
     }
   },
@@ -66,8 +76,14 @@ Page({
         value=this.data.value,
       sortKey='',
       sortValue='',
+      descShow = this.data.descShow,
       currentTab = this.data.currentTab
     if(currentTab==0){
+      if (descShow) {
+        sortValue = 'desc'
+      } else {
+        sortValue = 'asc'
+      }
       sortKey ='totalAmount'
     }
     if (currentTab == 1) {
@@ -79,9 +95,14 @@ Page({
     var data = { orderCategory:3}
     if (sortKey!=''){
       data["sortKey"] = sortKey
-      data["sortValue"] = ""
+      if (descShow) {
+        sortValue = 'desc'
+      } else {
+        sortValue = 'asc'
+      }
     }
     data["keyWords"] = value
+    data["sortValue"] = sortValue
     
     
     Api.dealUser(data)
