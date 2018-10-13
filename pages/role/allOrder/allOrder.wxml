@@ -320,7 +320,7 @@
 </view>
 
 <!-- 金额 -->
-<view class='np-order {{status!="closed" && !(status=="finish"&& self=="true")?"np-order-bar":"np-order-bar1"}} '>
+<view class='np-order {{status!="closed"?"np-order-bar":"np-order-bar1"}} '>
   <!-- <view>优惠改价
     <text>￥{{order.orderAmount}}</text>
     <text class='os-text'>￥1992.00</text>

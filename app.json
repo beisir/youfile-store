@@ -1,9 +1,11 @@
 {
   "pages":[
     "pages/page/workIndex/workIndex",
-    "pages/page/home/home",
     
     "pages/page/user/user",
+    
+    "pages/page/home/home",
+    
     
     "pages/page/order/order",
     

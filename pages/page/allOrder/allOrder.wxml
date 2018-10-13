@@ -118,10 +118,10 @@
   </view>
 </view>
 <view class='np-ct' wx:if="{{order.userMemo}}">
-  <view class='np-view np-view1'>
+  <view class='np-view np-view1' style='padding-right:46rpx;'>
     <image src="/image/mes2.png"></image>
     <view>留言</view>
-    <text>{{order.userMemo}}</text>
+    <text style='margin-right:0;'>{{order.userMemo}}</text>
   </view>
 </view>
 
@@ -263,7 +263,11 @@
       <text>货到付款</text>
     </view>
   </block>
-  <view class='np-o-view'>实付金额
+  <view class='np-o-view'>
+    <!-- 未支付 -->
+    <block wx:if='{{status=="unpaid"||status=="closed"|| status=="cancelled"}}'>应付金额</block>
+    <!-- 已支付 -->
+    <block wx:if='{{status!="closed" && status!="unpaid" && status!="cancelled"}}'>实付金额</block>
     <text>￥{{order.orderAmount}}</text>
   </view>
 </view>

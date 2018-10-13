@@ -126,6 +126,6 @@
     <text>￥{{price}}</text>
   </view>
   <view class="order-icon" bindtap='submit'>
-    提交订单
+    提交{{orderTitle}}
   </view>
 </view>

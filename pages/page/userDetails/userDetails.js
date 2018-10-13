@@ -48,6 +48,7 @@ Page({
   //改头像
   changeIcon() {
     app.http.onlychoseImg().then(res=>{
+      // console.log(res.tempFiles[0].size);
       let url = res.tempFilePaths[0];
       Api.toCuttingImg(url)
     })

@@ -6,7 +6,7 @@
     <navigator  url='../mewWholesaler/mewWholesaler'><view>{{waitVerify}}</view>待验证</navigator>
     <navigator  url='../mewWholesaler/mewWholesaler'><view>{{waitPass}}</view>等待通过</navigator>
   </view>
-  <button class='bf-btn' bindtap='addWholesaler'>扫一扫 添加供应商</button>
+  <button class='bf-btn' bindtap='addWholesaler'>添加供应商</button>
   <view class='bf-weui'>
     <navigator class="weui_cells"  url='../mewWholesaler/mewWholesaler'>
       <image  mode="widthFix" src="/image/w1.png"></image>

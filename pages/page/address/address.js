@@ -14,7 +14,8 @@ Page({
     invoice:"",  //发票
     phone:"", //电话
     msg:"",  //留言
-    sendData:{} //获取列表传递参数
+    sendData:{}, //获取列表传递参数
+    orderTitle:"订单"
   },
 
   //提交
@@ -222,6 +223,10 @@ Page({
     } else if (adminType == 3 || adminType == 2){
       //批发商
       orderType = 1;  
+      this.setData({orderTitle:'进货单'})
+      wx.setNavigationBarTitle({
+        title: '提交进货单',
+      })
     }
 
     //let type = options.type;

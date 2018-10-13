@@ -1,4 +1,7 @@
 @import '../order/order';
+.zindex{
+  z-index: -1;
+}
 .no-border{
   border-bottom:0!important; 
 }
@@ -30,7 +33,7 @@
   color: #666;font-weight: normal;font-size: 26rpx;margin-right: 100rpx;
 }
 .np-ct .np-code text{
-  font-size: 24rpx;color: #333;
+  font-size: 26rpx;color: #333;
 }
 .np-ct .np-code view:last-child{
   padding-top: 0rpx;
@@ -61,7 +64,7 @@
   width: 42rpx;height: 43rpx;vertical-align: middle;margin-top: -2rpx;margin-right: 10rpx;
 }
 .np-order{
-  font-size: 24rpx;color: #333;background: #fff;margin-bottom: 20rpx;padding:20rpx;padding-bottom: 30rpx;
+  font-size: 26rpx;color: #333;background: #fff;margin-bottom: 20rpx;padding:20rpx;padding-bottom: 30rpx;
 }
 .np-order-bar{
   margin-bottom: 120rpx;
@@ -100,7 +103,7 @@
   margin-right: 30rpx;
 }
 .np-fapiao{
-  border-top:2rpx solid #f3f3f3;padding-top:20rpx;font-size:24rpx;color:#333;background:#fff;margin-top:-20rpx;margin-bottom: 20rpx;padding:30rpx 20rpx;
+  border-top:2rpx solid #f3f3f3;padding-top:20rpx;font-size:26rpx;color:#333;background:#fff;margin-top:-20rpx;margin-bottom: 20rpx;padding:30rpx 20rpx;
 }
 .np-fapiao view{
   margin-bottom: 15rpx;
@@ -127,7 +130,7 @@
   width:38rpx;height:38rpx;vertical-align: middle;margin-top: -6rpx;margin-right: 20rpx;
 }
 .os-status{
-  color: #999;font-size: 24rpx;font-weight: normal;width: 496rpx;margin:0 auto;
+  color: #999;font-size: 26rpx;font-weight: normal;width: 496rpx;margin:0 auto;
 }
 .os-status view{
   display: inline-block;width: 124rpx;
@@ -145,7 +148,7 @@
   margin-top: 10rpx;
 }
 .os-mon1 view{
-  color: #999;font-size: 24rpx;padding-left: 20rpx;padding-top: 25rpx;
+  color: #999;font-size: 26rpx;padding-left: 20rpx;padding-top: 25rpx;
 }
 .cf-button button{
   font-size:26rpx;
