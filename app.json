@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/page/home/home",
+    
     "pages/page/user/user",
     
     "pages/page/order/order",
@@ -13,7 +15,6 @@
     
     "pages/page/workIndex/workIndex",
     
-    "pages/page/home/home",
     
     "pages/page/cartList/cartList",
     
