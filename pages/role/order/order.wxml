@@ -95,7 +95,7 @@
       </view>
       <!-- </navigator> -->
     </view>
-    <view>
+    <view bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.orderType}}' data-num="{{item.orderNumber}}">
       <view class="cart-box">
         <view class="cart-list" wx:for="{{item.goodsInfos}}" wx:key="{{index}}">
           <navigator>
@@ -147,13 +147,13 @@
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
       </view>
       <view class='or-last' wx:if="{{item.orderStatus=='shipped'}}">
-        <button wx:if="{{item.orderType==2}}" class='or-active'> 查看物流 </button>
+        <!-- <button wx:if="{{item.orderType==2}}" class='or-active'> 查看物流 </button> -->
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
       </view>
 
       <!-- 已完成 -->
       <view class='or-last' wx:if="{{item.orderStatus=='finish'}}">
-        <button class='or-active' wx:if="{{item.orderType==2}}"> 查看物流 </button>
+        <!-- <button class='or-active' wx:if="{{item.orderType==2}}"> 查看物流 </button> -->
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
         <!-- <button data-num="{{item.orderNumber}}" data-type="del" bindtap='showModal'> 删除订单 </button> -->
       </view>

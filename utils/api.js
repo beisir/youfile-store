@@ -589,6 +589,12 @@ function supplyOrde(data){
   data = initStoreId(data);
   return app.http.postRequest(supplyOrderUrl, data);
 }
+// 回首页
+function toHome(){
+  wx.switchTab({
+    url: '/pages/page/home/home'
+  })
+}
 /**
  * 初始化storeId
  */
@@ -600,6 +606,7 @@ function initStoreId(data) {
   return data;
 }
 module.exports = {
+  toHome: toHome,
   getStoreInfo: getStoreInfo,
   supplyOrde: supplyOrde,
   toCuttingImg: toCuttingImg,

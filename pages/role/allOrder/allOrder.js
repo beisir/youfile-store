@@ -9,9 +9,26 @@ Page({
    */
   data: {
     reson: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
-    cancelIndex: 0
+    cancelIndex: 0,
+    orderName: "订单",
+    timeOnce:true
   },
 
+  toHome(){
+    API.toHome();
+  },
+  //复制订单号
+  copyCode(){
+    wx.setClipboardData({
+      data: this.data.order.orderNumber,
+      success: ()=>{
+        wx.showToast({
+          title: '复制' + this.data.orderName+'号成功',
+          icon:"none"
+        })
+      }
+    })
+  },
 
   // 监听输入
   watchInput(e) {
@@ -251,10 +268,10 @@ Page({
   onLoad: function (options) {
     if (options.type == 'list') {
       wx.setNavigationBarTitle({
-        title: "出货单详情"
+        title: "供货单详情"
       })
       this.setData({
-        orderName: '出货单'
+        orderName: '供货单'
       })
     }
     this.setData({
@@ -307,7 +324,11 @@ Page({
         'order.deliverDate': this.timeFormat(this.data.order.deliverDate),
       })
       //倒计时
-      util.count_down(this, res.obj.timeoutExpressSecond)
+      let timm = this.data.timeOnce;
+      if (timm){
+        util.count_down(this, res.obj.timeoutExpressSecond)
+        this.setData({ timeOnce:false})        
+      }
     })
   },
   //时间戳转化成时间格式

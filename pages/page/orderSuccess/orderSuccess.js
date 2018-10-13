@@ -20,19 +20,23 @@ Page({
     let sendType = this.data.user.orderType; //订单类型[0 其他|1 门店自提|2 物流配送]
     let url = "";
     if (type == 1 && sendType == 1){
-      url = "../stockSelf/stockSelf";
+      // url = "../stockSelf/stockSelf";
+      url = "../allOrder/allOrder?type=list&self=true";
     }
     if (type == 1 && sendType == 2){
-      url = "../stockDetail/stockDetail";
+      // url = "../stockDetail/stockDetail";
+      url = "../allOrder/allOrder?type=list&self=false";
     }
     if (type == 3 && sendType == 1) {
-      url = "../self/self";
+      // url = "../self/self";
+      url = "../allOrder/allOrder?type=order&self=true";      
     }
     if (type == 3 && sendType == 2) {
-      url = "../nopay/nopay";
+      // url = "../nopay/nopay";
+      url = "../allOrder/allOrder?type=order&self=false"; 
     }
 
-    url += "?num="+this.data.num;
+    url += "&num="+this.data.num;
 
     wx.redirectTo({
       url: url

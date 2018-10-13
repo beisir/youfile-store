@@ -7,7 +7,7 @@
 .weui-cell__bd input{
   /* position: absolute;
   top: 33rpx; */
-  color: #999;
+  color: #333;
   font-size: 28rpx;
   /* left: 180rpx; */
   width: 400rpx;

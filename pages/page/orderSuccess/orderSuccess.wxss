@@ -20,7 +20,7 @@ page{
   font-size: 60rpx;
   color: #ccaa77;
   font-weight: 600;
-  margin: 50rpx 0 60rpx;
+  margin: 30rpx 0 60rpx;
 }
 
 .tip{

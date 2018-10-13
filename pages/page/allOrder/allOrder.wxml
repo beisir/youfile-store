@@ -91,7 +91,7 @@
 
 <!-- 自提地址 -->
 <view class='np-ct' wx:if="{{self=='true'}}">
-  <view class='np-view np-view1'>
+  <view class='np-view {{order.userMemo?"":"no-border"}}'>
     <image src="/image/ad.png"></image>
     <view>门店地址：{{order.storeInfo.address}}</view>
     <text>营业时间: {{order.storeInfo.openingTime}}</text>
@@ -110,13 +110,15 @@
     </view>
     <!-- <text>卖家暂未填写订单信息</text> -->
   </view>
-  <view class='np-view'>
+  <view class='np-view {{order.userMemo?"":"no-border"}}'>
     <image src="/image/ad.png"></image>
     <text class='np-text'>{{order.consigneeInfo.userPhone}}</text>
     <view>收货人：{{order.consigneeInfo.userName}}</view>
     <text>收货地址：{{order.consigneeInfo.detailAddress}}</text>
   </view>
-  <view wx:if="{{order.userMemo}}" class='np-view np-view1'>
+</view>
+<view class='np-ct' wx:if="{{order.userMemo}}">
+  <view class='np-view np-view1'>
     <image src="/image/mes2.png"></image>
     <view>留言</view>
     <text>{{order.userMemo}}</text>
@@ -133,7 +135,7 @@
 
 <!-- 商品 -->
 <view class='cf-cont'>
-  <view class='c-title'>
+  <view bindtap='toHome' class='c-title'>
     <image src="/image/ic1.png"></image>{{order.storeInfo.storeName}}
     <image class='itimg' src="/image/icl.png"></image>
     <view wx:if="{{self=='true'}}" class='order-zt'>自提</view>
@@ -143,14 +145,14 @@
   <view wx:if="{{orderType=='order'}}">
     <view class="cart-box">
       <view class="cart-list" wx:for="{{showList}}" wx:key="{{index}}">
-        <navigator>
+        <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.goodsId}}'>
           <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
+          <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
+            <view>x {{item.orderDetails.num}}</view>
+          </view>
+          <view class='ct-title ct-title1'>{{item.goodsName}}</view>
+          <text class="cart-pro-name">规格：{{item.orderDetails.goodsDesc}}</text>
         </navigator>
-        <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
-          <view>x {{item.orderDetails.num}}</view>
-        </view>
-        <view class='ct-title ct-title1'>{{item.goodsName}}</view>
-        <text class="cart-pro-name">规格：{{item.orderDetails.goodsDesc}}</text>
       </view>
     </view>
   </view>
@@ -159,12 +161,12 @@
   <view wx:if="{{orderType=='list'}}">
     <view class="cart-box" wx:for="{{order.goodsInfos}}" wx:key="{{index}}">
       <view class="cart-list">
-        <navigator>
+        <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.goodsId}}'>
           <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
-        </navigator>
-        <view class='ct-title ct-title1'>{{item.goodsName}}</view>
-        <view class="heji">共
+          <view class='ct-title ct-title1'>{{item.goodsName}}</view>
+          <view class="heji">共
           <text>{{item.goodsNum}}</text>件商品</view>
+        </navigator>
       </view>
 
       <!-- 表格 -->
@@ -190,7 +192,7 @@
 <!-- 显示字段 -->
 <view class='np-order'>
   <view>{{orderName}}号
-    <text>{{order.orderNumber}}</text>
+    <text bindtap='copyCode'>{{order.orderNumber}}</text>
   </view>
   <view>创建时间
     <text>{{order.createDate}}</text>
@@ -289,6 +291,6 @@
     <button data-index='{{index}}' data-type='del' bindtap='showModal'>删除{{orderName}}</button>
   </block>
   <block wx:if="{{self=='false' && (status=='shipped' || status=='finish')}}">
-    <button>查看物流</button>
+    <!-- <button>查看物流</button> -->
   </block>
 </view>

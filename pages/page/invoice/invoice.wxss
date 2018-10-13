@@ -29,7 +29,7 @@ button,.button-hover{
   padding-bottom:10rpx;
 }
 .in-input input{
-  color: #999;
+  color: #333;
   font-size: 24rpx;
   height: 70rpx;
   border:2rpx solid #EDEDED;
