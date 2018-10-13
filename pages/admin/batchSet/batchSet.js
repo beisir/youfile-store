@@ -19,6 +19,7 @@ Page({
    */
   // 开关
   switch1Change: function (e) {
+    console.log(e.detail.value)
     if (e.detail.value){
       this.setData({
         switch1Change:false
@@ -27,6 +28,7 @@ Page({
       this.setData({
         switch1Change: true
       })
+      this.setSaleBatchNum(0)
     }
   },
   switch2Change: function (e) {
@@ -38,6 +40,7 @@ Page({
       this.setData({
         switch2Change: true
       })
+      this.setSaleBatchAmount(0)
     }
   },
   onLoad: function (options) {
@@ -76,7 +79,6 @@ Page({
     }
   },
   togetherFun:function(){
-    console.log(this.data.value)
     this.setData({
       together: true,
     })
@@ -101,18 +103,30 @@ Page({
     })
     return
   },
+  setSaleBatchNum:function(value){
+    var _this=this
+    Api.saleBatchNum(value)
+      .then(res => {
+        _this.cancel()
+        _this.setSuccess()
+      })
+  },
   confirm:function(){
     var _this=this,
       value =this.data.value
     if (value==''){
       _this.setMes()
     }else{
-      Api.saleBatchNum(value)
-        .then(res => {
-          _this.cancel()
-          _this.setSuccess()
-        })
+     this.setSaleBatchNum(value)
     }
+  },
+  setSaleBatchAmount:function(value){
+    var _this=this
+    Api.saleBatchAmount(value)
+      .then(res => {
+        _this.cancel()
+        _this.setSuccess()
+      })
   },
   confirm1: function () {
     var _this = this,
@@ -120,11 +134,7 @@ Page({
     if (value == '') {
       _this.setMes()
     } else {
-      Api.saleBatchAmount(value)
-        .then(res => {
-          _this.cancel()
-          _this.setSuccess()
-        })
+      this.setSaleBatchAmount(value)
     }
   },
   /**

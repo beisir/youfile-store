@@ -6,7 +6,9 @@
         <image src="/image/ic1.png"></image> {{item.storeName}}<image class='itimg' src="/image/icl.png"></image> 
         <view wx:if='{{limitShow==3}}' class='new-c-t'>
          <view wx:if='{{storeAmount!=null && enjoyCost==true}}'>全场已满{{storeAmount}}元<text>混批</text></view>
+         <view wx:if='{{!enjoyCost && !enjoyCostNew}}'><text style='color:#666;border:0'>还差<text style='color:red;border:0;margin-left:0'>{{differentPrice}}</text>元可享受批发价</text><text>混批</text></view>
          <view wx:if='{{storeAmount==null && enjoyCost==true}}'>全场已享受批发价</view>
+         <view wx:if='{{!enjoyCost && enjoyCostNew==true}}'>全场已享受批发价</view>
         </view>
       </view>
       <!--编辑  -->

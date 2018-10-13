@@ -290,7 +290,7 @@ Page({
   chooseImage() {
     app.http.onlychoseImg().then(res => {
       let url = res.tempFilePaths[0];
-      Api.toCuttingImg(url,true)
+      Api.toCuttingImg(url)
     })
   },
   afterCuttingImg(url) {

@@ -13,6 +13,7 @@ Page({
     lostcarts: [],
     lostList: false,
     totalPrice:0, 
+    enjoyCostNew:false,
     selectAllStatus:true, 
     allEmpty:true,
     total1:0,
@@ -28,6 +29,7 @@ Page({
     baseUrl: app.globalData.imageUrl,
     limitShow: wx.getStorageSync('admin'),
     storeAmount: '',
+    differentPrice:0,
     storeNum: '',
     editDetailList:'',
     goodsConfig:[]
@@ -216,9 +218,15 @@ Page({
             effectiveList[i].allGoodsPf = effectiveList[i].wholesalePrice*effectiveList[i].num
           }
         }
+        var saleBatchNum = 0
+        var saleBatchAmount=0
+        if (Api.isEmpty(store)){
+          saleBatchAmount = Api.isEmpty(store.saleBatchAmount) ? store.saleBatchAmount : 1
+          saleBatchNum = Api.isEmpty(store.saleBatchNum) ? store.saleBatchNum : 1
+        }
         _this.setData({
-          storeAmount: Api.isEmpty(store.saleBatchAmount) ? store.saleBatchAmount:1,
-          storeNum: Api.isEmpty(store.saleBatchNum) ? store.saleBatchNum:1,
+          storeAmount:saleBatchAmount,
+          storeNum: saleBatchNum,
           detailList: effectiveList,
           lostcarts: failureList,
           storeMes: storeMes
@@ -380,6 +388,30 @@ Page({
     });
     this.getTotalPrice();
   },
+  // 更改商品价格
+  updatePrice:function(num){
+    var effectiveList = this.data.detailList
+    for (var i = 0; i < effectiveList.length; i++) {
+      effectiveList[i].selected = true
+      var newSkvArr = effectiveList[i].shoppingCartSkuList
+      if (Api.isEmpty(newSkvArr)) {
+        var num = 0;
+        var allGoodsAmount = 0
+        var allGoodsPf = 0
+        for (var j = 0; j < newSkvArr.length; j++) {
+          num += newSkvArr[j].num
+          allGoodsAmount += newSkvArr[j].sellPrice * newSkvArr[j].num
+          allGoodsPf += newSkvArr[j].wholesalePrice * newSkvArr[j].num
+        }
+        effectiveList[i].num = num
+        effectiveList[i].allGoodsAmount = allGoodsAmount
+        effectiveList[i].allGoodsPf = allGoodsPf
+      } else {
+        effectiveList[i].allGoodsAmount = effectiveList[i].sellPrice * effectiveList[i].num
+        effectiveList[i].allGoodsPf = effectiveList[i].wholesalePrice * effectiveList[i].num
+      }
+    }
+  },
   minusCount(e) {
     const index = e.currentTarget.dataset.index;
     const obj = e.currentTarget.dataset.obj;
@@ -411,6 +443,8 @@ Page({
       allTotalNum=0,
       total1=0,
       totalNew=0,
+      differentPrice = this.data.differentPrice,
+      differentPriceNew = 0,
       saleBatchGoodsNum=0,
       allGoodsAmount=0,
       enjoyCost=false
@@ -438,8 +472,9 @@ Page({
       var allGoodsTotal=0
       for (var i = 0; i < detailList.length;i++){
         if (detailList[i].selected){
-          allTotalNum = detailList[i].num
+          allTotalNum = parseInt(detailList[i].num)
           allGoodsAmount = detailList[i].allGoodsAmount
+          differentPriceNew += allGoodsAmount
           saleBatchGoodsNum = detailList[i].saleBatchNum
           allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
@@ -451,18 +486,10 @@ Page({
             })
           }
           if (allGoodsNum < storeNum && allGoodsTotal < storeAmount) {
-            if (allTotalNum > saleBatchGoodsNum){
+            if (allTotalNum >= saleBatchGoodsNum){
               detailList[i].enjoyPrice = true
             }else{
-              if (allGoodsNum > storeNum || allGoodsTotal > storeAmount) {
-                detailList[i].enjoyPrice = true
-                enjoyCost = true
-                this.setData({
-                  enjoyCost: true
-                })
-              }else{
-                detailList[i].enjoyPrice = false
-              }
+              detailList[i].enjoyPrice = false
             }
             enjoyCost = false
             this.setData({
@@ -477,9 +504,12 @@ Page({
       var newTotalPrice1=0
       var newChild1 = 0
       var newChild2=0
+      var len = detailList.length
+      var numTrue=0
       for (var i = 0; i < detailList.length; i++) {
         if (detailList[i].selected) {
           if (enjoyCost){
+              detailList[i].enjoyPrice = true
               if (detailList[i].shoppingCartSkuList != null) {
                 var arr = detailList[i].shoppingCartSkuList
                 for (var j = 0; j < arr.length; j++) {
@@ -491,6 +521,7 @@ Page({
           }else{
             var enjoy = detailList[i].enjoyPrice
             if (enjoy){
+              numTrue++
               if (detailList[i].shoppingCartSkuList != null) {
                 var arr = detailList[i].shoppingCartSkuList
                 for (var j = 0; j < arr.length; j++) {
@@ -515,11 +546,21 @@ Page({
           total1 = newTotalPrice1 + newTotalPrice
         }
       }
+      if (numTrue==len){
+        this.setData({
+          enjoyCostNew: true
+        })
+      }else{
+        this.setData({
+          enjoyCostNew: false
+        })
+      }
+      differentPrice = storeAmount - differentPriceNew
     }
-    console.log(detailList)
     this.setData({ 
       detailList: detailList,
       total1: total1.toFixed(2),
+      differentPrice: differentPrice,
       totalPrice: (total + totalNew).toFixed(2)
     });
   },
