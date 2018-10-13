@@ -3,20 +3,19 @@ const App = getApp();
 
 const device = wx.getSystemInfoSync()
 const width = device.windowWidth
-const height = device.windowHeight
 const pixelRatio = device.pixelRatio
 Page({
   data: {
     cropperOpt: {
       id: 'cropper',
       width,
-      height,
+      // height,
       pixelRatio,
       scale: 2.5,
       zoom: 8,
       cut: {
         x: (width - 300) / 2,
-        y: (height - 300) / 2,
+        // y: (height - 300) / 2,
         width: 300,
         height: 300
       }
@@ -74,6 +73,7 @@ Page({
       const targetCtx = wx.createCanvasContext('hideCanvas') // 这里是目标canvas画布的id值
       
       targetCtx.drawImage(this.data.cropperOpt.src, imgLeft, imgTop, scaleWidth, scaleHeight) // tmp代表被裁剪图片的临时路径
+
       targetCtx.draw(false, function (e) {
         wx.canvasToTempFilePath({
           canvasId: 'hideCanvas',
@@ -117,6 +117,13 @@ Page({
     }
   },
   onLoad (option) {
+    let device = wx.getSystemInfoSync()
+    let height = device.windowHeight - 50;
+    this.setData({ 
+      ["cropperOpt.height"]: height,
+      ["cropperOpt.cut.y"]: (height - 300) / 2,  
+    })
+
     const { cropperOpt } = this.data
     //裁图质量
     if (option.quality){
@@ -129,11 +136,11 @@ Page({
       cropperOpt.src = option.src
       new WeCropper(cropperOpt)
         .on('ready', (ctx) => {
-          console.log(`wecropper is ready for work!`)
+          // console.log(`wecropper is ready for work!`)
         })
         .on('beforeImageLoad', (ctx) => {
-          console.log(`before picture loaded, i can do something`)
-          console.log(`current canvas context:`, ctx)
+          // console.log(`before picture loaded, i can do something`)
+          // console.log(`current canvas context:`, ctx)
           wx.showToast({
             title: '上传中',
             icon: 'loading',
@@ -141,13 +148,13 @@ Page({
           })
         })
         .on('imageLoad', (ctx) => {
-          console.log(`picture loaded`)
-          console.log(`current canvas context:`, ctx)
+          // console.log(`picture loaded`)
+          // console.log(`current canvas context:`, ctx)
           wx.hideToast()
         })
         .on('beforeDraw', (ctx, instance) => {
           // console.log(`before canvas draw,i can do something`)
-          console.log(`current canvas context:`, ctx)
+          // console.log(`current canvas context:`, ctx)
         })
         .updateCanvas()
     }

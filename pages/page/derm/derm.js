@@ -19,7 +19,7 @@ Page({
           hasUser: true
         })
       }
-    }).catch(e => {1
+    }).catch(e => {
       this.setData({
         user: {},
         hasUser: false

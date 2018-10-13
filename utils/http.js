@@ -210,7 +210,7 @@ class request {
           name: 'file',
           header: header,
           formData: {
-            'type': types
+            'type': types ? types:""
           },
           success: (res => {
             if (res.statusCode === 200) {

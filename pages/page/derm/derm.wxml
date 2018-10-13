@@ -9,7 +9,7 @@
   </view>
 </view>
 <view class='erm-cont' style='padding:0;'>
-  <view class='erm-img'><image style='height:540rpx;' mode="widthFix" src="{{baseUrl+user.qrcode}}"></image></view>
+  <view class='erm-img'><image style='height:540rpx;' src="{{baseUrl+user.qrcode}}"></image></view>
   <view style='margin-top:0;'>扫一扫二维码图案，加我商友</view>
 </view>
 <view class='bottom-box' style='font-weight:100;'>
