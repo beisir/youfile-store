@@ -16,7 +16,7 @@
       <text>{{name}}</text>
     </view>
   </view>
-  <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>邀请成功后，该进货商将以批发价购买您店铺的 商品</view>
+  <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>邀请成功后，该进货商将以批发价购买您店铺的商品</view>
 </view>
 <view class='add-bottom'>
   <view bindtap='goBack'>取消</view>

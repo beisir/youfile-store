@@ -6,12 +6,16 @@
     
     "pages/page/user/user",
     
+    "pages/admin/addGoods/addGoods",
+    
+    
+    
+    
     "pages/page/invoice/invoice",
     
     
     "pages/admin/status/status",
     
-    "pages/admin/addGoods/addGoods",
     
     
     
