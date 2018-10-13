@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/page/cartList/cartList",
+    
     "pages/page/home/home",
     
     "pages/page/user/user",
@@ -18,7 +20,6 @@
     
     
     
-    "pages/page/cartList/cartList",
     
     
     

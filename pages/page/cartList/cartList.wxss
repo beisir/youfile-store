@@ -281,7 +281,7 @@
   border-bottom: 0;padding-bottom: 40rpx;
 }
 .cart-list {
-  border-bottom: 0;margin-left:245rpx;padding-top: 25rpx;
+  border-bottom: 0;margin-left:245rpx;min-height: 200rpx;
 }
 .new-c-t{
   position: absolute;right: 30rpx;color: #CCAA77;font-size:24rpx;
@@ -294,7 +294,7 @@
 .touch-item {
   display: flex;position: relative;
   justify-content: space-between;
-  background: #fff;padding-bottom: 60rpx;
+  background: #fff;
   overflow: hidden;margin:20rpx;
 }
  

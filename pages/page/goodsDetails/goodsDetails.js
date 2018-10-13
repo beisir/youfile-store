@@ -58,10 +58,10 @@ Page({
     imgUrls: [],
     baseUrl: app.globalData.imageUrl,
     goodsSpecificationVOList:[],
-    isShowNew:false,
     isShowNewOne: false,
     goodsSkuVOList:[],
     skuArrTwo: [],
+    saleBatchNumGoods:null,
     newSkuArrTwo:[],
     nameTwo:'',
     newSkuOnly:false,
@@ -348,6 +348,12 @@ Page({
         spectArrDifference.push({ code: code, newSkuArrTwo: newSkuArrTwo })
       }
     }
+    if (this.data.newSkuOnly) {
+     for (var i = 0; i < spectArrDifference.length; i++) {
+        var arrDataNew = spectArrDifference[i].newSkuArrTwo
+        arrDataNew[0].num=0
+      }
+    }
     if (this.data.currentTab ===index) {
       return false;
     } else {
@@ -360,10 +366,38 @@ Page({
     }
     this.getTotalPrice();
   },
+  newGetSpecDetails: function (index, code) {
+    var that = this,
+      swichNavCode = index,
+      code = code,
+      skuArrTwo = this.data.skuArrTwo,
+      skuArr = this.data.goodsSkuVOList,
+      skuValueVOList = [],
+      newSkuArrTwo = [],
+      codeName = this.data.goodsSpecificationVOList,
+      newList = {},
+      returnStop = false,
+      spectArrDifference = this.data.spectArrDifference
+    if (this.data.currentTab === index) {
+      return false;
+    } else {
+      that.setData({
+        swichNav: swichNavCode,
+        newSkuArrTwo: newSkuArrTwo,
+        moreCode: code,
+        spectArrDifference: spectArrDifference
+      })
+    }
+    this.getTotalPrice();
+  },
   swichNav: function (e) {
     var index = e.target.dataset.current,
       code = e.target.dataset.code
-    this.getSpecDetails(index,code)
+    if (this.data.newSkuOnly){
+      this.newGetSpecDetails(index, code)
+    }else{
+      this.getSpecDetails(index, code)
+    }
   },
   //关闭弹框
   closeAlert:function(){
@@ -554,6 +588,55 @@ Page({
       }
     }
   },
+  
+  // 没有规格进货商身份
+  getSetShow: function (difference){
+    this.setData({
+      discountShow: false,
+      difference: difference
+    })
+  },
+  getTotalPriceNew:function(num){
+    var wholesalePrice = this.data.wholesalePrice,
+      sell = this.data.sell,
+      saleBatchNumGoods = this.data.saleBatchNumGoods-1,
+      saleBatchNum = this.data.saleBatchNum-1,
+      difference=0,
+      saleBatchAmount=this.data.saleBatchAmount,
+      total=0
+    // discountShow  difference
+    // if (num>)
+    difference = total - num * wholesalePrice
+    if (saleBatchAmount == null && saleBatchNumGoods == null && saleBatchNum == null){
+      this.getSetShow(difference)
+    }
+    total = num*sell
+    if (total > saleBatchAmount){
+      this.getSetShow(difference)
+    }else{
+      this.setData({
+        discountShow: true,
+      })
+    }
+    if (saleBatchNumGoods){
+      if (num > saleBatchNumGoods) {
+        this.getSetShow(difference)
+      } else {
+        this.setData({
+          discountShow: true,
+        })
+      }
+    }
+    if (saleBatchNum) {
+      if (num > saleBatchNum) {
+        this.getSetShow(difference)
+      } else {
+        this.setData({
+          discountShow: true,
+        })
+      }
+    }
+  },
   // 购买数量
   minusCount:function(){
     let num = this.data.numbers
@@ -564,6 +647,9 @@ Page({
       this.setData({
         numbers: num
       })
+    }
+    if (this.data.isShowNewOne) {
+      this.getTotalPriceNew(num)
     }
     if (this.data.editOneName) {
       var newSkuArrTwo = this.data.newSkuArrTwo
@@ -585,6 +671,9 @@ Page({
     this.setData({
       numbers:num
     })
+    if (this.data.isShowNewOne){
+      this.getTotalPriceNew(num)
+    }
     if (this.data.editOneName){
       var newSkuArrTwo = this.data.newSkuArrTwo
       for (var i = 0; i < newSkuArrTwo.length;i++){
@@ -607,15 +696,33 @@ Page({
     const index = e.currentTarget.dataset.index;
     let spectArrDifference = this.data.spectArrDifference
     let code = this.data.moreCode
+    var goodsSpecificationVOListNew = this.data.goodsSpecificationVOList
+    var goodsSpecificationVOList = goodsSpecificationVOListNew[0].goodsSpecificationValueVOList
     for (var i = 0; i < spectArrDifference.length; i++) {
       if (spectArrDifference[i].code == code) {
         spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num+1
       }
     }
-    this.setData({
-      spectArrDifference: spectArrDifference
-    });
-    this.getTotalPrice();
+    if (this.data.newSkuOnly) {
+      for (var i = 0; i < goodsSpecificationVOList.length;i++){
+        for (var j = 0; j < spectArrDifference.length;j++){
+          if ((spectArrDifference[j].newSkuArrTwo[0].specValueCodeList).indexOf(goodsSpecificationVOList[i].specValueCode) != -1) {
+            goodsSpecificationVOList[i].num = spectArrDifference[j].newSkuArrTwo[0].num
+          }
+        }
+        goodsSpecificationVOListNew[0].goodsSpecificationValueVOList = goodsSpecificationVOList
+      }
+      this.setData({
+        goodsSpecificationVOList: goodsSpecificationVOListNew,
+        spectArrDifference: spectArrDifference
+      })
+      this.getTotalPrice();
+    }else{
+      this.setData({
+        spectArrDifference: spectArrDifference
+      });
+      this.getTotalPrice();
+    }
   },
 
   /**
@@ -695,7 +802,6 @@ Page({
       }
     }
     goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
-    
     this.setData({                    
       newSkuArrTwo: newSkuArrTwo,
       totalPrice: total.toFixed(2),
@@ -828,11 +934,6 @@ Page({
             skuArrTwo.push(obj.goodsSpecificationVOList[1])
             name = obj.goodsSpecificationVOList[1].specName
           }
-          if (obj.goodsSpecificationVOList.length==1){
-            _this.setData({
-              isShowNew:true
-            })
-          }
         }else{
           obj.goodsSpecificationVOList=[]
           _this.setData({
@@ -842,19 +943,18 @@ Page({
         if (!Api.isEmpty(obj.goodsSkuVOList)){
           obj.goodsSkuVOList=[]
         }
-        console.log(obj.goodsSpecificationVOList)
-        console.log(obj.goodsSkuVOList)
         wx.setStorageSync("storeId", obj.storeId)
         _this.setData({
           imgUrls: obj.goodsImageVOList,
           name: obj.name,
           wholesalePrice: obj.wholesalePrice,
+          sell: obj.sellPrice,
+          saleBatchNumGoods: obj.saleBatchNum,
           recommendDesc: obj.recommendDesc,
           description: obj.description,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
           goodsSkuVOList: obj.goodsSkuVOList,
           skuArrTwo: skuArrTwo,
-          sell: obj.sellPrice,
           stockNum: obj.stockNum,
           mainImgUrl: obj.mainImgUrl,
           nameTwo: name,
@@ -862,12 +962,15 @@ Page({
         },function(){
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {
+              var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
               if(obj.goodsSpecificationVOList.length==1){
+                for (var i = arr.length - 1; i >= 0; i--) {
+                  _this.getSpecDetails(i, arr[i].specValueCode)
+                }
                 _this.setData({
                   newSkuOnly:true
                 })
               }
-              var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
               if (isTrue){
                 for (var i = arr.length - 1; i >= 0; i--) {
                   _this.getSpecDetails(i, arr[i].specValueCode)
