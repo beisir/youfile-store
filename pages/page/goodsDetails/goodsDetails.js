@@ -656,7 +656,6 @@ Page({
     let saleBatchAmount = this.data.saleBatchAmount
     let saleBatchNum = this.data.saleBatchNum
     let difference=0
-    let isShowNew = this.data.isShowNew
     let newSkuOnly = this.data.newSkuOnly
     let limitShow = this.data.limitShow
     let goodsSpecificationVOList = this.data.goodsSpecificationVOList
@@ -696,11 +695,6 @@ Page({
       }
     }
     goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
-    if (isShowNew){
-      for (var i = 0; i < goodsSpecificationVOList[0].goodsSpecificationValueVOList.length;i++){
-        // goodsSpecificationVOList[0].goodsSpecificationValueVOList[i].num=0
-      }
-    }
     
     this.setData({                    
       newSkuArrTwo: newSkuArrTwo,
@@ -848,6 +842,8 @@ Page({
         if (!Api.isEmpty(obj.goodsSkuVOList)){
           obj.goodsSkuVOList=[]
         }
+        console.log(obj.goodsSpecificationVOList)
+        console.log(obj.goodsSkuVOList)
         wx.setStorageSync("storeId", obj.storeId)
         _this.setData({
           imgUrls: obj.goodsImageVOList,
