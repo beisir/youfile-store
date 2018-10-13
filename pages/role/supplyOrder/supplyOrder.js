@@ -135,6 +135,7 @@ Page({
       orderNumber: num,
       claimGoodsNum: money
     }).then((res) => {
+      this.afterOperation();
       wx.showToast({
         title: res.message,
         icon: 'none'

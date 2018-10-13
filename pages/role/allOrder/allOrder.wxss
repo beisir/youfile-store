@@ -1,4 +1,7 @@
 @import '../order/order';
+.no-border{
+  border-bottom:0!important; 
+}
 .ct-text{
   color:#CCAA77;
 }
@@ -12,7 +15,7 @@
   font-weight: normal
 }
 .np-ct{
-  background: #fff;padding-bottom: 15rpx;color: #333;font-size: 30rpx;
+  background: #fff;color: #333;font-size: 30rpx;padding: 10rpx 0 0;
 }
 .np-ct .np-view{
   margin-left:80rpx;padding-right: 100rpx;border-bottom: 2rpx solid #f3f3f3;position: relative;padding-bottom: 20rpx;
@@ -91,7 +94,7 @@
   height: 105rpx;background: none;padding:15rpx 20rpx 0 0;position: fixed;bottom: 0;width: 100%;border-top: 2rpx solid #DFDFDF;background: #fff;
 }
 .cf-button button{
-  height: 75rpx;width: 190rpx;font-size:30rpx;color: #666;line-height: 75rpx; 
+  height: 75rpx;font-size:30rpx;color: #666;line-height: 75rpx; 
 }
 .cf-button button:first-child{
   margin-right: 30rpx;
@@ -145,7 +148,7 @@
   color: #999;font-size: 24rpx;padding-left: 20rpx;padding-top: 25rpx;
 }
 .cf-button button{
-  font-size:22rpx;
+  font-size:26rpx;
   min-width: 155rpx;
   font-weight: 600;
 }

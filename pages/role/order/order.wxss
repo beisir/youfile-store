@@ -1,4 +1,8 @@
 @import '../../page/order/order';
+.c-title image{
+  height: 40rpx;
+  width: 40rpx;
+}
 .cf-button{
   height: auto;padding:20rpx 30rpx;
 }
@@ -12,16 +16,16 @@
   color: #CCAA77;font-weight:normal;border-bottom: 2rpx solid #CCAA77;width:265rpx;margin:0 auto;padding-top: 10rpx;
 }
 .alertInput{
-  width: 520rpx;height: 100rpx;border:2rpx solid #E1E1E1;border-radius: 8rpx;margin:0 auto;text-align:left;font-size: 30rpx;color: #999;font-weight: normal;margin-bottom: 20rpx;padding-left: 30rpx;
+  width: 520rpx;height: 100rpx;border:2rpx solid #E1E1E1;border-radius: 8rpx;margin:0 auto;text-align:left;font-size: 30rpx;color: #333;font-weight: normal;margin-bottom: 20rpx;padding-left: 30rpx;
 }
 .inputCon{
-  margin-top: 75rpx;margin-bottom: 70rpx;
+  margin-top: 50rpx;margin-bottom: 50rpx;
 }
 .confirm1{
   border:2rpx solid #BCBCBC;color: #999999;margin-right: 30rpx;
 }
 .modal-box{
-  padding-bottom:30rpx;
+  padding-bottom:60rpx;
   
 }
 .textarea{
