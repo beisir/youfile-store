@@ -2,74 +2,36 @@
   "pages":[
     "pages/page/home/home",
     
-    "pages/admin/status/status",
+    "pages/admin/addGoods/addGoods",
     
+    "pages/admin/shopClass/shopClass",
+    
+    
+    "pages/admin/spec/spec",
+    
+    
+    "pages/admin/status/status",
     
     "pages/page/cartList/cartList",
     
     "pages/admin/batchSet/batchSet",
     
     "pages/page/workIndex/workIndex",
-    
-    
-    
-    
     "pages/page/user/user",
-    
     "pages/page/order/order",
-    
-    
     "pages/role/supplyOrder/supplyOrder",
     
     "pages/role/order/order",
-    
-    
     "pages/businessFriend/merchant/index/index",
-    
     "pages/businessFriend/index/index",
-    
-    
-    
     "pages/businessFriend/merchant/dealUserDetails/dealUserDetails",
-    
-    
-    
     
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     
-    
-    
-    "pages/admin/addGoods/addGoods",
-    
-    
-    
-    
     "pages/page/invoice/invoice",
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
     "pages/page/upload/upload",
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     "pages/page/serStatus/serStatus",
@@ -91,7 +53,6 @@
     "pages/role/allOrder/allOrder",
     "pages/page/allOrder/allOrder",
     "pages/admin/editSpec/editSpec",
-    "pages/admin/spec/spec",
     "pages/page/orderSuccess/orderSuccess",
     "pages/role/supplyVoucher/supplyVoucher",
     "pages/admin/firstClass/firstClass",
@@ -150,7 +111,6 @@
     "pages/page/serList/serList",
 
    
-    "pages/admin/shopClass/shopClass",
     "pages/admin/editMesTitle/editMesTitle",
     "pages/admin/writeCont/writeCont",
     "pages/admin/classList/classList",

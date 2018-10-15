@@ -14,7 +14,9 @@ Page({
     name:'',
     names:'' 
   },
-
+  stopTouchMove: function () {
+    return false;
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -38,6 +40,16 @@ Page({
         currentTab: e.target.dataset.current,
       })
     }
+  },
+  goFistClass:function(){
+    this.setData({
+      currentTab:0,
+    })
+  },
+  goFistClass2: function () {
+    this.setData({
+      currentTab:1,
+    })
   },
   twoClass:function(e){
     var name=e.target.dataset.name,

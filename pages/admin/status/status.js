@@ -64,13 +64,9 @@ Page({
     that.data.detailList.splice(indexDel, 1)
     Api.adminGoodsDelete({ goodId: goodsIdDel })
       .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none',
-          duration: 2000
-        })
-        that.cancel()
+        Api.showToast("删除成功")
         that.setData({
+          show1:false,
           detailList: that.data.detailList
         })
       })

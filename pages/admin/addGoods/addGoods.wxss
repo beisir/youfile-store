@@ -135,15 +135,18 @@ border: 2rpx solid #d0d0d0;  padding-left: 20rpx;
   background: red;position: absolute;
 }
 .write{
-  margin-bottom: 200rpx;position: relative;
+  margin-bottom: 200rpx;position: relative;padding-right: 70rpx;
 }
 .write-cont{
-  background: #F9F9F9;border-top: 2rpx solid #E6E6E5;border-bottom: 2rpx solid #E6E6E5;width: 100%;
-  padding: 15rpx 30rpx;padding-bottom: 0;position: absolute;bottom: 83rpx;z-index: 1000;
+  background: #F9F9F9;width:60rpx;
+ padding-bottom: 0;position: fixed;z-index: 1000;right: 10rpx;top:450rpx;
 }
 .write-cont image{
   width:50rpx;height: 50rpx;margin-right: 30rpx;
 }
-.write-cont image:last-child{
-  float: right;margin-right: 50rpx;
+.removeImg{
+  position: relative;
+}
+.removeImg .clo-img{
+  position: absolute;right: 30rpx;top: 10rpx;width: 50rpx;height:50rpx;
 }

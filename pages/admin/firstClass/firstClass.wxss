@@ -1,9 +1,18 @@
 @import '../shopClass/shopClass';
 .shop-cont{
-  padding:0;
+  padding:0; max-height: 100%;overflow: scroll
+}
+swiper-item{
+  overflow: scroll
+}
+.shop-cont .shop-size{
+  font-size: 55rpx;
 }
 .shop-cont>view {
   height: 70rpx;padding-top: 27rpx;
+}
+.swiper{
+  height: 100%;overflow: scroll
 }
 .shop-cont1{
   margin-bottom: 20rpx;padding-top: 20rpx;

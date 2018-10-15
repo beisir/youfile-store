@@ -1,7 +1,7 @@
 @import '../addGoods/addGoods';
 @import '../spec/spec';
 .shop-cont{
-  background: #fff;border-radius: 8rpx;margin:20rpx;margin-bottom: 150rpx;padding:30rpx;font-size: 28rpx;padding-bottom: 0;
+  background: #fff;border-radius: 8rpx;margin:20rpx;margin-bottom: 150rpx;padding:30rpx;font-size: 30rpx;padding-bottom: 0;
 }
 .shop-cont .shop-size{
   font-size: 60rpx;padding-bottom: 50rpx;margin-top: 0;padding-top: 0;

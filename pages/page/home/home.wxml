@@ -88,7 +88,7 @@
               批发
               <text class='h-font' wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text>
               <image wx:if='{{limitShow==1}}' src='/image/wh.png'></image>
-              <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' bindtap='editFun' src="/image/edit2.png" />
+              <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
             </view>
           </view>
         </view>
@@ -107,7 +107,7 @@
 </view>
 <view class='showHide' hidden='{{showHide}}'>
   <view class='sh-cont'>
-    <view>分享</view>
+    <view><button  class='shre_btns' data-name='names' open-type='share'></button>分享</view>
     <view bindtap='topGoods'>置顶</view>
     <view bindtap='editGoods'>编辑</view>
     <view bindtap='upGoods'>下架</view>

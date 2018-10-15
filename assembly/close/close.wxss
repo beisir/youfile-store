@@ -16,9 +16,6 @@
   width:500rpx;font-weight: normal;
   margin: 0 auto;padding-bottom: 20rpx;
 }
-.slot view{
-  padding-top:27rpx;
-}
 .slot icon{
   margin-top: -8rpx;margin-right: 8rpx;
 }

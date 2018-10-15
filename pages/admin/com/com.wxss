@@ -69,7 +69,7 @@
   color: #C79359;
 }
 .st-title>view.active view{
- background:#C79359;height: 2rpx;width: 100rpx;position: absolute;bottom:0;left: 50%;margin-left:-50rpx;
+ background:#C79359;height: 2rpx;width: 100rpx;position: absolute;left: 50%;margin-left:-50rpx;
 }
 .st-cont{
   height:314rpx;
@@ -126,9 +126,9 @@
   margin-top: 22rpx;
   display: inline-block;
 }
-.st-bottom view:nth-child(2){
+.st-bottom1 view:nth-child(2){
   border-right: 2rpx solid #EDEDED;
-  border-left: 2rpx solid #EDEDED;
+  border-left:0;
 }
 .st-bottom navigator{
   height: 80rpx;
@@ -143,7 +143,7 @@
   background: #fff;
   color: #333;position: fixed;
   font-size: 30rpx;
-  height: 120rpx;border-top: 0;
+  height: 120rpx;
 }
 .st-bottom1 view{
   border-right: 2rpx solid #EDEDED;
@@ -215,4 +215,15 @@
 .xiala,.xiala1{
   position: absolute;width: 40rpx;height: 30rpx;top: -27rpx;
 }
-
+.list-view{
+  border-top:2rpx solid #EDEDED;margin-top:66rpx;
+}
+.list-view>view{
+  display: inline-block;width: 33%;color: #666;font-size: 28rpx;text-align: center;height: 90rpx;line-height: 90rpx;position: relative
+}
+.list-view>view view{
+  height:50rpx;width:2rpx;background:#EDEDED;position:absolute;top: 21rpx;
+}
+.list-view>view button, .button-hover{
+  position: absolute;background: #fff;opacity: 0;
+}

@@ -3,6 +3,9 @@
 .shop-cont .s-title image{
   height: 40rpx;width: 40rpx;vertical-align: middle;margin-right:20rpx;margin-left: 25rpx;
 }
+.shop-cont>view view{
+  top:0; font-size:30rpx;
+}
 .shop-cont .s-title{
   font-size: 30rpx;
 }

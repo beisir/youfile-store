@@ -13,6 +13,12 @@
 .slide-image{    
    width: 100%;    
 }
+.sh-cont view{
+  position: relative;
+}
+.sh-cont view button.shre_btns{
+  position: absolute;background: #fff;width:100%;border:0;opacity: 0;
+}
 .ym_sydtdmgzs {
     text-shadow: none !important;
      color: #fff;

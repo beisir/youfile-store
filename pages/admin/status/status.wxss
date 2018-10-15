@@ -46,8 +46,8 @@
 }
  
 .content {
-  padding-top: 20rpx;
-  padding-bottom: 20rpx;
+  padding-top: 45rpx;
+  padding-bottom: 10rpx;
   padding-left: 20rpx;
   line-height: 50rpx;
   margin-right: 0;

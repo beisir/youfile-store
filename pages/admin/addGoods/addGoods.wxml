@@ -1,4 +1,5 @@
-  <view class="weui-cell weui-upload" hidden='{{!uploadImg}}'>
+<view class='page'>
+    <view class="weui-cell weui-upload" hidden='{{!uploadImg}}'>
     <view class="weui-cell__bd">
       <view class="weui-uploader">
         <view class="weui-uploader__bd">
@@ -8,7 +9,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
                 <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
               </view>
           </view>
-          <view class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">
+          <view hidden='{{isAllImg}}' class="weui-uploader__input-box {{isShow?'true':'hideTrue'}}">
             <view class="weui-uploader__input" bindtap="chooseImage"></view>
           </view>
         </view>
@@ -52,7 +53,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         <view class="weui-cell__ft1"><image  src="/image/icl.png"></image></view>
       </navigator>
       <input class="weui-input" type="text" value='{{codeName}}' disabled='disabled' placeholder="未选择"></input>
-      <navigator class="weui-cell" url="../shopClass/shopClass">
+      <navigator class="weui-cell" url="../shopClass/shopClass?categoryCustomCode={{categoryCustomCode}}">
         <view class="weui-cell__hd"><image  src="/image/ic4.png"></image></view>
         <view class="weui-cell__bd">
           <text>本店分类</text>
@@ -72,7 +73,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
           </view>
           <view class='add-size'><text wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="index">{{item.specValueName}}</text></view>
       </view>
-      <input  wx:if="{{pageall.length<1}}" class="weui-input" type="text" disabled='disabled'  placeholder="不设置即仅一个规格（选填）"></input>
+      <input  wx:if="{{pageall.length<1}}" style='text-align:center;margin-top:20rpx;' class="weui-input" type="text" disabled='disabled'  placeholder="不设置即仅一个规格（选填）"></input>
     </view>
     <view class="page__category-content" hidden='{{clickSpecShow}}'>
       <view class='weui-title'>商品价格库存</view>
@@ -127,19 +128,18 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
       <view wx:for='{{addGoodsDetails}}' wx:key='index'>
       <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' wx:if='{{item.input}}' placeholder='请输入标题'></input>
       <textarea  data-index='{{index}}' value='{{item.value}}' wx:if='{{item.textInput}}' placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
-       <image mode='widthFix'  data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image>
+       <view class='removeImg'><image mode='widthFix'  bindlongtap="longTap"   data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image><image class='clo-img' data-index='{{index}}' bindtap='removeImage' src="/image/clo12.png" ></image></view>
       </view>
     </view>
     <view class="sendmessage">
       <view class='write-cont'>
-        <image bindtap='addTitle' src="/image/font.png"></image><image bindtap='addCont'  src="/image/color.png"></image><image  bindtap='addImage' src="/image/image.png" ></image><image src="/image/down1.png"></image>
+        <image bindtap='addTitle' src="/image/font.png"></image><image bindtap='addCont'  src="/image/color.png"></image><image  bindtap='addImage' src="/image/image.png" ></image>
       </view>
-      <input class="chat-input" type="emoji" placeholder="" />
-      <input style='display:none' type="" bindinput="" confirm-type="done" placeholder="" />
     </view>
   </view>
 </view>
- <view class='add-bottom'  hidden='{{!hiddenSend}}'>
+ <view class='add-bottom'>
   <view bindtap='addGit' data-status='0'><image  src="/image/git.png"></image>放入仓库</view>
   <view bindtap='addGit' data-status='1'><image  src="/image/up.png"></image>上架出售</view>
+</view>
 </view>

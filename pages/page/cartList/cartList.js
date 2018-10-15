@@ -272,6 +272,22 @@ Page({
     let detailList = this.data.detailList;
     const selected = detailList[index].selected;
     detailList[index].selected = !selected;
+    var len = detailList.length,
+        num=0;
+    for (var i = 0; i < detailList.length;i++){
+      if (detailList[i].selected){
+        num=num+1
+      }
+    }
+    if(num==len){
+      this.setData({
+        selectAllStatus: true
+      })
+    }else{
+      this.setData({
+        selectAllStatus: false
+      })
+    }
     this.setData({
       detailList: detailList
     });
@@ -389,26 +405,14 @@ Page({
     this.getTotalPrice();
   },
   // 更改商品价格
-  updatePrice:function(num){
+  updatePrice:function(num,index){
     var effectiveList = this.data.detailList
     for (var i = 0; i < effectiveList.length; i++) {
-      effectiveList[i].selected = true
-      var newSkvArr = effectiveList[i].shoppingCartSkuList
-      if (Api.isEmpty(newSkvArr)) {
-        var num = 0;
-        var allGoodsAmount = 0
-        var allGoodsPf = 0
-        for (var j = 0; j < newSkvArr.length; j++) {
-          num += newSkvArr[j].num
-          allGoodsAmount += newSkvArr[j].sellPrice * newSkvArr[j].num
-          allGoodsPf += newSkvArr[j].wholesalePrice * newSkvArr[j].num
-        }
-        effectiveList[i].num = num
-        effectiveList[i].allGoodsAmount = allGoodsAmount
-        effectiveList[i].allGoodsPf = allGoodsPf
-      } else {
-        effectiveList[i].allGoodsAmount = effectiveList[i].sellPrice * effectiveList[i].num
-        effectiveList[i].allGoodsPf = effectiveList[i].wholesalePrice * effectiveList[i].num
+      if(i==index){
+        var arr=[]
+        arr.push(effectiveList[i].sellPrice * num)
+        arr.push(effectiveList[i].wholesalePrice*num)
+        return arr
       }
     }
   },
@@ -424,10 +428,14 @@ Page({
     num = num - 1;
     detailList[index].shoppingCartSkuList[0].num = num;
     detailList[index].num = num
+    var arr=this.updatePrice(num,index)
+    detailList[index].allGoodsAmount = arr[0]
+    detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
     var dataArr = []
     dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId: storeId })
     this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
+
     this.setData({
       detailList: detailList
     });

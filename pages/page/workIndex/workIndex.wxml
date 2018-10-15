@@ -6,9 +6,9 @@
     <image mode='widthFix' bindtap='goDerm' src='/image/xcx2.png'></image>
   </view>
   <view class='wk-bot'>
-    <view>{{followNum}}<view>关注人数</view><view class='wk-xian'></view></view>
+    <view>{{followNum}}<view>关注人数</view></view>
     <view>{{payPurchaseOrders}}<view>付款进货单</view><view class='wk-xian'></view></view>
-    <view>{{payOrders}}<view>付款订单</view></view>
+    <view>{{payOrders}}<view>付款订单</view><view class='wk-xian'></view></view>
     <view class='wk-fg'></view>
     <view>{{verifyFriends}}<view>待验证商友</view></view>
     <view>{{unshippedPurchaseOrders}}<view>待发货进货单</view><view class='wk-xian'></view></view>
@@ -20,7 +20,7 @@
     <navigator   url='../../role/supplyOrder/supplyOrder'><view><image mode='widthFix' src='/image/ad1.png'></image></view><view>供货单</view></navigator>
     <navigator   url='../../role/order/order'><view><image mode='widthFix' src='/image/ad2.png'></image></view><view>订单管理</view></navigator>
     <navigator   url='../../admin/status/status'><view><image mode='widthFix' src='/image/ad3.png'></image></view><view>云享品</view></navigator>
-    <navigator   url='../../businessFriend/merchant/index/index'><view><image mode='widthFix' src='/image/ad4.png'></image></view><view>商友录</view></navigator>
+    <navigator   url='../../businessFriend/merchant/index/index'><view><image mode='widthFix' src='/image/ad4.png' style='width:50rpx;'></image></view><view>商友录</view></navigator>
     <navigator   url='../../page/mesEdit/mesEdit'><view><image mode='widthFix' src='/image/ad5.png'></image></view><view>小云店</view></navigator>
   </view>
 </view>

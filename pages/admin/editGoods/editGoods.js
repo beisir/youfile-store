@@ -1,5 +1,6 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+import util from '../../../utils/util.js'
 var x, y, x1, y1, x2, y2, index, currindex, n, yy;
 Page({
   /**
@@ -7,6 +8,7 @@ Page({
    */
   data: {
     pics: [],
+    stockHide: false,
     isShow: true,
     mainx: 0,
     isEmptySku:false,
@@ -38,6 +40,14 @@ Page({
     goodsId:'',
     addGoodsDetails: [],
     mainImgUrl: "",
+  },
+  removeImage: function (e) {
+    var index = e.target.dataset.index,
+      data = this.data.addGoodsDetails
+    data.splice(index, 1)
+    this.setData({
+      addGoodsDetails: data
+    })
   },
   // 输入描述内容
   addTitle: function () {
@@ -95,13 +105,15 @@ Page({
       description: val
     })
   },
+ 
   addImage: function () {
     var _this = this
     Api.uploadImage("GOODS")
       .then(res => {
         var data = this.data.addGoodsDetails
         var url = JSON.parse(res).obj
-        data.push({ img:_this.data.baseUrl.url })
+        console.log(url)
+        data.push({ img: _this.data.baseUrl + url })
         _this.setData({
           addGoodsDetails: data
         })
@@ -173,18 +185,28 @@ Page({
 
         var str = obj.description
         //匹配图片（g表示匹配所有结果i表示区分大小写）
-        var  imgReg = /<img.*?(?:>|\/>)/gi;
-        var  srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
-        var arr = str.match(imgReg);
+        // var  imgReg = /<img.*?(?:>|\/>)/gi;
+        // var  srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
+        var arr = util.parseGoodsDescription(str)
+        var data = _this.data.addGoodsDetails
         for (var i = 0; i < arr.length; i++) {
-          var src = arr[i].match(srcReg);
-          if (src[1]) {
-            var data = _this.data.addGoodsDetails
-            data.push({ img:src[1]})
-            _this.setData({
-              addGoodsDetails: data
-            })
+          if(arr[i].tag=="h4"){
+            data.push({ input: true, value: arr[i].content })
           }
+          if (arr[i].tag == "p") {
+            data.push({ textInput: true, value: arr[i].content})
+          }
+          if (arr[i].tag == "img") {
+            data.push({ img: arr[i].content})
+          }
+          // var src = arr[i].match(srcReg);
+          // if (src[1]) {
+          //   var data = _this.data.addGoodsDetails
+          //   data.push({ img:src[1]})
+          //   _this.setData({
+          //     
+          //   })
+          // }
         }
         _this.setData({
           pics: arrs,
@@ -193,6 +215,7 @@ Page({
           recommendDesc: obj.recommendDesc,
           pageall: obj.goodsSpecificationVOList,
           sellPrice: obj.sellPrice,
+          addGoodsDetails: data,
           stockNum: obj.stockNum,
           model: modelData,
           storeId: obj.storeId,
@@ -228,9 +251,17 @@ Page({
     Api.saleBatch()
       .then(res => {
         var obj = res.obj
-        _this.setData({
-          stock: obj.saleBatchNum == null ? 0 : obj.saleBatchNum
-        })
+        if (obj.saleBatchNum) {
+          _this.setData({
+            stock: obj.saleBatchNum
+          })
+        } else {
+          _this.setData({
+            stock: null,
+            stockHide: true
+          })
+        }
+
       })
   },
   // 取消
@@ -356,17 +387,23 @@ Page({
     }
   },
   // 图片上传
-  chooseImage: function () {
+  chooseImage() {
+    app.http.onlychoseImg().then(res => {
+      let url = res.tempFilePaths[0];
+      Api.toCuttingImg(url)
+    })
+  },
+  afterCuttingImg(url) {
     this.setData({
       uploadImg: true
     })
     var _this = this,
       pics = this.data.pics;
     var _this = this
-    Api.uploadImage("GOODS")
-      .then(res => {
-        var url = JSON.parse(res).obj
-        pics = pics.concat(_this.data.baseUrl+url);
+    app.http.onlyUploadImg(url).then(res => {
+      var url = JSON.parse(res).obj
+      if (url) {
+        pics = pics.concat(_this.data.baseUrl + url);
         if (pics.length > 6) {
           wx.showToast({
             title: '最多上传6张',
@@ -375,10 +412,18 @@ Page({
           })
         } else {
           _this.setData({
-            pics: pics
+            pics: pics,
+            isAllImg: false
+          }, function () {
+            if (pics.length == 6) {
+              _this.setData({
+                isAllImg: true
+              })
+            }
           })
         }
-      })
+      }
+    })
   },
   // 图片预览
   previewImage: function (e) {
@@ -453,9 +498,13 @@ Page({
     }
     for (var i = 0; i < addGoodsDetails.length; i++) {
       if (addGoodsDetails[i].input) {
-        description += '<h4>' + addGoodsDetails[i].value + '</h4>'
+        if (Api.isEmpty(addGoodsDetails[i].value)){
+          description += '<h4>' + addGoodsDetails[i].value + '</h4>'
+        }
       } else if (addGoodsDetails[i].textInput) {
-        description += '<p>' + addGoodsDetails[i].value + '</p>'
+        if (Api.isEmpty(addGoodsDetails[i].value)) {
+          description += '<p>' + addGoodsDetails[i].value + '</p>'
+        }
       } else {
         description += '<img src="' + addGoodsDetails[i].img + '"/>'
       }

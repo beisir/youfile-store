@@ -19,18 +19,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this
-    Api.storeIdInfo()
-      .then(res => {
-        var obj = res.obj
-        _this.setData({
-          countData: obj.countData,
-          floor: obj.floor.floorInfo,
-          storeMes: obj.store[0].store,
-          storeGoods: obj.store[0].goodsList,
-          logo: obj.store[0].store.logo
-        })
-      })
+    
   },
   editFun: function () {
     this.setData({
@@ -85,7 +74,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var _this = this
+    Api.storeIdInfo()
+      .then(res => {
+        var obj = res.obj
+        _this.setData({
+          countData: obj.countData,
+          floor: obj.floor.floorInfo,
+          storeMes: obj.store[0].store,
+          storeGoods: obj.store[0].goodsList,
+          logo: obj.store[0].store.logo
+        })
+      })
   },
 
   /**

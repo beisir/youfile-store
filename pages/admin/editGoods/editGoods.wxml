@@ -29,8 +29,8 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
   </view>
 <view class='add-cont'>
   <view class='ad-top'>
-    <view class="{{currentTab==0?'ad-active':''}}" data-current="0" data-current="0" bindtap="swichNav"><image src="{{currentTab==0?'/image/men.png':'/image/men0.png'}}"></image>商品信息</view>
-    <view class="{{currentTab==1?'ad-active':''}}" data-current="1" data-current="1" bindtap="swichNav"><image src="{{currentTab==0?'/image/car0.png':'/image/car.png'}}"></image>商品图文</view>
+    <view class="{{currentTab==0?'ad-active':''}}" data-current="0" data-current="0" bindtap="swichNav"><image src="{{currentTab==0?'/image/addming1.png':'/image/addming2.png'}}"></image>商品信息</view>
+    <view class="{{currentTab==1?'ad-active':''}}" data-current="1" data-current="1" bindtap="swichNav"><image src="{{currentTab==0?'/image/addming2.png':'/image/addming1.png'}}"></image>商品图文</view>
   </view>
   <view hidden='{{hiddenSelt}}'>
     <view class="page__category-content">
@@ -59,7 +59,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         <view class="weui-cell__ft1"><image  src="/image/icl.png"></image></view>
       </navigator>
       <input class="weui-input" type="text" value='{{codeName}}' disabled='disabled' placeholder="未选择"></input>
-      <navigator class="weui-cell" url="../shopClass/shopClass">
+      <navigator class="weui-cell" url="../shopClass/shopClass?categoryCustomCode={{categoryCustomCode}}">
         <view class="weui-cell__hd"><image  src="/image/ic4.png"></image></view>
         <view class="weui-cell__bd">
           <text>本店分类</text>
@@ -112,7 +112,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
       </view>
       <view class='weui-input'>总库存<input placeholder-class='pla-input'  class="weui-input" disabled='disabled' value='{{skuNum}}' type="text" placeholder=""></input><text>件</text></view>
     </view>
-    <view class="page__category-content">
+    <view class="page__category-content"  wx:if='{{!stockHide}}'>
       <view class='weui-title'>其他设置</view>
       <view class="weui-cell1">
         <view class="weui-cell__bd">
@@ -121,12 +121,12 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         <input class="stock" type="text" value='{{stock}}'></input>
         <view class="weui-cell__ft" bindtap='clearInput'><image  src="/image/clo.png"></image></view>
       </view>
-      <view class="weui-cell">
+      <!-- <view class="weui-cell">
         <view class="weui-cell__bd">
           <text>运费</text>
         </view>
         <view class="weui-cell__ft">邮费到付</view>
-      </view>
+      </view> -->
     </view>
   </view>
   <view hidden='{{hiddenSend}}'>
@@ -134,19 +134,17 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
       <view wx:for='{{addGoodsDetails}}' wx:key='index'>
       <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' wx:if='{{item.input}}' placeholder='请输入标题'></input>
       <textarea  data-index='{{index}}' value='{{item.value}}' wx:if='{{item.textInput}}' placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
-       <image mode='widthFix'  data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image>
+       <view class='removeImg'><image mode='widthFix'  bindlongtap="longTap"   data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image><image class='clo-img' data-index='{{index}}' bindtap='removeImage' src="/image/clo12.png" ></image></view>
       </view>
     </view>
     <view class="sendmessage">
       <view class='write-cont'>
-        <image bindtap='addTitle' src="/image/font.png"></image><image bindtap='addCont'  src="/image/color.png"></image><image  bindtap='addImage' src="/image/image.png" ></image><image src="/image/down1.png"></image>
+        <image bindtap='addTitle' src="/image/font.png"></image><image bindtap='addCont'  src="/image/color.png"></image><image  bindtap='addImage' src="/image/image.png" ></image>
       </view>
-      <input class="chat-input" type="emoji" placeholder="" />
-      <input style='display:none' type="" bindinput="" confirm-type="done" placeholder="" />
     </view>
   </view>
 </view>
- <view class='add-bottom add-bottom1'  hidden='{{!hiddenSend}}'>
+ <view class='add-bottom add-bottom1'>
   <view bindtap='updateGoods' data-status='1'>上架</view>
   <view bindtap='deleteList'>删除</view>
   <view bindtap='updateGoods' data-status='0'>保存</view>

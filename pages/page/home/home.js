@@ -76,7 +76,9 @@ Page({
     identity:'',
     baseUrl: app.globalData.imageUrl,
     likeShow:false,
-    limitShow:1
+    limitShow:1,
+    src:'',
+    goodsName:''
   },
 
   /**
@@ -101,21 +103,17 @@ Page({
     })
   },
   editFun:function(e){
-    var goodsId=e.target.dataset.id
+    var goodsId=e.target.dataset.id,
+      src = e.target.dataset.src,
+      goodsName = e.target.dataset.name
+    wx.setStorageSync("src", src)
+    wx.setStorageSync("goodsName", goodsName)
+    wx.setStorageSync("goodsId", goodsId)
     this.setData({
       showHide: false,
       goodsId: goodsId
     })
   }, 
-  // 分享
-  // onShareAppMessage: function (res) {
-  //   var goodsId = this.data.goodsId
-  //   return {
-  //     title: '弹出分享时显示的分享标题',
-  //     desc: '分享页面的内容',
-  //     path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + goodsId
-  //   }
-  // },
   // 下架商品
   upGoods:function(e){
     var _this=this,
@@ -383,12 +381,30 @@ Page({
   },
   
   /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    * 用户点击右上角分享
+    */
+  onShareAppMessage: (res) => {
+    var img = wx.getStorageSync('src'),
+      goodsName = wx.getStorageSync('goodsName'),
+      id = wx.getStorageSync('goodsId')
+    if (res.from === 'button') {
+     var name=res.target.dataset.name
+      if (name=="names"){
+        return {
+          title: goodsName,
+          path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id,
+          imageUrl: img,
+          success: (res) => {
+            console.log("转发成功", res);
+          },
+          fail: (res) => {
+            console.log("转发失败", res);
+          }
+        }
+      }
+    }
+  
   },
-
   /**
    * 页面上拉触底事件的处理函数
    */

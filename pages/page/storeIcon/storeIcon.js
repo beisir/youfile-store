@@ -1,6 +1,7 @@
 // pages/derm/derm.js
 const app = getApp();
 import Api from '../../../utils/api.js';
+import util from '../../../utils/util.js';
 Page({
 
   /**
@@ -11,10 +12,9 @@ Page({
     urlCode:''
   },
   saveImg() {
-    if (this.data.user.qrcode) {
-      wx.saveImageToPhotosAlbum({
-        filePath: this.data.baseUrl + this.data.user.qrcode,
-      })
+    if (this.data.urlCode) {
+      let imgUrl = this.data.baseUrl + this.data.urlCode;
+      util.saveImgToPhone(imgUrl)
     } else {
       wx.showToast({
         title: '暂无二维码',

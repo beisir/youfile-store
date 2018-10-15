@@ -17,11 +17,11 @@ Page({
     console.log(options.code)
     if (options.code=='邮费到付'){
       this.setData({
-        switch1Change:true
+        switch1Change:false
       })
     }else{
       this.setData({
-        switch1Change: false
+        switch1Change: true
       })
     }
   },

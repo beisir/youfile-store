@@ -2,6 +2,7 @@ import {
   adminGoodsListUrl,
   adminGoodsDeleteUrl,
   adminGoodsUpUrl,
+  goodsApiSearchListUrl,
   adminGoodsDownUrl,
   adminShopCateUrl,
   adminGoodsStatusUrl,
@@ -225,6 +226,11 @@ function goodsSearchList(data) {
   data = initStoreId(data);
   return app.pageRequest.pageGet(goodsSearchListUrl, data)
 }
+/**商品搜索列表**/
+function goodsApiSearchList(data) {
+  data = initStoreId(data);
+  return app.pageRequest.pageGet(goodsApiSearchListUrl, data)
+}
 /**关注用户列表**/
 function favoriteusers(data) {
   data = initStoreId(data);
@@ -326,7 +332,8 @@ function updateTemplateName(templateId, templateName ) {
   return app.http.putRequest(updateTemplateNameUrl+'?templateId='+templateId+'&templateName='+templateName )
 } 
 /**更新规格**/
-function updateSpecName(templateContentId,specName) {
+function updateSpecName(templateContentId,specName,data) {
+  data = initStoreId(data);
   return app.http.putRequest(updateSpecNameUrl+'?templateContentId='+templateContentId+'&specName='+specName)
 } 
 /**添加到购物车**/
@@ -344,7 +351,6 @@ function deteleCartGoods(data) {
 }
 /**修改购物车**/
 function updateMoreCart(data) {
-  console.log(data)
   var goodsId = JSON.parse(data)[0]["goodsId"]
   var url = '/api/shop/shoppingcart/shop/goods/batch/'+goodsId
   return app.http.putRequest(url, data)
@@ -711,6 +717,7 @@ module.exports = {
   classCodePar: classCodePar,
   addGoods: addGoods,
   classListApi: classListApi,
+  goodsApiSearchList: goodsApiSearchList,
   updataPwd: updataPwd,
   changeIcon: changeIcon
 }

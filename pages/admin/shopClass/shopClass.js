@@ -9,7 +9,9 @@ Page({
     show:false,
     watchInput: false,
     shouTitile:false,
-    codeArr:[]
+    codeArr:[],
+    showCodeName:false,
+    categoryCustomCode:[]
   },
   /**
    * 生命周期函数--监听页面加载
@@ -23,13 +25,28 @@ Page({
        codeArr:arr
      })
     }
+    if (options.categoryCustomCode){
+      var categoryCustomCode = (options.categoryCustomCode).split(",")
+      this.setData({
+        categoryCustomCode: categoryCustomCode,
+        showCodeName:true
+      })
+    }
     this.getList()
   },
   getList:function(){
     var that = this
     Api.adminShopCate()
       .then(res => {
-        const obj = res.obj
+        const obj = res.obj,
+          categoryCustomCode = this.data.categoryCustomCode
+        if (Api.isEmpty(categoryCustomCode)){
+          for(var i=0;i<obj.length;i++){
+            if (categoryCustomCode.indexOf(obj[i].customCategoryCode)!=-1){
+              obj[i].selected = true
+            }
+          }
+        }
         that.setData({
           dataList: obj
         })
@@ -59,7 +76,6 @@ Page({
       }
     }
     if (this.data.shouTitile) {
-      // Api.getUserDetaisl()
         app.http.putRequest('/admin/shop/goods/customcategory/'+strCode+'/goods', this.data.codeArr)
           .then(res => {
             wx.showToast({
@@ -111,15 +127,25 @@ Page({
   },
   // 监听input
   watchInput: function (event) {
-    if (event.detail.value == '') {
+    var value = event.detail.value,
+      num = value.length
+    if (value == '') {
       this.setData({
         watchInput: false
       })
     } else {
-      this.setData({
-        watchInput: true,
-        value: event.detail.value
-      })
+      if (num > 11) {
+        wx.showToast({
+          title: '超过最长数字限制',
+          icon: 'none',
+          duration: 2000,
+        })
+      } else {
+        this.setData({
+          value: value.substring(0, 10),
+          watchInput: true,
+        })
+      }
     }
   },
   /**

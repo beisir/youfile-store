@@ -30,15 +30,25 @@ Page({
   },
   // 新建分类
    watchInput: function (event) {
-    if (event.detail.value == '') {
+     var value = event.detail.value, 
+     num = value.length
+     if (value == '') {
       this.setData({
         watchInput: false
       })
     } else {
-      this.setData({
-        watchInput: true,
-        value: event.detail.value
-      })
+       if (num > 11) {
+         wx.showToast({
+           title: '超过最长数字限制',
+           icon: 'none',
+           duration: 2000,
+         })
+       } else {
+         this.setData({
+           value: value.substring(0, 10),
+           watchInput: true,
+         })
+       }
     }
   },
   addClass: function (e) {

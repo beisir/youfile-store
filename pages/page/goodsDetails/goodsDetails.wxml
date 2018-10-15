@@ -1,4 +1,10 @@
 <login id="login"></login>
+<navigator class="new-e navigator-hover" wx:if='{{limitShow==2}}' url="/pages/admin/editGoods/editGoods?goodsId={{goodsId}}">
+  <image src="/image/edit1.png"></image>
+</navigator>
+<!-- <view class="new-e new-e1 navigator-hover" bindtap='dowLoadImg' wx:if='{{limitShow==2}}'>
+  <image src="/image/edit1.png"></image>
+</view> -->
 <import src="../../../wxParse/wxParse.wxml"/> 
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
@@ -8,9 +14,9 @@
    </block>
 </swiper>
 <view class='gd-details'>
-  <view class='gd-title' wx:if='{{limitShow!=3}}'>
+  <view class='gd-title' wx:if='{{limitShow==1}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
-    <view class='gd-font'>零售价：<text>￥{{sell}}</text></view>
+    <view class='gd-font gd-font2'>零售价：<text>￥{{sell}}</text></view>
     <view class='gd-font'>批发价：<image src='/image/wh.png'></image>
     <!-- <text class='gd-yan'>商友验证中</text> -->
     <button  bindtap='addTip'>享受批发价</button></view>
@@ -20,7 +26,7 @@
     <view class='gd-font gd-font1'>零售价：￥{{sellPrice}}</view>
     <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text></view>
   </view> -->
-  <view class='gd-title' wx:if='{{limitShow==3}}'>
+  <view class='gd-title' wx:if='{{limitShow!=1}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
     <view class='gd-font gd-font2'>零售价：￥{{sell}}</view>
     <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text><button wx:if='{{saleBatchNum!=null}}' class='btn'><text>{{saleBatchNum}}</text>件起批</button></view>
@@ -117,6 +123,7 @@
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
       <view class='new-man' hidden='{{discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
+      <view class='new-man' hidden='{{!discountShow}}'>本店满{{saleBatchNum}}件可享受批发价</view>
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
@@ -124,6 +131,7 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
+            <view wx:if='{{saleBatchNum!=null}}' class='btn'>{{saleBatchNumGoods==null?saleBatchNum:saleBatchNumGoods}}<text>件起批</text></view>
             <!-- <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view> -->
           </view>
         </view>
@@ -183,6 +191,7 @@
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
       <view class='new-man' hidden='{{discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
+      <view class='new-man' hidden='{{!discountShow}}'>本店满{{saleBatchNum}}件可享受批发价</view>
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
@@ -190,6 +199,7 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
+            <view wx:if='{{saleBatchNum!=null}}' class='btn'>{{saleBatchNumGoods==null?saleBatchNum:saleBatchNumGoods}}<text>件起批</text></view>
             <view>￥{{discountShow?sell:saleBatchAmount}}</view>
             <text>库存：{{stockNum}}件</text>
           </view>
@@ -287,6 +297,7 @@
   <view hidden="{{showCart}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
       <view class='new-man' hidden='{{discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
+       <view class='new-man' hidden='{{!discountShow}}'>本店满{{saleBatchNum}}件可享受批发价</view>
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
@@ -294,6 +305,7 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
+            <view wx:if='{{saleBatchNum!=null}}' class='btn'>{{saleBatchNumGoods==null?saleBatchNum:saleBatchNumGoods}}<text>件起批</text></view>
             <!-- <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view> -->
           </view>
         </view>
@@ -309,7 +321,7 @@
           <view  class='gd-gg lt-attr' wx:if='{{index==0}}'>
             <view class="lt-table">
                 <view class="lt-tr">
-                    <view>{{nameTwo}}</view>
+                    <view wx:if='{{!newSkuOnlyEdit}}'>{{nameTwo}}</view>
                     <view>零售价</view>
                     <view>批发价</view>
                     <view>
@@ -322,7 +334,7 @@
                 </view>
                 <view  wx:for="{{spectArrDifference}}" wx:for-item="pItem" wx:key="{{index}}" >
                   <view class="lt-tr lt-tr1"  wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
-                      <view>{{item.name}}</view>
+                      <view wx:if='{{!newSkuOnlyEdit}}'>{{item.name}}</view>
                       <view class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
                       <view>￥{{item.wholesalePrice}}</view>
                       <view>
@@ -347,6 +359,7 @@
   <view hidden="{{showCartOne}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
       <view class='new-man' hidden='{{discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
+       <view class='new-man' hidden='{{!discountShow}}'>本店满{{saleBatchNum}}件可享受批发价</view>
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
@@ -354,6 +367,7 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
+            <view wx:if='{{saleBatchNum!=null}}' class='btn'>{{saleBatchNumGoods==null?saleBatchNum:saleBatchNumGoods}}<text>件起批</text></view>
             <view>￥{{limitShow==3 && discountShow==false?wholesalePrice:sell}}</view>
             <text>库存：{{stockNum}}件</text>
           </view>

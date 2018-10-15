@@ -8,6 +8,7 @@ Page({
    */
   data: {
     pics: [],
+    isAllImg:false,
     skuNumTrue:false,
     isShow: true,
     uploadImg:false,
@@ -40,6 +41,14 @@ Page({
     goodsImageVOList: [],
     mainImgUrl:'',
     addGoodsDetails: []
+  },
+  removeImage:function(e){
+    var index = e.target.dataset.index,
+      data = this.data.addGoodsDetails
+      data.splice(index,1)
+    this.setData({
+      addGoodsDetails:data
+    })
   },
   // 输入描述内容
   addTitle:function(){
@@ -204,8 +213,6 @@ Page({
   },
   onLoad: function (options) {
     this.getConfig()
-    // var str ='<h4>标题1</h4><p>这是内容1</p><img src="https://dev-image.youlife.me/goods/baec9167-286b-4510-9990-8a452522923a.jpg"/><h4>标题</h4><p>这是内容1</p><p>这是内容1</p><p>这是内容1</p><img src="https://dev-image.youlife.me/goods/e2c1a317-d41d-401c-b8dc-b6771e6f214a.jpg"/><p>这是内容1</p><h4>企鹅</h4>'
-    // console.log(util.parseGoodsDescription(str))
   },
   // tab切换
   swichNav: function (e) {
@@ -303,7 +310,7 @@ Page({
     app.http.onlyUploadImg(url).then(res => {
       var url = JSON.parse(res).obj
       if (url) {
-        pics = pics.concat(_this.data.baseUrl + url);
+        pics = pics.concat(_this.data.baseUrl + url); 
         if (pics.length > 6) {
           wx.showToast({
             title: '最多上传6张',
@@ -312,7 +319,14 @@ Page({
           })
         } else {
           _this.setData({
-            pics: pics
+            pics: pics,
+            isAllImg: false
+          },function(){
+            if (pics.length==6){
+              _this.setData({
+                isAllImg: true
+              })
+            }
           })
         }
       }
@@ -342,13 +356,17 @@ Page({
       skuListAll=this.data.skuListAll,
       pageall=this.data.pageall,
       addGoodsDetails = this.data.addGoodsDetails
-    for (var i = 0; i < addGoodsDetails.length;i++){
-      if (addGoodsDetails[i].input){
-        description += '<h4>' + addGoodsDetails[i].value+'</h4>'
-      } else if (addGoodsDetails[i].textInput){
-        description += '<p>' + addGoodsDetails[i].value+'</p>'
-      }else{
-        description += '<img src="' + addGoodsDetails[i].img+'"/>'
+    for (var i = 0; i < addGoodsDetails.length; i++) {
+      if (addGoodsDetails[i].input) {
+        if (Api.isEmpty(addGoodsDetails[i].value)) {
+          description += '<h4>' + addGoodsDetails[i].value + '</h4>'
+        }
+      } else if (addGoodsDetails[i].textInput) {
+        if (Api.isEmpty(addGoodsDetails[i].value)) {
+          description += '<p>' + addGoodsDetails[i].value + '</p>'
+        }
+      } else {
+        description += '<img src="' + addGoodsDetails[i].img + '"/>'
       }
     }
     for (var i = 0; i < pics.length;i++){

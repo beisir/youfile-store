@@ -65,6 +65,7 @@ Page({
     newSkuArrTwo:[],
     nameTwo:'',
     newSkuOnly:false,
+    newSkuOnlyEdit:false,
     className:'active',
     indicatorDots: true,
     autoplay: true,
@@ -191,7 +192,12 @@ Page({
   },
   //选择规格
   showAlert:function(){
-    var that = this;
+    var that = this,
+      limitShow = this.data.limitShow
+    if (limitShow==2){
+      Api.showToast("不能购买自己店铺的东西哦！")
+      return
+    }
     var animation = wx.createAnimation({
       duration: 300,
       timingFunction: 'linear'
@@ -305,7 +311,6 @@ Page({
       for (var i = 0; i < arr.length; i++) {
         if (this.data.editOneName) {
           var newArr = codeName[0].goodsSpecificationValueVOList
-
           if (newArr.length > 0) {
             var newArrLast = codeName[1].goodsSpecificationValueVOList
             for (var l = 0; l < newArrLast.length; l++) {
@@ -967,9 +972,16 @@ Page({
                 for (var i = arr.length - 1; i >= 0; i--) {
                   _this.getSpecDetails(i, arr[i].specValueCode)
                 }
-                _this.setData({
-                  newSkuOnly:true
-                })
+                if (isTrue){
+                  _this.setData({
+                    newSkuOnly: false,
+                    newSkuOnlyEdit:true
+                  })
+                }else{
+                  _this.setData({
+                    newSkuOnly: true
+                  })
+                }
               }
               if (isTrue){
                 for (var i = arr.length - 1; i >= 0; i--) {
@@ -1002,6 +1014,122 @@ Page({
       })
   },
   onShow: function () {
+  },
+  //下载内容
+  dow_temp: function (str, i, all_n, callback) {
+    var that = this;
+    wx.authorize({
+      scope: 'scope.writePhotosAlbum',
+      success() {
+        // 用户已经同意小程序使
+        const downloadTask = wx.downloadFile({
+          url: str,
+          success: function (res) {
+            var temp = res.tempFilePath
+            wx.saveImageToPhotosAlbum({
+              filePath: temp,
+              success: function () {
+              },
+              fail: function () {
+                wx.showToast({
+                  title: '第' + i + '下载失败',
+                })
+              }
+            })
+          },
+          fail: function (res) {
+            wx.showToast({
+              title: '下载失败',
+            })
+          }
+        })
+
+        downloadTask.onProgressUpdate((res) => {
+
+          if (res.progress == 100) {
+            callback(res.progress);
+            var count = that.data.percent_n;//统计下载多少次了
+            that.setData({
+              percent_n: count + 1
+            })
+            if (that.data.percent_n == all_n) {//判断是否下载完成
+              that.setData({//完成后，清空percent-N,防止多次下载后，出错
+                percent_n: 0
+              })
+              that.dowNum();
+            }
+          }
+        })
+
+      },
+      fail: function () {
+        wx.showToast({
+          title: '获取授权失败',
+        })
+      }
+    })
+  },
+  download: function () {
+    var that = this;
+    var data = that.data.itemData.pic_essey;
+    var dow_arr = that.data.dow_arr;
+    wx.showLoading({
+      title: '图片下载中..',
+    })
+    var all_n = data.length;
+    for (let i = 0, j = 1; i < all_n; i++ , j++) {
+      that.dow_temp(data[i], j, all_n, (text) => {
+        if (text == 100) {
+          wx.showLoading({
+            title: j + '/' + all_n + '下载中',
+            duration: 10000
+          })
+          if (j == all_n) {
+            wx.showToast({
+              title: '下载完成',
+              duration: 1000
+            })
+          }
+        } else {
+          wx.showToast({
+            title: '下载失败',
+          })
+        }
+        console.log('拿到值了是' + text);
+      })
+    }
+  },
+
+  // 下载多张图片
+  dowLoadImg:function(){
+    var that=this,
+      imgUrls = this.data.imgUrls,
+      arr=[]
+    for (var i = 0; i < imgUrls.length;i++){
+      arr.push(imgUrls[i].imageUrl)
+    }
+
+    for (let i = 0, j = 1; i < arr; i++ , j++) {
+      that.dow_temp(data[i], j, all_n, (text) => {
+        if (text == 100) {
+          wx.showLoading({
+            title: j + '/' + all_n + '下载中',
+            duration: 10000
+          })
+          if (j == all_n) {
+            wx.showToast({
+              title: '下载完成',
+              duration: 1000
+            })
+          }
+        } else {
+          wx.showToast({
+            title: '下载失败',
+          })
+        }
+        console.log('拿到值了是' + text);
+      })
+    }
   },
   likeStore: function () {
     var _this = this

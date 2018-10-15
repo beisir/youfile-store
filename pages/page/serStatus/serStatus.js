@@ -137,7 +137,6 @@ Page({
         });
       }
     });
-    this.getList('')
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -193,7 +192,7 @@ Page({
       result = this.data.result,
       goodsIdList = []
     goodsIdList.push(goodId)
-    Api.adminGoodsUp(goodsIdList)
+    Api.goodsApiSearchList(goodsIdList)
       .then(res => {
         result[index].status = "1"
         _this.setData({

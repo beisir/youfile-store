@@ -6,8 +6,17 @@
 .cart-list .hide_mes{
   display: none
 }
+.cart-list .cart-pro-name2{
+  margin-left: 230rpx;
+}
+.allNumShow{
+    font-size: 24rpx;text-align: right;color: #666;margin-right: 40rpx;
+}
+.allNumShow text{
+  color: #CCAA77
+}
 .man-j{
-  font-size: 24rpx;position:absolute;
+  font-size: 24rpx;position:absolute;margin-top:15rpx;
 }
 .man-j text{
   color: #CCAA77

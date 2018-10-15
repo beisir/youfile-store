@@ -32,6 +32,7 @@ Page({
     watchInput: false,
     updateSpec: false,
     editSpec: false,
+    lock: false,
     editDataModel: [],
     editShowModel: false,
     contentShow:false,
@@ -41,15 +42,62 @@ Page({
     templateContentId: '',
     notemp: { templateName: "衣服" },
     specName: '',
+    newTemplateName:'',
     value: '',
     valueEdit:'',
     goodsListData: [],
     show1:false,
     tempNewArr:[],
     tempNewId:'',
-    arrIndex: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
-    arrIndex1: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }]
+    longTap: [{ selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }],
+    longTap1: [{ selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }, { selected: true }],
+    arrIndex: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }],
+    arrIndex1: [{ selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }, { selected: false }]
 
+  },
+  stopTouchMove: function () {
+    return false;
+  },
+  setTapArr:function(){
+    var longTap = this.data.longTap
+    var longTap1 = this.data.longTap1
+    for (var i = 0; i < longTap.length;i++){
+      longTap[i].selected=true
+    }
+    for (var i = 0; i < longTap1.length; i++) {
+      longTap1[i].selected = true
+    }
+    this.setData({
+      longTap: longTap,
+      longTap1: longTap1
+    })
+  },
+  // 长按事件被触发
+  longTap: function (e) {
+    //锁住
+    this.setData({ lock: true });
+    var longTap = this.data.longTap,
+      index = e.target.dataset.current
+    longTap[index].selected = false
+    this.setData({
+      longTap: longTap
+    })
+  },
+  touchend: function () {
+    if (this.data.lock) {
+      //开锁
+      setTimeout(() => {
+        this.setData({ lock: false });
+      }, 100);
+    }
+  },
+  longTap1: function (e) {
+    var longTap = this.data.longTap1,
+      index = e.target.dataset.current
+    longTap[index].selected = false
+    this.setData({
+      longTap1: longTap
+    })
   },
   // 返回上一页
   goback: function () {
@@ -163,6 +211,7 @@ Page({
     var that = this;
     var templateId = e.target.dataset.id,
       arrIndex = this.data.arrIndex,
+      newTemplateName = e.target.dataset.templatename,
       index = e.target.dataset.current,
       editShowModel = this.data.editShowModel,
       editDataModel = this.data.editDataModel,
@@ -195,6 +244,7 @@ Page({
         templateId: templateId,
         navindex:-1,
         navindex1:-1,
+        newTemplateName: newTemplateName,
         goodsListData:[],
         arrIndex:arrIndex,
         arrIndex1: arrIndex1
@@ -234,6 +284,31 @@ Page({
         value: event.detail.value,
         valueEdit: event.detail.value
       })
+    }
+
+
+    var value = event.detail.value,
+      num = value.length
+    if (value == '') {
+      this.setData({
+        watchInput: false,
+        value: '',
+        valueEdit: ''
+      })
+    } else {
+      if (num > 7) {
+        wx.showToast({
+          title: '超过最长数字限制',
+          icon: 'none',
+          duration: 2000,
+        })
+      } else {
+        this.setData({
+          watchInput: true,
+          value: value.substring(0, 6),
+          valueEdit: event.detail.value
+        })
+      }
     }
   },
   // 取消
@@ -276,7 +351,6 @@ Page({
           tempArr[i].specValueList= specArr
         }else{
           for (var j = 0; j < tempArr[i].specValueList.length;j++){
-            console.log(tempArr[i].specValueList[j])
             str += tempArr[i].specValueList[j] + ",";
           }
           str += specName
@@ -337,17 +411,62 @@ Page({
     }
     str = (str.substring(str.length - 1) == ',') ? str.substring(0, str.length - 1) : str;
     var tempArr = { specName: "specName", templateId: id, specValueList: valData}
-    app.http.postRequest('/admin/shop/specificationTemplate/updateTemplateContentSpecValue?templateContentId='+id+ '&specValueList='+str,{})
+    var templateContentId=id
+    var specName=str
+    Api.addTempCont(templateContentId, specName)
         .then(res => {
           _this.setData({
             templateCont: valList
           })
+          Api.showToast("删除成功")
+          _this.setData({ lock: false });
+          _this.setTapArr();
     })
+  },
+  removeTemp1: function (e) {
+    var specName = e.target.dataset.name,
+      _this = this,
+      id = e.target.dataset.id,
+      pId = this.data.templateId,
+      tempArr = {},
+      valData = [],
+      str = '',
+      index = e.target.dataset.index,
+      valList = this.data.templateCont
+    for (var i = 0; i < valList.length; i++) {
+      if (valList[i].id == pId) {
+        valData = valList[i].specificationTemplateContentVOList
+        for (var j = 0; j < valData.length; j++) {
+          if (valData[j].id == id) {
+            valData = valData[j].specValueList
+            valData.baoremove(index)
+            valList[i].specificationTemplateContentVOList[j].specValueList
+            for (var h = 0; h < valData.length; h++) {
+              str += valData[h] + ","
+            }
+          }
+        }
+      }
+    }
+    str = (str.substring(str.length - 1) == ',') ? str.substring(0, str.length - 1) : str;
+    var tempArr = { specName: "specName", templateId: id, specValueList: valData }
+    var templateContentId = id
+    var specName = str
+    Api.addTempCont(templateContentId, specName)
+      .then(res => {
+        _this.setData({
+          templateCont: valList
+        })
+        Api.showToast("删除成功")
+        _this.setData({ lock: false });
+        _this.setTapArr();
+      })
   },
   // 确定 保存模板
   confirm1: function () {
     var _this = this
     var index = _this.data.currentTab
+    var templateContLen =_this.data.templateCont.length
     var tempArr = {}
     var listData = _this.data.templateCont[index]
     tempArr["specificationTemplateContentVOList"] = listData["specificationTemplateContentVOList"]
@@ -357,18 +476,16 @@ Page({
     }else{
       tempArr["templateName"]='默认模板'
     }
-    console.log(tempArr)
-    Api.addTemplate(tempArr)
-      .then(res => {
-          wx.showToast({
-            title: '添加成功',
-            icon: 'none',
-            duration: 1000,
-            mask: true
-          })
+    if (templateContLen>7){
+      Api.showToast("规格模板最多只能创建6个！")
+    }else{
+      Api.addTemplate(tempArr)
+        .then(res => {
+          Api.showToast("添加成功")
           getTempList(_this);
           _this.cancel()
-      })
+        })
+    }
   },
   upTop:function(){
     var _this = this,
@@ -378,7 +495,6 @@ Page({
         index=''
     for (var i = 0; i < templateCont.length;i++){
       if (templateCont[i].id == templateId){
-        console.log(templateCont[i].specificationTemplateContentVOList)
         var specList = templateCont[i].specificationTemplateContentVOList
         index=i
         templateCont[i].specificationTemplateContentVOList = specList.reverse()
@@ -387,7 +503,6 @@ Page({
     _this.setData({
       templateCont: templateCont
     })
-    console.log(templateCont[index])
     Api.addTemplate(templateCont[index])
       .then(res => {
         _this.cancel()
@@ -396,6 +511,10 @@ Page({
   },
   // 属性切换
   swichNav(e) {
+    //检查锁
+    if (this.data.lock) {
+      return;
+    }
     var current= e.target.dataset.current,
         pName = e.target.dataset.name,
         switchi = e.target.dataset.switchi,
@@ -523,31 +642,39 @@ Page({
     _this.setData({
       tempNewArr: templateCont,
       contentShow:true,
+      templateId: templateId,
       tempNewId: templateContentId
     })
   },
   contentDetele:function(){
     var _this=this,
       templateContentId = this.data.tempNewId,
-        templateCont=this.data.tempNewArr
-    Api.deleteTemplate(templateContentId)
-      .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none',
-          duration: 1000,
-          mask: true
+        templateCont=this.data.tempNewArr,
+      templateId = this.data.templateId
+    if (Api.isEmpty(templateId)){
+      Api.deleteTemplate(templateContentId)
+        .then(res => {
+          wx.showToast({
+            title: '删除成功',
+            icon: 'none',
+            duration: 1000,
+            mask: true
+          })
         })
-        _this.setData({
-          templateCont: templateCont,
-          contentShow:false
-        })
-      })
+    }
+    _this.setData({
+      templateCont: templateCont,
+      contentShow: false
+    })
+   
   },
   // 更新模板名称
   updateTemplate: function () {
+    var newTemplateName = this.data.newTemplateName
     this.setData({
-      updateSpec: true
+      updateSpec: true,
+      watchInput:true,
+      value: newTemplateName
     })
   },
   confirm2: function () {
