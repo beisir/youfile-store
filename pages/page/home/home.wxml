@@ -27,11 +27,11 @@
     <button class='shre_btn' open-type='share'>
       <image src="/image/fx1.png"></image>分享</button>
   </view>
-  <image src="{{baseUrl}}{{coverUrl}}{{storeCover}}" class="slide-image" mode="widthFix" />
+  <image src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
       <navigator  class='logoimg' url="../mes/mes?code={{limitShow}}">
-        <image mode="aspectFill" src="{{baseUrl}}{{store.logo}}{{logo}}"/>  
+        <image mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"/>  
       </navigator>
     </view>
     <view class="ym_sydtdmgzs">
@@ -75,7 +75,7 @@
         <view>
           <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
             <view class='ho-img'>
-              <image src="{{baseUrl}}{{item.mainImgUrl}}{{goodsSmall}}" mode="aspectFill"></image>
+              <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small " mode="aspectFill"></image>
             </view>
           </navigator>
           <view class="result-text">
@@ -88,7 +88,7 @@
               批发
               <text class='h-font' wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text>
               <image wx:if='{{limitShow==1}}' src='/image/wh.png'></image>
-              <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
+              <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
             </view>
           </view>
         </view>

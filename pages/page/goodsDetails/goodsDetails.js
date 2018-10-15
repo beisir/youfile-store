@@ -1022,10 +1022,10 @@ Page({
       arr=[],
       mainImgUrl =this.data.baseUrl+this.data.mainImgUrl
     for (var i = 0; i < imgUrls.length;i++){
-      arr.push(this.data.baseUrl+imgUrls[i].imageUrl)
+      arr.push(this.data.baseUrl + imgUrls[i].imageUrl + "?x-oss-process=style/store-cover")
     }
     wx.getImageInfo({         //下载图片
-      src: mainImgUrl,      //这里放你要下载图片的数组(多张) 或 字符串(一张)          下面代码不用改动
+      src: mainImgUrl +"?x-oss-process=style/store-cover",      //这里放你要下载图片的数组(多张) 或 字符串(一张)          下面代码不用改动
       success: function (ret) {
         var path = ret.path;
         wx.saveImageToPhotosAlbum({

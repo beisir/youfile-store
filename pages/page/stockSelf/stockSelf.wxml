@@ -95,7 +95,7 @@
     <view class="cart-box" wx:for="{{order.goodsInfos}}" wx:key="{{index}}">
       <view class="cart-list">
         <navigator>
-          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
         </navigator>
         <view class='ct-title ct-title1'>{{item.goodsName}}</view>
         <view class="heji">共

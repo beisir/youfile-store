@@ -104,7 +104,7 @@
     <view class="cart-box">
       <view class="cart-list" wx:for="{{showList}}" wx:key="{{index}}">
         <navigator>
-          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
         </navigator>
         <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
           <view>x {{item.orderDetails.num}}</view>

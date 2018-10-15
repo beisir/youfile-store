@@ -146,7 +146,7 @@
     <view class="cart-box">
       <view class="cart-list" wx:for="{{showList}}" wx:key="{{index}}">
         <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.goodsId}}'>
-          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
             <view>x {{item.orderDetails.num}}</view>
           </view>
@@ -162,7 +162,7 @@
     <view class="cart-box" wx:for="{{order.goodsInfos}}" wx:key="{{index}}">
       <view class="cart-list">
         <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.goodsId}}'>
-          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           <view class='ct-title ct-title1'>{{item.goodsName}}</view>
           <view class="heji">共
           <text>{{item.goodsNum}}</text>件商品</view>

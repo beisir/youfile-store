@@ -12,7 +12,7 @@
   <scroll-view scroll-y="true" style="height:100%;">
   <view class='bf-weui'>
     <navigator wx:for='{{detailList}}' wx:key='{{index}}' class="weui_cells"  url="../merchantInfo/merchantInfo?status=0&send={{storeId}}&accept={{item.userId}}&remark=&greet=&name={{item.nickName}}&logo={{baseUrl}}{{item.headPic}}&phone={{item.mobile}}">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}?x-oss-process=style/logo "></image></view>
       <text><text></text>{{item.nickName}} </text>
       <view class='nbf-font'>手机号：{{item.mobile}}</view>
     </navigator>

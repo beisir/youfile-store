@@ -10,7 +10,7 @@
     <view class='st-cont' wx:for="{{datas}}" wx:key="{{index}}">
     <icon type="success"  wx:if="{{item.selected}}" color="#CCAA77" data-index="{{index}}"  data-id='{{item.id}}' bindtap="selectList"/>
     <icon wx:else type="circle"  data-index="{{index}}" data-id='{{item.id}}' bindtap="selectList"/>
-      <image class='cart-thumb '  src="{{baseUrl}}{{item.mainImgUrl}}"></image>
+      <image class='cart-thumb '  src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
       <view class='st-details'>
         <view class='st-d-t'>{{item.name}}</view>
         <view class='st-d-status'>

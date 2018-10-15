@@ -65,7 +65,7 @@
       <view class="cart-box">
         <view class="cart-list" wx:for="{{item.goodsInfos}}" wx:key="{{index}}">
             <view class="cart-thumb">
-              <image class='goods-icon' mode="aspectFit" src="{{baseUrl+item.mainImgUrl}}"></image>
+              <image class='goods-icon' mode="aspectFit" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
             </view>
           <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
             <view>x {{item.orderDetails.num}}</view>

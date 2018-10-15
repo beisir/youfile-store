@@ -20,7 +20,7 @@
                   <!-- <view class='cart-xian-new'></view> -->
                   <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}"  class="cart-pro-select" bindtap="selectList"/>
                   <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList"/>
-                  <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}"><image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}"></image></navigator>
+                  <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}"><image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image></navigator>
 <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList==null}}'>￥{{item.sellPrice}}</view>
                   <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList!=null}}'>￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
                   <view class='ct-text ct-text1'  wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}'>￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
@@ -90,7 +90,7 @@
              <view class="cart-list">
                   <image class='noimg' src="/image/no.png"></image>
                   <image class='posimg' src="/image/alert.png"></image>
-                  <navigator ><image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}"></image></navigator>
+                  <navigator ><image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image></navigator>
                   <text class='ct-text'>￥{{item.sellPrice}}</text>
                   <view   style='width:365rpx' class='ct-title ct-t-title'>{{item.goodsName}}</view>
                   <!-- <text class="cart-pro-name">规格：{{item.small}}</text> -->

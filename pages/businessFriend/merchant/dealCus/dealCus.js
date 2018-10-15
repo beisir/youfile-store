@@ -85,13 +85,16 @@ Page({
     data["keyWords"] = value
     Api.dealUser(data)
       .then(res => {
-        console.log(res)
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
         if (Api.isEmpty(detailList)) {
           for (var i = 0; i < detailList.length; i++) {
-            var time = util.formatTime(new Date(detailList[i].latelyTradeDate))
-            detailList[i].latelyTradeDate = time.split(" ")[0]
+            if (Api.isEmpty(detailList[i].latelyTradeDate)){
+              var time = util.formatTime(new Date(detailList[i].latelyTradeDate))
+              detailList[i].latelyTradeDate = time.split(" ")[0]
+            }else{
+              detailList[i].latelyTradeDate=''
+            }
           }
         }
         _this.setData({

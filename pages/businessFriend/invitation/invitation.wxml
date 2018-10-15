@@ -12,7 +12,7 @@
 <view class='bf-cont'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{logo}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{logo}}?x-oss-process=style/logo"></image></view>
       <text>{{name}}</text>
       <view class='nbf-font'><image  mode="widthFix" src="{{baseUrl}}{{mallLogo}}"></image>{{mallName}}</view>
     </view>
