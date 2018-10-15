@@ -609,13 +609,11 @@ Page({
       difference=0,
       saleBatchAmount=this.data.saleBatchAmount,
       total=0
-    // discountShow  difference
-    // if (num>)
-    difference = total - num * wholesalePrice
     if (saleBatchAmount == null && saleBatchNumGoods == null && saleBatchNum == null){
       this.getSetShow(difference)
     }
     total = num*sell
+    difference = total - num * wholesalePrice
     if (total > saleBatchAmount){
       this.getSetShow(difference)
     }else{

@@ -9,14 +9,14 @@
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
-      <image src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" bindload='imgHeight'/>
+      <image src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight'/>
     </swiper-item>
    </block>
 </swiper>
 <view class='gd-details'>
   <view class='gd-title' wx:if='{{limitShow==1}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
-    <view class='gd-font gd-font2'>零售价：<text>￥{{sell}}</text></view>
+    <view class='gd-font gd-font2'>零售价：<text style='color:#333'>￥{{sell}}</text></view>
     <view class='gd-font'>批发价：<image src='/image/wh.png'></image>
     <!-- <text class='gd-yan'>商友验证中</text> -->
     <button  bindtap='addTip'>享受批发价</button></view>
@@ -90,7 +90,7 @@
 <view class='gd_bottom'>
     <view class='gd_b_left'>
         <view>
-          <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/follow/follow" extra-data="" version="trial"><image src="/image/home.png"></image></navigator>逛商城</view>
+          <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/newest/newest" extra-data="" version="trial"><image src="/image/home.png"></image></navigator>逛商城</view>
         </view>
         <view>
         <view bindtap='urlHome'><image src="/image/i22.png"></image></view>
@@ -195,7 +195,7 @@
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
             <view wx:if='{{saleBatchNum!=null}}' class='btn'>{{saleBatchNumGoods==null?saleBatchNum:saleBatchNumGoods}}<text>件起批</text></view>
-            <view>￥{{discountShow?sell:saleBatchAmount}}</view>
+            <view>￥{{discountShow?sell:wholesalePrice}}</view>
             <text>库存：{{stockNum}}件</text>
           </view>
         </view>
