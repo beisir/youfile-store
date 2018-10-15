@@ -107,7 +107,6 @@ Page({
   },
   //获取地址
   getAddress(obj){
-    console.log(obj)
     if(!obj){return}
     this.setData({
       address:obj
@@ -205,7 +204,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     let userType = wx.getStorageSync('identity'),
       storeId = wx.getStorageSync('storeId'),
       adminType= wx.getStorageSync("admin");

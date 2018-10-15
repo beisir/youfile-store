@@ -112,7 +112,6 @@ Page({
       .then(res => {
         var data = this.data.addGoodsDetails
         var url = JSON.parse(res).obj
-        console.log(url)
         data.push({ img: _this.data.baseUrl + url })
         _this.setData({
           addGoodsDetails: data
@@ -166,27 +165,17 @@ Page({
           skuTotal = this.data.skuNum,
           skuNum = obj.goodsSkuVOList,
           objImg = obj.goodsImageVOList
-        console.log(obj)
         for (var i = 0; i <objImg.length;i++){
           arrs.push(_this.data.baseUrl+objImg[i].imageUrl)
         }
-        // for (var i = 0; i < skuNum.length;i++){
-        //   skuTotal = skuTotal + skuNum[i].stockNum
-        // }
         var modelData = JSON.stringify(obj.goodsSpecificationVOList)
         if (obj.goodsSkuVOList.length>0){
          _this.setData({
            clickSpecShow: true
          })
         }
-        // console.log(obj.description.match(/<h4>([\s\S]*?)<\/h4>/)[1])
-        // console.log(obj.description.match(/<p>([\s\S]*?)<\/p>/)[1])
-        // console.log(obj.description.match(/src=[\'\"]?([^\'\"]*)[\'\"]?/i))
-
+      
         var str = obj.description
-        //匹配图片（g表示匹配所有结果i表示区分大小写）
-        // var  imgReg = /<img.*?(?:>|\/>)/gi;
-        // var  srcReg = /src=[\'\"]?([^\'\"]*)[\'\"]?/i;
         var arr = util.parseGoodsDescription(str)
         var data = _this.data.addGoodsDetails
         for (var i = 0; i < arr.length; i++) {

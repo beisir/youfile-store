@@ -8,7 +8,6 @@ var getTempList = function (that) {
         templateCont: []
       })
       const templateCont = (that.data.oneTemplateCont).concat(obj)
-      console.log(templateCont)
       that.setData({
         templateCont: [],
         templateCont: templateCont
@@ -62,7 +61,6 @@ Page({
     //     delete (data[j].timestampCode)
     //   }
     // }
-    console.log(goodsListData)
     // var index = this.data.currentTab
     // var pages = getCurrentPages();             //  获取页面栈
     // var currPage = pages[pages.length - 1];
@@ -99,7 +97,6 @@ Page({
         arrIndex1[j].selected = true
       }
     }
-    console.log(model)
     oneTemplateCont[0].specificationTemplateContentVOList = specificationTemplateContentVOList
     this.setData({
       oneTemplateCont: oneTemplateCont,
@@ -237,7 +234,6 @@ Page({
           tempArr[i].specValueList = specArr
         } else {
           for (var j = 0; j < tempArr[i].specValueList.length; j++) {
-            console.log(tempArr[i].specValueList[j])
             str += tempArr[i].specValueList[j] + ",";
           }
           str += specName
@@ -254,7 +250,6 @@ Page({
     if (templateContentId == '010') { return }
     Api.addTempCont(templateContentId, str)
       .then(res => {
-        const code = res.code
         wx.showToast({
           title: '新建成功',
           icon: 'none',
@@ -318,7 +313,6 @@ Page({
     } else {
       tempArr["templateName"] = '默认模板'
     }
-    console.log(tempArr)
     Api.addTemplate(tempArr)
       .then(res => {
         wx.showToast({
@@ -339,7 +333,6 @@ Page({
       index = ''
     for (var i = 0; i < templateCont.length; i++) {
       if (templateCont[i].id == templateId) {
-        console.log(templateCont[i].specificationTemplateContentVOList)
         var specList = templateCont[i].specificationTemplateContentVOList
         index = i
         templateCont[i].specificationTemplateContentVOList = specList.reverse()
@@ -348,7 +341,6 @@ Page({
     _this.setData({
       templateCont: templateCont
     })
-    console.log(templateCont[index])
     Api.addTemplate(templateCont[index])
       .then(res => {
         _this.cancel()

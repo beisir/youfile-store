@@ -36,7 +36,6 @@ Page({
     Api.userInfo({userId: userId})
     .then(res=>{
       var obj=res.obj
-      console.log(obj)
       if (obj.sex==0){
         sex='未知'
       } else if (obj.sex == 1) {

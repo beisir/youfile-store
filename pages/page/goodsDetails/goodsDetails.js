@@ -1041,7 +1041,6 @@ Page({
           fail(result) {
             wx.openSetting({
               success: (res) => {
-                console.log(res);
               }
             })
           }

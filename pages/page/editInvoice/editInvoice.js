@@ -41,7 +41,6 @@ Page({
      data = this.data.data
     arr = name.split(",")
     if (code=="true"){
-      console.log(333)
       this.setData({
         show:false,
         switch1Change:true

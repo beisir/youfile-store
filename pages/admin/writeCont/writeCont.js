@@ -50,13 +50,11 @@ Page({
   // }, 1000),
   onLoad: function (options) {
     // http.request('https://xyk-doctor.com/api/shop/shoppingcart/findByGoodsId/1', 'get', this.data.params, '正在加载数据', function (res) {
-    //   console.log(res)
     // })
   },
   searchSubmit: function (e) {
     var lists = this.data.lists;
     var index=e.target.dataset.id
-    console.log(index)
     var newData = { input: true, no: 0};
     lists.splice(index, 0, newData);
     // lists.push(newData);//实质是添加lists数组内容，使for循环多一次
