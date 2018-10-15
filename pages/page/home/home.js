@@ -75,6 +75,9 @@ Page({
     coverUrl:'',
     identity:'',
     baseUrl: app.globalData.imageUrl,
+    goodsSmall: app.globalData.goodsSmall, 
+    logo: app.globalData.logo, 
+    storeCover: app.globalData.storeCover, 
     likeShow:false,
     limitShow:1,
     src:'',
@@ -220,13 +223,12 @@ Page({
       })    
   },
   onLoad: function (options) {
+    var _this = this
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
-      // let userId = options.scene.split("&")[0];
-      // let recommendId = options.scene.split('&')[1];
+      var storeId = userId.split("store_")[1]
+      wx.setStorageSync("storeId", storeId)
     }
-
-  
     if (options.query) {
       wx.setStorageSync("storeId", options.query.storeId)
     }
@@ -302,19 +304,19 @@ Page({
     })
   }, 
   deteleLikeStore: function() {
-    var _this = this
-    Api.deteleLikeStore()
-      .then(res => {
-        wx.showToast({
-          title: '取消关注成功',
-          icon: 'none',
-          duration: 1000,
-          mask: true,
-        })
-        _this.setData({
-          likeShow: false
-        })
-      })
+    // var _this = this
+    // Api.deteleLikeStore()
+    //   .then(res => {
+    //     wx.showToast({
+    //       title: '取消关注成功',
+    //       icon: 'none',
+    //       duration: 1000,
+    //       mask: true,
+    //     })
+    //     _this.setData({
+    //       likeShow: false
+    //     })
+    //   })
   },
   onReady: function () {
 

@@ -1,4 +1,5 @@
 import Api from '../../../../utils/api.js'
+const util = require('../../../../utils/util.js');
 const app = getApp();
 Page({
 
@@ -71,10 +72,10 @@ Page({
       sortKey = 'totalAmount'
     }
     if (currentTab == 1) {
-      sortKey = 'latelyTradingDate'
+      sortKey = 'latelyTradeDate'
     }
     if (currentTab == 2) {
-      sortKey = 'tradingNum'
+      sortKey = 'tradeNum'
     }
     var data = { orderCategory:1}
     if (sortKey != '') {
@@ -87,7 +88,12 @@ Page({
         console.log(res)
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        console.log(detailList)
+        if (Api.isEmpty(detailList)) {
+          for (var i = 0; i < detailList.length; i++) {
+            var time = util.formatTime(new Date(detailList[i].latelyTradeDate))
+            detailList[i].latelyTradeDate = time.split(" ")[0]
+          }
+        }
         _this.setData({
           totalCount: totalCount
         })

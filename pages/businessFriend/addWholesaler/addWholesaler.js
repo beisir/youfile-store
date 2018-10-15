@@ -22,7 +22,6 @@ Page({
             .then(res => {
               var obj=res.obj
               if (Api.isEmpty(obj)){
-                console.log(obj)
                 var isBizFriend = obj.isBizFriend
                 if (isBizFriend){
                   var status=2

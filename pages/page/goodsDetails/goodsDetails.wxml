@@ -2,9 +2,9 @@
 <navigator class="new-e navigator-hover" wx:if='{{limitShow==2}}' url="/pages/admin/editGoods/editGoods?goodsId={{goodsId}}">
   <image src="/image/edit1.png"></image>
 </navigator>
-<!-- <view class="new-e new-e1 navigator-hover" bindtap='dowLoadImg' wx:if='{{limitShow==2}}'>
-  <image src="/image/edit1.png"></image>
-</view> -->
+<view class="new-e new-e1 navigator-hover"wx:if='{{limitShow==2}}'>
+  <image src="/image/addming2.png"  bindtap='dowLoadImg' ></image>
+</view>
 <import src="../../../wxParse/wxParse.wxml"/> 
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
@@ -74,12 +74,7 @@
             </view>
         </view>
   <view class='gd_readCont'>
-    <!-- <image src="http://pic.youlife.me/v1/tfs/T1Ka_TB4dT1RXrhCrK.jpg" mode="widthFix" bindload='imgHeight' />
-    <view class='gd_r-title'>
-      <view>I`WITH YOU —— 我就在你的身边</view>
-      <text>你眉眼低垂，融进世间柔和，身边的萤火虫翩 翩，从此眼里只有你，采用“萤火虫”为主题，以 及闪耀的钻石光芒，提炼了“Y”字点缀，化身与众不同的萤火虫。</text>
-    </view> -->
-    <view class='gd_r-title'>
+    <view class='gd_r-title' wx:if='{{description!=null && description!=""}}'>
      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
     </view>
   </view>

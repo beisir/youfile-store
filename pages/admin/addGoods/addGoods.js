@@ -8,6 +8,7 @@ Page({
    */
   data: {
     pics: [],
+    show1:false,
     isAllImg:false,
     skuNumTrue:false,
     isShow: true,
@@ -481,7 +482,10 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    // this.setData({
+    //   show1:true
+    // })
+    // return
   },
 
   /**

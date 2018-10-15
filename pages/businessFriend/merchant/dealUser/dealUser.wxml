@@ -21,11 +21,12 @@
       <text>{{item.remark==null?item.nickName:item.remark}}</text>
       <text class='de-right' wx:if='{{currentTab==-1}}'>总交易额￥{{item.totalAmount}}</text>
       <text class='de-right' wx:if='{{currentTab==0}}'>总交易额￥{{item.totalAmount}}</text>
-      <text class='de-right' wx:if='{{currentTab==1}}'>进货{{item.tradeNum}}次</text>
-      <text class='de-right' wx:if='{{currentTab==2}}'>进货{{item.latelyTradeDate}}次</text>
+      <text class='de-right' wx:if='{{currentTab==1}}'>最近购买于{{item.latelyTradeDate}}</text>
+      <text class='de-right' wx:if='{{currentTab==2}}'>进货{{item.tradeNum}}次</text>
     </navigator>
   </view>
 </view>
-<view class='allData'>{{totalCount}}位客户</view>
+<view class='allData' wx:if='{{totalCount==0}}'>暂无客户！</view>
+<view class='allData' wx:if='{{totalCount>0}}'>{{totalCount}}位客户</view>
 </scroll-view>
 

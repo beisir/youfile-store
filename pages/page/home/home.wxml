@@ -27,11 +27,11 @@
     <button class='shre_btn' open-type='share'>
       <image src="/image/fx1.png"></image>分享</button>
   </view>
-  <image src="{{baseUrl}}{{coverUrl}}" class="slide-image" mode="widthFix" />
+  <image src="{{baseUrl}}{{coverUrl}}{{storeCover}}" class="slide-image" mode="widthFix" />
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
       <navigator  class='logoimg' url="../mes/mes?code={{limitShow}}">
-        <image mode="aspectFill" src="{{baseUrl}}{{store.logo}}"/>  
+        <image mode="aspectFill" src="{{baseUrl}}{{store.logo}}{{logo}}"/>  
       </navigator>
     </view>
     <view class="ym_sydtdmgzs">
@@ -75,7 +75,7 @@
         <view>
           <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
             <view class='ho-img'>
-              <image src="{{baseUrl}}{{item.mainImgUrl}}" mode="aspectFill"></image>
+              <image src="{{baseUrl}}{{item.mainImgUrl}}{{goodsSmall}}" mode="aspectFill"></image>
             </view>
           </navigator>
           <view class="result-text">

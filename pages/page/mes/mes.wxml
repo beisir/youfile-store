@@ -58,21 +58,21 @@
     <image wx:for='{{storeGoods}}' wx:key='{{index}}'  src="{{baseUrl}}{{item.mainImgUrl}}"></image>
    </view>
 </view>
-<view class="weui_cells"  wx:if='{{limitShow==3}}'>
+<navigator class="weui_cells"  wx:if='{{limitShow==3}}'  url='/pages/page/stockOrder/stockOrder'>
     <image  src="/image/12.png"></image>
     <text class="store-address">采购记录 </text>
     <view class='weui-view'>
-      <text class='new-text'>123</text><image class='img' src="/image/icl.png"></image>
+      <text class='new-text'></text><image class='img' src="/image/icl.png"></image>
     </view>
-</view>
-<view class="weui_cells">
+</navigator>
+<navigator class="weui_cells"  url="../storeIcon/storeIcon">
     <image  src="/image/mes12.png"></image>
     <text class="store-address">商家信息 </text>
     <view class='weui-view'>
       <image class='m-img' src="/image/xcx.png"></image><image class='img' src="/image/icl.png"></image>
     </view>
    <view class='weui-xian weui-xian1'></view>
-</view>
+</navigator>
 <view class='weui-time wt-font1'>
   <view>营业时间<text>{{storeMes.openingTime==null?'':storeMes.openingTime}}</text></view>
   <view>客服电话<text>{{storeMes.servicePhone==null?'':storeMes.servicePhone}}</text><view class='mes-tel'><image src="/image/tel1.png"></image></view></view>

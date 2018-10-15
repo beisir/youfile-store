@@ -1,3 +1,13 @@
+<!-- 确定退出新建云享品？-->
+<mes
+  show="{{show1}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确定退出新建云享品？</text>
+  <button bindtap='confirmDetele'>确定</button>
+</view>
+</mes>
 <view class='page'>
     <view class="weui-cell weui-upload" hidden='{{!uploadImg}}'>
     <view class="weui-cell__bd">

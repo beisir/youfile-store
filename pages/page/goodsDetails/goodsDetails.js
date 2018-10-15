@@ -922,7 +922,7 @@ Page({
           skuArrTwo = [],
           name = ''
         var that = this;
-        var article = '<div>' + obj.description+'</div>'
+        var article = '<div>'+ obj.description+'</div>'
         WxParse.wxParse('article', 'html', article, that, 5);
         if (store.isFollow){
           _this.setData({
@@ -1015,121 +1015,41 @@ Page({
   },
   onShow: function () {
   },
-  //下载内容
-  dow_temp: function (str, i, all_n, callback) {
-    var that = this;
-    wx.authorize({
-      scope: 'scope.writePhotosAlbum',
-      success() {
-        // 用户已经同意小程序使
-        const downloadTask = wx.downloadFile({
-          url: str,
-          success: function (res) {
-            var temp = res.tempFilePath
-            wx.saveImageToPhotosAlbum({
-              filePath: temp,
-              success: function () {
-              },
-              fail: function () {
-                wx.showToast({
-                  title: '第' + i + '下载失败',
-                })
-              }
-            })
-          },
-          fail: function (res) {
-            wx.showToast({
-              title: '下载失败',
-            })
-          }
-        })
-
-        downloadTask.onProgressUpdate((res) => {
-
-          if (res.progress == 100) {
-            callback(res.progress);
-            var count = that.data.percent_n;//统计下载多少次了
-            that.setData({
-              percent_n: count + 1
-            })
-            if (that.data.percent_n == all_n) {//判断是否下载完成
-              that.setData({//完成后，清空percent-N,防止多次下载后，出错
-                percent_n: 0
-              })
-              that.dowNum();
-            }
-          }
-        })
-
-      },
-      fail: function () {
-        wx.showToast({
-          title: '获取授权失败',
-        })
-      }
-    })
-  },
-  download: function () {
-    var that = this;
-    var data = that.data.itemData.pic_essey;
-    var dow_arr = that.data.dow_arr;
-    wx.showLoading({
-      title: '图片下载中..',
-    })
-    var all_n = data.length;
-    for (let i = 0, j = 1; i < all_n; i++ , j++) {
-      that.dow_temp(data[i], j, all_n, (text) => {
-        if (text == 100) {
-          wx.showLoading({
-            title: j + '/' + all_n + '下载中',
-            duration: 10000
-          })
-          if (j == all_n) {
-            wx.showToast({
-              title: '下载完成',
-              duration: 1000
-            })
-          }
-        } else {
-          wx.showToast({
-            title: '下载失败',
-          })
-        }
-        console.log('拿到值了是' + text);
-      })
-    }
-  },
-
   // 下载多张图片
   dowLoadImg:function(){
-    var that=this,
+    var _this=this,
       imgUrls = this.data.imgUrls,
-      arr=[]
+      arr=[],
+      mainImgUrl =this.data.baseUrl+this.data.mainImgUrl
     for (var i = 0; i < imgUrls.length;i++){
-      arr.push(imgUrls[i].imageUrl)
+      arr.push(this.data.baseUrl+imgUrls[i].imageUrl)
     }
-
-    for (let i = 0, j = 1; i < arr; i++ , j++) {
-      that.dow_temp(data[i], j, all_n, (text) => {
-        if (text == 100) {
-          wx.showLoading({
-            title: j + '/' + all_n + '下载中',
-            duration: 10000
-          })
-          if (j == all_n) {
-            wx.showToast({
-              title: '下载完成',
-              duration: 1000
+    wx.getImageInfo({         //下载图片
+      src: mainImgUrl,      //这里放你要下载图片的数组(多张) 或 字符串(一张)          下面代码不用改动
+      success: function (ret) {
+        var path = ret.path;
+        wx.saveImageToPhotosAlbum({
+          filePath: path,
+          success(result) {
+            if (i == xin1.length) {
+              wx.hideLoading();
+              wx.showToast({
+                title: '下载图片成功',
+                duration: 2000,
+                mask: true,
+              });
+            }
+          },
+          fail(result) {
+            wx.openSetting({
+              success: (res) => {
+                console.log(res);
+              }
             })
           }
-        } else {
-          wx.showToast({
-            title: '下载失败',
-          })
-        }
-        console.log('拿到值了是' + text);
-      })
-    }
+        });
+      }
+    });
   },
   likeStore: function () {
     var _this = this

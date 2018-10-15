@@ -57,8 +57,8 @@
         <view bindtap='lookGoodsDetails'  data-id='{{item.id}}'>预览<view></view></view>
         <view wx:if='{{item.status==0}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架<view></view></view>
           <view wx:if='{{item.status==1}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架<view></view></view>
-          <view wx:if='{{item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>上架<view></view></view>
-          <view wx:if='{{item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>上架<view></view></view>
+          <view wx:if='{{item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架<view></view></view>
+          <view wx:if='{{item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架<view></view></view>
       </view>
       <!-- <view class='st-bottom'>
           <view><button open-type="share" data-name='{{item.name}}' data-img='{{baseUrl}}{{item.mainImgUrl}}' data-id='{{item.id}}'>转发</button></view>

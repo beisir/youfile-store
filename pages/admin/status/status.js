@@ -138,7 +138,6 @@ Page({
           duration: 2000
         })
       })
-      
   },
   upStatus:function(e){
     const goodId = e.currentTarget.dataset.id,
@@ -174,7 +173,6 @@ Page({
           datas = _this.data.detailList,
           totalCount = res.obj.totalCount,
           newArr = app.pageRequest.addDataList(datas, detailList)
-        console.log(detailList)
         _this.setData({
           detailList: newArr,
           totalCount: totalCount
@@ -239,11 +237,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    app.pageRequest.pageData.pageNum = 0
     this.setData({
-      detailList:[]
+      goodsStatus: 1,
+      hidden: true,
+      currentTab: 0,
+      classStatus: false,
+      detailList: []
     })
-    this.getList()
+    app.pageRequest.pageData.pageNum = 0
+    this.classCode('')
   },
   bindDownLoad: function () {
     var that = this,
@@ -266,7 +268,6 @@ Page({
   onHide: function () {
   
   },
-
   /**
    * 生命周期函数--监听页面卸载
    */
@@ -278,12 +279,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      currentTab:-1,
-      detailList: []
-    })
-    app.pageRequest.pageData.pageNum = 0
-    this.getList()
+    this.onShow()
+    wx.stopPullDownRefresh();
   },
 
   /**

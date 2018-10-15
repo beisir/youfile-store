@@ -142,7 +142,6 @@ class request {
             var imgSrc = res.tempFilePaths;
             var tempFilePaths = res.tempFilePaths
             wx.uploadFile({
-
               url: uploadImg,
               filePath: tempFilePaths[0],
               name: 'file',

@@ -13,13 +13,14 @@
     <navigator class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}' url="../reach/reach?accept={{item.userId}}">
       <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}"></image></view>
       <text>{{item.remark==null?item.nickName:item.remark}}</text>
-      <text class='de-right' wx:if='{{currentTab==-1}}'>总交易额{{item.totalAmount}}</text>
-      <text class='de-right' wx:if='{{currentTab==0}}'>总交易额{{item.totalAmount}}</text>
-      <text class='de-right' wx:if='{{currentTab==1}}'>进货{{item.tradeNum}}次</text>
-      <text class='de-right' wx:if='{{currentTab==2}}'>进货{{item.latelyTradeDate}}次</text>
+      <text class='de-right' wx:if='{{currentTab==-1}}'>总交易额￥{{item.totalAmount}}</text>
+      <text class='de-right' wx:if='{{currentTab==0}}'>总交易额￥{{item.totalAmount}}</text>
+      <text class='de-right' wx:if='{{currentTab==1}}'>最近购买于{{item.latelyTradeDate}}</text>
+      <text class='de-right' wx:if='{{currentTab==2}}'>进货{{item.tradeNum}}次</text>
     </navigator>
   </view>
 </view>
-<view class='allData'>{{totalCount}}位进货商</view>
+<view class='allData'  wx:if='{{totalCount==0}}'>暂无进货商！</view>
+<view class='allData'  wx:if='{{totalCount>0}}'>{{totalCount}}位进货商</view>
 </scroll-view>
 
