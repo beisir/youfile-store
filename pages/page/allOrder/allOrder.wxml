@@ -45,7 +45,7 @@
       <image src="/image/nz.png"></image>等待买家付款
     </view>
     <view class='np-right'>
-      <view>剩余时间：{{clock}}</view>
+      <view>剩余时间：{{clock?clock:""}}</view>
       <view>需付款：￥{{order.orderAmount}}</view>
     </view>
   </view>
@@ -93,10 +93,10 @@
 <view class='np-ct' wx:if="{{self=='true'}}">
   <view class='np-view {{order.userMemo?"":"no-border"}}'>
     <image src="/image/ad.png"></image>
-    <view>门店地址：{{order.storeInfo.address}}</view>
-    <text>营业时间: {{order.storeInfo.openingTime}}</text>
+    <view>门店地址：{{order.storeInfo.address?order.storeInfo.address:""}}</view>
+    <text>营业时间: {{order.storeInfo.openingTime?order.storeInfo.openingTime:""}}</text>
     <view class='sf-tel'>
-      <image src="/image/pre.png"></image>商家电话：{{order.storeInfo.servicePhone}}</view>
+      <image src="/image/pre.png"></image>商家电话：{{order.storeInfo.servicePhone?order.storeInfo.servicePhone:""}}</view>
   </view>
 </view>
 <!-- 物流信息 -->

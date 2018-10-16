@@ -28,6 +28,14 @@ Page({
     name:''
   },
 
+  // 电话
+  call() {
+    if (this.data.mobile) {
+      wx.makePhoneCall({
+        phoneNumber: this.data.mobile,
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

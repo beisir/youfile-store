@@ -16,13 +16,13 @@
   </view>
 </view>
 <view class="weui_cells ">
-    <navigator  url=''>
+    <!-- <navigator  url=''>
         <text class="store-address">云产品订单</text>
         <view class='weui-view'>
           <image class='img' src="/image/icl.png"></image>
         </view>
         <view class='weui-xian weui-xian1'></view>
-    </navigator>
+    </navigator> -->
     <navigator  url='../../businessFriend/merchant/index/index'>
         <text class="store-address">商友权限</text>
         <view class='weui-view'>

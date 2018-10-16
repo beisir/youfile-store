@@ -30,7 +30,7 @@
 </view>
 <view class='bf-cont info-cont'>
   <view class='in-cont'>
-   <text>手机号</text><view>{{mobile}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+   <text>手机号</text><view>{{mobile}}<view bindtap='call' class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
    <text>微信号</text><view wx:if='{{weixinNumber!=null}}'>{{weixinNumber==null?'':weixinNumber}}</view>

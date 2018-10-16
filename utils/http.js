@@ -195,6 +195,7 @@ class request {
       console.warn('no upload url')
       return
     }
+    
     return new Promise((resolve, reject) => {
       this.authHandler.getTokenOrRefresh().then(token => {
         var header = this.defaultUploadHeader
@@ -203,6 +204,9 @@ class request {
         } else {
           delete header['Authorization'];
         }
+        wx.showLoading({
+          title: '上传中',
+        })
         wx.uploadFile({
           url: uploadImg,
           filePath: url,
@@ -221,6 +225,9 @@ class request {
               reject(res)
             }
           }),
+          complete: (res=>{
+            wx.hideLoading();
+          })
         })
       })
     })

@@ -10,7 +10,14 @@ Page({
     showMes:false,
     baseUrl: app.globalData.imageUrl,
   },
-
+  // 电话
+  call(){
+    if (this.data.phone){
+      wx.makePhoneCall({
+        phoneNumber: this.data.phone,
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
