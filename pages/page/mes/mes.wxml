@@ -2,7 +2,7 @@
   <navigator class='new-e' url='../mesEdit/mesEdit' wx:if='{{limitShow==2}}'><image src="/image/edit1.png"></image></navigator>
   <view class="ym_jpstorename">
   <view class="ym_jpstorelogo">
-      <navigator ><image class="store-logo" src="{{baseUrl}}{{storeMes.logo}}" ></image></navigator>
+      <navigator ><image class="store-logo" src="{{baseUrl}}{{storeMes.logo}}?x-oss-process=style/logo" ></image></navigator>
     </view>
     {{storeMes.name}}
   </view>
@@ -47,7 +47,7 @@
       </view>
     </view>
 </view>
-<view class="weui_cells">
+<view class="weui_cells" bindtap='urlHome'>
     <image  src="/image/12.png"></image>
     <text class="store-address">小云店 </text>
     <view class='weui-view'>
@@ -55,7 +55,7 @@
     </view>
    <view class='weui-xian weui-xian1'></view>
    <view class='up-new-img'>
-    <image wx:for='{{storeGoods}}' wx:key='{{index}}'  src="{{baseUrl}}{{item.mainImgUrl}}"></image>
+    <image wx:for='{{storeGoods}}' wx:key='{{index}}'  src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
    </view>
 </view>
 <navigator class="weui_cells"  wx:if='{{limitShow==3}}'  url='/pages/page/stockOrder/stockOrder'>

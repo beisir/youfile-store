@@ -11,7 +11,7 @@
   <view class='lk-img'><image  mode="widthFix" src="/image/icl.png"></image></view>
   <navigator class='bf-weui' url='../details/details?userId={{userId}}'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{data.headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{data.headPic}}?x-oss-process=style/logo"></image></view>
       <text>{{data.userName}}</text>
       <image  class='re-img' wx:if='{{data.gender!=1}}' mode="widthFix" src="/image/ermR.png"></image>
       <image  class='re-img' wx:if='{{data.gender==1}}' mode="widthFix" src="/image/man.png"></image>

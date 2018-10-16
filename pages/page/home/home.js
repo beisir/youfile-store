@@ -67,6 +67,7 @@ Page({
     showHide:true,
     showDp:true,
     currentTab: 0,
+    baseUrl:'',
     result: [],
     keyword:'',
     descShow:false,
@@ -74,10 +75,6 @@ Page({
     store:'',
     coverUrl:'',
     identity:'',
-    baseUrl: app.globalData.imageUrl,
-    goodsSmall: app.globalData.goodsSmall, 
-    logo: app.globalData.logo, 
-    storeCover: app.globalData.storeCover, 
     likeShow:false,
     limitShow:1,
     src:'',
@@ -179,7 +176,7 @@ Page({
           datas = _this.data.result,
           newArr = app.pageRequest.addDataList(datas, detailList)
         _this.setData({
-          result: newArr
+          result: newArr,
         })
       })
   },
@@ -215,6 +212,7 @@ Page({
         })
         that.setData({
           store: obj.store,
+          baseUrl: app.globalData.imageUrl,
           coverUrl: obj.store.coverUrl,
           result: obj.goods.result,
           totalCount: obj.goods.totalCount,
@@ -304,19 +302,19 @@ Page({
     })
   }, 
   deteleLikeStore: function() {
-    // var _this = this
-    // Api.deteleLikeStore()
-    //   .then(res => {
-    //     wx.showToast({
-    //       title: '取消关注成功',
-    //       icon: 'none',
-    //       duration: 1000,
-    //       mask: true,
-    //     })
-    //     _this.setData({
-    //       likeShow: false
-    //     })
-    //   })
+    var _this = this
+    Api.deteleLikeStore()
+      .then(res => {
+        wx.showToast({
+          title: '取消关注成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true,
+        })
+        _this.setData({
+          likeShow: false
+        })
+      })
   },
   onReady: function () {
 
@@ -397,10 +395,8 @@ Page({
           path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id,
           imageUrl: img,
           success: (res) => {
-            console.log("转发成功", res);
           },
           fail: (res) => {
-            console.log("转发失败", res);
           }
         }
       }

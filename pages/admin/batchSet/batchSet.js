@@ -19,7 +19,6 @@ Page({
    */
   // 开关
   switch1Change: function (e) {
-    console.log(e.detail.value)
     if (e.detail.value){
       this.setData({
         switch1Change:false

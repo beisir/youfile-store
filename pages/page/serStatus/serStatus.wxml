@@ -51,7 +51,7 @@
           <scroll-view  scroll-y="true" style="height:100%">
             <view class="result-list" wx:for="{{result}}" wx:key="index">
                 <navigator url="../../page/goodsDetails/goodsDetails?goodsId={{item.id}}">
-                    <image src="{{baseUrl}}{{item.mainImgUrl}}"></image>
+                    <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
                     <view class="result-text">
                         <text>{{item.name}}</text>
                     </view>

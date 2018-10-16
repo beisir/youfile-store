@@ -53,7 +53,6 @@ Page({
     Api.purchaserList(data)
       .then(res => {
         var detailList = res.obj.result
-        console.log(detailList)
         if (detailList != null) {
           var datas = _this.data.detailList,
             newArr = app.pageRequest.addDataList(datas, detailList)

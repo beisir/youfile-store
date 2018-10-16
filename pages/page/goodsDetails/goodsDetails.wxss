@@ -30,7 +30,7 @@
   height:100%;
   position:fixed;
   top:0;
-  z-index: 10;
+  z-index: 900;
   background: rgba(0, 0, 0, 0.5)
 }
 .gd-alert{

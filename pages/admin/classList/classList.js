@@ -26,7 +26,6 @@ Page({
   },
   onLoad: function (options) {
     app.pageRequest.pageData.pageNum = 0
-    console.log(options)
     wx.setNavigationBarTitle({
       title: options.name
     })

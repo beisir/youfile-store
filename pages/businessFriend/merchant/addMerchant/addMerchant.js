@@ -59,7 +59,6 @@ Page({
     wx.navigateTo({
       url: '../serList/serList?value=' + val,
     })
-    console.log(val)
   },
   onShow: function () {
 

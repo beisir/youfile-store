@@ -2,7 +2,7 @@
 <view class="weui_cells weui_cells_n">
    <view class="weui-cell">
     <view class="weui-cell__hd">
-      <image src="{{user.headPic?baseUrl+user.headPic:'/image/userphoto.png'}}" mode="widthFix"></image>
+      <image src="{{user.headPic?baseUrl+user.headPic+'?x-oss-process=style/logo':'/image/userphoto.png'}}" mode="widthFix"></image>
     </view>
     <view class="weui-cell__name" wx:if="{{user.nickName}}">
       {{user.nickName}}<view style='margin-left:10rpx;' class='floor-admin'>新批零店主</view>
@@ -16,13 +16,13 @@
   </view>
 </view>
 <view class="weui_cells ">
-    <navigator  url=''>
+    <!-- <navigator  url=''>
         <text class="store-address">云产品订单</text>
         <view class='weui-view'>
           <image class='img' src="/image/icl.png"></image>
         </view>
         <view class='weui-xian weui-xian1'></view>
-    </navigator>
+    </navigator> -->
     <navigator  url='../../businessFriend/merchant/index/index'>
         <text class="store-address">商友权限</text>
         <view class='weui-view'>

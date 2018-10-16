@@ -80,9 +80,7 @@ Page({
           doorNum: info.doorNum,
         })
       }
-      console.log(storeMes)
       if (obj != null) {
-        console.log(storeMes.name)
         _this.setData({
           address: storeMes.address,
           servicePhone: storeMes.servicePhone,
@@ -176,7 +174,6 @@ Page({
       if (this.data.status == 2) {
         Api.setName({ remark: remark })
           .then(res => {
-            console.log(res)
             wx.showToast({
               title: '修改成功',
               icon: 'none',

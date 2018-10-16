@@ -36,7 +36,6 @@ Page({
     Api.addressInfo({id:id})
       .then(res => {
         const obj=res.obj
-        console.log(obj)
         _this.setData({
           province: obj.province,
           city: obj.city,
@@ -109,14 +108,12 @@ Page({
     })
   },
   chooseAddress: function () {
-    console.log("xuanzedizhi")
     var that = this;
     that.setData({
       show: true
     })
   },
   bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       region: e.detail.value
     })

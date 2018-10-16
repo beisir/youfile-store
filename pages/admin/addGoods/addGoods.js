@@ -90,7 +90,6 @@ Page({
     var _this = this
     Api.uploadImage("GOODS")
       .then(res => {
-        console.log(res)
         var data = this.data.addGoodsDetails
         var url = JSON.parse(res).obj
         data.push({ img:_this.data.baseUrl+url})

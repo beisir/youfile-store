@@ -73,7 +73,6 @@ Page({
         headPic: options.headPic,
       })
     }
-    console.log(options)
     if(options.name){
       this.setData({
         name:options.name

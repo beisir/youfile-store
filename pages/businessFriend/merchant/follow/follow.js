@@ -46,10 +46,8 @@ Page({
     var _this = this
     Api.favoriteusers(data)
       .then(res => {
-        console.log(res)
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        console.log(detailList)
         _this.setData({
           totalCount: totalCount
         })

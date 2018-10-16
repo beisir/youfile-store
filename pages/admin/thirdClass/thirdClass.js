@@ -24,7 +24,6 @@ Page({
     })
     app.http.getRequest('/admin/shop/category/sublist/{{parentCategoryCode}}', { parentCategoryCode: parentCategoryCode})
       .then(res => {
-        console.log(obj)
         that.setData({
           dataList: obj
         })

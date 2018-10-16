@@ -157,7 +157,7 @@
     <view class="cart-box" wx:for="{{order.goodsInfos}}" wx:for-item="good" wx:key="{{index}}">
       <view class="cart-list">
         <navigator>
-          <image class="cart-thumb" src="{{baseUrl+good.mainImgUrl}}"></image>
+          <image class="cart-thumb" src="{{baseUrl+good.mainImgUrl}}?x-oss-process=style/goods-small"></image>
         </navigator>
         <view class='ct-title ct-title1'>{{good.goodsName}}</view>
         <view class="heji">共
@@ -289,7 +289,7 @@
 <view wx:if="{{status!='closed' && status!='cancelled'}}" class='cf-button'>
   <block wx:if="{{status=='unpaid'}}">
     <button class='or-active'> 提醒付款 </button>
-    <button bindtap='showModal' data-type='change' data-num='{{order.orderNumber}}' class='or-active'> 整体改价 </button>
+    <button bindtap='showModal' data-type='change' data-num='{{order.orderNumber}}' class='or-active'> 整单改价 </button>
     <button class='or-active' data-type='ex' bindtap='showModal' data-num="{{order.orderNumber}}">收款发货</button>
     <button data-num="{{order.orderNumber}}" data-type='cancel' bindtap='showModal'>取消订单</button>
   </block>

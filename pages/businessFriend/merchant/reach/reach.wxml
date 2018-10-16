@@ -1,7 +1,7 @@
 <navigator class='bf-cont' url='../details/details?userId={{userId}}'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{headPic}}?x-oss-process=style/logo"></image></view>
       <text>{{name==''?nickName:name}}</text><image  class='re-img' mode="widthFix" src="/image/man.png"></image><view class='re-name'>进货商</view>
       <view class='nbf-font'>昵称：{{nickName}}</view>
     </view>
@@ -21,7 +21,7 @@
 </view>
 <view class='bf-cont info-cont'>
   <view class='in-cont'>
-   <text>手机号</text><view>{{phone}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+   <text>手机号</text><view>{{phone}}<view bindtap='call' class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
    <text>微信号</text><view>{{wechart}}</view>

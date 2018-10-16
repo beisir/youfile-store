@@ -1,7 +1,7 @@
 <view class='mes-cont'>
   <view class="ym_jpstorename">
   <view class="ym_jpstorelogo">
-     <image class="store-logo" src="{{baseUrl}}{{logo}}" ></image>
+     <image class="store-logo" src="{{baseUrl}}{{logo}}?x-oss-process=style/logo" ></image>
     </view>
     {{storeMes.name}}<image class='xyd' src="/image/edit2.png" bindtap='editFun'></image>
     <navigator url='../updateMes/updateMes?name=name&value={{storeMes.name}}&types=小云店名称'><text> 云商号 ECP0580881</text></navigator>

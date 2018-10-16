@@ -51,7 +51,6 @@ Page({
       swiIndex = this.data.index,
       _this=this
     if (swiIndex==index){
-      console.log(index)
       if (index==0){
         _this.changeApi(1)
         _this.setData({

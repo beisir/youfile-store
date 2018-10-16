@@ -14,7 +14,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.code)
     if (options.code=='邮费到付'){
       this.setData({
         switch1Change:false

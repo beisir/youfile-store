@@ -1,14 +1,14 @@
 import http from './utils/http.js'
 import pageRequest from './utils/pageRequest.js'
 import AuthHandler from './utils/authHandler.js'
-import { imageUrl, goodsSmall, logo, storeCover, qrcode, general} from './utils/const.js'
+import { imageUrl } from './utils/const.js'
 import touch from './utils/touch.js'
 App({
   onLaunch: function (options) {
     if (options.query){
       wx.setStorageSync("storeId",options.query.storeId)
     }
-    wx.setStorageSync("storeId", "S1000349")
+    // wx.setStorageSync("storeId", "S1000349")
     // wx.setStorage({
     //   key: 'storeId',
     //   data:'S1000349',
@@ -25,12 +25,7 @@ App({
   globalData: {
     userInfo: null,
     skin: "normal",
-    imageUrl: imageUrl,
-    goodsSmall: goodsSmall,
-    logo:logo,
-    general:general,
-    qrcode: qrcode,
-    storeCover: storeCover,
+    imageUrl: imageUrl
   },
   http: new http(),
   pageRequest: new pageRequest(),

@@ -9,7 +9,7 @@
 <view class='bf-cont'>
   <view class='bf-weui'>
     <navigator class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}' url="../lookInfo/lookInfo?userId={{item.userId}}&mobile={{item.mobile}}">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}?x-oss-process=style/logo"></image></view>
       <text>{{item.remark==null?item.nickName:item.remark}}</text>
     </navigator>
   </view>

@@ -9,14 +9,14 @@
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
    <block wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
-      <image src="{{baseUrl}}{{item.imageUrl}}" class="slide-image" mode="widthFix" bindload='imgHeight'/>
+      <image src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight'/>
     </swiper-item>
    </block>
 </swiper>
 <view class='gd-details'>
   <view class='gd-title' wx:if='{{limitShow==1}}'>
     <view>{{name}}<image src="/image/fx.png"></image></view>
-    <view class='gd-font gd-font2'>零售价：<text>￥{{sell}}</text></view>
+    <view class='gd-font gd-font2'>零售价：<text style='color:#333'>￥{{sell}}</text></view>
     <view class='gd-font'>批发价：<image src='/image/wh.png'></image>
     <!-- <text class='gd-yan'>商友验证中</text> -->
     <button  bindtap='addTip'>享受批发价</button></view>
@@ -37,7 +37,7 @@
       <image  src="/image/positionico.png"></image>
       <text class="store-address">北京 </text>
       <view class='weui-view'>
-        <image src="{{baseUrl}}{{qrcode}}"></image><image class='img' src="/image/icl.png"></image>
+        <image src="{{baseUrl}}{{qrcode}}?x-oss-process=style/qrcode"></image><image class='img' src="/image/icl.png"></image>
       </view>
   </view>
   <view class='gd-content'>
@@ -53,7 +53,7 @@
   </view>
   <view class="ym_goodsstore">
             <view class="ym_goodsstoreh">
-                <view class="ym_goodsstorelogo"><image mode="aspectFill" src="{{baseUrl}}{{store.logo}}"></image></view>
+                <view class="ym_goodsstorelogo"><image mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo  "></image></view>
                 <view class="ym_goodsstorename">
                     <view class="store-name-data">{{store.storeName}}</view>
                     <view class="ym_gfrz"><image src="{{baseUrl}}{{store.mallLogo}}"></image> {{store.mallName}}</view>
@@ -83,14 +83,14 @@
     <view class="weui_cells weui_cells1 gd_r_text">
         <text>优店介绍 </text>
     </view>
-      <view class='gd-new-img'><image mode="aspectFill" src="{{baseUrl}}{{store.logo}}"></image></view>
+      <view class='gd-new-img'><image mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"></image></view>
       <view>{{store.storeName}}</view>
       <view class='gd-dp-text'>终于等到您，轻松购物，生活百货一站购齐，品质生活由此开始！</view>
   </view>
 <view class='gd_bottom'>
     <view class='gd_b_left'>
         <view>
-          <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/follow/follow" extra-data="" version="trial"><image src="/image/home.png"></image></navigator>逛商城</view>
+          <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/newest/newest" extra-data="" version="trial"><image src="/image/home.png"></image></navigator>逛商城</view>
         </view>
         <view>
         <view bindtap='urlHome'><image src="/image/i22.png"></image></view>
@@ -122,7 +122,7 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image  src="{{baseUrl}}{{mainImgUrl}}"></image>
+            <image  src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
@@ -190,12 +190,12 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}"></image>
+            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
             <view wx:if='{{saleBatchNum!=null}}' class='btn'>{{saleBatchNumGoods==null?saleBatchNum:saleBatchNumGoods}}<text>件起批</text></view>
-            <view>￥{{discountShow?sell:saleBatchAmount}}</view>
+            <view>￥{{discountShow?sell:wholesalePrice}}</view>
             <text>库存：{{stockNum}}件</text>
           </view>
         </view>
@@ -243,7 +243,7 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}"></image>
+            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
@@ -296,7 +296,7 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image  src="{{baseUrl}}{{mainImgUrl}}"></image>
+            <image  src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
@@ -358,7 +358,7 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}"></image>
+            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>

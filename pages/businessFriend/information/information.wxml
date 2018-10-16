@@ -11,7 +11,7 @@
 <view class='bf-cont'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{logo}}"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{logo}}?x-oss-process=style/logo"></image></view>
       <text>{{name}}</text><text  wx:if='{{success}}'></text>
       <view class='nbf-font'><image  mode="widthFix" src="{{baseUrl}}{{mallLogo}}"></image>{{mallName}}</view>
     </view>
@@ -43,7 +43,7 @@
   <view class='in-cont'>
    <text>小云店</text>
    <view style='min-height:120rpx' >
-    <view wx:for='{{goodsList}}' wx:key='{{index}}' wx:if='{{index<4}}' class='in-more-img'><image  mode="widthFix" src="{{baseUrl}}{{item.mainImgUrl}}"></image></view>
+    <view wx:for='{{goodsList}}' wx:key='{{index}}' wx:if='{{index<4}}' class='in-more-img'><image  mode="widthFix" src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image></view>
     <view class='in-img'><image  mode="widthFix" src="/image/icl.png"></image></view>
    </view>
   </view>

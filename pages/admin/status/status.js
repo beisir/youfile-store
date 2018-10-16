@@ -335,10 +335,8 @@ Page({
       path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id,
       imageUrl: img,
       success: (res) => {
-        console.log("转发成功", res);
       },
       fail: (res) => {
-        console.log("转发失败", res);
       }
     }
   },

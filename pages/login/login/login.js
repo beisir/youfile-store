@@ -176,7 +176,6 @@ Component({
         this.closePage()
         let pages = getCurrentPages();
         let curPage = pages[pages.length - 1];
-        console.log(curPage)
         curPage.onLoad();
         curPage.onShow();
         wx.showToast({

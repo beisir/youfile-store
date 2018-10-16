@@ -14,7 +14,6 @@ Page({
     var show;
     wx.scanCode({
       success: (res) => {
-        console.log(res)
        var userId=res.result
         if (userId != "*") {
           var userId = userId.split("user_")[1]
@@ -34,7 +33,6 @@ Page({
               }else{
                 Api.showToast("未找到此供应商！")
               }
-              console.log(res)
               
             })
         } else {
@@ -71,7 +69,6 @@ Page({
     wx.navigateTo({
       url: '../serList/serList?value='+val,
     })
-    console.log(val)
   },
   onShow: function () {
    
