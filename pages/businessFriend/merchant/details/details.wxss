@@ -2,3 +2,13 @@
 .in-cont .weui-view{
   width:30rpx;top: 40rpx;right: 30rpx;
 }
+.in-cont text{
+  top: 32rpx;
+}
+.in-cont .weui-view{
+  top: 39rpx;
+}
+.sh-cont view:nth-child(3){
+  border-bottom-left-radius:10rpx;
+  border-bottom-right-radius:10rpx;
+}

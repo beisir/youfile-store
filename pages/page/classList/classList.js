@@ -65,7 +65,7 @@ Page({
       allCode = this.data.allCode,
       customCategoryCode = this.data.customCategoryCode
     if (!allCode){
-      Api.classCodeList({ customCategoryCode: customCategoryCode })
+      Api.goodsApiSearchList({ customCategoryCode: customCategoryCode })
         .then(res => {
           var detailList = res.obj.result,
             datas = _this.data.result
@@ -80,7 +80,8 @@ Page({
           
         })
     }else{
-      Api.goodsSearchList()
+      console.log(88)
+      Api.goodsApiSearchList()
         .then(res => {
           var detailList = res.obj.result,
             datas = _this.data.result,

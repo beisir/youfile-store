@@ -49,7 +49,7 @@ Page({
     this.setData({
       result: [],
     })
-    Api.goodsSearchList({ keyword: keyword })
+    Api.goodsApiSearchList({ keyword: keyword })
       .then(res => {
         var obj = res.obj.result,
           datas = _this.data.result,

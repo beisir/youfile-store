@@ -32,7 +32,7 @@ Page({
         }
       },
       fail: (res) => {
-        Api.showToast("扫码失败")
+        // Api.showToast("扫码失败")
       },
       complete: (res) => {
       }

@@ -21,13 +21,13 @@
 </view>
 <view class='bf-cont info-cont'>
   <view class='in-cont'>
-   <text>手机号</text><view>{{phone}}<view bindtap='call' class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+   <text>手机号</text><view wx:if='{{phone!==""}}'>{{phone}}<view bindtap='call' class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
-   <text>微信号</text><view>{{wechart}}</view>
+   <text>微信号</text><view wx:if='{{wechart!==""}}'>{{wechart}}</view>
   </view>
  <view class='in-cont'>
-   <text>生日</text><view>{{birthday}}</view>
+   <text>生日</text><view wx:if='{{birthday!==""}}'>{{birthday}}</view>
   </view>
 </view>
 <!-- <view class='re-bottom'  hidden='{{showMes}}' bindtap='urlHome'>91笔进货单</view> -->

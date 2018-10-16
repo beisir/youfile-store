@@ -1,8 +1,18 @@
 {
   "pages":[
     "pages/page/home/home",
-    "pages/page/cartList/cartList",
+    
+    "pages/businessFriend/merchant/index/index",
+    
+    
+    "pages/businessFriend/index/index",
+    
+    
     "pages/admin/status/status",
+    
+    
+    
+    "pages/page/cartList/cartList",
     "pages/admin/addGoods/addGoods",
     "pages/businessFriend/merchant/dealCus/dealCus",
     "pages/businessFriend/merchant/dealUser/dealUser",
@@ -14,14 +24,10 @@
     "pages/page/order/order",
     "pages/role/supplyOrder/supplyOrder",
     "pages/role/order/order",
-    "pages/businessFriend/merchant/index/index",
-    "pages/businessFriend/index/index",
     "pages/businessFriend/merchant/dealUserDetails/dealUserDetails",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
-    
     "pages/page/invoice/invoice",
-    
     "pages/page/upload/upload",
     
     

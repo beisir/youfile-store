@@ -89,7 +89,7 @@
   background: #fff;
 }
 .goods-ser input{
-  color: #888888;
+  color: #333;
   font-size: 28rpx;
   height: 80rpx;max-width:515rpx;
   padding-left: 90rpx;
