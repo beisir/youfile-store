@@ -2,7 +2,7 @@
   <view class='weui-cell'>
     <view class='weui-cell__bd' bindtap='changeIcon'>
       <text>用户头像</text>
-      <image class='pic' src="{{user.headPic?baseUrl+user.headPic:'/image/42.png'}}"></image>
+      <image class='pic' src="{{user.headPic?baseUrl+user.headPic+'?x-oss-process=style/logo':'/image/42.png'}}"></image>
     </view>
     <view class='weui-img'>
       <image src="/image/icl.png"></image>

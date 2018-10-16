@@ -21,28 +21,28 @@ Page({
       }
     },
   },
-  touchStart (e) {
+  touchStart(e) {
     this.wecropper.touchStart({
       touches: e.touches.filter(i => i.x !== undefined)
     })
   },
-  touchMove (e) {
+  touchMove(e) {
     this.wecropper.touchMove({
       touches: e.touches.filter(i => i.x !== undefined)
     })
   },
-  touchEnd (e) {
+  touchEnd(e) {
     this.wecropper.touchEnd()
   },
-  
-  uploadTap () {
+
+  uploadTap() {
     const self = this
 
     wx.chooseImage({
       count: 1, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success (res) {
+      success(res) {
         const src = res.tempFilePaths[0]
         //  获取裁剪图片资源后，给data添加src属性及其值
 
@@ -54,7 +54,7 @@ Page({
   //裁剪
   btnHandle() {
     //高清裁剪
-    if (this.data.quality){
+    if (this.data.quality) {
       let _that = this;
       // 点击了裁剪按钮
       let devicePixelRatio = this.data.cropperOpt.pixelRatio
@@ -71,7 +71,7 @@ Page({
       height = height * devicePixelRatio
 
       const targetCtx = wx.createCanvasContext('hideCanvas') // 这里是目标canvas画布的id值
-      
+
       targetCtx.drawImage(this.data.cropperOpt.src, imgLeft, imgTop, scaleWidth, scaleHeight) // tmp代表被裁剪图片的临时路径
 
       targetCtx.draw(false, function (e) {
@@ -90,13 +90,13 @@ Page({
           }
         })
       })
-    }else{
+    } else {
       this.wecropper.getCropperImage((avatar) => {
         this.afterGetPath(avatar)
       })
     }
   },
-  afterGetPath(avatar){
+  afterGetPath(avatar) {
     if (avatar) {
       //  获取到裁剪后的图片
       var pages = getCurrentPages();
@@ -116,22 +116,22 @@ Page({
       console.log('获取图片失败，请稍后重试')
     }
   },
-  onLoad (option) {
+  onLoad(option) {
     let device = wx.getSystemInfoSync()
     let height = device.windowHeight - 50;
-    this.setData({ 
+    this.setData({
       ["cropperOpt.height"]: height,
-      ["cropperOpt.cut.y"]: (height - 300) / 2,  
+      ["cropperOpt.cut.y"]: (height - 300) / 2,
     })
 
     const { cropperOpt } = this.data
     //裁图质量
-    if (option.quality){
+    if (option.quality) {
       this.setData({
         quality: true
       })
     }
-    
+
     if (option.src) {
       cropperOpt.src = option.src
       new WeCropper(cropperOpt)
