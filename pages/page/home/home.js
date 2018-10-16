@@ -224,7 +224,7 @@ Page({
     var _this = this
     if (options.scene) {
       let scene = decodeURIComponent(options.scene);
-      var storeId = userId.split("store_")[1]
+      var storeId = scene.split("store_")[1]
       wx.setStorageSync("storeId", storeId)
     }
     if (options.query) {

@@ -76,7 +76,7 @@
   color:#333;
   font-weight:bold;
   padding-right: 30rpx;
-  margin-top: 35rpx;
+  margin-top: 15rpx;
   margin-bottom: 10rpx;
    text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
@@ -161,8 +161,11 @@
 .gd-title view:first-child{
  position: relative;padding-right:70rpx;
 }
-.gd-title view:first-child image{
-  width: 38rpx;height:38rpx;position: absolute;right: 10rpx;top: 10rpx;
+.gd-title view:first-child image,.gd-title view:first-child button{
+  width: 38rpx;height:38rpx;position: absolute;right: 10rpx;top: 10rpx;border:0
+}
+.gd-title view:first-child button{
+  width: 60rpx;height: 60rpx;
 }
 .gd-title view.gd-font{
   font-size: 30rpx;color: #C7945A;

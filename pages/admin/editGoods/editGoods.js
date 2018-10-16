@@ -260,6 +260,7 @@ Page({
     })
   },
   onLoad: function (options) {
+    console.log(options)
     this.getConfig()
     this.setData({
       goodsId: options.goodsId

@@ -593,52 +593,58 @@ Page({
       }
     }
   },
-  
   // 没有规格进货商身份
-  getSetShow: function (difference){
-    this.setData({
-      discountShow: false,
-      difference: difference
-    })
-  },
   getTotalPriceNew:function(num){
     var wholesalePrice = this.data.wholesalePrice,
       sell = this.data.sell,
-      saleBatchNumGoods = this.data.saleBatchNumGoods-1,
-      saleBatchNum = this.data.saleBatchNum-1,
+      saleBatchNumGoods = this.data.saleBatchNumGoods,
+      saleBatchNum = this.data.saleBatchNum,
       difference=0,
+      discountShow=true,
       saleBatchAmount=this.data.saleBatchAmount,
       total=0
-    if (saleBatchAmount == null && saleBatchNumGoods == null && saleBatchNum == null){
-      this.getSetShow(difference)
-    }
-    total = num*sell
-    difference = total - num * wholesalePrice
-    if (total > saleBatchAmount){
-      this.getSetShow(difference)
-    }else{
+      total = num * sell
+      difference = total - num * wholesalePrice
+    console.log(saleBatchNum + "///" + saleBatchNumGoods + "///" + saleBatchAmount+"//"+num)
+      if (saleBatchNum == 0) {
+        if (saleBatchAmount == 0) {
+          discountShow = false
+        } else {
+          discountShow = true
+          if (total >= saleBatchAmount) {
+            discountShow = false
+          }
+        }
+      } else {
+        if (saleBatchNumGoods == 0) {
+          if (num >= saleBatchNum) {
+            discountShow = false
+          } else {
+            discountShow = true
+          }
+          if (total >= saleBatchAmount) {
+            discountShow = false
+          } else {
+            discountShow = true
+          }
+        }
+        if (saleBatchNumGoods > 0) {
+          if (num > saleBatchNumGoods) {
+            discountShow = false
+          } else {
+            discountShow = true
+          }
+          if (total >= saleBatchAmount) {
+            discountShow = false
+          } else {
+            discountShow = true
+          }
+        }
+      }
       this.setData({
-        discountShow: true,
+        discountShow: false,
+        difference: difference
       })
-    }
-    if (saleBatchNumGoods){
-      if (num > saleBatchNumGoods) {
-        this.getSetShow(difference)
-      } else {
-        this.setData({
-          discountShow: true,
-        })
-      }
-    }
-    if (saleBatchNum) {
-      if (num > saleBatchNum) {
-        this.getSetShow(difference)
-      } else {
-        this.setData({
-          discountShow: true,
-        })
-      }
-    }
   },
   // 购买数量
   minusCount:function(){
@@ -764,8 +770,10 @@ Page({
     let nums=0;
     let classNums=0;
     let saleBatchAmount = this.data.saleBatchAmount
-    let saleBatchNum = this.data.saleBatchNum
+    let saleBatchNum = this.data.saleBatchNum 
+    let saleBatchNumGoods = this.data.saleBatchNumGoods 
     let difference=0
+    let discountShow =true
     let newSkuOnly = this.data.newSkuOnly
     let limitShow = this.data.limitShow
     let goodsSpecificationVOList = this.data.goodsSpecificationVOList
@@ -784,21 +792,46 @@ Page({
           nums += newSkuArrTwo[i].num
           total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
           if (limitShow==3){
-            if (nums > saleBatchNum - 1 || total.toFixed(2) > saleBatchAmount) {
-              if (this.data.editCode){
-                newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
-              }else{
-                newTotal = nums * newSkuArrTwo[i].wholesalePrice;
-              }
-              difference = total - newTotal
-              this.setData({
-                discountShow: false,
-                newTotal: newTotal,
-              })
+            if (this.data.editCode) {
+              newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
             } else {
-              this.setData({
-                discountShow: true,
-              })
+              newTotal = nums * newSkuArrTwo[i].wholesalePrice;
+            }
+            difference = total - newTotal
+            if (saleBatchNum==0){
+              if (saleBatchAmount==0){
+                discountShow=false
+              }else{
+                discountShow = true 
+                if (total >= saleBatchAmount) {
+                  discountShow = false
+                }
+              }
+            }else{
+              if (saleBatchNumGoods==0){
+                if (nums >= saleBatchNum) {
+                  discountShow = false
+                }else{
+                  discountShow = true
+                }
+                if (total >= saleBatchAmount) {
+                  discountShow = false
+                } else {
+                  discountShow = true
+                }
+              }
+              if (saleBatchNumGoods>0) {
+                if (nums > saleBatchNumGoods){
+                  discountShow = false
+                }else{
+                  discountShow = true
+                }
+                if (total >= saleBatchAmount) {
+                  discountShow = false
+                } else {
+                  discountShow = true
+                }
+              }
             }
           }
         }
@@ -809,6 +842,7 @@ Page({
       newSkuArrTwo: newSkuArrTwo,
       totalPrice: total.toFixed(2),
       nums: nums,
+      discountShow: discountShow,
       classNums: classNums,
       newTotal: newTotal,
       difference: difference,
@@ -899,17 +933,23 @@ Page({
       .then(res => {
         var obj = res.obj
         if(obj!=null){
-          var  storeSaleBatchNum = obj.storeSaleBatchNum,
-            storeSaleBatchAmount = obj.storeSaleBatchAmount
+          var storeSaleBatchNum = obj.storeSaleBatchNum == null ? 0 : obj.storeSaleBatchNum,
+            storeSaleBatchAmount = obj.storeSaleBatchAmount == null ? 0 : obj.storeSaleBatchAmount,
+            saleBatchNumGoods = obj.goodsSaleBatchNum == null ? 0 : obj.goodsSaleBatchNum
           if (storeSaleBatchAmount != null) {
             _this.setData({
               saleBatchNum: storeSaleBatchNum
             })
-            if (storeSaleBatchNum != null) {
-              _this.setData({
-                saleBatchAmount: storeSaleBatchAmount
-              })
-            }
+          }
+          if (storeSaleBatchNum != null) {
+            _this.setData({
+              saleBatchAmount: storeSaleBatchAmount
+            })
+          }
+          if (saleBatchNumGoods!=null){
+            _this.setData({
+              saleBatchNumGoods: saleBatchNumGoods
+            })
           }
         }
       })
@@ -952,7 +992,6 @@ Page({
           name: obj.name,
           wholesalePrice: obj.wholesalePrice,
           sell: obj.sellPrice,
-          saleBatchNumGoods: obj.saleBatchNum,
           recommendDesc: obj.recommendDesc,
           description: obj.description,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
@@ -971,10 +1010,18 @@ Page({
                   _this.getSpecDetails(i, arr[i].specValueCode)
                 }
                 if (isTrue){
-                  _this.setData({
-                    newSkuOnly: false,
-                    newSkuOnlyEdit:true
-                  })
+                  var newArrOne = obj.goodsSkuVOList
+                  if (newArrOne[0].specValueCodeList.length==1){
+                    _this.setData({
+                      newSkuOnly: true,
+                      newSkuOnlyEdit: true
+                    })
+                  }else{
+                    _this.setData({
+                      newSkuOnly: false,
+                      newSkuOnlyEdit: true
+                    })
+                  }
                 }else{
                   _this.setData({
                     newSkuOnly: true
@@ -1109,7 +1156,22 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
-  }
+  onShareAppMessage: (res) => {
+    var img = wx.getStorageSync('src'),
+      storeId = wx.getStorageSync('storeId'),
+      id = res.target.dataset.goodsId
+    if (res.from === 'button') {
+      var name = res.target.dataset.name
+      return {
+        title: name,
+        path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id+"&storeId="+storeId,
+        imageUrl: img,
+        success: (res) => {
+        },
+        fail: (res) => {
+        }
+      }
+    }
+
+  },
 })

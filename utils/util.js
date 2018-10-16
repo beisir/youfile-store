@@ -118,7 +118,9 @@ function parseGoodsDescription(htmlContent) {
     if ("img" == tag) {
       content = item.attr.src;
     } else {
-      content = item.nodes[0].text;
+      if(item.nodes && item.nodes.length>0){
+        content = item.nodes[0].text;
+      }
     }
     if (content != null && content != undefined) {
       htmlJson.push({ "tag": tag, "content": content });

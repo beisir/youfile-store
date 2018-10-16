@@ -1,13 +1,13 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/page/cartList/cartList",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
     "pages/businessFriend/merchant/dealCus/dealCus",
     "pages/businessFriend/merchant/dealUser/dealUser",
     "pages/admin/shopClass/shopClass",
     "pages/admin/spec/spec",
-    "pages/page/cartList/cartList",
     "pages/admin/batchSet/batchSet",
     "pages/page/workIndex/workIndex",
     "pages/page/user/user",

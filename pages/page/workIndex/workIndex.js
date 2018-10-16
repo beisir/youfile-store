@@ -15,7 +15,7 @@ Page({
   }, 
   goHome: function () {
     wx.switchTab({
-      url: '../../page/user/user'
+      url: '../../page/home/home'
     })
   },
   /**
