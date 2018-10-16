@@ -20,7 +20,7 @@ Page({
     totalCount:'',
     sImg:'/image/xl.png',
     detailList: [],
-    goodsStatus:'',
+    goodsStatus:1,
     classStatus:false,
     baseUrl: app.globalData.imageUrl,
     code:'',
@@ -237,10 +237,20 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var gS = this.data.goodsStatus,
+      currentTab = this.data.currentTab
+    if (currentTab=="-1"){
+      this.setData({
+        currentTab: 0,
+      })
+    }else{
+      this.setData({
+        currentTab: currentTab,
+      })
+    }
     this.setData({
-      goodsStatus: 1,
+      goodsStatus: gS,
       hidden: true,
-      currentTab: 0,
       classStatus: false,
       detailList: []
     })

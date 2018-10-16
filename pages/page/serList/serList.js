@@ -28,7 +28,6 @@ Page({
     app.http.getRequest('/admin/shop/goods/findUnderStoreGoodsByCustomCategoryCode/' + storeId + '?customCategoryCode=' + customCategoryCode + '&pageNum=' + pageNum + '&pageSize=' + pageSize)
       .then(res => {
         const obj = res.obj
-        console.log(obj.result)
         _this.setData({
           result: obj.result
         })

@@ -100,11 +100,20 @@ Page({
         logo = options.logo,
         name=options.name,
         remark = options.remark
+    if (remark =="null"){
+      this.setData({
+        value:'',
+        remarkName:'',
+      })
+    }else{
+      this.setData({
+        value: remark,
+        remarkName: remark,
+      })
+    }
     this.setData({
       status:status,
       accept: accept,
-      value: remark == null ? '' : remark,
-      remarkName: remark,
     })
   if(status==2){
     this.setData({

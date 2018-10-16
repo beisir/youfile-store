@@ -90,12 +90,10 @@ Page({
     }
   },
   cancelShow(){
-    console.log(Api)
     Api.getStoreInfo().then(res=>{
       this.setData({
         show: res.obj.isReceipt
       })
-      console.log(res.obj.isReceipt)
       if (res.obj.isReceipt == true){
         let str = res.obj.receiptInfo;
         let arr = str.split(",");

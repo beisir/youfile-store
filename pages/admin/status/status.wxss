@@ -23,7 +23,7 @@
 }
 
 .st-cont .warn{
-  width: 28rpx;height: 28rpx;position: relative;border:0;vertical-align: middle;margin-top: -2rpx;
+  width: 28rpx;height: 28rpx;position: relative;border:0;vertical-align: middle;margin-top: -2rpx;margin-left: 10rpx;
 }
 .st-cont .not{
   color: #fff;background:rgba(0, 0, 0, 0.5);font-size: 24rpx;position: absolute;width: 180rpx;height: 75rpx;z-index: 10;
