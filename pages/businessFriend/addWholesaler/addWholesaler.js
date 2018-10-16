@@ -25,7 +25,8 @@ Page({
                 if (isBizFriend){
                   var status=2
                 }else{
-                  var status =0
+                  Api.showToast("未找到此供应商！")
+                  return
                 }
                 wx.navigateTo({
                   url: '../information/information?status='+status+'&send=&accept=' + obj.storeId + '&remark=&logo=&name=',

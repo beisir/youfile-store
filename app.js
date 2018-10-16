@@ -11,7 +11,7 @@ App({
     // wx.setStorageSync("storeId", "S1000349")
     // wx.setStorage({
     //   key: 'storeId',
-    //   data:'S1000349',
+    //   data:'S1000349',  
     // })
     // wx.setStorage({
     //   key: 'admin',xyd

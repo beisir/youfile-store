@@ -2,17 +2,17 @@
 <view class='wk-cont'>
   <view class='wk-title'>
     <text>今日收入（元）</text>
-    <view>{{todaySaleNum}}</view>
+    <view>{{todaySaleNum==null?0:todaySaleNum}}</view>
     <image mode='widthFix' bindtap='goDerm' src='/image/xcx2.png'></image>
   </view>
   <view class='wk-bot'>
-    <view>{{followNum}}<view>关注人数</view></view>
-    <view>{{payPurchaseOrders}}<view>付款进货单</view><view class='wk-xian'></view></view>
-    <view>{{payOrders}}<view>付款订单</view><view class='wk-xian'></view></view>
+    <view>{{followNum==null?0:followNum}}<view>关注人数</view></view>
+    <view>{{payPurchaseOrders==null?0:payPurchaseOrders}}<view>付款进货单</view><view class='wk-xian'></view></view>
+    <view>{{payOrders==null?0:payOrders}}<view>付款订单</view><view class='wk-xian'></view></view>
     <view class='wk-fg'></view>
-    <view>{{verifyFriends}}<view>待验证商友</view></view>
-    <view>{{unshippedPurchaseOrders}}<view>待发货进货单</view><view class='wk-xian'></view></view>
-    <view>{{unshippedOrders}}<view>待发货订单</view><view class='wk-xian'></view></view>
+    <view>{{verifyFriends==null?0:verifyFriends}}<view>待验证商友</view></view>
+    <view>{{unshippedPurchaseOrders==null?0:unshippedPurchaseOrders}}<view>待发货进货单</view><view class='wk-xian'></view></view>
+    <view>{{unshippedOrders==null?0:unshippedOrders}}<view>待发货订单</view><view class='wk-xian'></view></view>
   </view>
 </view>
 <view class='wk-cont wk-cont'>

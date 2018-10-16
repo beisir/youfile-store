@@ -39,19 +39,27 @@ Page({
   //选择规格
   showAlert: function (e) {
     var that = this,
-      name=e.target.dataset.name
-      if(name=="more"){
-        var index = e.target.dataset.index,
-          detailList = this.data.detailList[index]
-        wx.navigateTo({
-          url: '../goodsDetails/goodsDetails?goodsId=' + detailList["goodsId"] + "&code=" + index+"&name=more",
-        })
-      }else{
-        var gid = e.target.dataset.gid
-        wx.navigateTo({
-          url: '../goodsDetails/goodsDetails?goodsId=' +gid+ "&code=" + index+"&name=one",
-        })
-      }
+      name=e.target.dataset.name,
+      limitShow = this.data.limitShow
+    if (name == "more") {
+      var index = e.target.dataset.index,
+        detailList = this.data.detailList[index]
+      wx.navigateTo({
+        url: '../goodsDetails/goodsDetails?goodsId=' + detailList["goodsId"] + "&code=" + index + "&name=more",
+      })
+    }
+    if (limitShow == 3 && name == "one") {
+      var gid = e.target.dataset.gid
+      wx.navigateTo({
+        url: '../goodsDetails/goodsDetails?goodsId=' + gid + "&code=" + index + "&name=more",
+      })
+    }
+    if (limitShow != 3 && name == "one") {
+      var gid = e.target.dataset.gid
+      wx.navigateTo({
+        url: '../goodsDetails/goodsDetails?goodsId=' + gid + "&code=" + index + "&name=one",
+      })
+    }
   },
   //选择规格属性
   changeButton: function (e) {
@@ -172,8 +180,7 @@ Page({
           var effectiveList=[]
         }
         if (newFailureListLen > 0) {
-          var failureList = obj.failureList[0].goodsList,
-            store = obj.failureList[0].store
+          var failureList = obj.failureList[0].goodsList
         } else {
           var failureList = []
         }
@@ -221,8 +228,16 @@ Page({
         var saleBatchNum = 0
         var saleBatchAmount=0
         if (Api.isEmpty(store)){
-          saleBatchAmount = Api.isEmpty(store.saleBatchAmount) ? store.saleBatchAmount : 1
-          saleBatchNum = Api.isEmpty(store.saleBatchNum) ? store.saleBatchNum : 1
+          if (store.saleBatchAmount == null || store.saleBatchAmount==0){
+            saleBatchAmount=0
+          }else{
+            saleBatchAmount = store.saleBatchAmount
+          }
+          if (store.saleBatchNum == null || store.saleBatchNum == 0) {
+            saleBatchNum =0
+          } else {
+            saleBatchNum = store.saleBatchNum
+          }
         }
         _this.setData({
           storeAmount:saleBatchAmount,
@@ -459,9 +474,7 @@ Page({
     this.setData({
       enjoyCost: false
     })
-    storeNum = storeNum-1
     let detailList = this.data.detailList;// 获取购物车列表
-    let total = 0;
     for (let i = 0; i < detailList.length; i++) { 
       if (detailList[i].selected) {
         if (limitShow==3){
@@ -470,7 +483,7 @@ Page({
             detailList[i].saleBatchNum = storeNum
           }
         }else{
-          total += detailList[i].allGoodsAmount;
+          total1 += detailList[i].allGoodsAmount;
         }
         
       }
@@ -486,13 +499,34 @@ Page({
           saleBatchGoodsNum = detailList[i].saleBatchNum
           allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
-          if (allGoodsNum > storeNum || allGoodsTotal > storeAmount){
-            detailList[i].enjoyPrice = true
-            enjoyCost=true
-            this.setData({
-              enjoyCost: true
-            })
+          if (storeNum == 0 && storeAmount>0){
+            if(allGoodsTotal > storeAmount){
+              detailList[i].enjoyPrice = true
+              enjoyCost = true
+              this.setData({
+                enjoyCost: true
+              })
+            }
           }
+          if (storeAmount == 0 && storeNum>0){
+            if (allGoodsNum > storeNum){
+              detailList[i].enjoyPrice = true
+              enjoyCost = true
+              this.setData({
+                enjoyCost: true
+              })
+            }
+          }
+          if (storeNum > 0 && storeAmount>0){
+            if (allGoodsNum > storeNum || allGoodsTotal > storeAmount) {
+              detailList[i].enjoyPrice = true
+              enjoyCost = true
+              this.setData({
+                enjoyCost: true
+              })
+            }
+          }
+          
           if (allGoodsNum < storeNum && allGoodsTotal < storeAmount) {
             if (allTotalNum >= saleBatchGoodsNum){
               detailList[i].enjoyPrice = true
@@ -569,7 +603,6 @@ Page({
       detailList: detailList,
       total1: total1.toFixed(2),
       differentPrice: differentPrice,
-      totalPrice: (total + totalNew).toFixed(2)
     });
   },
   creatOrder:function(){
