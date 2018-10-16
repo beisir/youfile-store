@@ -135,7 +135,7 @@
 .mes-tel{
   color: #CCAA77;font-weight:normal;
   border-bottom: 2rpx solid #CCAA77;
-  width:265rpx;margin:0 auto;padding-top: 10rpx;
+  min-width:265rpx;margin:0 auto;padding-top: 10rpx;display:inline-block;
 }
 .mes-tel1{
   color: #CCAA77;font-weight:normal;font-size: 60rpx;border-top: 2rpx solid #F0F0F0;

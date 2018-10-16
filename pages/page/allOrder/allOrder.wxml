@@ -32,7 +32,7 @@
 <mes show="{{afterModal}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
     <text>如有疑问，请咨询客服人员</text>
-    <view class='mes-tel'>{{afterTel?afterTel:"无"}}</view>
+    <view class='mes-tel'>{{order.storeInfo.servicePhone?order.storeInfo.servicePhone:"无"}}</view>
   </view>
 </mes>
 
@@ -106,7 +106,7 @@
     <view>物流信息</view>
     <text>承运公司：{{order.expressCompany?order.expressCompany:""}}</text>
     <view>
-      <text>运单编号：{{order.expressNumber?order.expressNumber:""}}</text>
+      <text bindtap="copyKdCode">运单编号：{{order.expressNumber?order.expressNumber:""}}</text>
     </view>
     <!-- <text>卖家暂未填写订单信息</text> -->
   </view>
@@ -227,7 +227,7 @@
 
 <view class='np-fapiao'>
   <view>发票信息
-    <text>{{order.receiptInfo?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
+    <text>{{order.receiptInfo && order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
   <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
@@ -288,7 +288,7 @@
   </block>
 
   <block wx:if="{{status=='finish'}}">
-    <button class='or-active' data-type='after' data-tel="{{item.storeInfo.servicePhone}}" bindtap='showModal'> 售后服务 </button>
+    <button class='or-active' data-type='after' data-tel="{{item.storeInfo.servicePhone}}" bindtap='showModal'> 客服电话 </button>
   </block>
 
   <block wx:if="{{status=='finish' || status=='closed'|| status=='cancelled'}}">

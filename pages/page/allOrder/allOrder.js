@@ -30,6 +30,21 @@ Page({
       }
     })
   },
+  //复制运单号
+  copyKdCode() {
+    if (this.data.order.expressNumber){
+      wx.setClipboardData({
+        data: this.data.order.expressNumber,
+        success: () => {
+          wx.showToast({
+            title: '复制运单号成功',
+            icon: "none"
+          })
+        }
+      })
+    }
+    
+  },
 
   showModal(e) {
     let type = e.currentTarget.dataset.type,

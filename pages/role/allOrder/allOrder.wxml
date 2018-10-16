@@ -273,7 +273,7 @@
 
 <view class='np-fapiao'>
   <view>发票信息
-    <text>{{order.receiptInfo?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
+    <text>{{order.receiptInfo && order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
   <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
@@ -308,7 +308,7 @@
         <text>{{order.expressCompany?order.expressCompany:""}}</text>
       </view>
       <view>快递单号
-        <text>{{order.expressNumber?order.expressNumber:""}}</text>
+        <text bindtap='copyKdCode'>{{order.expressNumber?order.expressNumber:""}}</text>
       </view>
     </block>
   </block>

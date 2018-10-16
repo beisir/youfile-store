@@ -111,13 +111,13 @@
 
       <!-- 已收货_已完成 -->
       <block wx:if="{{item.orderStatus=='finish' && item.orderType==2}}">
-        <button class='or-active' data-type='after' data-tel="{{item.storeInfo.servicePhone}}" bindtap='showModal'> 售后服务 </button>
+        <button class='or-active' data-type='after' data-tel="{{item.storeInfo.servicePhone}}" bindtap='showModal'> 客服电话 </button>
         <!-- <button>查看物流</button> -->
         <button data-index='{{index}}' data-type='del' data-num='{{item.orderNumber}}' bindtap='showModal'>删除订单</button>
       </block>
 
       <block wx:if="{{item.orderStatus=='finish' && item.orderType==1}}">
-        <button class='or-active' data-type='after' data-tel="{{item.storeInfo.servicePhone}}" bindtap='showModal'> 售后服务 </button>
+        <button class='or-active' data-type='after' data-tel="{{item.storeInfo.servicePhone}}" bindtap='showModal'> 客服电话 </button>
         <button data-index='{{index}}' data-type='del' data-num='{{item.orderNumber}}' bindtap='showModal'>删除订单</button>
       </block>
 

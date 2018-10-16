@@ -29,6 +29,21 @@ Page({
       }
     })
   },
+  //复制运单号
+  copyKdCode() {
+    if (this.data.order.expressNumber) {
+      wx.setClipboardData({
+        data: this.data.order.expressNumber,
+        success: () => {
+          wx.showToast({
+            title: '复制快递单号成功',
+            icon: "none"
+          })
+        }
+      })
+    }
+
+  },
 
   // 监听输入
   watchInput(e) {

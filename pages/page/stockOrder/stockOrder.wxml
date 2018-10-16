@@ -136,7 +136,7 @@
 
       <!-- 已完成 -->
       <view class='or-last' wx:if="{{item.orderStatus=='finish'}}">
-        <button class='or-active' data-type='after' data-tel="{{item.storeInfo.servicePhone}}" bindtap='showModal'> 售后服务 </button>
+        <button class='or-active' data-type='after' data-tel="{{item.storeInfo.servicePhone}}" bindtap='showModal'> 客服电话 </button>
         <!-- <button wx:if="{{item.orderType==2}}">查看物流</button> -->
         <button data-index='{{index}}' data-type='del' data-num='{{item.orderNumber}}' bindtap='showModal'>删除进货单</button>
       </view>
