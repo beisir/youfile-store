@@ -195,9 +195,12 @@ Page({
         }
       }
     })
+
+    
+
     this.setData({
       goods,
-      price: Math.floor(price * 100) / 100
+      price: price.toFixed(2)
     })
   },
   /**
