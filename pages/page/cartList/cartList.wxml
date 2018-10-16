@@ -81,12 +81,12 @@
     </view>  
     </view>  
     <view class='cf-cont'>
-      <view class="c-title c-title1 hide{{lostList?'show':''}}">
+      <view class="c-title c-title1 hide{{lostList?'show':''}}" wx:if="{{lostcarts.length>0}}">
         <image src="/image/ic2.png"></image> 失效宝贝  <text bindtap="emptyAll">全部清空</text>
       </view>
       <view>
           <view class="cart-box">
-          <navigator  wx:for="{{lostcarts}}" wx:key="{{index}}" url='../goodsDetails/goodsDetails?goodsId={{item.goodsId}}'>
+          <view  wx:for="{{lostcarts}}" wx:key="{{index}}">
              <view class="cart-list">
                   <image class='noimg' src="/image/no.png"></image>
                   <image class='posimg' src="/image/alert.png"></image>
@@ -120,7 +120,7 @@
                           <view class="td">￥{{item.sellPrice}}</view>
                       </view>
                 </view>
-            </navigator>
+            </view>
           </view>
           <view class='bot-back'></view>
       </view>

@@ -7,6 +7,7 @@ import {
   adminShopCateUrl,
   adminGoodsStatusUrl,
   saleBatchNumUrl,
+  newGoodsSearchListUrl,
   cusNewDetailsUrl,
   salebatchamountUrl,
   saleBatchUrl,
@@ -225,6 +226,11 @@ function saleBatch(data) {
 function goodsSearchList(data) {
   data = initStoreId(data);
   return app.pageRequest.pageGet(goodsSearchListUrl, data)
+}
+/**商品搜索列表**/
+function newGoodsSearchList(data) {
+  data = initStoreId(data);
+  return app.pageRequest.pageGet(newGoodsSearchListUrl, data)
 }
 /**商品搜索列表**/
 function goodsApiSearchList(data) {
@@ -629,6 +635,7 @@ module.exports = {
   testGoodCode: testGoodCode,
   isEmpty: isEmpty,
   showToast: showToast,
+  classListApi: classListApi,
   adminGoodsList: adminGoodsList,
   adminGoodsDelete: adminGoodsDelete,
   adminGoodsUp: adminGoodsUp,
@@ -716,6 +723,7 @@ module.exports = {
   userInfor: userInfor,
   classCodePar: classCodePar,
   addGoods: addGoods,
+  newGoodsSearchList: newGoodsSearchList,
   classListApi: classListApi,
   goodsApiSearchList: goodsApiSearchList,
   updataPwd: updataPwd,

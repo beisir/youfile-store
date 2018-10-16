@@ -168,13 +168,19 @@ Page({
         for (var i = 0; i <objImg.length;i++){
           arrs.push(_this.data.baseUrl+objImg[i].imageUrl)
         }
-        var modelData = JSON.stringify(obj.goodsSpecificationVOList)
-        if (obj.goodsSkuVOList.length>0){
-         _this.setData({
-           clickSpecShow: true
-         })
+        if (obj.goodsSpecificationVOList!=null){
+          var modelData = JSON.stringify(obj.goodsSpecificationVOList)
+
+        }else{
+          var modelData=''
         }
-      
+        if (obj.goodsSkuVOList!=null){
+          if (obj.goodsSkuVOList.length > 0) {
+            _this.setData({
+              clickSpecShow: true
+            })
+          }
+        }
         var str = obj.description
         var arr = util.parseGoodsDescription(str)
         var data = _this.data.addGoodsDetails
@@ -188,14 +194,6 @@ Page({
           if (arr[i].tag == "img") {
             data.push({ img: arr[i].content})
           }
-          // var src = arr[i].match(srcReg);
-          // if (src[1]) {
-          //   var data = _this.data.addGoodsDetails
-          //   data.push({ img:src[1]})
-          //   _this.setData({
-          //     
-          //   })
-          // }
         }
         _this.setData({
           pics: arrs,
@@ -467,28 +465,30 @@ Page({
       newConst = this.data.newConst,
       skuList0 = [],
       skuList1 = [],
-      goodsListData=this.data.pageall,
+      goodsListData = this.data.pageall,
       clickSpecShow = this.data.clickSpecShow,
       addGoodsDetails = this.data.addGoodsDetails
-    if(clickSpecShow==false){
+    if (clickSpecShow == false) {
+     if(goodsListData!=null){
        if (goodsListData.length == 1) {
-        skuList0 = goodsListData[0].goodsSpecificationValueVOList
-        for (var i = 0; i < skuList0.length; i++) {
-          skuListAll.push({specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
-        }
-      } else if (goodsListData.length = 2) {
-        skuList0 = goodsListData[0].goodsSpecificationValueVOList
-        skuList1 = goodsListData[1].goodsSpecificationValueVOList
-        for (var i = 0; i < skuList0.length; i++) {
-          for (var j = 0; j < skuList1.length; j++) {
-            skuListAll.push({ specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice})
-          }
-        }
-      }
+         skuList0 = goodsListData[0].goodsSpecificationValueVOList
+         for (var i = 0; i < skuList0.length; i++) {
+           skuListAll.push({ specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+         }
+       } else if (goodsListData.length = 2) {
+         skuList0 = goodsListData[0].goodsSpecificationValueVOList
+         skuList1 = goodsListData[1].goodsSpecificationValueVOList
+         for (var i = 0; i < skuList0.length; i++) {
+           for (var j = 0; j < skuList1.length; j++) {
+             skuListAll.push({ specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+           }
+         }
+       }
+     }
     }
     for (var i = 0; i < addGoodsDetails.length; i++) {
       if (addGoodsDetails[i].input) {
-        if (Api.isEmpty(addGoodsDetails[i].value)){
+        if (Api.isEmpty(addGoodsDetails[i].value)) {
           description += '<h4>' + addGoodsDetails[i].value + '</h4>'
         }
       } else if (addGoodsDetails[i].textInput) {
@@ -503,8 +503,8 @@ Page({
       if (i == 0) {
         mainImgUrl = pics[i].replace(this.data.baseUrl, '')
       }
-      goodsImageVOList.push({ imageUrl: pics[i].replace(this.data.baseUrl,'') })
-    } 
+      goodsImageVOList.push({ imageUrl: pics[i].replace(this.data.baseUrl, '') })
+    }
     var goodsVO = {
       "categoryCode": this.data.categoryCode,
       "customCategoryCode": this.data.categoryCustomCode,
@@ -526,6 +526,7 @@ Page({
       "top": false,
       "wholesalePrice": this.data.wholesalePrice
     }
+    console.log(goodsVO)
     Api.updateGoods(goodsVO)
       .then(res => {
         wx.showToast({

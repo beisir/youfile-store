@@ -15,7 +15,7 @@
   border-radius: 50%;
 }
 .weui_cells .re-img{
-  position: relative;width: 30rpx;top: 0;left: 0;vertical-align: middle;margin-top: -8rpx;margin-left: 20rpx;
+  position: relative;width:40rpx;top: 0;left: 0;vertical-align: middle;margin-top: -8rpx;margin-left: 20rpx;
 }
 .re-name{
   display: inline-block;width: 95rpx;height: 35rpx;line-height: 35rpx;text-align: center;border-radius: 6rpx;border:2rpx solid #CFA272;color: #CFA272;font-size: 24rpx;margin-left: 20rpx;

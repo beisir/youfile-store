@@ -6,7 +6,7 @@
   width: 35rpx;position: absolute;top: 5rpx;left:5rpx;
 }
 .bf-all{
-  margin-top: 40rpx;
+  margin-top: 10rpx;
 }
 input{
   height: 120rpx;line-height: 120rpx;
@@ -15,7 +15,7 @@ input{
   z-index: 1000
 }
 textarea {
-  height: 100rpx;padding-top: 15rpx;
+  height: 100rpx;padding-top: 20rpx;
 }
 .add-bf-weui1 .weui_cells{
   line-height: 40rpx;

@@ -2,7 +2,7 @@
 @import '../class/class.wxss';
 .shop-cont{font-size: 32rpx;}
 .shop-cont view{padding-top: 0}
-.shop-cont switch{float: right;margin-top: -10rpx;margin-right: -10rpx;}
+.shop-cont switch{float: right;margin-top: 0rpx;margin-right: -10rpx;}
 .shop-cont .nView image{width: 35rpx;height: 35rpx;position: absolute;left:0rpx;top: 5rpx;}
 .shop-cont view.nView{font-size: 28rpx;color: #888888;position: relative;padding-left: 50rpx;padding-bottom: 40rpx;}
 .shop-cont1{margin-bottom: 0}

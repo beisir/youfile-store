@@ -104,11 +104,6 @@ Page({
           title: '修改成功',
           icon: 'none',
           duration: 2000,
-          success: function () {
-            wx.navigateTo({
-              url: '../mesEdit/mesEdit',
-            })
-          }
         })
       })
   },

@@ -2,7 +2,7 @@
     <input placeholder="输入进货商名称、手机号、备注名"   bindinput='changeValue'   value="{{value}}"/>
     <image class="home-ser"  src="/image/search1.png"></image>
     <view class='home-img' bindtap='searchBtn' >
-        筛选
+        搜索
     </view>
   </view>
 <view class='bf-cont'>
@@ -10,7 +10,7 @@
     <navigator class="weui_cells" url="../addMerchant/addMerchant">
       <image  mode="widthFix" src="/image/w1.png"></image>
       <text class="bf-font">添加进货商 </text>
-      <view class='weui-view'>
+      <view class='weui-view' style='top:10rpx'>
         <image  mode="widthFix" src="/image/icl.png"></image>
       </view>
     </navigator>
