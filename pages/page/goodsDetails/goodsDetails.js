@@ -605,6 +605,7 @@ Page({
       total=0
       total = num * sell
       difference = total - num * wholesalePrice
+    // console.log(saleBatchNum + "//" + num + "///" + total + "///" + saleBatchAmount + "///" + saleBatchNumGoods)
       if (saleBatchNum == 0) {
         if (saleBatchAmount == 0) {
           discountShow = false
