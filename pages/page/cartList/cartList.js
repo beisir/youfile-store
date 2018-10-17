@@ -469,7 +469,7 @@ Page({
       differentPrice = this.data.differentPrice,
       differentPriceNew = 0,
       saleBatchGoodsNum=0,
-      allGoodsAmount=0,
+      allGoodsAmount = 0,
       enjoyCost=false
     this.setData({
       enjoyCost: false
@@ -488,7 +488,6 @@ Page({
         
       }
     }
-    // console.log(detailList)
     if (limitShow == 3){
       var allGoodsNum=0
       var allGoodsTotal=0
@@ -600,9 +599,6 @@ Page({
       }
       differentPrice = storeAmount - differentPriceNew
     }
-    console.log(storeAmount)
-    console.log(differentPriceNew)
-    console.log(differentPrice)
     this.setData({ 
       detailList: detailList,
       total1: total1.toFixed(2),
