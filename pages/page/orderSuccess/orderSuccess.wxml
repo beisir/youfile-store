@@ -43,7 +43,7 @@
 
     <view class='item-box'>
       <view class='item-title'>客服微信</view>
-      <view class='item-msg'>{{user.storeInfo.wechatNumber?user.storeInfo.wechatNumber:""}}</view>
+      <view class='item-msg' bindtap='coypWx'>{{user.storeInfo.wechatNumber?user.storeInfo.wechatNumber:""}}</view>
     </view>
 
     <!-- <view class='item-box'>

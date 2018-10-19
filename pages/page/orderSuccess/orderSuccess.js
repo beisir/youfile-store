@@ -42,6 +42,19 @@ Page({
       url: url
     })
   },
+  coypWx(){
+    if (this.data.user.storeInfo.wechatNumber){
+      wx.setClipboardData({
+        data: this.data.user.storeInfo.wechatNumber,
+        success: () => {
+          wx.showToast({
+            title: '复制微信号成功',
+            icon: "none"
+          })
+        }
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */

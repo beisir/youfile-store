@@ -46,7 +46,7 @@ Page({
     let url = this.data.url,
         txt = this.data.val.trim(),
         num = this.data.num;
-    if(url && txt){
+    if(url){
       API.uploadVoucher({
         orderNumber: num,
         payVoucher: this.data.url,
@@ -65,7 +65,7 @@ Page({
       
     }else{
       wx.showToast({
-        title: '请上传凭证并填写描述',
+        title: '请上传支付凭证',
         icon:'none'
       })
     }
