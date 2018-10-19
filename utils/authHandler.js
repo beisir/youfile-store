@@ -179,7 +179,7 @@ class TokenHandler {
   //保存token信息
   saveTokenInfo(tokenInfo) {
     //设置access_token信息
-    this.setStorage('access_token', tokenInfo.access_token);
+    wx.setStorageSync('access_token', tokenInfo.access_token);
 
     //设置token过期时间
     let timestamp = Date.parse(new Date);

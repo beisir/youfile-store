@@ -1,7 +1,8 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+import authHandler from '../../../utils/authHandler.js';
 function getIdentity(_this) {
-  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+  if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
         var obj=res.obj

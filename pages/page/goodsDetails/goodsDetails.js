@@ -1,8 +1,9 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
 var WxParse = require('../../../wxParse/wxParse.js');
+import authHandler from '../../../utils/authHandler.js';
 function getIdentity(_this,goodsId,isTrue) {
-  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+  if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
         var obj = res.obj,
@@ -834,7 +835,7 @@ Page({
       discountShow: discountShow,
       classNums: classNums,
       newTotal: newTotal.toFixed(2),
-      difference: difference.toFixed(2),
+      difference: parseInt(difference),
       goodsSpecificationVOList: goodsSpecificationVOList
     });
   },

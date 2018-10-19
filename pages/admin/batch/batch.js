@@ -9,9 +9,9 @@ Page({
     hasList: true, 
     datas: [],
     baseUrl: app.globalData.imageUrl,
-    currentTab:-1,
+    currentTab:0,
     allSelected:false,
-    goodsStatus:'',
+    goodsStatus:1,
     setCode:[],
     showBottom:true,
     numSle:0,
@@ -23,23 +23,23 @@ Page({
   onLoad: function (options) {
     
   },
-getList:function(){
-  var _this = this
-  Api.adminGoodsList({})
-    .then(res => {
-      var detailList = res.obj.result
-      if (detailList.length==0){
-        Api.showToast("暂无更多数据了！")
-      }else{
-        var datas = _this.data.datas,
-          totalCount = res.obj.totalCount,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          datas: newArr,
-        })
-      }
-    })
-},
+// getList:function(){
+//   var _this = this
+//   Api.adminGoodsList({})
+//     .then(res => {
+//       var detailList = res.obj.result
+//       if (detailList.length==0){
+//         Api.showToast("暂无更多数据了！")
+//       }else{
+//         var datas = _this.data.datas,
+//           totalCount = res.obj.totalCount,
+//           newArr = app.pageRequest.addDataList(datas, detailList)
+//         _this.setData({
+//           datas: newArr,
+//         })
+//       }
+//     })
+// },
  indexOf(val,arr){
     for(var i = 0; i<arr.length; i++){
       if (arr[i] == val) { return i; }
@@ -210,7 +210,7 @@ getList:function(){
       datas: []
     })
     var _this = this
-    _this.getList()
+    _this.classCode()
   },
 
   /**
@@ -231,14 +231,7 @@ getList:function(){
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      currentTab: -1
-    })
-    app.pageRequest.pageData.pageNum = 0
-    this.setData({
-      datas: []
-    })
-    this.getList()
+   
   },
 
   /**
@@ -247,11 +240,12 @@ getList:function(){
   onReachBottom: function () {
     var that = this,
       goodsStatus = this.data.goodsStatus
-    if (goodsStatus == '') {
-      that.getList()
-    } else {
-      this.classCode()
-    }
+    this.classCode()
+    // if (goodsStatus == '') {
+    //   that.getList()
+    // } else {
+    //   this.classCode()
+    // }
   },
 
 

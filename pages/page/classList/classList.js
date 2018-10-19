@@ -74,10 +74,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const pages = getCurrentPages()
-    const currentPage = pages[pages.length - 1]
-    const url = currentPage.route
-    console.log(url)
+  
   },
 
   /**

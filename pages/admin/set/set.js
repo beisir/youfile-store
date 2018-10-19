@@ -24,6 +24,7 @@ Page({
         skuList1=[],
         skuListAll=[],
       goodsSkuVOList = options.modeList
+    console.log(goodsListData)
     if (goodsListData!=''){
       if (goodsListData.length == 1) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList

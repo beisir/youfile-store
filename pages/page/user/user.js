@@ -1,8 +1,9 @@
 // pages/user/user.js
 import Api from '../../../utils/api.js';
+import authHandler from '../../../utils/authHandler.js';
 var app = getApp();
 function getIdentity(_this) {
-  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+  if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
         var obj = res.obj,

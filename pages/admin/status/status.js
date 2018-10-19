@@ -337,21 +337,31 @@ Page({
   onShareAppMessage: (res) => {
     var img='',
     name='',
-    id=''
+    id='',
+    storeId = wx.getStorageSync('storeId')
     if (res.from === 'button') {
      var res=res.target.dataset
       img =res.img;
       id=res.id
       name=res.name
-    }
-    return {
-      title:name,
-      path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id,
-      imageUrl: img,
-      success: (res) => {
-      },
-      fail: (res) => {
+      return {
+        title: name,
+        path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id + "&storeId=" + storeId,
+        imageUrl: img,
+        success: (res) => {
+        },
+        fail: (res) => {
+        }
+      }
+    }else{
+      return {
+        path: '/pages/page/home/home?storeId=' + storeId,
+        success: (res) => {
+        },
+        fail: (res) => {
+        }
       }
     }
+    
   },
 })

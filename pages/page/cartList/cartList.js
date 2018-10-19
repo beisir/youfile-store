@@ -1,8 +1,9 @@
 const app = getApp();
 var that
 import Api from '../../../utils/api.js'
+import authHandler from '../../../utils/authHandler.js';
 function getIdentity(_this) {
-  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+  if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
         var obj = res.obj
@@ -626,7 +627,7 @@ Page({
       detailList: detailList,
       total1: total1.toFixed(2),
       enjoyCost: enjoyCost,
-      differentPrice: differentPrice.toFixed(2),
+      differentPrice: parseInt(differentPrice),
     });
   },
   creatOrder:function(){

@@ -63,7 +63,7 @@ Page({
     _this.setData({
       list: listNew
     })
-    app.http.postRequest('/admin/shop/customcategory/delete/batch',codes)
+    app.http.postRequest('/admin/shop/customcategory/delete/batch/{{storeId}}',codes)
       .then(res => {
         wx.showToast({
           title: '删除成功',

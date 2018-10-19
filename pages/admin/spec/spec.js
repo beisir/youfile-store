@@ -299,18 +299,33 @@ Page({
         valueEdit: ''
       })
     } else {
-      if (num > 7) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
-      } else {
-        this.setData({
-          watchInput: true,
-          value: value.substring(0, 6),
-          valueEdit: event.detail.value
-        })
+      if (this.data.addSpec){
+        if (num > 16) {
+          wx.showToast({
+            title: '超过最长数字限制',
+            icon: 'none',
+            duration: 2000,
+          })
+        } else {
+          this.setData({
+            watchInput: true,
+            value: value.substring(0, 15),
+          })
+        }
+      }else{
+        if (num > 7) {
+          wx.showToast({
+            title: '超过最长数字限制',
+            icon: 'none',
+            duration: 2000,
+          })
+        } else {
+          this.setData({
+            watchInput: true,
+            value: value.substring(0, 6),
+            valueEdit: (event.detail.value).substring(0, 6)
+          })
+        }
       }
     }
   },
