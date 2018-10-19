@@ -1,8 +1,48 @@
 const app = getApp();
 var that
 import Api from '../../../utils/api.js'
-// var recordStartX = 0;
-// var currentOffsetX = 0;
+function getIdentity(_this) {
+  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+    Api.userIdentity()
+      .then(res => {
+        var obj = res.obj
+        var isStoreOwner = obj.isStoreOwner,
+          isPurchaser = obj.isPurchaser
+        if (isStoreOwner) {
+          wx.setStorageSync("admin", 2)
+          _this.setData({
+            limitShow: 2
+          })
+        }
+        if (isPurchaser) {
+          wx.setStorageSync("admin", 3)
+          wx.setTabBarItem({
+            index: 1,
+            text: '进货车',
+            iconPath: '/image/22.png',
+            selectedIconPath: '/image/21.png'
+          })
+          _this.setData({
+            limitShow: 3
+          })
+        }
+        if (!isPurchaser && !isStoreOwner) {
+          wx.setStorageSync("admin", 1)
+          _this.setData({
+            limitShow: 1
+          })
+        }
+
+        _this.getList(_this)
+      })
+  } else {
+    _this.getList(_this)
+    wx.setStorageSync("admin", 1)
+    _this.setData({
+      limitShow: 1
+    })
+  }
+}
 Page({
   data: {
     indexEmpty: true,
@@ -27,7 +67,7 @@ Page({
     leftVal:'',
     numbers: 1,
     baseUrl: app.globalData.imageUrl,
-    limitShow: wx.getStorageSync('admin'),
+    limitShow:1,
     storeAmount: 0,
     storeNum: 0,
     differentPrice:0,
@@ -153,8 +193,6 @@ Page({
     this.setData({
       detailList: [],
       lostcarts:[],
-    }, function () {
-      _this.getTotalPrice();
     })
     var _this=this
     Api.cartList()
@@ -187,7 +225,28 @@ Page({
         if (effectiveList.length>0){
           _this.setData({
             hasList: true,
+            selectAllStatus:true,
           });
+          for (var i = 0; i < effectiveList.length; i++) {
+            effectiveList[i].selected = true
+            var newSkvArr = effectiveList[i].shoppingCartSkuList
+            if (Api.isEmpty(newSkvArr)) {
+              var num = 0;
+              var allGoodsAmount = 0
+              var allGoodsPf = 0
+              for (var j = 0; j < newSkvArr.length; j++) {
+                num += newSkvArr[j].num
+                allGoodsAmount += newSkvArr[j].sellPrice * newSkvArr[j].num
+                allGoodsPf += newSkvArr[j].wholesalePrice * newSkvArr[j].num
+              }
+              effectiveList[i].num = num
+              effectiveList[i].allGoodsAmount = allGoodsAmount
+              effectiveList[i].allGoodsPf = allGoodsPf
+            } else {
+              effectiveList[i].allGoodsAmount = effectiveList[i].sellPrice * effectiveList[i].num
+              effectiveList[i].allGoodsPf = effectiveList[i].wholesalePrice * effectiveList[i].num
+            }
+          }
         }
         if (failureList.length > 0) {
           _this.setData({
@@ -205,35 +264,15 @@ Page({
             hasList:false
           })
         }
-        for (var i = 0; i < effectiveList.length;i++){
-          effectiveList[i].selected = true
-          var newSkvArr = effectiveList[i].shoppingCartSkuList
-          if (Api.isEmpty(newSkvArr)){
-            var num=0;
-            var allGoodsAmount = 0
-            var allGoodsPf=0
-            for (var j = 0; j < newSkvArr.length;j++){
-              num+= newSkvArr[j].num
-              allGoodsAmount += newSkvArr[j].sellPrice * newSkvArr[j].num
-              allGoodsPf += newSkvArr[j].wholesalePrice * newSkvArr[j].num
-            }
-            effectiveList[i].num = num
-            effectiveList[i].allGoodsAmount = allGoodsAmount
-            effectiveList[i].allGoodsPf = allGoodsPf
-          }else{
-            effectiveList[i].allGoodsAmount = effectiveList[i].sellPrice*effectiveList[i].num
-            effectiveList[i].allGoodsPf = effectiveList[i].wholesalePrice*effectiveList[i].num
-          }
-        }
         var saleBatchNum = 0
         var saleBatchAmount=0
         if (Api.isEmpty(store)){
-          if (store.saleBatchAmount == null || store.saleBatchAmount==0){
+          if (store.saleBatchAmount == null){
             saleBatchAmount=0
           }else{
             saleBatchAmount = store.saleBatchAmount
           }
-          if (store.saleBatchNum == null || store.saleBatchNum == 0) {
+          if (store.saleBatchNum == null) {
             saleBatchNum =0
           } else {
             saleBatchNum = store.saleBatchNum
@@ -252,29 +291,20 @@ Page({
     
   },
   onLoad: function (options) {
- 
+  
   },
   onShow() {
     this.setData({
-      detailList:[]
+      detailList: []
     })
     if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '') {
       this.setData({
         indexEmpty: false
       })
+    } else {
+      getIdentity(this)
     }
-    if (wx.getStorageSync('admin') == 3) {
-      wx.setNavigationBarTitle({
-        title:'进货车'
-      })
-      wx.setTabBarItem({
-        index: 1,
-        text: '进货车',
-        iconPath: '/image/22.png',
-        selectedIconPath: '/image/21.png'
-      })
-    }
-    this.getList(this)
+    
   },
   /**
    * 当前商品选中事件
@@ -370,8 +400,12 @@ Page({
     num = num + 1;
     let storeId = this.data.storeId
     detailList[index].shoppingCartSkuList[0].num = num;
-    detailList[index].num=num
+    detailList[index].num = num
+    var arr = this.updatePrice(num, index)
+    detailList[index].allGoodsAmount = arr[0]
+    detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
+
     var dataArr=[]
     dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId:storeId})
     this.addCart(data[0]["goodsId"],JSON.stringify(dataArr))
@@ -401,8 +435,10 @@ Page({
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
+    },function(){
+      this.getTotalPrice();
     });
-    this.getTotalPrice();
+    
   },
   addCountNew(e) {
     const index = e.currentTarget.dataset.index;
@@ -416,8 +452,9 @@ Page({
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
+    },function(){
+      this.getTotalPrice();
     });
-    this.getTotalPrice();
   },
   // 更改商品价格
   updatePrice:function(num,index){
@@ -450,7 +487,6 @@ Page({
     var dataArr = []
     dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId: storeId })
     this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
-
     this.setData({
       detailList: detailList
     });
@@ -471,11 +507,8 @@ Page({
       saleBatchGoodsNum=0,
       allGoodsAmount = 0,
       enjoyCost=false
-    this.setData({
-      enjoyCost: false
-    })
-    let detailList = this.data.detailList;// 获取购物车列表
-    for (let i = 0; i < detailList.length; i++) { 
+    var detailList = this.data.detailList;// 获取购物车列表
+    for (var i = 0; i < detailList.length; i++) { 
       if (detailList[i].selected) {
         if (limitShow==3){
           saleBatchGoodsNum = detailList[i].saleBatchNum
@@ -499,44 +532,34 @@ Page({
           saleBatchGoodsNum = detailList[i].saleBatchNum
           allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
-          if (storeAmount == 0 && storeNum>0){
-            if (allGoodsNum > storeNum){
+          if (storeNum==0){
+            if (storeAmount==0){
               detailList[i].enjoyPrice = true
               enjoyCost = true
-              this.setData({
-                enjoyCost: true
-              })
-            }
-          }
-          if (storeAmount == 0 || storeNum == 0) {
-            if (allGoodsNum > storeNum) {
-              detailList[i].enjoyPrice = true
-              enjoyCost = true
-              this.setData({
-                enjoyCost: true
-              })
-            }
-          }
-          if (storeNum > 0 && storeAmount>0){
-            if (allGoodsNum > storeNum || allGoodsTotal > storeAmount) {
-              detailList[i].enjoyPrice = true
-              enjoyCost = true
-              this.setData({
-                enjoyCost: true
-              })
-            }
-          }
-          
-          if (allGoodsNum < storeNum && allGoodsTotal < storeAmount) {
-            if (allTotalNum >= saleBatchGoodsNum){
-              detailList[i].enjoyPrice = true
             }else{
               detailList[i].enjoyPrice = false
+              enjoyCost = false
             }
-            enjoyCost = false
-            this.setData({
-              enjoyCost: false
-            })
+          }
+          if (storeNum > 0){
+            if (storeAmount==0){
+              if (allGoodsNum >= storeNum){
+                detailList[i].enjoyPrice = true
+                enjoyCost = true
+              }else{
+                detailList[i].enjoyPrice = false
+                enjoyCost = false
+              }
+            }
+            if(storeAmount>0){
+              if (allGoodsNum >= storeNum || allGoodsTotal > storeAmount) {
+                detailList[i].enjoyPrice = true
+                enjoyCost = true
+              } else {
+                detailList[i].enjoyPrice = false
+                enjoyCost = false
+              }
+            }
           }
         }else{
           detailList[i].enjoyPrice = false
@@ -602,7 +625,8 @@ Page({
     this.setData({ 
       detailList: detailList,
       total1: total1.toFixed(2),
-      differentPrice: differentPrice,
+      enjoyCost: enjoyCost,
+      differentPrice: differentPrice.toFixed(2),
     });
   },
   creatOrder:function(){
@@ -628,5 +652,9 @@ Page({
     wx.navigateTo({
       url: '../address/address?model=' + model + '&enjoyCost=' + this.data.enjoyCost + '&totalPrice=' + this.data.totalPrice,
     })
+  },
+  onPullDownRefresh: function () {
+    this.onShow()
+    wx.stopPullDownRefresh();
   },
 })

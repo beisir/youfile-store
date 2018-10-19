@@ -1,33 +1,18 @@
-<swiper current="{{currentTab}}" duration="300">
-    <swiper-item catchtouchmove="stopTouchMove">
-     <!-- <view class='shop-cont shop-cont1'>
-        <view class='shop-size'>常选择的类目</view>
-        <view>珠宝 > 戒指 > 婚戒</view>
-        <view>服装 > 女装 > 连衣裙</view>
-        <view>家用电器 > 厨房电器 > 咖啡机</view>
-      </view> -->
-      <view class='shop-cont'>
-      <view class='shop-size'>请选择的类目</view>
-        <view wx:for='{{dataList}}' wx:key='{{index}}' bindtap='twoClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
-        {{item.name}}
-        </view>
-      </view>
-    </swiper-item>
-     <swiper-item catchtouchmove="stopTouchMove">
-      <view class='shop-cont shop-cont2'>
-        <view class='shop-size'>已选定<text bindtap='goFistClass'>{{name}}</text></view>
-        <view wx:for='{{dataListTwo}}' wx:key='{{index}}' bindtap='twothreeClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
-          {{item.name}}
-          <!-- <navigator url='../thirdClass/thirdClass?code={{item.categoryCode}}&name={{item.name}}&pName={{name}}'></navigator> -->
-        </view>
-      </view>
-    </swiper-item>
-    <swiper-item catchtouchmove="stopTouchMove">
-      <view class='shop-cont shop-cont2'>
-        <view class='shop-size'>已选定 <text bindtap='goFistClass'>{{name}}</text> ><text bindtap='goFistClass2'>{{names}}</text></view>
-        <view wx:for='{{dataListThree}}' wx:key='{{index}}'  data-name='{{item.name}}'  data-id='{{item.categoryCode}}' bindtap='classFun'>
-          {{item.name}}
-        </view>
-      </view>
-    </swiper-item>
-</swiper>
+<view class='shop-cont'  wx:if='{{currentTab==0}}'>
+    <view class='shop-size'>请选择的类目</view>
+    <view wx:for='{{dataList}}' wx:key='{{index}}' bindtap='twoClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
+      {{item.name}}
+    </view>
+</view>
+<view class='shop-cont shop-cont2' wx:if='{{currentTab==1}}'>
+  <view class='shop-size'>已选定<text bindtap='goFistClass'>{{name}}</text></view>
+  <view wx:for='{{dataListTwo}}' wx:key='{{index}}' bindtap='twothreeClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
+      {{item.name}}
+  </view>
+</view>
+<view class='shop-cont shop-cont2' wx:if='{{currentTab==2}}'>
+  <view class='shop-size'>已选定 <text bindtap='goFistClass'>{{name}}</text> ><text bindtap='goFistClass2'>{{names}}</text></view>
+  <view wx:for='{{dataListThree}}' wx:key='{{index}}'  data-name='{{item.name}}'  data-id='{{item.categoryCode}}' bindtap='classFun'>
+    {{item.name}}
+  </view>
+</view>

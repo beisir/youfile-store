@@ -14,6 +14,7 @@ Page({
     isShow: true,
     uploadImg:false,
     mainx: 0,
+    modelPageAll:'',
     newConst:'',
     pageall:[],
     stockHide:false,
@@ -150,30 +151,27 @@ Page({
       })
     }
   },
-
   wholesalePrice: function (event) {
     var _this = this,
       val = event.detail.value,
-      val = val.replace(/[^\d.]/g, ''),
       num = val.length
-    if (num > 10) {
+    if (num > 11) {
       Api.showToast("超过最长数字限制")
     } else {
       this.setData({
-        wholesalePrice: val.substring(0, 9),
+        wholesalePrice: val.substring(0, 10),
       })
     }
   },
   sellPrice: function (event) {
     var _this = this,
       val = event.detail.value,
-      val = val.replace(/[^\d.]/g, ''),
       num = val.length
-    if (num > 10) {
+    if (num > 11) {
       Api.showToast("超过最长数字限制")
     } else {
       this.setData({
-        sellPrice: val.substring(0, 9),
+        sellPrice: val.substring(0, 10),
       })
     }
   },
@@ -392,7 +390,8 @@ Page({
           }
         }
       }
-    }
+    } 
+    var stockNum = this.data.skuNum == '' ? this.data.allTotalNew : this.data.skuNum
     var goodsVO =  {
       "categoryCode": this.data.categoryCode,
       "customCategoryCode": this.data.categoryCustomCode,
@@ -406,9 +405,33 @@ Page({
       "recommendDesc": this.data.recommendDesc,
       "sellPrice":sellPrice,
       "status":status,
-      "stockNum": this.data.skuNum == '' ? this.data.allTotalNew:this.data.skuNum,
+      "stockNum": stockNum,
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": wholesalePrice
+    }
+    if (!Api.isEmpty(mainImgUrl)) {
+      Api.showToast("请上传商品图片！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.name)) {
+      Api.showToast("请输入标题！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.categoryCode)) {
+      Api.showToast("请输入商品类目！")
+      return;
+    }
+    if (!Api.isEmpty(sellPrice)) {
+      Api.showToast("请输入商品零售价！")
+      return;
+    }
+    if (!Api.isEmpty(wholesalePrice)) {
+      Api.showToast("请输入商品批发价！")
+      return;
+    }
+    if (!Api.isEmpty(stockNum)) {
+      Api.showToast("商品库存不能为零！")
+      return;
     }
     Api.addGoods(goodsVO)
       .then(res => {
@@ -466,6 +489,7 @@ Page({
     if(currPage.data.mydata){
       that.setData({
         pageall: currPage.data.mydata,
+        modelPageAll: JSON.stringify(currPage.data.mydata),
         pageShow:false
       })
     }
@@ -501,10 +525,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

@@ -28,6 +28,7 @@ Page({
     oneTemplateCont: [{ templateName: "不用模板",id:'', specificationTemplateContentVOList: [] }],
     templateCont: [],
     addSpec: false,
+    modelLen:0,
     addSpecAttc: false,
     watchInput: false,
     updateSpec: false,
@@ -37,7 +38,7 @@ Page({
     editShowModel: false,
     contentShow:false,
     editId: '',
-    timestamp:Date.parse(new Date()) + parseInt(89999999 * Math.random() + 10000000 + 1),
+    timestamp:Date.parse(new Date()) + parseInt(89999999 * Math.random() + 1),
     templateId: '',
     templateContentId: '',
     notemp: { templateName: "衣服" },
@@ -105,6 +106,7 @@ Page({
       editDataModel = this.data.editDataModel,
       isEmptySku=false,
       newDataSku=[],
+      modelLen = this.data.modelLen,
       editShowModel = this.data.editShowModel,
       templateId = this.data.templateId
     if (editShowModel){
@@ -117,16 +119,24 @@ Page({
           }
         }
         newDataSku = goodsListData
+        if (goodsListData.length < 1) {
+          isEmptySku = 1
+        }
       }else{
         for (var i = 0; i < editDataModel.length;i++){
+          var newData = []
           var dataChild =editDataModel[i].goodsSpecificationValueVOList
           for (var j = 0; j < dataChild.length;j++){
-            if (dataChild[j].slected==false){
-              dataChild.splice(j,1)
+            if (dataChild[j].slected){
+              newData.push(dataChild[j])
             }
           }
+          editDataModel[i].goodsSpecificationValueVOList = newData
         }
         newDataSku = editDataModel
+        if (editDataModel.length != modelLen) {
+          isEmptySku = false
+        }
       }
     }else{
       for (var i = 0; i < goodsListData.length; i++) {
@@ -137,9 +147,9 @@ Page({
         }
       }
       newDataSku =goodsListData
-    }
-    if ( goodsListData.length<1){
-      isEmptySku=1
+      if (goodsListData.length < 1) {
+        isEmptySku = 1
+      }
     }
     var index = this.data.currentTab
     var pages = getCurrentPages();             //  获取页面栈
@@ -179,6 +189,7 @@ Page({
         arrIndex: arrIndex,
         arrIndex1: arrIndex1,
         editDataModel: model,
+        modelLen: model.length,
         editShowModel: true
       })
     }else{
@@ -188,14 +199,6 @@ Page({
         oneTemplateCont: oneTemplateCont,
       })
     }
-    // ]}
-   
-
-
-    // var model = [{ specCode: "1538291327370", specName: "颜色", goodsSpecificationValueVOList: [{ specCode: "1538291327370", specValueCode: "1538291261487027702770277", specValueName: "米金" }, { specCode: "1538291327370", specValueName: "琥珀黄", specValueCode: "1538291261488127712771277" }] }, { specName: "规格", specCode: "1538291301278", goodsSpecificationValueVOList: [{ specCode: "1538291301278", specValueCode: "1538291261211002111", specValueName: "S" }, { specCode: "1538291301278", specValueCode: "1538291261212002222", specValueName: "M" }, { specCode: "180929210000", specValueCode: "1538291261213002333", specValueName: "L" }, { specCode: "1538291301278", specValueCode: "1538291261214002444", specValueName: "XL" }] }]
-
-
-   
   },
   checkedFunc: function (arr, isSelected) {
     for (var i = 0; i < arr.length; i++) {
@@ -564,7 +567,6 @@ Page({
         editDataModel: editDataModel
       })
     }
-    // timestamp
     for (var i = 0; i < goodsListData.length;i++){
       if (goodsListData[i].id == pId){
         addIndex = true
@@ -631,7 +633,11 @@ Page({
   // 删除模板内容
   deleteTemplateContentId: function (e) {
     var _this = this
-    var templateContentId = e.target.dataset.id
+    if (e.target.dataset.id){
+      var templateContentId = e.target.dataset.id
+    }else{
+      var templateContentId =''
+    }
     var templateId = this.data.templateId
     var currentTab = this.data.currentTab
     var templateCont = _this.data.templateCont
@@ -646,11 +652,31 @@ Page({
       tempNewId: templateContentId
     })
   },
+  // 删除规格的时候删除第二个规格
+  removeDataLastArr: function (data) {
+    var len = data.length
+    if (len == 2) {
+      data.pop()
+      return data;
+    }
+  },
   contentDetele:function(){
     var _this=this,
       templateContentId = this.data.tempNewId,
-        templateCont=this.data.tempNewArr,
+      templateCont=this.data.tempNewArr,
+      goodsListData = this.data.goodsListData,
+      editDataModel = this.data.editDataModel,
+      timestamp = this.data.timestamp,
       templateId = this.data.templateId
+    this.removeDataLastArr(goodsListData)
+    this.removeDataLastArr(editDataModel)
+    if (editDataModel.length == 1) {
+      var specEditNew = editDataModel[0].goodsSpecificationValueVOList
+      for (var i = 0; i < specEditNew.length;i++){
+        specEditNew[i].specCode = timestamp
+        specEditNew[i].specValueCode = parseInt(timestamp+"1"+ Math.random() * 10000 + i + i * 6)
+      }
+    }
     if (Api.isEmpty(templateId)){
       Api.deleteTemplate(templateContentId)
         .then(res => {
@@ -664,7 +690,9 @@ Page({
     }
     _this.setData({
       templateCont: templateCont,
-      contentShow: false
+      contentShow: false,
+      goodsListData: goodsListData,
+      editDataModel: editDataModel,
     })
    
   },
@@ -800,10 +828,5 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+ 
 })

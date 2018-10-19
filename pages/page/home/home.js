@@ -4,23 +4,18 @@ function getIdentity(_this) {
   if (Api.isEmpty(wx.getStorageSync("access_token"))) {
     Api.userIdentity()
       .then(res => {
-        var obj=res.obj,
-          isStoreOwner = obj.isStoreOwner,
+        var obj=res.obj
+        var  isStoreOwner = obj.isStoreOwner,
           isPurchaser = obj.isPurchaser
         if (isStoreOwner){
-          wx.setStorage({
-            key: 'admin',
-            data: 2, //1yon 2店主  3批发商
-          })
+          wx.setStorageSync("admin", 2)
+          //1yon 2店主  3批发商
           _this.setData({
             limitShow:2
           })
         }
         if (isPurchaser){
-          wx.setStorage({
-            key: 'admin',
-            data: 3,
-          })
+          wx.setStorageSync("admin", 3)
           wx.setTabBarItem({
             index: 1,
             text: '进货车',
@@ -32,10 +27,7 @@ function getIdentity(_this) {
           })
         }
         if (!isPurchaser && !isStoreOwner){
-          wx.setStorage({
-            key: 'admin',
-            data: 1,
-          })
+          wx.setStorageSync("admin", 1)
           _this.setData({
             limitShow: 1
           })
@@ -45,10 +37,7 @@ function getIdentity(_this) {
       })
   }else{
     _this.homeIndex()
-    wx.setStorage({
-      key: 'admin',
-      data: 1,
-    })
+    wx.setStorageSync("admin", 1)
     _this.setData({
       limitShow: 1
     })
@@ -88,13 +77,9 @@ Page({
     var Id = wx.getStorageSync("storeId"),
       logo =this.data.store.logo,
       name = this.data.store.storeName
-    
     wx.navigateTo({
       url: '../../businessFriend/information/information?status=0&send=&accept='+Id+'&remark=&logo='+logo+'&name='+name,
     })
-    // this.setData({
-    //   show:true
-    // })
   },
   confirm:function(){
     this.setData({
@@ -106,12 +91,11 @@ Page({
     var goodsId=e.target.dataset.id,
       src = e.target.dataset.src,
       goodsName = e.target.dataset.name
-    wx.setStorageSync("src", src)
-    wx.setStorageSync("goodsName", goodsName)
-    wx.setStorageSync("goodsId", goodsId)
     this.setData({
       showHide: false,
-      goodsId: goodsId
+      goodsId: goodsId,
+      src: src,
+      goodsName: goodsName,
     })
   }, 
   // 下架商品
@@ -153,6 +137,18 @@ Page({
       showDp: false,
     })
   }, 
+  editDpMes:function(){
+    var limitShow = this.data.limitShow
+    if (limitShow==2){
+      wx.navigateTo({
+        url: '../mesEdit/mesEdit',
+      })
+    }else{
+      wx.navigateTo({
+        url: '../mes/mes?code=' + limitShow,
+      })
+    }
+  },
   getList: function () {
     var _this = this,
       keyword = this.data.keyword,
@@ -172,12 +168,16 @@ Page({
     } 
     Api.shopList({ keyword: '', sortType: sortType})
       .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.result,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          result: newArr,
-        })
+        var detailList = res.obj.result
+        if (Api.isEmpty(detailList)){
+          var datas = _this.data.result,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            result: newArr,
+          })
+        }else{
+          Api.showToast("暂无更多数据了！")
+        }
       })
   },
   chooseImage:function(){
@@ -233,6 +233,7 @@ Page({
     if (options.storeId) {
       wx.setStorageSync("storeId", options.storeId)
     }
+  
   },
   bindChange: function (e) {
     var that = this;
@@ -329,18 +330,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
+    var _this=this
     this.closeShow()
     app.pageRequest.pageData.pageNum = 0
-    if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId")==''){
+    if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '') {
       this.setData({
         indexEmpty: false
       })
-    }else{
+    } else {
       getIdentity(this)
-      var that = this;
       wx.getSystemInfo({
         success: function (res) {
-          that.setData({
+          _this.setData({
             winWidth: res.windowWidth,
             winHeight: res.windowHeight
           });
@@ -361,38 +362,38 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.emptyArr()
+    var currentTab = this.data.currentTab
     this.setData({
-      currentTab:0
+      currentTab: currentTab
+    },function(){
+      this.emptyArr()
+      // this.onShow()
+      wx.stopPullDownRefresh();
     })
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-   
-  },
-  
+
   /**
     * 用户点击右上角分享
     */
-  onShareAppMessage: (res) => {
-    var img = wx.getStorageSync('src'),
-      goodsName = wx.getStorageSync('goodsName'),
-      id = wx.getStorageSync('goodsId')
+  onShareAppMessage: function (res) {
+    var store=this.data.store,
+        img = this.data.src,
+        goodsName = this.data.goodsName,
+        id = this.data.goodsId,
+        storeId = store.storeId, 
+        storeName = store.storeName
     if (res.from === 'button') {
      var name=res.target.dataset.name
       if (name=="names"){
         return {
           title: goodsName,
-          path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id,
+          path: '/pages/page/home/home?goodsId='+id+"&storeId"+storeId,
           imageUrl: img,
           success: (res) => {
           },
@@ -400,6 +401,15 @@ Page({
           }
         }
       }
+    }else{
+        return {
+          title: storeName,
+          path: '/pages/page/home/home?storeId='+storeId,
+          success: (res) => {
+          },
+          fail: (res) => {
+          }
+        }
     }
   
   },
@@ -407,14 +417,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    this.getList()
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-
 })

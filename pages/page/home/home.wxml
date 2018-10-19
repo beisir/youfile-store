@@ -27,23 +27,24 @@
     <button class='shre_btn' open-type='share'>
       <image src="/image/fx1.png"></image>分享</button>
   </view>
-  <image src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
+  <image wx:if='{{store!="" && limitShow==2}}'  bindtap='editDp' src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
+   <image wx:if='{{store!="" && limitShow!=2}}'  src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
-      <navigator  class='logoimg' url="../mes/mes?code={{limitShow}}">
-        <image mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"/>  
-      </navigator>
+      <view bindtap='editDpMes' class='logoimg'>
+        <image wx:if='{{store!=""}}' mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"/>  
+      </view>
     </view>
     <view class="ym_sydtdmgzs">
       <view class="store_name">{{store.storeName}}
         <view>{{store.storeNature}}</view>
-        <image wx:if='{{limitShow==2}}' bindtap='editDp' src="/image/edit1.png" />
+        <image wx:if='{{limitShow==2}}' bindtap='editDpMes' src="/image/edit1.png" />
       </view>
       <image class='logoimg' src="{{baseUrl}}{{store.mallLogo}}" />
       <text>{{store.mallName}}</text>
     </view>
   </view>
-  <button class="ym_sydtgzbtn" hidden='{{likeShow}}' bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
+  <button class="ym_sydtgzbtn" wx:if='{{store!=""}}' hidden='{{likeShow}}' bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
   <button class="ym_sydtgzbtn" hidden='{{!likeShow}}' bindtap='deteleLikeStore'>已关注</button>
 </view>
 <view class='add-firend'  wx:if='{{limitShow==1}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>
@@ -69,7 +70,7 @@
     <view></view>
     <text>{{totalCount}}</text>
   </view>
-  <scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
+  <scroll-view scroll-y="true" style="height:100%;">
     <view class='flex-boxx'>
       <view class="result-list" wx:for="{{result}}" wx:key="index">
         <view>

@@ -10,6 +10,7 @@ Page({
     pics: [],
     stockHide: false,
     isShow: true,
+    isStatus:true,
     mainx: 0,
     isEmptySku:false,
     newConst:'',
@@ -120,17 +121,27 @@ Page({
   },
   wholesalePrice: function (event) {
     var _this = this,
-      val = event.detail.value
-    this.setData({
-      wholesalePrice: val
-    })
+      val = event.detail.value,
+      num = val.length
+    if (num > 11) {
+      Api.showToast("超过最长数字限制")
+    } else {
+      this.setData({
+        wholesalePrice: val.substring(0, 10),
+      })
+    }
   },
   sellPrice: function (event) {
     var _this = this,
-      val = event.detail.value
-    this.setData({
-      sellPrice: val
-    })
+      val = event.detail.value,
+      num = val.length
+    if (num > 11) {
+      Api.showToast("超过最长数字限制")
+    } else {
+      this.setData({
+        sellPrice: val.substring(0, 10),
+      })
+    }
   },
   stockNum: function (event) {
     var _this = this,
@@ -142,20 +153,6 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  // getClassList: function (customCategoryCode){
-  //   var _this=this
-  //   Api.adminShopCate()
-  //     .then(res => {
-  //       var obj = res.obj
-  //       for(var i=0;i<obj.length;i++){
-  //         if (obj[i].customCategoryCode == customCategoryCode){
-  //           _this.setData({
-  //             strName: obj[i].name
-  //           })
-  //         }
-  //       }       
-  //     })
-  // },
   getDetails: function (goodsId){
     var _this=this
     Api.adminGetDetails({ goodsId: goodsId})
@@ -198,6 +195,7 @@ Page({
         _this.setData({
           pics: arrs,
           name: obj.name,
+          isStatus:obj.status,
           mainImgUrl: obj.mainImgUrl,
           recommendDesc: obj.recommendDesc,
           pageall: obj.goodsSpecificationVOList,
@@ -512,7 +510,7 @@ Page({
       "goodsSkuVOList": skuListAll,
       "goodsSpecificationVOList": this.data.pageall,
       "id": this.data.goodsId,
-      "mainImgUrl": this.data.mainImgUrl,
+      "mainImgUrl": mainImgUrl,
       "marketPrice": 10,
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,
@@ -524,6 +522,30 @@ Page({
       "storeName": this.data.storeName,
       "top": false,
       "wholesalePrice": this.data.wholesalePrice
+    }
+    if (!Api.isEmpty(mainImgUrl)) {
+      Api.showToast("请上传商品图片！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.name)) {
+      Api.showToast("请输入标题！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.categoryCode)) {
+      Api.showToast("请输入商品类目！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.sellPrice)) {
+      Api.showToast("请输入商品零售价！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.wholesalePrice)) {
+      Api.showToast("请输入商品批发价！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.skuNum)) {
+      Api.showToast("商品库存不能为零！")
+      return;
     }
     Api.updateGoods(goodsVO)
       .then(res => {
@@ -622,10 +644,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

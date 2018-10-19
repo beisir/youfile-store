@@ -4,24 +4,20 @@
     
     "pages/admin/status/status",
     
-    
-    "pages/businessFriend/merchant/index/index",
-    
-    
-    "pages/businessFriend/index/index",
-    
-    
-    
-    
-    
-    "pages/page/cartList/cartList",
     "pages/admin/addGoods/addGoods",
+    
+    "pages/admin/editGoods/editGoods",
+    "pages/page/workIndex/workIndex",
+    "pages/page/cartList/cartList",
+    "pages/page/goodsDetails/goodsDetails",
+    "pages/admin/firstClass/firstClass",
+    "pages/admin/spec/spec",
+    "pages/businessFriend/merchant/index/index",
+    "pages/businessFriend/index/index",
     "pages/businessFriend/merchant/dealCus/dealCus",
     "pages/businessFriend/merchant/dealUser/dealUser",
     "pages/admin/shopClass/shopClass",
-    "pages/admin/spec/spec",
     "pages/admin/batchSet/batchSet",
-    "pages/page/workIndex/workIndex",
     "pages/page/user/user",
     "pages/page/order/order",
     "pages/role/supplyOrder/supplyOrder",
@@ -31,17 +27,11 @@
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/page/invoice/invoice",
     "pages/page/upload/upload",
-    
-    
     "pages/page/serStatus/serStatus",
-    
-    
     "pages/admin/serStatus/serStatus",
- 
     "pages/admin/set/set",
     "pages/page/storeIcon/storeIcon",
     
-    "pages/admin/editGoods/editGoods",
     "pages/page/self/self",
     "pages/page/newAddress/newAddress",
     "pages/page/updataPwd/updataPwd",
@@ -54,7 +44,6 @@
     "pages/admin/editSpec/editSpec",
     "pages/page/orderSuccess/orderSuccess",
     "pages/role/supplyVoucher/supplyVoucher",
-    "pages/admin/firstClass/firstClass",
     "pages/page/stockOrder/stockOrder",
   
     "pages/page/indexEmpty/indexEmpty",
@@ -79,7 +68,6 @@
     "pages/cloudOrder/congratulation/congratulation",
     "pages/cloudOrder/myOrder/myOrder",
     "pages/page/userM/userM",
-    "pages/page/goodsDetails/goodsDetails",
     "pages/page/editStoreAddress/editStoreAddress",
     "pages/page/main/main",
     "pages/page/cost/cost",

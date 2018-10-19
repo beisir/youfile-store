@@ -29,7 +29,7 @@
                    
                   </view>
                   <view class="cart-pro-name cart-pro-name1"  wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" bindtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record"  wx:key="{{index}}">规格：{{record.skuName}}<image class='down' src="/image/down.png"></image></view>
-                   <view  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length>1}}' class='man-j'>满<text>{{item.saleBatchNum+1}}</text>起批<text wx:if='{{item.saleBatchNum+1-item.num>0 && !item.enjoyPrice}}' style='color:#333;'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum+1-item.num}}</text>件</text></view>
+                   <view  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length>1}}' class='man-j'>满<text>{{item.saleBatchNum}}</text>起批<text wx:if='{{item.saleBatchNum-item.num>0 && !item.enjoyPrice}}' style='color:#333;'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum-item.num}}</text>件</text></view>
                    <view class="cart-pro-name cart-pro-name1 cart-pro-name2" data-name="more"  data-index="{{index}}" wx:if="{{item.shoppingCartSkuList.length>1}}"  bindtap='showAlert'>修改规格/数量<image class='down' src="/image/down.png"></image></view>
                   <view class="table"  wx:if="{{item.shoppingCartSkuList.length>1}}" >
                      <view class="tr"  wx:if='{{limitShow!=3}}'>
@@ -65,6 +65,7 @@
                     <view class='cc-add'>{{item.num}}</view>
                     <view bindtap="addCount" data-index="{{index}}">+</view>
                   </view>
+                  <!-- <view  class='man-j'>满<text>{{item.saleBatchNum}}</text>起批<text wx:if='{{limitShow==3 && item.saleBatchNum-item.num>0 && !item.enjoyPrice}}' style='color:#333;'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum-item.num}}</text>件</text></view> -->
                    <view class="cc-coun-new" wx:if="{{item.shoppingCartSkuList==null}}"  wx:for-item="record">
                     <view bindtap="minusCountNew" data-obj="{{obj}}"  data-index="{{index}}">-</view>
                     <view class='cc-add'>{{item.num}}</view>

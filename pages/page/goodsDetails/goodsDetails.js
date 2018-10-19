@@ -87,8 +87,8 @@ Page({
     wholesale: '',
     sell:'',
     stockNum:'',
-    saleBatchNum:null,
-    saleBatchAmount:null,
+    saleBatchNum:0,
+    saleBatchAmount:0,
     totalPrice:'',
     goodsId:'',
     numAll:0,
@@ -605,7 +605,6 @@ Page({
       total=0
       total = num * sell
       difference = total - num * wholesalePrice
-    // console.log(saleBatchNum + "//" + num + "///" + total + "///" + saleBatchAmount + "///" + saleBatchNumGoods)
       if (saleBatchNum == 0) {
         if (saleBatchAmount == 0) {
           discountShow = false
@@ -616,25 +615,15 @@ Page({
           }
         }
       } else {
-        if (saleBatchNumGoods == 0) {
+        if (saleBatchAmount==0){
           if (num >= saleBatchNum) {
             discountShow = false
           } else {
             discountShow = true
           }
-          if (total >= saleBatchAmount) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
         }
-        if (saleBatchNumGoods > 0) {
-          if (num > saleBatchNumGoods) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
-          if (total >= saleBatchAmount) {
+        if (saleBatchAmount>0){
+          if (num >= saleBatchNum || total >= saleBatchAmount) {
             discountShow = false
           } else {
             discountShow = true
@@ -642,8 +631,8 @@ Page({
         }
       }
       this.setData({
-        discountShow: false,
-        difference: difference
+        discountShow: discountShow,
+        difference: parseInt(difference)
       })
   },
   // 购买数量
@@ -840,12 +829,12 @@ Page({
     goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
     this.setData({                    
       newSkuArrTwo: newSkuArrTwo,
-      totalPrice: total.toFixed(2),
+      totalPrice:total.toFixed(2),
       nums: nums,
       discountShow: discountShow,
       classNums: classNums,
-      newTotal: newTotal,
-      difference: difference,
+      newTotal: newTotal.toFixed(2),
+      difference: difference.toFixed(2),
       goodsSpecificationVOList: goodsSpecificationVOList
     });
   },
@@ -936,21 +925,11 @@ Page({
           var storeSaleBatchNum = obj.storeSaleBatchNum == null ? 0 : obj.storeSaleBatchNum,
             storeSaleBatchAmount = obj.storeSaleBatchAmount == null ? 0 : obj.storeSaleBatchAmount,
             saleBatchNumGoods = obj.goodsSaleBatchNum == null ? 0 : obj.goodsSaleBatchNum
-          if (storeSaleBatchAmount != null) {
             _this.setData({
-              saleBatchNum: storeSaleBatchNum
-            })
-          }
-          if (storeSaleBatchNum != null) {
-            _this.setData({
-              saleBatchAmount: storeSaleBatchAmount
-            })
-          }
-          if (saleBatchNumGoods!=null){
-            _this.setData({
+              saleBatchNum: storeSaleBatchNum,
+              saleBatchAmount: storeSaleBatchAmount,
               saleBatchNumGoods: saleBatchNumGoods
             })
-          }
         }
       })
     Api.goodsDetails({ goodsId:goodsId })
@@ -981,6 +960,8 @@ Page({
           obj.goodsSpecificationVOList=[]
           _this.setData({
             isShowNewOne:true
+          },function(){
+            _this.getTotalPriceNew(1)
           })
         } 
         if (!Api.isEmpty(obj.goodsSkuVOList)){
@@ -989,7 +970,6 @@ Page({
         wx.setStorageSync("storeId", obj.storeId)
         _this.setData({
           imgUrls: obj.goodsImageVOList,
-          name: obj.name,
           wholesalePrice: obj.wholesalePrice,
           sell: obj.sellPrice,
           recommendDesc: obj.recommendDesc,
@@ -999,6 +979,7 @@ Page({
           skuArrTwo: skuArrTwo,
           stockNum: obj.stockNum,
           mainImgUrl: obj.mainImgUrl,
+          name: obj.name,
           nameTwo: name,
           store: store
         },function(){
@@ -1156,20 +1137,18 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: (res) => {
-    var img = wx.getStorageSync('src'),
+  onShareAppMessage: function (res) {
+    var img = this.data.baseUrl+this.data.mainImgUrl +"?x-oss-process=style/general",
       storeId = wx.getStorageSync('storeId'),
-      id = res.target.dataset.goodsId
-    if (res.from === 'button') {
-      var name = res.target.dataset.name
-      return {
-        title: name,
-        path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id+"&storeId="+storeId,
-        imageUrl: img,
-        success: (res) => {
-        },
-        fail: (res) => {
-        }
+      id = this.data.goodsId,
+      name=this.data.name
+    return {
+      title: name,
+      path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id + "&storeId=" + storeId,
+      imageUrl: img,
+      success: (res) => {
+      },
+      fail: (res) => {
       }
     }
 

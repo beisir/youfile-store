@@ -27,6 +27,16 @@ Page({
   },
   onLoad: function (options) {
     this.getInfo()
+    if (!Api.isEmpty(wx.getStorageSync("access_token"))){
+      var pages = getCurrentPages();             //  获取页面栈
+      var currPage = pages[pages.length - 1];
+      var prevPage = pages[pages.length - 2];    // 上一个页面
+      prevPage.setData({
+      })
+      wx.navigateBack({
+        data: 1
+      })
+    }
   },
 
   /**
@@ -75,10 +85,5 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
-  }
 })
