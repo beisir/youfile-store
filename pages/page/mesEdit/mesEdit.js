@@ -9,7 +9,7 @@ Page({
     showHide: true,
     countData: '',
     floor: '',
-    storeMes: [],
+    storeMes: '',
     storeGoods: [],
     baseUrl: app.globalData.imageUrl,
     logo:''
@@ -116,10 +116,5 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
 
-  }
 })

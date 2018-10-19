@@ -614,8 +614,12 @@ function initStoreId(data) {
   if (data == null || data == undefined) {
     data = {};
   }
-  data.storeId = wx.getStorageSync('storeId');
-  return data;
+  if(isEmpty(wx.getStorageSync('storeId'))){
+    data.storeId = wx.getStorageSync('storeId');
+    return data;
+  }else{
+    showToast("暂无店铺ID！")
+  }
 }
 module.exports = {
   toHome: toHome,

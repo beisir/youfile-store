@@ -205,14 +205,18 @@ Page({
     }
     Api.adminGoodsStatus({ goodsStatus: goodsStatus})
       .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.detailList,
-          totalCount = res.obj.totalCount,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          detailList: newArr,
-          totalCount: totalCount
-        })
+        var detailList = res.obj.result
+        if (Api.isEmpty(detailList)){
+          var datas = _this.data.detailList,
+            totalCount = res.obj.totalCount,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            detailList: newArr,
+            totalCount: totalCount
+          })
+        }else{
+          Api.showToast("暂无更多数据了！")
+        }
       })
   },
   swichSer: function (e) {
@@ -258,18 +262,7 @@ Page({
     this.classCode('')
   },
   bindDownLoad: function () {
-    var that = this,
-        code = this.data.code,
-        goodsStatus = this.data.goodsStatus
-      if (this.data.goodsStatus == '' && this.data.code == '') {
-        that.getList()
-      }
-      if (this.data.goodsStatus != '' && this.data.code==''){
-        that.classCode('')
-      }
-      if (this.data.goodsStatus != '' && this.data.code != '') {
-        that.classCode(code)
-      }
+    
   },
 
   /**
@@ -297,7 +290,18 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    var that = this,
+      code = this.data.code,
+      goodsStatus = this.data.goodsStatus
+    if (this.data.goodsStatus == '' && this.data.code == '') {
+      that.getList()
+    }
+    if (this.data.goodsStatus != '' && this.data.code == '') {
+      that.classCode('')
+    }
+    if (this.data.goodsStatus != '' && this.data.code != '') {
+      that.classCode(code)
+    }
   },
   lookGoodsDetails: function (e) {
     var id = e.target.dataset.id

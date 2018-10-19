@@ -7,7 +7,7 @@
 </view>
 <import src="../../../wxParse/wxParse.wxml"/> 
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
-   <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+   <block wx:if='{{imgUrls.length!=0}}' wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
       <image src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight'/>
     </swiper-item>
@@ -37,7 +37,8 @@
       <image  src="/image/positionico.png"></image>
       <text class="store-address">北京 </text>
       <view class='weui-view'>
-        <image src="{{baseUrl}}{{qrcode}}?x-oss-process=style/qrcode"></image><image class='img' src="/image/icl.png"></image>
+        <!-- <image src="{{baseUrl}}{{qrcode}}?x-oss-process=style/qrcode"></image> -->
+        <image class='img' src="/image/icl.png"></image>
       </view>
   </view>
   <view class='gd-content'>
@@ -53,10 +54,10 @@
   </view>
   <view class="ym_goodsstore">
             <view class="ym_goodsstoreh">
-                <view class="ym_goodsstorelogo"><image mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo  "></image></view>
+                <view class="ym_goodsstorelogo"><image mode="aspectFill"  wx:if='{{store!=""}}' src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo  "></image></view>
                 <view class="ym_goodsstorename">
                     <view class="store-name-data">{{store.storeName}}</view>
-                    <view class="ym_gfrz"><image src="{{baseUrl}}{{store.mallLogo}}"></image> {{store.mallName}}</view>
+                    <view class="ym_gfrz"><image  wx:if='{{store!=""}}' src="{{baseUrl}}{{store.mallLogo}}"></image> {{store.mallName}}</view>
                 </view>
             </view>
             <view class="ym_goodsstoresprs">
@@ -83,7 +84,7 @@
     <view class="weui_cells weui_cells1 gd_r_text">
         <text>优店介绍 </text>
     </view>
-      <view class='gd-new-img'><image mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"></image></view>
+      <view class='gd-new-img'><image mode="aspectFill" wx:if='{{store!=""}}' src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"></image></view>
       <view>{{store.storeName}}</view>
       <view class='gd-dp-text'>终于等到您，轻松购物，生活百货一站购齐，品质生活由此开始！</view>
   </view>
@@ -109,27 +110,29 @@
           加入购物车
     </view>
     <view class='gd_b_right' wx:if='{{limitShow==3}}' bindtap='showAlert'>
-       <navigator>
+       <view>
           立即进货
-        </navigator>
+        </view>
     </view>
 </view>
 <view wx:if='{{limitShow==3 && isShowNewOne==false}}'>
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
-      <view class='new-man' hidden='{{discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
-      <view class='new-man' hidden='{{!discountShow}}'>
-          <text wx:if='{{saleBatchNum>0}}'>本店满{{saleBatchNum}}件可享受批发价</text>
-          <text wx:if='{{saleBatchNum==0 && saleBatchAmount>0}}'>本店满{{saleBatchAmount}}元可享受批发价</text>
+      <view class='new-man' wx:if='{{!discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
+      <view class='new-man' wx:if='{{discountShow && saleBatchNum>0}}'>
+          <text >本店满{{saleBatchNum}}件可享受批发价</text>
+      </view>
+       <view class='new-man' wx:if='{{discountShow && saleBatchNum==0 && saleBatchAmount>0}}'>
+          <text>本店满{{saleBatchAmount}}元可享受批发价</text>
       </view>
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image  src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <image wx:if='{{mainImgUrl!=""}}' src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
-            <view class='btn' wx:if='{{saleBatchNumGoods>0}}'>{{saleBatchNumGoods}}<text>件起批</text></view>
+            <view class='btn' wx:if='{{saleBatchNumGoods>0 && saleBatchNum>0}}'>{{saleBatchNumGoods}}<text>件起批</text></view>
             <view class='btn' wx:if='{{saleBatchNumGoods==0 && saleBatchNum>0}}'>{{saleBatchNum}}<text>件起批</text></view>
             <!-- <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view> -->
           </view>
@@ -177,7 +180,7 @@
         <view class='weui-bottom lt-weui-bottom'>
           <view>￥
             <view wx:if='{{discountShow==true}}'>{{totalPrice}}</view>
-            <view wx:if='{{discountShow==false}}'>{{newTotal}}.00</view>
+            <view wx:if='{{discountShow==false}}'>{{newTotal}}</view>
             <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
           </view>
           <view data-status='0' bindtap='moreAddCart'>加入进货车</view>
@@ -198,7 +201,7 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <image mode="aspectFill" wx:if='{{mainImgUrl!=""}}' src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
@@ -252,7 +255,7 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <image mode="aspectFill" wx:if='{{mainImgUrl!=""}}' src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
@@ -306,11 +309,11 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image  src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <image wx:if='{{mainImgUrl!=""}}'  src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
-            <view class='btn' wx:if='{{saleBatchNumGoods>0 && limitShow==3}}'>{{saleBatchNumGoods}}<text>件起批</text></view>
+            <view class='btn' wx:if='{{saleBatchNumGoods>0 && limitShow==3 && saleBatchNum>0}}'>{{saleBatchNumGoods}}<text>件起批</text></view>
             <view class='btn' wx:if='{{saleBatchNumGoods==0 && saleBatchNum>0 && limitShow==3}}'>{{saleBatchNum}}<text>件起批</text></view>
             <!-- <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view> -->
           </view>
@@ -356,7 +359,7 @@
           </view>
         </view>
         <view class='weui-bottom lt-weui-bottom lt-weui-bottom1'>
-          <view><view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view><view wx:if='{{discountShow==false}}'>￥{{newTotal}}.00</view>
+          <view><view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view><view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
           <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text></view>
           <view data-status='0' bindtap='moreAddCart'>确认修改</view>
         </view>
@@ -370,7 +373,7 @@
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
-            <image mode="aspectFill" src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <image mode="aspectFill" wx:if='{{mainImgUrl!=""}}' src="{{baseUrl}}{{mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
@@ -413,7 +416,7 @@
           </view>
         </view>
         <view class='weui-bottom lt-weui-bottom lt-weui-bottom1'>
-          <view><view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view><view wx:if='{{discountShow==false}}'>￥{{newTotal}}.00</view>
+          <view><view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view><view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
           <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text></view>
           <view data-status='0' bindtap='cratHome'>确认修改</view>
         </view>

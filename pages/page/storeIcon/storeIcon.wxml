@@ -1,5 +1,5 @@
 <view class='erm-cont' style='padding:100rpx;'>
-  <view class='erm-img'><image  mode="widthFix" src="{{baseUrl}}{{urlCode}}?x-oss-process=style/qrcode"></image></view>
+  <view class='erm-img'><image wx:if='{{urlCode}}'  mode="widthFix" src="{{baseUrl}}{{urlCode}}?x-oss-process=style/qrcode"></image></view>
   <view style='margin-top:0;'>分享小程序，获取更多流量吧</view>
 </view>
 <view class='bottom-box' style='font-weight:100;'>

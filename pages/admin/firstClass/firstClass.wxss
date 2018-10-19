@@ -1,12 +1,9 @@
 @import '../shopClass/shopClass';
 .shop-cont{
-  padding:0; max-height: 100%;overflow: scroll
-}
-swiper-item{
-  overflow: scroll
+  padding:0; 
 }
 .shop-cont .shop-size{
-  font-size: 55rpx;
+  font-size: 50rpx;
 }
 .shop-cont>view {
   height: 70rpx;padding-top: 27rpx;
@@ -34,7 +31,7 @@ navigator{
   border-top:2rpx solid #F1F1F1;border-bottom: 0;
 }
 .shop-cont .shop-size {
-  border-bottom: 0; margin-bottom:20rpx;padding-top:20rpx;padding-bottom:30rpx;border-top: 0;
+  border-bottom: 0; margin-bottom:20rpx;padding-top:20rpx;padding-bottom:20rpx;border-top: 0;
 }
 .shop-cont2 text{
   margin-left: 10rpx;color: #CCAA77;

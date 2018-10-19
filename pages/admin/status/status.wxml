@@ -16,12 +16,6 @@
       <view bindtap='blurInputEvent'>
         筛选
       </view>
-      <!-- <view hidden='{{showXl}}' class='st-xiala alert-xiala'>
-        <image class="xiala"  src="/image/xiala.png"></image>
-        <view class="{{alertTab==0 ? 'active' : ''}}" data-current="0" bindtap="alertNav">全部商品</view>
-        <view class="{{alertTab==1 ? 'active' : ''}}" data-current="1" bindtap="alertNav">批零商品</view>
-        <view class="{{alertTab==2 ? 'active' : ''}}" data-current="2" bindtap="alertNav">仅批发</view>
-    </view> -->
     </view>
 </view>
 <view class='st-title'>
@@ -58,7 +52,7 @@
         <view wx:if='{{item.status==0}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架<view></view></view>
           <view wx:if='{{item.status==1}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架<view></view></view>
           <view wx:if='{{item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架<view></view></view>
-          <view wx:if='{{item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架<view></view></view>
+          <view wx:if='{{item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架<view></view></view>
       </view>
       <!-- <view class='st-bottom'>
           <view><button open-type="share" data-name='{{item.name}}' data-img='{{baseUrl}}{{item.mainImgUrl}}' data-id='{{item.id}}'>转发</button></view>
