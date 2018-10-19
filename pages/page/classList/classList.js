@@ -80,7 +80,6 @@ Page({
           
         })
     }else{
-      console.log(88)
       Api.goodsApiSearchList()
         .then(res => {
           var detailList = res.obj.result,

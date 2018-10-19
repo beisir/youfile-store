@@ -8,6 +8,7 @@ App({
     if (options.query){
       wx.setStorageSync("storeId",options.query.storeId)
     }
+    // wx.setStorageSync("storeId", "S1000089")
     // wx.setStorageSync("storeId", "S1000349")
     // wx.setStorage({
     //   key: 'storeId',

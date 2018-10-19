@@ -2,13 +2,15 @@
   "pages":[
     "pages/page/home/home",
     
+    "pages/admin/status/status",
+    
+    
     "pages/businessFriend/merchant/index/index",
     
     
     "pages/businessFriend/index/index",
     
     
-    "pages/admin/status/status",
     
     
     

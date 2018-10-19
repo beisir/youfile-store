@@ -258,7 +258,6 @@ Page({
     })
   },
   onLoad: function (options) {
-    console.log(options)
     this.getConfig()
     this.setData({
       goodsId: options.goodsId
@@ -526,7 +525,6 @@ Page({
       "top": false,
       "wholesalePrice": this.data.wholesalePrice
     }
-    console.log(goodsVO)
     Api.updateGoods(goodsVO)
       .then(res => {
         wx.showToast({

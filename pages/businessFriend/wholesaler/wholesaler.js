@@ -48,7 +48,6 @@ Page({
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        console.log(detailList)
         _this.setData({
           totalCount: totalCount
         })

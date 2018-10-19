@@ -28,9 +28,9 @@ Page({
     numbers: 1,
     baseUrl: app.globalData.imageUrl,
     limitShow: wx.getStorageSync('admin'),
-    storeAmount: '',
+    storeAmount: 0,
+    storeNum: 0,
     differentPrice:0,
-    storeNum: '',
     editDetailList:'',
     goodsConfig:[]
   },
@@ -469,7 +469,7 @@ Page({
       differentPrice = this.data.differentPrice,
       differentPriceNew = 0,
       saleBatchGoodsNum=0,
-      allGoodsAmount=0,
+      allGoodsAmount = 0,
       enjoyCost=false
     this.setData({
       enjoyCost: false
@@ -499,8 +499,8 @@ Page({
           saleBatchGoodsNum = detailList[i].saleBatchNum
           allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
-          if (storeNum == 0 && storeAmount>0){
-            if(allGoodsTotal > storeAmount){
+          if (storeAmount == 0 && storeNum>0){
+            if (allGoodsNum > storeNum){
               detailList[i].enjoyPrice = true
               enjoyCost = true
               this.setData({
@@ -508,8 +508,8 @@ Page({
               })
             }
           }
-          if (storeAmount == 0 && storeNum>0){
-            if (allGoodsNum > storeNum){
+          if (storeAmount == 0 || storeNum == 0) {
+            if (allGoodsNum > storeNum) {
               detailList[i].enjoyPrice = true
               enjoyCost = true
               this.setData({
