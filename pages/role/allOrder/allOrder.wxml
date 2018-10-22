@@ -47,6 +47,16 @@
     <button bindtap='testCode'>确定</button>
   </view>
 </mes>
+<!-- 添加备注 -->
+<mes show="{{tipModal}}">
+  <view class='modal-box'>
+    <text>添加备注</text>
+    <view class='inputCon'>
+      <textarea class='tip-textarea' data-type='tip' bindinput='watchInput' value='{{order.remark?order.remark:""}}' maxlength='140' placeholder='140字以内'></textarea>
+    </view>
+    <button bindtap='saveRemark'>确定</button>
+  </view>
+</mes>
 
 
 
@@ -315,12 +325,15 @@
   <text wx:else>门店自提</text>
 </view>
 
-<view class='os-mon os-mon1'>备注信息
-  <textarea value='{{order.remark?order.remark:""}}' bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'></textarea>
+<view class='no-child'>
+  <view class='flex-center'>备注信息 </view>
+  <view class='textarea {{order.remark?"":"no-text"}}'>{{order.remark?order.remark:"140字以内..."}}</view>
+  <view style="text-align:right;"><text class='add-tip-button' data-type="tip" bindtap='showModal'>添加备注</text></view>
+  <!-- <textarea value='{{order.remark?order.remark:""}}' bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'></textarea> -->
 </view>
 
 <!-- 金额 -->
-<view class='np-order {{status!="closed"?"np-order-bar":"np-order-bar1"}} '>
+<view class='np-order {{status!="closed"&&status!="cancelled"?"np-order-bar":"np-order-bar1"}} '>
   <!-- <view>优惠改价
     <text>￥{{order.orderAmount}}</text>
     <text class='os-text'>￥1992.00</text>
