@@ -16,6 +16,7 @@ Page({
     mainx: 0,
     modelPageAll:'',
     newConst:'',
+    isEmptySku:false,
     pageall:[],
     stockHide:false,
     pageShow:true,
@@ -44,13 +45,33 @@ Page({
     mainImgUrl:'',
     addGoodsDetails: []
   },
+  // 删除详情信息
   removeImage:function(e){
-    var index = e.target.dataset.index,
-      data = this.data.addGoodsDetails
-      data.splice(index,1)
+    var index = e.target.dataset.index
+    this.changeData(index)
+  },
+  changeData:function(index){
+    var  data = this.data.addGoodsDetails
+    data.splice(index, 1)
     this.setData({
-      addGoodsDetails:data
+      addGoodsDetails: data
     })
+  },
+  topData:function(e){
+    var addGoodsDetails = this.data.addGoodsDetails,
+        index = e.target.dataset.index,
+        newObj=''
+    if (index==0){return}
+    newObj = addGoodsDetails[index]
+    addGoodsDetails.splice(index, 1)
+    addGoodsDetails.splice(index - 1, 0,newObj)
+    this.setData({
+      addGoodsDetails:addGoodsDetails
+    })
+  },
+  insertData: function (e) {
+    var index = e.target.dataset.index
+    this.insertImg(1,index)
   },
   // 输入描述内容
   addTitle:function(){
@@ -88,12 +109,19 @@ Page({
     })
   },
   addImage: function () {
+    this.insertImg(0)
+  },
+  insertImg:function(code,index){
     var _this = this
     Api.uploadImage("GOODS")
       .then(res => {
         var data = this.data.addGoodsDetails
         var url = JSON.parse(res).obj
-        data.push({ img:_this.data.baseUrl+url})
+        if(code==0){
+          data.push({ img: _this.data.baseUrl + url })
+        }else{
+          data.splice(index, 0, { img: _this.data.baseUrl + url })
+        }
         _this.setData({
           addGoodsDetails: data
         })
@@ -103,6 +131,7 @@ Page({
     var _this = this,
       val = event.detail.value,
       pageall = this.data.pageall,
+      num = val.length,
       index1 = 1,
       index2 = 1,
       len = 1
@@ -115,10 +144,15 @@ Page({
       }
     }
     len = index1 * index2
-    this.setData({
-      newConst: val,
-      allTotalNew: len * val
-    })
+    if (num > 16) {
+      Api.showToast("超过最长数字限制")
+    } else {
+      this.setData({
+        newConst: val.substring(0, 15),
+        allTotalNew: len * val
+      })
+    }
+   
   },
   watchName: function (event) {
     var _this = this,
@@ -159,7 +193,7 @@ Page({
       Api.showToast("超过最长数字限制")
     } else {
       this.setData({
-        wholesalePrice: val.substring(0, 10),
+        wholesalePrice: (util.newVal(val)).substring(0, 10),
       })
     }
   },
@@ -171,7 +205,7 @@ Page({
       Api.showToast("超过最长数字限制")
     } else {
       this.setData({
-        sellPrice: val.substring(0, 10),
+        sellPrice: (util.newVal(val)).substring(0, 10)
       })
     }
   },
@@ -243,13 +277,21 @@ Page({
   },
   // 分别设置价格和库存
   clickSpec:function(e){
-    var model = JSON.stringify(this.data.pageall);
-    var sellPrice = this.data.sellPrice
-    var newConst = this.data.newConst
-    var wholesalePrice = this.data.wholesalePrice
-    wx.navigateTo({
-      url: '../set/set?model=' + model + "&sellPrice=" + sellPrice + "&wholesalePrice=" + wholesalePrice + "&newConst=" + newConst,
-    })
+    var model = JSON.stringify(this.data.pageall),
+        skuListAll = this.data.skuListAll,
+        sellPrice = this.data.sellPrice,
+        newConst = this.data.newConst,
+        wholesalePrice = this.data.wholesalePrice
+    if (skuListAll.length > 0) {
+      var modeList = JSON.stringify(this.data.skuListAll)
+      wx.navigateTo({
+        url: '../set/set?model=' + model + '&modeList=' + modeList
+      })
+    } else {
+      wx.navigateTo({
+        url: '../set/set?model=' + model + "&sellPrice=" + sellPrice + "&wholesalePrice=" + wholesalePrice + "&newConst=" + newConst,
+      })
+    }
   },
   //长按拖动图片
   movestart: function (e) {
@@ -305,7 +347,7 @@ Page({
     var _this = this,
       pics = this.data.pics;
     var _this = this
-    app.http.onlyUploadImg(url).then(res => {
+    app.http.onlyUploadImg(url,"GOODS").then(res => {
       var url = JSON.parse(res).obj
       if (url) {
         pics = pics.concat(_this.data.baseUrl + url); 
@@ -373,25 +415,65 @@ Page({
       }
       goodsImageVOList.push({ imageUrl: pics[i].replace(this.data.baseUrl, '') })
     }
+    if (!Api.isEmpty(mainImgUrl)) {
+      Api.showToast("请上传商品图片！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.name)) {
+      Api.showToast("请输入标题！")
+      return;
+    }
+    if (!Api.isEmpty(this.data.categoryCode)) {
+      Api.showToast("请输入商品类目！")
+      return;
+    }
+    var stockNum = this.data.skuNum == '' ? this.data.allTotalNew : this.data.skuNum
     if(pageall.length>0){
       if (skuListAll.length ==0){
+        if (!Api.isEmpty(wholesalePrice)) {
+          Api.showToast("请输入商品批发价！")
+          return;
+        }
+        if (!Api.isEmpty(sellPrice)) {
+          Api.showToast("请输入商品零售价！")
+          return;
+        }
+        if (!Api.isEmpty(stockNum)) {
+          Api.showToast("商品库存不能为零！")
+          return;
+        }
         if (pageall.length == 1) {
           skuList0 = pageall[0].goodsSpecificationValueVOList
           for (var i = 0; i < skuList0.length; i++) {
-            skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+            skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '0', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
           }
         } else if (pageall.length = 2) {
           skuList0 = pageall[0].goodsSpecificationValueVOList
           skuList1 = pageall[1].goodsSpecificationValueVOList
           for (var i = 0; i < skuList0.length; i++) {
             for (var j = 0; j < skuList1.length; j++) {
-              skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+              skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '0', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
             }
           }
         }
+      }else{
+        sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
+        wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
       }
-    } 
-    var stockNum = this.data.skuNum == '' ? this.data.allTotalNew : this.data.skuNum
+    }else{
+      if (!Api.isEmpty(wholesalePrice)) {
+        Api.showToast("请输入商品批发价！")
+        return;
+      }
+      if (!Api.isEmpty(sellPrice)) {
+        Api.showToast("请输入商品零售价！")
+        return;
+      }
+      if (!Api.isEmpty(stockNum)) {
+        Api.showToast("商品库存不能为零！")
+        return;
+      }
+    }
     var goodsVO =  {
       "categoryCode": this.data.categoryCode,
       "customCategoryCode": this.data.categoryCustomCode,
@@ -409,30 +491,7 @@ Page({
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": wholesalePrice
     }
-    if (!Api.isEmpty(mainImgUrl)) {
-      Api.showToast("请上传商品图片！")
-      return;
-    }
-    if (!Api.isEmpty(this.data.name)) {
-      Api.showToast("请输入标题！")
-      return;
-    }
-    if (!Api.isEmpty(this.data.categoryCode)) {
-      Api.showToast("请输入商品类目！")
-      return;
-    }
-    if (!Api.isEmpty(sellPrice)) {
-      Api.showToast("请输入商品零售价！")
-      return;
-    }
-    if (!Api.isEmpty(wholesalePrice)) {
-      Api.showToast("请输入商品批发价！")
-      return;
-    }
-    if (!Api.isEmpty(stockNum)) {
-      Api.showToast("商品库存不能为零！")
-      return;
-    }
+    console.log(goodsVO)
     Api.addGoods(goodsVO)
       .then(res => {
         wx.showToast({
@@ -486,11 +545,23 @@ Page({
         strName: strName.slice(0, -1)
       })
     }
+    if (currPage.data.isEmptySku != 1) {
+      that.setData({
+        skuListAll: [],
+        skuNum: '',
+        sellPrice: '',
+        wholesalePrice: '',
+        isEmptySku: true,
+        pageShow: false,
+        newConst:'',
+        allTotalNew:'',
+        clickSpecShow: false,
+      })
+    }
     if(currPage.data.mydata){
       that.setData({
         pageall: currPage.data.mydata,
         modelPageAll: JSON.stringify(currPage.data.mydata),
-        pageShow:false
       })
     }
   },

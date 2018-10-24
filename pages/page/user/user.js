@@ -13,6 +13,8 @@ function getIdentity(_this) {
           wx.setStorageSync("admin", 2)
           _this.setData({
             limitShow: 2
+          },function(){
+            _this.getUser()
           })
         }
         if (isPurchaser) {
@@ -25,15 +27,18 @@ function getIdentity(_this) {
           })
           _this.setData({
             limitShow: 3,
+          }, function () {
+            _this.getUser()
           })
         }
         if (!isPurchaser && !isStoreOwner) {
           wx.setStorageSync("admin", 1)
           _this.setData({
             limitShow: 1
+          }, function () {
+            _this.getUser()
           })
         }
-        _this.getUser()
       })
   } else {
     _this.getUser()

@@ -61,6 +61,7 @@ class request {
     return new Promise((resolve, reject) => {
       url = this.analysisUrl(url, data);
       var header = (customHeader === undefined || customHeader == null || customHeader == "") ? this.defaultHeader : customHeader;
+      // var url = url.substring(0, url.indexOf("/", url.indexOf("/") + 1))
       this.authHandler.getTokenOrRefresh().then(token => {
         if (token) {
           header['Authorization'] = token;

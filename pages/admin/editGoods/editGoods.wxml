@@ -98,8 +98,8 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         </view>
           <view class="weui-cell__ft weui-active" bindtap='clickSpec'  wx:if="{{!pageShow}}">分别设置价格和库存</view>
       </view>
-      <view class='weui-input'   wx:if="{{!pageShow}}">每个规格库存<input  bindinput='newConst' value='{{newConst}}' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
-      <view class='weui-input'>总库存<input disabled='disabled' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""  value='{{skuNum}}' ></input><text>件</text></view>
+      <view class='weui-input'   wx:if="{{!pageShow}}">每个规格库存<input  bindinput='newConst' value='{{newConst}}' placeholder-class='pla-input' class="weui-input" type="number" placeholder=""></input><text>件</text></view>
+      <view class='weui-input'>总库存<input disabled='disabled' placeholder-class='pla-input' class="weui-input" type="number" placeholder=""  value='{{skuNum}}' ></input><text>件</text></view>
     </view>
     <view class="page__category-content" hidden='{{!clickSpecShow}}'>
       <view class='weui-title'>商品价格库存</view>
@@ -110,7 +110,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         </view>
           <view class="weui-cell__ft weui-active" data-id='000' bindtap='clickSpec'>查看或编辑价格和库存</view>
       </view>
-      <view class='weui-input'>总库存<input placeholder-class='pla-input'  class="weui-input" disabled='disabled' value='{{skuNum}}' type="text" placeholder=""></input><text>件</text></view>
+      <view class='weui-input'>总库存<input placeholder-class='pla-input'  class="weui-input" disabled='disabled' value='{{skuNum}}' type="number" placeholder=""></input><text>件</text></view>
     </view>
     <view class="page__category-content"  wx:if='{{!stockHide}}'>
       <view class='weui-title'>其他设置</view>
@@ -121,20 +121,25 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         <input class="stock" type="text" value='{{stock}}'></input>
         <view class="weui-cell__ft" bindtap='clearInput'><image  src="/image/clo.png"></image></view>
       </view>
-      <!-- <view class="weui-cell">
-        <view class="weui-cell__bd">
-          <text>运费</text>
-        </view>
-        <view class="weui-cell__ft">邮费到付</view>
-      </view> -->
     </view>
   </view>
   <view hidden='{{hiddenSend}}'>
     <view class='write'>
       <view wx:for='{{addGoodsDetails}}' wx:key='index'>
-      <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' wx:if='{{item.input}}' placeholder='请输入标题'></input>
-      <textarea  data-index='{{index}}' value='{{item.value}}' wx:if='{{item.textInput}}' placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
-       <view class='removeImg'><image mode='widthFix'  bindlongtap="longTap"   data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image><image class='clo-img' data-index='{{index}}' bindtap='removeImage' src="/image/clo12.png" ></image></view>
+      <view class='removeImg' wx:if='{{item.input}}'>
+        <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' placeholder='请输入标题'></input>
+      </view>
+      <view class='removeImg' wx:if='{{item.textInput}}'>
+        <textarea  data-index='{{index}}' value='{{item.value}}'  placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
+      </view>
+       <view class='removeImg'  wx:if='{{item.img}}' >
+        <image mode='widthFix'  data-index='{{index}}' src="{{item.img}}"></image>
+        <view>
+            <view data-index='{{index}}' bindtap='removeImage'><image  src="/image/remove.png" ></image>删除</view>
+            <view data-index='{{index}}' bindtap='insertData'><image  src="/image/add.png" ></image>插入</view>
+            <view data-index='{{index}}' bindtap='topData'><image  src="/image/top1.png" ></image>上移</view>
+        </view>
+      </view>
       </view>
     </view>
     <view class="sendmessage">

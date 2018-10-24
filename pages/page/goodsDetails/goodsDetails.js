@@ -65,6 +65,8 @@ Page({
     saleBatchNumGoods:null,
     newSkuArrTwo:[],
     nameTwo:'',
+    differNum :0,
+    differMoney:0,
     newSkuOnly:false,
     newSkuOnlyEdit:false,
     className:'active',
@@ -750,7 +752,9 @@ Page({
   getTotalPrice() {
     var childArr=[],
     code=this.data.moreCode,
-    colorNum=0
+    colorNum=0,
+    differNum = 0,
+    differMoney=0
     let newSkuArrTwo =[];
     let swichNav = this.data.swichNav;
     let spectArrDifference = this.data.spectArrDifference     
@@ -795,13 +799,23 @@ Page({
                 discountShow = true 
                 if (total >= saleBatchAmount) {
                   discountShow = false
+                }else{
+                  discountShow = true 
                 }
               }
+              differMoney = saleBatchAmount - total
             }else{
-              if (saleBatchNumGoods==0){
+              if (saleBatchAmount==0){
                 if (nums >= saleBatchNum) {
                   discountShow = false
-                }else{
+                } else {
+                  discountShow = true
+                }
+              }
+              if (saleBatchAmount >0){
+                if (nums >= saleBatchNum) {
+                  discountShow = false
+                } else {
                   discountShow = true
                 }
                 if (total >= saleBatchAmount) {
@@ -810,18 +824,8 @@ Page({
                   discountShow = true
                 }
               }
-              if (saleBatchNumGoods>0) {
-                if (nums > saleBatchNumGoods){
-                  discountShow = false
-                }else{
-                  discountShow = true
-                }
-                if (total >= saleBatchAmount) {
-                  discountShow = false
-                } else {
-                  discountShow = true
-                }
-              }
+              differNum = saleBatchNum - nums
+              differMoney = saleBatchAmount - total
             }
           }
         }
@@ -832,6 +836,8 @@ Page({
       newSkuArrTwo: newSkuArrTwo,
       totalPrice:total.toFixed(2),
       nums: nums,
+      differNum: differNum,
+      differMoney:differMoney,
       discountShow: discountShow,
       classNums: classNums,
       newTotal: newTotal.toFixed(2),
@@ -1118,7 +1124,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-   
+    
   },
 
   /**

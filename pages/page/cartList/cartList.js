@@ -23,6 +23,9 @@ function getIdentity(_this) {
             iconPath: '/image/22.png',
             selectedIconPath: '/image/21.png'
           })
+          wx.setNavigationBarTitle({
+            title: '进货车',
+          })
           _this.setData({
             limitShow: 3
           })

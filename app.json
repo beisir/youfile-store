@@ -1,11 +1,11 @@
 {
   "pages":[
     "pages/page/home/home",
-    "pages/admin/addGoods/addGoods",
     "pages/admin/status/status",
-    "pages/admin/success/success",
-    "pages/admin/spec/spec",
+    "pages/admin/addGoods/addGoods",
     "pages/admin/editGoods/editGoods",
+    "pages/admin/spec/spec",
+    "pages/admin/success/success",
     "pages/page/workIndex/workIndex",
     "pages/page/cartList/cartList",
     "pages/page/goodsDetails/goodsDetails",
@@ -29,7 +29,6 @@
     "pages/admin/serStatus/serStatus",
     "pages/admin/set/set",
     "pages/page/storeIcon/storeIcon",
-    
     "pages/page/self/self",
     "pages/page/newAddress/newAddress",
     "pages/page/updataPwd/updataPwd",
@@ -39,11 +38,9 @@
     "pages/login/register/register",
     "pages/role/allOrder/allOrder",
     "pages/page/allOrder/allOrder",
-    "pages/admin/editSpec/editSpec",
     "pages/page/orderSuccess/orderSuccess",
     "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/stockOrder/stockOrder",
-  
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
     "pages/page/address/address",
@@ -52,7 +49,6 @@
     "pages/page/postageInfo/postageInfo",
     "pages/page/mesEdit/mesEdit",
     "pages/businessFriend/merchant/setUp/setUp",
-
     "pages/businessFriend/merchant/follow/follow",
     "pages/businessFriend/merchant/details/details",
     "pages/businessFriend/merchant/merchantInfo/merchantInfo",
@@ -92,10 +88,7 @@
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
     "pages/page/serList/serList",
-
-   
     "pages/admin/editMesTitle/editMesTitle",
-    "pages/admin/writeCont/writeCont",
     "pages/admin/classList/classList",
     "pages/admin/classEdit/classEdit",
     "pages/admin/thirdClass/thirdClass",

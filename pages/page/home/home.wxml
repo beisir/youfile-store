@@ -31,9 +31,9 @@
    <image wx:if='{{store!="" && limitShow!=2}}'  src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
-      <view bindtap='editDpMes' class='logoimg'>
+      <navigator class='logoimg' url='../mes/mes?code={{limitShow}}'>
         <image wx:if='{{store!=""}}' mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"/>  
-      </view>
+      </navigator>
     </view>
     <view class="ym_sydtdmgzs">
       <view class="store_name">{{store.storeName}}

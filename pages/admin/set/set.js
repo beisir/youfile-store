@@ -1,4 +1,4 @@
-// pages/admin/set/set.js
+import util from '../../../utils/util.js'
 Page({
 
   /**
@@ -64,7 +64,11 @@ Page({
         skuListAll = this.data.skuListAll
     for (var j = 0; j < skuListAll.length; j++) {
       if (id == skuListAll[j].id){
-        skuListAll[j][name]=val
+        if (name =="stockNum"){
+          skuListAll[j][name] = val
+        }else{
+          skuListAll[j][name] = (util.newVal(val)).substring(0, 10)
+        }
       }
     }
     this.setData({

@@ -50,8 +50,6 @@ Page({
    */
   data: {
     indexEmpty: true,
-    winWidth:0,
-    winHeight: 0,
     show:false,
     isShow:false,
     showHide:true,
@@ -59,6 +57,7 @@ Page({
     currentTab: 0,
     baseUrl:'',
     result: [],
+    noMoreData:true,
     keyword:'',
     descShow:false,
     totalCount:0,
@@ -130,7 +129,8 @@ Page({
   closeShow: function() {
     this.setData({
       showHide: true,
-      showDp:true
+      showDp:true,
+      currentTab:0
     })
   }, 
   editDp: function () {
@@ -177,6 +177,9 @@ Page({
             result: newArr,
           })
         }else{
+          _this.setData({
+            noMoreData:false
+          })
           Api.showToast("暂无更多数据了！")
         }
       })
@@ -234,6 +237,7 @@ Page({
     if (options.storeId) {
       wx.setStorageSync("storeId", options.storeId)
     }
+    
   
   },
   bindChange: function (e) {
@@ -331,25 +335,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    var _this=this
     this.closeShow()
     app.pageRequest.pageData.pageNum = 0
-    if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '') {
+    if (!Api.getStoreId()) {
       this.setData({
         indexEmpty: false
       })
     } else {
       getIdentity(this)
-      wx.getSystemInfo({
-        success: function (res) {
-          _this.setData({
-            winWidth: res.windowWidth,
-            winHeight: res.windowHeight
-          });
-        }
-      });
     }
-    
   },
 
   /**
@@ -370,7 +364,8 @@ Page({
   onPullDownRefresh: function () {
     var currentTab = this.data.currentTab
     this.setData({
-      currentTab: currentTab
+      currentTab: currentTab,
+      noMoreData:true
     },function(){
       this.emptyArr()
       // this.onShow()
@@ -418,6 +413,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList()
+    var noMoreData = this.data.noMoreData
+    if (noMoreData){
+      this.getList()
+    }
   },
 })

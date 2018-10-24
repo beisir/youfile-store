@@ -133,10 +133,22 @@ function parseGoodsDescription(htmlContent) {
   }
   return htmlJson;
 }
+/**
+ *处理价格输入
+ */
+function newVal(val){
+  var val = val.replace(/[^\d.]/g, ""); //清除"数字"和"."以外的字符
+  val = val.replace(/^\./g, ""); //验证第一个字符是数字
+  val = val.replace(/\.{2,}/g, "."); //只保留第一个, 清除多余的
+  val = val.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+  val = val.replace(/^(\-)*(\d+)\.(\d\d).*$/, '$1$2.$3'); //只能输入两个小数
+  return val
+}
 module.exports = {
   formatTime: formatTime,
   count_down:count_down,
   saveImgToPhone: saveImgToPhone,
-  parseGoodsDescription: parseGoodsDescription
+  parseGoodsDescription: parseGoodsDescription,
+  newVal: newVal
 }
 

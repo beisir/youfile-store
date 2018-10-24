@@ -22,6 +22,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  calling: function () {
+    var storeMes = this.data.storeMes
+    wx.makePhoneCall({
+      phoneNumber: storeMes.servicePhone,
+      success: function () {
+      },
+      fail: function () {
+      }
+    })
+  },
   onLoad: function (options) {
     if (options.code){
       this.setData({

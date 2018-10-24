@@ -102,8 +102,8 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         </view>
           <view class="weui-cell__ft weui-active" bindtap='clickSpec'  wx:if="{{!pageShow}}">分别设置价格和库存</view>
       </view>
-      <view class='weui-input'   wx:if="{{!pageShow}}">每个规格库存<input  bindinput='newConst' value='{{newConst}}' placeholder-class='pla-input' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
-      <view class='weui-input'>总库存<input disabled='{{skuNumTrue}}' bindinput='skuNumTrue' placeholder-class='pla-input' value='{{allTotalNew}}' class="weui-input" type="text" placeholder=""></input><text>件</text></view>
+      <view class='weui-input'   wx:if="{{!pageShow}}">每个规格库存<input  bindinput='newConst' value='{{newConst}}' placeholder-class='pla-input' class="weui-input" type="number" placeholder=""></input><text>件</text></view>
+      <view class='weui-input'>总库存<input disabled='{{skuNumTrue}}' bindinput='skuNumTrue' placeholder-class='pla-input' value='{{allTotalNew}}' class="weui-input" type="number" placeholder=""></input><text>件</text></view>
     </view>
     <view class="page__category-content" hidden='{{!clickSpecShow}}'>
       <view class='weui-title'>商品价格库存</view>
@@ -122,27 +122,28 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         <view class="weui-cell__bd">
           <text>起批量</text>
         </view>
-        <input class="stock" type="text" bindinput='stockFun' value='{{stock}}'></input>
+        <input class="stock" type="number" bindinput='stockFun' value='{{stock}}'></input>
         <view class="weui-cell__ft" bindtap='clearInput'><image  src="/image/clo.png"></image></view>
       </view>
-      <!-- <view class="weui-cell">
-        <view class="weui-cell__bd">
-          <text>运费</text>
-        </view>
-        <view class="weui-cell__ft">邮费到付</view>
-      </view> -->
     </view>
   </view>
   <view hidden='{{hiddenSend}}'>
     <view class='write'>
       <view wx:for='{{addGoodsDetails}}' wx:key='index'>
-      <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' wx:if='{{item.input}}' placeholder='请输入标题'></input>
-      <textarea  data-index='{{index}}' value='{{item.value}}' wx:if='{{item.textInput}}' placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
-       <view class='removeImg'>
-        <image mode='widthFix'  bindlongtap="longTap"   data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image>
-        <image class='clo-img' data-index='{{index}}' bindtap='removeImage' src="/image/clo12.png" ></image>
+      <view class='removeImg' wx:if='{{item.input}}'>
+        <input bindinput='watchInput' value='{{item.value}}' data-index='{{index}}' placeholder='请输入标题'></input>
       </view>
-       <!-- <view class='removeImg'><image mode='widthFix'  bindlongtap="longTap"   data-index='{{index}}' wx:if='{{item.img}}'  src="{{item.img}}"></image><image class='clo-img' data-index='{{index}}' bindtap='removeImage' src="/image/clo12.png" ></image></view> -->
+      <view class='removeImg' wx:if='{{item.textInput}}'>
+        <textarea  data-index='{{index}}' value='{{item.value}}'  placeholder-class='weui-plac' bindinput='watchDec' placeholder='请输入商品描述内容...'></textarea>
+      </view>
+       <view class='removeImg'  wx:if='{{item.img}}' >
+        <image mode='widthFix'  data-index='{{index}}' src="{{item.img}}"></image>
+        <view>
+            <view data-index='{{index}}' bindtap='removeImage'><image  src="/image/remove.png" ></image>删除</view>
+            <view data-index='{{index}}' bindtap='insertData'><image  src="/image/add.png" ></image>插入</view>
+            <view data-index='{{index}}' bindtap='topData'><image  src="/image/top1.png" ></image>上移</view>
+        </view>
+      </view>
       </view>
     </view>
     <view class="sendmessage">

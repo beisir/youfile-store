@@ -27,6 +27,11 @@
     <view class='nomore'>没有更多了</view>
   </view>
   <view class="result-null" wx:else>
-    <view class="nomore">该分类下暂时为空！</view> 
+    <view class="nomore">
+      <view>
+        <image src="/image/nohome.png"></image>
+      </view>
+      暂时还没有商品哦
+    </view>
   </view>
 </view>

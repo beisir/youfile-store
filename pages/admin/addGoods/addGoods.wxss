@@ -6,7 +6,7 @@
   height: 150rpx;width: 150rpx;margin-top: 40rpx;margin-bottom: 10rpx;
 }
 .write image{
-  width:50%;margin-left: 25%;
+  width:80%;margin-left: 10%;
 }
 .page__category-content{
   margin:0 20rpx;background: #fff;color: #333;padding-bottom: 10rpx;margin-bottom: 30rpx;
@@ -147,6 +147,15 @@ border: 2rpx solid #d0d0d0;  padding-left: 20rpx;
 .removeImg{
   position: relative;
 }
-.removeImg .clo-img{
-  position: absolute;right: 30rpx;top: 10rpx;width: 50rpx;height:50rpx;
+.removeImg>view{
+  position: absolute;bottom:10rpx;z-index: 9;background: #F0F0F0;height:55rpx;width: 450rpx;right:10%;font-size:28rpx;line-height: 50rpx;
+}
+.removeImg>view view{
+  display: inline-block;width: 150rpx;color: #666;text-align: center
+}
+.removeImg>view image{
+  width:35rpx;height: 35rpx;vertical-align: middle;margin-top: -2rpx;margin-right:10rpx;margin-left:0;
+}
+.removeImg>view  view:first-child image{
+  width: 30rpx;height: 30rpx;
 }

@@ -12,9 +12,9 @@
   </view> 
   <view class='page__bd'>
     <view class=''>
-      <navigator class='weui-cell weui-cell_access' url='../classList/classList?name={{item.name}}&code={{item.customCategoryCode}}' wx:for="{{list}}" wx:key="{{index}}">
+      <navigator class='weui-cell weui-cell_access' url='../classList/classList?name={{item.name}}&code={{item.customCategoryCode}}' wx:for="{{list}}" wx:key="{{index}}" wx:if='{{item.customCategoryCode!=0}}'>
         <view class='weui-cell__bd'>
-           {{item.name}}
+           {{item.name}}<view class='num-v'>{{item.count}}件</view>
         </view>
         <view class='weui-img'>
          <image src="/image/icl.png"></image>
