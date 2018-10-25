@@ -581,7 +581,6 @@ Page({
       Api.showToast("请输入商品类目！")
       return;
     }
-    console.log(goodsVO)
     Api.updateGoods(goodsVO)
       .then(res => {
         wx.showToast({

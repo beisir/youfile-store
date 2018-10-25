@@ -630,8 +630,10 @@ Page({
       if (switchi == 1) {
         if (editDataModel.length==1){
           var copyData = editDataModel[0].goodsSpecificationValueVOList
+          editDataModel[0].specCode = timestamp + parseInt(89999 * Math.random() + 10000 + 1)
+          delete (editDataModel[0].goodsId)
           for (var i = 0; i < copyData.length; i++) {
-            copyData[i].specValueCode = timestamp + current + pId + code * parseInt(8999 * Math.random() + 1000 + 1)
+            copyData[i].specValueCode = timestamp + current + pId + 888 * parseInt(8999 * Math.random() + 1000 + 1)
           }
           editDataModel[0].goodsSpecificationValueVOList = copyData
           goodsListData = editDataModel
@@ -660,7 +662,6 @@ Page({
       if (goodsListData[i].id == pId){
         addIndex = true
         var codeArr = goodsListData[i].goodsSpecificationValueVOList
-        console.log(codeArr)
         for (var l = 0; l < codeArr.length; l++) {
         if(codeArr[l].specValueCode==code){
           codeArr.splice(l, 1)
@@ -841,6 +842,12 @@ Page({
     var tempArr = templateCont[index].specificationTemplateContentVOList
     var parentName = _this.data.specName
     if (specName == '') { _this.checkName(); return }
+    var goodsListData = this.data.goodsListData
+    for (var i = 0; i < goodsListData.length;i++){
+      if (goodsListData[i].specName == parentName){
+        goodsListData[i].specName = specName
+      }
+    }
     for (var i = 0; i < tempArr.length; i++) {
       if (tempArr[i].specName == specName){
         Api.showToast("已经有此规格名称！")
@@ -853,9 +860,17 @@ Page({
     templateCont[index].specificationTemplateContentVOList = tempArr
     _this.setData({
       templateCont: templateCont,
-      editSpec: false
+      editSpec: false,
+      goodsListData: goodsListData
     })
-    if (templateId == '') { return }
+   
+    if (templateId == '') { 
+      var editDataModel = this.data.editDataModel
+     if(this.data.editShowModel){
+       editDataModel[index].specName = specName
+     }
+      return 
+    }
     Api.updateSpecName(templateContentId,specName)
       .then(res => {
           wx.showToast({

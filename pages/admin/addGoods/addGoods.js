@@ -491,7 +491,6 @@ Page({
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": wholesalePrice
     }
-    console.log(goodsVO)
     Api.addGoods(goodsVO)
       .then(res => {
         wx.showToast({
