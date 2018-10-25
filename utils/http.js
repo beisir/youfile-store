@@ -94,8 +94,13 @@ class request {
                 reject(res);
               }
             } else if (res.statusCode === 401) {
+              if (res.data && res.data.error_description 
+                  && res.data.error_description.indexOf("Access token expired")!=-1){
+                this.authHandler.flushTokenInfo();
+              }else{
               curPage.loginCom = curPage.selectComponent("#login");
               curPage.loginCom.showPage();
+              }
               reject(res)
             } else {
               //其它错误，提示用户错误信息
