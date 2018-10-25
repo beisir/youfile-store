@@ -59,8 +59,12 @@
     <view></view>
   </view>
   <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">价格
-    <image src="/image/sort.png" wx:if="{{currentTab!=2}}"></image>
-    <image src="/image/sort1.png" wx:if="{{currentTab==2}}"></image>
+    <!-- <view class='sort-c' data-current="2" bindtap="swichNav"></view> -->
+    <view class='top-p' wx:if='{{descShow}}'></view>
+    <view class='top-p' wx:if='{{!descShow && currentTab!=2}}'></view>
+    <view class='top-p top-p1' wx:if='{{!descShow && currentTab==2}}'></view>
+    <view class='up-p' wx:if='{{!descShow}}'></view>
+    <view class='up-p up-p1' wx:if='{{descShow}}'></view>
     <view></view>
   </view>
 </view>
