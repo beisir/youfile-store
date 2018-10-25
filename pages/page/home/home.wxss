@@ -175,7 +175,7 @@
    border-bottom: 10rpx solid #333;
 }
 .sort-c{
-  /* top:30rpx;left: 145rpx;position: absolute;width: 20rpx;height: 30rpx;background: red;z-index: 1000 */
+  top:30rpx;left: 145rpx;position: absolute;width: 20rpx;height: 30rpx;background: red;z-index: 1000
 }
 .goods-total{
   position: fixed;
