@@ -342,6 +342,7 @@ Page({
         indexEmpty: false
       })
     } else {
+      console.log
       getIdentity(this)
     }
   },
