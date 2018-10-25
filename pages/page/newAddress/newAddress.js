@@ -13,6 +13,7 @@ Page({
     addressVal:'',
     telephone:'',
     userId: '123',
+    isDefault:false,
     isEdit:false,
     id:''
   },
@@ -39,6 +40,7 @@ Page({
         _this.setData({
           province: obj.province,
           city: obj.city,
+          isDefault: obj.isDefault,
           area: obj.county,
           nameVal: obj.userName,
           addressVal: obj.detailAddress,
@@ -126,7 +128,7 @@ Page({
     var _this = this,
       userName = this.data.nameVal,
       userPhone = this.data.telephone,
-      isDefault = false,
+      isDefault = this.data.isDefault,
       userId = this.data.userId,
       county = this.data.area,
       province = this.data.province,
