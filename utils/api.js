@@ -385,7 +385,7 @@ function likeStore(data) {
 /**店铺信息**/
 function shopList(data) {
   data = initStoreId(data);
-  return app.pageRequest.pageGet(shopListUrl, data)
+  return app.pageRequest.pageGetIndex(shopListUrl, data)
 }
 /**批发商数据**/
 function index(data) {

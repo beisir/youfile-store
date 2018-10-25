@@ -61,6 +61,7 @@ Page({
     goodsSpecificationVOList:[],
     isShowNewOne: false,
     goodsSkuVOList:[],
+    newSkuOnlyIndex:0,
     skuArrTwo: [],
     saleBatchNumGoods:null,
     newSkuArrTwo:[],
@@ -403,6 +404,9 @@ Page({
       code = e.target.dataset.code
     if (this.data.newSkuOnly){
       this.newGetSpecDetails(index, code)
+      this.setData({
+        newSkuOnlyIndex:index
+      })
     }else{
       this.getSpecDetails(index, code)
     }
@@ -603,38 +607,51 @@ Page({
       saleBatchNumGoods = this.data.saleBatchNumGoods,
       saleBatchNum = this.data.saleBatchNum,
       difference=0,
+      differMoney = 0,
+      differNum=0,
       discountShow=true,
       saleBatchAmount=this.data.saleBatchAmount,
       total=0
       total = num * sell
       difference = total - num * wholesalePrice
-      if (saleBatchNum == 0) {
-        if (saleBatchAmount == 0) {
+    if (saleBatchNumGoods==0){
+      saleBatchNumGoods = saleBatchNum
+    }
+    if (saleBatchNum == 0) {
+      if (saleBatchAmount == 0) {
+        discountShow = false
+      } else {
+        discountShow = true
+        if (total >= saleBatchAmount) {
           discountShow = false
         } else {
           discountShow = true
-          if (total >= saleBatchAmount) {
-            discountShow = false
-          }
-        }
-      } else {
-        if (saleBatchAmount==0){
-          if (num >= saleBatchNum) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
-        }
-        if (saleBatchAmount>0){
-          if (num >= saleBatchNum || total >= saleBatchAmount) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
         }
       }
+      differMoney = saleBatchAmount - total
+    } else {
+      if (saleBatchAmount == 0) {
+        if (num >= saleBatchNum || num>= saleBatchNumGoods) {
+          discountShow = false
+        } else {
+          discountShow = true
+        }
+      }
+      if (saleBatchAmount > 0) {
+        if (num >= saleBatchNum || total >= saleBatchAmount || num >= saleBatchNumGoods) {
+          discountShow = false
+        } else {
+          discountShow = true
+        }
+       
+      }
+      differNum = saleBatchNumGoods - num
+      differMoney = saleBatchAmount - total
+    }
       this.setData({
         discountShow: discountShow,
+        differNum: differNum,
+        differMoney:differMoney,
         difference: parseInt(difference)
       })
   },
@@ -774,6 +791,9 @@ Page({
     if (goodsSpecificationVOList.length>0){
       var  childArr=goodsSpecificationVOList[0].goodsSpecificationValueVOList
     }
+    if (saleBatchNumGoods == 0) {
+      saleBatchNumGoods = saleBatchNum
+    }
     for (var j = 0; j< spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
       for (let i = 0; i < newSkuArrTwo.length; i++) {
@@ -804,27 +824,22 @@ Page({
                 }
               }
               differMoney = saleBatchAmount - total
-            }else{
+            } else {
               if (saleBatchAmount==0){
-                if (nums >= saleBatchNum) {
+                if (nums >= saleBatchNum || nums >= saleBatchNumGoods) {
                   discountShow = false
                 } else {
                   discountShow = true
                 }
               }
               if (saleBatchAmount >0){
-                if (nums >= saleBatchNum) {
-                  discountShow = false
-                } else {
-                  discountShow = true
-                }
-                if (total >= saleBatchAmount) {
+                if (nums >= saleBatchNum || total >= saleBatchAmount || nums>=saleBatchNumGoods) {
                   discountShow = false
                 } else {
                   discountShow = true
                 }
               }
-              differNum = saleBatchNum - nums
+              differNum = saleBatchNumGoods - nums
               differMoney = saleBatchAmount - total
             }
           }
@@ -900,16 +915,33 @@ Page({
     const code = e.currentTarget.dataset.code;
     const obj = e.currentTarget.dataset.obj;
     var value = parseInt(e.detail.value)
+    var goodsSpecificationVOListNew = this.data.goodsSpecificationVOList
+    var goodsSpecificationVOList = goodsSpecificationVOListNew[0].goodsSpecificationValueVOList
     if (value < 0 || isNaN(value)){
       value=0
     }
     let spectArrDifference = this.data.spectArrDifference;
-    for (let i = 0; i < spectArrDifference.length; i++) {
-      spectArrDifference[i].newSkuArrTwo[index].num = value
+    if (this.data.newSkuOnly) {
+      var current = this.data.newSkuOnlyIndex
+      goodsSpecificationVOList[current].num = value
+        for (var j = 0; j < spectArrDifference.length; j++) {
+          if ((spectArrDifference[j].newSkuArrTwo[0].specValueCodeList).indexOf(goodsSpecificationVOList[current].specValueCode) != -1) {
+             spectArrDifference[j].newSkuArrTwo[0].num=value
+          }
+        }
+        goodsSpecificationVOListNew[0].goodsSpecificationValueVOList = goodsSpecificationVOList
+      this.setData({
+        goodsSpecificationVOList: goodsSpecificationVOListNew,
+        spectArrDifference: spectArrDifference
+      })
+    }else{
+      for (let i = 0; i < spectArrDifference.length; i++) {
+        spectArrDifference[i].newSkuArrTwo[index].num = value
+      }
+      this.setData({
+        spectArrDifference: spectArrDifference
+      });
     }
-    this.setData({
-      spectArrDifference: spectArrDifference
-    });
     this.getTotalPrice();
   },
   /**

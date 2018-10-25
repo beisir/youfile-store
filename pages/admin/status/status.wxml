@@ -1,4 +1,35 @@
 <login-component id='login' inner-text="Some text"></login-component>
+ <!-- 库存提示-->
+<mes
+  show="{{showNum}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>还未设置库存哦！</text>
+  <view class='showNum'>库存不能为0</view>
+  <button bindtap='confirmTip' class='show_btn'>立即设置</button>
+</view>
+</mes>
+ <!--是否上架-->
+<mes
+  show="{{confirmUp}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确定上架该商品？</text>
+  <button bindtap='confirmUp'>确定</button>
+</view>
+</mes>
+ <!--是否下架-->
+<mes
+  show="{{confirmDown}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确定下架该商品？</text>
+  <button bindtap='confirmDown'>确定</button>
+</view>
+</mes>
  <!-- 删除-->
 <mes
   show="{{show1}}"
@@ -49,19 +80,11 @@
       <view class='list-view'>
         <view><button open-type="share" data-name='{{item.name}}' data-img='{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{item.id}}'></button>转发</view>
         <view bindtap='lookGoodsDetails'  data-id='{{item.id}}'>预览<view></view></view>
-        <view wx:if='{{item.status==0}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架<view></view></view>
+        <view wx:if='{{item.status==0}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'>上架<view></view></view>
           <view wx:if='{{item.status==1}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架<view></view></view>
-          <view wx:if='{{item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架<view></view></view>
+          <view wx:if='{{item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'>上架<view></view></view>
           <view wx:if='{{item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架<view></view></view>
       </view>
-      <!-- <view class='st-bottom'>
-          <view><button open-type="share" data-name='{{item.name}}' data-img='{{baseUrl}}{{item.mainImgUrl}}' data-id='{{item.id}}'>转发</button></view>
-          <view bindtap='lookGoodsDetails'  data-id='{{item.id}}'>预览</view>
-          <view wx:if='{{item.status==0}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='changeStatus'>上架</view>
-          <view wx:if='{{item.status==1}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
-          <view wx:if='{{item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>上架</view>
-          <view wx:if='{{item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>上架</view>
-        </view> -->
       </view>
       <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>删除</view>
   </view>

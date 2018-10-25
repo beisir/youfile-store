@@ -87,8 +87,8 @@ export const purchaserListUrl='/admin/merchantpurchaser/purchaserlist'
 export const remakInfoUrl ='/admin/merchantpurchaser/{{storeId}}/purchaserinfo/{{purchaserUserId}}'
 export const apiSetUserUrl='/api/user/set'
 export const apiAddUserUrl='/api/user/set/bfpripermission'
-export const adminSetUserUrl='/admin/user/set'
-export const adminAddUserUrl = '/admin/user/set/bfpripermission'
+export const adminSetUserUrl='/api/user/set'
+export const adminAddUserUrl = '/api/user/set/bfpripermission'
 // 退出
 export const quitUrl = "/oauth/authentication/removetoken"
 export const updataPwdUrl = "/oauth/authentication/changepassword"

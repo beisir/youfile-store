@@ -417,7 +417,7 @@ Page({
     var _this = this,
       pics = this.data.pics;
     var _this = this
-    app.http.onlyUploadImg(url).then(res => {
+    app.http.onlyUploadImg(url, "GOODS").then(res => {
       var url = JSON.parse(res).obj
       if (url) {
         pics = pics.concat(_this.data.baseUrl + url);
@@ -528,6 +528,9 @@ Page({
        sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
        wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
      }
+    }else{
+      sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
+      wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
     }
     for (var i = 0; i < addGoodsDetails.length; i++) {
       if (addGoodsDetails[i].input) {

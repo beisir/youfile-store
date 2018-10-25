@@ -424,7 +424,7 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   margin-top: 20rpx;
 }
 .gd-new-img{
-  margin-bottom: 20rpx;
+  margin-bottom: 20rpx;padding-top: 50rpx;
   width: 160rpx;margin:0 auto;height: 160rpx;
 }
 .gd_dp image{

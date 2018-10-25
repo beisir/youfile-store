@@ -58,6 +58,7 @@ Page({
     lostList: false,
     totalPrice:0, 
     enjoyCostNew:false,
+    baseUrl: app.globalData.imageUrl,
     selectAllStatus:true, 
     allEmpty:true,
     total1:0,

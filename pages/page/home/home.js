@@ -175,6 +175,7 @@ Page({
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            noMoreData:true
           })
         }else{
           _this.setData({
@@ -237,8 +238,14 @@ Page({
     if (options.storeId) {
       wx.setStorageSync("storeId", options.storeId)
     }
-    
-  
+    this.closeShow()
+    if (!Api.getStoreId()) {
+      this.setData({
+        indexEmpty: false
+      })
+    } else {
+      getIdentity(this)
+    }
   },
   bindChange: function (e) {
     var that = this;
@@ -248,7 +255,7 @@ Page({
     this.setData({
       result: []
     });
-    app.pageRequest.pageData.pageNum = 0
+    app.pageRequest.pageDataIndex.pageNum = 0
     this.getList()
   },
   swichNav: function (e) {
@@ -335,16 +342,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    this.closeShow()
-    app.pageRequest.pageData.pageNum = 0
-    if (!Api.getStoreId()) {
-      this.setData({
-        indexEmpty: false
-      })
-    } else {
-      console.log
-      getIdentity(this)
-    }
+    
   },
 
   /**

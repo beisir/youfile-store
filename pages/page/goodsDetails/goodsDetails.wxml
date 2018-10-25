@@ -86,7 +86,7 @@
     </view> -->
       <view class='gd-new-img'><image mode="aspectFill" wx:if='{{store!=""}}' src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"></image></view>
       <view>{{store.storeName}}</view>
-      <view class='gd-dp-text'>{{store.description}}</view>
+      <view class='gd-dp-text' wx:if='{{store.description!=null}}'>{{store.description}}</view>
   </view>
 <view class='gd_bottom'>
     <view class='gd_b_left'>
@@ -198,10 +198,17 @@
 <view wx:if='{{limitShow==3 && isShowNewOne}}'>
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
-      <view class='new-man' hidden='{{discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
-      <view class='new-man' hidden='{{!discountShow}}'>
-          <text wx:if='{{saleBatchNum>0}}'>本店满{{saleBatchNum}}件可享受批发价</text>
-          <text wx:if='{{saleBatchNum==0 && saleBatchAmount>0}}'>本店满{{saleBatchAmount}}元可享受批发价</text>
+      <view class='new-man' wx:if='{{!discountShow}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
+      <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount==0}}'>
+          <text wx:if='{{differNum==0}}'>本店满{{saleBatchNum}}件可享受批发价</text>
+          <text wx:if='{{differNum>0}}'>本品差{{differNum}}件可享受批发价</text>
+      </view>
+       <view class='new-man' wx:if='{{discountShow && saleBatchNum==0 && saleBatchAmount>0}}'>
+          <text wx:if='{{differMoney==0}}'>本店满{{saleBatchAmount}}元可享受批发价</text>
+          <text wx:if='{{differMoney>0}}'>全场金额差{{differMoney}}元可享受批发价</text>
+      </view>
+       <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount>0 && differNum>0}}'>
+          <text>本品差{{differNum}}件 全场金额差{{differMoney}}元 可享受批发价</text>
       </view>
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
