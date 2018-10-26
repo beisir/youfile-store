@@ -179,11 +179,11 @@ class TokenHandler {
   //保存token信息
   saveTokenInfo(tokenInfo) {
     //设置access_token信息
-    this.setStorage('access_token', tokenInfo.access_token);
+    wx.setStorageSync('access_token', tokenInfo.access_token);
 
     //设置token过期时间
     let timestamp = Date.parse(new Date);
-    let expires_in = timestamp + parseInt(tokenInfo.expires_in) * 1000;
+    let expires_in = timestamp + parseInt(tokenInfo.expires_in) * 1000 - 7200000;
     wx.setStorageSync('expires_in', expires_in);
 
     //设置token type类型
@@ -214,7 +214,7 @@ class TokenHandler {
       wx.removeStorageSync('userId');
       wx.removeStorageSync('merchantNumber');
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 

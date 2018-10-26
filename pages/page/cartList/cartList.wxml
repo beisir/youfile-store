@@ -2,10 +2,10 @@
 <view class="main" bindtap='rightList' >
     <view class='cf-cont'  wx:if="{{hasList}}" >
       <view class='c-title'  wx:for="{{storeMes}}" wx:key="{{index}}">
-        <image src="/image/ic1.png"></image> {{item.storeName}}<image class='itimg' src="/image/icl.png"></image> 
+        <image src="{{baseUrl}}{{item.logo}}?x-oss-process=style/logo"></image> {{item.storeName}}<image class='itimg' src="/image/icl.png"></image> 
         <view wx:if='{{limitShow==3}}' class='new-c-t'>
          <view wx:if='{{storeAmount!=0 && enjoyCost==true && storeAmount!=0}}'>全场已满{{storeAmount}}元<text>混批</text></view>
-         <view wx:if='{{!enjoyCost && !enjoyCostNew}}'><text style='color:#666;border:0'>还差<text style='color:red;border:0;margin-left:0'>{{differentPrice}}</text>元可享受批发价</text><text>混批</text></view>
+         <view wx:if='{{!enjoyCost && !enjoyCostNew}}'><text style='color:#666;border:0' wx:if='{{differentPrice>0}}'>还差<text style='color:red;border:0;margin-left:0'>{{differentPrice}}</text>元可享受批发价</text><text>混批</text></view>
          <view wx:if='{{storeAmount==0 && enjoyCost==true}}'>全场已享受批发价</view>
          <view wx:if='{{!enjoyCost && enjoyCostNew==true}}'>全场已享受批发价</view>
         </view>
@@ -29,7 +29,7 @@
                    
                   </view>
                   <view class="cart-pro-name cart-pro-name1"  wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" bindtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record"  wx:key="{{index}}">规格：{{record.skuName}}<image class='down' src="/image/down.png"></image></view>
-                   <view  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length>1}}' class='man-j'>满<text>{{item.saleBatchNum}}</text>起批<text wx:if='{{item.saleBatchNum-item.num>0 && !item.enjoyPrice}}' style='color:#333;'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum-item.num}}</text>件</text></view>
+                   <view  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length>1 && storeNum>0}}' class='man-j'>满<text>{{item.saleBatchNum}}</text>起批<text wx:if='{{item.saleBatchNum-item.num>0 && !item.enjoyPrice}}' style='color:#333;'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum-item.num}}</text>件</text></view>
                    <view class="cart-pro-name cart-pro-name1 cart-pro-name2" data-name="more"  data-index="{{index}}" wx:if="{{item.shoppingCartSkuList.length>1}}"  bindtap='showAlert'>修改规格/数量<image class='down' src="/image/down.png"></image></view>
                   <view class="table"  wx:if="{{item.shoppingCartSkuList.length>1}}" >
                      <view class="tr"  wx:if='{{limitShow!=3}}'>

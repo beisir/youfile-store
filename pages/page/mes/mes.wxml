@@ -6,8 +6,8 @@
     </view>
     {{storeMes.name}}
   </view>
-  <view class="ym_jpstoredesc">
-    <text class="leftyh">“</text>{{storeMes.description}}<text class="rightyh">”</text>
+  <view class="ym_jpstoredesc" wx:if='{{description!=""}}'>
+    <text class="leftyh">“</text>{{description}}<text class="rightyh">”</text>
   </view>
 </view>
 <view class="weui_cells new-weui">
@@ -75,7 +75,7 @@
 </navigator>
 <view class='weui-time wt-font1'>
   <view>营业时间<text>{{storeMes.openingTime==null?'':storeMes.openingTime}}</text></view>
-  <view>客服电话<text>{{storeMes.servicePhone==null?'':storeMes.servicePhone}}</text><view class='mes-tel'><image src="/image/tel1.png"></image></view></view>
+  <view>客服电话<text>{{storeMes.servicePhone==null?'':storeMes.servicePhone}}</text><view class='mes-tel'><image src="/image/tel1.png"  bindtap="calling"></image></view></view>
   <view>客服微信<text>{{storeMes.wechatNumber==null?'':storeMes.wechatNumber}}</text></view>
   <view>公众号<text></text></view>
 </view>

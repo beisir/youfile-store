@@ -25,10 +25,11 @@ Page({
   data: {
     navindex: -1,
     currentTab: 0,
-    oneTemplateCont: [{ templateName: "不用模板",id:'', specificationTemplateContentVOList: [] }],
+    oneTemplateCont: [{ templateName: "不用模板", id: '', specificationTemplateContentVOList: [] }],
     templateCont: [],
     addSpec: false,
     modelLen:0,
+    copyData: false,
     addSpecAttc: false,
     watchInput: false,
     updateSpec: false,
@@ -38,7 +39,7 @@ Page({
     editShowModel: false,
     contentShow:false,
     editId: '',
-    timestamp:Date.parse(new Date()) + parseInt(89999999 * Math.random() + 1),
+    timestamp: Date.parse(new Date()) + parseInt(89999 * Math.random() + 10000+1),
     templateId: '',
     templateContentId: '',
     notemp: { templateName: "衣服" },
@@ -106,6 +107,7 @@ Page({
       editDataModel = this.data.editDataModel,
       isEmptySku=false,
       newDataSku=[],
+      copyData = this.data.copyData,
       modelLen = this.data.modelLen,
       editShowModel = this.data.editShowModel,
       templateId = this.data.templateId
@@ -123,17 +125,34 @@ Page({
           isEmptySku = 1
         }
       }else{
-        for (var i = 0; i < editDataModel.length;i++){
-          var newData = []
-          var dataChild =editDataModel[i].goodsSpecificationValueVOList
-          for (var j = 0; j < dataChild.length;j++){
-            if (dataChild[j].slected){
-              newData.push(dataChild[j])
+        if (copyData){
+          for (var i = 0; i < goodsListData.length; i++) {
+            var data = goodsListData[i].goodsSpecificationValueVOList
+            for (var j = 0; j < data.length; j++) {
+              if (data[j].timestampCode){
+                data[j].specValueCode = data[j].timestampCode
+                delete (data[j].timestampCode)
+              }
             }
           }
-          editDataModel[i].goodsSpecificationValueVOList = newData
+          newDataSku = goodsListData
+        }else{
+          for (var i = 0; i < editDataModel.length; i++) {
+            var newData = []
+            var dataChild = editDataModel[i].goodsSpecificationValueVOList
+            for (var j = 0; j < dataChild.length; j++) {
+              if (dataChild[j].selected) {
+                if (dataChild[j].timestampCode) {
+                  dataChild[j].specValueCode = dataChild[j].timestampCode
+                  delete (dataChild[j].timestampCode)
+                }
+                newData.push(dataChild[j])
+              }
+            }
+            editDataModel[i].goodsSpecificationValueVOList = newData
+          }
+          newDataSku = editDataModel
         }
-        newDataSku = editDataModel
         if (editDataModel.length != modelLen) {
           isEmptySku = false
         }
@@ -149,6 +168,11 @@ Page({
       newDataSku =goodsListData
       if (goodsListData.length < 1) {
         isEmptySku = 1
+      }
+    }
+    for (var i = 0; i < newDataSku.length;i++){
+      if (newDataSku[i].goodsSpecificationValueVOList.length==0){
+        newDataSku.splice(i,1)
       }
     }
     var index = this.data.currentTab
@@ -173,25 +197,43 @@ Page({
       specificationTemplateContentVOList = oneTemplateCont[0].specificationTemplateContentVOList
     if (options.model){
       var model = JSON.parse(options.model)
-      for (var i = 0; i < model.length; i++) {
-        specificationTemplateContentVOList.push({ specCode: model[i].specCode, specName: model[i].specName, specValueList: [] })
-        var arrChild = model[i].goodsSpecificationValueVOList
-        for (var j = 0; j < arrChild.length; j++) {
-          arrChild[j].slected = true
-          specificationTemplateContentVOList[i].specValueList.push(arrChild[j].specValueName)
-          arrIndex[j].selected = true
-          arrIndex1[j].selected = true
+      var modelLen=model.length
+      if (modelLen==0){
+        specificationTemplateContentVOList.push({ id: '010', specName: "颜色", specValueList: [] })
+        oneTemplateCont[0].specificationTemplateContentVOList = specificationTemplateContentVOList
+        this.setData({
+          oneTemplateCont: oneTemplateCont,
+        })
+      }else{
+        for (var i = 0; i < model.length; i++) {
+          specificationTemplateContentVOList.push({ id: '', specCode: model[i].specCode, specName: model[i].specName, specValueList: [] })
+          var arrChild = model[i].goodsSpecificationValueVOList
+          for (var j = 0; j < arrChild.length; j++) {
+            arrChild[j].selected = true
+            specificationTemplateContentVOList[i].specValueList.push(arrChild[j].specValueName)
+            if (modelLen == 1) {
+              arrIndex[j].selected = true
+            }
+            if (modelLen == 2) {
+              if(i==0){
+                arrIndex[j].selected = true
+              }else{
+                arrIndex1[j].selected = true
+              }
+            }
+          }
         }
+        oneTemplateCont[0].specificationTemplateContentVOList = specificationTemplateContentVOList
+        this.setData({
+          oneTemplateCont: oneTemplateCont,
+          arrIndex: arrIndex,
+          arrIndex1: arrIndex1,
+          editDataModel: model,
+          copyData:false,
+          modelLen: model.length,
+          editShowModel: true
+        })
       }
-      oneTemplateCont[0].specificationTemplateContentVOList = specificationTemplateContentVOList
-      this.setData({
-        oneTemplateCont: oneTemplateCont,
-        arrIndex: arrIndex,
-        arrIndex1: arrIndex1,
-        editDataModel: model,
-        modelLen: model.length,
-        editShowModel: true
-      })
     }else{
       specificationTemplateContentVOList.push({ id: '010', specName: "颜色", specValueList: []})
       oneTemplateCont[0].specificationTemplateContentVOList = specificationTemplateContentVOList
@@ -228,9 +270,9 @@ Page({
           var arrEach = editDataModel[i].goodsSpecificationValueVOList
           for (var j = 0; j < arrEach.length; j++) {
             if (i == 0) {
-              arrIndex[j].selected = arrEach[j].slected
+              arrIndex[j].selected = arrEach[j].selected
             } else {
-              arrIndex1[j].selected = arrEach[j].slected
+              arrIndex1[j].selected = arrEach[j].selected
             }
           }
         }
@@ -299,18 +341,33 @@ Page({
         valueEdit: ''
       })
     } else {
-      if (num > 7) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
-      } else {
-        this.setData({
-          watchInput: true,
-          value: value.substring(0, 6),
-          valueEdit: event.detail.value
-        })
+      if (this.data.addSpec){
+        if (num > 16) {
+          wx.showToast({
+            title: '超过最长数字限制',
+            icon: 'none',
+            duration: 2000,
+          })
+        } else {
+          this.setData({
+            watchInput: true,
+            value: value.substring(0, 15),
+          })
+        }
+      }else{
+        if (num > 7) {
+          wx.showToast({
+            title: '超过最长数字限制',
+            icon: 'none',
+            duration: 2000,
+          })
+        } else {
+          this.setData({
+            watchInput: true,
+            value: value.substring(0, 6),
+            valueEdit: (event.detail.value).substring(0, 6)
+          })
+        }
       }
     }
   },
@@ -367,7 +424,7 @@ Page({
       templateCont: templateCont
     })
     _this.cancel()
-    if(templateContentId=='010'){return}
+    if (templateContentId == '010' || !Api.isEmpty(templateContentId)){return}
     Api.addTempCont(templateContentId, str)
       .then(res => {
         const code = res.code
@@ -526,7 +583,7 @@ Page({
         editDataModel = this.data.editDataModel,
         newGoodsListData=[],
         list={},
-       timestamp = this.data.timestamp,
+        timestamp = this.data.timestamp,
         hash = {},
         addArr=[],
         templateCont = this.data.templateCont,
@@ -538,7 +595,7 @@ Page({
         codeTd = this.data.templateId,
         num='',
         arrIndex=[],
-       pIdNew  = e.target.dataset.id,
+        pIdNew  = e.target.dataset.id,
         pId = e.target.dataset.id
         code+=code+""+code
     if (pId == undefined || pId==''){
@@ -558,13 +615,47 @@ Page({
       })
     }
     if (editShowModel && !Api.isEmpty(pIdNew)) {
-      if (arrIndex[current].selected) {
-        editDataModel[switchi].goodsSpecificationValueVOList[current].slected = true
-      } else {
-        editDataModel[switchi].goodsSpecificationValueVOList[current].slected = false
+      if (switchi == 0) {
+        if (arrIndex[current].selected) {
+          if (current >= editDataModel[switchi].goodsSpecificationValueVOList.length) {
+            editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code })
+            editDataModel[switchi].goodsSpecificationValueVOList[editDataModel[switchi].goodsSpecificationValueVOList.length - 1].selected = true
+          } else {
+            editDataModel[switchi].goodsSpecificationValueVOList[current].selected = true
+          }
+        } else {
+          editDataModel[switchi].goodsSpecificationValueVOList[current].selected = false
+        }
+      }
+      if (switchi == 1) {
+        if (editDataModel.length==1){
+          var copyData = editDataModel[0].goodsSpecificationValueVOList
+          editDataModel[0].specCode = timestamp + parseInt(89999 * Math.random() + 10000 + 1)
+          delete (editDataModel[0].goodsId)
+          for (var i = 0; i < copyData.length; i++) {
+            copyData[i].specValueCode = timestamp + current + pId + 888 * parseInt(8999 * Math.random() + 1000 + 1)
+          }
+          editDataModel[0].goodsSpecificationValueVOList = copyData
+          goodsListData = editDataModel
+          this.setData({
+            copyData: true
+          })
+          editShowModel:false
+        }else{
+          if (arrIndex[current].selected) {
+            if (current >= editDataModel[switchi].goodsSpecificationValueVOList.length) {
+              editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code })
+              editDataModel[switchi].goodsSpecificationValueVOList[editDataModel[switchi].goodsSpecificationValueVOList.length - 1].selected = true
+            } else {
+              editDataModel[switchi].goodsSpecificationValueVOList[current].selected = true
+            }
+          } else {
+            editDataModel[switchi].goodsSpecificationValueVOList[current].selected = false
+          }
+        }
       }
       this.setData({
-        editDataModel: editDataModel
+        editDataModel: editDataModel,
       })
     }
     for (var i = 0; i < goodsListData.length;i++){
@@ -576,7 +667,7 @@ Page({
           codeArr.splice(l, 1)
          }
         }
-        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code})
+        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code * parseInt(8999 * Math.random() + 1000 + 1)})
         if (arrIndex[current].selected != true) {
           goodsListData[i].goodsSpecificationValueVOList.pop()
         }
@@ -586,7 +677,7 @@ Page({
       codeTd = '000'
     }
     if(!addIndex){
-      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi, selected: false, timestampCode: timestamp + current + pId + code})
+      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi, selected: false, timestampCode: timestamp + current + pId + code * parseInt(8999 * Math.random() + 1000 + 1)})
       list.specName = pName
       list.id = pId
       list.goodsSpecificationValueVOList = listChi
@@ -751,7 +842,17 @@ Page({
     var tempArr = templateCont[index].specificationTemplateContentVOList
     var parentName = _this.data.specName
     if (specName == '') { _this.checkName(); return }
+    var goodsListData = this.data.goodsListData
+    for (var i = 0; i < goodsListData.length;i++){
+      if (goodsListData[i].specName == parentName){
+        goodsListData[i].specName = specName
+      }
+    }
     for (var i = 0; i < tempArr.length; i++) {
+      if (tempArr[i].specName == specName){
+        Api.showToast("已经有此规格名称！")
+        return
+      }
       if (tempArr[i].specName == parentName) {
         tempArr[i].specName = specName
       }
@@ -759,9 +860,17 @@ Page({
     templateCont[index].specificationTemplateContentVOList = tempArr
     _this.setData({
       templateCont: templateCont,
-      editSpec: false
+      editSpec: false,
+      goodsListData: goodsListData
     })
-    if (templateId == '') { return }
+   
+    if (templateId == '') { 
+      var editDataModel = this.data.editDataModel
+     if(this.data.editShowModel){
+       editDataModel[index].specName = specName
+     }
+      return 
+    }
     Api.updateSpecName(templateContentId,specName)
       .then(res => {
           wx.showToast({

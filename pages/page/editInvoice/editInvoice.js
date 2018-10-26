@@ -86,26 +86,40 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  updateMes:function(){
     var _this = this,
       isReceipt = this.data.show,
       data = this.data.data,
-      id=wx.getStorageSync("storeId"),
-      receiptInfo=''
-    for(var i=0;i<data.length;i++){
-      if(data[i].selected){
-        receiptInfo += data[i].name+","
+      id = wx.getStorageSync("storeId"),
+      receiptInfo = ''
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].selected) {
+        receiptInfo += data[i].name + ","
       }
     }
-    var data = { isReceipt:!isReceipt, id: id, receiptInfo: receiptInfo.slice(0, -1)}
+    var data = { isReceipt: !isReceipt, id: id, receiptInfo: receiptInfo.slice(0, -1) }
     Api.updateMes(data)
       .then(res => {
         wx.showToast({
           title: '修改成功',
           icon: 'none',
           duration: 2000,
+          success: function () {
+            var pages = getCurrentPages();             //  获取页面栈
+            var currPage = pages[pages.length - 1];
+            var prevPage = pages[pages.length - 2];    // 上一个页面
+            prevPage.setData({
+              code: 0
+            })
+            wx.navigateBack({
+              data: 1
+            })
+          }
         })
       })
+  },
+  onUnload: function () {
+   
   },
 
   /**

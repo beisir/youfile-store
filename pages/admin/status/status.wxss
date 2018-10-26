@@ -3,6 +3,12 @@
 .record,.record-box{
   height: 340rpx;border-radius: 10rpx;
 }
+.showNum{
+  color: #999;font-size:28rpx;font-weight: normal;
+}
+.show_btn{
+  margin-bottom: 50rpx;
+}
  .record-box{
   margin:20rpx 0;position: relative;width: 95%;margin-left: 2.5%;
 }

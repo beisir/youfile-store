@@ -10,7 +10,6 @@ Page({
     watchInput: false,
     shouTitile:false,
     codeArr:[],
-    showCodeName:false,
     categoryCustomCode:[]
   },
   /**
@@ -27,9 +26,9 @@ Page({
     }
     if (options.categoryCustomCode){
       var categoryCustomCode = (options.categoryCustomCode).split(",")
+      console.log(categoryCustomCode)
       this.setData({
         categoryCustomCode: categoryCustomCode,
-        showCodeName:true
       })
     }
     this.getList()

@@ -24,7 +24,7 @@
   bind:sureSelectArea="sureSelectAreaListener"
 >
   <view class='spec-title'>新建规格</view>
-  <input placeholder-class='spec-class'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入文字，最多6个字' />
+  <input placeholder-class='spec-class'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入文字，最多15个字' />
   <view class='spec-view' bindtap='cancel'>取消</view><view  class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm'>确定</view>
 </spec>
 <!-- 新建规格属性-->

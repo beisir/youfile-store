@@ -133,7 +133,7 @@ Page({
   //获取默认地址
   getDefaultAdress(){
     //userid
-    app.http.getRequest("/admin/user/usershopaddress/default").then((res)=>{
+    app.http.getRequest("/api/user/usershopaddress/default").then((res)=>{
       if(res.obj){
         this.setData({
           address:res.obj

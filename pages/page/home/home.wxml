@@ -31,9 +31,9 @@
    <image wx:if='{{store!="" && limitShow!=2}}'  src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
-      <view bindtap='editDpMes' class='logoimg'>
+      <navigator class='logoimg' url='../mes/mes?code={{limitShow}}'>
         <image wx:if='{{store!=""}}' mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"/>  
-      </view>
+      </navigator>
     </view>
     <view class="ym_sydtdmgzs">
       <view class="store_name">{{store.storeName}}
@@ -58,9 +58,13 @@
   <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">销量
     <view></view>
   </view>
-  <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">价格
-    <image src="/image/sort.png" wx:if="{{currentTab!=2}}"></image>
-    <image src="/image/sort1.png" wx:if="{{currentTab==2}}"></image>
+  <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}">
+    <view class='sort-c' data-current="2" bindtap="swichNav">价格</view>
+    <view class='top-p' wx:if='{{descShow}}'></view>
+    <view class='top-p' wx:if='{{!descShow && currentTab!=2}}'></view>
+    <view class='top-p top-p1' wx:if='{{!descShow && currentTab==2}}'></view>
+    <view class='up-p' wx:if='{{!descShow}}'></view>
+    <view class='up-p up-p1' wx:if='{{descShow}}'></view>
     <view></view>
   </view>
 </view>

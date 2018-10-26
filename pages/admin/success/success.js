@@ -25,6 +25,11 @@ Page({
   onLoad: function (options) {
    
   },
+  goStatus:function(){
+    wx.navigateTo({
+      url: '../status/status',
+    })
+  },
   postageInfo:function(){
     wx.navigateTo({
       url: '../../page/postageInfo/postageInfo?code='+this.data.postageInfo,

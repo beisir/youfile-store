@@ -1,45 +1,53 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
 var WxParse = require('../../../wxParse/wxParse.js');
+import authHandler from '../../../utils/authHandler.js';
 function getIdentity(_this,goodsId,isTrue) {
-  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+  if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
-        var obj = res.obj,
-          isStoreOwner = obj.isStoreOwner,
-          isPurchaser = obj.isPurchaser
-        if (isStoreOwner) {
-          wx.setStorage({
-            key: 'admin',
-            data: 2, //1yon 2店主  3批发商
-          })
-          _this.setData({
-            limitShow: 2
-          })
-        }
-        if (isPurchaser) {
-          wx.setStorage({
-            key: 'admin',
-            data: 3,
-          })
-          wx.setTabBarItem({
-            index: 1,
-            text: '进货车',
-            iconPath: '/image/22.png',
-            selectedIconPath: '/image/21.png'
-          })
-          _this.setData({
-            limitShow: 3,
-          })
-        }
-        if (!isPurchaser && !isStoreOwner) {
-          wx.setStorage({
-            key: 'admin',
-            data: 1,
-          })
+        var obj = res.obj
+        if (obj == "null" || obj == null) {
+          wx.setStorageSync("admin", 1)
           _this.setData({
             limitShow: 1
           })
+        }else{
+          var isStoreOwner = obj.isStoreOwner,
+            isPurchaser = obj.isPurchaser
+          if (isStoreOwner) {
+            wx.setStorage({
+              key: 'admin',
+              data: 2, //1yon 2店主  3批发商
+            })
+            _this.setData({
+              limitShow: 2
+            })
+          }
+          if (isPurchaser) {
+            wx.setStorage({
+              key: 'admin',
+              data: 3,
+            })
+            wx.setTabBarItem({
+              index: 1,
+              text: '进货车',
+              iconPath: '/image/22.png',
+              selectedIconPath: '/image/21.png'
+            })
+            _this.setData({
+              limitShow: 3,
+            })
+          }
+          if (!isPurchaser && !isStoreOwner) {
+            wx.setStorage({
+              key: 'admin',
+              data: 1,
+            })
+            _this.setData({
+              limitShow: 1
+            })
+          }
         }
         _this.getDetails(goodsId,isTrue)
       })
@@ -60,16 +68,20 @@ Page({
     goodsSpecificationVOList:[],
     isShowNewOne: false,
     goodsSkuVOList:[],
+    newSkuOnlyIndex:0,
     skuArrTwo: [],
     saleBatchNumGoods:null,
     newSkuArrTwo:[],
     nameTwo:'',
+    differNum :0,
+    differMoney:0,
     newSkuOnly:false,
     newSkuOnlyEdit:false,
     className:'active',
     indicatorDots: true,
     autoplay: true,
     interval: 2000,
+    sdescription:'',
     duration: 500,
     bg: '#C79C77',
     Height: "" ,
@@ -400,6 +412,9 @@ Page({
       code = e.target.dataset.code
     if (this.data.newSkuOnly){
       this.newGetSpecDetails(index, code)
+      this.setData({
+        newSkuOnlyIndex:index
+      })
     }else{
       this.getSpecDetails(index, code)
     }
@@ -600,38 +615,51 @@ Page({
       saleBatchNumGoods = this.data.saleBatchNumGoods,
       saleBatchNum = this.data.saleBatchNum,
       difference=0,
+      differMoney = 0,
+      differNum=0,
       discountShow=true,
       saleBatchAmount=this.data.saleBatchAmount,
       total=0
       total = num * sell
       difference = total - num * wholesalePrice
-      if (saleBatchNum == 0) {
-        if (saleBatchAmount == 0) {
+    if (saleBatchNumGoods==0){
+      saleBatchNumGoods = saleBatchNum
+    }
+    if (saleBatchNum == 0) {
+      if (saleBatchAmount == 0) {
+        discountShow = false
+      } else {
+        discountShow = true
+        if (total >= saleBatchAmount) {
           discountShow = false
         } else {
           discountShow = true
-          if (total >= saleBatchAmount) {
-            discountShow = false
-          }
-        }
-      } else {
-        if (saleBatchAmount==0){
-          if (num >= saleBatchNum) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
-        }
-        if (saleBatchAmount>0){
-          if (num >= saleBatchNum || total >= saleBatchAmount) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
         }
       }
+      differMoney = saleBatchAmount - total
+    } else {
+      if (saleBatchAmount == 0) {
+        if (num >= saleBatchNum || num>= saleBatchNumGoods) {
+          discountShow = false
+        } else {
+          discountShow = true
+        }
+      }
+      if (saleBatchAmount > 0) {
+        if (num >= saleBatchNum || total >= saleBatchAmount || num >= saleBatchNumGoods) {
+          discountShow = false
+        } else {
+          discountShow = true
+        }
+       
+      }
+      differNum = saleBatchNumGoods - num
+      differMoney = saleBatchAmount - total
+    }
       this.setData({
         discountShow: discountShow,
+        differNum: differNum,
+        differMoney:differMoney,
         difference: parseInt(difference)
       })
   },
@@ -749,7 +777,9 @@ Page({
   getTotalPrice() {
     var childArr=[],
     code=this.data.moreCode,
-    colorNum=0
+    colorNum=0,
+    differNum = 0,
+    differMoney=0
     let newSkuArrTwo =[];
     let swichNav = this.data.swichNav;
     let spectArrDifference = this.data.spectArrDifference     
@@ -768,6 +798,9 @@ Page({
     let goodsSpecificationVOList = this.data.goodsSpecificationVOList
     if (goodsSpecificationVOList.length>0){
       var  childArr=goodsSpecificationVOList[0].goodsSpecificationValueVOList
+    }
+    if (saleBatchNumGoods == 0) {
+      saleBatchNumGoods = saleBatchNum
     }
     for (var j = 0; j< spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
@@ -794,33 +827,28 @@ Page({
                 discountShow = true 
                 if (total >= saleBatchAmount) {
                   discountShow = false
+                }else{
+                  discountShow = true 
                 }
               }
-            }else{
-              if (saleBatchNumGoods==0){
-                if (nums >= saleBatchNum) {
-                  discountShow = false
-                }else{
-                  discountShow = true
-                }
-                if (total >= saleBatchAmount) {
+              differMoney = saleBatchAmount - total
+            } else {
+              if (saleBatchAmount==0){
+                if (nums >= saleBatchNum || nums >= saleBatchNumGoods) {
                   discountShow = false
                 } else {
                   discountShow = true
                 }
               }
-              if (saleBatchNumGoods>0) {
-                if (nums > saleBatchNumGoods){
-                  discountShow = false
-                }else{
-                  discountShow = true
-                }
-                if (total >= saleBatchAmount) {
+              if (saleBatchAmount >0){
+                if (nums >= saleBatchNum || total >= saleBatchAmount || nums>=saleBatchNumGoods) {
                   discountShow = false
                 } else {
                   discountShow = true
                 }
               }
+              differNum = saleBatchNumGoods - nums
+              differMoney = saleBatchAmount - total
             }
           }
         }
@@ -831,10 +859,12 @@ Page({
       newSkuArrTwo: newSkuArrTwo,
       totalPrice:total.toFixed(2),
       nums: nums,
+      differNum: differNum,
+      differMoney:differMoney,
       discountShow: discountShow,
       classNums: classNums,
       newTotal: newTotal.toFixed(2),
-      difference: difference.toFixed(2),
+      difference: parseInt(difference),
       goodsSpecificationVOList: goodsSpecificationVOList
     });
   },
@@ -893,16 +923,33 @@ Page({
     const code = e.currentTarget.dataset.code;
     const obj = e.currentTarget.dataset.obj;
     var value = parseInt(e.detail.value)
+    var goodsSpecificationVOListNew = this.data.goodsSpecificationVOList
+    var goodsSpecificationVOList = goodsSpecificationVOListNew[0].goodsSpecificationValueVOList
     if (value < 0 || isNaN(value)){
       value=0
     }
     let spectArrDifference = this.data.spectArrDifference;
-    for (let i = 0; i < spectArrDifference.length; i++) {
-      spectArrDifference[i].newSkuArrTwo[index].num = value
+    if (this.data.newSkuOnly) {
+      var current = this.data.newSkuOnlyIndex
+      goodsSpecificationVOList[current].num = value
+        for (var j = 0; j < spectArrDifference.length; j++) {
+          if ((spectArrDifference[j].newSkuArrTwo[0].specValueCodeList).indexOf(goodsSpecificationVOList[current].specValueCode) != -1) {
+             spectArrDifference[j].newSkuArrTwo[0].num=value
+          }
+        }
+        goodsSpecificationVOListNew[0].goodsSpecificationValueVOList = goodsSpecificationVOList
+      this.setData({
+        goodsSpecificationVOList: goodsSpecificationVOListNew,
+        spectArrDifference: spectArrDifference
+      })
+    }else{
+      for (let i = 0; i < spectArrDifference.length; i++) {
+        spectArrDifference[i].newSkuArrTwo[index].num = value
+      }
+      this.setData({
+        spectArrDifference: spectArrDifference
+      });
     }
-    this.setData({
-      spectArrDifference: spectArrDifference
-    });
     this.getTotalPrice();
   },
   /**
@@ -981,7 +1028,8 @@ Page({
           mainImgUrl: obj.mainImgUrl,
           name: obj.name,
           nameTwo: name,
-          store: store
+          store: store,
+          sdescription: store.description
         },function(){
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {
@@ -1117,7 +1165,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-   
+    
   },
 
   /**

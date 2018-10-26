@@ -385,7 +385,7 @@ function likeStore(data) {
 /**店铺信息**/
 function shopList(data) {
   data = initStoreId(data);
-  return app.pageRequest.pageGet(shopListUrl, data)
+  return app.pageRequest.pageGetIndex(shopListUrl, data)
 }
 /**批发商数据**/
 function index(data) {
@@ -621,7 +621,18 @@ function initStoreId(data) {
     showToast("暂无店铺ID！")
   }
 }
+/**
+ *判断是否有storeId
+ */
+function getStoreId() {
+  if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '' || wx.getStorageSync("storeId") == null){
+    return false
+  }else{
+    return true
+  }
+}
 module.exports = {
+  getStoreId: getStoreId,
   toHome: toHome,
   getStoreInfo: getStoreInfo,
   supplyOrde: supplyOrde,

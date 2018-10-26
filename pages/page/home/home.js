@@ -1,38 +1,45 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+import authHandler from '../../../utils/authHandler.js';
 function getIdentity(_this) {
-  if (Api.isEmpty(wx.getStorageSync("access_token"))) {
+  if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
         var obj=res.obj
-        var  isStoreOwner = obj.isStoreOwner,
-          isPurchaser = obj.isPurchaser
-        if (isStoreOwner){
-          wx.setStorageSync("admin", 2)
-          //1yon 2店主  3批发商
-          _this.setData({
-            limitShow:2
-          })
-        }
-        if (isPurchaser){
-          wx.setStorageSync("admin", 3)
-          wx.setTabBarItem({
-            index: 1,
-            text: '进货车',
-            iconPath: '/image/22.png',
-            selectedIconPath: '/image/21.png'
-          })
-          _this.setData({
-            limitShow: 3
-          })
-        }
-        if (!isPurchaser && !isStoreOwner){
+        if (obj == "null" || obj==null){
           wx.setStorageSync("admin", 1)
           _this.setData({
             limitShow: 1
           })
+        }else{
+          var isStoreOwner = obj.isStoreOwner,
+            isPurchaser = obj.isPurchaser
+          if (isStoreOwner) {
+            wx.setStorageSync("admin", 2)
+            //1yon 2店主  3批发商
+            _this.setData({
+              limitShow: 2
+            })
+          }
+          if (isPurchaser) {
+            wx.setStorageSync("admin", 3)
+            wx.setTabBarItem({
+              index: 1,
+              text: '进货车',
+              iconPath: '/image/22.png',
+              selectedIconPath: '/image/21.png'
+            })
+            _this.setData({
+              limitShow: 3
+            })
+          }
+          if (!isPurchaser && !isStoreOwner) {
+            wx.setStorageSync("admin", 1)
+            _this.setData({
+              limitShow: 1
+            })
+          }
         }
-        
         _this.homeIndex()
       })
   }else{
@@ -49,8 +56,6 @@ Page({
    */
   data: {
     indexEmpty: true,
-    winWidth:0,
-    winHeight: 0,
     show:false,
     isShow:false,
     showHide:true,
@@ -58,6 +63,7 @@ Page({
     currentTab: 0,
     baseUrl:'',
     result: [],
+    noMoreData:true,
     keyword:'',
     descShow:false,
     totalCount:0,
@@ -129,7 +135,8 @@ Page({
   closeShow: function() {
     this.setData({
       showHide: true,
-      showDp:true
+      showDp:true,
+      currentTab:0
     })
   }, 
   editDp: function () {
@@ -174,8 +181,12 @@ Page({
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            noMoreData:true
           })
         }else{
+          _this.setData({
+            noMoreData:false
+          })
           Api.showToast("暂无更多数据了！")
         }
       })
@@ -233,7 +244,14 @@ Page({
     if (options.storeId) {
       wx.setStorageSync("storeId", options.storeId)
     }
-  
+    this.closeShow()
+    if (!Api.getStoreId()) {
+      this.setData({
+        indexEmpty: false
+      })
+    } else {
+      getIdentity(this)
+    }
   },
   bindChange: function (e) {
     var that = this;
@@ -243,7 +261,7 @@ Page({
     this.setData({
       result: []
     });
-    app.pageRequest.pageData.pageNum = 0
+    app.pageRequest.pageDataIndex.pageNum = 0
     this.getList()
   },
   swichNav: function (e) {
@@ -330,25 +348,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    var _this=this
-    this.closeShow()
-    app.pageRequest.pageData.pageNum = 0
-    if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '') {
+    if(wx.setStorageSync("admin")){
+      console.log(wx.setStorageSync("admin"))
       this.setData({
-        indexEmpty: false
+        limitShow: wx.setStorageSync("admin")
       })
-    } else {
-      getIdentity(this)
-      wx.getSystemInfo({
-        success: function (res) {
-          _this.setData({
-            winWidth: res.windowWidth,
-            winHeight: res.windowHeight
-          });
-        }
-      });
     }
-    
   },
 
   /**
@@ -369,7 +374,8 @@ Page({
   onPullDownRefresh: function () {
     var currentTab = this.data.currentTab
     this.setData({
-      currentTab: currentTab
+      currentTab: currentTab,
+      noMoreData:true
     },function(){
       this.emptyArr()
       // this.onShow()
@@ -417,6 +423,9 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList()
+    var noMoreData = this.data.noMoreData
+    if (noMoreData){
+      this.getList()
+    }
   },
 })

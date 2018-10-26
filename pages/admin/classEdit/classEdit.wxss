@@ -11,3 +11,4 @@
 .iconall{
   margin-right: 10rpx;
 }
+.shop-cont{max-height: 100%;overflow-y: scroll}

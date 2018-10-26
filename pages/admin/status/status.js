@@ -10,12 +10,17 @@ Page({
     currentTab: -1,
     alertTab:0,
     hidden:true,
+    confirmUp:false,
+    confirmDown:false,
+    upIndex:0,
     keyword:'',
     indexDel:'',
+    goodsId:'',
     currentTabSer:0,
     list:[],
     goodsIdDel:'',
     show1: false,
+    showNum: false,
     value:'',
     totalCount:'',
     sImg:'/image/xl.png',
@@ -118,12 +123,18 @@ Page({
   },
  
   // 上下架
-  changeStatus:function(e){
-    const goodId = e.currentTarget.dataset.id,
-          index = e.currentTarget.dataset.index,
-          _this=this,
-          detailList = this.data.detailList,
-          goodsIdList=[]
+  confirmTip:function(){
+    var id = this.data.goodsId
+    wx.navigateTo({
+      url: '../editGoods/editGoods?goodsId=' + id,
+    })
+  },
+  confirmUp:function(){
+    var _this=this,
+      goodsIdList = [],
+      index = this.data.upIndex,
+      detailList = this.data.detailList,
+      goodId = this.data.goodsId
     goodsIdList.push(goodId)
     Api.adminGoodsUp(goodsIdList)
       .then(res => {
@@ -131,6 +142,7 @@ Page({
         detailList.splice(index, 1)
         _this.setData({
           detailList: detailList,
+          confirmUp:false
         })
         wx.showToast({
           title: '上架成功',
@@ -139,12 +151,30 @@ Page({
         })
       })
   },
-  upStatus:function(e){
+  changeStatus:function(e){
     const goodId = e.currentTarget.dataset.id,
-      index = e.currentTarget.dataset.index,
-      _this = this,
+      num = e.currentTarget.dataset.num,
+          index = e.currentTarget.dataset.index
+    this.setData({
+      goodsId: goodId
+    })
+    if (1>num){
+      this.setData({
+        showNum:true
+      })
+    }else{
+      this.setData({
+        confirmUp: true,
+        upIndex:index
+      })
+    }
+  },
+  confirmDown: function () {
+    var _this = this,
+      goodsIdList = [],
+      index = this.data.upIndex,
       detailList = this.data.detailList,
-      goodsIdList = []
+      goodId = this.data.goodsId
     goodsIdList.push(goodId)
     Api.adminGoodsDown(goodsIdList)
       .then(res => {
@@ -152,6 +182,7 @@ Page({
         detailList.splice(index, 1)
         _this.setData({
           detailList: detailList,
+          confirmDown:false
         })
         wx.showToast({
           title: '下架成功',
@@ -159,6 +190,16 @@ Page({
           duration: 2000
         })
       })
+  },
+  upStatus:function(e){
+    const goodId = e.currentTarget.dataset.id,
+      index = e.currentTarget.dataset.index
+    this.setData({
+      confirmDown: true,
+      upIndex: index,
+      goodsId: goodId
+    })
+    
   },
   /**
    * 生命周期函数--监听页面加载
@@ -255,6 +296,9 @@ Page({
     this.setData({
       goodsStatus: gS,
       hidden: true,
+      showNum:false,
+      confirmUp:false,
+      confirmDown:false,
       classStatus: false,
       detailList: []
     })
@@ -337,21 +381,31 @@ Page({
   onShareAppMessage: (res) => {
     var img='',
     name='',
-    id=''
+    id='',
+    storeId = wx.getStorageSync('storeId')
     if (res.from === 'button') {
      var res=res.target.dataset
       img =res.img;
       id=res.id
       name=res.name
-    }
-    return {
-      title:name,
-      path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id,
-      imageUrl: img,
-      success: (res) => {
-      },
-      fail: (res) => {
+      return {
+        title: name,
+        path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id + "&storeId=" + storeId,
+        imageUrl: img,
+        success: (res) => {
+        },
+        fail: (res) => {
+        }
+      }
+    }else{
+      return {
+        path: '/pages/page/home/home?storeId=' + storeId,
+        success: (res) => {
+        },
+        fail: (res) => {
+        }
       }
     }
+    
   },
 })

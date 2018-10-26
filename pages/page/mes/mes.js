@@ -9,6 +9,7 @@ Page({
     showHide:true,
     countData:'',
     floor:'',
+    description:'',
     storeMes:'',
     storeGoods:[],
     baseUrl: app.globalData.imageUrl,
@@ -22,6 +23,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  calling: function () {
+    var storeMes = this.data.storeMes
+    wx.makePhoneCall({
+      phoneNumber: storeMes.servicePhone,
+      success: function () {
+      },
+      fail: function () {
+      }
+    })
+  },
   onLoad: function (options) {
     if (options.code){
       this.setData({
@@ -31,11 +42,18 @@ Page({
     var _this=this
     Api.storeIdInfo()
     .then(res=>{
-      var obj=res.obj
+      var obj=res.obj,
+        description=''
+      if (obj.store[0].store.description == "null" || obj.store[0].store.description == null){
+        description=''
+      }else{
+        description=obj.store[0].store.description
+      }
       _this.setData({
         countData: obj.countData,
         floor: obj.floor.floorInfo,
         storeMes: obj.store[0].store,
+        description: description,
         storeGoods: obj.store[0].goodsList
       })
     })
