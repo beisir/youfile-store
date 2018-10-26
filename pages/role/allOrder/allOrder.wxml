@@ -32,7 +32,7 @@
       <input class='alertInput' value='{{expressageCode}}' bindinput='watchInput' data-type='exCode' placeholder='请输入运单号 '></input>
     </view>
     <view style='display:flex;'>
-      <button wx:if="{{!noBtn}}" data-type='no' bindtap='sendGoods'>先发货，再填单</button>
+      <button wx:if="{{!noBtn}}" data-type='no' bindtap='sendGoods' style="padding:0;">先发货，再填单</button>
       <button bindtap='sendGoods'>确定</button>
     </view>
   </view>
