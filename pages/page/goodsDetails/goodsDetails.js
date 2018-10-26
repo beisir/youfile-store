@@ -6,41 +6,48 @@ function getIdentity(_this,goodsId,isTrue) {
   if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
-        var obj = res.obj,
-          isStoreOwner = obj.isStoreOwner,
-          isPurchaser = obj.isPurchaser
-        if (isStoreOwner) {
-          wx.setStorage({
-            key: 'admin',
-            data: 2, //1yon 2店主  3批发商
-          })
-          _this.setData({
-            limitShow: 2
-          })
-        }
-        if (isPurchaser) {
-          wx.setStorage({
-            key: 'admin',
-            data: 3,
-          })
-          wx.setTabBarItem({
-            index: 1,
-            text: '进货车',
-            iconPath: '/image/22.png',
-            selectedIconPath: '/image/21.png'
-          })
-          _this.setData({
-            limitShow: 3,
-          })
-        }
-        if (!isPurchaser && !isStoreOwner) {
-          wx.setStorage({
-            key: 'admin',
-            data: 1,
-          })
+        var obj = res.obj
+        if (obj == "null" || obj == null) {
+          wx.setStorageSync("admin", 1)
           _this.setData({
             limitShow: 1
           })
+        }else{
+          var isStoreOwner = obj.isStoreOwner,
+            isPurchaser = obj.isPurchaser
+          if (isStoreOwner) {
+            wx.setStorage({
+              key: 'admin',
+              data: 2, //1yon 2店主  3批发商
+            })
+            _this.setData({
+              limitShow: 2
+            })
+          }
+          if (isPurchaser) {
+            wx.setStorage({
+              key: 'admin',
+              data: 3,
+            })
+            wx.setTabBarItem({
+              index: 1,
+              text: '进货车',
+              iconPath: '/image/22.png',
+              selectedIconPath: '/image/21.png'
+            })
+            _this.setData({
+              limitShow: 3,
+            })
+          }
+          if (!isPurchaser && !isStoreOwner) {
+            wx.setStorage({
+              key: 'admin',
+              data: 1,
+            })
+            _this.setData({
+              limitShow: 1
+            })
+          }
         }
         _this.getDetails(goodsId,isTrue)
       })
@@ -74,6 +81,7 @@ Page({
     indicatorDots: true,
     autoplay: true,
     interval: 2000,
+    sdescription:'',
     duration: 500,
     bg: '#C79C77',
     Height: "" ,
@@ -1020,7 +1028,8 @@ Page({
           mainImgUrl: obj.mainImgUrl,
           name: obj.name,
           nameTwo: name,
-          store: store
+          store: store,
+          sdescription: store.description
         },function(){
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {

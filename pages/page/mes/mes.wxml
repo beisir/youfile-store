@@ -6,8 +6,8 @@
     </view>
     {{storeMes.name}}
   </view>
-  <view class="ym_jpstoredesc">
-    <text class="leftyh" wx:if='{{storeMes.description!=null}}'>“</text>{{storeMes.description}}<text class="rightyh">”</text>
+  <view class="ym_jpstoredesc" wx:if='{{description!=""}}'>
+    <text class="leftyh">“</text>{{description}}<text class="rightyh">”</text>
   </view>
 </view>
 <view class="weui_cells new-weui">

@@ -1,9 +1,4 @@
 <view class='page'>
-<nyz_area_picker
-  show="{{show}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-</nyz_area_picker>
   <view class='page__bd'>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
@@ -20,8 +15,14 @@
         </view>
       </view>
       <view class='weui-cell weui-cell_access'>
-        <view class='weui-cell__bd'  bindtap='chooseAddress'>
-           <text class='input-title'>所在地区</text><input disabled="true" value="{{province == ''?'':province + '、' + city + '、' + area}}"></input>
+        <view class='weui-cell__bd'>
+           <text class='input-title'>所在地区</text>
+           <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+              <view class="picker">
+                {{region[0]}}<text wx:if='{{region.length>0}}'>、</text>{{region[1]}}<text wx:if='{{region.length>0}}'>、</text>{{region[2]}}
+              </view>
+            </picker>
+           <!-- <input disabled="true" value="{{province == ''?'':province + '、' + city + '、' + area}}"></input> -->
         </view>
         <view class='weui-img'>
          <image src="/image/icl.png"></image>

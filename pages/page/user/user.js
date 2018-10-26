@@ -6,38 +6,47 @@ function getIdentity(_this) {
   if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
-        var obj = res.obj,
-          isStoreOwner = obj.isStoreOwner,
-          isPurchaser = obj.isPurchaser
-        if (isStoreOwner) {
-          wx.setStorageSync("admin", 2)
-          _this.setData({
-            limitShow: 2
-          },function(){
-            _this.getUser()
-          })
-        }
-        if (isPurchaser) {
-          wx.setStorageSync("admin", 3)
-          wx.setTabBarItem({
-            index: 1,
-            text: '进货车',
-            iconPath: '/image/22.png',
-            selectedIconPath: '/image/21.png'
-          })
-          _this.setData({
-            limitShow: 3,
-          }, function () {
-            _this.getUser()
-          })
-        }
-        if (!isPurchaser && !isStoreOwner) {
+        var obj = res.obj
+        if (obj == "null" || obj == null) {
           wx.setStorageSync("admin", 1)
           _this.setData({
             limitShow: 1
           }, function () {
             _this.getUser()
           })
+        }else{
+          var isStoreOwner = obj.isStoreOwner,
+            isPurchaser = obj.isPurchaser
+          if (isStoreOwner) {
+            wx.setStorageSync("admin", 2)
+            _this.setData({
+              limitShow: 2
+            }, function () {
+              _this.getUser()
+            })
+          }
+          if (isPurchaser) {
+            wx.setStorageSync("admin", 3)
+            wx.setTabBarItem({
+              index: 1,
+              text: '进货车',
+              iconPath: '/image/22.png',
+              selectedIconPath: '/image/21.png'
+            })
+            _this.setData({
+              limitShow: 3,
+            }, function () {
+              _this.getUser()
+            })
+          }
+          if (!isPurchaser && !isStoreOwner) {
+            wx.setStorageSync("admin", 1)
+            _this.setData({
+              limitShow: 1
+            }, function () {
+              _this.getUser()
+            })
+          }
         }
       })
   } else {

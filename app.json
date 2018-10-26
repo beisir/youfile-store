@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/page/newAddress/newAddress",
     "pages/page/cartList/cartList",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
@@ -30,7 +31,6 @@
     "pages/admin/set/set",
     "pages/page/storeIcon/storeIcon",
     "pages/page/self/self",
-    "pages/page/newAddress/newAddress",
     "pages/page/updataPwd/updataPwd",
     "pages/page/derm/derm",
     "pages/page/addressWe/addressWe",

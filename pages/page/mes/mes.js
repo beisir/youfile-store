@@ -9,6 +9,7 @@ Page({
     showHide:true,
     countData:'',
     floor:'',
+    description:'',
     storeMes:'',
     storeGoods:[],
     baseUrl: app.globalData.imageUrl,
@@ -41,11 +42,18 @@ Page({
     var _this=this
     Api.storeIdInfo()
     .then(res=>{
-      var obj=res.obj
+      var obj=res.obj,
+        description=''
+      if (obj.store[0].store.description == "null" || obj.store[0].store.description == null){
+        description=''
+      }else{
+        description=obj.store[0].store.description
+      }
       _this.setData({
         countData: obj.countData,
         floor: obj.floor.floorInfo,
         storeMes: obj.store[0].store,
+        description: description,
         storeGoods: obj.store[0].goodsList
       })
     })

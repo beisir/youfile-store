@@ -6,34 +6,40 @@ function getIdentity(_this) {
     Api.userIdentity()
       .then(res => {
         var obj=res.obj
-        var  isStoreOwner = obj.isStoreOwner,
-          isPurchaser = obj.isPurchaser
-        if (isStoreOwner){
-          wx.setStorageSync("admin", 2)
-          //1yon 2店主  3批发商
-          _this.setData({
-            limitShow:2
-          })
-        }
-        if (isPurchaser){
-          wx.setStorageSync("admin", 3)
-          wx.setTabBarItem({
-            index: 1,
-            text: '进货车',
-            iconPath: '/image/22.png',
-            selectedIconPath: '/image/21.png'
-          })
-          _this.setData({
-            limitShow: 3
-          })
-        }
-        if (!isPurchaser && !isStoreOwner){
+        if (obj == "null" || obj==null){
           wx.setStorageSync("admin", 1)
           _this.setData({
             limitShow: 1
           })
+        }else{
+          var isStoreOwner = obj.isStoreOwner,
+            isPurchaser = obj.isPurchaser
+          if (isStoreOwner) {
+            wx.setStorageSync("admin", 2)
+            //1yon 2店主  3批发商
+            _this.setData({
+              limitShow: 2
+            })
+          }
+          if (isPurchaser) {
+            wx.setStorageSync("admin", 3)
+            wx.setTabBarItem({
+              index: 1,
+              text: '进货车',
+              iconPath: '/image/22.png',
+              selectedIconPath: '/image/21.png'
+            })
+            _this.setData({
+              limitShow: 3
+            })
+          }
+          if (!isPurchaser && !isStoreOwner) {
+            wx.setStorageSync("admin", 1)
+            _this.setData({
+              limitShow: 1
+            })
+          }
         }
-        
         _this.homeIndex()
       })
   }else{

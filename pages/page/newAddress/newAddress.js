@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    province: '',
-    city: '',
-    area: '',
+    // province: '',
+    // city: '',
+    // area: '',
     show: false,
     nameVal:'',
     addressVal:'',
@@ -15,9 +15,14 @@ Page({
     userId: '123',
     isDefault:false,
     isEdit:false,
+    region: [],
     id:''
   },
-
+  bindRegionChange: function (e) {
+    this.setData({
+      region: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -100,26 +105,21 @@ Page({
     return true;
   },
   //城市选择
-  sureSelectAreaListener: function (e) {
-    var that = this;
-    that.setData({
-      show: false,
-      province: e.detail.currentTarget.dataset.province,
-      city: e.detail.currentTarget.dataset.city,
-      area: e.detail.currentTarget.dataset.area
-    })
-  },
-  chooseAddress: function () {
-    var that = this;
-    that.setData({
-      show: true
-    })
-  },
-  bindRegionChange: function (e) {
-    this.setData({
-      region: e.detail.value
-    })
-  },
+  // sureSelectAreaListener: function (e) {
+  //   var that = this;
+  //   that.setData({
+  //     show: false,
+  //     province: e.detail.currentTarget.dataset.province,
+  //     city: e.detail.currentTarget.dataset.city,
+  //     area: e.detail.currentTarget.dataset.area
+  //   })
+  // },
+  // chooseAddress: function () {
+  //   var that = this;
+  //   that.setData({
+  //     show: true
+  //   })
+  // },
   /**
    * 添加地址
    */
@@ -130,11 +130,13 @@ Page({
       userPhone = this.data.telephone,
       isDefault = this.data.isDefault,
       userId = this.data.userId,
-      county = this.data.area,
-      province = this.data.province,
-      city = this.data.city,
+      region = this.data.region,
+      province= region[0],
+      city= region[1],
+      county= region[2],
       detailAddress = this.data.addressVal,
       addressArr = {}
+    console.log(region)
     addressArr = { userName: userName, userPhone: userPhone, isDefault: isDefault, userId: userId, county: county, province: province, city: city, detailAddress: detailAddress }
     return addressArr
   },
@@ -149,7 +151,6 @@ Page({
         })
         _this.goBack()
       })
-
   },
   editAddress:function(){
     var list = this.getInputVal(),

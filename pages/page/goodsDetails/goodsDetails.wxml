@@ -86,7 +86,7 @@
     </view> -->
       <view class='gd-new-img'><image mode="aspectFill" wx:if='{{store!=""}}' src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"></image></view>
       <view>{{store.storeName}}</view>
-      <view class='gd-dp-text' wx:if='{{store.description!=null}}'>{{store.description}}</view>
+      <view class='gd-dp-text' wx:if='{{sdescription!=""}}'>{{sdescription}}</view>
   </view>
 <view class='gd_bottom'>
     <view class='gd_b_left'>
