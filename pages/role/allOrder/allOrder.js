@@ -17,6 +17,7 @@ Page({
   toHome(){
     API.toHome();
   },
+  
   //复制订单号
   copyCode(){
     wx.setClipboardData({
@@ -54,6 +55,7 @@ Page({
       case "goodCode": key = "getGoodCode"; break;
       case "exCom": key = "expressageCom"; break;
       case "exCode": key = "expressageCode"; break;
+      case "tip": key = "tipText";break;
     }
 
     this.setData({
@@ -65,6 +67,12 @@ Page({
     let num = e.currentTarget.dataset.num;
     let obj = {};
     switch (type) {
+      case "tip":
+        obj = {
+          tipModal:true,
+          tipText:""
+        };
+        break;
       case "change":
         obj = {
           changeModal: true,
@@ -245,7 +253,7 @@ Page({
   },
   // 保存备注
   saveRemark(e) {
-    let val = e.detail.value;
+    let val = this.data.tipText;
     API.addRemark({
       orderNumber: this.data.num,
       remark: val
@@ -254,9 +262,7 @@ Page({
         title: res.message,
         icon: 'none'
       })
-      if (res.success) {
-
-      }
+      this.afterOperation();
     })
   },
 
@@ -275,6 +281,7 @@ Page({
       delModal: false,  //删除
       cancelModal: false, //取消订单
       expressage: false, //发货
+      tipModal:false //备注
     })
   },
   /**
@@ -306,22 +313,7 @@ Page({
       })
     }
   },
-  // 保存备注
-  saveRemark(e) {
-    let val = e.detail.value;
-    API.addRemark({
-      orderNumber: this.data.num,
-      remark: val
-    }).then(res => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
-      if (res.success) {
-
-      }
-    })
-  },
+  
 
   getData() {
     app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {
