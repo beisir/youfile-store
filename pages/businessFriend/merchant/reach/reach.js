@@ -8,6 +8,7 @@ Page({
   data: {
     userId:'',
     showMes:false,
+    remarkName:'',
     baseUrl: app.globalData.imageUrl,
   },
   // 电话
@@ -35,8 +36,9 @@ Page({
             note: obj.note == null ? '' : obj.note,
             birthday: obj.birthday == null ? '' : obj.birthday,
             phone: obj.phone == null ? '' : obj.phone,
-            headPic: obj.headPic == null ? '' : obj.headPic,
+            headPic:obj.headPic,
             nickName: obj.nickName == null ? '' : obj.nickName,
+            remarkName: obj.remark == null ? '' : obj.remark,
             wechart: obj.wechart == null ? '' : obj.wechart,
           })
         }

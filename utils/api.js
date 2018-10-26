@@ -7,6 +7,7 @@ import {
   adminShopCateUrl,
   adminGoodsStatusUrl,
   saleBatchNumUrl,
+  isFriendUrl,
   newGoodsSearchListUrl,
   cusNewDetailsUrl,
   salebatchamountUrl,
@@ -83,6 +84,7 @@ import {
   changeIconUrl,
   testGoodCodeUrl,
   addGoodsUrl,
+  isFriendStoreUrl,
   uploadPayVoucherUrl,
   resetPasswordUrl,
   phoneMessageUrl,
@@ -392,6 +394,15 @@ function index(data) {
   data = initStoreId(data);
   return app.http.getRequest(indexUrl, data)
 }
+/**判断与供应商是否是好友关系**/
+function isFriendStore(data) {
+  return app.http.getRequest(isFriendStoreUrl, data)
+}
+/**判断与此进货商是否是好友关系**/
+function isFriend(data) {
+  data = initStoreId(data);
+  return app.http.getRequest(isFriendUrl, data)
+}
 /**新增批发商列表**/
 function mewWholesaler(data) {
   data = initStoreId(data);
@@ -667,6 +678,8 @@ module.exports = {
   goodsDetails: goodsDetails,
   batchNum:batchNum,
   addressList: addressList,
+  isFriend: isFriend,
+  isFriendStore: isFriendStore,
   addressDefault: addressDefault,
   addressDelete: addressDelete,
   saveAddress: saveAddress,

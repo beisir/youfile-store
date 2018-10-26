@@ -1,5 +1,6 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+import util from '../../../utils/util.js'
 Page({
   /**
    * 页面的初始数据
@@ -21,8 +22,10 @@ Page({
   switch1Change: function (e) {
     if (e.detail.value){
       this.setData({
-        switch1Change:false
+        switch1Change:false,
+        value:''
       })
+      this.togetherFun()
     }else{
       this.setData({
         switch1Change: true
@@ -33,8 +36,10 @@ Page({
   switch2Change: function (e) {
     if (e.detail.value) {
       this.setData({
-        switch2Change: false
+        switch2Change: false,
+        value1:''
       })
+      this.batchFun()
     } else {
       this.setData({
         switch2Change: true
@@ -49,32 +54,45 @@ Page({
   cancel: function () {
     this.setData({
       together: false,
-      batch: false
+      batch: false,
+      watchInput:false
     })
   },
   // 监听input
   watchInput: function (event) {
-    if (event.detail.value == '') {
+    var value = event.detail.value,
+      num = value.length
+    if (value == '') {
       this.setData({
         watchInput: false
       })
     } else {
-      this.setData({
-        watchInput: true,
-        value: event.detail.value
-      })
+      if (num > 11) {
+        Api.showToast("超过最长数字限制")
+      } else {
+        this.setData({
+          watchInput: true,
+          value: value.substring(0, 10),
+        })
+      }
     }
   },
   watchInput1: function (event) {
-    if (event.detail.value == '') {
+    var value = event.detail.value,
+      num = value.length
+    if (value == '') {
       this.setData({
         watchInput: false
       })
     } else {
-      this.setData({
-        watchInput: true,
-        value1:event.detail.value
-      })
+      if (num > 11) {
+        Api.showToast("超过最长数字限制")
+      } else {
+        this.setData({
+          value1: (util.newVal(value)).substring(0, 10),
+          watchInput: true,
+        })
+      }
     }
   },
   togetherFun:function(){

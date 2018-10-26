@@ -16,7 +16,6 @@ function getIdentity(_this) {
             isPurchaser = obj.isPurchaser
           if (isStoreOwner) {
             wx.setStorageSync("admin", 2)
-            //1yon 2店主  3批发商
             _this.setData({
               limitShow: 2
             })
@@ -75,7 +74,69 @@ Page({
     src:'',
     goodsName:''
   },
+  // addFriend:function(){
+  //   var limitShow=wx.getStorageSync("admin")
+  //   var that = this;
+  //   var show;
+  //   wx.scanCode({
+  //     success: (res) => {
+  //       var userId = res.result
+  //       if (userId != "*") {
+  //         var userId = userId.split("user_")[1]
+  //         if (limitShow == 2) {
+  //           Api.newUserInfor({ userId: userId })
+  //             .then(res => {
+  //               var accept = res.obj.id,
+  //                 phone = res.obj.mobile,
+  //                 userName = res.obj.userName
+  //               var pic = that.data.baseUrl + res.obj.headPic
+  //               Api.isFriend({ userId: accept })
+  //                 .then(res => {
+  //                   var res = res.obj
+  //                   var storeId = wx.getStorageSync("storeId")
+  //                   if (res) {
+  //                     wx.navigateTo({
+  //                       url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+  //                     })
+  //                   } else {
+  //                     console.log(accept)
+  //                     wx.navigateTo({
+  //                       url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=0&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
 
+  //                     })
+  //                   }
+  //                 })
+  //             })
+  //         } else {
+  //           Api.getStoreDetails({ userId: userId })
+  //             .then(res => {
+  //               var obj = res.obj
+  //               if (Api.isEmpty(obj)) {
+  //                 var isBizFriend = obj.isBizFriend
+  //                 var accept = obj.storeId
+  //                 if (!isBizFriend) {
+  //                   Api.showToast("未找到此供应商！")
+  //                   return
+  //                 } 
+                
+  //               } else {
+  //                 Api.showToast("未找到此供应商！")
+  //               }
+
+  //             })
+
+  //         }
+         
+  //       } else {
+  //         Api.showToast("未获取信息！")
+  //       }
+  //     },
+  //     fail: (res) => {
+  //     },
+  //     complete: (res) => {
+  //     }
+  //   })
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -233,16 +294,18 @@ Page({
   },
   onLoad: function (options) {
     var _this = this
-    if (options.scene) {
-      let scene = decodeURIComponent(options.scene);
-      var storeId = scene.split("store_")[1]
-      wx.setStorageSync("storeId", storeId)
-    }
-    if (options.query) {
-      wx.setStorageSync("storeId", options.query.storeId)
-    }
-    if (options.storeId) {
-      wx.setStorageSync("storeId", options.storeId)
+    if (options!=undefined){
+      if (options.scene) {
+        let scene = decodeURIComponent(options.scene);
+        var storeId = scene.split("store_")[1]
+        wx.setStorageSync("storeId", storeId)
+      }
+      if (options.query) {
+        wx.setStorageSync("storeId", options.query.storeId)
+      }
+      if (options.storeId) {
+        wx.setStorageSync("storeId", options.storeId)
+      }
     }
     this.closeShow()
     if (!Api.getStoreId()) {
@@ -250,6 +313,8 @@ Page({
         indexEmpty: false
       })
     } else {
+      app.pageRequest.pageDataIndex.pageNum = 1
+      app.pageRequest.pageData.pageNum = 0
       getIdentity(this)
     }
   },
@@ -348,12 +413,23 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    if(wx.setStorageSync("admin")){
-      console.log(wx.setStorageSync("admin"))
+    if(authHandler.isLogin()){
+      var limitShow = this.data.limitShow
+      var setlimitShow = wx.getStorageSync("admin")
+      if (Api.isEmpty(setlimitShow)){
+        this.setData({
+          limitShow: setlimitShow
+        })
+      }
+    }else{
       this.setData({
-        limitShow: wx.setStorageSync("admin")
+        limitShow: 1,
+        likeShow:false
       })
     }
+    this.setData({
+      getFollw: authHandler.isLogin(),
+    })
   },
 
   /**

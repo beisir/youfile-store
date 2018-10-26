@@ -70,7 +70,16 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    var index = this.data.currentTab
+    var pages = getCurrentPages();             //  获取页面栈
+    var currPage = pages[pages.length - 1];
+    var prevPage = pages[pages.length - 2];    // 上一个页面
+    prevPage.setData({
+      isempty: 0
+    })
+    wx.navigateBack({
+      data: 1
+    })
   },
 
   /**

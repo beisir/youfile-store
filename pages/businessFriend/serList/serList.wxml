@@ -12,11 +12,12 @@
 <view class='bf-cont' wx:if='{{detailList.length>0}}'>
   <scroll-view scroll-y="true" style="height:100%;">
   <view class='bf-weui'>
-    <navigator wx:for='{{detailList}}' wx:key='{{index}}' class="weui_cells"  url="../information/information?status=0&send={{userId}}&accept={{item.storeId}}&remark=&logo={{item.logo}}&name={{item.name}}">
+    <view wx:for='{{detailList}}' wx:key='{{index}}' class="weui_cells">
+      <view class='v' bindtap='getMes' data-accept='{{item.storeId}}' data-name='{{item.name}}' data-logo='{{item.logo}}'></view>
       <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.logo}}?x-oss-process=style/logo"></image></view>
       <text><text></text>{{item.name}} </text>
       <view class='nbf-font'>手机号：{{item.mobile}}</view>
-    </navigator>
+    </view>
   </view>
   </scroll-view>
 </view>

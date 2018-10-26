@@ -11,16 +11,16 @@
     <input placeholder="搜索店铺内商品" placeholder-class='pre-input' disabled='disabled' bindconfirm="searchBtn" value="{{value}}" />
   </navigator>
   <image class="home-ser" src="/image/search1.png"></image>
-  <view class='home-img home-img1'>
+  <view class='home-img '>
     <navigator url="../storeIcon/storeIcon">
       <image src="/image/xcx.png"></image>
     </navigator>
   </view>
-  <view class='home-img'>
-    <navigator url="../details/details">
+  <!-- <view class='home-img home-img1'>
+    <view bindtap='addFriend'>
       <image src="/image/youbao.png"></image>
-    </navigator>
-  </view>
+    </view>
+  </view> -->
 </view>
 <view class='banner'>
   <view class='hm-fx' wx:if='{{limitShow==2}}'>
@@ -44,8 +44,9 @@
       <text>{{store.mallName}}</text>
     </view>
   </view>
-  <button class="ym_sydtgzbtn" wx:if='{{store!=""}}' hidden='{{likeShow}}' bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
-  <button class="ym_sydtgzbtn" hidden='{{!likeShow}}' bindtap='deteleLikeStore'>已关注</button>
+  <button class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow}}'  bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
+  <button class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw}}'  bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
+  <button class="ym_sydtgzbtn" wx:if='{{likeShow && getFollw}}' bindtap='deteleLikeStore'>已关注</button>
 </view>
 <view class='add-firend'  wx:if='{{limitShow==1}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>
 <!-- <view class='add-firend add-firend1' wx:if='{{limitShow==1}}'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view> -->
