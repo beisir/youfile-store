@@ -22,7 +22,6 @@
                 {{region[0]}}<text wx:if='{{region.length>0}}'>、</text>{{region[1]}}<text wx:if='{{region.length>0}}'>、</text>{{region[2]}}
               </view>
             </picker>
-           <!-- <input disabled="true" value="{{province == ''?'':province + '、' + city + '、' + area}}"></input> -->
         </view>
         <view class='weui-img'>
          <image src="/image/icl.png"></image>

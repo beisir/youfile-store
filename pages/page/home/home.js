@@ -348,7 +348,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    
+    if(wx.setStorageSync("admin")){
+      console.log(wx.setStorageSync("admin"))
+      this.setData({
+        limitShow: wx.setStorageSync("admin")
+      })
+    }
   },
 
   /**

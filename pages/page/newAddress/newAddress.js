@@ -5,9 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // province: '',
-    // city: '',
-    // area: '',
     show: false,
     nameVal:'',
     addressVal:'',
@@ -43,10 +40,8 @@ Page({
       .then(res => {
         const obj=res.obj
         _this.setData({
-          province: obj.province,
-          city: obj.city,
           isDefault: obj.isDefault,
-          area: obj.county,
+          region: [obj.province, obj.city, obj.county],
           nameVal: obj.userName,
           addressVal: obj.detailAddress,
           telephone: obj.userPhone,
