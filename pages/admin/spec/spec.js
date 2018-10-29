@@ -1,5 +1,6 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+import util from '../../../utils/util.js'
 var getTempList = function (that) {
   Api.template()
     .then(res => {
@@ -618,7 +619,7 @@ Page({
       if (switchi == 0) {
         if (arrIndex[current].selected) {
           if (current >= editDataModel[switchi].goodsSpecificationValueVOList.length) {
-            editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code })
+            editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code + "_" + util.ramNum()})
             editDataModel[switchi].goodsSpecificationValueVOList[editDataModel[switchi].goodsSpecificationValueVOList.length - 1].selected = true
           } else {
             editDataModel[switchi].goodsSpecificationValueVOList[current].selected = true
@@ -630,10 +631,10 @@ Page({
       if (switchi == 1) {
         if (editDataModel.length==1){
           var copyData = editDataModel[0].goodsSpecificationValueVOList
-          editDataModel[0].specCode = timestamp + parseInt(89999 * Math.random() + 10000 + 1)
+          editDataModel[0].specCode = timestamp + parseInt(89999 * Math.random() + 10000 + 1)+"_" + util.ramNum()
           delete (editDataModel[0].goodsId)
           for (var i = 0; i < copyData.length; i++) {
-            copyData[i].specValueCode = timestamp + current + pId + 888 * parseInt(8999 * Math.random() + 1000 + 1)
+            copyData[i].specValueCode = timestamp + i * parseInt(999 * Math.random() +100 + 1) + current + pId + "_" + util.ramNum()
           }
           editDataModel[0].goodsSpecificationValueVOList = copyData
           goodsListData = editDataModel
@@ -644,7 +645,7 @@ Page({
         }else{
           if (arrIndex[current].selected) {
             if (current >= editDataModel[switchi].goodsSpecificationValueVOList.length) {
-              editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code })
+              editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code + "_" + util.ramNum()})
               editDataModel[switchi].goodsSpecificationValueVOList[editDataModel[switchi].goodsSpecificationValueVOList.length - 1].selected = true
             } else {
               editDataModel[switchi].goodsSpecificationValueVOList[current].selected = true
@@ -667,7 +668,7 @@ Page({
           codeArr.splice(l, 1)
          }
         }
-        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code * parseInt(8999 * Math.random() + 1000 + 1)})
+        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + i + current + pId + "_" + util.ramNum()})
         if (arrIndex[current].selected != true) {
           goodsListData[i].goodsSpecificationValueVOList.pop()
         }
@@ -677,11 +678,11 @@ Page({
       codeTd = '000'
     }
     if(!addIndex){
-      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi, selected: false, timestampCode: timestamp + current + pId + code * parseInt(8999 * Math.random() + 1000 + 1)})
+      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi, selected: false, timestampCode: timestamp + current + pId + "_" + util.ramNum()})
       list.specName = pName
       list.id = pId
       list.goodsSpecificationValueVOList = listChi
-      list.specCode = timestamp +parseInt(89999 * Math.random() + 10000 + 1)
+      list.specCode = timestamp + parseInt(89999 * Math.random() + 10000 + 1) + "_" + util.ramNum()
       goodsListData.push(list)
     }
     if (current == this.data.navindex) {
@@ -765,7 +766,7 @@ Page({
       var specEditNew = editDataModel[0].goodsSpecificationValueVOList
       for (var i = 0; i < specEditNew.length;i++){
         specEditNew[i].specCode = timestamp
-        specEditNew[i].specValueCode = parseInt(timestamp+"1"+ Math.random() * 10000 + i + i * 6)
+        specEditNew[i].specValueCode = parseInt(timestamp + "1" + Math.random() * 10000 + i + i * 6) + "_" + util.ramNum()
       }
     }
     if (Api.isEmpty(templateId)){

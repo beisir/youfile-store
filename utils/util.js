@@ -155,12 +155,24 @@ function ramNum(){
   }
   return c
 }
+/**
+ *随机三个字母
+ */
+function ramNum1() {
+  var c = ''
+  for (var i = 0; i < 3; i++) {
+    var rand = Math.floor(Math.random() * 26);
+    c = c + String.fromCharCode("a".charCodeAt(0) + rand);
+  }
+  return c
+}
 module.exports = {
   formatTime: formatTime,
   count_down:count_down,
   saveImgToPhone: saveImgToPhone,
   parseGoodsDescription: parseGoodsDescription,
   newVal: newVal,
-  ramNum: ramNum
+  ramNum: ramNum,
+  ramNum1: ramNum1,
 }
 
