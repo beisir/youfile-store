@@ -177,9 +177,9 @@
 }
 .cc-coun-new {
   position: absolute;
-  right: 20rpx;
+  right: 10rpx;
   width: 150rpx;
-  height: 42rpx;
+  height: 47rpx;
   background: #fff;
   border-radius: 4rpx;
   line-height: 1;
@@ -206,7 +206,7 @@
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-  max-width: 260rpx;
+  max-width: 230rpx;
   text-overflow: ellipsis;
 }
 .cart-list .cart-pro-name1{

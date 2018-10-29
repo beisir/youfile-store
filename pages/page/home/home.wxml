@@ -1,4 +1,14 @@
 <login id="login"></login>
+ <!--是否下架-->
+<mes
+  show="{{confirmDown}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确定下架该商品？</text>
+  <button bindtap='confirmDown'>确定</button>
+</view>
+</mes>
 <!-- 提示 -->
 <mes show="{{show}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
@@ -44,8 +54,8 @@
       <text>{{store.mallName}}</text>
     </view>
   </view>
-  <button class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow}}'  bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
-  <button class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw}}'  bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
+  <button class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow}}'  bindtap='likeStore'><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</button>
+  <button class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw}}'  bindtap='likeStore'><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</button>
   <button class="ym_sydtgzbtn" wx:if='{{likeShow && getFollw}}' bindtap='deteleLikeStore'>已关注</button>
 </view>
 <view class='add-firend'  wx:if='{{limitShow==1}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>

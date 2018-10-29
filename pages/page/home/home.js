@@ -60,6 +60,7 @@ Page({
     showHide:true,
     showDp:true,
     currentTab: 0,
+    confirmDown:false,
     baseUrl:'',
     result: [],
     noMoreData:true,
@@ -167,8 +168,13 @@ Page({
   }, 
   // 下架商品
   upGoods:function(e){
-    var _this=this,
-      goodsIdList=[],
+    this.setData({
+      confirmDown:true
+    })
+  },
+  confirmDown:function(){
+    var _this = this,
+      goodsIdList = [],
       goodsId = this.data.goodsId
     goodsIdList.push(goodsId)
     Api.adminGoodsDown(goodsIdList)
@@ -180,7 +186,8 @@ Page({
           success: function () {
             _this.setData({
               showHide: true,
-              currentTab:0
+              confirmDown:false,
+              currentTab: 0
             })
             _this.emptyArr()
           }
@@ -242,6 +249,7 @@ Page({
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            baseUrl: app.globalData.imageUrl,
             noMoreData:true
           })
         }else{

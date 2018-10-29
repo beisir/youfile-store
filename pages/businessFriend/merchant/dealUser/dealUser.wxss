@@ -12,5 +12,5 @@
   color: #CFA272;
 }
 .de-right{
-  color: #999;float: right;margin-right: 20rpx;
+  color: #999;float: right;margin-right: 20rpx;position:absolute;right:0rpx;
 }

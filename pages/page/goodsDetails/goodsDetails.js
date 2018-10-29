@@ -2,6 +2,7 @@ const app = getApp();
 import Api from '../../../utils/api.js'
 var WxParse = require('../../../wxParse/wxParse.js');
 import authHandler from '../../../utils/authHandler.js';
+const util = require('../../../utils/util.js')
 function getIdentity(_this,goodsId,isTrue) {
   if (authHandler.isLogin()) {
     Api.userIdentity()
@@ -70,7 +71,7 @@ Page({
     goodsSkuVOList:[],
     newSkuOnlyIndex:0,
     skuArrTwo: [],
-    saleBatchNumGoods:null,
+    saleBatchNumGoods:0,
     newSkuArrTwo:[],
     nameTwo:'',
     differNum :0,
@@ -247,7 +248,7 @@ Page({
         }
        }
      }
-   
+    if (!this.data.showCartOne) { this.getTotalPrice();}
   },
   getNewData: function (current, changeButtonCode){
     this.goodsSku(changeButtonCode, 0)
@@ -315,7 +316,6 @@ Page({
         }
       }
     }
-
     // 修改购物车
     if (that.data.editCode) {
       var arr=[]
@@ -324,7 +324,12 @@ Page({
         if (this.data.editOneName) {
           var newArr = codeName[0].goodsSpecificationValueVOList
           if (newArr.length > 0) {
-            var newArrLast = codeName[1].goodsSpecificationValueVOList
+            if (codeName.length==1){
+              var newArrLast = codeName[0].goodsSpecificationValueVOList
+            }
+            if (codeName.length == 2){
+              var newArrLast = codeName[1].goodsSpecificationValueVOList
+            }
             for (var l = 0; l < newArrLast.length; l++) {
               if (arr[i].specValueCodes.indexOf(newArrLast[l].specValueCode) != -1) {
                 this.getNewData1(l,newArrLast[l].specValueCode)
@@ -345,9 +350,22 @@ Page({
           })
         }else{
           var skuCode = arr[i].skuCode
+          var lenNum=1
+          if (arr[0].specValueCodes){
+            var lenArr=arr[0].specValueCodes
+            lenNum = lenArr.length
+          }
           for (var j = 0; j < newSkuArrTwo.length; j++) {
             if (newSkuArrTwo[j].skuCode == skuCode) {
-              newSkuArrTwo[j].num = arr[i].num
+              if (lenNum == 1) {
+                newSkuArrTwo[j].num = arr[i].num
+                
+              } else {
+                if (newSkuArrTwo[j].num == 0) {
+                  newSkuArrTwo[j].num = arr[i].num
+                }
+              }
+               
             }
           }
         }
@@ -479,7 +497,7 @@ Page({
       var  childArr = goodsSkuVOList[i].specValueCodeList
       if (childArr.length==1){
         if (childArr.indexOf(changeButtonCode) != -1) {
-          skuCode = goodsSkuVOList[0].skuCode
+          skuCode = goodsSkuVOList[i].skuCode
         }
       }else{
         if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
@@ -726,6 +744,9 @@ Page({
     var goodsSpecificationVOList = goodsSpecificationVOListNew[0].goodsSpecificationValueVOList
     for (var i = 0; i < spectArrDifference.length; i++) {
       if (spectArrDifference[i].code == code) {
+        if(spectArrDifference[i].newSkuArrTwo[index].num == undefined){
+          spectArrDifference[i].newSkuArrTwo[index].num=0
+        }
         spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num+1
       }
     }
@@ -780,7 +801,7 @@ Page({
     colorNum=0,
     differNum = 0,
     differMoney=0
-    let newSkuArrTwo =[];
+    let newSkuArrTwo = [];
     let swichNav = this.data.swichNav;
     let spectArrDifference = this.data.spectArrDifference     
     let total = 0;
@@ -812,7 +833,11 @@ Page({
         if (newSkuArrTwo[i].num > 0) {
           classNums += 1
           nums += newSkuArrTwo[i].num
-          total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+          if(this.data.showCartOne){
+            total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice;
+          }else{
+            total += newSkuArrTwo[i].num * this.data.sell;
+          }
           if (limitShow==3){
             if (this.data.editCode) {
               newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
@@ -964,21 +989,24 @@ Page({
    */
   getDetails: function (goodsId,isTrue){
     var _this=this,
-      storeId = this.data.storeId
-    Api.config(goodsId)
-      .then(res => {
-        var obj = res.obj
-        if(obj!=null){
-          var storeSaleBatchNum = obj.storeSaleBatchNum == null ? 0 : obj.storeSaleBatchNum,
-            storeSaleBatchAmount = obj.storeSaleBatchAmount == null ? 0 : obj.storeSaleBatchAmount,
-            saleBatchNumGoods = obj.goodsSaleBatchNum == null ? 0 : obj.goodsSaleBatchNum
+      storeId = this.data.storeId,
+      limitShow = this.data.limitShow
+    if (limitShow==3){
+      Api.config(goodsId)
+        .then(res => {
+          var obj = res.obj
+          if (obj != null) {
+            var storeSaleBatchNum = obj.storeSaleBatchNum == null ? 0 : obj.storeSaleBatchNum,
+              storeSaleBatchAmount = obj.storeSaleBatchAmount == null ? 0 : obj.storeSaleBatchAmount,
+              saleBatchNumGoods = obj.goodsSaleBatchNum == null ? 0 : obj.goodsSaleBatchNum
             _this.setData({
               saleBatchNum: storeSaleBatchNum,
               saleBatchAmount: storeSaleBatchAmount,
               saleBatchNumGoods: saleBatchNumGoods
             })
-        }
-      })
+          }
+        })
+    }
     Api.goodsDetails({ goodsId:goodsId })
       .then(res => {
         var obj = res.obj.goodsVO,
@@ -997,7 +1025,6 @@ Page({
             likeShow: false
           })
         }
-
         if (Api.isEmpty(obj.goodsSpecificationVOList)){
           if (obj.goodsSpecificationVOList.length > 1) {
             skuArrTwo.push(obj.goodsSpecificationVOList[1])
@@ -1030,11 +1057,12 @@ Page({
           nameTwo: name,
           store: store,
           sdescription: store.description
-        },function(){
+        }, function () {
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {
               var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
-              if(obj.goodsSpecificationVOList.length==1){
+              var len=obj.goodsSpecificationVOList
+              if (len.length==1){
                 for (var i = arr.length - 1; i >= 0; i--) {
                   _this.getSpecDetails(i, arr[i].specValueCode)
                 }
@@ -1057,12 +1085,20 @@ Page({
                   })
                 }
               }
-              if (isTrue){
-                for (var i = arr.length - 1; i >= 0; i--) {
-                  _this.getSpecDetails(i, arr[i].specValueCode)
-                }
-              }else{
+              if (this.data.newCartList.length==0){
                 _this.getSpecDetails(0, arr[0].specValueCode)
+              }
+              if (!this.data.showCartOne){
+                _this.getSpecDetails(0, arr[0].specValueCode)
+              }
+              if (len.length == 2){
+                if (isTrue) {
+                  for (var i = arr.length - 1; i >= 0; i--) {
+                    _this.getSpecDetails(i, arr[i].specValueCode)
+                  }
+                } else {
+                  _this.getSpecDetails(0, arr[0].specValueCode)
+                }
               }
             }
           }
@@ -1073,7 +1109,8 @@ Page({
           if (this.data.editOneName) {
             var newSkuArrTwo = this.data.newSkuArrTwo
             for (var i = 0; i < newSkuArrTwo.length; i++) {
-              if (newSkuArrTwo[i].num > 0) {
+              // num>0
+              if (newSkuArrTwo[i].num >= 0) {
                 newSkuArrTwo[i].num = num
               }
             }
@@ -1097,32 +1134,32 @@ Page({
       mainImgUrl =this.data.baseUrl+this.data.mainImgUrl
     for (var i = 0; i < imgUrls.length;i++){
       arr.push(this.data.baseUrl + imgUrls[i].imageUrl + "?x-oss-process=style/store-cover")
-    }
-    wx.getImageInfo({         //下载图片
-      src: mainImgUrl +"?x-oss-process=style/store-cover",      //这里放你要下载图片的数组(多张) 或 字符串(一张)          下面代码不用改动
-      success: function (ret) {
-        var path = ret.path;
-        wx.saveImageToPhotosAlbum({
-          filePath: path,
-          success(result) {
-            if (i == xin1.length) {
-              wx.hideLoading();
-              wx.showToast({
-                title: '下载图片成功',
-                duration: 2000,
-                mask: true,
-              });
-            }
-          },
-          fail(result) {
-            wx.openSetting({
-              success: (res) => {
+      wx.getImageInfo({         //下载图片
+        src: arr[i],      //这里放你要下载图片的数组(多张) 或 字符串(一张)          下面代码不用改动
+        success: function (ret) {
+          var path = ret.path;
+          wx.saveImageToPhotosAlbum({
+            filePath: path,
+            success(result) {
+              if (i == arr.length) {
+                wx.hideLoading();
+                wx.showToast({
+                  title: '下载图片成功',
+                  duration: 2000,
+                  mask: true,
+                });
               }
-            })
-          }
-        });
-      }
-    });
+            },
+            fail(result) {
+              wx.openSetting({
+                success: (res) => {
+                }
+              })
+            }
+          });
+        }
+      });
+    }
   },
   likeStore: function () {
     var _this = this

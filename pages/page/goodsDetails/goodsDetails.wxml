@@ -1,9 +1,9 @@
 <login id="login"></login>
 <navigator class="new-e navigator-hover" wx:if='{{limitShow==2}}' url="/pages/admin/editGoods/editGoods?goodsId={{goodsId}}">
-  <image src="/image/edit1.png"></image>
+  <image src="/image/gd1.png"></image>
 </navigator>
 <view class="new-e new-e1 navigator-hover"wx:if='{{limitShow==2}}'>
-  <image src="/image/addming2.png"  bindtap='dowLoadImg' ></image>
+  <image src="/image/gd2.png"  bindtap='dowLoadImg' ></image>
 </view>
 <import src="../../../wxParse/wxParse.wxml"/> 
 <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
@@ -94,7 +94,7 @@
           <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/newest/newest" extra-data="" version="trial"><image src="/image/home.png"></image></navigator>逛商城</view>
         </view>
         <view>
-        <view bindtap='urlHome'><image src="/image/i22.png"></image></view>
+        <view bindtap='urlHome'><image src="/image/ad5.png"></image></view>
           进店
         </view>
         <view  wx:if='{{limitShow!=3}}'>
@@ -353,7 +353,7 @@
                 <view class="lt-tr">
                     <view wx:if='{{!newSkuOnlyEdit}}'>{{nameTwo}}</view>
                     <view>零售价</view>
-                    <view>批发价</view>
+                    <view wx:if='{{limitShow==3}}'>批发价</view>
                     <view>
                       <view class="lt-add-cart">
                         <view class="lt-down" bindtap="minusCountAll"><image  src="/image/lt-jian.png"></image></view>
@@ -366,7 +366,7 @@
                   <view class="lt-tr lt-tr1"  wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
                       <view wx:if='{{!newSkuOnlyEdit}}'>{{item.name}}</view>
                       <view class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
-                      <view>￥{{item.wholesalePrice}}</view>
+                      <view wx:if='{{limitShow==3}}'>￥{{item.wholesalePrice}}</view>
                       <view>
                         <view class="lt-add-cart">
                           <view class="lt-down" data-index='{{index}}' bindtap="minusCount1"><image  src="/image/jian.png"></image></view>
@@ -389,8 +389,8 @@
   <view hidden="{{showCartOne}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
       <view class='new-man' wx:if='{{!discountShow && limitShow==3}}'>已享受批发价，共优惠<text>{{difference}}</text>元</view>
-       <view class='new-man' wx:if='{{discountShow && saleBatchNum!=0}}'>本店满{{saleBatchNum}}件可享受批发价</view>
-       <view class='new-man' wx:if='{{discountShow && saleBatchNum==0}}'>本店满{{saleBatchAmount}}元可享受批发价</view>
+      <view class='new-man' wx:if='{{discountShow && saleBatchNum!=0  && limitShow==3}}'>本店满{{saleBatchNum}}件可享受批发价</view>
+     <view class='new-man' wx:if='{{discountShow && saleBatchNum==0  && limitShow==3}}'>本店满{{saleBatchAmount}}元可享受批发价</view>
         <view class='gd-top'>
           <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
           <view class='gd-image'>
@@ -398,7 +398,7 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{name}}</view>
-            <view wx:if='{{saleBatchNum!=null}}' class='btn'>{{saleBatchNumGoods==null?saleBatchNum:saleBatchNumGoods}}<text>件起批</text></view>
+            <view wx:if='{{saleBatchNum!=0  && limitShow==3}}' class='btn'>{{saleBatchNumGoods==0?saleBatchNum:saleBatchNumGoods}}<text>件起批</text></view>
             <view wx:if='{{limitShow==3 && !discountShow}}'>￥{{wholesalePrice}}</view>
             <view wx:if='{{limitShow==3 && discountShow}}'>￥{{sell}}</view>
             <view wx:if='{{limitShow!=3}}'>￥{{sell}}</view>

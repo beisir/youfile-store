@@ -23,15 +23,12 @@ Page({
         .then(res => {
           var detailList = res.obj.result,
             datas = _this.data.result
-          if (detailList.length==0){
-            Api.showToast("暂无更多数据了！")
-          }else{
+          if (detailList.length>0){
             var newArr = app.pageRequest.addDataList(datas, detailList)
             _this.setData({
               result: newArr,
             })
           }
-          
         })
     }else{
       Api.goodsApiSearchList()
