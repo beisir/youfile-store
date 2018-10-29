@@ -16,15 +16,15 @@ Page({
     phone:'',
     wechart:'',
     birthday:'',
-    province: '',
-    city: '',
-    area: '',
+    showCity:true,
+    region:[],
     detailAddress:'',
     userId:null,
   },
-  datePickerBindchange: function (e) {
+  bindRegionChange: function (e) {
     this.setData({
-      dateValue: e.detail.value
+      region: e.detail.value,
+      showCity:true
     })
   },
   /**
@@ -43,6 +43,14 @@ Page({
       } else if (obj.sex == 2){
         sex = '女'
       }
+      var province=obj.province == null ? '' : obj.province
+      var city=obj.city == null ? '' : obj.city
+      var area=obj.county == null ? '' : obj.county
+      if (province==''){
+        _this.setData({
+          showCity:false
+        })
+      }
       _this.setData({
         name: obj.name,
         nickName: obj.nickName,
@@ -51,9 +59,7 @@ Page({
         phone: obj.phone,
         wechart: obj.wechart,
         birthday: obj.birthday,
-        province: obj.province == null ? '' : obj.province,
-        city: obj.city == null ? '' : obj.city,
-        area: obj.county == null ? '' : obj.county,
+        region: [province, city, area],
         detailAddress: obj.detailAddress,
         userId: obj.userId
       })
@@ -117,22 +123,6 @@ Page({
       show: true
     })
   },
-  // 收获地址
-  chooseAddress: function () {
-    var that = this;
-    that.setData({
-      showAddress: true
-    })
-  },
-  sureSelectAreaListener: function (e) {
-    var that = this;
-    that.setData({
-      showAddress: false,
-      province: e.detail.currentTarget.dataset.province,
-      city: e.detail.currentTarget.dataset.city,
-      area: e.detail.currentTarget.dataset.area
-    })
-  },
   // 更新
   addDetails:function(){
     var _this=this,
@@ -143,9 +133,10 @@ Page({
       phone = this.data.phone,
       wechart = this.data.wechart,
       birthday = this.data.birthday,
-      province = this.data.province,
-      city = this.data.city,
-      county = this.data.area,
+      region = this.data.region,
+      province = region[0],
+      city = region[1],
+      county = region[2],
       userId = this.data.userId,
       detailAddress = this.data.detailAddress,
       data={},

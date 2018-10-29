@@ -15,6 +15,27 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+
+  clickSer:function(e){
+    var accept = e.target.dataset.accept,
+      logo = e.target.dataset.logo,
+      name = e.target.dataset.name,
+      phone = e.target.dataset.phone,
+      storeId = this.data.storeId
+    Api.isFriend({ userId: accept })
+      .then(res => {
+        var res = res.obj
+        if (res){
+          wx.navigateTo({
+            url: '../reach/reach?accept=' + accept,
+          })
+        }else{
+          wx.navigateTo({
+            url: '../merchantInfo/merchantInfo?status=0&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + name + '&logo=' + logo + '&phone=' + phone,
+          })
+        }
+    })
+  },
   onLoad: function (options) {
     if (options.value) {
       app.pageRequest.pageData.pageNum = 0

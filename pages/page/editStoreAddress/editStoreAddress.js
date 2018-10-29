@@ -5,28 +5,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    province: '',
-    city: '',
-    area: '',
+    region: [],
     show: false,
     value:'',
     id: wx.getStorageSync("storeId"),
     baseUrl: wx.getStorageSync('baseUrl'),
   },
-  //城市选择
-  sureSelectAreaListener: function (e) {
-    var that = this;
-    that.setData({
-      show: false,
-      province: e.detail.currentTarget.dataset.province,
-      city: e.detail.currentTarget.dataset.city,
-      area: e.detail.currentTarget.dataset.area
-    })
-  },
-  chooseAddress: function () {
-    var that = this;
-    that.setData({
-      show: true
+  bindRegionChange: function (e) {
+    this.setData({
+      region: e.detail.value
     })
   },
   watchInput:function(e){
@@ -41,9 +28,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      area: options.county,
-      province: options.province,
-      city: options.city,
+      region: [options.province, options.city, options.county],
       value:options.address
     })
 
@@ -73,11 +58,12 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  updateMes:function(){
     var value = this.data.value,
-      province = this.data.province,
-      city = this.data.city,
-      area = this.data.area,
+      region = this.data.region,
+      province = region[0],
+      city = region[1],
+      area = region[2],
       id = this.data.id
     Api.updateMes({ address: value, id: id, province: province, city: city, county: area })
       .then(res => {
@@ -85,8 +71,22 @@ Page({
           title: '修改成功',
           icon: 'none',
           duration: 2000,
+          success: function () {
+            var pages = getCurrentPages();             //  获取页面栈
+            var currPage = pages[pages.length - 1];
+            var prevPage = pages[pages.length - 2];    // 上一个页面
+            prevPage.setData({
+              code: 0
+            })
+            wx.navigateBack({
+              data: 1
+            })
+          }
         })
       })
+  },
+  onUnload: function () {
+   
   },
 
   /**

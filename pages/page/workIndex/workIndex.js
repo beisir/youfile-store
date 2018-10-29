@@ -23,10 +23,6 @@ Page({
    */
   onLoad: function (options) {
     if (options.storeId) {
-      // wx.setStorage({
-      //   key: 'storeId',
-      //   data: options.storeId,
-      // })
       wx.setStorageSync("storeId", options.storeId)
     }
     if (!Api.isEmpty(wx.getStorageSync("access_token"))){
@@ -38,7 +34,7 @@ Page({
   },
   goDerm:function(){
     wx.navigateTo({
-      url: '../../page/derm/derm',
+      url: '../../page/storeIcon/storeIcon',
     })
   },
  getMes:function(){

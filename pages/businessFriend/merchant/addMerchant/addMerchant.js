@@ -22,10 +22,23 @@ Page({
           .then(res=>{
             var obj=res.obj
             var pic = that.data.baseUrl+obj.headPic
+            var accept = obj.id 
             var storeId = wx.getStorageSync("storeId")
-            wx.navigateTo({
-              url: '../merchantInfo/merchantInfo?status=0&send=' + storeId + '&accept=' + obj.id + '&remark=&greet=&name=' + obj.userName+'&logo=' + pic+'&phone=' + obj.mobile,
-            })
+            Api.isFriend({ userId: accept })
+              .then(res => {
+                var res = res.obj
+                var storeId = wx.getStorageSync("storeId")
+                if (res) {
+                  wx.navigateTo({
+                    url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+                  })
+                } else {
+                  wx.navigateTo({
+                    url: '../merchantInfo/merchantInfo?status=0&send=' + storeId + '&accept=' + obj.id + '&remark=&greet=&name=' + obj.userName + '&logo=' + pic + '&phone=' + obj.mobile,
+                  })
+                }
+              })
+          
           })
         }else{
           Api.showToast("未获取信息！")

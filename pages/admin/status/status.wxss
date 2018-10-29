@@ -73,7 +73,7 @@ page{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: #fff;position: relative;z-index: 1000;
   -webkit-transform: translateX(130rpx);
   transform: translateX(130rpx);
   -webkit-transition: all 0.4s;
@@ -107,4 +107,7 @@ page{
 }
 scroll-view{
   margin-top: 0rpx;padding-bottom: 100rpx;
+}
+.babt{
+  position: absolute;top: 0;height: 250rpx;z-index: 100;width: 100%;
 }

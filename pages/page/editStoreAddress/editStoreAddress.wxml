@@ -1,17 +1,21 @@
-<nyz_area_picker show="{{show}}" bind:sureSelectArea="sureSelectAreaListener"
->
-</nyz_area_picker>
+
 <view class='page'>
-  <view class='page__bd'>
+  <view class='page__bd page__bd-n'>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'  bindtap='chooseAddress'>
-           选择地区<input disabled="true" value="{{province == ''?'':province + '、' + city + '、' + area}}"></input>
+           选择地区 
+           <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+              <view class="picker">
+                {{region[0]}}<text wx:if='{{region.length>0}}'>、</text>{{region[1]}}<text wx:if='{{region.length>0}}'>、</text>{{region[2]}}
+              </view>
+            </picker>
         </view>
       </view>
-      <view class='weui-cell weui-cell_access'>
+      <view class='weui-cell weui-cell_access  weui-cell__bd1'>
         <view class='weui-cell__bd'>
-           详细地址<input bindinput='watchInput' value='{{value}}' placeholder='请输入详细地址详情'></input>
+           <text>详细地址</text> <textarea  bindinput='watchInput' value='{{value}}' placeholder='请输入详细地址详情'></textarea>
         </view>
       </view>
   </view>
+  <button bindtap='updateMes' class='aw-but'>确定</button>
 </view>

@@ -142,8 +142,8 @@
 .st-bottom1{
   background: #fff;
   color: #333;position: fixed;
-  font-size: 30rpx;
-  height: 120rpx;
+  font-size: 30rpx;z-index:9999;
+  height: 120rpx;font-weight:bold;
 }
 .st-bottom1 view{
   border-right: 2rpx solid #EDEDED;

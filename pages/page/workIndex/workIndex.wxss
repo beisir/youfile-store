@@ -10,16 +10,17 @@
 .wk-bot{
   position: relative
 }
-.wk-bot>view{
+
+.wk-bot>view,.wk-bot>navigator{
   width: 33.3%;font-size:40rpx;display: inline-block;text-align: center;margin: 30rpx 0;position: relative
 }
-.wk-bot>view view{
+.wk-bot>view view,.wk-bot>navigator view {
   font-size: 28rpx;
 }
 .wx-bot-cont>view,.wx-bot-cont>navigator{
   width: 25%;margin-top: 80rpx;display: inline-block;text-align: center;
 }
-.wk-bot>view .wk-xian{
+.wk-bot>view .wk-xian,.wk-bot>navigator .wk-xian{
   height: 45rpx;background: #EEEEEE;width: 2rpx;position: absolute;top:38rpx; 
 }
 .wk-bot>.wk-fg{

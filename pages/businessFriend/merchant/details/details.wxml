@@ -1,8 +1,3 @@
-<nyz_area_picker
-  show="{{showAddress}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-</nyz_area_picker>
 <view class='bf-cont info-cont'>
   <view class='in-cont'>
    <text>姓名</text><view><input value='{{name}}' bindinput='changeValue' data-name='name' placeholder='请输入客户真实姓名'></input></view>
@@ -28,7 +23,13 @@
    <text>生日</text><view><input placeholder='请选择日期' bindinput='changeValue' data-name='birthday' value='{{birthday}}'></input></view>
   </view>
   <view class='in-cont'>
-   <text>选择地区</text><view bindtap='chooseAddress'><input disabled="true" placeholder='请选择地区' value="{{province == ''?'':province + '、' + city + '、' + area}}"></input></view>
+   <text>选择地区</text><view>
+   <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+      <view class="picker">
+       {{region[0]}}<text wx:if='{{showCity}}'>、</text>{{region[1]}}<text wx:if='{{showCity}}'>、</text>{{region[2]}}
+    </view>
+  </picker>
+   </view>
    <view class='weui-view'>
       <image  mode="widthFix" src="/image/icl.png"></image>
    </view>

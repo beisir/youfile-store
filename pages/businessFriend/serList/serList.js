@@ -14,7 +14,26 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  getMes:function(e){
+    var accept = e.target.dataset.accept,
+      name = e.target.dataset.name,
+      logo = e.target.dataset.logo
+    Api.isFriendStore({ storeId: accept})
+    .then(res=>{
+      var res=res.obj
+      if(res){
+        wx.navigateTo({
+          url: '../information/information?status=2&send=&accept=' + accept+'&remark=&name='+name+'&logo='+logo,
+        })
+      }else{
+        wx.navigateTo({
+          url: '../information/information?status=0&send=&accept=' + accept+'&remark=&logo='+logo+'&name='+name,
+        })
+      }
+    })
+  },
   onLoad: function (options) {
+    // isFriendStoreUrl
     if (options.value){
       app.pageRequest.pageData.pageNum = 0
       this.getList({ keyword: options.value})
