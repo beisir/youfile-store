@@ -103,7 +103,9 @@ import {
   getStoreNameUrl,
   getStoreDetailsUrl,
   userInforUrl,
-  supplyOrderUrl
+  supplyOrderUrl,
+  showPurchaserUrl,
+  showMerchantUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -213,6 +215,7 @@ function adminGetDetails(data) {
 }
 /**分类**/
 function customCategoryCode(data) {
+  data = initStoreId(data);
   return app.http.putRequest(customCategoryCodeUrl,data)
 }
 /**店铺设置起批量**/
@@ -410,7 +413,6 @@ function mewWholesaler(data) {
 }
 /**设置备注**/
 function setName(data) {
-  data = initStoreId(data);
   return app.http.postRequest(setNameUrl, data)
 }
 /**添加批发商**/
@@ -485,6 +487,14 @@ function remakInfo(data) {
 /**批发商资料**/
 function purchaserUserId(url) {
   return app.http.getRequest(url)
+}
+/**扫一扫查看批发商**/
+function showPurchaser(data) {
+  return app.http.getRequest(showPurchaserUrl,data)
+}
+/**扫一扫查看进货商**/
+function showMerchant(data) {
+  return app.http.getRequest(showMerchantUrl, data)
 }
 /**满足起批配置信息**/
 function config(goodsId) {
@@ -755,5 +765,7 @@ module.exports = {
   classListApi: classListApi,
   goodsApiSearchList: goodsApiSearchList,
   updataPwd: updataPwd,
-  changeIcon: changeIcon
+  changeIcon: changeIcon,
+  showPurchaser: showPurchaser,
+  showMerchant: showMerchant
 }

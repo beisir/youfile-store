@@ -6,7 +6,8 @@
   <image src="/image/gd2.png"  bindtap='dowLoadImg' ></image>
 </view>
 <import src="../../../wxParse/wxParse.wxml"/> 
-<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
+<image style='display:inherit' wx:if='{{imgUrls.length==1}}' wx:for="{{imgUrls}}" wx:key="{{index}}" src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight'/>
+<swiper wx:if='{{imgUrls.length>1}}' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
    <block wx:if='{{imgUrls.length!=0}}' wx:for="{{imgUrls}}" wx:key="{{index}}">
     <swiper-item>
       <image src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight'/>

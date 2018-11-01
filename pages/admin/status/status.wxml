@@ -45,7 +45,7 @@
     <image class="home-ser"  src="/image/search.png"></image>
     <view class='home-img'>
       <view bindtap='blurInputEvent'>
-        筛选
+        搜索
       </view>
     </view>
 </view>
@@ -91,7 +91,14 @@
       <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>删除</view>
   </view>
   <view class='st-all' wx:if='{{detailList.length>0}}'>{{detailList.length}}件商品</view>
-  <view class='st-all' wx:if='{{detailList.length==0}}'>暂无商品</view>
+  <view class='st-all' wx:if='{{detailList.length==0}}'>
+     <view class="nomore">
+      <view>
+        <image src="/image/nohome.png"></image>
+      </view>
+      暂时还没有商品哦！
+    </view>
+  </view>
 </scroll-view>
 <view class='st-bottom st-bottom1'>
     <view><navigator url="../addGoods/addGoods">添加商品</navigator></view>

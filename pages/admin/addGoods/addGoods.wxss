@@ -123,13 +123,16 @@ border: 2rpx solid #d0d0d0;  padding-left: 20rpx;
   color: #999;font-size:24rpx
 }
 .write .value,.write textarea,.write input{
-  font-size: 28rpx;padding:0rpx 5%;word-wrap: break-word; word-break: normal;
+  font-size: 28rpx;width: 71%;border:2rpx solid #ddd;margin-bottom:10rpx;margin-left: 10%;padding:20rpx 30rpx;word-wrap: break-word; word-break: normal;
 }
 .write input{
-  font-size:32rpx;
+  font-size:32rpx;height: 120rpx;
+}
+.write textarea.input-v{
+  height: 120rpx;
 }
 .write textarea{
-  height: 200rpx;width: 90%;
+  height: 200rpx;
 }
 .write .value{
   background: red;position: absolute;
@@ -148,14 +151,17 @@ border: 2rpx solid #d0d0d0;  padding-left: 20rpx;
   position: relative;
 }
 .removeImg>view{
-  position: absolute;bottom:10rpx;z-index: 9;background: #F0F0F0;height:55rpx;width: 450rpx;right:10%;font-size:28rpx;line-height: 50rpx;
+  position: absolute;bottom:10rpx;z-index: 9;background: #F0F0F0;height:55rpx;width:auto;right:10%;font-size:28rpx;line-height: 50rpx;
 }
 .removeImg>view view{
-  display: inline-block;width: 150rpx;color: #666;text-align: center
+  display: inline-block;width: 130rpx;color: #666;text-align: center
 }
 .removeImg>view image{
   width:35rpx;height: 35rpx;vertical-align: middle;margin-top: -2rpx;margin-right:10rpx;margin-left:0;
 }
 .removeImg>view  view:first-child image{
   width: 30rpx;height: 30rpx;
+}
+.page{
+  overflow-x: hidden
 }

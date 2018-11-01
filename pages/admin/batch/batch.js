@@ -72,12 +72,14 @@ Page({
     var data = this.data.datas,
         selectAllStatus = this.data.selectAllStatus,
        arr = this.data.setCode
+    arr = []
     for (var i = 0; i < data.length;i++){
       if (selectAllStatus) {
         data[i].selected =false
+        arr=[]
       }else{
         data[i].selected = true
-        arr.push(goodId)
+        arr.push(data[i].id)
       }
     }
     this.setData({
@@ -89,9 +91,13 @@ Page({
   // 分类至
   addClass:function(){
     var code = this.data.setCode
-    wx.navigateTo({
-      url: '../shopClass/shopClass?code='+code,
-    })
+    if(code.length==0){
+      Api.showToast("请选择分类！")
+    }else{
+      wx.navigateTo({
+        url: '../shopClass/shopClass?code=' + code,
+      })
+    }
   },
   // 切换
   swichNav: function (e) {
@@ -130,7 +136,7 @@ Page({
       .then(res => {
         var detailList = res.obj.result
         if (detailList.length == 0) {
-          Api.showToast("暂无更多数据了！")
+          // Api.showToast("暂无更多数据了！")
         }else{
           var datas = _this.data.datas,
             newArr = app.pageRequest.addDataList(datas, detailList)
@@ -207,7 +213,9 @@ Page({
   onShow: function () {
     app.pageRequest.pageData.pageNum = 0
     this.setData({
-      datas: []
+      datas: [],
+      setCode:[],
+      numSle:0
     })
     var _this = this
     _this.classCode()
@@ -231,22 +239,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-   
+    this.onShow()
+    wx.stopPullDownRefresh();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var that = this,
-      goodsStatus = this.data.goodsStatus
     this.classCode()
-    // if (goodsStatus == '') {
-    //   that.getList()
-    // } else {
-    //   this.classCode()
-    // }
   },
-
-
 })

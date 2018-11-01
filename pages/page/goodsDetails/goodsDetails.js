@@ -17,19 +17,13 @@ function getIdentity(_this,goodsId,isTrue) {
           var isStoreOwner = obj.isStoreOwner,
             isPurchaser = obj.isPurchaser
           if (isStoreOwner) {
-            wx.setStorage({
-              key: 'admin',
-              data: 2, //1yon 2店主  3批发商
-            })
+            wx.setStorageSync("admin", 2)
             _this.setData({
               limitShow: 2
             })
           }
           if (isPurchaser) {
-            wx.setStorage({
-              key: 'admin',
-              data: 3,
-            })
+            wx.setStorageSync("admin", 3)
             wx.setTabBarItem({
               index: 2,
               text: '进货车',
@@ -41,10 +35,7 @@ function getIdentity(_this,goodsId,isTrue) {
             })
           }
           if (!isPurchaser && !isStoreOwner) {
-            wx.setStorage({
-              key: 'admin',
-              data: 1,
-            })
+            wx.setStorageSync("admin", 1)
             _this.setData({
               limitShow: 1
             })
@@ -363,6 +354,7 @@ Page({
               } else {
                 if (newSkuArrTwo[j].num == 0) {
                   newSkuArrTwo[j].num = arr[i].num
+                  arr[i].num=0
                 }
               }
                
@@ -1143,11 +1135,7 @@ Page({
             success(result) {
               if (i == arr.length) {
                 wx.hideLoading();
-                wx.showToast({
-                  title: '下载图片成功',
-                  duration: 2000,
-                  mask: true,
-                });
+                Api.showToast("图片下载成功")
               }
             },
             fail(result) {

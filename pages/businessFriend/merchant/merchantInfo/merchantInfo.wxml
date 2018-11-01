@@ -14,7 +14,7 @@
       <text>{{userName}}</text><text  wx:if='{{success}}'>（战略合作）</text>
     </view>
   </view>
-  <view class='data-cont' wx:if='{{oneGreet}}'>
+  <view class='data-cont' wx:if='{{oneGreet}}'  wx:if='{{greet.length!=0}}'>
    <view wx:for='{{greet}}' wx:key='{{index}}'><text>{{item.name}}：</text><view>{{item.mes}}</view></view>
   </view>
 </view>

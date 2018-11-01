@@ -166,6 +166,9 @@ function ramNum1() {
   }
   return c
 }
+function ramData(){
+  return Date.parse(new Date()) + parseInt(89999 * Math.random() + 10000 + 1)
+}
 module.exports = {
   formatTime: formatTime,
   count_down:count_down,
@@ -173,6 +176,7 @@ module.exports = {
   parseGoodsDescription: parseGoodsDescription,
   newVal: newVal,
   ramNum: ramNum,
+  ramData: ramData,
   ramNum1: ramNum1,
 }
 

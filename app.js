@@ -8,12 +8,13 @@ App({
     if (options.query && options.query.storeId){
       wx.setStorageSync("storeId",options.query.storeId)
     }
-    wx.setStorageSync("storeId", "S1000349")
+    // wx.setStorageSync("storeId", "S1000349")
   },
   globalData: {
     userInfo: null,
     skin: "normal",
-    imageUrl: imageUrl
+    imageUrl: imageUrl,
+    switchStore: false
   },
   http: new http(),
   pageRequest: new pageRequest(),

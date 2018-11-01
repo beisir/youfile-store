@@ -11,7 +11,7 @@
   border-top-left-radius:65rpx;border-bottom-left-radius:65rpx;padding-top: 7rpx;top: 25rpx;
 }
 .slide-image{    
-   width: 100%;    
+   width: 100%;display: inherit
 }
 .sh-cont view{
   position: relative;
@@ -27,7 +27,7 @@
     font-size: 28rpx;
     line-height: 40rpx;
 }
-.ym_sydtstore {
+.ym_sydtstore,.back-c{
     width: 100%;
     position: absolute;
     left: 0;
@@ -35,6 +35,9 @@
     padding-bottom: 20rpx;
     padding-top: 30rpx;
     z-index: 12;
+}
+.back-c{
+   background: linear-gradient(rgba(17, 0, 0, 0),70%,rgba(20, 2, 2, 0.4));z-index: 11;height:70rpx;bottom:0;
 }
 .ym_sydtlogo {
     float: left;
@@ -123,7 +126,6 @@
 }
 .swiper-tab{ 
   width: 100%; 
-  margin-top: -9rpx;
   text-align: center; 
   background: #fff;
   line-height: 80rpx;} 

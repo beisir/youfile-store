@@ -92,10 +92,13 @@ Page({
       goodsStatus: status,
       hidden: true,
       classStatus:false,
+      currentTabSer:0,
+      code:'',
       detailList: []
+    },function(){
+      app.pageRequest.pageData.pageNum = 0
+      this.classCode()
     })
-    app.pageRequest.pageData.pageNum = 0
-    this.classCode('')
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
@@ -144,6 +147,7 @@ Page({
           detailList: detailList,
           confirmUp:false
         })
+        app.globalData.switchStore = true
         wx.showToast({
           title: '上架成功',
           icon: 'none',
@@ -184,6 +188,7 @@ Page({
           detailList: detailList,
           confirmDown:false
         })
+        app.globalData.switchStore = true
         wx.showToast({
           title: '下架成功',
           icon: 'none',
@@ -204,22 +209,6 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-
-  getList: function () {
-    var _this = this,
-      keyword = this.data.keyword
-    Api.adminGoodsList({ keyword: '' })
-      .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.detailList,
-          totalCount = res.obj.totalCount,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          detailList: newArr,
-          totalCount: totalCount
-        })
-      })
-  },
   
   onLoad: function (options) {
 
@@ -232,50 +221,50 @@ Page({
     Api.adminShopCate()
       .then(res => {
         var obj = res.obj
-        obj.unshift({ name: "全部商品", customCategoryCode: "0000" })
+        obj.unshift({ name: "全部商品", customCategoryCode: "" })
         that.setData({
           list: obj
         })
       })
   },
-  classCode:function(code){
+  classCode:function(){
     var _this = this,
-      goodsStatus =this.data.goodsStatus
+      goodsStatus =this.data.goodsStatus,
+      customCategoryCodes=this.data.code
     if (goodsStatus==0){
       goodsStatus="0,2"
     }
-    Api.adminGoodsStatus({ goodsStatus: goodsStatus})
-      .then(res => {
-        var detailList = res.obj.result
-        if (Api.isEmpty(detailList)){
-          var datas = _this.data.detailList,
-            totalCount = res.obj.totalCount,
-            newArr = app.pageRequest.addDataList(datas, detailList)
-          _this.setData({
-            detailList: newArr,
-            totalCount: totalCount
-          })
-        }else{
-          Api.showToast("暂无更多数据了！")
-        }
-      })
+    Api.adminGoodsStatus({ goodsStatus: goodsStatus, customCategoryCodes: customCategoryCodes})
+        .then(res => {
+          var detailList = res.obj.result
+          if (Api.isEmpty(detailList)) {
+            var datas = _this.data.detailList,
+              totalCount = res.obj.totalCount,
+              newArr = app.pageRequest.addDataList(datas, detailList)
+            _this.setData({
+              detailList: newArr,
+              totalCount: totalCount
+            })
+          }
+        })
+   
   },
   swichSer: function (e) {
     var that = this,
         code=e.target.dataset.code
-    app.pageRequest.pageData.pageNum = 0
-    this.classCode(code)
-    that.setData({
-      detailList: []
-    })
     if (that.data.currentTabSer === e.target.dataset.current) {
       return false;
     } else {
       that.setData({
         currentTabSer: e.target.dataset.current,
         code:code
+      },function(){
+        app.pageRequest.pageData.pageNum = 0
+        that.setData({
+          detailList: []
+        })
+        this.classCode()
       })
-
     }
   },
   /**
@@ -284,26 +273,16 @@ Page({
   onShow: function () {
     var gS = this.data.goodsStatus,
       currentTab = this.data.currentTab
-    if (currentTab=="-1"){
-      this.setData({
-        currentTab: 0,
-      })
-    }else{
-      this.setData({
-        currentTab: currentTab,
-      })
-    }
     this.setData({
       goodsStatus: gS,
       hidden: true,
       showNum:false,
       confirmUp:false,
       confirmDown:false,
-      classStatus: false,
       detailList: []
     })
     app.pageRequest.pageData.pageNum = 0
-    this.classCode('')
+    this.classCode()
   },
   bindDownLoad: function () {
     
@@ -337,15 +316,7 @@ Page({
     var that = this,
       code = this.data.code,
       goodsStatus = this.data.goodsStatus
-    if (this.data.goodsStatus == '' && this.data.code == '') {
-      that.getList()
-    }
-    if (this.data.goodsStatus != '' && this.data.code == '') {
-      that.classCode('')
-    }
-    if (this.data.goodsStatus != '' && this.data.code != '') {
-      that.classCode(code)
-    }
+      that.classCode()
   },
   lookGoodsDetails: function (e) {
     var id = e.target.dataset.id

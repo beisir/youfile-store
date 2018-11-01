@@ -70,7 +70,7 @@ Page({
       Api.setUserName({ userId: userId, remark: remark })
         .then(res => {
           wx.showToast({
-            title: res.obj.message,
+            title: res.message,
             icon: 'none',
             duration: 1000,
             mask: true,

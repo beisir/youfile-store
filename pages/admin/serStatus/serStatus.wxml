@@ -33,24 +33,13 @@
       </view>
       <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>删除</view>
   </view>
-        <!-- <view class="result-box" wx:if="{{result.length > 0}}">
-          <scroll-view  scroll-y="true" style="height:100%">
-            <view class="result-list" wx:for="{{result}}" wx:key="index">
-                <navigator url="../../page/goodsDetails/goodsDetails?goodsId={{item.id}}">
-                    <image src="{{baseUrl}}{{item.mainImgUrl}}"></image>
-                    <view class="result-text">
-                        <text>{{item.name}}</text>
-                    </view>
-                    <view class="result-text">
-                        <text>￥ {{item.marketPrice}}</text>
-                    </view>
-                </navigator>
-            </view>
-            <view class='nomore'>没有更多了</view>
-            </scroll-view>
-        </view> -->
         <view class="result-null" wx:if="{{result.length==0}}">
-            <view class="null-tips">搜索结果为空！</view>
+          <view class="nomore">
+            <view>
+              <image src="/image/nohome.png"></image>
+            </view>
+            搜索结果为空！
+          </view>
         </view>
     </view>
     <view class="init-page" wx:else>
