@@ -1,6 +1,16 @@
 {
   "pages":[
     "pages/page/home/home",
+    
+    "pages/cloudOrder/myOrder/myOrder",
+    "pages/cloudOrder/orderDetail/orderDetail",
+    
+    
+    
+    "pages/page/invoice/invoice",
+    
+    
+    
     "pages/role/allOrder/allOrder",
     "pages/role/order/order",
     "pages/businessFriend/merchant/index/index",
@@ -26,7 +36,6 @@
     "pages/businessFriend/merchant/dealUserDetails/dealUserDetails",
     "pages/businessFriend/addWholesaler/addWholesaler",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
-    "pages/page/invoice/invoice",
     "pages/page/upload/upload",
     "pages/page/serStatus/serStatus",
     "pages/admin/serStatus/serStatus",
@@ -57,10 +66,8 @@
     "pages/businessFriend/merchant/reach/reach",
     "pages/businessFriend/wholesaler/wholesaler",
     "pages/businessFriend/information/information",
-    "pages/cloudOrder/orderDetail/orderDetail",
     "pages/cloudOrder/applyStore/applyStore",
     "pages/cloudOrder/congratulation/congratulation",
-    "pages/cloudOrder/myOrder/myOrder",
     "pages/page/userM/userM",
     "pages/page/editStoreAddress/editStoreAddress",
     "pages/page/main/main",
