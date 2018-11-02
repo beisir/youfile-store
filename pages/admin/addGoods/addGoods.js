@@ -57,6 +57,19 @@ Page({
       addGoodsDetails: data
     })
   },
+  // 下移
+  upData: function (e) {
+    var addGoodsDetails = this.data.addGoodsDetails,
+      index = e.target.dataset.index,
+      newObj = ''
+    if (index == addGoodsDetails.length - 1) { return }
+    newObj = addGoodsDetails[index]
+    addGoodsDetails.splice(index, 1)
+    addGoodsDetails.splice(index + 1, 0, newObj)
+    this.setData({
+      addGoodsDetails: addGoodsDetails
+    })
+  },
   topData:function(e){
     var addGoodsDetails = this.data.addGoodsDetails,
         index = e.target.dataset.index,

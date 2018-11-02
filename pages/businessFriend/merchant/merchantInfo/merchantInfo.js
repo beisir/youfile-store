@@ -53,8 +53,11 @@ Page({
         mobile = options.phone,
         headPic=options.logo
     for (var i = 0; i < greet.length;i++){
-      greetArr.push({ mes: greet[i], name: name})
+      if (Api.isEmpty(greet[i])){
+        greetArr.push({ mes: greet[i], name: name })
+      }
     }
+    console.log(greetArr)
     if (accept && status!=3){
       Api.newUserInfor({ userId: accept })
         .then(res => {

@@ -17,24 +17,18 @@ Page({
        var userId=res.result
         if (userId != "*") {
           var userId = userId.split("user_")[1]
-          Api.getStoreDetails({ userId: userId })
+          Api.showPurchaser({ userId: userId })
             .then(res => {
-              var obj=res.obj
-              if (Api.isEmpty(obj)){
-                var isBizFriend = obj.isBizFriend
-                if (isBizFriend){
-                  var status=2
-                }else{
-                  Api.showToast("未找到此供应商！")
-                  return
+              var obj = res.obj,
+                status = obj.status
+              if (status) {
+                if (status == 3) {
+                  status == 0
                 }
                 wx.navigateTo({
-                  url: '../information/information?status='+status+'&send=&accept=' + obj.storeId + '&remark=&logo=&name=',
+                  url: '../information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark= &name=&logo=',
                 })
-              }else{
-                Api.showToast("未找到此供应商！")
               }
-              
             })
         } else {
           Api.showToast("未获取信息！")

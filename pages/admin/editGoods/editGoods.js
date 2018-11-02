@@ -54,6 +54,20 @@ Page({
       addGoodsDetails: data
     })
   },
+  // 下移
+  upData:function(e){
+    var addGoodsDetails = this.data.addGoodsDetails,
+      index = e.target.dataset.index,
+      newObj = ''
+    if (index == addGoodsDetails.length-1) { return }
+    newObj = addGoodsDetails[index]
+    addGoodsDetails.splice(index, 1)
+    addGoodsDetails.splice(index + 1, 0, newObj)
+    this.setData({
+      addGoodsDetails: addGoodsDetails
+    })
+  },
+  // 上移
   topData: function (e) {
     var addGoodsDetails = this.data.addGoodsDetails,
       index = e.target.dataset.index,
@@ -117,13 +131,6 @@ Page({
       val = event.detail.value
     this.setData({
       recommendDesc: val
-    })
-  },
-  watchDec: function (event) {
-    var _this = this,
-      val = event.detail.value
-    this.setData({
-      description: val
     })
   },
   addImage: function () {
@@ -529,8 +536,10 @@ Page({
        wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
      }
     }else{
-      sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
-      wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
+      if (Api.isEmpty(skuListAll)){
+        sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
+        wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
+      }
     }
     for (var i = 0; i < addGoodsDetails.length; i++) {
       if (addGoodsDetails[i].input) {

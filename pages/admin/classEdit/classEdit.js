@@ -7,6 +7,7 @@ Page({
   data: {
     list: [],
     selectAllStatus: false,
+    numSle:0
   },
 
   /**
@@ -16,7 +17,8 @@ Page({
     var list = JSON.parse(options.model),
         _this=this
     _this.setData({
-      list:list
+      list: list,
+      numSle:0
     })
     
   },
@@ -24,6 +26,7 @@ Page({
   selectList(e) {
     var index = e.currentTarget.dataset.index;
     let list = this.data.list;
+    var _this=this
     const selected = list[index].selected;
     if (selected) {
       this.setData({
@@ -33,6 +36,16 @@ Page({
     list[index].selected = !selected;
     this.setData({
       list: list
+    },function(){
+      var num=0
+      for (var i = 0; i < list.length;i++){
+        if(list[i].selected){
+          num++
+        }
+      }
+      _this.setData({
+        numSle: num
+      })
     });
   },
   selectAll(e) {
@@ -42,9 +55,18 @@ Page({
     for (let i = 0; i < list.length; i++) {
       list[i].selected = selectAllStatus;
     }
+    if (selectAllStatus){
+      this.setData({
+        numSle: list.length - 1
+      });
+    }else{
+      this.setData({
+        numSle:0
+      });
+    }
     this.setData({
       selectAllStatus: selectAllStatus,
-      list: list
+      list: list,
     });
   },
   // detele

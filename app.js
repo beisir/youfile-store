@@ -13,7 +13,8 @@ App({
   globalData: {
     userInfo: null,
     skin: "normal",
-    imageUrl: imageUrl
+    imageUrl: imageUrl,
+    switchStore: false
   },
   http: new http(),
   pageRequest: new pageRequest(),

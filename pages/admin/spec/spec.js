@@ -1,5 +1,6 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+import util from '../../../utils/util.js'
 var getTempList = function (that) {
   Api.template()
     .then(res => {
@@ -39,7 +40,6 @@ Page({
     editShowModel: false,
     contentShow:false,
     editId: '',
-    timestamp: Date.parse(new Date()) + parseInt(89999 * Math.random() + 10000+1),
     templateId: '',
     templateContentId: '',
     notemp: { templateName: "衣服" },
@@ -80,6 +80,7 @@ Page({
     this.setData({ lock: true });
     var longTap = this.data.longTap,
       index = e.target.dataset.current
+    this.arrEach(longTap, 0)
     longTap[index].selected = false
     this.setData({
       longTap: longTap
@@ -91,11 +92,14 @@ Page({
       setTimeout(() => {
         this.setData({ lock: false });
       }, 100);
+    }else{
+      this.setData({ lock: true });
     }
   },
   longTap1: function (e) {
     var longTap = this.data.longTap1,
       index = e.target.dataset.current
+    this.arrEach(longTap, 1)
     longTap[index].selected = false
     this.setData({
       longTap1: longTap
@@ -446,7 +450,10 @@ Page({
   // 删除规格值
   removeTemp:function(e){
     var specName=e.target.dataset.name,
-        _this=this,
+        _this = this,
+        longTap = this.data.longTap,
+        longTap1 = this.data.longTap1,
+        rname = e.target.dataset.rname,
         id = e.target.dataset.id,
         pId=this.data.templateId,
         tempArr={},
@@ -473,6 +480,23 @@ Page({
     var tempArr = { specName: "specName", templateId: id, specValueList: valData}
     var templateContentId=id
     var specName=str
+    if (rname == "longTap") {
+      longTap[index].selected = true
+    } else {
+      longTap1[index].selected = true
+    }
+    this.setData({
+      longTap: longTap,
+      longTap1: longTap1
+    })
+    if (!Api.isEmpty(pId)) {
+      Api.showToast("删除成功")
+      _this.setData({
+        lock: false,
+        templateCont: valList
+      });
+      return
+    }
     Api.addTempCont(templateContentId, specName)
         .then(res => {
           _this.setData({
@@ -512,6 +536,14 @@ Page({
     var tempArr = { specName: "specName", templateId: id, specValueList: valData }
     var templateContentId = id
     var specName = str
+    if (!Api.isEmpty(pId)) {
+      Api.showToast("删除成功")
+      _this.setData({
+        lock: false,
+        templateCont: valList
+      });
+      return
+    }
     Api.addTempCont(templateContentId, specName)
       .then(res => {
         _this.setData({
@@ -528,9 +560,10 @@ Page({
     var index = _this.data.currentTab
     var templateContLen =_this.data.templateCont.length
     var tempArr = {}
+    var templateCont = _this.data.templateCont
     var listData = _this.data.templateCont[index]
     tempArr["specificationTemplateContentVOList"] = listData["specificationTemplateContentVOList"]
-    tempArr["userId"] = "00000000"
+    // tempArr["userId"] = "00000000"
     if (_this.data.value != '') {
       tempArr["templateName"] = _this.data.value
     }else{
@@ -569,45 +602,74 @@ Page({
       })
     
   },
+  // 长按删除设置false
+  arrEach:function(arr,code){
+    for(var i=0;i<arr.length;i++){
+      arr[i].selected=true
+    }
+    if(code==0){
+      this.setData({
+        longTap: arr
+      })
+    }else{
+      this.setData({
+        longTap1: arr
+      })
+    }
+  },
   // 属性切换
   swichNav(e) {
+    var current = e.target.dataset.current,
+      pName = e.target.dataset.name,
+      longTap = this.data.longTap,
+      longTap1 = this.data.longTap1,
+      switchi = e.target.dataset.switchi,
+      code = e.target.dataset.code,
+      pIdNew = e.target.dataset.id,
+      pId = e.target.dataset.id,
+      namechi=e.target.dataset.namechi
+      code+=code+"" + code
+    if (current== undefined){
+     return
+    }
     //检查锁
     if (this.data.lock) {
-      return;
+      this.setData({
+        lock: !this.data.lock
+      })
     }
-    var current= e.target.dataset.current,
-        pName = e.target.dataset.name,
-        switchi = e.target.dataset.switchi,
-        code= e.target.dataset.code,
-        editShowModel = this.data.editShowModel,
-        editDataModel = this.data.editDataModel,
-        newGoodsListData=[],
-        list={},
-        timestamp = this.data.timestamp,
-        hash = {},
-        addArr=[],
-        templateCont = this.data.templateCont,
-        listChi=[],
-        goodsList=[],
-        addIndex = false,
-        addIndexChi=false,
-        goodsListData = this.data.goodsListData,
-        codeTd = this.data.templateId,
-        num='',
-        arrIndex=[],
-        pIdNew  = e.target.dataset.id,
-        pId = e.target.dataset.id
-        code+=code+""+code
-    if (pId == undefined || pId==''){
-      pId='002'
+    if (current != this.data.navindex && this.data.navindex!=-1){
+       this.arrEach(longTap, 0)
+       this.arrEach(longTap1, 1)
     }
-    if(switchi==0){
+    this.alertSpecData(current, pName, switchi, code, pIdNew, pId, namechi)
+  },
+  alertSpecData: function (current, pName, switchi, code, pIdNew, pId, namechi){
+    var editShowModel = this.data.editShowModel,
+      editDataModel = this.data.editDataModel,
+      newGoodsListData = [],
+      list = {},
+      hash = {},
+      addArr = [],
+      templateCont = this.data.templateCont,
+      listChi = [],
+      goodsList = [],
+      addIndex = false,
+      addIndexChi = false,
+      goodsListData = this.data.goodsListData,
+      codeTd = this.data.templateId,
+      num = '',
+      arrIndex = []
+    if (pId == undefined || pId == '') {
+      pId = '002'
+    }
+    if (switchi == 0) {
       var arrIndex = this.data.arrIndex
       arrIndex[current].selected = !arrIndex[current].selected
       this.setData({
         arrIndex: arrIndex
       })
-    }else{
+    } else {
       var arrIndex = this.data.arrIndex1
       arrIndex[current].selected = !arrIndex[current].selected
       this.setData({
@@ -618,7 +680,7 @@ Page({
       if (switchi == 0) {
         if (arrIndex[current].selected) {
           if (current >= editDataModel[switchi].goodsSpecificationValueVOList.length) {
-            editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code })
+            editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName:namechi, timestampCode: util.ramData() + pId + code + "_" + util.ramNum() })
             editDataModel[switchi].goodsSpecificationValueVOList[editDataModel[switchi].goodsSpecificationValueVOList.length - 1].selected = true
           } else {
             editDataModel[switchi].goodsSpecificationValueVOList[current].selected = true
@@ -628,23 +690,23 @@ Page({
         }
       }
       if (switchi == 1) {
-        if (editDataModel.length==1){
+        if (editDataModel.length == 1) {
           var copyData = editDataModel[0].goodsSpecificationValueVOList
-          editDataModel[0].specCode = timestamp + parseInt(89999 * Math.random() + 10000 + 1)
+          editDataModel[0].specCode = util.ramData() + "_" + util.ramNum()
           delete (editDataModel[0].goodsId)
           for (var i = 0; i < copyData.length; i++) {
-            copyData[i].specValueCode = timestamp + current + pId + 888 * parseInt(8999 * Math.random() + 1000 + 1)
+            copyData[i].specValueCode = util.ramData() + current + pId + "_" + util.ramNum()
           }
           editDataModel[0].goodsSpecificationValueVOList = copyData
           goodsListData = editDataModel
           this.setData({
             copyData: true
           })
-          editShowModel:false
-        }else{
+          editShowModel: false
+        } else {
           if (arrIndex[current].selected) {
             if (current >= editDataModel[switchi].goodsSpecificationValueVOList.length) {
-              editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code })
+              editDataModel[switchi].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName:namechi, timestampCode: util.ramData() + current + pId + code + "_" + util.ramNum() })
               editDataModel[switchi].goodsSpecificationValueVOList[editDataModel[switchi].goodsSpecificationValueVOList.length - 1].selected = true
             } else {
               editDataModel[switchi].goodsSpecificationValueVOList[current].selected = true
@@ -658,16 +720,16 @@ Page({
         editDataModel: editDataModel,
       })
     }
-    for (var i = 0; i < goodsListData.length;i++){
-      if (goodsListData[i].id == pId){
+    for (var i = 0; i < goodsListData.length; i++) {
+      if (goodsListData[i].id == pId) {
         addIndex = true
         var codeArr = goodsListData[i].goodsSpecificationValueVOList
         for (var l = 0; l < codeArr.length; l++) {
-        if(codeArr[l].specValueCode==code){
-          codeArr.splice(l, 1)
-         }
+          if (codeArr[l].specValueCode == code) {
+            codeArr.splice(l, 1)
+          }
         }
-        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: e.target.dataset.namechi, timestampCode: timestamp + current + pId + code * parseInt(8999 * Math.random() + 1000 + 1)})
+        goodsListData[i].goodsSpecificationValueVOList.push({ specValueCode: code, specValueName: namechi, timestampCode: util.ramData() + i + current + pId + "_" + util.ramNum() })
         if (arrIndex[current].selected != true) {
           goodsListData[i].goodsSpecificationValueVOList.pop()
         }
@@ -676,12 +738,12 @@ Page({
     if (codeTd == '') {
       codeTd = '000'
     }
-    if(!addIndex){
-      listChi.push({ specValueCode: code, specValueName: e.target.dataset.namechi, selected: false, timestampCode: timestamp + current + pId + code * parseInt(8999 * Math.random() + 1000 + 1)})
+    if (!addIndex) {
+      listChi.push({ specValueCode: code, specValueName:namechi, selected: false, timestampCode: util.ramData() + current + pId + "_" + util.ramNum() })
       list.specName = pName
       list.id = pId
       list.goodsSpecificationValueVOList = listChi
-      list.specCode = timestamp +parseInt(89999 * Math.random() + 10000 + 1)
+      list.specCode = util.ramData() + "_" + util.ramNum()
       goodsListData.push(list)
     }
     if (current == this.data.navindex) {
@@ -757,16 +819,19 @@ Page({
       templateCont=this.data.tempNewArr,
       goodsListData = this.data.goodsListData,
       editDataModel = this.data.editDataModel,
-      timestamp = this.data.timestamp,
       templateId = this.data.templateId
     this.removeDataLastArr(goodsListData)
     this.removeDataLastArr(editDataModel)
     if (editDataModel.length == 1) {
+      // delete (editDataModel[0].goodsId)
+      editDataModel[0].specCode = util.ramData() + "_" + util.ramNum()
       var specEditNew = editDataModel[0].goodsSpecificationValueVOList
       for (var i = 0; i < specEditNew.length;i++){
-        specEditNew[i].specCode = timestamp
-        specEditNew[i].specValueCode = parseInt(timestamp+"1"+ Math.random() * 10000 + i + i * 6)
+        delete (specEditNew[i].goodsId)
+        delete (specEditNew[i].specCode)
+        specEditNew[i].specValueCode = parseInt(util.ramData()+ i + i * 6) + "_" + util.ramNum()
       }
+      editDataModel[0].goodsSpecificationValueVOList = specEditNew
     }
     if (Api.isEmpty(templateId)){
       Api.deleteTemplate(templateContentId)

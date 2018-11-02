@@ -23,7 +23,7 @@ function getIdentity(_this) {
           if (isPurchaser) {
             wx.setStorageSync("admin", 3)
             wx.setTabBarItem({
-              index: 1,
+              index: 2,
               text: '进货车',
               iconPath: '/image/22.png',
               selectedIconPath: '/image/21.png'
@@ -60,6 +60,7 @@ Page({
     showHide:true,
     showDp:true,
     currentTab: 0,
+    confirmDown:false,
     baseUrl:'',
     result: [],
     noMoreData:true,
@@ -67,6 +68,8 @@ Page({
     descShow:false,
     totalCount:0,
     store:'',
+    bannerHeight:0,
+    swiperHeight:0,
     coverUrl:'',
     identity:'',
     likeShow:false,
@@ -74,69 +77,69 @@ Page({
     src:'',
     goodsName:''
   },
-  // addFriend:function(){
-  //   var limitShow=wx.getStorageSync("admin")
-  //   var that = this;
-  //   var show;
-  //   wx.scanCode({
-  //     success: (res) => {
-  //       var userId = res.result
-  //       if (userId != "*") {
-  //         var userId = userId.split("user_")[1]
-  //         if (limitShow == 2) {
-  //           Api.newUserInfor({ userId: userId })
-  //             .then(res => {
-  //               var accept = res.obj.id,
-  //                 phone = res.obj.mobile,
-  //                 userName = res.obj.userName
-  //               var pic = that.data.baseUrl + res.obj.headPic
-  //               Api.isFriend({ userId: accept })
-  //                 .then(res => {
-  //                   var res = res.obj
-  //                   var storeId = wx.getStorageSync("storeId")
-  //                   if (res) {
-  //                     wx.navigateTo({
-  //                       url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
-  //                     })
-  //                   } else {
-  //                     console.log(accept)
-  //                     wx.navigateTo({
-  //                       url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=0&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
+  addFriend:function(){
+    var limitShow=wx.getStorageSync("admin")
+    var that = this;
+    var show;
+    wx.scanCode({
+      success: (res) => {
+        var userId = res.result
+        if (userId != "*") {
+          var userId = userId.split("user_")[1]
+          if (limitShow == 2) {
+            Api.showMerchant({ userId: userId })
+            .then(res=>{
+              var status = res.obj.status
+              if (status){
+                Api.newUserInfor({ userId: userId })
+                .then(res=>{
+                  var accept = res.obj.id,
+                    phone = res.obj.mobile,
+                    userName = res.obj.userName,
+                    storeId = wx.getStorageSync("storeId")
+                  var pic = that.data.baseUrl + res.obj.headPic
+                  if(status==2){
+                    wx.navigateTo({
+                      url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+                    })
+                  }
+                  if(status!=2){
+                    if (status==3){
+                      status=0
+                    }
+                    wx.navigateTo({
+                      url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
 
-  //                     })
-  //                   }
-  //                 })
-  //             })
-  //         } else {
-  //           Api.getStoreDetails({ userId: userId })
-  //             .then(res => {
-  //               var obj = res.obj
-  //               if (Api.isEmpty(obj)) {
-  //                 var isBizFriend = obj.isBizFriend
-  //                 var accept = obj.storeId
-  //                 if (!isBizFriend) {
-  //                   Api.showToast("未找到此供应商！")
-  //                   return
-  //                 } 
-                
-  //               } else {
-  //                 Api.showToast("未找到此供应商！")
-  //               }
-
-  //             })
-
-  //         }
-         
-  //       } else {
-  //         Api.showToast("未获取信息！")
-  //       }
-  //     },
-  //     fail: (res) => {
-  //     },
-  //     complete: (res) => {
-  //     }
-  //   })
-  // },
+                    })
+                  }
+                })
+              }
+            })
+          } else {
+            Api.showPurchaser({ userId: userId})
+            .then(res=>{
+              var obj=res.obj,
+                status=obj.status
+              if (status){
+                if (status==3){
+                  status==0
+                }
+                wx.navigateTo({
+                  url: '/pages/businessFriend/information/information?status=' + status+'&send=&accept=' + obj.storeId_ + '&remark= &name=&logo=',
+                })
+              }
+            })
+          }
+        } else {
+          Api.showToast("未获取信息！")
+        }
+      },
+      fail: (res) => {
+      },
+      complete: (res) => {
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -167,8 +170,13 @@ Page({
   }, 
   // 下架商品
   upGoods:function(e){
-    var _this=this,
-      goodsIdList=[],
+    this.setData({
+      confirmDown:true
+    })
+  },
+  confirmDown:function(){
+    var _this = this,
+      goodsIdList = [],
       goodsId = this.data.goodsId
     goodsIdList.push(goodsId)
     Api.adminGoodsDown(goodsIdList)
@@ -180,7 +188,8 @@ Page({
           success: function () {
             _this.setData({
               showHide: true,
-              currentTab:0
+              confirmDown:false,
+              currentTab: 0
             })
             _this.emptyArr()
           }
@@ -242,6 +251,7 @@ Page({
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            baseUrl: app.globalData.imageUrl,
             noMoreData:true
           })
         }else{
@@ -284,11 +294,27 @@ Page({
         })
         that.setData({
           store: obj.store,
+          floorInfo:obj.store.floor.floorInfo,
           baseUrl: app.globalData.imageUrl,
           coverUrl: obj.store.coverUrl,
           result: obj.goods.result,
           totalCount: obj.goods.totalCount,
           likeShow: obj.isFollow
+        },function(){
+          var query = wx.createSelectorQuery();
+          query.select('#myText').boundingClientRect()
+          query.exec(function (res) {
+            that.setData({
+              bannerHeight: res[0].height
+            })
+          })
+          var query1 = wx.createSelectorQuery();
+          query1.select('#swiper-tab').boundingClientRect()
+          query1.exec(function (res) {
+            that.setData({
+              swiperHeight: res[0].height
+            })
+          })
         })
       })    
   },
@@ -430,6 +456,13 @@ Page({
     this.setData({
       getFollw: authHandler.isLogin(),
     })
+    if (app.globalData.switchStore) {
+      this.closeShow()
+      app.pageRequest.pageDataIndex.pageNum = 1
+      app.pageRequest.pageData.pageNum = 0
+      getIdentity(this)
+      app.globalData.switchStore=false
+    }
   },
 
   /**
@@ -504,4 +537,12 @@ Page({
       this.getList()
     }
   },
+  onPageScroll: function (e) {
+    var top = e.scrollTop,
+    totalCount = this.data.totalCount,
+    bannerHeight = this.data.bannerHeight,
+    swiperHeight = this.data.swiperHeight
+    
+    // console.log(bannerHeight + "///" + top + "///" + swiperHeight)
+  }
 })

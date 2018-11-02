@@ -12,7 +12,7 @@
   background:rgba(0, 0, 0, 0.3);
   border-radius:50%;
   position:absolute;
-  right:50rpx;
+  right:20rpx;
   top:170rpx;
   z-index:100;
   text-align:center;
@@ -21,9 +21,9 @@
   top: 70rpx;
 }
 .new-e image {
-  width:50rpx;
-  height:50rpx;
-  margin-top:8rpx;
+  width:35rpx;
+  height:35rpx;
+  margin-top:18rpx;
 }
 .alertAdd{
   width: 100%;
@@ -98,7 +98,7 @@
   color: #333;
   font-size: 28rpx;
   font-weight:bold;
-  padding:0 40rpx;
+  padding:0 40rpx;max-height: 370rpx;overflow-y: scroll
 }
 .gd-gg .gd-view {
   display:inline-block;

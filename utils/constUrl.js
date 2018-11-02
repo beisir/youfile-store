@@ -107,3 +107,6 @@ export const addDxpressUrl = "/admin/order/{{orderNumber}}/addexpress"
 export const addRemarkUrl = "/admin/order/{{orderNumber}}/addRemark"
 export const seeVoucherUrl = "/api/order/orderpayment/{{orderNumber}}"
 export const supplyOrderUrl = "/api/order/"
+// 扫一扫
+export const showPurchaserUrl='/admin/bizscan/purchaser/{{userId}}'
+export const showMerchantUrl='/admin/bizscan/merchant/{{userId}}'

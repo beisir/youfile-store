@@ -18,28 +18,34 @@ Page({
         var userId = res.result
         if (userId!="*") {
           var userId = userId.split("user_")[1]
-          Api.newUserInfor({ userId: userId })
-          .then(res=>{
-            var obj=res.obj
-            var pic = that.data.baseUrl+obj.headPic
-            var accept = obj.id 
-            var storeId = wx.getStorageSync("storeId")
-            Api.isFriend({ userId: accept })
-              .then(res => {
-                var res = res.obj
-                var storeId = wx.getStorageSync("storeId")
-                if (res) {
-                  wx.navigateTo({
-                    url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+          Api.showMerchant({ userId: userId })
+            .then(res => {
+              var status = res.obj.status
+              if (status) {
+                Api.newUserInfor({ userId: userId })
+                  .then(res => {
+                    var accept = res.obj.id,
+                      phone = res.obj.mobile,
+                      userName = res.obj.userName,
+                      storeId = wx.getStorageSync("storeId")
+                    var pic = that.data.baseUrl + res.obj.headPic
+                    if (status == 2) {
+                      wx.navigateTo({
+                        url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+                      })
+                    }
+                    if (status != 2) {
+                      if (status == 3) {
+                        status = 0
+                      }
+                      wx.navigateTo({
+                        url: '../merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
+
+                      })
+                    }
                   })
-                } else {
-                  wx.navigateTo({
-                    url: '../merchantInfo/merchantInfo?status=0&send=' + storeId + '&accept=' + obj.id + '&remark=&greet=&name=' + obj.userName + '&logo=' + pic + '&phone=' + obj.mobile,
-                  })
-                }
-              })
-          
-          })
+              }
+            })
         }else{
           Api.showToast("未获取信息！")
         }

@@ -1,4 +1,14 @@
 <login id="login"></login>
+ <!--是否下架-->
+<mes
+  show="{{confirmDown}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确定下架该商品？</text>
+  <button bindtap='confirmDown'>确定</button>
+</view>
+</mes>
 <!-- 提示 -->
 <mes show="{{show}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
@@ -7,52 +17,61 @@
   </view>
 </mes>
 <view class="goods-ser">
-  <navigator url="../../page/serStatus/serStatus">
+  <navigator url="../../page/serStatus/serStatus" style='width:80%'>
     <input placeholder="搜索店铺内商品" placeholder-class='pre-input' disabled='disabled' bindconfirm="searchBtn" value="{{value}}" />
   </navigator>
   <image class="home-ser" src="/image/search1.png"></image>
-  <view class='home-img '>
+  <view class='home-img'>
     <navigator url="../storeIcon/storeIcon">
       <image src="/image/xcx.png"></image>
     </navigator>
   </view>
-  <!-- <view class='home-img home-img1'>
+  <view class='home-img home-img1'>
     <view bindtap='addFriend'>
       <image src="/image/youbao.png"></image>
     </view>
-  </view> -->
+  </view>
 </view>
-<view class='banner'>
+<view class='banner' id='myText'>
   <view class='hm-fx' wx:if='{{limitShow==2}}'>
     <button class='shre_btn' open-type='share'>
       <image src="/image/fx1.png"></image>分享</button>
   </view>
   <image wx:if='{{store!="" && limitShow==2}}'  bindtap='editDp' src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
    <image wx:if='{{store!="" && limitShow!=2}}'  src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
+  <view class='back-c'></view>
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
       <navigator class='logoimg' url='../mes/mes?code={{limitShow}}'>
         <image wx:if='{{store!=""}}' mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"/>  
       </navigator>
     </view>
-    <view class="ym_sydtdmgzs">
+    <!-- <view class="ym_sydtdmgzs" >
       <view class="store_name">{{store.storeName}}
-        <view>{{store.storeNature}}</view>
+         <view>{{store.storeNature==1?'新批零':'新零售'}}</view>
         <image wx:if='{{limitShow==2}}' bindtap='editDpMes' src="/image/edit1.png" />
       </view>
-      <image class='logoimg' src="{{baseUrl}}{{store.mallLogo}}" />
+      <image  class='logoimg' src="{{baseUrl}}{{store.mallLogo}}" />
       <text>{{store.mallName}}</text>
+    </view> -->
+    <view class="ym_sydtdmgzs">
+      <view class="store_name">{{store.storeName}}
+        <view>{{store.storeNature==1?'新批零':'新零售'}}</view>
+        <image wx:if='{{limitShow==2}}' bindtap='editDpMes' src="/image/edit1.png" />
+      </view>
+      <image class='logoimg' src="{{baseUrl}}{{floorInfo.mallLogo}}" />
+      <text>{{floorInfo.mallName}}{{floorInfo.balcony}}{{floorInfo.floor}}{{floorInfo.area}}{{floorInfo.doorNum}}</text>
     </view>
   </view>
-  <button class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow}}'  bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
-  <button class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw}}'  bindtap='likeStore'><text style='font-size:34rpx;'>+</text> 关注</button>
+  <button class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow}}'  bindtap='likeStore'><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</button>
+  <button class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw}}'  bindtap='likeStore'><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</button>
   <button class="ym_sydtgzbtn" wx:if='{{likeShow && getFollw}}' bindtap='deteleLikeStore'>已关注</button>
 </view>
 <view class='add-firend'  wx:if='{{limitShow==1}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/down.png'></image></view>
 <!-- <view class='add-firend add-firend1' wx:if='{{limitShow==1}}'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view> -->
 <view class='add-firend add-firend2' wx:if='{{limitShow==3}}'><view>友</view>已成商友，现可查看批发价！<image src='/image/sy.png'></image></view>
 <!-- <view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view> -->
-<view class="swiper-tab">
+<view class="swiper-tab" id='swiper-tab'>
   <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
     <view></view>
   </view>

@@ -28,7 +28,7 @@ function getIdentity(_this) {
           if (isPurchaser) {
             wx.setStorageSync("admin", 3)
             wx.setTabBarItem({
-              index: 1,
+              index: 2,
               text: '进货车',
               iconPath: '/image/22.png',
               selectedIconPath: '/image/21.png'

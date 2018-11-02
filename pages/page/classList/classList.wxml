@@ -29,9 +29,9 @@
   <view class="result-null" wx:else>
     <view class="nomore">
       <view>
-        <image src="/image/nohome.png"></image>
+        <image src="/image/class-i.png"></image>
       </view>
-      暂时还没有商品哦
+      还没有分类哦！
     </view>
   </view>
 </view>

@@ -21,8 +21,12 @@ Page({
         var detailList = res.obj.result
         if (detailList != null) {
           for (var i = 0; i < detailList.length;i++){
-            var greet = (detailList[i].greet).split("#;#")
-            detailList[i].greet=greet[0]
+            if(detailList[i].greet!=null){
+              var greet = (detailList[i].greet).split("#;#")[0]
+            }else{
+              var greet=''
+            }
+            detailList[i].greet=greet
           }
           var datas = _this.data.detailList,
             newArr = app.pageRequest.addDataList(datas, detailList)

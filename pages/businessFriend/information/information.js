@@ -181,7 +181,7 @@ Page({
     if (Api.isEmpty(remark)){
       this.cancel()
       if (this.data.status == 2) {
-        Api.setName({ remark: remark })
+        Api.setName({ remark: remark, storeId: purchaserUserId})
           .then(res => {
             wx.showToast({
               title: '修改成功',
@@ -210,11 +210,8 @@ Page({
 
   },
   urlHome: function () {
-    // wx.setStorage({
-    //   key: 'storeId',
-    //   data: this.data.accept,
-    // })
     wx.setStorageSync("storeId", this.data.accept)
+    app.globalData.switchStore=true
     wx.switchTab({
       url: '../../page/home/home'
     })
