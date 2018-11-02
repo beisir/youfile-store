@@ -130,7 +130,7 @@ Component({
           return;
         }
         let obj = {
-          mobile: this.data.telephone,
+          mobile: this.data.telephone.trim(),
           smsCode: this.data.verificationCode
         };
         loginApp.authHandler.loginByMobile(this.data.telephone, this.data.verificationCode).then(res => {
@@ -150,7 +150,7 @@ Component({
 
         let obj = {
           grant_type: 'password',
-          username: this.data.telephone,
+          username: this.data.telephone.trim(),
           password: this.data.password
         };
         loginApp.authHandler.loginByUser(this.data.telephone, this.data.password).then(res => {
@@ -160,6 +160,7 @@ Component({
             title: '账户密码错误',
             icon: 'none'
           })
+          console.warn(e);          
         })
       }
 
@@ -282,7 +283,7 @@ Component({
       }
     },
     testTel() {
-      let phone = this.data.telephone;
+      let phone = this.data.telephone.trim();
       if (!phone || phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
         return false;
       }
