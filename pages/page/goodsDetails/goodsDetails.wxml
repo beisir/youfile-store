@@ -68,11 +68,11 @@
             </view>
             <view class="ym_goodsstoreop"  hidden='{{likeShow}}'>
                 <view class="ui-link"   bindtap='likeStore'><text class="ym_qzjoin_add1">+</text>关注</view>
-                <view class="ui-link ui-link1" bindtap='urlHome'>进店</view>
+                <view class="ui-link ui-link1" bindtap='urlHome'>小云店</view>
             </view>
               <view class="ym_goodsstoreop"  hidden='{{!likeShow}}'>
                 <view class="ui-link"    bindtap='deteleLikeStore'><text class="ym_qzjoin_add1" ></text>已关注</view>
-                <view class="ui-link ui-link1" bindtap='urlHome'>进店</view>
+                <view class="ui-link ui-link1" bindtap='urlHome'>小云店</view>
             </view>
         </view>
   <view class='gd_readCont'>
@@ -96,7 +96,7 @@
         </view>
         <view>
         <view bindtap='urlHome'><image src="/image/ad5.png"></image></view>
-          进店
+          小云店
         </view>
         <view  wx:if='{{limitShow!=3}}'>
         <view bindtap='urlCart'><image src="/image/i33.png"></image></view>

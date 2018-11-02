@@ -494,7 +494,7 @@ Page({
       status = e.target.dataset.status,
       mainImgUrl = '',
       description = '',
-      skuListAll = this.data.skuListAll,
+      skuListAll =[],
       goodsImageVOList = [],
       sellPrice = this.data.sellPrice,
       wholesalePrice = this.data.wholesalePrice,
@@ -519,6 +519,7 @@ Page({
       }
      if(goodsListData!=null){
        if (goodsListData.length == 1) {
+         skuListAll=[]
          skuList0 = goodsListData[0].goodsSpecificationValueVOList
          for (var i = 0; i < skuList0.length; i++) {
            skuListAll.push({ specValueCodeList: [skuList0[i].specValueCode], marketPrice: '0', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })

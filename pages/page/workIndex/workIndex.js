@@ -67,7 +67,7 @@ Page({
        payOrders: obj.payOrders,
        unshippedPurchaseOrders: obj.unshippedPurchaseOrders,
        payPurchaseOrders: obj.payPurchaseOrders,
-       todaySaleNum: obj.todaySaleNum,
+       todaySaleNum: (obj.todaySaleNum).toFixed(2),
        unshippedOrders: obj.unshippedOrders,
        verifyFriends: obj.verifyFriends,
      })

@@ -176,7 +176,12 @@ Page({
     }
     for (var i = 0; i < newDataSku.length;i++){
       if (newDataSku[i].goodsSpecificationValueVOList.length==0){
-        newDataSku.splice(i,1)
+        newDataSku.splice(i, 1)
+      }
+    }
+    if (newDataSku.length==1){
+      if (newDataSku[0].goodsSpecificationValueVOList.length == 0) {
+        newDataSku=[]
       }
     }
     var index = this.data.currentTab
@@ -452,7 +457,7 @@ Page({
     var specName=e.target.dataset.name,
         _this = this,
         longTap = this.data.longTap,
-        longTap1 = this.data.longTap1,
+        arrIndex = this.data.arrIndex,
         rname = e.target.dataset.rname,
         id = e.target.dataset.id,
         pId=this.data.templateId,
@@ -480,14 +485,11 @@ Page({
     var tempArr = { specName: "specName", templateId: id, specValueList: valData}
     var templateContentId=id
     var specName=str
-    if (rname == "longTap") {
-      longTap[index].selected = true
-    } else {
-      longTap1[index].selected = true
-    }
+    longTap[index].selected = true
+    arrIndex[index].selected = false
     this.setData({
       longTap: longTap,
-      longTap1: longTap1
+      arrIndex: arrIndex,
     })
     if (!Api.isEmpty(pId)) {
       Api.showToast("删除成功")
@@ -512,6 +514,8 @@ Page({
       _this = this,
       id = e.target.dataset.id,
       pId = this.data.templateId,
+      longTap1 = this.data.longTap1,
+      arrIndex1 = this.data.arrIndex1,
       tempArr = {},
       valData = [],
       str = '',
@@ -536,6 +540,12 @@ Page({
     var tempArr = { specName: "specName", templateId: id, specValueList: valData }
     var templateContentId = id
     var specName = str
+    longTap1[index].selected = true
+    arrIndex1[index].selected = false
+    this.setData({
+      longTap1: longTap1,
+      arrIndex1: arrIndex1,
+    })
     if (!Api.isEmpty(pId)) {
       Api.showToast("删除成功")
       _this.setData({
@@ -785,7 +795,11 @@ Page({
   },
   // 删除模板内容
   deleteTemplateContentId: function (e) {
-    var _this = this
+    var _this = this,
+      arrIndex1 = this.data.arrIndex1
+    for (var i = 0; i < arrIndex1.length;i++){
+      arrIndex1[i].selected=false
+    }
     if (e.target.dataset.id){
       var templateContentId = e.target.dataset.id
     }else{
@@ -801,6 +815,7 @@ Page({
     _this.setData({
       tempNewArr: templateCont,
       contentShow:true,
+      arrIndex1: arrIndex1,
       templateId: templateId,
       tempNewId: templateContentId
     })

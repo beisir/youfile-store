@@ -100,9 +100,9 @@ Page({
    */
   onUnload: function () {
     var limitShow = wx.getStorageSync("admin")
-    wx.navigateTo({
-      url: '../mes/mes?code=' + limitShow,
-    })
+    // wx.navigateTo({
+    //   url: '../mes/mes?code=' + limitShow,
+    // })
   },
 
   /**

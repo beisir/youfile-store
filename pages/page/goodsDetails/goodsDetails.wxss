@@ -390,7 +390,7 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   width: 100%;
 }
 .gd_readCont{
-  background: #fff;
+  background: #fff;padding-bottom: 20rpx;
 }
 .gd_r-title,.wxParse-h4{
   color: #333;
