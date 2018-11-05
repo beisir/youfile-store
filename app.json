@@ -1,9 +1,10 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/page/user/user",
+    "pages/cloudOrder/myOrder/myOrder",
     "pages/admin/status/status",
     "pages/businessFriend/merchant/index/index",
-    "pages/cloudOrder/myOrder/myOrder",
     "pages/page/invoice/invoice",
     "pages/admin/addGoods/addGoods",
     "pages/admin/spec/spec",
@@ -13,7 +14,6 @@
     "pages/role/allOrder/allOrder",
     "pages/role/order/order",
     "pages/admin/batchSet/batchSet",
-    "pages/page/user/user",
     "pages/businessFriend/merchant/list/list",
     "pages/page/newAddress/newAddress",
     "pages/admin/editGoods/editGoods",
