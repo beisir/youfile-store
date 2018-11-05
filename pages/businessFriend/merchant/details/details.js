@@ -166,7 +166,7 @@ Page({
     var currPage = pages[pages.length - 1];
     var prevPage = pages[pages.length - 2];    // 上一个页面
     prevPage.setData({
-      mydata:1
+      userId: this.data.userId
     })
     wx.navigateBack({
       data: 1

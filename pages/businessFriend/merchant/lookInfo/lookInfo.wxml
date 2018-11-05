@@ -30,10 +30,10 @@
 </view>
 <view class='bf-cont info-cont'>
   <view class='in-cont'>
-   <text>手机号</text><view>{{data.mobile}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+   <text>手机号</text><view>{{data.mobile}}<view class='in-cont-img'><image  mode="widthFix" bindtap='calling' src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
-   <text>微信号</text><view wx:if='{{data.mobile!=null}}'>{{data.mobile}}</view>
+   <text>微信号</text><view wx:if='{{data.weixinNumber!=null}}'>{{data.weixinNumber}}</view>
   </view>
   <view class='in-cont'>
    <text>生日</text><view wx:if='{{data.birthday!=null}}'>{{data.birthday}}</view>

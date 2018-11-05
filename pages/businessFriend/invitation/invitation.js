@@ -37,6 +37,7 @@ Page({
       greet=this.data.value,
       send = this.data.send,
       remark = this.data.remark
+    console.log(accept+"//"+send)
     Api.addWholesaler({ accept: accept, send: send, greet: greet, remark: remark})
     .then(res=>{
       wx.showToast({

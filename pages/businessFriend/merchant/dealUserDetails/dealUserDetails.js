@@ -14,6 +14,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  calling: function () {
+    var mobile = this.data.phone
+    wx.makePhoneCall({
+      phoneNumber: mobile,
+      success: function () {
+      },
+      fail: function () {
+      }
+    })
+  },
   getMession: function (data) {
     var _this = this
     Api.cusNewDetails(data)
@@ -65,7 +75,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1]
+    if (currPage.data.userId) {
+      this.getMession({ userId: currPage.data.userId })
+    }
   },
 
   /**

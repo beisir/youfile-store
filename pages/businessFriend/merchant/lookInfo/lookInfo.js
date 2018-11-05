@@ -14,7 +14,16 @@ Page({
     baseUrl: app.globalData.imageUrl,
     data:''
   },
-
+  calling: function () {
+    var mobile = this.data.data.mobile
+    wx.makePhoneCall({
+      phoneNumber: mobile,
+      success: function () {
+      },
+      fail: function () {
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -24,7 +33,7 @@ Page({
       userId: options.userId,
       mobile: options.mobile
     })
-    Api.getUserDetaisl({ mobile: options.mobile})
+    Api.newUserInfor({ userId: options.userId})
     .then(res=>{
       var obj = res.obj
       _this.setData({

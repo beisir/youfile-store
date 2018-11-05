@@ -1,8 +1,11 @@
 <view class="goods-ser">
     <input placeholder="输入小云店名、手机号、备注名"  bindconfirm="searchBtn"   value="{{value}}"/>
     <image class="home-ser"  src="/image/search1.png"></image>
+    <view class='home-img' bindtap='searchBtn' >
+        搜索
+    </view>
 </view>
-<view class='bf-cont'>
+<view class='bf-cont' wx:if='{{detailList.length>0}}' >
   <view class='bf-weui'>
   <scroll-view scroll-y="true" style="height:100%;">
     <navigator class="weui_cells" wx:for='{{detailList}}'  wx:if='{{item.status!=2}}' wx:key='{{index}}' url="../information/information?status={{item.status}}&send={{item.send}}&accept={{item.accept}}&remark={{item.remark}}&name={{item.storeName}}&logo={{item.storeLogo}}">
@@ -28,3 +31,11 @@
     </scroll-view>
   </view>
 </view>
+<view class='allData' wx:if='{{detailList.length==0}}'>
+  <view class="nomore">
+      <view>
+        <image src="/image/user.png"></image>
+      </view>
+      暂无供应商！
+    </view>
+  </view>

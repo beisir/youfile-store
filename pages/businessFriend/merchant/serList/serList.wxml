@@ -8,7 +8,7 @@
   </view>
 </view>
 <view class='bf-all'>搜索结果</view>
-<view class='bf-cont'>
+<view class='bf-cont'  wx:if='{{detailList.length>0}}'>
   <scroll-view scroll-y="true" style="height:100%;">
   <view class='bf-weui'>
     <view wx:for='{{detailList}}' wx:key='{{index}}' class="weui_cells">
@@ -19,5 +19,13 @@
     </view> 
   </view>
   </scroll-view>
+</view>
+<view class='allData' wx:if='{{detailList.length==0}}'>
+  <view class="nomore">
+      <view>
+        <image src="/image/user.png"></image>
+      </view>
+      暂无进货商！
+  </view>
 </view>
 

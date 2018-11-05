@@ -48,7 +48,7 @@
 </view>
 
 <view class='bottom_M'>
-  <navigator open-type='redirect' url='../workIndex/workIndex'><image  src="/image/12.png"></image><view>工作台</view></navigator>
+  <navigator open-type='redirect' url='../workIndex/workIndex'><image  src="/image/ww.png"></image><view>工作台</view></navigator>
   <navigator open-type='redirect' url='../../businessFriend/merchant/index/index'><image  src="/image/admin2.png"></image><view>商友录</view></navigator>
   <navigator><image  src="/image/w12.png"></image><view   class='active'>我的</view></navigator>
 </view>
