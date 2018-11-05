@@ -83,12 +83,14 @@ class request {
               } else if (res.data.code == 1) {
                 wx.showToast({
                   title: res.data.message,
+                  duration: 2000,
                   icon: 'none'
                 })
                 reject(res);
               } else {
                 wx.showToast({
                   title: res.data.message,
+                  duration: 2000,
                   icon: 'none'
                 })
                 reject(res);

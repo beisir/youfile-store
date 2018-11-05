@@ -62,6 +62,7 @@ Page({
     goodsSkuVOList:[],
     newSkuOnlyIndex:0,
     skuArrTwo: [],
+    disLike:false,
     saleBatchNumGoods:0,
     newSkuArrTwo:[],
     nameTwo:'',
@@ -107,6 +108,7 @@ Page({
     spectArrDifference:[],
     editCode:false,
     newCartList:[],
+    favoriteNum:0,
     editOneName:false,
     store:''
   },
@@ -1033,6 +1035,10 @@ Page({
         if (!Api.isEmpty(obj.goodsSkuVOList)){
           obj.goodsSkuVOList=[]
         }
+        var favoriteNum=0
+        if (store.favoriteNum.obj){
+          favoriteNum = store.favoriteNum.obj
+        }
         wx.setStorageSync("storeId", obj.storeId)
         _this.setData({
           imgUrls: obj.goodsImageVOList,
@@ -1048,6 +1054,7 @@ Page({
           name: obj.name,
           nameTwo: name,
           store: store,
+          favoriteNum: favoriteNum,
           sdescription: store.description
         }, function () {
           if (_this.data.getSpecDetails) {
@@ -1160,11 +1167,13 @@ Page({
           mask: true,
         })
         _this.setData({
-          likeShow: true
+          likeShow: true,
+          favoriteNum: this.data.favoriteNum+1
         })
       })
   },
-  deteleLikeStore: function () {
+// 取消关注
+  disLike:function(){
     var _this = this
     Api.deteleLikeStore()
       .then(res => {
@@ -1175,9 +1184,17 @@ Page({
           mask: true,
         })
         _this.setData({
-          likeShow: false
+          likeShow: false,
+          disLike:false,
+          favoriteNum: this.data.favoriteNum - 1
         })
       })
+  },
+  deteleLikeStore: function () {
+    this.setData({
+      disLike:true
+    })
+   
   },
   /**
    * 生命周期函数--监听页面隐藏

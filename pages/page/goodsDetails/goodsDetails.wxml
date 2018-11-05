@@ -1,4 +1,14 @@
 <login id="login"></login>
+ <!--确定取消关注吗？-->
+<mes
+  show="{{disLike}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确定取消关注吗？</text>
+  <button bindtap='disLike'>确定</button>
+</view>
+</mes>
 <navigator class="new-e navigator-hover" wx:if='{{limitShow==2}}' url="/pages/admin/editGoods/editGoods?goodsId={{goodsId}}">
   <image src="/image/gd1.png"></image>
 </navigator>
@@ -63,7 +73,7 @@
             </view>
             <view class="ym_goodsstoresprs">
                 <view class="ym_goodsstorel"><view class="store-goodsNum-data">{{store.goodsNum}}</view>全部商品</view>
-                <view class="ym_goodsstorer"><view class='store-goodsNum-data'>{{store.favoriteNum.obj}}</view>关注人数</view>
+                <view class="ym_goodsstorer"><view class='store-goodsNum-data'>{{favoriteNum}}</view>关注人数</view>
                 <view class="ym_goodsstorer"><view class='store-goodsNum-data'>{{store.purchaserNum}}</view>进货商</view>
             </view>
             <view class="ym_goodsstoreop"  hidden='{{likeShow}}'>

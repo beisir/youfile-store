@@ -11,27 +11,48 @@ Page({
     value: '',
     totalCount: 0,
     currentTab: -1,
+    descShow:false,
     baseUrl: app.globalData.imageUrl,
     sortKey: '',
     sortValue: ''
   },
   emptyArr: function () {
+    var _this = this
     this.setData({
       detailList: [],
       totalCount: 0
+    },function(){
+      app.pageRequest.pageData.pageNum = 0
+      _this.getList()
     });
   },
   swichNav: function (e) {
-    var that = this;
+    var that = this,
+      descShow = this.data.descShow
     if (this.data.currentTab === e.target.dataset.current) {
+      if (e.target.dataset.current == 0) {
+        that.setData({
+          descShow: !descShow
+        }, function () {
+          that.emptyArr()
+        })
+      }
       return false;
     } else {
       that.setData({
         currentTab: e.target.dataset.current,
       }, function () {
         that.emptyArr()
-        app.pageRequest.pageData.pageNum = 0
-        that.getList()
+      })
+    }
+
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current,
+      }, function () {
+        
       })
     }
   },
@@ -58,17 +79,22 @@ Page({
     })
   },
   searchBtn: function (e) {
-    app.pageRequest.pageData.pageNum = 0
+
     this.emptyArr()
-    this.getList()
   },
   getList: function () {
     var _this = this,
       value = this.data.value,
-      sortKey = '',
+      sortKey = 'totalAmount',
       sortValue = '',
+      descShow = this.data.descShow,
       currentTab = this.data.currentTab
     if (currentTab == 0) {
+      if (descShow) {
+        sortValue = 'desc'
+      } else {
+        sortValue = 'asc'
+      }
       sortKey = 'totalAmount'
     }
     if (currentTab == 1) {
@@ -77,12 +103,10 @@ Page({
     if (currentTab == 2) {
       sortKey = 'tradeNum'
     }
-    var data = { orderCategory:1}
-    if (sortKey != '') {
-      data["sortKey"] = sortKey
-      data["sortValue"] = ''
-    }
+    var data = { orderCategory: 1 }
+    data["sortKey"] = sortKey
     data["keyWords"] = value
+    data["sortValue"] = sortValue
     Api.dealUser(data)
       .then(res => {
         var detailList = res.obj.result,
@@ -106,22 +130,11 @@ Page({
           _this.setData({
             detailList: newArr,
           })
-        } else {
-          wx.showToast({
-            title: '暂无更多了',
-            icon: 'none',
-            duration: 1000,
-            mask: true
-          })
         }
       })
   },
   onShow: function () {
-    app.pageRequest.pageData.pageNum = 0
-    this.setData({
-      detailList: []
-    })
-    this.getList()
+    this.emptyArr()
   },
 
   /**
@@ -142,19 +155,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      detailList: [],
-      value: ''
-    })
-    app.pageRequest.pageData.pageNum = 0
-    this.getList()
+    this.emptyArr()
+    wx.stopPullDownRefresh();
   },
 
   /**
-   * 页面上拉触底事件的处理函数
+   * 页面上拉事件的处理函数
    */
   onReachBottom: function () {
-    var val = this.data.value
     this.getList()
   },
 

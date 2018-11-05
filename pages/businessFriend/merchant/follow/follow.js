@@ -35,16 +35,16 @@ Page({
     })
   },
   searchBtn: function (e) {
-    var val = this.data.value
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       detailList: []
     })
-    this.getList({keyword: val })
+    this.getList()
   },
-  getList: function (data) {
+  getList: function () {
     var _this = this
-    Api.favoriteusers(data)
+    var val = this.data.value
+    Api.favoriteusers({ keyword: val })
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
@@ -96,22 +96,17 @@ Page({
   onPullDownRefresh: function () {
     this.setData({
       detailList: [],
-      value: ''
     })
     app.pageRequest.pageData.pageNum = 0
     this.getList()
+    wx.stopPullDownRefresh();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var val = this.data.value
-    if (val == '') {
       this.getList()
-    } else {
-      this.getList({keyword: val })
-    }
   },
 
 })

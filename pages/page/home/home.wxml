@@ -1,4 +1,14 @@
 <login id="login"></login>
+ <!--确定取消关注吗？-->
+<mes
+  show="{{disLike}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>确定取消关注吗？</text>
+  <button bindtap='disLike'>确定</button>
+</view>
+</mes>
  <!--是否下架-->
 <mes
   show="{{confirmDown}}"

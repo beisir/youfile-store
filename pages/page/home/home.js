@@ -71,6 +71,7 @@ Page({
     bannerHeight:0,
     swiperHeight:0,
     coverUrl:'',
+    disLike:false,
     identity:'',
     likeShow:false,
     limitShow:1,
@@ -412,8 +413,8 @@ Page({
       })
     })
   }, 
-  deteleLikeStore: function() {
-    var _this = this
+  disLike:function(){
+    var _this=this
     Api.deteleLikeStore()
       .then(res => {
         wx.showToast({
@@ -423,9 +424,16 @@ Page({
           mask: true,
         })
         _this.setData({
-          likeShow: false
+          likeShow: false,
+          disLike:false
         })
       })
+  },
+  deteleLikeStore: function() {
+    var _this = this
+    this.setData({
+      disLike:true
+    })
   },
   onReady: function () {
 
@@ -456,6 +464,7 @@ Page({
     }
     this.setData({
       getFollw: authHandler.isLogin(),
+      disLike:false
     })
     if (app.globalData.switchStore) {
       this.closeShow()

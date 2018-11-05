@@ -27,7 +27,12 @@
             </scroll-view>
         </view>
         <view class="result-null" wx:if="{{result.length==0}}">
-            <view class="null-tips">搜索结果为空！</view>
+           <view class="nomore">
+              <view>
+                <image src="/image/nohome.png"></image>
+              </view>
+              暂时还没有上架商品
+            </view>
         </view>
     </view>
     <view class="init-page" wx:else>
