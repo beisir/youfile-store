@@ -608,10 +608,14 @@ function seeVoucher(data){
   return app.http.getRequest(seeVoucherUrl, data)
 }
 // 裁剪图片跳转
-function toCuttingImg(url,quality){
+function toCuttingImg(url,quality,width,height){
   if(url){
     let add = '/pages/page/upload/upload?src=' + url;
     quality?add+="&quality=true":"";
+    add +="&width=";
+    width?add+=width:add+="750";
+    add += "&height=";
+    height ? add += height : add += "750";
     wx.navigateTo({
       url: add,
     })
