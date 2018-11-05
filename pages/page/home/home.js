@@ -122,7 +122,7 @@ Page({
                 status=obj.status
               if (status){
                 if (status==3){
-                  status==0
+                  status=0
                 }
                 wx.navigateTo({
                   url: '/pages/businessFriend/information/information?status=' + status+'&send=&accept=' + obj.storeId_ + '&remark= &name=&logo=',
@@ -286,7 +286,8 @@ Page({
   },
   homeIndex:function(){
     var that = this;
-    Api.homeIndex()
+    Api.homeIndex({ goodsSortType: "multiple" })
+    // Api.homeIndex()
       .then(res => {
         var obj = res.obj
         wx.setNavigationBarTitle({
@@ -508,7 +509,7 @@ Page({
       if (name=="names"){
         return {
           title: goodsName,
-          path: '/pages/page/home/home?goodsId='+id+"&storeId"+storeId,
+          path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id+"&storeId"+storeId,
           imageUrl: img,
           success: (res) => {
           },
