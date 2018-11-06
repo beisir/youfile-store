@@ -105,7 +105,8 @@ import {
   userInforUrl,
   supplyOrderUrl,
   showPurchaserUrl,
-  showMerchantUrl
+  showMerchantUrl,
+  recentGoodsUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -147,6 +148,11 @@ function getStoreInfo() {
 function adminGoodsList(data){
   data = initStoreId(data);
   return app.pageRequest.pageGet(adminGoodsListUrl, data)
+}
+/**首页新品**/
+function recentGoods(data) {
+  data = initStoreId(data);
+  return app.pageRequest.pageGet(recentGoodsUrl, data)
 }
 /**商品 删除**/
 function adminGoodsDelete(data) {
@@ -639,7 +645,7 @@ function initStoreId(data) {
   if (data == null || data == undefined) {
     data = {};
   }
-  if(isEmpty(wx.getStorageSync('storeId'))){
+  if (getStoreId()){
     data.storeId = wx.getStorageSync('storeId');
     return data;
   }else{
@@ -771,5 +777,6 @@ module.exports = {
   updataPwd: updataPwd,
   changeIcon: changeIcon,
   showPurchaser: showPurchaser,
-  showMerchant: showMerchant
+  showMerchant: showMerchant,
+  recentGoods: recentGoods
 }

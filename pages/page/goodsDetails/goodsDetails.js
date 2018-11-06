@@ -96,6 +96,7 @@ Page({
     saleBatchAmount:0,
     totalPrice:'',
     goodsId:'',
+    skuStr:'',
     numAll:0,
     moreCode:'',
     nums:0,
@@ -130,55 +131,59 @@ Page({
     // })
   },
   onLoad: function (options) {
-    if (options.storeId) {
-      wx.setStorageSync("storeId", options.storeId)
-    }
     var that = this,
-        arr=[],
-        goodsId=''
-    if(options.query){
-      goodsId = options.query.goodsId
-      wx.setStorageSync("storeId", options.query.storeId)
-    }else{
-      goodsId = options.goodsId
-    }
-    that.setData({
-      goodsId: goodsId
-    })
-    if (options.code){
+      arr = [],
+      goodsId = ''
+    if (options != undefined) {
+      if (options.storeId) {
+        wx.setStorageSync("storeId", options.storeId)
+      }
+      if (options.query) {
+        goodsId = options.query.goodsId
+        wx.setStorageSync("storeId", options.query.storeId)
+      } else {
+        goodsId = options.goodsId
+      }
       that.setData({
-        editCode: true,
+        goodsId: goodsId
       })
-      Api.cartList()
-        .then(res => {
-          var res = res.obj.effectiveList[0].goodsList
-          for (var i = 0; i < res.length; i++) {
-            if (res[i].goodsId == options.goodsId) {
-              arr = res[i].shoppingCartSkuList
-            }
-          }
-          if (options.name == "more") {
-            that.setData({
-              showCart: false,
-            })
-          }else{
-            that.setData({
-              showCartOne: false,
-              editOneName: true
-            })
-          }
-          that.setData({
-            newCartList: arr,
-          }, function () {
-            if (options.name == "more"){
-              getIdentity(this, goodsId, true)
-            }else{
-              getIdentity(this, goodsId, false)
-            }
-          })
+      if (options.code) {
+        that.setData({
+          editCode: true,
         })
+        Api.cartList()
+          .then(res => {
+            var res = res.obj.effectiveList[0].goodsList
+            for (var i = 0; i < res.length; i++) {
+              if (res[i].goodsId == options.goodsId) {
+                arr = res[i].shoppingCartSkuList
+              }
+            }
+            if (options.name == "more") {
+              that.setData({
+                showCart: false,
+              })
+            } else {
+              that.setData({
+                showCartOne: false,
+                editOneName: true
+              })
+            }
+            that.setData({
+              newCartList: arr,
+            }, function () {
+              if (options.name == "more") {
+                getIdentity(this, goodsId, true)
+              } else {
+                getIdentity(this, goodsId, false)
+              }
+            })
+          })
+      } else {
+        getIdentity(this, goodsId, false)
+      }
     }else{
-      getIdentity(this,goodsId,false)
+      getIdentity(this, this.data.goodsId, false)
     }
   },
 
@@ -542,9 +547,9 @@ Page({
               duration: 1000,
               mask: true
             })
-            wx.switchTab({
-              url: '../cartList/cartList'
-            })
+           _this.setData({
+             hidden:true
+           })
           })
       }
     }else{
@@ -564,11 +569,15 @@ Page({
       goodsSpecificationVOList = this.data.goodsSpecificationVOList,
       newArr=[],
       newSkuArrTwo=[],
+      _this=this,
+      skuStr='',
       status=e.target.dataset.status
     for (var j = 0; j < spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
       for (var i = 0; i < newSkuArrTwo.length; i++) {
         if (newSkuArrTwo[i].num > 0) {
+          // skuStr += newSkuArrTwo[i].skuName+","
+          console.log(newSkuArrTwo[i])
           newArr.push({ goodsId: goodsId, num: newSkuArrTwo[i].num, skuCode: newSkuArrTwo[i].skuCode,storeId:wx.getStorageSync('storeId')})
 
         }
@@ -605,6 +614,9 @@ Page({
             })
           })
       }else{
+        // _this.setData({
+        //   skuStr: skuStr
+        // })
         Api.addMoreCart(JSON.stringify(newArr))
           .then(res => {
             wx.showToast({
@@ -613,8 +625,8 @@ Page({
               duration: 1000,
               mask: true
             })
-            wx.switchTab({
-              url: '../cartList/cartList'
+            _this.setData({
+              hidden: true
             })
           })
       }
@@ -1166,6 +1178,7 @@ Page({
           duration: 1000,
           mask: true,
         })
+        app.globalData.isFollow =true
         _this.setData({
           likeShow: true,
           favoriteNum: this.data.favoriteNum+1
@@ -1183,6 +1196,7 @@ Page({
           duration: 1000,
           mask: true,
         })
+        app.globalData.isFollow = false
         _this.setData({
           likeShow: false,
           disLike:false,

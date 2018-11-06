@@ -58,7 +58,7 @@
   </view>
 </view>
 <view class="weui_cells weui_cells1" bindtap='showAlert'>
-      <text class="store-address">选择规格 </text>
+      <text class="store-address">选择规格 </text><view class='skuStr'>{{skuStr}}</view>
       <view class='weui-view'>
         <image class='img' src="/image/icl.png"></image>
       </view>

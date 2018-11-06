@@ -550,6 +550,15 @@ Page({
             }else{
               detailList[i].enjoyPrice = false
               enjoyCost = false
+              if (storeAmount>0){
+                if (allGoodsTotal > storeAmount) {
+                  detailList[i].enjoyPrice = true
+                  enjoyCost = true
+                } else {
+                  detailList[i].enjoyPrice = false
+                  enjoyCost = false
+                }
+              }
             }
           }
           if (storeNum > 0){

@@ -14,7 +14,8 @@ App({
     userInfo: null,
     skin: "normal",
     imageUrl: imageUrl,
-    switchStore: false
+    switchStore: false,
+    isFollow: null
   },
   http: new http(),
   pageRequest: new pageRequest(),
