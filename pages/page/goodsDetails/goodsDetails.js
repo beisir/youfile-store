@@ -257,6 +257,8 @@ Page({
       that.setData({
         specsTab: current,
         changeButtonCode: changeButtonCode
+      },function(){
+        that.selectedSku()
       })
     }
   },
@@ -269,6 +271,8 @@ Page({
       that.setData({
         currentTab: current,
         swichNavCode: swichNavCode
+      }, function () {
+        that.selectedSku()
       })
     }
   },
@@ -539,6 +543,7 @@ Page({
             })
           })
       }else{
+        _this.selectedSku()
         Api.addCart({ goodsId: goodsId, num: num, skuCode: skuCode })
           .then(res => {
             wx.showToast({
@@ -570,14 +575,11 @@ Page({
       newArr=[],
       newSkuArrTwo=[],
       _this=this,
-      skuStr='',
       status=e.target.dataset.status
     for (var j = 0; j < spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
       for (var i = 0; i < newSkuArrTwo.length; i++) {
         if (newSkuArrTwo[i].num > 0) {
-          // skuStr += newSkuArrTwo[i].skuName+","
-          console.log(newSkuArrTwo[i])
           newArr.push({ goodsId: goodsId, num: newSkuArrTwo[i].num, skuCode: newSkuArrTwo[i].skuCode,storeId:wx.getStorageSync('storeId')})
 
         }
@@ -614,9 +616,6 @@ Page({
             })
           })
       }else{
-        // _this.setData({
-        //   skuStr: skuStr
-        // })
         Api.addMoreCart(JSON.stringify(newArr))
           .then(res => {
             wx.showToast({
@@ -698,6 +697,7 @@ Page({
         numbers: num
       })
     }
+    this.selectedSku()
     if (this.data.isShowNewOne) {
       this.getTotalPriceNew(num)
     }
@@ -715,12 +715,35 @@ Page({
       })
     }
   },
+  // 判断选中的SKU
+  selectedSku:function(){
+    var skuStr = '',
+      swichNavCode = this.data.swichNavCode,
+      changeButtonCode = this.data.changeButtonCode,
+      goodsSkuVOList = this.data.goodsSkuVOList
+    for (var i = 0; i < goodsSkuVOList.length; i++) {
+      var childArr = goodsSkuVOList[i].specValueCodeList
+      if (childArr.length == 1) {
+        if (childArr.indexOf(changeButtonCode) != -1) {
+          skuStr = goodsSkuVOList[i].skuName
+        }
+      } else {
+        if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
+          skuStr = goodsSkuVOList[i].skuName
+        }
+      }
+    }
+    this.setData({
+      skuStr: skuStr
+    })
+  },
   addCount:function(){
     let num=this.data.numbers
     num=num+1
     this.setData({
-      numbers:num
+      numbers:num,
     })
+    this.selectedSku()
     if (this.data.isShowNewOne){
       this.getTotalPriceNew(num)
     }
@@ -886,8 +909,20 @@ Page({
       }
     }
     goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
+    var skuStr=''
+    for (var j = 0; j < spectArrDifference.length; j++) {
+      newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
+      for (var i = 0; i < newSkuArrTwo.length; i++) {
+        if (newSkuArrTwo[i].num > 0) {
+          skuStr += newSkuArrTwo[i].skuName+","
+
+        }
+      }
+    }
+    skuStr = (skuStr.substring(skuStr.length - 1) == ',') ? skuStr.substring(0, skuStr.length - 1) : skuStr
     this.setData({                    
       newSkuArrTwo: newSkuArrTwo,
+      skuStr: skuStr,
       totalPrice:total.toFixed(2),
       nums: nums,
       differNum: differNum,

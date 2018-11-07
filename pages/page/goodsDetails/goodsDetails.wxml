@@ -44,14 +44,14 @@
     <view class='gd-view-n' wx:if='{{saleBatchAmount==0}}' style='min-height:50rpx'><button>混批</button></view>
     <view class='gd-view-n'  wx:if='{{saleBatchAmount!=0}}'><button>混批</button>全场满￥{{saleBatchAmount}}元可混批</view>
   </view>
-  <view class="weui_cells">
+  <navigator class="weui_cells" url='../storeIcon/storeIcon'>
       <image  src="/image/positionico.png"></image>
       <text class="store-address">北京 </text>
       <view class='weui-view'>
-        <!-- <image src="{{baseUrl}}{{qrcode}}?x-oss-process=style/qrcode"></image> -->
+        <image src="/image/er.png" class='erImg'></image>
         <image class='img' src="/image/icl.png"></image>
       </view>
-  </view>
+  </navigator>
   <view class='gd-content'>
     <view><image src="/image/xin.png"></image>推荐心语</view>
     <text>{{recommendDesc}}</text>

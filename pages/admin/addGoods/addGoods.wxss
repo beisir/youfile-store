@@ -77,7 +77,10 @@
   border-radius: 6rpx;
 }
 .weui-upload{
-  padding-top: 40rpx;
+  padding-top: 30rpx;
+}
+.weui-upload::before{
+  border-top: 0
 }
 .weui-icon{
   font-size: 24rpx;color: #999;margin:10rpx 0;font-weight: normal
@@ -97,8 +100,9 @@
 .mainmove{position: absolute; opacity: 0.7}
 .maind{background: #fff; border:1px dashed #efefef;}
 .mainend{position: static; opacity: 1;}
-.weui-uploader__file {margin-right: 10rpx;}
+.weui-uploader__file {margin-right: 10rpx;padding-top: 20rpx;}
 .weui-uploader__img,.weui-uploader__input-box {width: 150rpx;height: 150rpx;margin-right: 18rpx;}
+.weui-uploader__input-box{margin-top: 20rpx;}
 .page-weui{border-top:1rpx solid #EFEFEF;margin-left: 15px;}
 .page-weui-active{border-top: 0;}
 .page-weui .weui-cell {padding-left: 0;}
@@ -107,6 +111,9 @@
 .ad-top  .ad-active,.ad-top view{background: #fff;border:0;}
 .ad-active{color: #CCAA77;}
 .ad-top view{height: 120rpx;line-height: 120rpx;width: 45.6%}
+.ad-top view:first-child image{
+  width:55rpx;height: 55rpx;
+}
 .stock{color:#333;font-weight: bold;font-size:36rpx;text-align: right;padding-right: 30rpx;}
 .sendmessage {  
   background-color: white;  width: 100%;  position: fixed;  bottom: 0rpx;  display: flex;  flex-direction: row;z-index: 1000;
@@ -167,4 +174,11 @@ border: 2rpx solid #d0d0d0;  padding-left: 20rpx;
 }
 .page{
   overflow-x: hidden
+}
+.re_img{
+  width: 40rpx;
+  height:40rpx;
+  position: absolute;
+  top:5rpx;margin-left: 120rpx;
+  z-index: 100
 }

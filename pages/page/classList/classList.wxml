@@ -30,9 +30,9 @@
     <view class="result-null" wx:else>
       <view class="nomore">
         <view>
-          <image src="/image/class-i.png"></image>
+          <image src="/image/nohome.png"></image>
         </view>
-        还没有分类哦！
+        还没有商品哦！
       </view>
     </view>
   </scroll-view>

@@ -110,8 +110,8 @@
   padding:0 15rpx;
   min-width: 90rpx;
   column-rule-color: #fff;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   color: #333;
   font-weight: normal;
   background: #fff;
@@ -247,6 +247,9 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   height: 29rpx;
   margin-left: 15rpx;
   margin-top: -3rpx;
+}
+.weui-view image.erImg{
+  width: 50rpx;height: 50rpx;margin-right: 0;
 }
 .weui_cells1 .weui-view{
   right: 40rpx;
@@ -590,5 +593,5 @@ margin-bottom:150rpx;
   left:180rpx;
   color:#666;
   font-size:26rpx;
-  width:400rpx;
+  width:450rpx;
 }

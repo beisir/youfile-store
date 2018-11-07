@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentTab: -1,
+    currentTab:0,
     alertTab:0,
     hidden:true,
     confirmUp:false,

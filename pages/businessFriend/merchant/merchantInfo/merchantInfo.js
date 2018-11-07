@@ -57,7 +57,6 @@ Page({
         greetArr.push({ mes: greet[i], name: name })
       }
     }
-    console.log(greetArr)
     if (accept && status!=3){
       Api.newUserInfor({ userId: accept })
         .then(res => {

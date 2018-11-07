@@ -1,14 +1,14 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/admin/status/status",
+    "pages/admin/addGoods/addGoods",
     "pages/page/cartList/cartList",
     "pages/admin/spec/spec",
     "pages/businessFriend/merchant/index/index",
     "pages/page/user/user",
     "pages/cloudOrder/myOrder/myOrder",
-    "pages/admin/status/status",
     "pages/page/invoice/invoice",
-    "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/index/index",
     "pages/role/allOrder/allOrder",

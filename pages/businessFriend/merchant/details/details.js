@@ -53,7 +53,7 @@ Page({
       }
       _this.setData({
         name: obj.name,
-        nickName: obj.nickName,
+        nickName: obj.remark,
         sex: sex,
         note: obj.note,
         phone: obj.phone,
@@ -148,7 +148,7 @@ Page({
     } else if (sex == '女') {
       no = 2
     }
-    data = { name: name, nickName: nickName, sex: no, note: note, phone: phone, wechart: wechart, birthday: birthday, province: province, city: city, county: county, detailAddress: detailAddress, userId: userId}
+    data = { name: name, remark: nickName, sex: no, note: note, phone: phone, wechart: wechart, birthday: birthday, province: province, city: city, county: county, detailAddress: detailAddress, userId: userId}
     Api.saveDetails(data)
     .then(res=>{
       wx.showToast({

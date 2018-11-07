@@ -30,7 +30,8 @@
     z-index: 12;
 }
 .shre_btn,.button-hover{
-  position: absolute;width: 150rpx;bottom: 20rpx;height: 80rpx;opacity: 0
+  position: absolute;width: 150rpx;bottom: 20rpx;height: 80rpx;border:0;border-left: 2rpx solid #eeeeee;background:unset;border-radius: 0;
+  height: 90rpx;bottom: 0;
 }
 .ym_sydtlogo {
     width: 80rpx;top:-100rpx;
@@ -66,14 +67,14 @@
     right: 5rpx;width: 155rpx;
     bottom: 60rpx;padding: 0;
     text-align: center;background: none;
-    font-size: 26rpx;border-left: 2rpx solid #EEEEEE;
+    font-size: 26rpx;
     z-index: 13;border-radius:0;
     display: flex;
     align-items: center;
     justify-content:center;
 }
 .ym_sydtgzbtn view{
-  position: absolute;bottom: 40rpx;border-left: 2rpx solid #EEEEEE;width: 157rpx;height:50rpx;padding-top: 5rpx;
+  position: absolute;bottom: 40rpx;width: 157rpx;height:50rpx;padding-top: 5rpx;
 }
 .ym_sydtgzbtn  image{
    width: 40rpx;height: 40rpx;

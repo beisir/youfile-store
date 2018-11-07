@@ -27,6 +27,9 @@ Page({
     brand: '',
     name: '',
     show1: false,
+    show:false,
+    reImgIndex:0,
+    moveImgShow:true,
     code:'',
     recommendDesc: '',
     description: '',
@@ -41,6 +44,23 @@ Page({
     goodsId:'',
     addGoodsDetails: [],
     mainImgUrl: "",
+  },
+  // 删除商品图
+  showRemoveImg:function(e){
+    var index=e.target.dataset.index
+    this.setData({
+      show:true,
+      reImgIndex:index
+    })
+  },
+  removeImg:function(){
+    var index = this.data.reImgIndex,
+      pics = this.data.pics
+    pics.splice(index,1)
+    this.setData({
+      show:false,
+      pics
+    })
   },
   // 删除详情信息
   removeImage: function (e) {
@@ -384,6 +404,7 @@ Page({
     y2 = e.touches[0].clientY - y + y1;
     this.setData({
       mainx: currindex,
+      moveImgShow:false,
       opacity: 0.7,
       start: { x: x2, y: y2 }
     })
@@ -406,6 +427,7 @@ Page({
       this.setData({
         mainx: "",
         pics: arr1,
+        moveImgShow:true,
         opacity: 1
       })
     }
@@ -486,6 +508,25 @@ Page({
     _this.setData({
       show1: true
     })
+  },
+  // 下架
+  confirmDown: function () {
+    var _this = this,
+      goodsIdList = [],
+      goodId = this.data.goodsId
+    goodsIdList.push(goodId)
+    Api.adminGoodsDown(goodsIdList)
+      .then(res => {
+        wx.showToast({
+          title: '下架成功',
+          icon: 'none',
+          duration: 2000
+        })
+        setTimeout(function () {
+          _this.goback()
+        }, 1000)
+
+      })
   },
   // 更新
   updateGoods: function (e) {

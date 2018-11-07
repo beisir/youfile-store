@@ -624,3 +624,6 @@ input:focus{
 .top-p1{
    border-bottom: 10rpx solid #333;
 }
+.result-null{
+  padding-bottom: 50rpx;
+}

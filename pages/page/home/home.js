@@ -131,6 +131,9 @@ Page({
                     })
                   }
                 })
+                // .catch(res=>{
+                  
+                // })
             }
           } else {
             Api.showToast("未获取信息！")
@@ -250,12 +253,14 @@ Page({
     } 
     Api.shopList({ keyword: '', sortType: sortType})
       .then(res => {
-        var detailList = res.obj.result
+        var detailList = res.obj.result,
+          totalCount = res.obj.totalCount
         if (Api.isEmpty(detailList)){
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            totalCount: totalCount,
             baseUrl: app.globalData.imageUrl,
             noMoreData:true
           })
@@ -365,12 +370,14 @@ Page({
     var _this=this
     Api.recentGoods()
       .then(res => {
-        var detailList = res.obj.result
+        var detailList = res.obj.result,
+          totalCount = res.obj.totalCount
         if (Api.isEmpty(detailList)) {
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            totalCount: totalCount,
             baseUrl: app.globalData.imageUrl,
             noMoreData: true
           })
