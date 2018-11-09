@@ -1,7 +1,7 @@
 @import '../../admin/spec/spec';
 @import '../serList/serList';
 page{
-  height: auto!important;
+  height: 120% !important;
   margin-bottom: 100rpx;
 }
 .nbf-font image{

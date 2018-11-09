@@ -12,9 +12,9 @@
   </navigator>
 </view>
 <view class="weui_cells">
-    <navigator url='../editStoreAddress/editStoreAddress?address={{storeMes.address}}&province={{storeMes.province}}&city={{storeMes.city}}&county={{storeMes.county}}'>
+    <navigator url='../editStoreAddress/editStoreAddress?address={{address}}&province={{province}}&city={{city}}&county={{county}}'>
       <image  src="/image/positionico.png"></image>
-      <text>{{storeMes.address}}</text>
+      <text>{{address}}</text>
       <view class='weui-view'>
       <image class='img' src="/image/icl.png"></image>
     </view>
@@ -57,10 +57,10 @@
    <view class='weui-xian weui-xian1'></view>
 </navigator>
 <view class='weui-time'>
-  <navigator url='../updateMes/updateMes?name=openingTime&value={{storeMes.openingTime}}&types=营业时间'>营业时间<text>{{storeMes.openingTime==null?'':storeMes.openingTime}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
-  <navigator url='../updateMes/updateMes?name=servicePhone&value={{storeMes.servicePhone}}&types=客服电话'>客服电话<text>{{storeMes.servicePhone==null?'':storeMes.servicePhone}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
-  <navigator  url='../updateMes/updateMes?name=wechatNumber&value={{storeMes.wechatNumber}}&types=客服微信'>客服微信<text>{{storeMes.wechatNumber==null?'':storeMes.wechatNumber}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
-  <navigator  url='../updateMes/updateMes?name=wechatPublicAccount&value={{storeMes.wechatPublicAccount}}&types=公众号'>公众号<text>{{storeMes.wechatPublicAccount==null?'':storeMes.wechatPublicAccount}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator url='../updateMes/updateMes?name=openingTime&value={{openingTime}}&types=营业时间'>营业时间<text>{{openingTime}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator url='../updateMes/updateMes?name=servicePhone&value={{servicePhone}}&types=客服电话'>客服电话<text>{{servicePhone}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator  url='../updateMes/updateMes?name=wechatNumber&value={{wechatNumber}}&types=客服微信'>客服微信<text>{{wechatNumber}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
+  <navigator  url='../updateMes/updateMes?name=wechatPublicAccount&value={{wechatPublicAccount}}&types=公众号'>公众号<text>{{wechatPublicAccount}}</text><view class='mes-tel'><image src="/image/icl.png"></image></view></navigator>
 </view>
 <view class="weui_cells">
     <image  src="/image/mes12.png"></image>

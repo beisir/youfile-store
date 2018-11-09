@@ -8,7 +8,7 @@ Page({
   data: {
     userId:'',
     showMes:false,
-    remarkName:'',
+    name:'',
     baseUrl: app.globalData.imageUrl,
   },
   // 电话
@@ -38,7 +38,7 @@ Page({
             phone: obj.phone == null ? '' : obj.phone,
             headPic:obj.headPic,
             nickName: obj.nickName == null ? '' : obj.nickName,
-            remarkName: obj.remark == null ? '' : obj.remark,
+            name: obj.name == null ? '' : obj.name,
             wechart: obj.wechart == null ? '' : obj.wechart,
           })
         }
@@ -74,7 +74,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that = this
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1]
+    if (currPage.data.userId) {
+      this.getMession({ purchaserUserId: currPage.data.userId })
+    }
   },
 
   /**

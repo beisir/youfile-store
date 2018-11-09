@@ -12,13 +12,14 @@
   <navigator class='bf-weui' url='../details/details?userId={{userId}}'>
     <view class="weui_cells new-weui">
       <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{data.headPic}}?x-oss-process=style/logo"></image></view>
-      <text>{{data.userName}}</text>
+      <text>{{data.nickName}}</text>
       <image  class='re-img' wx:if='{{data.gender!=1}}' mode="widthFix" src="/image/ermR.png"></image>
       <image  class='re-img' wx:if='{{data.gender==1}}' mode="widthFix" src="/image/man.png"></image>
+      <!-- <view class='nbf-font'>昵称：{{data.nickName}}</view> -->
     </view>
   </navigator>
 </view>
-<view class='bf-cont'>
+<!-- <view class='bf-cont'>
   <view class='bf-weui add-bf-weui' bindtap='setName'>
     <view class="weui_cells">
       <text class="bf-font">设置备注 </text>
@@ -27,13 +28,13 @@
       </view>
     </view>
   </view>
-</view>
+</view> -->
 <view class='bf-cont info-cont'>
   <view class='in-cont'>
-   <text>手机号</text><view>{{data.mobile}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+   <text>手机号</text><view>{{data.mobile}}<view class='in-cont-img'><image  mode="widthFix" bindtap='calling' src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
-   <text>微信号</text><view wx:if='{{data.mobile!=null}}'>{{data.mobile}}</view>
+   <text>微信号</text><view wx:if='{{data.weixinNumber!=null}}'>{{data.weixinNumber}}</view>
   </view>
   <view class='in-cont'>
    <text>生日</text><view wx:if='{{data.birthday!=null}}'>{{data.birthday}}</view>

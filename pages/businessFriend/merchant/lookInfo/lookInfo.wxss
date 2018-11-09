@@ -8,3 +8,6 @@
 .weui_cells>image{
   position: unset;width: 40rpx;height: 40rpx;margin-left: 10rpx;vertical-align: middle;margin-top: -2rpx;
 }
+.nbf-font{
+  margin-top: 10rpx;
+}

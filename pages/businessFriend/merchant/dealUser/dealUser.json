@@ -1,3 +1,4 @@
 {
-  "navigationBarTitleText": "成交客户"
+  "navigationBarTitleText": "成交客户",
+  "enablePullDownRefresh": true
 }

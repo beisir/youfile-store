@@ -40,7 +40,7 @@
   <view class='in-cont'>
    <text>楼层区域</text><view>{{balcony}}{{floor}}{{area}}{{doorNum}}</view>
   </view>
-  <view class='in-cont'>
+  <view class='in-cont' bindtap='urlHome'>
    <text>小云店</text>
    <view style='min-height:120rpx' >
     <view wx:for='{{goodsList}}' wx:key='{{index}}' wx:if='{{index<4}}' class='in-more-img'><image  mode="widthFix" src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image></view>
@@ -48,12 +48,12 @@
    </view>
   </view>
   <view class='in-cont'>
-   <text>手机号</text><view wx:if='{{servicePhone!=null}}'>{{servicePhone==null?'':servicePhone}}<view class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+   <text>手机号</text><view wx:if='{{servicePhone!=null}}'>{{servicePhone==null?'':servicePhone}}<view class='in-cont-img'><image  mode="widthFix"  bindtap='calling' src="/image/tel1.png"></image></view></view>
   </view>
   <view class='in-cont'>
    <text>微信号</text><view wx:if='{{wechatNumber!=null}}'>{{wechatNumber==null?'':wechatNumber}}</view>
   </view>
-  <view class='in-cont'>
+  <view class='in-cont' bindtap='urlHome'>
     <text>更多经营信息</text>
     <view class='in-img'><image  mode="widthFix" src="/image/icl.png"></image></view>
   </view>

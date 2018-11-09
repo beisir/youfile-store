@@ -30,7 +30,8 @@
     z-index: 12;
 }
 .shre_btn,.button-hover{
-  position: absolute;width: 150rpx;bottom: 20rpx;height: 80rpx;opacity: 0
+  position: absolute;width: 150rpx;bottom: 20rpx;height: 80rpx;border:0;border-left: 2rpx solid #eeeeee;background:unset;border-radius: 0;
+  height: 90rpx;bottom: 0;
 }
 .ym_sydtlogo {
     width: 80rpx;top:-100rpx;
@@ -64,16 +65,16 @@
     border: none;
     position: absolute;
     right: 5rpx;width: 155rpx;
-    bottom: 40rpx;padding: 0;
+    bottom: 60rpx;padding: 0;
     text-align: center;background: none;
-    font-size: 26rpx;border-left: 2rpx solid #EEEEEE;
+    font-size: 26rpx;
     z-index: 13;border-radius:0;
     display: flex;
     align-items: center;
     justify-content:center;
 }
 .ym_sydtgzbtn view{
-  position: absolute;bottom: 40rpx;border-left: 2rpx solid #EEEEEE;width: 157rpx;height:50rpx;
+  position: absolute;bottom: 40rpx;width: 157rpx;height:50rpx;padding-top: 5rpx;
 }
 .ym_sydtgzbtn  image{
    width: 40rpx;height: 40rpx;
@@ -129,7 +130,7 @@
 .swiper-tab-item{ 
   font-size: 28rpx; 
   display: inline-block; 
-  width:29%; position: relative;
+  width:25%; position: relative;
   color: #666; z-index: 1000;
 } 
 .swiper-tab-item image{
@@ -151,27 +152,6 @@
   background:#C79359;
   left: 50%;
   margin:0 auto;
-}
-.top-p{
-  position: absolute;
-  width: 0;z-index: 100;
-  height: 0;top:33rpx;left: 145rpx;
-  border-left: 7rpx solid transparent;
-  border-right: 7rpx solid transparent;
-  border-bottom: 10rpx solid #BBBBBB;
-}
-.up-p{
-  width: 0;top:45rpx;left: 145rpx;
-  height: 0; position: absolute;z-index: 100;
-  border-left:7rpx solid transparent;
-  border-right: 7rpx solid transparent;
-  border-top: 10rpx solid #BBBBBB;
-}
-.up-p1{
-  border-top: 10rpx solid #333;
-}
-.top-p1{
-   border-bottom: 10rpx solid #333;
 }
 .sort-c{
  z-index: 1000;position: relative;
@@ -206,7 +186,7 @@ margin-top: 30rpx;font-size: 30rpx;border-radius: 10rpx;}
 .store_name image{width: 35rpx;height: 35rpx;margin-left: 18rpx;margin-top: 0}
 .result-list .result-text1 image.h-img{height:40rpx;width: 40rpx;float: right;margin-right: 10rpx;}
 .result-list{
-  height: 530rpx;
+  height: 530rpx;border:0;
   margin: 0 0 30rpx;
 }
 .flex-boxx{
@@ -223,4 +203,20 @@ margin-top: 30rpx;font-size: 30rpx;border-radius: 10rpx;}
 }
 .share-v image{
   width: 35rpx;height: 35rpx;
+}
+.tipMes{
+  font-size: 36rpx;font-weight: normal;margin-bottom: 70rpx;margin-top: 10rpx;
+}
+.tipMes text{
+  color: #CCAA77
+}
+.result{
+  background: #fff;margin-top:0rpx;padding-top:30rpx;
+}
+.nomore{
+  margin-bottom: 0rpx;
+  margin-top: 0rpx;
+  text-align: center;
+  background: #f7f7f7;
+  padding:30rpx;
 }

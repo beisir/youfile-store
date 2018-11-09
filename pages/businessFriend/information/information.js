@@ -41,6 +41,16 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  calling: function () {
+    var mobile = this.data.servicePhone
+    wx.makePhoneCall({
+      phoneNumber: mobile,
+      success: function () {
+      },
+      fail: function () {
+      }
+    })
+  },
   getMession: function (status, accept) {
   var _this = this,
       url=''
@@ -86,7 +96,7 @@ Page({
           servicePhone: storeMes.servicePhone,
           wechatNumber: storeMes.wechatNumber, 
           businessScope: storeMes.businessScope, 
-          send: storeMes.id,
+          // send: storeMes.id,
           name: storeMes.name == null ? '' :storeMes.name,
           logo: storeMes.logo,
         })
@@ -100,6 +110,9 @@ Page({
         logo = options.logo,
         name=options.name,
         remark = options.remark
+    this.setData({
+      send:send
+    })
     if (remark =="null"){
       this.setData({
         value:'',

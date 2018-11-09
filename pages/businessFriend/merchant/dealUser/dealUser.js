@@ -112,8 +112,12 @@ Page({
           totalCount = res.obj.totalCount
         if (Api.isEmpty(detailList)){
           for (var i = 0; i < detailList.length;i++){
-            var time= util.formatTime(new Date(detailList[i].latelyTradeDate))
-            detailList[i].latelyTradeDate = time.split(" ")[0]
+            if (detailList[i].latelyTradeDate==null){
+              detailList[i].latelyTradeDate=''
+            }else{
+              var time = util.formatTime(new Date(detailList[i].latelyTradeDate))
+              detailList[i].latelyTradeDate = time.split(" ")[0]
+            }
           }
         }
         _this.setData({
@@ -161,19 +165,14 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      detailList: [],
-      value: ''
-    })
-    app.pageRequest.pageData.pageNum = 0
-    this.getList()
+    this.emptyArr()
+    wx.stopPullDownRefresh();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var val = this.data.value
     this.getList()
   },
 

@@ -97,6 +97,7 @@ Page({
       result: []
     })
     this.getList()
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -104,7 +105,6 @@ Page({
    */
   onReachBottom: function () {
     this.getList()
-
   },
 
 })

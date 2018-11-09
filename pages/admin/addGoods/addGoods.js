@@ -43,7 +43,27 @@ Page({
     baseUrl: app.globalData.imageUrl,
     goodsImageVOList: [],
     mainImgUrl:'',
-    addGoodsDetails: []
+    addGoodsDetails: [],
+    show: false,
+    reImgIndex: 0,
+    moveImgShow: true,
+  },
+  // 删除商品图
+  showRemoveImg: function (e) {
+    var index = e.target.dataset.index
+    this.setData({
+      show: true,
+      reImgIndex: index
+    })
+  },
+  removeImg: function () {
+    var index = this.data.reImgIndex,
+      pics = this.data.pics
+    pics.splice(index, 1)
+    this.setData({
+      show: false,
+      pics
+    })
   },
   // 删除详情信息
   removeImage:function(e){
@@ -321,6 +341,7 @@ Page({
     this.setData({
       mainx: currindex,
       opacity: 0.7,
+      moveImgShow: false,
       start: { x: x2, y: y2 }
     })
   },
@@ -342,6 +363,7 @@ Page({
       this.setData({
         mainx: "",
         pics: arr1,
+        moveImgShow: true,
         opacity: 1
       })
     }

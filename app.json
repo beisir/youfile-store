@@ -14,29 +14,16 @@
     
     "pages/payment/uploadPayment/uploadPayment",
     
-    
-    
-    "pages/cloudOrder/myOrder/myOrder",
-    
-    
-    
-    
     "pages/page/home/home",
-    
-    
-    
-    
-    "pages/page/invoice/invoice",
-    
-    
-    
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
-    "pages/admin/spec/spec",
-    "pages/page/workIndex/workIndex",
-    "pages/businessFriend/merchant/index/index",
-    "pages/businessFriend/index/index",
     "pages/page/cartList/cartList",
+    "pages/admin/spec/spec",
+    "pages/businessFriend/merchant/index/index",
+    "pages/cloudOrder/myOrder/myOrder",
+    "pages/page/invoice/invoice",
+    "pages/page/workIndex/workIndex",
+    "pages/businessFriend/index/index",
     "pages/role/order/order",
     "pages/admin/batchSet/batchSet",
     "pages/businessFriend/merchant/list/list",
@@ -108,7 +95,6 @@
     "pages/businessFriend/merchant/newMerchant/newMerchant",
     "pages/businessFriend/merchant/serList/serList",
     "pages/businessFriend/merchant/invite/invite",
-    
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
     "pages/page/serList/serList",
@@ -173,5 +159,8 @@
         "text": "客户"
       }
     ]
-  }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx6241529c7dc70d51"
+  ]
 }

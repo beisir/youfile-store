@@ -441,6 +441,8 @@ Page({
     }
     num = num - 1;
     detailList[index].num = num;
+    detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
+    detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
     dataArr.push({ goodsId:detailList[index]["goodsId"], num: num, skuCode:0, storeId: storeId })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
@@ -458,6 +460,8 @@ Page({
     num = num + 1;
     let storeId = this.data.storeId
     detailList[index].num = num
+    detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
+    detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
     dataArr.push({ goodsId: detailList[index]["goodsId"], num: num, skuCode: 0, storeId: storeId })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
@@ -550,6 +554,15 @@ Page({
             }else{
               detailList[i].enjoyPrice = false
               enjoyCost = false
+              if (storeAmount>0){
+                if (allGoodsTotal > storeAmount) {
+                  detailList[i].enjoyPrice = true
+                  enjoyCost = true
+                } else {
+                  detailList[i].enjoyPrice = false
+                  enjoyCost = false
+                }
+              }
             }
           }
           if (storeNum > 0){

@@ -71,6 +71,7 @@ Page({
     bannerHeight:0,
     swiperHeight:0,
     coverUrl:'',
+    disLike:false,
     identity:'',
     likeShow:false,
     limitShow:1,
@@ -86,49 +87,56 @@ Page({
         var userId = res.result
         if (userId != "*") {
           var userId = userId.split("user_")[1]
-          if (limitShow == 2) {
-            Api.showMerchant({ userId: userId })
-            .then(res=>{
-              var status = res.obj.status
-              if (status){
-                Api.newUserInfor({ userId: userId })
-                .then(res=>{
-                  var accept = res.obj.id,
-                    phone = res.obj.mobile,
-                    userName = res.obj.userName,
-                    storeId = wx.getStorageSync("storeId")
-                  var pic = that.data.baseUrl + res.obj.headPic
-                  if(status==2){
-                    wx.navigateTo({
-                      url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
-                    })
+          if (Api.isEmpty(userId)){
+            if (limitShow == 2) {
+              Api.showMerchant({ userId: userId })
+                .then(res => {
+                  var status = res.obj.status
+                  if (status) {
+                    Api.newUserInfor({ userId: userId })
+                      .then(res => {
+                        var accept = res.obj.id,
+                          phone = res.obj.mobile,
+                          userName = res.obj.userName,
+                          storeId = wx.getStorageSync("storeId")
+                        var pic = that.data.baseUrl + res.obj.headPic
+                        if (status == 2) {
+                          wx.navigateTo({
+                            url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+                          })
+                        }
+                        if (status != 2) {
+                          if (status == 3) {
+                            status = 0
+                          }
+                          wx.navigateTo({
+                            url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
+
+                          })
+                        }
+                      })
                   }
-                  if(status!=2){
-                    if (status==3){
-                      status=0
+                })
+            } else {
+              Api.showPurchaser({ userId: userId })
+                .then(res => {
+                  var obj = res.obj,
+                    status = obj.status
+                  if (status) {
+                    if (status == 3) {
+                      status = 0
                     }
                     wx.navigateTo({
-                      url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
-
+                      url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark= &name=&logo=',
                     })
                   }
                 })
-              }
-            })
+                // .catch(res=>{
+                  
+                // })
+            }
           } else {
-            Api.showPurchaser({ userId: userId})
-            .then(res=>{
-              var obj=res.obj,
-                status=obj.status
-              if (status){
-                if (status==3){
-                  status=0
-                }
-                wx.navigateTo({
-                  url: '/pages/businessFriend/information/information?status=' + status+'&send=&accept=' + obj.storeId_ + '&remark= &name=&logo=',
-                })
-              }
-            })
+            Api.showToast("未获取信息！")
           }
         } else {
           Api.showToast("未获取信息！")
@@ -234,9 +242,9 @@ Page({
       sortType=''
     if (currentTab == 0) {
       sortType = 'multiple'
-    } else if (currentTab == 1) {
-      sortType = 'sales'
     } else if (currentTab == 2) {
+      sortType = 'sales'
+    } else if (currentTab == 3) {
       if (descShow){
         sortType = 'prices_asc'
       }else{
@@ -245,12 +253,14 @@ Page({
     } 
     Api.shopList({ keyword: '', sortType: sortType})
       .then(res => {
-        var detailList = res.obj.result
+        var detailList = res.obj.result,
+          totalCount = res.obj.totalCount
         if (Api.isEmpty(detailList)){
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            totalCount: totalCount,
             baseUrl: app.globalData.imageUrl,
             noMoreData:true
           })
@@ -287,12 +297,12 @@ Page({
   homeIndex:function(){
     var that = this;
     Api.homeIndex({ goodsSortType: "multiple" })
-    // Api.homeIndex()
       .then(res => {
         var obj = res.obj
         wx.setNavigationBarTitle({
           title: obj.store.storeName
         })
+        app.globalData.isFollow = obj.isFollow
         that.setData({
           store: obj.store,
           floorInfo:obj.store.floor.floorInfo,
@@ -300,7 +310,7 @@ Page({
           coverUrl: obj.store.coverUrl,
           result: obj.goods.result,
           totalCount: obj.goods.totalCount,
-          likeShow: obj.isFollow
+          likeShow: app.globalData.isFollow
         },function(){
           var query = wx.createSelectorQuery();
           query.select('#myText').boundingClientRect()
@@ -356,11 +366,44 @@ Page({
     app.pageRequest.pageDataIndex.pageNum = 0
     this.getList()
   },
+  getListNew:function(){
+    var _this=this
+    Api.recentGoods()
+      .then(res => {
+        var detailList = res.obj.result,
+          totalCount = res.obj.totalCount
+        if (Api.isEmpty(detailList)) {
+          var datas = _this.data.result,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            result: newArr,
+            totalCount: totalCount,
+            baseUrl: app.globalData.imageUrl,
+            noMoreData: true
+          })
+        } else {
+          _this.setData({
+            noMoreData: false
+          })
+          Api.showToast("暂无更多数据了！")
+        }
+      })
+  },
+  emptyArrNew: function () {
+    var _this=this
+    this.setData({
+      result: []
+    },function(){
+      app.pageRequest.pageData.pageNum = 0
+      _this.getListNew()
+    });
+  },
   swichNav: function (e) {
     var that = this,
-      descShow = this.data.descShow
-    if (this.data.currentTab === e.target.dataset.current) {
-      if (e.target.dataset.current == 2) {
+      descShow = this.data.descShow,
+      index = e.target.dataset.current
+    if (this.data.currentTab === index) {
+      if (index == 3) {
         that.setData({
           descShow: !descShow
         }, function () {
@@ -370,9 +413,13 @@ Page({
       return false;
     } else {
       that.setData({
-        currentTab: e.target.dataset.current,
+        currentTab:index,
       },function(){
-        this.emptyArr()
+          if (index==1){
+            that.emptyArrNew()
+          }else{
+            this.emptyArr()
+          }
       })
     }
   },
@@ -412,8 +459,8 @@ Page({
       })
     })
   }, 
-  deteleLikeStore: function() {
-    var _this = this
+  disLike:function(){
+    var _this=this
     Api.deteleLikeStore()
       .then(res => {
         wx.showToast({
@@ -423,9 +470,16 @@ Page({
           mask: true,
         })
         _this.setData({
-          likeShow: false
+          likeShow: false,
+          disLike:false
         })
       })
+  },
+  deteleLikeStore: function() {
+    var _this = this
+    this.setData({
+      disLike:true
+    })
   },
   onReady: function () {
 
@@ -448,6 +502,16 @@ Page({
           limitShow: setlimitShow
         })
       }
+      if (app.globalData.isFollow){
+        this.setData({
+          likeShow:true
+        })
+      }
+      if (!app.globalData.isFollow){
+        this.setData({
+          likeShow: false
+        })
+      }
     }else{
       this.setData({
         limitShow: 1,
@@ -456,6 +520,7 @@ Page({
     }
     this.setData({
       getFollw: authHandler.isLogin(),
+      disLike:false
     })
     if (app.globalData.switchStore) {
       this.closeShow()
@@ -487,8 +552,11 @@ Page({
       currentTab: currentTab,
       noMoreData:true
     },function(){
-      this.emptyArr()
-      // this.onShow()
+      if (currentTab==1){
+        this.emptyArrNew()
+      }else{
+        this.emptyArr()
+      }
       wx.stopPullDownRefresh();
     })
   },
@@ -534,8 +602,13 @@ Page({
    */
   onReachBottom: function () {
     var noMoreData = this.data.noMoreData
+    var currentTab = this.data.currentTab
     if (noMoreData){
-      this.getList()
+      if (currentTab == 1) {
+        this.getListNew()
+      } else {
+        this.getList()
+      }
     }
   },
   onPageScroll: function (e) {
@@ -543,7 +616,6 @@ Page({
     totalCount = this.data.totalCount,
     bannerHeight = this.data.bannerHeight,
     swiperHeight = this.data.swiperHeight
-    
     // console.log(bannerHeight + "///" + top + "///" + swiperHeight)
   }
 })

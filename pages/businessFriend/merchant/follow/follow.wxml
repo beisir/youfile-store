@@ -14,6 +14,14 @@
     </navigator>
   </view>
 </view>
-<view class='allData'>{{totalCount}}位关注用户</view>
+<view class='allData' wx:if='{{totalCount==0}}'>
+  <view class="nomore">
+      <view>
+        <image src="/image/user.png"></image>
+      </view>
+      暂无客户！
+    </view>
+  </view>
+<view class='allData' wx:if='{{totalCount>0}}'>{{totalCount}}位关注用户</view>
 </scroll-view>
 

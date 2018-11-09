@@ -46,26 +46,20 @@ Page({
   getList: function (value) {
     var keyword = value,
       _this = this
-    this.setData({
-      result: [],
-    })
     Api.goodsApiSearchList({ keyword: keyword })
       .then(res => {
         var obj = res.obj.result,
-          datas = _this.data.result,
+          totalCount = res.obj.totalCount
+        var datas = _this.data.result,
           newArr = app.pageRequest.addDataList(datas, obj)
-        if (newArr.length > 0) {
-          _this.setData({
-            showResult: true,
-          })
-        } else {
+        _this.setData({
+          result: newArr,
+        })
+        if (totalCount>0){
           _this.setData({
             showResult: true,
           })
         }
-        _this.setData({
-          result: newArr,
-        })
       })
   },
   searchBtn(e) {
@@ -146,9 +140,8 @@ Page({
     this.setData({
       result: [],
     })
-    if (this.data.value != '') {
-      this.getList()
-    }
+    this.getList(this.data.value)
+    wx.stopPullDownRefresh();
   },
   onShareAppMessage: (res) => {
     var img = '',
@@ -257,5 +250,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var value = this.data.value
+    this.getList(value)
   }
 })

@@ -110,8 +110,8 @@
   padding:0 15rpx;
   min-width: 90rpx;
   column-rule-color: #fff;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 50rpx;
+  line-height: 50rpx;
   color: #333;
   font-weight: normal;
   background: #fff;
@@ -176,6 +176,9 @@
 .gd-title view.gd-font2{
   color:#999999;
 }
+.gd-font button{
+  height: 45rpx;
+}
 .gd-title .btn {
   border:0;text-align: right
 }
@@ -201,7 +204,7 @@
 color: #999999;font-size: 28rpx;margin-top: 20rpx;
 }
 .gd-title .gd-view-n button{
-  float: left;width: 120rpx;margin:5rpx 10rpx 0 0;
+  float: left;width: 120rpx;margin:5rpx 10rpx 0 0;height: 45rpx;
 }
 .gd-title text{
   color:#C79359;
@@ -244,6 +247,9 @@ color: #999999;font-size: 28rpx;margin-top: 20rpx;
   height: 29rpx;
   margin-left: 15rpx;
   margin-top: -3rpx;
+}
+.weui-view image.erImg{
+  width: 50rpx;height: 50rpx;margin-right: 0;
 }
 .weui_cells1 .weui-view{
   right: 40rpx;
@@ -573,4 +579,19 @@ margin-bottom:150rpx;
 }
 .lt-weui-bottom1 view>text{
   left: 70rpx
+}
+.weui_cells1 .skuStr{
+  text-overflow:-o-ellipsis-lastline;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  line-clamp:1;
+  -webkit-box-orient:vertical;
+  position:absolute;
+  top:2rpx;
+  left:180rpx;
+  color:#666;
+  font-size:26rpx;
+  width:450rpx;
 }

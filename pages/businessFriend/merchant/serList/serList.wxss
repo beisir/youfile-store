@@ -1,6 +1,6 @@
 @import '../../serList/serList';
 .bf-imput{
-  margin-top: 10rpx;position:fixed;width:92%;z-index: 100rpx;margin-top: 0;
+  margin-top: 10rpx;position:fixed;width:92%;z-index: 100;margin-top: 0;background:#fff;
 }
 .bf-weui .weui_cells{
   padding-top:10rpx;position: relative;

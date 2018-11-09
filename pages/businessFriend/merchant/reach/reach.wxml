@@ -2,7 +2,7 @@
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
       <view class='bf-img'  wx:if='{{headPic!=null}}'><image mode="aspectFill" src="{{baseUrl}}{{headPic}}?x-oss-process=style/logo"></image></view>
-      <text>{{remarkName==''?nickName:remarkName}}</text><image  class='re-img' mode="widthFix" src="/image/man.png"></image><view class='re-name'>进货商</view>
+      <text>{{name==''?nickName:name}}</text><image  class='re-img' mode="widthFix" src="/image/man.png"></image><view class='re-name'>进货商</view>
       <view class='nbf-font'>昵称：{{nickName}}</view>
     </view>
     <view class='weui-view'>

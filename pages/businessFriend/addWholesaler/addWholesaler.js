@@ -17,19 +17,23 @@ Page({
        var userId=res.result
         if (userId != "*") {
           var userId = userId.split("user_")[1]
-          Api.showPurchaser({ userId: userId })
-            .then(res => {
-              var obj = res.obj,
-                status = obj.status
-              if (status) {
-                if (status == 3) {
-                  status == 0
+          if (Api.isEmpty(userId)){
+            Api.showPurchaser({ userId: userId })
+              .then(res => {
+                var obj = res.obj,
+                  status = obj.status
+                if (status) {
+                  if (status == 3) {
+                    status == 0
+                  }
+                  wx.navigateTo({
+                    url: '../information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark= &name=&logo=',
+                  })
                 }
-                wx.navigateTo({
-                  url: '../information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark= &name=&logo=',
-                })
-              }
-            })
+              })
+          } else {
+            Api.showToast("未获取信息！")
+          }
         } else {
           Api.showToast("未获取信息！")
         }

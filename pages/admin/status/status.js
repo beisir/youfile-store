@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentTab: -1,
+    currentTab:0,
     alertTab:0,
     hidden:true,
     confirmUp:false,
@@ -147,7 +147,6 @@ Page({
           detailList: detailList,
           confirmUp:false
         })
-        app.globalData.switchStore = true
         wx.showToast({
           title: '上架成功',
           icon: 'none',
@@ -188,7 +187,6 @@ Page({
           detailList: detailList,
           confirmDown:false
         })
-        app.globalData.switchStore = true
         wx.showToast({
           title: '下架成功',
           icon: 'none',
@@ -282,6 +280,7 @@ Page({
       detailList: []
     })
     app.pageRequest.pageData.pageNum = 0
+    app.globalData.switchStore = true
     this.classCode()
   },
   bindDownLoad: function () {
