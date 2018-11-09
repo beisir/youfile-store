@@ -88,7 +88,14 @@ Component({
       })
     },
     save() {
-      this.cancancan();      
+      if (this.data.paymentUrl){
+        this.cancancan();      
+      }else{
+        wx.showToast({
+          title:"无收款二维码",
+          icon:'none'
+        })
+      }
     },
     roundRect(ctx, x, y, w, h, r) {
       // 开始绘制
@@ -147,8 +154,8 @@ Component({
       // targetCtx.arc(110, 60, 30, 0, 2 * Math.PI)
       // targetCtx.clip()
       // targetCtx.drawImage("/image/lalala.png", 80, 30, 60, 60)
-      this.roundRect(targetCtx, 80, 30, 60, 60, 10)
-      targetCtx.drawImage(this.data.headPic, 80, 30, 60, 60)
+      this.roundRect(targetCtx, 104, 42, 36, 36, 5)
+      targetCtx.drawImage(this.data.headPic, 104, 42, 36, 36)
       targetCtx.restore()
 
 
@@ -168,7 +175,7 @@ Component({
       targetCtx.setFillStyle('#333');
       targetCtx.fillText("您购买了：" + this.data.goodsName + "...等" + this.data.goodsNum+"件商品", 186, 126, 375);
 
-      targetCtx.font = 'bold 32px normal';
+      targetCtx.setFontSize(32);
       targetCtx.setTextAlign('center');
       targetCtx.setFillStyle('#ccaa77');
       targetCtx.fillText("￥" + this.data.myprice, 187, 187);
