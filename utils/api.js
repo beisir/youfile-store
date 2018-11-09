@@ -105,7 +105,9 @@ import {
   userInforUrl,
   supplyOrderUrl,
   showPurchaserUrl,
-  showMerchantUrl
+  showMerchantUrl,
+  getPaymentImgUrl,
+  putPaymentImgUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -632,6 +634,16 @@ function toHome(){
     url: '/pages/page/home/home'
   })
 }
+// 获取收款二维码
+function getPaymentImg(data){
+  data = initStoreId(data);  
+  return app.http.getRequest(getPaymentImgUrl, data)
+}
+// 设置收款二维码
+function putPaymentImg(data) {
+  data = initStoreId(data);
+  return app.http.putRequest(putPaymentImgUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
 /**
  * 初始化storeId
  */
@@ -657,6 +669,8 @@ function getStoreId() {
   }
 }
 module.exports = {
+  putPaymentImg: putPaymentImg,
+  getPaymentImg: getPaymentImg,
   getStoreId: getStoreId,
   toHome: toHome,
   getStoreInfo: getStoreInfo,

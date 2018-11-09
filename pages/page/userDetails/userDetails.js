@@ -56,7 +56,7 @@ Page({
     this.setData({
       noUpload: true
     })
-    app.http.onlyUploadImg(url).then(res => {
+    app.http.onlyUploadImg(url,"USER_HEAD_PIC").then(res => {
       var url = JSON.parse(res).obj
       if (url) {
         Api.changeIcon({

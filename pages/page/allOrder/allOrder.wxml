@@ -35,7 +35,8 @@
     <view class='mes-tel'>{{order.storeInfo.servicePhone?order.storeInfo.servicePhone:"无"}}</view>
   </view>
 </mes>
-
+<!-- 付款码 -->
+<savePayment show='{{paymentModal}}' com-name='{{order.storeInfo.storeName}}' wx='{{order.storeInfo.wechatNumber}}' goodsName='{{order.goodsInfos[0].goodsName}}' goods-num="{{order.num}}" price="{{order.orderAmount}}" head="{{order.storeInfo.logo?baseUrl+order.storeInfo.logo:''}}"></savePayment>
 
 
 <view class='order-title-box order-title-img'>
@@ -274,6 +275,7 @@
 
 <view class='cf-button'>
   <block wx:if="{{status=='unpaid'}}">
+    <button bindtap="showModal" data-type='payment' class='or-active'> 支付二维码 </button>
     <button style='' bindtap="uploadVoucher" class='or-active'> 上传支付凭证 </button>
     <button bindtap='showModal' data-type='cancel'>取消{{orderName}}</button>
   </block>
