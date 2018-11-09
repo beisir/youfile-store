@@ -26,3 +26,11 @@
     </view>
   </view>
 </view>
+<view class="result-null" wx:if='{{list.length<2}}'>
+  <view class="nomore">
+    <view>
+      <image src="/image/class-i.png"></image>
+    </view>
+    暂时还没有分类哦！
+  </view>
+</view>

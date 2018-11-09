@@ -2,3 +2,4 @@
 .result{
   padding-left: 0;
 }
+.st-all{margin-top: 0}

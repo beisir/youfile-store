@@ -650,6 +650,19 @@ function initStoreId(data) {
     return data;
   }else{
     showToast("暂无店铺ID！")
+    let pages = getCurrentPages()
+    let curPage = pages[pages.length - 1]
+    curPage.setData({
+      indexEmpty: false
+    })
+  }
+}
+/**
+ * 获取店铺storeId
+ */
+function getThisStoreId(){
+  if(getStoreId()){
+    return wx.getStorageSync("storeId")
   }
 }
 /**
@@ -664,6 +677,7 @@ function getStoreId() {
 }
 module.exports = {
   getStoreId: getStoreId,
+  getThisStoreId: getThisStoreId,
   toHome: toHome,
   getStoreInfo: getStoreInfo,
   supplyOrde: supplyOrde,

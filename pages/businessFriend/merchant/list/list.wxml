@@ -36,4 +36,10 @@
 </view>
 <view class='allData' wx:if='{{totalCount>0}}'>{{totalCount}}位进货商</view>
 </scroll-view>
-
+<!-- <view class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}'>
+      <navigator class='n-navigator' url="../reach/reach?status=2&send={{item.send}}&accept={{item.purchaserUserId}}&remark={{item.remark}}">
+        <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}?x-oss-process=style/logo"></image></view>
+        <text>{{item.remark==null || item.remark==''?item.nickName:item.remark}}</text>
+      </navigator>
+      <view class='n-simg'><image  src="/image/u4.png"></image></view>
+    </view> -->

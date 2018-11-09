@@ -85,8 +85,8 @@
                 <view class="ui-link ui-link1" bindtap='urlHome'>小云店</view>
             </view>
         </view>
-  <view class='gd_readCont'>
-    <view class='gd_r-title' wx:if='{{description!=null && description!=""}}'>
+  <view class='gd_readCont'  wx:if='{{description}}'>
+    <view class='gd_r-title'>
      <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
     </view>
   </view>
@@ -126,6 +126,10 @@
         </view>
     </view>
 </view>
+<!-- 一键入库 -->
+ <!-- <view class='goods-total'>
+    一键入库
+  </view> -->
 <view wx:if='{{limitShow==3 && isShowNewOne==false}}'>
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>

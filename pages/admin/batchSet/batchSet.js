@@ -62,9 +62,19 @@ Page({
   watchInput: function (event) {
     var value = event.detail.value,
       num = value.length
+    if (num>0){
+      if(value<1){
+        Api.showToast("请输入大于0的有效数字！")
+        this.setData({
+          value:''
+        })
+        return
+      }
+    }
     if (value == '') {
       this.setData({
-        watchInput: false
+        watchInput: false,
+        value: ''
       })
     } else {
       if (num > 11) {
@@ -80,9 +90,19 @@ Page({
   watchInput1: function (event) {
     var value = event.detail.value,
       num = value.length
+    if (num > 0) {
+      if (value < 1) {
+        Api.showToast("请输入大于0的有效数字！")
+        this.setData({
+          value1: ''
+        })
+        return
+      }
+    }
     if (value == '') {
       this.setData({
-        watchInput: false
+        watchInput: false,
+        value1: ''
       })
     } else {
       if (num > 11) {

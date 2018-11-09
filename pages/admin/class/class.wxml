@@ -21,6 +21,14 @@
         <image class='weui-img' src="/image/icl.png" bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'></image>
     </view>
   </view>
+  <view class="result-null" wx:if='{{list.length<2}}'>
+    <view class="nomore">
+      <view>
+        <image src="/image/class-i.png"></image>
+      </view>
+      暂时还没有分类哦！
+    </view>
+  </view>
   <view class='add-bottom'>
     <view  bindtap='manaClass'>管理分类</view>
     <view  bindtap='addClass'>新建分类</view>

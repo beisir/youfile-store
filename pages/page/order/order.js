@@ -237,7 +237,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      storeId : wx.getStorageSync("storeId"),
+      storeId: API.getThisStoreId(),
       baseUrl: app.globalData.imageUrl
     })
   },

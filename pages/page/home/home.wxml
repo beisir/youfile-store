@@ -1,26 +1,26 @@
 <login id="login"></login>
  <!--不是供应商-->
-<!-- <mes
-  show="true"
+<mes
+  show="{{isNotStore}}"
   bind:sureSelectArea="sureSelectAreaListener"
 >
 <view class='tipMes'>
   <view>我是<text>用户</text>,未开通新批零小云店,</view>
   <view>不提供进货商友功能哦~</view>
-  <button >知道了</button>
+  <button bindtap='closeTip'>知道了</button>
 </view>
-</mes> -->
+</mes>
  <!--零售店店主-->
-<!-- <mes
-  show="true"
+<mes
+  show="{{isStoreOwner}}"
   bind:sureSelectArea="sureSelectAreaListener"
 >
 <view class='tipMes'>
   <view>我是<text>新零售</text>小云店主,我们不 </view>
   <view>不提供进货商友功能哦~</view>
-  <button >知道了</button>
+  <button class='button-hover' bindtap='closeTip'>知道了</button>
 </view>
-</mes> -->
+</mes>
  <!--确定取消关注吗？-->
 <mes
   show="{{disLike}}"
@@ -86,10 +86,10 @@
       <text>{{floorInfo.mallName}}  {{floorInfo.balcony}}{{floorInfo.floor}}{{floorInfo.area}}{{floorInfo.doorNum}}</text>
     </view>
   </view>
-  <view class="ym_sydtgzbtn share-v" wx:if='{{limitShow==2}}'  bindtap='likeStore' style='color:#666 !important'><view><image  src="/image/fx.png" /></view><button class='shre_btn' open-type='share'></button>分享</view>
-  <view class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow && limitShow!=2}}'  bindtap='likeStore'><view><image  src="/image/f.png" /></view><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</view>
-  <view class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw && limitShow!=2}}'  bindtap='likeStore'><view><image  src="/image/f.png" /></view><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</view>
-  <view class="ym_sydtgzbtn"  style='color:#666 !important' wx:if='{{likeShow && getFollw && limitShow!=2}}' bindtap='deteleLikeStore'><view><image  src="/image/dis.png" /></view>已关注</view>
+  <view class="ym_sydtgzbtn share-v" wx:if='{{limitShow==2}}'   style='color:#666 !important'><view><image  src="/image/fx.png" /></view><button class='shre_btn' open-type='share'></button>分享</view>
+  <view class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow && limitShow!=2}}'  bindtap='likeStore'><view><image  src="/image/f.png" /></view><button class='shre_btn'></button><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</view>
+  <view class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw && limitShow!=2}}'  bindtap='likeStore'><view><image  src="/image/f.png" /></view><button class='shre_btn'></button><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</view>
+  <view class="ym_sydtgzbtn"  style='color:#666 !important' wx:if='{{likeShow && getFollw && limitShow!=2}}' bindtap='deteleLikeStore'><view><image  src="/image/dis.png" /></view><button class='shre_btn'></button>已关注</view>
 </view>
 <view class='add-firend'  wx:if='{{limitShow==1}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/mallr.png'></image></view>
 <!-- <view class='add-firend add-firend1' wx:if='{{limitShow==1}}'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view> -->
@@ -124,7 +124,7 @@
   </view>
   <scroll-view scroll-y="true" style="height:100%;">
     <view class='flex-boxx'>
-      <view class="result-list" wx:for="{{result}}" wx:key="index">
+      <view class="result-list" wx:for="{{result}}" wx:key="index" id='{{index==0?"result-list":""}}'>
         <view>
           <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
             <view class='ho-img'>
@@ -142,6 +142,7 @@
               <text wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text>
               <image wx:if='{{limitShow==1}}' src='/image/wh.png'></image>
               <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
+                <!-- <image wx:if='{{limitShow==3}}' class='h-img h-img1' data-id='{{item.id}}' src="/image/closeS.png" /> -->
             </view>
           </view>
         </view>

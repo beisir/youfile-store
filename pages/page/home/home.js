@@ -70,6 +70,7 @@ Page({
     store:'',
     bannerHeight:0,
     swiperHeight:0,
+    goodsHeight:0,
     coverUrl:'',
     disLike:false,
     identity:'',
@@ -98,7 +99,7 @@ Page({
                         var accept = res.obj.id,
                           phone = res.obj.mobile,
                           userName = res.obj.userName,
-                          storeId = wx.getStorageSync("storeId")
+                          storeId = Api.getThisStoreId()
                         var pic = that.data.baseUrl + res.obj.headPic
                         if (status == 2) {
                           wx.navigateTo({
@@ -127,13 +128,25 @@ Page({
                       status = 0
                     }
                     wx.navigateTo({
-                      url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark= &name=&logo=',
+                      url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark=&name=&logo=',
                     })
                   }
                 })
-                // .catch(res=>{
-                  
-                // })
+                .catch(res=>{
+                  var data=res.data
+                  if(data.code){
+                    var code = data.code
+                    if(code=="006"){
+                      that.setData({
+                        isStoreOwner:true
+                      })
+                    }else if (code == "005") {
+                      that.setData({
+                        isNotStore: true
+                      })
+                    }
+                  }
+                })
             }
           } else {
             Api.showToast("未获取信息！")
@@ -148,11 +161,18 @@ Page({
       }
     })
   },
+  // 关闭
+  closeTip:function(){
+    this.setData({
+      isStoreOwner: false,
+      isNotStore:false
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   addTip:function(){
-    var Id = wx.getStorageSync("storeId"),
+    var Id = Api.getThisStoreId(),
       logo =this.data.store.logo,
       name = this.data.store.storeName
     wx.navigateTo({
@@ -324,6 +344,13 @@ Page({
           query1.exec(function (res) {
             that.setData({
               swiperHeight: res[0].height
+            })
+          })
+          var query2 = wx.createSelectorQuery();
+          query2.select('#result-list').boundingClientRect()
+          query2.exec(function (res) {
+            that.setData({
+              goodsHeight: res[0].height
             })
           })
         })
@@ -520,14 +547,20 @@ Page({
     }
     this.setData({
       getFollw: authHandler.isLogin(),
-      disLike:false
+      disLike:false,
     })
     if (app.globalData.switchStore) {
-      this.closeShow()
-      app.pageRequest.pageDataIndex.pageNum = 1
-      app.pageRequest.pageData.pageNum = 0
-      getIdentity(this)
-      app.globalData.switchStore=false
+      if (!Api.getStoreId()) {
+        this.setData({
+          indexEmpty: false
+        })
+      } else {
+        this.closeShow()
+        app.pageRequest.pageDataIndex.pageNum = 1
+        app.pageRequest.pageData.pageNum = 0
+        getIdentity(this)
+        app.globalData.switchStore = false
+      }
     }
   },
 
@@ -612,10 +645,12 @@ Page({
     }
   },
   onPageScroll: function (e) {
-    var top = e.scrollTop,
-    totalCount = this.data.totalCount,
-    bannerHeight = this.data.bannerHeight,
-    swiperHeight = this.data.swiperHeight
-    // console.log(bannerHeight + "///" + top + "///" + swiperHeight)
+    // var top = e.scrollTop,
+    //   totalCount = this.data.totalCount,
+    //   swiperHeight = this.data.swiperHeight,
+    //   allHeight = this.data.bannerHeight + swiperHeight+120,
+    //   getHeght = top - allHeight
+    // console.log(top + "//" + allHeight+"//"+getHeght)
+    // console.log(this.data.goodsHeight)
   }
 })

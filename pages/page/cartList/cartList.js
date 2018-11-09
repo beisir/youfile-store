@@ -308,7 +308,7 @@ Page({
     this.setData({
       detailList: []
     })
-    if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '') {
+    if (!Api.getStoreId()) {
       this.setData({
         indexEmpty: false
       })

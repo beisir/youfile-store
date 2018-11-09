@@ -49,7 +49,7 @@ Page({
    */
   onShow: function (options) {
     var _this=this
-    var storeId = wx.getStorageSync("storeId")
+    var storeId = Api.getThisStoreId()
     Api.miniProgramCode({ storeId: storeId})
     .then(res=>{
       var obj = res.obj.miniProgramCode

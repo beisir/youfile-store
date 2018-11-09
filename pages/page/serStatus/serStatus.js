@@ -54,12 +54,8 @@ Page({
           newArr = app.pageRequest.addDataList(datas, obj)
         _this.setData({
           result: newArr,
+          showResult: true,
         })
-        if (totalCount>0){
-          _this.setData({
-            showResult: true,
-          })
-        }
       })
   },
   searchBtn(e) {

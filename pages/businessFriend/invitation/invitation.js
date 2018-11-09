@@ -31,13 +31,17 @@ Page({
       value: val
     })
   },
+  urlHome: function () {
+    wx.switchTab({
+      url: '/pages/page/home/home'
+    })
+  },
   invita:function(){
     var _this=this,
       accept = this.data.accept,
       greet=this.data.value,
       send = this.data.send,
       remark = this.data.remark
-    console.log(accept+"//"+send)
     Api.addWholesaler({ accept: accept, send: send, greet: greet, remark: remark})
     .then(res=>{
       wx.showToast({
@@ -46,9 +50,9 @@ Page({
         duration: 1000,
         mask: true
       })
-      wx.navigateTo({
-        url: '../mewWholesaler/mewWholesaler',
-      })
+      setTimeout(function () {
+        _this.urlHome()
+      }, 1000)
     })
   },
   /**
