@@ -1056,6 +1056,15 @@ Page({
           name = ''
         var that = this;
         var article = '<div>'+ obj.description+'</div>'
+        if (Api.isEmpty(obj.description)){
+          _this.setData({
+            description:true
+          })
+        }else{
+          _this.setData({
+            description: false
+          })
+        }
         WxParse.wxParse('article', 'html', article, that, 5);
         if (store.isFollow){
           _this.setData({
@@ -1092,7 +1101,6 @@ Page({
           wholesalePrice: obj.wholesalePrice,
           sell: obj.sellPrice,
           recommendDesc: obj.recommendDesc,
-          description: obj.description,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
           goodsSkuVOList: obj.goodsSkuVOList,
           skuArrTwo: skuArrTwo,
@@ -1102,7 +1110,7 @@ Page({
           nameTwo: name,
           store: store,
           favoriteNum: favoriteNum,
-          sdescription: store.description
+          sdescription: store.description == null ? '' :store.description
         }, function () {
           if (_this.data.getSpecDetails) {
             if (obj.goodsSpecificationVOList.length != 0) {

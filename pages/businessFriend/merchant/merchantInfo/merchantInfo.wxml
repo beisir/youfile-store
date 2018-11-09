@@ -36,7 +36,7 @@
    <text>微信号</text><view wx:if='{{weixinNumber!=null}}'>{{weixinNumber==null?'':weixinNumber}}</view>
   </view>
 </view>
-<button class='bf-btn'  wx:if='{{success}}'  bindtap='urlHome'>去进货</button>
-<button class='bf-btn'  wx:if='{{aginGreet}}' bindtap='invitation'>再次添加到批发商</button>
-<button class='bf-btn'  wx:if='{{oneGreet}}'  bindtap='passFunc'>通过验证</button>
-<button class='bf-btn'  wx:if='{{pass}}'  bindtap='invitation'>添加到进货商</button>
+<view class='bf-btn'  wx:if='{{success}}'  bindtap='urlHome'>去进货</view>
+<view class='bf-btn'  wx:if='{{aginGreet}}' bindtap='invitation'>再次添加到批发商</view>
+<view class='bf-btn'  wx:if='{{oneGreet}}'  bindtap='passFunc'>通过验证</view>
+<view class='bf-btn'  wx:if='{{pass}}'  bindtap='invitation'>添加到进货商</view>

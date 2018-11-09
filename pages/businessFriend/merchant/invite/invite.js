@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value: '',
+    value: '我是',
+    val2:'，我的优店，精挑细选优质商品，快来和我一起赚钱吧！',
     accept: '',
     baseUrl: app.globalData.imageUrl,
     headPic:'',
@@ -20,13 +21,15 @@ Page({
   },
   emptyVal: function () {
     this.setData({
-      value: ''
+      value: '',
+      val2: '',
+      storeName: ''
     })
   },
   searchBtn: function (e) {
     var val = e.detail.value
     this.setData({
-      value: val
+      value: val,
     })
   },
   invita: function () {
@@ -38,7 +41,7 @@ Page({
     if (Api.isEmpty(remark)){
       var data = { accept: accept, send: send, greet: greet, remark: remark }
     }else{
-      var data = { accept: accept, send: send, greet: greet, remark: null }
+      var data = { accept: accept, send: send, greet: greet, remark:'' }
     }
     Api.apply(data)
       .then(res => {
@@ -51,6 +54,17 @@ Page({
         wx.navigateTo({
           url: '../newMerchant/newMerchant',
         })
+      })
+      .catch(res => {
+        var data = res.data
+        if (data.code){
+          if (data.code =="004"){
+            Api.showToast(data.message)
+            setTimeout(function () {
+              _this.goBack()
+            }, 1000)
+          }
+        }
       })
   },
   /**

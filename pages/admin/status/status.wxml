@@ -41,7 +41,7 @@
 </view>
 </mes>
 <view class="goods-ser">
-  <input placeholder='输入商品名称' value="{{value}}" bindinput='changeValue' />
+  <input placeholder='输入商品名称' bindconfirm='blurInputEvent'  value="{{value}}" bindinput='changeValue' />
     <image class="home-ser"  src="/image/search.png"></image>
     <view class='home-img'>
       <view bindtap='blurInputEvent'>

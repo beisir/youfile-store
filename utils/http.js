@@ -88,11 +88,6 @@ class request {
                 })
                 reject(res);
               } else {
-                wx.showToast({
-                  title: res.data.message,
-                  duration: 2000,
-                  icon: 'none'
-                })
                 reject(res);
               }
             } else if (res.statusCode === 401) {

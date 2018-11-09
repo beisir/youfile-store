@@ -1,6 +1,1 @@
-{
-  "navigationBarTitleText": "商友",
-  "usingComponents": {
-    "login": "../../login/login/login"
-  }
-}
+{}

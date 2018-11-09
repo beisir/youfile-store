@@ -28,7 +28,7 @@ Page({
                       var accept = res.obj.id,
                         phone = res.obj.mobile,
                         userName = res.obj.userName,
-                        storeId = wx.getStorageSync("storeId")
+                        storeId = Api.getThisStoreId()
                       var pic = that.data.baseUrl + res.obj.headPic
                       if (status == 2) {
                         wx.navigateTo({

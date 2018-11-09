@@ -1,31 +1,22 @@
 {
   "pages":[
-    "pages/page/user/user",
-    
-    "pages/page/orderSuccess/orderSuccess",
-    
-    
-    "pages/page/order/order",
-    
-    
-    "pages/role/allOrder/allOrder",
-    
-    
-    
-    "pages/payment/uploadPayment/uploadPayment",
-    
     "pages/page/home/home",
+    "pages/page/user/user",
+    "pages/page/orderSuccess/orderSuccess",
+    "pages/page/order/order",
+    "pages/role/allOrder/allOrder",
+    "pages/payment/uploadPayment/uploadPayment",
+    "pages/admin/batchSet/batchSet",
     "pages/admin/status/status",
+    "pages/businessFriend/merchant/index/index",
     "pages/admin/addGoods/addGoods",
     "pages/page/cartList/cartList",
     "pages/admin/spec/spec",
-    "pages/businessFriend/merchant/index/index",
     "pages/cloudOrder/myOrder/myOrder",
     "pages/page/invoice/invoice",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/index/index",
     "pages/role/order/order",
-    "pages/admin/batchSet/batchSet",
     "pages/businessFriend/merchant/list/list",
     "pages/page/newAddress/newAddress",
     "pages/admin/editGoods/editGoods",
@@ -65,14 +56,8 @@
     "pages/businessFriend/merchant/merchantInfo/merchantInfo",
     "pages/businessFriend/merchant/lookInfo/lookInfo",
     "pages/businessFriend/merchant/reach/reach",
-    "pages/businessFriend/wholesaler/wholesaler",
     "pages/businessFriend/information/information",
-    "pages/businessFriend/addWholesaler/addWholesaler",
-    "pages/businessFriend/serList/serList",
-    "pages/businessFriend/setUp/setUp",
-    "pages/businessFriend/mewWholesaler/mewWholesaler",
     "pages/businessFriend/invitation/invitation",
-    "pages/businessFriend/data/data",
     "pages/cloudOrder/orderDetail/orderDetail",
     "pages/cloudOrder/applyStore/applyStore",
     "pages/cloudOrder/congratulation/congratulation",
@@ -98,7 +83,6 @@
    "pages/role/supplyDetails/supplyDetails",
    "pages/role/supplySelf/supplySelf",
     "pages/page/serList/serList",
-    "pages/admin/editMesTitle/editMesTitle",
     "pages/admin/classList/classList",
     "pages/admin/classEdit/classEdit",
     "pages/admin/thirdClass/thirdClass",
@@ -109,7 +93,6 @@
     "pages/page/set/set",
     "pages/page/updataPhone/updataPhone",
     "pages/page/success/success",
-    "pages/page/goodsList/goodsList",
     "pages/page/index/index",
     "pages/page/logs/logs",
     "pages/admin/batchClass/batchClass"

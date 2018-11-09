@@ -7,7 +7,6 @@ Page({
   data: {
     customCategoryCode: '',
     result: [],
-    limitShow: wx.getStorageSync('admin'),
     baseUrl: app.globalData.imageUrl,
     allCode:false
   },
@@ -71,7 +70,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.setData({
+      limitShow: wx.getStorageSync('admin')
+    })
   },
 
   /**

@@ -106,11 +106,17 @@ Page({
   onReady: function () {
   
   },
+  addTip: function () {
+    var Id = Api.getThisStoreId()
+    wx.navigateTo({
+      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=&logo=&name=',
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (wx.getStorageSync("storeId") == undefined ||  wx.getStorageSync("storeId") == '') {
+    if (!Api.getStoreId()) {
       this.setData({
         indexEmpty: false
       })

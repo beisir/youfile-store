@@ -263,7 +263,7 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      storeId: wx.getStorageSync("storeId"),   //列表请求
+      storeId: API.getThisStoreId(),   //列表请求
       baseUrl: app.globalData.imageUrl      //图片
     })
   },

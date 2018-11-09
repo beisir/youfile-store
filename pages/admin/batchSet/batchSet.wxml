@@ -13,7 +13,7 @@
   bind:sureSelectArea="sureSelectAreaListener"
 >
   <view class='spec-title'>混批金额<view>一次性下单金额高于设置金额，即享批发价</view></view>
-  <input placeholder-class='spec-class'   bindinput='watchInput1' value='{{value1}}'  class='spec-input'  placeholder='请输入混批金额' />
+  <input placeholder-class='spec-class' type='number'   bindinput='watchInput1' value='{{value1}}'  class='spec-input'  placeholder='请输入混批金额' />
   <view class='spec-view' bindtap='cancel'>取消</view><view  class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm1'>确定</view>
 </spec>
 <view class='shop-cont shop-cont1'>

@@ -1,10 +1,10 @@
 <view>
  <scroll-view scroll-y="true" style="height:100%;">
-    <view class="result result-box" wx:if="{{result.length > 0}}">
+    <view class="result" wx:if="{{result.length > 0}}">
       <view class="result-list" wx:for="{{result}}" wx:key="index">
         <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
           <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
-          <view class="result-text">
+          <view class="result-text result-text-h">
             <text>{{item.name}}</text>
           </view>
           <!-- <view class="result-text">
@@ -12,7 +12,7 @@
           </view> -->
           <view class="result-text result-text1">
             零售
-            <text>￥ {{item.sellPrice}}</text>
+            <text style='{{limitShow!=1?"color:#666":"#CCAA77"}};'>￥ {{item.sellPrice}}</text>
             <view wx:if='{{limitShow==1}}'>
               批发
               <image src='/image/wh.png'></image>
