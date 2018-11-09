@@ -118,7 +118,7 @@
 </view>
 <view class="result result-box" wx:if="{{result.length > 0}}">
   <view class='goods-total'>
-    <text>{{result.length}}</text>
+    <text>{{goodsHeight}}</text>
     <view></view>
     <text>{{totalCount}}</text>
   </view>

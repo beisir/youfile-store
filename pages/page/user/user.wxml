@@ -38,7 +38,7 @@
       <view>进货单</view>
     </navigator>
   </block>
-  <view wx:if='{{limitShow==1}}' bindtap='addTip' class='u-o-div'>
+  <view wx:if='{{limitShow==1 && !user.isStoreOwner}}' bindtap='addTip' class='u-o-div'>
     <image src='/image/firend.png'></image>
     <view>加商友合作</view>
   </view>

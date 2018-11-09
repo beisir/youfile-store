@@ -67,10 +67,10 @@ Page({
     keyword:'',
     descShow:false,
     totalCount:0,
+    goodsHeight:0,
     store:'',
     bannerHeight:0,
     swiperHeight:0,
-    goodsHeight:0,
     coverUrl:'',
     disLike:false,
     identity:'',
@@ -346,13 +346,6 @@ Page({
               swiperHeight: res[0].height
             })
           })
-          // var query2 = wx.createSelectorQuery();
-          // query2.select('#result-list').boundingClientRect()
-          // query2.exec(function (res) {
-          //   that.setData({
-          //     goodsHeight: res[0].height
-          //   })
-          // })
         })
       })    
   },
@@ -645,12 +638,11 @@ Page({
     }
   },
   onPageScroll: function (e) {
-    // var top = e.scrollTop,
-    //   totalCount = this.data.totalCount,
-    //   swiperHeight = this.data.swiperHeight,
-    //   allHeight = this.data.bannerHeight + swiperHeight+120,
-    //   getHeght = top - allHeight
-    // console.log(top + "//" + allHeight+"//"+getHeght)
-    // console.log(this.data.goodsHeight)
+    var top = e.scrollTop,
+      totalCount = this.data.totalCount,
+      swiperHeight = this.data.swiperHeight,
+      allHeight = this.data.bannerHeight + swiperHeight-300,
+      getHeght = top - allHeight
+    // console.log(parseInt(getHeght / 270))
   }
 })
