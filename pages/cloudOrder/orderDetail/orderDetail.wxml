@@ -61,7 +61,7 @@
       <text class='msg-title'>订单号</text>
       <text class="msg-content">{{msg.orderNumber}}</text>
     </view>
-    <view class='msg-item'>
+    <view class='msg-item' wx:if='{{msg.orderStatus=="paid"}}'>
       <text class='msg-title'>交易单号</text>
       <text class="msg-content">{{}}</text>
     </view>
@@ -109,9 +109,9 @@
   </view>
 </view>
 <view style='padding:80rpx 0'></view>
-<view class='bottom-lr-box'>
+<view class='bottom-lr-box' wx:if='{{msg.orderStatus=="unpaid"}}'>
   <view class='bottom-price'>应付支付：
     <text class="msg-content gold">￥{{msg.yunStoreGoodsSnapshot.favourablePrice}}元</text>
   </view>
-  <view class="buy-button">立即支付</view>
+  <view bindtap='buy' class="buy-button">立即支付</view>
 </view>

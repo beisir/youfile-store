@@ -346,13 +346,13 @@ Page({
               swiperHeight: res[0].height
             })
           })
-          var query2 = wx.createSelectorQuery();
-          query2.select('#result-list').boundingClientRect()
-          query2.exec(function (res) {
-            that.setData({
-              goodsHeight: res[0].height
-            })
-          })
+          // var query2 = wx.createSelectorQuery();
+          // query2.select('#result-list').boundingClientRect()
+          // query2.exec(function (res) {
+          //   that.setData({
+          //     goodsHeight: res[0].height
+          //   })
+          // })
         })
       })    
   },

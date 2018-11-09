@@ -36,6 +36,8 @@
     <view class='mes-tel'>{{afterTel?afterTel:"无"}}</view>
   </view>
 </mes>
+<!-- 付款码 -->
+<savePayment show='{{paymentModal}}' com-name='{{paymentItem.storeInfo.storeName}}' wx='{{paymentItem.storeInfo.wechatNumber}}' goodsName='{{paymentItem.goodsInfos[0].goodsName}}' goods-num="{{paymentItem.num}}" price="{{paymentItem.orderAmount}}" head="{{paymentItem.storeInfo.logo?baseUrl+paymentItem.storeInfo.logo:''}}"></savePayment>
 
 
 <image class='serchImg {{style?"serchImg1":""}}' src="/image/search.png"></image>
@@ -115,7 +117,7 @@
 
       <!-- 代收款 1自提-->
       <view class='or-last' wx:if="{{item.orderStatus=='unpaid'}}">
-      
+        <button class='or-active' bindtap='showModal' data-index="{{index}}" data-type="payment">支付二维码</button>
         <button data-num="{{item.orderNumber}}" bindtap='uploadVoucher' class='or-active'> 上传支付凭证 </button>
         <button bindtap='showModal' data-type='cancel' data-num="{{item.orderNumber}}">取消进货单</button>
       </view>

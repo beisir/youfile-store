@@ -77,6 +77,10 @@ Page({
           codeModal: true,
           testNum: num,
         }; break;  
+      case "payment":
+        obj = {
+          paymentModal: true
+        } ;break; 
     }
     this.setData(obj)
   },
@@ -86,7 +90,8 @@ Page({
       sureModal: false,  //收款
       delModal: false,  //删除
       cancelModal: false, //取消订单
-      afterModal: false //售后
+      afterModal: false, //售后
+      paymentModal: false
     })
   },
   //刷新数据

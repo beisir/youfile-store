@@ -1,4 +1,8 @@
 @import '../order/order';
+page{
+  height: auto!important;
+  padding-bottom: 10rpx;
+}
 .order-title-box{
   background-size: cover;
 }

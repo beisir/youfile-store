@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dan:"订单"
+    dan:"订单",
+    paymentModal:true,
+    baseUrl: app.globalData.imageUrl
   },
   getData() {
     app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {

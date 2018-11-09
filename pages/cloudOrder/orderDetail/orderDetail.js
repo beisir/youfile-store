@@ -21,6 +21,35 @@ Page({
       }
     })
   },
+  buy(){
+    wx.login({
+      success(res) {
+        if (res.code) {
+          this.getOpenid(res.code);
+        }
+      }
+    })
+    
+  },
+  getOpenid(code){
+    app.http.getRequest("",{code}).then(res=>{
+      this.payment(res)
+    }).catch(e=>{
+
+    })
+  },
+  payment(res){
+    wx.requestPayment({
+      timeStamp: '',
+      nonceStr: '',
+      package: '',
+      signType: '',
+      paySign: '',
+      success:function(res){
+
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -32,7 +61,7 @@ Page({
 
     let obj = {
       "code": "0",
-      "message": "用户获取云店铺订单信息成功",
+      "message": "获取订单详情成功",
       "obj": {
         "userInfoVO": {
           "userId": "cbced730cc43cead0592fbdd5ef10f99",
@@ -44,21 +73,21 @@ Page({
         "receiptInfo": {
           "isInvoice": null,
           "invoiceType": null,
-          "invoiceCategory": null,
-          "invoiceTitle": "youlife",
-          "identificationNumber": "123123",
+          "invoiceCategory": "普通发票",
+          "invoiceTitle": "123",
+          "identificationNumber": "123",
           "registeredAddress": null,
           "registererMobile": null,
           "depositBank": null,
           "depositBankNumber": null
         },
         "merchantNumber": null,
-        "orderNumber": "1058198780148449280",
-        "orderAmount": 18640,
+        "orderNumber": "1059351782951485440",
+        "orderAmount": 7660,
         "timeoutExpress": 72,
         "timeoutExpressType": "hour",
-        "timeoutExpressSecond": 235549,
-        "timeoutDate": 1541388424000,
+        "timeoutExpressSecond": 258462,
+        "timeoutDate": 1541663322000,
         "orderStatus": "unpaid",
         "orderStatusChildSta": "unpaid",
         "userMemo": null,
@@ -68,20 +97,20 @@ Page({
         "payDate": null,
         "payWay": null,
         "sort": 0,
-        "createDate": 1541129224000,
+        "createDate": 1541404122000,
         "finishDate": null,
         "payVoucher": null,
         "remark": null,
         "yunStoreGoodsSnapshot": {
-          "id": "YSG1011",
-          "classifyNumber": "SC004",
-          "classifyName": "新批零独立高级版",
-          "serviceFee": 20940,
-          "favourablePrice": 18640,
+          "id": "YSG1007",
+          "classifyNumber": "SC003",
+          "classifyName": "新批零独立专业版",
+          "serviceFee": 9960,
+          "favourablePrice": 7660,
           "discountAmount": 2300,
-          "serviceReriod": 3,
+          "serviceReriod": 2,
           "serviceReriodType": 0,
-          "serviceReriodMonth": 36,
+          "serviceReriodMonth": 24,
           "promotionCode": "123"
         }
       },

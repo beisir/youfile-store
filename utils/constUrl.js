@@ -111,3 +111,6 @@ export const supplyOrderUrl = "/api/order/"
 // 扫一扫
 export const showPurchaserUrl='/admin/bizscan/purchaser/{{userId}}'
 export const showMerchantUrl='/admin/bizscan/merchant/{{userId}}'
+//获取收款码
+export const getPaymentImgUrl = "/admin/store/receiptcode/{{storeId}}"
+export const putPaymentImgUrl = "/admin/store/{{storeId}}/receiptcode"
