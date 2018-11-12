@@ -67,10 +67,11 @@ Page({
     keyword:'',
     descShow:false,
     totalCount:0,
-    goodsHeight:0,
+    goodsNum:0,
     store:'',
     bannerHeight:0,
     swiperHeight:0,
+    goodsHeight:0,
     coverUrl:'',
     disLike:false,
     identity:'',
@@ -323,12 +324,13 @@ Page({
           title: obj.store.storeName
         })
         app.globalData.isFollow = obj.isFollow
+        var result=obj.goods.result
         that.setData({
           store: obj.store,
           floorInfo:obj.store.floor.floorInfo,
           baseUrl: app.globalData.imageUrl,
           coverUrl: obj.store.coverUrl,
-          result: obj.goods.result,
+          result: result,
           totalCount: obj.goods.totalCount,
           likeShow: app.globalData.isFollow
         },function(){
@@ -339,6 +341,15 @@ Page({
               bannerHeight: res[0].height
             })
           })
+          if (result.length>0){
+            var query2 = wx.createSelectorQuery();
+            query2.select('#result-list').boundingClientRect()
+            query2.exec(function (res) {
+              that.setData({
+                goodsHeight: res[0].height
+              })
+            })
+          }
           var query1 = wx.createSelectorQuery();
           query1.select('#swiper-tab').boundingClientRect()
           query1.exec(function (res) {
@@ -401,6 +412,15 @@ Page({
             baseUrl: app.globalData.imageUrl,
             noMoreData: true
           })
+          if (newArr.length > 0) {
+            var query2 = wx.createSelectorQuery();
+            query2.select('#result-list').boundingClientRect()
+            query2.exec(function (res) {
+              _this.setData({
+                goodsHeight: res[0].height
+              })
+            })
+          }
         } else {
           _this.setData({
             noMoreData: false
@@ -639,10 +659,21 @@ Page({
   },
   onPageScroll: function (e) {
     var top = e.scrollTop,
+      result = this.data.result,
+      goodsHeight = this.data.goodsHeight,
       totalCount = this.data.totalCount,
       swiperHeight = this.data.swiperHeight,
-      allHeight = this.data.bannerHeight + swiperHeight-300,
-      getHeght = top - allHeight
-    // console.log(parseInt(getHeght / 270))
+      allHeight = this.data.bannerHeight + swiperHeight - goodsHeight,
+      getHeght = top - allHeight,
+      goodsNum = (parseInt(getHeght / goodsHeight)+1)*2
+    if (goodsNum > result.length){
+      this.setData({
+        goodsNum: result.length
+      })
+    }else{
+      this.setData({
+        goodsNum: goodsNum
+      })
+    }
   }
 })

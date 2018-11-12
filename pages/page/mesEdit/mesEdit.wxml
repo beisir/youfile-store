@@ -7,8 +7,11 @@
     <!-- <image class='xyd' src="/image/edit2.png"></image> -->
     <!-- <navigator url='../updateMes/updateMes?name=name&value={{storeMes.name}}&types=小云店名称'><text> 店铺号 {{storeMes.id}}</text></navigator> -->
   </view>
-  <navigator  wx:if='{{storeMes.description!=""}}' url='../updateMes/updateMes?name=description&value={{storeMes.description}}&types=小云店简介' class="ym_jpstoredesc">
+  <navigator  wx:if='{{storeMes.description!=null}}' url='../updateMes/updateMes?name=description&value={{storeMes.description}}&types=小云店简介' class="ym_jpstoredesc">
     <text class="leftyh">“</text>{{storeMes.description}}<text class="rightyh">”</text>
+  </navigator>
+  <navigator  wx:if='{{storeMes.description==null}}' url='../updateMes/updateMes?name=description&value=&types=小云店简介' class="ym_jpstoredesc">
+    <text class="leftyh">“</text> <text class="rightyh">”</text>
   </navigator>
 </view>
 <view class="weui_cells">
