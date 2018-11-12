@@ -93,7 +93,7 @@
 
       <!-- 待支付 -->
       <block wx:if="{{item.orderStatus=='unpaid'}}">
-        <button class='or-active' bindtap='showModal' data-index="{{index}}" data-type="payment">支付二维码</button>
+        <button wx:if="{{hasPayImg}}" class='or-active' bindtap='showModal' data-index="{{index}}" data-type="payment">支付二维码</button>
         <navigator url='../../role/supplyVoucher/supplyVoucher?num={{item.orderNumber}}'>
           <button class='or-active'> 上传支付凭证 </button>
         </navigator>

@@ -249,6 +249,13 @@ Page({
       self: options.self  //是否自提
     })
 
+    API.getPaymentImg().then(res => {
+      if (res.obj) {
+        this.setData({
+          hasPayImg: true
+        })
+      }
+    })
   },
  
   /**

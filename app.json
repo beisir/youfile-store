@@ -2,8 +2,9 @@
   "pages":[
     "pages/page/home/home",
     "pages/admin/status/status",
-    "pages/page/user/user",
     "pages/page/orderSuccess/orderSuccess",
+    "pages/page/user/user",
+    "pages/cloudOrder/myOrder/myOrder",
     "pages/page/order/order",
     "pages/role/allOrder/allOrder",
     "pages/payment/uploadPayment/uploadPayment",
@@ -12,7 +13,6 @@
     "pages/admin/addGoods/addGoods",
     "pages/page/cartList/cartList",
     "pages/admin/spec/spec",
-    "pages/cloudOrder/myOrder/myOrder",
     "pages/page/invoice/invoice",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/index/index",

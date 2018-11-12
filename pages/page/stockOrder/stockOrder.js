@@ -266,6 +266,13 @@ Page({
       storeId: API.getThisStoreId(),   //列表请求
       baseUrl: app.globalData.imageUrl      //图片
     })
+    API.getPaymentImg().then(res => {
+      if (res.obj) {
+        this.setData({
+          hasPayImg: true
+        })
+      }
+    })
   },
 
   /**

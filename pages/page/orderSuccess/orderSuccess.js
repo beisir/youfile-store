@@ -8,7 +8,8 @@ Page({
   data: {
     dan:"订单",
     paymentModal:true,
-    baseUrl: app.globalData.imageUrl
+    baseUrl: app.globalData.imageUrl,
+    orderSuccessHiddenBtn:false
   },
   getData() {
     app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {

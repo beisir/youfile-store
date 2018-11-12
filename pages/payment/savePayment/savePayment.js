@@ -68,6 +68,9 @@ Component({
     ready: function () { 
       Api.getPaymentImg().then(res=>{
         if (res.obj){
+          this.setData({
+            hasImg:true
+          })
           wx.downloadFile({
             url: this.data.baseUrl + res.obj,
             success: (res) => {

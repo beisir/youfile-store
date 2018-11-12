@@ -247,6 +247,14 @@ Page({
       storeId: API.getThisStoreId(),
       baseUrl: app.globalData.imageUrl
     })
+
+    API.getPaymentImg().then(res => {
+      if (res.obj) {
+        this.setData({
+          hasPayImg: true
+        })
+      }  
+    })
   },
 
   /**
