@@ -54,6 +54,9 @@ Page({
         _this.urlHome()
       }, 1000)
     })
+    .catch(res=>{
+      Api.showToast(res.data.message)
+    })
   },
   /**
    * 生命周期函数--监听页面加载

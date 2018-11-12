@@ -1,13 +1,13 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/admin/status/status",
     "pages/page/user/user",
     "pages/page/orderSuccess/orderSuccess",
     "pages/page/order/order",
     "pages/role/allOrder/allOrder",
     "pages/payment/uploadPayment/uploadPayment",
     "pages/admin/batchSet/batchSet",
-    "pages/admin/status/status",
     "pages/businessFriend/merchant/index/index",
     "pages/admin/addGoods/addGoods",
     "pages/page/cartList/cartList",
