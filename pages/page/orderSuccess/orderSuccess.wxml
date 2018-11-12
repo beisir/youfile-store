@@ -8,7 +8,7 @@
     <view class='money'>￥{{user.orderAmount}}</view>
     <view class='tip'>您的{{dan}}已提交成功，请及时上传支付凭证</view>
     <button bindtap='toDetail' class='sure'>查看{{dan}}</button>
-    <navigator url='../../role/supplyVoucher/supplyVoucher?num={{num}}'>
+    <navigator hidden='{{orderSuccessHiddenBtn}}' url='../../role/supplyVoucher/supplyVoucher?num={{num}}'>
       <view class='title-text'>上传支付凭证</view>
     </navigator>
   </view>

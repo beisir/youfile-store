@@ -1,4 +1,4 @@
-<view class='modal {{show?"dblock":"dnone"}}'>
+<view wx:if="{{hasImg}}" class='modal {{show?"dblock":"dnone"}}'>
 <view class='box'>
   <view style="text-align:right;" bindtap='close'>
     <image src="/image/close.png" class='closeIcon'></image>  

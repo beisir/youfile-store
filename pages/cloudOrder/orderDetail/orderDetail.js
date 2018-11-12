@@ -24,8 +24,10 @@ Page({
   buy(){
     wx.login({
       success(res) {
+        console.log(res)
+        this.payment()
         if (res.code) {
-          this.getOpenid(res.code);
+          // this.getOpenid(res.code);
         }
       }
     })
