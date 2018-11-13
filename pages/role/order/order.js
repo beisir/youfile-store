@@ -118,7 +118,7 @@ Page({
         obj = {
           changeModal: true,
           changeNum: num,
-          changeMoney: ""
+          changeMoney: e.currentTarget.dataset.change,
         }; break;
       case "goodCode": 
         obj = {

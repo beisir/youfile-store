@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/cloudOrder/cloudPay/cloudPay",
     "pages/admin/status/status",
     "pages/page/orderSuccess/orderSuccess",
     "pages/page/user/user",
