@@ -25,15 +25,11 @@ Page({
     baseUrl: app.globalData.imageUrl,
     wechatNumber:'',
     businessScope:'',
-    area:'',
     goodsList:[],
     remarkChange:false,
     remarkName:'',
     mallLogo:'',
-    area:'',
-    floor:'',
-    balcony:'',
-    doorNum:'',
+    floorInfo:null
   },
   showLogo: function () {
     this.selectComponent("#login").showPage();
@@ -72,24 +68,15 @@ Page({
         store = obj.store[0],
         goodsList = store.goodsList,
         storeMes = store.store,
-        floor = obj.floor,
-        info=''
+        floor = Api.isFloorInfo(obj.floor)
       if (goodsList!=null){
         _this.setData({
           goodsList:goodsList
         })
       }
-      if (floor!=null){
-        info = floor.floorInfo
-        _this.setData({
-          area: info.area,
-          floor: info.floor,
-          mallName: info.mallName,
-          mallLogo: info.mallLogo,
-          balcony: info.balcony,
-          doorNum: info.doorNum,
-        })
-      }
+      _this.setData({
+        floorInfo: floor
+      })
       if (obj != null) {
         _this.setData({
           address: storeMes.address,
@@ -212,9 +199,16 @@ Page({
       this.showLogo()
       return
     }
-    wx.navigateTo({
-      url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remarkName + "&name=" + this.data.name + "&logo=" + this.data.logo + "&send=" + this.data.send + "&mallName=" + this.data.mallName + "&mallLogo=" + this.data.mallLogo,
-    })
+    var floorInfo = this.data.floorInfo
+    if (Api.isEmpty(floorInfo)){
+      wx.navigateTo({
+        url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remarkName + "&name=" + this.data.name + "&logo=" + this.data.logo + "&send=" + this.data.send + "&mallName=" + floorInfo.mallName + "&mallLogo=" + floorInfo.mallLogo,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remarkName + "&name=" + this.data.name + "&logo=" + this.data.logo + "&send=" + this.data.send + "&mallName=&mallLogo=",
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

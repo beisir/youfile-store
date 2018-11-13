@@ -8,7 +8,7 @@ Page({
   data: {
     showHide:true,
     countData:'',
-    floor:'',
+    floorInfo:null,
     description:'',
     storeMes:'',
     storeGoods:[],
@@ -44,9 +44,10 @@ Page({
         } else {
           description = obj.store[0].store.description
         }
+        var floorInfo = Api.isFloorInfo(obj.floor)
         _this.setData({
           countData: obj.countData,
-          floor: obj.floor.floorInfo,
+          floorInfo: floorInfo,
           storeMes: obj.store[0].store,
           description: description,
           storeGoods: obj.store[0].goodsList

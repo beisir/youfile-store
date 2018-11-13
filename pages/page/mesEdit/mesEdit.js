@@ -8,7 +8,7 @@ Page({
   data: {
     showHide: true,
     countData: '',
-    floor: '',
+    floorInfo:null,
     storeMes: '',
     storeGoods: [],
     baseUrl: app.globalData.imageUrl,
@@ -79,9 +79,10 @@ Page({
       .then(res => {
         var obj = res.obj,
           storeMes = obj.store[0].store
+        var floorInfo = Api.isFloorInfo(obj.floor)
         _this.setData({
           countData: obj.countData,
-          floor: obj.floor.floorInfo,
+          floorInfo: floorInfo,
           storeMes: obj.store[0].store,
           openingTime: storeMes.openingTime == null? '' : storeMes.openingTime,
           servicePhone: storeMes.servicePhone == null || storeMes.servicePhone == "null"? '' : storeMes.servicePhone,
