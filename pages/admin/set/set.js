@@ -24,38 +24,41 @@ Page({
         skuList1=[],
         skuListAll=[],
       goodsSkuVOList = options.modeList
-    console.log(goodsListData)
     if (goodsListData!=''){
       if (goodsListData.length == 1) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList
         for (var i = 0; i < skuList0.length; i++) {
-          skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+          skuListAll.push({ id: i + '1' + i, skuName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
         }
       } else if (goodsListData.length = 2) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList
         skuList1 = goodsListData[1].goodsSpecificationValueVOList
         for (var i = 0; i < skuList0.length; i++) {
           for (var j = 0; j < skuList1.length; j++) {
-            skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice})
+            skuListAll.push({ id: j + '1' + i, skuName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice})
           }
         }
       }
+      _this.setData({
+        skuListAll: skuListAll
+      })
     }
     if (goodsSkuVOList!=undefined){
       goodsSkuVOList = JSON.parse(options.modeList)
       for (var i = 0; i < goodsSkuVOList.length; i++) {
-        for (var j = 0; j < skuListAll.length; j++) {
-          if (goodsSkuVOList[i].specValueCodeList.sort().toString() == skuListAll[j].specValueCodeList.sort().toString()) {
-            skuListAll[j].sellPrice = goodsSkuVOList[i].sellPrice
-            skuListAll[j].wholesalePrice = goodsSkuVOList[i].wholesalePrice
-            skuListAll[j].stockNum = goodsSkuVOList[i].stockNum
-          }
-        }
+        goodsSkuVOList[i]["id"] = i + '1' + i
+        // for (var j = 0; j < skuListAll.length; j++) {
+          // if (goodsSkuVOList[i].specValueCodeList.sort().toString() == skuListAll[j].specValueCodeList.sort().toString()) {
+          //   skuListAll[j].sellPrice = goodsSkuVOList[i].sellPrice
+          //   skuListAll[j].wholesalePrice = goodsSkuVOList[i].wholesalePrice
+          //   skuListAll[j].stockNum = goodsSkuVOList[i].stockNum
+          // }
+        // }
       }
+      _this.setData({
+        skuListAll: goodsSkuVOList
+      })
     }
-    _this.setData({
-      skuListAll: skuListAll
-    })
   },
   monitor:function(e){
     let id = e.target.dataset.id,
@@ -65,7 +68,7 @@ Page({
     for (var j = 0; j < skuListAll.length; j++) {
       if (id == skuListAll[j].id){
         if (name =="stockNum"){
-          skuListAll[j][name] = val
+          skuListAll[j][name] = parseInt(val)
         }else{
           skuListAll[j][name] = (util.newVal(val)).substring(0, 10)
         }
@@ -90,9 +93,9 @@ Page({
     var currPage = pages[pages.length - 1];
     var prevPage = pages[pages.length - 2];    // 上一个页面
     for (var i = 0; i < skuListAll.length;i++){
-      delete skuListAll[i].specValueName
+      // delete skuListAll[i].specValueName
       delete skuListAll[i].id
-      delete skuListAll[i].specValueCode
+      // delete skuListAll[i].specValueCode
       if (skuListAll[i].stockNum!=''){
         skuNum += parseInt(skuListAll[i].stockNum)
       }

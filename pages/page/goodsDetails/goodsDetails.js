@@ -138,10 +138,7 @@ Page({
       if (options.storeId) {
         wx.setStorageSync("storeId", options.storeId)
       }
-      if (options.query) {
-        goodsId = options.query.goodsId
-        wx.setStorageSync("storeId", options.query.storeId)
-      } else {
+      if (options.goodsId) {
         goodsId = options.goodsId
       }
       that.setData({
@@ -182,7 +179,8 @@ Page({
       } else {
         getIdentity(this, goodsId, false)
       }
-    }else{
+    }
+    else{
       getIdentity(this, this.data.goodsId, false)
     }
   },

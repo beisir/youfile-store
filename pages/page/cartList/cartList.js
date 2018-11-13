@@ -353,6 +353,7 @@ Page({
    * 清空失效宝贝
    */
   emptyAll(e) {
+    var _this=this
     Api.deteleCartFai()
      .then(res => {
         wx.showToast({
@@ -360,7 +361,9 @@ Page({
           icon: 'none',
           duration: 2000
         })
-        this.getList()
+       setTimeout(function () {
+         _this.getList()
+       }, 1000)
     })
   },
 

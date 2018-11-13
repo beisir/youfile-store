@@ -578,6 +578,7 @@ Page({
        wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
      }
     }else{
+      skuListAll = this.data.skuListAll
       if (Api.isEmpty(skuListAll)){
         sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
         wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
