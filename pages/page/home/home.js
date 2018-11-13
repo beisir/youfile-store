@@ -15,10 +15,18 @@ function getIdentity(_this) {
           var isStoreOwner = obj.isStoreOwner,
             isPurchaser = obj.isPurchaser
           if (isStoreOwner) {
-            wx.setStorageSync("admin", 2)
-            _this.setData({
-              limitShow: 2
-            })
+            if(obj.storeNature==1){
+              wx.setStorageSync("admin", 2)
+              _this.setData({
+                limitShow: 2
+              })
+            }
+            if (obj.storeNature == 2) {
+              wx.setStorageSync("admin", 1)
+              _this.setData({
+                limitShow: 1
+              })
+            }
           }
           if (isPurchaser) {
             wx.setStorageSync("admin", 3)
@@ -325,9 +333,10 @@ Page({
         })
         app.globalData.isFollow = obj.isFollow
         var result=obj.goods.result
+        var floorInfo = Api.isFloorInfo(obj.store.floor)
         that.setData({
           store: obj.store,
-          floorInfo:obj.store.floor.floorInfo,
+          floorInfo: floorInfo,
           baseUrl: app.globalData.imageUrl,
           coverUrl: obj.store.coverUrl,
           result: result,

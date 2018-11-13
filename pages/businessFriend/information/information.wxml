@@ -13,7 +13,7 @@
     <view class="weui_cells new-weui">
       <view class='bf-img'><image wx:if='{{logo!=""}}'  mode="aspectFill" src="{{baseUrl}}{{logo}}?x-oss-process=style/logo"></image></view>
       <text>{{name}}</text><text  wx:if='{{success}}'></text>
-      <view class='nbf-font'><image wx:if='{{mallLogo!=""}}'  mode="widthFix" src="{{baseUrl}}{{mallLogo}}"></image>{{mallName}}</view>
+      <view class='nbf-font' wx:if='{{floorInfo!=null}}' ><image   mode="widthFix" src="{{baseUrl}}{{floorInfo.mallLogo}}"></image>{{floorInfo.mallName}}</view>
     </view>
   </view>
 </view>
@@ -35,10 +35,10 @@
    <text>所在地址</text><view>{{address}} </view>
   </view>
    <view class='in-cont'>
-   <text>所属商城</text><view>{{mallName}}</view>
+   <text>所属商城</text><view wx:if='{{floorInfo!=null}}'>{{floorInfo.mallName}}</view>
   </view>
   <view class='in-cont'>
-   <text>楼层区域</text><view>{{balcony}}{{floor}}{{area}}{{doorNum}}</view>
+   <text>楼层区域</text><view wx:if='{{floorInfo!=null}}'>{{floorInfo.balconyName}} {{floorInfo.floorName}} {{floorInfo.areaName}} {{floorInfo.storeDoorNum}}</view>
   </view>
   <view class='in-cont' bindtap='urlHome'>
    <text>小云店</text>

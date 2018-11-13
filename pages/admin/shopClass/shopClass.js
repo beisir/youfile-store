@@ -26,7 +26,6 @@ Page({
     }
     if (options.categoryCustomCode){
       var categoryCustomCode = (options.categoryCustomCode).split(",")
-      console.log(categoryCustomCode)
       this.setData({
         categoryCustomCode: categoryCustomCode,
       })

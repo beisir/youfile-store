@@ -16,10 +16,18 @@ function getIdentity(_this) {
           var isStoreOwner = obj.isStoreOwner,
             isPurchaser = obj.isPurchaser
           if (isStoreOwner) {
-            wx.setStorageSync("admin", 2)
-            _this.setData({
-              limitShow: 2
-            })
+            if (obj.storeNature == 1) {
+              wx.setStorageSync("admin", 2)
+              _this.setData({
+                limitShow: 2
+              })
+            }
+            if (obj.storeNature == 2) {
+              wx.setStorageSync("admin", 1)
+              _this.setData({
+                limitShow: 1
+              })
+            }
           }
           if (isPurchaser) {
             wx.setStorageSync("admin", 3)

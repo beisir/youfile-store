@@ -25,15 +25,15 @@
     <view>
       <image  src="/image/lou.png"></image>
       <text> 所属商城</text>
-      <view class='new-left' style='padding-right:20rpx'>
-       {{floor.mallName}}
+      <view class='new-left' wx:if='{{floorInfo!=null}}' style='padding-right:20rpx'>
+       {{floorInfo.mallName}}
       </view>
     </view>
     <view>
       <image  src="/image/lou.png"></image>
       <text>  楼层区域</text>
-      <view class='new-left' style='padding-right:20rpx'>
-        {{floor.balcony}}{{floor.floor}}{{floor.area}}
+       <view class='new-left'  wx:if='{{floorInfo!=null}}'>
+         {{floorInfo.balconyName}} {{floorInfo.floorName}} {{floorInfo.areaName}} {{floorInfo.storeDoorNum}}
       </view>
     </view>
 </view>
