@@ -10,9 +10,7 @@ Page({
 
   },
   getData() {
-    Api.cloudOrderDetail({ orderNumber: this.data.num }).then(res => {
-
-    })
+   
     // wx.requestPayment({
     //   "timeStamp": "1542009229352",
     //   "package": "prepay_id=wx12155349280398d600d768ba4170672130",
@@ -58,7 +56,7 @@ Page({
             "payType": 1
           },
           success: (res) => {
-            if(res.code == 0){
+            if (res.data.code == 0){
               this.payment(res.data.obj.payData);
             }else{
               wx.showToast({
@@ -80,6 +78,7 @@ Page({
    
   },
   payment(res) {
+    console.log(res)
     wx.requestPayment({
       "timeStamp": res.timeStamp,
       "package": res.package,
