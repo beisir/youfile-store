@@ -12,5 +12,5 @@
     <text class="gold-font">店主本人</text>谨慎上传清晰的收款码图片</view>
   <view class='tip'>请裁切至仅保留付款码区域即可</view>
   </view>
-  <view wx:if="{{imgUrl}}" bindtap='upload' class='sure-btn'>更换收款码</view>
+  <!-- <view wx:if="{{imgUrl}}" bindtap='upload' class='sure-btn'>更换收款码</view> -->
 </view>
