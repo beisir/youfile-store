@@ -2,6 +2,9 @@
   "pages":[
     "pages/page/home/home",
     "pages/admin/status/status",
+    "pages/businessFriend/merchant/index/index",
+    "pages/admin/spec/spec",
+    "pages/admin/addGoods/addGoods",
     "pages/page/orderSuccess/orderSuccess",
     "pages/page/user/user",
     "pages/cloudOrder/myOrder/myOrder",
@@ -9,10 +12,7 @@
     "pages/role/allOrder/allOrder",
     "pages/payment/uploadPayment/uploadPayment",
     "pages/admin/batchSet/batchSet",
-    "pages/businessFriend/merchant/index/index",
-    "pages/admin/addGoods/addGoods",
     "pages/page/cartList/cartList",
-    "pages/admin/spec/spec",
     "pages/page/invoice/invoice",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/index/index",
@@ -73,7 +73,6 @@
     "pages/cloudOrder/adminOrderDetail/adminOrderDetail",
     "pages/cloudOrder/orderList/orderList",
     "pages/admin/batch/batch",
-   
     "assembly/partnerAlert/partnerAlert",
     "pages/login/login/login",
     "pages/page/stockDetail/stockDetail",
@@ -106,10 +105,10 @@
     "enablePullDownRefresh":false
   },
   "networkTimeout": {
-    "request": 3000,
-    "connectSocket": 3000,
-    "uploadFile": 20000,
-    "downloadFile": 20000
+    "request": 50000,
+    "connectSocket": 50000,
+    "uploadFile": 50000,
+    "downloadFile": 50000
   },
   "tabBar": {
     "borderStyle": "white",

@@ -86,7 +86,38 @@ Page({
     likeShow:false,
     limitShow:1,
     src:'',
-    goodsName:''
+    goodsName:'',
+    copyGoods:false,
+    openStore:false
+  },
+  // 一键入库
+  copyGoods:function(e){
+    var originGoodsId = e.target.dataset.id
+    this.setData({
+      copyGoods:true,
+      originGoodsId: originGoodsId
+    })
+  },
+  copyGoodsYes:function(){
+    var _this=this,
+     originGoodsId = this.data.originGoodsId
+    this.setData({
+      copyGoods: false
+    })
+    Api.copyGoods({ originGoodsId: originGoodsId })
+      .then(res => {
+        Api.showToast(res.message)
+      })
+      .catch(res => {
+        console.log(res)
+        var code = res.data.code
+        console.log(code)
+        if (code =="E101"){
+          _this.setData({
+            openStore: true
+          })
+        }
+      })
   },
   addFriend:function(){
     var limitShow=wx.getStorageSync("admin")

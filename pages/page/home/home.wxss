@@ -44,6 +44,7 @@
 .add-firend3{padding-bottom:20rpx}
 .store_name image{width:35rpx;height:35rpx;margin-left:18rpx;margin-top:0}
 .result-list .result-text1 image.h-img{height:40rpx;width:40rpx;float:right;margin-right:10rpx}
+.result-list .result-text1 image.h-img1{transform: rotate(45deg)}
 .result-list{height:530rpx;border:0;margin:0 0 30rpx}
 .flex-boxx{display:flex;justify-content:space-between;flex-wrap:wrap;align-content:flex-start;width:680rpx;margin:0 auto}
 .result{padding:0}
@@ -53,3 +54,5 @@
 .tipMes text{color:#CCAA77}
 .result{background:#fff;margin-top:0rpx;padding-top:30rpx}
 .nomore{margin-bottom:0rpx;margin-top:0rpx;text-align:center;background:#f7f7f7;padding:30rpx}
+.tip-v view{font-size: 28rpx;color: #999;font-weight: normal}
+.tip-v button{margin-bottom: 40rpx;margin-top: 40rpx}

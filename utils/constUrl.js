@@ -43,6 +43,7 @@ export const addCartUrl='/api/shop/shoppingcart/goods'
 export const deleteTemplateUrl='/admin/shop/specificationTemplate/deleteTemplateContentByTemplateContentId'
 export const addTempContUrl='/admin/shop/specificationTemplate/updateTemplateContentSpecValue'
 export const saveSpecTemplateContentUrl='/admin/shop/specificationTemplate/saveSpecTemplateContent'
+export const tempSortUrl='/admin/shop/specificationTemplate/templatecontent/{{templateContentId}}/sort'
 export const deteleCartGoodsUrl = '/api/shop/shoppingcart/{{goodsId}}'
 export const deteleCartFaiUrl='/api/shop/shoppingcart/user/failure'
 export const addMoreCartUrl ='/api/shop/shoppingcart/goods/batch'
@@ -114,3 +115,5 @@ export const showMerchantUrl='/admin/bizscan/merchant/{{userId}}'
 //获取收款码
 export const getPaymentImgUrl = "/admin/store/receiptcode/{{storeId}}"
 export const putPaymentImgUrl = "/admin/store/{{storeId}}/receiptcode"
+// 一键入库
+export const copyGoodsUrl='/api/shop/goods/copy/{{originGoodsId}}'

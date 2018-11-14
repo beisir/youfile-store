@@ -109,6 +109,8 @@ import {
   getPaymentImgUrl,
   putPaymentImgUrl,
   recentGoodsUrl,
+  copyGoodsUrl,
+  tempSortUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -349,6 +351,10 @@ function cartList(data) {
 function addTemplate(data) {
   return app.http.postRequest(addTemplateUrl, data)
 } 
+/**排序模板**/
+function tempSort(data) {
+  return app.http.postRequest(tempSortUrl +"?sortType=asc", data)
+}
 /**调换规格位置**/
 function saveSpecTemplateContent(data) {
   return app.http.postRequest(saveSpecTemplateContentUrl, data)
@@ -649,6 +655,10 @@ function supplyOrde(data){
   data = initStoreId(data);
   return app.http.postRequest(supplyOrderUrl, data);
 }
+/**更新商品**/
+function copyGoods(data) {
+  return app.http.putRequest(copyGoodsUrl, data)
+} 
 // 回首页
 function toHome(){
   wx.switchTab({
@@ -703,6 +713,8 @@ function getStoreId() {
   }
 }
 module.exports = {
+  copyGoods: copyGoods,
+  tempSort: tempSort,
   isFloorInfo: isFloorInfo,
   putPaymentImg: putPaymentImg,
   getPaymentImg: getPaymentImg,
