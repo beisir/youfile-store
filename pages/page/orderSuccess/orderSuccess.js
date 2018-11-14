@@ -9,12 +9,13 @@ Page({
     dan:"订单",
     paymentModal:true,
     baseUrl: app.globalData.imageUrl,
-    orderSuccessHiddenBtn:false
+    orderSuccessHiddenBtn:false,
   },
   getData() {
     app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {
       this.setData({
         user: res.obj,
+        price: res.obj.orderAmount.toFixed(2)        
       })
     })
   },
