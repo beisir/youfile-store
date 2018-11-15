@@ -117,6 +117,7 @@
 <view class='add-firend add-firend2' wx:if='{{limitShow==3}}'><view>友</view>已成商友，现可查看批发价！</view>
 <!-- <view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view> -->
 <view class="swiper-tab" id='swiper-tab'>
+  <!-- <form class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" bind:submit="swichNav" data-current="0"   report-submit="true"> <button formType="submit">综合</button><view></view></form> -->
   <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
     <view></view>
   </view>

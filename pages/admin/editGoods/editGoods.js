@@ -20,7 +20,7 @@ Page({
     hiddenSelt: false,
     hiddenSend: true,
     clickSpecShow: false,
-    stock: '4',
+    stock: '',
     strName: '',
     skuListAll: [],
     skuNum: 0,
@@ -196,12 +196,19 @@ Page({
       })
     }
   },
-  stockNum: function (event) {
+  stockFun: function (e) {
     var _this = this,
-      val = event.detail.value
-    this.setData({
-      stockNum: val
-    })
+      val = e.detail.value
+    if (val > 0) {
+      this.setData({
+        stock: val
+      })
+    } else {
+      this.setData({
+        stock: null
+      })
+      Api.showToast("请输入大于0的有效值！")
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -340,7 +347,7 @@ Page({
   // 清空起批量
   clearInput: function (e) {
     this.setData({
-      stock: ''
+      stock: null
     })
   },
   newConst: function (event) {
@@ -540,6 +547,7 @@ Page({
       sellPrice = this.data.sellPrice,
       wholesalePrice = this.data.wholesalePrice,
       newConst = this.data.newConst,
+      saleBatchNum = this.data.stock,
       skuList0 = [],
       skuList1 = [],
       goodsListData = this.data.pageall,
@@ -615,7 +623,7 @@ Page({
       "marketPrice": 10,
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,
-      "saleBatchNum":10,
+      "saleBatchNum": saleBatchNum,
       "sellPrice":sellPrice,
       "status": status,
       "stockNum":this.data.skuNum,

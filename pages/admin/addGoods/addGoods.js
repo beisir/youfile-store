@@ -202,9 +202,16 @@ Page({
   stockFun:function(e){
     var _this = this,
       val = e.detail.value
-    this.setData({
-      stock: val
-    })
+    if (val>0){
+      this.setData({
+        stock: val
+      })
+    }else{
+      this.setData({
+        stock:''
+      })
+      Api.showToast("请输入大于0的有效值！")
+    }
   },
   watchRec: function (event) {
     var _this = this,

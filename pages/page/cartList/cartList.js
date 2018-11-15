@@ -427,7 +427,6 @@ Page({
     detailList[index].allGoodsAmount = arr[0]
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
-
     var dataArr=[]
     dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId:storeId})
     this.addCart(data[0]["goodsId"],JSON.stringify(dataArr))
@@ -484,14 +483,18 @@ Page({
   },
   // 更改商品价格
   updatePrice:function(num,index){
-    var effectiveList = this.data.detailList
-    for (var i = 0; i < effectiveList.length; i++) {
-      if(i==index){
-        var arr=[]
-        arr.push(effectiveList[i].sellPrice * num)
-        arr.push(effectiveList[i].wholesalePrice*num)
-        return arr
-      }
+    var effectiveList = this.data.detailList[index],
+      shoppingCartSkuList = effectiveList.shoppingCartSkuList
+    if (Api.isEmpty(shoppingCartSkuList)){
+      var arr = []
+      arr.push(shoppingCartSkuList[0].sellPrice * num)
+      arr.push(shoppingCartSkuList[0].wholesalePrice * num)
+      return arr
+    }else{
+      var arr = []
+      arr.push(effectiveList.sellPrice * num)
+      arr.push(effectiveList.wholesalePrice * num)
+      return arr
     }
   },
   minusCount(e) {
@@ -536,6 +539,7 @@ Page({
     var detailList = this.data.detailList;// 获取购物车列表
     for (var i = 0; i < detailList.length; i++) { 
       if (detailList[i].selected) {
+        console.log(detailList)
         if (limitShow==3){
           saleBatchGoodsNum = detailList[i].saleBatchNum
           if (!Api.isEmpty(saleBatchGoodsNum)) {
@@ -577,6 +581,7 @@ Page({
             }
           }
           if (storeNum > 0){
+            var saleBatchGoodsNum = detailList[i].saleBatchNum
             if (storeAmount==0){
               if (allGoodsNum >= storeNum){
                 detailList[i].enjoyPrice = true
@@ -595,6 +600,13 @@ Page({
                 enjoyCost = false
               }
             }
+            if (saleBatchGoodsNum > 0) {
+              if (allGoodsNum >= saleBatchGoodsNum) {
+                detailList[i].enjoyPrice = true
+              } else {
+                detailList[i].enjoyPrice = false
+              }
+            }
           }
         }else{
           detailList[i].enjoyPrice = false
@@ -602,11 +614,11 @@ Page({
       }
       var newTotalPrice = 0
       var newTotalPrice1=0
-      var newChild1 = 0
-      var newChild2=0
       var len = detailList.length
       var numTrue=0
       for (var i = 0; i < detailList.length; i++) {
+        var newChild1 = 0
+        var newChild2 = 0
         if (detailList[i].selected) {
           if (enjoyCost){
               detailList[i].enjoyPrice = true

@@ -1,8 +1,9 @@
 {
   "pages":[
     "pages/page/home/home",
-    "pages/cloudOrder/cloudPay/cloudPay",
+    "pages/page/cartList/cartList",
     "pages/admin/status/status",
+    "pages/cloudOrder/cloudPay/cloudPay",
     "pages/businessFriend/merchant/index/index",
     "pages/admin/spec/spec",
     "pages/admin/addGoods/addGoods",
@@ -13,7 +14,6 @@
     "pages/role/allOrder/allOrder",
     "pages/payment/uploadPayment/uploadPayment",
     "pages/admin/batchSet/batchSet",
-    "pages/page/cartList/cartList",
     "pages/page/invoice/invoice",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/index/index",

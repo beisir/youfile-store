@@ -109,9 +109,7 @@ Page({
         Api.showToast(res.message)
       })
       .catch(res => {
-        console.log(res)
         var code = res.data.code
-        console.log(code)
         if (code =="E101"){
           _this.setData({
             openStore: true
@@ -479,6 +477,7 @@ Page({
     });
   },
   swichNav: function (e) {
+    // Api.getFormId(e)
     var that = this,
       descShow = this.data.descShow,
       index = e.target.dataset.current

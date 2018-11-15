@@ -37,7 +37,15 @@ Page({
           } else {
             var isStoreOwner = obj.isStoreOwner
             if (isStoreOwner) {
-              wx.setStorageSync("admin", 2)
+              if (obj.storeNature == 1) {
+                wx.setStorageSync("admin", 2)
+              }
+              if (obj.storeNature == 2) {
+                wx.setStorageSync("admin", 1)
+                wx.switchTab({
+                  url: '../../page/user/user'
+                })  
+              }
             }else{
               wx.switchTab({
                 url: '../../page/user/user'

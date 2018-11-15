@@ -676,6 +676,14 @@ function putPaymentImg(data) {
   return app.http.putRequest(putPaymentImgUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 /**
+ * 获取formId
+ */
+function getFormId(e) {
+  var formId = e.detail.formId;
+  var content = e.detail.target.dataset.name//记录用户的操作
+  wx.setStorageSync("formId", formId)
+}
+/**
  * 初始化storeId
  */
 function initStoreId(data) {
@@ -714,6 +722,7 @@ function getStoreId() {
 }
 module.exports = {
   copyGoods: copyGoods,
+  getFormId: getFormId,
   tempSort: tempSort,
   isFloorInfo: isFloorInfo,
   putPaymentImg: putPaymentImg,

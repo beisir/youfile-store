@@ -102,6 +102,7 @@
 .lt-table{color:#666;font-weight:normal;height:400rpx;overflow:scroll;height:350rpx;margin-bottom:150rpx}
 .lt-tr{position:relative}
 .lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:80rpx}
+.lt-tr>view.setCss{line-height:30rpx;width:40%}
 .lt-tr>view:last-child{padding-top:20rpx;line-height:60rpx;width:32%}
 .lt-tr>view.add-xian{text-decoration:line-through}
 .lt-tr1>view:nth-child(3){color:#CCAA77}

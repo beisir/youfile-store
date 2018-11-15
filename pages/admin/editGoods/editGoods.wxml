@@ -128,7 +128,7 @@ bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weu
         <view class="weui-cell__bd">
           <text>起批量</text>
         </view>
-        <input class="stock" type="text" value='{{stock}}'></input>
+        <input class="stock" type="number" bindinput='stockFun' value='{{stock}}'></input>
         <view class="weui-cell__ft" bindtap='clearInput'><image  src="/image/clo.png"></image></view>
       </view>
     </view>

@@ -49,6 +49,7 @@ Page({
       if (url) {
         Api.uploadLogoImg(url)
           .then(res => {
+            app.globalData.switchStore = true
             wx.showToast({
               title: res.message,
               icon: 'none',
