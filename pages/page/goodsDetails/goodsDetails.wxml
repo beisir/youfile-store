@@ -366,7 +366,7 @@
           <view  class='gd-gg lt-attr' wx:if='{{index==0}}'>
             <view class="lt-table">
                 <view class="lt-tr">
-                    <view wx:if='{{!newSkuOnlyEdit}}'>{{nameTwo}}</view>
+                    <view wx:if='{{!newSkuOnlyEdit}}' class='{{limitShow==1?"setCss":""}}'>{{nameTwo}}</view>
                     <view>零售价</view>
                     <view wx:if='{{limitShow==3}}'>批发价</view>
                     <view>
@@ -379,7 +379,7 @@
                 </view>
                 <view  wx:for="{{spectArrDifference}}" wx:for-item="pItem" wx:key="{{index}}" >
                   <view class="lt-tr lt-tr1"  wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
-                      <view wx:if='{{!newSkuOnlyEdit}}'>{{item.name}}</view>
+                      <view wx:if='{{!newSkuOnlyEdit}}'  class='{{limitShow==1?"setCss":""}}'>{{item.name}}</view>
                       <view class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
                       <view wx:if='{{limitShow==3}}'>￥{{item.wholesalePrice}}</view>
                       <view>

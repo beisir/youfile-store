@@ -79,9 +79,14 @@ Page({
     //锁住
     this.setData({ lock: true });
     var longTap = this.data.longTap,
+      arrIndex = this.data.arrIndex,
       index = e.target.dataset.current
     this.arrEach(longTap, 0)
-    longTap[index].selected = false
+    if(arrIndex[index].selected){
+      longTap[index].selected = false
+    }else{
+      longTap[index].selected = true
+    }
     this.setData({
       longTap: longTap
     })
@@ -98,9 +103,14 @@ Page({
   },
   longTap1: function (e) {
     var longTap = this.data.longTap1,
+      arrIndex = this.data.arrIndex1,
       index = e.target.dataset.current
     this.arrEach(longTap, 1)
-    longTap[index].selected = false
+    if (arrIndex[index].selected) {
+      longTap[index].selected = false
+    } else {
+      longTap[index].selected = true
+    }
     this.setData({
       longTap1: longTap
     })
@@ -215,7 +225,7 @@ Page({
         })
       }else{
         for (var i = 0; i < model.length; i++) {
-          specificationTemplateContentVOList.push({ id: '', specCode: model[i].specCode, specName: model[i].specName, specValueList: [] })
+          specificationTemplateContentVOList.push({specCode: model[i].specCode, specName: model[i].specName, specValueList: [] })
           var arrChild = model[i].goodsSpecificationValueVOList
           for (var j = 0; j < arrChild.length; j++) {
             arrChild[j].selected = true
@@ -310,37 +320,28 @@ Page({
     var index = this.data.currentTab
     var templateId = this.data.templateId
     var newArr = { specName: "规格", specValueList: [] }
+    var newArr1 = { specName: "颜色", specValueList: [] }
     var templateCont = this.data.templateCont
     var tempArr = templateCont[index].specificationTemplateContentVOList
     templateCont[index].specificationTemplateContentVOList = tempArr
-    tempArr.push(newArr)
+    if (tempArr[0].specName=="规格"){
+      tempArr.push(newArr1)
+      var tempArrNew = { specName: "颜色", templateId: templateId, specValueList: [] }
+    }else{
+      tempArr.push(newArr)
+      var tempArrNew = { specName: "规格", templateId: templateId, specValueList: [] }
+    }
     this.setData({
       templateCont: templateCont
     })
-    var tempArr = { specName: "规格", templateId: templateId, specValueList:[]}
     if (index != 0) {
-      app.http.postRequest('/admin/shop/specificationTemplate/saveSpecTemplateContent', tempArr)
+      Api.saveSpecTemplateContent(tempArrNew)
         .then(res => {
         })
     }
   },
   // 监听input
   watchInput: function (event) {
-    if (event.detail.value == '') {
-      this.setData({
-        watchInput: false,
-        value:'',
-        valueEdit:''
-      })
-    } else {
-      this.setData({
-        watchInput: true,
-        value: event.detail.value,
-        valueEdit: event.detail.value
-      })
-    }
-
-
     var value = event.detail.value,
       num = value.length
     if (value == '') {
@@ -352,31 +353,21 @@ Page({
     } else {
       if (this.data.addSpec){
         if (num > 16) {
-          wx.showToast({
-            title: '超过最长数字限制',
-            icon: 'none',
-            duration: 2000,
-          })
-        } else {
-          this.setData({
-            watchInput: true,
-            value: value.substring(0, 15),
-          })
+          Api.showToast("超过最长数字限制")
         }
+        this.setData({
+          watchInput: true,
+          value: value.substring(0, 15),
+        })
       }else{
-        if (num > 7) {
-          wx.showToast({
-            title: '超过最长数字限制',
-            icon: 'none',
-            duration: 2000,
-          })
-        } else {
-          this.setData({
-            watchInput: true,
-            value: value.substring(0, 6),
-            valueEdit: (event.detail.value).substring(0, 6)
-          })
+        if (num > 10) {
+          Api.showToast("超过最长数字限制")
         }
+        this.setData({
+          watchInput: true,
+          value: value.substring(0, 9),
+          valueEdit: value.substring(0, 9)
+        })
       }
     }
   },
@@ -393,11 +384,17 @@ Page({
   },
   // 添加规格值
   addSpec: function (e) {
+    var currentTab = this.data.currentTab
+    if (currentTab!=0){
+      this.setData({
+        templateContentId: e.target.dataset.id,
+      })
+    }
     this.setData({
       addSpec: true,
       value: '',
-      templateContentId: e.target.dataset.id,
-      specName: e.target.dataset.name
+      specName: e.target.dataset.name,
+      specNameIndex: e.target.dataset.index
     })
   },
   confirm: function (e) {
@@ -405,6 +402,8 @@ Page({
     var specName = _this.data.value,
         newSpecValueList=[],
         specArr=[],
+        currentTab = this.data.currentTab,
+        specNameIndex = this.data.specNameIndex,
         str = "";
     var templateContentId = _this.data.templateContentId
     var index = _this.data.currentTab
@@ -412,28 +411,24 @@ Page({
     var tempArr = templateCont[index].specificationTemplateContentVOList
     var parentName = _this.data.specName
     if (specName == '') { _this.checkName(); return}
-    for (var i = 0; i < tempArr.length; i++) {
-      if (tempArr[i].specName == parentName) {
-        if (tempArr[i].specValueList==null){
-          str = specName
-          specArr.push(specName)
-          tempArr[i].specValueList= specArr
-        }else{
-          for (var j = 0; j < tempArr[i].specValueList.length;j++){
-            str += tempArr[i].specValueList[j] + ",";
-          }
-          str += specName
-          tempArr[i].specValueList.push(specName)
-        }
-        newSpecValueList = tempArr[i].specValueList
-      } 
+    if (tempArr[specNameIndex].specValueList==null){
+      str = specName
+      specArr.push(specName)
+      tempArr[specNameIndex].specValueList= specArr
+    }else{
+      for (var j = 0; j < tempArr[specNameIndex].specValueList.length;j++){
+        str += tempArr[specNameIndex].specValueList[j] + ",";
+      }
+      str += specName
+      tempArr[specNameIndex].specValueList.push(specName)
     }
+    newSpecValueList = tempArr[specNameIndex].specValueList
     templateCont[index].specificationTemplateContentVOList = tempArr
     _this.setData({
       templateCont: templateCont
     })
     _this.cancel()
-    if (templateContentId == '010' || !Api.isEmpty(templateContentId)){return}
+    if (currentTab==0){return}
     Api.addTempCont(templateContentId, str)
       .then(res => {
         const code = res.code
@@ -577,7 +572,8 @@ Page({
     if (_this.data.value != '') {
       tempArr["templateName"] = _this.data.value
     }else{
-      tempArr["templateName"]='默认模板'
+      Api.showToast("请输入模板名称！")
+      return
     }
     if (templateContLen>7){
       Api.showToast("规格模板最多只能创建6个！")
@@ -590,9 +586,10 @@ Page({
         })
     }
   },
-  upTop:function(){
+  upTop:function(e){
     var _this = this,
         templateId = _this.data.templateId,
+        templateContentId = e.target.dataset.id,
         templateCont= _this.data.templateCont,
         newArr=[],
         index=''
@@ -606,11 +603,11 @@ Page({
     _this.setData({
       templateCont: templateCont
     })
-    Api.addTemplate(templateCont[index])
-      .then(res => {
-        _this.cancel()
-      })
-    
+    if(index!=0){
+      Api.tempSort({templateContentId: templateContentId})
+        .then(res => {
+        })
+    }
   },
   // 长按删除设置false
   arrEach:function(arr,code){
@@ -631,8 +628,6 @@ Page({
   swichNav(e) {
     var current = e.target.dataset.current,
       pName = e.target.dataset.name,
-      longTap = this.data.longTap,
-      longTap1 = this.data.longTap1,
       switchi = e.target.dataset.switchi,
       code = e.target.dataset.code,
       pIdNew = e.target.dataset.id,
@@ -641,16 +636,6 @@ Page({
       code+=code+"" + code
     if (current== undefined){
      return
-    }
-    //检查锁
-    if (this.data.lock) {
-      this.setData({
-        lock: !this.data.lock
-      })
-    }
-    if (current != this.data.navindex && this.data.navindex!=-1){
-       this.arrEach(longTap, 0)
-       this.arrEach(longTap1, 1)
     }
     this.alertSpecData(current, pName, switchi, code, pIdNew, pId, namechi)
   },
@@ -664,6 +649,8 @@ Page({
       templateCont = this.data.templateCont,
       listChi = [],
       goodsList = [],
+      longTap = this.data.longTap,
+      longTap1 = this.data.longTap1,
       addIndex = false,
       addIndexChi = false,
       goodsListData = this.data.goodsListData,
@@ -676,12 +663,28 @@ Page({
     if (switchi == 0) {
       var arrIndex = this.data.arrIndex
       arrIndex[current].selected = !arrIndex[current].selected
+     if(arrIndex[current].selected){
+       if(!longTap[current].selected){
+         longTap[current].selected=true
+       }
+       this.setData({
+         longTap: longTap
+       })
+     }
       this.setData({
         arrIndex: arrIndex
       })
     } else {
       var arrIndex = this.data.arrIndex1
       arrIndex[current].selected = !arrIndex[current].selected
+      if (arrIndex[current].selected) {
+        if (!longTap1[current].selected) {
+          longTap1[current].selected = true
+        }
+        this.setData({
+          longTap1: longTap1
+        })
+      }
       this.setData({
         arrIndex1: arrIndex
       })
@@ -759,6 +762,8 @@ Page({
     if (current == this.data.navindex) {
       return false;
     } else {
+      // this.arrEach(longTap, 0)
+      // this.arrEach(longTap1, 1)
       this.setData({
         navindex: current,
         goodsListData: goodsListData,

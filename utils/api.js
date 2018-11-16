@@ -109,6 +109,8 @@ import {
   getPaymentImgUrl,
   putPaymentImgUrl,
   recentGoodsUrl,
+  copyGoodsUrl,
+  tempSortUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -349,6 +351,10 @@ function cartList(data) {
 function addTemplate(data) {
   return app.http.postRequest(addTemplateUrl, data)
 } 
+/**排序模板**/
+function tempSort(data) {
+  return app.http.postRequest(tempSortUrl +"?sortType=asc", data)
+}
 /**调换规格位置**/
 function saveSpecTemplateContent(data) {
   return app.http.postRequest(saveSpecTemplateContentUrl, data)
@@ -649,6 +655,10 @@ function supplyOrde(data){
   data = initStoreId(data);
   return app.http.postRequest(supplyOrderUrl, data);
 }
+/**更新商品**/
+function copyGoods(data) {
+  return app.http.putRequest(copyGoodsUrl, data)
+} 
 // 回首页
 function toHome(){
   wx.switchTab({
@@ -664,6 +674,14 @@ function getPaymentImg(data){
 function putPaymentImg(data) {
   data = initStoreId(data);
   return app.http.putRequest(putPaymentImgUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+/**
+ * 获取formId
+ */
+function getFormId(e) {
+  var formId = e.detail.formId;
+  var content = e.detail.target.dataset.name//记录用户的操作
+  wx.setStorageSync("formId", formId)
 }
 /**
  * 初始化storeId
@@ -703,6 +721,9 @@ function getStoreId() {
   }
 }
 module.exports = {
+  copyGoods: copyGoods,
+  getFormId: getFormId,
+  tempSort: tempSort,
   isFloorInfo: isFloorInfo,
   putPaymentImg: putPaymentImg,
   getPaymentImg: getPaymentImg,

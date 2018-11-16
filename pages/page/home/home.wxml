@@ -48,6 +48,27 @@
     <button bindtap='confirm'>确定</button>
   </view>
 </mes>
+ <!--是否复制-->
+<mes
+  show="{{copyGoods}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>是否加入到小云店仓库中？</text>
+  <button bindtap='copyGoodsYes'>确定</button>
+</view>
+</mes>
+ <!--未开通小云店-->
+<mes
+  show="{{openStore}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view class='tip-v'>
+  <text>您还未申请小云店哦？</text>
+  <view >开通小云店可享一键入库功能</view>
+  <button bindtap='openStore'>我要开店</button>
+</view>
+</mes>
 <view class="goods-ser">
   <navigator url="../../page/serStatus/serStatus" style='width:80%'>
     <input placeholder="搜索店铺内商品" placeholder-class='pre-input' disabled='disabled' bindconfirm="searchBtn" value="{{value}}" />
@@ -96,6 +117,7 @@
 <view class='add-firend add-firend2' wx:if='{{limitShow==3}}'><view>友</view>已成商友，现可查看批发价！</view>
 <!-- <view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view> -->
 <view class="swiper-tab" id='swiper-tab'>
+  <!-- <form class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" bind:submit="swichNav" data-current="0"   report-submit="true"> <button formType="submit">综合</button><view></view></form> -->
   <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
     <view></view>
   </view>
@@ -142,7 +164,7 @@
               <text wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text>
               <image wx:if='{{limitShow==1}}' src='/image/wh.png'></image>
               <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
-                <!-- <image wx:if='{{limitShow==3}}' class='h-img h-img1' data-id='{{item.id}}' src="/image/closeS.png" /> -->
+                <!-- <image wx:if='{{limitShow==3}}' bindtap='copyGoods' class='h-img h-img1' data-id='{{item.id}}' src="/image/closeS.png" /> -->
             </view>
           </view>
         </view>
