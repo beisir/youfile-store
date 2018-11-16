@@ -1,10 +1,12 @@
 {
   "pages":[
-    "pages/page/home/home",
+    "pages/page/user/user",
+    
     "pages/cloudOrder/cloudPay/cloudPay",
+    
+    "pages/page/home/home",
     "pages/admin/status/status",
     "pages/page/orderSuccess/orderSuccess",
-    "pages/page/user/user",
     "pages/cloudOrder/myOrder/myOrder",
     "pages/page/order/order",
     "pages/role/allOrder/allOrder",
