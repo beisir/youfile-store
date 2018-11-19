@@ -78,8 +78,8 @@ Page({
     hasUser: false,
     limitShow:1,
     indexEmpty: true,
+    showCloud: false,
   },
-
   showLogin() {
     this.selectComponent("#login").showPage();
   },
@@ -90,6 +90,16 @@ Page({
           user: res.obj,
           hasUser: true
         })
+        //小云点订单列表
+        if (this.data.user.id == "cbced730cc43cead0592fbdd5ef10f99") {
+          this.setData({
+            showCloud: true
+          })
+        }else{
+          this.setData({
+            showCloud: false
+          })
+        }
       }else{
         this.setData({
           user: "",

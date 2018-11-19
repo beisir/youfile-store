@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/page/user/user",
     "pages/page/home/home",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
@@ -8,7 +9,6 @@
     "pages/businessFriend/merchant/index/index",
     "pages/admin/spec/spec",
     "pages/page/orderSuccess/orderSuccess",
-    "pages/page/user/user",
     "pages/cloudOrder/myOrder/myOrder",
     "pages/page/order/order",
     "pages/role/allOrder/allOrder",
