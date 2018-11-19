@@ -611,6 +611,9 @@ Page({
       }
       goodsImageVOList.push({ imageUrl: pics[i].replace(this.data.baseUrl, '') })
     }
+    if (skuListAll.length == 0) {
+      skuListAll = null
+    }
     var goodsVO = {
       "categoryCode": this.data.categoryCode,
       "customCategoryCode": this.data.categoryCustomCode,

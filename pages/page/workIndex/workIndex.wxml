@@ -2,7 +2,7 @@
 <view class='wk-cont'>
   <view class='wk-title'>
     <text>今日收入（元）</text>
-    <view>{{todaySaleNum==null?0:todaySaleNum}}</view>
+    <view>{{todaySaleNum==null?0.00:todaySaleNum}}</view>
     <image mode='widthFix' bindtap='goDerm' src='/image/xcx2.png'></image>
   </view>
   <!-- ../follow/follow -->

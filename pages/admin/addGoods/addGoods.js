@@ -514,8 +514,9 @@ Page({
       if (!Api.isEmpty(stockNum)) {
         Api.showToast("商品库存不能为零！")
         return;
-      }
+      } 
     }
+
     var goodsVO =  {
       "categoryCode": this.data.categoryCode,
       "customCategoryCode": this.data.categoryCustomCode,

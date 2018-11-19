@@ -38,7 +38,7 @@ Page({
             phone: obj.phone == null ? '' : obj.phone,
             headPic:obj.headPic,
             nickName: obj.nickName == null ? '' : obj.nickName,
-            name: obj.name == null ? '' : obj.name,
+            name: obj.remark == null ? '' : obj.remark,
             wechart: obj.wechart == null ? '' : obj.wechart,
           })
         }

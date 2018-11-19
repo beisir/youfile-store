@@ -71,6 +71,7 @@ Page({
     newSkuOnlyIndex:0,
     skuArrTwo: [],
     disLike:false,
+    stockNumHide:false,
     saleBatchNumGoods:0,
     newSkuArrTwo:[],
     nameTwo:'',
@@ -210,7 +211,12 @@ Page({
   //选择规格
   showAlert:function(){
     var that = this,
-      limitShow = this.data.limitShow
+      limitShow = this.data.limitShow,
+      stockNumHide = this.data.stockNumHide
+    if (stockNumHide){
+      Api.showToast("该商品已售罄！")
+      return
+    }
     if (limitShow==2){
       Api.showToast("不能购买自己店铺的东西哦！")
       return
@@ -516,13 +522,12 @@ Page({
     }
    
     if(goodsSpecificationVOList.length>0){
+      if (goodsSkuVOList.length==0){
+        Api.showToast("该属性异常，请联系客服！")
+        return
+      }
       if (skuCode==''){
-        wx.showToast({
-          title: '请选择商品属性',
-          icon: 'none',
-          duration: 1000,
-          mask: true
-        })
+        Api.showToast("请选择商品属性!")
         return
       }
     }else{
@@ -576,6 +581,7 @@ Page({
     var specFirst = this.data.goodsSpecificationVOList[0].goodsSpecificationValueVOList,
       moreCode = this.data.moreCode,
       goodsId = this.data.goodsId,
+      goodsSkuVOList = this.data.goodsSkuVOList,
       spectArrDifference = this.data.spectArrDifference,
       goodsSpecificationVOList = this.data.goodsSpecificationVOList,
       newArr=[],
@@ -592,6 +598,10 @@ Page({
       }
     }
     if (goodsSpecificationVOList.length>0){
+      if (goodsSkuVOList.length == 0) {
+        Api.showToast("该属性异常，请联系客服！")
+        return
+      }
       if(newArr.length==0){
         wx.showToast({
           title: '请选择商品属性',
@@ -745,6 +755,11 @@ Page({
   },
   addCount:function(){
     let num=this.data.numbers
+    var stockNum = this.data.stockNum
+    if (num >= stockNum){
+      Api.showToast("超过购买数量！")
+      return 
+    }
     num=num+1
     this.setData({
       numbers:num,
@@ -782,7 +797,12 @@ Page({
         if(spectArrDifference[i].newSkuArrTwo[index].num == undefined){
           spectArrDifference[i].newSkuArrTwo[index].num=0
         }
-        spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num+1
+        if (spectArrDifference[i].newSkuArrTwo[index].num>=spectArrDifference[i].newSkuArrTwo[index].stockNum){
+          Api.showToast("超过购买数量！")
+          return 
+        }else{
+          spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num + 1
+        }
       }
     }
     if (this.data.newSkuOnly) {
@@ -1100,6 +1120,12 @@ Page({
         var favoriteNum=0
         if (store.favoriteNum.obj){
           favoriteNum = store.favoriteNum.obj
+        }
+        var stockNum = obj.stockNum
+        if (stockNum==0){
+          _this.setData({
+            stockNumHide:true
+          })
         }
         wx.setStorageSync("storeId", obj.storeId)
         _this.setData({
