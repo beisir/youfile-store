@@ -1,4 +1,5 @@
 import util from '../../../utils/util.js'
+import Api from '../../../utils/api.js'
 Page({
 
   /**
@@ -47,13 +48,6 @@ Page({
       goodsSkuVOList = JSON.parse(options.modeList)
       for (var i = 0; i < goodsSkuVOList.length; i++) {
         goodsSkuVOList[i]["id"] = i + '1' + i
-        // for (var j = 0; j < skuListAll.length; j++) {
-          // if (goodsSkuVOList[i].specValueCodeList.sort().toString() == skuListAll[j].specValueCodeList.sort().toString()) {
-          //   skuListAll[j].sellPrice = goodsSkuVOList[i].sellPrice
-          //   skuListAll[j].wholesalePrice = goodsSkuVOList[i].wholesalePrice
-          //   skuListAll[j].stockNum = goodsSkuVOList[i].stockNum
-          // }
-        // }
       }
       _this.setData({
         skuListAll: goodsSkuVOList
@@ -68,7 +62,12 @@ Page({
     for (var j = 0; j < skuListAll.length; j++) {
       if (id == skuListAll[j].id){
         if (name =="stockNum"){
-          skuListAll[j][name] = parseInt(val)
+          if(val==0){
+            Api.showToast("输入有效的库存数量!")
+            skuListAll[j][name]=''
+          }else{
+            skuListAll[j][name] = parseInt(val)
+          }
         }else{
           skuListAll[j][name] = (util.newVal(val)).substring(0, 10)
         }
@@ -86,6 +85,14 @@ Page({
       data: 1
     })
   },
+  isEmpty:function(val,mes){
+    if (Api.isEmpty(val)){
+      return true
+    }else{
+      Api.showToast(mes)
+      return false
+    }
+  },
   setFun:function(e){
     var skuNum = 0,
       skuListAll = this.data.skuListAll
@@ -96,8 +103,20 @@ Page({
       // delete skuListAll[i].specValueName
       delete skuListAll[i].id
       // delete skuListAll[i].specValueCode
-      if (skuListAll[i].stockNum!=''){
+      if(!this.isEmpty(skuListAll[i].wholesalePrice, "批发价不能为空!")){
+        return
+      }
+      if (isNaN(skuListAll[i].stockNum)){
+        Api.showToast("库存不能为空!")
+        return
+      }
+      if (!this.isEmpty(skuListAll[i].stockNum, "库存不能为空!")) {
+        return
+      }else{
         skuNum += parseInt(skuListAll[i].stockNum)
+      }
+      if (!this.isEmpty(skuListAll[i].sellPrice, "零售价不能为空!")) {
+        return
       }
     }
     prevPage.setData({

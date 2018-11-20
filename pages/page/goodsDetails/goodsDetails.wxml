@@ -99,6 +99,7 @@
       <view>{{store.storeName}}</view>
       <view class='gd-dp-text' wx:if='{{sdescription!=""}}'>{{sdescription}}</view>
   </view>
+<view wx:if='{{stockNumHide}}' class='no_stock'>商品已经卖光了~看看别的吧</view>
 <view class='gd_bottom'>
     <view class='gd_b_left'>
         <view>
@@ -117,10 +118,10 @@
           进货车
         </view>
     </view>
-    <view class='gd_b_right' wx:if='{{limitShow!=3}}' bindtap='showAlert'>
+    <view class='gd_b_right {{stockNumHide?"no-cart":""}}' wx:if='{{limitShow!=3}}' bindtap='showAlert'>
           加入购物车
     </view>
-    <view class='gd_b_right' wx:if='{{limitShow==3}}' bindtap='showAlert'>
+    <view class='gd_b_right {{stockNumHide?"no-cart":""}}' wx:if='{{limitShow==3}}' bindtap='showAlert'>
        <view>
           立即进货
         </view>

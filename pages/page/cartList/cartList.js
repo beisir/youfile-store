@@ -539,7 +539,6 @@ Page({
     var detailList = this.data.detailList;// 获取购物车列表
     for (var i = 0; i < detailList.length; i++) { 
       if (detailList[i].selected) {
-        console.log(detailList)
         if (limitShow==3){
           saleBatchGoodsNum = detailList[i].saleBatchNum
           if (!Api.isEmpty(saleBatchGoodsNum)) {
