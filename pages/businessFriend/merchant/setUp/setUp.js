@@ -72,7 +72,7 @@ Page({
   },
   changeApi: function (index){
     var _this=this
-    Api.adminAddUser(index)
+    Api.adminAddUser({ bfPermission:index})
       .then(res => {
         _this.getSet()
       })

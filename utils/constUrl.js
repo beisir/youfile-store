@@ -90,9 +90,9 @@ export const purchaserListUrl='/admin/merchantpurchaser/purchaserlist'
 export const remakInfoUrl ='/admin/merchantpurchaser/{{storeId}}/purchaserinfo/{{purchaserUserId}}'
 export const apiSetUserUrl='/api/user/set'
 export const apiAddUserUrl='/api/user/set/bfpripermission'
-export const adminSetUserUrl='/api/user/set'
+export const adminSetUserUrl ='/admin/merchantset/set'
 export const isFriendStoreUrl='/admin/purchasermerchant/{{storeId}}/merchant'
-export const adminAddUserUrl = '/api/user/set/bfpripermission'
+export const adminAddUserUrl = '/admin/merchantset'
 // 退出
 export const quitUrl = "/oauth/authentication/removetoken"
 export const updataPwdUrl = "/oauth/authentication/changepassword"

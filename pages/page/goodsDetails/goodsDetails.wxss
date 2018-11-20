@@ -115,13 +115,12 @@
 .lt-weui-bottom>view:nth-child(1){border-right:2rpx solid #F3F3F3}
 .weui-bottom view>view{width:auto}
 .lt-tr1 .lt-add-cart,.lt-add-cart .lt-num,.lt-tr1 .lt-num{background:#FAFAFA;border:2rpx solid #E1E1E1;position:relative;overflow:hidden}
-.
 .lt-tr1 .lt-num input{position:absolute}
 .lt-add-cart input{position:absolute;background:#fff}
 .lt-tr1 .lt-num{border-top:0;border-bottom:0;color:#333}
 .new-man{height:60rpx;line-height:60rpx;background:#CCAA77;color:#fff;text-align:center;font-size:24rpx;position:absolute;width:100%;top:-59rpx}
 .new-man text{font-size:30rpx}
-.gd-gg .gd-view .new-red{height:40rpx;width:40rpx;border-radius:50%;color:#fff;background:#F55353;border:2rpx solid #fff;position:absolute;top:-20rpx;right:-20rpx;line-height:40rpx}
+.gd-gg .gd-view .new-red{height:40rpx;width:40rpx;border-radius:50%;color:#fff;background:#F55353;border:2rpx solid #fff;position:absolute;top:-20rpx;right:-20rpx;line-height:40rpx;font-size: 24rpx;}
 .lt-weui-bottom1 view:last-child{color:#CCAA77;background:none;position:relative;width:57%}
 .lt-weui-bottom1>view{width:40%}
 .lt-weui-bottom1 view>text{left:70rpx}

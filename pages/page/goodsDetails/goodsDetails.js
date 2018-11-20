@@ -809,6 +809,7 @@ Page({
       for (var i = 0; i < goodsSpecificationVOList.length;i++){
         for (var j = 0; j < spectArrDifference.length;j++){
           if ((spectArrDifference[j].newSkuArrTwo[0].specValueCodeList).indexOf(goodsSpecificationVOList[i].specValueCode) != -1) {
+            console.log(goodsSpecificationVOList[i].stockNum)
             goodsSpecificationVOList[i].num = spectArrDifference[j].newSkuArrTwo[0].num
           }
         }
@@ -998,8 +999,14 @@ Page({
       }
     }
     for (let i = 0; i < newSkuArrTwo.length; i++) {
-      newSkuArrTwo[i].num = newSkuArrTwo[i].num + 1
-      total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+      if (newSkuArrTwo[i].num >=newSkuArrTwo[i].stockNum){
+        newSkuArrTwo[i].num = newSkuArrTwo[i].stockNum
+        total += newSkuArrTwo[i].num* newSkuArrTwo[i].sellPrice; 
+      }else{
+        newSkuArrTwo[i].num = newSkuArrTwo[i].num + 1
+        total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice; 
+      }
+      
     }
     spectArrDifference[index].newSkuArrTwo = newSkuArrTwo
     this.setData({
@@ -1026,7 +1033,13 @@ Page({
       goodsSpecificationVOList[current].num = value
         for (var j = 0; j < spectArrDifference.length; j++) {
           if ((spectArrDifference[j].newSkuArrTwo[0].specValueCodeList).indexOf(goodsSpecificationVOList[current].specValueCode) != -1) {
-             spectArrDifference[j].newSkuArrTwo[0].num=value
+            if (value >= spectArrDifference[j].newSkuArrTwo[0].stockNum) {
+              value = spectArrDifference[j].newSkuArrTwo[0].stockNum
+              spectArrDifference[j].newSkuArrTwo[0].num = value
+              Api.showToast("超过购买数量！")
+            } else {
+              spectArrDifference[j].newSkuArrTwo[0].num= value
+            }
           }
         }
         goodsSpecificationVOListNew[0].goodsSpecificationValueVOList = goodsSpecificationVOList
@@ -1036,7 +1049,15 @@ Page({
       })
     }else{
       for (let i = 0; i < spectArrDifference.length; i++) {
-        spectArrDifference[i].newSkuArrTwo[index].num = value
+        if (spectArrDifference[i].code == code) {
+          if (value >= spectArrDifference[i].newSkuArrTwo[index].stockNum) {
+            value = spectArrDifference[i].newSkuArrTwo[index].stockNum
+            spectArrDifference[i].newSkuArrTwo[index].num = value
+            Api.showToast("超过购买数量！")
+          } else {
+            spectArrDifference[i].newSkuArrTwo[index].num = value
+          }
+        }
       }
       this.setData({
         spectArrDifference: spectArrDifference
