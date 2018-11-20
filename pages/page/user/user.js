@@ -103,13 +103,15 @@ Page({
       }else{
         this.setData({
           user: "",
-          hasUser: false
+          hasUser: false,
+          showCloud: false
         })
       }
     }).catch(e => {
       this.setData({
         user: "",
-        hasUser: false
+        hasUser: false,
+        showCloud: false
       })
     })
   },
