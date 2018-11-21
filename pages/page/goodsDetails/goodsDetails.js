@@ -757,7 +757,7 @@ Page({
     let num=this.data.numbers
     var stockNum = this.data.stockNum
     if (num >= stockNum){
-      Api.showToast("超过购买数量！")
+      Api.showToast("库存不足！")
       return 
     }
     num=num+1
@@ -798,7 +798,7 @@ Page({
           spectArrDifference[i].newSkuArrTwo[index].num=0
         }
         if (spectArrDifference[i].newSkuArrTwo[index].num>=spectArrDifference[i].newSkuArrTwo[index].stockNum){
-          Api.showToast("超过购买数量！")
+          Api.showToast("库存不足！")
           return 
         }else{
           spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num + 1
@@ -1036,7 +1036,7 @@ Page({
             if (value >= spectArrDifference[j].newSkuArrTwo[0].stockNum) {
               value = spectArrDifference[j].newSkuArrTwo[0].stockNum
               spectArrDifference[j].newSkuArrTwo[0].num = value
-              Api.showToast("超过购买数量！")
+              Api.showToast("库存不足！")
             } else {
               spectArrDifference[j].newSkuArrTwo[0].num= value
             }
@@ -1053,7 +1053,7 @@ Page({
           if (value >= spectArrDifference[i].newSkuArrTwo[index].stockNum) {
             value = spectArrDifference[i].newSkuArrTwo[index].stockNum
             spectArrDifference[i].newSkuArrTwo[index].num = value
-            Api.showToast("超过购买数量！")
+            Api.showToast("库存不足！")
           } else {
             spectArrDifference[i].newSkuArrTwo[index].num = value
           }
