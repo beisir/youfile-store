@@ -190,7 +190,7 @@
                       <view>
                         <view class="lt-add-cart">
                           <view class="lt-down" data-index='{{index}}' bindtap="minusCount1"><image  src="/image/jian.png"></image></view>
-                          <view class="lt-num"><input value='{{item.num}}' data-code='{{pItem.code}}'  data-index='{{index}}' bindinput='changeNum'></input></view>
+                          <view class="lt-num"><input value='{{item.num}}' type='number' data-code='{{pItem.code}}'  data-index='{{index}}' bindinput='changeNum'></input></view>
                           <view class="lt-add"  data-index='{{index}}' bindtap="addCount1"><image  src="/image/lt-a.png"></image></view>
                         </view>
                     </view>
@@ -386,7 +386,7 @@
                       <view>
                         <view class="lt-add-cart">
                           <view class="lt-down" data-index='{{index}}' bindtap="minusCount1"><image  src="/image/jian.png"></image></view>
-                          <view class="lt-num"><input value='{{item.num}}' data-code='{{pItem.code}}'  data-index='{{index}}' bindinput='changeNum'></input></view>
+                          <view class="lt-num"><input value='{{item.num}}' type='number' data-code='{{pItem.code}}'  data-index='{{index}}' bindinput='changeNum'></input></view>
                           <view class="lt-add"  data-index='{{index}}' bindtap="addCount1"><image  src="/image/lt-a.png"></image></view>
                         </view>
                     </view>

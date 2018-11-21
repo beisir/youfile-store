@@ -1,15 +1,15 @@
 {
   "pages":[
-    "pages/page/user/user",
-    "pages/cloudOrder/myOrder/myOrder",    
     "pages/page/home/home",
+    "pages/page/cartList/cartList",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
-    "pages/page/cartList/cartList",
     "pages/cloudOrder/cloudPay/cloudPay",
     "pages/businessFriend/merchant/index/index",
     "pages/admin/spec/spec",
     "pages/page/orderSuccess/orderSuccess",
+    "pages/page/user/user",
+    "pages/cloudOrder/myOrder/myOrder",
     "pages/page/order/order",
     "pages/role/allOrder/allOrder",
     "pages/payment/uploadPayment/uploadPayment",

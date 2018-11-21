@@ -576,7 +576,7 @@ function apiAddUser(data) {
   return app.http.putRequest(apiAddUserUrl+"?bfPripermission="+data)
 }
 function adminAddUser(data) {
-  return app.http.putRequest(adminAddUserUrl + "?bfPripermission=" + data)
+  return app.http.putRequest(adminAddUserUrl,data)
 }
 // 退出登录
 function quit(data){
