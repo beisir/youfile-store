@@ -9,17 +9,37 @@ Page({
   },
 
   getData() {
-    app.http.getRequest("/api/yunstore/order/user/page/orderstatus/all").then(res => {
-      // wx.showToast({
-      //   title: res.message,
-      //   icon:'none'
-      // })
-      if (res.success) {
+    console.log(wx.getStorageInfoSync("access_token"));
+    let wo = wx.getStorageSync("access_token");
+    if(!wo){
+      wx.showToast({
+        title: '请先登录',
+        icon:'none'
+      })
+      return
+    }
+    wx.request({
+      url: 'https://dev-mall.youlife.me/api/yunstore/order/user/page/orderstatus/all',
+      header:{
+        Authorization: "bearer "+wo
+      },
+      success: (res)=>{
         this.setData({
-          msg: res.obj.result
+          list: res.data.obj.result
         })
       }
     })
+    // app.http.getRequest("/api/yunstore/order/user/page/orderstatus/all").then(res => {
+    //   // wx.showToast({
+    //   //   title: res.message,
+    //   //   icon:'none'
+    //   // })
+    //   if (res.success) {
+    //     this.setData({
+    //       msg: res.obj.result
+    //     })
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面加载

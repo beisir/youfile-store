@@ -84,7 +84,7 @@
   </view>
 </view>
 
-<!-- <view class='weui-back' wx:if="{{showCloud}}">
+<view class='weui-back' wx:if="{{showCloud}}">
     <navigator class='weui-cell weui-cell_access' url='../../cloudOrder/myOrder/myOrder'>
       <image src='/image/cloudOrder.png' class='user-img'></image>
       <view class='weui-cell__bd'>
@@ -94,4 +94,4 @@
         <image src="/image/icl.png"></image>
       </view>
     </navigator>
-  </view> -->
+  </view>

@@ -101,7 +101,7 @@
           <navigator>
             <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </navigator>
-          <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
+          <view class='ct-text ct-text1'>￥{{item.orderDetails.unitPrice}}
             <view>x {{item.orderDetails.num}}</view>
           </view>
           <view class='ct-title ct-title1'>{{item.goodsName}}</view>

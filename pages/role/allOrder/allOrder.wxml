@@ -219,7 +219,7 @@
         <view class="tr" wx:for="{{good.orderDetails}}" wx:key="{{index}}">
           <view class="td">{{item.goodsDesc}}</view>
           <view class="td">{{item.num}}件</view>
-          <view class="td">￥{{item.wholesalePrice}}</view>
+          <view class="td">￥{{item.unitPrice}}</view>
         </view>
       </view>
 
@@ -232,7 +232,7 @@
       <view class="cart-list" wx:for="{{order.goodsInfos}}" wx:key="{{index}}">
         <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.goodsId}}'>
           <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
-          <view class='ct-text ct-text1'>￥{{item.orderDetails.sellPrice}}
+          <view class='ct-text ct-text1'>￥{{item.orderDetails.unitPrice}}
             <view>x {{item.orderDetails.num}}</view>
           </view>
           <view class='ct-title ct-title1'>{{item.goodsName}}</view>
