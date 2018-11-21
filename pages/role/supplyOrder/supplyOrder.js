@@ -360,6 +360,20 @@ Page({
       url
     })
   },
+  initListType(type){
+    let list = this.data.nav;
+    let currentIndex = 2;
+    list.forEach((i,index)=>{
+      if(i == type){
+        currentIndex = index
+      }
+    })
+    this.setData({
+      navindex: currentIndex,
+      whitch: type,
+      showList: []
+    })
+  },
   /**
   * 生命周期函数--监听页面加载
   */
@@ -368,6 +382,9 @@ Page({
       storeId: API.getThisStoreId(),   //列表请求
       baseUrl: app.globalData.imageUrl      //图片
     })
+    if(options.navType){
+      this.initListType(options.navType)
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
