@@ -1,3 +1,4 @@
+<wxs src="../../../public/filter.wxs" module="filter" />
 <!-- 确认收款 -->
 <mes show="{{sureModal}}">
   <view>
@@ -40,9 +41,12 @@
 <!-- 改价 -->
 <mes show="{{changeModal}}">
   <view class='modal-box'>
-    <text>修改价格</text>
-    <view class='inputCon'>
-      <input maxlength='9' type='digit' value="{{changeMoney}}" class='alertInput' placeholder='请输入修改后价格' data-type='change' bindinput='watchInput'></input>
+    <text>修改订单价格</text>
+    <view class='title-line'></view>
+    <view class='money-layer-box '>
+      <view>订单原价：<text style='font-size:36rpx;' class='gold-money'>{{filter.filterMoney(thisOrderMoney)}}</text>元</view>
+      <view class='flex-center padding-set'>订单金额改价：<input class='layer-money-input gold-money' maxlength='9' type='digit' value='{{changeMoney}}' data-type='change' bindinput='watchInput'></input>元</view>
+      <view>差额：{{filter.filterMoney(thisOrderMoney)}} <text class='gold-money'> {{moneyIcon}} {{filter.plusNum(filter.filterMoney(thisOrderMoney-changeMoney))}}</text> = {{showChangeMoney}}元</view>
     </view>
     <button bindtap='sureChange'>确定</button>
   </view>

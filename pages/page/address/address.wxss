@@ -38,7 +38,10 @@
 .cart-box{
   background: #fff;
 }
-
+.flex-tel{
+  display: flex;
+  align-items: center;
+}
 .ad-tel{
   font-size: 26rpx;
   color: #999;

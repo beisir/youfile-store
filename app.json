@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/role/order/order",
     "pages/page/cartList/cartList",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
@@ -17,7 +18,6 @@
     "pages/page/invoice/invoice",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/index/index",
-    "pages/role/order/order",
     "pages/businessFriend/merchant/list/list",
     "pages/page/newAddress/newAddress",
     "pages/admin/editGoods/editGoods",

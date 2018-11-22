@@ -7,9 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    currentTab: 0,
-    hiddenSelt: false,
-    hiddenSend: true,
+    currentTab: 1,
+    hiddenSelt: true,
+    hiddenSend: false,
     address:"",  //地址
     invoice:"",  //发票
     phone:"", //电话

@@ -115,14 +115,31 @@ Page({
     let type = e.currentTarget.dataset.type;
     let key = "";
     switch (type) {
-      case "change": key = 'changeMoney'; break;
+      case "change": 
+        key = 'changeMoney';
+        let nowMoney = Number(e.detail.value),
+          order = Number(this.data.thisOrderMoney),
+            moneyIcon = "-";
+        if (nowMoney > order){
+          moneyIcon = "+" 
+        }
+        this.setData({
+          moneyIcon: moneyIcon
+        })
+        break;
       case "goodCode" : key = "getGoodCode";break;
       case "exCom": key = "expressageCom";break;
       case "exCode": key = "expressageCode"; break;
     }
 
+    let val = e.detail.value
+    if (key =="changeMoney"){
+      this.setData({
+        showChangeMoney: Number(val).toFixed(2)
+      })
+    }
     this.setData({
-      [key]: e.detail.value
+      [key]: val
     })
   },
   showModal(e){
@@ -134,7 +151,10 @@ Page({
         obj = {
           changeModal: true,
           changeNum: num,
-          changeMoney: e.currentTarget.dataset.change,
+          changeMoney: 0,
+          showChangeMoney:0,
+          moneyIcon:"-",
+          thisOrderMoney: e.currentTarget.dataset.change
         }; break;
       case "goodCode": 
         obj = {
@@ -190,7 +210,7 @@ Page({
   sureChange(){
     let num = this.data.changeNum;
     let money = this.data.changeMoney;
-    if (!money || money < 0){
+    if (!money || money <= 0){
       wx.showToast({
         title: '请输入金额',
         icon: 'none'
