@@ -7,7 +7,7 @@
 .clo{
   border-bottom: 2rpx solid #EBEBEB;
   padding-top:60rpx;padding-bottom: 50rpx;
-  width: 500rpx;margin:0 auto;
+  width: 500rpx;margin:0 auto 20rpx;
 }
 .slot{
   color: #333333;

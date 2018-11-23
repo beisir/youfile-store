@@ -21,11 +21,11 @@
 </mes>
 <!-- 关闭订单 -->
 <clo show="{{cancelModal}}" bind:sureSelectArea="sureSelectAreaListener">
-  <view wx:for='{{reson}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
+  <view class='layer-reason-item' wx:for='{{reson}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
     <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select" />
     <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
   </view>
-  <button bindtap='sureCancel'>确定</button>
+  <button class='layer-reason-btn' bindtap='sureCancel'>确定</button>
 </clo>
 <!-- 我要发货 -->
 <mes show="{{expressage}}" bind:sureSelectArea="sureSelectAreaListener">
@@ -168,7 +168,10 @@
     <image src="/image/ad.png"></image>
     <text class='np-text'>{{order.consigneeInfo.userPhone}}</text>
     <view>收货人：{{order.consigneeInfo.userName}}</view>
-    <text>收货地址：{{order.consigneeInfo.detailAddress}}</text>
+    <view class='address-box' style='padding:0;'>
+      <view class='address-title'>收货地址：</view>
+      <view class='address-inner'>{{order.consigneeInfo.detailAddress}}</view>
+    </view>
   </view>
 
   <view wx:else class='np-view {{order.userMemo?"":"no-border"}}'>
@@ -196,20 +199,19 @@
     
 </view>
 <view class='cf-cont'>
-    <view bindtap='toHome' class='c-title'>
-      <image src="/image/12.png"></image> {{order.storeInfo.storeName}}
-      <image class='itimg' src="/image/icl.png"></image>
+    <view class='c-title {{orderType=="list"?"border-bottom":""}}'>
+      <image src="/image/order-per.png"></image> {{order.userInfo.nickName}}
       <view wx:if="{{self=='true'}}" class='order-zt'>自提</view>
     </view>
   <!-- 出货单商品 -->
   <view wx:if="{{orderType=='list'}}">
     <view class="cart-box" wx:for="{{order.goodsInfos}}" wx:for-item="good" wx:key="{{index}}">
-      <view class="cart-list">
+      <view class="cart-list" style='background:#fff;'>
         <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{good.goodsId}}'>
           <image class="cart-thumb" src="{{baseUrl+good.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           <view class='ct-title ct-title1'>{{good.goodsName}}</view>
-          <view class="heji">共
-          <text>{{order.num}}</text>件商品</view>
+          <view class="heji">共 
+          <text style='font-size:26rpx;'>{{order.num}} 件</text>商品</view>
         </navigator>
       </view>
 
@@ -239,7 +241,7 @@
           <view class='ct-text ct-text1'>￥{{item.orderDetails.unitPrice}}
             <view>x {{item.orderDetails.num}}</view>
           </view>
-          <view class='ct-title ct-title1'>{{item.goodsName}}</view>
+          <view class='ct-title ct-title1' style="width:360rpx;">{{item.goodsName}}</view>
           <text class="cart-pro-name">规格：{{item.orderDetails.goodsDesc}}</text>
         </navigator>
       </view>
@@ -249,7 +251,7 @@
 </view>
 
 <!-- 显示字段 -->
-<view class='np-order'>
+<view class='np-order' style='margin-bottom:0;'>
   <view>{{orderName}}号
     <text bindtap='copyCode'>{{order.orderNumber}}</text>
   </view>
@@ -291,25 +293,28 @@
   </view>
   <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
-      <text>{{order.receiptInfo.invoiceTitle}}</text>
+      <text>{{order.receiptInfo.invoiceTitle?order.receiptInfo.invoiceTitle:""}}</text>
     </view>
     <view>纳税人识别号
-      <text>{{order.receiptInfo.identificationNumber}}</text>
+      <text>{{order.receiptInfo.identificationNumber?order.receiptInfo.identificationNumber:""}}</text>
     </view>
     <block wx:if="{{order.receiptInfo.invoiceCategory=='增值税专用发票'}}">
       <view>注册地址
-        <text>{{order.receiptInfo.registeredAddress}}</text>
+        <text>{{order.receiptInfo.registeredAddress?order.receiptInfo.registeredAddress:""}}</text>
       </view>
       <view>注册电话
-        <text>{{order.receiptInfo.registererMobile}}</text>
+        <text>{{order.receiptInfo.registererMobile?order.receiptInfo.registererMobile:""}}</text>
       </view>
       <view>开户银行
-        <text>{{order.receiptInfo.depositBank}}</text>
+        <text>{{order.receiptInfo.depositBank?order.receiptInfo.depositBank:""}}</text>
       </view>
       <view>开户账号
-        <text>{{order.receiptInfo.depositBankNumber}}</text>
+        <text>{{order.receiptInfo.depositBankNumber?order.receiptInfo.depositBankNumber:""}}</text>
       </view>
     </block>
+  </view>
+  <view style='margin:0;'>支付方式
+    <text>其他支付方式</text>
   </view>
 </view>
 
@@ -331,7 +336,7 @@
 
 <view class='no-child'>
   <view class='flex-center'>备注信息 </view>
-  <view class='textarea {{order.remark?"":"no-text"}}'>{{order.remark?order.remark:"140字以内..."}}</view>
+  <view class='textarea {{order.remark?"":"no-text"}} like-textarea'>{{order.remark?order.remark:"140字以内..."}}</view>
   <view style="text-align:right;"><text class='add-tip-button' data-type="tip" bindtap='showModal'>添加备注</text></view>
   <!-- <textarea value='{{order.remark?order.remark:""}}' bindconfirm='saveRemark' show-confirm-bar='true' maxlength='140' class='textarea' placeholder='140字以内'></textarea> -->
 </view>

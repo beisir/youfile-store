@@ -11,7 +11,8 @@ Page({
     reson: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
     cancelIndex: 0,
     orderName: "订单",
-    timeOnce:true
+    timeOnce:true,
+    remark: "啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦啊实打实大苏打撒旦"
   },
 
   toHome(){
@@ -274,6 +275,13 @@ Page({
   // 保存备注
   saveRemark(e) {
     let val = this.data.tipText;
+    if(!val){
+      wx.showToast({
+        title: '请修改备注',
+        icon: 'none'
+      })
+      return
+    }
     API.addRemark({
       orderNumber: this.data.num,
       remark: val

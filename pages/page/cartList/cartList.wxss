@@ -155,7 +155,7 @@
   position: absolute;
   top: 0;
   right: 260rpx;
-  font-size: 28rpx;
+  font-size: 30rpx;
   line-height: 1.4;
   text-align: right;
   padding-top: 14rpx;

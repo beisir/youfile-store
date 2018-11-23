@@ -19,7 +19,7 @@
     <text>修改订单价格</text>
     <view class='title-line'></view>
     <view class='money-layer-box '>
-      <view>订单原价：<text style='font-size:36rpx;' class='gold-money'>{{filter.filterMoney(thisOrderMoney)}}</text>元</view>
+      <view>订单原价：<text style='font-size:36rpx;' class='gold-money'>{{filter.filterMoney(thisOrderMoney)}}</text> 元</view>
       <view class='flex-center padding-set'>订单金额改价：<input class='layer-money-input gold-money' maxlength='9' type='digit' value='{{changeMoney}}' data-type='change' bindinput='watchInput'></input>元</view>
       <view>差额：{{filter.filterMoney(thisOrderMoney)}} <text class='gold-money'> {{moneyIcon}} {{filter.plusNum(filter.filterMoney(thisOrderMoney-changeMoney))}}</text> = {{showChangeMoney}}元</view>
     </view>
@@ -52,11 +52,11 @@
 </mes>
 <!-- 取消订单 -->
 <clo show="{{cancelModal}}" bind:sureSelectArea="sureSelectAreaListener">
-  <view wx:for='{{reson}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
+  <view class='layer-reason-item' wx:for='{{reson}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
     <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select" />
     <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
   </view>
-  <button bindtap='sureCancel'>确定</button>
+  <button class='layer-reason-btn' bindtap='sureCancel'>确定</button>
 </clo>
 
 

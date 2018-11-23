@@ -17,7 +17,21 @@ Page({
     sendData:{}, //获取列表传递参数
     orderTitle:"订单"
   },
-
+  //自动获取手机
+  getMobile(){
+    Api.userInfor().then(res=>{
+      if(res.obj.mobile){
+        this.setData({
+          phone: res.obj.mobile
+        })
+      }else{
+        wx.showToast({
+          title: '获取手机号码失败，请您手动填写',
+          icon: 'none'
+        })
+      }
+    })
+  },
   //提交
   submit(){
     let type = this.data.currentTab,
@@ -145,9 +159,19 @@ Page({
   getData(){
     app.http.postRequest("/api/order/store/" + this.data.storeId+"/preorder", this.data.sendData
     ).then((res)=>{
+        //起批量
+        let  conObj = {};       
+        res.obj.goodsWholesaleConfigs.forEach((el,index)=>{
+          if (el.saleBatchNum && el.saleBatchNum>0){
+            conObj[el.goodsId] = el.saleBatchNum
+          }
+        })
+
         this.setData({
           store: res.obj.preOrderStore,
-          goods: res.obj.preOrderGoodsList
+          goods: res.obj.preOrderGoodsList,
+          goodsConfig: conObj,
+          storeConfig: res.obj.storeWholesaleConfig
         })
       this.resetGoods();
     })
@@ -155,10 +179,16 @@ Page({
   //重置goods
   resetGoods(){
     let goods = this.data.goods,
-        price = 0;
+        price = 0,
+        allnum = 0,
+        config = this.data.goodsConfig;
     goods.forEach((el)=>{
       //是否优惠
       let off = el.satisfiedWholesale;
+      //起批量
+      if (config[el.goodsId]){
+        el.goodsConfig = config[el.goodsId];
+      }
 
       //有sku
       if (!el.num && el.preOrderGoodsSkuList){
@@ -175,6 +205,7 @@ Page({
             }
 
             if (!isNaN(thisPrice * item.num)){
+              el.myPrice = thisPrice * item.num;
               price += thisPrice * item.num;
             }
           }
@@ -191,16 +222,32 @@ Page({
           thisPrice = el.sellPrice;
         }
         if (!isNaN(thisPrice * el.num)) {
+          el.myPrice = thisPrice * item.num;
           price += thisPrice * el.num;
         }
       }
+      allnum += el.num;      
     })
 
-    
+    //全场混批设置
+    let storeNum = this.data.storeConfig.saleBatchNum,
+        storeAmount = this.data.storeConfig.saleBatchAmount,
+        pricesatisfy = false,
+        numsatisfy = false;
+
+    if (storeAmount && storeAmount>0 && price > storeAmount){
+      pricesatisfy = true;
+    }
+    if (storeNum && storeNum > 0 && allnum > storeNum){
+      numsatisfy = true;
+    }
 
     this.setData({
       goods,
-      price: price.toFixed(2)
+      price: price.toFixed(2),
+      allnum,
+      numsatisfy,
+      pricesatisfy      
     })
   },
   /**
