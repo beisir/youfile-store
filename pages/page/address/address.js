@@ -192,7 +192,8 @@ Page({
 
       //有sku
       if (!el.num && el.preOrderGoodsSkuList){
-        let num = 0;
+        let num = 0,
+            myprice = 0 ; 
         el.preOrderGoodsSkuList.forEach((item)=>{
           if (item.num){
             num += item.num;
@@ -205,11 +206,12 @@ Page({
             }
 
             if (!isNaN(thisPrice * item.num)){
-              el.myPrice = thisPrice * item.num;
+              myprice += thisPrice * item.num;
               price += thisPrice * item.num;
             }
           }
         })
+        el.myPrice = myprice.toFixed(2);
         el.num = num;
       }
       //没有sku
