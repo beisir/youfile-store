@@ -654,6 +654,7 @@ Page({
           icon: 'none',
           duration: 2000
         })
+        app.globalData.switchStore = true
         _this.goback()
       })
   },

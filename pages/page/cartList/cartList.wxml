@@ -6,8 +6,8 @@
         <view wx:if='{{limitShow==3}}' class='new-c-t'>
          <view wx:if='{{storeAmount!=0 && enjoyCost==true && storeAmount!=0  && differentPrice<0}}'>全场已满{{storeAmount}}元<text>混批</text></view>
          <view wx:if='{{!enjoyCost && !enjoyCostNew}}'><text style='color:#666;border:0' wx:if='{{differentPrice>0}}'>还差<text style='color:red;border:0;margin-left:0'>{{differentPrice}}</text>元全场可享受批发价</text><text>混批</text></view>
-         <view wx:if='{{storeAmount==0 && enjoyCost==true}}'>全场已享受批发价</view>
-         <view wx:if='{{!enjoyCost && enjoyCostNew==true}}'>全场已享受批发价</view>
+         <view wx:if='{{storeAmount==0 && enjoyCost==true}}'>全场已享受批发价<text>混批</text></view>
+         <view wx:if='{{!enjoyCost && enjoyCostNew==true}}'>全场已享受批发价<text>混批</text></view>
          <view wx:if='{{storeAmount!=0 && enjoyCost==true && storeAmount!=0 && differentPrice>0}}'>全场已享受批发价<text>混批</text></view>
         </view>
       </view>
@@ -60,7 +60,7 @@
                       <!-- <view class="delete-box" bindtap="deleteList" data-id='{{record.goodsId}}' data-index="{{index}}">
                       </view> -->
                   </view>
-                  <view class='allNumShow' wx:if="{{item.shoppingCartSkuList.length>1}}">共<text>{{item.num}}</text>件商品 合计:￥<text>{{item.enjoyPrice?item.allGoodsPf:item.allGoodsAmount}}</text></view>
+                  <view class='allNumShow' wx:if="{{item.shoppingCartSkuList.length>1}}">共<text> {{item.num}} 件</text>商品 合计：<text>￥{{item.enjoyPrice?item.allGoodsPf:item.allGoodsAmount}}</text></view>
                   <view class="cc-coun-new" wx:if="{{item.shoppingCartSkuList.length==1}}">
                     <view bindtap="minusCount" data-obj="{{obj}}"  data-index="{{index}}">-</view>
                     <view class='cc-add'>{{item.num}}</view>

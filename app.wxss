@@ -83,7 +83,7 @@ input:focus{padding:0}
 .tr,.td{text-align:center;padding-top:10rpx;padding-bottom:10rpx}
 .tr{font-weight:400}
 .table .tr:first-child{height:50rpx;line-height:30rpx}
-.tr .td:last-child,.heji text{color:#CCAA77}
+.tr .td:last-child,.heji text{color:#CCAA77;font-weight: 600}
 .th{height:30rpx;margin-top:10rpx;border-right:2rpx solid #EEEEEE}
 .tr .th:last-child{border-right:0}
 .ad-top{background:#fff;font-size:34rpx;text-align:center;padding:35rpx 0;color:#DDDDDD}
