@@ -266,7 +266,7 @@
       <text>￥{{order.orderAmount}}</text>
     </view>
     <view>运费类型
-      <text>货到付款</text>
+      <text>{{order.postageinfo.postageType?order.postageinfo.postageType:"邮费到付"}}</text>
     </view>
   </block>
   <view class='np-o-view'>
