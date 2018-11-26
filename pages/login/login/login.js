@@ -156,11 +156,7 @@ Component({
         loginApp.authHandler.loginByUser(this.data.telephone, this.data.password).then(res => {
           this.loginAfter(res);
         }).catch(e => {
-          wx.showToast({
-            title: '账户密码错误',
-            icon: 'none'
-          })
-          console.warn(e);          
+          API.showToast(e.data.message)         
         })
       }
 

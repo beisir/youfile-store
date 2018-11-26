@@ -312,3 +312,10 @@
 .el-size{
   font-size: 26rpx;
 }
+
+.com-name{
+  max-width: 155rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

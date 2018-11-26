@@ -348,7 +348,7 @@
     <text class='os-text'>￥1992.00</text>
   </view> -->
   <view wx:if='{{self=="false"}}'>运费类型
-    <text>货到付款</text>
+    <text>{{order.postageinfo.postageType?order.postageinfo.postageType:"邮费到付"}}</text>
   </view>
   <view class='np-o-view'>
     <!-- 未支付 -->

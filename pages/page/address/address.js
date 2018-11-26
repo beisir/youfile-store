@@ -60,6 +60,9 @@ Page({
       }
       obj.consigneeInfo = add;
       obj.orderType = 2;
+      obj.postageinfo = {
+        postageType: this.data.postType   //邮费
+      }
     }
 
     let goods = this.data.goods;
@@ -88,6 +91,7 @@ Page({
     obj.userMemo = this.data.msg  //留言
     obj.orderGoods = goodsArr;  //商品
     obj.orderCategory = this.data.orderCategory //订单种类
+
    
     Api.supplyOrde(obj).then((res)=>{
       //'../success/success'
@@ -192,7 +196,8 @@ Page({
 
       //有sku
       if (!el.num && el.preOrderGoodsSkuList){
-        let num = 0;
+        let num = 0,
+            myprice = 0 ; 
         el.preOrderGoodsSkuList.forEach((item)=>{
           if (item.num){
             num += item.num;
@@ -205,11 +210,12 @@ Page({
             }
 
             if (!isNaN(thisPrice * item.num)){
-              el.myPrice = thisPrice * item.num;
+              myprice += thisPrice * item.num;
               price += thisPrice * item.num;
             }
           }
         })
+        el.myPrice = myprice.toFixed(2);
         el.num = num;
       }
       //没有sku
@@ -222,7 +228,7 @@ Page({
           thisPrice = el.sellPrice;
         }
         if (!isNaN(thisPrice * el.num)) {
-          el.myPrice = thisPrice * item.num;
+          el.myPrice = thisPrice * el.num;
           price += thisPrice * el.num;
         }
       }
@@ -248,6 +254,18 @@ Page({
       allnum,
       numsatisfy,
       pricesatisfy      
+    })
+  },
+  //获取店铺信息，得到运费类型
+  getStore(){
+    Api.storeIdInfo().then(res=>{
+      let post = res.obj.store[0].store.postageInfo;
+      if(!post){
+        post = "邮费到付";
+      }
+      this.setData({
+        postType : post
+      })
     })
   },
   /**
@@ -294,6 +312,7 @@ Page({
     this.getData();
     this.getDefaultAdress();
 
+    this.getStore();
   },
   swichNav: function (e) {
     var that = this;

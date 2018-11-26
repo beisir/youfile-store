@@ -243,7 +243,7 @@ Page({
     }
     this.setData({
       num: options.num,
-      status: options.status,
+      // status: options.status,
       baseUrl: app.globalData.imageUrl,
       orderType: options.type, //order订单 list进货单
       self: options.self  //是否自提
