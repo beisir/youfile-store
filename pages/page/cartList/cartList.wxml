@@ -31,7 +31,7 @@
                   </view>
                   <view class="cart-pro-name cart-pro-name1"  wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" bindtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record"  wx:key="{{index}}">规格：{{record.skuName}}<image class='down' src="/image/down.png"></image></view>
                    <view  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length>1 && storeNum>0}}' class='man-j'>满<text>{{item.saleBatchNum}}</text>起批<text wx:if='{{item.saleBatchNum-item.num>0 && !item.enjoyPrice}}' style='color:#333;'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum-item.num}}</text>件</text></view>
-                   <view class="cart-pro-name cart-pro-name1 cart-pro-name2" data-name="more"  data-index="{{index}}" wx:if="{{item.shoppingCartSkuList.length>1}}"  bindtap='showAlert'>修改规格/数量<image class='down' src="/image/down.png"></image></view>
+                   <view class="cart-pro-name cart-pro-name1 cart-pro-name2" data-name="more"  data-index="{{index}}" wx:if="{{item.shoppingCartSkuList.length>1}}"  bindtap='showAlert'>修改规格 / 数量 <image class='down' src="/image/down.png"></image> </view>
                   <view class="table"  wx:if="{{item.shoppingCartSkuList.length>1}}" >
                      <view class="tr"  wx:if='{{limitShow!=3}}'>
                           <view class="th">规格</view>
@@ -88,7 +88,7 @@
       </view>
       <view>
           <view class="cart-box">
-          <view  wx:for="{{lostcarts}}" wx:key="{{index}}">
+          <view class='lostcarts-table'  wx:for="{{lostcarts}}" wx:key="{{index}}">
              <view class="cart-list">
                   <image class='noimg' src="/image/no.png"></image>
                   <image class='posimg' src="/image/alert.png"></image>
