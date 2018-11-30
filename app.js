@@ -8,6 +8,7 @@ App({
     if (options.query && options.query.storeId){
       wx.setStora;;dffgeSync("storeId",options.query.storeId)
     }
+    // wx.setStorageSync("storeId", "S1000520")
     // wx.setStorageSync("storeId", "S1000349")
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
@@ -49,7 +50,9 @@ App({
     skin: "normal",
     imageUrl: imageUrl,
     switchStore: false,
-    isFollow: null
+    isFollow: null,
+    projectType:"xpl",
+    userShowTip:false
   },
   http: new http(),
   pageRequest: new pageRequest(),

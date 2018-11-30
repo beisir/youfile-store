@@ -227,6 +227,11 @@ Page({
       wx.makePhoneCall({
         phoneNumber: tel,
       })
+    }else{
+      wx.showToast({
+        title: '卖家未设置电话号码',
+        icon: "none"
+      })
     }
   },
   /**
