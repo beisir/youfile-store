@@ -17,7 +17,7 @@
   <navigator url='../../admin/status/status'>
   <view class='f-item'>
     <image class='s-icon' src='/image/gift.png'></image>
-    <view class='cute'>
+    <view class='cute' style="border-bottom: 1px solid #eee;">
       <text>小云店还没有宝贝，赶快去上传吧</text>
       <image class='more' src='/image/mallr.png'></image>
     </view>

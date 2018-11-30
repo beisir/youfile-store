@@ -309,8 +309,9 @@ Page({
       })
     
   },
-  onLoad: function (options) {
   
+  onLoad: function (options) {
+    
   },
   onShow() {
     this.setData({

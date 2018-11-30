@@ -1,3 +1,4 @@
+<view wx:if="{{initOrder && limitShow == 2}}"><initstroe></initstroe></view>
 <login id="login"></login>
  <!--不是供应商-->
 <mes

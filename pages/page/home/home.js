@@ -398,6 +398,20 @@ Page({
         })
       })    
   },
+  getStore() {
+    Api.storeIdInfo().then(res => {
+      let store = res.obj.store[0].store;
+      if (!store.name) {
+        this.setData({
+          initOrder: true
+        })
+      } else {
+        this.setData({
+          initOrder: false
+        })
+      }
+    })
+  },
   onLoad: function (options) {
     var _this = this
     if (options!=undefined){
@@ -573,6 +587,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
+    this.getStore()    
     if(authHandler.isLogin()){
       var limitShow = this.data.limitShow
       var setlimitShow = wx.getStorageSync("admin")

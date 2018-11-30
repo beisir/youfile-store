@@ -1,10 +1,11 @@
 {
   "pages":[
+    "pages/page/user/user",    
     "pages/page/home/home",
-    "pages/page/user/user",
-    "pages/cloudOrder/congratulation/congratulation",
-    "pages/cloudOrder/myOrder/myOrder",
     "pages/cloudOrder/applyStore/applyStore",
+    "pages/role/supplyVoucher/supplyVoucher",
+    "pages/cloudOrder/congratulation/congratulation",    
+    "pages/cloudOrder/myOrder/myOrder",
     
     
     "pages/page/order/order",
@@ -53,7 +54,6 @@
     "pages/page/details/details",
     "pages/login/register/register",
     "pages/page/allOrder/allOrder",
-    "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
     "pages/page/address/address",
