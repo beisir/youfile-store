@@ -15,10 +15,10 @@
                         <text>{{item.name}}</text>
                     </view>
                     <view class="result-text result-text2">
-                        <text>零售 <text style='color:#CCAA77'>￥{{item.sellPrice}}</text></text>
+                        <text>零售 <text>￥{{item.sellPrice}}</text></text>
                     </view>
                    <view style='padding-left:20rpx;color:#666'>
-                      批发 <text wx:if='{{limitShow!=1}}' >￥{{item.wholesalePrice}}</text>
+                      批发 <text wx:if='{{limitShow!=1}}'  style='color:#CCAA77'>￥{{item.wholesalePrice}}</text>
                        <image style='width:30rpx;height:30rpx;vertical-align:middle;margin-top:-2rpx' wx:if='{{limitShow==1}}' src='/image/wh.png'></image>
                   </view>
                 </navigator>

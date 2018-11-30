@@ -90,6 +90,11 @@ Page({
     copyGoods:false,
     openStore:false
   },
+  openStore:function(){
+    wx.navigateTo({
+      url: '../../cloudOrder/newCloud/newCloud',
+    })
+  },
   // 一键入库
   copyGoods:function(e){
     var originGoodsId = e.target.dataset.id

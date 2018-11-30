@@ -1,4 +1,25 @@
 <login id="login"></login>
+ <!--是否复制-->
+<mes
+  show="{{copyGoods}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>是否加入到小云店仓库中？</text>
+  <button bindtap='copyGoodsYes'>确定</button>
+</view>
+</mes>
+ <!--未开通小云店-->
+<mes
+  show="{{openStore}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view class='tip-v'>
+  <text>您还未申请小云店哦？</text>
+  <view >开通小云店可享一键入库功能</view>
+  <button bindtap='openStore'>我要开店</button>
+</view>
+</mes>
  <!--确定取消关注吗？-->
 <mes
   show="{{disLike}}"
@@ -128,9 +149,10 @@
     </view>
 </view>
 <!-- 一键入库 -->
- <!-- <view class='goods-total'>
-    一键入库
-  </view> -->
+ <view  wx:if='{{limitShow==3}}' bindtap='copyGoods' class='goods-total goods-total-ku'>
+    <view>一键</view>
+    <view class='gt-ku'>入库</view>
+  </view>
 <view wx:if='{{limitShow==3 && isShowNewOne==false}}'>
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
@@ -250,7 +272,7 @@
           </view>
           <view  class='gd-gg gd-gg1'  wx:if='{{index==1}}'>
             <text>{{item.specName}}</text>
-            <view style='height:250rpx;overflow:scroll;'>
+            <view style='max-height:250rpx;overflow:scroll;'>
             <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                 <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.specValueName}}</view></view>
               </block>
@@ -368,7 +390,8 @@
             <view class="lt-table">
                 <view class="lt-tr">
                     <view wx:if='{{!newSkuOnlyEdit}}' class='{{limitShow==1?"setCss":""}}'>{{nameTwo}}</view>
-                    <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>零售价</view>
+                    <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'  wx:if='{{limitShow!=1}}'>零售价</view>
+                    <view  style='{{newSkuOnly?"width:50%":"width:22%"}}'  wx:if='{{limitShow==1}}'>零售价</view>
                     <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>批发价</view>
                     <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                       <view class="lt-add-cart">
@@ -381,7 +404,8 @@
                 <view  wx:for="{{spectArrDifference}}" wx:for-item="pItem" wx:key="{{index}}" >
                   <view class="lt-tr lt-tr1"  wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
                       <view wx:if='{{!newSkuOnlyEdit}}'  class='{{limitShow==1?"setCss":""}}'>{{item.name}}</view>
-                      <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
+                      <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow!=1}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
+                      <view  style='{{newSkuOnly?"width:50%":"width:22%"}}' wx:if='{{limitShow==1}}'>￥{{item.sellPrice}}</view>
                       <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>￥{{item.wholesalePrice}}</view>
                       <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                         <view class="lt-add-cart">
@@ -432,7 +456,7 @@
           </view>
           <view  class='gd-gg gd-gg1'  wx:if='{{index==1}}'>
             <text>{{item.specName}}</text>
-            <view>
+            <view style='max-height:250rpx;overflow:scroll;'>
             <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                 <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.specValueName}}</view></view>
               </block>

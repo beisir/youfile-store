@@ -54,5 +54,3 @@
 .tipMes text{color:#CCAA77}
 .result{background:#fff;margin-top:0rpx;padding-top:30rpx}
 .nomore{margin-bottom:0rpx;margin-top:0rpx;text-align:center;background:#f7f7f7;padding:30rpx}
-.tip-v view{font-size: 28rpx;color: #999;font-weight: normal}
-.tip-v button{margin-bottom: 40rpx;margin-top: 40rpx}

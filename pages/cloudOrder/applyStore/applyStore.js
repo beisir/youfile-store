@@ -19,10 +19,7 @@ Component({
     floorModal: false, //
     rangeModal: false, //经营范围
     modal: true, //第一步
-    mallList: [{
-      name: '1',
-      code: 1
-    }],
+    mallList: [],
     mallModal: false,
     nameNum: 0,
     name: "",

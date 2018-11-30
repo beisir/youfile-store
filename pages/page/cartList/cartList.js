@@ -546,7 +546,7 @@ Page({
             detailList[i].saleBatchNum = storeNum
           }
         }else{
-          total1 += detailList[i].allGoodsAmount;
+          total1 += parseFloat(detailList[i].allGoodsAmount);
         }
         
       }
@@ -557,7 +557,7 @@ Page({
       for (var i = 0; i < detailList.length;i++){
         if (detailList[i].selected){
           allTotalNum = parseInt(detailList[i].num)
-          allGoodsAmount = detailList[i].allGoodsAmount
+          allGoodsAmount = parseFloat(detailList[i].allGoodsAmount)
           differentPriceNew += allGoodsAmount
           saleBatchGoodsNum = detailList[i].saleBatchNum
           allGoodsNum += allTotalNum
@@ -637,24 +637,26 @@ Page({
               if (detailList[i].shoppingCartSkuList != null) {
                 var arr = detailList[i].shoppingCartSkuList
                 for (var j = 0; j < arr.length; j++) {
-                  newChild1 += arr[j].num * arr[j].wholesalePrice;
+                  newTotalPrice += arr[j].num * arr[j].wholesalePrice;
                 }
               } else {
-                newChild2 += detailList[i].num * detailList[i].wholesalePrice
+                newTotalPrice += detailList[i].num * detailList[i].wholesalePrice
               }
-              newTotalPrice = newChild1 + newChild2
+              // newTotalPrice = newChild1 + newChild2
             }else{
               if (detailList[i].shoppingCartSkuList != null) {
                 var arr = detailList[i].shoppingCartSkuList
                 for (var j = 0; j < arr.length; j++) {
-                  newChild1 += arr[j].num * arr[j].sellPrice;
+                  newTotalPrice1 += arr[j].num * arr[j].sellPrice;
                 }
               } else {
-                newChild2 += detailList[i].num * detailList[i].sellPrice
+                newTotalPrice1 += detailList[i].num * detailList[i].sellPrice
               }
-              newTotalPrice1 = newChild1 + newChild2
+              // console.log(newChild1 + "///" + newChild2)
+              // newTotalPrice1 = newChild1 + newChild2
             }
           }
+          // console.log(newTotalPrice1 + "///" + newTotalPrice)
           total1 = newTotalPrice1 + newTotalPrice
         }
       }
