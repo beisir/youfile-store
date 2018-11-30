@@ -339,6 +339,11 @@ Page({
       wx.makePhoneCall({
         phoneNumber: this.data.order.userInfo.mobile,
       })
+    }else{
+      wx.showToast({
+        title: '买家未设置电话号码',
+        icon: "none"
+      })
     }
   },
   

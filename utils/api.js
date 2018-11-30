@@ -110,7 +110,8 @@ import {
   putPaymentImgUrl,
   recentGoodsUrl,
   copyGoodsUrl,
-  tempSortUrl
+  tempSortUrl,
+  threeFloorListUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -675,6 +676,10 @@ function putPaymentImg(data) {
   data = initStoreId(data);
   return app.http.putRequest(putPaymentImgUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
+// 楼层三级联动
+function threeFloorList(data) {
+  return app.http.getRequest(threeFloorListUrl, data)
+}
 /**
  * 获取formId
  */
@@ -683,6 +688,7 @@ function getFormId(e) {
   var content = e.detail.target.dataset.name//记录用户的操作
   wx.setStorageSync("formId", formId)
 }
+
 /**
  * 初始化storeId
  */
@@ -721,6 +727,7 @@ function getStoreId() {
   }
 }
 module.exports = {
+  threeFloorList: threeFloorList,
   copyGoods: copyGoods,
   getFormId: getFormId,
   tempSort: tempSort,

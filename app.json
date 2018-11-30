@@ -3,6 +3,12 @@
     "pages/page/home/home",
     "pages/page/cartList/cartList",
     "pages/page/user/user",
+    "pages/cloudOrder/congratulation/congratulation",
+    "pages/cloudOrder/myOrder/myOrder",
+    "pages/cloudOrder/applyStore/applyStore",
+    "pages/page/order/order",
+    "pages/page/stockOrder/stockOrder",
+    "pages/cloudOrder/newCloud/newCloud",
     "pages/login/agreement/agreement",
     "pages/role/order/order",
     "pages/admin/status/status",
@@ -11,8 +17,6 @@
     "pages/businessFriend/merchant/index/index",
     "pages/admin/spec/spec",
     "pages/page/orderSuccess/orderSuccess",
-    "pages/cloudOrder/myOrder/myOrder",
-    "pages/page/order/order",
     "pages/role/allOrder/allOrder",
     "pages/payment/uploadPayment/uploadPayment",
     "pages/admin/batchSet/batchSet",
@@ -44,7 +48,6 @@
     "pages/login/register/register",
     "pages/page/allOrder/allOrder",
     "pages/role/supplyVoucher/supplyVoucher",
-    "pages/page/stockOrder/stockOrder",
     "pages/page/indexEmpty/indexEmpty",
     "pages/role/orderDetails/orderDetails",
     "pages/page/address/address",
@@ -61,8 +64,6 @@
     "pages/businessFriend/information/information",
     "pages/businessFriend/invitation/invitation",
     "pages/cloudOrder/orderDetail/orderDetail",
-    "pages/cloudOrder/applyStore/applyStore",
-    "pages/cloudOrder/congratulation/congratulation",
     "pages/page/userM/userM",
     "pages/page/editStoreAddress/editStoreAddress",
     "pages/page/main/main",
@@ -146,6 +147,6 @@
   },
   "navigateToMiniProgramAppIdList": [
     "wx6241529c7dc70d51",
-    "wx4f385374765e4cbb"
+    "wx1a7532a2abdd1698"
   ]
 }
