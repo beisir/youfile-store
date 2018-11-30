@@ -140,7 +140,7 @@
 </view>
 <view class="result result-box" wx:if="{{result.length > 0}}">
   <view class='goods-total'>
-    <text>{{goodsNum}}</text>
+    <text>{{goodsNum==null?0:goodsNum}}</text>
     <view></view>
     <text>{{totalCount}}</text>
   </view>

@@ -228,7 +228,7 @@ Page({
           thisPrice = el.sellPrice;
         }
         if (!isNaN(thisPrice * el.num)) {
-          el.myPrice = thisPrice * el.num;
+          el.myPrice = (thisPrice * el.num).toFixed(2);
           price += thisPrice * el.num;
         }
       }
@@ -347,7 +347,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var admin = wx.getStorageSync('admin')
+    this.setData({
+      admin: admin
+    })
   },
 
   /**

@@ -15,7 +15,7 @@ Page({
       { name: "化妆品", selected: false, color: "#fff", colorTrue: "#D1DEE5"},
       { name: "家居家纺", selected: false, color: "#fff", colorTrue: "#F57158"},
       { name: "日用百货", selected: false, color: "#fff", colorTrue: "#D1DEE5"},
-      { name: "休闲装", selected: false, color: "#fff", colorTrue: "#AA8EAD"},
+      { name: "电子产品", selected: false, color: "#fff", colorTrue: "#AA8EAD"},
       { name: "礼品婚庆", selected: false, color: "#fff", colorTrue: "#F57158" },
       { name: "仿真花艺", selected: false, color: "#fff", colorTrue: "#D1DEE5" },],
     name:''

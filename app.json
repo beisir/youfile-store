@@ -1,10 +1,10 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/page/cartList/cartList",
     "pages/page/user/user",
     "pages/login/agreement/agreement",
     "pages/role/order/order",
-    "pages/page/cartList/cartList",
     "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
     "pages/cloudOrder/cloudPay/cloudPay",
@@ -145,6 +145,7 @@
     ]
   },
   "navigateToMiniProgramAppIdList": [
-    "wx6241529c7dc70d51"
+    "wx6241529c7dc70d51",
+    "wx4f385374765e4cbb"
   ]
 }

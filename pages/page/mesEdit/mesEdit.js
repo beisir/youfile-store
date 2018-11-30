@@ -40,7 +40,7 @@ Page({
   },
   afterCuttingImg(url) {
     var _this=this
-    app.http.onlyUploadImg(url).then(res => {
+    app.http.onlyUploadImg(url,"STORE_IMAGE").then(res => {
       var url = JSON.parse(res).obj
       _this.setData({
         coverUrl: url,

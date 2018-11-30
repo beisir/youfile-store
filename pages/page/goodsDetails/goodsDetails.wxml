@@ -250,7 +250,7 @@
           </view>
           <view  class='gd-gg gd-gg1'  wx:if='{{index==1}}'>
             <text>{{item.specName}}</text>
-            <view style='height:250rpx;overflow:scroll;'>
+            <view style='max-height:250rpx;overflow:scroll;'>
             <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                 <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.specValueName}}</view></view>
               </block>
@@ -368,7 +368,8 @@
             <view class="lt-table">
                 <view class="lt-tr">
                     <view wx:if='{{!newSkuOnlyEdit}}' class='{{limitShow==1?"setCss":""}}'>{{nameTwo}}</view>
-                    <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>零售价</view>
+                    <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'  wx:if='{{limitShow!=1}}'>零售价</view>
+                    <view  style='{{newSkuOnly?"width:50%":"width:22%"}}'  wx:if='{{limitShow==1}}'>零售价</view>
                     <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>批发价</view>
                     <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                       <view class="lt-add-cart">
@@ -381,7 +382,8 @@
                 <view  wx:for="{{spectArrDifference}}" wx:for-item="pItem" wx:key="{{index}}" >
                   <view class="lt-tr lt-tr1"  wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
                       <view wx:if='{{!newSkuOnlyEdit}}'  class='{{limitShow==1?"setCss":""}}'>{{item.name}}</view>
-                      <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
+                      <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow!=1}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
+                      <view  style='{{newSkuOnly?"width:50%":"width:22%"}}' wx:if='{{limitShow==1}}'>￥{{item.sellPrice}}</view>
                       <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>￥{{item.wholesalePrice}}</view>
                       <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                         <view class="lt-add-cart">
@@ -432,7 +434,7 @@
           </view>
           <view  class='gd-gg gd-gg1'  wx:if='{{index==1}}'>
             <text>{{item.specName}}</text>
-            <view>
+            <view style='max-height:250rpx;overflow:scroll;'>
             <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                 <view  class='gd-view'><view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.specValueName}}</view></view>
               </block>

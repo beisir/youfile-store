@@ -58,17 +58,19 @@
       <image class='tri-icon' src="/image/icl.png"></image>
     </view>
   </view>
-
-
-  <view class='c-title flex-center'>
+  <view class='c-title flex-center' wx:if="{{admin!=3}}">
     <image src="/image/12.png"></image> 
     <view class='com-name'>{{store.storeName}}</view>
     <image class='right-icon' src="/image/icl.png"></image>
-    <text style='right:50rpx;' class='glod-font store-satisfy' wx:if="{{pricesatisfy}}">全场已满{{storeConfig.saleBatchAmount}}元<text class='hunpi' style='position:static;'>混批</text></text>
-    <text style='right:50rpx;' class='glod-font store-satisfy' wx:else>全场满{{storeConfig.saleBatchAmount}}元享受批发价<text class='hunpi' style='position:static;'>混批</text></text>
+  </view>
+  <view class='c-title flex-center' wx:if="{{admin==3}}">
+    <image src="/image/12.png"></image> 
+    <view class='com-name'>{{store.storeName}}</view>
+    <image class='right-icon' src="/image/icl.png"></image>
+    <text style='right:50rpx;' class='glod-font store-satisfy' wx:if="{{pricesatisfy && storeConfig.saleBatchAmount>0}}">全场已满{{storeConfig.saleBatchAmount}}元<text class='hunpi' style='position:static;'>混批</text></text>
+    <text style='right:50rpx;' class='glod-font store-satisfy'wx:if="{{!pricesatisfy && storeConfig.saleBatchAmount>0}}">全场满{{storeConfig.saleBatchAmount}}元享受批发价<text class='hunpi' style='position:static;'>混批</text></text>
   </view>
   <!-- <view class="cart-box">
-
     <view class="cart-list" wx:for="{{carts}}" wx:key="{{index}}">
       <navigator url="../goodsdetails/goodsdetails?id={{item.id}}"><image class="cart-thumb" src="{{item.image}}"></image></navigator> 
       <view class='ct-text ct-text1'>￥{{item.price}}<view>x {{item.num}}</view></view>
@@ -86,7 +88,7 @@
           <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
         </navigator>
         <view class='ct-title ct-title1'>{{item.goodsName}}</view>
-        <view class="heji" wx:if="{{item.goodsConfig}}">满
+        <view class="heji" wx:if="{{item.goodsConfig && admin==3}}">满
           <text class='el-size'><text class='bold-font'>{{item.goodsConfig}} </text>件</text>起批</view>
       </view>
 
@@ -130,20 +132,14 @@
     <view hidden='{{index == goods.length-1}}' class='border-line'></view>
     </view>
   </view>
-
-
-
-
-
-
   <view class='ad-fp' bindtap='toInvoiceDetail'>
     发票：
     <text class='s-font'>{{invoice.invoiceType && invoice.invoiceCategory?invoice.invoiceType +" "+invoice.invoiceCategory:"不开发票"}}</text>
     <image class='itimg' src="/image/icl.png"></image>
   </view>
-  <view class='ad-fp'>
+  <view class='ad-fp ad-fp-new'>
     买家留言：
-    <input class='s-font' type="text" maxlength='45' placeholder="选填：给商家留言（45字以内）" data-type='msg' value="{{msg}}" bindinput='watchInput' />
+    <input class='s-font' type="text" maxlength='45' placeholder="选填：给商家留言(45字以内)" data-type='msg' value="{{msg}}" bindinput='watchInput' />
   </view>
   <view class='ad-monery' hidden="{{hiddenSend}}">
     <view>商品金额
