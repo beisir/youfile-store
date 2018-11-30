@@ -362,6 +362,7 @@ Page({
     Api.homeIndex({ goodsSortType: "multiple" })
       .then(res => {
         var obj = res.obj
+        console.log(obj.store.storeName)
         wx.setNavigationBarTitle({
           title: obj.store.storeName
         })
