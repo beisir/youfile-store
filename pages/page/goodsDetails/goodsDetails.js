@@ -698,7 +698,7 @@ Page({
       this.setData({
         discountShow: discountShow,
         differNum: differNum,
-        differMoney:differMoney,
+        differMoney: differMoney.toFixed(2),
         difference: parseInt(difference)
       })
   },
@@ -953,7 +953,7 @@ Page({
       totalPrice:total.toFixed(2),
       nums: nums,
       differNum: differNum,
-      differMoney:differMoney,
+      differMoney: differMoney.toFixed(2),
       discountShow: discountShow,
       classNums: classNums,
       newTotal: newTotal.toFixed(2),

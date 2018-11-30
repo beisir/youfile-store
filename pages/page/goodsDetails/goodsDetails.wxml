@@ -368,9 +368,9 @@
             <view class="lt-table">
                 <view class="lt-tr">
                     <view wx:if='{{!newSkuOnlyEdit}}' class='{{limitShow==1?"setCss":""}}'>{{nameTwo}}</view>
-                    <view>零售价</view>
-                    <view wx:if='{{limitShow==3}}'>批发价</view>
-                    <view>
+                    <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>零售价</view>
+                    <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>批发价</view>
+                    <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                       <view class="lt-add-cart">
                         <view class="lt-down" bindtap="minusCountAll"><image  src="/image/lt-jian.png"></image></view>
                         <view class="lt-num" style='border-top:0'><input disabled='disabled' value='批量'></input></view>
@@ -381,9 +381,9 @@
                 <view  wx:for="{{spectArrDifference}}" wx:for-item="pItem" wx:key="{{index}}" >
                   <view class="lt-tr lt-tr1"  wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
                       <view wx:if='{{!newSkuOnlyEdit}}'  class='{{limitShow==1?"setCss":""}}'>{{item.name}}</view>
-                      <view class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
-                      <view wx:if='{{limitShow==3}}'>￥{{item.wholesalePrice}}</view>
-                      <view>
+                      <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
+                      <view  style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>￥{{item.wholesalePrice}}</view>
+                      <view  style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                         <view class="lt-add-cart">
                           <view class="lt-down" data-index='{{index}}' bindtap="minusCount1"><image  src="/image/jian.png"></image></view>
                           <view class="lt-num" style='border-top:0'><input value='{{item.num}}' type='number' data-code='{{pItem.code}}'  data-index='{{index}}' bindinput='changeNum'></input></view>

@@ -259,11 +259,11 @@ Page({
                 allGoodsPf += newSkvArr[j].wholesalePrice * newSkvArr[j].num
               }
               effectiveList[i].num = num
-              effectiveList[i].allGoodsAmount = allGoodsAmount
-              effectiveList[i].allGoodsPf = allGoodsPf
+              effectiveList[i].allGoodsAmount = allGoodsAmount.toFixed(2)
+              effectiveList[i].allGoodsPf = allGoodsPf.toFixed(2)
             } else {
-              effectiveList[i].allGoodsAmount = effectiveList[i].sellPrice * effectiveList[i].num
-              effectiveList[i].allGoodsPf = effectiveList[i].wholesalePrice * effectiveList[i].num
+              effectiveList[i].allGoodsAmount = (effectiveList[i].sellPrice * effectiveList[i].num).toFixed(2)
+              effectiveList[i].allGoodsPf = (effectiveList[i].wholesalePrice * effectiveList[i].num).toFixed(2)
             }
           }
         }
