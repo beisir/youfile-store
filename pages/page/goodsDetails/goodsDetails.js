@@ -120,11 +120,45 @@ Page({
     newCartList:[],
     favoriteNum:0,
     editOneName:false,
-    store:''
+    store:'',
+    copyGoods: false,
+    openStore: false
   },
   /**
   * 生命周期函数--监听页面加载
   */
+  openStore: function () {
+    wx.navigateTo({
+      url: '../../cloudOrder/newCloud/newCloud',
+    })
+  },
+  // 一键入库
+  copyGoods: function (e) {
+    var originGoodsId = e.target.dataset.id
+    this.setData({
+      copyGoods: true,
+      originGoodsId: originGoodsId
+    })
+  },
+  copyGoodsYes: function () {
+    var _this = this,
+      originGoodsId = this.data.originGoodsId
+    this.setData({
+      copyGoods: false
+    })
+    Api.copyGoods({ originGoodsId: originGoodsId })
+      .then(res => {
+        Api.showToast(res.message)
+      })
+      .catch(res => {
+        var code = res.data.code
+        if (code == "E101") {
+          _this.setData({
+            openStore: true
+          })
+        }
+      })
+  },
   showLogo:function(){
     this.selectComponent("#login").showPage();
   },

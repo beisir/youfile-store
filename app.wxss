@@ -55,7 +55,7 @@ button::after{border:none}
 .cart-box .ct-t-title{color:#999}
 .c-title view{display:inline}
 .c-title text{position:absolute;right:30rpx}
-.c-title image{width:50rpx;height:50rpx;margin-top:-5rpx;margin-right:5rpx;vertical-align:middle}
+.c-title image{width:50rpx;height:50rpx;margin-top:-2rpx;margin-right:5rpx;vertical-align:middle}
 .cart-list .cart-thumb{position:absolute;top:35rpx;left:-170rpx;background:#fff;width:150rpx;height:150rpx}
 .cart-list .cart-pro-name{display:inline-block;color:#888;margin-top:17rpx;padding:3rpx 0rpx;font-size:24rpx;overflow:hidden}
 .cart-pro-name image{width:20rpx;height:20rpx;position:absolute;right:8rpx;top:16rpx;vertical-align:middle;margin-left:5rpx}
@@ -130,3 +130,5 @@ input:focus{padding:0}
 .n-simg{width: 40rpx;height: 40rpx;position: absolute;right: 10rpx;top: 10rpx;}
 .n-simg image{width: 100%;height:100%;}
 .weui_cells .n-navigator{width: 80%;background: red}
+.tip-v view{font-size: 28rpx;color: #999;font-weight: normal}
+.tip-v button{margin-bottom: 40rpx;margin-top: 40rpx}

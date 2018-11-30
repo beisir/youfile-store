@@ -164,7 +164,7 @@
               <text wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text>
               <image wx:if='{{limitShow==1}}' src='/image/wh.png'></image>
               <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
-                <!-- <image wx:if='{{limitShow==3}}' bindtap='copyGoods' class='h-img h-img1' data-id='{{item.id}}' src="/image/closeS.png" /> -->
+                <image wx:if='{{limitShow==3}}' bindtap='copyGoods' class='h-img h-img1' data-id='{{item.id}}' src="/image/closeS.png" />
             </view>
           </view>
         </view>

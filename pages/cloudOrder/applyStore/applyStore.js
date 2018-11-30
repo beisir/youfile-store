@@ -17,7 +17,7 @@ Page({
     //楼层
     floorModal: false, //
     rangeModal: false,  //经营范围
-    modal:true,  //第一步
+    modal:false,  //第一步
     mallList:[{name:'1',code:1}],
     mallModal:false,
     nameNum: 0,

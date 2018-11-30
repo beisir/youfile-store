@@ -1,4 +1,25 @@
 <login id="login"></login>
+ <!--是否复制-->
+<mes
+  show="{{copyGoods}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>是否加入到小云店仓库中？</text>
+  <button bindtap='copyGoodsYes'>确定</button>
+</view>
+</mes>
+ <!--未开通小云店-->
+<mes
+  show="{{openStore}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view class='tip-v'>
+  <text>您还未申请小云店哦？</text>
+  <view >开通小云店可享一键入库功能</view>
+  <button bindtap='openStore'>我要开店</button>
+</view>
+</mes>
  <!--确定取消关注吗？-->
 <mes
   show="{{disLike}}"
@@ -128,9 +149,10 @@
     </view>
 </view>
 <!-- 一键入库 -->
- <!-- <view class='goods-total'>
-    一键入库
-  </view> -->
+ <view  wx:if='{{limitShow==3}}' bindtap='copyGoods' class='goods-total goods-total-ku'>
+    <view>一键</view>
+    <view class='gt-ku'>入库</view>
+  </view>
 <view wx:if='{{limitShow==3 && isShowNewOne==false}}'>
   <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>

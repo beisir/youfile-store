@@ -27,7 +27,7 @@
 .c-title .itimg{position:absolute;right:50rpx;top:36rpx}
 .receive-box .itimg{position:absolute;right:29rpx;top:44rpx;width:24rpx;height:29rpx}
 .c-title{background:#fff;margin-left:0;padding-left:50rpx;font-weight:600;border:0}
-.c-title image{width:50rpx;height:50rpx}
+.c-title image{width:45rpx;height:45rpx}
 .cart-footer{height:120rpx;background:#fff;border-top:0;border-bottom:0;bottom:0}
 .order-icon{line-height:120rpx;height:122rpx}
 .order-all{right:280rpx;color:#999;height:120rpx;display:flex;align-items:center;padding-top:0}
