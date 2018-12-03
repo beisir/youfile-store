@@ -144,7 +144,6 @@ Component({
         loginApp.authHandler.loginByMobile(this.data.telephone, this.data.verificationCode).then(res => {
           this.loginAfter(res);
         }).catch(e => {
-          API.showToast(e.data.message)
           this.setData({
             stopLoginBtn: false
           })
@@ -166,10 +165,14 @@ Component({
           username: this.data.telephone.trim(),
           password: this.data.password
         };
+
+        this.setData({
+          stopLoginBtn: true
+        })
+        
         loginApp.authHandler.loginByUser(this.data.telephone, this.data.password).then(res => {
           this.loginAfter(res);
         }).catch(e => {
-          API.showToast(e.data.message) 
           this.setData({
             stopLoginBtn: false
           })        
