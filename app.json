@@ -1,10 +1,10 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/cloudOrder/applyStore/applyStore",
     "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/mesEdit/mesEdit",
     "pages/page/updateArea/mesEdit",
-    "pages/cloudOrder/applyStore/applyStore",
     "pages/page/updateMes/updateMes",
     "pages/page/cartList/cartList",
     "pages/page/user/user",
