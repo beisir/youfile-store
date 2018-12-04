@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/admin/status/status",
     "pages/cloudOrder/applyStore/applyStore",
     "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/mesEdit/mesEdit",
@@ -15,7 +16,6 @@
     "pages/cloudOrder/newCloud/newCloud",
     "pages/login/agreement/agreement",
     "pages/role/order/order",
-    "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
     "pages/cloudOrder/cloudPay/cloudPay",
     "pages/businessFriend/merchant/index/index",
