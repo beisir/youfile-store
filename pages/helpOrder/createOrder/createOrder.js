@@ -1,4 +1,4 @@
-// pages/cloudOrder/orderList/orderList.js
+// pages/helpOrder/createOrder/createOrder.js
 Page({
 
   /**
@@ -57,4 +57,10 @@ Page({
 
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
 })

@@ -14,7 +14,7 @@ Page({
   },
   getData() {
     wx.request({
-      url: 'https://mall.youlife.me/api/yunstore/order/'+this.data.num,
+      url: '/admin/yunstore/order/'+this.data.num,
       header: {
         Authorization: wx.getStorageSync("access_token")
       },
@@ -39,7 +39,7 @@ Page({
   },
   getOpenid(code) {
     wx.request({
-      url: 'https://pay.youlife.me/api/pay',
+      url: app.globalData.payUrl,
       method: 'POST',
       data: {
         "channel": "wx_pay",
@@ -51,7 +51,7 @@ Page({
         "tradeType": "JSAPI"
       },
       header: {
-        "appNumber": "APP001",
+        "platAppId": app.globalData.payAppNum,
       },
       success: (res) => {
         if (res.data.code == 0) {
