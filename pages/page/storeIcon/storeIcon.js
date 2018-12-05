@@ -90,7 +90,11 @@ Page({
      * 用户点击右上角分享
      */
   onShareAppMessage: function (res) {
+<<<<<<< HEAD
     let id = wx.getStorageSync("storeId");
+=======
+    let id = wx.getStorageInfoSync("storeId");
+>>>>>>> d9976ea673577b69bc0c415eaccc8d9ee67c5f07
     if (id) {
       return {
         path: "pages/page/home/home?storeId=" + id

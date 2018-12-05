@@ -32,9 +32,17 @@ Component({
     //忘记密码
     forget: false,
     //登录按钮样式class
-    btnID: "loginBtnDis"
+    btnID: "loginBtnDis",
+    //关注
+    attention:true
   },
   methods: {
+    // 自动关注
+    attentionStore() {
+      this.setData({
+        attention: !this.data.attention
+      })
+    },
     //判断是否输入完整
     checkComplete() {
       if (this.data.loginType === 'code') {
@@ -142,6 +150,10 @@ Component({
         })
 
         loginApp.authHandler.loginByMobile(this.data.telephone, this.data.verificationCode).then(res => {
+          //关注
+          if (this.data.attention) {
+            API.likeStore();
+          }
           this.loginAfter(res);
         }).catch(e => {
           this.setData({
