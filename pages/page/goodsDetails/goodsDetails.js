@@ -128,9 +128,9 @@ Page({
   * 生命周期函数--监听页面加载
   */
   openStore: function () {
-    wx.navigateTo({
-      url: '../../cloudOrder/newCloud/newCloud',
-    })
+    // wx.navigateTo({
+    //   url: '../../cloudOrder/newCloud/newCloud',
+    // })
   },
   // 一键入库
   copyGoods: function (e) {
