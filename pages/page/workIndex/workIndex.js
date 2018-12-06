@@ -82,7 +82,7 @@ Page({
        payOrders: obj.payOrders,
        unshippedPurchaseOrders: obj.unshippedPurchaseOrders,
        payPurchaseOrders: obj.payPurchaseOrders,
-       todaySaleNum: (obj.todaySaleNum).toFixed(2),
+       todaySaleNum: obj.todaySaleNum == null ? 0 : (obj.todaySaleNum).toFixed(2),
        unshippedOrders: obj.unshippedOrders,
        verifyFriends: obj.verifyFriends,
      })
@@ -96,6 +96,9 @@ Page({
           initOrder: true
         })
       } else {
+        wx.setNavigationBarTitle({
+          title: store.name+"工作台"
+        })
         this.setData({
           initOrder: false
         })

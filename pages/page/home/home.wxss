@@ -43,8 +43,7 @@
 .add-firend3 view{background:#F7AC25}
 .add-firend3{padding-bottom:20rpx}
 .store_name image{width:35rpx;height:35rpx;margin-left:18rpx;margin-top:0}
-.result-list .result-text1 image.h-img{height:40rpx;width:40rpx;float:right;margin-right:10rpx}
-.result-list .result-text1 image.h-img1{transform: rotate(45deg)}
+.result-list .result-text1 image.h-img{height:40rpx;width:40rpx;float:right}
 .result-list{height:530rpx;border:0;margin:0 0 30rpx}
 .flex-boxx{display:flex;justify-content:space-between;flex-wrap:wrap;align-content:flex-start;width:680rpx;margin:0 auto}
 .result{padding:0}
