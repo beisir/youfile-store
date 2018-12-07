@@ -1,9 +1,10 @@
 {
   "pages":[
+    "pages/page/home/home",
+    "pages/admin/status/status",
     "pages/page/user/user",
     "pages/casher/success/success",
     "pages/casher/casher/casher",
-    "pages/page/home/home",
     "pages/login/agreement/agreement",
     "pages/faceToFaceOrder/remindLayer/remindLayer",
     "pages/faceToFaceOrder/createSuccess/createSuccess",
@@ -11,7 +12,6 @@
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
     "pages/cloudOrder/myOrder/myOrder",
     "pages/login/register/register",
-    "pages/admin/status/status",
     "pages/cloudOrder/applyStore/applyStore",
     "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/mesEdit/mesEdit",

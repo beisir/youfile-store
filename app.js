@@ -1,7 +1,7 @@
 import http from './utils/http.js'
 import pageRequest from './utils/pageRequest.js'
 import AuthHandler from './utils/authHandler.js'
-import { imageUrl, payUrl} from './utils/const.js'
+import { imageUrl } from './utils/const.js'
 import touch from './utils/touch.js'
 App({
   onLaunch: function (options) {
@@ -9,7 +9,7 @@ App({
       wx.setStorageSync("storeId",options.query.storeId)
     }
     // wx.setStorageSync("storeId", "S1000527")
-    // wx.setStorageSync("storeId", "S1000349")
+    wx.setStorageSync("storeId", "S1000349")
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
@@ -52,9 +52,7 @@ App({
     switchStore: false,
     isFollow: null,
     projectType:"xpl",
-    userShowTip:false,
-    payUrl: payUrl,    
-    payAppNum:"APP001"
+    userShowTip:false
   },
   http: new http(),
   pageRequest: new pageRequest(),

@@ -95,9 +95,9 @@ Page({
     this.selectComponent("#storeOrder").open();
   },
   openStore:function(){
-    wx.navigateTo({
-      url: '../../cloudOrder/newCloud/newCloud',
-    })
+    // wx.navigateTo({
+    //   url: '../../cloudOrder/newCloud/newCloud',
+    // })
   },
   // 一键入库
   copyGoods:function(e){

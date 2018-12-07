@@ -12,6 +12,7 @@ Page({
     isShow: true,
     isStatus:true,
     mainx: 0,
+    saveHide:true,
     isEmptySku:false,
     newConst:'',
     pageall: [],
@@ -276,20 +277,6 @@ Page({
         })
       })
   },
-  wholesalePrice: function (event) {
-    var _this = this,
-      val = event.detail.value
-    this.setData({
-      wholesalePrice: val
-    })
-  },
-  sellPrice: function (event) {
-    var _this = this,
-      val = event.detail.value
-    this.setData({
-      sellPrice: val
-    })
-  },
   getConfig: function () {
     var _this = this
     Api.saleBatch()
@@ -537,12 +524,12 @@ Page({
   },
   // 更新
   updateGoods: function (e) {
-    var _this=this,
+    var _this = this,
       pics = this.data.pics,
       status = e.target.dataset.status,
       mainImgUrl = '',
       description = '',
-      skuListAll =[],
+      skuListAll = [],
       goodsImageVOList = [],
       sellPrice = this.data.sellPrice,
       wholesalePrice = this.data.wholesalePrice,
@@ -566,28 +553,28 @@ Page({
         Api.showToast("商品库存不能为零！")
         return;
       }
-     if(goodsListData!=null){
-       if (goodsListData.length == 1) {
-         skuListAll=[]
-         skuList0 = goodsListData[0].goodsSpecificationValueVOList
-         for (var i = 0; i < skuList0.length; i++) {
-           skuListAll.push({ specValueCodeList: [skuList0[i].specValueCode], marketPrice: '0', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
-         }
-       } else if (goodsListData.length = 2) {
-         skuList0 = goodsListData[0].goodsSpecificationValueVOList
-         skuList1 = goodsListData[1].goodsSpecificationValueVOList
-         for (var i = 0; i < skuList0.length; i++) {
-           for (var j = 0; j < skuList1.length; j++) {
-             skuListAll.push({ specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '0', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
-           }
-         }
-       }
-       sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
-       wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
-     }
-    }else{
+      if (goodsListData != null) {
+        if (goodsListData.length == 1) {
+          skuListAll = []
+          skuList0 = goodsListData[0].goodsSpecificationValueVOList
+          for (var i = 0; i < skuList0.length; i++) {
+            skuListAll.push({ specValueCodeList: [skuList0[i].specValueCode], marketPrice: '0', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+          }
+        } else if (goodsListData.length = 2) {
+          skuList0 = goodsListData[0].goodsSpecificationValueVOList
+          skuList1 = goodsListData[1].goodsSpecificationValueVOList
+          for (var i = 0; i < skuList0.length; i++) {
+            for (var j = 0; j < skuList1.length; j++) {
+              skuListAll.push({ specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '0', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
+            }
+          }
+        }
+        sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
+        wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
+      }
+    } else {
       skuListAll = this.data.skuListAll
-      if (Api.isEmpty(skuListAll)){
+      if (Api.isEmpty(skuListAll)) {
         sellPrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.sellPrice }))
         wholesalePrice = Math.min.apply(Math, skuListAll.map(function (o) { return o.wholesalePrice }))
       }
@@ -629,13 +616,13 @@ Page({
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,
       "saleBatchNum": saleBatchNum,
-      "sellPrice":sellPrice,
+      "sellPrice": sellPrice,
       "status": status,
-      "stockNum":this.data.skuNum,
+      "stockNum": this.data.skuNum,
       "storeId": this.data.storeId,
       "storeName": this.data.storeName,
       "top": false,
-      "wholesalePrice":wholesalePrice
+      "wholesalePrice": wholesalePrice
     }
     if (!Api.isEmpty(mainImgUrl)) {
       Api.showToast("请上传商品图片！")
@@ -649,16 +636,20 @@ Page({
       Api.showToast("请输入商品类目！")
       return;
     }
-    Api.updateGoods(goodsVO)
-      .then(res => {
-        wx.showToast({
-          title: '更新成功',
-          icon: 'none',
-          duration: 2000
+    this.setData({
+      saveHide: false
+    },function(){
+      Api.updateGoods(goodsVO)
+        .then(res => {
+          wx.showToast({
+            title: '更新成功',
+            icon: 'none',
+            duration: 2000
+          })
+          app.globalData.switchStore = true
+          _this.goback()
         })
-        app.globalData.switchStore = true
-        _this.goback()
-      })
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
