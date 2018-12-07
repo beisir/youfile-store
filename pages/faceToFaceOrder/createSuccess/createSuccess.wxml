@@ -1,0 +1,9 @@
+<view class='success-box'>
+<text class='title'>订单金额</text>
+<view class="price">￥21231123.00</view>
+<text>已帮TA下单成功，请顾客付款完成交易</text>
+<view class='btn'>查看门店订单</view>
+<text>今天已经完成第<text class='red-font'>6</text>单了，加油哦！</text>
+<image src='/image/good.png' class='good-icon'></image>
+<text class='gold-font'>你真棒</text>
+</view>

@@ -1,0 +1,158 @@
+page{
+  font-size: 28rpx;
+  color: #333;
+}
+/* common */
+.padding-box{
+  padding-left: 50rpx;
+  padding-right: 50rpx;
+}
+.flex-center{
+  display: flex;
+  align-items: center;
+
+}
+/* ENDcommon */
+.nav-box{
+  display: flex;
+  justify-content: space-around;
+  height: 80rpx;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+.nav-item{
+  height: 77rpx;
+  line-height: 77rpx;
+  border-bottom: 4rpx solid #fff;
+  padding: 0 15rpx;
+}
+.nav-ac{
+  border-color: #ca7;
+  color: #ca7
+}
+
+
+/* liebiao*/
+.list-item{
+  background: #fff;
+}
+.item-title{
+  display: flex;
+  height: 100rpx;
+  align-items: center;
+  justify-content: space-between;
+}
+  .com-name-box{
+    max-width: 320rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .cloud-icon{
+    height: 60rpx;
+    width: 60rpx;
+    margin-right: 10rpx;
+  }
+  .right-icon{
+    height: 50rpx;
+    width: 50rpx;
+  }
+  .type-chunk{
+    height: 40rpx;
+    width: 80rpx;
+    border: 1rpx solid #ca7;
+    color: #ca7;
+    font-size: 24rpx;
+    line-height: 40rpx;
+    text-align: center;
+    margin-top: 1rpx;
+  }
+  .status-text{
+    color: #ca7;
+  }
+
+  /* 货物 */
+  .goods-box{
+    background: #f7f7f7;
+    display: flex;
+    padding: 36rpx 50rpx 28rpx;
+    font-size: 26rpx;
+    position: relative;
+  }
+    .gray-layer{
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(255,255,255,0.5)
+    }
+    .goods-icon{
+      width: 136rpx;
+      height:136rpx;
+      border: 1rpx solid #ddd;
+      background: #fff;
+      margin-right: 20rpx;
+    }
+    .goods-icon image{
+      max-width: 136rpx;
+      max-height: 136rpx;
+    }
+
+    .tip-box{
+      width: 360rpx;
+      display:flex;
+      flex-wrap: wrap;
+      margin-right: 5rpx;
+    }
+      .tip-box text{
+
+      }
+    .goods-price{
+      flex: 1;
+      text-align: right;
+    }
+
+  .all-price-box{
+    height: 100rpx;
+    padding-top: 30rpx;
+    text-align: right; 
+    font-size: 26rpx;
+    box-sizing: border-box;
+  }  
+
+  .gold-font{
+    color: #ca7;
+  }
+  .gray-color{
+    color: #999;
+  }
+
+  .btn-box{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    padding-bottom: 20rpx;
+  }
+  .btn{
+    height: 60rpx;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    text-align: center;
+    line-height: 60rpx;
+    border-radius: 10rpx;
+    margin-left: 20rpx;
+    font-size: 24rpx;
+  }
+  .cancel-btn{
+    width: 142rpx;
+    border-color: #ddd;
+    color: #999;
+  }
+  .pay-btn{
+    width: 162rpx;
+    border-color: #ca7;
+    background: #ca7;
+    color: #fff;
+  }

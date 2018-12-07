@@ -1,5 +1,6 @@
 // pages/page/stockOrder/stockOrder.js
 const app = getApp();
+let searchTimer;
 import API from "../../../utils/api.js";
 Page({
 
@@ -195,9 +196,14 @@ Page({
     this.getList(true);
   },
   searchBtn(e) {
+    clearTimeout(searchTimer);
     this.setData({
       style: true,
+      keyword: e.detail.value
     })
+    searchTimer = setTimeout(() => {
+      this.getList(true);
+    }, 1000)
   },
 
   //跳转
@@ -236,8 +242,7 @@ Page({
       })
     }
     app.pageRequest.pageGet("/api/order/user/store/" + this.data.storeId +"/ordercategory/1/orderstatus/" + this.data.whitch, {
-      //pageNum:1,
-      //pageSize:100
+      keyWords: this.data.keyword ? this.data.keyword : ""
     }).then((res) => {
       //this.resetData(res.obj.result);
       //this.resetData(this.data.orderList.obj.result)

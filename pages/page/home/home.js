@@ -90,6 +90,10 @@ Page({
     copyGoods:false,
     openStore:false
   },
+  //到店弹框
+  showStoreOrder(){
+    this.selectComponent("#storeOrder").open();
+  },
   openStore:function(){
     wx.navigateTo({
       url: '../../cloudOrder/newCloud/newCloud',
