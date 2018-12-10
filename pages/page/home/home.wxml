@@ -93,7 +93,7 @@
     <button class='shre_btn' open-type='share'>
       <image src="/image/fx1.png"></image>分享</button>
   </view> -->
-  <image wx:if='{{store!="" && limitShow==2}}'  bindtap='editDp' src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
+  <image wx:if='{{store!="" && limitShow==2}}'   bindtap="chooseImage" src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
    <image wx:if='{{store!="" && limitShow!=2}}'  src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
@@ -193,14 +193,14 @@
     <view bindtap='closeShow'>取消</view>
   </view>
 </view>
-<view class='showHide' hidden='{{showDp}}'>
+<!-- <view class='showHide' hidden='{{showDp}}'>
   <view class='sh-cont'>
     <view class='sh-title'>更换小云店封面</view>
     <view bindtap="chooseImage">拍照</view>
     <view bindtap="chooseImage">从手机相册选取</view>
     <view bindtap='closeShow'>取消</view>
   </view>
-</view>
+</view> -->
 <view hidden='{{indexEmpty}}'>
   <no></no>
 </view>

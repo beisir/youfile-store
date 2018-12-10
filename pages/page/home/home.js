@@ -284,11 +284,11 @@ Page({
       currentTab:0
     })
   }, 
-  editDp: function () {
-    this.setData({
-      showDp: false,
-    })
-  }, 
+  // editDp: function () {
+  //   this.setData({
+  //     showDp: false,
+  //   })
+  // }, 
   editDpMes:function(){
     var limitShow = this.data.limitShow
     if (limitShow==2){
