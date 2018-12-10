@@ -11,7 +11,7 @@
         <image src="/image/12.png" class='cloud-icon'></image>
         <text class='com-name-box'>{{item.name}}</text>
         <image src='/image/mallr.png' class='right-icon'></image>
-        <view class='type-chunk'>到店</view>
+        <view class='type-chunk'>门店</view>
       </view>
       <view class='status-text'>
         <text wx:if="{{item.type == 'unpaid'}}">待付款</text>

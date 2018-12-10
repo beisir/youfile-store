@@ -61,7 +61,7 @@
   font-weight: 600;
 }
 
-.buy-btn{
+.modal .buy-btn{
   width: 500rpx;
   height: 80rpx;
   line-height: 80rpx;

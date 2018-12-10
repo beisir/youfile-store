@@ -112,6 +112,7 @@ import {
   copyGoodsUrl,
   tempSortUrl,
   threeFloorListUrl,
+  orderDetailUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -680,6 +681,10 @@ function putPaymentImg(data) {
 function threeFloorList(data) {
   return app.http.getRequest(threeFloorListUrl, data)
 }
+//订单详情
+function getOrderDetail(data){
+  return app.http.getRequest(orderDetailUrl,data);
+}
 /**
  * 获取formId
  */
@@ -727,6 +732,7 @@ function getStoreId() {
   }
 }
 module.exports = {
+  getOrderDetail: getOrderDetail,
   threeFloorList: threeFloorList,
   copyGoods: copyGoods,
   getFormId: getFormId,
