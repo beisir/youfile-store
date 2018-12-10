@@ -1,6 +1,10 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/faceToFaceOrder/myCustomerList/myCustomerList",
+    "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",
+    "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
+    "pages/faceToFaceOrder/helpOrder/helpOrder",    
     "pages/admin/status/status",
     "pages/page/user/user",
     "pages/casher/success/success",
