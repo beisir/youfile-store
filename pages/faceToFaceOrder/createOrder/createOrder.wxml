@@ -1,3 +1,4 @@
+<view class='warn-box' wx:if="{{warn=='money'}}">单笔支付金额不可超过10000</view>
 <view class='user-title'>
   <view class='user-icon-box'>
     <image class='user-icon' mode="aspectFit" src='/image/eee.png'></image>
@@ -7,7 +8,7 @@
 <view class='common-box flex-between price-box'>
   <text class="item-title">订单金额</text>
   <view class='flex-center'>
-    <input type='digit' class='price-input'></input>
+    <input type='digit' bindinput='watchInput' data-type="money" class='price-input'></input>
     <text class='yuan'>元</text>
   </view>
 </view>

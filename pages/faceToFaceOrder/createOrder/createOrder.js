@@ -7,6 +7,24 @@ Page({
   data: {
 
   },
+  watchInput(e){
+    console.log(e)
+    let type = e.currentTarget.dataset.type,
+        val = e.detail.value,
+        obj = {};
+    switch(type){
+      case "money":
+        let m = /^(([1-9][0-9]*)|([0]\.\d{1,2})|([1-9][0-9]*\.\d{1,2}))$/.test(val);
+        if(val<10000){
+          obj.warn = false;
+        } else {
+          obj.warn = 'money';            
+        }
+        obj.money = val;     
+      break;
+    }
+    this.setData(obj)
+  },
 
   /**
    * 生命周期函数--监听页面加载
