@@ -1,0 +1,41 @@
+<view class='user-title'>
+  <view class='user-icon-box'>
+    <image class='user-icon' mode="aspectFit" src='/image/eee.png'></image>
+  </view>
+  <text class='user-name'>刘德华</text>
+</view>
+<view class='common-box flex-between price-box'>
+  <text class="item-title">订单金额</text>
+  <view class='flex-center'>
+    <input type='digit' class='price-input'></input>
+    <text class='yuan'>元</text>
+  </view>
+</view>
+
+<view class='common-box'>
+  <view class='goos-box flex-between'>
+    <view class='flex-center' style='flex:1;'>
+      <text class='item-title'>购买商品</text>
+      <text class='no-tip'>选择添加商品</text>
+      <!-- <view class='tip-box'>
+        <text class='tip-item'>差距</text>
+        <text class='tip-item'>差距差距阿斯达差距阿斯达差距阿斯达差距阿斯达阿斯达</text>
+        <text class='tip-item'>差asdas dasd 距</text>
+      </view> -->
+    </view>
+    <image src='/image/icl.png' class='right-tri'></image>
+  </view>
+
+  <view class='remark-box flex-center'>
+    <text class='remark-title'>添加备注说明</text> 
+  </view>
+</view>
+
+ <view class='common-box flex-between red-packet-box'>
+    <text class='item-title'>红包礼金</text>
+    <text class="packet-num">-￥0.00</text>
+  </view>
+
+  <view class='price-font-box'>￥0.00</view>
+  <button class='help-btn'>帮TA下单</button>
+  <view class='reminder'>让TA成为你的老顾客</view>

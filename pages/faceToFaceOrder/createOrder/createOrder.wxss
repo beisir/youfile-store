@@ -1,0 +1,133 @@
+/* pages/faceToFaceOrder/createOrder/createOrder.wxss */
+page{
+  font-size: 32rpx;
+  color: #333;
+}
+.common-box{
+  padding: 0 50rpx;
+  margin: 20rpx 30rpx;
+  background: #fff;
+  border-radius: 10rpx;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-center{
+  display: flex;
+  align-items: center;
+}
+.user-title{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 30rpx;
+}
+
+.user-icon-box{
+  width: 122rpx;
+  height: 122rpx;
+  border-radius: 10rpx;
+  margin: 30rpx 0;
+}
+.user-icon{
+  max-width: 122rpx;
+  max-height: 122rpx;
+}
+.user-name{
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #000;
+  line-height: 1;
+}
+
+.item-title{
+  font-weight: 600;
+  width: 135rpx;
+  margin-right: 40rpx;
+  
+}
+
+/* 金额 */
+.price-box{
+  height: 120rpx;
+  border-radius: 10rpx;
+  font-weight: 600;  
+}
+.yuan{
+  font-size: 32rpx;
+}
+.price-input{
+  text-align: right;
+  margin-right: 20rpx;
+}
+
+.goos-box{
+  min-height: 140rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eee;
+  padding: 30rpx 0;
+}
+
+.right-tri{
+  width: 38rpx;
+  height: 38rpx;
+  margin-left: 20rpx;
+}
+
+.tip-box{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.tip-item{
+  line-height: 1.2;
+  margin:10rpx 0;
+  font-size: 32rpx;
+  color: #ca7;
+}
+.no-tip{
+ color: #999; 
+}
+/* 备注 */
+.remark-box{
+  height: 90rpx;
+  font-size: 26rpx;
+}
+.remark-title{
+  color: #4a6682;
+}
+/* 红包  */
+.red-packet-box{
+  height: 100rpx;
+}
+.packet-num{
+  color: #999;
+  font-size: 36rpx;
+}
+
+.price-font-box{
+  font-size: 90rpx;
+  font-weight: 600;
+  text-align: center;
+  margin: 110rpx 0 50rpx;
+  line-height: 1;
+}
+
+.help-btn{
+  background: #ca7;
+  width: 600rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.reminder{
+  font-size: 28rpx;
+  color: #333;
+  text-align: center;
+  line-height: 1;
+  margin-top: 20rpx;
+}
