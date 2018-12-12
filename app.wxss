@@ -132,3 +132,6 @@ input:focus{padding:0}
 .weui_cells .n-navigator{width: 80%;background: red}
 .tip-v view{font-size: 28rpx;color: #999;font-weight: normal}
 .tip-v button{margin-bottom: 40rpx;margin-top: 40rpx}
+.input-placeholder-common-color{
+  color: #999;
+}

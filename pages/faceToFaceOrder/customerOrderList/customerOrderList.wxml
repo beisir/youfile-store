@@ -23,7 +23,7 @@
     <view class='goods-box'>
       <view class='gray-layer' wx:if="{{item.type == 'cancelled'}}"></view>
       <view class='goods-icon'>
-        <image src='{{item.icon}}'></image>
+        <image src='/image/default-gift.png'></image>
       </view>
       <view class='tip-box'>
         <text wx:for='{{item.tip}}' wx:for-item="tip">{{tip}}</text>

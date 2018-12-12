@@ -88,7 +88,8 @@ Page({
     src:'',
     goodsName:'',
     copyGoods:false,
-    openStore:false
+    openStore:false,
+    tipIndex:0,
   },
   //到店弹框
   showStoreOrder(){
@@ -213,6 +214,23 @@ Page({
     this.setData({
       isStoreOwner: false,
       isNotStore:false
+    })
+  },
+  //轮播消息
+  toUser(){
+    wx.switchTab({
+      url: '/pages/page/user/user'
+    })
+  },
+  stopSwiperTip(){
+    this.setData({
+      showAllTip: true,
+      tipIndex:0      
+    })
+  },
+  continueSwiperTip(){
+    this.setData({
+      showAllTip: false,
     })
   },
   /**

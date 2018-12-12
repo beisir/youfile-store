@@ -11,7 +11,7 @@
   <view class='lk-img'><image  mode="widthFix" src="/image/icl.png"></image></view>
   <navigator class='bf-weui' url='../details/details?userId={{userId}}'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{data.headPic}}?x-oss-process=style/logo"></image></view>
+      <view class='bf-img'><image  mode="aspectFill" src="{{data.headPic?baseUrl+data.headPic+'?x-oss-process=style/logo':'https://dev-image.youlife.me/user/head/defaultHeadPic.png?x-oss-process=style/logo'}}"></image></view>
       <text>{{data.nickName}}</text>
       <image  class='re-img' wx:if='{{data.gender!=1}}' mode="widthFix" src="/image/ermR.png"></image>
       <image  class='re-img' wx:if='{{data.gender==1}}' mode="widthFix" src="/image/man.png"></image>
@@ -29,6 +29,15 @@
     </view>
   </view>
 </view> -->
+<!-- 红包礼金 -->
+<view class='box-item' wx:if="{{faceOrderIn}}">
+  <text>红包礼金</text>
+  <view class='red-packet'>
+    <text>0</text>
+    <image class='tri-right' src="/image/icl.png"></image>
+  </view>
+</view>
+
 <view class='bf-cont info-cont'>
   <view class='in-cont'>
    <text>手机号</text><view>{{data.mobile}}<view class='in-cont-img'><image  mode="widthFix" bindtap='calling' src="/image/tel1.png"></image></view></view>
@@ -38,5 +47,18 @@
   </view>
   <view class='in-cont'>
    <text>生日</text><view wx:if='{{data.birthday!=null}}'>{{data.birthday}}</view>
+  </view>
+</view>
+
+
+<view class='bottom-btn-box'  wx:if="{{faceOrderIn}}">
+  <view wx:if="{{!ifWholesaler}}" class='btn-item'>
+    <image class='btn-icon' src='/image/ad4.png'></image>
+    <text>添加到进货商</text>
+  </view>
+  <view wx:if="{{!ifWholesaler}}" class='btn-line'></view>
+  <view class='btn-item'>
+    <image class='btn-icon' src='/image/exchange.png'></image>
+    <text>帮TA下单</text>
   </view>
 </view>

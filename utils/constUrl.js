@@ -121,3 +121,5 @@ export const copyGoodsUrl='/api/shop/goods/copy/{{originGoodsId}}'
 export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 //订单详情
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
+// 是否为进货商
+export const ifWholesalerUrl = "/inside/merchantpurchaser/{{storeId}}/purchaser/{{userId}}"

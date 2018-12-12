@@ -12,7 +12,9 @@ Page({
     userId:'',
     mobile:'',
     baseUrl: app.globalData.imageUrl,
-    data:''
+    data:'',
+    faceOrderIn:false,  //帮ta下单进入改为true
+    ifWholesaler:true //添加进货商按钮
   },
   calling: function () {
     var mobile = this.data.data.mobile
@@ -21,6 +23,16 @@ Page({
       success: function () {
       },
       fail: function () {
+      }
+    })
+  },
+  faceOrder(options){
+    Api.ifWholesaler({ userId: this.data.userId}).then(res=>{
+      if (options.entry == "faceOrder") {
+        this.setData({
+          faceOrderIn: true,
+          ifWholesaler: res.obj
+        })
       }
     })
   },
@@ -40,6 +52,9 @@ Page({
         data:obj
       })
     })
+
+    this.faceOrder(options);
+    
   },
   // 监听input
   watchInput: function (event) {

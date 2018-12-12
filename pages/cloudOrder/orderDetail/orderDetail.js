@@ -7,13 +7,13 @@ Page({
    * 页面的初始数据
    */
   data: {
-    returnModal:false
+    returnModal: false
   },
-  gotoStore(){
+  gotoStore() {
 
   },
   getData() {
-    app.http.getRequest('/admin/yunstore/order/' + this.data.num).then(res=>{
+    app.http.getRequest('/admin/yunstore/order/' + this.data.num).then(res => {
       this.setData({
         msg: res.obj
       })
@@ -21,25 +21,25 @@ Page({
   },
   buy() {
     wx.navigateTo({
-      url: '../../casher/casher?num=' + this.data.num +'&type=cloud' 
+      url: '../../casher/casher?num=' + this.data.num + '&type=cloud'
     })
   },
-  
-  getUser(){
-    Api.userInfor().then(res=>{
+
+  getUser() {
+    Api.userInfor().then(res => {
       if (res.obj) {
         this.setData({
           user: res.obj
         })
-      }  
+      }
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
-      num:options.num
+      num: options.num
     })
     this.getUser()
   },
@@ -47,42 +47,42 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     this.getData();
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 

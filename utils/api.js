@@ -113,6 +113,7 @@ import {
   tempSortUrl,
   threeFloorListUrl,
   orderDetailUrl,
+  ifWholesalerUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -685,6 +686,11 @@ function threeFloorList(data) {
 function getOrderDetail(data){
   return app.http.getRequest(orderDetailUrl,data);
 }
+//是否进货商
+function ifWholesaler(data){
+  data = initStoreId(data);  
+  return app.http.getRequest(ifWholesalerUrl,data);
+}
 /**
  * 获取formId
  */
@@ -732,6 +738,7 @@ function getStoreId() {
   }
 }
 module.exports = {
+  ifWholesaler: ifWholesaler,
   getOrderDetail: getOrderDetail,
   threeFloorList: threeFloorList,
   copyGoods: copyGoods,
