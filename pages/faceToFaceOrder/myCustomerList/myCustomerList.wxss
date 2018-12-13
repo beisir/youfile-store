@@ -1,0 +1,83 @@
+/* pages/faceToFaceOrder/myCustomerList/myCustomerList.wxss */
+page{
+  font-size: 28rpx;
+  color: #333;
+}
+/* 搜索 */
+.cus-search-box{
+  padding: 0 50rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  background: #fff;
+}
+.cus-search-icon{
+  width: 42rpx;
+  height: 42rpx;
+  margin-right:20rpx; 
+}
+/* 切换 */
+.nav-box{
+  display: flex;
+  justify-content: space-around;
+  height: 80rpx;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+.nav-item{
+  height: 77rpx;
+  line-height: 77rpx;
+  border-bottom: 4rpx solid #fff;
+  padding: 0 15rpx;
+}
+.nav-ac{
+  border-color: #ca7;
+  color: #ca7
+}
+/* 列表 */
+.flex-center{
+  display: flex;
+  align-items: center;
+}
+.list-box{
+  margin: 20rpx 20rpx 40rpx;
+  background: #fff;
+  border-radius: 10rpx;
+}
+.user-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 120rpx;
+  font-size: 30rpx;
+  padding: 0 30rpx;
+  font-weight: 600;
+}
+.user-icon{
+  height: 66rpx;
+  width: 66rpx;
+  margin-right: 30rpx;
+  border-radius: 50%;
+}
+
+.help-btn{
+  color: #ca7;
+  border: 2rpx solid #ca7;
+  text-align: center;
+  width: 160rpx; 
+  height: 60rpx;
+  font-size: 26rpx;
+  line-height: 60rpx;
+}
+
+.line-border{
+  margin-left: 125rpx;
+  height: 1rpx;
+  background: #ddd;
+}
+.gray-num{
+  font-size: 26rpx;
+  color:#999;
+  text-align: center;
+}

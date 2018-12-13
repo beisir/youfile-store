@@ -30,7 +30,7 @@ Page({
           app.globalData.switchStore = true;
           app.globalData.userShowTip = true;
           wx.switchTab({
-            url: "../../page/user/user",
+            url: "../../page/user/user?layerText=请登陆购买账号后，点击小云店工作台初始化账户",
           })
         }
       } else {

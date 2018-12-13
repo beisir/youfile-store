@@ -17,11 +17,11 @@ Page({
       title: "待付款",
       state: 'unpaid'
     }, {
-      title: "已付款",
-      state: "paid"
+        title: "待发货",
+        state: "wait_deliver"
     }, {
       title: "待收货",
-      state: "shipped"
+        state: "delivered"
     }, {
       title: "已完成",
       state: "finish"
@@ -248,7 +248,7 @@ Page({
       //this.resetData(this.data.orderList.obj.result)
       if (res.obj && res.obj.result) {
         this.setData({
-          showList: res.obj.result
+          showList: this.data.showList.concat(res.obj.result)
         })
       }
     })

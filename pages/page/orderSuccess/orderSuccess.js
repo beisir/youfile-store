@@ -1,5 +1,6 @@
 // pages/page/orderSuccess/orderSuccess.js
 const app = getApp();
+import API from "../../../utils/api.js"
 Page({
 
   /**
@@ -12,7 +13,7 @@ Page({
     orderSuccessHiddenBtn:false,
   },
   getData() {
-    app.http.getRequest("/api/order/byordernumber/" + this.data.num).then((res) => {
+    API.getOrderDetail({ orderNumber: this.data.num }).then((res) => {
       this.setData({
         user: res.obj,
         price: res.obj.orderAmount.toFixed(2)        
@@ -21,7 +22,7 @@ Page({
   },
   toDetail(){
     let type = this.data.user.orderCategory; //订单分类[1 进货单|2 小云店订单|3 普通订单]
-    let sendType = this.data.user.orderType; //订单类型[0 其他|1 门店自提|2 物流配送]
+    let sendType = this.data.user.logisticsMode; //订单类型[0 其他|1 门店自提|2 物流配送]
     let url = "";
     if (type == 1 && sendType == 1){
       // url = "../stockSelf/stockSelf";
