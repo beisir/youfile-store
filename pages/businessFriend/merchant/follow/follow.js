@@ -35,6 +35,10 @@ Page({
     })
   },
   searchBtn: function (e) {
+    var val = this.data.value
+    if (!val){
+      return
+    }
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       detailList: []
@@ -94,12 +98,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    wx.stopPullDownRefresh();
     this.setData({
       detailList: [],
     })
     app.pageRequest.pageData.pageNum = 0
     this.getList()
-    wx.stopPullDownRefresh();
   },
 
   /**

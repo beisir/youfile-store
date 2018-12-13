@@ -40,15 +40,16 @@
   <button bindtap='confirmDetele'>确定</button>
 </view>
 </mes>
-<view class="goods-ser">
-  <input placeholder='输入商品名称' bindconfirm='blurInputEvent'  value="{{value}}" bindinput='changeValue' />
+<navigator class="goods-ser" url='../serStatus/serStatus'>
+ <!-- bindconfirm='blurInputEvent' bindinput='blurInputEvent'  -->
+  <input placeholder='输入商品名称' disabled='disabled'  value="{{value}}" />
     <image class="home-ser"  src="/image/search.png"></image>
     <view class='home-img'>
-      <view bindtap='blurInputEvent'>
+      <view >
         搜索
       </view>
     </view>
-</view>
+</navigator>
 <view class='st-title'>
   <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中<view></view></view>
   <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中<view></view></view>
@@ -96,7 +97,7 @@
       <view>
         <image src="/image/nohome.png"></image>
       </view>
-      暂时还没有商品哦！
+      搜索结果为空！
     </view>
   </view>
 </scroll-view>

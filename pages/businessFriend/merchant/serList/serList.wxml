@@ -1,9 +1,12 @@
 <view class='bf-imput'>
    <view class="goods-ser">
-    <input placeholder="输入进货商名称、手机号"   bindconfirm="searchBtn"   value="{{value}}"/>
+    <input placeholder="输入进货商名称、手机号"   bindconfirm="searchBtn" bindinput='changeValue'   value="{{value}}"/>
     <image class="home-ser"  src="/image/search.png"></image>
-    <view class='home-img'>
+    <view style='top:18rpx;right:90rpx' class='home-img' bindtap='emptyInput'>
       <image  src="/image/ser.png"></image>
+    </view>
+    <view class='home-img' bindtap='searchBtn' >
+        搜索
     </view>
   </view>
 </view>

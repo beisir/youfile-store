@@ -37,11 +37,11 @@ Page({
       value:value
     })
   },
-  blurInputEvent:function(){
-    wx.navigateTo({
-      url: '../serStatus/serStatus?value='+this.data.value,
-    })
-  },
+  // blurInputEvent:function(){
+  //   wx.navigateTo({
+  //     url: '../serStatus/serStatus?value='+this.data.value,
+  //   })
+  // },
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
     //开始触摸时 重置所有删除

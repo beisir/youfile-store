@@ -77,8 +77,14 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  searchBtn: function (e) {
+  changeValue: function (e) {
     var val = e.detail.value
+    this.setData({
+      value: val
+    })
+  },
+  searchBtn: function (e) {
+    var val = this.data.value
     wx.navigateTo({
       url: '../serList/serList?value=' + val,
     })

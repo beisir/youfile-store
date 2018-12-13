@@ -48,7 +48,7 @@
 <mes show="{{show}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
     <text>加商友合作可享批发价</text>
-    <button bindtap='confirm'>确定</button>
+    <button bindtap='confirm'>我要合作</button>
   </view>
 </mes>
  <!--是否复制-->
@@ -157,15 +157,15 @@
             </view>
           </navigator>
           <view class="result-text">
-            <text>{{item.name}}</text>
+            <text data-id='{{item.id}}' bindtap='lookDetails'>{{item.name}}</text>
           </view>
           <view class="result-text result-text1">
             零售
-            <text  class='h-font'>￥ {{item.sellPrice}}</text>
+            <text  class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
             <view>
               批发
-              <text wx:if='{{limitShow!=1}}'>￥ {{item.wholesalePrice}}</text>
-              <image wx:if='{{limitShow==1}}' src='/image/wh.png'></image>
+              <text wx:if='{{limitShow!=1}}' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.wholesalePrice}}</text>
+              <image wx:if='{{limitShow==1}}'  bindtap='addWholesalePrice' src='/image/wh.png'></image>
               <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
                 <image wx:if='{{limitShow==3}}' bindtap='copyGoods' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" />
             </view>

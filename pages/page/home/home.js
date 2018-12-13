@@ -95,9 +95,9 @@ Page({
     this.selectComponent("#storeOrder").open();
   },
   openStore:function(){
-    // wx.navigateTo({
-    //   url: '../../cloudOrder/newCloud/newCloud',
-    // })
+    wx.navigateTo({
+      url: '../../cloudOrder/newCloud/newCloud',
+    })
   },
   // 一键入库
   copyGoods:function(e){
@@ -226,10 +226,22 @@ Page({
       url: '../../businessFriend/information/information?status=0&send=&accept='+Id+'&remark=&logo='+logo+'&name='+name,
     })
   },
+  addWholesalePrice: function () {
+    this.setData({
+      show: true
+    })
+  },
   confirm:function(){
     this.setData({
       show: false,
       isShow:true,
+    })
+    this.addTip()
+  },
+  lookDetails: function (e) {
+    var goodsId = e.target.dataset.id
+    wx.navigateTo({
+      url: '../goodsDetails/goodsDetails?goodsId=' + goodsId,
     })
   },
   editFun:function(e){
@@ -592,6 +604,7 @@ Page({
       result:[]
     })
   },
+
   /**
    * 生命周期函数--监听页面显示
    */

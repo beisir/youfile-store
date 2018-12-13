@@ -62,7 +62,8 @@ Page({
     })
   },
   searchBtn: function (e) {
-    var val = e.detail.value
+    var val = this.data.value
+    if (!val){return}
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       detailList: []
@@ -91,7 +92,13 @@ Page({
 
       })
   },
+  emptyInput:function(){
+    this.setData({
+      value:''
+    })
+  },
   onShow: function () {
+    if (!this.data.value){return}
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       detailList:[],
@@ -122,6 +129,8 @@ Page({
       value: ''
     })
     app.pageRequest.pageData.pageNum = 0
+    var val = this.data.value
+    if (!val) { return }
     this.getList({ keyword: this.data.value })
   },
 
@@ -129,6 +138,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var val = this.data.value
+    if (!val) { return }
     var val = this.data.value
     this.getList({ keyword: val })
   },
