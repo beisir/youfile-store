@@ -19,11 +19,11 @@ Page({
       title: "待付款",
       state: 'unpaid'
     }, {
-      title: "已付款",
-      state: "paid"
+      title: "待发货",
+        state: "wait_deliver"
     }, {
       title: "待收货",
-      state: "shipped"
+        state: "delivered"
     }, {
       title: "已完成",
       state: "finish"
@@ -335,7 +335,7 @@ Page({
     app.pageRequest.pageGet("/admin/order/store/" + this.data.storeId+"/ordercategory/1/orderstatus/" + this.data.whitch, {
       keyWords: this.data.keyword ? this.data.keyword : ""
     }).then((res) => {
-      if (!res.obj){return}
+      if (!res.obj || !res.obj.result){return}
       this.setData({
         showList: this.data.showList.concat(res.obj.result)
       })

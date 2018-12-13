@@ -68,23 +68,24 @@
 </view>
 <view wx:if="{{showList.length>0}}">
   <view class='cf-cont' wx:for="{{showList}}" wx:key="{{index}}">
-    <view class='c-title' bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.orderType}}' data-num="{{item.orderNumber}}">
+    <view class='c-title' bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.logisticsMode}}' data-num="{{item.orderNumber}}">
       <!-- <navigator class='c-title' url='{{item.status<6?"../orderDetails/orderDetails":"../orderSelf/orderSelf"}}?status={{item.status}}'> -->
 
       <image src="/image/preson.png"></image> {{item.userInfo.nickName}}
       <text class='or-phone'>{{item.userInfo.mobile}}</text>
-      <view wx:if="{{item.orderType==1}}" class='order-zt'>自提</view>
+      <view wx:if="{{item.logisticsMode==1}}" class='order-zt'>自提</view>
 
       <view bindtap="onChangeShowState">
         <!-- 缺少代填表 -->
         <text wx:if="{{item.orderStatus=='unpaid'}}">待付款</text>
-        <text wx:if="{{item.orderStatus=='paid' && item.orderType==2 && item.orderStatusChildSta !=='unForm'}}">待发货</text>
-        <text wx:if="{{item.orderStatus=='shipped'  }}">待收货</text>
+        <text wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==2}}">待发货</text>
+        <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && item.isForm}}">待收货</text>
+        <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==1}}">待取货</text>
+        <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && !item.isForm}}">待填表</text>
         <text wx:if="{{item.orderStatus=='finish' }}">交易成功 </text>
         <text wx:if="{{item.orderStatus=='closed' }}">交易关闭</text>
-        <text wx:if="{{item.orderStatus=='cancelled' }}">交易取消</text>
-        <text wx:if="{{item.orderStatus=='paid' && item.orderType==1}}">待取货</text>
-        <text wx:if="{{item.orderStatus=='paid' && item.orderType==2 && item.orderStatusChildSta=='unForm'}}">待填表</text>
+        <text wx:if="{{item.orderStatus=='canceled' }}">交易取消</text>
+       
 
         <!-- <text wx:if="{{item.status==0}}">待付款</text>
             <text wx:if="{{item.status==1}}">已付款</text>
@@ -99,27 +100,27 @@
       </view>
       <!-- </navigator> -->
     </view>
-    <view bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.orderType}}' data-num="{{item.orderNumber}}">
+    <view bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.logisticsMode}}' data-num="{{item.orderNumber}}">
       <view class="cart-box">
-        <view class="cart-list" wx:for="{{item.goodsInfos}}" wx:key="{{index}}">
+        <view class="cart-list" wx:for="{{item.goodsInfoList}}" wx:key="{{index}}">
           <navigator>
             <image class="cart-thumb" src="{{baseUrl+item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </navigator>
-          <view class='ct-text ct-text1'>￥{{item.orderDetails.unitPrice}}
-            <view>x {{item.orderDetails.num}}</view>
+          <view class='ct-text ct-text1'>￥{{item.goodsSkuInfoVOList.unitPrice}}
+            <view>x {{item.goodsSkuInfoVOList.num}}</view>
           </view>
           <view class='ct-title ct-title1'>{{item.goodsName}}</view>
-          <text class="cart-pro-name">规格：{{item.orderDetails.goodsDesc}}</text>
+          <text class="cart-pro-name">规格：{{item.goodsSkuInfoVOList.goodsDesc}}</text>
         </view>
       </view>
     </view>
     <view class='cf-button'>
       <!-- <text wx:if="{{item.orderStatus=='unpaid'}}">待付款</text>
-            <text wx:if="{{item.orderStatus=='paid' && item.orderType==2}}">待发货</text>
-            <text wx:if="{{item.orderStatus=='shipped'  }}">待收货</text>
+            <text wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==2}}">待发货</text>
+            <text wx:if="{{item.orderStatus=='delivered'  }}">待收货</text>
             <text wx:if="{{item.orderStatus=='finish' }}">交易成功 </text>
             <text wx:if="{{item.orderStatus=='closed' }}">交易关闭</text>
-            <text wx:if="{{item.orderStatus=='paid' && item.orderType==1}}">待取货</text>
+            <text wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==1}}">待取货</text>
             <text wx:if="{{item.status==2}}">待填表</text> -->
       <view class='or-text'>共
         <text class='or-font1'>{{item.num}}</text>件商品
@@ -130,40 +131,38 @@
       <view class='or-last' wx:if="{{item.orderStatus=='unpaid'}}">
         <button class='or-active'> 提醒付款 </button>
         <button bindtap='showModal' data-type='change' data-num='{{item.orderNumber}}' data-change="{{item.orderAmount}}" class='or-active'> 整单改价 </button>
-        <button wx:if="{{item.orderType==2}}" class='or-active' data-type='ex' bindtap='showModal' data-num="{{item.orderNumber}}">收款发货</button>
-        <button wx:if="{{item.orderType==1}}" class='or-active' data-type='sureGet' bindtap='showModal' data-num="{{item.orderNumber}}">确认收款</button>
+        <button wx:if="{{item.logisticsMode==2}}" class='or-active' data-type='ex' bindtap='showModal' data-num="{{item.orderNumber}}">收款发货</button>
+        <button wx:if="{{item.logisticsMode==1}}" class='or-active' data-type='sureGet' bindtap='showModal' data-num="{{item.orderNumber}}">确认收款</button>
         <button data-num="{{item.orderNumber}}" data-type='cancel' bindtap='showModal'>关闭订单</button>
       </view>
 
       <!-- 已付款  -->
-      <view class='or-last' wx:if="{{item.orderStatus=='paid' && item.orderType==2 && item.orderStatusChildSta !=='unForm'}}">
+      <view class='or-last' wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==2}}">
         <button class='or-active' data-num="{{item.orderNumber}}" data-type='ex' bindtap='showModal'> 我要发货 </button>
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
       </view>
-      <view class='or-last' wx:if="{{item.orderStatus=='paid' && item.orderType==1}}">
-        <button class='or-active' data-type='goodCode' data-num='{{item.orderNumber}}' bindtap='showModal'> 验证取货码 </button>
-        <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
-      </view>
+      
 
-      <!-- 待收货 缺少待填单-->
-      <view class='or-last' wx:if="{{item.orderStatus=='paid' && item.orderType==2 && item.orderStatusChildSta=='unForm'}}">
-        <button class='or-active' data-type='ex2' bindtap='showModal'> 填写运单号 </button>
+      <!-- 待收货-->
+      <view class='or-last' wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2}}">
+        <button class='or-active' data-type='ex2' bindtap='showModal' wx:if="{{!item.isForm}}"> 填写运单号 </button>
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
+        <!-- <button wx:if="{{item.logisticsMode==2}}" class='or-active'> 查看物流 </button> -->        
       </view>
-      <view class='or-last' wx:if="{{item.orderStatus=='shipped'}}">
-        <!-- <button wx:if="{{item.orderType==2}}" class='or-active'> 查看物流 </button> -->
+      <view class='or-last' wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==1}}">
+        <button class='or-active' data-type='goodCode' data-num='{{item.orderNumber}}' bindtap='showModal'> 验证取货码 </button>
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
       </view>
 
       <!-- 已完成 -->
       <view class='or-last' wx:if="{{item.orderStatus=='finish'}}">
-        <!-- <button class='or-active' wx:if="{{item.orderType==2}}"> 查看物流 </button> -->
+        <!-- <button class='or-active' wx:if="{{item.logisticsMode==2}}"> 查看物流 </button> -->
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
         <!-- <button data-num="{{item.orderNumber}}" data-type="del" bindtap='showModal'> 删除订单 </button> -->
       </view>
 
       <!-- 已关闭 -->
-      <!-- <view class='or-last' wx:if="{{item.orderStatus=='closed' || item.orderStatus=='cancelled'}}">
+      <!-- <view class='or-last' wx:if="{{item.orderStatus=='closed' || item.orderStatus=='canceled'}}">
         <button data-num="{{item.orderNumber}}" data-type="del" bindtap='showModal'> 删除订单 </button>
       </view> -->
 

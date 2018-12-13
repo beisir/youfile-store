@@ -47,7 +47,7 @@ Page({
         return false;
       }
       obj.userPhone = phone;
-      obj.orderType = 1;
+      obj.logisticsMode = 1;
     }else if(type == 1){
       //物流
       let add = this.data.address;
@@ -59,7 +59,7 @@ Page({
         return false;
       }
       obj.consigneeInfo = add;
-      obj.orderType = 2;
+      obj.logisticsMode = 2;
       obj.postageinfo = {
         postageType: this.data.postType   //邮费
       }
@@ -89,7 +89,7 @@ Page({
       obj.receiptInfo = this.data.invoice;  //发票
     }
     obj.userMemo = this.data.msg  //留言
-    obj.orderGoods = goodsArr;  //商品
+    obj.orderDetailReqVOList = goodsArr;  //商品
     obj.orderCategory = this.data.orderCategory //订单种类
 
    
