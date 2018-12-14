@@ -64,7 +64,7 @@
 <view wx:if="{{showList.length>0}}">
   <view class='cf-cont' wx:for="{{showList}}" wx:key="{{index}}">
     <view class='c-title' bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.logisticsMode}}' data-num="{{item.orderNumber}}">
-      <image src="/image/preson.png"></image> {{item.userInfo.nickName}}
+      <image src="/image/preson.png"></image> {{filter.my_slice(item.userInfo.nickName,5)}}
       <text class='or-phone'>{{item.userInfo.mobile}}</text>
       <view wx:if="{{item.logisticsMode==1}}" class='order-zt'>自提</view>
       <view bindtap="onChangeShowState">
@@ -137,12 +137,14 @@
       <view class='or-last' wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==2}}">
         <button class='or-active' data-num="{{item.orderNumber}}" data-type='ex' bindtap='showModal'  wx:if="{{!item.isForm}}"> 我要发货 </button>
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
+        <button data-num="{{item.orderNumber}}" data-type='cancel' bindtap='showModal'>关闭供货单</button>        
       </view>
 
       <!-- 待收货-->
       <view class='or-last' wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==1}}">
         <button class='or-active' data-type='goodCode' data-num='{{item.orderNumber}}' bindtap='showModal'> 验证取货码 </button>
         <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
+        <button data-num="{{item.orderNumber}}" data-type='cancel' bindtap='showModal'>关闭供货单</button>        
       </view>
       <view class='or-last' wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2}}">
         <!-- <button class='or-active'> 查看物流 </button> -->
@@ -162,32 +164,6 @@
         <button data-num="{{item.orderNumber}}" data-type="del" bindtap='showModal'> 删除订单 </button>
       </view> -->
 
-
-      <view class='or-last' wx:if="{{item.status==0}}">
-        <button class='or-active'> 提醒付款 </button>
-        <button class='or-active'> 改价 </button>
-        <button bindtap='closeAlert'>关闭供货单</button>
-      </view>
-      <view class='or-last' wx:if="{{item.status==1}}">
-        <button class='or-active' bindtap='chooseAddress1'> 我要发货 </button>
-      </view>
-      <view class='or-last' wx:if="{{item.status==2}}">
-        <button class='or-active' bindtap='chooseAddress2'> 填写运单号 </button>
-      </view>
-      <view class='or-last' wx:if="{{item.status==3}}">
-        <!-- <button class='or-active'> 查看物流 </button> -->
-      </view>
-      <view class='or-last' wx:if="{{item.status==4}}">
-        <!-- <button class='or-active'> 查看物流 </button> -->
-      </view>
-      <view class='or-last' wx:if="{{item.status==6}}">
-        <button class='or-active'> 提醒付款 </button>
-        <button class='or-active'> 改价 </button>
-        <button>关闭供货单</button>
-      </view>
-      <view class='or-last' wx:if="{{item.status==7}}">
-        <button class='or-active' bindtap='chooseAddress'> 验证取货码 </button>
-      </view>
     </view>
   </view>
 </view>

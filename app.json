@@ -1,9 +1,9 @@
 {
   "pages":[
     "pages/page/user/user",
+    "pages/role/order/order",
     "pages/page/home/home",
     "pages/role/supplyOrder/supplyOrder",
-    "pages/role/order/order",
     "pages/page/order/order",
     "pages/faceToFaceOrder/myCustomerList/myCustomerList",
     "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",

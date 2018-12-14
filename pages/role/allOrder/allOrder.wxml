@@ -379,11 +379,13 @@
     <block wx:if="{{self=='false'}}">
       <button class='or-active' data-type='ex' bindtap='showModal'> 我要发货 </button>
     </block>
+    <button data-type='cancel' bindtap='showModal'>关闭{{orderName}}</button>
   </block>
 
   <!-- 待收取货 -->
   <block wx:if="{{self=='true' && status=='delivered'}}">
     <button data-type='goodCode' bindtap='showModal' class='or-active'> 验证取货码 </button>
+    <button data-type='cancel' bindtap='showModal'>关闭{{orderName}}</button>    
   </block>
 
   <block wx:if="{{status=='delivered' && self=='false'}}">
