@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "帮TA下单"
+  "navigationBarTitleText": "帮TA下单",
+  "usingComponents": {
+    "layer":"../../../assembly/layer/layer"
+  }
 }

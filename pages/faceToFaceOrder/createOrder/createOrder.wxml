@@ -1,11 +1,14 @@
-<view class='warn-box' wx:if="{{warn=='money'}}">单笔支付金额不可超过10000</view>
+<layer id="layer">
+  
+</layer>
+<view class='warn-box' wx:if="{{warnText}}">{{warnText}}</view>
 <view class='user-title'>
   <view class='user-icon-box'>
     <image class='user-icon' mode="aspectFit" src='/image/eee.png'></image>
   </view>
   <text class='user-name'>刘德华</text>
 </view>
-<view class='common-box flex-between price-box'>
+<view class='common-box flex-between price-box {{redColor?"red-color":""}}'>
   <text class="item-title">订单金额</text>
   <view class='flex-center'>
     <input type='digit' bindinput='watchInput' data-type="money" class='price-input'></input>
@@ -27,7 +30,7 @@
     <image src='/image/icl.png' class='right-tri'></image>
   </view>
 
-  <view class='remark-box flex-center'>
+  <view class='remark-box flex-center' bindtap='addTip'>
     <text class='remark-title'>添加备注说明</text> 
   </view>
 </view>

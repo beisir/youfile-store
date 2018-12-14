@@ -5,32 +5,45 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    warnText:""
   },
   watchInput(e){
-    console.log(e)
     let type = e.currentTarget.dataset.type,
         val = e.detail.value,
         obj = {};
     switch(type){
       case "money":
         let m = /^(([1-9][0-9]*)|([0]\.\d{1,2})|([1-9][0-9]*\.\d{1,2}))$/.test(val);
-        if(val<10000){
-          obj.warn = false;
-        } else {
-          obj.warn = 'money';            
+        if(m){
+          if (val <= 10000) {
+            obj.warnText = false;
+            obj.redColor = false;
+          } else {
+            obj.warnText = '单笔支付金额不可超过10000';
+            obj.redColor = true
+          }
+          obj.money = val;  
+        }else{
+          obj.warnText = '请输入正确金额格式,最多两位小数';
+          obj.redColor = true;          
         }
-        obj.money = val;     
       break;
     }
     this.setData(obj)
   },
-
+  addTip(){
+    this.setData({
+      
+    })
+  },
+  tipShow(){
+    this.selectComponent("#layer").open();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.tipShow()
   },
 
   /**

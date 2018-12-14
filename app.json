@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/page/home/home",
+    "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/businessFriend/merchant/index/index",
     "pages/page/workIndex/workIndex",
     "pages/page/user/user",

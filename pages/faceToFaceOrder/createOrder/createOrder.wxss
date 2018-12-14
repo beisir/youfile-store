@@ -29,7 +29,7 @@ page{
   width: 122rpx;
   height: 122rpx;
   border-radius: 10rpx;
-  margin: 70rpx 0 30rpx;
+  margin: 30rpx 0;
 }
 .user-icon{
   max-width: 122rpx;
@@ -143,4 +143,8 @@ page{
   height: 60rpx;
   line-height: 60rpx;
   text-align: center;
+}
+
+.red-color{
+  color: #d23636;
 }
