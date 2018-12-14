@@ -79,7 +79,8 @@ Page({
     })
   },
   searchBtn: function (e) {
-
+    var val = this.data.value
+    if (!val) { return }
     this.emptyArr()
   },
   getList: function () {
@@ -155,8 +156,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.emptyArr()
     wx.stopPullDownRefresh();
+    this.emptyArr()
   },
 
   /**

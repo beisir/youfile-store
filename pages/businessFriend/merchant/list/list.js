@@ -36,6 +36,9 @@ Page({
   },
   searchBtn: function (e) {
     var val = this.data.value
+    if (!val){
+      return
+    }
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       detailList: []
@@ -88,10 +91,11 @@ Page({
   onPullDownRefresh: function () {
     this.setData({
       detailList: [],
-      value: ''
     })
+    wx.stopPullDownRefresh();
+    var val = this.data.value
     app.pageRequest.pageData.pageNum = 0
-    this.getList()
+    this.getList({ keyword: val })
   },
 
   /**

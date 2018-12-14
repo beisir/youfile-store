@@ -1,6 +1,9 @@
 <view class="goods-ser">
-    <input placeholder="输入进货商名称、手机号、备注名"  bindconfirm="searchBtn"   value="{{value}}"/>
+    <input placeholder="输入进货商名称、手机号、备注名"  bindconfirm="searchBtn" bindinput='changeValue'    value="{{value}}"/>
     <image class="home-ser"  src="/image/search1.png"></image>
+    <view class='home-img' bindtap='searchBtn' >
+        搜索
+    </view>
 </view>
 <view class='bf-cont' wx:if='{{detailList.length>0}}'>
   <view class='bf-weui'>
@@ -8,7 +11,7 @@
     <view class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}'>
       <navigator wx:if='{{item.status==2}}'  url="../reach/reach?accept={{item.send}}">
         <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}?x-oss-process=style/logo"></image></view>
-          <text >{{item.nickName}}</text>
+          <text>{{item.remark==null || item.remark==''?item.nickName:item.remark}}</text>
           <view class='nbf-font'>{{item.greet}}</view>
           <view class='weui-view'>
             已添加

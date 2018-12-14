@@ -41,7 +41,7 @@
       <view>
         <image src="/image/nohome.png"></image>
       </view>
-      暂时还没有商品哦！
+      搜索商品为空！
     </view>
   </view>
 </view>

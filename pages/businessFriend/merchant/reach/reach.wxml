@@ -8,7 +8,7 @@
     <view class='weui-view'>
       <image  mode="widthFix" src="/image/icl.png"></image>
     </view>
-    <view class='re-font'>{{note}}</view>
+    <view wx:if='{{note!=""}}' class='re-font'>{{note}}</view>
   </view>
 </navigator>
 <view class='bf-cont'>

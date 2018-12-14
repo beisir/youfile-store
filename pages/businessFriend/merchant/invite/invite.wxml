@@ -2,7 +2,7 @@
 <view class='bf-cont'>
   <view class='bf-weui add-bf-weui add-bf-weui1'>
     <view class="weui_cells weui_cells">
-      <textarea  placeholder=''   bindinput="searchBtn" value='{{val1}}{{storeName}}{{val2}}'></textarea>
+      <textarea  placeholder=''   bindinput="searchBtn" value='{{allName}}'></textarea>
       <view class='weui-view'  bindtap='emptyVal'>
         <image  mode="widthFix"  src="/image/ser.png"></image>
       </view>

@@ -14,14 +14,14 @@
       <text>{{userName}}</text><text  wx:if='{{success}}'>（战略合作）</text>
     </view>
   </view>
-  <view class='data-cont' wx:if='{{oneGreet}}'  wx:if='{{greet.length!=0}}'>
-   <view wx:for='{{greet}}' wx:key='{{index}}'><text>{{item.name}}：</text><view>{{item.mes}}</view></view>
+  <view class='data-cont'  wx:if='{{greet!=""}}'>
+   <view><text>{{name}}：</text><view>{{greet}}</view></view>
   </view>
 </view>
 <view class='bf-cont'>
   <view class='bf-weui add-bf-weui' bindtap='setName'>
     <view class="weui_cells">
-      <text class="bf-font">设置备注 </text>
+      <text class="bf-font">设置备注 </text><text style='font-weight:none;margin-left:30rpx'>{{value}}</text>
       <view class='weui-view'>
         <image  mode="widthFix" src="/image/icl.png"></image>
       </view>
@@ -37,6 +37,6 @@
   </view>
 </view>
 <view class='bf-btn'  wx:if='{{success}}'  bindtap='urlHome'>去进货</view>
-<view class='bf-btn'  wx:if='{{aginGreet}}' bindtap='invitation'>再次添加到批发商</view>
+<view class='bf-btn'  wx:if='{{aginGreet}}' bindtap='invitation'>再次添加到进货商</view>
 <view class='bf-btn'  wx:if='{{oneGreet}}'  bindtap='passFunc'>通过验证</view>
 <view class='bf-btn'  wx:if='{{pass}}'  bindtap='invitation'>添加到进货商</view>

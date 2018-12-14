@@ -17,11 +17,11 @@ Page({
       title: "待付款",
       state: 'unpaid'
     }, {
-      title: "已付款",
-      state: "paid"
+        title: "待发货",
+        state: "wait_deliver"
     }, {
       title: "待收货",
-      state: "shipped"
+        state: "delivered"
     }, {
       title: "已完成",
       state: "finish"
@@ -29,22 +29,7 @@ Page({
     navindex: 0,
     whitch: 'all', //切换
     //理由
-    reason: [{
-      title: "无法联系上买家",
-      selected: true
-    }, {
-      title: "买家误拍或重拍",
-      selected: false
-    }, {
-      title: "买家无诚意完成交易",
-      selected: false
-    }, {
-      title: "缺货无法交易",
-      selected: false
-    }, {
-      title: "其他",
-      selected: false
-    }],
+    reason: [{ title: "我不想买了", selected: true }, { title: "信息填写错误，重新拍", selected: false }, { title: "卖家缺货", selected: false }, { title: "同城见面交易", selected: false }, { title: "其他", selected: false }],
     cancelIndex: 0,
 
 
@@ -248,7 +233,7 @@ Page({
       //this.resetData(this.data.orderList.obj.result)
       if (res.obj && res.obj.result) {
         this.setData({
-          showList: res.obj.result
+          showList: this.data.showList.concat(res.obj.result)
         })
       }
     })

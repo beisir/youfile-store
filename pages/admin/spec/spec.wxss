@@ -3,7 +3,7 @@
   width: 40rpx;height: 40rpx;position: absolute;right: 0;top:6rpx;
 }
 page{
-  height: 100%;
+  height: 99%;
 }
 .sp-color image.img{
   right: 70rpx;
@@ -76,7 +76,7 @@ page{
   color: #fff;background: #CCAA77;border:2rpx solid #CCAA77;
 }
 swiper {
-  height:110%;
+  height:85%;
 }
 .spec-title{
  font-size: 46rpx;font-weight: bold;text-align: center;margin-bottom: 80rpx;margin-top:40rpx;

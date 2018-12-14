@@ -22,7 +22,8 @@ Page({
         if (detailList != null) {
           for (var i = 0; i < detailList.length;i++){
             if(detailList[i].greet!=null){
-              var greet = (detailList[i].greet).split("#;#")[0]
+              var arr = (detailList[i].greet).split("#;#")
+              var greet = arr[arr.length - 1]
             }else{
               var greet=''
             }
@@ -44,8 +45,15 @@ Page({
 
       })
   },
-  searchBtn: function (e) {
+  changeValue: function (e) {
     var val = e.detail.value
+    this.setData({
+      value: val
+    })
+  },
+  searchBtn: function (e) {
+    var val = this.data.value
+    if (!val){return}
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       detailList: []
@@ -97,6 +105,7 @@ Page({
     })
     app.pageRequest.pageData.pageNum = 0
     this.getList({ userId: wx.getStorageSync('userId') })
+    wx.stopPullDownRefresh();
   },
 
   /**

@@ -19,7 +19,7 @@ Page({
     accept:'',
     pass:false,
     passCode:0,
-    greet:[],
+    greet:'',
     headPic:'',
     userName:'',
     mobile:'',
@@ -46,16 +46,15 @@ Page({
         send=options.send,
         storeId = this.data.storeId,
         accept = options.accept,
-        greetArr=[],
-        greet = (options.greet).split("#;#"),
         name = options.name,
         remark = options.remark,
         mobile = options.phone,
         headPic=options.logo
-    for (var i = 0; i < greet.length;i++){
-      if (Api.isEmpty(greet[i])){
-        greetArr.push({ mes: greet[i], name: name })
-      }
+    if (options.greet){
+      var greet = options.greet
+      this.setData({
+        greet: greet
+      })
     }
     if (accept && status!=3){
       Api.newUserInfor({ userId: accept })
@@ -80,7 +79,6 @@ Page({
       accept: accept,
       value: remark == "null" ? '' : remark,
       showName: remark == "null" ? '' : remark,
-      greet: greetArr,
       name:name,
       userName:name==null?'':name,
       headPic: headPic,
@@ -101,6 +99,10 @@ Page({
             aginGreet: true
           })
         } else {
+          this.setData({
+            value: '',
+            showName:'',
+          })
           this.setData({
             oneGreet: true
           })

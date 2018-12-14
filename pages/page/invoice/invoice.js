@@ -17,6 +17,9 @@ Page({
     invoice:{}  //发票信息
   },
   selectList(e){
+    this.setData({
+      invoice:{}
+    })
     const index1=e.currentTarget.dataset.index;
     let dataInvoice=this.data.dataInvoice;
     var array=this.data.dataInvoice
@@ -81,6 +84,15 @@ Page({
   },
 
   addWrite(e){
+    if(!this.data.com || !this.data.ordinary){
+      if (!this.data.invoice.invoiceTitle || !this.data.invoice.identificationNumber){
+        wx.showToast({
+          title: '请填写抬头以及识别号',
+          icon:'none'
+        })
+        return
+      }
+    }
     var pages = getCurrentPages();
     if (pages.length > 1) {
       //上一个页面实例对象
@@ -120,37 +132,48 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     this.cancelShow()
-
-    // if (options != {}){
-    //   let index = 0;
-    //   if (options.invoiceType=="个人"){
-    //     index = 1;
-    //   }else{
-    //     if (options.invoiceCategory == "普通发票"){
-    //       index = 2;
-    //     }else{
-    //       index = 3;
-    //     }
-    //   }
-    //   var array = this.data.dataInvoice
-    //   array.forEach((item, i, arr) => {
-    //     var sItem = "dataInvoice[" + i + "].selected"
-    //     if(i==index){
-    //       this.setData({
-    //         [sItem]: true,
-    //       })
-    //     }
-    //     this.setData({
-    //       [sItem]: false,
-    //     })
-    //   })
-
-      
-    //   this.setData({
-    //     invoice: options
-    //   })
-    // }
+    if (options.invoiceType){
+      let index = 0;
+      if (options.invoiceType=="个人"){
+        index = 1;
+      }else{
+        if (options.invoiceCategory == "普通发票"){
+          index = 2;
+        }else{
+          index = 3;
+        }
+      }
+      var array = this.data.dataInvoice
+      array.forEach((item, i, arr) => {
+        if(i==index){
+          item.selected = true;
+        }else{
+          item.selected = false;
+        }
+      })
+      this.setData({
+        invoice: options,
+        dataInvoice:array
+      })
+      if (index == 3) {
+        this.setData({
+          com: false,
+          ordinary: true,
+        })
+      } else if (index == 2) {
+        this.setData({
+          com: true,
+          ordinary: false,
+        })
+      } else {
+        this.setData({
+          com: true,
+          ordinary: true,
+        })
+      }
+    }
   },
 
   /**
