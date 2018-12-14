@@ -58,27 +58,31 @@ Page({
     })
   },
   searchBtn(e) {
+    var val = this.data.value
+    if (!val){return}
     this.initData()
     this.getList()
   },
   onLoad(options) {
-    var _this = this
-    this.initData()
-    if (options.value){
-      _this.setData({
-        value:options.value
-      },function(){
-        _this.getList()
-      })
-    }
+    // var _this = this
+    // this.initData()
+    // if (options.value){
+    //   _this.setData({
+    //     value:options.value
+    //   },function(){
+    //     _this.getList()
+    //   })
+    // }
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    var val = this.data.value
     this.initData()
-    this.getList()
     wx.stopPullDownRefresh();
+    if (!val) { return }
+    this.getList()
   },
   onShareAppMessage: (res) => {
     var img = '',
@@ -196,6 +200,8 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var val = this.data.value
+    if (!val) { return }
     this.getList()
   }
 })

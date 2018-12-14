@@ -120,6 +120,30 @@ Page({
       })
     }
   },
+  changeNum: function (e) {
+    var num = e.detail.value
+    if (num == '') { return }
+    num = num.replace(/\b(0+)/gi, "")
+    if (num == 0) {
+      num = 1
+    }
+    const index = e.currentTarget.dataset.index;
+    let detailList = this.data.detailList;
+    let storeId = this.data.storeId
+    detailList[index].shoppingCartSkuList[0].num = num;
+    detailList[index].num = num
+    var arr = this.updatePrice(num, index)
+    detailList[index].allGoodsAmount = arr[0]
+    detailList[index].allGoodsPf = arr[1]
+    var data = detailList[index].shoppingCartSkuList
+    var dataArr = []
+    dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId: storeId })
+    this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
+    this.setData({
+      detailList: detailList
+    });
+    this.getTotalPrice();
+  },
   //选择规格属性
   changeButton: function (e) {
     var that = this;
@@ -130,6 +154,12 @@ Page({
         specsTab: e.target.dataset.current,
       })
     }
+  },
+  lookDetails: function (e) {
+    var goodsId = e.target.dataset.id
+    wx.navigateTo({
+      url: '../goodsDetails/goodsDetails?goodsId=' + goodsId,
+    })
   },
   // 购买数量
   minusCount1: function () {
@@ -145,7 +175,7 @@ Page({
   },
   addCount1: function () {
     var num = this.data.numbers
-    num = num + 1
+    num = parseInt(num) + 1
     this.setData({
       numbers: num
     })
@@ -159,6 +189,11 @@ Page({
         currentTab: e.target.dataset.current,
       })
     }
+  },
+  urlHome: function () {
+    wx.switchTab({
+      url: '../home/home'
+    })
   },
   //关闭弹框
   closeAlert: function () {
@@ -420,7 +455,7 @@ Page({
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;
     let num = detailList[index].shoppingCartSkuList[0].num;
-    num = num + 1;
+    num = parseInt(num) + 1;
     let storeId = this.data.storeId
     detailList[index].shoppingCartSkuList[0].num = num;
     detailList[index].num = num
@@ -464,11 +499,76 @@ Page({
     });
     
   },
+  blurInput:function(e){
+    var num = e.detail.value
+    console.log(num)
+    if(num==''){
+      num = 1
+    }
+    const index = e.currentTarget.dataset.index;
+    let detailList = this.data.detailList;
+    let storeId = this.data.storeId
+    detailList[index].shoppingCartSkuList[0].num = num;
+    detailList[index].num = num
+    var arr = this.updatePrice(num, index)
+    detailList[index].allGoodsAmount = arr[0]
+    detailList[index].allGoodsPf = arr[1]
+    var data = detailList[index].shoppingCartSkuList
+    var dataArr = []
+    dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId: storeId })
+    this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
+    this.setData({
+      detailList: detailList
+    });
+    this.getTotalPrice();
+  },
+  blurInput1: function (e) {
+    var num = e.detail.value
+    if (num == '') {
+      num = 1
+    }
+    const index = e.currentTarget.dataset.index;
+    let detailList = this.data.detailList;
+    let storeId = this.data.storeId
+    detailList[index].num = num
+    detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
+    detailList[index].allGoodsAmount = num * detailList[index].sellPrice
+    var dataArr = []
+    dataArr.push({ goodsId: detailList[index]["goodsId"], num: num, skuCode: 0, storeId: storeId })
+    this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
+    this.setData({
+      detailList: detailList
+    }, function () {
+      this.getTotalPrice();
+    });
+  },
+  changeNum1: function (e) {
+    var num = e.detail.value
+    const index = e.currentTarget.dataset.index;
+    let detailList = this.data.detailList;
+    if (num == '') { return }
+    num = num.replace(/\b(0+)/gi, "")
+    if (num == 0) {
+      num = 1
+    }
+    let storeId = this.data.storeId
+    detailList[index].num = num
+    detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
+    detailList[index].allGoodsAmount = num * detailList[index].sellPrice
+    var dataArr = []
+    dataArr.push({ goodsId: detailList[index]["goodsId"], num: num, skuCode: 0, storeId: storeId })
+    this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
+    this.setData({
+      detailList: detailList
+    }, function () {
+      this.getTotalPrice();
+    });
+  },
   addCountNew(e) {
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;
     let num = detailList[index].num;
-    num = num + 1;
+    num = parseInt(num) + 1;
     let storeId = this.data.storeId
     detailList[index].num = num
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice

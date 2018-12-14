@@ -14,3 +14,6 @@
 .bf-cont{
   margin-top: 70rpx;
 }
+.goods-ser input {
+  max-width: 480rpx;
+}

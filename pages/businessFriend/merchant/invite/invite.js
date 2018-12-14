@@ -6,12 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    value: '我是',
-    val2:'，我的优店，精挑细选优质商品，快来和我一起赚钱吧！',
     accept: '',
     baseUrl: app.globalData.imageUrl,
     headPic:'',
     storeName:'',
+    allName:'',
     name:''
   },
   goBack: function () {
@@ -21,21 +20,19 @@ Page({
   },
   emptyVal: function () {
     this.setData({
-      value: '',
-      val2: '',
-      storeName: ''
+      allName: ''
     })
   },
   searchBtn: function (e) {
     var val = e.detail.value
     this.setData({
-      value: val,
+      allName: val,
     })
   },
   invita: function () {
     var _this = this,
       accept = this.data.accept,
-      greet = this.data.value,
+      greet = this.data.allName,
       send = wx.getStorageSync('storeId'),
       remark = this.data.remark
     if (Api.isEmpty(remark)){
@@ -76,7 +73,7 @@ Page({
     .then(res=>{
       var storeName = res.obj.name
       _this.setData({
-        storeName: storeName
+        allName: "我是" + storeName +"，我的优店，精挑细选优质商品，快来和我一起赚钱吧！"
       })
     })
   },

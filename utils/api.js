@@ -111,6 +111,7 @@ import {
   recentGoodsUrl,
   copyGoodsUrl,
   tempSortUrl,
+  updateClassUrl,
   threeFloorListUrl,
   orderDetailUrl,
 } from './constUrl.js'
@@ -301,6 +302,11 @@ function topGoods(data) {
 /**取消默认地址**/
 function removeDefault(data) {
   return app.http.putRequest(removeDefaultUrl, data)
+}
+/**修改店内分类**/
+function updateClass(data) {
+  data = initStoreId(data);
+  return app.http.putRequest(updateClassUrl, data)
 }
 /**商品状态筛选**/
 function classCodeList(data) {
@@ -838,6 +844,7 @@ module.exports = {
   updateMes: updateMes,
   uploadLogoImg: uploadLogoImg,
   topGoods: topGoods,
+  updateClass: updateClass,
   adminGetDetails: adminGetDetails,
   storeIndex: storeIndex,
   setUserName: setUserName,
