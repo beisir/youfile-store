@@ -1,0 +1,15 @@
+<!-- 企业 -->
+<view class='ba-cont'>
+  <view>浦发银行北京望京支行</view>
+  <view>周大福北京望京分公司</view>
+  <view><text>****</text> <text>****</text> <text>****</text> <text>1232</text></view>
+  <view class='ba-block'><view></view></view>
+</view>
+<!-- 个人 -->
+<view class='ba-cont ba-cont1'>
+  <view>浦发银行北京望京支行</view>
+  <view>周大福北京望京分公司</view>
+  <view><text>****</text> <text>****</text> <text>****</text> <text>1232</text></view>
+  <view class='ba-block'><view></view></view>
+</view>
+<view class='ba-sq'><image src="/image/ca-ba.png"></image>申请更换银行卡<image src="/image/ca-you.png"></image></view>

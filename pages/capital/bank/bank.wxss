@@ -1,0 +1,11 @@
+page{background:#2E3132;border-top:0}
+.ba-cont{background-image:linear-gradient(to right,#5290D0,#4A6EC2);position:relative;margin:20rpx;border-radius:10rpx;color:#fff;font-size:32rpx;padding:40rpx 55rpx;overflow:hidden}
+.ba-cont1{background:#C75056}
+.ba-cont view:nth-child(2){font-size:28rpx;margin-bottom:50rpx;margin-top:10rpx}
+.ba-cont text{font-size:45rpx;margin-right:20rpx;z-index:10;position:relative}
+.ba-block{height:280rpx;width:280rpx;border:40rpx solid #5981C7;border-radius:100%;position:absolute;right:-70rpx;bottom:-100rpx}
+.ba-block view{width:30rpx;height:30rpx;border:40rpx solid #5981C7;transform:rotate(45deg);margin:80rpx}
+.ba-cont1 .ba-block{border:40rpx solid #CB5E63}
+.ba-cont1 .ba-block view{border:40rpx solid #CB5E63}
+.ba-sq{color:#CCAA77;font-size:30rpx;text-align:center;margin-top:60rpx}
+.ba-sq image{width:45rpx;height:45rpx;vertical-align:middle;margin-top:-2rpx;margin-right:20rpx}

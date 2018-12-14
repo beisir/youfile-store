@@ -1,0 +1,18 @@
+ <view class='re-cont'>
+    <view class='re-data'>2018-10-09 11:45:30 <text>已结算</text></view>
+    <navigator class='weui-back' >
+      <view class='weui-cell weui-cell_access'>
+        <view class='weui-cell__bd'>
+          ￥120.00
+        </view>
+      </view>
+    </navigator>
+    <view class='re-data'>2018-10-09 11:45:30 <text>已结算</text></view>
+    <navigator class='weui-back'>
+      <view class='weui-cell weui-cell_access'>
+        <view class='weui-cell__bd'>
+          ￥120.00
+        </view>
+      </view>
+    </navigator>
+  </view>
