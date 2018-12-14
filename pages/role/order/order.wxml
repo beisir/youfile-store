@@ -68,38 +68,25 @@
 </view>
 <view wx:if="{{showList.length>0}}">
   <view class='cf-cont' wx:for="{{showList}}" wx:key="{{index}}">
-    <view class='c-title' bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.logisticsMode}}' data-num="{{item.orderNumber}}">
-      <!-- <navigator class='c-title' url='{{item.status<6?"../orderDetails/orderDetails":"../orderSelf/orderSelf"}}?status={{item.status}}'> -->
+    <navigator url="../../businessFriend/merchant/dealUserDetails/dealUserDetails?accept={{item.userInfo.userId}}&&code=0">    
+      <view class='c-title' data-status='{{item.orderStatus}}' data-type='{{item.logisticsMode}}' data-num="{{item.orderNumber}}">
+        <image src="/image/preson.png"></image> {{filter.my_slice(item.userInfo.nickName,5)}}
+        <text class='or-phone'>{{item.userInfo.mobile}}</text>
+        <view wx:if="{{item.logisticsMode==1}}" class='order-zt'>自提</view>
 
-      <image src="/image/preson.png"></image> {{filter.my_slice(item.userInfo.nickName,5)}}
-      <text class='or-phone'>{{item.userInfo.mobile}}</text>
-      <view wx:if="{{item.logisticsMode==1}}" class='order-zt'>自提</view>
-
-      <view bindtap="onChangeShowState">
-        <!-- 缺少代填表 -->
-        <text wx:if="{{item.orderStatus=='unpaid'}}">待付款</text>
-        <text wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==2}}">待发货</text>
-        <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && item.isForm}}">待收货</text>
-        <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==1}}">待取货</text>
-        <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && !item.isForm}}">待填表</text>
-        <text wx:if="{{item.orderStatus=='finish' }}">交易成功 </text>
-        <text wx:if="{{item.orderStatus=='closed' }}">交易关闭</text>
-        <text wx:if="{{item.orderStatus=='canceled' }}">交易取消</text>
-       
-
-        <!-- <text wx:if="{{item.status==0}}">待付款</text>
-            <text wx:if="{{item.status==1}}">已付款</text>
-            <text wx:if="{{item.status==2}}">待填表</text>
-            <text wx:if="{{item.status==3}}">已发货 </text>
-            <text wx:if="{{item.status==4}}">交易成功</text>
-            <text wx:if="{{item.status==5}}">交易关闭</text>
-            <text wx:if="{{item.status==6}}">待付款</text>
-            <text wx:if="{{item.status==7}}">已付款</text>
-            <text wx:if="{{item.status==8}}">交易成功</text>
-            <text wx:if="{{item.status==9}}">交易关闭</text> -->
+        <view bindtap="onChangeShowState">
+          <!-- 缺少代填表 -->
+          <text wx:if="{{item.orderStatus=='unpaid'}}">待付款</text>
+          <text wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==2}}">待发货</text>
+          <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && item.isForm}}">待收货</text>
+          <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==1}}">待取货</text>
+          <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && !item.isForm}}">待填表</text>
+          <text wx:if="{{item.orderStatus=='finish' }}">交易成功 </text>
+          <text wx:if="{{item.orderStatus=='closed' }}">交易关闭</text>
+          <text wx:if="{{item.orderStatus=='canceled' }}">交易取消</text>
+        </view>
       </view>
-      <!-- </navigator> -->
-    </view>
+    </navigator>
     <view bindtap='toOrderDetail' data-status='{{item.orderStatus}}' data-type='{{item.logisticsMode}}' data-num="{{item.orderNumber}}">
       <view class="cart-box">
         <view class="cart-list" wx:for="{{item.goodsInfoList}}" wx:key="{{index}}">
