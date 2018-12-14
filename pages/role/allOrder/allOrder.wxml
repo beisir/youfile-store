@@ -150,16 +150,16 @@
 
 </view>
 <!-- 交易关闭 -->
-<view class='os-title' wx:if="{{status=='closed'}}">
+<!-- <view class='os-title' wx:if="{{status=='closed'}}">
   <view>
     <image src="/image/closeS.png"></image>{{orderName}}已关闭</view>
   <view class='os-close-res'>关闭原因：{{order.closedReason?order.closedReason:""}}</view>
-</view> 
+</view>  -->
 <!-- 交易取消 -->
 <view class='os-title' wx:if="{{status=='canceled'}}">
   <view>
-    <image src="/image/closeS.png"></image>{{orderName}}已取消</view>
-  <view class='os-close-res'>取消原因：{{order.cancelReason?order.cancelReason:""}}</view>
+    <image src="/image/closeS.png"></image>{{orderName}}已关闭</view>
+  <view class='os-close-res'>原因：{{order.cancelReason?order.cancelReason:""}}</view>
 </view>   
 <!-- 正文 -->
 <view class='np-ct'>
@@ -370,7 +370,7 @@
     <button wx:if="{{self=='true'}}" data-type='sureGet' bindtap='showModal' class='or-active'> 确认收款 </button>
     <button wx:else class='or-active' data-type='ex' bindtap='showModal'> 收款发货 </button>
     
-    <button data-type='cancel' bindtap='showModal'>关闭{{orderName}}</button>
+    <button data-type='cancel' bindtap='showModal'>取消{{orderName}}</button>
   </block>
 
  
@@ -379,13 +379,13 @@
     <block wx:if="{{self=='false'}}">
       <button class='or-active' data-type='ex' bindtap='showModal'> 我要发货 </button>
     </block>
-    <button data-type='cancel' bindtap='showModal'>关闭{{orderName}}</button>
+    <button data-type='cancel' bindtap='showModal'>取消{{orderName}}</button>
   </block>
 
   <!-- 待收取货 -->
   <block wx:if="{{self=='true' && status=='delivered'}}">
     <button data-type='goodCode' bindtap='showModal' class='or-active'> 验证取货码 </button>
-    <button data-type='cancel' bindtap='showModal'>关闭{{orderName}}</button>    
+    <button data-type='cancel' bindtap='showModal'>取消{{orderName}}</button>    
   </block>
 
   <block wx:if="{{status=='delivered' && self=='false'}}">
