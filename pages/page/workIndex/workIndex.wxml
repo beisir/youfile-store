@@ -9,12 +9,12 @@
   <!-- ../follow/follow -->
   <view class='wk-bot'>
     <navigator url='../../businessFriend/merchant/follow/follow'>{{followNum==null?0:followNum}}<view>关注人数</view></navigator>
-    <navigator url='../../role/supplyOrder/supplyOrder?navType=paid'>{{payPurchaseOrders==null?0:payPurchaseOrders}}<view>付款供货单</view><view class='wk-xian'></view></navigator>
-    <navigator  url='../../role/order/order?navType=paid'>{{payOrders==null?0:payOrders}}<view>付款订单</view><view class='wk-xian'></view></navigator>
+    <navigator url='../../role/supplyOrder/supplyOrder?navType=wait_deliver'>{{payPurchaseOrders==null?0:payPurchaseOrders}}<view>付款供货单</view><view class='wk-xian'></view></navigator>
+    <navigator  url='../../role/order/order?navType=wait_deliver'>{{payOrders==null?0:payOrders}}<view>付款订单</view><view class='wk-xian'></view></navigator>
     <navigator class='wk-fg'></navigator>
     <navigator url='../../businessFriend/merchant/newMerchant/newMerchant'>{{verifyFriends==null?0:verifyFriends}}<view>待验证商友</view></navigator>
-    <navigator url='../../role/supplyOrder/supplyOrder?navType=paid'>{{unshippedPurchaseOrders==null?0:unshippedPurchaseOrders}}<view>待发货供货单</view><view class='wk-xian'></view></navigator>
-    <navigator   url='../../role/order/order?navType=paid'>{{unshippedOrders==null?0:unshippedOrders}}<view>待发货订单</view><view class='wk-xian'></view></navigator>
+    <navigator url='../../role/supplyOrder/supplyOrder?navType=wait_deliver'>{{unshippedPurchaseOrders==null?0:unshippedPurchaseOrders}}<view>待发货供货单</view><view class='wk-xian'></view></navigator>
+    <navigator   url='../../role/order/order?navType=wait_deliver'>{{unshippedOrders==null?0:unshippedOrders}}<view>待发货订单</view><view class='wk-xian'></view></navigator>
   </view>
 </view>
 <view class='wk-cont wk-cont'>

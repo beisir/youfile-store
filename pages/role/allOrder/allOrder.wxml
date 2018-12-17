@@ -282,7 +282,7 @@
   </block>
   <block wx:if="{{status=='closed'|| status=='canceled'}}">
     <view>关闭时间
-      <text>{{order.updateDate}}</text>
+      <text>{{order.cancelDate}}</text>
     </view>
   </block>
 </view>

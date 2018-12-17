@@ -1,0 +1,3 @@
+@import '../record/record';.re-data{color:#999999;padding:20rpx 30rpx;font-size:28rpx}
+.re-data text{margin-left:10rpx}
+.weui-cell__bd{font-size:40rpx}

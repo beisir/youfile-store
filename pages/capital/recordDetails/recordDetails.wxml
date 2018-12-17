@@ -1,0 +1,18 @@
+<view class='re-cont'>
+  <view  class='user-img'><image src='/image/ca-or.png'></image></view>
+  <view class='re-mon'>
+    订单入账
+    <view>+2900.00</view>
+  </view>
+  <view class='re-view'>
+    <view>商品说明<text>公主方形钻石简单奢华款白金戒指</text></view>
+    <view>订单号<text>5555645456</text></view>
+    <view>交易单号<text>43578943578943</text></view>
+    <view>支付时间<text>2014-09-09 21:12:12</text></view>
+    <view>付款方手机号<text>150****1235</text></view>
+    <view>支付方式<text>上线支付</text></view>
+    <view>收款总金额<text>￥2300.00</text></view>
+    <view>手续费<text>￥13</text></view>
+  </view>
+</view>
+<view class='re-bottom'>查看订单详情</view>

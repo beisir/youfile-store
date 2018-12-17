@@ -1,0 +1,47 @@
+<view class='wk-cont'>
+  <view class='wk-title'>
+    <text>今日收款 (元）</text><image src="/image/ca2.png"></image>
+    <view>
+      5231.70
+      <view class='ca-right' bindtap='goRecord'>
+          明细
+          <image src="/image/ca-r.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class='ca-num'>
+    <view>12<view>今日收款笔数</view></view>
+    <view>12<view>昨收款笔数</view></view>
+    <view>12<view>总收款笔数 </view></view>
+  </view>
+</view>
+ <view class='wk-bot'>
+    <navigator url=''><view>收款总金额 (元)<image src="/image/ca1.png"></image></view>2121</navigator>
+    <navigator url=''><view>已结算金额 (元)<image src="/image/ca1.png"></image></view>2121<view class='wk-xian'></view></navigator>
+    <view class='wk-bot-xian'></view>
+    <navigator url=''><view>昨日收款 (元)<image src="/image/ca1.png"></image></view>2121</navigator>
+    <navigator url=''><view>待结算金额 (元)<image src="/image/ca1.png"></image></view>2121<view class='wk-xian'></view></navigator>
+  </view>
+  <view class='page_bd page_hd1'>
+    <view class='weui-back'>
+      <navigator class='weui-cell weui-cell_access' url='../haveRecord/haveRecord'>
+        <view class='weui-cell__bd'>
+          已结算记录
+        </view>
+        <view class='weui-img'>
+          <image src="/image/icl.png"></image>
+        </view>
+      </navigator>
+    </view>
+    <view class='weui-back'>
+      <navigator class='weui-cell weui-cell_access' url='../bank/bank'>
+        <view class='weui-cell__bd'>
+          我的银行卡
+        </view>
+        <view class='weui-img'>
+          <text>已绑定</text>
+          <image src="/image/icl.png"></image>
+        </view>
+      </navigator>
+    </view>
+  </view>

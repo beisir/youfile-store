@@ -2,6 +2,11 @@
   "pages":[
     "pages/page/home/home",
     "pages/faceToFaceOrder/createOrder/createOrder",
+    "pages/capital/index/index",
+    "pages/capital/bank/bank",
+    "pages/capital/haveRecord/haveRecord",
+    "pages/capital/recordDetails/recordDetails",
+    "pages/capital/record/record",
     "pages/businessFriend/merchant/index/index",
     "pages/page/workIndex/workIndex",
     "pages/page/user/user",
