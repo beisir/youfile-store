@@ -30,3 +30,7 @@
   width: 30rpx;
   height:30rpx;
 }
+
+.modal-title{
+  border-bottom: 1rpx solid #ca7;
+}
