@@ -4,14 +4,21 @@ Component({
    * 组件的属性列表
    */
   properties: {
-
+    title: {
+      type: String,
+      value: "您好"
+    },
+    show:{
+      type:Boolean,
+      value: false
+    }
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    show:false
+    
   },
 
   /**

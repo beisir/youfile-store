@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    warnText:""
+    warnText:"",
+    tip: ""   //备注
   },
   watchInput(e){
     let type = e.currentTarget.dataset.type,
@@ -28,22 +29,40 @@ Page({
           obj.redColor = true;          
         }
       break;
+      case "tip":
+        obj.tip = val;
+      break;
     }
     this.setData(obj)
   },
-  addTip(){
+  showModal(e){
+    let type = e.currentTarget.dataset.type;
+    let obj = {};
+    switch(type){
+      case "tip":
+        obj.tipsModal = true
+      break;
+    }
+    this.setData(obj)
+  },
+  closeModal(){
     this.setData({
-      
+      tipsModal: false    //备注
     })
   },
-  tipShow(){
-    this.selectComponent("#layer").open();
+  //保存备注
+  saveTip(){
+    this.setData({
+      sureTip:this.data.tip
+    })
+    this.closeModal();
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.tipShow()
+
   },
 
   /**

@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/page/home/home",
+    "pages/faceToFaceOrder/goodsTag/goodsTag",
     "pages/faceToFaceOrder/createOrder/createOrder",
+    "pages/page/home/home",
     "pages/capital/index/index",
     "pages/capital/bank/bank",
     "pages/capital/haveRecord/haveRecord",

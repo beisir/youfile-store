@@ -1,5 +1,9 @@
-<layer id="layer">
-  
+<!-- 备注 -->
+<layer show='{{tipsModal}}' title="请填写备注">
+  <view> 
+    <textarea placeholder-style='color:#999;' bindinput='watchInput' data-type="tip" maxlength='100' placeholder='请在此填写备注' class='textarea'></textarea>
+    <button bindtap='saveTip' class='modal-btn'>保存</button>
+  </view>
 </layer>
 <view class='warn-box' wx:if="{{warnText}}">{{warnText}}</view>
 <view class='user-title'>
@@ -11,7 +15,7 @@
 <view class='common-box flex-between price-box {{redColor?"red-color":""}}'>
   <text class="item-title">订单金额</text>
   <view class='flex-center'>
-    <input type='digit' bindinput='watchInput' data-type="money" class='price-input'></input>
+    <input value='{{sureTip}}' type='digit' bindinput='watchInput' data-type="money" class='price-input'></input>
     <text class='yuan'>元</text>
   </view>
 </view>
@@ -30,8 +34,10 @@
     <image src='/image/icl.png' class='right-tri'></image>
   </view>
 
-  <view class='remark-box flex-center' bindtap='addTip'>
-    <text class='remark-title'>添加备注说明</text> 
+  <view class='remark-box' data-type="tip" bindtap='showModal'>
+    <text class='gray-color' style='word-break:break-all;'>{{sureTip}}</text>
+    <text wx:if="{{!sureTip}}" class='remark-title'>添加备注说明</text> 
+    <text wx:else class='remark-title' style='margin-left:20rpx;'>修改</text>
   </view>
 </view>
 

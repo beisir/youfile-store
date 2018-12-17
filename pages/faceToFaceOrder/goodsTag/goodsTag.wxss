@@ -1,0 +1,113 @@
+/* pages/faceToFaceOrder/goodsTag/goodsTag.wxss */
+page{
+  background: #fff;
+}
+.box{
+  padding: 50rpx;
+  font-size: 30rpx;
+}
+.title-font{
+  font-size: 48rpx;
+  font-weight: 600;
+}
+.goods-item{
+  position: relative;
+  min-height: 120rpx;
+  box-sizing: border-box;
+  padding: 5rpx 0;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  background: #fff;
+}
+.chose-icon{
+  margin-right: 22rpx;
+}
+.gray-color{
+  color:#999;
+}
+
+.input-box{
+  border: 1px solid #ca7;
+  border-radius: 10rpx;
+  padding-left: 32rpx;
+  height: 120rpx;
+  box-sizing: border-box;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  margin: 80rpx 0 30rpx;
+}
+.goods-input{
+  flex: 1;
+}
+.sure-btn{
+  font-weight: 600;
+  color: #ca7;
+  padding: 0 50rpx;
+  height: 110rpx;
+  line-height: 110rpx;
+}
+.line-border{
+  height: 1px;
+  background: #eee;
+  margin-left: 58rpx;
+}
+.blob{
+  font-weight: 600;
+}
+
+/* 列表 */
+.list-box{
+  position: relative;
+}
+.del-btn{
+  position: absolute;
+  width: 133rpx;
+  top: 0;
+  right:0; 
+  background: #ff4141;
+  color: #fff;
+  height: 98%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-btn{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 95%;
+  margin: auto;
+  box-sizing: border-box;
+  border-top: 1px solid #ddd;
+  height: 120rpx;
+  text-align: center;
+  line-height: 120rpx;
+  font-size: 36rpx;
+  color: #ca7;
+  letter-spacing:30rpx;
+  font-weight: 600;
+}
+
+.edit-input{
+  border: 1px solid #ddd;
+  height: 100rpx;
+  border-radius: 10rpx;
+  margin: 20rpx 0;
+  padding: 0 20rpx;
+}
+
+.modal-btn{
+    width:240rpx;
+    height:70rpx;
+    color:#fff;
+    line-height:68rpx;
+    border:2rpx solid #ca7;
+    font-size:30rpx;
+    margin:80rpx auto 0;
+    background:#ca7;
+    border-radius: 10rpx;
+  }

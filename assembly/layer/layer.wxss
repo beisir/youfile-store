@@ -12,25 +12,37 @@
 .modal-inner{
   background: #fff;
   border-radius: 10rpx;
-  width: 600rpx;
+  width: 636rpx;
+  box-sizing: border-box;
+  padding: 20rpx 50rpx 50rpx;
   position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%,-50%);
-  padding: 20rpx; 
   z-index: 99999;
+  font-size: 26rpx;
+  color: #333;
 }
 .modal-close{
   text-align: right;
   width: 50rpx;
   height: 50rpx;
-  float: right;
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
 }
 .modal-close image{
-  width: 30rpx;
-  height:30rpx;
+  width: 40rpx;
+  height:40rpx;
 }
 
 .modal-title{
-  border-bottom: 1rpx solid #ca7;
+  color:#333333;
+  font-size:36rpx;
+  text-align:center;
+  font-weight:600;
+  margin:0 auto 20rpx;
+  padding-top:60rpx;
+  padding-bottom:50rpx;
+  border-bottom:2rpx solid #EBEBEB;
 }

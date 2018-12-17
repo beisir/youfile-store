@@ -1,0 +1,28 @@
+<!-- 编辑 -->
+<layer show='{{editModal}}' title="编辑商品名称">
+  <view> 
+    <input placeholder='请输入名称' class='edit-input' type='text'></input>
+    <button bindtap='saveTip' class='modal-btn'>确定</button>
+  </view>
+</layer>
+<view class='box'>
+  <view>
+    <view class='title-font'>购买商品名称</view>
+    <view class='gray-color'>快捷输入或选择商品名称</view>
+  </view>
+  <view class='input-box'>
+    <input bindinput='getGoodsName' maxlength='50' placeholder-class='input-placeholder-common-color' placeholder='输入商品名称' class='goods-input' type='text'></input>
+    <view bindtap='addTip' class='sure-btn'>确定</view>
+  </view>
+
+  <view class='list-box' wx:for="{{list}}" wx:key="{{index}}">
+    <view bindlongtap='editGoods' bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" class='goods-item' bindtap='clickTag' data-index="{{index}}" style="{{item.textStyle}}">
+      <icon class='chose-icon' type="{{item.checked?'success':'circle'}}" color="#ccaa77" size="18" />
+      <text>{{item.name}}</text>
+    </view>
+    <view class='line-border'></view>
+    <view class='del-btn' bindtap='del' data-id="{{item.id}}">删除</view>
+  </view>
+</view>
+
+<view class='bottom-btn'>确定</view>
