@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/admin/status/status",
     "pages/capital/index/index",
     "pages/capital/bank/bank",
     "pages/capital/haveRecord/haveRecord",
@@ -15,7 +16,6 @@
     "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
     "pages/faceToFaceOrder/helpOrder/helpOrder",    
-    "pages/admin/status/status",
     "pages/casher/success/success",
     "pages/casher/casher/casher",
     "pages/login/agreement/agreement",
@@ -36,6 +36,7 @@
     "pages/role/order/order",
     "pages/admin/addGoods/addGoods",
     "pages/cloudOrder/cloudPay/cloudPay",
+    "pages/cloudOrder/newCloud/newCloud",
     "pages/admin/spec/spec",
     "pages/page/orderSuccess/orderSuccess",
     "pages/role/allOrder/allOrder",

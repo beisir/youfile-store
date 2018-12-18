@@ -434,6 +434,17 @@ Page({
     })
   },
   onLoad: function (options) {
+    // let url ='https://www.youlife.net.cn/qr/?type=user&userId=3a7b3f6c8902c89585bc1f32a54e60cb'
+    // // let url = decodeURIComponent(options.q)
+    // console.log(url)
+    // if (url){
+    //   let type = url.match(/type=(\S*)&/)[1];
+    //   if (type =="user"){
+    //     let userId = url.match(/userId=(\S*)/)[1];
+    //     console.log(userId)
+    //   }
+    // }
+    // console.log(JSON.stringify(options))
     var _this = this
     if (options!=undefined){
       if (options.scene) {
