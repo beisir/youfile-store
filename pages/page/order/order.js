@@ -1,6 +1,7 @@
 // pages/order/order.js
 const app = getApp();
 import API from "../../../utils/api.js";
+var seeImg = false;
 Page({
 
   /**
@@ -19,7 +20,23 @@ Page({
     cancelIndex:0
 
   },
-
+  //查看凭证
+  seeVoucher(e) {
+    let num = e.currentTarget.dataset.num;
+    API.seeVoucher({ orderNumber: num }).then((res) => {
+      if (res.obj.payVoucher) {
+        seeImg = true;
+        wx.previewImage({
+          urls: [this.data.baseUrl + res.obj.payVoucher]
+        })
+      } else {
+        wx.showToast({
+          title: '未上传付款凭证',
+          icon: 'none'
+        })
+      }
+    })
+  },
 
   showModal(e,item){
     let type = e.currentTarget.dataset.type,
@@ -273,7 +290,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // app.pageRequest.pageData.pageNum = app.pageRequest.pageData.pageNum == 0 ? app.pageRequest.pageData.pageNum:app.pageRequest.pageData.pageNum-1;
+    if (seeImg) {
+      seeImg = false;
+      return;
+    }
     this.getList(true);
   },
 

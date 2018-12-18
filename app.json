@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/role/supplyVoucher/supplyVoucher",
     "pages/capital/index/index",
     "pages/capital/bank/bank",
     "pages/capital/haveRecord/haveRecord",
@@ -26,7 +27,6 @@
     "pages/cloudOrder/myOrder/myOrder",
     "pages/login/register/register",
     "pages/cloudOrder/applyStore/applyStore",
-    "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/mesEdit/mesEdit",
     "pages/page/updateArea/mesEdit",
     "pages/page/updateMes/updateMes",
