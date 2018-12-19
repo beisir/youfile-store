@@ -1,4 +1,5 @@
 // pages/faceToFaceOrder/goodsTag/goodsTag.js
+const app=getApp()
 Page({
 
   /**
@@ -115,11 +116,58 @@ Page({
       editModal:true
     })  
   },
+  sure(){
+    let arr = [];
+    this.data.list.forEach(el=>{
+      if (el.checked){
+        arr.push(el)
+      }
+    })
+
+    var pages = getCurrentPages();
+    if (pages.length > 1) {
+      //上一个页面实例对象
+      var prePage = pages[pages.length - 2];
+      prePage.getTag(arr);
+      wx.navigateBack();
+    }
+  },
+  //复选
+  recheck(){
+    let arr = this.data.list;
+    let checkedArr = this.data.checked;
+    arr.forEach(el=>{
+      checkedArr.every(item=>{
+        if(el.id == item){
+          el.checked = true
+          return false
+        }
+        return true
+      })
+    })
+    this.setData({
+      list: arr
+    })
+  },
+  getList(){
+    app.http.getRequest("/admin/offlinegoods/"+this.data.storeId+"/list").then(res=>{
+      res.obj
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (options.tag){
+      this.setData({
+        checked: options.tag.split(",")
+      })
+      this.recheck()
+    }
+    this.setData({
+      storeId: wx.getStorageSync("storeId")
+    })
+    this.getList();
   },
 
   /**

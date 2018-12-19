@@ -76,7 +76,7 @@ import {
   uploadLogoImgUrl,
   storeIndexUrl,
   setUserNameUrl,
-  getUserDetaislUrl,
+  getUserDetailUrl,
   userIdentityUrl,
   classListApiUrl,
   quitUrl,
@@ -115,6 +115,8 @@ import {
   threeFloorListUrl,
   orderDetailUrl,
   ifWholesalerUrl,
+  shopkeeperOrderListUrl,
+  helpOrderUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -577,8 +579,8 @@ function getStoreName(data) {
 }
 
 /**获取用户信息**/
-function getUserDetaisl(data) {
-  return app.http.getRequest(getUserDetaislUrl, data)
+function getUserDetail(data) {
+  return app.http.getRequest(getUserDetailUrl, data)
 }
 /**权限设置**/
 function apiAddUser(data) {
@@ -699,6 +701,16 @@ function ifWholesaler(data){
   data = initStoreId(data);  
   return app.http.getRequest(ifWholesalerUrl,data);
 }
+//门店商家列表
+function getStoreOrderAdmin(data){
+  data = initStoreId(data);    
+  return app.pageRequest.pageGet(shopkeeperOrderListUrl, data)
+}
+// 帮他下单
+function helpOrder(data){
+  data = initStoreId(data);    
+  return app.http.postRequest(helpOrderUrl, data);
+}
 /**
  * 获取formId
  */
@@ -746,6 +758,8 @@ function getStoreId() {
   }
 }
 module.exports = {
+  helpOrder: helpOrder,
+  getStoreOrderAdmin: getStoreOrderAdmin,
   ifWholesaler: ifWholesaler,
   getOrderDetail: getOrderDetail,
   threeFloorList: threeFloorList,
@@ -857,7 +871,7 @@ module.exports = {
   adminGetDetails: adminGetDetails,
   storeIndex: storeIndex,
   setUserName: setUserName,
-  getUserDetaisl: getUserDetaisl,
+  getUserDetail: getUserDetail,
   userIdentity: userIdentity,
   customCategoryCode: customCategoryCode,
   quit: quit,

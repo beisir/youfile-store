@@ -25,4 +25,4 @@
   </view>
 </view>
 
-<view class='bottom-btn'>确定</view>
+<view bindtap='sure' class='bottom-btn'>确定</view>

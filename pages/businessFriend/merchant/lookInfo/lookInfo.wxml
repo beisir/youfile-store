@@ -57,8 +57,8 @@
     <text>添加到进货商</text>
   </view>
   <view wx:if="{{!ifWholesaler}}" class='btn-line'></view>
-  <view class='btn-item'>
+  <navigator class='btn-item' url="../../../faceToFaceOrder/createOrder/createOrder?user={{data.id}}">
     <image class='btn-icon' src='/image/exchange.png'></image>
     <text>帮TA下单</text>
-  </view>
+  </navigator>
 </view>

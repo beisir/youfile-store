@@ -10,7 +10,7 @@
 </view>
 
 <view>
-  <view wx:for="{{list}}" class='list-item'>
+  <view wx:for="{{list}}" class='list-item' wx:key="{{index}}">
     <!-- 头 -->
     <view class='item-title padding-box'>
       <view class='flex-center'>
@@ -32,7 +32,7 @@
         <image src='/image/default-gift.png'></image>
       </view>
       <view class='tip-box'>
-        <text wx:for='{{item.tip}}' wx:for-item="tip">{{tip}}</text>
+        <text wx:for='{{item.tip}}' wx:for-item="tip" wx:key="{{index}}">{{tip}}</text>
       </view>
       <view class='goods-price'>￥{{filter.filterMoney(item.price)}}</view>
     </view>

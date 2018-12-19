@@ -62,7 +62,7 @@ export const uploadLogoImgUrl='/admin/store/{{storeId}}/logo'
 export const topGoodsUrl='/admin/shop/goods/top/{{goodsId}}'
 export const storeIndexUrl='/admin/store/{{storeId}}/index'
 export const setUserNameUrl='/admin/shop/storecustomer/remark/{{storeId}}/{{userId}}/{{remark}}'
-export const getUserDetaislUrl='/api/user/bymobile/{{mobile}}'
+export const getUserDetailUrl='/api/user/bymobile/{{mobile}}'
 export const userIdentityUrl='/api/store/{{storeId}}/user/identity'
 export const miniProgramCodeUrl='/api/store/{{storeId}}'
 export const recentGoodsUrl='/api/shop/store/{{storeId}}/user/goods/recent'
@@ -124,3 +124,7 @@ export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
 // 是否为进货商
 export const ifWholesalerUrl = "/inside/merchantpurchaser/{{storeId}}/purchaser/{{userId}}"
+// 商家门店订单
+export const shopkeeperOrderListUrl = "/admin/ftf/order/store/{{storeId}}/orderstatus/{{orderStatus}}"
+// 帮他下单
+export const helpOrderUrl = "/admin/ftf/order"

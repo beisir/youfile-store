@@ -1,4 +1,6 @@
 // pages/faceToFaceOrder/createOrder/createOrder.js
+const app = getApp();
+import API from "../../../utils/api.js";
 Page({
 
   /**
@@ -6,7 +8,10 @@ Page({
    */
   data: {
     warnText:"",
-    tip: ""   //备注
+    tip: "",   //备注
+    sureTip:"",
+    tag: [],  //标签
+    baseUrl: app.globalData.imageUrl
   },
   watchInput(e){
     let type = e.currentTarget.dataset.type,
@@ -19,11 +24,11 @@ Page({
           if (val <= 10000) {
             obj.warnText = false;
             obj.redColor = false;
+            obj.money = val;  
           } else {
             obj.warnText = '单笔支付金额不可超过10000';
             obj.redColor = true
           }
-          obj.money = val;  
         }else{
           obj.warnText = '请输入正确金额格式,最多两位小数';
           obj.redColor = true;          
@@ -57,12 +62,59 @@ Page({
     })
     this.closeModal();
   },
+  //修改商品标签
+  editTag(){
+    let tag = this.data.tag;
+    let str = "";
+    if(tag.length > 0){
+      let strarr = [];
+      tag.forEach(el=>{
+        strarr.push(el.id);
+      })
+      str = "?tag=" + strarr.join(',')
+    }
+    wx.navigateTo({
+      url: '../goodsTag/goodsTag'+str,
+    })
+  },
+  getTag(tagArr){
+    this.setData({
+      tag: tagArr
+    })
+  },
 
+  // 创建订单
+  creatOrder(){ 
+    if (this.data.warnText){
+      return
+    }
+    let obj = {
+      storeId: this.data.storeId,
+      orderAmount: this.data.money,
+      remark: this.data.sureTip
+    };
+    this.data.tag ? obj.faceToFaceOrderDetailVOList = this.data.tag:"";
+    app.http.postRequest("/admin/ftf/order",obj).then(res=>{
+
+    })
+  },
+  //获取用户
+  getUser(){
+    API.newUserInfor({ userId: this.data.userId }).then(res=>{
+      this.setData({
+        user:res.obj
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      userId: options.user,
+      storeId: wx.getStorageSync('storeId')
+    })  
+    this.getUser()
   },
 
   /**

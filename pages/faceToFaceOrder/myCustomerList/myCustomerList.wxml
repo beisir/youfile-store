@@ -10,16 +10,18 @@
 
 <view class='list-box'>
   <block wx:for="{{list}}" wx:if="{{list}}" wx:key="{{index}}">
-  <navigator url="../../businessFriend/merchant/lookInfo/lookInfo?userId={{item.userId}}&mobile={{item.mobile}}&entry=faceOrder">
     <view class='user-item'>
-      <view class='flex-center'>
-        <image class='user-icon' src='{{item.headPic?baseUrl+item.headPic+"?x-oss-process=style/logo":"/image/preson.png"}}'></image>
-        <text>{{item.nickName}}</text>
-      </view>
-      <view class='help-btn'>帮TA下单</view>
+      <navigator url="../../businessFriend/merchant/lookInfo/lookInfo?userId={{item.userId}}&mobile={{item.mobile}}&entry=faceOrder">
+        <view class='flex-center'>
+          <image class='user-icon' src='{{item.headPic?baseUrl+item.headPic+"?x-oss-process=style/logo":"/image/preson.png"}}'></image>
+          <text>{{item.nickName}}</text>
+        </view>
+      </navigator>  
+      <navigator url="../createOrder/createOrder?user={{item.userId}}">
+        <view bindtap='helpOrder' class='help-btn'>帮TA下单</view>
+      </navigator>
     </view>
     <view hidden='{{index==list.length-1}}' class='line-border'></view>
-  </navigator>  
   </block>
 </view>
 
