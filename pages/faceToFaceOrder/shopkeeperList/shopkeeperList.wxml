@@ -2,7 +2,7 @@
 
 <view class='my-search-box padding-box'>
   <image src='/image/search.png' class='search-input-icon'></image>
-  <input class='my-search-input' bindconfirm="search" type='text' placeholder='输入订单号/商品名称/昵称/手机号'></input>
+  <input class='my-search-input' bindinput='watchInput' data-type='search' bindconfirm="search" type='text' placeholder='输入订单号/商品名称/昵称/手机号'></input>
 </view>
 
 <view class='nav-box'>
@@ -40,7 +40,7 @@
     <view class='all-price-box padding-box gray-color'>合计：<text class="gold-font {{item.type == 'cancelled'?'gray-color':''}}">￥{{filter.filterMoney(item.price) }}</text></view>
     <view class='btn-box padding-box'>
       <view class='btn pay-btn'>提醒付款</view>
-      <view class='btn cancel-btn'>关闭订单</view>
+      <view bindtap="close" class='btn cancel-btn'>关闭订单</view>
     </view>
   </view>
 

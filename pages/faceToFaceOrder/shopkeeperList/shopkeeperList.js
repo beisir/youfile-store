@@ -34,7 +34,13 @@ Page({
       nav: arr
     })
   },
+  watchInput(e){
+    let type = e
+  },
+  //搜索
+  search(){
 
+  },
   getList(re){
     if (re) {
       app.pageRequest.pageData.pageNum = 0;
@@ -49,6 +55,10 @@ Page({
         })
       }
     })
+  },
+
+  close(){
+    
   },
 
   /**
