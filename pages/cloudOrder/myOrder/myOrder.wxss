@@ -1,100 +1,21 @@
-/* pages/cloudOrder/myOrder/myOrder.wxss */
-.item-box{
-  margin: 20rpx 20rpx 0;  
-  background: #fff;
-  border-radius: 5px;
-}
-.order-box{
-  padding: 60rpx 50rpx 10rpx;
-}
-.order-title{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.store-name{
-  font-size: 36rpx;
-  font-weight: 600;
-  padding-right: 40rpx;
-}
-.store-type{
-  color: #ccaa77;
-  font-size:24rpx;
-  border: 1rpx solid #ccaa77;
-  padding: 8rpx;
-}
-.youyou{
-  color: #ccaa77;
-  font-size:28rpx;
-  font-weight: 600;  
-}
-.price-box{
-  text-align: center;
-  padding: 80rpx 0 90rpx;
-  border-bottom: 1px solid #eee;
-}
-.tip-font{
-  font-size: 28rpx;
-  color: #666;  
-}
-.line{
-  border-right: 1px solid #ddd;
-  margin: 0 20rpx; 
-}
-.price{
-  font-size: 72rpx;
-  color:#333;
-}
-.bb{
-  display: flex;
-   align-items:center;
-}
-.msg-box{
-  padding: 50rpx 0 0;
-  flex: 1;
-}
-.more{
-  width:32rpx;
-  height:32rpx;
-}
-.msg-item{
-  display: flex;
-  font-size: 28rpx;
-  padding-bottom: 50rpx;
-  align-items: flex-end;
-}
-.msg-title{
-  flex: 0 0 140rpx;
-  color: #666;
-}
-.msg-content{
-  font-weight: 600;
-  color: #333;
-}
 
-.company{
-  color: #999;
-  text-align: center;
-  font-size: 26rpx;
-  padding: 60rpx;
-}
-
-.to-detail{
-  height: 100rpx;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding:  0 50rpx;
-  background: #fff;
-  border-top: 1px solid #eee;
-  font-size: 28rpx;
-  font-weight: 600;
-  color: #333;
-}
-.color-red{
-  color: #d30000;
-  font-size: 30rpx;
-}
-.b-font{
-  font-size: 36rpx;
-}
+.item-box{margin:20rpx 20rpx 0;background:#fff;border-radius:5px}
+.order-box{padding:60rpx 50rpx 10rpx}
+.order-title{display:flex;align-items:center;justify-content:space-between}
+.store-name{font-size:36rpx;font-weight:600;padding-right:40rpx}
+.store-type{color:#ccaa77;font-size:24rpx;border:1rpx solid #ccaa77;padding:8rpx}
+.youyou{color:#ccaa77;font-size:28rpx;font-weight:600}
+.price-box{text-align:center;padding:80rpx 0 90rpx;border-bottom:1px solid #eee}
+.tip-font{font-size:28rpx;color:#666}
+.line{border-right:1px solid #ddd;margin:0 20rpx}
+.price{font-size:72rpx;color:#333}
+.bb{display:flex;align-items:center}
+.msg-box{padding:50rpx 0 0;flex:1}
+.more{width:32rpx;height:32rpx}
+.msg-item{display:flex;font-size:28rpx;padding-bottom:50rpx;align-items:flex-end}
+.msg-title{flex:0 0 140rpx;color:#666}
+.msg-content{font-weight:600;color:#333}
+.company{color:#999;text-align:center;font-size:26rpx;padding:60rpx}
+.to-detail{height:100rpx;display:flex;justify-content:space-between;align-items:center;padding:0 50rpx;background:#fff;border-top:1px solid #eee;font-size:28rpx;font-weight:600;color:#333}
+.color-red{color:#d30000;font-size:30rpx}
+.b-font{font-size:36rpx}
