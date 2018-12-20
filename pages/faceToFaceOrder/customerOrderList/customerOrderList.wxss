@@ -37,6 +37,7 @@ page{
 /* liebiao*/
 .list-item{
   background: #fff;
+  margin-bottom: 20rpx;
 }
 .item-title{
   display: flex;
@@ -175,4 +176,9 @@ page{
     border-color: #ca7;
     background: #ca7;
     color: #fff;
+  }
+
+  /* 取消理由 */
+  .layer-reason-item{
+    margin: 20rpx 0;
   }

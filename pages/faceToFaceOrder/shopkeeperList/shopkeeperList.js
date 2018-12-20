@@ -7,16 +7,30 @@ Page({
    */
   data: {
     nav: [{ name: "全部", type: "all", checked: true }, { name: "待付款", type: "unpaid", checked: false }, { name: "已完成", type: "finish", checked: false }],
+    searchText:"",
     listType:"all",
     list: [{
       name: "我的你",
       type: "cancelled",
-      tip: ["123", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju", "chaju"],
       price: 102220,
       icon: "/image/cloudStoreIcon.png",
-    }]
-  },
+    }],
+    reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
+    cancelIndex:0
 
+
+  },
+  watchInput(e){
+    let val = e.detail.value,
+        type= e.currentTarget.dataset.type,
+        obj = {};
+    switch(type){
+      case "search" : 
+      obj.searchText = val;
+      break;
+    }    
+    this.setData(obj)
+  },
   switchNav(e) {
     let type = e.currentTarget.dataset.type;
     let arr = this.data.nav;
@@ -33,13 +47,11 @@ Page({
     this.setData({
       nav: arr
     })
-  },
-  watchInput(e){
-    let type = e
+    this.getList(true)
   },
   //搜索
   search(){
-
+    this.getList(true)
   },
   getList(re){
     if (re) {
@@ -48,7 +60,7 @@ Page({
         list: []
       })
     }
-    API.getStoreOrderAdmin({ orderStatus: this.data.listType}).then(res=>{
+    API.getStoreOrderAdmin({ orderStatus: this.data.listType, keyWords: this.data.searchText}).then(res=>{
       if (res.obj && res.obj.result) {
         this.setData({
           list: this.data.list.concat(res.obj.result)
@@ -56,11 +68,59 @@ Page({
       }
     })
   },
-
-  close(){
-    
+  //操作后刷新
+  afterSet(){
+    setTimeout(()=>{
+      this.closeModal();
+      this.getList(true)
+    },800)
   },
-
+  //取消订单
+  sureCancel(e){
+    let code = this.data.closeCode;
+    let reason = this.data.reason[this.data.cancelIndex].title;
+    API.ftfCloseOrder({ orderNumber: code, reason: reason }).then(res=>{
+      wx.showToast({
+        title: res.message,
+        icon : 'none'
+      })
+      this.afterSet();
+    })
+  },
+  //取消理由
+  swichReason(e) {
+    var current = e.currentTarget.dataset.current;
+    var array = this.data.reason
+    array.forEach((item, index, arr) => {
+      if (current == index) {
+        item.selected = true;
+      } else {
+        item.selected = false;
+      }
+    })
+    this.setData({
+      reason: array,
+      cancelIndex: current
+    })
+  },
+  //蒙层
+  showModal(e){
+    let type = e.currentTarget.dataset.type,
+        code = e.currentTarget.dataset.code,
+        obj = {};    
+    switch(type){
+      case 'close':
+        obj.cancelModal = true;
+        obj.closeCode = code;
+      break;
+    }
+    this.setData(obj)
+  },
+  closeModal(){
+    this.setData({
+      cancelModal:false //取消订单
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -79,7 +139,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // this.getList(true)
+    this.getList(true)
   },
 
   /**
@@ -100,14 +160,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getList()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getList()
   },
 
   /**

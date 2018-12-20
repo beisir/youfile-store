@@ -5,14 +5,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    amount:"",
+    hasNum:1,
   },
 
+  getData(){
+
+  },
+  toDetail(){
+    wx.navigateTo({
+      url: '../shopkeeperDeatil/shopkeeperDeatil?code='+this.data.code
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      code: options.code,
+      amount: options.amount,
+      hasNum: options.count
+    })
   },
 
   /**

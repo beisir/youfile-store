@@ -117,6 +117,8 @@ import {
   ifWholesalerUrl,
   shopkeeperOrderListUrl,
   helpOrderUrl,
+  ftfCloseOrderUrl,
+  ftfAdminOrderDetailUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -711,6 +713,14 @@ function helpOrder(data){
   data = initStoreId(data);    
   return app.http.postRequest(helpOrderUrl, data);
 }
+//关闭订单
+function ftfCloseOrder(data){
+  return app.http.putRequest(ftfCloseOrderUrl, data);
+}
+//商家订单详情
+function ftfAdminOrderDetail(data){
+  return app.http.getRequest(ftfAdminOrderDetailUrl, data);
+}
 /**
  * 获取formId
  */
@@ -758,6 +768,8 @@ function getStoreId() {
   }
 }
 module.exports = {
+  ftfAdminOrderDetail: ftfAdminOrderDetail,
+  ftfCloseOrder: ftfCloseOrder,
   helpOrder: helpOrder,
   getStoreOrderAdmin: getStoreOrderAdmin,
   ifWholesaler: ifWholesaler,

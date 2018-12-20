@@ -1,5 +1,14 @@
 <wxs src="../../../public/filter.wxs" module="filter" />
+<!-- 取消进货单 -->
+<clo show="{{cancelModal}}">
+  <view class='layer-reason-item' wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
+    <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select" />
+    <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
+  </view>
+  <button class='layer-reason-btn' bindtap='sureCancel'>确定</button>
+</clo>
 
+<!-- 主体 -->
 <view class='my-search-box padding-box'>
   <image src='/image/search.png' class='search-input-icon'></image>
   <input class='my-search-input' bindinput='watchInput' data-type='search' bindconfirm="search" type='text' placeholder='输入订单号/商品名称/昵称/手机号'></input>
@@ -15,32 +24,34 @@
     <view class='item-title padding-box'>
       <view class='flex-center'>
         <image src="/image/order-per.png" class='cloud-icon'></image>
-        <text class='com-name-box'>{{item.name}}</text>
-        <text class='tel-box'>13333333333</text>
+        <text class='com-name-box'>{{item.userInfo.nickName}}</text>
+        <text class='tel-box'>{{item.userInfo.mobile}}</text>
         <view class='type-chunk'>门店</view>
       </view>
       <view class='status-text'>
-        <text wx:if="{{item.type == 'unpaid'}}">待付款</text>
-        <text wx:if="{{item.type == 'cancelled'}}" class="gray-color">交易关闭</text> 
-        <text wx:if="{{item.type == 'finish'}}" class="gray-color">交易成功</text>                       
+        <text wx:if="{{item.orderStatus == 'unpaid'}}">待付款</text>
+        <text wx:if="{{item.orderStatus == 'canceled'}}" class="gray-color">交易关闭</text> 
+        <text wx:if="{{item.orderStatus == 'finish'}}" class="gray-color">交易成功</text>                       
       </view>
     </view>
     <!-- 货 -->
+    <navigator url='../shopkeeperDetail/shopkeeperDetail?code={{item.orderNumber}}'>
     <view class='goods-box'>
-      <view class='gray-layer' wx:if="{{item.type == 'cancelled'}}"></view>
+      <view class='gray-layer' wx:if="{{item.orderStatus == 'canceled'}}"></view>
       <view class='goods-icon'>
         <image src='/image/default-gift.png'></image>
       </view>
       <view class='tip-box'>
-        <text wx:for='{{item.tip}}' wx:for-item="tip" wx:key="{{index}}">{{tip}}</text>
+        <text wx:for='{{item.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key="{{index}}">{{tip.goodsName}}</text>
       </view>
-      <view class='goods-price'>￥{{filter.filterMoney(item.price)}}</view>
+      <view class='goods-price'>￥{{filter.filterMoney(item.orderAmount)}}</view>
     </view>
+    </navigator>
+    <view class='all-price-box padding-box gray-color'>合计：<text class="gold-font {{item.orderStatus == 'canceled'?'gray-color':''}}">￥{{filter.filterMoney(item.orderAmount) }}</text></view>
     <!-- 按钮 -->
-    <view class='all-price-box padding-box gray-color'>合计：<text class="gold-font {{item.type == 'cancelled'?'gray-color':''}}">￥{{filter.filterMoney(item.price) }}</text></view>
-    <view class='btn-box padding-box'>
+    <view class='btn-box padding-box' wx:if="{{item.orderStatus == 'unpaid'}}">
       <view class='btn pay-btn'>提醒付款</view>
-      <view bindtap="close" class='btn cancel-btn'>关闭订单</view>
+      <view data-code="{{item.orderNumber}}" bindtap="showModal" data-type='close' class='btn cancel-btn'>取消订单</view>
     </view>
   </view>
 

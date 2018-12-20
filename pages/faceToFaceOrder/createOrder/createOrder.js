@@ -88,14 +88,51 @@ Page({
     if (this.data.warnText){
       return
     }
+    let moneyVal = this.data.money
+    let m = /^(([1-9][0-9]*)|([0]\.\d{1,2})|([1-9][0-9]*\.\d{1,2}))$/.test(moneyVal);
+    if (!m) {
+      this.setData({
+        warnText: '请输入正确金额格式,最多两位小数',
+        redColor: true
+      })  
+      return 
+    }
+    if (moneyVal > 10000) {
+      this.setData({
+        warnText : '单笔支付金额不可超过10000',
+        redColor : true
+      })
+      return
+    }
+
     let obj = {
       storeId: this.data.storeId,
       orderAmount: this.data.money,
-      remark: this.data.sureTip
+      remark: this.data.sureTip,
+      customerUserNo: this.data.userId,
+      faceToFaceOrderDetailVOList: this.data.tag
     };
-    this.data.tag ? obj.faceToFaceOrderDetailVOList = this.data.tag:"";
-    app.http.postRequest("/admin/ftf/order",obj).then(res=>{
 
+    obj.faceToFaceOrderDetailVOList = [{
+      "amount": 100,
+      "goodsDesc": "123",
+      "goodsId": "1111111111",
+      "goodsName": "测试数据",
+      "num": 1,
+      "unitPrice": 100
+    }];
+    app.http.postRequest("/admin/ftf/order",obj).then(res=>{
+      wx.showToast({
+        title: res.message,
+        icon:'none'
+      })
+      if(res.code == '0'){
+        setTimeout(() => {
+          wx.navigateTo({
+            url: '../createSuccess/createSuccess?code=' + res.obj.orderNumber + "&amount=" + res.obj.orderAmount + "&count=" + res.obj.todayOrderCount,
+          })
+        }, 800)
+      }
     })
   },
   //获取用户

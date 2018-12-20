@@ -23,6 +23,7 @@
     <view class='line-border'></view>
     <view class='del-btn' bindtap='del' data-id="{{item.id}}">删除</view>
   </view>
+
 </view>
 
 <view bindtap='sure' class='bottom-btn'>确定</view>

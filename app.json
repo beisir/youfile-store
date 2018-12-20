@@ -1,10 +1,11 @@
 {
   "pages":[
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
+    "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",
     "pages/faceToFaceOrder/myCustomerList/myCustomerList",
+    "pages/faceToFaceOrder/createSuccess/createSuccess",
     "pages/faceToFaceOrder/helpOrder/helpOrder",
     "pages/faceToFaceOrder/createOrder/createOrder",
-    "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",    
     "pages/page/home/home",
     "pages/faceToFaceOrder/goodsTag/goodsTag",
     "pages/capital/index/index",
@@ -23,7 +24,6 @@
     "pages/casher/casher/casher",
     "pages/login/agreement/agreement",
     "pages/faceToFaceOrder/remindLayer/remindLayer",
-    "pages/faceToFaceOrder/createSuccess/createSuccess",
     "pages/faceToFaceOrder/customerOrderDetail/customerOrderDetail",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
     "pages/cloudOrder/myOrder/myOrder",

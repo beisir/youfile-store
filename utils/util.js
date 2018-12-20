@@ -19,6 +19,7 @@ const formatNumber = n => {
 /**倒计时   定义一个总毫秒数，以一分钟为例。TODO，传入一个时间点，转换成总毫秒数**/
 /* 毫秒级倒计时 */
 function count_down(that,sec) {
+  console.log(that,sec)
   var total_micro_second = sec?sec:0;  
   // 渲染倒计时时钟
   that.setData({

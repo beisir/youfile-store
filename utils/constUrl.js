@@ -128,3 +128,7 @@ export const ifWholesalerUrl = "/inside/merchantpurchaser/{{storeId}}/purchaser/
 export const shopkeeperOrderListUrl = "/admin/ftf/order/store/{{storeId}}/orderstatus/{{orderStatus}}"
 // 帮他下单
 export const helpOrderUrl = "/admin/ftf/order"
+//门店订单详情
+export const ftfAdminOrderDetailUrl = "/admin/ftf/order/byordernumber/{{orderNumber}}"
+//门店关闭订单
+export const ftfCloseOrderUrl = "/admin/ftf/order/{{orderNumber}}/closed"
