@@ -8,49 +8,74 @@ Page({
   data: {
     detailList: [],
     value: '',
+    samePre: false,
     baseUrl: app.globalData.imageUrl,
+  },
+  samePreBtn: function () {
+    this.setData({
+      samePre: false
+    })
   },
   click: function () {
     var that = this;
     var show;
     wx.scanCode({
       success: (res) => {
-        var userId = res.result
-        if (userId!="*") {
-          var userId = userId.split("user_")[1]
-          if (Api.isEmpty(userId)) {
-            Api.showMerchant({ userId: userId })
-              .then(res => {
-                var status = res.obj.status
-                if (status) {
-                  Api.newUserInfor({ userId: userId })
-                    .then(res => {
-                      var accept = res.obj.id,
-                        phone = res.obj.mobile,
-                        userName = res.obj.userName,
-                        storeId = Api.getThisStoreId()
-                      var pic = that.data.baseUrl + res.obj.headPic
-                      if (status == 2) {
-                        wx.navigateTo({
-                          url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
-                        })
-                      }
-                      if (status != 2) {
-                        if (status == 3) {
-                          status = 0
+        var qrUrl = res.result
+        if (qrUrl) {
+          if (qrUrl.indexOf("&userId") == -1) {
+            Api.showToast("未获取信息！")
+            return
+          }
+          let type = qrUrl.match(/type=(\S*)&/)[1];
+          if (type == "user") {
+            let userId = qrUrl.match(/userId=(\S*)/)[1];
+            if (Api.isEmpty(userId)) {
+              Api.showMerchant({ userId: userId })
+                .then(res => {
+                  var status = res.obj.status
+                  var hasStore = res.obj.hasStore
+                  if (hasStore) {
+                    var storeNature = res.obj.store.storeNature
+                    if (storeNature == 1) {
+                      that.setData({
+                        samePre: true
+                      })
+                      return
+                    }
+                  }
+                  if (status) {
+                    Api.newUserInfor({ userId: userId })
+                      .then(res => {
+                        var accept = res.obj.id,
+                          phone = res.obj.mobile,
+                          userName = res.obj.userName,
+                          storeId = Api.getThisStoreId()
+                        var pic = that.data.baseUrl + res.obj.headPic
+                        if (status == 2) {
+                          wx.navigateTo({
+                            url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+                          })
                         }
-                        wx.navigateTo({
-                          url: '../merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
+                        if (status != 2) {
+                          if (status == 3) {
+                            status = 0
+                          }
+                          wx.navigateTo({
+                            url: '../merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
 
-                        })
-                      }
-                    })
-                }
-              })
+                          })
+                        }
+                      })
+                  }
+                })
+            } else {
+              Api.showToast("未获取信息！")
+            }
           } else {
             Api.showToast("未获取信息！")
           }
-        }else{
+        } else {
           Api.showToast("未获取信息！")
         }
       },

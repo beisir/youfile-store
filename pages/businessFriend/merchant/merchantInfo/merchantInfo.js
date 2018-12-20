@@ -73,12 +73,22 @@ Page({
           })
         })
     }
+    if (status==3){
+      this.setData({
+        value:'',
+        showName:'',
+      })
+    }else{
+      this.setData({
+        value: remark == "null" ? '' : remark,
+        showName: remark == "null" ? '' : remark,
+      })
+    }
     this.setData({
       status:status,
       send:send,
       accept: accept,
-      value: remark == "null" ? '' : remark,
-      showName: remark == "null" ? '' : remark,
+      
       name:name,
       userName:name==null?'':name,
       headPic: headPic,
@@ -167,7 +177,7 @@ Page({
     var  send = this.data.send,
       accept = this.data.accept,
       remark = this.data.showName
-    Api.acceptPurchaser({ accept: accept, send: send, remark: remark})
+    Api.acceptPurchaser({ accept: accept, send: send, otherSideRemark: remark})
     .then(res=>{
       wx.showToast({
         title: '添加成功',

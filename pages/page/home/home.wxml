@@ -20,7 +20,7 @@
 >
 <view class='tipMes'>
   <view>我是<text>新零售</text>小云店主,我们不 </view>
-  <view>不提供进货商友功能哦~</view>
+  <view>提供进货商友功能哦~</view>
   <button class='button-hover' bindtap='closeTip'>知道了</button>
 </view>
 </mes>
@@ -32,6 +32,26 @@
 <view>
   <text>确定取消关注吗？</text>
   <button bindtap='disLike'>确定</button>
+</view>
+</mes>
+ <!--供应商不能互相加-->
+<mes
+  show="{{samePre}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>供应商不能添加供应商哦！</text>
+  <button bindtap='samePreBtn'>确定</button>
+</view>
+</mes>
+ <!--供应商-->
+<mes
+  show="{{samePreStore}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>回到自己的店加商友哦！</text>
+  <button bindtap='samePreStore'>确定</button>
 </view>
 </mes>
  <!--是否下架-->
@@ -168,7 +188,7 @@
               <image wx:if='{{limitShow==1}}'  bindtap='addWholesalePrice' src='/image/wh.png'></image>
               <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
                <!-- wx:if='{{limitShow==3}} copyGoods' -->
-                <image bindtap='openStore' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" />
+                <!-- <image bindtap='openStore' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" /> -->
             </view>
           </view>
         </view>

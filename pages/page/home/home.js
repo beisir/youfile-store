@@ -64,6 +64,7 @@ Page({
   data: {
     indexEmpty: true,
     show:false,
+    samePre:false,
     isShow:false,
     showHide:true,
     showDp:true,
@@ -76,6 +77,8 @@ Page({
     descShow:false,
     totalCount:0,
     goodsNum:0,
+    samePreStore:false,
+    samePreStoreId:'',
     store:'',
     bannerHeight:0,
     swiperHeight:0,
@@ -126,77 +129,135 @@ Page({
         }
       })
   },
-  addFriend:function(){
-    var limitShow=wx.getStorageSync("admin")
-    var that = this;
-    var show;
-    wx.scanCode({
-      success: (res) => {
-        var userId = res.result
-        if (userId != "*") {
-          var userId = userId.split("user_")[1]
-          if (Api.isEmpty(userId)){
-            if (limitShow == 2) {
-              Api.showMerchant({ userId: userId })
-                .then(res => {
-                  var status = res.obj.status
-                  if (status) {
-                    Api.newUserInfor({ userId: userId })
-                      .then(res => {
-                        var accept = res.obj.id,
-                          phone = res.obj.mobile,
-                          userName = res.obj.userName,
-                          storeId = Api.getThisStoreId()
-                        var pic = that.data.baseUrl + res.obj.headPic
-                        if (status == 2) {
-                          wx.navigateTo({
-                            url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
-                          })
-                        }
-                        if (status != 2) {
-                          if (status == 3) {
-                            status = 0
-                          }
-                          wx.navigateTo({
-                            url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
-
-                          })
-                        }
-                      })
+  samePreBtn:function(){
+    this.setData({
+      samePre:false
+    })
+  },
+  samePreStore:function(){
+    var samePreStoreId = this.data.samePreStoreId
+    this.setData({
+      samePreStore:false
+    })
+    wx.setStorageSync("storeId", samePreStoreId)
+    app.globalData.switchStore = true
+    this.onShow()
+  },
+  getFriendMes:function(userId){
+    var that = this
+    var limitShow = wx.getStorageSync("admin")
+    app.http.getRequest("/api/user/byuserid").then((res) => {
+      if (res.obj) {
+        if (res.obj.isStoreOwner == true && res.obj.storeNature == 1 && limitShow!=2) {
+          that.setData({
+            samePreStore:true,
+            samePreStoreId: res.obj.storeId
+          })
+        }else{
+          if (limitShow == 2) {
+            Api.showMerchant({ userId: userId })
+              .then(res => {
+                var status = res.obj.status
+                var hasStore = res.obj.hasStore
+                if (hasStore) {
+                  var storeNature = res.obj.store.storeNature
+                  if (storeNature == 1) {
+                    that.setData({
+                      samePre: true
+                    })
+                    return
                   }
-                })
-            } else {
-              Api.showPurchaser({ userId: userId })
-                .then(res => {
-                  var obj = res.obj,
-                    status = obj.status
-                  if (status) {
-                    if (status == 3) {
-                      status = 0
-                    }
-                    wx.navigateTo({
-                      url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark=&name=&logo=',
+                }
+                if (status) {
+                  res.obj.status
+                  Api.newUserInfor({ userId: userId })
+                    .then(res => {
+                      var accept = res.obj.id,
+                        phone = res.obj.mobile,
+                        userName = res.obj.userName,
+                        storeId = Api.getThisStoreId()
+                      var pic = that.data.baseUrl + res.obj.headPic
+                      if (status == 2) {
+                        wx.navigateTo({
+                          url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+                        })
+                      }
+                      if (status != 2) {
+                        if (status == 3) {
+                          status = 0
+                        }
+                        wx.navigateTo({
+                          url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
+
+                        })
+                      }
+                    })
+                    .catch(res => {
+                      
+                    })
+                }
+              })
+              
+          } else {
+            Api.showPurchaser({ userId: userId })
+              .then(res => {
+                var obj = res.obj,
+                  status = obj.status,
+                  storeId_ = obj.storeId_
+                if (storeId_) {
+                  wx.setStorageSync("storeId", storeId_)
+                  app.globalData.switchStore = true
+                }
+                if (status) {
+                  if (status == 3) {
+                    status = 0
+                  }
+                  wx.navigateTo({
+                    url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark=&name=&logo=',
+                  })
+                }
+              })
+              .catch(res => {
+                var data = res.data
+                if (data.code) {
+                  var code = data.code
+                  if (code == "006") {
+                    that.setData({
+                      isStoreOwner: true
+                    })
+                  } else if (code == "005") {
+                    that.setData({
+                      isNotStore: true
                     })
                   }
-                })
-                .catch(res=>{
-                  var data=res.data
-                  if(data.code){
-                    var code = data.code
-                    if(code=="006"){
-                      that.setData({
-                        isStoreOwner:true
-                      })
-                    }else if (code == "005") {
-                      that.setData({
-                        isNotStore: true
-                      })
-                    }
-                  }
-                })
-            }
-          } else {
+                }
+              })
+          }
+        }
+      }else{
+        that.selectComponent("#login").showPage();
+      }
+    })
+    .catch(e => {
+      Api.showToast("没有此用户！")
+    })
+  },
+  addFriend:function(){
+    var that = this;
+    wx.scanCode({
+      success: (res) => {
+        var qrUrl = res.result
+        if (qrUrl) {
+          if(qrUrl.indexOf("&userId")==-1){
             Api.showToast("未获取信息！")
+          }else{
+            let type = qrUrl.match(/type=(\S*)&/)[1];
+            if (type == "user") {
+              let userId = qrUrl.match(/userId=(\S*)/)[1];
+              that.getFriendMes(userId)
+            } else {
+              Api.showToast("未获取信息！")
+            }
           }
         } else {
           Api.showToast("未获取信息！")
@@ -434,19 +495,18 @@ Page({
     })
   },
   onLoad: function (options) {
-    // let url ='https://www.youlife.net.cn/qr/?type=user&userId=3a7b3f6c8902c89585bc1f32a54e60cb'
-    // // let url = decodeURIComponent(options.q)
-    // console.log(url)
-    // if (url){
-    //   let type = url.match(/type=(\S*)&/)[1];
-    //   if (type =="user"){
-    //     let userId = url.match(/userId=(\S*)/)[1];
-    //     console.log(userId)
-    //   }
-    // }
-    // console.log(JSON.stringify(options))
     var _this = this
     if (options!=undefined){
+      let qrUrl = decodeURIComponent(options.q)
+      if (Api.isEmpty(qrUrl)) {
+        if (qrUrl.indexOf("&userId") != -1) {
+          let type = qrUrl.match(/type=(\S*)&/)[1];
+          if (type == "user") {
+            let userId = qrUrl.match(/userId=(\S*)/)[1];
+            _this.getFriendMes(userId)
+          }
+        }
+      }
       if (options.scene) {
         let scene = decodeURIComponent(options.scene);
         var storeId = scene.split("store_")[1]
