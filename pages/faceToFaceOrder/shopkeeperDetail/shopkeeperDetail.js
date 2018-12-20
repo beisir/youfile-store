@@ -28,11 +28,11 @@ Page({
         order: res.obj
       })
       //倒计时
-      // let timm = this.data.timeOnce;
-      // if (timm) {
-      //   util.count_down(this, res.obj.timeoutExpressSecond ? res.obj.timeoutExpressSecond * 1000 : "")
-      //   this.setData({ timeOnce: false })
-      // }
+      let timm = this.data.timeOnce;
+      if (timm) {
+        util.count_down(this, res.obj.timeoutExpressSecond ? res.obj.timeoutExpressSecond * 1000 : "")
+        this.setData({ timeOnce: false })
+      }
     })
   },
 

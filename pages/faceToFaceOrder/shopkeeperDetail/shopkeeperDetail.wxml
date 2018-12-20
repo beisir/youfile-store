@@ -67,7 +67,7 @@
   <view class='item-title padding-box'>
     <view class='flex-center'>
       <image src="/image/12.png" class='cloud-icon'></image>
-      <text class='com-name-box'>{{order.userInfo.storeName}}</text>
+      <text class='com-name-box'>{{order.storeInfo.storeName}}</text>
       <image src='/image/mallr.png' class='right-icon'></image>
       <view class='type-chunk'>门店</view>
     </view>
@@ -92,10 +92,29 @@
     <text class='msg-title'>订单号</text>
     <text class='msg-detail'>{{order.orderNumber}}</text>
   </view>
+
+  <block wx:if="{{order.orderStatus == 'finish'}}">
+    <view class='msg-item'>
+      <text class='msg-title'>支付交易号</text>
+      <text class='msg-detail'>{{order.orderNumber}}</text>
+    </view>
+  </block>
+
   <view class='msg-item'>
     <text class='msg-title'>创建时间</text>
     <text class='msg-detail'>{{order.createDate}}</text>
   </view>
+
+  <block wx:if="{{order.orderStatus == 'finish'}}">
+    <view class='msg-item'>
+      <text class='msg-title'>支付时间</text>
+      <text class='msg-detail'>{{order.payDate}}</text>
+    </view>
+    <view class='msg-item'>
+      <text class='msg-title'>成交时间</text>
+      <text class='msg-detail'>{{order.finishDate}}</text>
+    </view>
+  </block>
 </view>
 <view class='border-line'></view>
 <view class='msg-list-box padding-box'>
@@ -118,7 +137,7 @@
   <view class='msg-item'>
     <text class='pay-price-title' wx:if="{{order.orderStatus == 'finish'}}">实收金额</text>
     <text class='pay-price-title' wx:else>应收金额</text>
-    <text class='msg-detail pay-price'>￥{{order.orderAmount}}</text>
+    <text class='msg-detail pay-price'>￥{{order.payAmount}}</text>
   </view>
 </view>
 

@@ -119,12 +119,16 @@ import {
   helpOrderUrl,
   ftfCloseOrderUrl,
   ftfAdminOrderDetailUrl,
+  customerOrderListUrl,
+  ftfCustomerOrderDetailUrl,
+  ftfCaneledOrderUrl,
+  ftfDelOrderUrl,
 } from './constUrl.js'
 
 const app = getApp()
 /**判断是否为空**/
 function isEmpty(str) {
-  if (str == '' || str == undefined || str == null){
+  if (str == '' || str == undefined || str == null || str == "undefined"){
     return false
   }else{
     return true
@@ -717,9 +721,26 @@ function helpOrder(data){
 function ftfCloseOrder(data){
   return app.http.putRequest(ftfCloseOrderUrl, data);
 }
+//取消订单
+function ftfCaneledOrder(data){
+  return app.http.putRequest(ftfCaneledOrderUrl, data);
+}
+//删除订单
+function ftfDelOrder(data){
+  return app.http.deleteRequest(ftfDelOrderUrl, data);
+}
 //商家订单详情
 function ftfAdminOrderDetail(data){
   return app.http.getRequest(ftfAdminOrderDetailUrl, data);
+}
+// 门店顾客列表
+function customerOrderList(data) {
+  data = initStoreId(data);
+  return app.pageRequest.pageGet(customerOrderListUrl, data)
+}
+//门店顾客订单详情
+function ftfCustomerOrderDetail(data){
+  return app.http.getRequest(ftfCustomerOrderDetailUrl, data);
 }
 /**
  * 获取formId
@@ -768,6 +789,10 @@ function getStoreId() {
   }
 }
 module.exports = {
+  ftfDelOrder,
+  ftfCaneledOrder,
+  customerOrderList, 
+  ftfCustomerOrderDetail,
   ftfAdminOrderDetail: ftfAdminOrderDetail,
   ftfCloseOrder: ftfCloseOrder,
   helpOrder: helpOrder,

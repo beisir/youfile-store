@@ -2,6 +2,7 @@
 const app = getApp();
 const util = require('../../../utils/util.js');
 import API from "../../../utils/api.js";
+var seeImg = false;
 Page({
 
   /**
@@ -13,6 +14,24 @@ Page({
     cancelIndex: 0,
     orderName:"订单",
     timeOnce: true
+  },
+
+  //查看凭证
+  seeVoucher(e) {
+    let num = this.data.num;
+    API.seeVoucher({ orderNumber: num }).then((res) => {
+      if (res.obj.payVoucher) {
+        seeImg = true;
+        wx.previewImage({
+          urls: [this.data.baseUrl + res.obj.payVoucher]
+        })
+      } else {
+        wx.showToast({
+          title: '未上传付款凭证',
+          icon: 'none'
+        })
+      }
+    })
   },
 
   toHome() {
@@ -274,6 +293,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (seeImg) {
+      seeImg = false;
+      return;
+    }
     this.getData();
   },
 

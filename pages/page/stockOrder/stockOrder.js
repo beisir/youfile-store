@@ -2,6 +2,8 @@
 const app = getApp();
 let searchTimer;
 import API from "../../../utils/api.js";
+var seeImg = false;
+
 Page({
 
   /**
@@ -35,6 +37,23 @@ Page({
 
   },
 
+  //查看凭证
+  seeVoucher(e) {
+    let num = e.currentTarget.dataset.num;
+    API.seeVoucher({ orderNumber: num }).then((res) => {
+      if (res.obj.payVoucher) {
+        seeImg = true;
+        wx.previewImage({
+          urls: [this.data.baseUrl + res.obj.payVoucher]
+        })
+      } else {
+        wx.showToast({
+          title: '未上传付款凭证',
+          icon: 'none'
+        })
+      }
+    })
+  },
 
   showModal(e) {
     let type = e.currentTarget.dataset.type,
@@ -276,6 +295,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    if (seeImg) {
+      seeImg = false;
+      return;
+    }
     this.getList(true);
   },
 

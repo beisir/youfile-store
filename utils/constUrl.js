@@ -126,9 +126,14 @@ export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
 export const ifWholesalerUrl = "/inside/merchantpurchaser/{{storeId}}/purchaser/{{userId}}"
 // 商家门店订单
 export const shopkeeperOrderListUrl = "/admin/ftf/order/store/{{storeId}}/orderstatus/{{orderStatus}}"
+export const customerOrderListUrl ="/api/ftf/order/user/store/{{storeId}}/orderstatus/{{orderStatus}}"
 // 帮他下单
 export const helpOrderUrl = "/admin/ftf/order"
 //门店订单详情
 export const ftfAdminOrderDetailUrl = "/admin/ftf/order/byordernumber/{{orderNumber}}"
+export const ftfCustomerOrderDetailUrl = "/api/ftf/order/byordernumber/{{orderNumber}}"
 //门店关闭订单
 export const ftfCloseOrderUrl = "/admin/ftf/order/{{orderNumber}}/closed"
+export const ftfCaneledOrderUrl = "/api/ftf/order/{{orderNumber}}/cancel"
+// 删除订单
+export const ftfDelOrderUrl = "/api/ftf/order/{{orderNumber}}"

@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "添加进货商"
+  "navigationBarTitleText": "添加进货商",
+  "usingComponents": {
+    "mes": "../../../../assembly/tips/tips"
+  }
 }

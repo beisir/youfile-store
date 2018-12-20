@@ -113,17 +113,18 @@ page{
     }
       .tip-box text{
         float:left;
-        margin-left:10rpx;
+        margin-right:10rpx;
       }
       .owner-tip-box{
-        height: 80rpx;
-        display: -webkit-box;
+        min-height: 80rpx;
+        overflow: hidden;
+        /* display: -webkit-box;
         overflow: hidden;
         text-overflow: ellipsis;
         word-wrap: break-word;
         white-space: normal !important;
         -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        -webkit-box-orient: vertical; */
       }
       
       .shopkeeper-tip{

@@ -1,3 +1,13 @@
+ <!--供应商不能互相加-->
+<mes
+  show="{{samePre}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+<view>
+  <text>供应商不能添加供应商哦！</text>
+  <button bindtap='samePreBtn'>确定</button>
+</view>
+</mes>
  <view class="goods-ser">
     <input placeholder="输入进货商名称、手机号"  bindconfirm='searchBtn'    bindinput='changeValue'  value="{{value}}"/>
     <image class="home-ser"  src="/image/search1.png"></image>

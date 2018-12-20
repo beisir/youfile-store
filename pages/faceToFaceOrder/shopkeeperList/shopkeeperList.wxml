@@ -8,6 +8,7 @@
   <button class='layer-reason-btn' bindtap='sureCancel'>确定</button>
 </clo>
 
+
 <!-- 主体 -->
 <view class='my-search-box padding-box'>
   <image src='/image/search.png' class='search-input-icon'></image>

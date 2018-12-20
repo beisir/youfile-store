@@ -71,8 +71,8 @@
         <view bindtap="onChangeShowState">
           <text wx:if="{{item.orderStatus=='unpaid'}}">待付款</text>
           <text wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==2 }}">待发货</text>
-          <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && item.isForm}}">待收货</text>
-          <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && !item.isForm}}">待填表</text>        
+          <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2}}">待收货</text>
+          <!-- <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && !item.isForm}}">待填表</text>         -->
           <text wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==1}}">待取货</text>
           <text wx:if="{{item.orderStatus=='finish' }}">供货成功 </text>
           <text wx:if="{{item.orderStatus=='canceled' }}">交易关闭</text>
@@ -117,35 +117,34 @@
 
       <!-- 代收款 1自提-->
       <view class='or-last' wx:if="{{item.orderStatus=='unpaid'}}">
-        <button class='or-active'> 提醒付款 </button>
+        <!-- <button class='or-active'> 提醒付款 </button> -->
+        <button class='or-active' data-type='sureGet' bindtap='showModal' data-num="{{item.orderNumber}}">确认收款</button>
         <button bindtap='showModal' data-type='change' data-num='{{item.orderNumber}}' data-change="{{item.orderAmount}}" class='or-active'> 整单改价 </button>
-        <button wx:if="{{item.logisticsMode==2}}" class='or-active' data-type='ex' bindtap='showModal' data-num="{{item.orderNumber}}">收款发货</button>
-        <button wx:if="{{item.logisticsMode==1}}" class='or-active' data-type='sureGet' bindtap='showModal' data-num="{{item.orderNumber}}">确认收款</button>
+        <!-- <button wx:if="{{item.logisticsMode==2}}" class='or-active' data-type='ex' bindtap='showModal' data-num="{{item.orderNumber}}">收款发货</button> -->
+        <button wx:if="{{item.payVoucher}}" bindtap='seeVoucher' data-num="{{item.orderNumber}}">付款凭证</button>
         <button data-num="{{item.orderNumber}}" data-type='cancel' bindtap='showModal'>取消供货单</button>
       </view>
 
       <!-- 待发货  -->
       <view class='or-last' wx:if="{{item.orderStatus=='wait_deliver' && item.logisticsMode==2}}">
         <button class='or-active' data-num="{{item.orderNumber}}" data-type='ex' bindtap='showModal'> 我要发货 </button>
-        <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
-        <button data-num="{{item.orderNumber}}" data-type='cancel' bindtap='showModal'>取消供货单</button>        
+        <button wx:if="{{item.payVoucher}}" bindtap='seeVoucher' data-num="{{item.orderNumber}}">付款凭证</button>
       </view>
 
       <!-- 待收货-->
       <view class='or-last' wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==1}}">
         <button class='or-active' data-type='goodCode' data-num='{{item.orderNumber}}' bindtap='showModal'> 验证取货码 </button>
-        <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
-        <button data-num="{{item.orderNumber}}" data-type='cancel' bindtap='showModal'>取消供货单</button>        
+        <button wx:if="{{item.payVoucher}}" bindtap='seeVoucher' data-num="{{item.orderNumber}}">付款凭证</button>
       </view>
-      <view class='or-last' wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2}}">
+      <view class='or-last' wx:if="{{item.orderStatus=='delivered' && item.logisticsMode==2 && item.payVoucher}}">
         <!-- <button class='or-active'> 查看物流 </button> -->
-        <button class='or-active' data-type='ex2' bindtap='showModal' wx:if="{{!item.isForm}}"> 填写运单号 </button>        
-        <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
+        <!-- <button class='or-active' data-type='ex2' bindtap='showModal' wx:if="{{!item.isForm}}"> 填写运单号 </button>         -->
+        <button wx:if="{{item.payVoucher}}" bindtap='seeVoucher' data-num="{{item.orderNumber}}">付款凭证</button>
       </view>
 
       <!-- 已完成 -->
-      <view class='or-last' wx:if="{{item.orderStatus=='finish'}}">
-        <button bindtap='seeVoucher' data-num="{{item.orderNumber}}">查看支付凭证</button>
+      <view class='or-last' wx:if="{{item.orderStatus=='finish' && item.payVoucher}}">
+        <button wx:if="{{item.payVoucher}}" bindtap='seeVoucher' data-num="{{item.orderNumber}}">付款凭证</button>
         <!-- <button class='or-active' wx:if="{{item.logisticsMode==2}}"> 查看物流 </button> -->
         <!-- <button data-num="{{item.orderNumber}}" data-type="del" bindtap='showModal'> 删除订单 </button> -->
       </view>
