@@ -1,50 +1,8 @@
-page{
-  font-size: 26rpx;
-  background: #fff;
-  color: #333;
-}
-.success-box{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.title{
-  font-size: 30rpx;
-  margin: 60rpx 0 30rpx;
-  font-weight: 600;
-}
-.price{
-  font-size: 60rpx; 
-  color: #ca7;
-  margin-bottom: 70rpx; 
-  font-weight: 600;
-}
-
-.btn{
-  height: 80rpx;
-  line-height: 80rpx;
-  text-align: center;
-  width: 600rpx;
-  background: #ca7;
-  color: #fff;
-  border-radius: 10rpx;
-  font-size: 30rpx;
-  margin-top: 60rpx;
-  margin-bottom: 60rpx; 
-}
-
-.red-font{
-  font-size: 36rpx;
-  color: #d23636;
-  margin: 0 10rpx;
-}
-
-.good-icon{
-  width: 100rpx;
-  height: 100rpx;
-  margin: 180rpx 0 25rpx;
-}
-
-.gold-font{
-  color: #ca7;
-}
+page{font-size:26rpx;background:#fff;color:#333}
+.success-box{display:flex;flex-direction:column;align-items:center}
+.title{font-size:30rpx;margin:60rpx 0 30rpx;font-weight:600}
+.price{font-size:60rpx;color:#ca7;margin-bottom:70rpx;font-weight:600}
+.btn{height:80rpx;line-height:80rpx;text-align:center;width:600rpx;background:#ca7;color:#fff;border-radius:10rpx;font-size:30rpx;margin-top:60rpx;margin-bottom:60rpx}
+.red-font{font-size:36rpx;color:#d23636;margin:0 10rpx}
+.good-icon{width:100rpx;height:100rpx;margin:180rpx 0 25rpx}
+.gold-font{color:#ca7}

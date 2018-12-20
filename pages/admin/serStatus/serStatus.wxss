@@ -1,5 +1,2 @@
-@import '../status/status';
-.result{
-  padding-left: 0;
-}
-.st-all{margin-top: 0}
+@import '../status/status';.result{padding-left:0}
+.st-all{margin-top:0}

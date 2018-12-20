@@ -1,7 +1,1 @@
-@import '../newAddress/newAddress.wxss';
-.aw-but{
-  position: relative;
-  bottom: 0;
-  left: 0;
-  margin-top: 40rpx;
-}
+@import '../newAddress/newAddress.wxss';.aw-but{position:relative;bottom:0;left:0;margin-top:40rpx}

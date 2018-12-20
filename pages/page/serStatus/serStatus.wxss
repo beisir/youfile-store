@@ -1,16 +1,6 @@
-/* pages/serStatus/serStatus.wxss */
-.ser-font{
-  left: 88%;
-}
-.result-list image{
-  background: none
-}
-.result-list .r-h{
-  height: 80rpx;
-}
-.result-list{
-  height:520rpx;
-}
-.result-list .result-text2 {
-  margin-top:10rpx;color: #666;
-}
+
+.ser-font{left:88%}
+.result-list image{background:none}
+.result-list .r-h{height:80rpx}
+.result-list{height:520rpx}
+.result-list .result-text2{margin-top:10rpx;color:#666}
