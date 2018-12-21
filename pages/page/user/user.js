@@ -132,7 +132,7 @@ Page({
           })
         }
         // 店铺开通是否付费
-        if(res.obj.storeStatus == true){
+        if (res.obj.isStoreOwner == true){
           this.setData({
             payStore: true
           })
