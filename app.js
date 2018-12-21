@@ -55,7 +55,8 @@ App({
     projectType:"xpl",
     userShowTip:false,
     payUrl: payUrl,    
-    payAppNum:"APP001"
+    payAppNum: "APP001",
+    retailStoreId:"",
   },
   http: new http(),
   pageRequest: new pageRequest(),

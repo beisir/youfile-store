@@ -68,6 +68,7 @@ Page({
     isShow:false,
     showHide:true,
     showDp:true,
+    goRetailStore: true,
     currentTab: 0,
     confirmDown:false,
     baseUrl:'',

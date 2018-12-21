@@ -5,6 +5,7 @@
     "mes": "../../../../assembly/tips/tips",
     "login": "../../login/login/login",
     "no": "../indexEmpty/indexEmpty",
+    "retailStore": "../retailStore/retailStore",
     "initstroe": "../../cloudOrder/applyStore/applyStore",
     "storeOrder":"../../faceToFaceOrder/remindLayer/remindLayer"
   }

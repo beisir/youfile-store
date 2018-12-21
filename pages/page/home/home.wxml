@@ -1,68 +1,54 @@
-<view wx:if="{{initOrder && limitShow == 2}}"><initstroe></initstroe></view>
+<view wx:if="{{initOrder && limitShow == 2}}">
+  <initstroe></initstroe>
+</view>
 <login id="login"></login>
 <!-- 到店订单付款提示 -->
 <storeOrder id="storeOrder"></storeOrder>
- <!--不是供应商-->
-<mes
-  show="{{isNotStore}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-<view class='tipMes'>
-  <view>我是<text>用户</text>,未开通新批零小云店,</view>
-  <view>不提供进货商友功能哦~</view>
-  <button bindtap='closeTip'>知道了</button>
-</view>
+<!--不是供应商-->
+<mes show="{{isNotStore}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view class='tipMes'>
+    <view>我是
+      <text>用户</text>,未开通新批零小云店,</view>
+    <view>不提供进货商友功能哦~</view>
+    <button bindtap='closeTip'>知道了</button>
+  </view>
 </mes>
- <!--零售店店主-->
-<mes
-  show="{{isStoreOwner}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-<view class='tipMes'>
-  <view>我是<text>新零售</text>小云店主,我们不 </view>
-  <view>提供进货商友功能哦~</view>
-  <button class='button-hover' bindtap='closeTip'>知道了</button>
-</view>
+<!--零售店店主-->
+<mes show="{{isStoreOwner}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view class='tipMes'>
+    <view>我是
+      <text>新零售</text>小云店主,我们不 </view>
+    <view>提供进货商友功能哦~</view>
+    <button class='button-hover' bindtap='closeTip'>知道了</button>
+  </view>
 </mes>
- <!--确定取消关注吗？-->
-<mes
-  show="{{disLike}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-<view>
-  <text>确定取消关注吗？</text>
-  <button bindtap='disLike'>确定</button>
-</view>
+<!--确定取消关注吗？-->
+<mes show="{{disLike}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确定取消关注吗？</text>
+    <button bindtap='disLike'>确定</button>
+  </view>
 </mes>
- <!--供应商不能互相加-->
-<mes
-  show="{{samePre}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-<view>
-  <text>供应商不能添加供应商哦！</text>
-  <button bindtap='samePreBtn'>确定</button>
-</view>
+<!--供应商不能互相加-->
+<mes show="{{samePre}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>供应商不能添加供应商哦！</text>
+    <button bindtap='samePreBtn'>确定</button>
+  </view>
 </mes>
- <!--供应商-->
-<mes
-  show="{{samePreStore}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-<view>
-  <text>回到自己的店加商友哦！</text>
-  <button bindtap='samePreStore'>确定</button>
-</view>
+<!--供应商-->
+<mes show="{{samePreStore}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>回到自己的店加商友哦！</text>
+    <button bindtap='samePreStore'>确定</button>
+  </view>
 </mes>
- <!--是否下架-->
-<mes
-  show="{{confirmDown}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-<view>
-  <text>确定下架该商品？</text>
-  <button bindtap='confirmDown'>确定</button>
-</view>
+<!--是否下架-->
+<mes show="{{confirmDown}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确定下架该商品？</text>
+    <button bindtap='confirmDown'>确定</button>
+  </view>
 </mes>
 <!-- 提示 -->
 <mes show="{{show}}" bind:sureSelectArea="sureSelectAreaListener">
@@ -71,26 +57,20 @@
     <button bindtap='confirm'>我要合作</button>
   </view>
 </mes>
- <!--是否复制-->
-<mes
-  show="{{copyGoods}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-<view>
-  <text>是否加入到小云店仓库中？</text>
-  <button bindtap='copyGoodsYes'>确定</button>
-</view>
+<!--是否复制-->
+<mes show="{{copyGoods}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>是否加入到小云店仓库中？</text>
+    <button bindtap='copyGoodsYes'>确定</button>
+  </view>
 </mes>
- <!--未开通小云店-->
-<mes
-  show="{{openStore}}"
-  bind:sureSelectArea="sureSelectAreaListener"
->
-<view class='tip-v'>
-  <text>您还未申请小云店哦？</text>
-  <view >开通小云店可享一键入库功能</view>
-  <button bindtap='openStore'>我要开店</button>
-</view>
+<!--未开通小云店-->
+<mes show="{{openStore}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view class='tip-v'>
+    <text>您还未申请小云店哦？</text>
+    <view>开通小云店可享一键入库功能</view>
+    <button bindtap='openStore'>我要开店</button>
+  </view>
 </mes>
 <view class="goods-ser">
   <navigator url="../../page/serStatus/serStatus" style='width:80%'>
@@ -113,12 +93,12 @@
     <button class='shre_btn' open-type='share'>
       <image src="/image/fx1.png"></image>分享</button>
   </view> -->
-  <image wx:if='{{store!="" && limitShow==2}}'   bindtap="chooseImage" src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
-   <image wx:if='{{store!="" && limitShow!=2}}'  src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
+  <image wx:if='{{store!="" && limitShow==2}}' bindtap="chooseImage" src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
+  <image wx:if='{{store!="" && limitShow!=2}}' src="{{baseUrl}}{{coverUrl}}?x-oss-process=style/store-cover" class="slide-image" mode="widthFix" />
   <view class="ym_sydtstore">
     <view class="ym_sydtlogo">
       <navigator class='logoimg' url='../mes/mes?code={{limitShow}}'>
-        <image wx:if='{{store!=""}}' mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"/>  
+        <image wx:if='{{store!=""}}' mode="aspectFill" src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo" />
       </navigator>
     </view>
     <view class="ym_sydtdmgzs">
@@ -130,14 +110,36 @@
       <text wx:if='{{floorInfo!=null}}'>{{floorInfo.mallName}} {{floorInfo.balconyName}} {{floorInfo.floorName}} {{floorInfo.areaName}} {{floorInfo.storeDoorNum}}</text>
     </view>
   </view>
-  <view class="ym_sydtgzbtn share-v" wx:if='{{limitShow==2}}'   style='color:#666 !important'><view><image  src="/image/fx.png" /></view><button class='shre_btn' open-type='share'></button>分享</view>
-  <view class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow && limitShow!=2}}'  bindtap='likeStore'><view><image  src="/image/f.png" /></view><button class='shre_btn'></button><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</view>
-  <view class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw && limitShow!=2}}'  bindtap='likeStore'><view><image  src="/image/f.png" /></view><button class='shre_btn'></button><text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</view>
-  <view class="ym_sydtgzbtn"  style='color:#666 !important' wx:if='{{likeShow && getFollw && limitShow!=2}}' bindtap='deteleLikeStore'><view><image  src="/image/dis.png" /></view><button class='shre_btn'></button>已关注</view>
+  <view class="ym_sydtgzbtn share-v" wx:if='{{limitShow==2}}' style='color:#666 !important'>
+    <view>
+      <image src="/image/fx.png" />
+    </view>
+    <button class='shre_btn' open-type='share'></button>分享</view>
+  <view class="ym_sydtgzbtn" wx:if='{{store!="" && !likeShow && limitShow!=2}}' bindtap='likeStore'>
+    <view>
+      <image src="/image/f.png" />
+    </view>
+    <button class='shre_btn'></button>
+    <text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</view>
+  <view class="ym_sydtgzbtn" wx:if='{{!likeShow  && !getFollw && limitShow!=2}}' bindtap='likeStore'>
+    <view>
+      <image src="/image/f.png" />
+    </view>
+    <button class='shre_btn'></button>
+    <text style='font-size:34rpx;margin-top:-5rpx;'>+</text> 关注</view>
+  <view class="ym_sydtgzbtn" style='color:#666 !important' wx:if='{{likeShow && getFollw && limitShow!=2}}' bindtap='deteleLikeStore'>
+    <view>
+      <image src="/image/dis.png" />
+    </view>
+    <button class='shre_btn'></button>已关注</view>
 </view>
-<view class='add-firend'  wx:if='{{limitShow==1}}' bindtap='addTip'><view>商</view>点此加为商友，即刻查看批发价！<image src='/image/mallr.png'></image></view>
+<view class='add-firend' wx:if='{{limitShow==1}}' bindtap='addTip'>
+  <view>商</view>点此加为商友，即刻查看批发价！
+  <image src='/image/mallr.png'></image>
+</view>
 <!-- <view class='add-firend add-firend1' wx:if='{{limitShow==1}}'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view> -->
-<view class='add-firend add-firend2' wx:if='{{limitShow==3}}'><view>友</view>已成商友，现可查看批发价！</view>
+<view class='add-firend add-firend2' wx:if='{{limitShow==3}}'>
+  <view>友</view>已成商友，现可查看批发价！</view>
 <!-- <view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view> -->
 <view class="swiper-tab" id='swiper-tab'>
   <!-- <form class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" bind:submit="swichNav" data-current="0"   report-submit="true"> <button formType="submit">综合</button><view></view></form> -->
@@ -159,7 +161,7 @@
     <view class='up-p up-p1' wx:if='{{descShow}}'></view>
     <view></view>
   </view>
-  
+
 </view>
 <view class="result result-box" wx:if="{{result.length > 0}}">
   <view class='goods-total'>
@@ -181,14 +183,14 @@
           </view>
           <view class="result-text result-text1">
             零售
-            <text  class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+            <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
             <view>
               批发
               <text wx:if='{{limitShow!=1}}' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.wholesalePrice}}</text>
-              <image wx:if='{{limitShow==1}}'  bindtap='addWholesalePrice' src='/image/wh.png'></image>
+              <image wx:if='{{limitShow==1}}' bindtap='addWholesalePrice' src='/image/wh.png'></image>
               <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
-               <!-- wx:if='{{limitShow==3}} copyGoods' -->
-                <!-- <image bindtap='openStore' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" /> -->
+              <!-- wx:if='{{limitShow==3}} copyGoods' -->
+              <!-- <image bindtap='openStore' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" /> -->
             </view>
           </view>
         </view>
@@ -207,7 +209,8 @@
 </view>
 <view class='showHide' hidden='{{showHide}}'>
   <view class='sh-cont'>
-    <view><button  class='shre_btns' data-name='names' open-type='share'></button>分享</view>
+    <view>
+      <button class='shre_btns' data-name='names' open-type='share'></button>分享</view>
     <view bindtap='topGoods'>置顶</view>
     <view bindtap='editGoods'>编辑</view>
     <view bindtap='upGoods'>下架</view>
@@ -224,4 +227,7 @@
 </view> -->
 <view hidden='{{indexEmpty}}'>
   <no></no>
+</view>
+<view hidden='{{goRetailStore}}'>
+  <retailStore></retailStore>
 </view>
