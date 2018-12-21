@@ -1,17 +1,19 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
+import EnterStoreHandler from '../../../utils/enterStoreHandler.js';
+
 function getIdentity(_this) {
   if (authHandler.isLogin()) {
     Api.userIdentity()
       .then(res => {
-        var obj=res.obj
-        if (obj == "null" || obj==null){
+        var obj = res.obj
+        if (obj == "null" || obj == null) {
           wx.setStorageSync("admin", 1)
           _this.setData({
             limitShow: 1
           })
-        }else{
+        } else {
           var isStoreOwner = obj.isStoreOwner,
             isPurchaser = obj.isPurchaser
           if (isPurchaser) {
@@ -27,7 +29,7 @@ function getIdentity(_this) {
             })
           }
           if (isStoreOwner) {
-            if(obj.storeNature==1){
+            if (obj.storeNature == 1) {
               wx.setStorageSync("admin", 2)
               _this.setData({
                 limitShow: 2
@@ -49,7 +51,7 @@ function getIdentity(_this) {
         }
         _this.homeIndex()
       })
-  }else{
+  } else {
     _this.homeIndex()
     wx.setStorageSync("admin", 1)
     _this.setData({
@@ -63,259 +65,248 @@ Page({
    */
   data: {
     indexEmpty: true,
-    show:false,
-    samePre:false,
-    isShow:false,
-    showHide:true,
-    showDp:true,
+    show: false,
+    samePre: false,
+    isShow: false,
+    showHide: true,
+    showDp: true,
     goRetailStore: true,
     currentTab: 0,
-    confirmDown:false,
-    baseUrl:'',
+    confirmDown: false,
+    baseUrl: '',
     result: [],
-    noMoreData:true,
-    keyword:'',
-    descShow:false,
-    totalCount:0,
-    goodsNum:0,
-    samePreStore:false,
-    samePreStoreId:'',
-    store:'',
-    bannerHeight:0,
-    swiperHeight:0,
-    goodsHeight:0,
-    coverUrl:'',
-    disLike:false,
-    identity:'',
-    likeShow:false,
-    limitShow:1,
-    src:'',
-    goodsName:'',
-    copyGoods:false,
-    openStore:false
+    noMoreData: true,
+    keyword: '',
+    descShow: false,
+    totalCount: 0,
+    goodsNum: 0,
+    samePreStore: false,
+    samePreStoreId: '',
+    store: '',
+    bannerHeight: 0,
+    swiperHeight: 0,
+    goodsHeight: 0,
+    coverUrl: '',
+    disLike: false,
+    identity: '',
+    likeShow: false,
+    isOnloaded: false,
+    limitShow: 1,
+    src: '',
+    goodsName: '',
+    copyGoods: false,
+    openStore: false
   },
   //到店弹框
-  showStoreOrder(){
+  showStoreOrder() {
     this.selectComponent("#storeOrder").open();
   },
-  openStore:function(){
+  openStore: function() {
     wx.navigateTo({
       url: '../../cloudOrder/newCloud/newCloud',
     })
   },
   // 一键入库
-  copyGoods:function(e){
+  copyGoods: function(e) {
     var originGoodsId = e.target.dataset.id
     this.setData({
-      copyGoods:true,
+      copyGoods: true,
       originGoodsId: originGoodsId
     })
   },
-  copyGoodsYes:function(){
-    var _this=this,
-     originGoodsId = this.data.originGoodsId
+  copyGoodsYes: function() {
+    var _this = this,
+      originGoodsId = this.data.originGoodsId
     this.setData({
       copyGoods: false
     })
-    Api.copyGoods({ originGoodsId: originGoodsId })
+    Api.copyGoods({
+        originGoodsId: originGoodsId
+      })
       .then(res => {
         Api.showToast(res.message)
       })
       .catch(res => {
         var code = res.data.code
-        if (code =="E101"){
+        if (code == "E101") {
           _this.setData({
             openStore: true
           })
         }
       })
   },
-  samePreBtn:function(){
+  samePreBtn: function() {
     this.setData({
-      samePre:false
+      samePre: false
     })
   },
-  samePreStore:function(){
+  samePreStore: function() {
     var samePreStoreId = this.data.samePreStoreId
     this.setData({
-      samePreStore:false
+      samePreStore: false
     })
     wx.setStorageSync("storeId", samePreStoreId)
     app.globalData.switchStore = true
     this.onShow()
   },
-  getFriendMes:function(userId){
-    var that = this
+  getFriendMes: function(userId) {
     var limitShow = wx.getStorageSync("admin")
-    console.log(userId)
-    Api.getStoreData({ userId: userId }).then((res) => {
-      console.log(res)
-    })
-    .catch(e => {
-        console.log(e)
-      })
-    Api.getUserInfo().then((res) => {
-      if (res.obj) {
-        if (res.obj.isStoreOwner == true && res.obj.storeNature == 1 && limitShow!=2) {
-          that.setData({
-            samePreStore:true,
-            samePreStoreId: res.obj.storeId
-          })
-        }else{
-          if (limitShow == 2) {
-            Api.showMerchant({ userId: userId })
-              .then(res => {
-                var status = res.obj.status
-                var hasStore = res.obj.hasStore
-                if (hasStore) {
-                  var storeNature = res.obj.store.storeNature
-                  if (storeNature == 1) {
-                    that.setData({
-                      samePre: true
-                    })
-                    return
-                  }
-                }
-                if (status) {
-                  res.obj.status
-                  Api.newUserInfor({ userId: userId })
-                    .then(res => {
-                      var accept = res.obj.id,
-                        phone = res.obj.mobile,
-                        userName = res.obj.userName,
-                        storeId = Api.getThisStoreId()
-                      var pic = that.data.baseUrl + res.obj.headPic
-                      if (status == 2) {
-                        wx.navigateTo({
-                          url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
-                        })
-                      }
-                      if (status != 2) {
-                        if (status == 3) {
-                          status = 0
-                        }
-                        wx.navigateTo({
-                          url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
-
-                        })
-                      }
-                    })
-                    .catch(res => {
-                      
-                    })
-                }
+    var that = this
+    if (limitShow == 2) {
+      Api.showMerchant({
+          userId: userId
+        })
+        .then(res => {
+          console.log(res)
+          var status = res.obj.status
+          if (status) {
+            Api.newUserInfor({
+                userId: userId
               })
-              
-          } else {
-            Api.showPurchaser({ userId: userId })
               .then(res => {
-                var obj = res.obj,
-                  status = obj.status,
-                  storeId_ = obj.storeId_
-                if (storeId_) {
-                  wx.setStorageSync("storeId", storeId_)
-                  app.globalData.switchStore = true
+                var accept = res.obj.id,
+                  phone = res.obj.mobile,
+                  userName = res.obj.userName,
+                  storeId = Api.getThisStoreId()
+                var pic = that.data.baseUrl + res.obj.headPic
+                if (status == 2) {
+                  wx.navigateTo({
+                    url: '/pages/businessFriend/merchant/reach/reach?accept=' + accept,
+                  })
                 }
-                if (status) {
+                if (status != 2) {
                   if (status == 3) {
                     status = 0
                   }
                   wx.navigateTo({
-                    url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark=&name=&logo=',
+                    url: '/pages/businessFriend/merchant/merchantInfo/merchantInfo?status=' + status + '&send=' + storeId + '&accept=' + accept + '&remark=&greet=&name=' + userName + '&logo=' + pic + '&phone=' + phone,
+
                   })
                 }
               })
               .catch(res => {
-                var data = res.data
-                if (data.code) {
-                  var code = data.code
-                  if (code == "006") {
-                    that.setData({
-                      isStoreOwner: true
-                    })
-                  } else if (code == "005") {
-                    that.setData({
-                      isNotStore: true
-                    })
-                  }
-                }
+
               })
           }
-        }
-      }else{
-        that.selectComponent("#login").showPage();
-      }
-    })
-    .catch(e => {
-      Api.showToast("没有此用户！")
-    })
+        })
+
+    } else {
+      Api.showPurchaser({
+          userId: userId
+        })
+        .then(res => {
+          var obj = res.obj,
+            status = obj.status,
+            storeId_ = obj.storeId_
+          if (storeId_) {
+            wx.setStorageSync("storeId", storeId_)
+            app.globalData.switchStore = true
+          }
+          if (status) {
+            if (status == 3) {
+              status = 0
+            }
+            wx.navigateTo({
+              url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark=&name=&logo=',
+            })
+          }
+        })
+        .catch(res => {
+          var data = res.data
+          if (data.code) {
+            var code = data.code
+            if (code == "006") {
+              that.setData({
+                isStoreOwner: true
+              })
+            } else if (code == "005") {
+              that.setData({
+                isNotStore: true
+              })
+            }
+          }
+        })
+    }
   },
-  addFriend:function(){
-    var that = this;
+  addFriend: function() {
+    var _this = this;
     wx.scanCode({
       success: (res) => {
         var qrUrl = res.result
-        if (qrUrl) {
-          if(qrUrl.indexOf("&userId")==-1){
-            Api.showToast("未获取信息！")
-          }else{
-            let type = qrUrl.match(/type=(\S*)&/)[1];
-            if (type == "user") {
-              let userId = qrUrl.match(/userId=(\S*)/)[1];
-            
-              that.getFriendMes(userId)
-            } else {
-              Api.showToast("未获取信息！")
-            }
-          }
-        } else {
-          Api.showToast("未获取信息！")
+        let options = {
+          getUserIdFromQrCode: qrUrl
         }
+        let enEnterStoreHandler = new EnterStoreHandler("1");
+        enEnterStoreHandler.enterStore(options).then(store => {
+          if (store.storeNature == "1") {
+            let userId = store.userId
+            Api.userInfor().then(res => {
+              let obj = res.obj
+              if (obj) {
+                let isStoreOwner = res.obj.isStoreOwner
+                if (isStoreOwner) {
+                  if (res.obj.storeNature == "1") {
+                    _this.setData({
+                      samePre: true
+                    })
+                  } else {
+                    _this.getFriendMes(userId)
+                  }
+                } else {
+                  _this.getFriendMes(userId)
+                }
+              } else {
+                this.selectComponent("#login").showPage();
+              }
+            })
+          }
+        }).catch(store => {
+          let userId = store.userId
+          _this.getFriendMes(userId)
+        });
       },
-      fail: (res) => {
-      },
-      complete: (res) => {
-      }
+      fail: (res) => {},
+      complete: (res) => {}
     })
   },
   // 关闭
-  closeTip:function(){
+  closeTip: function() {
     this.setData({
       isStoreOwner: false,
-      isNotStore:false
+      isNotStore: false
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  addTip:function(){
+  addTip: function() {
     var Id = Api.getThisStoreId(),
-      logo =this.data.store.logo,
+      logo = this.data.store.logo,
       name = this.data.store.storeName
     wx.navigateTo({
-      url: '../../businessFriend/information/information?status=0&send=&accept='+Id+'&remark=&logo='+logo+'&name='+name,
+      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=&logo=' + logo + '&name=' + name,
     })
   },
-  addWholesalePrice: function () {
+  addWholesalePrice: function() {
     this.setData({
       show: true
     })
   },
-  confirm:function(){
+  confirm: function() {
     this.setData({
       show: false,
-      isShow:true,
+      isShow: true,
     })
     this.addTip()
   },
-  lookDetails: function (e) {
+  lookDetails: function(e) {
     var goodsId = e.target.dataset.id
     wx.navigateTo({
       url: '../goodsDetails/goodsDetails?goodsId=' + goodsId,
     })
   },
-  editFun:function(e){
-    var goodsId=e.target.dataset.id,
+  editFun: function(e) {
+    var goodsId = e.target.dataset.id,
       src = e.target.dataset.src,
       goodsName = e.target.dataset.name
     this.setData({
@@ -324,14 +315,14 @@ Page({
       src: src,
       goodsName: goodsName,
     })
-  }, 
+  },
   // 下架商品
-  upGoods:function(e){
+  upGoods: function(e) {
     this.setData({
-      confirmDown:true
+      confirmDown: true
     })
   },
-  confirmDown:function(){
+  confirmDown: function() {
     var _this = this,
       goodsIdList = [],
       goodsId = this.data.goodsId
@@ -342,10 +333,10 @@ Page({
           title: '下架成功',
           icon: 'none',
           duration: 2000,
-          success: function () {
+          success: function() {
             _this.setData({
               showHide: true,
-              confirmDown:false,
+              confirmDown: false,
               currentTab: 0
             })
             _this.emptyArr()
@@ -353,106 +344,111 @@ Page({
         })
       })
   },
-  editGoods:function(){
+  editGoods: function() {
     var goodsId = this.data.goodsId
     wx.navigateTo({
-      url: '../../admin/editGoods/editGoods?goodsId='+goodsId,
+      url: '../../admin/editGoods/editGoods?goodsId=' + goodsId,
     })
   },
   closeShow: function() {
     this.setData({
       showHide: true,
-      showDp:true,
-      currentTab:0
+      showDp: true,
+      currentTab: 0
     })
-  }, 
+  },
   // editDp: function () {
   //   this.setData({
   //     showDp: false,
   //   })
   // }, 
-  editDpMes:function(){
+  editDpMes: function() {
     var limitShow = this.data.limitShow
-    if (limitShow==2){
+    if (limitShow == 2) {
       wx.navigateTo({
         url: '../mesEdit/mesEdit',
       })
-    }else{
+    } else {
       wx.navigateTo({
         url: '../mes/mes?code=' + limitShow,
       })
     }
   },
-  getList: function () {
+  getList: function() {
     var _this = this,
       keyword = this.data.keyword,
       currentTab = this.data.currentTab,
       descShow = this.data.descShow,
-      sortType=''
+      sortType = ''
     if (currentTab == 0) {
       sortType = 'multiple'
     } else if (currentTab == 2) {
       sortType = 'sales'
     } else if (currentTab == 3) {
-      if (descShow){
+      if (descShow) {
         sortType = 'prices_asc'
-      }else{
+      } else {
         sortType = 'prices_desc'
       }
-    } 
-    Api.shopList({ keyword: '', sortType: sortType})
+    }
+    Api.shopList({
+        keyword: '',
+        sortType: sortType
+      })
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        if (Api.isEmpty(detailList)){
+        if (Api.isEmpty(detailList)) {
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
             totalCount: totalCount,
             baseUrl: app.globalData.imageUrl,
-            noMoreData:true
+            noMoreData: true
           })
-        }else{
+        } else {
           _this.setData({
-            noMoreData:false
+            noMoreData: false
           })
           Api.showToast("暂无更多数据了！")
         }
       })
   },
-  chooseImage:function(){
-    var _this=this
+  chooseImage: function() {
+    var _this = this
     Api.uploadImage("STORE_IMAGE")
-    .then(res=>{
-      var url = JSON.parse(res).obj
-      _this.setData({
-        coverUrl: url
-      })
-      Api.updateCover(url)
-        .then(res => {
-          wx.showToast({
-            title: res.message,
-            icon: 'none',
-            duration: 1000,
-            mask: true,
-            success:function(){
-              _this.closeShow()
-            }
-          })
+      .then(res => {
+        var url = JSON.parse(res).obj
+        _this.setData({
+          coverUrl: url
         })
-    })
+        Api.updateCover(url)
+          .then(res => {
+            wx.showToast({
+              title: res.message,
+              icon: 'none',
+              duration: 1000,
+              mask: true,
+              success: function() {
+                _this.closeShow()
+              }
+            })
+          })
+      })
   },
-  homeIndex:function(){
+  homeIndex: function() {
     var that = this;
-    Api.homeIndex({ goodsSortType: "multiple" })
+    Api.homeIndex({
+        goodsSortType: "multiple"
+      })
       .then(res => {
         var obj = res.obj
         wx.setNavigationBarTitle({
-          title: obj.store.storeName == null ? "小云店":obj.store.storeName
+          title: obj.store.storeName == null ? "小云店" : obj.store.storeName
         })
         app.globalData.isFollow = obj.isFollow
-        var result=obj.goods.result
+        var result = obj.goods.result
         var floorInfo = Api.isFloorInfo(obj.store.floor)
         that.setData({
           store: obj.store,
@@ -462,18 +458,18 @@ Page({
           result: result,
           totalCount: obj.goods.totalCount,
           likeShow: app.globalData.isFollow
-        },function(){
+        }, function() {
           var query = wx.createSelectorQuery();
           query.select('#myText').boundingClientRect()
-          query.exec(function (res) {
+          query.exec(function(res) {
             that.setData({
               bannerHeight: res[0].height
             })
           })
-          if (result.length>0){
+          if (result.length > 0) {
             var query2 = wx.createSelectorQuery();
             query2.select('#result-list').boundingClientRect()
-            query2.exec(function (res) {
+            query2.exec(function(res) {
               that.setData({
                 goodsHeight: res[0].height
               })
@@ -481,13 +477,13 @@ Page({
           }
           var query1 = wx.createSelectorQuery();
           query1.select('#swiper-tab').boundingClientRect()
-          query1.exec(function (res) {
+          query1.exec(function(res) {
             that.setData({
               swiperHeight: res[0].height
             })
           })
         })
-      })    
+      })
   },
   getStore() {
     Api.storeIdInfo().then(res => {
@@ -503,59 +499,46 @@ Page({
       }
     })
   },
-  onLoad: function (options) {
-    Api.getStoreNature({ storeId:"S1000538"}).then(res=>{
-      var nature=res.obj
-      console.log(res)
-    })
-    var _this = this
-    if (options!=undefined){
-      let qrUrl = decodeURIComponent(options.q)
-      if (Api.isEmpty(qrUrl)) {
-        if (qrUrl.indexOf("&userId") != -1) {
-          let type = qrUrl.match(/type=(\S*)&/)[1];
-          if (type == "user") {
-            let userId = qrUrl.match(/userId=(\S*)/)[1];
-            _this.getFriendMes(userId)
-          }
-        }
-      }
-      if (options.scene) {
-        let scene = decodeURIComponent(options.scene);
-        var storeId = scene.split("store_")[1]
-        wx.setStorageSync("storeId", storeId)
-      }
-      if (options.query) {
-        wx.setStorageSync("storeId", options.query.storeId)
-      }
-      if (options.storeId) {
-        wx.setStorageSync("storeId", options.storeId)
-      }
-    }
+  initStoreData: function() {
     this.closeShow()
-    if (!Api.getStoreId()) {
-      this.setData({
-        indexEmpty: false
-      })
-    } else {
-      app.pageRequest.pageDataIndex.pageNum = 1
-      app.pageRequest.pageData.pageNum = 0
-      getIdentity(this)
+    app.pageRequest.pageDataIndex.pageNum = 1
+    app.pageRequest.pageData.pageNum = 0
+    getIdentity(this)
+    app.globalData.switchStore = false
+  },
+  onLoad: function(options) {
+    var _this = this
+    if (options != undefined) {
+      let enEnterStoreHandler = new EnterStoreHandler("1");
+      enEnterStoreHandler.enterStore(options).then(store => {
+        //进店成功
+        _this.initStoreData()
+        _this.setData({
+          isOnloaded: true
+        });
+        //isload 为true
+      }).catch(store => {
+        _this.setData({
+          isOnloaded: true
+        });
+      });
     }
   },
-  bindChange: function (e) {
+  bindChange: function(e) {
     var that = this;
-    that.setData({ currentTab: e.detail.current });
+    that.setData({
+      currentTab: e.detail.current
+    });
   },
-  emptyArr: function () {
+  emptyArr: function() {
     this.setData({
       result: []
     });
     app.pageRequest.pageDataIndex.pageNum = 0
     this.getList()
   },
-  getListNew:function(){
-    var _this=this
+  getListNew: function() {
+    var _this = this
     Api.recentGoods()
       .then(res => {
         var detailList = res.obj.result,
@@ -572,7 +555,7 @@ Page({
           if (newArr.length > 0) {
             var query2 = wx.createSelectorQuery();
             query2.select('#result-list').boundingClientRect()
-            query2.exec(function (res) {
+            query2.exec(function(res) {
               _this.setData({
                 goodsHeight: res[0].height
               })
@@ -586,16 +569,16 @@ Page({
         }
       })
   },
-  emptyArrNew: function () {
-    var _this=this
+  emptyArrNew: function() {
+    var _this = this
     this.setData({
       result: []
-    },function(){
+    }, function() {
       app.pageRequest.pageData.pageNum = 0
       _this.getListNew()
     });
   },
-  swichNav: function (e) {
+  swichNav: function(e) {
     // Api.getFormId(e)
     var that = this,
       descShow = this.data.descShow,
@@ -604,61 +587,63 @@ Page({
       if (index == 3) {
         that.setData({
           descShow: !descShow
-        }, function () {
+        }, function() {
           this.emptyArr()
         })
       }
       return false;
     } else {
       that.setData({
-        currentTab:index,
-      },function(){
-          if (index==1){
-            that.emptyArrNew()
-          }else{
-            this.emptyArr()
-          }
+        currentTab: index,
+      }, function() {
+        if (index == 1) {
+          that.emptyArrNew()
+        } else {
+          this.emptyArr()
+        }
       })
     }
   },
   // 置顶
-  topGoods:function(){
+  topGoods: function() {
     var goodsId = this.data.goodsId,
-      _this=this
-    Api.topGoods({goodsId: goodsId})
-    .then(res=>{
-      wx.showToast({
-        title: "置顶成功",
-        icon: 'none',
-        duration: 1000,
-        mask: true,
-        success: function () {
-          _this.closeShow()
-          _this.emptyArr()
-        }
+      _this = this
+    Api.topGoods({
+        goodsId: goodsId
       })
-    })
+      .then(res => {
+        wx.showToast({
+          title: "置顶成功",
+          icon: 'none',
+          duration: 1000,
+          mask: true,
+          success: function() {
+            _this.closeShow()
+            _this.emptyArr()
+          }
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  likeStore:function(){
-    var _this=this
+  likeStore: function() {
+    var _this = this
     Api.likeStore()
-    .then(res=>{
-      wx.showToast({
-        title: '关注成功',
-        icon: 'none',
-        duration: 1000,
-        mask: true,
+      .then(res => {
+        wx.showToast({
+          title: '关注成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true,
+        })
+        _this.setData({
+          likeShow: true
+        })
       })
-      _this.setData({
-        likeShow: true
-      })
-    })
-  }, 
-  disLike:function(){
-    var _this=this
+  },
+  disLike: function() {
+    var _this = this
     Api.deteleLikeStore()
       .then(res => {
         wx.showToast({
@@ -669,70 +654,70 @@ Page({
         })
         _this.setData({
           likeShow: false,
-          disLike:false
+          disLike: false
         })
       })
   },
   deteleLikeStore: function() {
     var _this = this
     this.setData({
-      disLike:true
+      disLike: true
     })
   },
-  onReady: function () {
+  onReady: function() {
 
 
   },
   searchBtn(e) {
     this.setData({
-      result:[]
+      result: []
     })
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function (options) {
-    this.getStore()    
-    if(authHandler.isLogin()){
-      var limitShow = this.data.limitShow
-      var setlimitShow = wx.getStorageSync("admin")
-      if (Api.isEmpty(setlimitShow)){
+  onShow: function(options) {
+    // this.getStore()
+    var _this = this,
+      isOnloaded = this.data.isOnloaded
+    if (isOnloaded) {
+      if (authHandler.isLogin()) {
+        var limitShow = this.data.limitShow
+        var setlimitShow = wx.getStorageSync("admin")
+        if (Api.isEmpty(setlimitShow)) {
+          this.setData({
+            limitShow: setlimitShow
+          })
+        }
+        if (app.globalData.isFollow) {
+          this.setData({
+            likeShow: true
+          })
+        }
+        if (!app.globalData.isFollow) {
+          this.setData({
+            likeShow: false
+          })
+        }
+      } else {
         this.setData({
-          limitShow: setlimitShow
-        })
-      }
-      if (app.globalData.isFollow){
-        this.setData({
-          likeShow:true
-        })
-      }
-      if (!app.globalData.isFollow){
-        this.setData({
+          limitShow: 1,
           likeShow: false
         })
       }
-    }else{
       this.setData({
-        limitShow: 1,
-        likeShow:false
+        getFollw: authHandler.isLogin(),
+        disLike: false,
       })
-    }
-    this.setData({
-      getFollw: authHandler.isLogin(),
-      disLike:false,
-    })
-    if (app.globalData.switchStore) {
-      if (!Api.getStoreId()) {
-        this.setData({
-          indexEmpty: false
-        })
-      } else {
-        this.closeShow()
-        app.pageRequest.pageDataIndex.pageNum = 1
-        app.pageRequest.pageData.pageNum = 0
-        getIdentity(this)
-        app.globalData.switchStore = false
+      if (app.globalData.switchStore) {
+        if (!Api.getStoreId()) {
+          this.setData({
+            indexEmpty: false
+          })
+        } else {
+          _this.initStoreData()
+        }
       }
     }
   },
@@ -740,27 +725,26 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  },
+  onUnload: function() {},
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     var currentTab = this.data.currentTab
     this.setData({
       currentTab: currentTab,
-      noMoreData:true
-    },function(){
-      if (currentTab==1){
+      noMoreData: true
+    }, function() {
+      if (currentTab == 1) {
         this.emptyArrNew()
-      }else{
+      } else {
         this.emptyArr()
       }
       wx.stopPullDownRefresh();
@@ -769,47 +753,43 @@ Page({
 
 
   /**
-    * 用户点击右上角分享
-    */
-  onShareAppMessage: function (res) {
-    var store=this.data.store,
-        img = this.data.src,
-        goodsName = this.data.goodsName,
-        id = this.data.goodsId,
-        storeId = store.storeId, 
-        storeName = store.storeName
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function(res) {
+    var store = this.data.store,
+      img = this.data.src,
+      goodsName = this.data.goodsName,
+      id = this.data.goodsId,
+      storeId = store.storeId,
+      storeName = store.storeName
     if (res.from === 'button') {
-     var name=res.target.dataset.name
-      if (name=="names"){
+      var name = res.target.dataset.name
+      if (name == "names") {
         return {
           title: goodsName,
-          path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id+"&storeId"+storeId,
+          path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id + "&storeId" + storeId,
           imageUrl: img,
-          success: (res) => {
-          },
-          fail: (res) => {
-          }
+          success: (res) => {},
+          fail: (res) => {}
         }
       }
-    }else{
-        return {
-          title: storeName,
-          path: '/pages/page/home/home?storeId='+storeId,
-          success: (res) => {
-          },
-          fail: (res) => {
-          }
-        }
+    } else {
+      return {
+        title: storeName,
+        path: '/pages/page/home/home?storeId=' + storeId,
+        success: (res) => {},
+        fail: (res) => {}
+      }
     }
-  
+
   },
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     var noMoreData = this.data.noMoreData
     var currentTab = this.data.currentTab
-    if (noMoreData){
+    if (noMoreData) {
       if (currentTab == 1) {
         this.getListNew()
       } else {
@@ -817,7 +797,7 @@ Page({
       }
     }
   },
-  onPageScroll: function (e) {
+  onPageScroll: function(e) {
     var top = e.scrollTop,
       result = this.data.result,
       goodsHeight = this.data.goodsHeight,
@@ -825,12 +805,12 @@ Page({
       swiperHeight = this.data.swiperHeight,
       allHeight = this.data.bannerHeight + swiperHeight - goodsHeight,
       getHeght = top - allHeight,
-      goodsNum = (parseInt(getHeght / goodsHeight)+1)*2
-    if (goodsNum > result.length){
+      goodsNum = (parseInt(getHeght / goodsHeight) + 1) * 2
+    if (goodsNum > result.length) {
       this.setData({
         goodsNum: result.length
       })
-    }else{
+    } else {
       this.setData({
         goodsNum: goodsNum
       })
