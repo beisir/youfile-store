@@ -15,20 +15,6 @@ function getIdentity(_this) {
         }else{
           var isStoreOwner = obj.isStoreOwner,
             isPurchaser = obj.isPurchaser
-          if (isStoreOwner) {
-            if (obj.storeNature == 1) {
-              wx.setStorageSync("admin", 2)
-              _this.setData({
-                limitShow: 2
-              })
-            }
-            if (obj.storeNature == 2) {
-              wx.setStorageSync("admin", 1)
-              _this.setData({
-                limitShow: 1
-              })
-            }
-          }
           if (isPurchaser) {
             wx.setStorageSync("admin", 3)
             wx.setTabBarItem({
@@ -43,6 +29,20 @@ function getIdentity(_this) {
             _this.setData({
               limitShow: 3
             })
+          }
+          if (isStoreOwner) {
+            if (obj.storeNature == 1) {
+              wx.setStorageSync("admin", 2)
+              _this.setData({
+                limitShow: 2
+              })
+            }
+            if (obj.storeNature == 2) {
+              wx.setStorageSync("admin", 1)
+              _this.setData({
+                limitShow: 1
+              })
+            }
           }
           if (!isPurchaser && !isStoreOwner) {
             wx.setStorageSync("admin", 1)

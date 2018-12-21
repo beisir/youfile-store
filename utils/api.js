@@ -123,6 +123,9 @@ import {
   ftfCustomerOrderDetailUrl,
   ftfCaneledOrderUrl,
   ftfDelOrderUrl,
+  getUserInfoUrl,
+  getStoreNatureUrl,
+  getStoreDataUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -743,6 +746,24 @@ function ftfCustomerOrderDetail(data){
   return app.http.getRequest(ftfCustomerOrderDetailUrl, data);
 }
 /**
+ * 根据userId获取店铺Id
+ */
+function getStoreData(data) {
+  return app.http.getRequest(getStoreDataUrl, data);
+}
+/**
+ * 获取用户信息
+ */
+function getUserInfo(data) {
+  return app.http.getRequest(getUserInfoUrl, data);
+}
+/**
+ * 获取店铺性质
+ */
+function getStoreNature(data) {
+  return app.http.getRequest(getStoreNatureUrl, data);
+}
+/**
  * 获取formId
  */
 function getFormId(e) {
@@ -798,6 +819,9 @@ module.exports = {
   helpOrder: helpOrder,
   getStoreOrderAdmin: getStoreOrderAdmin,
   ifWholesaler: ifWholesaler,
+  getStoreNature: getStoreNature,
+  getStoreData:getStoreData,
+  getUserInfo: getUserInfo,
   getOrderDetail: getOrderDetail,
   threeFloorList: threeFloorList,
   copyGoods: copyGoods,
