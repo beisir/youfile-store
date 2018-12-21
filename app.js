@@ -10,7 +10,7 @@ App({
     }
     // wx.setStorageSync("storeId", "S1000527")
     // wx.setStorageSync("storeId", "S1000320")
-    // wx.setStorageSync("storeId", "S1000349")
+    // wx.setStorageSync("storeId", "S1000409")
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
