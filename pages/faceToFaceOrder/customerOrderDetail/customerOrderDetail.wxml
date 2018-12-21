@@ -88,7 +88,7 @@
       <image src='/image/default-gift.png'></image>
     </view>
     <view class='tip-box'>
-      <text wx:for='{{order.faceToFaceOrderDetailVOList}}' wx:for-item="tip">{{tip.goodsName}}</text>
+      <text wx:for='{{order.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key='{{index}}'>{{tip.goodsName}}</text>
     </view>
     <view class='goods-price gold-font'>￥{{filter.filterMoney(order.orderAmount)}}</view>
   </view>
