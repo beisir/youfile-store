@@ -157,7 +157,6 @@ Page({
           userId: userId
         })
         .then(res => {
-          console.log(res)
           var status = res.obj.status
           if (status) {
             Api.newUserInfor({
@@ -191,41 +190,58 @@ Page({
         })
 
     } else {
-      Api.showPurchaser({
+      Api.userInfor().then(res => {
+        let obj = res.obj
+        if (obj) {
+          let isStoreOwner = res.obj.isStoreOwner
+          if (isStoreOwner){
+            if (res.obj.storeNature == "1") {
+              let samePreStoreId = res.obj.storeId
+              that.setData({
+                samePreStore: true,
+                samePreStoreId: res.obj.storeId
+              })
+              return
+            }
+          }
+        } 
+        Api.showPurchaser({
           userId: userId
         })
-        .then(res => {
-          var obj = res.obj,
-            status = obj.status,
-            storeId_ = obj.storeId_
-          if (storeId_) {
-            wx.setStorageSync("storeId", storeId_)
-            app.globalData.switchStore = true
-          }
-          if (status) {
-            if (status == 3) {
-              status = 0
+          .then(res => {
+            var obj = res.obj,
+              status = obj.status,
+              storeId_ = obj.storeId_
+            if (storeId_) {
+              wx.setStorageSync("storeId", storeId_)
+              app.globalData.switchStore = true
             }
-            wx.navigateTo({
-              url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark=&name=&logo=',
-            })
-          }
-        })
-        .catch(res => {
-          var data = res.data
-          if (data.code) {
-            var code = data.code
-            if (code == "006") {
-              that.setData({
-                isStoreOwner: true
-              })
-            } else if (code == "005") {
-              that.setData({
-                isNotStore: true
+            if (status) {
+              if (status == 3) {
+                status = 0
+              }
+              wx.navigateTo({
+                url: '/pages/businessFriend/information/information?status=' + status + '&send=&accept=' + obj.storeId_ + '&remark=&name=&logo=',
               })
             }
-          }
-        })
+          })
+          .catch(res => {
+            var data = res.data
+            if (data.code) {
+              var code = data.code
+              if (code == "006") {
+                that.setData({
+                  isStoreOwner: true
+                })
+              } else if (code == "005") {
+                that.setData({
+                  isNotStore: true
+                })
+              }
+            }
+          })
+      })
+     
     }
   },
   addFriend: function() {
@@ -239,26 +255,9 @@ Page({
         let enEnterStoreHandler = new EnterStoreHandler("1");
         enEnterStoreHandler.enterStore(options).then(store => {
           if (store.storeNature == "1") {
-            let userId = store.userId
-            Api.userInfor().then(res => {
-              let obj = res.obj
-              if (obj) {
-                let isStoreOwner = res.obj.isStoreOwner
-                if (isStoreOwner) {
-                  if (res.obj.storeNature == "1") {
-                    _this.setData({
-                      samePre: true
-                    })
-                  } else {
-                    _this.getFriendMes(userId)
-                  }
-                } else {
-                  _this.getFriendMes(userId)
-                }
-              } else {
-                this.selectComponent("#login").showPage();
-              }
-            })
+            var userId = store.userId
+            var storeId = store.storeId
+            _this.getUserInfor(userId, storeId)
           }
         }).catch(store => {
           let userId = store.userId
@@ -268,6 +267,41 @@ Page({
       },
       fail: (res) => {},
       complete: (res) => {}
+    })
+  },
+  getUserInfor: function (userId, storeId){
+    var limitShow = wx.getStorageSync("admin")
+    var _this=this
+    Api.userInfor().then(res => {
+      let obj = res.obj
+      if (obj) {
+        let isStoreOwner = res.obj.isStoreOwner
+        if (isStoreOwner) {
+          if (res.obj.storeNature == "1") {
+            _this.initStoreData()
+            let samePreStoreId = res.obj.storeId
+            if (limitShow == 2) {
+              if (storeId != samePreStoreId) {
+                _this.setData({
+                  samePre: true
+                })
+              }
+            } else {
+              _this.setData({
+                samePreStore: true,
+                samePreStoreId: res.obj.storeId
+              })
+            }
+
+          } else {
+            _this.getFriendMes(userId)
+          }
+        } else {
+          _this.getFriendMes(userId)
+        }
+      } else {
+        this.selectComponent("#login").showPage();
+      }
     })
   },
   // 关闭
@@ -513,20 +547,27 @@ Page({
       let enEnterStoreHandler = new EnterStoreHandler("1");
       enEnterStoreHandler.enterStore(options).then(store => {
         //进店成功
+        if (store.userId) {
+          let userId = store.userId
+          _this.getFriendMes(userId)
+        }
+        wx.getStorageSync("storeId")
         _this.initStoreData()
         _this.setData({
           isOnloaded: true
         });
-        //isload 为true
+        this.setData({
+          indexEmpty: true
+        })
+        
       }).catch(store => {
         _this.setData({
           isOnloaded: true
         });
-        let nature = store.nature
-        if (nature == "3") {
-          _this.setData({
-            indexEmpty: false
-          })
+        _this.initStoreData()
+        if (store.userId) {
+          let userId = store.userId
+          _this.getFriendMes(userId)
         }
       });
     }
@@ -723,6 +764,9 @@ Page({
             indexEmpty: false
           })
         } else {
+          this.setData({
+            indexEmpty: true
+          })
           _this.initStoreData()
         }
       }

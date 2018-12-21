@@ -19,7 +19,7 @@ class EnterStoreHandler {
       this.getStoreId(options).then((storeId) => {
         //判断店铺编号是否为空
         if (!Api.isEmpty(storeId)) {
-          console.error("店铺编号未获取到，请处理2");
+          // console.error("店铺编号未获取到，请处理2");
           let data = { userId: this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode), nature: "3" }
           reject(data);
           return;
@@ -27,6 +27,11 @@ class EnterStoreHandler {
 
         //设置storeId
         store.storeId = storeId;
+        if (options.q){
+          if (decodeURIComponent(options.q)){
+            store.userId = this.getUserIdFromQrCodeUrl(decodeURIComponent(options.q))
+          }
+        }
         //获取店铺性质
         Api.getStoreNature({ storeId: storeId }).then(res => {
           var nature = res.obj
@@ -39,7 +44,8 @@ class EnterStoreHandler {
           }
           //店铺性质未获取到，不做处理
           if (!Api.isEmpty(nature)) {
-            console.error("店铺性质未获取到，请处理1");
+            
+            // console.error("店铺性质未获取到，请处理1");
             wx.setStorageSync('storeId', storeId);
             let data = { userId: this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode), nature: "3" }
             resolve(data);
@@ -47,8 +53,16 @@ class EnterStoreHandler {
           }
           //店铺性质不对处理
           if (this.storeNature != nature) {
-            console.error("请跳转到指定小程序");
-            let data = { userId: this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode), nature:"2"}
+            let data;
+            if (options.getUserIdFromQrCode){
+              data = { userId: this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode), nature: "2" }
+            }else{
+              if (options.q) {
+                if (decodeURIComponent(options.q)) {
+                  data = { userId: this.getUserIdFromQrCodeUrl(decodeURIComponent(options.q)) }
+                }
+              }
+            }
             reject(data);
             return;
           }
@@ -57,7 +71,7 @@ class EnterStoreHandler {
           return;
         }).catch(e => {
           //获取店铺性质异常，不错处理
-          console.error(e);
+          // console.error(e);
           wx.setStorageSync('storeId', storeId);
           resolve(store);
           return;
@@ -73,6 +87,7 @@ class EnterStoreHandler {
   getStoreId(options) {
     return new Promise((resolve, reject) => {
       let storeId = null;
+      // console.log(options)
       //options为空，正常从本地获取店铺编号 TODO
       if (options == undefined || JSON.stringify(options) == "{}") {
         storeId = wx.getStorageSync("storeId")
@@ -96,7 +111,6 @@ class EnterStoreHandler {
         resolve(storeId);
         return;
       }
-
       //如果店铺编号未获取到，根据用户编号获取店铺编号
       if (storeId == null || options.getUserIdFromQrCode) {
         //获取二维码url地址
