@@ -146,7 +146,14 @@ Page({
   getFriendMes:function(userId){
     var that = this
     var limitShow = wx.getStorageSync("admin")
-    app.http.getRequest("/api/user/byuserid").then((res) => {
+    console.log(userId)
+    Api.getStoreData({ userId: userId }).then((res) => {
+      console.log(res)
+    })
+    .catch(e => {
+        console.log(e)
+      })
+    Api.getUserInfo().then((res) => {
       if (res.obj) {
         if (res.obj.isStoreOwner == true && res.obj.storeNature == 1 && limitShow!=2) {
           that.setData({
@@ -254,6 +261,7 @@ Page({
             let type = qrUrl.match(/type=(\S*)&/)[1];
             if (type == "user") {
               let userId = qrUrl.match(/userId=(\S*)/)[1];
+            
               that.getFriendMes(userId)
             } else {
               Api.showToast("未获取信息！")
@@ -495,6 +503,10 @@ Page({
     })
   },
   onLoad: function (options) {
+    Api.getStoreNature({ storeId:"S1000538"}).then(res=>{
+      var nature=res.obj
+      console.log(res)
+    })
     var _this = this
     if (options!=undefined){
       let qrUrl = decodeURIComponent(options.q)
