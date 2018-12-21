@@ -263,6 +263,7 @@ Page({
         }).catch(store => {
           let userId = store.userId
           _this.getFriendMes(userId)
+          
         });
       },
       fail: (res) => {},
@@ -521,6 +522,12 @@ Page({
         _this.setData({
           isOnloaded: true
         });
+        let nature = store.nature
+        if (nature == "3") {
+          _this.setData({
+            indexEmpty: false
+          })
+        }
       });
     }
   },
@@ -678,7 +685,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function(options) {
-    // this.getStore()
+    this.getStore()
     var _this = this,
       isOnloaded = this.data.isOnloaded
     if (isOnloaded) {

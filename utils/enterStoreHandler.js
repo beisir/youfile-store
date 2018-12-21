@@ -41,7 +41,8 @@ class EnterStoreHandler {
           if (!Api.isEmpty(nature)) {
             console.error("店铺性质未获取到，请处理1");
             wx.setStorageSync('storeId', storeId);
-            resolve(store);
+            let data = { userId: this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode), nature: "3" }
+            resolve(data);
             return;
           }
           //店铺性质不对处理
