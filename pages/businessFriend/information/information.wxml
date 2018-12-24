@@ -32,7 +32,7 @@
    <text>主营范围</text><view>{{businessScope}}</view>
   </view>
   <view class='in-cont'>
-   <text>所在地址</text><view>{{address}} </view>
+   <text>所在地址</text><view>{{address==null?'':address}} </view>
   </view>
    <view class='in-cont'>
    <text>所属商城</text><view wx:if='{{floorInfo!=null}}'>{{floorInfo.mallName}}</view>
