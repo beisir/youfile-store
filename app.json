@@ -1,10 +1,10 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/admin/status/status",
     "pages/page/cartList/cartList",
     "pages/businessFriend/merchant/index/index",
     "pages/role/supplyVoucher/supplyVoucher",
-    "pages/admin/status/status",
     "pages/capital/index/index",
     "pages/capital/bank/bank",
     "pages/capital/haveRecord/haveRecord",

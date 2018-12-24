@@ -101,28 +101,28 @@ Page({
   showStoreOrder() {
     this.selectComponent("#storeOrder").open();
   },
-  openStore: function() {
+  openStore: function () {
     wx.navigateTo({
       url: '../../cloudOrder/newCloud/newCloud',
     })
   },
   // 一键入库
-  copyGoods: function(e) {
+  copyGoods: function (e) {
     var originGoodsId = e.target.dataset.id
     this.setData({
       copyGoods: true,
       originGoodsId: originGoodsId
     })
   },
-  copyGoodsYes: function() {
+  copyGoodsYes: function () {
     var _this = this,
       originGoodsId = this.data.originGoodsId
     this.setData({
       copyGoods: false
     })
     Api.copyGoods({
-        originGoodsId: originGoodsId
-      })
+      originGoodsId: originGoodsId
+    })
       .then(res => {
         Api.showToast(res.message)
       })
@@ -135,12 +135,12 @@ Page({
         }
       })
   },
-  samePreBtn: function() {
+  samePreBtn: function () {
     this.setData({
       samePre: false
     })
   },
-  samePreStore: function() {
+  samePreStore: function () {
     var samePreStoreId = this.data.samePreStoreId
     this.setData({
       samePreStore: false
@@ -149,19 +149,19 @@ Page({
     app.globalData.switchStore = true
     this.onShow()
   },
-  getFriendMes: function(userId) {
+  getFriendMes: function (userId) {
     var limitShow = wx.getStorageSync("admin")
     var that = this
     if (limitShow == 2) {
       Api.showMerchant({
-          userId: userId
-        })
+        userId: userId
+      })
         .then(res => {
           var status = res.obj.status
           if (status) {
             Api.newUserInfor({
-                userId: userId
-              })
+              userId: userId
+            })
               .then(res => {
                 var accept = res.obj.id,
                   phone = res.obj.mobile,
@@ -194,7 +194,7 @@ Page({
         let obj = res.obj
         if (obj) {
           let isStoreOwner = res.obj.isStoreOwner
-          if (isStoreOwner){
+          if (isStoreOwner) {
             if (res.obj.storeNature == "1") {
               let samePreStoreId = res.obj.storeId
               that.setData({
@@ -204,7 +204,7 @@ Page({
               return
             }
           }
-        } 
+        }
         Api.showPurchaser({
           userId: userId
         })
@@ -241,10 +241,10 @@ Page({
             }
           })
       })
-     
+
     }
   },
-  addFriend: function() {
+  addFriend: function () {
     var _this = this;
     wx.scanCode({
       success: (res) => {
@@ -262,16 +262,18 @@ Page({
         }).catch(store => {
           let userId = store.userId
           _this.getFriendMes(userId)
-          
+
         });
       },
-      fail: (res) => {},
-      complete: (res) => {}
+      fail: (res) => {
+        // Api.showToast("未获取用户信息！")
+      },
+      complete: (res) => { }
     })
   },
-  getUserInfor: function (userId, storeId){
+  getUserInfor: function (userId, storeId) {
     var limitShow = wx.getStorageSync("admin")
-    var _this=this
+    var _this = this
     Api.userInfor().then(res => {
       let obj = res.obj
       if (obj) {
@@ -305,7 +307,7 @@ Page({
     })
   },
   // 关闭
-  closeTip: function() {
+  closeTip: function () {
     this.setData({
       isStoreOwner: false,
       isNotStore: false
@@ -314,7 +316,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  addTip: function() {
+  addTip: function () {
     var Id = Api.getThisStoreId(),
       logo = this.data.store.logo,
       name = this.data.store.storeName
@@ -322,25 +324,25 @@ Page({
       url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=&logo=' + logo + '&name=' + name,
     })
   },
-  addWholesalePrice: function() {
+  addWholesalePrice: function () {
     this.setData({
       show: true
     })
   },
-  confirm: function() {
+  confirm: function () {
     this.setData({
       show: false,
       isShow: true,
     })
     this.addTip()
   },
-  lookDetails: function(e) {
+  lookDetails: function (e) {
     var goodsId = e.target.dataset.id
     wx.navigateTo({
       url: '../goodsDetails/goodsDetails?goodsId=' + goodsId,
     })
   },
-  editFun: function(e) {
+  editFun: function (e) {
     var goodsId = e.target.dataset.id,
       src = e.target.dataset.src,
       goodsName = e.target.dataset.name
@@ -352,12 +354,12 @@ Page({
     })
   },
   // 下架商品
-  upGoods: function(e) {
+  upGoods: function (e) {
     this.setData({
       confirmDown: true
     })
   },
-  confirmDown: function() {
+  confirmDown: function () {
     var _this = this,
       goodsIdList = [],
       goodsId = this.data.goodsId
@@ -368,7 +370,7 @@ Page({
           title: '下架成功',
           icon: 'none',
           duration: 2000,
-          success: function() {
+          success: function () {
             _this.setData({
               showHide: true,
               confirmDown: false,
@@ -379,13 +381,13 @@ Page({
         })
       })
   },
-  editGoods: function() {
+  editGoods: function () {
     var goodsId = this.data.goodsId
     wx.navigateTo({
       url: '../../admin/editGoods/editGoods?goodsId=' + goodsId,
     })
   },
-  closeShow: function() {
+  closeShow: function () {
     this.setData({
       showHide: true,
       showDp: true,
@@ -397,7 +399,7 @@ Page({
   //     showDp: false,
   //   })
   // }, 
-  editDpMes: function() {
+  editDpMes: function () {
     var limitShow = this.data.limitShow
     if (limitShow == 2) {
       wx.navigateTo({
@@ -409,7 +411,7 @@ Page({
       })
     }
   },
-  getList: function() {
+  getList: function () {
     var _this = this,
       keyword = this.data.keyword,
       currentTab = this.data.currentTab,
@@ -427,9 +429,9 @@ Page({
       }
     }
     Api.shopList({
-        keyword: '',
-        sortType: sortType
-      })
+      keyword: '',
+      sortType: sortType
+    })
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
@@ -450,7 +452,7 @@ Page({
         }
       })
   },
-  chooseImage: function() {
+  chooseImage: function () {
     var _this = this
     Api.uploadImage("STORE_IMAGE")
       .then(res => {
@@ -465,18 +467,18 @@ Page({
               icon: 'none',
               duration: 1000,
               mask: true,
-              success: function() {
+              success: function () {
                 _this.closeShow()
               }
             })
           })
       })
   },
-  homeIndex: function() {
+  homeIndex: function () {
     var that = this;
     Api.homeIndex({
-        goodsSortType: "multiple"
-      })
+      goodsSortType: "multiple"
+    })
       .then(res => {
         var obj = res.obj
         wx.setNavigationBarTitle({
@@ -493,10 +495,10 @@ Page({
           result: result,
           totalCount: obj.goods.totalCount,
           likeShow: app.globalData.isFollow
-        }, function() {
+        }, function () {
           var query = wx.createSelectorQuery();
           query.select('#myText').boundingClientRect()
-          query.exec(function(res) {
+          query.exec(function (res) {
             that.setData({
               bannerHeight: res[0].height
             })
@@ -504,7 +506,7 @@ Page({
           if (result.length > 0) {
             var query2 = wx.createSelectorQuery();
             query2.select('#result-list').boundingClientRect()
-            query2.exec(function(res) {
+            query2.exec(function (res) {
               that.setData({
                 goodsHeight: res[0].height
               })
@@ -512,7 +514,7 @@ Page({
           }
           var query1 = wx.createSelectorQuery();
           query1.select('#swiper-tab').boundingClientRect()
-          query1.exec(function(res) {
+          query1.exec(function (res) {
             that.setData({
               swiperHeight: res[0].height
             })
@@ -534,14 +536,27 @@ Page({
       }
     })
   },
-  initStoreData: function() {
+  initStoreData: function () {
     this.closeShow()
     app.pageRequest.pageDataIndex.pageNum = 1
     app.pageRequest.pageData.pageNum = 0
     getIdentity(this)
     app.globalData.switchStore = false
   },
-  onLoad: function(options) {
+  loadData: function () {
+    var _this = this
+    if (!Api.getStoreId()) {
+      this.setData({
+        indexEmpty: false
+      })
+    } else {
+      this.setData({
+        indexEmpty: true
+      })
+      _this.initStoreData()
+    }
+  },
+  onLoad: function (options) {
     var _this = this
     if (options != undefined) {
       let enEnterStoreHandler = new EnterStoreHandler("1");
@@ -551,41 +566,50 @@ Page({
           let userId = store.userId
           _this.getFriendMes(userId)
         }
-        wx.getStorageSync("storeId")
-        _this.initStoreData()
         _this.setData({
           isOnloaded: true
         });
-        this.setData({
-          indexEmpty: true
-        })
-        
+        _this.loadData()
+
       }).catch(store => {
         _this.setData({
           isOnloaded: true
         });
-        _this.initStoreData()
-        if (store.userId) {
-          let userId = store.userId
-          _this.getFriendMes(userId)
+        _this.loadData()
+        if (store) {
+          if (store.userId) {
+            let userId = store.userId
+            _this.getFriendMes(userId)
+          }
+          // if (store.storeIdRetail){
+          //  _this.setData({
+          //    goRetailStore:false
+          //  })
+          // }
         }
       });
+    } else {
+      _this.loadData()
+      this.setData({
+        getFollw: authHandler.isLogin(),
+        disLike: false,
+      })
     }
   },
-  bindChange: function(e) {
+  bindChange: function (e) {
     var that = this;
     that.setData({
       currentTab: e.detail.current
     });
   },
-  emptyArr: function() {
+  emptyArr: function () {
     this.setData({
       result: []
     });
     app.pageRequest.pageDataIndex.pageNum = 0
     this.getList()
   },
-  getListNew: function() {
+  getListNew: function () {
     var _this = this
     Api.recentGoods()
       .then(res => {
@@ -603,7 +627,7 @@ Page({
           if (newArr.length > 0) {
             var query2 = wx.createSelectorQuery();
             query2.select('#result-list').boundingClientRect()
-            query2.exec(function(res) {
+            query2.exec(function (res) {
               _this.setData({
                 goodsHeight: res[0].height
               })
@@ -617,16 +641,16 @@ Page({
         }
       })
   },
-  emptyArrNew: function() {
+  emptyArrNew: function () {
     var _this = this
     this.setData({
       result: []
-    }, function() {
+    }, function () {
       app.pageRequest.pageData.pageNum = 0
       _this.getListNew()
     });
   },
-  swichNav: function(e) {
+  swichNav: function (e) {
     // Api.getFormId(e)
     var that = this,
       descShow = this.data.descShow,
@@ -635,7 +659,7 @@ Page({
       if (index == 3) {
         that.setData({
           descShow: !descShow
-        }, function() {
+        }, function () {
           this.emptyArr()
         })
       }
@@ -643,7 +667,7 @@ Page({
     } else {
       that.setData({
         currentTab: index,
-      }, function() {
+      }, function () {
         if (index == 1) {
           that.emptyArrNew()
         } else {
@@ -653,19 +677,19 @@ Page({
     }
   },
   // 置顶
-  topGoods: function() {
+  topGoods: function () {
     var goodsId = this.data.goodsId,
       _this = this
     Api.topGoods({
-        goodsId: goodsId
-      })
+      goodsId: goodsId
+    })
       .then(res => {
         wx.showToast({
           title: "置顶成功",
           icon: 'none',
           duration: 1000,
           mask: true,
-          success: function() {
+          success: function () {
             _this.closeShow()
             _this.emptyArr()
           }
@@ -675,7 +699,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  likeStore: function() {
+  likeStore: function () {
     var _this = this
     Api.likeStore()
       .then(res => {
@@ -690,7 +714,7 @@ Page({
         })
       })
   },
-  disLike: function() {
+  disLike: function () {
     var _this = this
     Api.deteleLikeStore()
       .then(res => {
@@ -706,13 +730,13 @@ Page({
         })
       })
   },
-  deteleLikeStore: function() {
+  deteleLikeStore: function () {
     var _this = this
     this.setData({
       disLike: true
     })
   },
-  onReady: function() {
+  onReady: function () {
 
 
   },
@@ -725,7 +749,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function(options) {
+  onShow: function (options) {
     this.getStore()
     var _this = this,
       isOnloaded = this.data.isOnloaded
@@ -754,45 +778,36 @@ Page({
           likeShow: false
         })
       }
-      this.setData({
-        getFollw: authHandler.isLogin(),
-        disLike: false,
-      })
       if (app.globalData.switchStore) {
-        if (!Api.getStoreId()) {
-          this.setData({
-            indexEmpty: false
-          })
-        } else {
-          this.setData({
-            indexEmpty: true
-          })
-          _this.initStoreData()
-        }
+        _this.loadData()
       }
     }
+    this.setData({
+      getFollw: authHandler.isLogin(),
+      disLike: false,
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {},
+  onUnload: function () { },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
     var currentTab = this.data.currentTab
     this.setData({
       currentTab: currentTab,
       noMoreData: true
-    }, function() {
+    }, function () {
       if (currentTab == 1) {
         this.emptyArrNew()
       } else {
@@ -806,7 +821,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function(res) {
+  onShareAppMessage: function (res) {
     var store = this.data.store,
       img = this.data.src,
       goodsName = this.data.goodsName,
@@ -820,16 +835,16 @@ Page({
           title: goodsName,
           path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id + "&storeId" + storeId,
           imageUrl: img,
-          success: (res) => {},
-          fail: (res) => {}
+          success: (res) => { },
+          fail: (res) => { }
         }
       }
     } else {
       return {
         title: storeName,
         path: '/pages/page/home/home?storeId=' + storeId,
-        success: (res) => {},
-        fail: (res) => {}
+        success: (res) => { },
+        fail: (res) => { }
       }
     }
 
@@ -837,7 +852,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     var noMoreData = this.data.noMoreData
     var currentTab = this.data.currentTab
     if (noMoreData) {
@@ -848,7 +863,7 @@ Page({
       }
     }
   },
-  onPageScroll: function(e) {
+  onPageScroll: function (e) {
     var top = e.scrollTop,
       result = this.data.result,
       goodsHeight = this.data.goodsHeight,

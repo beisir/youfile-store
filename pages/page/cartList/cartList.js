@@ -316,7 +316,9 @@ Page({
             allEmpty:false
           })
         }
-        storeMes.push(store)
+        if (store){
+          storeMes.push(store)
+        }
         if(effectiveList.length==0){
           _this.setData({
             hasList:false
