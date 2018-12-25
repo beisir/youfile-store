@@ -1,4 +1,5 @@
 // pages/faceToFaceOrder/goodsTag/goodsTag.js
+const API = require("../../../utils/api.js")
 const app=getApp()
 Page({
 
@@ -9,19 +10,8 @@ Page({
     editModal:false,
     delBtnWidth:133,
     name:"",
-    list:[{
-      name:"戒指",
-      checked:false,
-      id:1
-    }, {
-        name: "婚假用品",
-        checked: false,
-        id: 2
-      }, {
-        name: "施华洛世奇 LATISHA 四叶草项链女锁骨链 百搭配饰品四叶草吊坠项链施华洛世奇 LATISHA 四叶草项链女锁骨链 百搭配饰品四叶草吊坠项链",
-        checked: false,
-        id: 3
-      }]
+    list:[],
+    editText:""
   },
   clickTag(e){
     let index = e.currentTarget.dataset.index;
@@ -81,14 +71,14 @@ Page({
   },
   // 删除
   del(e){
-    let id = e.currentTarget.dataset.id;
-
-    let arr = this.data.list;
-    let newarr = arr.filter(el=>{
-      return el.id != id
-    })  
-    this.setData({
-      list:newarr
+    let id = e.currentTarget.dataset.id,
+        index = e.currentTarget.dataset.index;
+    API.ftfDelGoods({ goodsId: id}).then(res=>{
+      let arr = this.data.list;
+      arr.splice(index, 1)
+      this.setData({
+        list: arr
+      })
     })
   },
   // 添加
@@ -98,24 +88,64 @@ Page({
       title: '添加中'
     })
     if(val){
-      let arr = this.data.list;
-      arr.push({
-        name: val,
-        id: 5,
-        checked: true
-      })
-      this.setData({
-        list: arr
+      API.ftfCreatGoods({goodsName:val}).then(res=>{
+        let goods = res.obj;
+        goods.checked = true;
+
+        let arr = this.data.list;
+        arr.unshift(goods)
+        this.setData({
+          list: arr
+        })
       })
     }
     wx.hideLoading()
   },
   // 编辑
-  editGoods(){
+  editGoods(e){
+    let name = e.currentTarget.dataset.name,
+        nowId = e.currentTarget.dataset.id;
     this.setData({
-      editModal:true
+      editModal:true,
+      editText:name,
+      nowId,
     })  
   },
+  editInput(e){
+    this.setData({
+      editText : e.detail.value
+    })
+  },
+  saveTip(){
+    let val = this.data.editText.trim();
+    if(val){
+      API.ftfEditGoods({ goodsName: val, goodsId: this.data.nowId}).then(res=>{
+        this.setData({
+          editModal: false,
+          editText: ""
+        })
+        let arr = this.data.list;
+
+        for(let el of arr){
+          if (el.goodsId == this.data.nowId) {
+            el.goodsName = val;
+            break;
+          }
+        }
+        this.setData({
+          list : arr
+        })
+      })
+    }else{
+      wx.showToast({
+        title: '请填写新名称',
+        icon:'none'
+      })
+    }
+  },
+
+
+  //确认
   sure(){
     let arr = [];
     this.data.list.forEach(el=>{
@@ -138,7 +168,7 @@ Page({
     let checkedArr = this.data.checked;
     arr.forEach(el=>{
       checkedArr.every(item=>{
-        if(el.id == item){
+        if (el.goodsId == item){
           el.checked = true
           return false
         }
@@ -148,10 +178,24 @@ Page({
     this.setData({
       list: arr
     })
+    this.setData({
+      checked: ""
+    })
   },
   getList(){
-    app.http.getRequest("/admin/offlinegoods/"+this.data.storeId+"/list").then(res=>{
-      res.obj
+    API.ftfGoodsList().then(res=>{
+      let list = res.obj;
+      if(list){
+        list.forEach(el=>{
+          el.checked = false
+        })
+        this.setData({list})
+
+        if (this.data.checked){
+          this.recheck()
+        }
+
+      }
     })
   },
   /**
@@ -162,7 +206,6 @@ Page({
       this.setData({
         checked: options.tag.split(",")
       })
-      this.recheck()
     }
     this.setData({
       storeId: wx.getStorageSync("storeId")

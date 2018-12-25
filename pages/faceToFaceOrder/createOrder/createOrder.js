@@ -69,7 +69,7 @@ Page({
     if(tag.length > 0){
       let strarr = [];
       tag.forEach(el=>{
-        strarr.push(el.id);
+        strarr.push(el.goodsId);
       })
       str = "?tag=" + strarr.join(',')
     }
@@ -112,15 +112,6 @@ Page({
       customerUserNo: this.data.userId,
       faceToFaceOrderDetailVOList: this.data.tag
     };
-
-    obj.faceToFaceOrderDetailVOList = [{
-      "amount": 100,
-      "goodsDesc": "123",
-      "goodsId": "1111111111",
-      "goodsName": "测试数据",
-      "num": 1,
-      "unitPrice": 100
-    }];
     app.http.postRequest("/admin/ftf/order",obj).then(res=>{
       wx.showToast({
         title: res.message,

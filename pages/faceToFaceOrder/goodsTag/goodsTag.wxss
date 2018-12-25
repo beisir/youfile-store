@@ -90,6 +90,8 @@ page{
   color: #ca7;
   letter-spacing:30rpx;
   font-weight: 600;
+  z-index: 1;
+  background: #fff;
 }
 
 .edit-input{

@@ -126,6 +126,11 @@ import {
   getUserInfoUrl,
   getStoreNatureUrl,
   getStoreDataUrl,
+  ftfGoodsListUrl,
+  ftfCreatGoodsUrl,
+  ftfDelGoodsUrl,
+  ftfEditGoodsUrl,
+  ftfGoodsIfExistUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -745,6 +750,35 @@ function customerOrderList(data) {
 function ftfCustomerOrderDetail(data){
   return app.http.getRequest(ftfCustomerOrderDetailUrl, data);
 }
+// 门店商品列表
+function ftfGoodsList(data){
+  data = initStoreId(data);
+  return app.http.getRequest(ftfGoodsListUrl, data);
+}
+//添加
+function ftfCreatGoods(data){
+  data = initStoreId(data);
+  return app.http.postRequest(ftfCreatGoodsUrl, data);
+}
+//删除
+function ftfDelGoods(data){
+  return app.http.deleteRequest(ftfDelGoodsUrl, data);
+}
+//编辑
+function ftfEditGoods(data){
+  return app.http.putRequest(ftfEditGoodsUrl, data);
+}
+//查重
+function ftfGoodsIfExist(data){
+  data = initStoreId(data);
+  return app.http.getRequest(ftfGoodsIfExistUrl, data);
+}
+
+
+
+
+
+
 /**
  * 根据userId获取店铺Id
  */
@@ -810,6 +844,11 @@ function getStoreId() {
   }
 }
 module.exports = {
+  ftfGoodsList,
+  ftfCreatGoods,
+  ftfDelGoods,
+  ftfEditGoods,
+  ftfGoodsIfExist,
   ftfDelOrder,
   ftfCaneledOrder,
   customerOrderList, 

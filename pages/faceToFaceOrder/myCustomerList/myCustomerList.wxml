@@ -18,7 +18,7 @@
         </view>
       </navigator>  
       <navigator url="../createOrder/createOrder?user={{item.userId}}">
-        <view bindtap='helpOrder' class='help-btn'>帮TA下单</view>
+        <view class='help-btn'>帮TA下单</view>
       </navigator>
     </view>
     <view hidden='{{index==list.length-1}}' class='line-border'></view>

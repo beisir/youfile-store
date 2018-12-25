@@ -140,3 +140,9 @@ export const ftfCloseOrderUrl = "/admin/ftf/order/{{orderNumber}}/closed"
 export const ftfCaneledOrderUrl = "/api/ftf/order/{{orderNumber}}/cancel"
 // 删除订单
 export const ftfDelOrderUrl = "/api/ftf/order/{{orderNumber}}"
+// 线下商品
+export const ftfGoodsListUrl = "/admin/shop/offlinegoods/{{storeId}}/list" 
+export const ftfCreatGoodsUrl = "/admin/shop/offlinegoods"
+export const ftfDelGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}"
+export const ftfEditGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}/byid"
+export const ftfGoodsIfExistUrl = "/admin/shop/offlinegoods/{{storeId}}/exist" 

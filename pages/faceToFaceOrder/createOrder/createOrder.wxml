@@ -27,9 +27,7 @@
       <text class='item-title'>购买商品</text>
       <text wx:if="{{tag.length == 0}}" class='no-tip'>选择添加商品</text>
       <view wx:else class='tip-box'>
-        <text class='tip-item'>差距</text>
-        <text class='tip-item'>差距差距阿斯达差距阿斯达差距阿斯达差距阿斯达阿斯达</text>
-        <text class='tip-item'>差asdas dasd 距</text>
+        <text wx:for="{{tag}}" class='tip-item' wx:key="{{index}}">{{item.goodsName}}</text>
       </view>
     </view>
     <image src='/image/icl.png' class='right-tri'></image>

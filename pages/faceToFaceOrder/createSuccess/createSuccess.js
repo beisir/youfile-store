@@ -14,7 +14,7 @@ Page({
   },
   toDetail(){
     wx.navigateTo({
-      url: '../shopkeeperDeatil/shopkeeperDeatil?code='+this.data.code
+      url: '../shopkeeperDetail/shopkeeperDetail?code='+this.data.code
     })
   },
   /**
