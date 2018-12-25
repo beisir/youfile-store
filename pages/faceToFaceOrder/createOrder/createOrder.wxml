@@ -16,7 +16,7 @@
 <view class='common-box flex-between price-box {{redColor?"red-color":""}}'>
   <text class="item-title">订单金额</text>
   <view class='flex-center'>
-    <input value='{{sureTip}}' type='digit' bindinput='watchInput' data-type="money" class='price-input'></input>
+    <input value='{{money}}' type='digit' bindinput='watchInput' data-type="money" class='price-input'></input>
     <text class='yuan'>元</text>
   </view>
 </view>
