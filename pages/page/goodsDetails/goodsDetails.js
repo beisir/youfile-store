@@ -128,13 +128,13 @@ Page({
   * 生命周期函数--监听页面加载
   */
   openStore: function () {
-    // wx.navigateTo({
-    //   url: '../../cloudOrder/newCloud/newCloud',
-    // })
+    wx.navigateTo({
+      url: '../../cloudOrder/newCloud/newCloud',
+    })
   },
   // 一键入库
   copyGoods: function (e) {
-    var originGoodsId = e.target.dataset.id
+    var originGoodsId = this.data.goodsId
     this.setData({
       copyGoods: true,
       originGoodsId: originGoodsId

@@ -71,10 +71,10 @@
         <view  class='st-d-t'>{{item.name}}</view> 
         <view class='st-details'>
             <view class='st-d-status'>
-              <view><text>批发：</text><text class='st-mom'>￥{{item.wholesalePrice}}</text></view>
-              <view><text>零售：</text><text class='st-mom'>￥{{item.sellPrice}}</text></view>
+              <view><text>批发 :</text><text class='st-mom'>￥{{item.wholesalePrice}}</text></view>
+              <view><text>零售 :</text><text class='st-mom'>￥{{item.sellPrice}}</text></view>
               <!-- <view>供货：400</view><view>零售：400</view> -->
-              <view><text>库存：</text>{{item.stockNum}}<image class='warn' wx:if='{{item.stockNum<10}}' src="/image/warn.png"></image></view>
+              <view><text>库存 : </text>{{item.stockNum}}<image class='warn' wx:if='{{item.stockNum<10}}' src="/image/warn.png"></image></view>
             </view>
             <view class='not' wx:if='{{item.stockNum<10}}'><view class='triangle_border_up'></view>该商品库存不足 请及时补货</view>
           </view>

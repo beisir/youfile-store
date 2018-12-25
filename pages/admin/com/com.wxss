@@ -12,8 +12,8 @@
 .st-cont{height:314rpx;position:relative;padding-left:230rpx;color:#333;font-size:28rpx;padding-right:30rpx;padding-top:30rpx;width:65%;background:#fff;border-radius:10rpx}
 .st-cont image.cart-thumb{height:180rpx;width:180rpx;left:30rpx;border:2rpx solid #EDEDED;position:absolute}
 .st-d-status{margin-top:20rpx}
-.st-d-status view{width:50%;display:inline-block;color:#888;margin-bottom:6rpx;font-size:24rpx}
-.st-d-status view text{color:#333;font-size:28rpx}
+.st-d-status view{min-width: 180rpx;display:inline-block;color:#888;margin-bottom:6rpx;font-size:26rpx}
+.st-d-status view text{color:#333;font-size:26rpx}
 .st-d-t{width:450rpx;overflow:hidden;font-weight:bold;text-overflow:ellipsis;white-space:nowrap}
 .st-d-status view text.st-mom{color:#C79359}
 .st-bottom{position:absolute;bottom:0;width:100%;text-align:center;left:0;border-top:2rpx solid #EEEEEE;height:90rpx}

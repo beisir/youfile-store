@@ -181,8 +181,8 @@ Page({
       Api.showToast("超过最长数字限制")
     } else {
       this.setData({
-        newConst: val.substring(0, 15),
-        allTotalNew: len * val
+        newConst: val.substring(0, 9),
+        allTotalNew: len * (val.substring(0, 9))
       })
     }
    
@@ -233,7 +233,7 @@ Page({
       Api.showToast("超过最长数字限制")
     } else {
       this.setData({
-        wholesalePrice: (util.newVal(val)).substring(0, 10),
+        wholesalePrice: (util.newVal(val)).substring(0, 9),
       })
     }
   },
@@ -245,7 +245,7 @@ Page({
       Api.showToast("超过最长数字限制")
     } else {
       this.setData({
-        sellPrice: (util.newVal(val)).substring(0, 10)
+        sellPrice: (util.newVal(val)).substring(0, 9)
       })
     }
   },
@@ -258,7 +258,7 @@ Page({
       Api.showToast("超过最长数字限制")
     } else {
       this.setData({
-        allTotalNew: val.substring(0, 15),
+        allTotalNew: val.substring(0, 9),
       })
     }
   },
