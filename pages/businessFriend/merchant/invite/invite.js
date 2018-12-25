@@ -35,7 +35,7 @@ Page({
       greet = this.data.allName,
       send = wx.getStorageSync('storeId'),
       remark = this.data.remark
-    if (Api.isEmpty(remark)){
+    if (Api.isNotEmpty(remark)){
       var data = { accept: accept, send: send, greet: greet, remark: remark }
     }else{
       var data = { accept: accept, send: send, greet: greet, remark:'' }

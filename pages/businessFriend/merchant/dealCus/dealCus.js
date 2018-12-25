@@ -112,9 +112,9 @@ Page({
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        if (Api.isEmpty(detailList)) {
+        if (Api.isNotEmpty(detailList)) {
           for (var i = 0; i < detailList.length; i++) {
-            if (Api.isEmpty(detailList[i].latelyTradeDate)){
+            if (Api.isNotEmpty(detailList[i].latelyTradeDate)){
               var time = util.formatTime(new Date(detailList[i].latelyTradeDate))
               detailList[i].latelyTradeDate = time.split(" ")[0]
             }else{

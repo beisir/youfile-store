@@ -125,3 +125,5 @@ export const copyGoodsUrl='/api/shop/goods/copy/{{originGoodsId}}'
 export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 //订单详情
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
+// 资金管理
+export const getBankcardUrl='/admin/user/profile/bankcard'

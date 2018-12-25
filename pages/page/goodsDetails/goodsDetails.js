@@ -584,7 +584,7 @@ Page({
     }else{
       skuCode=0
     }
-    if (!Api.isEmpty(wx.getStorageSync("access_token"))){
+    if (!Api.isNotEmpty(wx.getStorageSync("access_token"))){
       _this.showLogo()
       return
     }
@@ -1156,7 +1156,7 @@ Page({
           name = ''
         var that = this;
         var article = '<div>'+ obj.description+'</div>'
-        if (Api.isEmpty(obj.description)){
+        if (Api.isNotEmpty(obj.description)){
           _this.setData({
             description:true
           })
@@ -1177,7 +1177,7 @@ Page({
             likeShow: false
           })
         }
-        if (Api.isEmpty(obj.goodsSpecificationVOList)){
+        if (Api.isNotEmpty(obj.goodsSpecificationVOList)){
           if (obj.goodsSpecificationVOList.length > 1) {
             skuArrTwo.push(obj.goodsSpecificationVOList[1])
             name = obj.goodsSpecificationVOList[1].specName
@@ -1190,7 +1190,7 @@ Page({
             _this.getTotalPriceNew(1)
           })
         } 
-        if (!Api.isEmpty(obj.goodsSkuVOList)){
+        if (!Api.isNotEmpty(obj.goodsSkuVOList)){
           obj.goodsSkuVOList=[]
         }
         var favoriteNum=0

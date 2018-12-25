@@ -141,7 +141,7 @@ Page({
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
     var dataArr = []
-    dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId: storeId })
+    dataArr.push({ goodsId: data[0]["goodsId"], num: parseInt(num), skuCode: data[0]["skuCode"], storeId: storeId })
     this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -288,7 +288,7 @@ Page({
           for (var i = 0; i < effectiveList.length; i++) {
             effectiveList[i].selected = true
             var newSkvArr = effectiveList[i].shoppingCartSkuList
-            if (Api.isEmpty(newSkvArr)) {
+            if (Api.isNotEmpty(newSkvArr)) {
               var num = 0;
               var allGoodsAmount = 0
               var allGoodsPf = 0
@@ -326,7 +326,7 @@ Page({
         }
         var saleBatchNum = 0
         var saleBatchAmount=0
-        if (Api.isEmpty(store)){
+        if (Api.isNotEmpty(store)){
           if (store.saleBatchAmount == null){
             saleBatchAmount=0
           }else{
@@ -474,7 +474,7 @@ Page({
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
     var dataArr=[]
-    dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId:storeId})
+    dataArr.push({ goodsId: data[0]["goodsId"], num: parseInt(num), skuCode: data[0]["skuCode"], storeId:storeId})
     this.addCart(data[0]["goodsId"],JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -491,7 +491,7 @@ Page({
     const obj = e.currentTarget.dataset.obj;
     let detailList = this.data.detailList;
     let storeId = this.data.storeId
-    let num = detailList[index].num
+    let num = parseInt(detailList[index].num)
     if (num <= 1) {
       return false;
     }
@@ -500,7 +500,7 @@ Page({
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
     detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
-    dataArr.push({ goodsId:detailList[index]["goodsId"], num: num, skuCode:0, storeId: storeId })
+    dataArr.push({ goodsId: detailList[index]["goodsId"], num: parseInt(num), skuCode:0, storeId: storeId })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -524,7 +524,7 @@ Page({
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
     var dataArr = []
-    dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId: storeId })
+    dataArr.push({ goodsId: data[0]["goodsId"], num: parseInt(num), skuCode: data[0]["skuCode"], storeId: storeId })
     this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -543,7 +543,7 @@ Page({
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
     detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
-    dataArr.push({ goodsId: detailList[index]["goodsId"], num: num, skuCode: 0, storeId: storeId })
+    dataArr.push({ goodsId: detailList[index]["goodsId"], num: parseInt(num), skuCode: 0, storeId: storeId })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -569,7 +569,7 @@ Page({
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
     detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
-    dataArr.push({ goodsId: detailList[index]["goodsId"], num: num, skuCode: 0, storeId: storeId })
+    dataArr.push({ goodsId: detailList[index]["goodsId"], num: parseInt(num), skuCode: 0, storeId: storeId })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -580,7 +580,7 @@ Page({
   addCountNew(e) {
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;
-    let num = detailList[index].num;
+    let num = parseInt(detailList[index].num);
     num = parseInt(num) + 1;
     let stockNum = detailList[index].stockNum
     if (num > stockNum){
@@ -591,7 +591,7 @@ Page({
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
     detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
-    dataArr.push({ goodsId: detailList[index]["goodsId"], num: num, skuCode: 0, storeId: storeId })
+    dataArr.push({ goodsId: detailList[index]["goodsId"], num: parseInt(num), skuCode: 0, storeId: storeId })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -603,7 +603,7 @@ Page({
   updatePrice:function(num,index){
     var effectiveList = this.data.detailList[index],
       shoppingCartSkuList = effectiveList.shoppingCartSkuList
-    if (Api.isEmpty(shoppingCartSkuList)){
+    if (Api.isNotEmpty(shoppingCartSkuList)){
       var arr = []
       arr.push(shoppingCartSkuList[0].sellPrice * num)
       arr.push(shoppingCartSkuList[0].wholesalePrice * num)
@@ -632,7 +632,7 @@ Page({
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
     var dataArr = []
-    dataArr.push({ goodsId: data[0]["goodsId"], num: num, skuCode: data[0]["skuCode"], storeId: storeId })
+    dataArr.push({ goodsId: data[0]["goodsId"], num: parseInt(num), skuCode: data[0]["skuCode"], storeId: storeId })
     this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -659,7 +659,7 @@ Page({
       if (detailList[i].selected) {
         if (limitShow==3){
           saleBatchGoodsNum = detailList[i].saleBatchNum
-          if (!Api.isEmpty(saleBatchGoodsNum)) {
+          if (!Api.isNotEmpty(saleBatchGoodsNum)) {
             detailList[i].saleBatchNum = storeNum
           }
         }else{
@@ -803,10 +803,10 @@ Page({
         var dataArr = data[i].shoppingCartSkuList
         if (dataArr!=null){
           for (var j = 0; j < dataArr.length; j++) {
-            model.push({ goodsId: data[i].goodsId, num: dataArr[j].num, skuCode: dataArr[j].skuCode })
+            model.push({ goodsId: data[i].goodsId, num: parseInt(dataArr[j].num), skuCode: dataArr[j].skuCode })
           }
         }else{
-          model.push({ goodsId: data[i].goodsId, num: data[i].num, skuCode:0})
+          model.push({ goodsId: data[i].goodsId, num: parseInt(data[i].num), skuCode:0})
         }
       }
     }

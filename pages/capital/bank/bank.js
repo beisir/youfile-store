@@ -1,11 +1,12 @@
-// pages/capital/bank/bank.js
+const app = getApp();
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    bankData:''
   },
 
   /**
@@ -25,8 +26,21 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+  getBankData:function(){
+    var _this=this
+    Api.getBankcard().then(res => {
+      if (res.obj){
+        let bankData = res.obj
+        let str = bankData.bankCard
+        bankData.bankCard = str.substr(str.length - 4)
+        _this.setData({
+          bankData: bankData
+        })
+      }
+    })
+  },
   onShow: function () {
-
+    this.getBankData()
   },
 
   /**

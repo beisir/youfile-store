@@ -435,7 +435,7 @@ Page({
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        if (Api.isEmpty(detailList)) {
+        if (Api.isNotEmpty(detailList)) {
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
@@ -581,11 +581,11 @@ Page({
             let userId = store.userId
             _this.getFriendMes(userId)
           }
-          // if (store.storeIdRetail){
+          if (store.storeIdRetail){
           //  _this.setData({
           //    goRetailStore:false
           //  })
-          // }
+          }
         }
       });
     } else {
@@ -615,7 +615,7 @@ Page({
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        if (Api.isEmpty(detailList)) {
+        if (Api.isNotEmpty(detailList)) {
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
@@ -651,7 +651,6 @@ Page({
     });
   },
   swichNav: function (e) {
-    // Api.getFormId(e)
     var that = this,
       descShow = this.data.descShow,
       index = e.target.dataset.current
@@ -757,7 +756,7 @@ Page({
       if (authHandler.isLogin()) {
         var limitShow = this.data.limitShow
         var setlimitShow = wx.getStorageSync("admin")
-        if (Api.isEmpty(setlimitShow)) {
+        if (Api.isNotEmpty(setlimitShow)) {
           this.setData({
             limitShow: setlimitShow
           })
