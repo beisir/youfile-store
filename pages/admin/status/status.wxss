@@ -18,10 +18,10 @@ page{height:unset !important}
 .del{background-color:#FF4141;width:130rpx;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;position:relative;z-index:1000;-webkit-transform:translateX(130rpx);transform:translateX(130rpx);-webkit-transition:all 0.4s;transition:all 0.4s}
 .touch-move-active .content,.touch-move-active .del{-webkit-transform:translateX(0);transform:translateX(0)}
 .row{display:flex;flex-direction:row}
-.st-cont .editGoods{height:50rpx;width:50rpx;right:20rpx;left:unset;position:absolute;top:110rpx;z-index:1000}
+.st-cont .editGoods{height:50rpx;width:50rpx;right:20rpx;left:unset;position:absolute;top:145rpx;z-index:1000}
 .column{display:flex;width:100%;flex-direction:column;margin-left:210rpx}
 .st-cont{width:100%}
-.st-d-status view{width:35%}
+.st-d-status view{width:36%}
 .st-all{padding-top:50rpx}
 scroll-view{margin-top:0rpx;padding-bottom:100rpx}
 .babt{position:absolute;top:0;height:250rpx;z-index:100;width:100%}

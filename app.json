@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/faceToFaceOrder/myCustomerList/myCustomerList",
     "pages/page/home/home",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
-    "pages/faceToFaceOrder/myCustomerList/myCustomerList",
     "pages/faceToFaceOrder/goodsTag/goodsTag",
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
     "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",

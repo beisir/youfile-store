@@ -14,10 +14,10 @@
       <view class='st-details'>
         <view class='st-d-t'>{{item.name}}</view>
         <view class='st-d-status'>
-          <view><text>批发：</text><text class='st-mom'>￥{{item.wholesalePrice}}</text></view>
-          <view><text>零售：</text><text class='st-mom'>￥{{item.sellPrice}}</text></view>
+          <view><text>批发 :</text><text class='st-mom'>￥{{item.wholesalePrice}}</text></view>
+          <view><text>零售 :</text><text class='st-mom'>￥{{item.sellPrice}}</text></view>
           <!-- <view>供货：122</view><view>零售：144</view> -->
-          <view><text>库存：</text>{{item.stockNum}}</view>
+          <view><text>库存 : </text>{{item.stockNum}}</view>
         </view>
       </view>
     </view>
