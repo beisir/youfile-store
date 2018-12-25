@@ -8,7 +8,7 @@
 </layer>
 <view class='warn-box' wx:if="{{warnText}}">{{warnText}}</view>
 <view class='user-title'>
-  <view class='user-icon-box'>
+  <view class='user-icon-box'> 
     <image class='user-icon' mode="aspectFit" src='{{user.headPic?baseUrl+user.headPic+"?x-oss-process=style/goods-small":"/image/42.png"}}'></image>
   </view>
   <text class='user-name'>{{user.nickName}}</text>

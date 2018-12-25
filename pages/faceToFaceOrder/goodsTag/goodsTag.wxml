@@ -1,4 +1,4 @@
-<!-- 编辑 -->
+<!-- 编辑  -->
 <layer show='{{editModal}}' title="编辑商品名称">
   <view> 
     <input value='{{editText}}' maxlength='50' bindinput="editInput" placeholder='请输入名称' class='edit-input' type='text'></input>

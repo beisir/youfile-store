@@ -1,4 +1,4 @@
-// pages/faceToFaceOrder/goodsTag/goodsTag.js
+//  pages/faceToFaceOrder/goodsTag/goodsTag.js
 const API = require("../../../utils/api.js")
 const app=getApp()
 Page({

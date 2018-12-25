@@ -15,7 +15,7 @@ class EnterStoreHandler {
       var store = {};
       //获取店铺编号
       // let userId = this.getUserIdFromQrCodeUrl(qrUrl);
-      
+
       this.getStoreId(options).then((storeId) => {
         //判断店铺编号是否为空
         if (!Api.isEmpty(storeId)) {
@@ -27,8 +27,8 @@ class EnterStoreHandler {
 
         //设置storeId
         store.storeId = storeId;
-        if (options.q){
-          if (decodeURIComponent(options.q)){
+        if (options.q) {
+          if (decodeURIComponent(options.q)) {
             store.userId = this.getUserIdFromQrCodeUrl(decodeURIComponent(options.q))
           }
         }
@@ -36,15 +36,15 @@ class EnterStoreHandler {
         Api.getStoreNature({ storeId: storeId }).then(res => {
           var nature = res.obj
           store.storeNature = nature;
-          if (nature=="1"){
-            if (options.getUserIdFromQrCode){
+          if (nature == "1") {
+            if (options.getUserIdFromQrCode) {
               store.userId = this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode)
-              
+
             }
           }
           //店铺性质未获取到，不做处理
           if (!Api.isEmpty(nature)) {
-            
+
             // console.error("店铺性质未获取到，请处理1");
             wx.setStorageSync('storeId', storeId);
             let data = { userId: this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode), nature: "3" }
@@ -54,13 +54,17 @@ class EnterStoreHandler {
           //店铺性质不对处理
           if (this.storeNature != nature) {
             let data;
-            if (options.getUserIdFromQrCode){
+            if (options.getUserIdFromQrCode) {
               data = { userId: this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode), nature: "2" }
-            }else{
+            } else {
               if (options.q) {
                 if (decodeURIComponent(options.q)) {
                   data = { userId: this.getUserIdFromQrCodeUrl(decodeURIComponent(options.q)) }
                 }
+              } else {
+                // 零售店进到批零
+                // wx.setStorageSync("storeIdRetail", storeId)
+                // data = { storeIdRetail:true}
               }
             }
             reject(data);
@@ -77,7 +81,7 @@ class EnterStoreHandler {
           return;
         });
       });
-      
+
     });
   }
 
@@ -115,9 +119,9 @@ class EnterStoreHandler {
       if (storeId == null || options.getUserIdFromQrCode) {
         //获取二维码url地址
         let qrUrl;
-        if (options.getUserIdFromQrCode){
+        if (options.getUserIdFromQrCode) {
           qrUrl = options.getUserIdFromQrCode
-        }else{
+        } else {
           qrUrl = decodeURIComponent(options.q);
         }
         let userId = this.getUserIdFromQrCodeUrl(qrUrl);
@@ -131,7 +135,7 @@ class EnterStoreHandler {
           return;
         })
       }
-      
+
 
 
     });
