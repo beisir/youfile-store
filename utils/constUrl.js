@@ -127,3 +127,6 @@ export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
 // 资金管理
 export const getBankcardUrl='/admin/user/profile/bankcard'
+export const getTradeUrl ='/admin/store/trade/statistic'
+export const getAccountinUrl='/admin/store/trade/accountin'
+export const getAccountDetailUrl='/admin/store/trade/{{paymentNumber}}/accountDetail'

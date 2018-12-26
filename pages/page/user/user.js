@@ -84,7 +84,8 @@ Page({
   data: {
     hasUser: false,
     limitShow:1,
-    indexEmpty: true
+    indexEmpty: true,
+    goRetailStore: true,
   },
   toMyStore(){
     let toID = this.data.user.storeId;
@@ -227,9 +228,14 @@ Page({
           indexEmpty: false
         })
       }
-      getIdentity(this)
-
-      this.getStore();
+      if (app.globalData.storeIdRetail){
+        this.setData({
+          goRetailStore:false
+        })
+      }else{
+        getIdentity(this)
+        this.getStore();
+      }
     }
     
   },

@@ -75,6 +75,7 @@ Page({
     baseUrl: app.globalData.imageUrl,
     selectAllStatus:true, 
     allEmpty:true,
+    goRetailStore: true,
     total1:0,
     obj:{
         name:"hello"
@@ -363,7 +364,13 @@ Page({
         indexEmpty: false
       })
     } else {
-      getIdentity(this)
+      if (app.globalData.storeIdRetail) {
+        this.setData({
+          goRetailStore: false
+        })
+      }else{
+        getIdentity(this)
+      }
     }
     
   },

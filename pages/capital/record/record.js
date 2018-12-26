@@ -1,11 +1,11 @@
-// pages/capital/record/record.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    dataArr:[]
   },
 
   /**
@@ -14,19 +14,24 @@ Page({
   onLoad: function (options) {
 
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
 
   },
-
+  getData: function () {
+    var _this = this
+    Api.getAccountin().then(res => {
+      let obj = res.obj
+      console.log(obj)
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getData()
   },
 
   /**

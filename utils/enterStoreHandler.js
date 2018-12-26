@@ -1,5 +1,5 @@
 import Api from './api.js'
-
+const app = getApp();
 class EnterStoreHandler {
 
   //构造函数
@@ -63,9 +63,9 @@ class EnterStoreHandler {
                 }
               } else {
                 // 零售店进到批零
-                // wx.setStorageSync("storeIdRetail", storeId)
-                // console.log(storeId)
-                // data = { storeIdRetail:true}
+                wx.setStorageSync("storeIdRetail", storeId)
+                app.globalData.storeIdRetail = true
+                data = { storeIdRetail:true}
               }
             }
             reject(data);

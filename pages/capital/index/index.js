@@ -1,11 +1,15 @@
-// pages/capital/index/index.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    threeMonthMerchantTrade: '',
+    threeMountSettle: '',
+    todayMerchantTrade: '',
+    waitingSettleAmount: '',
+    yesterdayMerchantTrade:'',
   },
 
   /**
@@ -25,12 +29,24 @@ Page({
   onReady: function () {
 
   },
-
+  getTradeData:function(){
+    var _this=this
+    Api.getTrade().then(res=>{
+      let obj=res.obj
+      _this.setData({
+        waitingSettleAmount: obj.waitingSettleAmount,
+        todayMerchantTrade: obj.todayMerchantTrade,
+        threeMonthMerchantTrade: obj.threeMonthMerchantTrade,
+        yesterdayMerchantTrade: obj.yesterdayMerchantTrade,
+        threeMountSettle: obj.threeMountSettle
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getTradeData()
   },
 
   /**

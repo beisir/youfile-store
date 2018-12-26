@@ -1,11 +1,14 @@
-<view wx:if="{{initOrder && limitShow == 2}}"><initstroe></initstroe></view>
+<view wx:if="{{initOrder && limitShow == 2}}">
+  <initstroe></initstroe>
+</view>
 <view hidden='{{indexEmpty}}'>
   <no></no>
 </view>
+<view hidden='{{goRetailStore}}'>
+  <retailStore></retailStore>
+</view>
 <login id="login"></login>
-
 <view class='u-title'>
-
   <view class='u-t-cont'>
     <navigator url='../derm/derm' class='init-page'>
       <image hidden='{{!hasUser}}' src='/image/er.png'></image>
@@ -89,7 +92,7 @@
 
   <block wx:if="{{limitShow==2}}">
     <!-- 工作台 -->
-    <view class='page_bd page_hd1' >
+    <view class='page_bd page_hd1'>
       <view class='weui-back'>
         <navigator class='weui-cell weui-cell_access' url='../workIndex/workIndex'>
           <image src='/image/cloudIcon.png' class='user-img'></image>

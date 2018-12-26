@@ -117,7 +117,10 @@ import {
   getUserInfoUrl,
   getStoreNatureUrl,
   getStoreDataUrl,
-  getBankcardUrl
+  getBankcardUrl,
+  getTradeUrl,
+  getAccountinUrl,
+  getAccountDetailUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -722,6 +725,27 @@ function getBankcard(data) {
   return app.http.getRequest(getBankcardUrl, data);
 }
 /**
+ *
+统计收支
+ */
+function getTrade(data) {
+  return app.http.getRequest(getTradeUrl, data)
+} 
+/**
+ *
+查询商户收益
+ */
+function getAccountin(data) {
+  return app.http.getRequest(getAccountinUrl, data)
+}
+/**
+ *
+查询商户收益详情
+ */
+function getAccountDetail(data) {
+  return app.http.getRequest(getAccountDetailUrl, data)
+}
+/**
  * 获取formId
  */
 function getFormId(e) {
@@ -897,5 +921,8 @@ module.exports = {
   showPurchaser: showPurchaser,
   showMerchant: showMerchant,
   recentGoods: recentGoods,
-  getBankcard: getBankcard
+  getBankcard: getBankcard,
+  getTrade,
+  getAccountin,
+  getAccountDetail
 }
