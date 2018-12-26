@@ -1,18 +1,26 @@
-// pages/capital/recordDetails/recordDetails.js
+import Api from '../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
+  getDetails: function (paymentNumber){
+    var _this=this
+    Api.getAccountDetail({ paymentNumber: paymentNumber}).then(res=>{
+      console.log(res)
+    })
+  },
   onLoad: function (options) {
-
+    if (options.paymentNumber){
+      this.getDetails(options.paymentNumber)
+    }
   },
 
   /**

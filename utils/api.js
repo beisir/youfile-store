@@ -120,7 +120,8 @@ import {
   getBankcardUrl,
   getTradeUrl,
   getAccountinUrl,
-  getAccountDetailUrl
+  getAccountDetailUrl,
+  getHaveRecordUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -736,7 +737,7 @@ function getTrade(data) {
 查询商户收益
  */
 function getAccountin(data) {
-  return app.http.getRequest(getAccountinUrl, data)
+  return app.pageRequest.pageGet(getAccountinUrl, data)
 }
 /**
  *
@@ -744,6 +745,13 @@ function getAccountin(data) {
  */
 function getAccountDetail(data) {
   return app.http.getRequest(getAccountDetailUrl, data)
+}
+/**
+ *
+查询结算记录
+ */
+function getHaveRecord(data) {
+  return app.http.getRequest(getHaveRecordUrl, data)
 }
 /**
  * 获取formId
@@ -924,5 +932,6 @@ module.exports = {
   getBankcard: getBankcard,
   getTrade,
   getAccountin,
-  getAccountDetail
+  getAccountDetail,
+  getHaveRecord
 }

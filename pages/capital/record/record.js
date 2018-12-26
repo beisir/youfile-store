@@ -1,4 +1,6 @@
 import Api from '../../../utils/api.js'
+const app = getApp();
+const util = require('../../../utils/util.js');
 Page({
 
   /**
@@ -20,18 +22,34 @@ Page({
   onReady: function () {
 
   },
+  // util.formatTime(new Date(res.obj.createDate))
   getData: function () {
     var _this = this
     Api.getAccountin().then(res => {
-      let obj = res.obj
-      console.log(obj)
+      var detailList = res.obj.result
+      if (Api.isNotEmpty(detailList)) {
+        var datas = _this.data.dataArr,
+          newArr = app.pageRequest.addDataList(datas, detailList)
+        _this.setData({
+          dataArr: newArr
+        })
+      } else {
+        Api.showToast("暂无更多数据了！")
+      }
     })
   },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  initData:function(){
+    this.setData({
+      dataArr: []
+    })
+    app.pageRequest.pageData.pageNum = 0
     this.getData()
+  },
+  onShow: function () {
+    this.initData()
   },
 
   /**

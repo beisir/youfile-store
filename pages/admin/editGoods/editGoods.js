@@ -649,6 +649,11 @@ Page({
           app.globalData.switchStore = true
           _this.goback()
         })
+        .catch(res => {
+          _this.setData({
+            saveHide: true
+          })
+        })
     })
   },
   /**

@@ -8,7 +8,7 @@ App({
     if (options.query && options.query.storeId){
       wx.setStorageSync("storeId",options.query.storeId)
     }
-    // wx.setStorageSync("storeId", "S1000527")
+    // wx.setStorageSync("storeId", "S1000371")
     // wx.setStorageSync("storeId", "S1000349")
     // wx.setStorageSync("storeId", "S001")
     // 获取小程序更新机制兼容
