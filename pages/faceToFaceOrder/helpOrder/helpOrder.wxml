@@ -27,12 +27,14 @@
   <block wx:if="{{!afterSearch}}">
     <view class='focus-user'>刚刚关注的用户</view>
     <view class='user-list'>
-      <view class='user-item'>
+      <view class='user-item' wx:for='{{list}}'>
         <view class='flex-center'>
           <image class='user-icon' src='/image/preson.png'></image>
-          <text>方小鱼Funny</text>
+          <text>{{item.nickName}}</text>
         </view>
-        <view class='help-btn'>帮TA下单</view>
+        <navigator url="../createOrder/createOrder?user={{item.userId}}">
+          <view class='help-btn'>帮TA下单</view>
+        </navigator>
       </view>
     </view>
   </block>

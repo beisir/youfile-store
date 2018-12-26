@@ -1,14 +1,19 @@
 // pages/faceToFaceOrder/helpOrder/helpOrder.js
+import API from "../../../utils/api.js";
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list:[]
   },
   getFocusList(){
-
+    API.recentlyFocusUser({num:10}).then(res=>{
+      this.setData({
+        list:res.obj
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
