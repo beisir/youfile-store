@@ -1,8 +1,8 @@
 {
   "pages":[
     "pages/page/home/home",
-    "pages/capital/record/record",
     "pages/capital/index/index",
+    "pages/capital/record/record",
     "pages/capital/haveRecord/haveRecord",
     "pages/admin/addGoods/addGoods",
     "pages/capital/bank/bank",

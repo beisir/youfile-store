@@ -129,5 +129,5 @@ export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
 export const getBankcardUrl='/admin/user/profile/bankcard'
 export const getTradeUrl ='/admin/store/trade/statistic'
 export const getAccountinUrl='/admin/store/trade/accountin'
-export const getAccountDetailUrl='/admin/store/trade/{{paymentNumber}}/accountDetail'
+export const getAccountDetailUrl ='/admin/store/trade/{{paymentNumber}}/account/detail'
 export const getHaveRecordUrl='/admin/store/trade/settle/{{merchantNumber}}'
