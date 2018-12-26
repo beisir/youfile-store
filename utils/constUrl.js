@@ -146,3 +146,5 @@ export const ftfCreatGoodsUrl = "/admin/shop/offlinegoods"
 export const ftfDelGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}"
 export const ftfEditGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}/byid"
 export const ftfGoodsIfExistUrl = "/admin/shop/offlinegoods/{{storeId}}/exist" 
+//最近关注
+export const recentlyFocusUserUrl = "/admin/store/{{storeId}}/favoriteusers/recently"

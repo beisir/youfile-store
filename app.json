@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/faceToFaceOrder/helpOrder/helpOrder",
+    "pages/page/user/user",
     "pages/page/home/home",
     "pages/faceToFaceOrder/myCustomerList/myCustomerList",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
@@ -7,7 +9,6 @@
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
     "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",
     "pages/faceToFaceOrder/createSuccess/createSuccess",
-    "pages/faceToFaceOrder/helpOrder/helpOrder",
     "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/page/cartList/cartList",
     "pages/businessFriend/merchant/index/index",
@@ -18,7 +19,6 @@
     "pages/capital/recordDetails/recordDetails",
     "pages/capital/record/record",
     "pages/page/workIndex/workIndex",
-    "pages/page/user/user",
     "pages/role/supplyOrder/supplyOrder",
     "pages/page/order/order",
     "pages/businessFriend/merchant/follow/follow",

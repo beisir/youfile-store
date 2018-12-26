@@ -131,6 +131,7 @@ import {
   ftfDelGoodsUrl,
   ftfEditGoodsUrl,
   ftfGoodsIfExistUrl,
+  recentlyFocusUserUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -774,6 +775,11 @@ function ftfGoodsIfExist(data){
   return app.http.getRequest(ftfGoodsIfExistUrl, data);
 }
 
+//最近关注用户列表
+function recentlyFocusUser(data){
+  data = initStoreId(data);
+  return app.http.getRequest(recentlyFocusUserUrl, data);
+}
 
 
 
@@ -844,6 +850,7 @@ function getStoreId() {
   }
 }
 module.exports = {
+  recentlyFocusUser,
   ftfGoodsList,
   ftfCreatGoods,
   ftfDelGoods,

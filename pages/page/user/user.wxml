@@ -39,17 +39,26 @@
       <view>进货单</view>
     </navigator>
   </block>
-  <view wx:if='{{limitShow==1 && !user.isStoreOwner}}' bindtap='addTip' class='u-o-div'>
-    <image src='/image/firend.png'></image>
-    <view>加商友合作</view>
-  </view>
-  <view wx:if='{{limitShow==3}}' class='u-o-div'>
-    <image src='/image/firend.png'></image>
-    <view>已达成商友</view>
-  </view>
+  <navigator class='u-o-div' url='../../faceToFaceOrder/customerOrderList/customerOrderList'>
+    <image src='/image/ftfIcon-thin-bla.png'></image>
+    <view>门店订单</view>
+  </navigator>
 </view>
 <view class='page_bd'>
   <view class='weui-back'>
+
+    <view wx:if='{{limitShow==1 && !user.isStoreOwner}}' bindtap='addTip' class='weui-cell weui-cell_access'>
+      <image class='user-img' src='/image/ad4.png' style='margin-left:5rpx;margin-right:25rpx;'></image>
+      <view class='weui-cell__bd'>加商友合作</view>
+      <view class='weui-img'>
+        <image src="/image/icl.png"></image>
+      </view>
+    </view>
+    <view wx:if='{{limitShow==3}}' class='weui-cell weui-cell_access'>
+      <image class='user-img' src='/image/ad4.png' style='margin-left:5rpx;margin-right:25rpx;'></image>
+      <view>已达成商友</view>
+    </view>
+
     <navigator class='weui-cell weui-cell_access' url='../addressWe/addressWe'>
       <image src='/image/u1.png' class='user-img'></image>
       <view class='weui-cell__bd'>

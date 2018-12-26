@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "门店订单",
   "usingComponents": {
+    "login": "../../login/login/login",
     "mes": "../../../assembly/tips/tips",
     "clo": "../../../assembly/close/close"
   }
