@@ -1,11 +1,12 @@
 import Api from '../../../utils/api.js'
+const util = require('../../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
+    dataDetails:''
   },
 
   /**
@@ -13,11 +14,34 @@ Page({
    */
   getDetails: function (paymentNumber){
     var _this=this
-    Api.getAccountDetail({ paymentNumber: paymentNumber}).then(res=>{
-      console.log(res)
+    Api.getAccountDetail({ paymentNumber: "PO201802220245139951088"}).then(res=>{
+      let obj=res.obj
+      if(obj){
+        if (obj.paidDate){
+          obj.paidDate = util.formatTime(new Date(obj.paidDate))
+        }
+        if (obj.payWay == "wx_mini_app_pay"){
+          obj.payWay ="微信小程序支付"
+        }
+        if (obj.customerPhone){
+          var tel = 18810399133;
+          tel = "" + tel;
+          var ary = tel.split("");
+          ary.splice(3, 4, "****");
+          var tel1 = ary.join("");
+          obj.customerPhone = tel1
+        }else{
+          obj.customerPhone = ''
+        }
+        _this.setData({
+          dataDetails:obj
+        })
+      }
+      console.log(obj)
     })
   },
   onLoad: function (options) {
+    this.getDetails()
     if (options.paymentNumber){
       this.getDetails(options.paymentNumber)
     }

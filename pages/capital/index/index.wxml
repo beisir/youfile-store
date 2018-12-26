@@ -12,7 +12,7 @@
   <view class='ca-num'>
     <view>{{todayMerchantTrade.tradeCount}}<view>今日收款笔数</view></view>
     <view>{{yesterdayMerchantTrade.tradeCount}}<view>昨收款笔数</view></view>
-    <view>{{threeMountSettle.tradeCount}}<view>总收款笔数 </view></view>
+    <view>{{threeMonthMerchantTrade.tradeCount}}<view>总收款笔数 </view></view>
   </view>
 </view>
  <view class='wk-bot'>
