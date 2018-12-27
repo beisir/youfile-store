@@ -127,7 +127,7 @@ Page({
   pay(e){
     let code = e.currentTarget.dataset.code;
     wx.navigateTo({
-      url: '../../casher/casher/casher?num=' + code +'&orderType=ftf'
+      url: '../../casher/casher/casher?num=' + code +'&type=ftf'
     })
   },
   /**
