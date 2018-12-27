@@ -148,3 +148,5 @@ export const ftfEditGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}/byid"
 export const ftfGoodsIfExistUrl = "/admin/shop/offlinegoods/{{storeId}}/exist" 
 //最近关注
 export const recentlyFocusUserUrl = "/admin/store/{{storeId}}/favoriteusers/recently"
+//用户肖像
+export const searchUserInfoByTelUrl = "/admin/user/profile/{{mobile}}/mobile"

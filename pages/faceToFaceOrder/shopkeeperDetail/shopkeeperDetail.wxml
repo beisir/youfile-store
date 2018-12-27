@@ -47,7 +47,7 @@
 <view class='mid-btn padding-box'>
   <view class='flex-center'>
     <image src='/image/mes.png' class='btn-icon'></image>
-    <text>联系卖家</text>
+    <text>联系买家</text>
   </view>
   <view class='btn-line'></view>
   <view class='flex-center' bindtap='call'>

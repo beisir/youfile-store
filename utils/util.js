@@ -169,6 +169,18 @@ function ramNum1() {
 function ramData(){
   return Date.parse(new Date()) + parseInt(89999 * Math.random() + 10000 + 1)
 }
+
+function testTel(tel) {
+  if(tel){
+    let phone = tel.trim();
+    if (!phone || phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
+      return false;
+    }
+    return true;
+  }else{
+    return false
+  }
+}
 module.exports = {
   formatTime: formatTime,
   count_down:count_down,
@@ -178,5 +190,6 @@ module.exports = {
   ramNum: ramNum,
   ramData: ramData,
   ramNum1: ramNum1,
+  testTel: testTel,
 }
 
