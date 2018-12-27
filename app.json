@@ -1,13 +1,13 @@
 {
   "pages":[
     "pages/page/home/home",
-    "pages/capital/recordDetails/recordDetails",
-    "pages/capital/index/index",
-    "pages/capital/record/record",
     "pages/capital/haveRecord/haveRecord",
+    "pages/capital/record/record",
+    "pages/capital/index/index",
+    "pages/admin/status/status",
+    "pages/capital/recordDetails/recordDetails",
     "pages/admin/addGoods/addGoods",
     "pages/capital/bank/bank",
-    "pages/admin/status/status",
     "pages/page/cartList/cartList",
     "pages/businessFriend/merchant/index/index",
     "pages/role/supplyVoucher/supplyVoucher",

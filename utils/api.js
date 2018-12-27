@@ -751,7 +751,7 @@ function getAccountDetail(data) {
 查询结算记录
  */
 function getHaveRecord(data) {
-  return app.http.getRequest(getHaveRecordUrl, data)
+  return app.pageRequest.pageGet(getHaveRecordUrl, data)
 }
 /**
  * 获取formId

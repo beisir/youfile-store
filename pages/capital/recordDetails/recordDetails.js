@@ -14,7 +14,7 @@ Page({
    */
   getDetails: function (paymentNumber){
     var _this=this
-    Api.getAccountDetail({ paymentNumber: "PO201802220245139951088"}).then(res=>{
+    Api.getAccountDetail({ paymentNumber: paymentNumber}).then(res=>{
       let obj=res.obj
       if(obj){
         if (obj.paidDate){
@@ -24,7 +24,7 @@ Page({
           obj.payWay ="微信小程序支付"
         }
         if (obj.customerPhone){
-          var tel = 18810399133;
+          var tel = obj.customerPhone;
           tel = "" + tel;
           var ary = tel.split("");
           ary.splice(3, 4, "****");
@@ -41,9 +41,9 @@ Page({
     })
   },
   onLoad: function (options) {
-    this.getDetails()
     if (options.paymentNumber){
-      this.getDetails(options.paymentNumber)
+      console.log(options)
+      this.getDetails("PO1000341122")
     }
   },
 

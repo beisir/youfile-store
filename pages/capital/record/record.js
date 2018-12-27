@@ -22,12 +22,14 @@ Page({
   onReady: function () {
 
   },
-  // util.formatTime(new Date(res.obj.createDate))
   getData: function () {
     var _this = this
     Api.getAccountin().then(res => {
       var detailList = res.obj.result
       if (Api.isNotEmpty(detailList)) {
+        for (var i = 0; i < detailList.length;i++){
+          detailList[i].inAccountDate = util.formatTime(new Date(detailList[i].inAccountDate))
+        }
         var datas = _this.data.dataArr,
           newArr = app.pageRequest.addDataList(datas, detailList)
         _this.setData({
@@ -77,7 +79,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getData()
   },
 
   /**
