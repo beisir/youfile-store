@@ -13,12 +13,24 @@ Page({
     reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
     cancelIndex: 0
   },
-
+  //复制订单号
+  copyCode() {
+    wx.setClipboardData({
+      data: this.data.order.orderNumber,
+      success: () => {
+        wx.showToast({
+          title: '复制订单号成功',
+          icon: "none"
+        })
+      }
+    })
+  },
   getData(){
     API.ftfAdminOrderDetail({ orderNumber : this.data.code}).then(res=>{
       
 
       try {
+        res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
         res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
         res.obj.finishDate = util.formatTime(new Date(res.obj.finishDate));
         res.obj.cancelDate = util.formatTime(new Date(res.obj.cancelDate));

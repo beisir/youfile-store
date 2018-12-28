@@ -22,7 +22,7 @@
   <view wx:key="{{index}}" class='nav-item {{item.checked?"nav-ac":""}}' bindtap='switchNav' data-type="{{item.type}}" wx:for="{{nav}}" wx:key='{{index}}'>{{item.name}}</view>
 </view>
 
-<view>
+<view wx:if="{{list.length>0}}">
   <view wx:for="{{list}}" class='list-item' wx:key='{{index}}'>
     <!-- 头 -->
     <view class='item-title padding-box'>
@@ -63,5 +63,10 @@
       </block>
     </view>
   </view>
-
 </view>
+<view wx:else class="order-no-data">
+  <view class="nocar">
+    <image src="/image/no1.png"></image>
+  </view>
+  您还没有相关的订单
+</view> 

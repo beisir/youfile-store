@@ -14,11 +14,25 @@ Page({
     cancelIndex: 0
   },
 
+  //复制订单号
+  copyCode() {
+    wx.setClipboardData({
+      data: this.data.order.orderNumber,
+      success: () => {
+        wx.showToast({
+          title: '复制订单号成功',
+          icon: "none"
+        })
+      }
+    })
+  },
+
   getData() {
     API.ftfCustomerOrderDetail({ orderNumber: this.data.code }).then(res => {
 
 
       try {
+        res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
         res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
         res.obj.finishDate = util.formatTime(new Date(res.obj.finishDate));
         res.obj.cancelDate = util.formatTime(new Date(res.obj.cancelDate));

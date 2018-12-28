@@ -6,7 +6,7 @@
 
   <!-- 搜索 -->
   <view class='search-box'>
-    <input placeholder-class='place-font' bindinput='searchInput' placeholder='输入用户手机号' type='number'></input>
+    <input placeholder-class='place-font' bindconfirm='search' bindinput='searchInput' placeholder='输入用户手机号' type='number'></input>
     <view bindtap='search' style='height:100%;width:100rpx;display:flex;align-items:center;flex-direction:row-reverse;'>
       <image src='/image/search1.png' class='o-search-icon'></image>
     </view>

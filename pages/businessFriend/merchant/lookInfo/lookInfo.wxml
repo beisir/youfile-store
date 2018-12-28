@@ -52,7 +52,7 @@
 
 
 <view class='bottom-btn-box'  wx:if="{{faceOrderIn}}">
-  <navigator wx:if="{{!ifWholesaler}}" class='btn-item' url="../../../businessFriend/merchant/invite/invite?accept={{data.id}}&remark=&headPic={{baseUrl+data.headPic}}">
+  <navigator wx:if="{{!ifWholesaler}}" class='btn-item' url="../../../businessFriend/merchant/invite/invite?accept={{data.id}}&remark=&headPic={{baseUrl+data.headPic}}&name={{data.nickName}}">
     <image class='btn-icon' src='/image/ad4.png'></image>
     <text>添加到进货商</text>
   </navigator>
