@@ -150,3 +150,5 @@ export const ftfGoodsIfExistUrl = "/admin/shop/offlinegoods/{{storeId}}/exist"
 export const recentlyFocusUserUrl = "/admin/store/{{storeId}}/favoriteusers/recently"
 //用户肖像
 export const searchUserInfoByTelUrl = "/admin/user/profile/{{mobile}}/mobile"
+//用户待付款订单
+export const unpaidOrderNumUrl = "/api/all/order/{{storeId}}/unpaid/count"

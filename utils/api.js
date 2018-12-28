@@ -133,6 +133,7 @@ import {
   ftfGoodsIfExistUrl,
   recentlyFocusUserUrl,
   searchUserInfoByTelUrl,
+  unpaidOrderNumUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -785,6 +786,11 @@ function recentlyFocusUser(data){
 function searchUserInfoByTel(data){
   return app.http.getRequest(searchUserInfoByTelUrl, data);
 }
+//待付款订单
+function unpaidOrderNum(data){
+  data = initStoreId(data);
+  return app.http.getRequest(unpaidOrderNumUrl,data);
+}
 
 
 
@@ -854,6 +860,7 @@ function getStoreId() {
   }
 }
 module.exports = {
+  unpaidOrderNum,
   searchUserInfoByTel,
   recentlyFocusUser,
   ftfGoodsList,

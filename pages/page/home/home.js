@@ -95,12 +95,37 @@ Page({
     src: '',
     goodsName: '',
     copyGoods: false,
-    openStore: false
+    openStore: false,
+    tipIndex: 0,
   },
   //到店弹框
   showStoreOrder() {
     this.selectComponent("#storeOrder").open();
   },
+  //轮播消息
+  toUser() {
+    wx.switchTab({
+      url: '/pages/page/user/user'
+    })
+  },
+  stopSwiperTip() {
+    this.setData({
+      showAllTip: true,
+      tipIndex: 0
+    })
+  },
+  continueSwiperTip() {
+    this.setData({
+      showAllTip: false,
+    })
+  },
+  swiperItemControl(){
+    
+    Api.unpaidOrderNum().then(res=>{
+
+    })
+  },
+  //开店
   openStore: function () {
     wx.navigateTo({
       url: '../../cloudOrder/newCloud/newCloud',
@@ -750,6 +775,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
+    // this.swiperItemControl()  //轮播接口
     this.getStore()
     var _this = this,
       isOnloaded = this.data.isOnloaded
