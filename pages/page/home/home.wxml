@@ -137,23 +137,26 @@
 
 
  <!-- 轮播通知 -->
- <view class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}' >
+ <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}' >
    <swiper interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
-     <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' bindtap='toUser'>
+     <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
        <image class="swiper-font-icon" src='/image/dingfont.png'></image>
-       <text>您有 <text class="order-num">2</text> 笔待支付订单！</text>
+       <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>
      </swiper-item>
      <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==1}}' bindtap='addTip'>
        <image class="swiper-font-icon" src='/image/shangfont.png'></image>
        <text>点此加为商友，即刻查看批发价！</text>
      </swiper-item>
    </swiper>
-   <view class='swiper-tri-box' wx:if='{{limitShow==1 && !showAllTip}}' bindtap='stopSwiperTip'>
-     <image class='more-tri-icon' src='/image/down.png'></image>
-   </view>
-   <view class='swiper-tri-box' wx:else bindtap='continueSwiperTip'>
-     <image class='more-tri-icon' src='/image/sy.png'></image>
-   </view>
+   <!-- 箭头图标开关 -->
+   <block wx:if="{{limitShow == 1 && unpaidOrderNum > 0}}">
+    <view class='swiper-tri-box' wx:if='{{limitShow==1 && !showAllTip}}' bindtap='stopSwiperTip'>
+      <image class='more-tri-icon' src='/image/down.png'></image>
+    </view>
+    <view class='swiper-tri-box' wx:else bindtap='continueSwiperTip'>
+      <image class='more-tri-icon' src='/image/sy.png'></image>
+    </view>
+   </block>
  </view>
 
 <!-- <view class='add-firend' wx:if='{{limitShow==1}}' bindtap='addTip'>

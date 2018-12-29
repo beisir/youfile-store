@@ -120,7 +120,6 @@ Page({
     })
   },
   swiperItemControl(){
-    
     Api.unpaidOrderNum().then(res=>{
 
     })
@@ -775,7 +774,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (options) {
-    // this.swiperItemControl()  //轮播接口
     this.getStore()
     var _this = this,
       isOnloaded = this.data.isOnloaded
@@ -811,6 +809,12 @@ Page({
     this.setData({
       getFollw: authHandler.isLogin(),
       disLike: false,
+    },function(){
+      //getFollw判断是否登录不能轻易改啊
+      this.showStoreOrder();
+      if (this.data.getFollw){
+        this.swiperItemControl()  //轮播接口
+      }
     })
   },
 

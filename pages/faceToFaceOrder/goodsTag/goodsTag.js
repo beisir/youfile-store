@@ -95,7 +95,8 @@ Page({
         let arr = this.data.list;
         arr.unshift(goods)
         this.setData({
-          list: arr
+          list: arr,
+          name: ""
         })
       })
     }

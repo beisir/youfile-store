@@ -92,6 +92,21 @@
   color: #333;
   font-size: 30rpx;
   display:inline-block;
+  position: relative;
+}
+/* 订单数字 */
+.unpaid-order-num-ball{
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  background: red;
+  border-radius: 50%;
+  right:34%;
+  top:14rpx;
+  color: white;
+  font-size: 18rpx;
+  text-align: center;
 }
 .weui-back{
   background: #fff;

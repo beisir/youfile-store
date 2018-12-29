@@ -11,7 +11,7 @@
     <view class='gray-color'>快捷输入或选择商品名称</view>
   </view>
   <view class='input-box'>
-    <input bindinput='getGoodsName' maxlength='50' placeholder-class='input-placeholder-common-color' placeholder='输入商品名称' class='goods-input' type='text'></input>
+    <input bindinput='getGoodsName' maxlength='50' placeholder-class='input-placeholder-common-color' placeholder='输入商品名称' class='goods-input' type='text' value="{{name}}"></input>
     <view bindtap='addTip' class='sure-btn'>确定</view>
   </view>
 

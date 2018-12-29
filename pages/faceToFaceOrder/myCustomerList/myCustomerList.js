@@ -72,10 +72,12 @@ Page({
         Api.favoriteusers(data).then(res => {
           if (res.obj.result) {
             this.setData({
-              totalNum: res.obj.totalCount,
               list: this.data.list.concat(res.obj.result)
             })
           }
+          this.setData({
+            totalNum: res.obj.totalCount,
+          })
         }).catch(e => {
 
         });
@@ -86,10 +88,12 @@ Page({
         Api.dealUser(data).then(res => {
           if (res.obj.result) {
             this.setData({
-              totalNum: res.obj.totalCount,
               list: this.data.list.concat(res.obj.result)
             })
           }
+          this.setData({
+            totalNum: res.obj.totalCount,
+          })
         }).catch(e => {
 
         });
@@ -99,12 +103,13 @@ Page({
         data.orderCategory = 3;
         Api.dealUser(data).then(res => {
           if (res.obj.result) {
-
             this.setData({
-              totalNum: res.obj.totalCount,
               list: this.data.list.concat(res.obj.result)
             })
           }
+          this.setData({
+            totalNum: res.obj.totalCount,
+          })
         }).catch(e => {
 
         });
