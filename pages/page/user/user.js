@@ -169,6 +169,24 @@ Page({
       }
     })
   },
+  getUnpaidNum() {
+    if (authHandler.isLogin()) {
+      //用户订单查询
+      Api.unpaidOrderNum().then(res => {
+        this.setData({
+          retailOrderCount: res.obj.retailOrderCount,
+          wholesaleOrderCount: res.obj.wholesaleOrderCount,
+          faceToFaceOrderCount: res.obj.faceToFaceOrderCount
+        })
+      })
+    } else {
+      this.setData({
+        retailOrderCount: 0,
+        wholesaleOrderCount: 0,
+        faceToFaceOrderCount: 0
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -210,28 +228,20 @@ Page({
         title: '',
         content: '请登录您的账号（购买时的手机号），开启您的小云店吧！',
         showCancel:false,
-        complete: () => {
-          if (!Api.getStoreId()) {
-            this.setData({
-              indexEmpty: false
-            })
-          }
-          getIdentity(this)
-
-          this.getStore();
-        }
       })
-    }else{
-      if (!Api.getStoreId()) {
-        this.setData({
-          indexEmpty: false
-        })
-      }
-      getIdentity(this)
-
-      this.getStore();
     }
+
+    if (!Api.getStoreId()) {
+      this.setData({
+        indexEmpty: false
+      })
+    }
+    getIdentity(this)
+    this.getStore();
     
+
+    this.getUnpaidNum();
+
   },
 
   /**

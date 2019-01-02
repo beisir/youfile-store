@@ -134,6 +134,7 @@ import {
   recentlyFocusUserUrl,
   searchUserInfoByTelUrl,
   unpaidOrderNumUrl,
+  ftfRecentOrderUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -791,7 +792,11 @@ function unpaidOrderNum(data){
   data = initStoreId(data);
   return app.http.getRequest(unpaidOrderNumUrl,data);
 }
-
+//最近到店订单
+function ftfRecentOrder(data){
+  data = initStoreId(data);
+  return app.http.getRequest(ftfRecentOrderUrl, data);
+}
 
 
 
@@ -860,6 +865,7 @@ function getStoreId() {
   }
 }
 module.exports = {
+  ftfRecentOrder,
   unpaidOrderNum,
   searchUserInfoByTel,
   recentlyFocusUser,

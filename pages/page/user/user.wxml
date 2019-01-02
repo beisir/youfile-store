@@ -30,19 +30,19 @@
 </view>
 <view class='u-order'>
   <navigator class='u-o-div' url='../order/order'>
-    <!-- <view class='unpaid-order-num-ball'>11</view> -->
+    <view class='unpaid-order-num-ball' wx:if="{{retailOrderCount && retailOrderCount>0}}">{{retailOrderCount}}</view>
     <image src='/image/order.png'></image>
     <view>我的订单</view>
   </navigator>
   <block wx:if='{{limitShow==3}}'>
     <navigator class='u-o-div' url='../stockOrder/stockOrder'>
-      <!-- <view class='unpaid-order-num-ball'>11</view> -->
+      <view class='unpaid-order-num-ball' wx:if="{{wholesaleOrderCount && wholesaleOrderCount>0}}">{{wholesaleOrderCount}}</view>
       <image src='/image/supplyOrder.png'></image>
       <view>进货单</view>
     </navigator>
   </block>
   <navigator class='u-o-div' url='../../faceToFaceOrder/customerOrderList/customerOrderList'>
-    <!-- <view class='unpaid-order-num-ball'>11</view> -->
+    <view class='unpaid-order-num-ball' wx:if="{{faceToFaceOrderCount && faceToFaceOrderCount>0}}">{{faceToFaceOrderCount}}</view>
     <image src='/image/ftfIcon-thin-bla.png'></image>
     <view>门店订单</view>
   </navigator>

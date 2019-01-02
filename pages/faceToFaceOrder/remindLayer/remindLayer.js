@@ -1,3 +1,4 @@
+import API from "../../../utils/api.js"
 Component({
   properties: {
     // 这里定义了innerText属性，属性值可以在组件使用时指定
@@ -20,11 +21,13 @@ Component({
       })
     },
     open(obj){
-      if(this.checkIfLayer()){
-        this.setData({
-          modalShow: true
-        })
-      }
+      API.ftfRecentOrder().then(res=>{
+        if (this.checkIfLayer()) {
+          this.setData({
+            modalShow: true
+          })
+        }
+      })
     },
     pay(){
       let code = this.data.orderNum;

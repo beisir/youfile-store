@@ -152,3 +152,5 @@ export const recentlyFocusUserUrl = "/admin/store/{{storeId}}/favoriteusers/rece
 export const searchUserInfoByTelUrl = "/admin/user/profile/{{mobile}}/mobile"
 //用户待付款订单
 export const unpaidOrderNumUrl = "/api/all/order/{{storeId}}/unpaid/count/group/category"
+//买单首页弹窗
+export const ftfRecentOrderUrl = "/api/ftf/order/user/store/{{storeId}}/unpaid/last"

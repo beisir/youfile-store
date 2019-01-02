@@ -100,7 +100,11 @@ Page({
   },
   //到店弹框
   showStoreOrder() {
-    this.selectComponent("#storeOrder").open();
+    if (authHandler.isLogin()) {
+      this.selectComponent("#storeOrder").open();
+    }else{
+      this.selectComponent("#storeOrder").close();
+    }
   },
   //轮播消息
   toUser() {
@@ -120,11 +124,17 @@ Page({
     })
   },
   swiperItemControl(){
-    Api.unpaidOrderNum().then(res=>{
-      this.setData({
-        unpaidOrderNum: res.obj.totalOrderCount
+    if (authHandler.isLogin()) {
+      Api.unpaidOrderNum().then(res=>{
+        this.setData({
+          unpaidOrderNum: res.obj.totalOrderCount
+        })
       })
-    })
+    }else{
+      this.setData({
+        unpaidOrderNum:0
+      })
+    }
   },
   //开店
   openStore: function () {
@@ -811,13 +821,10 @@ Page({
     this.setData({
       getFollw: authHandler.isLogin(),
       disLike: false,
-    },function(){
-      //getFollw判断是否登录不能轻易改啊
-      this.showStoreOrder();
-      if (this.data.getFollw){
-        this.swiperItemControl()  //轮播接口
-      }
     })
+
+    this.showStoreOrder();  //到店订单弹窗
+    this.swiperItemControl()  //轮播接口
   },
 
   /**
