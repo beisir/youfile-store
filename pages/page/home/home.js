@@ -121,7 +121,9 @@ Page({
   },
   swiperItemControl(){
     Api.unpaidOrderNum().then(res=>{
-
+      this.setData({
+        unpaidOrderNum: res.obj.totalOrderCount
+      })
     })
   },
   //开店

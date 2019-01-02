@@ -96,7 +96,7 @@
   <block wx:if="{{order.orderStatus == 'finish'}}">
     <view class='msg-item'>
       <text class='msg-title'>支付交易号</text>
-      <text class='msg-detail'>{{order.orderNumber}}</text>
+      <text class='msg-detail'>{{order.paymentNumber}}</text>
     </view>
   </block>
 

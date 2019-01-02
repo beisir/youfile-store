@@ -102,7 +102,7 @@
     <!-- 已付款 --> 
     <view class='msg-item' wx:if="{{order.type == 'finish'}}">
       <text class='msg-title'>支付交易号</text>
-      <text class='msg-detail'>{{order.payVoucher}}</text>
+      <text class='msg-detail'>{{order.paymentNumber}}</text>
     </view>
     <view class='msg-item'>
       <text class='msg-title'>创建时间</text>

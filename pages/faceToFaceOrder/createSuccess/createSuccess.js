@@ -13,7 +13,7 @@ Page({
 
   },
   toDetail(){
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../shopkeeperDetail/shopkeeperDetail?code='+this.data.code
     })
   },

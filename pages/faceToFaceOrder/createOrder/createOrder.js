@@ -119,7 +119,7 @@ Page({
       })
       if(res.code == '0'){
         setTimeout(() => {
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../createSuccess/createSuccess?code=' + res.obj.orderNumber + "&amount=" + res.obj.orderAmount + "&count=" + res.obj.todayOrderCount,
           })
         }, 800)
