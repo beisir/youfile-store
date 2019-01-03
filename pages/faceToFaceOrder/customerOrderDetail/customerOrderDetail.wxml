@@ -24,7 +24,7 @@
     </view>
     <view>
       <view class='title-time'>剩余时间：{{clock?clock:''}}</view>
-      <view class='title-price'>需付款：￥{{order.payAmount}}</view>
+      <view class='title-price'>需付款：￥{{filter.filterMoney(order.payAmount)}}</view>
     </view>
   </block>
   <block wx:if="{{order.orderStatus == 'finish'}}">

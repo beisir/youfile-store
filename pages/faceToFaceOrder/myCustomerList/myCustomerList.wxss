@@ -11,6 +11,9 @@ page{
   align-items: center;
   background: #fff;
 }
+.cus-search-box input{
+  width: 500rpx;
+}
 .cus-search-icon{
   width: 42rpx;
   height: 42rpx;

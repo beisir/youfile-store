@@ -13,7 +13,7 @@
   <!-- 待付款 -->
   <block wx:if="{{order.orderStatus == 'unpaid'}}">
     <view class='o-title-text'>
-      <text>卖家剩余支付时间</text>
+      <text>买家剩余支付时间</text>
       <text class='time-left'>{{clock?clock:""}}</text>
     </view>
     <image class='status-img' src='/image/faceOrder1.png'></image>
@@ -128,7 +128,7 @@
 <view class='msg-list-box padding-box' style='margin:20rpx 0 0;'>
   <view class='msg-item'>
     <text class='msg-title'>订单金额</text>
-    <text class='msg-detail gold-font'>￥{{order.orderAmount}}</text>
+    <text class='msg-detail gold-font'>￥{{filter.filterMoney(order.orderAmount)}}</text>
   </view>
   <view class='msg-item'>
     <text class='msg-title'>红包礼金</text>
@@ -137,7 +137,7 @@
   <view class='msg-item'>
     <text class='pay-price-title' wx:if="{{order.orderStatus == 'finish'}}">实收金额</text>
     <text class='pay-price-title' wx:else>应收金额</text>
-    <text class='msg-detail pay-price'>￥{{order.payAmount}}</text>
+    <text class='msg-detail pay-price'>￥{{filter.filterMoney(order.payAmount)}}</text>
   </view>
 </view>
 

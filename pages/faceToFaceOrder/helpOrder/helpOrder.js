@@ -12,7 +12,7 @@ Page({
     baseUrl: app.globalData.imageUrl
   },
   getFocusList(){
-    API.recentlyFocusUser({num:5}).then(res=>{
+    API.recentlyFocusUser({num:3}).then(res=>{
       this.setData({
         list:res.obj
       })

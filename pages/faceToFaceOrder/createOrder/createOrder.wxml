@@ -2,7 +2,7 @@
 <!-- 备注 -->
 <layer show='{{tipsModal}}' title="请填写备注">
   <view> 
-    <textarea placeholder-style='color:#999;' bindinput='watchInput' data-type="tip" maxlength='100' placeholder='请在此填写备注' class='textarea'></textarea>
+    <textarea placeholder-style='color:#999;' value='{{tip}}' bindinput='watchInput' data-type="tip" maxlength='100' placeholder='请在此填写备注' class='textarea'></textarea>
     <button bindtap='saveTip' class='modal-btn'>保存</button>
   </view>
 </layer>

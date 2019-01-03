@@ -19,7 +19,7 @@ Page({
         obj = {};
     switch(type){
       case "money":
-        let m = /^(([1-9][0-9]*)|([0]\.\d{1,2})|([1-9][0-9]*\.\d{1,2}))$/.test(val);
+        let m = /^(([1-9][0-9]*)|([0]\.\d?[1-9])|([1-9][0-9]*\.\d{1,2}))$/.test(val);
         if(m){
           if (val <= 10000) {
             obj.warnText = false;
@@ -58,7 +58,8 @@ Page({
   //保存备注
   saveTip(){
     this.setData({
-      sureTip:this.data.tip
+      sureTip: this.data.tip.trim(),
+      tip: this.data.tip.trim()
     })
     this.closeModal();
   },

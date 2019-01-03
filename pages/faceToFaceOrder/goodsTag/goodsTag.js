@@ -14,8 +14,27 @@ Page({
     editText:""
   },
   clickTag(e){
+    
     let index = e.currentTarget.dataset.index;
     let key = "list["+index+"].checked";
+
+    //最多六个
+    if (!this.data.list[index].checked){
+      let arr = [];
+      this.data.list.forEach(el => {
+        if (el.checked) {
+          arr.push(el)
+        }
+      })
+      if (arr.length >= 6) {
+        wx.showToast({
+          title: '最多选择6个商品',
+          icon: 'none'
+        })
+        return
+      }
+    }
+
     this.setData({
       [key]: !this.data.list[index].checked
     })
@@ -90,7 +109,19 @@ Page({
     if(val){
       API.ftfCreatGoods({goodsName:val}).then(res=>{
         let goods = res.obj;
-        goods.checked = true;
+
+        //最多六个
+        let checkedArr = [];
+        this.data.list.forEach(el => {
+          if (el.checked) {
+            checkedArr.push(el)
+          }
+        })
+        if (checkedArr.length >= 6) {
+          goods.checked = false;
+        }else{
+          goods.checked = true;
+        }
 
         let arr = this.data.list;
         arr.unshift(goods)

@@ -22,15 +22,24 @@ Component({
     },
     open(obj){
       API.ftfRecentOrder().then(res=>{
-        if (this.checkIfLayer()) {
+        if (!(res.obj && res.obj.id && res.obj.userInfo.userId)) {
+          return false
+        }
+        if (this.checkIfLayer(res.obj)) {
           this.setData({
-            modalShow: true
+            modalShow: true,
+            ftfNowOrder: res.obj
+          })
+        }else{
+          this.setData({
+            modalShow: false,
+            ftfNowOrder: ""
           })
         }
       })
     },
     pay(){
-      let code = this.data.orderNum;
+      let code = this.data.ftfNowOrder.id;
       if(!code){
         wx.showToast({
           title: '缺少订单号',
@@ -43,9 +52,17 @@ Component({
       })
     },
     noTip(){
-      let code = "",
-        storeID = wx.getStorageSync("storeId"),
-        userId = "cbced730cc43cead0592fbdd5ef10f99",
+      if (!this.data.ftfNowOrder){
+        wx.showToast({
+          title: '缺少订单信息',
+          icon:'none'
+        })
+        return
+      }
+      let order = this.data.ftfNowOrder;
+      let code = order.id,
+        storeID = order.storeInfo.storeId,
+        userId = order.userInfo.userId,
         checkStr = code + storeID + userId, //唯一标识符
         now = Date.parse(new Date());
       let ifLayer = wx.getStorageSync("ftfLayer");
@@ -56,20 +73,17 @@ Component({
       wx.setStorageSync("ftfLayer", ifLayer)
     },
     //检验是否不再提醒
-    checkIfLayer(){
-      wx.setStorageSync("ftfLayer", [{
-        str: '123S1000349cbced730cc43cead0592fbdd5ef10f99',
-        date: 1545989447000
-      }, {
-        str: '1234S1000349cbced730cc43cead0592fbdd5ef10f99',
-        date: 1545991763000
-      }])
-      
+    checkIfLayer(order){
+      let nowUser = wx.getStorageSync("userId"),
+        storeId = wx.getStorageSync("storeId")
+      if ((order.userInfo.userId != nowUser) || (order.storeInfo.storeId != storeId)){ //登录用户与当前店是否正确
+        return false
+      }
       let ifLayer = wx.getStorageSync("ftfLayer");
       if (ifLayer){
-        let code = "123",
-            storeID = wx.getStorageSync("storeId"),
-            userId = "cbced730cc43cead0592fbdd5ef10f99",
+        let code = order.id,
+            storeID = storeId,
+            userId = nowUser,
             checkStr = code + storeID + userId; //唯一标识符
         if (!(code && storeID && userId)){
           return false
@@ -85,7 +99,6 @@ Component({
           }
         })
         wx.setStorageSync("ftfLayer", ifLayer)
-        console.log(layerBollen)
         return layerBollen
       }else{
         return true
