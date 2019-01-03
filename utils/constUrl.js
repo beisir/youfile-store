@@ -126,7 +126,7 @@ export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 //订单详情
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
 // 是否为进货商
-export const ifWholesalerUrl = "/inside/merchantpurchaser/{{storeId}}/purchaser/{{userId}}"
+export const ifWholesalerUrl = "/admin/user/profile/{{userId}}"
 // 商家门店订单
 export const shopkeeperOrderListUrl = "/admin/ftf/order/store/{{storeId}}/orderstatus/{{orderStatus}}"
 export const customerOrderListUrl ="/api/ftf/order/user/store/{{storeId}}/orderstatus/{{orderStatus}}"

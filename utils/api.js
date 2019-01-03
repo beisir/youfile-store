@@ -716,7 +716,6 @@ function getOrderDetail(data){
 }
 //是否进货商
 function ifWholesaler(data){
-  data = initStoreId(data);  
   return app.http.getRequest(ifWholesalerUrl,data);
 }
 //门店商家列表

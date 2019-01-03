@@ -31,7 +31,7 @@ Page({
       if (options.entry == "faceOrder") {
         this.setData({
           faceOrderIn: true,
-          ifWholesaler: res.obj
+          ifWholesaler: res.obj.isPurchaser
         })
       }
     })
