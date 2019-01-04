@@ -20,9 +20,9 @@ Component({
         modalShow: false
       })
     },
-    open(obj){
+    open(that){
       API.ftfRecentOrder().then(res=>{
-        if (!(res.obj && res.obj.id && res.obj.userInfo.userId)) {
+        if (!(res.obj && res.obj.orderNumber && res.obj.userInfo.userId)) {
           return false
         }
         if (this.checkIfLayer(res.obj)) {
@@ -39,7 +39,7 @@ Component({
       })
     },
     pay(){
-      let code = this.data.ftfNowOrder.id;
+      let code = this.data.ftfNowOrder.orderNumber;
       if(!code){
         wx.showToast({
           title: '缺少订单号',
@@ -50,6 +50,7 @@ Component({
       wx.navigateTo({
         url: '../../casher/casher/casher?num=' + code + '&type=ftf',
       })
+      this.close();
     },
     noTip(){
       if (!this.data.ftfNowOrder){
@@ -60,17 +61,19 @@ Component({
         return
       }
       let order = this.data.ftfNowOrder;
-      let code = order.id,
+      let code = order.orderNumber,
         storeID = order.storeInfo.storeId,
         userId = order.userInfo.userId,
         checkStr = code + storeID + userId, //唯一标识符
         now = Date.parse(new Date());
       let ifLayer = wx.getStorageSync("ftfLayer");
+      if (!ifLayer) { ifLayer = []}
       ifLayer.push({
         str: checkStr,
         date: now
       })  
       wx.setStorageSync("ftfLayer", ifLayer)
+      this.close();
     },
     //检验是否不再提醒
     checkIfLayer(order){
@@ -81,7 +84,7 @@ Component({
       }
       let ifLayer = wx.getStorageSync("ftfLayer");
       if (ifLayer){
-        let code = order.id,
+        let code = order.orderNumber,
             storeID = storeId,
             userId = nowUser,
             checkStr = code + storeID + userId; //唯一标识符

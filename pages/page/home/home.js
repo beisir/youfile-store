@@ -101,7 +101,7 @@ Page({
   //到店弹框
   showStoreOrder() {
     if (authHandler.isLogin()) {
-      this.selectComponent("#storeOrder").open();
+      this.selectComponent("#storeOrder").open(this);
     }else{
       this.selectComponent("#storeOrder").close();
     }
