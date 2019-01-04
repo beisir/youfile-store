@@ -185,6 +185,7 @@ Page({
     app.globalData.switchStore = true
     this.onShow()
   },
+  // 获取与扫描商户之前的关系
   getFriendMes: function (userId) {
     var limitShow = wx.getStorageSync("admin")
     var that = this
@@ -280,6 +281,7 @@ Page({
 
     }
   },
+  // 扫码
   addFriend: function () {
     var _this = this;
     wx.scanCode({
@@ -307,6 +309,7 @@ Page({
       complete: (res) => { }
     })
   },
+  // 获取当前登录的身份
   getUserInfor: function (userId, storeId) {
     var limitShow = wx.getStorageSync("admin")
     var _this = this
@@ -471,7 +474,7 @@ Page({
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        if (Api.isEmpty(detailList)) {
+        if (Api.isNotEmpty(detailList)) {
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
@@ -617,11 +620,12 @@ Page({
             let userId = store.userId
             _this.getFriendMes(userId)
           }
-          // if (store.storeIdRetail){
-          //  _this.setData({
-          //    goRetailStore:false
-          //  })
-          // }
+          // 判断零售店进到批零
+          if (store.storeIdRetail){
+           _this.setData({
+             goRetailStore:false
+           })
+          }
         }
       });
     } else {
@@ -651,7 +655,7 @@ Page({
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        if (Api.isEmpty(detailList)) {
+        if (Api.isNotEmpty(detailList)) {
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
@@ -687,7 +691,6 @@ Page({
     });
   },
   swichNav: function (e) {
-    // Api.getFormId(e)
     var that = this,
       descShow = this.data.descShow,
       index = e.target.dataset.current
@@ -793,7 +796,7 @@ Page({
       if (authHandler.isLogin()) {
         var limitShow = this.data.limitShow
         var setlimitShow = wx.getStorageSync("admin")
-        if (Api.isEmpty(setlimitShow)) {
+        if (Api.isNotEmpty(setlimitShow)) {
           this.setData({
             limitShow: setlimitShow
           })

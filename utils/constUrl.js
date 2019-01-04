@@ -154,3 +154,10 @@ export const searchUserInfoByTelUrl = "/admin/user/profile/{{mobile}}/mobile"
 export const unpaidOrderNumUrl = "/api/all/order/{{storeId}}/unpaid/count/group/category"
 //买单首页弹窗
 export const ftfRecentOrderUrl = "/api/ftf/order/user/store/{{storeId}}/unpaid/last"
+
+// 资金管理
+export const getBankcardUrl='/admin/user/profile/bankcard'
+export const getTradeUrl ='/admin/store/trade/statistic'
+export const getAccountinUrl='/admin/store/trade/accountin'
+export const getAccountDetailUrl ='/admin/store/trade/{{paymentNumber}}/account/detail'
+export const getHaveRecordUrl ='/admin/store/trade/settle'

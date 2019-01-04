@@ -1,5 +1,5 @@
 import Api from './api.js'
-
+const app = getApp();
 class EnterStoreHandler {
 
   //构造函数
@@ -18,7 +18,7 @@ class EnterStoreHandler {
 
       this.getStoreId(options).then((storeId) => {
         //判断店铺编号是否为空
-        if (!Api.isEmpty(storeId)) {
+        if (!Api.isNotEmpty(storeId)) {
           // console.error("店铺编号未获取到，请处理2");
           let data = { userId: this.getUserIdFromQrCodeUrl(options.getUserIdFromQrCode), nature: "3" }
           reject(data);
@@ -43,7 +43,7 @@ class EnterStoreHandler {
             }
           }
           //店铺性质未获取到，不做处理
-          if (!Api.isEmpty(nature)) {
+          if (!Api.isNotEmpty(nature)) {
 
             // console.error("店铺性质未获取到，请处理1");
             wx.setStorageSync('storeId', storeId);
@@ -63,8 +63,9 @@ class EnterStoreHandler {
                 }
               } else {
                 // 零售店进到批零
-                // wx.setStorageSync("storeIdRetail", storeId)
-                // data = { storeIdRetail:true}
+                wx.setStorageSync("storeIdRetail", storeId)
+                app.globalData.storeIdRetail = true
+                data = { storeIdRetail:true}
               }
             }
             reject(data);
@@ -110,7 +111,7 @@ class EnterStoreHandler {
         storeId = options.storeId;
       }
 
-      if (Api.isEmpty(storeId)) {
+      if (Api.isNotEmpty(storeId)) {
         //验证店铺编号
         resolve(storeId);
         return;

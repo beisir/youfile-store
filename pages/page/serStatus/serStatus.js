@@ -66,7 +66,7 @@ Page({
       result: []
     })
     var value = this.data.value
-    if (Api.isEmpty(value)) {
+    if (Api.isNotEmpty(value)) {
       this.historyHandle(value)
     }
     this.getList(value)

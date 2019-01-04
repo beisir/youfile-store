@@ -2,7 +2,7 @@
   <view class='wk-title'>
     <text>今日收款 (元）</text><image src="/image/ca2.png"></image>
     <view>
-      5231.70
+      {{todayMerchantTrade.tradeAmount}}
       <view class='ca-right' bindtap='goRecord'>
           明细
           <image src="/image/ca-r.png"></image>
@@ -10,17 +10,17 @@
     </view>
   </view>
   <view class='ca-num'>
-    <view>12<view>今日收款笔数</view></view>
-    <view>12<view>昨收款笔数</view></view>
-    <view>12<view>总收款笔数 </view></view>
+    <view>{{todayMerchantTrade.tradeCount}}<view>今日收款笔数</view></view>
+    <view>{{yesterdayMerchantTrade.tradeCount}}<view>昨收款笔数</view></view>
+    <view>{{threeMonthMerchantTrade.tradeCount}}<view>总收款笔数 </view></view>
   </view>
 </view>
  <view class='wk-bot'>
-    <navigator url=''><view>收款总金额 (元)<image src="/image/ca1.png"></image></view>2121</navigator>
-    <navigator url=''><view>已结算金额 (元)<image src="/image/ca1.png"></image></view>2121<view class='wk-xian'></view></navigator>
+    <navigator url=''><view>收款总金额 (元)<image src="/image/ca1.png"></image></view>{{threeMonthMerchantTrade.tradeAmount}}</navigator>
+    <navigator url=''><view>已结算金额 (元)<image src="/image/ca1.png"></image></view>{{threeMountSettle.tradeAmount}}<view class='wk-xian'></view></navigator>
     <view class='wk-bot-xian'></view>
-    <navigator url=''><view>昨日收款 (元)<image src="/image/ca1.png"></image></view>2121</navigator>
-    <navigator url=''><view>待结算金额 (元)<image src="/image/ca1.png"></image></view>2121<view class='wk-xian'></view></navigator>
+    <navigator url=''><view>昨日收款 (元)<image src="/image/ca1.png"></image></view>{{yesterdayMerchantTrade.tradeAmount}}</navigator>
+    <navigator url=''><view>待结算金额 (元)<image src="/image/ca1.png"></image></view>{{waitingSettleAmount}}<view class='wk-xian'></view></navigator>
   </view>
   <view class='page_bd page_hd1'>
     <view class='weui-back'>

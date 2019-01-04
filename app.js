@@ -56,7 +56,7 @@ App({
     userShowTip:false,
     payUrl: payUrl,    
     payAppNum: "APP001",
-    retailStoreId:"",
+    storeIdRetail:false
   },
   http: new http(),
   pageRequest: new pageRequest(),

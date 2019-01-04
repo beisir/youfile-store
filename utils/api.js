@@ -135,11 +135,16 @@ import {
   searchUserInfoByTelUrl,
   unpaidOrderNumUrl,
   ftfRecentOrderUrl,
+  getBankcardUrl,
+  getTradeUrl,
+  getAccountinUrl,
+  getAccountDetailUrl,
+  getHaveRecordUrl,
 } from './constUrl.js'
 
 const app = getApp()
 /**判断是否为空**/
-function isEmpty(str) {
+function isNotEmpty(str) {
   if (str == '' || str == undefined || str == null || str == "undefined"){
     return false
   }else{
@@ -156,7 +161,7 @@ function showToast(message) {
 }
 /**判断楼座是否为空**/
 function isFloorInfo(obj) {
-  if (isEmpty(obj)) {
+  if (isNotEmpty(obj)) {
     var floor = obj
       floor.mallName = floor.mallName == null ? '' : floor.mallName,
       floor.areaName = floor.areaName == null ? '' : floor.areaName,
@@ -609,11 +614,11 @@ function adminAddUser(data) {
 }
 // 退出登录
 function quit(data){
-  return app.http.postRequest(quitUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.authHandler.postRequest(quitUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 // 修改密码
 function updataPwd(data){
-  return app.http.postRequest(updataPwdUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.authHandler.postRequest(updataPwdUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 // 修改头像
 function changeIcon(data){
@@ -629,15 +634,15 @@ function uploadVoucher(data){
 }
 /**重置密码**/
 function resetPassword(data) {
-  return app.http.postRequest(resetPasswordUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.authHandler.postRequest(resetPasswordUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 /**短信验证码**/
 function phoneMessage(data) {
-  return app.http.getRequest(phoneMessageUrl, data)
+  return app.authHandler.getRequest(phoneMessageUrl, data)
 }
 /**注册**/
 function register(data) {
-  return app.http.postRequest(registerUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.authHandler.postRequest(registerUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 /**注册短信验证码**/
 function registerPhoneMsg(data) {
@@ -657,7 +662,7 @@ function cancelOrder(data){
 function addExpress(data){
   let expressCompany = data.expressCompany ? data.expressCompany:"";
   let expressNumber = data.expressNumber ? data.expressNumber:"";
-  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + expressCompany + "&expressNumber=" + expressNumber, data)
+  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + encodeURI(expressCompany) + "&expressNumber=" + encodeURI(expressNumber), data)
 }
 // 订单填写商家备注
 function addRemark(data){
@@ -818,6 +823,40 @@ function getStoreNature(data) {
   return app.http.getRequest(getStoreNatureUrl, data);
 }
 /**
+ * 获取用户个人银行卡信息
+ */
+function getBankcard(data) {
+  return app.http.getRequest(getBankcardUrl, data);
+}
+/**
+ *
+统计收支
+ */
+function getTrade(data) {
+  return app.http.getRequest(getTradeUrl, data)
+} 
+/**
+ *
+查询商户收益
+ */
+function getAccountin(data) {
+  return app.pageRequest.pageGet(getAccountinUrl, data)
+}
+/**
+ *
+查询商户收益详情
+ */
+function getAccountDetail(data) {
+  return app.http.getRequest(getAccountDetailUrl, data)
+}
+/**
+ *
+查询结算记录
+ */
+function getHaveRecord(data) {
+  return app.pageRequest.pageGet(getHaveRecordUrl, data)
+}
+/**
  * 获取formId
  */
 function getFormId(e) {
@@ -910,7 +949,7 @@ module.exports = {
   registerPhoneMsg: registerPhoneMsg,
   uploadVoucher: uploadVoucher,
   testGoodCode: testGoodCode,
-  isEmpty: isEmpty,
+  isNotEmpty: isNotEmpty,
   showToast: showToast,
   classListApi: classListApi,
   adminGoodsList: adminGoodsList,
@@ -1010,5 +1049,10 @@ module.exports = {
   changeIcon: changeIcon,
   showPurchaser: showPurchaser,
   showMerchant: showMerchant,
-  recentGoods: recentGoods
+  recentGoods: recentGoods,
+  getBankcard: getBankcard,
+  getTrade,
+  getAccountin,
+  getAccountDetail,
+  getHaveRecord
 }

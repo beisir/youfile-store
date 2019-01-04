@@ -84,7 +84,8 @@ Page({
   data: {
     hasUser: false,
     limitShow:1,
-    indexEmpty: true
+    indexEmpty: true,
+    goRetailStore: true,
   },
   toMyStore(){
     let toID = this.data.user.storeId;
@@ -191,6 +192,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options==undefined){
+      app.globalData.switchStore=true
+    }
     this.setData({
       baseUrl: app.globalData.imageUrl
     })
@@ -231,14 +235,22 @@ Page({
       })
     }
 
-    if (!Api.getStoreId()) {
-      this.setData({
-        indexEmpty: false
-      })
-    }
+ 
+      if (!Api.getStoreId()) {
+        this.setData({
+          indexEmpty: false
+        })
+      }
+      if (app.globalData.storeIdRetail){
+        this.setData({
+          goRetailStore:false
+        })
+      }else{
+        getIdentity(this)
+        this.getStore();
+      }
     getIdentity(this)
     this.getStore();
-    
 
     this.getUnpaidNum();
 

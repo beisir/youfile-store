@@ -114,7 +114,7 @@ Page({
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
-        if (Api.isEmpty(detailList)){
+        if (Api.isNotEmpty(detailList)){
           for (var i = 0; i < detailList.length;i++){
             if (detailList[i].latelyTradeDate==null){
               detailList[i].latelyTradeDate=''

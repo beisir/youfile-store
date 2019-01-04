@@ -74,7 +74,7 @@ Component({
       colorTrue: "#d4e6cd"
     },
     {
-      name: "休闲装",
+      name: "电子产品",
       checked: false,
       color: "#fff",
       colorTrue: "#cde6dc"
@@ -127,7 +127,7 @@ Component({
         return
       }
 
-      App.http.getRequest("/api/" + name + "/exist").then(res => {
+      App.http.getRequest("/api/exist?storeName=" + encodeURI(name)).then(res => {
         if (res.obj == true) {
           wx.showToast({
             title: '名字重复，请更换店名',
