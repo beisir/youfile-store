@@ -105,6 +105,13 @@ Page({
       })
       return
     }
+    if (!(this.data.tag && this.data.tag.length>0)){
+      wx.showToast({
+        title: '请选择商品',
+        icon: "none"
+      })
+      return
+    }
 
     let obj = {
       storeId: this.data.storeId,
