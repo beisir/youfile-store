@@ -111,8 +111,10 @@ export const closedOrderUrl = "/admin/order/{{orderNumber}}/closed"
 export const cancelOrderUrl = "/api/order/{{orderNumber}}/cancel"
 export const addDxpressUrl = "/admin/order/{{orderNumber}}/addexpress"
 export const addRemarkUrl = "/admin/order/{{orderNumber}}/addRemark"
+export const updatetotalUrl = "/admin/order/{{orderNumber}}/updatetotal"
 export const seeVoucherUrl = "/api/order/orderpayment/{{orderNumber}}"
 export const supplyOrderUrl = "/api/order/"
+export const receiveOrderUrl = "/api/order/{{orderNumber}}/receive"
 // 扫一扫
 export const showPurchaserUrl='/admin/bizscan/purchaser/{{userId}}'
 export const showMerchantUrl='/admin/bizscan/merchant/{{userId}}'

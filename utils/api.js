@@ -97,6 +97,7 @@ import {
   miniProgramCodeUrl,
   addDxpressUrl,
   addRemarkUrl,
+  updatetotalUrl,
   classCodeParUrl,
   updateGoodsUrl,
   seeVoucherUrl,
@@ -104,6 +105,7 @@ import {
   getStoreDetailsUrl,
   userInforUrl,
   supplyOrderUrl,
+  receiveOrderUrl,
   showPurchaserUrl,
   showMerchantUrl,
   getPaymentImgUrl,
@@ -626,7 +628,7 @@ function changeIcon(data){
 }
 // 验证取货码
 function testGoodCode(data){
-  return app.http.putRequest(testGoodCodeUrl,data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.postRequest(testGoodCodeUrl,data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 // 上传凭证
 function uploadVoucher(data){
@@ -651,22 +653,30 @@ function registerPhoneMsg(data) {
 // 关闭订单
 function closeOrder(data){
   let url = closedOrderUrl + "?reason=" + encodeURI(data.reason)
-  return app.http.putRequest(url, data)
+  return app.http.postRequest(url, data)
 }
 // 取消订单
 function cancelOrder(data){
   let url = cancelOrderUrl + "?reason=" + encodeURI(data.reason)
-  return app.http.putRequest(url, data)
+  return app.http.postRequest(url, data)
+}
+//确认收货
+function receiveOrder(data){
+  return app.http.postRequest(receiveOrderUrl,data)
 }
 // 添加快递
 function addExpress(data){
   let expressCompany = data.expressCompany ? data.expressCompany:"";
   let expressNumber = data.expressNumber ? data.expressNumber:"";
-  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + encodeURI(expressCompany) + "&expressNumber=" + encodeURI(expressNumber), data)
+  return app.http.postRequest(addDxpressUrl + "?expressCompany=" + encodeURI(expressCompany) + "&expressNumber=" + encodeURI(expressNumber), data)
 }
 // 订单填写商家备注
 function addRemark(data){
-  return app.http.putRequest(addRemarkUrl +"?remark=" + data.remark, data)
+  return app.http.postRequest(addRemarkUrl, data)
+}
+//改价
+function updatetotal(data){
+  return app.http.postRequest(updatetotalUrl, data)
 }  
 // 查看凭证
 function seeVoucher(data){
@@ -735,11 +745,11 @@ function helpOrder(data){
 }
 //关闭订单
 function ftfCloseOrder(data){
-  return app.http.putRequest(ftfCloseOrderUrl, data);
+  return app.http.postRequest(ftfCloseOrderUrl, data);
 }
 //取消订单
 function ftfCaneledOrder(data){
-  return app.http.putRequest(ftfCaneledOrderUrl, data);
+  return app.http.postRequest(ftfCaneledOrderUrl, data);
 }
 //删除订单
 function ftfDelOrder(data){
@@ -939,8 +949,10 @@ module.exports = {
   supplyOrde: supplyOrde,
   toCuttingImg: toCuttingImg,
   seeVoucher: seeVoucher,
+  updatetotal: updatetotal,
   addRemark: addRemark,
   addExpress: addExpress,
+  receiveOrder: receiveOrder,
   cancelOrder: cancelOrder,
   closeOrder: closeOrder,
   resetPassword: resetPassword,

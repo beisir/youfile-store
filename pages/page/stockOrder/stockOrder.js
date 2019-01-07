@@ -152,7 +152,7 @@ Page({
   // 确认收货
   sureSure(e) {
     let num = this.data.getNum;
-    app.http.requestAll("/api/order/" + num + "/receive", {}, "PUT").then((res) => {
+    API.receiveOrder({ orderNumber: num }).then((res) => {
       wx.showToast({
         title: res.message,
         icon: 'none'

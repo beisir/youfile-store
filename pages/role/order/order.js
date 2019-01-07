@@ -217,10 +217,10 @@ Page({
       })
       return
     }
-    app.http.requestAll("/admin/order/" + num + "/updatetotal", {
+    API.updatetotal({
       orderNumber: num,
       orderAmount: money
-    }, "PUT").then((res) => {
+    }).then((res) => {
       this.afterOperation();
       wx.showToast({
         title: res.message,
