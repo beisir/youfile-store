@@ -42,7 +42,7 @@ Page({
       if (!phone || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
         wx.showToast({
           title: '请输入正确手机号码',
-          icon:'none'
+          icon:'none',duration: 4000
         })
         return false;
       }

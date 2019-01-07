@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/page/payWay/payWay",
     "pages/page/user/user",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
     "pages/faceToFaceOrder/helpOrder/helpOrder",

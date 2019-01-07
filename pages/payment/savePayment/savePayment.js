@@ -96,7 +96,7 @@ Component({
       }else{
         wx.showToast({
           title:"无收款二维码",
-          icon:'none'
+          icon:'none',duration: 4000
         })
       }
     },

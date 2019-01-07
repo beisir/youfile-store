@@ -88,7 +88,7 @@ Page({
       if (!this.data.invoice.invoiceTitle || !this.data.invoice.identificationNumber){
         wx.showToast({
           title: '请填写抬头以及识别号',
-          icon:'none'
+          icon:'none',duration: 4000
         })
         return
       }

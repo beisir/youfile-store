@@ -20,6 +20,9 @@ Page({
       case "cloudXLS":
         this.cloudPay();
         break;
+      case 'ftf':
+        this.ftfPay();
+        break;  
     }
   },
   cloudPay() {
@@ -63,6 +66,9 @@ Page({
         })
       }
     }
+  },
+  ftfPay() {
+    wx.navigateBack({ delta: 2 })
   },
   getUser() {
     Api.userInfor().then(res => {

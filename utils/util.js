@@ -72,16 +72,10 @@ const saveImgToPhone = imgUrl => {
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success(res) {
-              wx.showToast({
-                title: '保存图片成功！',
-                icon: 'none'
-              })
+              Api.showToast('保存图片成功！')
             },
             fail(res) {
-              wx.showToast({
-                title: '保存图片失败！',
-                icon: 'none'
-              })
+              Api.showToast('保存图片失败！')
             }
           })
         }

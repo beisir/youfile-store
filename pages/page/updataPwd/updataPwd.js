@@ -64,7 +64,7 @@ Page({
       }).catch(e=>{
         wx.showToast({
           title: e.data.message,
-          icon:'none'
+          icon:'none',duration: 4000
         })
       })
     } else {

@@ -171,7 +171,7 @@ Page({
     }else{
       wx.showToast({
         title: '请填写新名称',
-        icon:'none'
+        icon:'none',duration: 4000
       })
     }
   },

@@ -69,10 +69,7 @@ Page({
       })
       
     }else{
-      wx.showToast({
-        title: '请上传付款凭证',
-        icon:'none'
-      })
+      API.showToast('请上传付款凭证')
     }
   },
   /**

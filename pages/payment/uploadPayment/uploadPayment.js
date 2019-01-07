@@ -37,7 +37,7 @@ Page({
         Api.putPaymentImg({ receiptCode:url}).then(res=>{
           wx.showToast({
             title: res.message,
-            icon:'none'
+            icon:'none',duration: 4000
           })
           this.setData({
             imgUrl: url

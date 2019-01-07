@@ -123,7 +123,7 @@ Page({
     app.http.postRequest("/admin/ftf/order",obj).then(res=>{
       wx.showToast({
         title: res.message,
-        icon:'none'
+        icon:'none',duration: 4000
       })
       if(res.code == '0'){
         setTimeout(() => {

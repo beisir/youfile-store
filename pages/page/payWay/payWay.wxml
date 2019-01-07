@@ -1,0 +1,6 @@
+<view class='invoice'>
+  <view class='in-title' wx:for="{{payList}}" wx:key="{{index}}">{{item.name}}
+    <icon type="success" color="#CCAA77" data-index="{{index}}" wx:if="{{item.selected}}" class="cart-pro-select" bindtap="selectList"/>
+    <icon type="circle" color="#CCAA77" data-index="{{index}}" wx:else class="cart-pro-select" bindtap="selectList"/>
+  </view>
+</view>

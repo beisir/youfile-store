@@ -56,7 +56,7 @@ Component({
       if (!this.data.ftfNowOrder){
         wx.showToast({
           title: '缺少订单信息',
-          icon:'none'
+          icon:'none',duration: 4000
         })
         return
       }

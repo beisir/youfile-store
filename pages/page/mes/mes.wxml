@@ -30,7 +30,7 @@
 <view class="weui_cells">
     <view>
       <image  src="/image/positionico.png"></image>
-      <text>{{storeMes.address}}</text>
+      <text>{{storeMes.address?storeMes.address:''}}</text>
     </view>
     <view>
       <image  src="/image/lou.png"></image>
