@@ -83,7 +83,7 @@ Page({
         });
         break;
       case "jhs":
-        data.keyWords = this.data.searchText;
+        data.keyword = this.data.searchText;
         data.orderCategory = 1;
         Api.merchantList(data).then(res => {
           if (res.obj.result) {
