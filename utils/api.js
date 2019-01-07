@@ -158,7 +158,7 @@ function showToast(message) {
   wx.showToast({
     title: message,
     icon: 'none',
-    duration: 2000,
+    duration: 3000,
   })
 }
 /**判断楼座是否为空**/
