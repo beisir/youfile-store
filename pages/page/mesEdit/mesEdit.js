@@ -110,10 +110,7 @@ Page({
       _this.onShow()
     })
     .catch(e => {
-      wx.showToast({
-        title: e.message,
-        icon: 'none'
-      })
+      Api.showToast(e.message)
     })
     this.closeModal();
   },

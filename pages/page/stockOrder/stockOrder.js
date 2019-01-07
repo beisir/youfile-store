@@ -47,10 +47,7 @@ Page({
           urls: [this.data.baseUrl + res.obj.payVoucher]
         })
       } else {
-        wx.showToast({
-          title: '未上传付款凭证',
-          icon: 'none'
-        })
+        API.showToast('未上传付款凭证')
       }
     })
   },
@@ -136,10 +133,7 @@ Page({
       orderNumber: num
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: "none"
-      })
+      API.showToast(res.message)
     })
   },
   //上传还款凭证
@@ -153,10 +147,7 @@ Page({
   sureSure(e) {
     let num = this.data.getNum;
     API.receiveOrder({ orderNumber: num }).then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
@@ -167,10 +158,7 @@ Page({
 
     if (del) {
       app.http.deleteRequest("/api/order/" + del.num).then((res) => {
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
+        API.showToast(res.message)
         //删除成功剔除
         if (res.success ) {
           // list.splice(del.index, 1);

@@ -25,10 +25,7 @@ Page({
           phone: res.obj.mobile
         })
       }else{
-        wx.showToast({
-          title: '获取手机号码失败，请您手动填写',
-          icon: 'none'
-        })
+        Api.showToast('获取手机号码失败，请您手动填写')
       }
     })
   },
@@ -40,10 +37,7 @@ Page({
       //自提
       let phone = this.data.phone;
       if (!phone || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
-        wx.showToast({
-          title: '请输入正确手机号码',
-          icon:'none',duration: 4000
-        })
+        Api.showToast('请输入正确手机号码')
         return false;
       }
       obj.userPhone = phone;
@@ -52,10 +46,7 @@ Page({
       //物流
       let add = this.data.address;
       if(add=={}||!add){
-        wx.showToast({
-          title: '请选择收货人信息',
-          icon: 'none'
-        })
+        Api.showToast('请选择收货人信息')
         return false;
       }
       obj.consigneeInfo = add;
@@ -96,10 +87,7 @@ Page({
     Api.supplyOrde(obj).then((res)=>{
       //'../success/success'
       setTimeout(()=>{
-        wx.showToast({
-          title: res.message,
-          icon: "none"
-        })
+        Api.showToast(res.message)
       },0)
       setTimeout(()=>{
         wx.redirectTo({

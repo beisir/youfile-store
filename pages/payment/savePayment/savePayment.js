@@ -94,10 +94,7 @@ Component({
       if (this.data.paymentUrl){
         this.cancancan();      
       }else{
-        wx.showToast({
-          title:"无收款二维码",
-          icon:'none',duration: 4000
-        })
+        Api.showToast("无收款二维码")
       }
     },
     roundRect(ctx, x, y, w, h, r) {
@@ -200,10 +197,7 @@ Component({
             wx.saveImageToPhotosAlbum({
               filePath: this.data.imagePath,
               success: function (res) {
-                wx.showToast({
-                  title: '已保存到手机相册',
-                  icon: 'none'
-                })
+                Api.showToast('已保存到手机相册')
               }
             })
           },

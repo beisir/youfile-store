@@ -85,10 +85,7 @@ Page({
   },
   checkTel:function(){
     if (!this.testTel()) {
-      wx.showToast({
-        title: '请输入正确手机号码',
-        icon: 'none',
-      })
+      Api.showToast('请输入正确手机号码')
       return false;
     }else{
       return true
@@ -135,11 +132,7 @@ Page({
     list.id=this.data.id
     Api.editAddress(list)
       .then(res => {
-        wx.showToast({
-          title: '编辑成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast('编辑成功')
         _this.goBack()
       })
   },

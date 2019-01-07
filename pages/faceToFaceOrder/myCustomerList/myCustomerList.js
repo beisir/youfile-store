@@ -85,7 +85,7 @@ Page({
       case "jhs":
         data.keyWords = this.data.searchText;
         data.orderCategory = 1;
-        Api.dealUser(data).then(res => {
+        Api.merchantList(data).then(res => {
           if (res.obj.result) {
             this.setData({
               list: this.data.list.concat(res.obj.result)

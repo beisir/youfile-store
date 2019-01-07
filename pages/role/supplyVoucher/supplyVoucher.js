@@ -52,10 +52,7 @@ Page({
         payVoucher: this.data.url,
         voucherDesc: txt
       }).then(res => {
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
+        API.showToast(res.message)
         if (res.success) {
           let pages = getCurrentPages();
           let prevPage = pages[pages.length - 2];

@@ -97,10 +97,7 @@ Page({
           urls: [this.data.baseUrl + res.obj.payVoucher]
         })
       } else {
-        wx.showToast({
-          title: '未上传付款凭证',
-          icon: 'none'
-        })
+        API.showToast('未上传付款凭证')
       }
     })
   },
@@ -211,10 +208,7 @@ Page({
     let num = this.data.changeNum;
     let money = this.data.changeMoney;
     if (!money || money <= 0){
-      wx.showToast({
-        title: '请输入金额',
-        icon: 'none'
-      })
+      API.showToast('请输入金额')
       return
     }
     API.updatetotal({
@@ -222,10 +216,7 @@ Page({
       orderAmount: money
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
   // 验证取货码
@@ -233,20 +224,14 @@ Page({
     let num = this.data.testNum;
     let money = this.data.getGoodCode;
     if (!money || money < 0) {
-      wx.showToast({
-        title: '请输入验证码',
-        icon: 'none'
-      })
+      API.showToast('请输入验证码')
       return
     }
     API.testGoodCode({
       orderNumber: num,
       claimGoodsNum: money
     }).then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterOperation();
     })
     
@@ -257,10 +242,7 @@ Page({
     app.http.requestAll("/admin/order/orderpayment/{{orderNumber}}/confirm", {
       orderNumber: num
     }, "POST").then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
@@ -279,20 +261,14 @@ Page({
       obj.expressCompany = this.data.expressageCom;
       obj.expressNumber = this.data.expressageCode;
       if (!obj.expressNumber){
-        wx.showToast({
-          title: "请填写运单号",
-          icon: 'none'
-        })
+        API.showToast("请填写运单号")
         return
       }
     }
 
     API.addExpress(obj).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
      
   },
@@ -301,10 +277,7 @@ Page({
     let num = this.data.delNum;
     app.http.deleteRequest("/api/order/"+num).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
     
   },
@@ -317,10 +290,7 @@ Page({
       orderNumber: num
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
   afterOperation(){

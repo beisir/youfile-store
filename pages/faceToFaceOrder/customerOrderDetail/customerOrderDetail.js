@@ -19,10 +19,7 @@ Page({
     wx.setClipboardData({
       data: this.data.order.orderNumber,
       success: () => {
-        wx.showToast({
-          title: '复制订单号成功',
-          icon: "none"
-        })
+        API.showToast('复制订单号成功')
       }
     })
   },
@@ -62,10 +59,7 @@ Page({
   sureDel() {
     let code = this.data.code;
     API.ftfDelOrder({ orderNumber: code }).then(res => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.closeModal();
       setTimeout(()=>{
         wx.navigateBack()
@@ -84,10 +78,7 @@ Page({
     let code = this.data.code;
     let reason = this.data.reason[this.data.cancelIndex].title;
     API.ftfCaneledOrder({ orderNumber: code, reason: reason }).then(res => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterSet();
     })
   },

@@ -33,24 +33,15 @@ Page({
   },
   register() {
     if (!this.testTel()) {
-      wx.showToast({
-        title: '请输入正确手机号码',
-        icon: 'none',
-      })
+      API.showToast('请输入正确手机号码')
       return;
     }
     if (this.data.verificationCode.length == 0) {
-      wx.showToast({
-        title: '请输入验证码',
-        icon: 'none',
-      })
+      API.showToast('请输入验证码')
       return;
     }
     if (this.data.password.length < 6 || this.data.password.length > 16) {
-      wx.showToast({
-        title: '密码必须是6 - 16位的数字或字母',
-        icon: 'none'
-      })
+      API.showToast('密码必须是6 - 16位的数字或字母')
       return
     }
 
@@ -61,10 +52,7 @@ Page({
     }
 
     API.register(obj).then(res => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
 
       //登录
       app.authHandler.loginByUser(obj.mobile, obj.password).then(res => {
@@ -80,16 +68,10 @@ Page({
           wx.navigateBack({})
         }, 500)
       }).catch(e => {
-        // wx.showToast({
-        //   title: '账户密码错误',
-        //   icon: 'none'
-        // })
+        API.showToast(e.data.message)
       })
     }).catch(e => {
-      wx.showToast({
-        title: e.data.message,
-        icon: 'none'
-      })
+      API.showToast(e.data.message)
     })
 
   },
@@ -149,16 +131,10 @@ Page({
   //获取验证码
   getCode() {
     if (!this.testTel()) {
-      wx.showToast({
-        title: '请输入正确手机号码',
-        icon: 'none',
-      })
+      API.showToast('请输入正确手机号码')
     } else {
       this.testAlreadyRegister().then(res=>{
-        wx.showToast({
-          title: '该手机号已注册，请登录',
-          icon: 'none'
-        })
+        API.showToast('该手机号已注册，请登录')
         setTimeout(()=>{
           wx.navigateBack()
         },1000)

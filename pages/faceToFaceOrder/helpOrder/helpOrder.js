@@ -41,10 +41,7 @@ Page({
         })
       })
     }else{
-      wx.showToast({
-        title: '请输入正确的手机号',
-        icon: "none"
-      })
+      API.showToast('请输入正确的手机号')
     }
   },
   scan(){

@@ -24,10 +24,7 @@ Page({
     wx.setClipboardData({
       data: this.data.order.orderNumber,
       success: ()=>{
-        wx.showToast({
-          title: '复制' + this.data.orderName+'号成功',
-          icon:"none"
-        })
+        API.showToast('复制' + this.data.orderName+'号成功')
       }
     })
   },
@@ -37,10 +34,7 @@ Page({
       wx.setClipboardData({
         data: this.data.order.expressNumber,
         success: () => {
-          wx.showToast({
-            title: '复制快递单号成功',
-            icon: "none"
-          })
+          API.showToast('复制快递单号成功')
         }
       })
     }
@@ -142,10 +136,7 @@ Page({
           urls: [this.data.baseUrl + res.obj.payVoucher]
         })
       } else {
-        wx.showToast({
-          title: '未上传付款凭证',
-          icon: 'none'
-        })
+        API.showToast('未上传付款凭证')
       }
     })
   },
@@ -155,10 +146,7 @@ Page({
     let num = this.data.num;
     let money = this.data.getGoodCode;
     if (!money || money < 0) {
-      wx.showToast({
-        title: '请输入验证码',
-        icon: 'none'
-      })
+      API.showToast('请输入验证码')
       return
     }
     API.testGoodCode({
@@ -166,10 +154,7 @@ Page({
       claimGoodsNum: money
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
 
@@ -182,10 +167,7 @@ Page({
       orderNumber: num
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
   //取消理由
@@ -221,19 +203,13 @@ Page({
       obj.expressCompany = this.data.expressageCom;
       obj.expressNumber = this.data.expressageCode;
       if (!obj.expressNumber) {
-        wx.showToast({
-          title: "请填写运单号",
-          icon: 'none'
-        })
+        API.showToast("请填写运单号")
         return
       }
     }
     API.addExpress(obj).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
 
   },
@@ -242,10 +218,7 @@ Page({
     let num = this.data.num;
     let money = this.data.changeMoney;
     if (!money || money <= 0) {
-      wx.showToast({
-        title: '请输入金额',
-        icon: 'none'
-      })
+      API.showToast('请输入金额')
       return
     }
     API.updatetotal({
@@ -253,10 +226,7 @@ Page({
       orderAmount: money
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast( res.message)
     })
   },
   //确认收款
@@ -265,10 +235,7 @@ Page({
     app.http.requestAll("/admin/order/orderpayment/" + num + "/confirm", {
       orderNumber: num
     }, "POST").then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
@@ -276,20 +243,14 @@ Page({
   saveRemark(e) {
     let val = this.data.tipText;
     if(!val){
-      wx.showToast({
-        title: '请修改备注',
-        icon: 'none'
-      })
+      API.showToast('请修改备注')
       return
     }
     API.addRemark({
       orderNumber: this.data.num,
       remark: val
     }).then(res => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
@@ -340,10 +301,7 @@ Page({
         phoneNumber: this.data.order.userInfo.mobile,
       })
     }else{
-      wx.showToast({
-        title: '买家未设置电话号码',
-        icon: "none"
-      })
+      API.showToast('买家未设置电话号码')
     }
   },
   

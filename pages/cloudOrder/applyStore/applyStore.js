@@ -113,26 +113,17 @@ Component({
       let url = this.data.url,
         name = this.data.name;
       if (!url) {
-        wx.showToast({
-          title: "请上传LOGO",
-          icon: 'none'
-        })
+        Api.showToast("请上传LOGO")
         return
       }
       if (!name) {
-        wx.showToast({
-          title: "请输入名称",
-          icon: 'none'
-        })
+        Api.showToast("请输入名称")
         return
       }
 
       App.http.getRequest("/api/exist?storeName=" + encodeURI(name)).then(res => {
         if (res.obj == true) {
-          wx.showToast({
-            title: '名字重复，请更换店名',
-            icon: "none"
-          })
+          Api.showToast('名字重复，请更换店名')
         } else {
           this.setData({
             comName: name,
@@ -155,10 +146,7 @@ Component({
       let status = !this.data.item[index].checked;
       if (status) {
         if (this.data.itemNum == 2) {
-          wx.showToast({
-            title: '最多选择两个主营范围',
-            icon: 'none'
-          })
+          Api.showToast('最多选择两个主营范围')
           return
         }
         this.setData({
@@ -266,10 +254,7 @@ Component({
         }
       })
       if (rangeItem.length == 0) {
-        wx.showToast({
-          title: '请选择经营范围',
-          icon: 'none'
-        })
+        Api.showToast('请选择经营范围')
         return
       }
       obj.businessScope = rangeItem.join(",");
@@ -293,18 +278,12 @@ Component({
         floorObj.floorAreaCode = cArea.code;
         floorObj.floorCode = cFloor.code;
       } else {
-        wx.showToast({
-          title: '请选择楼层区域',
-          icon: 'none'
-        })
+        Api.showToast('请选择楼层区域')
         return
       }
       //店铺号
       if (this.data.shopCode == "") {
-        wx.showToast({
-          title: '店铺号不能为空',
-          icon: 'none'
-        })
+        Api.showToast('店铺号不能为空')
         return
       }
       floorObj.storeDoorNum = this.data.shopCode;
@@ -323,10 +302,7 @@ Component({
             url: "/pages/cloudOrder/congratulation/congratulation",
           })
         }).catch(e => {
-          wx.showToast({
-            title: e.message,
-            icon: 'none'
-          })
+          Api.showToast(e.message)
         })
 
       })
@@ -381,10 +357,7 @@ Component({
             })
           }
         } else {
-          wx.showToast({
-            title: '请重新登录账号后,再次进入设置',
-            icon: "none"
-          })
+          Api.showToast('请重新登录账号后,再次进入设置')
           setTimeout(() => {
             wx.navigateBack()
           }, 1000)

@@ -31,10 +31,7 @@ Page({
       let imgUrl = this.data.baseUrl + this.data.user.qrcode;
       util.saveImgToPhone(imgUrl)     
     } else {
-      wx.showToast({
-        title: '暂无二维码',
-        icon: 'none'
-      })
+      Api.showToast('暂无二维码')
     }
   },
   share() {
@@ -104,9 +101,7 @@ Page({
         path: "pages/page/home/home?storeId=" + id
       }
     } else {
-      wx.showToast({
-        title: '请进入店铺，再分享给好友',
-      })
+      Api.showToast('请进入店铺，再分享给好友')
     }
   }
 })

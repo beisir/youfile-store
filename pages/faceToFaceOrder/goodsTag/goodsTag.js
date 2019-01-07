@@ -27,10 +27,7 @@ Page({
         }
       })
       if (arr.length >= 6) {
-        wx.showToast({
-          title: '最多选择6个商品',
-          icon: 'none'
-        })
+        API.showToast('最多选择6个商品')
         return
       }
     }
@@ -169,10 +166,7 @@ Page({
         })
       })
     }else{
-      wx.showToast({
-        title: '请填写新名称',
-        icon:'none',duration: 4000
-      })
+      API.showToast('请填写新名称')
     }
   },
 

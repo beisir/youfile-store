@@ -106,10 +106,7 @@ Page({
       return
     }
     if (!(this.data.tag && this.data.tag.length>0)){
-      wx.showToast({
-        title: '请选择商品',
-        icon: "none"
-      })
+      API.showToast('请选择商品')
       return
     }
 
@@ -121,10 +118,7 @@ Page({
       faceToFaceOrderDetailVOList: this.data.tag
     };
     app.http.postRequest("/admin/ftf/order",obj).then(res=>{
-      wx.showToast({
-        title: res.message,
-        icon:'none',duration: 4000
-      })
+      API.showToast(res.message)
       if(res.code == '0'){
         setTimeout(() => {
           wx.redirectTo({

@@ -41,10 +41,7 @@ Component({
     pay(){
       let code = this.data.ftfNowOrder.orderNumber;
       if(!code){
-        wx.showToast({
-          title: '缺少订单号',
-          icon: 'none'
-        })
+        API.showToast('缺少订单号')
         return
       }
       wx.navigateTo({
@@ -54,10 +51,7 @@ Component({
     },
     noTip(){
       if (!this.data.ftfNowOrder){
-        wx.showToast({
-          title: '缺少订单信息',
-          icon:'none',duration: 4000
-        })
+        API.showToast('缺少订单信息')
         return
       }
       let order = this.data.ftfNowOrder;

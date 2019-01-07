@@ -413,11 +413,7 @@ Page({
     var _this=this
     Api.deteleCartFai()
      .then(res => {
-        wx.showToast({
-          title: '清空成功',
-          icon: 'none',
-          duration: 2000
-        })
+       Api.showToast('清空成功')
        setTimeout(function () {
          _this.getList()
        }, 1000)

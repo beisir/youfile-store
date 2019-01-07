@@ -52,10 +52,7 @@ Page({
       wx.setClipboardData({
         data: this.data.user.storeInfo.wechatNumber,
         success: () => {
-          wx.showToast({
-            title: '复制微信号成功',
-            icon: "none"
-          })
+          API.showToast('复制微信号成功')
         }
       })
     }

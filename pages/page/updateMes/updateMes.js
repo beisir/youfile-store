@@ -22,11 +22,7 @@ Page({
       status = this.data.status 
     if (status==1){
       if (num > 20) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
+        Api.showToast('超过最长数字限制')
       } else {
         this.setData({
           value: value.substring(0, 19),
@@ -36,11 +32,7 @@ Page({
     }
     if (status == 2) {
       if (num > 100) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
+        Api.showToast('超过最长数字限制')
       } else {
         this.setData({
           value: value.substring(0, 99),
@@ -50,11 +42,7 @@ Page({
     }
     if (status == 3) {
       if (num > 30) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
+        Api.showToast('超过最长数字限制')
       } else {
         this.setData({
           value: value.substring(0, 29),
@@ -64,11 +52,7 @@ Page({
     }
     if (status == 4) {
       if (num > 32) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
+        Api.showToast('超过最长数字限制')
       } else {
         this.setData({
           value: value.substring(0, 21),

@@ -65,10 +65,7 @@ Page({
     let code = this.data.closeCode;
     let reason = this.data.reason[this.data.cancelIndex].title;
     API.ftfCaneledOrder({ orderNumber: code, reason: reason }).then(res => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterSet();
     })
   },
@@ -116,10 +113,7 @@ Page({
   sureDel(){
     let code = this.data.delCode;
     API.ftfDelOrder({ orderNumber:code}).then(res=>{
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterSet();
     })
   },

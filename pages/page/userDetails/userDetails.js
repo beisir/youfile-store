@@ -62,10 +62,7 @@ Page({
         Api.changeIcon({
           headPic: url
         }).then(res => {
-          wx.showToast({
-            title: res.message,
-            icon: 'none'
-          })
+          Api.showToast(res.message)
           this.setData({
             ['user.headPic']: url
           })
