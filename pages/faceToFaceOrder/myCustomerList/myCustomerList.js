@@ -87,6 +87,9 @@ Page({
         data.orderCategory = 1;
         Api.merchantList(data).then(res => {
           if (res.obj.result) {
+            res.obj.result.forEach(el => {
+              el.userId = el.purchaserUserId
+            })
             this.setData({
               list: this.data.list.concat(res.obj.result)
             })

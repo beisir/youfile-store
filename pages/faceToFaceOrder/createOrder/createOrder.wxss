@@ -110,6 +110,7 @@ page{
     box-sizing: border-box;
     font-size: 26rpx;
     color: #333;
+    position: initial;
   }
   .modal-btn{
     width:240rpx;
