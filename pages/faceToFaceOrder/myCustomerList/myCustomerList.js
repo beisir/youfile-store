@@ -16,7 +16,7 @@ Page({
       type: "jhs",
       checked: false
     }, {
-      name: "成交客户",
+      name: "成交用户",
       type: "cjkh",
       checked: false
     }],
