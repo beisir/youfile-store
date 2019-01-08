@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/page/home/home",
+    "pages/page/order/order",
     "pages/page/payWay/payWay",
     "pages/page/user/user",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
@@ -23,7 +24,6 @@
     "pages/role/supplyVoucher/supplyVoucher",
     "pages/page/workIndex/workIndex",
     "pages/role/supplyOrder/supplyOrder",
-    "pages/page/order/order",
     "pages/businessFriend/merchant/follow/follow",
     "pages/casher/success/success",
     "pages/casher/casher/casher",
