@@ -28,7 +28,7 @@ Page({
       title: "已完成",
       state: "finish"
     }],
-    reson: [{
+    reason: [{
       title: "无法联系上买家",
       selected: true
     }, {
@@ -41,7 +41,7 @@ Page({
       title: "缺货无法交易",
       selected: false
     }, {
-      title: "其他",
+      title: "其他原因",
       selected: false
     }],
     navindex: 0,
@@ -286,7 +286,7 @@ Page({
     let num = this.data.closeNum,
       index = this.data.cancelIndex;
     API.closeOrder({
-      reason: this.data.reson[index].title,
+      reason: this.data.reason[index].title,
       orderNumber: num
     }).then((res) => {
       this.afterOperation();
@@ -319,7 +319,7 @@ Page({
   //取消理由
   swichReason(e){
     var current = e.currentTarget.dataset.current;
-    var array = this.data.reson
+    var array = this.data.reason
     array.forEach((item, index, arr) => {
       if (current == index){
         item.selected = true;
@@ -328,7 +328,7 @@ Page({
       }
     })
     this.setData({
-      reson: array,
+      reason: array,
       cancelIndex: current
     })
   },

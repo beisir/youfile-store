@@ -28,7 +28,7 @@ Page({
       title: "已完成",
       state: "finish"
     }],
-    reson: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
+    reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他原因", selected: false }],
     navindex: 0,
     cancelIndex: 0,
     inputActive: 'inputActive ',
@@ -159,7 +159,7 @@ Page({
     let num = this.data.closeNum,
       index = this.data.cancelIndex;
     API.closeOrder({
-      reason: this.data.reson[index].title,
+      reason: this.data.reason[index].title,
       orderNumber: num
     }).then((res) => {
       this.afterOperation();
@@ -169,7 +169,7 @@ Page({
   //取消理由
   swichReason(e) {
     var current = e.currentTarget.dataset.current;
-    var array = this.data.reson
+    var array = this.data.reason
     array.forEach((item, index, arr) => {
       if (current == index) {
         item.selected = true;
@@ -178,7 +178,7 @@ Page({
       }
     })
     this.setData({
-      reson: array,
+      reason: array,
       cancelIndex: current
     })
   },
