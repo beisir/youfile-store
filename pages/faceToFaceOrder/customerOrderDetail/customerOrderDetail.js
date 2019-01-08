@@ -10,7 +10,7 @@ Page({
   data: {
     timeOnce: true,  //倒计时
     //取消
-    reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
+    reason: [{ title: "我不想买了", selected: true }, { title: "信息填写错误，重新拍", selected: false }, { title: "卖家缺货", selected: false }, { title: "其他", selected: false }],
     cancelIndex: 0
   },
 

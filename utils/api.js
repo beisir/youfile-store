@@ -142,6 +142,7 @@ import {
   getAccountinUrl,
   getAccountDetailUrl,
   getHaveRecordUrl,
+  storeOnlinePayUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -811,7 +812,11 @@ function ftfRecentOrder(data){
   data = initStoreId(data);
   return app.http.getRequest(ftfRecentOrderUrl, data);
 }
-
+//商家是否支持在线支付
+function storeOnlinePay(data){
+  data = initStoreId(data);
+  //return app.http.getRequest(storeOnlinePayUrl,data);
+}
 
 
 /**
@@ -913,6 +918,7 @@ function getStoreId() {
   }
 }
 module.exports = {
+  storeOnlinePay,
   ftfRecentOrder,
   unpaidOrderNum,
   searchUserInfoByTel,

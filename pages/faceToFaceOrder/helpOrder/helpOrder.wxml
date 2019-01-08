@@ -21,7 +21,7 @@
      <view class='list-item'>进货商</view>
     </navigator>
     <navigator url='../myCustomerList/myCustomerList?type=cjkh'>
-     <view class='list-item'>成交客户</view>
+     <view class='list-item'>成交用户</view>
     </navigator>
   </view>
 

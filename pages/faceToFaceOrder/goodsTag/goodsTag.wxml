@@ -15,7 +15,7 @@
     <view bindtap='addTip' class='sure-btn'>确定</view>
   </view>
 
-  <scroll-view scroll-y='true' style="height:684rpx;">
+  <scroll-view scroll-y='true' style="height:654rpx;">
     <view class='list-box' wx:for="{{list}}" wx:key="{{index}}">
       <view bindlongpress='editGoods' bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" class='goods-item' bindtap='clickTag' data-index="{{index}}" data-id="{{item.goodsId}}" data-name="{{item.goodsName}}" style="{{item.textStyle}}">
         <icon class='chose-icon' type="{{item.checked?'success':'circle'}}" color="#ccaa77" size="18" />

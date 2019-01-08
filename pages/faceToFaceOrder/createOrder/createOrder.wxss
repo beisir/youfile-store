@@ -155,6 +155,7 @@ page{
   text-align: center;
   line-height: 1;
   margin-top: 20rpx;
+  margin-bottom: 30rpx;
 }
 
 /* 警告 */

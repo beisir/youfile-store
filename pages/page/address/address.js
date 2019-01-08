@@ -137,6 +137,23 @@ Page({
       url: "../invoice/invoice?" + str,
     })
   },
+  //获取支付方式
+  getPayWay(obj) {
+    if (!obj) { return }
+    this.setData({
+      payway: obj
+    })
+  },
+  toPayWayDetail(){
+    let obj = this.data.payway;
+    let str = "";
+    if(obj){
+      str = "?payway="+obj.type;
+    }
+    wx.navigateTo({
+      url: "../payWay/payWay"+ str,
+    })
+  },
   //获取默认地址
   getDefaultAdress(){
     //userid

@@ -1,4 +1,5 @@
 // pages/page/payWay/payWay.js
+import Api from "../../../utils/api.js";
 Page({
 
   /**
@@ -7,18 +8,72 @@ Page({
   data: {
     payList:[{
       name:'其他支付方式',
+      type:'other',
       selected:true
     },{
       name:'在线支付',
+      type:"online",
       selected:false
-    }]
+    }],
+    selectedItem: {
+      name: '其他支付方式',
+      type: 'other',
+      selected: true
+    }
   },
 
+  selectItem(e){
+    let arr = this.data.payList;
+    arr.forEach((el,i)=>{
+      if(i == e.currentTarget.dataset.index){
+        el.selected = true
+        this.setData({
+          selectedItem:el
+        })
+      }else{
+        el.selected = false
+      }
+    })
+    this.setData({
+      payList: arr
+    })
+  },
+
+  sure(){
+    var pages = getCurrentPages();
+    if (pages.length > 1) {
+      //上一个页面实例对象
+      var prePage = pages[pages.length - 2];
+      prePage.getPayWay(this.data.selectedItem);
+      wx.navigateBack();
+    }
+  },
+  recheck(type){
+    let arr = this.data.payList;
+    arr.forEach((el) => {
+      if (el.type == type) {
+        el.selected = true
+        this.setData({
+          selectedItem: el
+        })
+      } else {
+        el.selected = false
+      }
+    })
+    this.setData({
+      payList: arr
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.payway){
+      this.recheck(options.payway);
+    }
+    // Api.storeOnlinePay().then(res=>{
 
+    // })
   },
 
   /**

@@ -49,12 +49,13 @@
       <image class='ad-itimg ad-itimg4' src="/image/addrbg.png"></image>
     </view>
   </navigator>
+   <!-- bindtap='toPayWayDetail' -->
   <view class='item-box flex-between payway-box'>
     <view class='flex-center'>
       <image style="margin-left:7rpx;" class='s-icon' src='/image/wallet.png'></image>支付方式
     </view>
     <view class='flex-center gray-font s-font'>
-      其他支付方式
+      {{payway.name?payway.name:'其他支付方式'}}
       <image class='tri-icon' src="/image/icl.png"></image>
     </view>
   </view>
