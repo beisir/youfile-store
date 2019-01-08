@@ -71,9 +71,9 @@ Page({
     if(options.payway){
       this.recheck(options.payway);
     }
-    // Api.storeOnlinePay().then(res=>{
+    Api.storeOnlinePay().then(res=>{
 
-    // })
+    })
   },
 
   /**

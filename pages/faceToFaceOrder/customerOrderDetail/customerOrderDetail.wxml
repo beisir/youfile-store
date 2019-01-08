@@ -76,11 +76,11 @@
       <image src='/image/mallr.png' class='right-icon'></image>
       <view class='type-chunk'>门店</view>
     </view>
-    <view class='status-text'>
+    <!-- <view class='status-text'>
       <text wx:if="{{order.orderStatus == 'unpaid'}}">待付款</text>
-      <text wx:if="{{order.orderStatus == 'canceled'}}" class="gray-color">已过期</text> 
-      <text wx:if="{{order.orderStatus == 'finish'}}" class="gray-color">已完成</text>                       
-    </view>
+      <text wx:if="{{order.orderStatus == 'canceled'}}" class="gray-color">交易关闭</text> 
+      <text wx:if="{{order.orderStatus == 'finish'}}" class="gray-color">交易完成</text>                       
+    </view> -->
   </view>
   <view class='goods-box'>
     <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
@@ -117,6 +117,12 @@
       <view class='msg-item'>
         <text class='msg-title'>成交时间</text>
         <text class='msg-detail'>{{order.finishDate}}</text>
+      </view>
+    </block>
+    <block wx:if="{{order.orderStatus == 'canceled'}}">
+      <view class='msg-item'>
+        <text class='msg-title'>关闭时间</text>
+        <text class='msg-detail'>{{order.cancelDate}}</text>
       </view>
     </block>
   </view>

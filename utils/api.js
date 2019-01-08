@@ -815,7 +815,7 @@ function ftfRecentOrder(data){
 //商家是否支持在线支付
 function storeOnlinePay(data){
   data = initStoreId(data);
-  //return app.http.getRequest(storeOnlinePayUrl,data);
+  return app.http.getRequest(storeOnlinePayUrl,data);
 }
 
 

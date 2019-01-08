@@ -22,7 +22,7 @@
   <block wx:if="{{order.orderStatus == 'canceled'}}">
     <view class='o-title-text'>
       <image class='cancel-title-icon' src='/image/closeS.png'></image>
-      <text>交易取消</text>
+      <text>交易关闭</text>
     </view>
     <view class='close-res-box'>原因：{{order.cancelReason?order.cancelReason:"无"}}</view>
   </block>
@@ -113,6 +113,13 @@
     <view class='msg-item'>
       <text class='msg-title'>成交时间</text>
       <text class='msg-detail'>{{order.finishDate}}</text>
+    </view>
+  </block>
+
+  <block wx:if="{{order.orderStatus == 'canceled'}}">
+    <view class='msg-item'>
+      <text class='msg-title'>关闭时间</text>
+      <text class='msg-detail'>{{order.cancelDate}}</text>
     </view>
   </block>
 </view>

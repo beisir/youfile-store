@@ -157,7 +157,7 @@ export const unpaidOrderNumUrl = "/api/all/order/{{storeId}}/unpaid/count/group/
 //买单首页弹窗
 export const ftfRecentOrderUrl = "/api/ftf/order/user/store/{{storeId}}/unpaid/last"
 //商家是否支持在线支付
-export const storeOnlinePayUrl = "/api/merchant/pay/config/{{merchantNumber}}"
+export const storeOnlinePayUrl = "/api/merchant/pay/config/{{storeId}}"
 
 // 资金管理
 export const getBankcardUrl='/admin/user/profile/bankcard'

@@ -49,7 +49,7 @@
       <image class='ad-itimg ad-itimg4' src="/image/addrbg.png"></image>
     </view>
   </navigator>
-   <!-- bindtap='toPayWayDetail' -->
+  <!--  bindtap='toPayWayDetail' -->
   <view class='item-box flex-between payway-box'>
     <view class='flex-center'>
       <image style="margin-left:7rpx;" class='s-icon' src='/image/wallet.png'></image>支付方式
