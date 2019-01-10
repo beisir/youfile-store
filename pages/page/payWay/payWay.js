@@ -10,10 +10,6 @@ Page({
       name:'其他支付方式',
       type:'other',
       selected:true
-    },{
-      name:'在线支付',
-      type:"online",
-      selected:false
     }],
     selectedItem: {
       name: '其他支付方式',
@@ -68,11 +64,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.payway){
-      this.recheck(options.payway);
-    }
+    
     Api.storeOnlinePay().then(res=>{
-
+      let obj = {};
+      if (res.obj && res.obj.onlinePay){
+        obj.onlinePay = true
+        let arr = this.data.payList;
+        arr.push({
+          name: '在线支付',
+          type: "online",
+          selected: false
+        })
+        this.setData({
+          payList: arr
+        })
+        if (options.payway) {
+          this.recheck(options.payway);
+        }
+      }
+      this.setData(obj);
+    }).catch(e=>{
+      
     })
   },
 
