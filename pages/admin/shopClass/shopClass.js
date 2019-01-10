@@ -40,8 +40,10 @@ Page({
           categoryCustomCode = this.data.categoryCustomCode
         if (Api.isNotEmpty(categoryCustomCode)){
           for(var i=0;i<obj.length;i++){
-            if (categoryCustomCode.indexOf(obj[i].customCategoryCode)!=-1){
-              obj[i].selected = true
+            if (obj[i].customCategoryCode!="0"){
+              if (categoryCustomCode.indexOf(obj[i].customCategoryCode) != -1) {
+                obj[i].selected = true
+              }
             }
           }
         }

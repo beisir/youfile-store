@@ -17,9 +17,13 @@ Page({
     })
   },
   watchInput:function(e){
-    var value=e.detail.value
+    var value=e.detail.value,
+      num = value.length
+    if (num > 51) {
+      Api.showToast("超过最长数字限制")
+    }
     this.setData({
-      value:value
+      value: value.substring(0, 50),
     })
   },
  
