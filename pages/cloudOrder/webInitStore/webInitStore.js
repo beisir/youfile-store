@@ -18,7 +18,6 @@ Page({
     if (token){
       this.setData({
         src: cloudUrl + "/initStore.html?user=" + token
-        // src: cloudUrl + "/openStore.html"
       })
     }else{
       wx.navigateBack()
