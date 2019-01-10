@@ -3,57 +3,14 @@ import Api from '../../../utils/api.js'
 var WxParse = require('../../../wxParse/wxParse.js');
 import authHandler from '../../../utils/authHandler.js';
 const util = require('../../../utils/util.js')
-function getIdentity(_this,goodsId,isTrue) {
-  if (authHandler.isLogin()) {
-    Api.userIdentity()
-      .then(res => {
-        var obj = res.obj
-        if (obj == "null" || obj == null) {
-          wx.setStorageSync("admin", 1)
-          _this.setData({
-            limitShow: 1
-          })
-        }else{
-          var isStoreOwner = obj.isStoreOwner,
-            isPurchaser = obj.isPurchaser
-          if (isPurchaser) {
-            wx.setStorageSync("admin", 3)
-            wx.setTabBarItem({
-              index: 2,
-              text: '进货车',
-              iconPath: '/image/22.png',
-              selectedIconPath: '/image/21.png'
-            })
-            _this.setData({
-              limitShow: 3,
-            })
-          }
-          if (isStoreOwner) {
-            if (obj.storeNature == 1) {
-              wx.setStorageSync("admin", 2)
-              _this.setData({
-                limitShow: 2
-              })
-            }
-            if (obj.storeNature == 2) {
-              wx.setStorageSync("admin", 1)
-              _this.setData({
-                limitShow: 1
-              })
-            }
-          }
-          if (!isPurchaser && !isStoreOwner) {
-            wx.setStorageSync("admin", 1)
-            _this.setData({
-              limitShow: 1
-            })
-          }
-        }
-        _this.getDetails(goodsId,isTrue)
-      })
-  }else{
+import IsStoreOwner from '../../../utils/isStoreOwner.js';
+// 身份判断
+function getIdentity(_this, goodsId, isTrue) {
+  let isStoreOwner = new IsStoreOwner();
+  isStoreOwner.enterIdentity().then(res => {
     _this.getDetails(goodsId, isTrue)
-  }
+  }).catch(res => {
+  });
 }
 Page({
 

@@ -4,11 +4,19 @@ import AuthHandler from './utils/authHandler.js'
 import { imageUrl, payUrl} from './utils/const.js'
 import touch from './utils/touch.js'
 App({
+  // 监听错误
+  onError: function (err) {
+    wx.showToast({
+      title: err,
+      icon: 'none',
+      duration: 4000,
+    })
+  },
   onLaunch: function (options) {
     if (options.query && options.query.storeId){
       wx.setStorageSync("storeId",options.query.storeId)
     }
-    // wx.setStorageSync("storeId", "S1000371")
+    // wx.setStorageSync("storeId", "S1000604")
     // wx.setStorageSync("storeId", "S1000349")
     // wx.setStorageSync("storeId", "S001")
     // 获取小程序更新机制兼容

@@ -2,64 +2,13 @@ const app = getApp();
 var that
 import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
+import IsStoreOwner from '../../../utils/isStoreOwner.js';
 function getIdentity(_this) {
-  if (authHandler.isLogin()) {
-    Api.userIdentity()
-      .then(res => {
-        var obj = res.obj
-        if (obj == "null" || obj == null) {
-          wx.setStorageSync("admin", 1)
-          _this.setData({
-            limitShow: 1
-          })
-        }else{
-          var isStoreOwner = obj.isStoreOwner,
-            isPurchaser = obj.isPurchaser
-          if (isPurchaser) {
-            wx.setStorageSync("admin", 3)
-            wx.setTabBarItem({
-              index: 2,
-              text: '进货车',
-              iconPath: '/image/22.png',
-              selectedIconPath: '/image/21.png'
-            })
-            wx.setNavigationBarTitle({
-              title: '进货车',
-            })
-            _this.setData({
-              limitShow: 3
-            })
-          }
-          if (isStoreOwner) {
-            if (obj.storeNature == 1) {
-              wx.setStorageSync("admin", 2)
-              _this.setData({
-                limitShow: 2
-              })
-            }
-            if (obj.storeNature == 2) {
-              wx.setStorageSync("admin", 1)
-              _this.setData({
-                limitShow: 1
-              })
-            }
-          }
-          if (!isPurchaser && !isStoreOwner) {
-            wx.setStorageSync("admin", 1)
-            _this.setData({
-              limitShow: 1
-            })
-          }
-        }
-        _this.getList(_this)
-      })
-  } else {
+  let isStoreOwner = new IsStoreOwner();
+  isStoreOwner.enterIdentity().then(res => {
     _this.getList(_this)
-    wx.setStorageSync("admin", 1)
-    _this.setData({
-      limitShow: 1
-    })
-  }
+  }).catch(res => {
+  });
 }
 Page({
   data: {

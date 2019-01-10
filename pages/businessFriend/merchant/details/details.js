@@ -21,6 +21,13 @@ Page({
     detailAddress:'',
     userId:null,
   },
+  // 生日选择
+  bindDateChange(e) {
+    let that = this;
+    that.setData({
+      birthday: e.detail.value,
+    })
+  },
   bindRegionChange: function (e) {
     this.setData({
       region: e.detail.value,

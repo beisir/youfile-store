@@ -142,16 +142,24 @@ Page({
   },
   watchName: function (event) {
     var _this = this,
-      val = event.detail.value
+      val = event.detail.value,
+      num = val.length
+    if (num > 56) {
+      Api.showToast("超过最长数字限制")
+    }
     this.setData({
-      name: val
+      name: val.substring(0, 55),
     })
   },
   watchRec: function (event) {
     var _this = this,
-      val = event.detail.value
+      val = event.detail.value,
+      num = val.length
+    if (num > 51) {
+      Api.showToast("超过最长数字限制")
+    }
     this.setData({
-      recommendDesc: val
+      recommendDesc: val.substring(0, 50),
     })
   },
   addImage: function () {
@@ -177,6 +185,14 @@ Page({
     var _this = this,
       val = event.detail.value,
       num = val.length
+    if (num == 2 && val.charAt(0) == '0') {
+      if (val != "0.") {
+        this.setData({
+          wholesalePrice: 0
+        })
+        return
+      }
+    }
     if (num > 11) {
       Api.showToast("超过最长数字限制")
     } else {
@@ -189,13 +205,20 @@ Page({
     var _this = this,
       val = event.detail.value,
       num = val.length
+    if (num == 2 && val.charAt(0) == '0') {
+      if (val != "0.") {
+        this.setData({
+          sellPrice: 0
+        })
+        return
+      }
+    }
     if (num > 11) {
       Api.showToast("超过最长数字限制")
-    } else {
-      this.setData({
-        sellPrice: (util.newVal(val)).substring(0, 9),
-      })
     }
+    this.setData({
+      sellPrice: (util.newVal(val)).substring(0, 9)
+    })
   },
   stockFun: function (e) {
     var _this = this,
@@ -344,6 +367,7 @@ Page({
       index1=1,
       index2=1,
       len = 1
+    val = val.replace(/\b(0+)/gi, "")
     if (Api.isNotEmpty(pageall)){
       for (var i = 0; i < pageall.length; i++) {
         var data = pageall[i].goodsSpecificationValueVOList.length

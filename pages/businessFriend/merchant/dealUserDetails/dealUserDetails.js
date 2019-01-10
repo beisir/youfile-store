@@ -8,6 +8,7 @@ Page({
   data: {
     userId: '',
     showMes: false,
+    remarkName:'',
     baseUrl: app.globalData.imageUrl,
   },
 
@@ -39,6 +40,7 @@ Page({
             birthday: obj.user.birthday == null ? '' : obj.user.birthday,
             phone: obj.user.phone == null ? '' : obj.user.phone,
             headPic: obj.user.headPic == null ? '' : obj.user.headPic,
+            remarkName: obj.user.remark == null ? '' : obj.user.remark,
             nickName: obj.user.nickName == null ? '' : obj.user.nickName,
             wechart: obj.user.wechart == null ? '' : obj.user.wechart,
           })

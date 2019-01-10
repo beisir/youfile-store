@@ -2,62 +2,14 @@ const app = getApp();
 import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
 import EnterStoreHandler from '../../../utils/enterStoreHandler.js';
-
+import IsStoreOwner from '../../../utils/isStoreOwner.js';
+// 身份判断
 function getIdentity(_this) {
-  if (authHandler.isLogin()) {
-    Api.userIdentity()
-      .then(res => {
-        var obj = res.obj
-        if (obj == "null" || obj == null) {
-          wx.setStorageSync("admin", 1)
-          _this.setData({
-            limitShow: 1
-          })
-        } else {
-          var isStoreOwner = obj.isStoreOwner,
-            isPurchaser = obj.isPurchaser
-          if (isPurchaser) {
-            wx.setStorageSync("admin", 3)
-            wx.setTabBarItem({
-              index: 2,
-              text: '进货车',
-              iconPath: '/image/22.png',
-              selectedIconPath: '/image/21.png'
-            })
-            _this.setData({
-              limitShow: 3
-            })
-          }
-          if (isStoreOwner) {
-            if (obj.storeNature == 1) {
-              wx.setStorageSync("admin", 2)
-              _this.setData({
-                limitShow: 2
-              })
-            }
-            if (obj.storeNature == 2) {
-              wx.setStorageSync("admin", 1)
-              _this.setData({
-                limitShow: 1
-              })
-            }
-          }
-          if (!isPurchaser && !isStoreOwner) {
-            wx.setStorageSync("admin", 1)
-            _this.setData({
-              limitShow: 1
-            })
-          }
-        }
-        _this.homeIndex()
-      })
-  } else {
+  let isStoreOwner = new IsStoreOwner();
+  isStoreOwner.enterIdentity().then(res => {
     _this.homeIndex()
-    wx.setStorageSync("admin", 1)
-    _this.setData({
-      limitShow: 1
-    })
-  }
+  }).catch(res => {
+  });
 }
 Page({
   /**
@@ -91,7 +43,7 @@ Page({
     identity: '',
     likeShow: false,
     isOnloaded: false,
-    limitShow: 1,
+    limitShow:1,
     src: '',
     goodsName: '',
     copyGoods: false,
@@ -319,6 +271,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  // 查看资料
   addTip: function () {
     var Id = Api.getThisStoreId(),
       logo = this.data.store.logo,
@@ -345,6 +298,7 @@ Page({
       url: '../goodsDetails/goodsDetails?goodsId=' + goodsId,
     })
   },
+  // 编辑商品
   editFun: function (e) {
     var goodsId = e.target.dataset.id,
       src = e.target.dataset.src,
@@ -402,6 +356,7 @@ Page({
   //     showDp: false,
   //   })
   // }, 
+  // 编辑小云店信息
   editDpMes: function () {
     var limitShow = this.data.limitShow
     if (limitShow == 2) {
@@ -414,6 +369,7 @@ Page({
       })
     }
   },
+  // 获取商品列表
   getList: function () {
     var _this = this,
       keyword = this.data.keyword,
@@ -455,6 +411,7 @@ Page({
         }
       })
   },
+  // 修改封面图
   chooseImage: function () {
     var _this = this
     Api.uploadImage("STORE_IMAGE")
@@ -477,6 +434,9 @@ Page({
           })
       })
   },
+   /**
+   * 获取首页数据
+   */
   homeIndex: function () {
     var that = this;
     Api.homeIndex({
@@ -539,6 +499,9 @@ Page({
       }
     })
   },
+  /**
+   * 初始化信息
+   */
   initStoreData: function () {
     this.closeShow()
     app.pageRequest.pageDataIndex.pageNum = 1
@@ -546,6 +509,9 @@ Page({
     getIdentity(this)
     app.globalData.switchStore = false
   },
+  /**
+   * 判断是否有店铺ID
+   */
   loadData: function () {
     var _this = this
     if (!Api.getStoreId()) {
@@ -559,6 +525,9 @@ Page({
       _this.initStoreData()
     }
   },
+    /**
+   * 生命周期函数--监听页面加载
+   */
   onLoad: function (options) {
     var _this = this
     if (options != undefined) {
