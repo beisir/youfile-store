@@ -1,6 +1,7 @@
 {
-  "pages":[
+  "pages": [
     "pages/page/home/home",
+    "pages/cloudOrder/webInitStore/webInitStore",
     "pages/capital/haveRecord/haveRecord",
     "pages/capital/record/record",
     "pages/capital/index/index",
@@ -98,13 +99,13 @@
     "pages/page/logs/logs",
     "pages/admin/batchClass/batchClass"
   ],
-  "window":{
-    "backgroundTextStyle":"black",
+  "window": {
+    "backgroundTextStyle": "black",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black",
-    "backgroundColor":"#F7F7F7",
-    "enablePullDownRefresh":false
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F7F7F7",
+    "enablePullDownRefresh": false
   },
   "networkTimeout": {
     "request": 50000,
