@@ -6,7 +6,6 @@
     "login": "../../login/login/login",
     "no": "../indexEmpty/indexEmpty",
     "retailStore": "../retailStore/retailStore",
-    "initstroe": "../../cloudOrder/applyStore/applyStore",
-    "storeOrder":"../../faceToFaceOrder/remindLayer/remindLayer"
+    "initstroe": "../../cloudOrder/applyStore/applyStore"
   }
 }

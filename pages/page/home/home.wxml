@@ -2,8 +2,6 @@
   <initstroe></initstroe>
 </view>
 <login id="login"></login>
-<!-- 到店订单付款提示 -->
-<storeOrder id="storeOrder"></storeOrder>
 <!--不是供应商-->
 <mes show="{{isNotStore}}" bind:sureSelectArea="sureSelectAreaListener">
   <view class='tipMes'>

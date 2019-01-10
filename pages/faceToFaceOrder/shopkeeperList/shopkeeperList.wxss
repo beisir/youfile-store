@@ -1,7 +1,0 @@
-@import "../customerOrderList/customerOrderList";.cloud-icon{width:37rpx;height:37rpx;margin-right:20rpx}
-.search-input-icon{height:30rpx;width:30rpx;margin-right:15rpx}
-.my-search-input{width:460rpx;text-align:left}
-.my-search-box{height:60rpx;background:#fff;margin:20rpx 50rpx;border-radius:10rpx;text-align:center;display:flex;justify-content:center;align-items:center}
-.type-chunk{margin-left:20rpx}
-.com-name-box{max-width:180rpx;font-weight:600}
-.tel-box{margin-left:15rpx}
