@@ -20,8 +20,13 @@ Page({
         src: cloudUrl + "/initStore.html?user=" + token
       })
     }else{
+      wx.showToast({
+        title: '未登录',
+        icon:'none'
+      })
       wx.navigateBack()
     }
+    
   },
 
   /**
