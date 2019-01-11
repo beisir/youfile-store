@@ -5,6 +5,10 @@ page{
 .box{
   padding: 50rpx;
   font-size: 30rpx;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
 }
 .title-font{
   font-size: 48rpx;
