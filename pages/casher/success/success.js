@@ -95,6 +95,7 @@ Page({
       if (sec == 0) {
         wx.hideLoading();
         clearInterval(timmer);
+        this.afterTimer();
         Api.userInfor().then(res => {
           if (res.obj) {
             this.setData({
@@ -107,6 +108,16 @@ Page({
         })
       }
     }, 1000)
+  },
+  afterTimer(){
+    switch (this.data.type) {
+      case "cloudXPL":
+      case "cloudXLS":
+        wx.navigateTo({
+          url: '../../cloudOrder/webInitStore/webInitStore',
+        })
+        break;
+    }
   },
   switchType() {
     let obj = {};

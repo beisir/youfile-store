@@ -12,9 +12,7 @@ Page({
     userId:'',
     mobile:'',
     baseUrl: app.globalData.imageUrl,
-    data:'',
-    faceOrderIn:false,  //帮ta下单进入改为true
-    ifWholesaler:true //添加进货商按钮
+    data:''
   },
   calling: function () {
     var mobile = this.data.data.mobile
@@ -23,16 +21,6 @@ Page({
       success: function () {
       },
       fail: function () {
-      }
-    })
-  },
-  faceOrder(options){
-    Api.ifWholesaler({ userId: this.data.userId}).then(res=>{
-      if (options.entry == "faceOrder") {
-        this.setData({
-          faceOrderIn: true,
-          ifWholesaler: res.obj.isPurchaser
-        })
       }
     })
   },
@@ -45,16 +33,20 @@ Page({
       userId: options.userId,
       mobile: options.mobile
     })
-    Api.newUserInfor({ userId: options.userId})
-    .then(res=>{
-      var obj = res.obj
-      _this.setData({
-        data:obj
+    if (options.userId){
+      _this.getUserDetails({ userId: options.userId })
+    }
+  },
+  // 获取信息
+  getUserDetails:function(data){
+    var _this=this
+    Api.newUserInfor(data)
+      .then(res => {
+        var obj = res.obj
+        _this.setData({
+          data: obj
+        })
       })
-    })
-
-    this.faceOrder(options);
-    
   },
   // 监听input
   watchInput: function (event) {
@@ -114,6 +106,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1]
+    if (currPage.data.userId) {
+      that.getUserDetails({ userId: currPage.data.userId })
+      this.setData({
+        userId: currPage.data.userId,
+      })
+    }
 
   },
 

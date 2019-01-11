@@ -278,7 +278,7 @@ Component({
         floorObj.floorAreaCode = cArea.code;
         floorObj.floorCode = cFloor.code;
       } else {
-        Api.showToast('请选择楼层区域')
+        Api.showToast('请选择楼座楼层')
         return
       }
       //店铺号
