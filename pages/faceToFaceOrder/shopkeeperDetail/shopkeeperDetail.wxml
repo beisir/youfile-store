@@ -38,7 +38,7 @@
 <!-- 商店 -->
 <view class='user-box padding-box'>
   <view class='flex-center'>
-    <image src='/image/ad.png' class="user-icon"></image>
+    <image src='/image/order-per.png' class="user-icon"></image>
     <text class='username-box'>客户名称：{{order.userInfo.nickName}}</text>
   </view>
   <view>{{order.userInfo.mobile}}</view>
