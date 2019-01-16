@@ -553,7 +553,7 @@ Page({
           icon: 'none',
           duration: 2000,
           success:function(){
-            wx.navigateTo({
+            wx.redirectTo({
               url: '../success/success',
             })
           }

@@ -29,6 +29,11 @@ Page({
       baseUrl: app.globalData.imageUrl
     })
   },
+  goHome: function () {
+    wx.switchTab({
+      url: '../../page/home/home'
+    })
+  },
   //打电话
   tel: function () {
     wx.makePhoneCall({
