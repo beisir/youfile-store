@@ -94,8 +94,6 @@ Page({
     var status = options.status,
         send=options.send,
         accept = options.accept,
-        logo = options.logo,
-        name=options.name,
         remark = options.remark
     this.setData({
       send:send
@@ -244,7 +242,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    app.globalData.switchStore=true
   },
 
   /**
