@@ -6,6 +6,7 @@
     "login": "../../login/login/login",
     "no": "../indexEmpty/indexEmpty",
     "retailStore": "../retailStore/retailStore",
-    "initstroe": "../../cloudOrder/applyStore/applyStore"
+    "initstroe": "../../cloudOrder/applyStore/applyStore",
+    "returnBall": "../../../assembly/returnBall/returnBall"
   }
 }

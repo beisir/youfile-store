@@ -4,18 +4,12 @@ Component({
    
   },
   data: {
+    globalData: app.globalData,
   },
   methods: {
     goRetailStore:function(){
       var retailStoreId = wx.getStorageSync("storeIdRetail")
-      wx.navigateToMiniProgram({
-        appId: 'wx1a7532a2abdd1698', // 要跳转的小程序的appid
-        path: 'pages/page/home/home?storeId=' + retailStoreId, // 跳转的目标页面
-        envVersion: 'trial',//release
-        success(res) {
-          // 打开成功  
-        }
-      })
+      app.navigate.toProgram(app.globalData.navigateToAppID.xls, 'pages/page/home/home?storeId=' + retailStoreId, {})
     }
   }
 })

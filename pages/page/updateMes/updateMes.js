@@ -1,11 +1,12 @@
 import Api from '../../../utils/api.js'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    palceName:"小云店名称",
+    palceName: app.globalData.projectName+"名称",
     value:'',
     emptyVal:0,
     num:0,

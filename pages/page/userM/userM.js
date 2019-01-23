@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    globalData: app.globalData,
   },
 
   getData(){
@@ -37,7 +37,7 @@ Page({
   //打电话
   tel: function () {
     wx.makePhoneCall({
-      phoneNumber: '01053361798',
+      phoneNumber: app.globalData.servesPhone
     })
   },
   /**
