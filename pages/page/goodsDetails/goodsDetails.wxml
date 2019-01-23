@@ -5,18 +5,18 @@
   bind:sureSelectArea="sureSelectAreaListener"
 >
 <view>
-  <text>是否加入到小云店仓库中？</text>
+  <text>是否加入到{{globalData.projectName}}仓库中？</text>
   <button bindtap='copyGoodsYes'>确定</button>
 </view>
 </mes>
- <!--未开通小云店-->
+ <!--未开通店-->
 <mes
   show="{{openStore}}"
   bind:sureSelectArea="sureSelectAreaListener"
 >
 <view class='tip-v'>
-  <text>您还未申请小云店哦？</text>
-  <view >开通小云店可享一键入库功能</view>
+  <text>您还未申请{{globalData.projectName}}哦？</text>
+  <view >开通{{globalData.projectName}}可享一键入库功能</view>
   <button bindtap='openStore'>我要开店</button>
 </view>
 </mes>
@@ -99,11 +99,11 @@
             </view>
             <view class="ym_goodsstoreop"  hidden='{{likeShow}}'>
                 <view class="ui-link"   bindtap='likeStore'><text class="ym_qzjoin_add1">+</text>关注</view>
-                <view class="ui-link ui-link1" bindtap='urlHome'>小云店</view>
+                <view class="ui-link ui-link1" bindtap='urlHome'>{{globalData.projectName}}</view>
             </view>
               <view class="ym_goodsstoreop"  hidden='{{!likeShow}}'>
                 <view class="ui-link"    bindtap='deteleLikeStore'><text class="ym_qzjoin_add1" ></text>已关注</view>
-                <view class="ui-link ui-link1" bindtap='urlHome'>小云店</view>
+                <view class="ui-link ui-link1" bindtap='urlHome'>{{globalData.projectName}}</view>
             </view>
         </view>
   <view class='gd_readCont'  wx:if='{{description}}'>
@@ -123,12 +123,13 @@
 <view wx:if='{{stockNumHide}}' class='no_stock'>商品已经卖光了~看看别的吧</view>
 <view class='gd_bottom'>
     <view class='gd_b_left'>
-        <view>
-          <view><navigator class='mesImage' target="miniProgram" open-type="navigate" app-id="wx6241529c7dc70d51" path="pages/mall/newest/newest" extra-data="" version="trial"><image src="/image/home.png"></image></navigator>逛商城</view>
+        <view bindtap='call'>
+          <view><image src="/image/tel-blob.png"></image></view>
+          联系我们
         </view>
         <view>
         <view bindtap='urlHome'><image src="/image/ad5.png"></image></view>
-          小云店
+          {{globalData.projectName}}
         </view>
         <view  wx:if='{{limitShow!=3}}'>
         <view bindtap='urlCart'><image src="/image/i33.png"></image></view>

@@ -7,7 +7,7 @@
     <view class="weui-cell__name" wx:if="{{user.nickName}}">
       {{user.nickName}}<view style='margin-left:10rpx;' class='floor-admin'>新批零店主</view>
       <!-- <view class="weui-dp">
-        <image src='/image/dp.png' mode="widthFix"></image>百荣世贸 商务部
+        <image src='/image/dp.png' mode="widthFix"></image> 商务部
       </view> -->
     </view>
     <!-- <view class='weui-view'>
@@ -40,7 +40,7 @@
 <view class="weui_cells " bindtap='tel'>
     <view>
         <image  src="/image/u2.png"></image>
-        <text class="store-address">联系优生活 </text>
+        <text class="store-address">优生活技术支持 </text>
         <view class='weui-view'>
           <image class='img' src="/image/icl.png"></image>
         </view>

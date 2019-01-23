@@ -16,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     indexEmpty: true,
     show: false,
     samePre: false,
@@ -354,7 +355,7 @@ Page({
   //     showDp: false,
   //   })
   // }, 
-  // 编辑小云店信息
+  // 编辑信息
   editDpMes: function () {
     var limitShow = this.data.limitShow
     if (limitShow == 2) {
@@ -443,7 +444,7 @@ Page({
       .then(res => {
         var obj = res.obj
         wx.setNavigationBarTitle({
-          title: obj.store.storeName == null ? "小云店" : obj.store.storeName
+          title: obj.store.storeName == null ? app.globalData.projectName : obj.store.storeName
         })
         app.globalData.isFollow = obj.isFollow
         var result = obj.goods.result
@@ -794,7 +795,19 @@ Page({
       } else {
         this.emptyArr()
       }
-      wx.stopPullDownRefresh();
+      wx.stopPullDownRefresh({
+        complete() {
+          wx.getSystemInfo({
+            success(res) {
+              if (res.platform == "android") {
+                wx.pageScrollTo({
+                  scrollTop: 0,
+                })
+              }
+            }
+          })
+        }
+      });
     })
   },
 

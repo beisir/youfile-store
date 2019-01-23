@@ -1,3 +1,6 @@
+<!-- 悬浮球 -->
+<returnBall>
+
 <view hidden='{{indexEmpty}}'>
   <no></no>
 </view>
@@ -37,3 +40,6 @@
     暂时还没有分类哦！
   </view>
 </view>
+
+
+</returnBall>
