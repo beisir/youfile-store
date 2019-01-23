@@ -18,7 +18,7 @@ App({
       wx.setStorageSync("storeId",options.query.storeId)
     }
     // wx.setStorageSync("storeId", "S1000604")
-    // wx.setStorageSync("storeId", "S1000528")
+    // wx.setStorageSync("storeId", "S1000349")
     // wx.setStorageSync("storeId", "S001")
     // wx.setStorageSync("storeId", "S1000349")
     // wx.setStorageSync("storeId", "S1000089")

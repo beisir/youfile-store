@@ -274,11 +274,9 @@ Page({
    */
   // 查看资料
   addTip: function () {
-    var Id = Api.getThisStoreId(),
-      logo = this.data.store.logo,
-      name = this.data.store.storeName
+    var Id = Api.getThisStoreId()
     wx.navigateTo({
-      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=&logo=' + logo + '&name=' + name,
+      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=',
     })
   },
   addWholesalePrice: function () {
@@ -460,31 +458,42 @@ Page({
           totalCount: obj.goods.totalCount,
           likeShow: app.globalData.isFollow
         }, function () {
-          var query = wx.createSelectorQuery();
-          query.select('#myText').boundingClientRect()
-          query.exec(function (res) {
-            that.setData({
-              bannerHeight: res[0].height
-            })
-          })
-          if (result.length > 0) {
-            var query2 = wx.createSelectorQuery();
-            query2.select('#result-list').boundingClientRect()
-            query2.exec(function (res) {
-              that.setData({
-                goodsHeight: res[0].height
-              })
-            })
-          }
-          var query1 = wx.createSelectorQuery();
-          query1.select('#swiper-tab').boundingClientRect()
-          query1.exec(function (res) {
-            that.setData({
-              swiperHeight: res[0].height
-            })
-          })
+          that.getHeight(result)
         })
       })
+  },
+  // 获取高度
+  getHeight(result){
+    var that = this;
+    var query = wx.createSelectorQuery();
+    query.select('#myText').boundingClientRect()
+    query.exec(function (res) {
+      if (res[0]) {
+        that.setData({
+          bannerHeight: res[0].height
+        })
+      }
+    })
+    if (result.length > 0) {
+      var query2 = wx.createSelectorQuery();
+      query2.select('#result-list').boundingClientRect()
+      query2.exec(function (res) {
+        if (res[0]) {
+          that.setData({
+            goodsHeight: res[0].height
+          })
+        }
+      })
+    }
+    var query1 = wx.createSelectorQuery();
+    query1.select('#swiper-tab').boundingClientRect()
+    query1.exec(function (res) {
+      if (res[0]) {
+        that.setData({
+          swiperHeight: res[0].height
+        })
+      }
+    })
   },
   getStore() {
     Api.storeIdInfo().then(res => {
@@ -534,6 +543,7 @@ Page({
     if (options != undefined) {
       let enEnterStoreHandler = new EnterStoreHandler("1");
       enEnterStoreHandler.enterStore(options).then(store => {
+        _this.loadData()
         //进店成功
         if (store.userId) {
           let userId = store.userId
@@ -542,7 +552,6 @@ Page({
         _this.setData({
           isOnloaded: true
         });
-        _this.loadData()
 
       }).catch(store => {
         _this.setData({

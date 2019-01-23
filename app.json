@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/admin/status/status",
+    "pages/admin/addGoods/addGoods",
     "pages/page/user/user",
     "pages/cloudOrder/webInitStore/webInitStore",
     "pages/businessFriend/merchant/dealUser/dealUser",
     "pages/page/workIndex/workIndex",
-    "pages/admin/status/status",
-    "pages/admin/addGoods/addGoods",
     "pages/capital/haveRecord/haveRecord",
     "pages/capital/record/record",
     "pages/capital/index/index",
