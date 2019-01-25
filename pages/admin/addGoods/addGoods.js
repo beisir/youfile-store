@@ -160,9 +160,9 @@ Page({
         })
       })
   },
-  gitConst(num){
+  newConst: function (event) {
     var _this = this,
-      val =num,
+      val = event.detail.value,
       pageall = this.data.pageall,
       num = val.length,
       index1 = 1,
@@ -180,14 +180,11 @@ Page({
     len = index1 * index2
     if (num > 16) {
       Api.showToast("超过最长数字限制")
-    }
+    } 
     this.setData({
       newConst: val.substring(0, 9),
       allTotalNew: len * (val.substring(0, 9))
     })
-  },
-  newConst: function (event) {
-    this.gitConst(event.detail.value)
   },
   watchName: function (event) {
     var _this = this,
@@ -619,8 +616,6 @@ Page({
       that.setData({
         pageall: currPage.data.mydata,
         modelPageAll: JSON.stringify(currPage.data.mydata),
-      }, function () {
-        this.gitConst(this.data.newConst)
       })
     }
   },
