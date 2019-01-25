@@ -160,9 +160,9 @@ Page({
         })
       })
   },
-  newConst: function (event) {
+  gitConst(num){
     var _this = this,
-      val = event.detail.value,
+      val =num,
       pageall = this.data.pageall,
       num = val.length,
       index1 = 1,
@@ -180,11 +180,14 @@ Page({
     len = index1 * index2
     if (num > 16) {
       Api.showToast("超过最长数字限制")
-    } 
+    }
     this.setData({
       newConst: val.substring(0, 9),
       allTotalNew: len * (val.substring(0, 9))
     })
+  },
+  newConst: function (event) {
+    this.gitConst(event.detail.value)
   },
   watchName: function (event) {
     var _this = this,
@@ -602,13 +605,13 @@ Page({
     if (currPage.data.isEmptySku != 1) {
       that.setData({
         skuListAll: [],
-        skuNum: '',
-        sellPrice: '',
-        wholesalePrice: '',
+        // skuNum: '',
+        // sellPrice: '',
+        // wholesalePrice: '',
         isEmptySku: true,
         pageShow: false,
-        newConst:'',
-        allTotalNew:'',
+        // newConst:'',
+        // allTotalNew:'',
         clickSpecShow: false,
       })
     }
@@ -616,6 +619,8 @@ Page({
       that.setData({
         pageall: currPage.data.mydata,
         modelPageAll: JSON.stringify(currPage.data.mydata),
+      }, function () {
+        this.gitConst(this.data.newConst)
       })
     }
   },
