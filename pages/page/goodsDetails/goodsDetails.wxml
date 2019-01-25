@@ -1,3 +1,6 @@
+<!-- 悬浮球 -->
+<returnBall>
+
 <login id="login"></login>
  <!--是否复制-->
 <mes
@@ -484,3 +487,5 @@
         </view>
       </view>
   </view>
+
+  </returnBall>
