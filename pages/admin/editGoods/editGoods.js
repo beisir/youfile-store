@@ -360,15 +360,15 @@ Page({
       stock: null
     })
   },
-  newConst: function (event) {
+  // 计算库存
+  getCount(val) {
     var _this = this,
-      val = event.detail.value,
       pageall = this.data.pageall,
-      index1=1,
-      index2=1,
+      index1 = 1,
+      index2 = 1,
       len = 1
     val = val.replace(/\b(0+)/gi, "")
-    if (Api.isNotEmpty(pageall)){
+    if (Api.isNotEmpty(pageall)) {
       for (var i = 0; i < pageall.length; i++) {
         var data = pageall[i].goodsSpecificationValueVOList.length
         if (i == 0) {
@@ -382,30 +382,36 @@ Page({
         newConst: val.substring(0, 9),
         skuNum: len * (val.substring(0, 9))
       })
-    }else{
+    } else {
       this.setData({
         newConst: val.substring(0, 9),
         skuNum: val.substring(0, 9)
       })
     }
   },
+  newConst: function (event) {
+    var val = event.detail.value
+    this.getCount(val)
+  },
   // 分别设置价格和库存
   clickSpec: function (e) {
-    var model = JSON.stringify(this.data.pageall),
-        skuListAll=this.data.skuListAll,
-      sellPrice = this.data.sellPrice,
-      newConst = this.data.newConst,
-      isEmptySku = this.data.isEmptySku,
-      wholesalePrice = this.data.wholesalePrice
-    if (skuListAll.length>0){
-     var  modeList = JSON.stringify(this.data.skuListAll)
-      wx.navigateTo({
-        url: '../set/set?model=' + model + '&modeList=' + modeList
-      })
-    }else{
-      wx.navigateTo({
-        url: '../set/set?model=' + model + "&sellPrice=" + sellPrice + "&wholesalePrice=" + wholesalePrice + "&newConst=" + newConst,
-      })
+    if (this.data.pageall){
+      var model = JSON.stringify(this.data.pageall),
+        skuListAll = this.data.skuListAll,
+        sellPrice = this.data.sellPrice,
+        newConst = this.data.newConst,
+        isEmptySku = this.data.isEmptySku,
+        wholesalePrice = this.data.wholesalePrice
+      if (skuListAll.length > 0) {
+        var modeList = JSON.stringify(this.data.skuListAll)
+        wx.navigateTo({
+          url: '../set/set?model=' + model + '&modeList=' + modeList
+        })
+      } else {
+        wx.navigateTo({
+          url: '../set/set?model=' + model + "&sellPrice=" + sellPrice + "&wholesalePrice=" + wholesalePrice + "&newConst=" + newConst,
+        })
+      }
     }
   },
   //长按拖动图片
@@ -723,9 +729,9 @@ Page({
       that.setData({
         skuListAll: [],
         skuNum: '',
-        newConst:'',
-        sellPrice: '',
-        wholesalePrice: '',
+        // newConst:'',
+        // sellPrice: '',
+        // wholesalePrice: '',
         isEmptySku:true,
         pageShow: false,
         clickSpecShow: false,
@@ -741,6 +747,10 @@ Page({
       }else{
         that.setData({
           pageall: currPage.data.mydata,
+        }, function () {
+          if (that.data.newConst) {
+            that.getCount(this.data.newConst)
+          }
         })
       }
       that.setData({
