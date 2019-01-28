@@ -104,7 +104,7 @@
         <navigator class='weui-cell weui-cell_access' url='../workIndex/workIndex'>
           <image src='/image/cloudIcon.png' class='user-img'></image>
           <view class='weui-cell__bd'>
-            我的工作台
+            {{globalData.projectName}}工作台
           </view>
           <view class='weui-img'>
             <image src="/image/icl.png"></image>
