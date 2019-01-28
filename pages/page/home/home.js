@@ -834,7 +834,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  toBottom: function () {
     var noMoreData = this.data.noMoreData
     var currentTab = this.data.currentTab
     if (noMoreData) {
