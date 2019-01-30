@@ -5,7 +5,7 @@
   </view>
   <view class='title'>保存付款二维码</view>
   <view class='name-box'>
-    <image src='{{head?head+"?x-oss-process=style/logo":"/image/42.png"}}' class='store-icon'></image>
+    <image src='{{head?head+"?x-oss-process=style/logo":"/image/user.png"}}' class='store-icon'></image>
     <view>
       <view class='store-title'>{{comName}}</view>
       <view class='wx-code'>微信号：{{wx}}</view>

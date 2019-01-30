@@ -18,7 +18,7 @@
     </navigator>
     <view class='u-t-ewmico'>
       <navigator url='{{hasUser?"../userDetails/userDetails":""}}'>
-        <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic+"?x-oss-process=style/logo  ":"/image/42.png"}}'></image>
+        <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic+"?x-oss-process=style/logo  ":"/image/user.png"}}'></image>
         <view hidden='{{hasUser}}'>
           <open-data class='user-headPic' type="userAvatarUrl"></open-data>
         </view>

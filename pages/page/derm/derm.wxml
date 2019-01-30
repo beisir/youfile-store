@@ -1,6 +1,6 @@
 <view class="weui-cell">
   <view class="weui-cell__hd">
-    <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic+"?x-oss-process=style/goods-small":"/image/42.png"}}'></image>
+    <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic+"?x-oss-process=style/goods-small":"/image/user.png"}}'></image>
   </view>
   <view class="weui-cell__name">
     {{user.nickName}}
