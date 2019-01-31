@@ -773,6 +773,9 @@ Page({
       }
       if (switchi == 1) {
         if (editDataModel.length == 1) {
+        //  if(editDataModel[0]["id"]==undefined){
+        //    editDataModel[0]["id"]="010"
+        //  }
           var copyData = editDataModel[0].goodsSpecificationValueVOList
           editDataModel[0].specCode = util.ramData() + "_" + util.ramNum()
           delete (editDataModel[0].goodsId)
@@ -803,7 +806,7 @@ Page({
       })
     }
     for (var i = 0; i < goodsListData.length; i++) {
-      if (goodsListData[i].id == pId) {
+      if (goodsListData[i].specName == pName) {
         addIndex = true
         var codeArr = goodsListData[i].goodsSpecificationValueVOList
         for (var l = 0; l < codeArr.length; l++) {

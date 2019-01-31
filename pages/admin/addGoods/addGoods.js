@@ -47,6 +47,7 @@ Page({
     show: false,
     reImgIndex: 0,
     moveImgShow: true,
+    addGitShow: true
   },
   // 删除商品图
   showRemoveImg: function (e) {
@@ -62,7 +63,7 @@ Page({
     pics.splice(index, 1)
     this.setData({
       show: false,
-      pics
+      pics: pics
     })
   },
   // 删除详情信息
@@ -372,6 +373,9 @@ Page({
     var arr1=this.data.pics
     if (y2 != 0) {
       var left = e.currentTarget.offsetLeft
+      if (left < 0) {
+        left = 0
+      }
       var top = e.currentTarget.offsetTop
       var windWidth = (wx.getSystemInfoSync().windowWidth-15)/4
       var leftIndex = (left / windWidth).toFixed()
@@ -447,6 +451,7 @@ Page({
       newConst = this.data.newConst,
       saleBatchNum=this.data.stock,
       goodsImageVOList=[],
+      _this=this,
       description='',
       skuList0 = [],
       skuList1 = [],
@@ -550,19 +555,29 @@ Page({
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": wholesalePrice
     }
-    Api.addGoods(goodsVO)
-      .then(res => {
-        wx.showToast({
-          title: '添加成功',
-          icon: 'none',
-          duration: 2000,
-          success:function(){
-            wx.redirectTo({
-              url: '../success/success',
-            })
-          }
+    this.setData({
+      addGitShow: false
+    },function(){
+      Api.addGoods(goodsVO)
+        .then(res => {
+          wx.showToast({
+            title: '添加成功',
+            icon: 'none',
+            duration: 2000,
+            success: function () {
+              wx.redirectTo({
+                url: '../success/success',
+              })
+            }
+          })
+        })
+        .catch(res => {
+          _this.setData({
+            addGitShow: true
+          })
         })
     })
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

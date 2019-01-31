@@ -9,7 +9,6 @@ Page({
   data: {
     pics: [],
     stockHide: false,
-    isShow: true,
     isStatus:true,
     mainx: 0,
     saveHide:true,
@@ -437,6 +436,9 @@ Page({
     var arr1 = this.data.pics
     if (y2 != 0) {
       var left = e.currentTarget.offsetLeft
+      if (left<0){
+        left=0
+      }
       var top = e.currentTarget.offsetTop
       var windWidth = (wx.getSystemInfoSync().windowWidth - 15) / 4
       var leftIndex = (left / windWidth).toFixed()
@@ -729,7 +731,7 @@ Page({
       that.setData({
         skuListAll: [],
         skuNum: '',
-        // newConst:'',
+        newConst:'',
         // sellPrice: '',
         // wholesalePrice: '',
         isEmptySku:true,
@@ -747,10 +749,6 @@ Page({
       }else{
         that.setData({
           pageall: currPage.data.mydata,
-        }, function () {
-          if (that.data.newConst) {
-            that.getCount(this.data.newConst)
-          }
         })
       }
       that.setData({
