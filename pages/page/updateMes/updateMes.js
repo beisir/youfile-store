@@ -1,11 +1,12 @@
 import Api from '../../../utils/api.js'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    palceName:"小云店名称",
+    palceName: app.globalData.projectName+"名称",
     value:'',
     emptyVal:0,
     num:0,
@@ -75,14 +76,8 @@ Page({
           icon: 'none',
           duration: 2000,
           success:function(){
-            var pages = getCurrentPages();             //  获取页面栈
-            var currPage = pages[pages.length - 1];
-            var prevPage = pages[pages.length - 2];    // 上一个页面
-            prevPage.setData({
-              code:0
-            })
-            wx.navigateBack({
-              data: 1
+            wx.redirectTo({
+              url: '../mesEdit/mesEdit',
             })
           }
         })

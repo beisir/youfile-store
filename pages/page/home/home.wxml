@@ -1,3 +1,7 @@
+
+<!-- 悬浮球 -->
+<returnBall>
+
 <view wx:if="{{initOrder && limitShow == 2}}">
   <initstroe></initstroe>
 </view>
@@ -8,7 +12,7 @@
 <mes show="{{isNotStore}}" bind:sureSelectArea="sureSelectAreaListener">
   <view class='tipMes'>
     <view>我是
-      <text>用户</text>,未开通新批零小云店,</view>
+      <text>用户</text>,未开通新批零{{globalData.projectName}},</view>
     <view>不提供进货商友功能哦~</view>
     <button bindtap='closeTip'>知道了</button>
   </view>
@@ -17,7 +21,7 @@
 <mes show="{{isStoreOwner}}" bind:sureSelectArea="sureSelectAreaListener">
   <view class='tipMes'>
     <view>我是
-      <text>新零售</text>小云店主,我们不 </view>
+      <text>新零售</text>{{globalData.projectName}}主,我们不 </view>
     <view>提供进货商友功能哦~</view>
     <button class='button-hover' bindtap='closeTip'>知道了</button>
   </view>
@@ -60,15 +64,15 @@
 <!--是否复制-->
 <mes show="{{copyGoods}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
-    <text>是否加入到小云店仓库中？</text>
+    <text>是否加入到{{globalData.projectName}}仓库中？</text>
     <button bindtap='copyGoodsYes'>确定</button>
   </view>
 </mes>
-<!--未开通小云店-->
+<!--未开通店-->
 <mes show="{{openStore}}" bind:sureSelectArea="sureSelectAreaListener">
   <view class='tip-v'>
-    <text>您还未申请小云店哦？</text>
-    <view>开通小云店可享一键入库功能</view>
+    <text>您还未申请{{globalData.projectName}}哦？</text>
+    <view>开通{{globalData.projectName}}可享一键入库功能</view>
     <button bindtap='openStore'>我要开店</button>
   </view>
 </mes>
@@ -102,7 +106,7 @@
       </navigator>
     </view>
     <view class="ym_sydtdmgzs">
-      <view class="store_name">{{store.storeName?store.storeName:"小云店"}}
+      <view class="store_name">{{store.storeName?store.storeName:globalData.projectName}}
         <view>{{store.storeNature=="1"?"新批零":"新零售"}}</view>
         <image wx:if='{{limitShow==2}}' bindtap='editDpMes' src="/image/edit.png" />
         <image wx:if='{{limitShow==3}}' class='firend-icon' src='/image/friend-icon.png'></image>
@@ -244,7 +248,7 @@
 </view>
 <!-- <view class='showHide' hidden='{{showDp}}'>
   <view class='sh-cont'>
-    <view class='sh-title'>更换小云店封面</view>
+    <view class='sh-title'>更换{{globalData.projectName}}封面</view>
     <view bindtap="chooseImage">拍照</view>
     <view bindtap="chooseImage">从手机相册选取</view>
     <view bindtap='closeShow'>取消</view>
@@ -256,3 +260,6 @@
 <view hidden='{{goRetailStore}}'>
   <retailStore></retailStore>
 </view>
+
+
+</returnBall>

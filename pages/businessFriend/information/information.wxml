@@ -41,7 +41,7 @@
    <text>楼座楼层</text><view wx:if='{{floorInfo!=null}}'>{{floorInfo.balconyName}} {{floorInfo.floorName}} {{floorInfo.areaName}} {{floorInfo.storeDoorNum}}</view>
   </view>
   <view class='in-cont' bindtap='urlHome'>
-   <text>小云店</text>
+   <text>{{globalData.projectName}}</text>
    <view style='min-height:120rpx' >
     <view wx:for='{{goodsList}}' wx:key='{{index}}' wx:if='{{index<4}}' class='in-more-img'><image  mode="widthFix" src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image></view>
     <view class='in-img'><image  mode="widthFix" src="/image/icl.png"></image></view>

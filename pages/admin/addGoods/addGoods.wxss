@@ -8,7 +8,7 @@
 .weui-cell:before{border-top:2rpx solid #E7E7E7}
 .weui-cell__ft{color:#333}
 .weui-title view{position:absolute;right:30rpx;top:0rpx;color:#999;font-size:30rpx}
-.weui-active{color:#C79359;font-weight:600}
+.weui-active{color:#C79359;font-weight:600;margin-right: 40rpx}
 .weui-cell__bd,.weui-cell__ft text{font-weight:600}
 .weui-cell__ft text{margin-right:30rpx}
 .weui-cell1{padding:10px 15px;display:-webkit-box;display:-webkit-flex;display:flex;padding-right:0;position:relative}
@@ -65,3 +65,4 @@
 .add-bottom{z-index:20}
 .page{overflow-x:hidden}
 .re_img{width:40rpx;height:40rpx;position:absolute;top:5rpx;margin-left:120rpx;z-index:100}
+.weui-cell__ft1 image.ca-you{width: 40rpx;height: 40rpx}

@@ -26,10 +26,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     hasUser: false,
     limitShow:1,
     indexEmpty: true,
     goRetailStore: true,
+  },
+  navigateToMyStore() {
+    app.navigate.toMyStore(app.globalData.navigateToAppID.xls, this.data.user.storeId)
   },
   toMyStore(){
     let toID = this.data.user.storeId;
@@ -55,7 +59,7 @@ Page({
           user: res.obj,
           hasUser: true
         })
-        //申请小云店小云点订单列表
+        //申请店订单列表
         //新批零店主
         if (res.obj.isStoreOwner == true && res.obj.storeNature == 1){
           this.setData({
@@ -174,7 +178,7 @@ Page({
       app.globalData.userShowTip = false;
       wx.showModal({
         title: '',
-        content: '请登录您的账号（购买时的手机号），开启您的小云店吧！',
+        content: '请登录您的账号（购买时的手机号），开启您的' + app.globalData.projectName+'吧！',
         showCancel:false,
       })
     }

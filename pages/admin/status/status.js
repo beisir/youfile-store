@@ -37,6 +37,11 @@ Page({
       value:value
     })
   },
+  goWork: function () {
+    wx.reLaunch({
+      url: '/pages/page/workIndex/workIndex',
+    })
+  },
   // blurInputEvent:function(){
   //   wx.navigateTo({
   //     url: '../serStatus/serStatus?value='+this.data.value,

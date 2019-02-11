@@ -31,7 +31,7 @@ Page({
         "channel": "wx_pay",
         "currency": "CNY",
         "code": code,
-        "goodsInfo": "小云店购买",
+        "goodsInfo": "购买",
         "orderNumber": this.data.num,
         "payWay": "wx_mini_app_pay",
         "tradeType": "JSAPI"

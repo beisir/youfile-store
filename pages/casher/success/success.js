@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     returnModal: false,
     secTime: 5,
     waitStatus: true
@@ -37,7 +38,7 @@ Page({
           wx.setStorageSync("storeId", toID)
           app.globalData.switchStore = true;
           wx.switchTab({
-            url: "../../page/user/user?layerText=请登陆购买账号后，点击小云店工作台初始化账户",
+            url: "../../page/user/user",
           })
         }
       } else {
@@ -55,7 +56,7 @@ Page({
           wx.setStorageSync("storeId", toID)
           app.globalData.switchStore = true;
           wx.switchTab({
-            url: "../../page/user/user?layerText=请登陆购买账号后，点击小云店工作台初始化账户",
+            url: "../../page/user/user",
           })
         }
       } else {
@@ -70,6 +71,19 @@ Page({
   ftfPay() {
     wx.navigateBack({ delta: 2 })
   },
+  toMyStoreXPl() {
+    app.navigate.toInit(app.globalData.navigateToAppID.xpl, this.data.storeId).then(res=>{
+      this.toUser();
+    })
+  },
+  toMyStoreXLS() {
+    app.navigate.toInit(app.globalData.navigateToAppID.xls, this.data.storeId).then(res => {
+      this.toUser();
+    })
+  },
+
+
+
   getUser() {
     Api.userInfor().then(res => {
       if (res.obj) {
@@ -109,7 +123,7 @@ Page({
       }
     }, 1000)
   },
-  afterTimer(){
+  afterTimer() {
     switch (this.data.type) {
       case "cloudXPL":
       case "cloudXLS":
@@ -124,7 +138,7 @@ Page({
     switch (this.data.type) {
       case "cloudXPL":
       case "cloudXLS":
-        obj.btnText = '开启小云店之旅';
+        obj.btnText = '开启' + app.globalData.projectName + '之旅';
         obj.loadText = "正在开启哦~";
         break;
     }

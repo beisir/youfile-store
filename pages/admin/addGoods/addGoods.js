@@ -47,6 +47,7 @@ Page({
     show: false,
     reImgIndex: 0,
     moveImgShow: true,
+    addGitShow: true
   },
   // 删除商品图
   showRemoveImg: function (e) {
@@ -62,7 +63,7 @@ Page({
     pics.splice(index, 1)
     this.setData({
       show: false,
-      pics
+      pics: pics
     })
   },
   // 删除详情信息
@@ -160,9 +161,9 @@ Page({
         })
       })
   },
-  newConst: function (event) {
+  // 计算库存
+  getCount(val){
     var _this = this,
-      val = event.detail.value,
       pageall = this.data.pageall,
       num = val.length,
       index1 = 1,
@@ -180,11 +181,15 @@ Page({
     len = index1 * index2
     if (num > 16) {
       Api.showToast("超过最长数字限制")
-    } 
+    }
     this.setData({
       newConst: val.substring(0, 9),
       allTotalNew: len * (val.substring(0, 9))
     })
+  },
+  newConst: function (event) {
+    var val = event.detail.value
+    this.getCount(val)
   },
   watchName: function (event) {
     var _this = this,
@@ -368,6 +373,9 @@ Page({
     var arr1=this.data.pics
     if (y2 != 0) {
       var left = e.currentTarget.offsetLeft
+      if (left < 0) {
+        left = 0
+      }
       var top = e.currentTarget.offsetTop
       var windWidth = (wx.getSystemInfoSync().windowWidth-15)/4
       var leftIndex = (left / windWidth).toFixed()
@@ -443,6 +451,7 @@ Page({
       newConst = this.data.newConst,
       saleBatchNum=this.data.stock,
       goodsImageVOList=[],
+      _this=this,
       description='',
       skuList0 = [],
       skuList1 = [],
@@ -546,19 +555,29 @@ Page({
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": wholesalePrice
     }
-    Api.addGoods(goodsVO)
-      .then(res => {
-        wx.showToast({
-          title: '添加成功',
-          icon: 'none',
-          duration: 2000,
-          success:function(){
-            wx.navigateTo({
-              url: '../success/success',
-            })
-          }
+    this.setData({
+      addGitShow: false
+    },function(){
+      Api.addGoods(goodsVO)
+        .then(res => {
+          wx.showToast({
+            title: '添加成功',
+            icon: 'none',
+            duration: 2000,
+            success: function () {
+              wx.redirectTo({
+                url: '../success/success',
+              })
+            }
+          })
+        })
+        .catch(res => {
+          _this.setData({
+            addGitShow: true
+          })
         })
     })
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -602,13 +621,13 @@ Page({
     if (currPage.data.isEmptySku != 1) {
       that.setData({
         skuListAll: [],
-        skuNum: '',
-        sellPrice: '',
-        wholesalePrice: '',
+        // skuNum: '',
+        // sellPrice: '',
+        // wholesalePrice: '',
         isEmptySku: true,
         pageShow: false,
-        newConst:'',
-        allTotalNew:'',
+        // newConst:'',
+        // allTotalNew:'',
         clickSpecShow: false,
       })
     }
@@ -616,6 +635,10 @@ Page({
       that.setData({
         pageall: currPage.data.mydata,
         modelPageAll: JSON.stringify(currPage.data.mydata),
+      },function(){
+        if (that.data.newConst){
+          that.getCount(this.data.newConst)
+        }
       })
     }
   },

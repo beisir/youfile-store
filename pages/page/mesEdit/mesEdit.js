@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     showHide: true,
     countData: '',
     storeId:'',
@@ -191,7 +192,7 @@ Page({
           servicePhone: storeMes.servicePhone == null || storeMes.servicePhone == "null" ? '' : storeMes.servicePhone,
           wechatNumber: storeMes.wechatNumber == null || storeMes.wechatNumber == "null" ? '' : storeMes.wechatNumber,
           wechatPublicAccount: storeMes.wechatPublicAccount == null || storeMes.wechatPublicAccount == "null" ? '' : storeMes.wechatPublicAccount,
-          address: storeMes.address == null || storeMes.address == "null" ? '' : storeMes.address,
+          address: storeMes.address == null || storeMes.address == "null" ? '请填写地址' : storeMes.address,
           province: storeMes.province == null || storeMes.province == "null" ? '' : storeMes.province,
           city: storeMes.city == null || storeMes.city == "null" ? '' : storeMes.city,
           county: storeMes.county == null || storeMes.county == "null" ? '' : storeMes.county,

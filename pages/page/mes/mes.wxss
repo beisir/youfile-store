@@ -35,7 +35,7 @@
 .weui_cells .weui-xian1{top:100rpx}
 .xyd{height:40rpx;width:40rpx;vertical-align:middle;margin-left:15rpx}
 .weui_cells .up-new-img image{height:100rpx;width:100rpx;margin:30rpx 10rpx}
-.weui_cells .up-new-img{text-align:left}
+.weui_cells .up-new-img{text-align:left;margin-left:42rpx}
 .new-weui .new-view{width:33.3%;display:inline-block;text-align:center;color:#999;font-size:26rpx;line-height:1;margin-bottom:65rpx}
 .new-weui .new-view view{color:#333;font-size:40rpx;margin-bottom:20rpx}
 .new-text{color:#CCAA77}

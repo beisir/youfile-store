@@ -10,13 +10,14 @@
     "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",
     "pages/faceToFaceOrder/createSuccess/createSuccess",
     "pages/faceToFaceOrder/createOrder/createOrder",
+    "pages/admin/addGoods/addGoods",
+    "pages/admin/status/status",
+    "pages/admin/spec/spec",
     "pages/cloudOrder/webInitStore/webInitStore",
     "pages/businessFriend/merchant/dealUser/dealUser",
-    "pages/admin/status/status",
-    "pages/admin/addGoods/addGoods",
     "pages/capital/haveRecord/haveRecord",
     "pages/capital/record/record",
-    "pages/capital/index/index",
+    "pages/capital/index/iworkIndex/workIndendex",
     "pages/capital/recordDetails/recordDetails",
     "pages/capital/bank/bank",
     "pages/page/cartList/cartList",
@@ -43,7 +44,6 @@
     "pages/role/order/order",
     "pages/cloudOrder/cloudPay/cloudPay",
     "pages/cloudOrder/newCloud/newCloud",
-    "pages/admin/spec/spec",
     "pages/page/orderSuccess/orderSuccess",
     "pages/role/allOrder/allOrder",
     "pages/payment/uploadPayment/uploadPayment",
@@ -159,6 +159,7 @@
   },
   "navigateToMiniProgramAppIdList": [
     "wx6241529c7dc70d51",
-    "wx1a7532a2abdd1698"
+    "wx1a7532a2abdd1698",
+    "wx5e0828787c26f235"
   ]
 }

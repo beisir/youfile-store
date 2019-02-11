@@ -7,8 +7,11 @@ Component({
     }
   },
   data: {
+    globalData: loginApp.globalData,
   },
   methods: {
-    
+    returnMall() {
+      loginApp.navigate.toMall()
+    }
   }
 })
