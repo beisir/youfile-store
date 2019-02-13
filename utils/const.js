@@ -16,8 +16,8 @@ export const authUrl = "https://dev-accounts.youlife.me"
 // export const authUrl = "https://accounts.youlife.me"
 
 export const projectName = "小云店"
-export const payAppNum =  "APP001"
-export const projectType =  "xpl"
+export const payAppNum = "APP001"
+export const projectType = "xpl"
 export const servesPhone = "01053361798"
 export const navigateToAppID = {
   me: 'wx4f385374765e4cbb',
