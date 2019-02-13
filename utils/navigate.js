@@ -1,10 +1,14 @@
 import {
   navigateToAppID
 } from "./const.js"
+
+import AuthHandler from './authHandler.js'
+
 class Navigate {
   //构造函数
   constructor() {
-
+    this.authHandler = new AuthHandler(),
+      this.env = 'trial'
   }
 
 
@@ -35,27 +39,29 @@ class Navigate {
 
   //去mall
   toMall() {
-    this.toProgram(navigateToAppID.platform, "pages/mall/newest/newest")
+    this.toProgram(navigateToAppID.platform)
   }
 
   //返回去逛逛
   returnBack() {
     let fromId = wx.getStorageSync('navigateFromAppId');
     if (fromId && (fromId == navigateToAppID.xpl || fromId == navigateToAppID.xls)) {
-      wx.navigateToMiniProgram({
-        appId: navigateToAppID.platform,
-        envVersion: 'trial'
-      })
+      this.toMall()
     } else {
+      let loginObj = this.authHandler.getTokenInfo()
+      let extraData = {}
+      if (loginObj) {
+        extraData = {
+          loginObj:JSON.stringify(loginObj)
+        }
+      }
       wx.navigateBackMiniProgram({
+        extraData,
         success(res) {
 
         },
         fail() {
-          wx.navigateToMiniProgram({
-            appId: navigateToAppID.platform,
-            envVersion: 'trial'
-          })
+          this.toMall()
         }
       })
     }
@@ -63,9 +69,15 @@ class Navigate {
 
   //跳转
   toProgram(targetAppId, targetPath, extraData) {
-    if (!extraData) { extraData = {} }
+    if (!extraData) {
+      extraData = {}
+    }
     extraData.appid = navigateToAppID.me;
 
+    let loginObj = this.authHandler.getTokenInfo()
+    if (loginObj) {
+      extraData.loginObj = JSON.stringify(loginObj)
+    }
     try {
       if (targetPath) {
         if (targetPath.indexOf("?") == -1) {
@@ -78,15 +90,17 @@ class Navigate {
           arr.push(key + "=" + extraData[key]);
         }
         targetPath = targetPath + arr.join("&");
+      }else{
+        targetPath = ""
       }
-    } catch (e) { }
+    } catch (e) {}
 
     return new Promise((resolve, reject) => {
       wx.navigateToMiniProgram({
         appId: targetAppId,
         path: targetPath,
         extraData,
-        envVersion: 'trial',
+        envVersion: this.env,
         success(res) {
           resolve(res)
         },
@@ -110,6 +124,12 @@ class Navigate {
     } else {
       wx.setStorageSync("navigateFromAppId", false)
     }
+
+    //登录信息
+    if (!this.authHandler.isLogin() && options.referrerInfo.extraData && options.referrerInfo.extraData.loginObj) {
+      this.authHandler.saveTokenInfo(JSON.parse(options.referrerInfo.extraData.loginObj))
+    }
+
   }
 
 

@@ -11,9 +11,9 @@ class TokenHandler {
   constructor() {
     //初始化基础的认证常量
     this.basicAuthorization = basicAuthorization,
-    this.defaultHeader = {
-      'content-type': 'application/json;charset=UTF-8'
-    },
+      this.defaultHeader = {
+        'content-type': 'application/json;charset=UTF-8'
+      },
       this.baseUrl = authUrl;
   }
   /**
@@ -223,6 +223,32 @@ class TokenHandler {
     wx.setStorageSync('merchantNumber', tokenInfo.merchantNumber);
   }
 
+  //获取token信息
+  getTokenInfo() {
+    let obj = {}
+    if (this.isLogin()) {
+      obj.access_token = wx.getStorageSync('access_token');
+      //取出token过期时间
+      obj.expires_in = wx.getStorageSync('expires_in');
+      //取出token type类型
+      obj.token_type = wx.getStorageSync('token_type');
+      //取出刷新token
+      obj.refresh_token = wx.getStorageSync('refresh_token');
+      //取出token作用范围
+      obj.scope = wx.getStorageSync('scope');
+      //取出license
+      obj.license = wx.getStorageSync('license');
+      //取出用户编号
+      obj.userId = wx.getStorageSync('userId');
+      //取出商户编号
+      obj.merchantNumber = wx.getStorageSync('merchantNumber');
+    } else {
+      obj = false
+    }
+
+    return obj
+  }
+
   /**
    * 清除token信息
    * */
@@ -250,6 +276,11 @@ class TokenHandler {
     return token != null && token != undefined && token != "";
   }
 
+  isLogin() {
+    let token = wx.getStorageSync('access_token')
+    return token != null && token != undefined && token != "";
+  }
+
   /**
    * 设置缓存信息
    */
@@ -259,6 +290,7 @@ class TokenHandler {
       data: value,
     })
   }
+
 
   /**
    * GET类型的网络请求
