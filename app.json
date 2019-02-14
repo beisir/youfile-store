@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/page/address/address",
     "pages/admin/addGoods/addGoods",
     "pages/admin/status/status",
     "pages/admin/spec/spec",
@@ -59,7 +60,6 @@
     "pages/page/details/details",
     "pages/page/allOrder/allOrder",
     "pages/page/indexEmpty/indexEmpty",
-    "pages/page/address/address",
     "pages/admin/class/class",
     "pages/page/classList/classList",
     "pages/page/postageInfo/postageInfo",
