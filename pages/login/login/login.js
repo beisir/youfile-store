@@ -75,24 +75,15 @@ Component({
     //忘记密码修改新密码
     creatNewPassword() {
       if (!this.testTel()) {
-        wx.showToast({
-          title: '请输入正确手机号码',
-          icon: 'none',
-        })
+        API.showToast('请输入正确手机号码')
         return;
       }
       if (this.data.verificationCode.length == 0) {
-        wx.showToast({
-          title: '请输入验证码',
-          icon: 'none',
-        })
+        API.showToast('请输入验证码')
         return;
       }
       if (this.data.password.length < 6 || this.data.password.length > 16) {
-        wx.showToast({
-          title: '密码必须是6 - 16位的数字或字母',
-          icon: 'none'
-        })
+        API.showToast('密码必须是6 - 16位的数字或字母')
         return
       }
       let obj = {
@@ -101,20 +92,14 @@ Component({
         smsCode: this.data.verificationCode
       }
       API.resetPassword(obj).then(res => {
-        wx.showToast({
-          title: res.message,
-          icon: 'none',
-        })
+        API.showToast(res.message)
         this.setData({
           forget: false,
           password: "",
           verificationCode: ""
         })
       }).catch(e=>{
-        wx.showToast({
-          title: e.data.message,
-          icon: 'none'
-        })
+        API.showToast(e.data.message)
       })
     },
     //登录
@@ -123,26 +108,17 @@ Component({
         return
       }
       if (this.data.btnID === 'loginBtnDis') {
-        wx.showToast({
-          title: '请填写完整',
-          icon: 'none',
-        })
+        API.showToast('请填写完整')
         return;
       }
       //校验
       if (!this.testTel()) {
-        wx.showToast({
-          title: '请输入正确手机号码',
-          icon: 'none',
-        })
+        API.showToast('请输入正确手机号码')
         return;
       }
       if (this.data.loginType == 'code') {
         if (this.data.verificationCode.length == 0) {
-          wx.showToast({
-            title: '请输入验证码',
-            icon: 'none',
-          })
+          API.showToast('请输入验证码')
           return;
         }
         let obj = {
@@ -170,10 +146,7 @@ Component({
       } else {
 
         if (this.data.password.length < 6 || this.data.password.length > 16) {
-          wx.showToast({
-            title: '密码必须是6 - 16位的数字或字母',
-            icon: 'none'
-          })
+          API.showToast('密码必须是6 - 16位的数字或字母')
           return
         }
 
@@ -202,10 +175,7 @@ Component({
         stopLoginBtn: false
       })
       if (res.message) {
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
+        API.showToast(res.message)
         return
       }
       if (res.access_token) {
@@ -214,10 +184,7 @@ Component({
         let curPage = pages[pages.length - 1];
         curPage.onLoad();
         curPage.onShow();
-        wx.showToast({
-          title: "登录成功",
-          icon: 'none'
-        })
+        API.showToast("登录成功")
       }
     },
     //显示隐藏密码
@@ -279,10 +246,7 @@ Component({
     //获取验证码
     getCode() {
       if (!this.testTel()) {
-        wx.showToast({
-          title: '请输入正确手机号码',
-          icon: 'none',
-        })
+        API.showToast('请输入正确手机号码')
       } else {
         API.phoneMessage({
           mobile: this.data.telephone

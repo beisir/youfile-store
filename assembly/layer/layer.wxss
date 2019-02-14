@@ -1,0 +1,48 @@
+/* assembly/layer/layer.wxss */
+
+.modal-back {
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+.modal-inner{
+  background: #fff;
+  border-radius: 10rpx;
+  width: 636rpx;
+  box-sizing: border-box;
+  padding: 20rpx 50rpx 50rpx;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 99999;
+  font-size: 26rpx;
+  color: #333;
+}
+.modal-close{
+  text-align: right;
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+}
+.modal-close image{
+  width: 40rpx;
+  height:40rpx;
+}
+
+.modal-title{
+  color:#333333;
+  font-size:36rpx;
+  text-align:center;
+  font-weight:600;
+  margin:0 auto 20rpx;
+  padding-top:60rpx;
+  padding-bottom:50rpx;
+  border-bottom:2rpx solid #EBEBEB;
+}

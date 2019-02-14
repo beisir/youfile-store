@@ -21,6 +21,9 @@ Page({
       case "cloudXLS":
         this.cloudPay();
         break;
+      case 'ftf':
+        this.ftfPay();
+        break;  
     }
   },
   cloudPay() {
@@ -64,6 +67,9 @@ Page({
         })
       }
     }
+  },
+  ftfPay() {
+    wx.navigateBack({ delta: 2 })
   },
   toMyStoreXPl() {
     app.navigate.toInit(app.globalData.navigateToAppID.xpl, this.data.storeId).then(res=>{

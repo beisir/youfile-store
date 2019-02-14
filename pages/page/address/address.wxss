@@ -64,3 +64,5 @@
 .el-size{font-size:26rpx}
 .com-name{max-width:155rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ad-fp-new{padding-right: 0;}
+.pay-item{width: 190rpx;height: 70rpx;background: #eeeeee;color: #333;font-size: 28rpx;text-align: center;line-height: 70rpx;border-radius: 10rpx;float: left;margin-right:40rpx;}
+.pay-item-ac{color: #fff;background: #ca7;}

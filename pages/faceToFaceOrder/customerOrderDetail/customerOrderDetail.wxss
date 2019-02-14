@@ -1,0 +1,131 @@
+@import '../customerOrderList/customerOrderList';
+.title-box{
+  height: 136rpx;
+  background-size: cover;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.title-icon{
+  height: 36rpx;
+  width: 36rpx;
+  margin-right: 26rpx;
+}
+.status-font{
+  font-size: 36rpx;
+}
+.title-time{
+  font-size: 24rpx;
+  text-align: right;
+  margin-bottom: 5rpx;
+}
+.title-price{
+  font-size: 22rpx;
+  text-align: right;
+}
+
+.store-box{
+  padding-top:35rpx;
+  padding-bottom: 35rpx;
+  background: #fff;
+}
+  .store-line{
+    position: relative;
+    padding-left: 55rpx;
+    margin-bottom: 15rpx;
+  }
+  .store-icon{
+    position: absolute;
+    left: 0;
+    height: 35rpx;
+    width: 35rpx;
+    top: 4rpx;
+  }
+
+  .store-add{
+    font-size: 30rpx;
+    font-weight: 600;
+  }
+  .store-time{
+    font-size: 26rpx;
+  }
+  /* 按钮 */
+  .btn-icon{
+    width: 50rpx;
+    height: 50rpx;
+    margin-right: 10rpx;
+  }
+
+  .mid-btn{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100rpx;
+    background: #fff;
+    margin: 20rpx 0;
+  }
+  .btn-line{
+    background: #ededed;
+    width: 1px;
+    height: 44rpx;
+  }
+
+  /* 货 */
+  .goods-detail-box{
+    background: #fff;
+  }
+/* 信息条 */
+.msg-list-box{
+  background: #fff;
+  padding-top: 25rpx;
+  padding-bottom: 25rpx;
+}
+.msg-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  margin: 10rpx 0;
+}
+  .msg-title{
+    color: #666; 
+  }
+  .msg-detail{
+    font-weight: 600;
+  }
+
+  .border-line{
+    background: #ddd;
+    height: 1rpx;
+    position: relative;
+    left: 45rpx;
+  }
+
+  .pay-price-title{
+    font-size: 28rpx;
+  }
+  .pay-price{
+    color: #d23636;
+    font-size: 34rpx;
+  }
+
+  /* 按钮 */
+  .bottom-btn-box{
+    height: 122rpx;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    left:0;
+    background: #fff;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 20rpx;
+    box-sizing: border-box;
+  }
+  .btn{
+    width: 200rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+  }

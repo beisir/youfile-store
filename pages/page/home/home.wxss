@@ -32,7 +32,7 @@
 .swiper-box view{text-align:center}
 .on view:last-child{height:2rpx;width:90rpx;background:#C79359;left:50%;margin:0 auto}
 .sort-c{z-index:1000;position:relative}
-.store_name view{display:inline-block;background:#CCAA77;font-size:24rpx;padding:0 15rpx;border-radius:10rpx;margin-left:6px;line-height:1.3;color:#fff}
+.store_name view{display:inline-block;background:#CCAA77;font-size:24rpx;padding:0rpx 15rpx;border-radius:10rpx;margin-left:6px;line-height:1.3;color:#fff}
 .add-firend{font-size:28rpx;height:100rpx;background:#fff;padding-left:40rpx;margin-top:-10rpx;margin-bottom:20rpx;border-top:2rpx solid #FAFAFA}
 .add-firend view{background:#FF5C52;color:#fff;display:inline-block;padding:0 5rpx;line-height:1.3;margin-right:15rpx;margin-top:30rpx;font-size:30rpx;border-radius:10rpx}
 .add-firend image{width:40rpx;height:40rpx;float:right;margin-right:40rpx;margin-top:24rpx}
@@ -54,3 +54,53 @@
 .result{background:#fff;margin-top:0rpx;padding-top:30rpx}
 .nomore{margin-bottom:0rpx;margin-top:0rpx;text-align:center;background:#f7f7f7;padding:30rpx}
 .ym_sydtdmgzs text{position: absolute;height: auto;width:500rpx;word-wrap:break-word}
+
+/* 轮播 */
+.swiper-tip-box{
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  background: #fff;  
+  padding: 0 50rpx 0 45rpx;
+  margin-top: -10rpx;  
+}
+.swiper-tips{
+  height: 80rpx;  
+  width: 500rpx;
+}
+  .swiper-tips swiper-item{
+    height: 80rpx;  
+    display: flex;
+    align-items: center;
+    font-size: 24rpx;
+    font-weight: 600;
+  }
+  .swiper-font-icon{
+    width: 30rpx;
+    height: 30rpx;
+    margin-right: 20rpx;
+  }
+  .more-tri-icon{
+    width: 30rpx;
+    height: 30rpx;
+  }
+.swipter-tip-height{
+  height: 130rpx;
+  padding-top: 7rpx;
+}
+.swipter-tip-item-height{
+  height: 50rpx;
+}
+.swiper-tri-box{
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.order-num{
+  color: #d23636;
+  font-size: 30rpx;
+}
+.store_name .firend-icon{
+  height: 30rpx;
+  width: 30rpx;
+}

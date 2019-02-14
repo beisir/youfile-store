@@ -41,10 +41,7 @@ Page({
       old = this.data.old;
 
     if (newpass.length < 6 || newpass.length > 16) {
-      wx.showToast({
-        title: '密码必须是6 - 16位的数字或字母',
-        icon: 'none'
-      })
+      API.showToast('密码必须是6 - 16位的数字或字母')
       return
     }
 
@@ -54,24 +51,15 @@ Page({
         oldPassword: old,
         newPassword: newpass
       }).then((res) => {
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
+        API.showToast(res.message)
           setTimeout(() => {
             wx.navigateBack({})
           }, 1000)
       }).catch(e=>{
-        wx.showToast({
-          title: e.data.message,
-          icon:'none'
-        })
+        API.showToast(e.data.message)
       })
     } else {
-      wx.showToast({
-        title: '新密码输入不一致',
-        icon: 'none'
-      })
+      API.showToast('新密码输入不一致')
     }
   },
   /**

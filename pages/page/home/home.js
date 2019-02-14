@@ -48,12 +48,48 @@ Page({
     src: '',
     goodsName: '',
     copyGoods: false,
-    openStore: false
+    openStore: false,
+    tipIndex: 0,
   },
   //到店弹框
   showStoreOrder() {
-    this.selectComponent("#storeOrder").open();
+    if (authHandler.isLogin()) {
+      this.selectComponent("#storeOrder").open(this);
+    }else{
+      this.selectComponent("#storeOrder").close();
+    }
   },
+  //轮播消息
+  toUser() {
+    wx.switchTab({
+      url: '/pages/page/user/user'
+    })
+  },
+  stopSwiperTip() {
+    this.setData({
+      showAllTip: true,
+      tipIndex: 0
+    })
+  },
+  continueSwiperTip() {
+    this.setData({
+      showAllTip: false,
+    })
+  },
+  swiperItemControl(){
+    if (authHandler.isLogin()) {
+      Api.unpaidOrderNum().then(res=>{
+        this.setData({
+          unpaidOrderNum: res.obj.totalOrderCount
+        })
+      })
+    }else{
+      this.setData({
+        unpaidOrderNum:0
+      })
+    }
+  },
+  //开店
   openStore: function () {
     wx.navigateTo({
       url: '../../cloudOrder/newCloud/newCloud',
@@ -768,6 +804,9 @@ Page({
       getFollw: authHandler.isLogin(),
       disLike: false,
     })
+
+    this.showStoreOrder();  //到店订单弹窗
+    this.swiperItemControl()  //轮播接口
   },
 
   /**

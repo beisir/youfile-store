@@ -48,20 +48,24 @@ Page({
         if (res.data.code == 0) {
           this.payment(res.data.obj.payData);
         } else {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'none'
-          })
+          setTimeout(() => {
+            wx.showToast({
+              title: res.data.message,
+              icon: 'none'
+            })
+          }, 0)
           // setTimeout(() => {
           //   wx.navigateBack()
           // }, 1000)
         }
       },
       fail: (e) => {
-        wx.showToast({
-          title: e.data.message,
-          icon: 'none'
-        })
+        setTimeout(()=>{
+          wx.showToast({
+            title: e.data.message,
+            icon: 'none'
+          })
+        },0)
 
       },
       complete() {
@@ -117,7 +121,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       num: options.num,
-      orderType: options.type
+      orderType: options.type ? options.type:""
     })
     this.buy();
 

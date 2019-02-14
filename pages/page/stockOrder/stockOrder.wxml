@@ -37,7 +37,8 @@
   </view>
 </mes>
 <!-- 付款码 -->
-<savePayment show='{{paymentModal}}' com-name='{{paymentItem.storeInfo.storeName}}' wx='{{paymentItem.storeInfo.wechatNumber}}' goodsName='{{paymentItem.goodsInfoList[0].goodsName}}' goods-num="{{paymentItem.num}}" price="{{paymentItem.orderAmount}}" head="{{paymentItem.storeInfo.logo?baseUrl+paymentItem.storeInfo.logo:''}}"></savePayment>
+<savePayment show='{{paymentModal}}' com-name='{{paymentItem.storeInfo.storeName}}' wx='{{paymentItem.storeInfo.wechatNumber}}' goodsName='{{paymentItem.goodsInfoList[0].goodsName}}' goods-num="{{paymentItem.num}}" price="{{paymentItem.orderAmount}}"
+  head="{{paymentItem.storeInfo.logo?baseUrl+paymentItem.storeInfo.logo:''}}"></savePayment>
 
 
 <image class='serchImg {{style?"serchImg1":""}}' src="/image/search.png"></image>
@@ -50,7 +51,7 @@
 <!-- 列表 -->
 <view wx:if="{{showList.length>0}}">
   <view class='cf-cont' wx:for="{{showList}}" wx:key="{{index}}">
-    <navigator url="../home/home" open-type='switchTab'>        
+    <navigator url="../home/home" open-type='switchTab'>
       <view class='c-title' data-status='{{item.orderStatus}}' data-type='{{item.logisticsMode}}' data-num="{{item.orderNumber}}">
         <image src="/image/ic1.png"></image> {{item.storeInfo.storeName}}
         <image class='itimg' src="/image/icl.png"></image>
@@ -109,9 +110,18 @@
 
       <!-- 代收款 1自提-->
       <view class='or-last' wx:if="{{item.orderStatus=='unpaid'}}">
-        <button wx:if="{{hasPayImg}}" class='or-active' bindtap='showModal' data-index="{{index}}" data-type="payment">付款码</button>
-        <button wx:if="{{!item.payVoucher}}" data-num="{{item.orderNumber}}" bindtap='uploadVoucher' class='or-active'> 上传付款凭证 </button>
-        <button wx:else data-num="{{item.orderNumber}}" bindtap='uploadVoucher' class='or-active'> 再次上传凭证 </button>
+        <!-- 线上 -->
+        <block wx:if="{{item.payType=='online'}}">
+          <navigator url='../../casher/casher/casher?num={{item.orderNumber}}'>
+            <button class='or-active'>付款</button>
+          </navigator>
+        </block>
+        <!-- 线下 -->
+        <block wx:else>
+          <button wx:if="{{hasPayImg}}" class='or-active' bindtap='showModal' data-index="{{index}}" data-type="payment">付款码</button>
+          <button wx:if="{{!item.payVoucher}}" data-num="{{item.orderNumber}}" bindtap='uploadVoucher' class='or-active'> 上传付款凭证 </button>
+          <button wx:else data-num="{{item.orderNumber}}" bindtap='uploadVoucher' class='or-active'> 再次上传凭证 </button>
+        </block>
         <button bindtap='showModal' data-type='cancel' data-num="{{item.orderNumber}}">取消进货单</button>
       </view>
 

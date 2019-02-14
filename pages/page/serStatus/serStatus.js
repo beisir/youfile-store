@@ -189,11 +189,7 @@ Page({
         _this.setData({
           result: result,
         })
-        wx.showToast({
-          title: '上架成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast('上架成功')
       })
 
   },
@@ -215,11 +211,7 @@ Page({
     that.data.detailList.splice(indexDel, 1)
     Api.adminGoodsDelete({ goodId: goodsIdDel })
       .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast('删除成功')
         that.setData({
           detailList: that.data.detailList
         })
@@ -239,11 +231,7 @@ Page({
         _this.setData({
           result: result,
         })
-        wx.showToast({
-          title: '下架成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast('下架成功')
       })
   },
   /**
