@@ -45,6 +45,10 @@ class Navigate {
   //返回去逛逛
   returnBack() {
     let fromId = wx.getStorageSync('navigateFromAppId');
+    if (!fromId) {
+      this.toMall()
+      return
+    }
     if (fromId && (fromId == navigateToAppID.xpl || fromId == navigateToAppID.xls)) {
       this.toMall()
     } else {
@@ -52,7 +56,7 @@ class Navigate {
       let extraData = {}
       if (loginObj) {
         extraData = {
-          loginObj:JSON.stringify(loginObj)
+          loginObj: JSON.stringify(loginObj)
         }
       }
       wx.navigateBackMiniProgram({
@@ -90,10 +94,10 @@ class Navigate {
           arr.push(key + "=" + extraData[key]);
         }
         targetPath = targetPath + arr.join("&");
-      }else{
+      } else {
         targetPath = ""
       }
-    } catch (e) {}
+    } catch (e) { }
 
     return new Promise((resolve, reject) => {
       wx.navigateToMiniProgram({
