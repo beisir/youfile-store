@@ -34,6 +34,7 @@ page{
 .user-icon{
   max-width: 122rpx;
   max-height: 122rpx;
+  border-radius:10rpx;
 }
 .user-name{
   font-size: 36rpx;
@@ -152,7 +153,7 @@ page{
 
 .reminder{
   font-size: 28rpx;
-  color: #333;
+  color: #999;
   text-align: center;
   line-height: 1;
   margin-top: 20rpx;

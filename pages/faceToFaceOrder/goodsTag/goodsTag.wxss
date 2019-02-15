@@ -83,7 +83,7 @@ page{
   bottom: 0;
   left: 0;
   right: 0;
-  width: 95%;
+  width: 100%;
   margin: auto;
   box-sizing: border-box;
   border-top: 1px solid #ddd;

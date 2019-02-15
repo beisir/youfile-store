@@ -99,8 +99,8 @@
   .border-line{
     background: #ddd;
     height: 1rpx;
-    position: relative;
-    left: 45rpx;
+    box-sizing: border-box;
+    margin-left: 45rpx;
   }
 
   .pay-price-title{
