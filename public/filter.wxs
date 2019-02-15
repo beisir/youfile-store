@@ -44,10 +44,23 @@ var my_slice = function(str,a){
   return str;  
 }
 
+var filterOrderNum = function (num) {
+  if (num) {
+    num = parseInt(num)
+    if (num > 100){
+      return "99+"
+    }
+    return num
+  } else {
+    return 0
+  }
+}
+
 module.exports = {
   filterMoney: filterMoney,
   plusNum: plusNum,
   filterTime: filterTime,
   filterNull: filterNull,
-  my_slice: my_slice
+  my_slice: my_slice,
+  filterOrderNum: filterOrderNum
 }

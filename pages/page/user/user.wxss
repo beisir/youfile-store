@@ -105,7 +105,7 @@
   right:34%;
   top:14rpx;
   color: white;
-  font-size: 18rpx;
+  font-size: 14rpx;
   text-align: center;
 }
 .weui-back{
