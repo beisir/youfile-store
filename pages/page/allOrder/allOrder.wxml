@@ -258,7 +258,8 @@
     </block>
   </view>
   <view style='margin:0;'>支付方式
-    <text>其他支付方式</text>
+    <text wx:if="{{order.payType=='online'}}">线上支付</text>
+    <text wx:else>其他支付方式</text>
   </view>
 </view>
 
