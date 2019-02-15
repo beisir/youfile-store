@@ -41,7 +41,7 @@
 
 <view class='wk-cont'>
   <view class='wk-title'>
-    <text bindtap='tradeAmount'>今日收款 (元）</text><image src="/image/ca2.png"></image>
+    <text bindtap='tradeAmount'>今日收款 (元）</text><image bindtap='tradeAmount' src="/image/ca2.png"></image>
     <view>
       {{todayMerchantTrade.tradeAmount}}
       <view class='ca-right' bindtap='goRecord'>
