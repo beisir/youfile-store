@@ -1,0 +1,11 @@
+<view class='modal-back' wx:if="{{show}}">
+  <view class='modal-inner'>
+    <view style='overflow:hidden;'>
+      <view class="modal-close" bindtap='close'><image src="/image/clo12.png"  bindtap='cancel'></image></view>          
+    </view>
+    <view>
+      <view class='modal-title'>{{title}}</view>
+      <slot></slot>
+    </view>
+  </view>
+</view>

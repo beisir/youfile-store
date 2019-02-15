@@ -77,11 +77,7 @@ Page({
     var _this=this
     Api.addressDelete({ id:this.data.id})
       .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none',
-          duration: 2000,
-        })
+        Api.showToast('删除成功')
         this.getList()
       })
   },

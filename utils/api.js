@@ -76,7 +76,7 @@ import {
   uploadLogoImgUrl,
   storeIndexUrl,
   setUserNameUrl,
-  getUserDetaislUrl,
+  getUserDetailUrl,
   userIdentityUrl,
   classListApiUrl,
   quitUrl,
@@ -97,6 +97,7 @@ import {
   miniProgramCodeUrl,
   addDxpressUrl,
   addRemarkUrl,
+  updatetotalUrl,
   classCodeParUrl,
   updateGoodsUrl,
   seeVoucherUrl,
@@ -104,6 +105,7 @@ import {
   getStoreDetailsUrl,
   userInforUrl,
   supplyOrderUrl,
+  receiveOrderUrl,
   showPurchaserUrl,
   showMerchantUrl,
   getPaymentImgUrl,
@@ -114,14 +116,33 @@ import {
   updateClassUrl,
   threeFloorListUrl,
   orderDetailUrl,
+  ifWholesalerUrl,
+  shopkeeperOrderListUrl,
+  helpOrderUrl,
+  ftfCloseOrderUrl,
+  ftfAdminOrderDetailUrl,
+  customerOrderListUrl,
+  ftfCustomerOrderDetailUrl,
+  ftfCaneledOrderUrl,
+  ftfDelOrderUrl,
   getUserInfoUrl,
   getStoreNatureUrl,
   getStoreDataUrl,
+  ftfGoodsListUrl,
+  ftfCreatGoodsUrl,
+  ftfDelGoodsUrl,
+  ftfEditGoodsUrl,
+  ftfGoodsIfExistUrl,
+  recentlyFocusUserUrl,
+  searchUserInfoByTelUrl,
+  unpaidOrderNumUrl,
+  ftfRecentOrderUrl,
   getBankcardUrl,
   getTradeUrl,
   getAccountinUrl,
   getAccountDetailUrl,
-  getHaveRecordUrl
+  getHaveRecordUrl,
+  storeOnlinePayUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -138,7 +159,7 @@ function showToast(message) {
   wx.showToast({
     title: message,
     icon: 'none',
-    duration: 2000,
+    duration: 3000,
   })
 }
 /**判断楼座是否为空**/
@@ -584,8 +605,8 @@ function getStoreName(data) {
 }
 
 /**获取用户信息**/
-function getUserDetaisl(data) {
-  return app.http.getRequest(getUserDetaislUrl, data)
+function getUserDetail(data) {
+  return app.http.getRequest(getUserDetailUrl, data)
 }
 /**权限设置**/
 function apiAddUser(data) {
@@ -608,7 +629,7 @@ function changeIcon(data){
 }
 // 验证取货码
 function testGoodCode(data){
-  return app.http.putRequest(testGoodCodeUrl,data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.postRequest(testGoodCodeUrl,data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 // 上传凭证
 function uploadVoucher(data){
@@ -633,22 +654,30 @@ function registerPhoneMsg(data) {
 // 关闭订单
 function closeOrder(data){
   let url = closedOrderUrl + "?reason=" + encodeURI(data.reason)
-  return app.http.putRequest(url, data)
+  return app.http.postRequest(url, data)
 }
 // 取消订单
 function cancelOrder(data){
   let url = cancelOrderUrl + "?reason=" + encodeURI(data.reason)
-  return app.http.putRequest(url, data)
+  return app.http.postRequest(url, data)
+}
+//确认收货
+function receiveOrder(data){
+  return app.http.postRequest(receiveOrderUrl,data)
 }
 // 添加快递
 function addExpress(data){
   let expressCompany = data.expressCompany ? data.expressCompany:"";
   let expressNumber = data.expressNumber ? data.expressNumber:"";
-  return app.http.putRequest(addDxpressUrl + "?expressCompany=" + encodeURI(expressCompany) + "&expressNumber=" + encodeURI(expressNumber), data)
+  return app.http.postRequest(addDxpressUrl + "?expressCompany=" + encodeURI(expressCompany) + "&expressNumber=" + encodeURI(expressNumber), data)
 }
 // 订单填写商家备注
 function addRemark(data){
   return app.http.putRequest(addRemarkUrl + "?remark=" + encodeURI(data.remark), data)
+}
+//改价
+function updatetotal(data){
+  return app.http.postRequest(updatetotalUrl, data)
 }  
 // 查看凭证
 function seeVoucher(data){
@@ -701,6 +730,95 @@ function threeFloorList(data) {
 function getOrderDetail(data){
   return app.http.getRequest(orderDetailUrl,data);
 }
+//是否进货商
+function ifWholesaler(data){
+  return app.http.getRequest(ifWholesalerUrl,data);
+}
+//门店商家列表
+function getStoreOrderAdmin(data){
+  data = initStoreId(data);    
+  return app.pageRequest.pageGet(shopkeeperOrderListUrl, data)
+}
+// 帮他下单
+function helpOrder(data){
+  data = initStoreId(data);    
+  return app.http.postRequest(helpOrderUrl, data);
+}
+//关闭订单
+function ftfCloseOrder(data){
+  return app.http.postRequest(ftfCloseOrderUrl, data);
+}
+//取消订单
+function ftfCaneledOrder(data){
+  return app.http.postRequest(ftfCaneledOrderUrl, data);
+}
+//删除订单
+function ftfDelOrder(data){
+  return app.http.deleteRequest(ftfDelOrderUrl, data);
+}
+//商家订单详情
+function ftfAdminOrderDetail(data){
+  return app.http.getRequest(ftfAdminOrderDetailUrl, data);
+}
+// 门店顾客列表
+function customerOrderList(data) {
+  data = initStoreId(data);
+  return app.pageRequest.pageGet(customerOrderListUrl, data)
+}
+//门店顾客订单详情
+function ftfCustomerOrderDetail(data){
+  return app.http.getRequest(ftfCustomerOrderDetailUrl, data);
+}
+// 门店商品列表
+function ftfGoodsList(data){
+  data = initStoreId(data);
+  return app.http.getRequest(ftfGoodsListUrl, data);
+}
+//添加
+function ftfCreatGoods(data){
+  data = initStoreId(data);
+  return app.http.postRequest(ftfCreatGoodsUrl, data);
+}
+//删除
+function ftfDelGoods(data){
+  return app.http.deleteRequest(ftfDelGoodsUrl, data);
+}
+//编辑
+function ftfEditGoods(data){
+  return app.http.putRequest(ftfEditGoodsUrl, data);
+}
+//查重
+function ftfGoodsIfExist(data){
+  data = initStoreId(data);
+  return app.http.getRequest(ftfGoodsIfExistUrl, data);
+}
+
+//最近关注用户列表
+function recentlyFocusUser(data){
+  data = initStoreId(data);
+  return app.http.getRequest(recentlyFocusUserUrl, data);
+}
+//查询用户肖像
+function searchUserInfoByTel(data){
+  return app.http.getRequest(searchUserInfoByTelUrl, data);
+}
+//待付款订单
+function unpaidOrderNum(data){
+  data = initStoreId(data);
+  return app.http.getRequest(unpaidOrderNumUrl,data);
+}
+//最近到店订单
+function ftfRecentOrder(data){
+  data = initStoreId(data);
+  return app.http.getRequest(ftfRecentOrderUrl, data);
+}
+//商家是否支持在线支付
+function storeOnlinePay(data){
+  data = initStoreId(data);
+  return app.http.getRequest(storeOnlinePayUrl,data);
+}
+
+
 /**
  * 根据userId获取店铺Id
  */
@@ -800,6 +918,25 @@ function getStoreId() {
   }
 }
 module.exports = {
+  storeOnlinePay,
+  ftfRecentOrder,
+  unpaidOrderNum,
+  searchUserInfoByTel,
+  recentlyFocusUser,
+  ftfGoodsList,
+  ftfCreatGoods,
+  ftfDelGoods,
+  ftfEditGoods,
+  ftfGoodsIfExist,
+  ftfDelOrder,
+  ftfCaneledOrder,
+  customerOrderList, 
+  ftfCustomerOrderDetail,
+  ftfAdminOrderDetail: ftfAdminOrderDetail,
+  ftfCloseOrder: ftfCloseOrder,
+  helpOrder: helpOrder,
+  getStoreOrderAdmin: getStoreOrderAdmin,
+  ifWholesaler: ifWholesaler,
   getStoreNature: getStoreNature,
   getStoreData:getStoreData,
   getUserInfo: getUserInfo,
@@ -818,8 +955,10 @@ module.exports = {
   supplyOrde: supplyOrde,
   toCuttingImg: toCuttingImg,
   seeVoucher: seeVoucher,
+  updatetotal: updatetotal,
   addRemark: addRemark,
   addExpress: addExpress,
+  receiveOrder: receiveOrder,
   cancelOrder: cancelOrder,
   closeOrder: closeOrder,
   resetPassword: resetPassword,
@@ -913,7 +1052,7 @@ module.exports = {
   adminGetDetails: adminGetDetails,
   storeIndex: storeIndex,
   setUserName: setUserName,
-  getUserDetaisl: getUserDetaisl,
+  getUserDetail: getUserDetail,
   userIdentity: userIdentity,
   customCategoryCode: customCategoryCode,
   quit: quit,

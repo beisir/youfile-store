@@ -1,0 +1,19 @@
+page{font-size:26rpx;color:#333;background:#fff}
+view{line-height:1}
+.padding-box{padding-left:50rpx;padding-right:50rpx}
+.flex-center{display:flex;align-items:center}
+.title-box{display:flex;align-items:center;justify-content:space-between;font-size:48rpx;font-weight:600;padding:58rpx 0 98rpx}
+.scan-icon{height:50rpx;width:50rpx}
+.search-box{height:120rpx;box-sizing:border-box;border:1rpx solid #ca7;display:flex;align-items:center;justify-content:space-between;padding:0 37rpx 0 32rpx;background:#fafafa;border-radius:10rpx;font-size:30rpx}
+.o-search-icon{height:42rpx;width:42rpx}
+.place-font{color:#999}
+.list-type{margin:20rpx 0 80rpx;display:flex;justify-content:space-between}
+.list-item{background:#fafafa;border-radius:10rpx;text-align:center;height:80rpx;line-height:80rpx;color:#666;width:167rpx}
+.focus-user{border-left:5rpx solid #ca7;font-size:36rpx;padding-left:20rpx;margin-bottom:50rpx}
+.user-item{display:flex;align-items:center;justify-content:space-between;height:100rpx;font-size:30rpx}
+.user-icon{height:66rpx;width:66rpx;margin-right:30rpx;border-radius:50%}
+.help-btn{color:#ca7;border:2rpx solid #ca7;text-align:center;width:160rpx;height:60rpx;font-size:26rpx;line-height:60rpx}
+.no-user{padding-top:30rpx;text-align:center}
+.warn-icon{height:50rpx;width:50rpx;margin-right:10rpx}
+.nouser-tip{justify-content:center;margin-bottom:120rpx;color:#999;font-size:30rpx}
+.gold-color-tip{color:#ca7;font-size:36rpx;line-height:1.4}

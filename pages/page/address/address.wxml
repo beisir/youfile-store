@@ -1,3 +1,6 @@
+<bottomLayer title='支付方式' id='payway'>
+  <view wx:for="{{payType}}" data-type="{{item.type}}" wx:key="{{index}}" class='pay-item {{item.check?"pay-item-ac":""}}' bindtap='chosePaytype'>{{item.name}}</view>
+</bottomLayer>
 <view class='ad-top'>
   <view class="{{currentTab==1?'ad-active':''}}" data-current="1" data-current="1" bindtap="swichNav">
     <image src="{{currentTab==0?'/image/car0.png':'/image/car.png'}}"></image>物流配送</view>
@@ -49,12 +52,12 @@
       <image class='ad-itimg ad-itimg4' src="/image/addrbg.png"></image>
     </view>
   </navigator>
-  <view class='item-box flex-between payway-box'>
+  <view class='item-box flex-between payway-box' bindtap='showPayway'>
     <view class='flex-center'>
       <image style="margin-left:7rpx;" class='s-icon' src='/image/wallet.png'></image>支付方式
     </view>
     <view class='flex-center gray-font s-font'>
-      其他支付方式
+      {{checkedPaytype.name}}
       <image class='tri-icon' src="/image/icl.png"></image>
     </view>
   </view>

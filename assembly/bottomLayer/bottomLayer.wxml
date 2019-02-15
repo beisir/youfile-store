@@ -1,0 +1,13 @@
+<!--assembly/bottomLayer.wxml-->
+<view class='modal' hidden='{{bottomLayer}}'>
+  <view class='layer-body'>
+    <view class='close-header' bindtap='close'>
+      <image class='close-img' src='/image/close.png'></image>
+    </view>
+    <view class='title padding-box'>{{title}}</view>
+    <scroll-view class='scroll padding-box' scroll-y='true'>
+      <slot/>
+    </scroll-view>
+    <view class='sure-btn' bindtap='sure'>确定</view>
+  </view>
+</view>

@@ -7,7 +7,7 @@
 .wx-bot-cont>view,.wx-bot-cont>navigator{width:25%;margin-top:80rpx;display:inline-block;text-align:center}
 .wk-bot>view .wk-xian,.wk-bot>navigator .wk-xian{height:45rpx;background:#EEEEEE;width:2rpx;position:absolute;top:38rpx}
 .wk-bot>.wk-fg{background:#EEEEEE;width:88%;position:absolute;height:2rpx;top:140rpx;left:6%}
-.wx-bot-cont{font-size:28rpx;padding-bottom:80rpx}
+.wx-bot-cont{font-size:28rpx;padding-bottom:80rpx;margin-bottom:120rpx}
 .wk-title image{width:55rpx;position:absolute;right:20rpx;top:50rpx}
 .wx-bot-cont image{width:45rpx}
 .wx-bot-cont>view view:first-child{width:50rpx;height:50rpx;margin:0 auto;padding-bottom:10rpx}

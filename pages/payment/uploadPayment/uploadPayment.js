@@ -35,10 +35,7 @@ Page({
       var url = JSON.parse(res).obj
       if (url){
         Api.putPaymentImg({ receiptCode:url}).then(res=>{
-          wx.showToast({
-            title: res.message,
-            icon:'none'
-          })
+          Api.showToast(res.message)
           this.setData({
             imgUrl: url
           })

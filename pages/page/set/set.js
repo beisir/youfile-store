@@ -14,10 +14,7 @@ Page({
   quit() {
 
     API.quit({ accesstoken: this.data.token}).then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: "none"
-      })
+      API.showToast(res.message)
       app.authHandler.flushTokenInfo();
       this.setData({
         token: ""

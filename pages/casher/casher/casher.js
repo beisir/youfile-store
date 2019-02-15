@@ -1,5 +1,6 @@
 // pages/casher/casher/casher.js
 const app = getApp();
+import { indexUrl } from "../../../utils/const.js";
 Page({
 
   /**
@@ -48,20 +49,24 @@ Page({
         if (res.data.code == 0) {
           this.payment(res.data.obj.payData);
         } else {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'none'
-          })
+          setTimeout(() => {
+            wx.showToast({
+              title: res.data.message,
+              icon: 'none'
+            })
+          }, 0)
           // setTimeout(() => {
           //   wx.navigateBack()
           // }, 1000)
         }
       },
       fail: (e) => {
-        wx.showToast({
-          title: e.data.message,
-          icon: 'none'
-        })
+        setTimeout(()=>{
+          wx.showToast({
+            title: e.data.message,
+            icon: 'none'
+          })
+        },0)
 
       },
       complete() {
@@ -111,15 +116,38 @@ Page({
       url: '../success/success?type=' + this.data.orderType + "&price=" + this.data.price,
     })
   },
+  //获取订单详情
+  getDetail(){
+    app.authHandler.getTokenOrRefresh().then(token => {
+      if (token) {
+        wx.request({
+          url: indexUrl + '/pay/cashier/index/' + this.data.num,
+          method: 'POST',
+          header: {
+            "Authorization": token
+          },
+          success: res=>{
+            console.log(res)
+          },
+          fail: e=>{
+
+          }
+        })
+      
+      }
+    })  
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
       num: options.num,
-      orderType: options.type
+      orderType: options.type ? options.type:""
     })
-    this.buy();
+    this.getDetail()
+    this.buy()
 
     if (options.loginObj) {
       let user = JSON.parse(options.loginObj);

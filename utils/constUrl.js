@@ -62,7 +62,7 @@ export const uploadLogoImgUrl='/admin/store/{{storeId}}/logo'
 export const topGoodsUrl='/admin/shop/goods/top/{{goodsId}}'
 export const storeIndexUrl='/admin/store/{{storeId}}/index'
 export const setUserNameUrl='/admin/shop/storecustomer/remark/{{storeId}}/{{userId}}/{{remark}}'
-export const getUserDetaislUrl='/api/user/bymobile/{{mobile}}'
+export const getUserDetailUrl='/api/user/bymobile/{{mobile}}'
 export const userIdentityUrl='/api/store/{{storeId}}/user/identity'
 export const miniProgramCodeUrl='/api/store/{{storeId}}'
 export const recentGoodsUrl='/api/shop/store/{{storeId}}/user/goods/recent'
@@ -111,8 +111,10 @@ export const closedOrderUrl = "/admin/order/{{orderNumber}}/closed"
 export const cancelOrderUrl = "/api/order/{{orderNumber}}/cancel"
 export const addDxpressUrl = "/admin/order/{{orderNumber}}/addexpress"
 export const addRemarkUrl = "/admin/order/{{orderNumber}}/addRemark"
+export const updatetotalUrl = "/admin/order/{{orderNumber}}/updatetotal"
 export const seeVoucherUrl = "/api/order/orderpayment/{{orderNumber}}"
 export const supplyOrderUrl = "/api/order/"
+export const receiveOrderUrl = "/api/order/{{orderNumber}}/receive"
 // 扫一扫
 export const showPurchaserUrl='/admin/bizscan/purchaser/{{userId}}'
 export const showMerchantUrl='/admin/bizscan/merchant/{{userId}}'
@@ -125,6 +127,38 @@ export const copyGoodsUrl='/api/shop/goods/copy/{{originGoodsId}}'
 export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 //订单详情
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
+// 是否为进货商
+export const ifWholesalerUrl = "/admin/user/profile/{{userId}}"
+// 商家门店订单
+export const shopkeeperOrderListUrl = "/admin/ftf/order/store/{{storeId}}/orderstatus/{{orderStatus}}"
+export const customerOrderListUrl ="/api/ftf/order/user/store/{{storeId}}/orderstatus/{{orderStatus}}"
+// 帮他下单
+export const helpOrderUrl = "/admin/ftf/order"
+//门店订单详情
+export const ftfAdminOrderDetailUrl = "/admin/ftf/order/byordernumber/{{orderNumber}}"
+export const ftfCustomerOrderDetailUrl = "/api/ftf/order/byordernumber/{{orderNumber}}"
+//门店关闭订单
+export const ftfCloseOrderUrl = "/admin/ftf/order/{{orderNumber}}/closed"
+export const ftfCaneledOrderUrl = "/api/ftf/order/{{orderNumber}}/cancel"
+// 删除订单
+export const ftfDelOrderUrl = "/api/ftf/order/{{orderNumber}}"
+// 线下商品
+export const ftfGoodsListUrl = "/admin/shop/offlinegoods/{{storeId}}/list" 
+export const ftfCreatGoodsUrl = "/admin/shop/offlinegoods"
+export const ftfDelGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}"
+export const ftfEditGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}/byid"
+export const ftfGoodsIfExistUrl = "/admin/shop/offlinegoods/{{storeId}}/exist" 
+//最近关注
+export const recentlyFocusUserUrl = "/admin/store/{{storeId}}/favoriteusers/recently"
+//用户肖像
+export const searchUserInfoByTelUrl = "/admin/user/profile/{{mobile}}/mobile"
+//用户待付款订单
+export const unpaidOrderNumUrl = "/api/all/order/{{storeId}}/unpaid/count/group/category"
+//买单首页弹窗
+export const ftfRecentOrderUrl = "/api/ftf/order/user/store/{{storeId}}/unpaid/last"
+//商家是否支持在线支付
+export const storeOnlinePayUrl = "/api/merchant/pay/config/{{storeId}}/pay"
+
 // 资金管理
 export const getBankcardUrl='/admin/user/profile/bankcard'
 export const getTradeUrl ='/admin/store/trade/statistic'

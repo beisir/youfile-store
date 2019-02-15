@@ -51,6 +51,18 @@
       </view>
       <view>订单管理</view>
     </navigator>
+    <navigator url='../../faceToFaceOrder/shopkeeperList/shopkeeperList'>
+      <view>
+        <image mode='widthFix' src='/image/ftfIcon.png'></image>
+      </view>
+      <view>门店订单</view>
+    </navigator>
+    <navigator url='../../faceToFaceOrder/helpOrder/helpOrder'>
+      <view>
+        <image mode='widthFix' src='/image/exchange.png'></image>
+      </view>
+      <view>帮TA下单</view>
+    </navigator>
     <navigator url='../../admin/status/status'>
       <view>
         <image mode='widthFix' src='/image/ad3.png'></image>
@@ -69,7 +81,7 @@
       </view>
       <view>{{globalData.projectName}}</view>
     </navigator>
-     <navigator url='/pages/capital/index/index'>
+    <navigator url='/pages/capital/index/index'>
       <view>
         <image mode='widthFix' src='/image/zj.png' style='width:50rpx;'></image>
       </view>

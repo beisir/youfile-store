@@ -1,0 +1,71 @@
+@import "../customerOrderDetail/customerOrderDetail";
+
+.o-title-box{
+  padding:50rpx 0 60rpx;
+  border-bottom: 1rpx solid #ddd;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.o-title-text{
+  font-size: 36rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-left{
+  margin-left: 33rpx;
+  color: #ca7;
+}
+
+.status-img{
+  margin-top: 40rpx;
+  width: 332rpx;
+  height: 70rpx;
+}
+
+.mid-btn{
+  justify-content: space-between;
+}
+
+.user-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  height: 95rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.user-icon{
+  width: 35rpx;
+  height: 35rpx;
+  margin-right: 20rpx;
+}
+
+.username-box{
+  max-width: 380rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.type-chunk{
+  margin-left: 20rpx;
+}
+
+
+  .cancel-title-icon{
+    width:38rpx;
+    height:38rpx;
+    margin-right:20rpx;
+  }
+  .close-res-box{
+    font-size:30rpx;
+    color:#999;
+    margin-top:30rpx;
+    font-weight: 600;
+  }

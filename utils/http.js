@@ -87,7 +87,7 @@ class request {
                 setTimeout(()=>{
                   wx.showToast({
                     title: res.data.message,
-                    duration: 2000,
+                    duration: 4000,
                     icon: 'none'
                   })
                 },0)

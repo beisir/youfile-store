@@ -6,6 +6,7 @@
     "no": "../indexEmpty/indexEmpty",
     "retailStore": "../retailStore/retailStore",
     "initstroe": "../../cloudOrder/applyStore/applyStore",
+    "storeOrder":"../../faceToFaceOrder/remindLayer/remindLayer",
     "returnBall": "../../../assembly/returnBall/returnBall"
   }
 }
