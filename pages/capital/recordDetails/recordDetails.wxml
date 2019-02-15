@@ -15,4 +15,4 @@
     <view>手续费<text>￥{{dataDetails.fee==null?'':dataDetails.fee}}</text></view>
   </view>
 </view>
-<view class='re-bottom'>查看订单详情</view>
+<view class='re-bottom' bindtap='goOrderDetails'>查看订单详情</view>

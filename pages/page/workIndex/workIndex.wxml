@@ -69,6 +69,12 @@
       </view>
       <view>{{globalData.projectName}}</view>
     </navigator>
+     <navigator url='/pages/capital/index/index'>
+      <view>
+        <image mode='widthFix' src='/image/zj.png' style='width:50rpx;'></image>
+      </view>
+      <view>资金中心</view>
+    </navigator>
   </view>
 </view>
 <view class='goHome' bindtap='goHome'>

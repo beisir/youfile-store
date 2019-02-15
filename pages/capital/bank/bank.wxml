@@ -12,4 +12,4 @@
   <view><text>****</text> <text>****</text> <text>****</text> <text>{{bankData.bankCard}}</text></view>
   <view class='ba-block'><view></view></view>
 </view>
-<view class='ba-sq'><image src="/image/ca-ba.png"></image>申请更换银行卡<image src="/image/ca-you.png"></image></view>
+<view class='ba-sq'  bindtap='tel'><image src="/image/ca-ba.png"></image>申请更换银行卡<image src="/image/ca-you.png"></image></view>

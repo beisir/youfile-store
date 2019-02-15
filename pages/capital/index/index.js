@@ -10,6 +10,11 @@ Page({
     todayMerchantTrade: '',
     waitingSettleAmount: '',
     yesterdayMerchantTrade:'',
+    tradeAmount:false,//今日收款
+    tradeCounts: false,//收款总金额
+    threeMountSettles: false,//已结算金额
+    yesterdayMerchantTrades: false,//昨日收款
+    waitingSettleAmounts: false,//待结算金额
   },
 
   /**
@@ -21,6 +26,42 @@ Page({
   goRecord:function(){
     wx.navigateTo({
       url: '../record/record',
+    })
+  },
+  // 今日收款提示
+  tradeAmount(){
+    this.setData({
+      tradeAmount:true
+    })
+  },
+  tradeCounts(){
+    this.setData({
+      tradeCounts:true
+    })
+  },
+  yesterdayMerchantTrades() {
+    this.setData({
+      yesterdayMerchantTrades: true
+    })
+  },
+  threeMountSettles() {
+    this.setData({
+      threeMountSettles: true
+    })
+  },
+  waitingSettleAmounts() {
+    this.setData({
+      waitingSettleAmounts: true
+    })
+  },
+  // 关闭弹框
+  closeBtn(){
+    this.setData({
+      tradeAmount: false,
+      tradeCounts: false,
+      yesterdayMerchantTrades: false,
+      threeMountSettles: false,
+      waitingSettleAmounts:false,
     })
   },
   /**

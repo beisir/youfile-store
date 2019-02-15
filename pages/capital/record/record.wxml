@@ -11,7 +11,7 @@
         </view>
       </view>
     </navigator>
-    <view wx:if='{{dataArr.length==0}}'>
+    <!-- <view wx:if='{{dataArr.length==0}}'>
       暂无数据！
-    </view>
+    </view> -->
   </view>
