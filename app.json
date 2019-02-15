@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/page/home/home",
-    "pages/page/workIndex/workIndex",
     "pages/capital/index/index",
+    "pages/page/workIndex/workIndex",
     "pages/capital/record/record",
     "pages/page/address/address",
     "pages/page/payWay/payWay",
