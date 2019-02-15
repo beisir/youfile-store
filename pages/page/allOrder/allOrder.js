@@ -182,6 +182,20 @@ Page({
         order: res.obj,
         status: res.obj.orderStatus  //状态
       })
+
+      //自提  //订单类型[0 其他|1 门店自提|2 物流配送]
+      if (this.data.order.logisticsMode == '1') {
+        this.setData({ self: true })
+      } else {
+        this.setData({ self: false })
+      }
+      //订单种类 //订单分类[1 进货单|2 店订单|3 普通订单]
+      if (this.data.order.orderCategory == '1') {
+        this.setData({ orderType: 'list' })
+      } else {
+        this.setData({ orderType: 'order' })
+      }
+
       //订单
       if(this.data.orderType == 'order'){
         this.resetData([this.data.order]);
@@ -248,8 +262,8 @@ Page({
       num: options.num,
       // status: options.status,
       baseUrl: app.globalData.imageUrl,
-      orderType: options.type, //order订单 list进货单
-      self: options.self  //是否自提
+      // orderType: options.type, //order订单 list进货单
+      // self: options.self  //是否自提
     })
 
     API.getPaymentImg().then(res => {

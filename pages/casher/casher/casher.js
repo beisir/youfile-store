@@ -1,5 +1,6 @@
 // pages/casher/casher/casher.js
 const app = getApp();
+import { indexUrl } from "../../../utils/const.js";
 Page({
 
   /**
@@ -115,6 +116,28 @@ Page({
       url: '../success/success?type=' + this.data.orderType + "&price=" + this.data.price,
     })
   },
+  //获取订单详情
+  getDetail(){
+    app.authHandler.getTokenOrRefresh().then(token => {
+      if (token) {
+        wx.request({
+          url: indexUrl + '/pay/cashier/index/' + this.data.num,
+          method: 'POST',
+          header: {
+            "Authorization": token
+          },
+          success: res=>{
+            console.log(res)
+          },
+          fail: e=>{
+
+          }
+        })
+      
+      }
+    })  
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -123,7 +146,8 @@ Page({
       num: options.num,
       orderType: options.type ? options.type:""
     })
-    this.buy();
+    this.getDetail()
+    this.buy()
 
     if (options.loginObj) {
       let user = JSON.parse(options.loginObj);
