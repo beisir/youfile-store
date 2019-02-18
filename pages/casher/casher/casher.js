@@ -1,6 +1,5 @@
 // pages/casher/casher/casher.js
 const app = getApp();
-import { indexUrl } from "../../../utils/const.js";
 Page({
 
   /**
@@ -29,50 +28,61 @@ Page({
     })
   },
   getOpenid(code) {
-    wx.request({
-      url: app.globalData.payUrl,
-      method: 'POST',
-      data: {
-        "channel": "wx_pay",
-        "currency": "CNY",
-        "code": code,
-        "goodsInfo": "小云店购买",
-        "orderNumber": this.data.num,
-        "payWay": "wx_mini_app_pay",
-        "tradeType": "JSAPI"
-      },
-      header: {
-        "platAppId": app.globalData.payAppNum,
-      },
-      success: (res) => {
-        this.preSet(res);
-        if (res.data.code == 0) {
-          this.payment(res.data.obj.payData);
-        } else {
-          setTimeout(() => {
-            wx.showToast({
-              title: res.data.message,
-              icon: 'none'
-            })
-          }, 0)
-          // setTimeout(() => {
-          //   wx.navigateBack()
-          // }, 1000)
-        }
-      },
-      fail: (e) => {
-        setTimeout(()=>{
-          wx.showToast({
-            title: e.data.message,
-            icon: 'none'
-          })
-        },0)
+    app.authHandler.getTokenOrRefresh().then(token => {
+      if (token) {
+        wx.request({
+          url: app.globalData.payUrl,
+          method: 'POST',
+          data: {
+            "channel": "wx_pay",
+            "currency": "CNY",
+            "code": code,
+            "goodsInfo": "小云店购买",
+            "orderNumber": this.data.num,
+            "payWay": "wx_mini_app_pay",
+            "tradeType": "JSAPI"
+          },
+          header: {
+            "platAppId": app.globalData.payAppNum,
+            "Authorization": token
+          },
+          success: (res) => {
+            this.preSet(res);
+            if (res.data.code == 0) {
+              this.payment(res.data.obj.payData);
+            } else {
+              setTimeout(() => {
+                wx.showToast({
+                  title: res.data.message,
+                  icon: 'none'
+                })
+              }, 0)
+              // setTimeout(() => {
+              //   wx.navigateBack()
+              // }, 1000)
+            }
+          },
+          fail: (e) => {
+            setTimeout(() => {
+              wx.showToast({
+                title: e.data.message,
+                icon: 'none'
+              })
+            }, 0)
 
-      },
-      complete() {
-        wx.hideLoading();
+          },
+          complete() {
+            wx.hideLoading();
+          }
+        })
+
+      } else {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
       }
-    })
+    })  
   },
   preSet(res) {
     let type = "";
@@ -112,41 +122,19 @@ Page({
     })
   },
   afterPayment() {
-    wx.navigateTo({
-      url: '../success/success?type=' + this.data.orderType + "&price=" + this.data.price,
+    wx.redirectTo({
+      url: '../success/success?type=' + this.data.orderType + "&price=" + this.data.price + "&num=" + this.data.num,
     })
   },
-  //获取订单详情
-  getDetail(){
-    app.authHandler.getTokenOrRefresh().then(token => {
-      if (token) {
-        wx.request({
-          url: indexUrl + '/pay/cashier/index/' + this.data.num,
-          method: 'POST',
-          header: {
-            "Authorization": token
-          },
-          success: res=>{
-            console.log(res)
-          },
-          fail: e=>{
 
-          }
-        })
-      
-      }
-    })  
-    
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
       num: options.num,
-      orderType: options.type ? options.type:""
+      orderType: options.type ? options.type : ""
     })
-    this.getDetail()
     this.buy()
 
     if (options.loginObj) {

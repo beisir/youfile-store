@@ -8,8 +8,8 @@ Page({
   data: {
     dataInvoice:[
       { title: "不开发票", selected: true ,show:true},
-      { title: "个人", selected: false, show: false},
-      { title: "普通发票", selected: false, show: false},
+      { title: "个人 普通发票", selected: false, show: false},
+      { title: "公司 普通发票", selected: false, show: false},
       { title: "增值税专用发票", selected: false, show: false},
     ],
     ordinary:true,

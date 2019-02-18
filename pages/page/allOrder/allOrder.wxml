@@ -233,7 +233,7 @@
 
 <view class='np-fapiao'>
   <view>发票信息
-    <text>{{order.receiptInfo && order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
+    <text>{{order.receiptInfo && order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceType+""+order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
   <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
@@ -258,7 +258,7 @@
     </block>
   </view>
   <view style='margin:0;'>支付方式
-    <text wx:if="{{order.payType=='online'}}">线上支付</text>
+    <text wx:if="{{order.payType=='online'}}">在线支付</text>
     <text wx:else>其他支付方式</text>
   </view>
 </view>

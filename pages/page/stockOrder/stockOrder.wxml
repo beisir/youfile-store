@@ -75,8 +75,7 @@
             <image class="cart-thumb" src="{{baseUrl+good.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </navigator>
           <view class='ct-title ct-title1'>{{good.goodsName}}</view>
-          <view class="heji">共
-            <text>{{item.num}}</text>件商品</view>
+          <view class="heji"><text>{{good.goodsNum}}</text>件商品</view>
         </view>
 
         <!-- 表格 -->
@@ -103,7 +102,8 @@
           <text>{{item.timeoutExpressSecond}}</text>
         </view>
       </block> -->
-      <view class='or-text'>
+      <view class='or-text'>共
+        <text class='or-font1'>{{item.num}}</text>件商品
         <text class='or-font2'>合计：</text>
         <text class='or-font3'>￥{{item.orderAmount}}</text>
       </view>

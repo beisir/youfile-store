@@ -210,8 +210,7 @@
         <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{good.goodsId}}'>
           <image class="cart-thumb" src="{{baseUrl+good.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           <view class='ct-title ct-title1'>{{good.goodsName}}</view>
-          <view class="heji">共 
-          <text style='font-size:26rpx;'>{{order.num}} 件</text>商品</view>
+          <view class="heji"><text style='font-size:26rpx;'>{{good.goodsNum}} 件</text>商品</view>
         </navigator>
       </view>
 
@@ -289,7 +288,7 @@
 
 <view class='np-fapiao'>
   <view>发票信息
-    <text>{{order.receiptInfo && order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
+    <text>{{order.receiptInfo && order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceType+""+order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
   <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
@@ -314,13 +313,12 @@
     </block>
   </view>
   <view style='margin:0;'>支付方式
-    <text wx:if="{{order.payType=='online'}}">线上支付</text>
+    <text wx:if="{{order.payType=='online'}}">在线支付</text>
     <text wx:else>其他支付方式</text>
   </view>
 </view>
 
-<view class='os-mon'>
-  配送方式
+<view class='os-mon'>配送方式
   <block wx:if='{{self=="false"}}'>
     <text>物流配送</text>
     <block wx:if="{{order.expressStatus != '0'}}">

@@ -123,8 +123,8 @@ class Navigate {
 
   }
   parseExtraDataOnShow(options) {
-    if (options.query && options.query.appid) {
-      wx.setStorageSync("navigateFromAppId", options.query.appid)
+    if ( options.referrerInfo.extraData && options.referrerInfo.extraData.appid ) {
+      wx.setStorageSync("navigateFromAppId", options.referrerInfo.extraData.appid)
     } else {
       wx.setStorageSync("navigateFromAppId", false)
     }
