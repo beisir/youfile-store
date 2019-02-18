@@ -90,7 +90,7 @@
   margin: 10rpx 0;
 }
   .msg-title{
-    color: #666; 
+    color: #333; 
   }
   .msg-detail{
     font-weight: 600;
@@ -124,6 +124,7 @@
     padding-top: 20rpx;
     box-sizing: border-box;
   }
+  .bottom-btn-box .btn{font-size: 26rpx;}
   .btn{
     width: 200rpx;
     height: 80rpx;

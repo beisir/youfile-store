@@ -47,7 +47,7 @@ var my_slice = function(str,a){
 var filterOrderNum = function (num) {
   if (num) {
     num = parseInt(num)
-    if (num > 100){
+    if (num >= 100){
       return "99+"
     }
     return num

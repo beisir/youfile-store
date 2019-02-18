@@ -100,11 +100,13 @@ Page({
   // 添加
   addTip(){
     let val = this.data.name.trim();
-    wx.showLoading({
-      title: '添加中'
-    })
+    
     if(val){
+      wx.showLoading({
+        title: '添加中'
+      })
       API.ftfCreatGoods({goodsName:val}).then(res=>{
+        wx.hideLoading()
         let goods = res.obj;
 
         //最多六个
@@ -127,8 +129,9 @@ Page({
           name: ""
         })
       })
+    } else {
+      API.showToast("请输入商品名称")
     }
-    wx.hideLoading()
   },
   // 编辑
   editGoods(e){

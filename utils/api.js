@@ -750,7 +750,7 @@ function ftfCloseOrder(data){
 }
 //取消订单
 function ftfCaneledOrder(data){
-  return app.http.postRequest(ftfCaneledOrderUrl, data);
+  return app.http.postRequest(ftfCaneledOrderUrl + "?reason=" + encodeURI(data.reason), data);
 }
 //删除订单
 function ftfDelOrder(data){

@@ -97,15 +97,15 @@
 /* 订单数字 */
 .unpaid-order-num-ball{
   position: absolute;
-  width: 30rpx;
+  min-width: 30rpx;
   height: 30rpx;
   line-height: 30rpx;
-  background: red;
+  background: #eb3941;
   border-radius: 50%;
   right:34%;
   top:14rpx;
   color: white;
-  font-size: 14rpx;
+  font-size: 18rpx;
   text-align: center;
 }
 .weui-back{

@@ -152,7 +152,7 @@
 <block wx:if="{{order.orderStatus == 'unpaid'}}">
   <view style='padding:70rpx;'></view>
   <view class='bottom-btn-box padding-box' >
-    <view class='btn pay-btn'>提醒付款</view>
+    <!-- <view class='btn pay-btn'>提醒付款</view> -->
     <view bindtap='showModal' data-type="close" class='btn cancel-btn'>取消订单</view>
   </view>
 </block>

@@ -47,12 +47,12 @@
 <view class='store-box padding-box'>
   <view class='store-line'>
     <image src='/image/ad.png' class="store-icon"></image>
-    <text class='store-add'>门店地址：{{order.storeInfo.address}}</text>    
+    <text class='store-add'>门店地址：{{order.storeInfo.address?order.storeInfo.address:""}}</text>    
   </view>
-  <view class='store-line store-time'>营业时间：周一周日9:00~19:00</view>
+  <view class='store-line store-time'>营业时间：{{order.storeInfo.openingTime?order.storeInfo.openingTime:""}}</view>
   <view class='store-line store-time'>
     <image src='/image/pre.png' class='store-icon'></image>
-    <text class='gray-color'>卖家电话：{{order.storeInfo.servicePhone}}</text>    
+    <text class='gray-color'>卖家电话：{{order.storeInfo.servicePhone?order.storeInfo.servicePhone:""}}</text>    
   </view>
 </view>
 <!-- 按钮 -->
