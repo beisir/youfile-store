@@ -32,6 +32,7 @@ Page({
         }
         var datas = _this.data.dataArr,
           newArr = app.pageRequest.addDataList(datas, detailList)
+        console.log(newArr)
         _this.setData({
           dataArr: newArr
         })
