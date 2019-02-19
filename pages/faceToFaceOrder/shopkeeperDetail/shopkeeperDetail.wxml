@@ -137,10 +137,10 @@
     <text class='msg-title'>订单金额</text>
     <text class='msg-detail gold-font'>￥{{filter.filterMoney(order.orderAmount)}}</text>
   </view>
-  <view class='msg-item'>
+  <!-- <view class='msg-item'>
     <text class='msg-title'>红包礼金</text>
     <text class='msg-detail gray-color'>-￥0.00</text>
-  </view>
+  </view> -->
   <view class='msg-item'>
     <text class='pay-price-title' wx:if="{{order.orderStatus == 'finish'}}">实收金额</text>
     <text class='pay-price-title' wx:else>应收金额</text>
