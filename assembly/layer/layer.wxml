@@ -1,4 +1,4 @@
-<view class='modal-back' wx:if="{{show}}">
+<view class='modal-back' hidden="{{!show}}">
   <view class='modal-inner'>
     <view style='overflow:hidden;'>
       <view class="modal-close" bindtap='close'><image src="/image/clo12.png"  bindtap='cancel'></image></view>          
