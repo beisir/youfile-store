@@ -1,15 +1,16 @@
 <!-- 企业 -->
 <view class='ba-cont' wx:if='{{bankData.merchantCharacter==3}}'>
-  <view>{{bankData.subBankName}}</view>
+  <view wx:if="{{bankData.subBankName}}">{{bankData.subBankName}}</view>
+  <view wx:else>{{bankData.headBankName}}</view>
   <view>{{bankData.merchantName}}</view>
   <view><text>****</text> <text>****</text> <text>****</text> <text>{{bankData.bankCard}}</text></view>
   <view class='ba-block'><view></view></view>
 </view>
 <!-- 个人 -->
 <view class='ba-cont ba-cont1' wx:else>
-  <view>{{bankData.subBankName}}</view>
-  <view wx:if='{{bankData.merchantName}}'>{{bankData.merchantName}}</view>
+  <view wx:if="{{bankData.subBankName}}">{{bankData.subBankName}}</view>
   <view wx:else>{{bankData.headBankName}}</view>
+  <view>{{bankData.merchantName}}</view>
   <view><text>****</text> <text>****</text> <text>****</text> <text>{{bankData.bankCard}}</text></view>
   <view class='ba-block'><view></view></view>
 </view>

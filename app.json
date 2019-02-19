@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/capital/bank/bank",
     "pages/capital/index/index",
     "pages/page/workIndex/workIndex",
     "pages/capital/record/record",
@@ -21,7 +22,6 @@
     "pages/capital/haveRecord/haveRecord",
     "pages/capital/index/iworkIndex/workIndendex",
     "pages/capital/recordDetails/recordDetails",
-    "pages/capital/bank/bank",
     "pages/admin/spec/spec",
     "pages/page/user/user",
     "pages/page/cartList/cartList",
