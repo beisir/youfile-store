@@ -40,10 +40,10 @@
   </view>
 </view>
 
- <view class='common-box flex-between red-packet-box'>
+ <!-- <view class='common-box flex-between red-packet-box'>
     <text class='item-title'>红包礼金</text>
     <text class="packet-num">-￥0.00</text>
-  </view>
+  </view> -->
 
   <view class='price-font-box'>￥{{filter.filterMoney(money)}}</view>
   <button bindtap='creatOrder' class='help-btn'>帮TA下单</button>

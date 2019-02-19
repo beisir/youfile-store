@@ -115,15 +115,15 @@ Page({
    */
   onShow: function () {
     //门店订单
-    if (this.data.entry === 'ftf'){
-      Api.ifWholesaler({ userId: this.data.userId }).then(res => {
-        if (res.obj.isPurchaser) {
-          this.setData({ ifWholesaler: true })
-        } else {
-          this.setData({ ifWholesaler: false })
-        }
-      })
-    }
+    // if (this.data.entry === 'ftf'){
+    //   Api.ifWholesaler({ userId: this.data.userId }).then(res => {
+    //     if (res.obj.isPurchaser) {
+    //       this.setData({ ifWholesaler: true })
+    //     } else {
+    //       this.setData({ ifWholesaler: false })
+    //     }
+    //   })
+    // }
   },
 
   /**

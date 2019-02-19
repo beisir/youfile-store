@@ -30,13 +30,13 @@
   </view>
 </view> -->
 <!-- 红包礼金 -->
-<view class='box-item' wx:if="{{faceOrderIn}}">
+<!-- <view class='box-item' wx:if="{{faceOrderIn}}">
   <text>红包礼金</text>
   <view class='red-packet'>
     <text>0</text>
     <image class='tri-right' src="/image/icl.png"></image>
   </view>
-</view>
+</view> -->
 
 <view class='bf-cont info-cont'>
   <view class='in-cont'>
@@ -52,11 +52,11 @@
 
 
 <view class='bottom-btn-box'  wx:if="{{faceOrderIn}}">
-  <navigator wx:if="{{!ifWholesaler}}" class='btn-item' url="../../../businessFriend/merchant/invite/invite?accept={{data.id}}&remark=&headPic={{baseUrl+data.headPic}}&name={{data.nickName}}">
+  <!-- <navigator wx:if="{{!ifWholesaler}}" class='btn-item' url="../../../businessFriend/merchant/invite/invite?accept={{data.id}}&remark=&headPic={{baseUrl+data.headPic}}&name={{data.nickName}}">
     <image class='btn-icon' src='/image/ad4.png'></image>
     <text>添加到进货商</text>
   </navigator>
-  <view wx:if="{{!ifWholesaler}}" class='btn-line'></view>
+  <view wx:if="{{!ifWholesaler}}" class='btn-line'></view> -->
   <navigator class='btn-item' url="../../../faceToFaceOrder/createOrder/createOrder?user={{data.id}}">
     <image class='btn-icon' src='/image/exchange.png'></image>
     <text>帮TA下单</text>
