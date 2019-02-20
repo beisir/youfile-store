@@ -57,12 +57,12 @@
       </view>
       <view>门店订单</view>
     </navigator>
-    <navigator url='../../faceToFaceOrder/helpOrder/helpOrder'>
+    <!-- <navigator url='../../faceToFaceOrder/helpOrder/helpOrder'>
       <view>
         <image mode='widthFix' src='/image/exchange.png'></image>
       </view>
       <view>帮TA下单</view>
-    </navigator>
+    </navigator> -->
     <navigator url='../../admin/status/status'>
       <view>
         <image mode='widthFix' src='/image/ad3.png'></image>
