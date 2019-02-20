@@ -746,7 +746,7 @@ function helpOrder(data){
 }
 //关闭订单
 function ftfCloseOrder(data){
-  return app.http.postRequest(ftfCloseOrderUrl, data);
+  return app.http.postRequest(ftfCloseOrderUrl + "?reason=" + encodeURI(data.reason), data);
 }
 //取消订单
 function ftfCaneledOrder(data){
