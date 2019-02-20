@@ -9,7 +9,7 @@ Page({
     name:'',
     show:true,
     id: Api.getThisStoreId(),
-    data: [{ name: "个人普通发票", selected: false }, { name: "提供增值税普通发票", selected: false }, { name: "提供增值税专用发票", selected: false }]
+    data: [{ name: "个人发票", selected: false }, { name: "提供增值税普通发票", selected: false }, { name: "提供增值税专用发票", selected: false }]
   },
   switch1Change: function (e) {
    var checked=e.detail.value
