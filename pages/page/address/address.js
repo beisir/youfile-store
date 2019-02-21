@@ -50,7 +50,7 @@ Page({
         Api.showToast('请输入正确手机号码')
         return false;
       }
-      obj.userPhone = phone;
+      obj.pickerPhone = phone;
       obj.logisticsMode = 1;
     }else if(type == 1){
       //物流

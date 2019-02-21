@@ -176,7 +176,7 @@
 
   <view wx:else class='np-view {{order.userMemo?"":"no-border"}}'>
     <image src="/image/ad.png"></image>
-    <text class='np-text'>{{order.userInfo.mobile}}</text>
+    <text class='np-text'>{{order.pickerPhone?order.pickerPhone:order.userInfo.mobile}}</text>
     <view>取货人：{{order.userInfo.nickName}}</view>
   </view>
 
