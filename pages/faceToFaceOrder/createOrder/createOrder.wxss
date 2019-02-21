@@ -45,8 +45,8 @@ page{
 
 .item-title{
   font-weight: 600;
-  width: 135rpx;
-  margin-right: 40rpx;
+  width: 165rpx;
+  margin-right: 10rpx;
   
 }
 

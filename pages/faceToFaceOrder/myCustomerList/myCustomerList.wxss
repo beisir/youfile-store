@@ -72,7 +72,7 @@ page{
 
 .help-btn{
   color: #ca7;
-  border: 2rpx solid #ca7;
+  border: 1rpx solid #ca7;
   text-align: center;
   width: 160rpx; 
   height: 60rpx;
@@ -82,8 +82,7 @@ page{
 
 .line-border{
   margin-left: 125rpx;
-  height: 1px;
-  background: #ddd;
+  border-bottom: 1rpx solid #ddd;
 }
 .gray-num{
   font-size: 26rpx;
