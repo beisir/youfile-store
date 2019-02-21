@@ -23,5 +23,5 @@ export const navigateToAppID = {
   me: 'wx4f385374765e4cbb',
   xls: 'wx1a7532a2abdd1698',
   xpl: 'wx4f385374765e4cbb',
-  platform: 'wx5e0828787c26f235'
+  platform: 'wx6241529c7dc70d51'
 }
