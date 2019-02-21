@@ -417,9 +417,9 @@ Page({
       sortType = 'sales'
     } else if (currentTab == 3) {
       if (descShow) {
-        sortType = 'prices_asc'
-      } else {
         sortType = 'prices_desc'
+      } else {
+        sortType = 'prices_asc'
       }
     }
     Api.shopList({
