@@ -110,7 +110,7 @@
     </view>
   </navigator>
   <navigator url='../updateMes/updateMes?name=wechatPublicAccount&value={{wechatPublicAccount}}&types=公众号'>公众号
-    <text>{{wechatPublicAccount}}</text>
+    <text class='wePublicAccount'>{{wechatPublicAccount}}</text>
     <view class='mes-tel'>
       <image src="/image/icl.png"></image>
     </view>

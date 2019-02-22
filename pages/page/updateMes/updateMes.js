@@ -24,42 +24,38 @@ Page({
     if (status==1){
       if (num > 20) {
         Api.showToast('超过最长数字限制')
-      } else {
-        this.setData({
-          value: value.substring(0, 19),
-          num: num
-        })
       }
+      this.setData({
+        value: value.substring(0, 19),
+        num: num
+      })
     }
     if (status == 2) {
-      if (num > 100) {
+      if (num > 101) {
         Api.showToast('超过最长数字限制')
-      } else {
-        this.setData({
-          value: value.substring(0, 99),
-          num: num
-        })
       }
+      this.setData({
+        value: value.substring(0, 100),
+        num: num-1
+      })
     }
     if (status == 3) {
       if (num > 30) {
         Api.showToast('超过最长数字限制')
-      } else {
-        this.setData({
-          value: value.substring(0, 29),
-          num: num
-        })
       }
+      this.setData({
+        value: value.substring(0, 29),
+        num: num
+      })
     }
     if (status == 4) {
       if (num > 32) {
         Api.showToast('超过最长数字限制')
-      } else {
-        this.setData({
-          value: value.substring(0, 21),
-          num: num
-        })
       }
+      this.setData({
+        value: value.substring(0, 21),
+        num: num
+      })
     }
     if(status==0){
       this.setData({

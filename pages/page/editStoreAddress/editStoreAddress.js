@@ -10,6 +10,7 @@ Page({
     value:'',
     id: Api.getThisStoreId(),
     baseUrl: wx.getStorageSync('baseUrl'),
+    platformIos:true
   },
   bindRegionChange: function (e) {
     this.setData({
@@ -33,7 +34,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       region: [options.province, options.city, options.county],
-      value:options.address
+      value: options.address == '请填写地址' ? '' : options.address
     })
 
   },
@@ -48,8 +49,23 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
+  // 判断手机是ios还是安卓
+  getIsIos() {
+    var phone = wx.getSystemInfoSync()
+    var _this = this
+    console.log(phone.platform)
+    if (phone.platform == 'ios') {
+      _this.setData({
+        platformIos: true
+      })
+    } else {
+      _this.setData({
+        platformIos: false
+      })
+    }
+  },
   onShow: function () {
-
+    this.getIsIos()
   },
 
   /**
