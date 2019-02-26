@@ -25,19 +25,21 @@
 <view wx:if="{{list.length>0}}">
   <view wx:for="{{list}}" class='list-item' wx:key='{{index}}'>
     <!-- 头 -->
-    <view class='item-title padding-box'>
-      <view class='flex-center'>
-        <image src="/image/12.png" class='cloud-icon'></image>
-        <text class='com-name-box'>{{item.storeInfo.storeName}}</text>
-        <image src='/image/mallr.png' class='right-icon'></image>
-        <view class='type-chunk'>门店</view>
+    <navigator url="../../page/home/home" open-type='switchTab'>
+      <view class='item-title padding-box'>
+        <view class='flex-center'>
+          <image src="/image/12.png" class='cloud-icon'></image>
+          <text class='com-name-box'>{{item.storeInfo.storeName}}</text>
+          <image src='/image/mallr.png' class='right-icon'></image>
+          <view class='type-chunk'>门店</view>
+        </view>
+        <view class='status-text'>
+          <text wx:if="{{item.orderStatus == 'unpaid'}}">待付款</text>
+          <text wx:if="{{item.orderStatus == 'canceled'}}" class="gray-color">交易关闭</text> 
+          <text wx:if="{{item.orderStatus == 'finish'}}">交易成功</text>                       
+        </view>
       </view>
-      <view class='status-text'>
-        <text wx:if="{{item.orderStatus == 'unpaid'}}">待付款</text>
-        <text wx:if="{{item.orderStatus == 'canceled'}}" class="gray-color">交易关闭</text> 
-        <text wx:if="{{item.orderStatus == 'finish'}}">交易成功</text>                       
-      </view>
-    </view>
+    </navigator>
     <!-- 货 -->
     <navigator url='../customerOrderDetail/customerOrderDetail?code={{item.orderNumber}}'>
     <view class='goods-box'>

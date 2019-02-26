@@ -69,7 +69,7 @@
 </view>
 <!-- 货 -->
 <view class='goods-detail-box'>
-  <view class='item-title padding-box'>
+  <view class='item-title padding-box' bindtap='toHome'>
     <view class='flex-center'>
       <image src="/image/12.png" class='cloud-icon'></image>
       <text class='com-name-box'>{{order.storeInfo.storeName}}</text>
