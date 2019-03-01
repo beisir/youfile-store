@@ -18,7 +18,7 @@ page{height:unset !important}
 .del image{width: 60rpx;}
 .touch-move-active .content,.touch-move-active .del{-webkit-transform:translateX(0);transform:translateX(0)}
 .row{display:flex;flex-direction:row}
-.st-cont .editGoods{height:50rpx;width:50rpx;right:20rpx;left:unset;position:absolute;top:110rpx;z-index:1000}
+.st-cont .editGoods{height:50rpx;width:50rpx;right:20rpx;left:unset;position:absolute;top:120rpx;z-index:1000}
 .column{display:flex;width:100%;min-height:165rpx;flex-direction:column;margin-left:210rpx}
 .st-cont{width:100%}
 .st-d-status view{margin-bottom:0;line-height:1.7;width:35%}

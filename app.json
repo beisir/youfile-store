@@ -2,6 +2,9 @@
   "pages": [
     "pages/page/home/home",
     "pages/admin/status/status",
+    "pages/admin/addGoods/addGoods",
+    "pages/admin/goodsSpec/goodsSpec",
+    "pages/admin/specSet/specSet",
     "pages/businessFriend/merchant/list/list",
     "pages/businessFriend/merchant/index/index",
     "pages/capital/bank/bank",
@@ -18,7 +21,6 @@
     "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",
     "pages/faceToFaceOrder/createSuccess/createSuccess",
     "pages/faceToFaceOrder/createOrder/createOrder",
-    "pages/admin/addGoods/addGoods",
     "pages/cloudOrder/webInitStore/webInitStore",
     "pages/businessFriend/merchant/dealUser/dealUser",
     "pages/capital/haveRecord/haveRecord",

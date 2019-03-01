@@ -318,12 +318,12 @@ Page({
     })
   },
   // 监听是去焦点不能为0
-  focuMonitor:function(e){
+  focuMonitor: function(e) {
     var name = e.target.dataset.name,
       val = e.detail.value,
       index = e.target.dataset.index,
       goodsSkuVOList = this.data.goodsSkuVOList
-    if (val==0){
+    if (val == 0) {
       goodsSkuVOList[index][name] = ''
       Api.showToast("请输入不为零的有效数值！")
     }
@@ -414,16 +414,16 @@ Page({
     })
   },
   // 判断失去焦点是否为0
-  focuPrice: function () {
+  focuPrice: function() {
     var changePriceVal = this.data.changePriceVal
-    if (changePriceVal==0){
+    if (changePriceVal == 0) {
       this.setData({
-        changePriceVal:''
+        changePriceVal: ''
       })
       Api.showToast("批发价不能为零")
     }
   },
-  focuSell: function () {
+  focuSell: function() {
     var changeSellVal = this.data.changeSellVal
     if (changeSellVal == 0) {
       this.setData({
@@ -432,7 +432,7 @@ Page({
       Api.showToast("零售价价不能为零")
     }
   },
-  focuStock: function () {
+  focuStock: function() {
     var changeStockVal = this.data.changeStockVal
     if (changeStockVal == 0) {
       this.setData({
@@ -440,7 +440,7 @@ Page({
       })
       Api.showToast("库存不能为零")
     }
-  }, 
+  },
   // 监听统一设置 价格库存
   changePrice: function(e) {
     var val = e.detail.value
@@ -466,7 +466,7 @@ Page({
       this.setData({
         changeSellVal: val
       })
-     return
+      return
     }
     this.setData({
       changeSellVal: (util.newVal(val)).substring(0, 8)
@@ -739,11 +739,27 @@ Page({
     var goodsId = this.data.goodsId
     // 有ID单独修改的规格
     if (goodsId) {
+      var wholesalePrice = '',
+        sellPrice = '',
+        stockNum=0
+        //获取最小价格和总库存
+        sellPrice = Math.min.apply(Math, goodsSkuVOList.map(function(o) {
+          return o.sellPrice
+        }))
+      wholesalePrice = Math.min.apply(Math, goodsSkuVOList.map(function(o) {
+        return o.wholesalePrice
+      }))
+      for (var v of goodsSkuVOList) {
+        stockNum += parseInt(v.stockNum)
+      }
       var dataVo = {
         goodsSpecificationVOList: skuListData,
         goodsSkuVOList: goodsSkuVOList,
         id: this.data.goodsId,
-        storeId: this.data.storeId
+        storeId: this.data.storeId,
+        sellPrice: sellPrice,
+        stockNum: stockNum,
+        wholesalePrice: wholesalePrice
       }
       Api.updateGooodsSku(dataVo)
         .then(res => {
