@@ -7,9 +7,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    old: "",
-    new: "",
-    re: ""
+    //获取验证码按钮
+    buttonTimer: "获取验证码",
+    btnSec: '60',
+    disabled: false,
+    pass:'',
+    code:''
   },
   watchInput(e) {
     let val = e.detail.value,
@@ -17,56 +20,101 @@ Page({
       obj = {};
 
     switch (type) {
-      case "old":
+      case "code":
         obj = {
-          old: val
+          code: val
         }
         break;
-      case "new":
+      case "pass":
         obj = {
-          new: val
-        }
-        break;
-      case "re":
-        obj = {
-          re: val
+          pass: val
         }
         break;
     }
     this.setData(obj);
   },
   sure() {
-    let newpass = this.data.new,
-      re = this.data.re,
-      old = this.data.old;
-
-    if (newpass.length < 6 || newpass.length > 16) {
-      API.showToast('密码必须是6 - 16位的数字或字母')
+    let code = this.data.code,
+      pass = this.data.pass;
+    if (!code){
+      API.showToast('请输入验证码')
+      return
+    }
+    if (pass.length < 6 || pass.length > 16) {
+      API.showToast('密码长度应为6 - 16位')
       return
     }
 
-    if (newpass == re & newpass != "") {
-
-      API.updataPwd({
-        oldPassword: old,
-        newPassword: newpass
-      }).then((res) => {
-        API.showToast(res.message)
-          setTimeout(() => {
-            wx.navigateBack({})
-          }, 1000)
-      }).catch(e=>{
-        API.showToast(e.data.message)
-      })
+      // API.updataPwd({
+      //   oldPassword: old,
+      //   newPassword: newpass
+      // }).then((res) => {
+      //   API.showToast(res.message)
+      //     setTimeout(() => {
+      //       wx.navigateBack({})
+      //     }, 1000)
+      // }).catch(e=>{
+      //   API.showToast(e.data.message)
+      // })
+    
+  },
+  getUserInfo(){
+    API.getUserInfo().then(res => {
+      let telephone = res.obj.mobile;
+      if (telephone){
+        this.setData({telephone})
+      }
+    })
+  },
+  //获取验证码
+  getCode() {
+    if (!this.testTel()) {
+      API.showToast('未获取到您的手机号')
     } else {
-      API.showToast('新密码输入不一致')
+      API.phoneMessage({
+        mobile: this.data.telephone
+      }).then(res => {
+
+      })
+
+      //获取验证码倒计时
+      let sec = this.data.btnSec;
+      this.setData({
+        buttonTimer: sec + "s",
+        disabled: true,
+        reSendCode: false
+      })
+      let timer = setInterval(() => {
+        sec--;
+        this.setData({
+          buttonTimer: sec + "s",
+          btnSec: sec
+        })
+
+        if (sec <= 1) {
+          clearInterval(timer)
+          this.setData({
+            reSendCode: true,
+            buttonTimer: "获取验证码",
+            btnSec: 60,
+            disabled: false
+          })
+        }
+      }, 1000)
     }
+  },
+  testTel() {
+    let phone = this.data.telephone.trim();
+    if (!phone || phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
+      return false;
+    }
+    return true;
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getUserInfo()
   },
 
   /**

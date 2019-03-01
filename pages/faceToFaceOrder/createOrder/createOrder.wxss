@@ -2,6 +2,7 @@
 page{
   font-size: 32rpx;
   color: #333;
+  border: 0;
 }
 .common-box{
   padding: 0 50rpx;
@@ -50,11 +51,18 @@ page{
   
 }
 
+/* 订单定位 */
+.gold-box{height: 132rpx;position: relative;}
+.gold-back-box{background: #ca7;height: 50%;}
+
 /* 金额 */
 .price-box{
   height: 120rpx;
   border-radius: 10rpx;
   font-weight: 600;  
+  position: absolute;
+  bottom: 0;
+  margin: 0 30rpx;
 }
 .yuan{
   font-size: 32rpx;
@@ -156,21 +164,21 @@ page{
   color: #999;
   text-align: center;
   line-height: 1;
-  margin-top: 20rpx;
+  margin-top: 30rpx;
   margin-bottom: 30rpx;
 }
 
 /* 警告 */
 .warn-box{
-  position: fixed;
+  /* position: fixed;
   top: 0;
   width: 100%;
-  background: #ebcd9a;
+  background: #ebcd9a; */
   color: #d23636;
   font-size: 26rpx;
-  height: 60rpx;
-  line-height: 60rpx;
   text-align: center;
+  line-height: 1;
+  padding-top: 20rpx; 
 }
 
 .red-color{
@@ -179,3 +187,18 @@ page{
 .gray-color{
   color:#999;
 }
+
+/* 商品头部 */
+.goods-title{height: 99rpx;border-bottom: 1rpx solid #eee;}
+.addgoods-icon{width: 50rpx;height: 50rpx;}
+.goods-list-box{padding: 50rpx 0;font-size: 30rpx;}
+/* 商品 */
+.no-goods-tip{font-size: 30rpx;color: #999;line-height: 1; }
+.tag-item{padding: 50rpx 0;font-size: 30rpx;}
+.tag-item-border{border-bottom: 1rpx solid #eee}
+.tag-name-box{width: 350rpx;font-weight: 600;}
+/* 加减器 */
+.stepper{display: flex;justify-content: space-between;align-items: center;width: 178rpx;
+height:48rpx;border: 1rpx solid #ddd;border-radius: 5rpx;font-size: 32rpx;}
+.stepper-sign{width: 49rpx;text-align: center;line-height: 48rpx;}
+.num-input{flex: 1;text-align: center;font-size: 32rpx;}

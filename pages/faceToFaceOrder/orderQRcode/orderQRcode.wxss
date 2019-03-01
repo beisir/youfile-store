@@ -1,0 +1,27 @@
+/* pages/faceToFaceOrder/orderQRcode/orderQRcode.wxss */
+page{border: 0;color: #333;}
+.top-box{height: 590rpx;position: relative;}
+.order-price-box{
+  height: 310rpx;
+  background: #ca7;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 48rpx;
+  box-sizing: border-box;
+}
+.roundedge{height: 50rpx;background: #ca7;border-radius: 0 0 50% 50%;}
+.QRcode-icon{width: 300rpx;height: 300rpx;position: absolute;left:0;right: 0;margin: auto;bottom:40rpx;box-shadow: 0 0 15rpx #999;}
+.code-tip{display: flex;flex-direction: column;align-items: center;font-size: 26rpx;color:#333;}
+/* 线 */
+.dashed-border{display: flex;justify-content: space-between;margin: 60rpx 50rpx 40rpx;}
+.dashed-border view{width: 13rpx;height: 1rpx; background: #ddd;}
+ /* 新货物 */
+.goods-title{font-size:30rpx;font-weight: 600;margin:0 50rpx 33rpx;line-height: 1;}
+.new-goods-box{
+  padding: 0 50rpx 12rpx;
+  position: relative;
+}
+.new-goods-box .goods-item{padding-bottom: 38rpx;display: flex;justify-content: space-between;font-size: 26rpx;color: #666;}
+.goods-item-goodsname{width: 70%;}

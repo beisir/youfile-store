@@ -2,7 +2,7 @@
 
 .o-title-box{
   padding:50rpx 0 60rpx;
-  border-bottom: 1rpx solid #ddd;
+  border-bottom: 1rpx solid #eee;
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 }
 
 .o-title-text{
-  font-size: 36rpx;
+  font-size: 40rpx;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -33,25 +33,32 @@
 }
 
 .user-box{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: #fff;
-  height: 95rpx;
-  font-size: 30rpx;
-  font-weight: 600;
+  padding-top: 50rpx;
+  padding-bottom: 45rpx;
+  line-height: 1;
 }
 .user-icon{
   width: 35rpx;
   height: 35rpx;
   margin-right: 20rpx;
 }
-
-.username-box{
-  max-width: 380rpx;
+.userphone-box{
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  color: #666;
+  font-size: 28rpx;
+  padding-left: 55rpx;
+  margin-top: 27rpx;
+}
+.username-box{
+  flex:1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 36rpx;
+  font-weight: 600;
 }
 .type-chunk{
   margin-left: 20rpx;
@@ -69,3 +76,14 @@
     margin-top:30rpx;
     font-weight: 600;
   }
+
+.mid-btn{margin: 0 50rpx 25rpx;font-size: 28rpx;}
+.btn-icon{
+    width: 40rpx;
+    height: 40rpx;
+    margin-right: 10rpx;
+  }
+.remark-box{padding-bottom:30rpx;padding-top:30rpx;display: flex;justify-content: space-between;}  
+.remark-detail{max-width: 400rpx;text-align: right;word-break:break-all;}
+.dashed-border{display: flex;justify-content: space-between;}
+.dashed-border view{width: 17rpx;height: 1rpx; background: #eee;}

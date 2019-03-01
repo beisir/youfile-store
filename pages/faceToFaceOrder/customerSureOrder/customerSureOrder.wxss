@@ -1,0 +1,22 @@
+@import '../customerOrderDetail/customerOrderDetail';
+.time-icon{width: 50rpx;height: 50rpx;margin-right: 10rpx;}
+.common-box{
+  margin: 20rpx 30rpx;
+  background: #fff;
+  border-radius: 10rpx;
+}
+.lasttime-box{
+  height: 130rpx;
+  line-height: 1;
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #ca7;
+}
+.price-box{
+  height: 156rpx;
+  margin: 0 50rpx;
+}
+.bottom-btn{background: #ca7;color: #fff;font-size: 36rpx;height: 120rpx;
+line-height: 120rpx;text-align: center;position: fixed;bottom: 0;width: 100%;font-weight: 600;}
+.dashed-border{display: flex;justify-content: space-between;}
+.dashed-border view{width: 17rpx;height: 3rpx; background: #eee;}

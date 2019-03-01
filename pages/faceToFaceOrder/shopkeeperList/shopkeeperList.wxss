@@ -2,14 +2,15 @@
 
 
 .cloud-icon {
-  width: 37rpx;
-  height: 37rpx;
+  width: 40rpx;
+  height: 40rpx;
   margin-right: 20rpx;
 }
 .search-input-icon{
   height: 30rpx;
   width: 30rpx;
   margin-right: 15rpx;
+  font-size: 24rpx;
 }
 .my-search-input{
   width: 460rpx;
@@ -30,7 +31,7 @@
   margin-left: 20rpx;
 }
 .com-name-box{
-  max-width: 170rpx;
+  max-width: 380rpx;
   font-weight: 600;
 }
 .tel-box{

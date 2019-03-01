@@ -13,6 +13,31 @@ Page({
     tag: [],  //标签
     baseUrl: app.globalData.imageUrl
   },
+  // 加减器
+  changeNum(e){
+    let type = e.currentTarget.dataset.type,
+        item = e.currentTarget.dataset.item,
+        tags = this.data.tag;
+
+    tags.forEach((el, index)=> {
+      if (el.goodsId === item.goodsId){
+        if(type==='add') {
+          if (el.num == 9999) {
+            API.showToast("数量最多9999个")
+            return
+          }
+          el.num++
+        } else {
+          el.num--
+        }
+        
+        if(el.num <= 0){
+          tags.splice(index,1)
+        }
+      }
+    })
+    this.setData({tag:tags})    
+  },
   watchInput(e){
     let type = e.currentTarget.dataset.type,
         val = e.detail.value,
@@ -36,6 +61,32 @@ Page({
       break;
       case "tip":
         obj.tip = val;
+      break;
+      case "goodsnum":
+        let item = e.currentTarget.dataset.item
+        let arr = this.data.tag;
+        if ( val>0 && val<9999){
+          arr.forEach(el=>{
+            if (el.goodsId === item.goodsId){
+              el.num = val
+            }
+          })
+          obj.tag = arr
+        }else if(val > 9999){
+          arr.forEach(el => {
+            if (el.goodsId === item.goodsId) {
+              el.num = 9999
+            }
+          })
+          obj.tag = arr
+        } else if (val <= 0 && val!=""){
+          arr.forEach((el,index) => {
+            if (el.goodsId === item.goodsId) {
+              arr.splice(index, 1)
+            }
+          })
+          obj.tag = arr
+        }
       break;
     }
     this.setData(obj)
@@ -70,9 +121,13 @@ Page({
     if(tag.length > 0){
       let strarr = [];
       tag.forEach(el=>{
-        strarr.push(el.goodsId);
+        let obj = {
+          num: el.num,
+          goodsId: el.goodsId
+        }
+        strarr.push(obj);
       })
-      str = "?tag=" + strarr.join(',')
+      str = "?tag=" + JSON.stringify(strarr)
     }
     wx.navigateTo({
       url: '../goodsTag/goodsTag'+str,

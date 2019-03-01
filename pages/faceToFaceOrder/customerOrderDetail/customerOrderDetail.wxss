@@ -9,12 +9,12 @@
 }
 
 .title-icon{
-  height: 36rpx;
-  width: 36rpx;
+  height: 40rpx;
+  width: 40rpx;
   margin-right: 26rpx;
 }
 .status-font{
-  font-size: 36rpx;
+  font-size: 40rpx;
 }
 .title-time{
   font-size: 24rpx;
@@ -28,8 +28,8 @@
 
 .store-box{
   padding-top:35rpx;
-  padding-bottom: 35rpx;
   background: #fff;
+  margin-bottom: 20rpx;
 }
   .store-line{
     position: relative;
@@ -41,11 +41,12 @@
     left: 0;
     height: 35rpx;
     width: 35rpx;
-    top: 4rpx;
+    top: 50%;
+    margin-top: -15rpx;
   }
 
   .store-add{
-    font-size: 30rpx;
+    font-size: 36rpx;
     font-weight: 600;
   }
   .store-time{
@@ -57,14 +58,17 @@
     height: 50rpx;
     margin-right: 10rpx;
   }
-
+  .white-box{background: #fff;}
   .mid-btn{
     display: flex;
     justify-content: space-around;
     align-items: center;
     height: 100rpx;
     background: #fff;
-    margin: 20rpx 0;
+    border-top: 1rpx solid #eee;
+    margin-top:20rpx;
+    font-weight: 600;
+    font-size: 30rpx;
   }
   .btn-line{
     background: #ededed;
@@ -75,6 +79,7 @@
   /* 货 */
   .goods-detail-box{
     background: #fff;
+    margin-bottom: 20rpx;
   }
 /* 信息条 */
 .msg-list-box{
@@ -93,7 +98,6 @@
     color: #333; 
   }
   .msg-detail{
-    font-weight: 600;
   }
 
   .border-line{
@@ -110,7 +114,7 @@
     color: #d23636;
     font-size: 34rpx;
   }
-
+  .font-bold{font-weight: 600;}
   /* 按钮 */
   .bottom-btn-box{
     height: 122rpx;
@@ -124,9 +128,10 @@
     padding-top: 20rpx;
     box-sizing: border-box;
   }
-  .bottom-btn-box .btn{font-size: 26rpx;}
+  .bottom-btn-box .btn{font-size: 30rpx;}
   .btn{
     width: 200rpx;
     height: 80rpx;
-    line-height: 80rpx;
+    line-height: 78rpx;
   }
+  .goods-item-goodsname{color: #333;}

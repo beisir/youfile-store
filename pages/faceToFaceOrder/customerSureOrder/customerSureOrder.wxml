@@ -1,0 +1,42 @@
+<wxs src="../../../public/filter.wxs" module="filter" />
+
+<view class='common-box padding-box flex-center lasttime-box'>
+  <image class='time-icon' src='/image/gold-time.png'></image>
+  <view>剩余时间：{{clock?clock:''}}</view>
+</view>
+
+<view class='common-box'>
+  <!-- 商店 -->
+  <view class='store-box padding-box'>
+    <view class='store-line'>
+      <image src='/image/ad.png' class="store-icon"></image>
+      <text class='store-add'>门店地址：{{order.storeInfo.address?order.storeInfo.address:""}}</text>
+    </view>
+    <view class='store-line store-time gray-color'>营业时间：{{order.storeInfo.openingTime?order.storeInfo.openingTime:""}}</view>
+  </view>
+  <!-- 货 -->
+
+  <view class='goods-detail-box'>
+    <view class='item-title padding-box' bindtap='toHome'>
+      <view class='flex-center'>
+        <image src="/image/u4.png" class='cloud-icon'></image>
+        <text class='com-name-box'>{{order.storeInfo.storeName}}</text>
+      </view>
+    </view>
+    <view class='new-goods-box'>
+      <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
+      <view wx:for='{{order.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key="{{index}}" class='goods-item'>
+        <text class='goods-item-goodsname'>{{tip.goodsName}}</text>
+        <text>x12312</text>
+      </view>
+    </view>
+  </view>
+  <view class='dashed-border padding-box'><view wx:for='[1,1,1,1,1,1,1,1,1,1]' wx:key='{{item}}'></view></view>
+  <!-- 价格 -->
+  <view class='msg-item font-bold price-box'>
+    <text class='pay-price-title'>应付金额</text>
+    <text class='msg-detail pay-price'>￥{{filter.filterMoney(order.payAmount)}}</text>
+  </view>
+</view>
+
+<view class='bottom-btn' bindtap='pay'>确认订单</view>
