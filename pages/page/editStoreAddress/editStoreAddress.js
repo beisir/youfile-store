@@ -53,7 +53,6 @@ Page({
   getIsIos() {
     var phone = wx.getSystemInfoSync()
     var _this = this
-    console.log(phone.platform)
     if (phone.platform == 'ios') {
       _this.setData({
         platformIos: true

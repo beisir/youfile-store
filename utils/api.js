@@ -143,6 +143,12 @@ import {
   getAccountDetailUrl,
   getHaveRecordUrl,
   storeOnlinePayUrl,
+  deleteUserUrl,
+  goodsSkuUrl,
+  skuCodeUrl,
+  specValCodeUrl,
+  updateGooodsSkuUrl,
+  searchClassUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -222,6 +228,11 @@ function cusNewDetails(data) {
 /**获取批发商商资料**/
 function newUserInfor(data) {
   return app.http.getRequest(newUserInforUrl, data)
+}
+/**删除商友关系**/
+function deleteUser(data) {
+  data = initStoreId(data);
+  return app.http.deleteRequest(deleteUserUrl, data)
 }
 
 /**分类列表**/
@@ -817,8 +828,26 @@ function storeOnlinePay(data){
   data = initStoreId(data);
   return app.http.getRequest(storeOnlinePayUrl,data);
 }
-
-
+/**获取搜索分类**/
+function searchClass(data) {
+  return app.http.getRequest(searchClassUrl, data)
+}
+/**编辑商品规格**/
+function updateGooodsSku(data) {
+  return app.http.putRequest(updateGooodsSkuUrl, data)
+}
+/*Skucode**/
+function skuCode(data) {
+  return app.http.getRequest(skuCodeUrl, data)
+}
+/*批量生成规格值编码**/
+function specValCode(data) {
+  return app.http.getRequest(specValCodeUrl, data)
+}
+/**模板列表**/
+function getGoodsSku(data) {
+  return app.http.getRequest(goodsSkuUrl, data)
+}
 /**
  * 根据userId获取店铺Id
  */
@@ -1072,5 +1101,11 @@ module.exports = {
   getTrade,
   getAccountin,
   getAccountDetail,
-  getHaveRecord
+  getHaveRecord,
+  deleteUser,
+  getGoodsSku,
+  skuCode,
+  specValCode,
+  updateGooodsSku,
+  searchClass
 }

@@ -54,7 +54,10 @@
 .result{background:#fff;margin-top:0rpx;padding-top:30rpx}
 .nomore{margin-bottom:0rpx;margin-top:0rpx;text-align:center;background:#f7f7f7;padding:30rpx}
 .ym_sydtdmgzs text{position: absolute;height: auto;width:500rpx;word-wrap:break-word}
-
+.isHideGoods{position: absolute;width:330rpx;height: 330rpx;background:rgba(201, 201, 201, 0.9);left: 0rpx;z-index: 10;text-align: center;font-size: 30rpx;color: #fff;}
+.isHideGoods view{line-height: 1.3}
+.result-list{position: relative}
+.isHideGoods image{width: 70rpx;height: 70rpx;position: relative;padding:0;margin-top:70rpx;left: 0;background: unset}
 /* 轮播 */
 .swiper-tip-box{
   display: flex;

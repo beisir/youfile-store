@@ -165,3 +165,15 @@ export const getTradeUrl ='/admin/store/trade/statistic'
 export const getAccountinUrl='/admin/store/trade/accountin'
 export const getAccountDetailUrl ='/admin/store/trade/{{paymentNumber}}/account/detail'
 export const getHaveRecordUrl ='/admin/store/trade/settle'
+// 删除进货商关系
+export const deleteUserUrl='/admin/merchantpurchaser/{{storeId}}/{{purchaserUserId}}'
+// 根据商品查SKU
+export const goodsSkuUrl = '/admin/shop/goods/specification/sku/{{goodsId}}'
+// 查询SKUcode,
+export const skuCodeUrl = '/admin/shop/goods/specification/specification/value/codes'
+// 批量生成规格值code
+export const specValCodeUrl = '/admin/shop/goods/specification/spec/value/codes'
+// 修改SKU
+export const updateGooodsSkuUrl = '/admin/shop/goods/specification/sku'
+// 分类搜索
+export const searchClassUrl = '/api/shop/category/search'

@@ -22,7 +22,7 @@
             <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
           </view>
         </view>
-        <view class="weui-uploader__input-box" wx:if='{{pics.length<6}}'>
+        <view class="weui-uploader__input-box"  wx:if='{{pics.length<6}}'>
           <view class="weui-uploader__input" bindtap="chooseImage"></view>
         </view>
       </view>
@@ -39,30 +39,30 @@
       <image src="{{currentTab==0?'/image/addming2.png':'/image/addming1.png'}}"></image>商品图文</view>
   </view>
   <view hidden='{{hiddenSelt}}'>
-    <view class="page__category-content">
-      <view class="weui-cell1">
-        <view class="weui-cell__hd">
-          <image src="/image/title.png"></image>
-        </view>
-        <view class="weui-cell__bd">
-          <text>标题</text>
-        </view>
-      </view>
-      <input class="weui-input" type="text" bindinput='watchName' value='{{name}}' placeholder="请填写商品标题"></input>
-      <view class="weui-cell">
-        <view class="weui-cell__hd">
-          <image src="/image/tuijian.png"></image>
-        </view>
-        <view class="weui-cell__bd">
-          <text>推荐心语</text>
-        </view>
-      </view>
-      <input class="weui-input" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder="请输入推荐语（选填）"></input>
-    </view>
-    <view class="page__category-content">
-      <view class='weui-title'>商品类目</view>
-      <navigator url='../firstClass/firstClass'>
+      <view class="page__category-content">
         <view class="weui-cell1">
+          <view class="weui-cell__hd">
+            <image src="/image/title.png"></image>
+          </view>
+          <view class="weui-cell__bd">
+            <text>标题</text>
+          </view>
+        </view>
+        <textarea class="weui-input" type="text" bindinput='watchName' value='{{name}}' placeholder='请填写商品标题'></textarea>
+        <view class='change-num' wx:if='{{nameLen>0}}'>{{nameLen}}/55</view>
+        <view class="weui-cell">
+          <view class="weui-cell__hd">
+            <image src="/image/tuijian.png"></image>
+          </view>
+          <view class="weui-cell__bd">
+            <text>推荐心语</text>
+          </view>
+        </view>
+        <textarea class="weui-input" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
+        <view  class='change-num'  wx:if='{{recommendDescLen>0}}'>{{recommendDescLen}}/60</view>
+      </view>
+      <view class="page__category-content">
+        <navigator  url='../firstClass/firstClass' class="weui-cell1 we-new-g">
           <view class="weui-cell__hd">
             <image src="/image/ic3.png"></image>
           </view>
@@ -70,13 +70,11 @@
             <text>类目</text>
           </view>
           <view class="weui-cell__ft1">
+            <text>{{codeName==''?'未选择':codeName}}</text>
             <image src="/image/icl.png"></image>
           </view>
-        </view>
-        <input class="weui-input" type="text" value='{{codeName}}' disabled='disabled' placeholder="未选择"></input>
-      </navigator>
-      <navigator url="../shopClass/shopClass?categoryCustomCode={{categoryCustomCode}}">
-        <view class="weui-cell">
+        </navigator>
+        <navigator  url="../shopClass/shopClass?categoryCustomCode={{categoryCustomCode}}" class="weui-cell we-new-g">
           <view class="weui-cell__hd">
             <image src="/image/ic4.png"></image>
           </view>
@@ -84,104 +82,102 @@
             <text>本店分类</text>
           </view>
           <view class="weui-cell__ft1">
+            <text>{{strName=='' || strName==null?'未设置（选填）':strName}}</text>
             <image src="/image/icl.png"></image>
           </view>
-        </view>
-        <input class="weui-input" disabled='disabled' type="text" value='{{strName}}' placeholder="未设置（选填）"></input>
-      </navigator>
-    </view>
-    <navigator class="page__category-content" url='../spec/spec?model={{model}}'>
-      <view class='weui-title'>商品规格
-        <view>{{pageall.length>0?'已设置':'未设置'}}
-          <image src="/image/icl.png"></image>
+        </navigator>
+      </view>
+      <view class="page__category-content">
+        <view bindtap='alertSpec'>
+          <view class="weui-cell1 weui-cell-new">
+            <view class="weui-cell__hd">
+              <image src="/image/ic3.png"></image>
+            </view>
+            <view class="weui-cell__bd">
+              <text>商品规格</text>
+            </view>
+          </view>
+          <view class="weui-cell__ri">
+            <image wx:if='{{skuListData.length==0}}' src="/image/add1.png"></image>
+            <image wx:if='{{skuListData.length>0}}' src="/image/edit1.png"></image>
+            <view wx:if='{{skuListData.length==0}}'>添加</view>
+            <view wx:if='{{skuListData.length>0}}'>编辑</view>
+          </view>
+          <input class="weui-input"  wx:if='{{skuListData.length==0}}' type="text" value='（选填）未设置' disabled='disabled' ></input>
+          <input class="weui-input ed-co" wx:if='{{skuListData.length>0}}' type="text" value='已设置' disabled='disabled'></input>
         </view>
       </view>
-      <view class='page-weui {{index==0?"page-weui-active":""}}' wx:for="{{pageall}}" wx:key="index">
-        <view class="weui-cell">
+      <view class="page__category-content page__new">
+        <view class='weui-title'>商品价格库存
+          <text>(对顾客的展示价格)</text>
+          <image src="/image/ca1.png"></image>
+        </view>
+        <view class="weui-cell1">
           <view class="weui-cell__hd">
-            <image src="/image/ic5.png"></image>
+            <image src="/image/ic6.png"></image>
           </view>
           <view class="weui-cell__bd">
-            <text>{{item.specName}}</text>
+            <text>批发价</text>
+          </view>
+          <view class='weui-input'>
+            <input bindinput='wholesalePrice' disabled='{{skuListData.length==0?false:"disabled"}}' value='{{wholesalePrice}}' placeholder-class='pla-input' class="weui-input" type="text" ></input>
+            <text>元</text>
           </view>
         </view>
-        <view class='add-size'>
-          <text wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="index">{{item.specValueName}}</text>
+         <view class="weui-cell1">
+          <view class="weui-cell__hd">
+            <image src="/image/ic6.png"></image>
+          </view>
+          <view class="weui-cell__bd">
+            <text>零售价</text>
+          </view>
+          <view class='weui-input'>
+            <input bindinput='sellPrice' disabled='{{skuListData.length==0?false:"disabled"}}' value='{{sellPrice}}' placeholder-class='pla-input' class="weui-input" type="text" ></input>
+            <text>元</text>
+          </view>
+        </view>
+         <view class="weui-cell1">
+          <view class="weui-cell__hd">
+            <image src="/image/ic7.png"></image>
+          </view>
+          <view class="weui-cell__bd">
+            <text>总库存</text>
+          </view>
+          <view class='weui-input'>
+            <input bindinput='stockNum' disabled='{{skuListData.length==0?false:"disabled"}}' value='{{stockNum==0?"":stockNum}}' placeholder-class='pla-input' class="weui-input" type="number" maxlength='8'></input>
+            <text>件</text>
+          </view>
         </view>
       </view>
-      <input wx:if="{{pageall.length<1}}" class="weui-input" type="text" disabled='disabled' placeholder="不设置即仅一个规格（选填）"></input>
-    </navigator>
-    <view class="page__category-content" hidden='{{clickSpecShow}}'>
-      <view class='weui-title'>商品价格库存</view>
-      <view class="weui-cell1">
-        <view class="weui-cell__hd">
-          <image src="/image/ic6.png"></image>
-        </view>
-        <view class="weui-cell__bd">
-          <text>价格</text>
-        </view>
-      </view>
-      <view class='weui-input'>每个规格批发价
-        <input bindinput='wholesalePrice' placeholder-class='pla-input' class="weui-input" type="text" placeholder="" value='{{wholesalePrice}}'></input>
-        <text>元</text>
-      </view>
-      <view class='weui-input'>每个规格零售价
-        <input bindinput='sellPrice' placeholder-class='pla-input' class="weui-input" type="text" placeholder="" value='{{sellPrice}}'></input>
-        <text>元</text>
-      </view>
-      <view class="weui-cell"  bindtap='clickSpec'>
-        <view class="weui-cell__hd">
-          <image src="/image/ic7.png"></image>
-        </view>
-        <view class="weui-cell__bd">
-          <text>库存</text>
-        </view>
-        <view class="weui-cell__ft weui-active" wx:if="{{!pageShow}}">分别设置价格和库存</view>
-        <view class="weui-cell__ft1" style='top:22rpx;right:-10rpx'>
-          <image src="/image/ca-you.png" class='ca-you'></image>
+      <view class="page__category-content page__new" wx:if='{{!stockHide}}'>
+        <view class='weui-title'>其他设置</view>
+        <view class="weui-cell1">
+          <view class="weui-cell__bd" style='width:200rpx'>
+            <text>起批量</text>
+          </view>
+          <view class='weui-input'>
+            <input class="stock" type="number" bindinput='stockFun' value='{{stock}}'></input>
+          </view>
+          <view class="weui-cell__ft weui-cell__cl" bindtap='clearInput'>
+            <image src="/image/clo.png"></image>
+          </view>
         </view>
       </view>
-      <view class='weui-input' wx:if="{{!pageShow}}">每个规格库存
-        <input bindinput='newConst' value='{{newConst}}' placeholder-class='pla-input' class="weui-input" type="number" placeholder=""></input>
-        <text>件</text>
-      </view>
-      <view class='weui-input'>总库存
-        <input disabled='disabled' placeholder-class='pla-input' class="weui-input" type="number" placeholder="" value='{{skuNum}}'></input>
-        <text>件</text>
-      </view>
-    </view>
-    <view class="page__category-content" hidden='{{!clickSpecShow}}'>
-      <view class='weui-title'>商品价格库存</view>
-      <view class="weui-cell1" data-id='000' bindtap='clickSpec'>
-        <view class="weui-cell__hd">
-          <image src="/image/ic7.png"></image>
+     <view class="page__category-content page__new">
+        <view class='weui-title'>商品隐私设置
+          <text>(关闭代表对所有人公开)</text>
         </view>
-        <view class="weui-cell__bd">
-          <text>价格·库存</text>
-        </view>
-        <view class="weui-cell__ft weui-active">查看或编辑价格和库存</view>
-        <view class="weui-cell__ft1" style='top:22rpx;right:-10rpx'>
-         <image src="/image/ca-you.png" class='ca-you'></image>
-        </view>
-      </view>
-      <view class='weui-input'>总库存
-        <input placeholder-class='pla-input' class="weui-input" disabled='disabled' value='{{skuNum}}' type="number" placeholder=""></input>
-        <text>件</text>
-      </view>
-    </view>
-    <view class="page__category-content" wx:if='{{!stockHide}}'>
-      <view class='weui-title'>其他设置</view>
-      <view class="weui-cell1">
-        <view class="weui-cell__bd">
-          <text>起批量</text>
-        </view>
-        <input class="stock" type="number" bindinput='stockFun' value='{{stock}}'></input>
-        <view class="weui-cell__ft" bindtap='clearInput'>
-          <image src="/image/clo.png"></image>
+        <view class="weui-cell1">
+          <view class="weui-cell__bd">
+            <text>允许商友可见</text>
+            <view class='ag-font'>与您成为商友关系的进货商可查看</view>
+          </view>
+          <view class='weui-input'>
+            <switch color="#CCAA77" checked='{{switchChange}}' bindchange="switchChange"/>
+          </view>
         </view>
       </view>
     </view>
-  </view>
   <view hidden='{{hiddenSend}}'>
     <view class='write'>
       <view wx:for='{{addGoodsDetails}}' wx:key='index'>
