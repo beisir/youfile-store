@@ -9,7 +9,7 @@
     {{item.name}}
   </view>
 </view>
-<view wx:else class='noClass'>
+<view wx:if='{{listData.length==0 && initShow}}' class='noClass'>
   <view><image  src="/image/bac.png"></image></view>
   没有搜索到相关类目
 </view>

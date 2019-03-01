@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/page/home/home",
     "pages/admin/status/status",
+    "pages/page/home/home",
     "pages/admin/addGoods/addGoods",
     "pages/admin/goodsSpec/goodsSpec",
     "pages/admin/specSet/specSet",

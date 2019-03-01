@@ -9,7 +9,8 @@ Page({
     parentCategoryCode:0,
     listData: [],
     value:'',
-    isShowClose:false
+    isShowClose:false,
+    initShow:false
   },
   //监听input输入的值
   searchInput:function(e){
@@ -44,7 +45,8 @@ Page({
         .then(res => {
           var listData=res.obj
           _this.setData({
-            listData: listData
+            listData: listData,
+            initShow:true
           })
         })
     }
