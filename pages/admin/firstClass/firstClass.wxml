@@ -1,18 +1,15 @@
-<view class='shop-cont'  wx:if='{{currentTab==0}}'>
-    <view class='shop-size'>请选择类目</view>
-    <view wx:for='{{dataList}}' wx:key='{{index}}' bindtap='twoClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
-      {{item.name}}
-    </view>
+<view class="search-box">
+  <input class="search-input" value="{{value}}" bindconfirm='searchBtn'  auto-focus='ture' placeholder-class='pre-input' placeholder='请输入关键词' bindinput="searchInput"/>
+  <image class="home-ser-new" src="/image/search.png"></image>
+  <image class="home-ser-new r-new" wx:if='{{isShowClose}}'  bindtap='emptyInput' src="/image/close.png"></image>
+  <view class='serCont' bindtap="searchBtn" >搜索</view>
 </view>
-<view class='shop-cont shop-cont2' wx:if='{{currentTab==1}}'>
-  <view class='shop-size'>已选定<text bindtap='goFistClass'>{{name}}</text></view>
-  <view wx:for='{{dataListTwo}}' wx:key='{{index}}' bindtap='twothreeClass' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
-      {{item.name}}
-  </view>
-</view>
-<view class='shop-cont shop-cont2' wx:if='{{currentTab==2}}'>
-  <view class='shop-size'>已选定 <text bindtap='goFistClass'>{{name}}</text> ><text bindtap='goFistClass2'>{{names}}</text></view>
-  <view wx:for='{{dataListThree}}' wx:key='{{index}}'  data-name='{{item.name}}'  data-id='{{item.categoryCode}}' bindtap='classFun'>
+<view class='shop-cont' wx:if='{{listData.length>0}}'>
+  <view wx:for='{{listData}}' wx:key='{{index}}' bindtap='classFun' data-id='{{item.categoryCode}}' data-name='{{item.name}}'>
     {{item.name}}
   </view>
+</view>
+<view wx:else class='noClass'>
+  <view><image  src="/image/bac.png"></image></view>
+  没有搜索到相关类目
 </view>

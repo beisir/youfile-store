@@ -147,7 +147,7 @@ Page({
     }
     this.setData({
       name: val.substring(0, 55),
-      nameLen: num
+      nameLen: (val.substring(0, 55)).length
     })
   },
   // 设置隐私
@@ -160,12 +160,12 @@ Page({
     var _this = this,
       val = event.detail.value,
       num = val.length
-    if (num > 51) {
+    if (num > 61) {
       Api.showToast("超过最长数字限制")
     }
     this.setData({
-      recommendDesc: val.substring(0, 50),
-      recommendDescLen: num
+      recommendDesc: val.substring(0, 60),
+      recommendDescLen: (val.substring(0, 60)).length
     })
   },
   addImage: function () {
@@ -239,6 +239,8 @@ Page({
         _this.setData({
           pics: arrs,
           name: obj.name,
+          nameLen: (obj.name).length,
+          recommendDescLen: (obj.recommendDesc).length,
           isStatus: obj.status,
           mainImgUrl: obj.mainImgUrl,
           switchChange: obj.privacy==0?false:true,

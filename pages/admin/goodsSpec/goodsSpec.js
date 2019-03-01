@@ -42,18 +42,25 @@ Page({
     var _this = this
     if (voListData) {
       var len = voListData.length
-      for (var i = 0; i < voListData.length; i++) {
-        var childData = voListData[i].goodsSpecificationValueVOList
-        for (var j = 0; j < childData.length; j++) {
-          childData[j].sClick = true
-          for (let u of goodsSkuVOList) {
-            if (i == 0) {
-              if (u.specValueCodeList.indexOf(childData[j].specValueCode) != -1) {
-                u.skuName = childData[j].specValueName
-              }
-            } else {
-              if (u.specValueCodeList.indexOf(childData[j].specValueCode) != -1) {
-                u.skuNameSign = childData[j].specValueName
+      if (len==0){
+        voListData.push({
+          specName: "颜色",
+          goodsSpecificationValueVOList: []
+        })
+      }else{
+        for (var i = 0; i < voListData.length; i++) {
+          var childData = voListData[i].goodsSpecificationValueVOList
+          for (var j = 0; j < childData.length; j++) {
+            childData[j].sClick = true
+            for (let u of goodsSkuVOList) {
+              if (i == 0) {
+                if (u.specValueCodeList.indexOf(childData[j].specValueCode) != -1) {
+                  u.skuName = childData[j].specValueName
+                }
+              } else {
+                if (u.specValueCodeList.indexOf(childData[j].specValueCode) != -1) {
+                  u.skuNameSign = childData[j].specValueName
+                }
               }
             }
           }

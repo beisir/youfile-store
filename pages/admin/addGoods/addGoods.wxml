@@ -53,7 +53,7 @@
             <text>标题</text>
           </view>
         </view>
-        <textarea class="weui-input" type="text" bindinput='watchName' value='{{name}}' placeholder='请填写商品标题'></textarea>
+        <textarea class="weui-input1 {{nameLen>0?'weui-input2':''}}" type="text" bindinput='watchName' value='{{name}}' placeholder='请填写商品标题'></textarea>
         <view class='change-num' wx:if='{{nameLen>0}}'>{{nameLen}}/55</view>
         <view class="weui-cell">
           <view class="weui-cell__hd">
@@ -63,7 +63,7 @@
             <text>推荐心语</text>
           </view>
         </view>
-        <textarea class="weui-input" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
+        <textarea class="weui-input1 {{recommendDescLen>0?'weui-input2':''}}" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
         <view  class='change-num'  wx:if='{{recommendDescLen>0}}'>{{recommendDescLen}}/60</view>
       </view>
       <view class="page__category-content">

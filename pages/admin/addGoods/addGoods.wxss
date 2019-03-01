@@ -78,4 +78,6 @@
 .page__new .weui-cell1 .weui-cell__bd text{font-size: 32rpx;font-weight: normal}
 .page__new .weui-cell1{border-bottom: 2rpx solid #E1E1E1;margin-left: 20rpx;padding-bottom: 0}
 .page__new .weui-cell1:last-child{border-bottom: 0}
-.change-num{color: #999;font-size: 28rpx;width: 100%;text-align: right}
+.change-num{color: #999;font-size: 28rpx;width: 100%;text-align: right;padding-bottom: 15rpx}
+.weui-input1{font-size: 32rpx;color: #666;width: 95%;margin-left: 5%;height: 70rpx}
+.weui-input2{height: 145rpx;}

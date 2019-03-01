@@ -184,7 +184,7 @@ Page({
     }
     this.setData({
       name: val.substring(0, 55),
-      nameLen: num
+      nameLen: (val.substring(0, 55)).length
     })
   },
   stockFun: function(e) {
@@ -205,12 +205,12 @@ Page({
     var _this = this,
       val = event.detail.value,
       num = val.length
-    if (num > 51) {
+    if (num > 61) {
       Api.showToast("超过最长数字限制")
     }
     this.setData({
-      recommendDesc: val.substring(0, 50),
-      recommendDescLen:num
+      recommendDesc: val.substring(0, 60),
+      recommendDescLen: (val.substring(0, 60)).length
     })
   },
   // 库存
