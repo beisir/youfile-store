@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/admin/status/status",
+    "pages/poster/goodsList/goodsList",
     "pages/page/home/home",
+    "pages/admin/status/status",
     "pages/admin/addGoods/addGoods",
     "pages/admin/goodsSpec/goodsSpec",
     "pages/admin/specSet/specSet",
