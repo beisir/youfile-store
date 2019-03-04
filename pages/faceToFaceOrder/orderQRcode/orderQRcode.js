@@ -1,6 +1,7 @@
 // pages/faceToFaceOrder/orderQRcode/orderQRcode.js
 import API from "../../../utils/api.js";
 import util from '../../../utils/util.js';
+import QRCode from '../../../utils/weapp-qrcode.js';
 Page({
 
   /**
@@ -15,6 +16,10 @@ Page({
 
       }
     ]
+  },
+  rpx2px(rpx){
+    const rate = wx.getSystemInfoSync().windowWidth / 750
+    return rate * rpx
   },
   getData() {
     API.ftfAdminOrderDetail({ orderNumber: this.data.code }).then(res => {
@@ -42,9 +47,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let qrcodeWidth = this.rpx2px(300)
+    this.setData({
+      qrcodeWidth: qrcodeWidth,
+    })
+    let qrcode = new QRCode('canvas', {
+      text: "1",
+      width: qrcodeWidth,
+      height: qrcodeWidth,
+      colorDark: "#000",
+      colorLight: "white",
+      correctLevel: QRCode.CorrectLevel.H
+    },url=> {
+      this.setData({ url: url })
+    });
 
+    setTimeout(()=>{
+      qrcode.makeCode('text you want convert', url => {
+        this.setData({ url: url })
+      })
+    },3000)
+   
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

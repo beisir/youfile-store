@@ -107,7 +107,7 @@
 
 
 
-        <view class='btn {{btnID}}' bindtap='login'>登录</view>
+        <button open-type='getUserInfo' class='btn {{btnID}}' disabled='{{btnID=="loginBtnDis"?true:false}}' bindgetuserinfo='getWXUserInfo' bindtap='login'>登录</button>
 
         <view class='text-sm user-agreement flex-box' style="justify-content:center;">登录后即完成阅读并同意
           <navigator class='text-yellow text-underline' url="/pages/login/agreement/agreement" hover-class="navigator-hover">《用户协议》 </navigator>
@@ -134,6 +134,6 @@
     </view>
   </view>
   <!-- 关闭按钮 -->
-  <image src='/image/login-close.png' class='close-btn {{loginChoseTypeModal?"close-btn-pos":""}} {{getCodeModal?"close-btn-code":""}}' bindtap='closePage'></image>
+  <image src='/image/login-close.png' class='close-btn {{loginChoseTypeModal?"close-btn-pos":""}} {{getCodeModal?"close-btn-code":""}}' bindtap='closePageBtn'></image>
 
 </view>

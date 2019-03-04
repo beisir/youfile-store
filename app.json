@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/faceToFaceOrder/orderQRcode/orderQRcode",
     "pages/faceToFaceOrder/ftfOpenpay/ftfOpenpay",
     "pages/page/updataPwd/updataPwd",
     "pages/page/user/user",
-    "pages/faceToFaceOrder/orderQRcode/orderQRcode",
     "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
     "pages/faceToFaceOrder/createOrder/createOrder",

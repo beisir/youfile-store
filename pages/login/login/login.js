@@ -3,9 +3,9 @@ import API from '../../../utils/api.js';
 Component({
   properties: {
     // 这里定义了innerText属性，属性值可以在组件使用时指定
-    innerText: {
+    closeBtnType: {
       type: String,
-      value: 'default value',
+      value: '',
     }
   },
   data: {
@@ -45,6 +45,10 @@ Component({
     attention: true
   },
   methods: {
+    // 获取用户信息
+    getWXUserInfo(data){
+      console.log(data)
+    },
     // 输入验证码
     getFocus(){
       this.setData({ inputFocus: true})
@@ -106,14 +110,14 @@ Component({
     //判断是否输入完整
     checkComplete() {
       if (this.data.loginType === 'code') {
-        if (this.data.telephone.length > 0 && this.data.verificationCode.length > 0) {
+        if (this.data.telephone.length > 0 && this.data.verificationCode.length >= 4) {
           this.setData({
             btnID: 'loginBtnAc'
           })
           return
         }
       } else {
-        if (this.data.telephone.length > 0 && this.data.password.length > 0) {
+        if (this.data.telephone.length > 0 && this.data.password.length >= 6) {
           this.setData({
             btnID: 'loginBtnAc'
           })
@@ -167,10 +171,10 @@ Component({
       if (this.data.stopLoginBtn) {
         return
       }
-      if (this.data.btnID === 'loginBtnDis') {
-        API.showToast('请填写完整')
-        return;
-      }
+      // if (this.data.btnID === 'loginBtnDis') {
+      //   API.showToast('请填写完整')
+      //   return;
+      // }
       //校验
       if (!this.testTel()) {
         API.showToast('请输入正确手机号码')
@@ -351,6 +355,16 @@ Component({
         return false;
       }
       return true;
+    },
+    closePageBtn(){
+      this.closePage()
+      if (this.data.closeBtnType) {
+        switch (this.data.closeBtnType) {
+          case 'quit':
+            wx.navigateBack()
+            break;
+        }
+      }
     },
     closePage() {
       this.setData({

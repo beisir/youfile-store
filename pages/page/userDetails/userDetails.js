@@ -9,9 +9,17 @@ Page({
   data: {
     sexData: [{ sex: "男", val: '1' }, { sex: "女", val: '2' }, { sex: "保密", val: '0' }],
     sex: '男',
-    show: true
+    show: true,
+    region: ['', '', ''],
+    customItem: '全部'
   },
-
+  // 选择地区
+  bindRegionChange(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      region: e.detail.value
+    })
+  },
   getData() {
     app.http.getRequest("/api/user/byuserid").then(res => {
       if (res.success) {
@@ -40,6 +48,10 @@ Page({
     if (res.success) {
       this.getData()
     }
+  },
+  // 改地区
+  changeArea(){
+    
   },
   //改微信
   changeWx() {

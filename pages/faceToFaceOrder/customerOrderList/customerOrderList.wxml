@@ -1,5 +1,5 @@
 <wxs src="../../../public/filter.wxs" module="filter" />
-<login id="login"></login>
+<login id="login" closeBtnType='quit'></login>
 <!-- 取消进货单 -->
 <clo show="{{cancelModal}}">
   <view class='layer-reason-item' wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>

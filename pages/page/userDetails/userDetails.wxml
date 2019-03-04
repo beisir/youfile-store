@@ -52,6 +52,19 @@
       </view>
     </navigator>
 
+
+    <view class='weui-cell'>
+      <view class='weui-cell__bd' bindtap='changeArea'>
+        <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+          地区
+          <text class='max-width:' wx:if="{{region[0]}}">{{region[0]}}，{{region[1]}}，{{region[2]}}</text>
+        </picker>
+
+      </view>
+      <view class='weui-img'>
+        <image src="/image/icl.png"></image>
+      </view>
+    </view>
   </view>
 </view>
 <view class='showHide' hidden='{{show}}'>
