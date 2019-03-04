@@ -31,12 +31,12 @@ Page({
       })
     }
     if (status == 2) {
-      if (num > 101) {
+      if (num > 100) {
         Api.showToast('超过最长数字限制')
       }
       this.setData({
-        value: value.substring(0, 100),
-        num: num-1
+        value: value.substring(0, 99),
+        num: num
       })
     }
     if (status == 3) {

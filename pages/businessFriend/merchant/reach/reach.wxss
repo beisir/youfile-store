@@ -35,3 +35,7 @@
 .bt-view>view:nth-child(2){
   width:38%;font-size:26rpx;
 }
+.spec-title{margin-bottom: 40rpx}
+.re-bottom{color: #F93E3F;}
+.is-font{color: #666;font-size: 30rpx;font-weight: normal}
+.is-font image{width: 35rpx;height: 35rpx;transform: rotate(180deg);margin-right: 10rpx;vertical-align: middle;margin-top: -2rpx;}

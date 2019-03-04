@@ -10,6 +10,34 @@ Page({
     showMes:false,
     name:'',
     baseUrl: app.globalData.imageUrl,
+    deleteUser:false
+  },
+  // 删除商友关系
+  deleteFriend: function () {
+    this.setData({
+      deleteUser: true
+    })
+  },
+  cancel:function(){
+    this.setData({
+      deleteUser:false
+    })
+  },
+  // 确定删除
+  conSpecName:function(){
+    var _this = this,
+      userId = this.data.userId,
+      data = {}
+    data.purchaserUserId = userId
+    Api.deleteUser(data)
+      .then(res => {
+        Api.showToast(res.message)
+        setTimeout(() => {
+          wx.navigateTo({
+            url: '../list/list',
+          })
+        }, 1000)
+      })
   },
   // 电话
   call(){
@@ -19,6 +47,7 @@ Page({
       })
     }
   },
+ 
   /**
    * 生命周期函数--监听页面加载
    */
