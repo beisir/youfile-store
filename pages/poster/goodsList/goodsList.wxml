@@ -12,9 +12,9 @@
     <view class='search-btn'>搜索</view>
   </view>
 
-  <view class='goods-item padding-box'>
+  <view class='goods-item'>
     <view class='flex-center goods-top-box'>
-      <icon wx:if="{{selectAllStatus}}" type="success" size="40rpx" color="#CCAA77" bindtap="selectAll" />
+      <icon wx:if="false" type="success" size="40rpx" color="#CCAA77" bindtap="selectAll" />
       <icon wx:else type="circle" size="40rpx" bindtap="selectAll" />
       <view class='goods-icon-box'>
         <image mode='aspectFit' class='goods-icon' src='/image/search.png'></image>
@@ -27,11 +27,19 @@
         </view>
       </view>
     </view>
+    <view class='dotted-line'><view wx:for='[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,]'></view></view>
     <!-- 图片 -->
     <view class='goods-img-box'>
-      <view class='goods-img-item'>
-        <image class='' src='/image/search.png'></image>
+      <view class='goods-img-item' wx:for="[,,]">
+        <image class='' src='/image/uploadStore.png'></image>
+        <image class='img-chose-icon' src='/image/square-uncheck.png'></image>
+        <image class='img-chose-icon' src='/image/square-check.png'></image>
       </view>
     </view>
   </view>
+</view>
+<view class='bottom-btn-box'>
+  <view class='button-type'>已选择</view>
+  <view class='btn-line'></view>
+  <view class='button-type'>确定</view>
 </view>

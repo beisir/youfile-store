@@ -12,8 +12,16 @@
 .goods-icon-box{width: 130rpx; height: 130rpx;border: 1rpx solid #eee;margin: 0 30rpx 0 25rpx;box-sizing: border-box;display: flex;align-items: center;justify-content: center;}
 .goods-icon{max-width: 100rpx;max-height: 100rpx;}
 .goods-msg-box{height: 130rpx;flex:1;}
-.goods-name{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 28rxp;font-weight: 600;width:380rpx;margin-top:5rpx;margin-bottom: 20rpx;line-height: 1;font-family: 'STSong'}
-.goods-price{min-width: 50%;float: left;font-size: 26rpx;color: #999;line-height: 1;}
-.goods-img-box{height: 170rpx;display: flex;align-items: center;background: #fdfdfd;padding-left: 40rpx;padding-right: 40rpx;}
-.goods-img-item{width: 90rpx;height: 90rpx;background: #fff;display: flex;align-items: center;justify-content: center;border-radius: 10rpx;}
+.goods-name{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 28rxp;font-weight: 600;width:380rpx;margin-top:5rpx;margin-bottom: 10rpx;line-height: 1;font-family: 'STSong'}
+.goods-price{min-width: 50%;float: left;font-size: 26rpx;color: #999;line-height: 1;padding-top:10rpx;}
+/* 图片 */
+.goods-img-box{height: 170rpx;display: flex;align-items: center;padding-left: 40rpx;padding-right: 40rpx;justify-content: space-between;}
+.goods-img-item{width: 90rpx;height: 90rpx;background: #fff;display: flex;align-items: center;justify-content: center;border-radius: 10rpx;box-shadow:  0 0  10rpx #eee;position: relative;}
 .goods-img-item image{width: 75rpx;height: 75rpx;}
+.dotted-line{background: #fff;display: flex;justify-content: space-between;padding:0 40rpx;}
+.dotted-line view{height: 1rpx;width: 10rpx;background: #eee;}
+.goods-img-item .img-chose-icon{position: absolute;right: 0;bottom: 0;width: 20rpx;height: 20rpx;}
+/* 底部按钮 */
+.bottom-btn-box{position: fixed;height: 120rpx;background: #fff;bottom: 0;width: 100%;display: flex;justify-content: space-around;align-items: center;}
+.btn-line{width: 2rpx;height: 30rpx;background: #ddd;}
+.button-type{width: 200rpx;text-align: center;color: #ca7;font-size: 36rpx;}
