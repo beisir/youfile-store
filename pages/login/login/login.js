@@ -391,6 +391,11 @@ Component({
           case 'quit':
             wx.navigateBack()
             break;
+          case 'tohome':
+            wx.switchTab({
+              url: '../../page/home/home'
+            })
+            break;
         }
       }
     },

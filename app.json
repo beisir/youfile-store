@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
     "pages/page/home/home",
+    "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
     "pages/page/navigateMiddleware/navigateMiddleware",
     "pages/page/userDetails/userDetails",
     "pages/faceToFaceOrder/orderQRcode/orderQRcode",

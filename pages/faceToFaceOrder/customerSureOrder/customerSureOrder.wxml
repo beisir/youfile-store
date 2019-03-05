@@ -1,4 +1,5 @@
 <wxs src="../../../public/filter.wxs" module="filter" />
+<login closeBtnType='tohome' id="login"></login>
 
 <view class='common-box padding-box flex-center lasttime-box'>
   <image class='time-icon' src='/image/gold-time.png'></image>
