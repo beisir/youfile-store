@@ -197,8 +197,6 @@ Page({
         getIdentity(this)
         this.getStore();
       }
-    getIdentity(this)
-    this.getStore();
 
     this.getUnpaidNum();
 

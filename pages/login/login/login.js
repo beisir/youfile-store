@@ -47,7 +47,7 @@ Component({
   methods: {
     // 获取用户信息
     getWXUserInfo(data){
-      console.log(data)
+      this.login()
     },
     // 输入验证码
     getFocus(){
@@ -197,7 +197,9 @@ Component({
         loginApp.authHandler.loginByMobile(this.data.telephone, this.data.verificationCode).then(res => {
           //关注
           if (this.data.attention) {
-            API.likeStore();
+            API.likeStore().then(res => {
+              app.globalData.switchStore = true
+            });
           }
           this.loginAfter(res);
         }).catch(e => {
@@ -244,12 +246,38 @@ Component({
       }
       if (res.access_token) {
         this.closePage()
-        let pages = getCurrentPages();
-        let curPage = pages[pages.length - 1];
-        curPage.onLoad();
-        curPage.onShow();
         API.showToast("登录成功")
+        // 存储微信信息
+        this.saveWXmsg()
       }
+    },
+    saveWXmsg(){
+      API.hasSavedWXmsg().then(res=> {
+        if(res.obj === false){
+          wx.getUserInfo({
+            success: (res)=>{
+              API.saveWXmsg({
+                avatarUrl: res.userInfo.avatarUrl,
+                gender: res.userInfo.gender,
+                nickName: res.userInfo.nickName
+              }).then(res=> {
+                this.refreshPage()
+              })
+            },
+            fail: (e)=> {
+              this.refreshPage()
+            }
+          })  
+        }else{
+          this.refreshPage()
+        }
+      })
+    },
+    refreshPage(){
+      let pages = getCurrentPages();
+      let curPage = pages[pages.length - 1];
+      curPage.onLoad();
+      curPage.onShow();
     },
     //显示隐藏密码
     showHide() {

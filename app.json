@@ -1,11 +1,13 @@
 {
   "pages": [
+    "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
     "pages/page/home/home",
+    "pages/page/navigateMiddleware/navigateMiddleware",
+    "pages/page/userDetails/userDetails",
     "pages/faceToFaceOrder/orderQRcode/orderQRcode",
     "pages/faceToFaceOrder/ftfOpenpay/ftfOpenpay",
     "pages/page/updataPwd/updataPwd",
     "pages/page/user/user",
-    "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
     "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
@@ -96,7 +98,6 @@
     "pages/page/cost/cost",
     "pages/page/editInvoice/editInvoice",
     "pages/page/mes/mes",
-    "pages/page/userDetails/userDetails",
     "pages/role/orderSelf/orderSelf",
     "pages/admin/batch/batch",
     "assembly/partnerAlert/partnerAlert",

@@ -15,9 +15,16 @@ Page({
   },
   // 选择地区
   bindRegionChange(e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       region: e.detail.value
+    })
+    let obj = {
+      province: e.detail.value[0],
+      city: e.detail.value[1],
+      area: e.detail.value[2],
+    }
+    Api.updateUserInfo(obj).then(res=> {
+      Api.showToast('修改成功')
     })
   },
   getData() {
@@ -25,6 +32,10 @@ Page({
       if (res.success) {
         this.setData({
           user: res.obj
+        })
+        let addArr = [res.obj.province, res.obj.city, res.obj.area]
+        this.setData({
+          region: addArr
         })
       }
     })

@@ -177,3 +177,9 @@ export const specValCodeUrl = '/admin/shop/goods/specification/spec/value/codes'
 export const updateGooodsSkuUrl = '/admin/shop/goods/specification/sku'
 // 分类搜索
 export const searchClassUrl = '/api/shop/category/search'
+
+// 修改用户信息
+export const updateUserInfoUrl = '/api/user/update'
+// 微信信息
+export const hasSavedWXmsgUrl = '/api/weixin/user/exist'
+export const saveWXmsgUrl = '/api/weixin/user/save'

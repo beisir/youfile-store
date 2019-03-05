@@ -107,7 +107,7 @@
 
 
 
-        <button open-type='getUserInfo' class='btn {{btnID}}' disabled='{{btnID=="loginBtnDis"?true:false}}' bindgetuserinfo='getWXUserInfo' bindtap='login'>登录</button>
+        <button open-type='getUserInfo' class='btn {{btnID}}' disabled='{{btnID=="loginBtnDis"?true:false}}' bindgetuserinfo='getWXUserInfo'>登录</button>
 
         <view class='text-sm user-agreement flex-box' style="justify-content:center;">登录后即完成阅读并同意
           <navigator class='text-yellow text-underline' url="/pages/login/agreement/agreement" hover-class="navigator-hover">《用户协议》 </navigator>
@@ -130,7 +130,7 @@
       </view>
       <view wx:if="{{!reSendCode}}" class='single-line' style='color:#999;margin:68rpx 0 52rpx;'>{{btnSec}}s可重新发送</view>
       <view wx:else class='single-line' style='color:#ca7;margin:68rpx 0 52rpx;'  bindtap='getCode'>重新发送验证码</view>
-      <button bindtap='login' class='code-login-btn'>确定</button>
+      <button bindgetuserinfo='getWXUserInfo' class='code-login-btn'>确定</button>
     </view>
   </view>
   <!-- 关闭按钮 -->

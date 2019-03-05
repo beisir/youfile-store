@@ -148,7 +148,10 @@ import {
   skuCodeUrl,
   specValCodeUrl,
   updateGooodsSkuUrl,
-  searchClassUrl
+  searchClassUrl,
+  updateUserInfoUrl,
+  hasSavedWXmsgUrl,
+  saveWXmsgUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -167,6 +170,13 @@ function showToast(message) {
     icon: 'none',
     duration: 3000,
   })
+}
+// 判断是否存过微信信息
+function hasSavedWXmsg(data){
+  return app.http.getRequest(hasSavedWXmsgUrl, data)
+}
+function saveWXmsg(data){
+  return app.http.postRequest(saveWXmsgUrl, data)
 }
 /**判断楼座是否为空**/
 function isFloorInfo(obj) {
@@ -860,6 +870,10 @@ function getStoreData(data) {
 function getUserInfo(data) {
   return app.http.getRequest(getUserInfoUrl, data);
 }
+// 更新用户信息
+function updateUserInfo(data) {
+  return app.http.postRequest(updateUserInfoUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
 /**
  * 获取店铺性质
  */
@@ -908,7 +922,6 @@ function getFormId(e) {
   var content = e.detail.target.dataset.name//记录用户的操作
   wx.setStorageSync("formId", formId)
 }
-
 /**
  * 初始化storeId
  */
@@ -946,7 +959,12 @@ function getStoreId() {
     return true
   }
 }
+
+
 module.exports = {
+  saveWXmsg,
+  hasSavedWXmsg,
+  updateUserInfo,
   storeOnlinePay,
   ftfRecentOrder,
   unpaidOrderNum,
