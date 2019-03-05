@@ -152,6 +152,7 @@ import {
   updateUserInfoUrl,
   hasSavedWXmsgUrl,
   saveWXmsgUrl,
+  getMyWXPhoneUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -177,6 +178,10 @@ function hasSavedWXmsg(data){
 }
 function saveWXmsg(data){
   return app.http.postRequest(saveWXmsgUrl, data)
+}
+// 获取微信手机
+function getMyWXPhone(data){
+  return app.http.getRequest(getMyWXPhoneUrl, data, { "platAppId": app.globalData.payAppNum})
 }
 /**判断楼座是否为空**/
 function isFloorInfo(obj) {
@@ -962,6 +967,7 @@ function getStoreId() {
 
 
 module.exports = {
+  getMyWXPhone,
   saveWXmsg,
   hasSavedWXmsg,
   updateUserInfo,

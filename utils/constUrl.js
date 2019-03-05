@@ -183,3 +183,5 @@ export const updateUserInfoUrl = '/api/user/update'
 // 微信信息
 export const hasSavedWXmsgUrl = '/api/weixin/user/exist'
 export const saveWXmsgUrl = '/api/weixin/user/save'
+// 解密手机
+export const getMyWXPhoneUrl = '/api/weixin/user/decrypt'

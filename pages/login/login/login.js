@@ -68,11 +68,13 @@ Component({
     },
     // 微信授权登录
     getPhoneNumber(e) {
+      console.log(e)
       // 区分授权按钮种类
       let btnType = e.target.dataset.type
       if (e.detail.iv && e.detail.encryptedData){
         wx.checkSession({
           success: (res)=> {
+            this.getMyPhone(e.detail.iv, e.detail.encryptedData, this.data.code)
             if (btnType == 'wxLogin'){
               // 通过code获取 sessionKey 发给后台解密 获取手机号
               this.setData({ getCodeModal: true })
@@ -85,7 +87,7 @@ Component({
             // 微信code过期
             wx.login({
               success: function(res) {
-                res.code
+                this.getMyPhone(e.detail.iv, e.detail.encryptedData, res.code)
               },
               fail: function(res) {},
               complete: function(res) {},
@@ -97,6 +99,18 @@ Component({
       console.log(e.detail.errMsg)
       console.log(e.detail.iv)
       console.log(e.detail.encryptedData)
+    },
+    // 解密手机号
+    getMyPhone(iv, encryptedData, code){
+      let obj = {
+        iv,
+        encryptData: encryptedData,
+        jsCode: code
+      }
+      API.getMyWXPhone(obj).then(res=> {
+        let data = JSON.parse(res.obj)
+        console.log(data)
+      })
     },
     touserLogin(){
       this.setData({ loginChoseTypeModal:false})
