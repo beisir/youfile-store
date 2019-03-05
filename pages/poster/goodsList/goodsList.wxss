@@ -1,1 +1,19 @@
 /* pages/poster/goodsList/goodsList.wxss */
+.flex-between{display: flex;align-items: center;justify-content: space-between;}
+.flex-center{display: flex;align-items: center;}
+.search-own{padding: 20rpx 0;}
+.search-icon-own{width: 30rpx;height: 30rpx;}
+.list-search-box{height: 100rpx;}
+.search-box-own{flex:1;margin-right:20rpx;height: 100rpx;background: #fff;padding: 0 30rpx 0 40rpx;border-radius: 10rpx;}
+.search-btn{width: 100rpx;font-weight: 600;text-align: center;font-size: 28rpx;}
+/* 商品 */
+.goods-item{background: #fff;border-radius: 10rpx;}
+.goods-top-box{padding-top:35rpx;padding-bottom:35rpx;padding-left: 40rpx;padding-right: 40rpx;}
+.goods-icon-box{width: 130rpx; height: 130rpx;border: 1rpx solid #eee;margin: 0 30rpx 0 25rpx;box-sizing: border-box;display: flex;align-items: center;justify-content: center;}
+.goods-icon{max-width: 100rpx;max-height: 100rpx;}
+.goods-msg-box{height: 130rpx;flex:1;}
+.goods-name{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 28rxp;font-weight: 600;width:380rpx;margin-top:5rpx;margin-bottom: 20rpx;line-height: 1;font-family: 'STSong'}
+.goods-price{min-width: 50%;float: left;font-size: 26rpx;color: #999;line-height: 1;}
+.goods-img-box{height: 170rpx;display: flex;align-items: center;background: #fdfdfd;padding-left: 40rpx;padding-right: 40rpx;}
+.goods-img-item{width: 90rpx;height: 90rpx;background: #fff;display: flex;align-items: center;justify-content: center;border-radius: 10rpx;}
+.goods-img-item image{width: 75rpx;height: 75rpx;}

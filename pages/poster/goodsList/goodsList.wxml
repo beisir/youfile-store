@@ -1,3 +1,37 @@
-<view>
-  <input></input>
+<view style='padding:0 30rpx 30rpx;'>
+  <view class='flex-between search-own'>
+    <view class='flex-between search-box-own '>
+      <view class='flex-center'>
+        <image class='search-icon-own' src='/image/search.png'></image>
+        <input type='text'></input>
+      </view>
+      <view>
+        <image class='search-icon-own' src='/image/close.png'></image>
+      </view>
+    </view>
+    <view class='search-btn'>搜索</view>
+  </view>
+
+  <view class='goods-item padding-box'>
+    <view class='flex-center goods-top-box'>
+      <icon wx:if="{{selectAllStatus}}" type="success" size="40rpx" color="#CCAA77" bindtap="selectAll" />
+      <icon wx:else type="circle" size="40rpx" bindtap="selectAll" />
+      <view class='goods-icon-box'>
+        <image mode='aspectFit' class='goods-icon' src='/image/search.png'></image>
+      </view>
+      <view class='goods-msg-box'>
+        <view class='goods-name'>周大福 赵丽颖赵丽颖陪伴款颖火虫赵丽颖陪伴款颖火虫陪伴款颖火虫</view>
+        <view>
+          <view class='goods-price'>批发价:￥1500</view>
+          <view class='goods-price'>零售价:￥1800</view>
+        </view>
+      </view>
+    </view>
+    <!-- 图片 -->
+    <view class='goods-img-box'>
+      <view class='goods-img-item'>
+        <image class='' src='/image/search.png'></image>
+      </view>
+    </view>
+  </view>
 </view>
