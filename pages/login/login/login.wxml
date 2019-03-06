@@ -121,7 +121,7 @@
     <view class='flex-col'>
       <view class='single-line code-title'>输入验证码</view>
       <view class='single-line text-xs' style='color:#666;'>验证码已通过短信发送至：{{telephone}}</view>
-      <input type='number' value='{{coolCodeVal}}' bindinput='coolCode' class='code-input-hide' focus="{{inputFocus}}"></input>
+      <input type='number' value='{{verificationCode}}' bindinput='coolCode' class='code-input-hide' focus="{{inputFocus}}"></input>
       <view class='code-flex-box' bindtap='getFocus'>
         <view wx:for="{{codearr}}" wx:key="{{index}}" class='show-code-item'>
           <text>{{item}}</text>
@@ -130,7 +130,7 @@
       </view>
       <view wx:if="{{!reSendCode}}" class='single-line' style='color:#999;margin:68rpx 0 52rpx;'>{{btnSec}}s可重新发送</view>
       <view wx:else class='single-line' style='color:#ca7;margin:68rpx 0 52rpx;'  bindtap='getCode'>重新发送验证码</view>
-      <button bindgetuserinfo='getWXUserInfo' class='code-login-btn'>确定</button>
+      <button open-type='getUserInfo' bindgetuserinfo='getWXUserInfo' class='code-login-btn {{btnID}}' disabled='{{btnID=="loginBtnDis"?true:false}}'>确定</button>
     </view>
   </view>
   <!-- 关闭按钮 -->

@@ -14,8 +14,7 @@ Component({
     // 验证码界面
     getCodeModal: false,
     inputFocus: false,  //输入框
-    codearr: ["","","",""],
-    coolCodeVal: "",
+    codearr: ["", "", "", ""],
     reSendCode: false,
     //登录头信息
     loginTitle: '快捷登录',
@@ -46,17 +45,19 @@ Component({
   },
   methods: {
     // 获取用户信息
-    getWXUserInfo(data){
+    getWXUserInfo(data) {
       this.login()
     },
     // 输入验证码
-    getFocus(){
-      this.setData({ inputFocus: true})
+    getFocus() {
+      this.setData({ inputFocus: true })
     },
-    coolCode(e){
+    coolCode(e) {
       var value = e.detail.value;
-      if(value.length>4){
-        this.setData({ coolCodeVal: value.substr(0,4)})
+      if (value.length >= 4) {
+        this.setData({ verificationCode: value.substr(0, 4) })
+      } else {
+        this.setData({ verificationCode: value })
       }
       let arr = [
         value[0] ? value[0] : "",
@@ -64,56 +65,64 @@ Component({
         value[2] ? value[2] : "",
         value[3] ? value[3] : "",
       ]
-      this.setData({ codearr: arr})
+      this.setData({ codearr: arr })
+      this.checkComplete();
     },
     // 微信授权登录
     getPhoneNumber(e) {
-      console.log(e)
       // 区分授权按钮种类
       let btnType = e.target.dataset.type
-      if (e.detail.iv && e.detail.encryptedData){
+      if (e.detail.iv && e.detail.encryptedData) {
         wx.checkSession({
-          success: (res)=> {
-            this.getMyPhone(e.detail.iv, e.detail.encryptedData, this.data.code)
-            if (btnType == 'wxLogin'){
-              // 通过code获取 sessionKey 发给后台解密 获取手机号
-              this.setData({ getCodeModal: true })
-              this.getCode()
-            }else{
-              this.setData({ telephone:'13363527425'})
-            }
-          },
-          fail: function(res) {
-            // 微信code过期
-            wx.login({
-              success: function(res) {
-                this.getMyPhone(e.detail.iv, e.detail.encryptedData, res.code)
-              },
-              fail: function(res) {},
-              complete: function(res) {},
+          success: (res) => {
+            this.getMyPhone(e.detail.iv, e.detail.encryptedData, this.data.code).then(res => {
+              let data = JSON.parse(res.obj)
+              this.switchGetPhoneWay(data, btnType)
             })
           },
-          complete: function(res) {},
+          fail: function (res) {
+            // 微信code过期
+            wx.login({
+              success: function (res) {
+                this.getMyPhone(e.detail.iv, e.detail.encryptedData, res.code).then(res => {
+                  let data = JSON.parse(res.obj)
+                  this.switchGetPhoneWay(data, btnType)
+                })
+              },
+              fail: function (res) { },
+              complete: function (res) { },
+            })
+          },
+          complete: function (res) { },
         })
       }
-      console.log(e.detail.errMsg)
-      console.log(e.detail.iv)
-      console.log(e.detail.encryptedData)
+    },
+    // 不同获取手机号场景
+    switchGetPhoneWay(data, btnType) {
+      if (data.phoneNumber) {
+        this.setData({ telephone: data.phoneNumber })
+        if (btnType == 'wxLogin') {
+          // 微信一键登录
+          this.setData({ getCodeModal: true, loginType: 'code' })
+          this.getCode()
+        } else {
+          // 正常登录
+        }
+      } else {
+        API.showToast('获取手机号码失败，请手动填写')
+      }
     },
     // 解密手机号
-    getMyPhone(iv, encryptedData, code){
+    getMyPhone(iv, encryptedData, code) {
       let obj = {
         iv,
         encryptData: encryptedData,
         jsCode: code
       }
-      API.getMyWXPhone(obj).then(res=> {
-        let data = JSON.parse(res.obj)
-        console.log(data)
-      })
+      return API.getMyWXPhone(obj)
     },
-    touserLogin(){
-      this.setData({ loginChoseTypeModal:false})
+    touserLogin() {
+      this.setData({ loginChoseTypeModal: false })
     },
     // 自动关注
     attentionStore() {
@@ -265,29 +274,29 @@ Component({
         this.saveWXmsg()
       }
     },
-    saveWXmsg(){
-      API.hasSavedWXmsg().then(res=> {
-        if(res.obj === false){
+    saveWXmsg() {
+      API.hasSavedWXmsg().then(res => {
+        if (res.obj === false) {
           wx.getUserInfo({
-            success: (res)=>{
+            success: (res) => {
               API.saveWXmsg({
                 avatarUrl: res.userInfo.avatarUrl,
                 gender: res.userInfo.gender,
                 nickName: res.userInfo.nickName
-              }).then(res=> {
+              }).then(res => {
                 this.refreshPage()
               })
             },
-            fail: (e)=> {
+            fail: (e) => {
               this.refreshPage()
             }
-          })  
-        }else{
+          })
+        } else {
           this.refreshPage()
         }
       })
     },
-    refreshPage(){
+    refreshPage() {
       let pages = getCurrentPages();
       let curPage = pages[pages.length - 1];
       curPage.onLoad();
@@ -354,11 +363,13 @@ Component({
       if (!this.testTel()) {
         API.showToast('请输入正确手机号码')
       } else {
-        API.phoneMessage({
-          mobile: this.data.telephone
-        }).then(res => {
+        if (!this.data.disabled){
+          API.phoneMessage({
+            mobile: this.data.telephone
+          }).then(res => {
 
-        })
+          })
+        }
         // loginApp.http.getRequest("/oauth/code/sms", {
         //   mobile: this.data.telephone
         // }).then(res => {
@@ -398,7 +409,7 @@ Component({
       }
       return true;
     },
-    closePageBtn(){
+    closePageBtn() {
       this.closePage()
       if (this.data.closeBtnType) {
         switch (this.data.closeBtnType) {
@@ -418,7 +429,6 @@ Component({
         loginChoseTypeModal: true,
         getCodeModal: false,
         codearr: ["", "", "", ""],
-        coolCodeVal: "",
         reSendCode: false,
         pageShow: false,
         forget: false,
@@ -435,24 +445,24 @@ Component({
         pageShow: true
       })
       wx.login({
-        success: (res)=> {
+        success: (res) => {
           if (res.code) {
             this.setData({
               code: res.code
             })
           }
         },
-        fail: function(res) {},
-        complete: function(res) {},
+        fail: function (res) { },
+        complete: function (res) { },
       })
-      let closetimer = setInterval(()=>{
+      let closetimer = setInterval(() => {
         let token = wx.getStorageSync('access_token')
-        if (token) { 
+        if (token) {
           this.closePage()
           clearInterval(this.data.closetimer)
         }
-      },1000)
-      this.setData({ closetimer})
+      }, 1000)
+      this.setData({ closetimer })
     }
   }
 })
