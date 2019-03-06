@@ -1,6 +1,7 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
 import util from '../../../utils/util.js'
+import GetTempList from '../specSet/getTempList.js'
 Page({
   /**
    * 页面的初始数据
@@ -19,11 +20,24 @@ Page({
     changePriceVal: "", //统一设置批发价
     changeSellVal: "", //统一设置零售价
     changeStockVal: "", //统一设置库存
+    resNum:0
+  },
+  // 获取规格数量
+  getNum:function(){
+    var getTempList = new GetTempList(),
+      _this = this
+    getTempList.getTempCont().then(res => {
+      if (res){
+        _this.setData({
+          resNum: res.length
+        })
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     // 单独修改规格
     if (options.goodsId) {
       this.getGoodsSku(options.goodsId)
@@ -38,16 +52,16 @@ Page({
     }
   },
   // 接受上个页面传来的数据
-  getConent: function(voListData, goodsSkuVOList) {
+  getConent: function (voListData, goodsSkuVOList) {
     var _this = this
     if (voListData) {
       var len = voListData.length
-      if (len==0){
+      if (len == 0) {
         voListData.push({
           specName: "颜色",
           goodsSpecificationValueVOList: []
         })
-      }else{
+      } else {
         for (var i = 0; i < voListData.length; i++) {
           var childData = voListData[i].goodsSpecificationValueVOList
           for (var j = 0; j < childData.length; j++) {
@@ -73,11 +87,11 @@ Page({
     }
   },
   // 根据ID获取规格
-  getGoodsSku: function(goodsId) {
+  getGoodsSku: function (goodsId) {
     var _this = this
     Api.getGoodsSku({
-        goodsId: goodsId
-      })
+      goodsId: goodsId
+    })
       .then(res => {
         var voListData = res.obj.goodsSpecificationVOList,
           goodsSkuVOList = res.obj.goodsSkuVOList
@@ -85,7 +99,7 @@ Page({
       })
   },
   //取消弹框
-  cancel: function() {
+  cancel: function () {
     this.setData({
       updataSpecName: false,
       deteleVo: false,
@@ -96,7 +110,7 @@ Page({
     })
   },
   // 监听input字数长度
-  watchInput: function(event) {
+  watchInput: function (event) {
     var value = event.detail.value,
       updataSpecName = this.data.updataSpecName,
       addSpecChild = this.data.addSpecChild,
@@ -130,7 +144,7 @@ Page({
     }
   },
   // 添加规格
-  addAttrc: function() {
+  addAttrc: function () {
     var listData = this.data.listData,
       _this = this,
       defaultName = this.data.defaultName,
@@ -159,7 +173,7 @@ Page({
     })
   },
   // 编辑规格名称
-  editSpecName: function(e) {
+  editSpecName: function (e) {
     var index = e.target.dataset.index,
       name = e.target.dataset.name
     this.setData({
@@ -169,7 +183,7 @@ Page({
       watchInput: true
     })
   },
-  conSpecName: function() {
+  conSpecName: function () {
     var listData = this.data.listData,
       efitSpecIndex = this.data.efitSpecIndex,
       value = this.data.value
@@ -182,40 +196,53 @@ Page({
     this.cancel()
   },
   // 排序
-  upTop: function() {
-    var listData = this.data.listData
+  upTop: function () {
+    var listData = this.data.listData,
+      goodsSkuVOList = this.data.goodsSkuVOList
+    console.log(listData)
     this.setData({
       listData: listData.reverse()
+    },function(){
+      for (var v of goodsSkuVOList){
+        v.temp = v.skuName
+        v.skuName = v.skuNameSign
+        v.skuNameSign = v.temp
+      }
+      this.setData({
+        goodsSkuVOList: goodsSkuVOList
+      },function(){
+        this.getSkuData()
+      })
     })
   },
   // 删除
-  deleteAttrc: function(e) {
+  deleteAttrc: function (e) {
     var index = e.target.dataset.index
     this.setData({
       deteleVo: true,
       indexAttrc: index
     })
   },
-  conDeleteAttrc: function() {
+  conDeleteAttrc: function () {
     var listData = this.data.listData,
       indexAttrc = this.data.indexAttrc
     listData.splice(indexAttrc, 1)
     this.setData({
       deteleVo: false,
       listData: listData
-    }, function() {
+    }, function () {
       this.getSkuData()
     })
   },
   // 添加规格值
-  addSpecValue: function(e) {
+  addSpecValue: function (e) {
     var index = e.target.dataset.index
     this.setData({
       addSpexIndex: index,
       addSpecChild: true
     })
   },
-  conSpecChild: function() {
+  conSpecChild: function () {
     var value = this.data.value,
       addSpexIndex = this.data.addSpexIndex,
       listData = this.data.listData
@@ -233,14 +260,14 @@ Page({
       })
       this.setData({
         listData: listData,
-      }, function() {
+      }, function () {
         this.getSkuData()
       })
       this.cancel()
     }
   },
   //SKU组合
-  getSkuData: function() {
+  getSkuData: function () {
     var listData1 = this.data.listData,
       listData = [],
       tempGoodsSkuList = this.data.goodsSkuVOList,
@@ -324,22 +351,8 @@ Page({
       goodsSkuVOList: goodsSkuVOList
     })
   },
-  // 监听是去焦点不能为0
-  focuMonitor: function(e) {
-    var name = e.target.dataset.name,
-      val = e.detail.value,
-      index = e.target.dataset.index,
-      goodsSkuVOList = this.data.goodsSkuVOList
-    if (val == 0) {
-      goodsSkuVOList[index][name] = ''
-      Api.showToast("请输入不为零的有效数值！")
-    }
-    this.setData({
-      goodsSkuVOList: goodsSkuVOList,
-    })
-  },
   // 监听input价格和库存
-  monitor: function(e) {
+  monitor: function (e) {
     var name = e.target.dataset.name,
       val = e.detail.value,
       index = e.target.dataset.index,
@@ -363,12 +376,35 @@ Page({
       goodsSkuVOList: goodsSkuVOList,
     })
   },
+  // 长按或者点击事件
+  bindTouchStart: function (e) {
+    this.startTime = e.timeStamp;
+  },
+  bindTouchEnd: function (e) {
+    this.endTime = e.timeStamp;
+  },
+  bindTap: function (e) {
+    if (this.endTime - this.startTime < 350) {
+      var listData = this.data.listData
+      for (var v of listData) {
+        for (var k of v.goodsSpecificationValueVOList) {
+          k.selected = false
+        }
+      }
+      this.setData({
+        listData: listData
+      })
+    }
+  },
   // 规格操作
-  chengeData: function(e, value) {
+  chengeData: function (e, value) {
     var index = e.target.dataset.index,
       name = e.target.dataset.name,
       listData = this.data.listData
-    for (let v of listData) {
+    for (var v of listData) {
+      for (var k of v.goodsSpecificationValueVOList) {
+        k.selected = false
+      }
       if (v.specName == name) {
         var goodsSpecificationValueVOList = v.goodsSpecificationValueVOList
         if (value == "delete") {
@@ -380,76 +416,55 @@ Page({
     }
     this.setData({
       listData: listData
-    }, function() {
+    }, function () {
       this.getSkuData()
     })
   },
   // 长按
-  bingLongTap: function(e) {
+  bingLongTap: function (e) {
     this.chengeData(e, "press")
   },
   // 删除规格值
-  operationBind: function(e) {
+  operationBind: function (e) {
     this.chengeData(e, "delete")
   },
   // 统一设置
-  unifiedSet: function() {
+  unifiedSet: function () {
     this.setData({
       unifiedSet: true,
       watchInput: true,
     })
   },
-  confirmSet: function() {
+  confirmSet: function () {
     var goodsSkuVOList = this.data.goodsSkuVOList,
       changePriceVal = this.data.changePriceVal,
       changeSellVal = this.data.changeSellVal,
       changeStockVal = this.data.changeStockVal
+    if (changePriceVal == 0 && Api.isNotEmpty(changePriceVal)) {
+      Api.showToast("批发价不得低于0")
+      return;
+    }
+    if (changeSellVal == 0 && Api.isNotEmpty(changeSellVal)) {
+      Api.showToast("零售价不得低于0")
+      return;
+    }
+    if (changeStockVal == 0 && Api.isNotEmpty(changeStockVal)) {
+      Api.showToast("库存不得低于0")
+      return;
+    }
     for (let v of goodsSkuVOList) {
-      if (changePriceVal) {
-        v.wholesalePrice = changePriceVal
-      }
-      if (changeSellVal) {
-        v.sellPrice = changeSellVal
-      }
-      if (changeStockVal) {
-        v.stockNum = changeStockVal
-      }
+      v.wholesalePrice = changePriceVal
+      v.sellPrice = changeSellVal
+      v.stockNum = changeStockVal
     }
     this.cancel()
     this.setData({
       goodsSkuVOList: goodsSkuVOList
     })
   },
-  // 判断失去焦点是否为0
-  focuPrice: function() {
-    var changePriceVal = this.data.changePriceVal
-    if (changePriceVal == 0) {
-      this.setData({
-        changePriceVal: ''
-      })
-      Api.showToast("批发价不能为零")
-    }
-  },
-  focuSell: function() {
-    var changeSellVal = this.data.changeSellVal
-    if (changeSellVal == 0) {
-      this.setData({
-        changeSellVal: ''
-      })
-      Api.showToast("零售价价不能为零")
-    }
-  },
-  focuStock: function() {
-    var changeStockVal = this.data.changeStockVal
-    if (changeStockVal == 0) {
-      this.setData({
-        changeStockVal: ''
-      })
-      Api.showToast("库存不能为零")
-    }
-  },
+
   // 监听统一设置 价格库存
-  changePrice: function(e) {
+  changePrice: function (e) {
     var val = e.detail.value
     if (val.length == 2 && val.charAt(0) == '0') {
       if (val != "0.") {
@@ -464,7 +479,7 @@ Page({
       changePriceVal: (util.newVal(val)).substring(0, 8)
     })
   },
-  changeSell: function(e) {
+  changeSell: function (e) {
     var val = e.detail.value
     if (val.length == 2 && val.charAt(0) == '0') {
       if (val != "0.") {
@@ -479,13 +494,13 @@ Page({
       changeSellVal: (util.newVal(val)).substring(0, 8)
     })
   },
-  changeStock: function(e) {
+  changeStock: function (e) {
     this.setData({
       changeStockVal: e.detail.value
     })
   },
   // 选择规格模板
-  goAlertSpec: function() {
+  goAlertSpec: function () {
     var listData = this.data.listData,
       tempArr = []
     // 去除空的规格组
@@ -499,7 +514,7 @@ Page({
     })
   },
   //确定返回
-  goback: function() {
+  goback: function () {
     var _this = this,
       goodsSkuVOList = this.data.goodsSkuVOList,
       listData = this.data.listData,
@@ -514,18 +529,30 @@ Page({
       }
     }
     for (var v of goodsSkuVOList) {
-      if (!Api.isNotEmpty(v.stockNum)) {
-        Api.showToast("库存不能为空！")
+      if (v.wholesalePrice == 0 && Api.isNotEmpty(v.wholesalePrice)){
+        Api.showToast("批发价不得低于0")
+        return
+      }
+      if (!Api.isNotEmpty(v.wholesalePrice)) {
+        Api.showToast("批发价不能为空！")
+        return
+      }
+      if (v.sellPrice == 0 && Api.isNotEmpty(v.sellPrice)) {
+        Api.showToast("零售价不得低于0")
         return
       }
       if (!Api.isNotEmpty(v.sellPrice)) {
         Api.showToast("零售价不能为空！")
         return
       }
-      // if (!Api.isNotEmpty(v.wholesalePrice)) {
-      //   Api.showToast("批发价不能为空！")
-      //   return
-      // }
+      if (v.stockNum == 0 && Api.isNotEmpty(v.stockNum)) {
+        Api.showToast("库存不得低于0")
+        return
+      }
+      if (!Api.isNotEmpty(v.stockNum)) {
+        Api.showToast("库存不能为空！")
+        return
+      }
     }
     if (skuListData.length > 0) {
       // 判断是新的规格还是编辑规格
@@ -556,6 +583,9 @@ Page({
             for (var i = 0; i < skuListData.length; i++) {
               skuListData[i].specCode = codeData[i].specCode[0]
               var specVoList = skuListData[i].goodsSpecificationValueVOList
+              for (var v of goodsSkuVOList){
+                v.specValueCodeList=[]
+              }
               for (var j = 0; j < specVoList.length; j++) {
                 delete specVoList[j].sClick
                 specVoList[j].specCode = codeData[i].specCode[0]
@@ -610,8 +640,16 @@ Page({
                   var len = skuListData[i].goodsSpecificationValueVOList.length - 1
                   // 给新增的规格值复制code
                   if (specVoList[j].goodsId == undefined) {
-                    specVoList[j].specCode = skuListData[i].specCode
-                    specVoList[j].specValueCode = (codeData[skuListData[0].specCode])[len - j]
+                    if (specVoList[j].specCode){
+                      specVoList[j].specCode = specVoList[j].specCode
+                    }else{
+                      specVoList[j].specCode = skuListData[i].specCode
+                    }
+                    if (specVoList[j].specValueCode){
+                      specVoList[j].specValueCode = specVoList[j].specValueCode
+                    }else{
+                      specVoList[j].specValueCode = (codeData[skuListData[0].specCode])[len - j]
+                    }
                     delete specVoList[j].sClick
                   }
                 }
@@ -619,8 +657,16 @@ Page({
                   var lens = skuListData[i].goodsSpecificationValueVOList.length - 1
                   // 给新增的规格值复制code
                   if (specVoList[j].goodsId == undefined) {
-                    specVoList[j].specCode = skuListData[i].specCode
-                    specVoList[j].specValueCode = (codeData[skuListData[1].specCode])[lens - j]
+                    if (specVoList[j].specCode){
+                      specVoList[j].specCode = specVoList[j].specCode
+                    }else{
+                      specVoList[j].specCode = skuListData[i].specCode
+                    }
+                    if (specVoList[j].specValueCode){
+                      specVoList[j].specValueCode = specVoList[j].specValueCode
+                    }else{
+                      specVoList[j].specValueCode = (codeData[skuListData[1].specCode])[lens - j]
+                    }
                     delete specVoList[j].sClick
                   }
                 }
@@ -639,7 +685,6 @@ Page({
           if (skuListData[i].goodsId == undefined) {
             var childVoData = skuListData[i],
               index = i
-            console.log(i)
             firstSpecValueNum = skuListData[i].goodsSpecificationValueVOList.length
             skuParms = {
               specNum: 1,
@@ -695,8 +740,16 @@ Page({
                       var len = childVoData1.goodsSpecificationValueVOList.length - 1
                       // 给新增的规格值复制code
                       if (specVoList[j].goodsId == undefined) {
-                        specVoList[j].specCode = childVoData1.specCode
-                        specVoList[j].specValueCode = (codeData[skuListData[0].specCode])[len - j]
+                        if (specVoList[j].specCode){
+                          specVoList[j].specCode = specVoList[j].specCode
+                        }else{
+                          specVoList[j].specCode = childVoData1.specCode
+                        }
+                        if (specVoList[j].specValueCode){
+                          specVoList[j].specCode = specVoList[j].specCode
+                        }else{
+                          specVoList[j].specValueCode = (codeData[skuListData[0].specCode])[len - j]
+                        }
                         delete specVoList[j].sClick
                       }
                     }
@@ -719,7 +772,7 @@ Page({
     }
   },
   //code赋值
-  copySkuCode: function(getTempCode, goodsSkuVOList) {
+  copySkuCode: function (getTempCode, goodsSkuVOList) {
     // getTempCodo所有的code对象  goodsSkuVOListsku组合
     for (var i of getTempCode) {
       var specValueName = i.specValueName
@@ -748,15 +801,15 @@ Page({
     if (goodsId) {
       var wholesalePrice = '',
         sellPrice = '',
-        stockNum=0
-        //获取最小价格和总库存
-        sellPrice = Math.min.apply(Math, goodsSkuVOList.map(function(o) {
-          return o.sellPrice
-        }))
-      wholesalePrice = Math.min.apply(Math, goodsSkuVOList.map(function(o) {
-        return o.wholesalePrice
+        stockNum = 0
+      //获取最小价格和总库存
+      sellPrice = Math.min.apply(Math, goodsSkuVOList.map(function (o) {
+        return o.sellPrice
       }))
       for (var v of goodsSkuVOList) {
+        if (v.sellPrice == sellPrice) {
+          wholesalePrice = v.wholesalePrice
+        }
         stockNum += parseInt(v.stockNum)
       }
       var dataVo = {
@@ -792,18 +845,18 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
+    this.getNum()
     var pages = getCurrentPages()
     var currPage = pages[pages.length - 1]
     if (currPage.data.listDataSpec) {
       var listDataSpec = currPage.data.listDataSpec
-      console.log(listDataSpec)
       for (var c of listDataSpec) {
         var childList = c.goodsSpecificationValueVOList
         for (var v of childList) {
@@ -813,7 +866,7 @@ Page({
       }
       this.setData({
         listData: currPage.data.listDataSpec,
-      }, function() {
+      }, function () {
         this.getSkuData()
       })
     }
@@ -821,27 +874,27 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 

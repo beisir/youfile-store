@@ -32,10 +32,10 @@
   <navigator style='width:75%' url='../serStatus/serStatus'>
     <input placeholder='输入商品名称' value="{{value}}" disabled='disabled' />
   </navigator>
-  <image class="home-ser" src="/image/search.png"></image>
+  <image class="home-ser" src="/image/search1.png"></image>
   <view class='home-img'>
       <view >
-        搜索
+        筛选
       </view>
     </view>
 </view>
@@ -81,7 +81,7 @@
             </view>
             <view>
               <text>库存：</text>
-              <image class='warn' wx:if='{{item.stockNum<10}}' src="/image/warn.png"></image><text style='color:#888;font-size:26rpx'>￥{{item.stockNum}}</text>
+              <text style='color:#888;font-size:26rpx'>{{item.stockNum}}</text> <image class='warn' wx:if='{{item.stockNum<10}}' src="/image/warn.png"></image>
             </view>
           </view>
           <view class='not' wx:if='{{item.stockNum<10}}'>
@@ -123,14 +123,9 @@
     <image src="/image/ad5.png"></image>
   </view>工作台</view>
 <view class='st-bottom st-bottom1'>
-  <view>
-    <navigator url="../addGoods/addGoods">添加商品</navigator>
-  </view>
-  <view>
-    <navigator url="../batch/batch">批量管理</navigator>
-  </view>
-  <view>
-    <navigator url="../class/class">本店分类</navigator>
-  </view>
+    <view><navigator url="../addGoods/addGoods">添加商品</navigator></view>
+    <view><navigator url="../batch/batch">批量管理</navigator></view>
+    <view><navigator url="../batchSet/batchSet">起批设置</navigator></view>
+    <view><navigator url="../class/class">本店分类</navigator></view>
 </view>
 <view class='showHide' bindtap='closeShow' hidden='{{showMore}}'></view>

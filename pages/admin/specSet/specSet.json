@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "设置规格",
+  "navigationBarTitleText": "设置规格模板",
   "usingComponents": {
     "spec": "../../../../assembly/specifications/spec",
      "mes": "../../../../assembly/tips/tips"

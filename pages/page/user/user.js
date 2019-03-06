@@ -182,8 +182,6 @@ Page({
         showCancel:false,
       })
     }
-
- 
       if (!Api.getStoreId()) {
         this.setData({
           indexEmpty: false
@@ -197,11 +195,7 @@ Page({
         getIdentity(this)
         this.getStore();
       }
-    getIdentity(this)
-    this.getStore();
-
     this.getUnpaidNum();
-
   },
 
   /**

@@ -19,6 +19,7 @@ Page({
       this.setData({
         token: ""
       })
+      app.globalData.switchStore = true
       setTimeout(() => {
         wx.navigateBack()
       }, 800)

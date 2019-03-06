@@ -1,8 +1,9 @@
-<!-- 确定退出新建云享品？-->
+<!-- 提示-->
 <mes show="{{show1}}" bind:sureSelectArea="sureSelectAreaListener">
-  <view>
-    <text>确定退出新建云商品？</text>
-    <button bindtap='confirmDetele'>确定</button>
+  <view class='font-color'>
+    <view><text>.</text>当不设置规格时，展示当前设置的批发价、零售价及总库存；</view>
+    <view><text>.</text>当已单独设置规格时，自动展示最小值的零售价与其对应的批发价格，总库存自动核算所有销售属性的库存之和；</view>
+    <button bindtap='confirmMes'>知道了</button>
   </view>
 </mes>
 <!-- 删除-->
@@ -53,7 +54,7 @@
             <text>标题</text>
           </view>
         </view>
-        <textarea class="weui-input1 {{nameLen>0?'weui-input2':''}}" type="text" bindinput='watchName' value='{{name}}' placeholder='请填写商品标题'></textarea>
+        <textarea wx:if="{{!showTale}}" auto-height="true" maxlength='55' class="weui-input1 {{nameLen>0?'weui-input2':''}}" type="text" bindinput='watchName' value='{{name}}' placeholder='请填写商品标题'></textarea>
         <view class='change-num' wx:if='{{nameLen>0}}'>{{nameLen}}/55</view>
         <view class="weui-cell">
           <view class="weui-cell__hd">
@@ -63,7 +64,7 @@
             <text>推荐心语</text>
           </view>
         </view>
-        <textarea class="weui-input1 {{recommendDescLen>0?'weui-input2':''}}" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
+        <textarea wx:if="{{!showTale}}" auto-height="true" maxlength='60' class="weui-input1 {{recommendDescLen>0?'weui-input2':''}}" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
         <view  class='change-num'  wx:if='{{recommendDescLen>0}}'>{{recommendDescLen}}/60</view>
       </view>
       <view class="page__category-content">
@@ -96,7 +97,7 @@
         <view bindtap='alertSpec'>
           <view class="weui-cell1 weui-cell-new">
             <view class="weui-cell__hd">
-              <image src="/image/ic3.png"></image>
+              <image class='img-n' src="/image/guige.png"></image>
             </view>
             <view class="weui-cell__bd">
               <text>商品规格</text>
@@ -115,11 +116,11 @@
       <view class="page__category-content page__new">
         <view class='weui-title'>商品价格库存
           <text>(对顾客的展示价格)</text>
-          <image src="/image/ca1.png"></image>
+          <image bindtap='tipMes' src="/image/ca1.png"></image>
         </view>
         <view class="weui-cell1">
           <view class="weui-cell__hd">
-            <image src="/image/ic6.png"></image>
+            <image class='img-n' src="/image/ic6.png"></image>
           </view>
           <view class="weui-cell__bd">
             <text>批发价</text>
@@ -131,7 +132,7 @@
         </view>
          <view class="weui-cell1">
           <view class="weui-cell__hd">
-            <image src="/image/ic6.png"></image>
+            <image class='img-n' src="/image/ic6.png"></image>
           </view>
           <view class="weui-cell__bd">
             <text>零售价</text>
@@ -149,7 +150,7 @@
             <text>总库存</text>
           </view>
           <view class='weui-input'>
-            <input bindinput='stockNum' disabled='{{skuListData.length==0?false:"disabled"}}' value='{{stockNum}}' placeholder-class='pla-input' class="weui-input" type="number" maxlength='8'></input>
+            <input bindinput='stockNum' disabled='{{skuListData.length==0?false:"disabled"}}' value='{{stockNum}}' placeholder-class='pla-input' class="weui-input" type="number" maxlength='4'></input>
             <text>件</text>
           </view>
         </view>
@@ -161,20 +162,20 @@
             <text>起批量</text>
           </view>
           <view class='weui-input'>
-            <input class="stock" type="number" bindinput='stockFun' value='{{stock}}'></input>
+            <input class="stock" type="number" bindinput='stockFun' maxlength='4' value='{{stock}}'></input>
           </view>
           <view class="weui-cell__ft weui-cell__cl" bindtap='clearInput'>
             <image src="/image/clo.png"></image>
           </view>
         </view>
       </view>
-     <view class="page__category-content page__new">
+     <view class="page__category-content page__new  weui-cell1_new">
         <view class='weui-title'>商品隐私设置
           <text>(关闭代表对所有人公开)</text>
         </view>
         <view class="weui-cell1">
           <view class="weui-cell__bd">
-            <text>允许商友可见</text>
+            <text>仅允许商友可见</text>
             <view class='ag-font'>与您成为商友关系的进货商可查看</view>
           </view>
           <view class='weui-input'>
@@ -187,7 +188,7 @@
       <view class='write'>
         <view wx:for='{{addGoodsDetails}}' wx:key='index'>
           <view class='removeImg' wx:if='{{item.input}}'>
-            <input bindinput='watchInput' class='input-v' value='{{item.value}}' data-index='{{index}}' placeholder='请输入标题'></input>
+            <input bindinput='watchInput' class='input-v' maxlength='200' value='{{item.value}}' data-index='{{index}}' placeholder='请输入标题'></input>
             <view>
               <view>
                 <image src="/image/remove.png"></image>

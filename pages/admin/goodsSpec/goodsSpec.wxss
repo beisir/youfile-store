@@ -11,6 +11,7 @@
 .gv-comp{padding-bottom: 50rpx;}
 .gv-comp>view:first-child{font-size: 34rpx;border-bottom: 2rpx solid #F6F6F6}
 .gv-comp>view image{width: 30rpx;height: 30rpx;vertical-align: middle;margin-top: -6rpx;margin-right: 10rpx;}
+.gv-comp>view image.write{width: 50rpx;height: 50rpx;vertical-align: middle;}
 .gv-comp>view:nth-child(2){font-size: 26rpx;}
 .gv-comp>view{padding: 0 30rpx}
 .gv-comp>view:first-child,.gv-comp>view:nth-child(2){min-height: 100rpx;line-height: 100rpx;}
@@ -23,3 +24,4 @@
 .gs-tip{color: #888888;font-size: 26rpx;font-weight: normal;margin-top: 15rpx;}
 .spec-class1{color: #888;}
 .spec-input1{height: 95rpx;text-align: center}
+.last-num{position: absolute;right: 80rpx;top: 72rpx;font-weight: bold}

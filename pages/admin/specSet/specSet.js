@@ -118,7 +118,8 @@ Page({
         _this.setData({
           listData: res,
           currentTab: 0,
-          templateId: res[0].id
+          templateId: res[0].id,
+          templateName: res[0].templateName
         }, function() {
           var listDataSpec = _this.data.listDataSpec
           _this.isSelected(res[0], listDataSpec)
@@ -451,8 +452,12 @@ Page({
       specValueList = [],
       specValueNameList = [],
       listDataSpec = this.data.listDataSpec, // 判断点击的规格值是否已经存在
-      listDataSpecLen = listDataSpec.length //已经存在的规格长度
+      listDataSpecLen = '' //已经存在的规格长度
     for (let v of specCont) {
+      // 隐藏长按
+      for (var val of v.specValueNameList) {
+        val.selected = false
+      }
       if (v.id == specChildId) {
         specValueList = v.specValueList
         specValueNameList = v.specValueNameList
@@ -461,9 +466,16 @@ Page({
     // 长按或者点击
     if (sign == 'longpress' || sign == 'click') {
       if (sign == 'click') {
+        var isSelected = specValueNameList[indexDeleteVal].sClick
         specValueNameList[indexDeleteVal].sClick = !specValueNameList[indexDeleteVal].sClick
         // 获取当前点击的规格值和规格名称
         var name = specValueNameList[indexDeleteVal].specValueName
+        for (var i = 0; i < listDataSpec.length; i++) {
+          var list = listDataSpec[i].goodsSpecificationValueVOList
+          if (list.length == 0) {
+            listDataSpec.splice(i, 1)
+          }
+        }
         // 临时规格数组
         var tempSpecArr = []
         for (var val of listDataSpec) {
@@ -476,7 +488,7 @@ Page({
             newSpecName: name
           })
         }
-        console.log(listDataSpec)
+        listDataSpecLen = listDataSpec.length
         if (listDataSpecLen == 0) {
           listDataSpec.push({
             specName: parentName,
@@ -517,7 +529,7 @@ Page({
             }
           }
         }
-      } else {
+      } else if (sign == 'longpress') {
         for (let v of specValueNameList) {
           v.selected = false
         }
@@ -527,10 +539,6 @@ Page({
         }
       }
       listData[index].specificationTemplateContentVOList.specValueNameList = specValueNameList
-      this.setData({
-        listData: listData
-      })
-      return
     }
     // 添加或者删除
     if (sign == 'add') {
@@ -541,6 +549,12 @@ Page({
             return
           }
         }
+        specValueNameList.push({
+          specValueName: value
+        })
+        specValueList.push(value)
+        listData[index].specificationTemplateContentVOList.specValueNameList = specValueNameList
+        listData[index].specificationTemplateContentVOList.specValueList = specValueList
       } else {
         return
       }
@@ -558,26 +572,25 @@ Page({
       }
       specValueList.splice(indexDeleteVal, 1)
       specValueNameList.splice(indexDeleteVal, 1)
-      // listData[index].specificationTemplateContentVOList.specValueNameList = specValueNameList
     }
     for (var j = 0; j < specValueList.length; j++) {
       str += specValueList[j] + ",";
     }
-    if (sign == 'add') {
-      str += value
-      specValueNameList.push({
-        specValueName: value
-      })
-      listData[index].specificationTemplateContentVOList.specValueNameList = specValueNameList
-    }
     str = (str.substring(str.length - 1) == ',') ? str.substring(0, str.length - 1) : str;
-    Api.addTempCont(specChildId, str)
-      .then(res => {
-        _this.setData({
-          listData: listData
-        })
-        _this.cancel()
+    if (sign == 'longpress' || sign == 'click'){
+      _this.setData({
+        listData: listData
       })
+      _this.cancel()
+    }else{
+      Api.addTempCont(specChildId, str)
+        .then(res => {
+          _this.setData({
+            listData: listData
+          })
+          _this.cancel()
+        })
+    }
   },
   // 删除规格值 
   operationBind: function(e) {

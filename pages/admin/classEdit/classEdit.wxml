@@ -1,3 +1,10 @@
+<!-- 删除-->
+<mes show="{{show1}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确定删除该分类？</text>
+    <button bindtap='confirmFun'>确定</button>
+  </view>
+</mes>
 <!-- 新建分类 -->
 <spec
   show="{{show}}"

@@ -146,12 +146,11 @@ Page({
           icon: 'none',
           duration: 2000,
         })
-      } else {
-        this.setData({
-          value: value.substring(0, 10),
-          watchInput: true,
-        })
       }
+      this.setData({
+        value: value.substring(0, 10),
+        watchInput: true,
+      })
     }
   },
   /**

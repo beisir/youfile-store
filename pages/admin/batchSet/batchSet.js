@@ -79,40 +79,38 @@ Page({
     } else {
       if (num > 11) {
         Api.showToast("超过最长数字限制")
-      } else {
-        this.setData({
-          watchInput: true,
-          value: value.substring(0, 10),
-        })
       }
+      this.setData({
+        watchInput: true,
+        value: value.substring(0, 10),
+      })
     }
   },
   watchInput1: function (event) {
-    var value = event.detail.value,
-      num = value.length
-    if (num > 0) {
-      if (value < 1) {
-        Api.showToast("请输入大于0的有效数字！")
+    var _this = this,
+      val = event.detail.value,
+      num = val.length
+    if (num == 2 && val.charAt(0) == '0') {
+      if (val != "0.") {
         this.setData({
-          value1: ''
+          value1: 0
         })
         return
       }
     }
-    if (value == '') {
+    if (val == '') {
       this.setData({
         watchInput: false,
-        value1: ''
       })
+      return
     } else {
-      if (num > 11) {
+      if (num > 9) {
         Api.showToast("超过最长数字限制")
-      } else {
-        this.setData({
-          value1: (util.newVal(value)).substring(0, 10),
-          watchInput: true,
-        })
       }
+      this.setData({
+        value1: (util.newVal(val)).substring(0, 8),
+        watchInput: true,
+      })
     }
   },
   togetherFun:function(){
@@ -168,7 +166,7 @@ Page({
   confirm1: function () {
     var _this = this,
       value = this.data.value1
-    if (value == '') {
+    if (value == '' || value=="0") {
       _this.setMes()
     } else {
       this.setSaleBatchAmount(value)

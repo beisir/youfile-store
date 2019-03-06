@@ -36,10 +36,11 @@ Page({
     description: '',
     categoryCustomCode: '',
     categoryCode: '',
+    showTale:false,
     marketPrice: '10',
     introduction: '',
     sellPrice: '',
-    wholesalePrice: 0,
+    wholesalePrice: '',
     baseUrl: app.globalData.imageUrl,
     goodsImageVOList: [],
     mainImgUrl: '',
@@ -49,12 +50,23 @@ Page({
     moveImgShow: true,
     addGitShow: true
   },
+  confirmMes:function(){
+    this.setData({
+      show1:false
+    })
+  },
+  tipMes:function(){
+    this.setData({
+      show1:true
+    })
+  },
   // 删除商品图
   showRemoveImg: function(e) {
     var index = e.target.dataset.index
     this.setData({
       show: true,
-      reImgIndex: index
+      reImgIndex: index,
+      showTale:true
     })
   },
   removeImg: function() {
@@ -214,9 +226,20 @@ Page({
     })
   },
   // 库存
-  stockNum:function(e){
+  stockNum: function (event){
+    var _this = this,
+      val = event.detail.value,
+      num = val.length
+    if (num == 2 && val.charAt(0) == '0') {
+      if (val != "0.") {
+        this.setData({
+          stockNum: 0
+        })
+        return
+      }
+    }
     this.setData({
-      stockNum:e.detail.value
+      stockNum: event.detail.value
     })
   },
   sellPrice: function(event) {
@@ -418,7 +441,6 @@ Page({
       pics = this.data.pics,
       _this=this,
       mainImgUrl = '',
-      wholesalePrice = 0,
       newConst = this.data.newConst,
       saleBatchNum = this.data.stock,
       goodsImageVOList = [],
@@ -457,12 +479,41 @@ Page({
       Api.showToast("请上传商品图片！")
       return;
     }
-    if (!Api.isNotEmpty(this.data.name)) {
-      Api.showToast("请输入标题！")
+    //为空或全部为空格
+    if ((this.data.name).match(/^[ ]*$/)) {
+      Api.showToast("标题不能为空！")
+      return;
+    }
+    if(this.data.name==''){
+      Api.showToast("标题不能为空")
       return;
     }
     if (!Api.isNotEmpty(this.data.categoryCode)) {
       Api.showToast("请输入商品类目！")
+      return;
+    }
+    if (wholesalePrice == 0 && Api.isNotEmpty(wholesalePrice)) {
+      Api.showToast("批发价不得低于0")
+      return;
+    }
+    if (!Api.isNotEmpty(wholesalePrice)) {
+      Api.showToast("请填写批发价")
+      return;
+    }
+    if (sellPrice == 0 && Api.isNotEmpty(sellPrice)) {
+      Api.showToast("零售价不得低于0")
+      return;
+    }
+    if (!Api.isNotEmpty(sellPrice)) {
+      Api.showToast("请填写零售价")
+      return;
+    }
+    if (stockNum == 0 && Api.isNotEmpty(stockNum)) {
+      Api.showToast("库存不得低于0")
+      return;
+    }
+    if (!Api.isNotEmpty(stockNum)) {
+      Api.showToast("请填写库存")
       return;
     }
     var goodsVO = {
@@ -553,6 +604,9 @@ Page({
     }
     // 规格
     if (currPage.data.goodsSkuVOList) {
+      if (currPage.data.goodsSkuVOList.length==0){
+        return
+      }
       var goodsSkuVOList = currPage.data.goodsSkuVOList, 
         skuListData = currPage.data.skuListData,
         wholesalePrice='',
@@ -562,18 +616,18 @@ Page({
       sellPrice = Math.min.apply(Math, goodsSkuVOList.map(function (o) {
         return o.sellPrice
       }))
-      wholesalePrice = Math.min.apply(Math, goodsSkuVOList.map(function (o) {
-        return o.wholesalePrice
-      }))
       for (var v of goodsSkuVOList) {
+        if (v.sellPrice == sellPrice) {
+          wholesalePrice = v.wholesalePrice
+        }
         stockNum += parseInt(v.stockNum)
       }
       that.setData({
         goodsSkuVOList: goodsSkuVOList,
         skuListData: skuListData,
-        stockNum: stockNum,
-        sellPrice: sellPrice,
-        wholesalePrice: wholesalePrice
+        stockNum: stockNum == 0 ? '' : stockNum,
+        sellPrice: sellPrice == Infinity ? '' : sellPrice,
+        wholesalePrice: wholesalePrice == Infinity ? '' : wholesalePrice
       })
     }
     

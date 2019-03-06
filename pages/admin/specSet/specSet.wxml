@@ -8,7 +8,7 @@
 <!-- 删除模板-->
 <mes show="{{unsetTemp}}">
   <view>
-    <text>确认删除？</text>
+    <text>确定删除该模板？</text>
     <button bindtap='confirmDetele'>确定</button>
   </view>
 </mes>
@@ -22,7 +22,7 @@
 <!-- 删除规格-->
 <mes show="{{deteleVo}}">
   <view>
-    <text>确认删除？</text>
+    <text>确定删除该规格？</text>
     <button bindtap='conDeleteAttrc'>确定</button>
   </view>
 </mes>
@@ -78,7 +78,7 @@
   </view>
 </view>
 <view class='add-bottom add-bottom1'>
-  <view bindtap='updateTemplate'>更新模板</view>
+  <view bindtap='updateTemplate'>更新模板名称</view>
   <view bindtap='unsetSpec'>删除模板</view>
   <view bindtap='goback'>确定</view>
 </view>
