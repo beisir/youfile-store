@@ -183,11 +183,65 @@ Page({
       })
     })
   },
+
+  // 微信授权登录
+  getPhoneNumber(e) {
+    if (e.detail.iv && e.detail.encryptedData) {
+      wx.checkSession({
+        success: (res) => {
+          this.getMyPhone(e.detail.iv, e.detail.encryptedData, this.data.code).then(res => {
+            let data = JSON.parse(res.obj)
+            this.switchGetPhoneWay(data)
+          })
+        },
+        fail: function (res) {
+          // 微信code过期
+          wx.login({
+            success: function (res) {
+              this.getMyPhone(e.detail.iv, e.detail.encryptedData, res.code).then(res => {
+                let data = JSON.parse(res.obj)
+                this.switchGetPhoneWay(data)
+              })
+            },
+            fail: function (res) { },
+            complete: function (res) { },
+          })
+        },
+        complete: function (res) { },
+      })
+    }
+  },
+  switchGetPhoneWay(data) {
+    if (data.phoneNumber) {
+      this.setData({ telephone: data.phoneNumber })
+      this.getCode()
+    }  
+  },
+  // 解密手机号
+  getMyPhone(iv, encryptedData, code) {
+    let obj = {
+      iv,
+      encryptData: encryptedData,
+      jsCode: code
+    }
+    return API.getMyWXPhone(obj)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     app.authHandler.flushTokenInfo()
+    wx.login({
+      success: (res) => {
+        if (res.code) {
+          this.setData({
+            code: res.code
+          })
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   },
 
   /**

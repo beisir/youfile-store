@@ -8,66 +8,63 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goods:[{
-      goodsName: 121231
-
-    }, {
-        goodsName: "121a's 121a's 阿斯达按说 231121a's 阿斯达按说 231121a's 阿斯达按说 231121a's 阿斯达按说 231阿斯达按说 231"
-
-      }
-    ]
+    
   },
   rpx2px(rpx){
     const rate = wx.getSystemInfoSync().windowWidth / 750
     return rate * rpx
   },
   getData() {
-    API.ftfAdminOrderDetail({ orderNumber: this.data.code }).then(res => {
-
-
-      try {
-        res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
-        res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
-        res.obj.finishDate = util.formatTime(new Date(res.obj.finishDate));
-        res.obj.cancelDate = util.formatTime(new Date(res.obj.cancelDate));
-      } catch (e) { }
-
+    API.ftfpreOrderDetail({ qrCode: this.data.code }).then(res => {
       this.setData({
         order: res.obj
+      },()=>{
+        this.loadQRcode()
       })
-      //倒计时
-      let timm = this.data.timeOnce;
-      if (timm) {
-        util.count_down(this, res.obj.timeoutExpressSecond ? res.obj.timeoutExpressSecond * 1000 : "")
-        this.setData({ timeOnce: false })
-      }
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+  loadQRcode(){
+    let codeData = {
+      type: 'ftforder',
+      path: '/pages/faceToFaceOrder/orderQRcode/orderQRcode',
+      code: this.data.code
+    }
+    let url = 'https://www.youlife.net.cn/qr/?'
+    let arr = []
+    for (let key in codeData){
+      let thisdata = ""
+      if (typeof codeData[key] === 'object'){
+        thisdata = JSON.stringify(codeData[key])
+      }else{
+        thisdata = codeData[key]
+      }
+      arr.push(key + "=" + thisdata)
+    }
+    url += arr.join('&')
+    // 绘制二维码
     let qrcodeWidth = this.rpx2px(300)
     this.setData({
       qrcodeWidth: qrcodeWidth,
     })
     let qrcode = new QRCode('canvas', {
-      text: "1",
+      text: url,
       width: qrcodeWidth,
       height: qrcodeWidth,
       colorDark: "#000",
       colorLight: "white",
       correctLevel: QRCode.CorrectLevel.H
-    },url=> {
+    }, url => {
       this.setData({ url: url })
     });
-
-    setTimeout(()=>{
-      qrcode.makeCode('text you want convert', url => {
-        this.setData({ url: url })
-      })
-    },3000)
-   
+  },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    this.setData({
+      code: options.code
+    })
+    this.getData()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

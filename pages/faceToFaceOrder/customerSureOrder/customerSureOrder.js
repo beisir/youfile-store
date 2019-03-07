@@ -11,15 +11,6 @@ Page({
   },
   getData() {
     API.ftfCustomerOrderDetail({ orderNumber: this.data.code }).then(res => {
-
-
-      try {
-        res.obj.payDate = util.formatTime(new Date(res.obj.payDate));
-        res.obj.createDate = util.formatTime(new Date(res.obj.createDate));
-        res.obj.finishDate = util.formatTime(new Date(res.obj.finishDate));
-        res.obj.cancelDate = util.formatTime(new Date(res.obj.cancelDate));
-      } catch (e) { }
-
       this.setData({
         order: res.obj
       })
@@ -32,9 +23,12 @@ Page({
     })
   },
   pay(){
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../../casher/casher/casher?num=' + this.data.code + '&type=ftf'
     })
+  },
+  toHome(){
+    API.toHome()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -43,7 +37,6 @@ Page({
     this.setData({
       code: options.code
     })
-    this.getData();
   },
 
   /**
@@ -57,7 +50,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getData();
   },
 
   /**

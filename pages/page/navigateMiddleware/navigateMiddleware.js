@@ -1,4 +1,6 @@
 // pages/page/navigateMiddleware/navigateMiddleware.js
+import API from "../../../utils/api.js";
+import { switchQRCodeType } from "../../../utils/scanCode.js";
 Page({
 
   /**
@@ -7,7 +9,7 @@ Page({
   data: {
     options:{}
   },
-
+  
   switchType(){
     switch (this.data.options.type) {
       case 'ftforder':
@@ -18,18 +20,29 @@ Page({
 
   // 门店订单
   ftfOrder(){
-    let urldata = this.data.options;
-    urldata.orderNumber
-
-
+    // let urldata = this.data.options;
+    // if (!urldata.code) { this.toHome();return}
+    // API.ftfuserSureOrder({ qrCode: urldata.code, payType: 'online' }).then(res => {
+    //   if(res.code == '0'){
+    //     wx.redirectTo({
+    //       url: '../../faceToFaceOrder/customerSureOrder/customerSureOrder?code=' + res.obj.orderNumber,
+    //     })
+    //   }
+    // })
   },
-
+  toHome(){
+    wx.switchTab({
+      url: '../home/home',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({options})
-    console.log(getCurrentPages())
+    if (options){
+      this.setData({ options })
+    }
+    switchQRCodeType(options ? options : this.data.options, 'middle' )
   },
 
   /**
@@ -43,7 +56,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.switchType()
   },
 
   /**

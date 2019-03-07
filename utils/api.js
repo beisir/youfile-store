@@ -153,6 +153,8 @@ import {
   hasSavedWXmsgUrl,
   saveWXmsgUrl,
   getMyWXPhoneUrl,
+  ftfuserSureOrderUrl,
+  ftfpreOrderDetailUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -183,6 +185,18 @@ function saveWXmsg(data){
 function getMyWXPhone(data){
   return app.http.getRequest(getMyWXPhoneUrl, data, { "platAppId": app.globalData.payAppNum})
 }
+/**
+ * 门店订单
+ */
+// 用户确定订单
+function ftfuserSureOrder(data){
+  return app.http.postRequest(ftfuserSureOrderUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+// 商家预订单详情
+function ftfpreOrderDetail(data){
+  return app.http.getRequest(ftfpreOrderDetailUrl, data)
+}
+
 /**判断楼座是否为空**/
 function isFloorInfo(obj) {
   if (isNotEmpty(obj)) {
@@ -967,6 +981,8 @@ function getStoreId() {
 
 
 module.exports = {
+  ftfpreOrderDetail,
+  ftfuserSureOrder,
   getMyWXPhone,
   saveWXmsg,
   hasSavedWXmsg,

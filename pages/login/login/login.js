@@ -221,7 +221,7 @@ Component({
           //关注
           if (this.data.attention) {
             API.likeStore().then(res => {
-              app.globalData.switchStore = true
+              loginApp.globalData.switchStore = true
             });
           }
           this.loginAfter(res);

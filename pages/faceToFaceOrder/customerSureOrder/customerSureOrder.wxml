@@ -18,8 +18,8 @@
   <!-- 货 -->
 
   <view class='goods-detail-box'>
-    <view class='item-title padding-box' bindtap='toHome'>
-      <view class='flex-center'>
+    <view class='item-title padding-box'>
+      <view class='flex-center' bindtap='toHome'>
         <image src="/image/u4.png" class='cloud-icon'></image>
         <text class='com-name-box'>{{order.storeInfo.storeName}}</text>
       </view>
@@ -28,7 +28,7 @@
       <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
       <view wx:for='{{order.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key="{{index}}" class='goods-item'>
         <text class='goods-item-goodsname'>{{tip.goodsName}}</text>
-        <text>x12312</text>
+        <text>x{{tip.num}}</text>
       </view>
     </view>
   </view>

@@ -99,7 +99,7 @@
     <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
     <view wx:for='{{order.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key="{{index}}" class='goods-item'>
       <text class='goods-item-goodsname'>{{tip.goodsName}}</text>
-      <text>x12312</text>
+      <text>x{{tip.num}}</text>
     </view>
   </view>
 </view>

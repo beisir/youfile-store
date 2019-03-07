@@ -45,17 +45,24 @@ Page({
       return
     }
 
-      // API.updataPwd({
-      //   oldPassword: old,
-      //   newPassword: newpass
-      // }).then((res) => {
-      //   API.showToast(res.message)
-      //     setTimeout(() => {
-      //       wx.navigateBack({})
-      //     }, 1000)
-      // }).catch(e=>{
-      //   API.showToast(e.data.message)
-      // })
+    let obj = {
+      mobile: this.data.telephone,
+      password: this.data.pass,
+      smsCode: this.data.code
+    }
+    API.resetPassword(obj).then(res => {
+      API.showToast(res.message)
+      this.setData({
+        forget: false,
+        pass: "",
+        code: ""
+      })
+      setTimeout(()=>{
+        wx.navigateBack()
+      },800)
+    }).catch(e => {
+      API.showToast(e.data.message)
+    })
     
   },
   getUserInfo(){

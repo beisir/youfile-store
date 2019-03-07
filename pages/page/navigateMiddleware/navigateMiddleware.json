@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "欢迎",
-  "usingComponents": {}
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "login": "../../login/login/login"
+  }
 }

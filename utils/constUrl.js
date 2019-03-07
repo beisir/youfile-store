@@ -185,3 +185,6 @@ export const hasSavedWXmsgUrl = '/api/weixin/user/exist'
 export const saveWXmsgUrl = '/api/weixin/user/save'
 // 解密手机
 export const getMyWXPhoneUrl = '/api/weixin/user/decrypt'
+// 门店订单 买家
+export const ftfuserSureOrderUrl = '/api/ftf/order'
+export const ftfpreOrderDetailUrl = '/admin/ftf/order/{{qrCode}}/info'

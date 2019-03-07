@@ -169,7 +169,6 @@ Page({
       storeId: this.data.storeId,
       orderAmount: this.data.money,
       remark: this.data.sureTip,
-      customerUserNo: this.data.userId,
       faceToFaceOrderDetailVOList: this.data.tag
     };
     app.http.postRequest("/admin/ftf/order",obj).then(res=>{
@@ -177,29 +176,20 @@ Page({
       if(res.code == '0'){
         setTimeout(() => {
           wx.redirectTo({
-            url: '../createSuccess/createSuccess?code=' + res.obj.orderNumber + "&amount=" + res.obj.orderAmount + "&count=" + res.obj.todayOrderCount,
+            url: '../orderQRcode/orderQRcode?code=' + res.obj
           })
         }, 800)
       }
-    })
-  },
-  //获取用户
-  getUser(){
-    API.newUserInfor({ userId: this.data.userId }).then(res=>{
-      this.setData({
-        user:res.obj
-      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     this.setData({
-      userId: options.user,
       storeId: wx.getStorageSync('storeId')
     })  
-    this.getUser()
   },
 
   /**

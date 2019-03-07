@@ -1,15 +1,15 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/faceToFaceOrder/createOrder/createOrder",
+    "pages/faceToFaceOrder/orderQRcode/orderQRcode",
     "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
+    "pages/faceToFaceOrder/ftfOpenpay/ftfOpenpay",
     "pages/page/navigateMiddleware/navigateMiddleware",
     "pages/page/userDetails/userDetails",
-    "pages/faceToFaceOrder/orderQRcode/orderQRcode",
-    "pages/faceToFaceOrder/ftfOpenpay/ftfOpenpay",
     "pages/page/updataPwd/updataPwd",
     "pages/page/user/user",
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
-    "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
     "pages/page/poster/poster",
     "pages/admin/goodsSpec/goodsSpec",
