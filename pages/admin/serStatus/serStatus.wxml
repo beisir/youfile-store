@@ -72,6 +72,7 @@
         <view bindtap='showMoreClick' data-index="{{index}}"></view>
       </view>
     </view>
+    <view class='showHide' bindtap='closeShow' hidden='{{showMore}}'></view>
     <view class='showMore' wx:if='{{showIndex==index}}'>
       <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.id}}'>
         <image mode='widthFix' src="/image/sYan.png"></image>预览</navigator>
@@ -92,4 +93,4 @@
   </view>
 </scroll-view>
 </view>
-<view class='showHide' bindtap='closeShow' hidden='{{showMore}}'></view>
+<!-- <view class='showHide' bindtap='closeShow' hidden='{{showMore}}'></view> -->

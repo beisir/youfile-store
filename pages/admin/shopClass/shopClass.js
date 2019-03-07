@@ -59,7 +59,10 @@ Page({
     const index = e.currentTarget.dataset.index;
     let dataList = this.data.dataList;
     const selected = dataList[index].selected;
-    dataList[index].selected = !selected;
+    for (var v of dataList) {
+      v.selected=false
+    }
+    dataList[index].selected = true;
     this.setData({
       dataList: dataList
     });

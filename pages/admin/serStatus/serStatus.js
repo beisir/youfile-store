@@ -75,6 +75,12 @@ Page({
   onLoad(options) {
    
   },
+  onShow() {
+    var val = this.data.value
+    if (!val) { return }
+    this.initData()
+    this.getList()
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */

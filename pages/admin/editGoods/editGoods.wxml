@@ -62,7 +62,7 @@
   </view>
   <view hidden='{{hiddenSelt}}'>
       <view class="page__category-content">
-        <view class="weui-cell1">
+        <view class="weui-cell1 weui-cell3">
           <view class="weui-cell__hd">
             <image src="/image/title.png"></image>
           </view>
@@ -70,7 +70,7 @@
             <text>标题</text>
           </view>
         </view>
-        <textarea  wx:if="{{!showTale}}" class="weui-input1 {{name.length>0?'weui-input2':''}}" type="text" bindinput='watchName' value='{{name}}' placeholder='请填写商品标题'></textarea>
+        <textarea  wx:if="{{!showTale}}" class="weui-input1 {{name.length>0?'weui-input2':''}}" type="text" bindinput='watchName' value='{{name}}' placeholder='请填写商品标题' placeholder-class="palce-class"></textarea>
         <view class='change-num' wx:if='{{nameLen>0}}'>{{nameLen}}/55</view>
         <view class="weui-cell">
           <view class="weui-cell__hd">
@@ -80,7 +80,7 @@
             <text>推荐心语</text>
           </view>
         </view>
-        <textarea wx:if="{{!showTale}}"  class="weui-input1 {{recommendDesc.length>0?'weui-input2':''}}" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
+        <textarea wx:if="{{!showTale}}" placeholder-class="palce-class"  class="weui-input1 {{recommendDesc.length>0?'weui-input2':''}}" type="text" bindinput='watchRec' value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
         <view  class='change-num'  wx:if='{{recommendDescLen>0}}'>{{recommendDescLen}}/60</view>
       </view>
       <view class="page__category-content">
@@ -113,7 +113,7 @@
         <view bindtap='alertSpec'>
           <view class="weui-cell1 weui-cell-new">
             <view class="weui-cell__hd">
-              <image  class='img-n' src="/image/guige.png"></image>
+              <image  class='img-n1' src="/image/guige.png"></image>
             </view>
             <view class="weui-cell__bd">
               <text>商品规格</text>
@@ -125,8 +125,8 @@
             <view wx:if='{{skuListData.length==0}}'>添加</view>
             <view wx:if='{{skuListData.length>0}}'>编辑</view>
           </view>
-          <input class="weui-input"  wx:if='{{skuListData.length==0}}' type="text" value='（选填）未设置' disabled='disabled' ></input>
-          <input class="weui-input ed-co" wx:if='{{skuListData.length>0}}' type="text" value='已设置' disabled='disabled'></input>
+          <input class="weui-input input-l"  wx:if='{{skuListData.length==0}}' type="text" value='（选填）未设置' disabled='disabled' ></input>
+          <input class="weui-input ed-co input-l" wx:if='{{skuListData.length>0}}' type="text" value='已设置' disabled='disabled'></input>
         </view>
       </view>
       <view class="page__category-content page__new">
@@ -136,7 +136,7 @@
         </view>
         <view class="weui-cell1">
           <view class="weui-cell__hd">
-            <image  class='img-n' src="/image/ic6.png"></image>
+            <image  class='img-n' src="/image/pifa.png"></image>
           </view>
           <view class="weui-cell__bd">
             <text>批发价</text>
@@ -160,7 +160,7 @@
         </view>
          <view class="weui-cell1">
           <view class="weui-cell__hd">
-            <image src="/image/ic7.png"></image>
+            <image  class='img-n' src="/image/ic7.png"></image>
           </view>
           <view class="weui-cell__bd">
             <text>总库存</text>
@@ -173,7 +173,7 @@
       </view>
       <view class="page__category-content page__new" wx:if='{{!stockHide}}'>
         <view class='weui-title'>其他设置</view>
-        <view class="weui-cell1">
+        <view class="weui-cell1 weui-cell2">
           <view class="weui-cell__bd" style='width:200rpx'>
             <text>起批量</text>
           </view>
@@ -189,7 +189,7 @@
         <view class='weui-title'>商品隐私设置
           <text>(关闭代表对所有人公开)</text>
         </view>
-        <view class="weui-cell1">
+        <view class="weui-cell1 weui-cell2">
           <view class="weui-cell__bd">
             <text>仅允许商友可见</text>
             <view class='ag-font'>与您成为商友关系的进货商可查看</view>

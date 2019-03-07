@@ -28,40 +28,42 @@
     <button bindtap='confirmDetele'>确定</button>
   </view>
 </mes>
-<view class="goods-ser">
-  <navigator style='width:75%' url='../serStatus/serStatus'>
-    <input placeholder='输入商品名称' value="{{value}}" disabled='disabled' />
-  </navigator>
-  <image class="home-ser" src="/image/search1.png"></image>
-  <view class='home-img'>
-      <view >
+<view class='topScoll'>
+  <view class="goods-ser">
+    <navigator style='width:100%' url='../serStatus/serStatus'>
+      <input placeholder='输入商品名称' value="{{value}}" disabled='disabled' />
+    </navigator>
+    <image class="home-ser" src="/image/search1.png"></image>
+    <!-- <view class='home-img'>
+      <view>
         筛选
       </view>
+    </view> -->
+  </view>
+  <view class='st-title'>
+    <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中
+      <view></view>
     </view>
-</view>
-<view class='st-title'>
-  <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中
-    <view></view>
-  </view>
-  <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中
-    <view></view>
-  </view>
-  <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完
-    <view></view>
-  </view>
-  <view class="{{classStatus? 'active' : ''}}" bindtap="swichNavLast">本店分类
-    <image src="{{sImg}}"></image>
-    <view></view>
+    <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中
+      <view></view>
+    </view>
+    <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完
+      <view></view>
+    </view>
+    <view class="{{classStatus? 'active' : ''}}" bindtap="swichNavLast">{{className}}
+      <image src="{{sImg}}"></image>
+      <view></view>
+    </view>
   </view>
 </view>
 <view class='hideSer' hidden='{{hidden}}' bindtap='hideSer'>
   <view class='serList'>
-    <view wx:for='{{list}}' wx:key='{{index}}' data-code='{{item.customCategoryCode}}' class="{{currentTabSer==index? 'active' : ''}}" data-current="{{index}}" bindtap="swichSer">{{item.name}}
+    <view wx:for='{{list}}' wx:key='{{index}}' data-name='{{item.name}}' data-code='{{item.customCategoryCode}}' class="{{currentTabSer==index? 'active' : ''}}" data-current="{{index}}" bindtap="swichSer">{{item.name}}
       <image src="/image/dui.png"></image>
     </view>
   </view>
 </view>
-<scroll-view style='overflow:scroll' scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
+<scroll-view class='scroll-v' style='overflow:scroll' scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
   <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{detailList}}" wx:key="">
     <view class='babt' bindtap='editGoods' data-id='{{item.id}}'></view>
     <view class='content st-cont' data-index="{{index}}">
@@ -77,11 +79,12 @@
             </view>
             <view>
               <text>零售：</text>
-               <text class='st-mom'>￥{{item.sellPrice}}</text>
+              <text class='st-mom'>￥{{item.sellPrice}}</text>
             </view>
             <view>
               <text>库存：</text>
-              <text style='color:#888;font-size:26rpx'>{{item.stockNum}}</text> <image class='warn' wx:if='{{item.stockNum<10}}' src="/image/warn.png"></image>
+              <text style='color:#888;font-size:26rpx'>{{item.stockNum}}</text>
+              <image class='warn' wx:if='{{item.stockNum<10}}' src="/image/warn.png"></image>
             </view>
           </view>
           <view class='not' wx:if='{{item.stockNum<10}}'>
@@ -99,6 +102,7 @@
         <view bindtap='showMoreClick' data-index="{{index}}"></view>
       </view>
     </view>
+    <view class='showHide' bindtap='closeShow' hidden='{{showMore}}'></view>
     <view class='showMore' wx:if='{{showIndex==index}}'>
       <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.id}}'>
         <image mode='widthFix' src="/image/sYan.png"></image>预览</navigator>
@@ -106,7 +110,8 @@
         <view class='v-san'></view>
         <image mode='widthFix' src="/image/sRe.png"></image>删除</view>
     </view>
-    <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.id}}'><image mode='widthFix' src="/image/sBai.png"></image>删除</view>
+    <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>
+      <image mode='widthFix' src="/image/sBai.png"></image>删除</view>
   </view>
   <view class='st-all' wx:if='{{detailList.length>0}}'>{{detailList.length}}件商品</view>
   <view class='st-all' wx:if='{{detailList.length==0}}'>
@@ -123,9 +128,17 @@
     <image src="/image/ad5.png"></image>
   </view>工作台</view>
 <view class='st-bottom st-bottom1'>
-    <view><navigator url="../addGoods/addGoods">添加商品</navigator></view>
-    <view><navigator url="../batch/batch">批量管理</navigator></view>
-    <view><navigator url="../batchSet/batchSet">起批设置</navigator></view>
-    <view><navigator url="../class/class">本店分类</navigator></view>
+  <view>
+    <navigator url="../addGoods/addGoods">添加商品</navigator>
+  </view>
+  <view>
+    <navigator url="../batch/batch">批量管理</navigator>
+  </view>
+  <view>
+    <navigator url="../batchSet/batchSet">起批设置</navigator>
+  </view>
+  <view>
+    <navigator url="../class/class">本店分类</navigator>
+  </view>
 </view>
-<view class='showHide' bindtap='closeShow' hidden='{{showMore}}'></view>
+<!-- <view class='showHide showHide2' bindtap='closeShow' hidden='{{showMore}}'></view> -->

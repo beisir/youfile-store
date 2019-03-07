@@ -1,7 +1,7 @@
 <!-- 删除规格-->
 <mes show="{{deteleVo}}">
   <view>
-    <text>确认删除？</text>
+    <text>确定删除该规格组？</text>
     <button bindtap='conDeleteAttrc'>确定</button>
   </view>
 </mes>
@@ -32,7 +32,7 @@
 </spec>
 <!-- 弹框结束 -->
 <view class='spec-c'>
-  <view class='last-num'>共{{resNum}}个</view>
+  <view class='last-num' bindtap='goAlertSpec'>共{{resNum}}个</view>
   <view bindtap='goAlertSpec' class='gs-title'>
     <view class='gs-right'></view>
     <view>选择规格模板</view>
@@ -44,10 +44,10 @@
         {{twoItem.specName}}
         <image src="/image/editSpec.png" data-index='{{index}}' data-name="{{twoItem.specName}}" bindtap='editSpecName'></image>
         <image wx:if='{{index==1}}' class='img' bindtap='upTop' src="/image/ups.png"></image>
-        <image wx:if='{{twoItem.goodsSpecificationValueVOList.length>0}}' data-index='{{index}}' bindtap='deleteAttrc' src="/image/sImg.png"></image>
+        <image wx:if='{{listData.length>1}}' data-index='{{index}}' bindtap='deleteAttrc' src="/image/sImg.png"></image>
       </view>
       <view class='sp-button'>
-        <view class='active' bindtap='addSpecValue' data-index='{{index}}'>.</view>
+        <view class='active' bindtap='addSpecValue' wx:if='{{twoItem.goodsSpecificationValueVOList.length<50}}' data-index='{{index}}'>.</view>
         <view wx:for='{{twoItem.goodsSpecificationValueVOList}}' data-index='{{index}}' data-name="{{twoItem.specName}}"  bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" wx:key='{{index}}' bindlongtap="bingLongTap"  bindtap="bindTap"  class="{{item.sClick?'act':''}}">
           {{item.specValueName}}
           <text wx:if='{{item.selected}}' data-index='{{index}}' data-name="{{twoItem.specName}}" catchtap='operationBind'>删除</text>

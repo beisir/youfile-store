@@ -24,6 +24,7 @@ Page({
     showNum: false,
     isCopied: '',
     value: '',
+    className:'本店分类',
     totalCount: '',
     sImg: '/image/xl.png',
     detailList: [],
@@ -168,7 +169,8 @@ Page({
     } else {
       that.setData({
         currentTab: e.target.dataset.current,
-        sImg: '/image/xl.png'
+        sImg: '/image/xl.png',
+        className: "本店分类"
       })
     }
   },
@@ -325,13 +327,15 @@ Page({
   },
   swichSer: function (e) {
     var that = this,
-      code = e.target.dataset.code
+      code = e.target.dataset.code,
+      name = e.target.dataset.name
     if (that.data.currentTabSer === e.target.dataset.current) {
       return false;
     } else {
       that.setData({
         currentTabSer: e.target.dataset.current,
-        code: code
+        code: code,
+        className:name
       }, function () {
         that.initData()
       })

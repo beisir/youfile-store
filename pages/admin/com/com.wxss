@@ -2,13 +2,13 @@
 .goods-ser input{color:#999;font-size:28rpx;height:70rpx;padding-left:85rpx;width:65%}
 .home-ser{height:40rpx;width:40rpx;position:absolute;left:25rpx;top:17rpx}
 .home-img{height:70rpx;width:70rpx;position:absolute;right:40rpx;top:-10rpx;text-align:center;z-index:10;padding-top:26rpx;font-size:30rpx;color:#C79359}
-.st-title{color:#333;font-size:28rpx;text-align:center;background:#fff;position:relative}
+.st-title{color:#333;font-size:28rpx;text-align:center;background:#fff;position:relative;height: 92rpx;}
 .st-xiala,.serList{position:absolute;border:2rpx solid #EDEDED;width:160rpx;background:#fff;z-index:10;color:#666;font-size:28rpx;right:5rpx;top:170rpx;padding-top:20rpx;padding-bottom:20rpx}
 .st-xiala view{height:50rpx;text-align:center;line-height:50rpx}
-.st-title>view{width:25%;display:inline-block;height:90rpx;position:relative;line-height:90rpx}
+.st-title>view{width:25%;display:inline-block;height:90rpx;position:relative;line-height:90rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
 .st-title>view image{width:15rpx;height:15rpx;margin-left:8rpx;vertical-align:middle}
 .st-title>view.active{color:#C79359}
-.st-title>view.active view{background:#C79359;height:2rpx;width:100rpx;position:absolute;left:50%;margin-left:-50rpx}
+.st-title>view.active view{background:#C79359;height:4rpx;width:100rpx;position:absolute;left:50%;margin-left:-50rpx;bottom: 0;}
 .st-cont{height: 314rpx;position:relative;padding-left:230rpx;color:#333;font-size:28rpx;padding-right:30rpx;padding-top:30rpx;width:65%;background:#fff;border-radius:10rpx}
 .st-cont image.cart-thumb{height:180rpx;width:180rpx;left:30rpx;border:2rpx solid #EDEDED;position:absolute}
 .st-d-status{margin-top:20rpx}
@@ -42,11 +42,11 @@
 .list-view>view{display:inline-block;width:33%;color:#666;font-size:28rpx;text-align:center;height:90rpx;line-height:90rpx;position:relative}
 .list-view1>view{width:28%;border-right: 2rpx solid #EDEDED;height: 40rpx;line-height: 40rpx;margin-top:25rpx;}
 .list-view>view view{height:50rpx;width:2rpx;background:#EDEDED;position:absolute;top:21rpx}
-.list-view>view button,.button-hover{position:absolute;background:#fff;opacity:0}
+.list-view>view button,.button-hover{position:absolute;background:#fff;opacity:0;margin-top: -20rpx}
 .c-ser{width: 35rpx;height: 35rpx;margin-left: 20rpx;vertical-align: middle;margin-top: -2rpx;}
 .home-img-c{width: 160rpx;}
 .user-v{position:absolute;width:90rpx;height:40rpx;line-height:40rpx;text-align:center;background:#CCAA77;color:#fff;font-size:26rpx;left:30rpx;top:186rpx}
-.showMore{height: 100rpx;width: 100%;position: absolute;border-radius: 10rpx;background: #fff;bottom: -100rpx;z-index: 9000}
+.showMore{height: 100rpx;width: 100%;position: absolute;border-radius: 10rpx;background: #fff;bottom: -100rpx;z-index: 9999}
 .showMore>view,.showMore>navigator{width: 49%;display: inline-block;color: #333;text-align: center;line-height: 60rpx;margin-top: 22rpx;position: relative}
 .showMore>view image,.showMore>navigator image{width: 35rpx;vertical-align: middle;margin-top: -6rpx;margin-right: 10rpx;}
 .showMore>view:last-child{border-left: 2rpx solid #EDEDED}

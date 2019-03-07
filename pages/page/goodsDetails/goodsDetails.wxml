@@ -64,7 +64,7 @@
   <view class='gd-title' wx:if='{{limitShow!=1}}'>
     <view>{{name}}<button class='shre_btn' open-type='share' data-name='{{name}}' data-id='{{goodsId}}'> <image src="/image/fx.png"></image></button></view>
     <view class='gd-font gd-font2'>零售价：￥{{sell}}</view>
-    <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text><button wx:if='{{saleBatchNum!=0}}' class='btn'><text>{{saleBatchNum}}</text>件起批</button></view>
+    <view class='gd-font'>批发价：<text>￥{{wholesalePrice}}</text><button wx:if='{{saleBatchNum!=0}}' class='btn'><text>{{saleBatchNumGoods ==0?saleBatchNum:saleBatchNumGoods}}</text>件起批</button></view>
     <view class='gd-view-n' wx:if='{{saleBatchAmount==0}}' style='min-height:50rpx'><button>混批</button></view>
     <view class='gd-view-n'  wx:if='{{saleBatchAmount!=0}}'><button>混批</button>全场满￥{{saleBatchAmount}}元可混批</view>
   </view>

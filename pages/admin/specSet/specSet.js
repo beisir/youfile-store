@@ -26,15 +26,7 @@ Page({
     initSpecId: '', //需要修改的规格ID
     addSpecChild: false, //添加规格值
     indexDeleteVal: '', //删除规格索引标识
-    listDataSpec: [{
-      specName: "颜色",
-      goodsSpecificationValueVOList: [{
-        specValueName: "蓝色"
-      }, {
-        specValueName: "2121"
-      }]
-
-    }], //上个页面带来的规格数组
+    listDataSpec: [], //上个页面带来的规格数组
   },
   /**
    * 生命周期函数--监听页面加载
@@ -45,7 +37,9 @@ Page({
   // 获取规格组
   getListData: function(options) {
     this.setData({
-      listDataSpec: JSON.parse(options.listData)
+      listDataSpec: JSON.parse(options.listData),
+    },function(){
+      this.getTempList()
     })
   },
   /**
@@ -54,12 +48,27 @@ Page({
   onReady: function() {
 
   },
+  // 去除重复值
+  arrayUnique2:function(arr, name) {
+    var hash = {};
+    return arr.reduce(function (item, next) {
+      hash[next[name]] ? '' : hash[next[name]] = true && item.push(next);
+      return item;
+    }, []);
+  },
   // 返回上个页面
   goback: function() {
     var listDataSpec = this.data.listDataSpec,
       pages = getCurrentPages(),
+      listDataSpeclen = listDataSpec.length,
       currPage = pages[pages - 1],
       prevPage = pages[pages.length - 2]
+    if (listDataSpeclen==1){
+      listDataSpec[0].goodsSpecificationValueVOList = this.arrayUnique2(listDataSpec[0].goodsSpecificationValueVOList, "specValueName")
+    } else if (listDataSpeclen==2){
+      listDataSpec[0].goodsSpecificationValueVOList = this.arrayUnique2(listDataSpec[0].goodsSpecificationValueVOList, "specValueName")
+      listDataSpec[1].goodsSpecificationValueVOList = this.arrayUnique2(listDataSpec[1].goodsSpecificationValueVOList, "specValueName")
+    }
     prevPage.setData({
       listDataSpec: listDataSpec,
     })
@@ -101,31 +110,46 @@ Page({
   },
   // 获取规格模板列表
   getTempList: function() {
-    var getTempList = new GetTempList(),
-      _this = this
-    getTempList.getTempCont().then(res => {
-        for (var v of res) {
-          var voList = v.specificationTemplateContentVOList
-          for (var i of voList) {
-            if (i.specValueNameList == null) {
-              i.specValueNameList = []
+    var _this = this
+    Api.template()
+      .then(res => {
+        var obj = res.obj
+        for (var v of obj) {
+          if (v.specificationTemplateContentVOList) {
+            var voList = v.specificationTemplateContentVOList
+            for (var i of voList) {
+              if (i.specValueNameList == null) {
+                i.specValueNameList = []
+              }
+              if (i.specValueList == null) {
+                i.specValueList = []
+              }
             }
-            if (i.specValueList == null) {
-              i.specValueList = []
-            }
+          } else {
+            v.specificationTemplateContentVOList = []
           }
         }
         _this.setData({
-          listData: res,
+          listData: obj,
           currentTab: 0,
-          templateId: res[0].id,
-          templateName: res[0].templateName
+          templateId: obj[0].id,
+          templateName: obj[0].templateName
         }, function() {
           var listDataSpec = _this.data.listDataSpec
-          _this.isSelected(res[0], listDataSpec)
+
+          for (var i = 0; i < listDataSpec.length;i++){
+            var list = listDataSpec[i].goodsSpecificationValueVOList
+            var newList = []
+            for (var k = 0; k < list.length; k++) {
+              if (list[k].sClick) {
+                newList.push(list[k])
+              }
+            }
+            listDataSpec[i].goodsSpecificationValueVOList = newList
+          }
+          _this.isSelected(obj[0], listDataSpec)
         })
       })
-      .catch(res => {})
   },
   // 添加或者删除之后重新渲染额页面
   getInitData: function(mes) {
@@ -137,7 +161,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getTempList()
+    
   },
   // 点击切换模板
   clickTab: function(e) {
@@ -215,7 +239,12 @@ Page({
   },
   // 添加模板
   addTempParent: function() {
-    var _this = this
+    var _this = this,
+      listDataLen = this.data.listData.length
+    if (listDataLen > 7) {
+      Api.showToast("最多可添加8个模板哦！")
+      return
+    }
     _this.setData({
       addTempParent: true,
       value: ''
@@ -280,7 +309,7 @@ Page({
       _this = this,
       defaultName = this.data.defaultName,
       tempArrNew = {}
-    if (tempContentVOList) {
+    if (tempContentVOList.length > 0) {
       var childValue = tempContentVOList[0].specName
       if (childValue == defaultName) {
         tempArrNew = {
@@ -481,6 +510,7 @@ Page({
         for (var val of listDataSpec) {
           tempSpecArr.push(val.specName)
         }
+        listDataSpecLen = listDataSpec.length
         if (tempSpecArr.indexOf(parentName) == -1 && listDataSpecLen == 2) {
           this.setData({
             haveSpecShow: true,
@@ -488,7 +518,6 @@ Page({
             newSpecName: name
           })
         }
-        listDataSpecLen = listDataSpec.length
         if (listDataSpecLen == 0) {
           listDataSpec.push({
             specName: parentName,
@@ -577,16 +606,19 @@ Page({
       str += specValueList[j] + ",";
     }
     str = (str.substring(str.length - 1) == ',') ? str.substring(0, str.length - 1) : str;
-    if (sign == 'longpress' || sign == 'click'){
+    if (sign == 'longpress' || sign == 'click') {
       _this.setData({
         listData: listData
       })
       _this.cancel()
-    }else{
+    } else {
       Api.addTempCont(specChildId, str)
         .then(res => {
           _this.setData({
             listData: listData
+          },function(){
+            this.getTempList()
+            _this.isSelected(listData, _this.data.listDataSpec)
           })
           _this.cancel()
         })
