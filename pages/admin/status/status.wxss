@@ -36,4 +36,6 @@ scroll-view{margin-top:0rpx;padding-bottom:100rpx}
 .touch-item{overflow: unset}
 .topScoll{position: fixed;top: 0;width: 100%;z-index: 1000}
 .scroll-v{margin-top: 170rpx;}
-.showHide {left: 0;background:#000;opacity: 0.05;z-index: 8888;top: 0}
+.showHide {left: 0;z-index: 8888;top: 0}
+.showHideb {top: unset;bottom: 0rpx;position: fixed;height: 120rpx;z-index: 9999;background: rgba(0,0,0,0.3)}
+.showHidet {position: fixed;height: 172rpx;z-index: 9999;background: rgba(0,0,0,0.3)}

@@ -24,7 +24,7 @@ Page({
     showNum: false,
     isCopied: '',
     value: '',
-    className:'本店分类',
+    className: '本店分类',
     totalCount: '',
     sImg: '/image/xl.png',
     detailList: [],
@@ -36,10 +36,40 @@ Page({
     showMore: true,
     allGoodsShow: false,
     alertData: ["全部商品", "引用商品", "自建商品"],
+    platformIos: '',
+    showHidet: true,
+    showHideb: true,
+  },
+  // 判断手机是ios还是安卓
+  getIsIos() {
+    var phone = wx.getSystemInfoSync()
+    var _this = this
+    if (phone.platform == 'ios') {
+      _this.setData({
+        platformIos: true,
+      })
+    } else {
+      _this.setData({
+        platformIos: false,
+      })
+    }
   },
   // 显示更多操作
   showMoreClick: function (e) {
     var index = e.target.dataset.index
+    if (this.data.platformIos) {
+      this.setData({
+        showMore: false,
+        showHidet: false,
+        showHideb: false,
+      })
+    } else {
+      this.setData({
+        showMore: false,
+        showHidet: true,
+        showHideb: true,
+      })
+    }
     this.setData({
       showMore: false,
       showIndex: index
@@ -57,6 +87,8 @@ Page({
   closeShow: function () {
     this.setData({
       showMore: true,
+      showHideb: true,
+      showHidet: true,
       showIndex: -1
     })
   },
@@ -113,6 +145,8 @@ Page({
         that.setData({
           show1: false,
           showMore: true,
+          showHidet: true,
+          showHideb: true,
           detailList: that.data.detailList
         })
       })
@@ -156,10 +190,14 @@ Page({
     var that = this,
       status = e.target.dataset.index
     that.setData({
-      goodsStatus: status,
       hidden: true,
+      allGoodsShow: false,
       classStatus: false,
       currentTabSer: 0,
+      goodsStatus: status,
+      showMore: true,
+      showHidet: true,
+      showHideb: true,
       code: '',
     }, function () {
       that.initData()
@@ -320,6 +358,8 @@ Page({
       detailList: [],
       showIndex: -1,
       showMore: true,
+      showHidet: true,
+      showHideb: true,
     }, function () {
       _this.classCode()
     })
@@ -335,7 +375,7 @@ Page({
       that.setData({
         currentTabSer: e.target.dataset.current,
         code: code,
-        className:name
+        className: name
       }, function () {
         that.initData()
       })
@@ -345,6 +385,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getIsIos()
     var gS = this.data.goodsStatus,
       currentTab = this.data.currentTab
     this.setData({
@@ -352,7 +393,8 @@ Page({
       hidden: true,
       showNum: false,
       confirmUp: false,
-      confirmDown: false
+      confirmDown: false,
+      allGoodsShow: false
     })
     app.globalData.switchStore = true
     this.initData()
