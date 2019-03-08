@@ -120,7 +120,7 @@ class Navigate {
 
   //入口处理跳转参数
   parseExtraDataOnlunch(options) {
-
+    
   }
   parseExtraDataOnShow(options) {
     if ( options.referrerInfo.extraData && options.referrerInfo.extraData.appid ) {
@@ -133,9 +133,7 @@ class Navigate {
     if (!this.authHandler.isLogin() && options.referrerInfo.extraData && options.referrerInfo.extraData.loginObj) {
       this.authHandler.saveTokenInfo(JSON.parse(options.referrerInfo.extraData.loginObj))
     }
-
   }
-
 
 }
 

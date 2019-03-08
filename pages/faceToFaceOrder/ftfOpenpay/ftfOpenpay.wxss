@@ -1,0 +1,16 @@
+/* pages/faceToFaceOrder/ftfOpenpay/ftfOpenpay.wxss */
+page{background: #fff;}
+.title-box{width: 750rpx;height: 256rpx;position: relative;}
+.backimg{width: 750rpx;height: 256rpx;position: absolute;top: 0;left: 0;}
+.ftf-font{font-size: 62rpx;font-weight: 600;position: absolute;z-index: 1;color: #fff;left: 56rpx;top: 74rpx;}
+.ftf-font2{font-size: 30rpx;position: absolute;z-index: 1;color: #fff;left: 56rpx;top: 154rpx;}
+.single-line{line-height: 1;}
+.title-icon{height: 50rpx;width: 50rpx;}
+.s-title-box{display: flex;align-items: center;justify-content: center;margin: 50rpx 0;font-weight: 600;}
+.intro-box{position: relative;height: 856rpx;}
+.intro-line{position: absolute;width:611rpx;height: 817rpx;left: 0;right: 0;margin: auto;}
+.intro-item{position: absolute;z-index: 1;width: 500rpx;letter-spacing: 3rpx;}
+.intro-icon{width: 100rpx;height: 100rpx;position: absolute;color: #333;}
+.intro-tite{position: absolute;font-size: 30rpx;font-weight: 600;}
+.intro-detail{position: absolute;font-size: 26rpx;}
+.open-btn{width: 600rpx;height: 100rpx;line-height:100rpx;color:#fff;font-size:36rpx;font-weight:600;letter-spacing:5rpx;  background: #f14b38;border-radius: 60rpx;margin:10rpx auto 50rpx;}

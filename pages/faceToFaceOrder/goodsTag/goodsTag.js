@@ -108,7 +108,7 @@ Page({
       API.ftfCreatGoods({goodsName:val}).then(res=>{
         wx.hideLoading()
         let goods = res.obj;
-
+        goods.num = 1
         //最多六个
         let checkedArr = [];
         this.data.list.forEach(el => {
@@ -197,8 +197,9 @@ Page({
     let checkedArr = this.data.checked;
     arr.forEach(el=>{
       checkedArr.every(item=>{
-        if (el.goodsId == item){
+        if (el.goodsId == item.goodsId){
           el.checked = true
+          el.num = item.num
           return false
         }
         return true
@@ -217,6 +218,7 @@ Page({
       if(list){
         list.forEach(el=>{
           el.checked = false
+          el.num = 1
         })
         this.setData({list})
 
@@ -233,7 +235,7 @@ Page({
   onLoad: function (options) {
     if (options.tag){
       this.setData({
-        checked: options.tag.split(",")
+        checked: JSON.parse(options.tag)
       })
     }
     this.setData({

@@ -20,9 +20,10 @@
       <view bindlongpress='editGoods' bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" class='goods-item' bindtap='clickTag' data-index="{{index}}" data-id="{{item.goodsId}}" data-name="{{item.goodsName}}" style="{{item.textStyle}}">
         <icon class='chose-icon' type="{{item.checked?'success':'circle'}}" color="#ccaa77" size="18" />
         <text>{{item.goodsName}}</text>
+        <view class='del-btn' bindtap='del' data-index="{{index}}" data-id="{{item.goodsId}}">删除</view>
       </view>
       <view class='line-border'></view>
-      <view class='del-btn' bindtap='del' data-index="{{index}}" data-id="{{item.goodsId}}">删除</view>
+      
     </view>
     <view style='height:400rpx;'></view>
   </scroll-view>

@@ -2,6 +2,7 @@
 page{
   font-size: 28rpx;
   color: #333;
+  padding-bottom:10rpx;
 }
 /* common */
 .padding-box{
@@ -13,6 +14,11 @@ page{
   align-items: center;
 
 }
+.flex-between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 /* ENDcommon */
 .nav-box{
   display: flex;
@@ -21,6 +27,7 @@ page{
   align-items: center;
   background: #fff;
   margin-bottom: 20rpx;
+  padding:0 60rpx;
 }
 .nav-item{
   height: 77rpx;
@@ -41,24 +48,28 @@ page{
 }
 .item-title{
   display: flex;
-  height: 100rpx;
+  height: 120rpx;
   align-items: center;
   justify-content: space-between;
+  font-size: 36rpx;
+  font-weight: 600;
 }
   .com-name-box{
-    max-width: 320rpx;
+    max-width: 330rpx;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
   }
   .cloud-icon{
-    height: 60rpx;
-    width: 60rpx;
-    margin-right: 10rpx;
+    height: 40rpx;
+    width: 40rpx;
+    margin-right: 15rpx;
   }
   .right-icon{
-    height: 50rpx;
-    width: 50rpx;
+    height: 40rpx;
+    width: 40rpx;
+    margin-left:10rpx;
   }
   .type-chunk{
     height: 40rpx;
@@ -74,6 +85,14 @@ page{
     color: #ca7;
   }
 
+  /* 新货物 */
+  .new-goods-box{
+    padding: 0 50rpx 12rpx;
+    position: relative;
+  }
+    .new-goods-box .goods-item{padding-bottom: 38rpx;display: flex;justify-content: space-between;font-size: 26rpx;color: #666;}
+    .goods-item-goodsname{width: 70%;}
+    
   /* 货物 */
   .goods-box{
     background: #f7f7f7;
@@ -142,6 +161,8 @@ page{
     text-align: right; 
     font-size: 26rpx;
     box-sizing: border-box;
+    font-weight: 600;
+    border-top: 1rpx solid #eeeeee; 
   }  
 
   .gold-font{
@@ -150,7 +171,7 @@ page{
   .gray-color{
     color: #999;
   }
-
+  .relative-box{position: relative;}
   .btn-box{
     display: flex;
     flex-direction: row-reverse;
@@ -160,20 +181,20 @@ page{
   .btn{
     height: 60rpx;
     box-sizing: border-box;
-    border: 1px solid #fff;
+    border: 1rpx solid #fff;
     text-align: center;
-    line-height: 60rpx;
+    line-height: 58rpx;
     border-radius: 10rpx;
     margin-left: 20rpx;
     font-size: 24rpx;
   }
   .cancel-btn{
-    width: 142rpx;
+    width: 160rpx;
     border-color: #ddd;
     color: #999;
   }
   .pay-btn{
-    width: 162rpx;
+    width: 160rpx;
     border-color: #ca7;
     background: #ca7;
     color: #fff;

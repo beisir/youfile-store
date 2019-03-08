@@ -177,3 +177,14 @@ export const specValCodeUrl = '/admin/shop/goods/specification/spec/value/codes'
 export const updateGooodsSkuUrl = '/admin/shop/goods/specification/sku'
 // 分类搜索
 export const searchClassUrl = '/api/shop/category/search'
+
+// 修改用户信息
+export const updateUserInfoUrl = '/api/user/update'
+// 微信信息
+export const hasSavedWXmsgUrl = '/api/weixin/user/exist'
+export const saveWXmsgUrl = '/api/weixin/user/save'
+// 解密手机
+export const getMyWXPhoneUrl = '/api/weixin/user/decrypt'
+// 门店订单 买家
+export const ftfuserSureOrderUrl = '/api/ftf/order'
+export const ftfpreOrderDetailUrl = '/admin/ftf/order/{{qrCode}}/info'

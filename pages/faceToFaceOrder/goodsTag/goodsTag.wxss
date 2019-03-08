@@ -69,7 +69,7 @@ page{
   position: absolute;
   width: 133rpx;
   top: 0;
-  right:0; 
+  right:-133rpx; 
   background: #ff4141;
   color: #fff;
   height: 98%;

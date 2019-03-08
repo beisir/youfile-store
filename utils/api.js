@@ -148,7 +148,13 @@ import {
   skuCodeUrl,
   specValCodeUrl,
   updateGooodsSkuUrl,
-  searchClassUrl
+  searchClassUrl,
+  updateUserInfoUrl,
+  hasSavedWXmsgUrl,
+  saveWXmsgUrl,
+  getMyWXPhoneUrl,
+  ftfuserSureOrderUrl,
+  ftfpreOrderDetailUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -168,6 +174,29 @@ function showToast(message) {
     duration: 3000,
   })
 }
+// 判断是否存过微信信息
+function hasSavedWXmsg(data){
+  return app.http.getRequest(hasSavedWXmsgUrl, data)
+}
+function saveWXmsg(data){
+  return app.http.postRequest(saveWXmsgUrl, data)
+}
+// 获取微信手机
+function getMyWXPhone(data){
+  return app.http.getRequest(getMyWXPhoneUrl, data, { "platAppId": app.globalData.payAppNum})
+}
+/**
+ * 门店订单
+ */
+// 用户确定订单
+function ftfuserSureOrder(data){
+  return app.http.postRequest(ftfuserSureOrderUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+// 商家预订单详情
+function ftfpreOrderDetail(data){
+  return app.http.getRequest(ftfpreOrderDetailUrl, data)
+}
+
 /**判断楼座是否为空**/
 function isFloorInfo(obj) {
   if (isNotEmpty(obj)) {
@@ -860,6 +889,10 @@ function getStoreData(data) {
 function getUserInfo(data) {
   return app.http.getRequest(getUserInfoUrl, data);
 }
+// 更新用户信息
+function updateUserInfo(data) {
+  return app.http.postRequest(updateUserInfoUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
 /**
  * 获取店铺性质
  */
@@ -908,7 +941,6 @@ function getFormId(e) {
   var content = e.detail.target.dataset.name//记录用户的操作
   wx.setStorageSync("formId", formId)
 }
-
 /**
  * 初始化storeId
  */
@@ -946,7 +978,15 @@ function getStoreId() {
     return true
   }
 }
+
+
 module.exports = {
+  ftfpreOrderDetail,
+  ftfuserSureOrder,
+  getMyWXPhone,
+  saveWXmsg,
+  hasSavedWXmsg,
+  updateUserInfo,
   storeOnlinePay,
   ftfRecentOrder,
   unpaidOrderNum,

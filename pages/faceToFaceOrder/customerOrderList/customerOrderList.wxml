@@ -1,5 +1,5 @@
 <wxs src="../../../public/filter.wxs" module="filter" />
-<login id="login"></login>
+<login id="login" closeBtnType='quit'></login>
 <!-- 取消进货单 -->
 <clo show="{{cancelModal}}">
   <view class='layer-reason-item' wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
@@ -28,10 +28,10 @@
     <navigator url="../../page/home/home" open-type='switchTab'>
       <view class='item-title padding-box'>
         <view class='flex-center'>
-          <image src="/image/12.png" class='cloud-icon'></image>
+          <image src="/image/u4.png" class='cloud-icon'></image>
           <text class='com-name-box'>{{item.storeInfo.storeName}}</text>
           <image src='/image/mallr.png' class='right-icon'></image>
-          <view class='type-chunk'>门店</view>
+          <!-- <view class='type-chunk'>门店</view> -->
         </view>
         <view class='status-text'>
           <text wx:if="{{item.orderStatus == 'unpaid'}}">待付款</text>
@@ -42,7 +42,7 @@
     </navigator>
     <!-- 货 -->
     <navigator url='../customerOrderDetail/customerOrderDetail?code={{item.orderNumber}}'>
-    <view class='goods-box'>
+    <!-- <view class='goods-box'>
       <view class='gray-layer' wx:if="{{item.orderStatus == 'canceled'}}"></view>
       <view class='goods-icon'>
         <image src='/image/default-gift.png'></image>
@@ -51,6 +51,13 @@
         <text wx:for='{{item.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key="{{index}}">{{tip.goodsName}}</text>
       </view>
       <view class='goods-price'>￥{{filter.filterMoney(item.orderAmount)}}</view>
+    </view> -->
+    <view class='new-goods-box'>
+      <view class='gray-layer' wx:if="{{item.orderStatus == 'canceled'}}"></view>
+      <view wx:for='{{item.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key="{{index}}" class='goods-item'>
+        <text class='goods-item-goodsname'>{{tip.goodsName}}</text>
+        <text>x{{tip.num}}</text>
+      </view>
     </view>
     </navigator>
     <!-- 按钮 -->

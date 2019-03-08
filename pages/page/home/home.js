@@ -3,6 +3,7 @@ import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
 import EnterStoreHandler from '../../../utils/enterStoreHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
+import { handleQRCode } from '../../../utils/scanCode.js';
 // 身份判断
 function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
@@ -237,29 +238,15 @@ Page({
   // 扫码
   addFriend: function () {
     var _this = this;
+    app.globalData.notOnshow = true
     wx.scanCode({
       success: (res) => {
-        var qrUrl = res.result
-        let options = {
-          getUserIdFromQrCode: qrUrl
-        }
-        let enEnterStoreHandler = new EnterStoreHandler("1");
-        enEnterStoreHandler.enterStore(options).then(store => {
-          if (store.storeNature == "1") {
-            var userId = store.userId
-            var storeId = store.storeId
-            _this.getUserInfor(userId, storeId)
-          }
-        }).catch(store => {
-          let userId = store.userId
-          _this.getFriendMes(userId)
-
-        });
+        handleQRCode(res.result,'home')
       },
       fail: (res) => {
         // Api.showToast("未获取用户信息！")
       },
-      complete: (res) => { }
+      complete: (res) => { app.globalData.notOnshow = false }
     })
   },
   // 获取当前登录的身份
@@ -805,7 +792,7 @@ Page({
       disLike: false,
     })
 
-    this.showStoreOrder();  //到店订单弹窗
+    // this.showStoreOrder();  //到店订单弹窗
     this.swiperItemControl()  //轮播接口
   },
 

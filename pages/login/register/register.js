@@ -32,6 +32,10 @@ Page({
       attention: !this.data.attention
     })
   },
+  // 获取用户信息
+  getWXUserInfo(data) {
+    this.register()
+  },
   register() {
     if (!this.testTel()) {
       API.showToast('请输入正确手机号码')
@@ -57,17 +61,31 @@ Page({
 
       //登录
       app.authHandler.loginByUser(obj.mobile, obj.password).then(res => {
-        //关注
-        if (this.data.attention){
-          API.likeStore();
-        }
-        //获取上一页
-        let pages = getCurrentPages();
-        let curPage = pages[pages.length - 2];
-        curPage.selectComponent("#login").closePage()
-        setTimeout(() => {
-          wx.navigateBack({})
-        }, 500)
+        wx.getUserInfo({
+          success: (res) => {
+            API.saveWXmsg({
+              avatarUrl: res.userInfo.avatarUrl,
+              gender: res.userInfo.gender,
+              nickName: res.userInfo.nickName
+            }).then(res => {
+            })
+          },
+          fail: (e) => {
+          },
+          complete: (e)=>{
+            //关注
+            if (this.data.attention) {
+              API.likeStore();
+            }
+            //获取上一页
+            let pages = getCurrentPages();
+            let curPage = pages[pages.length - 2];
+            curPage.selectComponent("#login").closePage()
+            setTimeout(() => {
+              wx.navigateBack({})
+            }, 500)
+          }
+        })
       }).catch(e => {
         API.showToast(e.data.message)
       })
@@ -183,11 +201,71 @@ Page({
       })
     })
   },
+
+  // 微信授权登录
+  getPhoneNumber(e) {
+    if (e.detail.iv && e.detail.encryptedData) {
+      wx.checkSession({
+        success: (res) => {
+          this.getMyPhone(e.detail.iv, e.detail.encryptedData, this.data.code)
+        },
+        fail: function (res) {
+          // 微信code过期
+          wx.login({
+            success: function (res) {
+              this.getMyPhone(e.detail.iv, e.detail.encryptedData, res.code)
+            },
+            fail: function (res) { },
+            complete: function (res) { },
+          })
+        },
+        complete: function (res) { },
+      })
+    }
+  },
+  switchGetPhoneWay(data) {
+    if (data.phoneNumber) {
+      this.setData({ telephone: data.phoneNumber })
+      this.getCode()
+    }  
+  },
+  // 解密手机号
+  getMyPhone(iv, encryptedData, code) {
+    let obj = {
+      iv,
+      encryptData: encryptedData,
+      jsCode: code
+    }
+    API.getMyWXPhone(obj).then(res => {
+      let data = JSON.parse(res.obj)
+      this.switchGetPhoneWay(data)
+      wx.login({
+        success: (res) => {
+          if (res.code) {
+            this.setData({
+              code: res.code
+            })
+          }
+        }
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     app.authHandler.flushTokenInfo()
+    wx.login({
+      success: (res) => {
+        if (res.code) {
+          this.setData({
+            code: res.code
+          })
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   },
 
   /**

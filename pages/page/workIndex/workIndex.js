@@ -65,6 +65,8 @@ Page({
         })
       }
     }
+    // 是否支持在线支付
+    this.getPayway()
   },
   goDerm: function() {
     wx.navigateTo({
@@ -101,6 +103,15 @@ Page({
         this.setData({
           initOrder: false
         })
+      }
+    })
+  },
+  getPayway() {
+    Api.storeOnlinePay().then(res => {
+      if (res.obj && res.obj.onlinePay) {
+        this.setData({onlinePay: true});
+      }else{
+        this.setData({ onlinePay: false });
       }
     })
   },
