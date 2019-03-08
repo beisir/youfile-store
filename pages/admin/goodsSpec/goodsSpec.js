@@ -199,7 +199,6 @@ Page({
   upTop: function () {
     var listData = this.data.listData,
       goodsSkuVOList = this.data.goodsSkuVOList
-    console.log(listData)
     this.setData({
       listData: listData.reverse()
     },function(){
