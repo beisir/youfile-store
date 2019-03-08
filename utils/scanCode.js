@@ -39,6 +39,10 @@ function handleObject(obj) {
   try{
     let arr = []
     for (let key in obj) {
+      if(key == 'q'){
+        arr.push(key + "=" + encodeURIComponent(obj[key]))
+        continue
+      }
       arr.push(key + "=" + obj[key])
     }
     return arr.join("&")
@@ -97,6 +101,7 @@ function homeBF(qrUrl) {
 }
 
 function middleBF(baseOptions){
+  console.log(baseOptions, handleObject(baseOptions))
   wx.reLaunch({
     url: '/pages/page/home/home?' + handleObject(baseOptions)
   })

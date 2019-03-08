@@ -62,8 +62,8 @@ Page({
       this.setData({ options })
     }
     // handleQRCode('http://youlife.cn?type=ftforder&storeId=S1000349&code=cb72f7974bcf233393208e31b370e91b', 'middle', { q: 'http://youlife.cn?type=ftforder&storeId=S1000349&code=cb72f7974bcf233393208e31b370e91b'})
-    handleQRCode('http://youlife.cn?type=user&userId=cbced730cc43cead0592fbdd5ef10f99', 'middle', { q: 'http://youlife.cn?type=user&userId=cbced730cc43cead0592fbdd5ef10f99'})
-    //handleQRCode(decodeURIComponent(options.q), 'middle')
+    // handleQRCode('http://youlife.cn?type=user&userId=cbced730cc43cead0592fbdd5ef10f99', 'middle', { q: 'http://youlife.cn?type=user&userId=cbced730cc43cead0592fbdd5ef10f99'})
+    handleQRCode(decodeURIComponent(options.q), 'middle')
   },
 
   /**
