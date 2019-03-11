@@ -64,6 +64,10 @@ function ftfOrder(urldata, entry) {
     API.toHome()
     return
   }
+  if (urldata.storeId && !wx.getStorageSync('storeId')){
+    wx.setStorageSync("storeId", urldata.storeId)
+    app.globalData.switchStore = true;
+  }
   API.ftfuserSureOrder({ qrCode: urldata.code, payType: 'online' }).then(res => {
     if (entry === 'middle') {
       wx.redirectTo({
@@ -76,7 +80,9 @@ function ftfOrder(urldata, entry) {
     }
   }).catch(e => {
     if (e.data.code === '1') {
-      API.toHome()
+      setTimeout(()=> {
+        API.toHome()
+      },1000)
     }
   })
 }

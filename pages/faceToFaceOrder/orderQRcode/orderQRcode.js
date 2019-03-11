@@ -26,11 +26,10 @@ Page({
   loadQRcode(){
     let codeData = {
       type: 'ftforder',
-      path: '/pages/faceToFaceOrder/orderQRcode/orderQRcode',
       code: this.data.code,
       storeId: this.data.order.storeId
     }
-    let url = 'https://www.youlife.net.cn/qr/?'
+    let url = 'https://www.youlife.net.cn/wholesale/qr/?'
     let arr = []
     for (let key in codeData){
       let thisdata = ""
@@ -42,6 +41,7 @@ Page({
       arr.push(key + "=" + thisdata)
     }
     url += arr.join('&')
+    console.log(url)
     // 绘制二维码
     let qrcodeWidth = this.rpx2px(300)
     this.setData({

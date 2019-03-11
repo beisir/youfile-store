@@ -276,7 +276,9 @@ Component({
       }
       if (res.access_token) {
         this.closePage()
-        API.showToast("登录成功")
+        setTimeout(()=>{
+          API.showToast("登录成功")
+        },500)
         // 存储微信信息
         this.saveWXmsg()
       }

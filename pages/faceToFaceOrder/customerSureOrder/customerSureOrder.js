@@ -22,12 +22,12 @@ Page({
       }
     })
   },
-  pay(){
-    wx.redirectTo({
+  pay() {
+    wx.navigateTo({
       url: '../../casher/casher/casher?num=' + this.data.code + '&type=ftf'
     })
   },
-  toHome(){
+  toHome() {
     API.toHome()
   },
   /**
