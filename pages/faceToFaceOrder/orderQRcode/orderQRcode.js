@@ -24,6 +24,9 @@ Page({
     })
   },
   loadQRcode(){
+    wx.showLoading({
+      title: '正在生成哦~',
+    })
     let codeData = {
       type: 'ftforder',
       code: this.data.code,
@@ -56,6 +59,7 @@ Page({
       correctLevel: QRCode.CorrectLevel.H
     }, url => {
       this.setData({ url: url })
+      wx.hideLoading()
     });
   },
   /**

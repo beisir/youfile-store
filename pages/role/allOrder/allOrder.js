@@ -285,6 +285,11 @@ Page({
         orderName: '供货单'
       })
     }
+    if (options.num.substring(6, 8) == '04'){
+      wx.redirectTo({
+        url: '../../faceToFaceOrder/shopkeeperDetail/shopkeeperDetail?code=' + options.num,
+      })
+    }
     this.setData({
       // status: options.status,
       num: options.num,

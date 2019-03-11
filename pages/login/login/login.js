@@ -276,9 +276,7 @@ Component({
       }
       if (res.access_token) {
         this.closePage()
-        setTimeout(()=>{
-          API.showToast("登录成功")
-        },500)
+        API.showToast("登录成功")
         // 存储微信信息
         this.saveWXmsg()
       }
@@ -308,8 +306,10 @@ Component({
     refreshPage() {
       let pages = getCurrentPages();
       let curPage = pages[pages.length - 1];
-      curPage.onLoad();
-      curPage.onShow();
+      setTimeout(() => {
+        curPage.onLoad();
+        curPage.onShow();
+      }, 800)
     },
     //显示隐藏密码
     showHide() {

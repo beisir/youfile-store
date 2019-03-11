@@ -176,14 +176,14 @@ function showToast(message) {
 }
 // 判断是否存过微信信息
 function hasSavedWXmsg(data){
-  return app.http.getRequest(hasSavedWXmsgUrl, data)
+  return app.http.getRequest(hasSavedWXmsgUrl, data, {}, true)
 }
 function saveWXmsg(data){
-  return app.http.postRequest(saveWXmsgUrl, data)
+  return app.http.postRequest(saveWXmsgUrl, data, {}, true)
 }
 // 获取微信手机
 function getMyWXPhone(data){
-  return app.http.getRequest(getMyWXPhoneUrl, data, { "platAppId": app.globalData.payAppNum})
+  return app.http.getRequest(getMyWXPhoneUrl, data, { "platAppId": app.globalData.payAppNum}, true)
 }
 /**
  * 门店订单
@@ -491,7 +491,7 @@ function deteleLikeStore(data) {
 }
 /**关注店铺**/
 function likeStore(data) {
-  return app.http.putRequest(likeStoreUrl+'?storeId='+wx.getStorageSync('storeId'))
+  return app.http.putRequest(likeStoreUrl+'?storeId='+wx.getStorageSync('storeId'), {}, {}, true)
 }
 /**店铺信息**/
 function shopList(data) {
