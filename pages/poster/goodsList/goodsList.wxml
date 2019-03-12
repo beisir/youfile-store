@@ -3,9 +3,9 @@
     <view class='flex-between search-box-own '>
       <view class='flex-center'>
         <image class='search-icon-own' src='/image/search.png'></image>
-        <input type='text'></input>
+        <input class='search-input-own' placeholder='输入商品名称' placeholder-class='input-placeholder-common-color' type='text' value=''></input>
       </view>
-      <view>
+      <view class='search-close-box'>
         <image class='search-icon-own' src='/image/close.png'></image>
       </view>
     </view>

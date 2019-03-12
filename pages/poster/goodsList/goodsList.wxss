@@ -3,6 +3,7 @@
 .flex-center{display: flex;align-items: center;}
 .search-own{padding: 20rpx 0;}
 .search-icon-own{width: 30rpx;height: 30rpx;}
+.search-input-own{margin-left: 30rpx;font-size: 28rpx;}
 .list-search-box{height: 100rpx;}
 .search-box-own{flex:1;margin-right:20rpx;height: 100rpx;background: #fff;padding: 0 30rpx 0 40rpx;border-radius: 10rpx;}
 .search-btn{width: 100rpx;font-weight: 600;text-align: center;font-size: 28rpx;}
@@ -25,4 +26,4 @@
 /* 底部按钮 */
 .bottom-btn-box{position: fixed;height: 120rpx;background: #fff;bottom: 0;width: 100%;display: flex;justify-content: space-around;align-items: center;}
 .btn-line{width: 2rpx;height: 30rpx;background: #ddd;}
-.button-type{width: 200rpx;text-align: center;color: #ca7;font-size: 36rpx;}
+.button-type{width: 374rpx;text-align: center;color: #ca7;font-size: 36rpx;}

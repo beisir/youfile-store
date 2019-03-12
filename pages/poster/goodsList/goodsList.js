@@ -63,6 +63,12 @@ Page({
     let goodsindex = e.currentTarget.dataset.goodsindex,
       imgindex = e.currentTarget.dataset.index,
       item = e.currentTarget.dataset.item;
+    let imgarr = this.data.goods[goodsindex].img;
+
+    const checkedarr = imgarr.filter(el => el.checked)
+    if (checkedarr.length == 1 && imgarr[imgindex].checked == true){
+      return
+    }
     this.setData({
       ['goods[' + goodsindex + '].img[' + imgindex + '].checked']: !item.checked
     })
