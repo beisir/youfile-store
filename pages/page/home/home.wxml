@@ -201,7 +201,7 @@
     <scroll-view scroll-y="true" style="height:100%;">
       <view class='flex-boxx'>
         <view class="result-list" wx:for="{{result}}" wx:key="index" id='{{index==0?"result-list":""}}'>
-          <view wx:if='{{item.isHide}}'  class='isHideGoods'>
+          <view wx:if='{{item.isHide}}' class='isHideGoods'>
             <image src="/image/isshow.png"></image>
             <view>该商品</view>
             <view>加商友可见</view>
@@ -213,6 +213,17 @@
                   <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small " mode="widthFix"></image>
                 </view>
               </view>
+              <view class="result-text">
+                <text>{{item.name}}</text>
+              </view>
+              <view class="result-text result-text1">
+                零售
+                <text class='h-font'>￥ {{item.sellPrice}}</text>
+                <view>
+                  批发
+                  <image src='/image/wh.png'></image>
+                </view>
+              </view>
             </block>
             <block wx:if='{{!item.isHide}}'>
               <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
@@ -220,21 +231,21 @@
                   <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small " mode="widthFix"></image>
                 </view>
               </navigator>
-            </block>
-            <view class="result-text">
-              <text data-id='{{item.id}}' bindtap='lookDetails'>{{item.name}}</text>
-            </view>
-            <view class="result-text result-text1">
-              零售
-              <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
-              <view>
-                批发
-                <text wx:if='{{limitShow!=1}}' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.wholesalePrice}}</text>
-                <image wx:if='{{limitShow==1}}' bindtap='addWholesalePrice' src='/image/wh.png'></image>
-                <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
-                <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" />
+              <view class="result-text">
+                <text data-id='{{item.id}}' bindtap='lookDetails'>{{item.name}}</text>
               </view>
-            </view>
+              <view class="result-text result-text1">
+                零售
+                <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                <view>
+                  批发
+                  <text wx:if='{{limitShow!=1}}' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.wholesalePrice}}</text>
+                  <image wx:if='{{limitShow==1}}' bindtap='addWholesalePrice' src='/image/wh.png'></image>
+                  <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
+                  <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" />
+                </view>
+              </view>
+            </block>
           </view>
         </view>
       </view>
