@@ -41,38 +41,40 @@
     <image src='/image/order-per.png' class="user-icon"></image>
     <text class='username-box'>客户名称：{{order.userInfo.nickName}}</text>
   </view>
-  <view>{{order.userInfo.mobile}}</view>
+  <view class='userphone-box'>买家电话：{{order.userInfo.mobile}}</view>
 </view>
 <!-- 按钮 -->
-<view class='mid-btn padding-box'>
-  <view class='flex-center'>
-    <image src='/image/mes.png' class='btn-icon'></image>
-    <text>联系买家</text>
+<view class='white-box'>
+  <view class='mid-btn'>
+    <view class='flex-center'>
+      <image src='/image/mes.png' class='btn-icon'></image>
+      <text>联系买家</text>
+    </view>
+    <view class='btn-line'></view>
+    <view class='flex-center' bindtap='call'>
+      <image src='/image/tel1.png' class='btn-icon'></image>
+      <text>拨打电话</text>
+    </view>
+    <view class='btn-line'></view>
+    <navigator url="../../businessFriend/merchant/lookInfo/lookInfo?userId={{order.userInfo.userId}}&mobile={{order.userInfo.mobile}}&entry=faceOrder">
+      <view class='flex-center'>
+        <image src='/image/role.png' class='btn-icon'></image>
+        <text>客户资料</text>
+      </view>
+    </navigator>
   </view>
-  <view class='btn-line'></view>
-  <view class='flex-center' bindtap='call'>
-    <image src='/image/tel1.png' class='btn-icon'></image>
-    <text>拨打电话</text>
-  </view>
-  <view class='btn-line'></view>
-  <navigator url="../../businessFriend/merchant/lookInfo/lookInfo?userId={{order.userInfo.userId}}&mobile={{order.userInfo.mobile}}&entry=faceOrder">
-  <view class='flex-center'>
-    <image src='/image/role.png' class='btn-icon'></image>
-    <text>客户资料</text>
-  </view>
-  </navigator>
 </view>
 <!-- 货 -->
 <view class='goods-detail-box'>
-  <view class='item-title padding-box'>
+  <view class='item-title padding-box' bindtap='toHome'>
     <view class='flex-center'>
-      <image src="/image/12.png" class='cloud-icon'></image>
+      <image src="/image/u4.png" class='cloud-icon'></image>
       <text class='com-name-box'>{{order.storeInfo.storeName}}</text>
       <image src='/image/mallr.png' class='right-icon'></image>
-      <view class='type-chunk'>门店</view>
+      <!-- <view class='type-chunk'>门店</view> -->
     </view>
   </view>
-  <view class='goods-box'>
+  <!-- <view class='goods-box'>
     <view class='gray-layer' wx:if="{{item.type == 'cancelled'}}"></view>
     <view class='goods-icon'>
       <image src='/image/default-gift.png'></image>
@@ -84,10 +86,28 @@
       <view class='shopkeeper-tip'>备注：{{order.remark}}</view>
     </view>
     <view class='goods-price gold-font'>￥{{filter.filterMoney(order.orderAmount)}}</view>
+  </view> -->
+  <view class='new-goods-box'>
+    <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
+    <view wx:for='{{order.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key="{{index}}" class='goods-item'>
+      <text class='goods-item-goodsname'>{{tip.goodsName}}</text>
+      <text>x{{tip.num}}</text>
+    </view>
   </view>
+  <!-- 备注 -->
+  <view class='dashed-border padding-box'><view wx:for='[1,1,1,1,1,1,1,1,1,1]' wx:key='{{item}}'></view></view>
+  <view class='padding-box relative-box' wx:if="{{order.remark}}">
+    <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
+    <view class='remark-box'>
+      <view class='msg-title'>备注</view>
+      <view class='remark-detail'>{{order.remark}}</view>
+    </view>
+  </view>
+
 </view>
 <!-- 订单号 -->
-<view class='msg-list-box padding-box'>
+<view class='msg-list-box padding-box relative-box'>
+  <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
   <view class='msg-item'>
     <text class='msg-title'>订单号</text>
     <text class='msg-detail' bindtap='copyCode'>{{order.orderNumber}}</text>
@@ -123,25 +143,25 @@
     </view>
   </block>
 </view>
-<view class='border-line'></view>
+<view class='border-line'><view></view></view>
 <view class='msg-list-box padding-box'>
-  <view class='msg-item'>
+  <view class='msg-item pay-price-title'>
     <text class='msg-title'>支付方式</text>
-    <text class='msg-detail'>在线支付</text>
+    <text class='msg-detail font-bold'>在线支付</text>
   </view>
 </view>
 
 <!-- 价格 -->
 <view class='msg-list-box padding-box' style='margin:20rpx 0 0;'>
-  <view class='msg-item'>
-    <text class='msg-title'>订单金额</text>
-    <text class='msg-detail gold-font'>￥{{filter.filterMoney(order.orderAmount)}}</text>
+  <view class='msg-item pay-price-title'>
+    <text class='msg-title font-bold'>订单金额</text>
+    <text class='msg-detail'>￥{{filter.filterMoney(order.orderAmount)}}</text>
   </view>
   <!-- <view class='msg-item'>
     <text class='msg-title'>红包礼金</text>
     <text class='msg-detail gray-color'>-￥0.00</text>
   </view> -->
-  <view class='msg-item'>
+  <view class='msg-item font-bold'>
     <text class='pay-price-title' wx:if="{{order.orderStatus == 'finish'}}">实收金额</text>
     <text class='pay-price-title' wx:else>应收金额</text>
     <text class='msg-detail pay-price'>￥{{filter.filterMoney(order.payAmount)}}</text>
@@ -151,7 +171,7 @@
 <!-- 底部按钮 -->
 <block wx:if="{{order.orderStatus == 'unpaid'}}">
   <view style='padding:70rpx;'></view>
-  <view class='bottom-btn-box padding-box' >
+  <view class='bottom-btn-box padding-box'>
     <!-- <view class='btn pay-btn'>提醒付款</view> -->
     <view bindtap='showModal' data-type="close" class='btn cancel-btn'>取消订单</view>
   </view>

@@ -8,7 +8,7 @@
 <!-- 删除模板-->
 <mes show="{{unsetTemp}}">
   <view>
-    <text>确认删除？</text>
+    <text>确定删除该模板？</text>
     <button bindtap='confirmDetele'>确定</button>
   </view>
 </mes>
@@ -22,7 +22,7 @@
 <!-- 删除规格-->
 <mes show="{{deteleVo}}">
   <view>
-    <text>确认删除？</text>
+    <text>确定删除该规格组？</text>
     <button bindtap='conDeleteAttrc'>确定</button>
   </view>
 </mes>
@@ -42,8 +42,8 @@
 </spec>
 <!-- 提示已经了规格值 -->
 <spec show="{{haveSpecShow}}">
-  <view class='spec-title'>提示</view>
-  <view class='spec-title-c'>已有两个规格，是否替换！</view>
+  <view class='spec-title'>确定使用该规格模板？</view>
+  <view class='spec-title-c'>确定后，原有设置的规格信息将会被情况</view>
   <view class='spec-view' bindtap='cancelSpec'>取消</view>
   <view class="spec-view spec-view-ac spec-view-active" bindtap='conNewSpec'>确定</view>
 </spec>
@@ -61,7 +61,7 @@
         {{twoItem.specName}}
         <image src="/image/editSpec.png" data-name="{{twoItem.specName}}" data-id="{{twoItem.id}}" bindtap='editSpecName'></image>
         <image wx:if='{{index==1}}' class='img' data-id="{{twoItem.id}}" bindtap='upTop' src="/image/ups.png"></image>
-        <image data-id='{{twoItem.id}}'  bindtap='deleteAttrc' src="/image/sImg.png"></image>
+        <image data-id='{{twoItem.id}}' wx:if='{{oneItem.specificationTemplateContentVOList.length>1}}'  bindtap='deleteAttrc' src="/image/sImg.png"></image>
       </view>
       <view class='sp-button'>
         <view  wx:for='{{twoItem.specValueNameList}}' data-name="{{twoItem.specName}}" data-index='{{index}}'  wx:key='{{index}}' data-id="{{twoItem.id}}"  bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" bindlongtap="bingLongTap" bindtap="bindTap" class="{{item.sClick ||item.haveSelected ?'act':''}}"  data-havesku='{{item.haveSelected}}'>
@@ -69,7 +69,7 @@
           <text  wx:if='{{item.selected}}' data-index='{{index}}' data-name="{{twoItem.specName}}" data-id="{{twoItem.id}}" catchtap='operationBind'>删除</text>
           <image wx:if='{{item.selected}}' src="/image/downs.png"></image>
         </view>
-        <view class='active'  bindtap='addSpecValue' data-index='{{index}}' data-id="{{twoItem.id}}">.</view>
+        <view class='active'  bindtap='addSpecValue' wx:if='{{twoItem.specValueNameList.length<50}}' data-index='{{index}}' data-id="{{twoItem.id}}">.</view>
       </view>
     </view>
     <view class='sp-add' wx:if='{{oneItem.specificationTemplateContentVOList.length<2 || oneItem.specificationTemplateContentVOList==null}}' bindtap='addAttrc'>
@@ -78,7 +78,7 @@
   </view>
 </view>
 <view class='add-bottom add-bottom1'>
-  <view bindtap='updateTemplate'>更新模板</view>
+  <view bindtap='updateTemplate'>更新模板名称</view>
   <view bindtap='unsetSpec'>删除模板</view>
   <view bindtap='goback'>确定</view>
 </view>

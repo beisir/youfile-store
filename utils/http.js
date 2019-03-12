@@ -20,26 +20,26 @@ class request {
   /**
    * PUT类型的网络请求
    */
-  putRequest(url, data, header) {
-    return this.requestAll(url, data, 'PUT', header)
+  putRequest(url, data, header, hideLoading) {
+    return this.requestAll(url, data, 'PUT', header, hideLoading)
   }
   /**
    * GET类型的网络请求
    */
-  getRequest(url, data, header) {
-    return this.requestAll(url, data, 'GET', header)
+  getRequest(url, data, header, hideLoading) {
+    return this.requestAll(url, data, 'GET', header, hideLoading)
   }
   /**
    * DELETE类型的网络请求
    */
-  deleteRequest(url, data, header) {
-    return this.requestAll(url, data, 'DELETE', header)
+  deleteRequest(url, data, header, hideLoading) {
+    return this.requestAll(url, data, 'DELETE', header, hideLoading)
   }
   /**
    * POST类型的网络请求
    */
-  postRequest(url, data, header) {
-    return this.requestAll(url, data, 'POST', header)
+  postRequest(url, data, header, hideLoading) {
+    return this.requestAll(url, data, 'POST', header, hideLoading)
   }
   /**
    * 解析URL
@@ -53,11 +53,14 @@ class request {
   /**
    * 网络请求
    */
-  requestAll(url, data, method, customHeader) {
+  requestAll(url, data, method, customHeader, hideLoading) {
     wx.showNavigationBarLoading()
-    wx.showLoading({
-      title: "正在加载",
-    })
+    if (!hideLoading){
+      wx.showLoading({
+        title: "正在加载",
+      })
+    }
+    
     return new Promise((resolve, reject) => {
       url = this.analysisUrl(url, data);
       var header = (customHeader === undefined || customHeader == null || customHeader == "") ? this.defaultHeader : customHeader;
@@ -119,7 +122,9 @@ class request {
             reject(res)
           }),
           complete: function() {
-            wx.hideLoading()
+            if (!hideLoading) {
+              wx.hideLoading()
+            }
             wx.hideNavigationBarLoading()
           }
         })

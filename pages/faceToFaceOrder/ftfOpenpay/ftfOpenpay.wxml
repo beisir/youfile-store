@@ -1,0 +1,38 @@
+<view class='title-box'>
+  <image class='backimg' src='/image/openpay-back.png'></image>
+  <view class='ftf-font single-line'>面对面 帮TA下单</view>
+  <view class='ftf-font2 single-line'>手机轻松完成快速收款</view>
+</view>
+<view class='s-title-box'>
+  <image class='title-icon' src='/image/openpay-l.png'></image>
+  <text class='single-line'>产品亮点</text>
+  <image class='title-icon' src='/image/openpay-r.png'></image>
+</view>
+<view class='intro-box'>
+  <image class='intro-line' src='/image/openpay-line.png'></image>
+  <view class='intro-item' style='left:152rpx;top:44rpx;'>
+    <image class='intro-icon' src='/image/openpay-icon1.png'></image>
+    <view class='intro-tite single-line' style='left:157rpx;'>商家一键生成门店订单</view>
+    <view class='intro-detail single-line' style='left:157rpx;top:48rpx;'>快速帮TA生成门店订</view>
+    <view class='intro-detail single-line' style='left:157rpx;top:80rpx;'>单，方便快捷</view>
+  </view>
+
+  <view class='intro-item' style='left:118rpx;top:253rpx;'>
+    <image class='intro-icon' style="left:359rpx;" src='/image/openpay-icon2.png'></image>
+    <view class='intro-tite single-line' style='top:13rpx;'>顾客门店快捷购</view>
+    <view class='intro-detail single-line' style='top:61rpx;'>顾客扫码即付，化繁为简</view>
+  </view>
+
+  <view class='intro-item' style='left:152rpx;top:463rpx;'>
+    <image class='intro-icon' src='/image/openpay-icon3.png'></image>
+    <view class='intro-tite single-line' style='left:157rpx;top:13rpx;'>记录你的顾客买买买</view>
+    <view class='intro-detail single-line' style='left:157rpx;top:61rpx;'>记录老客户的每一笔消费</view>
+  </view>
+
+  <view class='intro-item' style='left:118rpx;top:675rpx;'>
+    <image class='intro-icon' style="left:359rpx;" src='/image/openpay-icon4.png'></image>
+    <view class='intro-tite single-line' style='top:13rpx;'>支付平台资金安全保障</view>
+    <view class='intro-detail single-line' style='top:61rpx;'>隔天到账，账单清晰</view>
+  </view>
+</view>
+<button class='open-btn' bindtap='call'>立即开通在线支付</button>

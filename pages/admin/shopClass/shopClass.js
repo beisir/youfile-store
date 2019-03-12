@@ -59,7 +59,10 @@ Page({
     const index = e.currentTarget.dataset.index;
     let dataList = this.data.dataList;
     const selected = dataList[index].selected;
-    dataList[index].selected = !selected;
+    for (var v of dataList) {
+      v.selected=false
+    }
+    dataList[index].selected = true;
     this.setData({
       dataList: dataList
     });
@@ -146,12 +149,11 @@ Page({
           icon: 'none',
           duration: 2000,
         })
-      } else {
-        this.setData({
-          value: value.substring(0, 10),
-          watchInput: true,
-        })
       }
+      this.setData({
+        value: value.substring(0, 10),
+        watchInput: true,
+      })
     }
   },
   /**

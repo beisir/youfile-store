@@ -13,6 +13,31 @@ Page({
     tag: [],  //标签
     baseUrl: app.globalData.imageUrl
   },
+  // 加减器
+  changeNum(e){
+    let type = e.currentTarget.dataset.type,
+        item = e.currentTarget.dataset.item,
+        tags = this.data.tag;
+
+    tags.forEach((el, index)=> {
+      if (el.goodsId === item.goodsId){
+        if(type==='add') {
+          if (el.num == 9999) {
+            API.showToast("数量最多9999个")
+            return
+          }
+          el.num++
+        } else {
+          el.num--
+        }
+        
+        if(el.num <= 0){
+          tags.splice(index,1)
+        }
+      }
+    })
+    this.setData({tag:tags})    
+  },
   watchInput(e){
     let type = e.currentTarget.dataset.type,
         val = e.detail.value,
@@ -37,6 +62,48 @@ Page({
       case "tip":
         obj.tip = val;
       break;
+      case "goodsnum":
+        let item = e.currentTarget.dataset.item
+        let arr = this.data.tag;
+        if ( val>0 && val<9999){
+          arr.forEach(el=>{
+            if (el.goodsId === item.goodsId){
+              el.num = val
+            }
+          })
+          obj.tag = arr
+        }else if(val > 9999){
+          arr.forEach(el => {
+            if (el.goodsId === item.goodsId) {
+              el.num = 9999
+            }
+          })
+          obj.tag = arr
+        } else if (val <= 0 && val!=""){
+          arr.forEach((el,index) => {
+            if (el.goodsId === item.goodsId) {
+              arr.splice(index, 1)
+              this.setData({inputFocus:false})
+            }
+          })
+          obj.tag = arr
+        }
+      break;
+    }
+    this.setData(obj)
+  },
+  goodsnumInit(e){
+    let item = e.currentTarget.dataset.item
+    let arr = this.data.tag
+    let val = e.detail.value
+    let obj = {}
+    if (val === ''){
+      arr.forEach((el, index) => {
+        if (el.goodsId === item.goodsId) {
+          el.num = 1
+        }
+      })
+      obj.tag = arr
     }
     this.setData(obj)
   },
@@ -70,9 +137,13 @@ Page({
     if(tag.length > 0){
       let strarr = [];
       tag.forEach(el=>{
-        strarr.push(el.goodsId);
+        let obj = {
+          num: el.num,
+          goodsId: el.goodsId
+        }
+        strarr.push(obj);
       })
-      str = "?tag=" + strarr.join(',')
+      str = "?tag=" + JSON.stringify(strarr)
     }
     wx.navigateTo({
       url: '../goodsTag/goodsTag'+str,
@@ -114,7 +185,6 @@ Page({
       storeId: this.data.storeId,
       orderAmount: this.data.money,
       remark: this.data.sureTip,
-      customerUserNo: this.data.userId,
       faceToFaceOrderDetailVOList: this.data.tag
     };
     app.http.postRequest("/admin/ftf/order",obj).then(res=>{
@@ -122,29 +192,20 @@ Page({
       if(res.code == '0'){
         setTimeout(() => {
           wx.redirectTo({
-            url: '../createSuccess/createSuccess?code=' + res.obj.orderNumber + "&amount=" + res.obj.orderAmount + "&count=" + res.obj.todayOrderCount,
+            url: '../orderQRcode/orderQRcode?code=' + res.obj
           })
         }, 800)
       }
-    })
-  },
-  //获取用户
-  getUser(){
-    API.newUserInfor({ userId: this.data.userId }).then(res=>{
-      this.setData({
-        user:res.obj
-      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     this.setData({
-      userId: options.user,
       storeId: wx.getStorageSync('storeId')
     })  
-    this.getUser()
   },
 
   /**

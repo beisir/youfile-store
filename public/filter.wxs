@@ -56,11 +56,19 @@ var filterOrderNum = function (num) {
   }
 }
 
+var hideTelephone = function (tel) {
+  if(tel) {
+    return tel.substring(0, 3) + "****" + tel.substring(7);
+  }
+  return tel
+} 
+
 module.exports = {
   filterMoney: filterMoney,
   plusNum: plusNum,
   filterTime: filterTime,
   filterNull: filterNull,
   my_slice: my_slice,
-  filterOrderNum: filterOrderNum
+  filterOrderNum: filterOrderNum,
+  hideTelephone: hideTelephone
 }

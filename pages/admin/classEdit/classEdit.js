@@ -12,7 +12,8 @@ Page({
     numSle:0,
     code:'',
     watchInput:true,
-    value:''
+    value:'',
+    show1:false
   },
 
   /**
@@ -144,26 +145,35 @@ Page({
   },
   // detele
   removeFun:function(){
-    var _this=this,
-        list=this.data.list,
-        codes=[],
-        listNew=[]
+    this.setData({
+      show1:true
+    })
+  },
+  confirmFun:function(){
+    var _this = this,
+      list = this.data.list,
+      codes = [],
+      listNew = []
     for (var i = 0; i < list.length; i++) {
-      if (list[i].selected){
+      if (list[i].selected) {
         codes.push(list[i].customCategoryCode)
-      }else{
+      } else {
         listNew.push(list[i])
       }
     }
     _this.setData({
       list: listNew
     })
-    app.http.postRequest('/admin/shop/customcategory/delete/batch/{{storeId}}',codes)
+    app.http.postRequest('/admin/shop/customcategory/delete/batch/{{storeId}}', codes)
       .then(res => {
         wx.showToast({
           title: '删除成功',
           icon: 'none',
           duration: 2000
+        })
+        _this.setData({
+          show1:false,
+          numSle:0
         })
       })
   },

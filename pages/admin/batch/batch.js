@@ -92,7 +92,7 @@ Page({
   addClass:function(){
     var code = this.data.setCode
     if(code.length==0){
-      Api.showToast("请选择分类！")
+      Api.showToast("请选择商品！")
     }else{
       wx.navigateTo({
         url: '../shopClass/shopClass?code=' + code,

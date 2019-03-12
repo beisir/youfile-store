@@ -1,25 +1,25 @@
 //  pages/faceToFaceOrder/goodsTag/goodsTag.js
 const API = require("../../../utils/api.js")
-const app=getApp()
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    editModal:false,
-    delBtnWidth:133,
-    name:"",
-    list:[],
-    editText:""
+    editModal: false,
+    delBtnWidth: 133,
+    name: "",
+    list: [],
+    editText: ""
   },
-  clickTag(e){
-    
+  clickTag(e) {
+
     let index = e.currentTarget.dataset.index;
-    let key = "list["+index+"].checked";
+    let key = "list[" + index + "].checked";
 
     //最多六个
-    if (!this.data.list[index].checked){
+    if (!this.data.list[index].checked) {
       let arr = [];
       this.data.list.forEach(el => {
         if (el.checked) {
@@ -37,26 +37,26 @@ Page({
     })
   },
   // 左滑删除
-  touchS(e){
-    if (e.touches.length == 1){
+  touchS(e) {
+    if (e.touches.length == 1) {
       this.setData({
         //设置触摸起始点水平方向位置
         startX: e.touches[0].clientX
       });
     }
   },
-  touchM(e){
-    if(e.touches.length == 1){
+  touchM(e) {
+    if (e.touches.length == 1) {
       let moveX = e.touches[0].clientX,
-          disX = this.data.startX - moveX,
-          delBtn = this.data.delBtnWidth,
-          textStyle = "";
-      if(disX == 0 || disX < 0){
+        disX = this.data.startX - moveX,
+        delBtn = this.data.delBtnWidth,
+        textStyle = "";
+      if (disX == 0 || disX < 0) {
         textStyle = "left:0rpx";
-      } else if(disX > 0){
-        textStyle = "left:-"+ disX +"rpx";
-        
-        if (disX >= delBtn){
+      } else if (disX > 0) {
+        textStyle = "left:-" + disX + "rpx";
+
+        if (disX >= delBtn) {
           textStyle = "left:-" + delBtn + "rpx";
         }
       }
@@ -64,32 +64,32 @@ Page({
       let index = e.currentTarget.dataset.index;
       this.setData({
         ["list[" + index + "].textStyle"]: textStyle
-      })    
+      })
     }
   },
-  touchE(e){
+  touchE(e) {
     let endX = e.changedTouches[0].clientX,
       disX = this.data.startX - endX,
       delBtn = this.data.delBtnWidth,
       textStyle = "";
 
-    textStyle = disX > delBtn / 2 ? "left:-" + delBtn +"rpx":"left=0rpx";
+    textStyle = disX > delBtn / 2 ? "left:-" + delBtn + "rpx" : "left=0rpx";
 
     let index = e.currentTarget.dataset.index;
     this.setData({
       ["list[" + index + "].textStyle"]: textStyle
-    })    
+    })
   },
-  getGoodsName(e){
+  getGoodsName(e) {
     this.setData({
-      name:e.detail.value
-    })  
+      name: e.detail.value
+    })
   },
   // 删除
-  del(e){
+  del(e) {
     let id = e.currentTarget.dataset.id,
-        index = e.currentTarget.dataset.index;
-    API.ftfDelGoods({ goodsId: id}).then(res=>{
+      index = e.currentTarget.dataset.index;
+    API.ftfDelGoods({ goodsId: id }).then(res => {
       let arr = this.data.list;
       arr.splice(index, 1)
       this.setData({
@@ -98,17 +98,21 @@ Page({
     })
   },
   // 添加
-  addTip(){
+  addTip() {
+    if (this.data.list.length >= 99) {
+      API.showToast('最多创建99个商品')
+      return
+    }
     let val = this.data.name.trim();
-    
-    if(val){
+
+    if (val) {
       wx.showLoading({
         title: '添加中'
       })
-      API.ftfCreatGoods({goodsName:val}).then(res=>{
+      API.ftfCreatGoods({ goodsName: val }).then(res => {
         wx.hideLoading()
         let goods = res.obj;
-
+        goods.num = 1
         //最多六个
         let checkedArr = [];
         this.data.list.forEach(el => {
@@ -118,7 +122,7 @@ Page({
         })
         if (checkedArr.length >= 6) {
           goods.checked = false;
-        }else{
+        } else {
           goods.checked = true;
         }
 
@@ -134,51 +138,51 @@ Page({
     }
   },
   // 编辑
-  editGoods(e){
+  editGoods(e) {
     let name = e.currentTarget.dataset.name,
-        nowId = e.currentTarget.dataset.id;
+      nowId = e.currentTarget.dataset.id;
     this.setData({
-      editModal:true,
-      editText:name,
+      editModal: true,
+      editText: name,
       nowId,
-    })  
-  },
-  editInput(e){
-    this.setData({
-      editText : e.detail.value
     })
   },
-  saveTip(){
+  editInput(e) {
+    this.setData({
+      editText: e.detail.value
+    })
+  },
+  saveTip() {
     let val = this.data.editText.trim();
-    if(val){
-      API.ftfEditGoods({ goodsName: val, goodsId: this.data.nowId}).then(res=>{
+    if (val) {
+      API.ftfEditGoods({ goodsName: val, goodsId: this.data.nowId }).then(res => {
         this.setData({
           editModal: false,
           editText: ""
         })
         let arr = this.data.list;
 
-        for(let el of arr){
+        for (let el of arr) {
           if (el.goodsId == this.data.nowId) {
             el.goodsName = val;
             break;
           }
         }
         this.setData({
-          list : arr
+          list: arr
         })
       })
-    }else{
+    } else {
       API.showToast('请填写新名称')
     }
   },
 
 
   //确认
-  sure(){
+  sure() {
     let arr = [];
-    this.data.list.forEach(el=>{
-      if (el.checked){
+    this.data.list.forEach(el => {
+      if (el.checked) {
         arr.push(el)
       }
     })
@@ -192,13 +196,14 @@ Page({
     }
   },
   //复选
-  recheck(){
+  recheck() {
     let arr = this.data.list;
     let checkedArr = this.data.checked;
-    arr.forEach(el=>{
-      checkedArr.every(item=>{
-        if (el.goodsId == item){
+    arr.forEach(el => {
+      checkedArr.every(item => {
+        if (el.goodsId == item.goodsId) {
           el.checked = true
+          el.num = item.num
           return false
         }
         return true
@@ -211,16 +216,17 @@ Page({
       checked: ""
     })
   },
-  getList(){
-    API.ftfGoodsList().then(res=>{
+  getList() {
+    API.ftfGoodsList().then(res => {
       let list = res.obj;
-      if(list){
-        list.forEach(el=>{
+      if (list) {
+        list.forEach(el => {
           el.checked = false
+          el.num = 1
         })
-        this.setData({list})
+        this.setData({ list })
 
-        if (this.data.checked){
+        if (this.data.checked) {
           this.recheck()
         }
 
@@ -231,9 +237,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if (options.tag){
+    if (options.tag) {
       this.setData({
-        checked: options.tag.split(",")
+        checked: JSON.parse(options.tag)
       })
     }
     this.setData({

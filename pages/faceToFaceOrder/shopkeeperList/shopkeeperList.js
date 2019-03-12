@@ -9,12 +9,7 @@ Page({
     nav: [{ name: "全部", type: "all", checked: true }, { name: "待付款", type: "unpaid", checked: false }, { name: "已完成", type: "finish", checked: false }],
     searchText:"",
     listType:"all",
-    list: [{
-      name: "我的你",
-      type: "cancelled",
-      price: 102220,
-      icon: "/image/cloudStoreIcon.png",
-    }],
+    list: [],
     reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他原因", selected: false }],
     cancelIndex:0
 

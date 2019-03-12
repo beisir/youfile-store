@@ -4,7 +4,7 @@
   bind:sureSelectArea="sureSelectAreaListener"
 >
   <view class='spec-title'>起批件数<view>设置后，所有上架商品起批量自动同步</view></view>
-  <input placeholder-class='spec-class' type='number'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入起批数量' />
+  <input placeholder-class='spec-class' type='number' maxlength='4'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入起批数量' />
   <view class='spec-view' bindtap='cancel'>取消</view><view  class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm'>确定</view>
 </spec>
 <!-- 混批 -->

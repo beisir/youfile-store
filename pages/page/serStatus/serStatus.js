@@ -8,7 +8,7 @@ Page({
     baseUrl: app.globalData.imageUrl,
     result: [],
     value: '',
-    limitShow: wx.getStorageSync('admin'),
+    limitShow: '',
     showResult: false,
     closeCont: false,
   },
@@ -129,6 +129,11 @@ Page({
         });
       }
     });
+  },
+  onShow(){
+    this.setData({
+      limitShow:wx.getStorageSync('admin')
+    })
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

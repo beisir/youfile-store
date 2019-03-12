@@ -13,6 +13,10 @@ Page({
     reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他原因", selected: false }],
     cancelIndex: 0
   },
+  // 返回首页
+  toHome() {
+    API.toHome()
+  },
   //复制订单号
   copyCode() {
     wx.setClipboardData({

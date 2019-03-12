@@ -1,7 +1,7 @@
 <!-- 删除规格-->
 <mes show="{{deteleVo}}">
   <view>
-    <text>确认删除？</text>
+    <text>确定删除该规格组？</text>
     <button bindtap='conDeleteAttrc'>确定</button>
   </view>
 </mes>
@@ -24,14 +24,15 @@
   <view class='spec-title'>批量设置价格/库存
     <view class='gs-tip'>您可以只设定价格或只设定库存</view>
   </view>
-  <input class='spec-input spec-input1' value='{{changePriceVal}}' bindinput='changePrice' bindblur='focuPrice' placeholder-class='spec-class spec-class1' placeholder='统一输入批发价' />
-  <input class='spec-input spec-input1' value='{{changeSellVal}}' bindinput='changeSell' bindblur='focuSell' placeholder-class='spec-class spec-class1' placeholder='统一输入零售价' />
-  <input class='spec-input spec-input1' value='{{changeStockVal}}' bindinput='changeStock' bindblur='focuStock' placeholder-class='spec-class spec-class1' placeholder='统一输入库存' type='number' maxlength='4' />
+  <input class='spec-input spec-input1' value='{{changePriceVal}}' bindinput='changePrice' placeholder-class='spec-class spec-class1' placeholder='统一输入批发价' />
+  <input class='spec-input spec-input1' value='{{changeSellVal}}' bindinput='changeSell'  placeholder-class='spec-class spec-class1' placeholder='统一输入零售价' />
+  <input class='spec-input spec-input1' value='{{changeStockVal}}' bindinput='changeStock' placeholder-class='spec-class spec-class1' placeholder='统一输入库存' type='number' maxlength='4' />
   <view class='spec-view' bindtap='cancel'>取消</view>
   <view class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirmSet'>确定</view>
 </spec>
 <!-- 弹框结束 -->
 <view class='spec-c'>
+  <view class='last-num' bindtap='goAlertSpec'>共{{resNum}}个</view>
   <view bindtap='goAlertSpec' class='gs-title'>
     <view class='gs-right'></view>
     <view>选择规格模板</view>
@@ -43,11 +44,11 @@
         {{twoItem.specName}}
         <image src="/image/editSpec.png" data-index='{{index}}' data-name="{{twoItem.specName}}" bindtap='editSpecName'></image>
         <image wx:if='{{index==1}}' class='img' bindtap='upTop' src="/image/ups.png"></image>
-        <image wx:if='{{twoItem.goodsSpecificationValueVOList.length>0}}' data-index='{{index}}' bindtap='deleteAttrc' src="/image/sImg.png"></image>
+        <image wx:if='{{listData.length>1}}' data-index='{{index}}' bindtap='deleteAttrc' src="/image/sImg.png"></image>
       </view>
       <view class='sp-button'>
-        <view class='active' bindtap='addSpecValue' data-index='{{index}}'>.</view>
-        <view wx:for='{{twoItem.goodsSpecificationValueVOList}}' data-index='{{index}}' data-name="{{twoItem.specName}}" wx:key='{{index}}' bindlongtap="bingLongTap" class="{{item.sClick?'act':''}}">
+        <view class='active' bindtap='addSpecValue' wx:if='{{twoItem.goodsSpecificationValueVOList.length<50}}' data-index='{{index}}'>.</view>
+        <view wx:for='{{twoItem.goodsSpecificationValueVOList}}' data-index='{{index}}' data-name="{{twoItem.specName}}"  bindtouchstart="bindTouchStart" bindtouchend="bindTouchEnd" wx:key='{{index}}' bindlongtap="bingLongTap"  bindtap="bindTap"  class="{{item.sClick?'act':''}}">
           {{item.specValueName}}
           <text wx:if='{{item.selected}}' data-index='{{index}}' data-name="{{twoItem.specName}}" catchtap='operationBind'>删除</text>
           <image wx:if='{{item.selected}}' src="/image/downs.png"></image>
@@ -67,7 +68,7 @@
   <block wx:else>
     <view class='gv-comp'>
       <view bindtap='unifiedSet'>批发价 | 零售价 | 库存
-        <view>批量设置</view>
+        <view><image class='write' src="/image/write.png"></image>批量设置</view>
       </view>
       <view>
         <image src="/image/ca1.png"></image>默认对顾客展示价格为，最低零售价与对应的批发价</view>
@@ -77,13 +78,13 @@
         </view>
         <view>
           <view>
-            <input maxlength='8' bindinput='monitor'  bindblur='focuMonitor' data-index='{{index}}' data-name='wholesalePrice' value='{{item.wholesalePrice}}' placeholder='输入批发价'></input>
+            <input maxlength='8' bindinput='monitor'  data-index='{{index}}' data-name='wholesalePrice' value='{{item.wholesalePrice}}' placeholder='输入批发价'></input>
           </view>
           <view>
-            <input maxlength='8' bindinput='monitor'  bindblur='focuMonitor' data-index='{{index}}' data-name='sellPrice' value='{{item.sellPrice}}' placeholder='输入零售价'></input>
+            <input maxlength='8' bindinput='monitor' data-index='{{index}}' data-name='sellPrice' value='{{item.sellPrice}}' placeholder='输入零售价'></input>
           </view>
           <view>
-            <input type='number' bindinput='monitor'  bindblur='focuMonitor' data-index='{{index}}' data-name='stockNum' maxlength='8' value='{{item.stockNum}}' placeholder='输入库存'></input>
+            <input type='number' bindinput='monitor'  data-index='{{index}}' data-name='stockNum' maxlength='4' value='{{item.stockNum}}' placeholder='输入库存'></input>
           </view>
         </view>
       </view>

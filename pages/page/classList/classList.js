@@ -10,6 +10,13 @@ Page({
     baseUrl: app.globalData.imageUrl,
     allCode:false
   },
+  // 查看资料
+  addTip: function () {
+    var Id = Api.getThisStoreId()
+    wx.navigateTo({
+      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

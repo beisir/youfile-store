@@ -1,15 +1,12 @@
-@import '../set/set.wxss';
-.input-box{
-  display: flex;
-  align-items: center;
-  height: 100rpx;  
-  padding:0 35rpx;
-  font-size:30rpx;
-}
-.input-box input{
-  font-size:28rpx;
-  padding-top:2rpx;
-}
-.input-box>view{
-  width: 170rpx;
-}
+page{background: #fff;}
+.padding-box{padding-left: 50rpx;padding-right: 50rpx;padding-top: 50rpx;}
+.flex-between{display: flex;justify-content: space-between;align-items: center;}
+.flex-center{display: flex;align-items: center;}
+.code-icon{width: 27rpx;height:31rpx;margin-right: 20rpx;}
+.code-input-box{height: 99rpx; border-bottom: 1rpx solid #ddd;}
+.code-btn{border: 1rpx solid #ddd;height: 98rpx;width: 198rpx;color: #ca7;font-size: 30rpx;text-align: center;line-height: 98rpx;padding: 0;margin: 0;background: #fff;border-radius: 0;}
+.pass-input{border-bottom: 1rpx solid #ddd;height: 100rpx; box-sizing: border-box;}
+.common-margin{margin-bottom: 25rpx;}
+.change-btn{width: 100%;background: #ca7;color: #fff;font-size: 34rpx;height: 100rpx;
+line-height: 100rpx;letter-spacing: 15rpx;margin-top: 170rpx;}
+.c-input{font-size: 30rpx;}
