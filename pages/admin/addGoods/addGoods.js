@@ -52,12 +52,14 @@ Page({
   },
   confirmMes:function(){
     this.setData({
-      show1:false
+      show1:false,
+      showTale: false
     })
   },
   tipMes:function(){
     this.setData({
-      show1:true
+      show1:true,
+      showTale: true
     })
   },
   // 删除商品图

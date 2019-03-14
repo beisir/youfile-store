@@ -16,7 +16,6 @@ App({
   onLaunch: function (options) {
     //跳转进入的入口
     this.navigate.parseExtraDataOnlunch(options)
-
     if (options.query && options.query.storeId){
       wx.setStorageSync("storeId",options.query.storeId)
     }

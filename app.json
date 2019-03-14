@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/admin/status/status",
     "pages/page/navigateMiddleware/navigateMiddleware",
     "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
@@ -33,7 +34,6 @@
     "pages/faceToFaceOrder/shopkeeperDetail/shopkeeperDetail",
     "pages/faceToFaceOrder/createSuccess/createSuccess",
     "pages/admin/addGoods/addGoods",
-    "pages/admin/status/status",
     "pages/cloudOrder/webInitStore/webInitStore",
     "pages/businessFriend/merchant/dealUser/dealUser",
     "pages/capital/haveRecord/haveRecord",
