@@ -20,10 +20,10 @@
         <image mode='aspectFit' class='goods-icon' src='/image/search.png'></image>
       </view>
       <view class='goods-msg-box'>
-        <view class='goods-name'>周大福 赵丽颖赵丽颖陪伴款颖火虫赵丽颖陪伴款颖火虫陪伴款颖火虫</view>
+        <view class='goods-name'>{{item.name}}</view>
         <view>
-          <view class='goods-price'>批发价:￥1500</view>
-          <view class='goods-price'>零售价:￥1800</view>
+          <view class='goods-price'>批发价:￥{{item.wholesalePrice}}</view>
+          <view class='goods-price'>零售价:￥{{item.sellPrice}}</view>
         </view>
       </view>
     </view>
@@ -41,5 +41,5 @@
 <view class='bottom-btn-box'>
   <view class='button-type'>已选择{{checkedLength}}</view>
   <view class='btn-line'></view>
-  <view class='button-type'>确定</view>
+  <view class='button-type' bindtap='sureGoods'>确定</view>
 </view>

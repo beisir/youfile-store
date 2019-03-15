@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "商品海报库",
-  "usingComponents": {}
+  "usingComponents": {
+    "tips": "/assembly/tips/tips"
+  }
 }

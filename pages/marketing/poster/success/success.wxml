@@ -1,3 +1,14 @@
-<view>
-  
+<view class='flex-between all-box'>
+  <view bindtap='pre' class='icon-box' style='padding-left:30rpx;'><image class='tri-icon' src='/image/poster-left.png'></image></view>
+  <swiper class='img-box' bindchange='changeImg' current='{{current}}'>
+    <swiper-item class='item' wx:for='{{img}}' wx:key='{{index}}'><image src='{{item.src}}'></image></swiper-item>
+  </swiper>
+  <view bindtap='next' class='icon-box' style='padding-right:30rpx;justify-content:flex-end;'><image class='tri-icon' src='/image/poster-right.png'></image></view>
+</view>
+<view class='imgnum'>{{current+1}}/{{img.length}}</view>
+
+<view class='bottom-btn flex-between'>
+  <view class='b-btn' bindtap='downLoadImg'><image src='/image/download-gold.png' style='width:36rpx;height:30rpx;margin-right:15rpx;'></image><text>下载到相册</text></view>
+  <view class='btn-line'></view>
+  <view class='b-btn' bindtap='toOtherStoreroom'><image src='/image/in-gold.png' style='width:34rpx;height:35rpx;margin-right:15rpx;'></image><text>放入海报库</text></view>
 </view>

@@ -28,16 +28,16 @@
 </tips>
 
 <view class='box'>
-  <view class='chose-goods-box common-box flex-between'>
+  <navigator url='../goodsList/goodsList' class='chose-goods-box common-box flex-between'>
     <view class='flex-center'>
       <image class='goods-icon' src='/image/goods-bag.png'></image>
       <text class='title-font'>选择商品</text>
     </view>
     <view class='flex-center'>
-      <text class='gray-color' style='margin-right:20rpx;font-size:30rpx;'>已选择</text>
+      <text wx:if='{{goods}}' class='gray-color' style='margin-right:20rpx;font-size:30rpx;'>已选择</text>
       <image class='right-icon' src='/image/poster-right-in.png'></image>
     </view>
-  </view>
+  </navigator>
 
   <view class='common-box module-box'>
     <view class='module-title'>选择模板</view>
@@ -49,10 +49,10 @@
         <view class='inline' wx:for='{{moduleList}}' wx:key="{{index}}" bindtap='checkimg' data-index='{{index}}'>
           <view class='module-item'>
             <view class='img-box'>
-              <image class='module-img' src='{{item.img}}'></image>
+              <image class='module-img' src='{{item.posterExamplePath}}'></image>
               <image hidden='{{!item.checked}}' class='check-icon' src='/image/checked-right.png'></image>
             </view>
-            <text>{{item.name}}</text>
+            <text>{{item.posterName}}</text>
           </view>
         </view>
       </scroll-view>
@@ -71,7 +71,7 @@
     </view>
   </view>
 
-  <view class='des-box flex-between common-box' bindtap='showModal' data-type='title'>
+  <view wx:if='{{goods}}' class='des-box flex-between common-box' bindtap='showModal' data-type='title'>
     <view class='flex-center des-main-box'>
       <image class='des-title-icon' src='/image/poster-title.png'></image>
       <view style='flex:1;'>
@@ -82,7 +82,7 @@
     <image class='right-icon' src='/image/poster-right-in.png'></image>
   </view>
 
-  <view class='des-box flex-between common-box' bindtap='showModal' data-type='des' style='margin-bottom:120rpx;'>
+  <view wx:if='{{goods}}' class='des-box flex-between common-box' bindtap='showModal' data-type='des' style='margin-bottom:120rpx;'>
     <view class='flex-center des-main-box'>
       <image class='des-title-icon' src='/image/poster-des.png'></image>
       <view style='flex:1;'>

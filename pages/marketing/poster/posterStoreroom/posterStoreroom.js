@@ -1,26 +1,51 @@
 // pages/marketing/poster/posterStoreroom/posterStoreroom.js
+import API from '../../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    storeroom:[{
-      name: '精品你们v转给',
-      num: 5,
-      img: [{ src: '/image/openpay-icon4.png' }, { src: '/image/openpay-icon4.png' }, { src: '/image/openpay-icon4.png' }, { src: '/image/openpay-icon4.png' }, { src: '/image/openpay-icon4.png' }]
-    }, {
-        name: '精品你们v转给',
-        num: 2,
-        img: []
-      }]
+    storeroom:[],
+    creatModal: false,
+    newName:''
   },
-
+  // 获取专辑列表
+  getStore(){
+    API.getPosterTagList({ posterNum: 4}).then(res=> {
+      this.setData({storeroom: res.obj})
+    })
+  },
+  // 添加专辑
+  createshow(){
+    this.setData({ newName:'',creatModal: true})
+  },
+  inputNewName(e){
+    let val = e.detail.value
+    this.setData({ newName: val})
+  },
+  addStore(){
+    let val = this.data.newName;
+    if (val.length > 0) {
+      API.addPosterTag({ name: val }).then(res => {
+        API.showToast(res.message)
+        this.closeModal()
+        setTimeout(()=>{
+          this.getStore()
+        },800)
+      })
+    }
+  }, 
+  closeModal(){
+    this.setData({
+      creatModal: false
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getStore()
   },
 
   /**

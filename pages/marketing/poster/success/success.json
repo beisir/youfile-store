@@ -1,3 +1,4 @@
 {
-  "usingComponents": {}
+  "usingComponents": {"layer": "/assembly/layer/layer"},
+  "navigationBarTitleText": "商品码海报"
 }

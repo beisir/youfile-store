@@ -6,10 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    img: [{ src: 'https://dev-image.youlife.me/goods/f0559389-514b-4a5c-bbae-65c0a84d6d48.jpg' }, { src: '/image/openpay-icon4.png' }, { src: '/image/openpay-icon4.png' }, { src: 'https://dev-image.youlife.me/goods/239b9aa9-4af5-4614-8295-0ef658188ead.jpg'}],
+    img: [],
     edit: false,
     storeroomModul:false,
-    roomList:[]
+    roomList:[],
+    totalCount: 0
   },
  
   // 选择模板
@@ -96,16 +97,15 @@ Page({
 
   },
   getRoom() {
-    let arr = [{
-      name: '精品女装',
-      checked: false
-    }]
-
-    arr.unshift({
-      name: '放入默认专辑',
-      checked: true
+    API.getPosterTagList({ posterNum: 4 }).then(res => {
+      let arr = res.obj;
+      arr.unshift({
+        name: '放入默认专辑',
+        checked: true
+      })
+      this.setData({ roomList: arr })
     })
-    this.setData({ roomList: arr })
+    
   },
   // 选择专辑
   check_room(e) {
@@ -130,6 +130,18 @@ Page({
     })
     this.closeModal()
   },
+  // 详情
+  getDetail(){
+    API.getPosterTagDetail({ tagCode: this.data.code }).then(res => {
+      let arr = res.obj.result
+      this.setData({ totalCount: res.obj.totalCount, img: res.obj.result})
+    })
+  },
+  // 下页
+  nextpage(){
+    if (this.data.img.length == 0){return}
+    this.getDetail()
+  },
   /**
    *公用 
    */
@@ -142,7 +154,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({ code:'GP10000016'})
     this.getRoom()
+    this.getDetail()
   },
 
   /**

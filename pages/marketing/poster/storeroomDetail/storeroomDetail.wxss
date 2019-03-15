@@ -28,3 +28,5 @@
 
 .room-checked-icon{width: 40rpx;height: 40rpx;margin-right: 40rpx;}
 .room-item{height: 80rpx;font-size: 36rpx;}
+
+.next-icon{width: 92rpx;height: 92rpx;position: fixed;right: 40rpx;bottom: 77rpx;}

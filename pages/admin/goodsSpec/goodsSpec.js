@@ -544,7 +544,7 @@ Page({
         Api.showToast("零售价不能为空！")
         return
       }
-      if (v.stockNum == 0 && Api.isNotEmpty(v.stockNum)) {
+      if (v.stockNum == 0 && Api.isNotEmpty((v.stockNum).toString())) {
         Api.showToast("库存不得低于0")
         return
       }

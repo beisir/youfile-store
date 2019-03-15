@@ -33,11 +33,22 @@ Page({
   create_poster(){
 
   },
+  // 获取商品详情
+  getGoodsDetail() {
+    API.adminGetDetails({ goodsId: this.data.goodsId }).then(res => {
+      this.setData({
+        goods: res.obj,
+        sureTitleVal: res.obj.name,
+        sureDesVal: res.obj.recommendDesc
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({ goodsId: options.goodsId,checkedarr:[]})
+    this.getGoodsDetail()
   },
 
   /**

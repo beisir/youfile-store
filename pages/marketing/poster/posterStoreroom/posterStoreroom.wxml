@@ -1,5 +1,16 @@
+<tips show='{{creatModal}}'>
+  <text style='line-height:1;'>创建新专辑</text>
+  <view class='showmodal'>
+    <input class='modal-input' maxlength='15' value='{{newName}}' bindinput='inputNewName'></input>
+    <view class='btn-group'>
+      <button class='cancel-btn' bindtap='closeModal'>取消</button>
+      <button bindtap='addStore' class='{{newName.length==0?"noabled-btn":""}}'>确定</button>
+    </view>
+  </view>
+</tips>
+
 <view class='box'>
-  <view class='chose-goods-box common-box flex-between'>
+  <view class='chose-goods-box common-box flex-between'bindtap='createshow'>
     <view class='flex-center'>
       <image class='goods-icon' src='/image/goods-bag.png'></image>
       <text class='title-font'>创建新专辑</text>
@@ -7,13 +18,13 @@
     <image class='right-icon' src='/image/poster-right-in.png'></image>
   </view>
   <!-- 仓库 -->
-  <view class='common-box storeroom-item' wx:for='{{storeroom}}' wx:key='{{index}}'>
+  <navigator url='../storeroomDetail/storeroomDetail?code={{item.code}}' class='common-box storeroom-item' wx:for='{{storeroom}}' wx:key='{{index}}'>
     <view class='storeroom-title'>{{item.name}} · 共{{item.num}}张</view>
     <view class='all-img-box' wx:if='{{item.img.length > 0}}'>
       <view wx:for='{{item.img}}' wx:for-index='imgIndex' wx:key='{{imgIndex}}' wx:for-item='img' wx:if="{{imgIndex<4}}" class='show-img-box'>
         <image src='{{img.src}}'></image>
       </view>
     </view>
-  </view>
+  </navigator>
 </view>  
-<view class='red-btn'>一键生成海报</view>
+<navigator url='../prePoster/prePoster' class='red-btn'>一键生成海报</navigator>

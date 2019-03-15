@@ -85,7 +85,7 @@
 .page__new .weui-cell2{border-bottom: 2rpx solid #EDEDED;margin-left: 40rpx;padding-bottom: 0}
 .page__new .weui-cell1:last-child{border-bottom: 0}
 .change-num{color: #999;font-size: 28rpx;width: 100%;text-align: right;padding-bottom: 15rpx}
-.weui-input1{font-size: 32rpx;color: #333;width: 95%;margin-left: 5%;height: 70rpx}
+.weui-input1{font-size: 32rpx;color: #333;width: 95%;margin-left: 5%;}
 .weui-cell1_new{padding-bottom: 20rpx;}
 .weui-input1{min-height: 80rpx;}
 .font-color{font-size:32rpx;text-align: left;padding:30rpx;}

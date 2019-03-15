@@ -155,6 +155,15 @@ import {
   getMyWXPhoneUrl,
   ftfuserSureOrderUrl,
   ftfpreOrderDetailUrl,
+  posterModuleListUrl,
+  addPosterTagUrl,
+  getPosterTagListUrl,
+  delPosterTagUrl,
+  updatePosterTagNameUrl,
+  getPosterTagDetailUrl,
+  delPosterArrUrl,
+  toOtherPosterTagUrl,
+  delAllPosterUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -979,8 +988,50 @@ function getStoreId() {
   }
 }
 
+/**
+ *海报 
+*/
+function posterModuleList(data){
+  return app.http.getRequest(posterModuleListUrl,data)
+}
+// 专辑
+function addPosterTag(data){  // 添加专辑
+  data = initStoreId(data);
+  return app.http.putRequest(addPosterTagUrl,data)
+}
+function getPosterTagList(data){  // 专辑列表
+  return app.http.getRequest(getPosterTagListUrl, data)
+}
+function delPosterTag(data){  // 删除
+  return app.http.deleteRequest(delPosterTagUrl, data)
+}
+function updatePosterTagName(data){ // 更换名字
+  return app.http.postRequest(updatePosterTagNameUrl, data)
+}
+function getPosterTagDetail(data){  // 详情
+  return app.pageRequest.pageGet(getPosterTagDetailUrl, data)
+}
+function delPosterArr(data){  // 批量删除
+  return app.http.deleteRequest(delPosterArrUrl, data)
+}
+function toOtherPosterTag(data){
+
+}
+function delAllPoster(data){  // 全删
+  return app.http.deleteRequest(delAllPosterUrl, data)
+}
+
 
 module.exports = {
+  getPosterTagDetail,
+  delPosterArr,
+  toOtherPosterTag,
+  delAllPoster,
+  addPosterTag,
+  getPosterTagList,
+  delPosterTag,
+  updatePosterTagName,
+  posterModuleList,
   ftfpreOrderDetail,
   ftfuserSureOrder,
   getMyWXPhone,

@@ -1,4 +1,6 @@
 // pages/poster/goodsList/goodsList.js
+import API from '../../../../utils/api.js'
+const app = getApp()
 Page({
 
   /**
@@ -54,7 +56,7 @@ Page({
         if(!el.checked){
           // 未选
           el.checked = true
-          el.img[0].checked = true
+          // el.img[0].checked = true
           this.setData({
             nowChecked: el
           })
@@ -62,9 +64,9 @@ Page({
         }
       } else {
         el.checked = false
-        el.img.forEach(ii => {
-          ii.checked = false
-        })
+        // el.img.forEach(ii => {
+        //   ii.checked = false
+        // })
       }
     })
 
@@ -90,11 +92,27 @@ Page({
     this.setData({ checkedLength: newimgarr.filter(el => el.checked).length })
 
   },
+  getGoodsList(){
+    API.shopList({
+      keyword: '',
+      sortType: 'multiple'
+    }).then(res=>{
+      this.setData({ goods: res.obj.result})
+    })
+  },
+  sureGoods(){
+    let arr = this.data.goods.filter(el=> el.checked)
+    if(arr.length == 0){ API.showToast('请选择商品');return}
+    let pages = getCurrentPages()
+    let prepage = pages[pages.length-2]
+    prepage && prepage.choseGoods ? prepage.choseGoods(arr[0]):''
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    app.pageRequest.pageDataIndex.pageNum =0
+    this.getGoodsList()
   },
 
   /**

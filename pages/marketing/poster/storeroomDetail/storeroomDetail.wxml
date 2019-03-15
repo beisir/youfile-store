@@ -18,7 +18,7 @@
   <view wx:if="{{!edit}}" class='title-box flex-between'>
     <view class='flex-center'> 
       <text class='title-font'>精品女装</text>
-      <text class='img-num-text'>共12张</text>
+      <text class='img-num-text'>共{{totalCount}}张</text>
     </view>
     <view class='flex-center'>
       <image style='width:37rpx;height:36rpx;margin-right:50rpx;' src='/image/sRe.png'></image>
@@ -49,3 +49,5 @@
   <view class='btn-line'></view>
   <button>删除海报</button>
 </view>
+
+<image hidden='{{edit}}' class='next-icon' bindtap='nextpage' src='/image/nextpage-gold.png'></image>

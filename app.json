@@ -1,14 +1,14 @@
 {
   "pages": [
-    "pages/page/poster/poster",
     "pages/marketing/poster/prePoster/prePoster",
-    "pages/marketing/poster/success/success",
     "pages/page/home/home",
-    "pages/marketing/poster/choseGoodsimg/choseGoodsimg",
-    "pages/admin/status/status",
     "pages/marketing/poster/storeroomDetail/storeroomDetail",
     "pages/marketing/poster/posterStoreroom/posterStoreroom",
     "pages/marketing/poster/goodsList/goodsList",
+    "pages/marketing/poster/success/success",
+    "pages/page/poster/poster",
+    "pages/marketing/poster/choseGoodsimg/choseGoodsimg",
+    "pages/admin/status/status",
     "pages/page/navigateMiddleware/navigateMiddleware",
     "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
