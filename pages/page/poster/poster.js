@@ -41,7 +41,7 @@ Page({
       goodsDes: '浅秋专同款女装针浅秋专柜同款女装针织连衣裙浅秋专柜同款女装针织连衣裙秋冬季新品羊毛圆领撞色优雅木耳边厚浅秋专柜同款女装',
       goodsImg: 'https://dev-image.youlife.me/goods/41050839-567f-4b74-8065-efe1c25ed0f0.jpg?x-oss-process=style/general',
       storeName: '深秋',
-      qrcode: '/image/poster-qrcode.jpg'
+      qrcode: 'https://dev-image.youlife.me/goods/41050839-567f-4b74-8065-efe1c25ed0f0.jpg?x-oss-process=style/general'
     });
 
     this.setData({ posterConfig: obj },()=>{

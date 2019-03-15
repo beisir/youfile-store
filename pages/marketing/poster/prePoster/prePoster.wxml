@@ -1,0 +1,96 @@
+<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" style="z-index:100;"></poster>
+
+<tips show='{{titleModal}}'>
+  <text style='line-height:1;'>标题</text>
+  <view class='showmodal'>
+    <view class='textarea-box'>
+      <textarea fixed='true' maxlength='55' bindinput='watchInput' data-type='title'></textarea>
+      <view class='layer-num'>{{titleVal.length}}/55</view>
+    </view>
+    <view class='btn-group'>
+      <button class='cancel-btn' bindtap='closeModal'>取消</button>
+      <button bindtap='sureTitle'>确定</button>
+    </view>
+  </view>
+</tips>
+<tips show='{{desModal}}'>
+  <text style='line-height:1;'>推荐心语</text>
+  <view class='showmodal'>
+    <view class='textarea-box' style='height:250rpx;'>
+      <textarea  fixed='true' maxlength='60' bindinput='watchInput' data-type='des' style='height:180rpx;'></textarea>
+      <view class='layer-num'>{{desVal.length}}/60</view>
+    </view>
+    <view class='btn-group'>
+      <button class='cancel-btn' bindtap='closeModal'>取消</button>
+      <button bindtap='sureDes'>确定</button>
+    </view>
+  </view>
+</tips>
+
+<view class='box'>
+  <view class='chose-goods-box common-box flex-between'>
+    <view class='flex-center'>
+      <image class='goods-icon' src='/image/goods-bag.png'></image>
+      <text class='title-font'>选择商品</text>
+    </view>
+    <view class='flex-center'>
+      <text class='gray-color' style='margin-right:20rpx;font-size:30rpx;'>已选择</text>
+      <image class='right-icon' src='/image/poster-right-in.png'></image>
+    </view>
+  </view>
+
+  <view class='common-box module-box'>
+    <view class='module-title'>选择模板</view>
+    <view class='mudule-item-box flex-between'>
+      <view style='margin-right:15rpx;'>
+        <image class='dir-icon' src='/image/poster-left.png'></image>
+      </view>
+      <scroll-view scroll-x scroll-y class='scroll-box' bindscroll='scrolling'>
+        <view class='inline' wx:for='{{moduleList}}' wx:key="{{index}}" bindtap='checkimg' data-index='{{index}}'>
+          <view class='module-item'>
+            <view class='img-box'>
+              <image class='module-img' src='{{item.img}}'></image>
+              <image hidden='{{!item.checked}}' class='check-icon' src='/image/checked-right.png'></image>
+            </view>
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </scroll-view>
+      <view style='margin-left:15rpx;'>
+        <image class='dir-icon' src='/image/poster-right.png'></image>
+      </view>
+    </view>
+
+    <view class='chose-goodsimg-box flex-between' bindtap='toChoseImg'>
+      <view class='flex-center'>
+        <image class='add-img-icon' src='/image/poster-img.png'></image>
+        <text style='font-size:30rpx;font-weight:600;margin-right:5rpx;'>选择更多商品图片</text>
+        <text class='gray-color' style='font-size:24rpx;'>(已选择{{checkedImg.length}}张)</text>
+      </view>
+      <image class='right-icon' src='/image/poster-right-in.png'></image>
+    </view>
+  </view>
+
+  <view class='des-box flex-between common-box' bindtap='showModal' data-type='title'>
+    <view class='flex-center des-main-box'>
+      <image class='des-title-icon' src='/image/poster-title.png'></image>
+      <view style='flex:1;'>
+        <view class='des-title-text'>标题</view>
+        <view class='des-des-text'>{{sureTitleVal}}</view>
+      </view>
+    </view>
+    <image class='right-icon' src='/image/poster-right-in.png'></image>
+  </view>
+
+  <view class='des-box flex-between common-box' bindtap='showModal' data-type='des' style='margin-bottom:120rpx;'>
+    <view class='flex-center des-main-box'>
+      <image class='des-title-icon' src='/image/poster-des.png'></image>
+      <view style='flex:1;'>
+        <view class='des-title-text'>推荐心语</view>
+        <view class='des-des-text'>{{sureDesVal?sureDesVal:'简单描述下，让顾客了解商品特点及细节~'}}</view>
+      </view>
+    </view>
+    <image class='right-icon' src='/image/poster-right-in.png'></image>
+  </view>
+  <view bindtap='create_poster' class='red-btn'>一键生成海报</view>
+</view>

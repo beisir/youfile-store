@@ -1,3 +1,17 @@
+<bottomLayer closeBtn='{{false}}' title='图文分享更方便' id='shareway' height='475' btn="取消" align='center'>
+  <view class='flex-between' style='height:100%;border-top:1rpx solid #eee;box-sizing:border-box;'>
+    <navigator class='share-item' url='../../marketing/poster/prePoster/prePoster?goodsId={{shareItem.id}}'>
+      <image src='/image/er-icon.png'></image>
+      <text>商品码海报</text>
+    </navigator>
+    <view class='share-item'>
+      <button open-type="share" data-name='{{shareItem.name}}' data-img='{{baseUrl}}{{shareItem.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{shareItem.id}}'></button>
+      <image src='/image/wx-icon.png'></image>
+      <text>微信好友</text>
+    </view>
+  </view>
+</bottomLayer>
+
 <login-component id='login' inner-text="Some text"></login-component>
 <!-- 库存提示-->
 <mes show="{{showNum}}" bind:sureSelectArea="sureSelectAreaListener">
@@ -92,8 +106,8 @@
         </view>
       </view>
       <view class='list-view list-view1'>
-        <view>
-          <button open-type="share" data-name='{{item.name}}' data-img='{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{item.id}}'></button>分享</view>
+        <view bindtap='share' data-item="{{item}}" data-id='{{item.id}}'>分享</view>
+          <!-- <button open-type="share" data-name='{{item.name}}' data-img='{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{item.id}}'></button> -->
         <view data-id='{{item.id}}' data-storeid='{{item.storeId}}' bindtap='updateSpec'>改规格</view>
         <view wx:if='{{item.status==0}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'>上架</view>
         <view wx:if='{{item.status==1}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
@@ -143,3 +157,4 @@
 </view>
 <view class='showHide showHideb' bindtap='closeShow'  hidden='{{showHideb}}'></view>
 <view class='showHide showHidet' bindtap='closeShow' hidden='{{showHidet}}'></view>
+

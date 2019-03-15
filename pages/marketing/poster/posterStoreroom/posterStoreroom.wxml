@@ -1,0 +1,19 @@
+<view class='box'>
+  <view class='chose-goods-box common-box flex-between'>
+    <view class='flex-center'>
+      <image class='goods-icon' src='/image/goods-bag.png'></image>
+      <text class='title-font'>创建新专辑</text>
+    </view>
+    <image class='right-icon' src='/image/poster-right-in.png'></image>
+  </view>
+  <!-- 仓库 -->
+  <view class='common-box storeroom-item' wx:for='{{storeroom}}' wx:key='{{index}}'>
+    <view class='storeroom-title'>{{item.name}} · 共{{item.num}}张</view>
+    <view class='all-img-box' wx:if='{{item.img.length > 0}}'>
+      <view wx:for='{{item.img}}' wx:for-index='imgIndex' wx:key='{{imgIndex}}' wx:for-item='img' wx:if="{{imgIndex<4}}" class='show-img-box'>
+        <image src='{{img.src}}'></image>
+      </view>
+    </view>
+  </view>
+</view>  
+<view class='red-btn'>一键生成海报</view>

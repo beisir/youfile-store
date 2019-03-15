@@ -3,7 +3,7 @@
     <view class='flex-between search-box-own '>
       <view class='flex-center'>
         <image class='search-icon-own' src='/image/search.png'></image>
-        <input class='search-input-own' placeholder='输入商品名称' placeholder-class='input-placeholder-common-color' type='text' value=''></input>
+        <input class='search-input-own' placeholder='输入商品名称' placeholder-class='input-placeholder-common-color' type='text' value='{{searchText}}' bindinput='searchInput'></input>
       </view>
       <view class='search-close-box'>
         <image class='search-icon-own' src='/image/close.png'></image>
@@ -39,7 +39,7 @@
   </view>
 </view>
 <view class='bottom-btn-box'>
-  <view class='button-type'>已选择</view>
+  <view class='button-type'>已选择{{checkedLength}}</view>
   <view class='btn-line'></view>
   <view class='button-type'>确定</view>
 </view>

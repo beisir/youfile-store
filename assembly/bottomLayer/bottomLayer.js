@@ -7,6 +7,22 @@ Component({
     title: {
       type: String,
       value: ''
+    },
+    height: {
+      type: Number,
+      value: "826"
+    },
+    btn: {
+      type: String,
+      value: '确定'
+    },
+    closeBtn: {
+      type: Boolean,
+      value: true
+    },
+    align: {
+      type: String,
+      value: ''
     }
   },
 
@@ -22,6 +38,7 @@ Component({
    */
   methods: {
     open(){
+      console.log(this.data.height)
       this.setData({
         bottomLayer: false
       })

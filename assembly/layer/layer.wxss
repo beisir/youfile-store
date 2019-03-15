@@ -38,11 +38,12 @@
 
 .modal-title{
   color:#333333;
-  font-size:36rpx;
+  font-size:46rpx;
   text-align:center;
   font-weight:600;
-  margin:0 auto 20rpx;
-  padding-top:60rpx;
+  margin:0 auto;
+  padding-top:40rpx;
   padding-bottom:50rpx;
-  /* border-bottom:2rpx solid #EBEBEB; */
+  line-height: 1;
 }
+.line{height: 1rpx;background: #eee;margin:0 20rpx;}

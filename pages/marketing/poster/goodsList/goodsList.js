@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    checkedLength: 0,
     goods: [{
         name: '周大福 赵丽颖赵丽颖陪伴款颖火虫赵丽颖陪伴款颖火虫陪伴款颖火虫',
         checked: false,
@@ -35,18 +36,30 @@ Page({
         }],
         id: 2
       }
-    ]
+    ],
+    searchText: ""
+  },
+  searchInput(e){
+    let val = e.detail.value
+    this.setData({ searchText: val})
+  },
+  search(){
+    
   },
   checkedGoods(e) {
     let arr = this.data.goods,
       thisItem = e.currentTarget.dataset.item;
     arr.forEach(el => {
       if (el.id === thisItem.id) {
-        el.checked = true
-        el.img[0].checked = true
-        this.setData({
-          nowChecked: el
-        })
+        if(!el.checked){
+          // 未选
+          el.checked = true
+          el.img[0].checked = true
+          this.setData({
+            nowChecked: el
+          })
+          this.setData({ checkedLength: 1})
+        }
       } else {
         el.checked = false
         el.img.forEach(ii => {
@@ -72,7 +85,9 @@ Page({
     this.setData({
       ['goods[' + goodsindex + '].img[' + imgindex + '].checked']: !item.checked
     })
-
+    // 选择数
+    let newimgarr = this.data.goods[goodsindex].img;
+    this.setData({ checkedLength: newimgarr.filter(el => el.checked).length })
 
   },
   /**

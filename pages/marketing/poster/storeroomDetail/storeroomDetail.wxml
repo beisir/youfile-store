@@ -1,0 +1,51 @@
+<layer show='{{storeroomModul}}' title='选择专辑' hasline='true'>
+  <view class='showmodal'>
+    <scroll-view scroll-y class='roomscroll'>
+      <view class='flex-center room-item {{item.checked?"gold-color":""}}' wx:for='{{roomList}}' wx:key='{{index}}' bindtap='check_room' data-index="{{index}}">
+        <image wx:if="{{!item.checked}}" class='room-checked-icon' src='/image/unchecked.png'></image>
+        <image wx:else class='room-checked-icon' src='/image/checked-gold2.png'></image>
+        <text>{{item.name}}</text>
+      </view>
+    </scroll-view>
+    <view class='btn-group'>
+      <button class='cancel-btn' bindtap='closeModal'>取消</button>
+      <button bindtap='sureRoom'>确定</button>
+    </view>
+  </view>
+</layer>
+
+<view class='box'>
+  <view wx:if="{{!edit}}" class='title-box flex-between'>
+    <view class='flex-center'> 
+      <text class='title-font'>精品女装</text>
+      <text class='img-num-text'>共12张</text>
+    </view>
+    <view class='flex-center'>
+      <image style='width:37rpx;height:36rpx;margin-right:50rpx;' src='/image/sRe.png'></image>
+      <image bindtap='startEdit' style='width:35rpx;height:35rpx;' src='/image/poster-edit.png'></image>
+    </view>
+  </view>
+  <view wx:else class='title-box flex-between'>
+    <input type='text' maxlength='15' class='title-input'></input>
+    <view class='flex-center'>
+      <text class='gold-color' style='font-size:26rpx;margin-right:30rpx;'>全部清空</text>
+      <image bindtap='endEdit' style='width:38rpx;height:38rpx;' src='/image/edit-right.png'></image>
+    </view>
+  </view>
+
+  <view class='img-box'>
+    <view class='img-item-box {{edit && item.checked?"gold-border":""}}' wx:for='{{img}}' bindtap='choseImg' data-index="{{index}}" wx:key='{{index}}'>
+      <image hidden='{{!edit || !item.checked}}' class='checked-icon' src='/image/checked-gold.png'></image>
+      <image class='img-module' mode='aspectFit' src='{{item.src}}'></image>
+    </view>
+    <view class='empty-view' wx:for="{{img.length%3==0?0:3-img.length%3}}" wx:key='{{index}}'></view>
+  </view>
+</view>
+
+<view class='bottom-btn-box' hidden='{{!edit}}'>
+  <button bindtap='downLoadImg'>下载到相册</button>
+  <view class='btn-line'></view>
+  <button bindtap='toOtherStoreroom'>移到其他专辑</button>
+  <view class='btn-line'></view>
+  <button>删除海报</button>
+</view>
