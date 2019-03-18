@@ -131,7 +131,7 @@ Page({
   },
   insertData: function (e) {
     var index = e.target.dataset.index
-    this.insertImg(1, index)
+    this.insertImg(parseInt(index)+1)
   },
   // 输入描述内容
   addTitle: function () {
@@ -199,22 +199,12 @@ Page({
     })
   },
   addImage: function () {
-    this.insertImg(0)
+    this.insertImg()
   },
-  insertImg: function (code, index) {
+  insertImg: function (index) {
     var _this = this
-    Api.uploadImage("GOODS")
+    Api.uploadImage("GOODS", true, index)
       .then(res => {
-        var data = this.data.addGoodsDetails
-        var url = JSON.parse(res).obj
-        if (code == 0) {
-          data.push({ img: _this.data.baseUrl + url })
-        } else {
-          data.splice(index, 0, { img: _this.data.baseUrl + url })
-        }
-        _this.setData({
-          addGoodsDetails: data
-        })
       })
   },
   sellPrice: function (event) {
