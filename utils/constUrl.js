@@ -192,14 +192,16 @@ export const ftfpreOrderDetailUrl = '/admin/ftf/order/{{qrCode}}/info'
  * 海报
  * */ 
 export const posterModuleListUrl = '/admin/marketing/poster/template/list/onlines'
+export const uploadPosterUrl = '/admin/marketing/poster/batch'
 // 专辑
 export const addPosterTagUrl = '/admin/marketing/poster/tag'
 export const getPosterTagListUrl = '/admin/marketing/poster/tag/'
 export const delPosterTagUrl = '/admin/marketing/poster/tag/code'
 export const updatePosterTagNameUrl = '/admin/marketing/poster/tag/name'
-
+export const getPosterTagMsgUrl = '/admin/marketing/poster/tag/{{code}}/detail'
 export const getPosterTagDetailUrl = '/admin/marketing/poster/tag/{{tagCode}}'
 export const delPosterArrUrl = '/admin/marketing/poster/batch'
 export const toOtherPosterTagUrl = '/admin/marketing/poster/tag'
 export const delAllPosterUrl = '/admin/marketing/poster/tag/poster'
+
 

@@ -1,12 +1,14 @@
 // pages/poster/prePoster/prePoster.js
 import Poster from '../../miniprogram_npm/wxa-plugin-canvas/poster/poster.js';
 import API from '../../../../utils/api.js'
+const App = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    baseUrl: App.globalData.imageUrl,
     titleModal: false,
     titleVal:'',
     desVal:'',
@@ -20,11 +22,12 @@ Page({
   toChoseImg(){
     if(!this.data.goods){API.showToast("请先选择商品");return;}
     wx.navigateTo({
-      url: '../choseGoodsimg/choseGoodsimg',
+      url: '../choseGoodsimg/choseGoodsimg?goodsId=' + this.data.goodsId + '&checkedImg=' + JSON.stringify(this.data.checkedImg),
     })
   },
   saveImg(imgarr){
-    console.log(imgarr)
+    if (imgarr.length===0){return}
+    this.setData({ checkedImg: imgarr})
   },
   showModal(e){
     let type = e.currentTarget.dataset.type,
@@ -74,6 +77,7 @@ Page({
   scrolling(e){
     console.log(e.detail)
   },
+  // 选模板
   checkimg(e){
     let thisindex = e.currentTarget.dataset.index,
         arr = this.data.moduleList;
@@ -87,20 +91,37 @@ Page({
     this.setData({
       moduleList: arr
     })
-
-
-    let bluestr = '{ "width": 750, "height": 1600, "debug": false, "backgroundColor": "white", "blocks": [{ "x": 0, "y": 0, "width": 750, "height": 426, "backgroundColor": "#f2e8e7" }], "images": [{ "x": 256, "y": 0, "height": 157, "width": 237, "url": "/image/poster-headflower.png", "zIndex": 1000 }, { "x": 226, "y": 280, "height": 7, "width": 298, "url": "/image/poster-text.png", "zIndex": 1000 }, { "x": 307, "y": 307, "height": 33, "width": 138, "url": "/image/poster-new.png", "zIndex": 1000 }, { "x": 75, "y": 482, "height": 600, "width": 600, "url": "{{goodsImg}}", "zIndex": 1000 }, { "x": 338, "y": 1432, "height": 90, "width": 91, "url": "/image/poster-flower.png", "zIndex": 1000 }, { "x": 295, "y": 1524, "height": 25, "width": 25, "url": "/image/poster-logo.png", "zIndex": 1000 }, { "x": 336, "y": 1526, "height": 21, "width": 150, "url": "/image/poster-youlife.png", "zIndex": 1000 }, { "x": 560, "y": 1177, "height": 130, "width": 130, "url": "{{qrcode}}", "zIndex": 1000 }], "texts": [{ "x": 375, "y": 250, "text": "{{storeName}}", "fontSize": {{fontSize}}, "fontWeight": "bold","width": 700, "fontFamily": "STSong", "color": "#76757f", "textAlign": "center", "zIndex": 1000 }, { "x": 56, "y": 1200, "text": "{{goodsName}}", "width": 470, "lineNum": 2, "fontSize": 27, "lineHeight": 40, "fontWeight": "bold", "fontFamily": "STSong", "color": "#333", "zIndex": 1000 }, { "x": 56, "y": 1287, "text": "{{goodsDes}}", "width": 470, "lineNum": 4, "fontSize": 27, "lineHeight": 36, "fontFamily": "STSong", "color": "#333", "zIndex": 1000 }, { "x": 563, "y": 1337, "text": "识别小程序码了解商品详情", "width": 120, "lineNum": 2, "fontSize": 20, "lineHeight": 30, "fontFamily": "STSong", "color": "#666", "zIndex": 1000 }], "lines": [] }'
-    this.setData({ modulestr: bluestr })
   },
+  // 一键创建海报
   create_poster(){
-    var obj = this.posterStrParse(this.data.modulestr, {
-      goodsName: "儿童装",
-      goodsDes: 'yuejuan',
-      goodsImg: '/image/poster-des.png',
-      storeName: '童泰',
+    if (this.data.postering){return}
+    if (!this.data.goods){
+      API.showToast("请选择商品")
+      return
+    }
+    let arr = this.data.moduleList.filter(el => el.checked)
+    if(arr.length == 0){
+      API.showToast("请选择模板")
+      return
+    }
+    if(this.data.checkedImg.length == 0){
+      API.showToast("该商品缺少商品主图，请先选择其他商品")
+      return
+    }
+    this.setData({ posterArr:false, postering: true})
+    this.canvasPoset(this.data.checkedImg[0].imageUrl)
+  },
+  // 海报配置与生成
+  canvasPoset(imgUrl){
+    let arr = this.data.moduleList.filter(el => el.checked)
+    this.setData({ templateId: arr[0].id})
+    var obj = this.posterStrParse(arr[0].posterConfig, {
+      goodsName: this.data.goods.name ? this.data.goods.name:'',
+      goodsDes: this.data.sureDesVal ? this.data.sureDesVal:'',
+      goodsImg: this.data.baseUrl + imgUrl,
+      storeName: this.data.goods.storeName ? this.data.goods.storeName:'',
       qrcode: '/image/poster-des.png'
     });
-
     this.setData({ posterConfig: obj }, () => {
       Poster.create(true);
     })
@@ -124,16 +145,26 @@ Page({
     const {
       detail
     } = e;
-    console.log(detail)
-    wx.navigateTo({
-      
-      url: '../success/success?url=' + JSON.stringify([detail, detail, detail, detail, detail, detail, detail, detail]),
-      success:()=>{
 
-      }
-    })
-
-
+    let posterarr = this.data.posterArr
+    if (posterarr){
+      posterarr.push(detail)
+    }else{
+      posterarr = [detail]
+    }
+    this.setData({ posterArr: posterarr})
+    
+    if (this.data.checkedImg.length === posterarr.length){
+      wx.navigateTo({
+        url: '../success/success?goodsId=' + this.data.goodsId + '&templateId=' + this.data.templateId +'&url=' + JSON.stringify(this.data.posterArr),
+        success: () => {
+          this.setData({ postering: false })
+        }
+      })
+    }else{
+      this.canvasPoset(this.data.checkedImg[posterarr.length].imageUrl)
+    }
+    
     this.setData({
       url: [detail]
     })
@@ -148,28 +179,41 @@ Page({
   },
   // 选择商品
   choseGoods(goods){  
-    console.log(goods)
+    this.setData({ goodsId: goods.id})
+    this.setGoodsMsg(goods)
   },  
   // 获取商品详情
   getGoodsDetail(){
     API.adminGetDetails({ goodsId: this.data.goodsId }).then(res=> {
-      let nowgoods = res.obj
-      let checkedImgArr = nowgoods.goodsImageVOList ? nowgoods.goodsImageVOList[0]:''
-      this.setData({
-        goods: nowgoods,
-        checkedImg: checkedImgArr,
-        sureTitleVal: res.obj.name,
-        sureDesVal: res.obj.recommendDesc
-      })
+      this.setGoodsMsg(res.obj)
+    })
+  },
+  setGoodsMsg(data){
+    let nowgoods = data
+    if (nowgoods.goodsImageVOList){
+      var checkedImgArr = nowgoods.goodsImageVOList.filter(el=>el.checked)
+      if (checkedImgArr.length == 0){
+        checkedImgArr = [nowgoods.goodsImageVOList[0]]
+      }
+    }
+    this.setData({
+      goods: data,
+      checkedImg: checkedImgArr,
+      sureTitleVal: data.name,
+      sureDesVal: data.recommendDesc ? data.recommendDesc : '',
+      desVal: data.recommendDesc ? data.recommendDesc : '',
+      titleVal: data.name
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({goodsId: 180929212000})
+    if (options.goodsId){
+      this.setData({ goodsId: options.goodsId })
+      this.getGoodsDetail()
+    }
     this.get_module()
-    this.getGoodsDetail()
   },
 
   /**

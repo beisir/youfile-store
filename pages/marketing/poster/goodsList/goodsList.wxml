@@ -1,15 +1,15 @@
-<view style='padding:0 30rpx 30rpx;'>
+<view style='padding:0 30rpx 200rpx;'>
   <view class='flex-between search-own'>
     <view class='flex-between search-box-own '>
       <view class='flex-center'>
         <image class='search-icon-own' src='/image/search.png'></image>
         <input class='search-input-own' placeholder='输入商品名称' placeholder-class='input-placeholder-common-color' type='text' value='{{searchText}}' bindinput='searchInput'></input>
       </view>
-      <view class='search-close-box'>
+      <view class='search-close-box' bindtap='clearSearchText'>
         <image class='search-icon-own' src='/image/close.png'></image>
       </view>
     </view>
-    <view class='search-btn'>搜索</view>
+    <view class='search-btn' bindtap='search'>搜索</view>
   </view>
 
   <view class='goods-item' wx:for="{{goods}}" wx:key="{{index}}">
@@ -17,7 +17,7 @@
       <icon wx:if="{{item.checked}}" type="success" size="40rpx" color="#CCAA77" />
       <icon wx:else type="circle" size="40rpx"/>
       <view class='goods-icon-box'>
-        <image mode='aspectFit' class='goods-icon' src='/image/search.png'></image>
+        <image mode='aspectFit' class='goods-icon' src='{{baseUrl+item.mainImgUrl}}'></image>
       </view>
       <view class='goods-msg-box'>
         <view class='goods-name'>{{item.name}}</view>
@@ -27,11 +27,11 @@
         </view>
       </view>
     </view>
-    <view class='dotted-line'><view wx:for='[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,]' wx:key="{{index}}"></view></view>
+    <view class='dotted-line' hidden='{{!item.checked}}'><view wx:for='[,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,]' wx:key="{{index}}"></view></view>
     <!-- 图片 -->
     <view class='goods-img-box' hidden='{{!item.checked}}'>
-      <view class='goods-img-item' wx:for="{{item.img}}" wx:key="{{index}}" wx:for-item='ii' wx:for-index="imgindex" bindtap='checkedImg' data-index="{{imgindex}}" data-goodsindex="{{index}}" data-item="{{ii}}">
-        <image class='' src='/image/uploadStore.png'></image>
+      <view class='goods-img-item' wx:for="{{item.goodsImageVOList}}" wx:key="{{index}}" wx:for-item='ii' wx:for-index="imgindex" bindtap='checkedImg' data-index="{{imgindex}}" data-goodsindex="{{index}}" data-item="{{ii}}">
+        <image class='' src='{{baseUrl+ii.imageUrl}}'></image>
         <image wx:if='{{ii.checked}}' class='img-chose-icon' src='/image/square-check.png'></image>
         <image wx:else class='img-chose-icon' src='/image/square-uncheck.png'></image>
       </view>

@@ -4,7 +4,7 @@
   <text style='line-height:1;'>标题</text>
   <view class='showmodal'>
     <view class='textarea-box'>
-      <textarea fixed='true' maxlength='55' bindinput='watchInput' data-type='title'></textarea>
+      <textarea fixed='true' maxlength='55' bindinput='watchInput' data-type='title' value='{{titleVal}}'></textarea>
       <view class='layer-num'>{{titleVal.length}}/55</view>
     </view>
     <view class='btn-group'>
@@ -17,7 +17,7 @@
   <text style='line-height:1;'>推荐心语</text>
   <view class='showmodal'>
     <view class='textarea-box' style='height:250rpx;'>
-      <textarea  fixed='true' maxlength='60' bindinput='watchInput' data-type='des' style='height:180rpx;'></textarea>
+      <textarea  value='{{desVal}}' fixed='true' maxlength='60' bindinput='watchInput' data-type='des' style='height:180rpx;'></textarea>
       <view class='layer-num'>{{desVal.length}}/60</view>
     </view>
     <view class='btn-group'>
@@ -76,7 +76,7 @@
       <image class='des-title-icon' src='/image/poster-title.png'></image>
       <view style='flex:1;'>
         <view class='des-title-text'>标题</view>
-        <view class='des-des-text'>{{sureTitleVal}}</view>
+        <view class='des-des-text'>{{sureTitleVal?sureTitleVal:''}}</view>
       </view>
     </view>
     <image class='right-icon' src='/image/poster-right-in.png'></image>

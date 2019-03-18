@@ -1,11 +1,11 @@
 {
   "pages": [
-    "pages/marketing/poster/prePoster/prePoster",
-    "pages/page/home/home",
-    "pages/marketing/poster/storeroomDetail/storeroomDetail",
     "pages/marketing/poster/posterStoreroom/posterStoreroom",
-    "pages/marketing/poster/goodsList/goodsList",
+    "pages/marketing/poster/prePoster/prePoster",
     "pages/marketing/poster/success/success",
+    "pages/page/home/home",
+    "pages/marketing/poster/goodsList/goodsList",
+    "pages/marketing/poster/storeroomDetail/storeroomDetail",
     "pages/page/poster/poster",
     "pages/marketing/poster/choseGoodsimg/choseGoodsimg",
     "pages/admin/status/status",

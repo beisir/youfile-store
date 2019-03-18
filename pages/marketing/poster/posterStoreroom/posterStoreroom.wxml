@@ -19,7 +19,7 @@
   </view>
   <!-- 仓库 -->
   <navigator url='../storeroomDetail/storeroomDetail?code={{item.code}}' class='common-box storeroom-item' wx:for='{{storeroom}}' wx:key='{{index}}'>
-    <view class='storeroom-title'>{{item.name}} · 共{{item.num}}张</view>
+    <view class='storeroom-title'>{{item.name}} · 共{{item.goodsPosterCount}}张</view>
     <view class='all-img-box' wx:if='{{item.img.length > 0}}'>
       <view wx:for='{{item.img}}' wx:for-index='imgIndex' wx:key='{{imgIndex}}' wx:for-item='img' wx:if="{{imgIndex<4}}" class='show-img-box'>
         <image src='{{img.src}}'></image>

@@ -7,46 +7,22 @@ Page({
    * 页面的初始数据
    */
   data: {
+    baseUrl: app.globalData.imageUrl,
     checkedLength: 0,
-    goods: [{
-        name: '周大福 赵丽颖赵丽颖陪伴款颖火虫赵丽颖陪伴款颖火虫陪伴款颖火虫',
-        checked: false,
-        img: [{
-          checked: false
-        }, {
-          checked: false
-        }, {
-          checked: false
-        }, {
-          checked: false
-        }, {
-          checked: false
-        }, {
-          checked: false
-        }],
-        id: 1
-      },
-      {
-        name: '周大福 赵丽颖赵丽颖陪伴款颖火虫赵丽颖陪伴款颖火虫陪伴款颖火虫',
-        checked: false,
-        img: [{
-          checked: false
-        }, {
-          checked: false
-        }, {
-          checked: false
-        }],
-        id: 2
-      }
-    ],
-    searchText: ""
+    goods: [],
+    searchText: "",
+    sureSearchText:''
   },
   searchInput(e){
     let val = e.detail.value
     this.setData({ searchText: val})
   },
   search(){
-    
+    this.setData({ sureSearchText: this.data.searchText})
+    this.getGoodsList(true)
+  },
+  clearSearchText(){
+    this.setData({ searchText: ''})
   },
   checkedGoods(e) {
     let arr = this.data.goods,
@@ -56,7 +32,7 @@ Page({
         if(!el.checked){
           // 未选
           el.checked = true
-          // el.img[0].checked = true
+          el.goodsImageVOList[0].checked = true
           this.setData({
             nowChecked: el
           })
@@ -64,9 +40,9 @@ Page({
         }
       } else {
         el.checked = false
-        // el.img.forEach(ii => {
-        //   ii.checked = false
-        // })
+        el.goodsImageVOList.forEach(ii => {
+          ii.checked = false
+        })
       }
     })
 
@@ -78,26 +54,34 @@ Page({
     let goodsindex = e.currentTarget.dataset.goodsindex,
       imgindex = e.currentTarget.dataset.index,
       item = e.currentTarget.dataset.item;
-    let imgarr = this.data.goods[goodsindex].img;
+    let imgarr = this.data.goods[goodsindex].goodsImageVOList;
 
     const checkedarr = imgarr.filter(el => el.checked)
     if (checkedarr.length == 1 && imgarr[imgindex].checked == true){
       return
     }
     this.setData({
-      ['goods[' + goodsindex + '].img[' + imgindex + '].checked']: !item.checked
+      ['goods[' + goodsindex + '].goodsImageVOList[' + imgindex + '].checked']: !item.checked
     })
     // 选择数
-    let newimgarr = this.data.goods[goodsindex].img;
+    let newimgarr = this.data.goods[goodsindex].goodsImageVOList;
     this.setData({ checkedLength: newimgarr.filter(el => el.checked).length })
 
   },
-  getGoodsList(){
-    API.shopList({
-      keyword: '',
-      sortType: 'multiple'
+  getGoodsList(re){
+    if(re){
+      app.pageRequest.pageData.pageNum = 0;
+      this.setData({
+        goods: []
+      })
+      this.setData({ checkedLength: 0 })
+    }
+    API.adminGoodsList({
+      storeId: wx.getStorageSync('storeId'),
+      keyword: this.data.sureSearchText,
+      containsImage: true
     }).then(res=>{
-      this.setData({ goods: res.obj.result})
+      this.setData({ goods: this.data.goods.concat(res.obj.result)})
     })
   },
   sureGoods(){
@@ -105,14 +89,16 @@ Page({
     if(arr.length == 0){ API.showToast('请选择商品');return}
     let pages = getCurrentPages()
     let prepage = pages[pages.length-2]
-    prepage && prepage.choseGoods ? prepage.choseGoods(arr[0]):''
+    if (prepage && prepage.choseGoods){
+      prepage.choseGoods(arr[0])
+      wx.navigateBack()
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    app.pageRequest.pageDataIndex.pageNum =0
-    this.getGoodsList()
+    
   },
 
   /**
@@ -126,7 +112,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getGoodsList(true)
   },
 
   /**
@@ -154,7 +140,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
+    this.getGoodsList()
   },
 
   /**

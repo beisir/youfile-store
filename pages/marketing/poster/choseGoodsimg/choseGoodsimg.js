@@ -1,11 +1,14 @@
 // pages/marketing/poster/choseGoodsimg/choseGoodsimg.js
+import API from '../../../../utils/api.js'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    img:[{},{},{},{},{},{},{},{}]
+    baseUrl: app.globalData.imageUrl,
+    img:[]
   },
   choseU(e){
     let thisindex = e.currentTarget.dataset.index;
@@ -27,6 +30,7 @@ Page({
     let prePage = pages[pages.length-2];
     if (prePage && prePage.saveImg){
       prePage.saveImg(arr)
+      wx.navigateBack()
     }
   },
   // 画海报辣
@@ -38,16 +42,25 @@ Page({
     API.adminGetDetails({ goodsId: this.data.goodsId }).then(res => {
       this.setData({
         goods: res.obj,
-        sureTitleVal: res.obj.name,
-        sureDesVal: res.obj.recommendDesc
+        img: this.recheckImg(res.obj.goodsImageVOList)
       })
     })
+  },
+  recheckImg(arr){
+    arr.forEach(el=> {
+      this.data.checkedarr.forEach(item=>{
+        if (el.id == item.id){
+          el.checked = true
+        }
+      })
+    })
+    return arr
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ goodsId: options.goodsId,checkedarr:[]})
+    this.setData({ goodsId: options.goodsId, checkedarr: JSON.parse(options.checkedImg)})
     this.getGoodsDetail()
   },
 

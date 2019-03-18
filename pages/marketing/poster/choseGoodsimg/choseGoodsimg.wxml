@@ -3,7 +3,7 @@
     <image wx:if="{{item.checked}}" class='check-icon' src='/image/checked-right.png'></image>
     <image wx:else class='check-icon' src='/image/unchecked.png'></image>
 
-    <image class='goods-img' mode='aspectFit' src='/image/wx-icon.png'></image>
+    <image class='goods-img' mode='aspectFit' src='{{baseUrl + item.imageUrl}}'></image>
   </view>
   
   <view class='empty-box' wx:for="{{img.length%3==0?0:3-img.length%3}}" wx:key="{{index}}"></view>

@@ -142,6 +142,7 @@ class request {
     wx.showNavigationBarLoading()
     wx.showLoading({
       title: "正在加载",
+      mask: true
     })
     return new Promise((resolve, reject) => {
       this.authHandler.getTokenOrRefresh().then(token => {

@@ -156,6 +156,7 @@ import {
   ftfuserSureOrderUrl,
   ftfpreOrderDetailUrl,
   posterModuleListUrl,
+  uploadPosterUrl,
   addPosterTagUrl,
   getPosterTagListUrl,
   delPosterTagUrl,
@@ -164,6 +165,7 @@ import {
   delPosterArrUrl,
   toOtherPosterTagUrl,
   delAllPosterUrl,
+  getPosterTagMsgUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -994,6 +996,9 @@ function getStoreId() {
 function posterModuleList(data){
   return app.http.getRequest(posterModuleListUrl,data)
 }
+function uploadPoster(data){
+  return app.http.putRequest(uploadPosterUrl,data)
+}
 // 专辑
 function addPosterTag(data){  // 添加专辑
   data = initStoreId(data);
@@ -1003,13 +1008,16 @@ function getPosterTagList(data){  // 专辑列表
   return app.http.getRequest(getPosterTagListUrl, data)
 }
 function delPosterTag(data){  // 删除
-  return app.http.deleteRequest(delPosterTagUrl, data)
+  return app.http.deleteRequest(delPosterTagUrl + "?tagCode=" + data.tagCode, data)
 }
 function updatePosterTagName(data){ // 更换名字
-  return app.http.postRequest(updatePosterTagNameUrl, data)
+  return app.http.postRequest(updatePosterTagNameUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 function getPosterTagDetail(data){  // 详情
   return app.pageRequest.pageGet(getPosterTagDetailUrl, data)
+}
+function getPosterTagMsg(data){
+  return app.http.getRequest(getPosterTagMsgUrl, data)
 }
 function delPosterArr(data){  // 批量删除
   return app.http.deleteRequest(delPosterArrUrl, data)
@@ -1018,11 +1026,13 @@ function toOtherPosterTag(data){
 
 }
 function delAllPoster(data){  // 全删
-  return app.http.deleteRequest(delAllPosterUrl, data)
+  return app.http.deleteRequest(delAllPosterUrl + '?tagCode=' + data.tagCode , data)
 }
 
 
 module.exports = {
+  getPosterTagMsg,
+  uploadPoster,
   getPosterTagDetail,
   delPosterArr,
   toOtherPosterTag,
