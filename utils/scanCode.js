@@ -59,7 +59,6 @@ function getCurrentpage() {
 
 // 门店订单
 function ftfOrder(urldata, entry) {
-  console.log(urldata)
   if (!urldata.code) {
     API.toHome()
     return
@@ -107,7 +106,6 @@ function homeBF(qrUrl) {
 }
 
 function middleBF(baseOptions){
-  console.log(baseOptions, handleObject(baseOptions))
   wx.reLaunch({
     url: '/pages/page/home/home?' + handleObject(baseOptions)
   })
