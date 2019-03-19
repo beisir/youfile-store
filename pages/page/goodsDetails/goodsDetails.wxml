@@ -278,8 +278,7 @@
           <view class='gd-botoom'>
             <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
             <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
-            <text>共<text>{{classNums}}</text>种
-            <text>{{nums}}</text>件商品</text>
+            <text>共<text>{{classNums}}</text>种 <text>{{nums}}</text>件商品</text>
           </view>
           <view class='gd-botoom1' data-status='0' bindtap='moreAddCart'>加入进货车</view>
           <view class='gd-botoom1' data-status='1' bindtap='moreAddCart'>立即下单</view>
@@ -519,8 +518,7 @@
         <view>
           <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
           <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
-          <text>共<text>{{classNums}}</text>种
-          <text>{{nums}}</text>件商品</text>
+          <text>共<text>{{classNums}}</text>种 <text>{{nums}}</text>件商品</text>
         </view>
         <view data-status='0' bindtap='moreAddCart'>确认修改</view>
       </view>
@@ -592,8 +590,7 @@
         <view>
           <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
           <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
-          <text>共<text>{{classNums}}</text>种
-          <text>{{nums}}</text>件商品</text>
+          <text>共<text>{{classNums}}</text>种 <text>{{nums}}</text>件商品</text>
         </view>
         <view data-status='0' bindtap='cratHome'>确认修改</view>
       </view>
