@@ -101,13 +101,17 @@ Page({
         room = el
       }
     })
+    this.closeModal()
     // 上传图片
     if(room){
       let imgarr = this.data.img;
       let porimseArr = [];
-
+      wx.showLoading({
+        title: '正在上传',
+        mask: true
+      })
       imgarr.forEach(el => {
-        porimseArr.push(app.http.onlyUploadImg(el))
+        porimseArr.push(app.http.onlyUploadImg(el,'',true))
       })
       Promise.all(porimseArr).then(res => {
         let sendArr = []
@@ -121,8 +125,8 @@ Page({
           })
         })
         API.uploadPoster(sendArr).then(res => {
+          wx.hideLoading()
           API.showToast(res.message)
-          this.closeModal()
         })
       })
     }

@@ -109,6 +109,10 @@ Page({
       return
     }
     this.setData({ posterArr:false, postering: true})
+    wx.showLoading({
+      title: '海报生成中',
+      mask: true
+    })
     this.canvasPoset(this.data.checkedImg[0].imageUrl)
   },
   // 海报配置与生成
@@ -116,7 +120,7 @@ Page({
     let arr = this.data.moduleList.filter(el => el.checked)
     this.setData({ templateId: arr[0].id})
     var obj = this.posterStrParse(arr[0].posterConfig, {
-      goodsName: this.data.goods.name ? this.data.goods.name:'',
+      goodsName: this.data.sureTitleVal ? this.data.sureTitleVal:this.data.goods.name,
       goodsDes: this.data.sureDesVal ? this.data.sureDesVal:'',
       goodsImg: this.data.baseUrl + imgUrl,
       storeName: this.data.goods.storeName ? this.data.goods.storeName:'',
@@ -155,6 +159,7 @@ Page({
     this.setData({ posterArr: posterarr})
     
     if (this.data.checkedImg.length === posterarr.length){
+      wx.hideLoading()
       wx.navigateTo({
         url: '../success/success?goodsId=' + this.data.goodsId + '&templateId=' + this.data.templateId +'&url=' + JSON.stringify(this.data.posterArr),
         success: () => {

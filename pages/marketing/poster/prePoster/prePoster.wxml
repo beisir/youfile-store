@@ -1,4 +1,4 @@
-<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" style="z-index:100;"></poster>
+<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" style="z-index:100;" hideLoading='true'></poster>
 
 <tips show='{{titleModal}}'>
   <text style='line-height:1;'>标题</text>

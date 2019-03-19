@@ -28,11 +28,25 @@ Page({
         wx.navigateBack()
       },800)
     })
+    this.closeModal()
   },
   // 选择模板
   choseImg(e){
-    if (!this.data.edit){return}
     let index = e.currentTarget.dataset.index;
+    if (!this.data.edit){
+      let urlarr = [];
+      this.data.img.forEach(el => {
+        urlarr.push(this.data.baseUrl + el.poster)
+      })
+      wx.previewImage({
+        urls: urlarr,
+        current: urlarr[index],
+        success: ()=>{
+          this.setData({seeingImg: true})
+        }
+      })      
+      return
+    }
     this.setData({
       ["img["+index+"].checked"] : !this.data.img[index].checked
     })
@@ -87,30 +101,34 @@ Page({
             this.setData({ img: imgarr })
             setTimeout(()=>{
               wx.hideLoading()
-            },15000)
+            },30000)
           }
         })
-        arr.forEach((el,index)=>{
-          wx.getImageInfo({
-            src: el.poster,
-            success(res){
-              wx.saveImageToPhotosAlbum({
-                filePath: res.path,
-                success:()=>{
-                  API.showToast('保存成功')
-                },
-                complete(){
-                  if(index == arr.length-1){
-                    wx.hideLoading()
-                  }
-                }
-              })
-            }
-          })
-        })
+        this.recursionDownload(0, arr)
       },
       fail(e) {
         API.showToast("您未授权相册权限~")
+      }
+    })
+  },
+  recursionDownload(index,arr){
+    if (!arr[index]){
+      wx.hideLoading()
+      API.showToast('保存成功')
+      return
+    }
+    wx.getImageInfo({
+      src: this.data.baseUrl + arr[index].poster,
+      success:(res)=> {
+        wx.saveImageToPhotosAlbum({
+          filePath: res.path,
+          success: () => {
+            
+          },
+          complete: ()=> {
+            this.recursionDownload(index + 1, arr)
+          }
+        })
       }
     })
   },
@@ -128,18 +146,6 @@ Page({
     API.getPosterTagList({ posterNum: 0 }).then(res => {
       let arr = res.obj;
       let hasTag = false
-      arr.forEach(el=>{
-        if(el.name == '默认专辑'){
-          hasTag = true
-        }
-      })
-      if (!hasTag){
-        arr.unshift({
-          name: '放入默认专辑',
-          checked: true
-        })
-      }
-      
       this.setData({ roomList: arr })
     })
     
@@ -165,6 +171,26 @@ Page({
         room = el
       }
     })
+
+    if (room.code === this.data.tag.code){
+      API.showToast("已经在当前专辑了哦~~")
+      return
+    }
+
+    let imgarr = this.data.img.filter(el=> el.checked)
+    let idArr = []
+    imgarr.forEach(el=>{
+      idArr.push(el.id)
+    })
+    API.toOtherPosterTag({
+      posterIds: idArr.join(','),
+      targetTagCode: room.code,
+      originTagCode: this.data.tag.code
+    }).then(res=> {
+      API.showToast(res.message)
+      this.getThisPage()
+      this.getMsg()
+    })
     this.closeModal()
   },
   // 详情
@@ -179,22 +205,32 @@ Page({
   getPage(re){
     if (re) {
       app.pageRequest.pageData.pageNum = 0;
+      app.pageRequest.pageData.pageSize = 18
     }
     API.getPosterTagDetail({ tagCode: this.data.code }).then(res => {
       let arr = res.obj.result
       this.setData({ totalCount: res.obj.totalCount, img: res.obj.result})
     })
   },
+  getThisPage(){
+    if (app.pageRequest.pageData.pageNum>0){
+      app.pageRequest.pageData.pageNum = app.pageRequest.pageData.pageNum - 1
+    }
+    this.getPage()
+  },
   // 下页
   nextpage(){
-    if (this.data.img.length < 20){return}
+    if (this.data.img.length < 18){return}
     this.getPage()
   },
   // 全部清空
   delAllPoster(){
     API.delAllPoster({tagCode: this.data.code}).then(res=>{
+      API.showToast(res.message)
       this.getMsg()
+      this.getPage(true)
     })
+    this.closeModal()
   },
   /**
    *公用 
@@ -203,7 +239,8 @@ Page({
     this.setData({
       storeroomModul:false,
       delModule: false,
-      delAllPosterModule: false
+      delAllPosterModule: false,
+      delPosterArrModule: false
     })
   },
   showModal(e){
@@ -216,8 +253,31 @@ Page({
       case 'delAllPoster':
         obj.delAllPosterModule = true
       break;  
+      case 'delPoster':
+        let arr = this.data.img.filter(el => el.checked)
+        if (arr.length == 0) {
+          API.showToast("请选择海报")
+          return
+        }
+        obj.delPosterArrModule = true
+      break;  
     }
     this.setData(obj)
+  },
+  delSomePoster(){
+    let imgarr = this.data.img.filter(el => el.checked)
+    let idArr = []
+    imgarr.forEach(el => {
+      idArr.push(el.id)
+    })
+    API.delPosterArr({ posterIds: idArr.join(',')}).then(res=> {
+      API.showToast(res.message)
+      setTimeout(()=>{
+        this.getThisPage()
+        this.getMsg()
+      },800)
+    })
+    this.closeModal()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -239,6 +299,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    if (this.data.seeingImg){
+      this.setData({ seeingImg: false})
+      return
+    }
     this.getPage(true)
   },
 

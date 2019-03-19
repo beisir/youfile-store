@@ -17,14 +17,21 @@
 <layer show='{{delModule}}' title='是否确认删除'>
   <view class='btn-group'>
     <button class='cancel-btn' bindtap='closeModal' style='margin:0;'>取消</button>
-    <button bindtap='sureRoom' bindtap='sureDel' style='margin:0;'>确定</button>
+    <button bindtap='sureDel' style='margin:0;'>确定</button>
+  </view>
+</layer>
+
+<layer show='{{delPosterArrModule}}' title='是否确认删除选定海报'>
+  <view class='btn-group'>
+    <button class='cancel-btn' bindtap='closeModal' style='margin:0;'>取消</button>
+    <button bindtap='delSomePoster' style='margin:0;'>确定</button>
   </view>
 </layer>
 
 <layer show='{{delAllPosterModule}}' title='是否确认删除全部模板'>
   <view class='btn-group'>
     <button class='cancel-btn' bindtap='closeModal' style='margin:0;'>取消</button>
-    <button bindtap='sureRoom' bindtap='sureDelAllPoster' style='margin:0;'>确定</button>
+    <button bindtap='delAllPoster' style='margin:0;'>确定</button>
   </view>
 </layer>
 
@@ -42,15 +49,15 @@
   <view wx:else class='title-box flex-between'>
     <input type='text' maxlength='15' class='title-input' bindinput='newName' value='{{newName}}'></input>
     <view class='flex-center'>
-      <text bindtap='delAllPoster' class='gold-color' style='font-size:26rpx;margin-right:30rpx;'>全部清空</text>
+      <text bindtap='showModal' data-type='delAllPoster' class='gold-color' style='font-size:26rpx;margin-right:30rpx;'>全部清空</text>
       <image bindtap='endEdit' style='width:38rpx;height:38rpx;' src='/image/edit-right.png'></image>
     </view>
   </view>
 
-  <view class='img-box'>
+  <view class='img-box' wx:if="{{img.length>0}}">
     <view class='img-item-box {{edit && item.checked?"gold-border":""}}' wx:for='{{img}}' bindtap='choseImg' data-index="{{index}}" wx:key='{{index}}'>
       <image hidden='{{!edit || !item.checked}}' class='checked-icon' src='/image/checked-gold.png'></image>
-      <image class='img-module' mode='aspectFit' src='{{baseUrl+item.poster}}' data-item='{{item}}'></image>
+      <image class='img-module' mode='aspectFit' src='{{baseUrl+item.poster}}?x-oss-process=style/poster-middle' data-item='{{item}}'></image>
     </view>
     <view class='empty-view' wx:for="{{img.length%3==0?0:3-img.length%3}}" wx:key='{{index}}'></view>
   </view>
@@ -61,7 +68,7 @@
   <view class='btn-line'></view>
   <button bindtap='toOtherStoreroom'>移到其他专辑</button>
   <view class='btn-line'></view>
-  <button>删除海报</button>
+  <button bindtap='showModal' data-type='delPoster'>删除海报</button>
 </view>
 
 <image hidden='{{edit}}' class='next-icon' bindtap='nextpage' src='/image/nextpage-gold.png'></image>

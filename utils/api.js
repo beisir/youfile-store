@@ -1020,10 +1020,10 @@ function getPosterTagMsg(data){
   return app.http.getRequest(getPosterTagMsgUrl, data)
 }
 function delPosterArr(data){  // 批量删除
-  return app.http.deleteRequest(delPosterArrUrl, data)
+  return app.http.deleteRequest(delPosterArrUrl + "?posterIds=" + encodeURI(data.posterIds), data)
 }
 function toOtherPosterTag(data){
-
+  return app.http.postRequest(toOtherPosterTagUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
 }
 function delAllPoster(data){  // 全删
   return app.http.deleteRequest(delAllPosterUrl + '?tagCode=' + data.tagCode , data)

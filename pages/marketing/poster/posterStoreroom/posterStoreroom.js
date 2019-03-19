@@ -1,11 +1,13 @@
 // pages/marketing/poster/posterStoreroom/posterStoreroom.js
 import API from '../../../../utils/api.js'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    baseUrl: app.globalData.imageUrl,
     storeroom:[],
     creatModal: false,
     newName:''
