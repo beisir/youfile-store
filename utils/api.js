@@ -171,9 +171,9 @@ import {
 const app = getApp()
 /**判断是否为空**/
 function isNotEmpty(str) {
-  if (str == '' || str == undefined || str == null || str == "undefined"){
+  if (str == '' || str == undefined || str == null || str == "undefined") {
     return false
-  }else{
+  } else {
     return true
   }
 }
@@ -186,25 +186,30 @@ function showToast(message) {
   })
 }
 // 判断是否存过微信信息
-function hasSavedWXmsg(data){
+function hasSavedWXmsg(data) {
   return app.http.getRequest(hasSavedWXmsgUrl, data, {}, true)
 }
-function saveWXmsg(data){
+
+function saveWXmsg(data) {
   return app.http.postRequest(saveWXmsgUrl, data, {}, true)
 }
 // 获取微信手机
-function getMyWXPhone(data){
-  return app.http.getRequest(getMyWXPhoneUrl, data, { "platAppId": app.globalData.payAppNum}, true)
+function getMyWXPhone(data) {
+  return app.http.getRequest(getMyWXPhoneUrl, data, {
+    "platAppId": app.globalData.payAppNum
+  }, true)
 }
 /**
  * 门店订单
  */
 // 用户确定订单
-function ftfuserSureOrder(data){
-  return app.http.postRequest(ftfuserSureOrderUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+function ftfuserSureOrder(data) {
+  return app.http.postRequest(ftfuserSureOrderUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 // 商家预订单详情
-function ftfpreOrderDetail(data){
+function ftfpreOrderDetail(data) {
   return app.http.getRequest(ftfpreOrderDetailUrl, data)
 }
 
@@ -212,7 +217,7 @@ function ftfpreOrderDetail(data){
 function isFloorInfo(obj) {
   if (isNotEmpty(obj)) {
     var floor = obj
-      floor.mallName = floor.mallName == null ? '' : floor.mallName,
+    floor.mallName = floor.mallName == null ? '' : floor.mallName,
       floor.areaName = floor.areaName == null ? '' : floor.areaName,
       floor.balconyName = floor.balconyName == null ? '' : floor.balconyName,
       floor.floorName = floor.floorName == null ? '' : floor.floorName,
@@ -241,8 +246,8 @@ function getStoreInfo() {
   let data = initStoreId({})
   return app.http.getRequest(miniProgramCodeUrl, data)
 }
-/**云享品管理 列表**/ 
-function adminGoodsList(data){
+/**云享品管理 列表**/
+function adminGoodsList(data) {
   data = initStoreId(data);
   return app.pageRequest.pageGet(adminGoodsListUrl, data)
 }
@@ -306,17 +311,17 @@ function adminGoodsStatus(data) {
 }
 /**店铺设置起批量**/
 function saleBatchNum(data) {
-  return app.http.putRequest(saleBatchNumUrl+'?saleBatchNum='+data)
-} 
+  return app.http.putRequest(saleBatchNumUrl + '?saleBatchNum=' + data)
+}
 /**添加商品**/
 function addGoods(data) {
   data = initStoreId(data);
-  return app.http.postRequest(addGoodsUrl,data)
-} 
+  return app.http.postRequest(addGoodsUrl, data)
+}
 /**更新商品**/
 function updateGoods(data) {
-  return app.http.putRequest(updateGoodsUrl,data)
-} 
+  return app.http.putRequest(updateGoodsUrl, data)
+}
 /**编辑商品详情**/
 function adminGetDetails(data) {
   return app.http.getRequest(adminGoodsDetailsUrl, data)
@@ -324,12 +329,12 @@ function adminGetDetails(data) {
 /**分类**/
 function customCategoryCode(data) {
   data = initStoreId(data);
-  return app.http.putRequest(customCategoryCodeUrl,data)
+  return app.http.putRequest(customCategoryCodeUrl, data)
 }
 /**店铺设置起批量**/
 function saleBatchAmount(data) {
-  return app.http.putRequest(salebatchamountUrl+'?amount='+data)
-} 
+  return app.http.putRequest(salebatchamountUrl + '?amount=' + data)
+}
 /**获取店铺起批配置**/
 function saleBatch(data) {
   data = initStoreId(data);
@@ -363,7 +368,7 @@ function homeIndex(data) {
 /**获取店内分类列表**/
 function classList(data) {
   data = initStoreId(data);
-  return app.http.getRequest(classListUrl,data)
+  return app.http.getRequest(classListUrl, data)
 }
 /**无登录状态获取店内分类列表**/
 function classListApi(data) {
@@ -374,10 +379,10 @@ function classListApi(data) {
 function addClass(data) {
   data = initStoreId(data);
   return app.http.postRequest(addClassUrl, data)
-} 
+}
 /**商品置顶**/
 function topGoods(data) {
-  return app.http.putRequest(topGoodsUrl+"?isTop=true", data)
+  return app.http.putRequest(topGoodsUrl + "?isTop=true", data)
 }
 /**取消默认地址**/
 function removeDefault(data) {
@@ -397,7 +402,7 @@ function classCodeList(data) {
 function setUserName(data) {
   data = initStoreId(data);
   return app.http.postRequest(setUserNameUrl, data)
-} 
+}
 /**商品详情**/
 function goodsDetails(data) {
   return app.http.getRequest(goodsDetailsUrl, data)
@@ -408,7 +413,7 @@ function batchNum(data) {
 }
 /**获取用户地址列表**/
 function addressList(data) {
-  return app.http.getRequest(addressListUrl,data)
+  return app.http.getRequest(addressListUrl, data)
 }
 /**默认用户地址**/
 function addressDefault(data) {
@@ -420,8 +425,8 @@ function addressDelete(data) {
 }
 /**地址添加**/
 function saveAddress(data) {
-  return app.http.postRequest(saveAddressUrl,data)
-} 
+  return app.http.postRequest(saveAddressUrl, data)
+}
 /**地址详情**/
 function addressInfo(data) {
   return app.http.getRequest(addressInfoUrl, data)
@@ -438,10 +443,10 @@ function cartList(data) {
 /**保存模板**/
 function addTemplate(data) {
   return app.http.postRequest(addTemplateUrl, data)
-} 
+}
 /**排序模板**/
 function tempSort(data) {
-  return app.http.postRequest(tempSortUrl +"?sortType=asc", data)
+  return app.http.postRequest(tempSortUrl + "?sortType=asc", data)
 }
 /**调换规格位置**/
 function saveSpecTemplateContent(data) {
@@ -456,14 +461,14 @@ function templateDelete(data) {
   return app.http.deleteRequest(templateDeleteUrl + '?templateId=' + data)
 }
 /**更新模板**/
-function updateTemplateName(templateId, templateName ) {
-  return app.http.putRequest(updateTemplateNameUrl+'?templateId='+templateId+'&templateName='+templateName )
-} 
+function updateTemplateName(templateId, templateName) {
+  return app.http.putRequest(updateTemplateNameUrl + '?templateId=' + templateId + '&templateName=' + templateName)
+}
 /**更新规格**/
-function updateSpecName(templateContentId,specName,data) {
+function updateSpecName(templateContentId, specName, data) {
   data = initStoreId(data);
-  return app.http.putRequest(updateSpecNameUrl+'?templateContentId='+templateContentId+'&specName='+specName)
-} 
+  return app.http.putRequest(updateSpecNameUrl + '?templateContentId=' + templateContentId + '&specName=' + specName)
+}
 /**添加到购物车**/
 function addCart(data) {
   data = initStoreId(data);
@@ -475,34 +480,34 @@ function addMoreCart(data) {
 }
 /**删除购物车商品**/
 function deteleCartGoods(data) {
-  return app.http.deleteRequest(deteleCartGoodsUrl,data)
+  return app.http.deleteRequest(deteleCartGoodsUrl, data)
 }
 /**修改购物车**/
 function updateMoreCart(data) {
   var goodsId = JSON.parse(data)[0]["goodsId"]
-  var url = '/api/shop/shoppingcart/shop/goods/batch/'+goodsId
+  var url = '/api/shop/shoppingcart/shop/goods/batch/' + goodsId
   return app.http.putRequest(url, data)
 }
 /**情况购物车失效商品**/
 function deteleCartFai(data) {
   data = initStoreId(data);
-  return app.http.deleteRequest(deteleCartFaiUrl,data)
+  return app.http.deleteRequest(deteleCartFaiUrl, data)
 }
 /**删除规格**/
 function deleteTemplate(data) {
-  return app.http.deleteRequest(deleteTemplateUrl+'?templateContentId='+data)
+  return app.http.deleteRequest(deleteTemplateUrl + '?templateContentId=' + data)
 }
 /**添加规格**/
 function addTempCont(templateContentId, specValueList) {
-  return app.http.putRequest(addTempContUrl+'?templateContentId='+templateContentId+'&specValueList='+specValueList)
+  return app.http.putRequest(addTempContUrl + '?templateContentId=' + templateContentId + '&specValueList=' + specValueList)
 }
 /**取消关注**/
 function deteleLikeStore(data) {
-  return app.http.deleteRequest(deteleLikeStoreUrl+'?storeId='+wx.getStorageSync('storeId'))
+  return app.http.deleteRequest(deteleLikeStoreUrl + '?storeId=' + wx.getStorageSync('storeId'))
 }
 /**关注店铺**/
 function likeStore(data) {
-  return app.http.putRequest(likeStoreUrl+'?storeId='+wx.getStorageSync('storeId'), {}, {}, true)
+  return app.http.putRequest(likeStoreUrl + '?storeId=' + wx.getStorageSync('storeId'), {}, {}, true)
 }
 /**店铺信息**/
 function shopList(data) {
@@ -607,7 +612,7 @@ function purchaserUserId(url) {
 }
 /**扫一扫查看批发商**/
 function showPurchaser(data) {
-  return app.http.getRequest(showPurchaserUrl,data)
+  return app.http.getRequest(showPurchaserUrl, data)
 }
 /**扫一扫查看进货商**/
 function showMerchant(data) {
@@ -616,7 +621,7 @@ function showMerchant(data) {
 /**满足起批配置信息**/
 function config(goodsId) {
   var storeId = wx.getStorageSync('storeId')
-  return app.http.getRequest(configUrl+'?storeId='+storeId+'&goodsId='+goodsId)
+  return app.http.getRequest(configUrl + '?storeId=' + storeId + '&goodsId=' + goodsId)
 }
 /**店铺详情**/
 function storeIdInfo(data) {
@@ -624,13 +629,13 @@ function storeIdInfo(data) {
   return app.http.getRequest(storeIdInfoUrl, data)
 }
 /**上传图片**/
-function uploadImage(types) {
-  return app.http.chooseImageUpload(types)
+function uploadImage(types, ifUploadMore, index) {
+  return app.http.chooseImageUpload(types, ifUploadMore, index)
 }
 /**更换店封面**/
-function updateCover(url,data) {
+function updateCover(url, data) {
   data = initStoreId(data);
-  return app.http.putRequest(updateCoverUrl +'?coverUrl='+url,data)
+  return app.http.putRequest(updateCoverUrl + '?coverUrl=' + url, data)
 }
 /**更换店名称**/
 function updateMes(data) {
@@ -638,14 +643,15 @@ function updateMes(data) {
   return app.http.putRequest(updateMesUrl, data)
 }
 /**更换店logo**/
-function uploadLogoImg(url,data) {
+function uploadLogoImg(url, data) {
   data = initStoreId(data);
-  return app.http.putRequest(uploadLogoImgUrl+'?logo='+url, data)
+  return app.http.putRequest(uploadLogoImgUrl + '?logo=' + url, data)
 }
 /**获取用户权限设置**/
 function apiSetUser(data) {
   return app.http.getRequest(apiSetUserUrl, data)
 }
+
 function adminSetUser(data) {
   return app.http.getRequest(adminSetUserUrl, data)
 }
@@ -661,34 +667,47 @@ function getUserDetail(data) {
 }
 /**权限设置**/
 function apiAddUser(data) {
-  return app.http.putRequest(apiAddUserUrl+"?bfPripermission="+data)
+  return app.http.putRequest(apiAddUserUrl + "?bfPripermission=" + data)
 }
+
 function adminAddUser(data) {
-  return app.http.putRequest(adminAddUserUrl,data)
+  return app.http.putRequest(adminAddUserUrl, data)
 }
 // 退出登录
-function quit(data){
-  return app.authHandler.postRequest(quitUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+function quit(data) {
+  return app.authHandler.postRequest(quitUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 // 修改密码
-function updataPwd(data){
-  return app.authHandler.postRequest(updataPwdUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+function updataPwd(data) {
+  return app.authHandler.postRequest(updataPwdUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 // 修改头像
-function changeIcon(data){
-  return app.http.putRequest(changeIconUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+function changeIcon(data) {
+  return app.http.putRequest(changeIconUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 // 验证取货码
-function testGoodCode(data){
-  return app.http.postRequest(testGoodCodeUrl,data, { 'content-type': 'application/x-www-form-urlencoded' })
+function testGoodCode(data) {
+  return app.http.postRequest(testGoodCodeUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 // 上传凭证
-function uploadVoucher(data){
-  return app.http.postRequest(uploadPayVoucherUrl, data, {'content-type':'application/x-www-form-urlencoded'})
+function uploadVoucher(data) {
+  return app.http.postRequest(uploadPayVoucherUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 /**重置密码**/
 function resetPassword(data) {
-  return app.authHandler.postRequest(resetPasswordUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.authHandler.postRequest(resetPasswordUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 /**短信验证码**/
 function phoneMessage(data) {
@@ -696,51 +715,53 @@ function phoneMessage(data) {
 }
 /**注册**/
 function register(data) {
-  return app.authHandler.postRequest(registerUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.authHandler.postRequest(registerUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 /**注册短信验证码**/
 function registerPhoneMsg(data) {
   return app.http.getRequest(registerPhoneMsgUrl, data)
 }
 // 关闭订单
-function closeOrder(data){
+function closeOrder(data) {
   let url = closedOrderUrl + "?reason=" + encodeURI(data.reason)
   return app.http.postRequest(url, data)
 }
 // 取消订单
-function cancelOrder(data){
+function cancelOrder(data) {
   let url = cancelOrderUrl + "?reason=" + encodeURI(data.reason)
   return app.http.postRequest(url, data)
 }
 //确认收货
-function receiveOrder(data){
-  return app.http.postRequest(receiveOrderUrl,data)
+function receiveOrder(data) {
+  return app.http.postRequest(receiveOrderUrl, data)
 }
 // 添加快递
-function addExpress(data){
-  let expressCompany = data.expressCompany ? data.expressCompany:"";
-  let expressNumber = data.expressNumber ? data.expressNumber:"";
+function addExpress(data) {
+  let expressCompany = data.expressCompany ? data.expressCompany : "";
+  let expressNumber = data.expressNumber ? data.expressNumber : "";
   return app.http.postRequest(addDxpressUrl + "?expressCompany=" + encodeURI(expressCompany) + "&expressNumber=" + encodeURI(expressNumber), data)
 }
 // 订单填写商家备注
-function addRemark(data){
+function addRemark(data) {
   return app.http.putRequest(addRemarkUrl + "?remark=" + encodeURI(data.remark), data)
 }
 //改价
-function updatetotal(data){
+function updatetotal(data) {
   return app.http.postRequest(updatetotalUrl, data)
-}  
+}
 // 查看凭证
-function seeVoucher(data){
+function seeVoucher(data) {
   return app.http.getRequest(seeVoucherUrl, data)
 }
 // 裁剪图片跳转
-function toCuttingImg(url,quality,width,height){
-  if(url){
+function toCuttingImg(url, quality, width, height) {
+  if (url) {
     let add = '/pages/page/upload/upload?src=' + url;
-    quality?add+="&quality=true":"";
-    add +="&width=";
-    width?add+=width:add+="750";
+    quality ? add += "&quality=true" : "";
+    add += "&width=";
+    width ? add += width : add += "750";
     add += "&height=";
     height ? add += height : add += "750";
     wx.navigateTo({
@@ -749,66 +770,68 @@ function toCuttingImg(url,quality,width,height){
   }
 }
 // 提交订单
-function supplyOrde(data){
+function supplyOrde(data) {
   data = initStoreId(data);
   return app.http.postRequest(supplyOrderUrl, data);
 }
 /**更新商品**/
 function copyGoods(data) {
   return app.http.putRequest(copyGoodsUrl, data)
-} 
+}
 // 回首页
-function toHome(){
+function toHome() {
   wx.switchTab({
     url: '/pages/page/home/home'
   })
 }
 // 获取收款二维码
-function getPaymentImg(data){
-  data = initStoreId(data);  
+function getPaymentImg(data) {
+  data = initStoreId(data);
   return app.http.getRequest(getPaymentImgUrl, data)
 }
 // 设置收款二维码
 function putPaymentImg(data) {
   data = initStoreId(data);
-  return app.http.putRequest(putPaymentImgUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.putRequest(putPaymentImgUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 // 楼层三级联动
 function threeFloorList(data) {
   return app.http.getRequest(threeFloorListUrl, data)
 }
 //订单详情
-function getOrderDetail(data){
-  return app.http.getRequest(orderDetailUrl,data);
+function getOrderDetail(data) {
+  return app.http.getRequest(orderDetailUrl, data);
 }
 //是否进货商
-function ifWholesaler(data){
-  return app.http.getRequest(ifWholesalerUrl,data);
+function ifWholesaler(data) {
+  return app.http.getRequest(ifWholesalerUrl, data);
 }
 //门店商家列表
-function getStoreOrderAdmin(data){
-  data = initStoreId(data);    
+function getStoreOrderAdmin(data) {
+  data = initStoreId(data);
   return app.pageRequest.pageGet(shopkeeperOrderListUrl, data)
 }
 // 帮他下单
-function helpOrder(data){
-  data = initStoreId(data);    
+function helpOrder(data) {
+  data = initStoreId(data);
   return app.http.postRequest(helpOrderUrl, data);
 }
 //关闭订单
-function ftfCloseOrder(data){
+function ftfCloseOrder(data) {
   return app.http.postRequest(ftfCloseOrderUrl + "?reason=" + encodeURI(data.reason), data);
 }
 //取消订单
-function ftfCaneledOrder(data){
+function ftfCaneledOrder(data) {
   return app.http.postRequest(ftfCaneledOrderUrl + "?reason=" + encodeURI(data.reason), data);
 }
 //删除订单
-function ftfDelOrder(data){
+function ftfDelOrder(data) {
   return app.http.deleteRequest(ftfDelOrderUrl, data);
 }
 //商家订单详情
-function ftfAdminOrderDetail(data){
+function ftfAdminOrderDetail(data) {
   return app.http.getRequest(ftfAdminOrderDetailUrl, data);
 }
 // 门店顾客列表
@@ -817,56 +840,56 @@ function customerOrderList(data) {
   return app.pageRequest.pageGet(customerOrderListUrl, data)
 }
 //门店顾客订单详情
-function ftfCustomerOrderDetail(data){
+function ftfCustomerOrderDetail(data) {
   return app.http.getRequest(ftfCustomerOrderDetailUrl, data);
 }
 // 门店商品列表
-function ftfGoodsList(data){
+function ftfGoodsList(data) {
   data = initStoreId(data);
   return app.http.getRequest(ftfGoodsListUrl, data);
 }
 //添加
-function ftfCreatGoods(data){
+function ftfCreatGoods(data) {
   data = initStoreId(data);
   return app.http.postRequest(ftfCreatGoodsUrl, data);
 }
 //删除
-function ftfDelGoods(data){
+function ftfDelGoods(data) {
   return app.http.deleteRequest(ftfDelGoodsUrl, data);
 }
 //编辑
-function ftfEditGoods(data){
+function ftfEditGoods(data) {
   return app.http.putRequest(ftfEditGoodsUrl, data);
 }
 //查重
-function ftfGoodsIfExist(data){
+function ftfGoodsIfExist(data) {
   data = initStoreId(data);
   return app.http.getRequest(ftfGoodsIfExistUrl, data);
 }
 
 //最近关注用户列表
-function recentlyFocusUser(data){
+function recentlyFocusUser(data) {
   data = initStoreId(data);
   return app.http.getRequest(recentlyFocusUserUrl, data);
 }
 //查询用户肖像
-function searchUserInfoByTel(data){
+function searchUserInfoByTel(data) {
   return app.http.getRequest(searchUserInfoByTelUrl, data);
 }
 //待付款订单
-function unpaidOrderNum(data){
+function unpaidOrderNum(data) {
   data = initStoreId(data);
-  return app.http.getRequest(unpaidOrderNumUrl,data);
+  return app.http.getRequest(unpaidOrderNumUrl, data);
 }
 //最近到店订单
-function ftfRecentOrder(data){
+function ftfRecentOrder(data) {
   data = initStoreId(data);
   return app.http.getRequest(ftfRecentOrderUrl, data);
 }
 //商家是否支持在线支付
-function storeOnlinePay(data){
+function storeOnlinePay(data) {
   data = initStoreId(data);
-  return app.http.getRequest(storeOnlinePayUrl,data);
+  return app.http.getRequest(storeOnlinePayUrl, data);
 }
 /**获取搜索分类**/
 function searchClass(data) {
@@ -902,7 +925,9 @@ function getUserInfo(data) {
 }
 // 更新用户信息
 function updateUserInfo(data) {
-  return app.http.postRequest(updateUserInfoUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.postRequest(updateUserInfoUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 /**
  * 获取店铺性质
@@ -922,7 +947,7 @@ function getBankcard(data) {
  */
 function getTrade(data) {
   return app.http.getRequest(getTradeUrl, data)
-} 
+}
 /**
  *
 查询商户收益
@@ -949,7 +974,7 @@ function getHaveRecord(data) {
  */
 function getFormId(e) {
   var formId = e.detail.formId;
-  var content = e.detail.target.dataset.name//记录用户的操作
+  var content = e.detail.target.dataset.name //记录用户的操作
   wx.setStorageSync("formId", formId)
 }
 /**
@@ -959,10 +984,10 @@ function initStoreId(data) {
   if (data == null || data == undefined) {
     data = {};
   }
-  if (getStoreId()){
+  if (getStoreId()) {
     data.storeId = wx.getStorageSync('storeId');
     return data;
-  }else{
+  } else {
     showToast("暂无店铺ID！")
     let pages = getCurrentPages()
     let curPage = pages[pages.length - 1]
@@ -974,8 +999,8 @@ function initStoreId(data) {
 /**
  * 获取店铺storeId
  */
-function getThisStoreId(){
-  if(getStoreId()){
+function getThisStoreId() {
+  if (getStoreId()) {
     return wx.getStorageSync("storeId")
   }
 }
@@ -983,9 +1008,9 @@ function getThisStoreId(){
  *判断是否有storeId
  */
 function getStoreId() {
-  if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '' || wx.getStorageSync("storeId") == null){
+  if (wx.getStorageSync("storeId") == undefined || wx.getStorageSync("storeId") == '' || wx.getStorageSync("storeId") == null) {
     return false
-  }else{
+  } else {
     return true
   }
 }
@@ -1060,7 +1085,7 @@ module.exports = {
   ftfGoodsIfExist,
   ftfDelOrder,
   ftfCaneledOrder,
-  customerOrderList, 
+  customerOrderList,
   ftfCustomerOrderDetail,
   ftfAdminOrderDetail: ftfAdminOrderDetail,
   ftfCloseOrder: ftfCloseOrder,
@@ -1068,7 +1093,7 @@ module.exports = {
   getStoreOrderAdmin: getStoreOrderAdmin,
   ifWholesaler: ifWholesaler,
   getStoreNature: getStoreNature,
-  getStoreData:getStoreData,
+  getStoreData: getStoreData,
   getUserInfo: getUserInfo,
   getOrderDetail: getOrderDetail,
   threeFloorList: threeFloorList,
@@ -1114,7 +1139,7 @@ module.exports = {
   addClass: addClass,
   classCodeList: classCodeList,
   goodsDetails: goodsDetails,
-  batchNum:batchNum,
+  batchNum: batchNum,
   addressList: addressList,
   isFriend: isFriend,
   isFriendStore: isFriendStore,
@@ -1132,23 +1157,23 @@ module.exports = {
   templateDelete: templateDelete,
   updateTemplateName: updateTemplateName,
   updateSpecName: updateSpecName,
-  addCart:addCart,
+  addCart: addCart,
   deleteTemplate: deleteTemplate,
   addTempCont: addTempCont,
   deteleCartGoods: deteleCartGoods,
-  deteleCartFai:deteleCartFai,
+  deteleCartFai: deteleCartFai,
   addMoreCart: addMoreCart,
   deteleLikeStore: deteleLikeStore,
   likeStore: likeStore,
   saveSpecTemplateContent,
   shopList: shopList,
-  index:index,
+  index: index,
   mewWholesaler: mewWholesaler,
   setName: setName,
   addWholesaler: addWholesaler,
-  pass:pass,
+  pass: pass,
   updateGoods: updateGoods,
-  wholesalerAll:wholesalerAll,
+  wholesalerAll: wholesalerAll,
   merchantIndex: merchantIndex,
   merchantList: merchantList,
   newMerchant: newMerchant,
@@ -1172,7 +1197,7 @@ module.exports = {
   cusNewDetails: cusNewDetails,
   adminAddUser: adminAddUser,
   adminSetUser: adminSetUser,
-  dealUser:dealUser,
+  dealUser: dealUser,
   favoriteusers: favoriteusers,
   updateMoreCart: updateMoreCart,
   updateMes: updateMes,

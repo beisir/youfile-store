@@ -936,16 +936,16 @@ Page({
         if (newSkuArrTwo[i].num > 0) {
           classNums += 1
           nums += newSkuArrTwo[i].num
-          if (this.data.showCartOne) {
+          if (this.data.showCartOne) { //true
             total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice;
           } else {
             total += newSkuArrTwo[i].num * this.data.sell;
           }
           if (limitShow == 3) {
-            if (this.data.editCode) {
+            if (this.data.editCode) { //false
               newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
             } else {
-              newTotal = nums * newSkuArrTwo[i].wholesalePrice;
+              newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice;
             }
             difference = total - newTotal
             if (saleBatchNum == 0) {
@@ -1061,7 +1061,7 @@ Page({
     spectArrDifference[index].newSkuArrTwo = newSkuArrTwo
     this.setData({
       spectArrDifference: spectArrDifference,
-      totalPrice: total.toFixed(2)
+      // totalPrice: total.toFixed(2)
     }, function() {
       this.getTotalPrice();
     });
@@ -1227,7 +1227,7 @@ Page({
               ctx.globalAlpha = 0.7
               ctx.drawImage("/image/op.png", 0, 0, 350, 350)
               ctx.draw(true)
-              setTimeout(function () {
+              setTimeout(function() {
                 wx.canvasToTempFilePath({ //生成图片
                   x: 0,
                   y: 0,
@@ -1237,7 +1237,7 @@ Page({
                   destHeight: 350,
                   quality: 1,
                   canvasId: 'myCanvas',
-                  success: function (res) {
+                  success: function(res) {
                     wx.uploadFile({
                       url: uploadImg,
                       filePath: res.tempFilePath,

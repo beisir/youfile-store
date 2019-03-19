@@ -110,7 +110,7 @@
 .lt-tr>view.add-xian{text-decoration:line-through}
 .lt-tr1>view:nth-child(3){color:#CCAA77}
 .lt-weui-bottom>view{width:33%;color:#CCAA77;position:relative}
-.lt-weui-bottom view>text{position:absolute;font-size:24rpx;color:#333;bottom:-30rpx;left:50rpx}
+.lt-weui-bottom view>text{position:absolute;font-size:24rpx;color:#333;bottom:-30rpx;left:50rpx;}
 .lt-weui-bottom view>text text{color:#CCAA77}
 .lt-weui-bottom{border-top:2rpx solid #F3F3F3}
 .lt-weui-bottom>view:nth-child(2){border-left:2rpx solid #F3F3F3}
