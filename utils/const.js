@@ -15,13 +15,13 @@ export const indexUrl = "https://beta-www.youlife.net.cn"
 export const authUrl = "https://beta-accounts.youlife.net.cn"
 
 
-// export const indexUrl = "https://www.youlife.me"
+// export const indexUrl = "https://www.youlife.net.cn"
 // export const payUrl = "https://pay.youlife.me/api/pay"
-// export const baseUrl = 'https://store.youlife.me'
-// export const imageUrl = 'https://image.youlife.me/'
+// export const baseUrl = 'https://store.youlife.net.cn'
+// export const imageUrl = 'https://image.youlife.net.cn/'
 // export const basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=';
 // export const uploadImg = 'https://store.youlife.me/base/image'
-// export const authUrl = "https://accounts.youlife.me"
+// export const authUrl = "https://accounts.youlife.net.cn"
 
 export const projectName = "小云店"
 export const payAppNum = "APP001"
