@@ -102,9 +102,14 @@ class EnterStoreHandler {
 
       //从小程序码中获取店铺编号
       if (options.scene) {
+
         let scene = decodeURIComponent(options.scene);
         storeId = scene.split("store_")[1]
+      
+      
       }
+
+
 
       //从链接中获取店铺编号
       if (options.storeId) {

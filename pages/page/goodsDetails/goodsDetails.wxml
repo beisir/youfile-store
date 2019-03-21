@@ -42,6 +42,14 @@
         </swiper-item>
       </block>
     </swiper>
+    <!-- 活动条 -->
+    <view class='active-g'>
+      <view>￥<text>1000</text><text>￥1200</text></view>
+      <view>
+        <view>距结束还有</view>
+        <text>1天15：15：15</text>
+      </view>
+    </view>
   </view>
   <view class='gd-details'>
     <view class='gd-title' wx:if='{{limitShow==1}}'>
@@ -59,42 +67,62 @@
       </view>
     </view>
     <view class='gd-title' wx:if='{{limitShow!=1}}'>
-      <view>{{name}}
+      <view>
+        {{name}}
         <button class='shre_btn' open-type='share' data-name='{{name}}' data-id='{{goodsId}}'>
           <image src="/image/fx.png"></image>
         </button>
       </view>
+      <view class='goods-er'>
+          <view>北京</view>
+          <image src="/image/er.png"></image>
+        </view>
       <view class='gd-font gd-font2'>零售价：￥{{sell}}</view>
       <view class='gd-font'>批发价：
         <text>￥{{wholesalePrice}}</text>
-        <button wx:if='{{saleBatchNum!=0}}' class='btn'>
-          <text>{{saleBatchNumGoods ==0?saleBatchNum:saleBatchNumGoods}}</text>件起批</button>
+        <!-- <button wx:if='{{saleBatchNum!=0}}' class='btn'>
+          <text>{{saleBatchNumGoods ==0?saleBatchNum:saleBatchNumGoods}}</text>件起批</button> -->
       </view>
-      <view class='gd-view-n' wx:if='{{saleBatchAmount==0}}' style='min-height:50rpx'>
+      <!-- <view class='gd-view-n' wx:if='{{saleBatchAmount==0}}' style='min-height:50rpx'>
         <button>混批</button>
+      </view> -->
+     <view class='sale-num'  wx:if='{{saleBatchNum!=0 || saleBatchAmount!=0}}'></view>
+      <view class='gd-view-n' wx:if='{{saleBatchNum!=0}}'>
+        <button>起批</button>每单满{{saleBatchNumGoods ==0?saleBatchNum:saleBatchNumGoods}}件起批
       </view>
-      <view class='gd-view-n' wx:if='{{saleBatchAmount!=0}}'>
-        <button>混批</button>全场满￥{{saleBatchAmount}}元可混批</view>
+        <view class='gd-view-n' wx:if='{{saleBatchAmount!=0}}'>
+          <button>混批</button>全场满￥{{saleBatchAmount}}元可混批
+        </view>
     </view>
-    <navigator class="weui_cells" url='../storeIcon/storeIcon'>
-      <image src="/image/positionico.png"></image>
-      <text class="store-address">北京 </text>
+    <view class="weui_cells weui_cells1" bindtap='showAlert'>
+      <text class="store-address">选择规格 </text>
+      <view class='skuStr'>{{skuStr}}</view>
+      <view class='skuStr skuStr1' wx:if='{{!skuStr}}'>请选择商品规格</view>
       <view class='weui-view'>
-        <image src="/image/er.png" class='erImg'></image>
         <image class='img' src="/image/icl.png"></image>
       </view>
-    </navigator>
+    </view>
+    <!-- 购买记录 -->
+    <view class="weui_cells weui_cells1 buy-view" >
+      <text class="store-address">购买记录 </text>
+      <view class='skuStr'>已有 <text>3840</text> 人购买，商品共销售 <text>4769</text> 份</view>
+      <view class='b-view'>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+        <view><image class='img' src="/image/ww.png"></image></view>
+      </view>
+    </view>
     <view class='gd-content'>
       <view>
         <image src="/image/xin.png"></image>推荐心语</view>
       <text>{{recommendDesc}}</text>
-    </view>
-  </view>
-  <view class="weui_cells weui_cells1" bindtap='showAlert'>
-    <text class="store-address">选择规格 </text>
-    <view class='skuStr'>{{skuStr}}</view>
-    <view class='weui-view'>
-      <image class='img' src="/image/icl.png"></image>
     </view>
   </view>
   <view class="ym_goodsstore">
@@ -119,15 +147,19 @@
     <view class="ym_goodsstoreop" hidden='{{likeShow}}'>
       <view class="ui-link" bindtap='likeStore'>
         <text class="ym_qzjoin_add1">+</text>关注</view>
-      <view class="ui-link ui-link1" bindtap='urlHome'>{{globalData.projectName}}</view>
+      <view class="ui-link ui-link1" bindtap='urlHome'>进店</view>
     </view>
     <view class="ym_goodsstoreop" hidden='{{!likeShow}}'>
       <view class="ui-link" bindtap='deteleLikeStore'>
         <text class="ym_qzjoin_add1"></text>已关注</view>
-      <view class="ui-link ui-link1" bindtap='urlHome'>{{globalData.projectName}}</view>
+      <view class="ui-link ui-link1" bindtap='urlHome'>进店</view>
     </view>
   </view>
   <view class='gd_readCont' wx:if='{{description}}'>
+    <view class='goods-des'>
+      <view>— 商 品 详 情 —</view>
+      <view>COMMODITY INFORMATION</view>
+    </view>
     <view class='gd_r-title'>
       <template is="wxParse" data="{{wxParseData:article.nodes}}" />
     </view>

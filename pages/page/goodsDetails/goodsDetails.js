@@ -148,7 +148,7 @@ Page({
   onLoad: function(options) {
     var that = this,
       arr = [],
-      goodsId = ''
+      goodsId = '180929212000'
     if (options != undefined) {
       if (options.storeId) {
         wx.setStorageSync("storeId", options.storeId)
