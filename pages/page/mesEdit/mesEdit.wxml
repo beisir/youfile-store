@@ -68,9 +68,9 @@
 </view>
 <view class="weui_cells">
   <view>
-    <text> 业态</text>
+    <text> 从事业态</text>
     <view class='new-left new-left1'>
-      {{storeMes.retailFormat==null?'':storeMes.retailFormat}}
+      购物
     </view>
   </view>
   <view>
