@@ -268,7 +268,7 @@
               <view class="lt-tr">
                 <view wx:if='{{!newSkuOnly}}'>{{nameTwo}}</view>
                 <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>零售价</view>
-                <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>批发价</view>
+                <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>现价</view>
                 <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                   <view class="lt-add-cart">
                     <view class="lt-down" bindtap="minusCountAll">
@@ -287,7 +287,7 @@
                 <view class="lt-tr lt-tr1" wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
                   <view wx:if='{{!newSkuOnly}}'>{{item.name}}</view>
                   <view style='{{newSkuOnly?"width:33%":"width:22%"}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
-                  <view style='color:#CCAA77;{{newSkuOnly?"width:33%":"width:22%"}}'>￥{{item.wholesalePrice}}</view>
+                  <view class='line-price' style='color:#000;{{newSkuOnly?"width:33%":"width:22%"}}'><text class="jiage-t" style='font-size:24rpx'>批发价</text>￥{{item.wholesalePrice}}</view>
                   <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                     <view class="lt-add-cart">
                       <view class="lt-down" data-index='{{index}}' bindtap="minusCount1">

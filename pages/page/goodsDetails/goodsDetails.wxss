@@ -8,7 +8,7 @@
 .gd-alert{height:auto;width:100%;position:fixed;bottom:0;background:#fff}
 .gd-image{width:160rpx;height:160rpx;overflow:hidden;border-radius:10rpx}
 .gd-image image{max-width:160rpx;max-height:160rpx}
-.gd-top{border-bottom:2rpx dashed #E2E2E2;margin:40rpx;padding:10rpx 0 40rpx 0;position:relative}
+.gd-top{border-bottom:2rpx solid #E2E2E2;margin:40rpx;padding:10rpx 0 40rpx 0;position:relative}
 .gdclose{position:absolute;right:-10rpx;top:-10rpx;width:40rpx;z-index:10;height:40rpx}
 .gd-ins{position:absolute;left:185rpx;top:0rpx;font-size:28rpx;color:#CCAA77}
 .gd-ins .gd-title1{color:#333;font-weight:bold;padding-right:30rpx;margin-top:10rpx;margin-bottom:10rpx;text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical}
@@ -103,7 +103,8 @@
 .lt-num{height:48rpx;border-left:2rpx solid #D5B98F;border-right:2rpx solid #D5B98F}
 .lt-table{color:#666;font-weight:normal;height:400rpx;overflow:scroll;height:350rpx;margin-bottom:150rpx;margin-top:10px}
 .lt-tr{position:relative}
-.lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:80rpx}
+.lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:80rpx;}
+.jiage-t{position: absolute;top:-1rpx;border: 2rpx solid #CCAA77;padding: 0 5rpx;color:#CCAA77;height: 30rpx;line-height: 30rpx;border-radius: 5rpx;}
 .lt-tr>view.setCss{line-height:30rpx;width:40%}
 .lt-tr>view:last-child{padding-top:20rpx;line-height:60rpx;width:32%}
 .lt-tr>view.add-xian{text-decoration:line-through}

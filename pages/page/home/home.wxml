@@ -161,17 +161,25 @@
       </view>
     </block>
   </view>
-
-  <!-- <view class='add-firend' wx:if='{{limitShow==1}}' bindtap='addTip'>
-  <view>商</view>点此加为商友，即刻查看批发价！
-  <image src='/image/mallr.png'></image>
-</view> -->
-  <!-- <view class='add-firend add-firend1' wx:if='{{limitShow==1}}'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view> -->
-  <!-- <view class='add-firend add-firend2' wx:if='{{limitShow==3}}'>
-  <view>友</view>已成商友，现可查看批发价！</view> -->
-  <!-- <view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view> -->
-  <view class="swiper-tab" id='swiper-tab'>
-    <!-- <form class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" bind:submit="swichNav" data-current="0"   report-submit="true"> <button formType="submit">综合</button><view></view></form> -->
+  <view class='add-firend add-firend2' wx:if='{{limitShow==3}}'>
+    <view>友</view>已成商友，现可查看批发价！
+    <image src='/image/mallr.png'></image>
+  </view>
+  <view class='tab-cont'>
+    <view class='tab-view'>
+      <view bindtap='tabSwitch' wx:if="{{tabSwitchShow}}" data-index='0' class='tab-one {{tabSwitch=="0"?"tab-act":""}}'>正在抢订</view>
+      <view bindtap='tabSwitch' wx:if="{{tabSwitchShow}}" data-index='1' class='tab-one-1{{tabSwitch=="1"?"tab-act":""}}'>更多商品</view>
+      <view bindtap='tabSwitch' wx:if="{{!tabSwitchShow}}" data-index='0' class='tab-two-1'>正在抢订</view>
+      <view bindtap='tabSwitch' wx:if="{{!tabSwitchShow}}" data-index='1' class='tab-two'>更多商品</view>
+      <view class='stop-time'>
+        距结束
+        <text>01</text> :
+        <text>12</text> :
+        <text>01</text>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!tabSwitchShow}}" class="swiper-tab" id='swiper-tab'>
     <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
       <view></view>
     </view>
@@ -192,7 +200,72 @@
     </view>
 
   </view>
-  <view class="result result-box" wx:if="{{result.length > 0}}">
+  <!-- 活动商品 -->
+  <view wx:else class="swiper-tab active-nav" id='swiper-tab'>
+    <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
+      <view></view>
+    </view>
+    <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">新品
+      <view></view>
+    </view>
+    <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">销量
+      <view></view>
+    </view>
+    <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
+      <view></view>
+    </view>
+    <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">新品
+      <view></view>
+    </view>
+    <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">销量
+      <view></view>
+    </view>
+    <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
+      <view></view>
+    </view>
+    <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">新品
+      <view></view>
+    </view>
+    <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">销量
+      <view></view>
+    </view>
+  </view>
+  <view class='dc-list' wx:if="{{result.length > 0 && tabSwitchShow}}">
+    <view wx:for="{{result}}" wx:key="index" class='{{item.isHide?"opa-view":""}}'>
+      <view>
+        <image class='g-img' src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small" />
+      </view>
+      <view class='dc-cont'>
+        <view class='s-name'>{{item.name}}</view>
+        <view class='dc-price'>
+          <view class='shan'>
+            <image mode="widthFix" src="/image/shan.png" />抢订价</view>
+          ￥
+          <text>1234</text>
+          <view class='goods-zize'>￥5847</view>
+          <image bindtap='copyGoods' class='copy-img' src="/image/dd.png" />
+        </view>
+        <view class='dc-xian'>
+          <view>
+            <view></view>
+          </view>
+          <text>已抢50%</text>
+        </view>
+      </view>
+      <!-- <view class='isHideacti'>
+        <block>
+          <image src="/image/isshow.png"></image>
+          <view>该商品</view>
+          <view>加商友可见</view>
+        </block>
+        <block>
+          <view class='no-a-goods'>已抢光</view>
+        </block>
+      </view> -->
+    </view>
+  </view>
+  <!-- 结束 -->
+  <view class="result result-box" wx:if="{{result.length > 0 && !tabSwitchShow}}">
     <view class='goods-total'>
       <text>{{goodsNum==null?0:goodsNum}}</text>
       <view></view>
@@ -201,6 +274,7 @@
     <scroll-view scroll-y="true" style="height:100%;">
       <view class='flex-boxx'>
         <view class="result-list" wx:for="{{result}}" wx:key="index" id='{{index==0?"result-list":""}}'>
+          <view class='ac-time'>限时抢购</view>
           <view wx:if='{{item.isHide}}' class='isHideGoods'>
             <image src="/image/isshow.png"></image>
             <view>该商品</view>
@@ -252,14 +326,18 @@
       <view class='nomore'>优生活技术支持</view>
     </scroll-view>
   </view>
-  <view class="result-null" wx:else>
+  <!-- <view class="result-null" wx:else>
     <view class="nomore">
       <view>
         <image src="/image/nohome.png"></image>
       </view>
-      暂时还没有上架商品
+      <block>
+        <view class='no-active'>暂时没有抢订</view>
+        <text>我们正在为您准备更优惠的商品</text>
+      </block>
+      <block>暂时还没有上架商品</block>
     </view>
-  </view>
+  </view> -->
   <view class='showHide' hidden='{{showHide}}'>
     <view class='sh-cont'>
       <view>
@@ -270,20 +348,10 @@
       <view bindtap='closeShow'>取消</view>
     </view>
   </view>
-  <!-- <view class='showHide' hidden='{{showDp}}'>
-  <view class='sh-cont'>
-    <view class='sh-title'>更换{{globalData.projectName}}封面</view>
-    <view bindtap="chooseImage">拍照</view>
-    <view bindtap="chooseImage">从手机相册选取</view>
-    <view bindtap='closeShow'>取消</view>
-  </view>
-</view> -->
   <view hidden='{{indexEmpty}}'>
     <no></no>
   </view>
   <view hidden='{{goRetailStore}}'>
     <retailStore></retailStore>
   </view>
-
-
 </returnBall>

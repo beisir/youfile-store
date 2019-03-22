@@ -51,6 +51,24 @@ Page({
     copyGoods: false,
     openStore: false,
     tipIndex: 0,
+    tabSwitch: "0",
+    tabSwitchShow:true
+  },
+  // 切换抢购商品
+  tabSwitch:function(e){
+    var index = e.target.dataset.index
+    if(index=="1"){
+      this.setData({
+        tabSwitchShow: false
+      })
+    }else{
+      this.setData({
+        tabSwitchShow: true
+      })
+    }
+    this.setData({
+      tabSwitch:index
+    })
   },
   //到店弹框
   showStoreOrder() {

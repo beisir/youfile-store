@@ -3,6 +3,9 @@
 .result-list image{background:none}
 .result-list .r-h{height:80rpx}
 .result-list{height:520rpx}
+.search-box{background: #f7f7f7}
+.serCont{font-size: 28rpx;font-weight: bold;color: #333;padding-top: 26rpx;}
+.search-input{background: #fff;}
 .result-list .result-text2{margin-top:10rpx;color:#666}
 .isHideGoods{position: absolute;width:330rpx;height: 330rpx;background:rgba(201, 201, 201, 0.9);left: 0rpx;z-index: 10;text-align: center;font-size: 30rpx;color: #fff;}
 .isHideGoods view{line-height: 1.3}
