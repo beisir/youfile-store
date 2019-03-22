@@ -39,7 +39,7 @@
   <view wx:if="{{!edit}}" class='title-box flex-between'>
     <view class='flex-center'> 
       <text class='title-font'>{{tag.name}}</text>
-      <text class='img-num-text'>共{{tag.goodsPosterCount}}张</text>
+      <text class='img-num-text'>共{{tag.goodsPosterCount?tag.goodsPosterCount:0}}张</text>
     </view>
     <view class='flex-center'>
       <image bindtap='showModal' wx:if="{{tag.name!=='默认专辑'}}" data-type='del' style='width:37rpx;height:36rpx;margin-right:50rpx;' src='/image/sRe.png'></image>
