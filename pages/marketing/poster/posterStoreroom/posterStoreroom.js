@@ -27,7 +27,7 @@ Page({
     this.setData({ newName: val})
   },
   addStore(){
-    let val = this.data.newName;
+    let val = this.data.newName.trim();
     if (val.length > 0) {
       API.addPosterTag({ name: val }).then(res => {
         API.showToast(res.message)
@@ -36,6 +36,8 @@ Page({
           this.getStore()
         },800)
       })
+    }else{
+      API.showToast("请输入专辑名称")
     }
   }, 
   closeModal(){

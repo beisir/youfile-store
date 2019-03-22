@@ -166,6 +166,7 @@ import {
   toOtherPosterTagUrl,
   delAllPosterUrl,
   getPosterTagMsgUrl,
+  simpleStoreMsgUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1022,7 +1023,7 @@ function posterModuleList(data){
   return app.http.getRequest(posterModuleListUrl,data)
 }
 function uploadPoster(data){
-  return app.http.putRequest(uploadPosterUrl,data)
+  return app.http.putRequest(uploadPosterUrl, data, {}, true)
 }
 // 专辑
 function addPosterTag(data){  // 添加专辑
@@ -1053,9 +1054,13 @@ function toOtherPosterTag(data){
 function delAllPoster(data){  // 全删
   return app.http.deleteRequest(delAllPosterUrl + '?tagCode=' + data.tagCode , data)
 }
-
+// 获取店铺信息
+function simpleStoreMsg(data){
+  return app.http.getRequest(simpleStoreMsgUrl,data)
+}
 
 module.exports = {
+  simpleStoreMsg,
   getPosterTagMsg,
   uploadPoster,
   getPosterTagDetail,

@@ -1,6 +1,7 @@
 // pages/page/navigateMiddleware/navigateMiddleware.js
 import API from "../../../utils/api.js";
 import EnterStoreHandler from '../../../utils/enterStoreHandler.js';
+import { switchOptionsType } from '../../../utils/switch.js'
 
 import {
   handleQRCode
@@ -14,49 +15,6 @@ Page({
     options: {},
     indexEmpty:true,
     goRetailStore: true
-  },
-  
-  sitchType(){
-    let options = this.data.options
-
-    // 小程序二维码进入
-    if (options.scene) {
-      let scene = decodeURIComponent(options.scene);
-      let dataarr = scene.split("_");
-
-      // "G_" + storeId + "_" + goodsId  商品小程序码 "S_" + storeId 店铺小程序码
-      switch (dataarr[0]){
-        case 'G':
-          if(dataarr[2]){
-            wx.redirectTo({
-              url: '/pages/page/goodsDetails/goodsDetails?goodsId=' + dataarr[2]
-            })
-          }else{
-            API.showToast("缺少商品~~无法识别小程序码")
-          }
-        break;
-        case 'S':
-          console.log(dataarr[1], wx.getStorageSync('storeId'))
-          if (dataarr[1] === wx.getStorageSync('storeId')){
-            this.toHome()
-          } else {
-            API.showToast("进入店铺失败~~请稍后再试")
-          }
-        break;
-      }
-
-      return
-    }
-
-    // 普通二维码
-    if (options.q) {
-      handleQRCode(decodeURIComponent(this.data.options.q), 'middle')
-      return
-    }
-    // 跳转进入
-    if (!options.scene && !options.q) {
-
-    }
   },
 
   toHome() {
@@ -83,9 +41,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // options = { scene:'G_S1000349_181105902000' }
-    // options = { scene: 'S_S1000349' }
-
+    // options = { scene:'G_S1000415_190301124000' }
+    options = { scene: 'S_S1000638' }
     var _this = this
     if (options != undefined) {
       this.setData({
@@ -94,8 +51,9 @@ Page({
       let enEnterStoreHandler = new EnterStoreHandler("1");
       enEnterStoreHandler.enterStore(options).then(store => {
         _this.loadData()
+
         //进店成功
-        this.sitchType()
+        switchOptionsType(options)
 
       }).catch(store => {
         _this.loadData()
@@ -109,7 +67,7 @@ Page({
         }
       });
     }else{
-      this.sitchType()
+      switchOptionsType(this.data.options)
     }
     // handleQRCode('http://youlife.cn?type=ftforder&storeId=S1000349&code=880f1880e819c9ba1855f7975fb49236', 'middle', { q: 'http://youlife.cn?type=ftforder&storeId=S1000349&code=880f1880e819c9ba1855f7975fb49236'})
     // handleQRCode('http://youlife.cn?type=user&userId=cbced730cc43cead0592fbdd5ef10f99', 'middle', { q: 'http://youlife.cn?type=user&userId=cbced730cc43cead0592fbdd5ef10f99'})

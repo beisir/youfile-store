@@ -188,6 +188,8 @@ export const getMyWXPhoneUrl = '/api/weixin/user/decrypt'
 // 门店订单 买家
 export const ftfuserSureOrderUrl = '/api/ftf/order'
 export const ftfpreOrderDetailUrl = '/admin/ftf/order/{{qrCode}}/info'
+// 查询店铺信息
+export const simpleStoreMsgUrl = '/api/store/simple/{{storeId}}'
 /**
  * 海报
  * */ 

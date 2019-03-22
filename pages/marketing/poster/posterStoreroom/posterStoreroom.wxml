@@ -1,7 +1,7 @@
 <tips show='{{creatModal}}'>
   <text style='line-height:1;'>创建新专辑</text>
   <view class='showmodal'>
-    <input class='modal-input' maxlength='15' value='{{newName}}' bindinput='inputNewName'></input>
+    <input class='modal-input input-placeholder-common-color' placeholder='为你的专辑添加一个标题，最多6个字' maxlength='6' value='{{newName}}' bindinput='inputNewName' style='font-weight:500;'></input>
     <view class='btn-group'>
       <button class='cancel-btn' bindtap='closeModal'>取消</button>
       <button bindtap='addStore' class='{{newName.length==0?"noabled-btn":""}}'>确定</button>
@@ -12,7 +12,7 @@
 <view class='box'>
   <view class='chose-goods-box common-box flex-between'bindtap='createshow'>
     <view class='flex-center'>
-      <image class='goods-icon' src='/image/goods-bag.png'></image>
+      <image class='goods-icon' src='/image/poster-create.png'></image>
       <text class='title-font'>创建新专辑</text>
     </view>
     <image class='right-icon' src='/image/poster-right-in.png'></image>

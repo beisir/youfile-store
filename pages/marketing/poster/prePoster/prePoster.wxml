@@ -3,8 +3,8 @@
 <tips show='{{titleModal}}'>
   <text style='line-height:1;'>标题</text>
   <view class='showmodal'>
-    <view class='textarea-box'>
-      <textarea fixed='true' maxlength='55' bindinput='watchInput' data-type='title' value='{{titleVal}}'></textarea>
+    <view class='textarea-box' style='height:250rpx;'>
+      <textarea fixed='true' maxlength='55' bindinput='watchInput' data-type='title' value='{{titleVal}}' style='height:180rpx;'></textarea>
       <view class='layer-num'>{{titleVal.length}}/55</view>
     </view>
     <view class='btn-group'>
@@ -49,7 +49,7 @@
         <view class='inline' wx:for='{{moduleList}}' wx:key="{{index}}" bindtap='checkimg' data-index='{{index}}'>
           <view class='module-item'>
             <view class='img-box'>
-              <image class='module-img' src='{{item.posterExamplePath}}'></image>
+              <image class='module-img' src='{{baseUrl + item.posterExamplePath}}'></image>
               <image hidden='{{!item.checked}}' class='check-icon' src='/image/checked-right.png'></image>
             </view>
             <text>{{item.posterName}}</text>

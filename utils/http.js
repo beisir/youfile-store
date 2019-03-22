@@ -1,7 +1,8 @@
 import AuthHandler from './authHandler.js';
 import {
   baseUrl,
-  uploadImg
+  uploadImg,
+  imageUrl
 } from './const.js'
 /**
  请求
@@ -55,12 +56,12 @@ class request {
    */
   requestAll(url, data, method, customHeader, hideLoading) {
     wx.showNavigationBarLoading()
-    if (!hideLoading){
+    if (!hideLoading) {
       wx.showLoading({
         title: "正在加载",
       })
     }
-    
+
     return new Promise((resolve, reject) => {
       url = this.analysisUrl(url, data);
       var header = (customHeader === undefined || customHeader == null || customHeader == "") ? this.defaultHeader : customHeader;
@@ -70,10 +71,6 @@ class request {
         } else {
           delete header['Authorization'];
         }
-        // var formId = wx.getStorageSync('formId')
-        // var storeId = wx.getStorageSync('storeId')
-        // header['formId'] = formId;
-        // header['storeId'] = storeId;
         wx.request({
           url: this._baseUrl + url,
           data: data,
@@ -87,24 +84,24 @@ class request {
               if (res.data.code == 0) {
                 resolve(res.data);
               } else if (res.data.code == 1) {
-                setTimeout(()=>{
+                setTimeout(() => {
                   wx.showToast({
                     title: res.data.message,
                     duration: 4000,
                     icon: 'none'
                   })
-                },0)
+                }, 0)
                 reject(res);
               } else {
                 reject(res);
               }
             } else if (res.statusCode === 401) {
-              if (res.data && res.data.error_description 
-                  && res.data.error_description.indexOf("Access token expired")!=-1){
+              if (res.data && res.data.error_description &&
+                res.data.error_description.indexOf("Access token expired") != -1) {
                 this.authHandler.flushTokenInfo();
-              }else{
-              curPage.loginCom = curPage.selectComponent("#login");
-              curPage.loginCom.showPage();
+              } else {
+                curPage.loginCom = curPage.selectComponent("#login");
+                curPage.loginCom.showPage();
               }
               reject(res)
             } else {
@@ -134,11 +131,11 @@ class request {
   /**
    * 上传图片
    */
-  chooseImageUpload(types) {
-    return this.chooseImage(types)
+  chooseImageUpload(types, ifUploadMore, index) {
+    return this.chooseImage(types, ifUploadMore, index)
   }
 
-  chooseImage(types) {
+  chooseImage(types, ifUploadMore, index) {
     wx.showNavigationBarLoading()
     wx.showLoading({
       title: "正在加载",
@@ -153,31 +150,50 @@ class request {
           delete header['Authorization'];
         }
         wx.chooseImage({
-          count: 1,
+          count: ifUploadMore ? 6 : 1,
           sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
           sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
           success: function(res) {
-            var imgSrc = res.tempFilePaths;
-            var tempFilePaths = res.tempFilePaths
-            wx.uploadFile({
-              url: uploadImg,
-              filePath: tempFilePaths[0],
-              name: 'file',
-              header: header,
-              formData: {
-                'type': types ? types:""
-              },
-              success: (res => {
-                if (res.statusCode === 200) {
-                  resolve(res.data)
-                } else {
-                  if (this._errorHandler != null) {
-                    this._errorHandler(res)
+            var tempFilePaths = res.tempFilePaths;
+            for (var v of tempFilePaths) {
+              wx.uploadFile({
+                url: uploadImg,
+                filePath: v,
+                name: 'file',
+                header: header,
+                formData: {
+                  'type': types ? types : ""
+                },
+                success: (res => {
+                  if (res.statusCode === 200) {
+                    let pages = getCurrentPages()
+                    let curPage = pages[pages.length - 1]
+                    // 多张
+                    if (ifUploadMore){
+                      var addGoodsDetails = curPage.data.addGoodsDetails
+                      if (index) {
+                        addGoodsDetails.splice(index, 0, { "img": imageUrl + JSON.parse(res.data).obj })
+                      } else {
+                        addGoodsDetails.push({
+                          "img": imageUrl + JSON.parse(res.data).obj
+                        })
+                      }
+                      curPage.setData({
+                        addGoodsDetails: addGoodsDetails
+                      })
+                    }else{
+                      resolve(res.data)
+                    }
+                  } else {
+                    if (this._errorHandler != null) {
+                      this._errorHandler(res)
+                    }
+                    reject(res)
                   }
-                  reject(res)
-                }
-              }),
-            })
+                }),
+
+              })
+            }
           },
           fail: (res => {
             if (this._errorHandler != null) {
@@ -197,7 +213,7 @@ class request {
     return new Promise((resolve, reject) => {
       wx.chooseImage({
         count: 1,
-        sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+        sizeType: ['original'], // original 原图，compressed 压缩图，默认二者都有
         sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
         success: function(res) {
           resolve(res)
@@ -208,12 +224,12 @@ class request {
       })
     })
   }
-  onlyUploadImg(url, types,noLoading) {
-    if(!url){
+  onlyUploadImg(url, types, noLoading) {
+    if (!url) {
       console.warn('no upload url')
       return
     }
-    
+
     return new Promise((resolve, reject) => {
       this.authHandler.getTokenOrRefresh().then(token => {
         var header = this.defaultUploadHeader
@@ -222,19 +238,18 @@ class request {
         } else {
           delete header['Authorization'];
         }
-        if (!noLoading){
+        if (!noLoading) {
           wx.showLoading({
             title: '上传中',
           })
         }
-        
         wx.uploadFile({
           url: uploadImg,
           filePath: url,
           name: 'file',
           header: header,
           formData: {
-            'type': types ? types:""
+            'type': types ? types : ""
           },
           success: (res => {
             if (res.statusCode === 200) {
@@ -246,7 +261,7 @@ class request {
               reject(res)
             }
           }),
-          complete: (res=>{
+          complete: (res => {
             if (!noLoading) {
               wx.hideLoading();
             }

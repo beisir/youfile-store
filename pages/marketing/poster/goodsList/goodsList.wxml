@@ -31,7 +31,7 @@
     <!-- 图片 -->
     <view class='goods-img-box' hidden='{{!item.checked}}'>
       <view class='goods-img-item' wx:for="{{item.goodsImageVOList}}" wx:key="{{index}}" wx:for-item='ii' wx:for-index="imgindex" bindtap='checkedImg' data-index="{{imgindex}}" data-goodsindex="{{index}}" data-item="{{ii}}">
-        <image class='' src='{{baseUrl+ii.imageUrl}}'></image>
+        <image class='' src='{{baseUrl+ii.imageUrl}}?x-oss-process=style/goods-small'></image>
         <image wx:if='{{ii.checked}}' class='img-chose-icon' src='/image/square-check.png'></image>
         <image wx:else class='img-chose-icon' src='/image/square-uncheck.png'></image>
       </view>

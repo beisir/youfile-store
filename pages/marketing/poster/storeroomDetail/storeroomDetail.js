@@ -55,14 +55,14 @@ Page({
     this.setData({ edit: true, newName:this.data.tag.name})
   },
   endEdit(){
-    if(!this.data.newName){
+    if(!this.data.newName.trim()){
       API.showToast('请填写新名字')
       return 
     }
     if (this.data.newName !== this.data.tag.name){
       API.updatePosterTagName({
         tagCode: this.data.code,
-        name: this.data.newName
+        name: this.data.newName.trim()
       }).then(res => {
         this.getMsg()
       })
@@ -188,8 +188,11 @@ Page({
       originTagCode: this.data.tag.code
     }).then(res=> {
       API.showToast(res.message)
-      this.getThisPage()
-      this.getMsg()
+      setTimeout(()=>{
+        this.getThisPage()
+        this.getMsg()
+      },800)
+      
     })
     this.closeModal()
   },

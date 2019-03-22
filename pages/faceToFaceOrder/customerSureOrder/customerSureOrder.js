@@ -30,13 +30,32 @@ Page({
   toHome() {
     API.toHome()
   },
+  addOrder(){
+    API.ftfuserSureOrder({ qrCode: this.data.qrCode, payType: 'online' }).then(res => {
+      this.setData({
+        code: res.obj.orderNumber
+      },()=>{
+        this.getData();
+      })
+    }).catch(e => {
+      if (e.data.code === '1') {
+        setTimeout(() => {
+          API.toHome()
+        }, 1000)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      code: options.code
-    })
+    if (options){
+      this.setData({
+        qrCode: options.qrCode,
+      })
+    }
+   
+    this.addOrder()
   },
 
   /**
@@ -50,7 +69,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getData();
   },
 
   /**

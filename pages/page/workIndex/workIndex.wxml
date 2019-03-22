@@ -104,9 +104,9 @@
   <view class='wx-bot-cont'>
     <navigator url='../../marketing/poster/posterStoreroom/posterStoreroom'>
       <view>
-        <image mode='widthFix' src='/image/ad1.png'></image>
+        <image mode='widthFix' src='/image/pic-icon.png'></image>
       </view>
-      <view>商品码海报</view>
+      <view>商品海报库</view>
     </navigator>
   </view>  
 </view>  

@@ -42,12 +42,12 @@
       <text class='img-num-text'>共{{tag.goodsPosterCount}}张</text>
     </view>
     <view class='flex-center'>
-      <image bindtap='showModal' data-type='del' style='width:37rpx;height:36rpx;margin-right:50rpx;' src='/image/sRe.png'></image>
+      <image bindtap='showModal' wx:if="{{tag.name!=='默认专辑'}}" data-type='del' style='width:37rpx;height:36rpx;margin-right:50rpx;' src='/image/sRe.png'></image>
       <image bindtap='startEdit' style='width:35rpx;height:35rpx;' src='/image/poster-edit.png'></image>
     </view>
   </view>
   <view wx:else class='title-box flex-between'>
-    <input type='text' maxlength='15' class='title-input' bindinput='newName' value='{{newName}}'></input>
+    <input type='text' maxlength='6' disabled="{{tag.name==='默认专辑'}}" class='title-input' bindinput='newName' value='{{newName}}'></input>
     <view class='flex-center'>
       <text bindtap='showModal' data-type='delAllPoster' class='gold-color' style='font-size:26rpx;margin-right:30rpx;'>全部清空</text>
       <image bindtap='endEdit' style='width:38rpx;height:38rpx;' src='/image/edit-right.png'></image>

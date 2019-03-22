@@ -107,7 +107,7 @@ Page({
       let imgarr = this.data.img;
       let porimseArr = [];
       wx.showLoading({
-        title: '正在上传',
+        title: '正在放入专辑',
         mask: true
       })
       imgarr.forEach(el => {
