@@ -125,7 +125,7 @@ Page({
     this.setData({ templateId: arr[0].id})
     var obj = this.posterStrParse(arr[0].posterConfig, {
       imageUrl: this.data.baseUrl,
-      goodsName: this.data.sureTitleVal ? this.data.sureTitleVal:this.data.goods.name,
+      goodsName: this.data.sureTitleVal ? this.data.sureTitleVal.trim():this.data.goods.name,
       goodsDes: this.data.sureDesVal ? this.data.sureDesVal:'',
       goodsImg: this.data.baseUrl + imgUrl,
       storeName: this.data.goods.storeName ? this.data.goods.storeName:'',

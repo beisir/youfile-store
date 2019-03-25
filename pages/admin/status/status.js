@@ -49,6 +49,9 @@ Page({
       this.selectComponent("#shareway").open();
     })
   },
+  hideBottom(){
+    this.selectComponent("#shareway").close();
+  },
   // 判断手机是ios还是安卓
   getIsIos() {
     var phone = wx.getSystemInfoSync()
