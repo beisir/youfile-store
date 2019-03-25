@@ -17,7 +17,7 @@
 
 /* 弹框 */
 .showmodal{font-size:30rpx;padding: 50rpx 40rpx;}
-.modal-input{border-bottom: 1rpx solid #ddd;margin-bottom: 50rpx;text-align: left;padding:15rpx 0;font-size:30rpx;}
+.modal-input{border-bottom: 1rpx solid #ddd;margin-bottom: 50rpx;text-align: left;padding:15rpx 0;font-size:30rpx;font-weight: 500;}
 .btn-group{display: flex;justify-content: space-between;}
 .btn-group button{margin: 0;}
 .cancel-btn{color: #999;border: 1rpx solid #ddd;background: #fff;}

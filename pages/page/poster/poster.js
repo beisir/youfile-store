@@ -89,7 +89,7 @@ Page({
    * 
    * ***/
   creatblue(){
-    let bluestr = '{ "width": 750, "height": 1600, "debug": false, "init": true, "backgroundColor": "white",  "images": [{ "x": 0, "y": 0, "width": 750, "height": 1603, "url": "{{imageUrl}}marketing/poster/WechatIMG18.jpeg","zIndex": 1000 }]}'
+    let bluestr = '{ "width": 750, "height": 1600, "debug": false, "init": true, "backgroundColor": "white",  "images": [{ "x": 0, "y": 0, "width": 750, "height": 1603, "url": "{{imageUrl}}/marketing/poster/qianmu-background.png","zIndex": 1000 }]}'
     // {{imageUrl}}marketing/poster/WechatIMG18.jpeg
     // {{imageUrl}}/marketing/poster/qianmu-background.png
     // /image/blue-back.png

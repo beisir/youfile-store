@@ -17,7 +17,7 @@
   <text style='line-height:1;'>推荐心语</text>
   <view class='showmodal'>
     <view class='textarea-box' style='height:250rpx;'>
-      <textarea  value='{{desVal}}' fixed='true' maxlength='60' bindinput='watchInput' data-type='des' style='height:180rpx;'></textarea>
+      <textarea placeholder='简单描述下，让顾客了解商品特点及细节~' placeholder-class='input-placeholder-common-color' value='{{desVal}}' fixed='true' maxlength='60' bindinput='watchInput' data-type='des' style='height:180rpx;'></textarea>
       <view class='layer-num'>{{desVal.length}}/60</view>
     </view>
     <view class='btn-group'>
