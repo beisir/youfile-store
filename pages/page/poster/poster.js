@@ -89,8 +89,10 @@ Page({
    * 
    * ***/
   creatblue(){
-    let bluestr = '{ "width": 750, "height": 1600, "debug": false, "init": true, "backgroundColor": "white",  "images": [{ "x": 0, "y": 0, "width": 750, "height": 1603, "url": "{{imageUrl}}/marketing/poster/qianmu-background.png","zIndex": 10 }]}'
-
+    let bluestr = '{ "width": 750, "height": 1600, "debug": false, "init": true, "backgroundColor": "white",  "images": [{ "x": 0, "y": 0, "width": 750, "height": 1603, "url": "{{imageUrl}}marketing/poster/WechatIMG18.jpeg","zIndex": 1000 }]}'
+    // {{imageUrl}}marketing/poster/WechatIMG18.jpeg
+    // {{imageUrl}}/marketing/poster/qianmu-background.png
+    // /image/blue-back.png
     var obj = this.posterStrParse(bluestr, {
       imageUrl: app.globalData.imageUrl,
       goodsName: "儿儿童装儿童装儿童装童装",

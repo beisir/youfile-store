@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/page/poster/poster",
     "pages/marketing/poster/success/success",
     "pages/admin/status/status",
     "pages/marketing/poster/posterStoreroom/posterStoreroom",
-    "pages/page/poster/poster",
     "pages/page/navigateMiddleware/navigateMiddleware",
     "pages/marketing/poster/prePoster/prePoster",
     "pages/marketing/poster/goodsList/goodsList",
