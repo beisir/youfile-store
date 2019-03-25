@@ -1,0 +1,30 @@
+<tips show='{{creatModal}}'>
+  <text style='line-height:1;'>创建新专辑</text>
+  <view class='showmodal'>
+    <input class='modal-input' placeholder-class='input-placeholder-common-color' placeholder='为你的专辑添加一个标题，最多6个字' maxlength='6' value='{{newName}}' bindinput='inputNewName' style='font-weight:500;'></input>
+    <view class='btn-group'>
+      <button class='cancel-btn' bindtap='closeModal'>取消</button>
+      <button bindtap='addStore' class='{{newName.length==0?"noabled-btn":""}}'>确定</button>
+    </view>
+  </view>
+</tips>
+
+<view class='box'>
+  <view class='chose-goods-box common-box flex-between'bindtap='createshow'>
+    <view class='flex-center'>
+      <image class='goods-icon' src='/image/poster-create.png'></image>
+      <text class='title-font'>创建新专辑</text>
+    </view>
+    <image class='right-icon' src='/image/poster-right-in.png'></image>
+  </view>
+  <!-- 仓库 -->
+  <navigator url='../storeroomDetail/storeroomDetail?code={{item.code}}' class='common-box storeroom-item' wx:for='{{storeroom}}' wx:key='{{index}}'>
+    <view class='storeroom-title'>{{item.name}} · 共{{item.goodsPosterCount?item.goodsPosterCount:0}}张</view>
+    <view class='all-img-box' wx:if='{{item.goodsPosterVOs.length > 0}}'>
+      <view wx:for='{{item.goodsPosterVOs}}' wx:for-index='imgIndex' wx:key='{{imgIndex}}' wx:for-item='img' wx:if="{{imgIndex<4}}" class='show-img-box'>
+        <image lazy-load='true' src='{{baseUrl+img.poster}}?x-oss-process=style/poster-small'></image>
+      </view>
+    </view>
+  </navigator>
+</view>  
+<navigator url='../prePoster/prePoster' class='red-btn'>一键生成海报</navigator>

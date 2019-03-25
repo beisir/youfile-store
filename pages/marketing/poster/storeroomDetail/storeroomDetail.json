@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "layer": "/assembly/layer/layer"
+  },
+  "navigationBarTitleText": "海报专辑"
+}

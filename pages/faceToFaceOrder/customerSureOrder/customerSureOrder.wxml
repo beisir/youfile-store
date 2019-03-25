@@ -1,6 +1,6 @@
 <wxs src="../../../public/filter.wxs" module="filter" />
 <login closeBtnType='tohome' id="login"></login>
-
+<block wx:if="{{order}}">
 <view class='common-box padding-box flex-center lasttime-box'>
   <image class='time-icon' src='/image/gold-time.png'></image>
   <view>剩余支付时间：{{clock?clock:''}}</view>
@@ -41,3 +41,4 @@
 </view>
 
 <view class='bottom-btn' bindtap='pay'>确认订单</view>
+</block>

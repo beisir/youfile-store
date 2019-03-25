@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "tips": "/assembly/tips/tips",
+    "poster": "wxa-plugin-canvas/poster"
+  },
+  "navigationBarTitleText": "生成商品码海报"
+}

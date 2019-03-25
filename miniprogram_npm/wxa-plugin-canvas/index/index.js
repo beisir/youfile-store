@@ -252,7 +252,7 @@ const helper = {
           const setHeight = image.height;
           const width = this.toRpx(imgInfo.width);
           const height = this.toRpx(imgInfo.height);
-
+          
           if (width / height <= setWidth / setHeight) {
             sx = 0;
             sy = (height - ((width / setWidth) * setHeight)) / 2;

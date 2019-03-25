@@ -1,1 +1,7 @@
 <login closeBtnType='tohome' id="login"></login>
+<view hidden='{{indexEmpty}}'>
+  <no></no>
+</view>
+<view hidden='{{goRetailStore}}'>
+  <retailStore></retailStore>
+</view>

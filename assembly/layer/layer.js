@@ -11,6 +11,10 @@ Component({
     show:{
       type:Boolean,
       value: false
+    },
+    hasline:{
+      type: Boolean,
+      value: false
     }
   },
 

@@ -1,9 +1,16 @@
 {
   "pages": [
     "pages/page/home/home",
-    "pages/admin/addGoods/addGoods",
+    "pages/page/poster/poster",
+    "pages/marketing/poster/success/success",
     "pages/admin/status/status",
+    "pages/marketing/poster/posterStoreroom/posterStoreroom",
     "pages/page/navigateMiddleware/navigateMiddleware",
+    "pages/marketing/poster/prePoster/prePoster",
+    "pages/marketing/poster/goodsList/goodsList",
+    "pages/marketing/poster/storeroomDetail/storeroomDetail","pages/page/workIndex/workIndex",
+    "pages/marketing/poster/choseGoodsimg/choseGoodsimg",
+    "pages/admin/addGoods/addGoods",
     "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
     "pages/admin/shopClass/shopClass",
@@ -18,14 +25,12 @@
     "pages/page/user/user",
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
-    "pages/page/poster/poster",
     "pages/admin/goodsSpec/goodsSpec",
     "pages/admin/specSet/specSet",
     "pages/businessFriend/merchant/list/list",
     "pages/businessFriend/merchant/index/index",
     "pages/capital/bank/bank",
     "pages/capital/index/index",
-    "pages/page/workIndex/workIndex",
     "pages/capital/record/record",
     "pages/page/address/address",
     "pages/page/payWay/payWay",
@@ -168,6 +173,7 @@
   "navigateToMiniProgramAppIdList": [
     "wx6241529c7dc70d51",
     "wx1a7532a2abdd1698",
-    "wx5e0828787c26f235"
+    "wx5e0828787c26f235",
+    "wx3cfbe069368479ce"
   ]
 }

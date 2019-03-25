@@ -139,6 +139,7 @@ class request {
     wx.showNavigationBarLoading()
     wx.showLoading({
       title: "正在加载",
+      mask: true
     })
     return new Promise((resolve, reject) => {
       this.authHandler.getTokenOrRefresh().then(token => {
@@ -223,7 +224,7 @@ class request {
       })
     })
   }
-  onlyUploadImg(url, types) {
+  onlyUploadImg(url, types, noLoading) {
     if (!url) {
       console.warn('no upload url')
       return
@@ -237,9 +238,11 @@ class request {
         } else {
           delete header['Authorization'];
         }
-        wx.showLoading({
-          title: '上传中',
-        })
+        if (!noLoading) {
+          wx.showLoading({
+            title: '上传中',
+          })
+        }
         wx.uploadFile({
           url: uploadImg,
           filePath: url,
@@ -259,7 +262,9 @@ class request {
             }
           }),
           complete: (res => {
-            wx.hideLoading();
+            if (!noLoading) {
+              wx.hideLoading();
+            }
           })
         })
       })
