@@ -42,7 +42,7 @@ Page({
    */
   onLoad: function(options) {
     // options = { scene:'G_S1000415_190301124000' }
-    options = { scene: 'S_S1000638' }
+    // options = { scene: 'S_S1000638' }
     var _this = this
     if (options != undefined) {
       this.setData({

@@ -108,6 +108,10 @@ Page({
       API.showToast("该商品缺少商品主图，请先选择其他商品")
       return
     }
+    if (!this.data.sureTitleVal.trim()){
+      API.showToast("请输入商品标题")
+      return
+    }
     this.setData({ posterArr:false, postering: true})
     wx.showLoading({
       title: '海报生成中',

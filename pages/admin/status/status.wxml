@@ -1,6 +1,7 @@
 <bottomLayer closeBtn='{{false}}' title='图文分享更方便' id='shareway' height='475' btn="取消" align='center'>
   <view class='flex-between' style='height:100%;border-top:1rpx solid #eee;box-sizing:border-box;'>
     <navigator class='share-item' url='../../marketing/poster/prePoster/prePoster?goodsId={{shareItem.id}}'>
+      <view class='share-poster-tip'><block wx:if="{{!posterTip}}">新功能</block><block wx:else>已生成</block></view>
       <image src='/image/er-icon.png'></image>
       <text>商品码海报</text>
     </navigator>

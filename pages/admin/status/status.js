@@ -42,8 +42,12 @@ Page({
   },
   // 分享
   share(e){
-    this.setData({shareItem:e.currentTarget.dataset.item})
-    this.selectComponent("#shareway").open();
+    Api.goodsPosterNum({ goodsId: e.currentTarget.dataset.item.id}).then(res=> {
+      let posterTip = false
+      res.obj > 0 ? posterTip = true : posterTip = false
+      this.setData({ shareItem: e.currentTarget.dataset.item, posterTip})
+      this.selectComponent("#shareway").open();
+    })
   },
   // 判断手机是ios还是安卓
   getIsIos() {

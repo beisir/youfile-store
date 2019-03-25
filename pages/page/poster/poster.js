@@ -1,5 +1,6 @@
 // pages/page/poster/poster.js
 import Poster from '../../../miniprogram_npm/wxa-plugin-canvas/poster/poster.js';
+const app = getApp()
 Page({
 
   /**
@@ -88,10 +89,10 @@ Page({
    * 
    * ***/
   creatblue(){
-    let bluestr = '{ "width": 750, "height": 1600, "debug": false, "init": true, "backgroundColor": "white",  "images": [{ "x": 0, "y": 0, "width": 750, "height": 1600, "url": "{{backImg}}","zIndex": 10 },{ "x": 75, "y": 482, "height": 600, "width": 600, "url": "{{goodsImg}}", "zIndex": 1000 }, { "x": 560, "y": 1177, "height": 130, "width": 130, "url": "{{qrcode}}", "zIndex": 1000 }], "texts": [{ "x": 375, "y": 185, "text": "{{storeName}}", "fontSize": {{fontSize}}, "fontWeight": "bold","width": 700,"fontFamily": "STSong", "color": "#4f4f51", "textAlign": "center", "zIndex": 1000 }, { "x": 56, "y": 1200, "text": "{{goodsName}}", "width": 470, "lineNum": 2, "fontSize": 27, "lineHeight": 40, "fontWeight": "bold", "fontFamily": "STSong", "color": "#333", "zIndex": 1000 }, { "x": 56, "y": 1287, "text": "{{goodsDes}}", "width": 470, "lineNum": 4, "fontSize": 27, "lineHeight": 36, "fontFamily": "STSong", "color": "#333", "zIndex": 1000 }, { "x": 563, "y": 1337, "text": "识别小程序码了解商品详情", "width": 120, "lineNum": 2, "fontSize": 20, "lineHeight": 30, "fontFamily": "STSong", "color": "#666", "zIndex": 1000 }], "lines": [] }'
+    let bluestr = '{ "width": 750, "height": 1600, "debug": false, "init": true, "backgroundColor": "white",  "images": [{ "x": 0, "y": 0, "width": 750, "height": 1603, "url": "{{imageUrl}}/marketing/poster/qianmu-background.png","zIndex": 10 }]}'
 
     var obj = this.posterStrParse(bluestr, {
-      backImg: '/image/back1.png',
+      imageUrl: app.globalData.imageUrl,
       goodsName: "儿儿童装儿童装儿童装童装",
       goodsDes: 'yueyuejuanyuejuanyuejuanyuejuanyuejuanyuejuanyuejuanyuejuanyuejuanjuan',
       goodsImg: 'https://dev-image.youlife.net.cn/goods/41050839-567f-4b74-8065-efe1c25ed0f0.jpg?x-oss-process=style/general',

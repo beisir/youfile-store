@@ -41,6 +41,7 @@ scroll-view{margin-top:0rpx;padding-bottom:100rpx}
 .showHidet {position: fixed;height: 172rpx;z-index: 9999;background: rgba(0,0,0,0.3)}
 /* 分享 */
 .share-item{width: 50%;display: flex;flex-direction: column; align-items: center;padding-top:40rpx;height: 100%;box-sizing: border-box;position: relative;}
+.share-poster-tip{height: 30rpx;padding: 0 13rpx;line-height: 30rpx;background:#f14c38;color: #fff;font-size: 24rpx;border-radius: 30rpx;position:absolute;right:76rpx;top:26rpx;}
 .share-item image{height: 97rpx;width: 97rpx;margin-bottom: 30rpx;}
 .share-item text{font-size: 28rpx;}
 .share-item button{background: rgba(255,255,255,0);padding:0;margin:0;border: 0;position: absolute;width: 90%;height: 90%;box-sizing: border-box;top: 0;}

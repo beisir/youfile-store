@@ -66,7 +66,14 @@ Page({
         })
       },
       fail(e) {
-        API.showToast("您未授权相册权限~")
+        wx.openSetting({
+          success(res) {
+            console.log(res.authSetting)
+          },
+          fail(e){
+            console.log(e)
+          }
+        })
       }
     })
   },

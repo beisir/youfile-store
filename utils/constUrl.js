@@ -205,5 +205,5 @@ export const getPosterTagDetailUrl = '/admin/marketing/poster/tag/{{tagCode}}'
 export const delPosterArrUrl = '/admin/marketing/poster/batch'
 export const toOtherPosterTagUrl = '/admin/marketing/poster/tag'
 export const delAllPosterUrl = '/admin/marketing/poster/tag/poster'
-
+export const goodsPosterNumUrl = '/admin/marketing/poster/goods/{{goodsId}}/count'
 

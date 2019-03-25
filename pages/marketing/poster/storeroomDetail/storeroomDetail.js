@@ -56,7 +56,7 @@ Page({
   },
   endEdit(){
     if(!this.data.newName.trim()){
-      API.showToast('请填写新名字')
+      API.showToast('请输入专辑名称')
       return 
     }
     if (this.data.newName !== this.data.tag.name){
@@ -87,7 +87,7 @@ Page({
           }
         })
         if (arr.length == 0) {
-          API.showToast("请选择图片")
+          API.showToast("请选择海报")
           return
         }
         wx.showLoading({
@@ -136,7 +136,7 @@ Page({
   toOtherStoreroom(){
     let arr = this.data.img.filter(el => el.checked)
     if (arr.length == 0) {
-      API.showToast("请选择图片")
+      API.showToast("请选择海报")
       return
     }
     this.setData({ storeroomModul:true})
@@ -229,9 +229,11 @@ Page({
   // 全部清空
   delAllPoster(){
     API.delAllPoster({tagCode: this.data.code}).then(res=>{
-      API.showToast(res.message)
-      this.getMsg()
-      this.getPage(true)
+      API.showToast('该专辑下的海报全部清空成功~')
+      setTimeout(()=> {
+        this.getMsg()
+        this.getPage(true)
+      },800)
     })
     this.closeModal()
   },

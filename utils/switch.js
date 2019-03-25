@@ -61,6 +61,12 @@ function parseQRcode(options) {
           data: { qrCode: obj.code}
         }
         break;
+      case 'user':
+        return {
+          path: '/pages/page/home/home',
+          data: options
+        }
+        break;
     }
   }
 }

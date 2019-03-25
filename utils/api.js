@@ -167,6 +167,7 @@ import {
   delAllPosterUrl,
   getPosterTagMsgUrl,
   simpleStoreMsgUrl,
+  goodsPosterNumUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1054,12 +1055,16 @@ function toOtherPosterTag(data){
 function delAllPoster(data){  // 全删
   return app.http.deleteRequest(delAllPosterUrl + '?tagCode=' + data.tagCode , data)
 }
+function goodsPosterNum(data){
+  return app.http.getRequest(goodsPosterNumUrl,data)
+}
 // 获取店铺信息
 function simpleStoreMsg(data){
   return app.http.getRequest(simpleStoreMsgUrl,data)
 }
 
 module.exports = {
+  goodsPosterNum,
   simpleStoreMsg,
   getPosterTagMsg,
   uploadPoster,
