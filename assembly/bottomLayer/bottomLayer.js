@@ -38,7 +38,6 @@ Component({
    */
   methods: {
     open(){
-      console.log(this.data.height)
       this.setData({
         bottomLayer: false
       })
