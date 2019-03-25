@@ -50,7 +50,8 @@
     <input type='text' maxlength='6' disabled="{{tag.name==='默认专辑'}}" class='title-input' bindinput='newName' value='{{newName}}'></input>
     <view class='flex-center'>
       <text bindtap='showModal' data-type='delAllPoster' class='gold-color' style='font-size:26rpx;margin-right:30rpx;'>全部清空</text>
-      <image bindtap='endEdit' style='width:38rpx;height:38rpx;' src='/image/edit-right.png'></image>
+      <text bindtap='endEdit' class='gold-color' style='font-size:26rpx;'>完成</text>
+      <!-- <image bindtap='endEdit' style='width:38rpx;height:38rpx;' src='/image/edit-right.png'></image> -->
     </view>
   </view>
 
