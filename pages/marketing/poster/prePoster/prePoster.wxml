@@ -34,7 +34,7 @@
       <text class='title-font'>选择商品</text>
     </view>
     <view class='flex-center'>
-      <text wx:if='{{goods}}' class='gray-color' style='margin-right:20rpx;font-size:30rpx;'>已选择</text>
+      <text wx:if='{{goods}}' class='gray-color' style='margin-right:20rpx;font-size:30rpx;'>重新选择</text>
       <image class='right-icon' src='/image/poster-right-in.png'></image>
     </view>
   </navigator>

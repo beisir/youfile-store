@@ -104,33 +104,55 @@ Page({
     this.closeModal()
     // 上传图片
     if(room){
+      this.setData({chosedRoom:room})
       let imgarr = this.data.img;
       let porimseArr = [];
-      wx.showLoading({
-        title: '正在放入专辑',
-        mask: true
-      })
-      imgarr.forEach(el => {
-        porimseArr.push(app.http.onlyUploadImg(el,'',true))
-      })
-      Promise.all(porimseArr).then(res => {
-        let sendArr = []
-        res.forEach(el => {
-          sendArr.push({
-            goodsId: this.data.goodsId,
-            poster: JSON.parse(el).obj,
-            storeId: wx.getStorageSync('storeId'),
-            tagCodes: [room.code],
-            templateId: this.data.templateId
-          })
-        })
-        API.uploadPoster(sendArr).then(res => {
-          wx.hideLoading()
-          API.showToast(res.message)
-        })
-      })
+      // 串行上传
+      app.http.uploadImgArr(imgarr)
+      // 并行上传
+      // imgarr.forEach(el => {
+      //   porimseArr.push(app.http.onlyUploadImg(el,'',true))
+      // })
+      // Promise.all(porimseArr).then(res => {
+      //   let sendArr = []
+      //   res.forEach(el => {
+      //     sendArr.push({
+      //       goodsId: this.data.goodsId,
+      //       poster: JSON.parse(el).obj,
+      //       storeId: wx.getStorageSync('storeId'),
+      //       tagCodes: [room.code],
+      //       templateId: this.data.templateId
+      //     })
+      //   })
+      //   API.uploadPoster(sendArr).then(res => {
+      //     wx.hideLoading()
+      //     API.showToast(res.message)
+      //   })
+      // }).catch(e=>{
+      //   API.showToast("上传失败，请稍后再试")
+      // })
     }
-    
+  },
+  // 图片上传成功
+  mulImgUploadSuccess(res){
+    let sendArr = []
+    res.forEach(el => {
+      sendArr.push({
+        goodsId: this.data.goodsId,
+        poster: JSON.parse(el).obj,
+        storeId: wx.getStorageSync('storeId'),
+        tagCodes: [this.data.chosedRoom.code],
+        templateId: this.data.templateId
+      })
+    })
+    API.uploadPoster(sendArr).then(res => {
+      wx.hideLoading()
+      API.showToast(res.message)
+    })
+  },
+  mulImgUploadFail(e){
+    console.log(e)
+    API.showToast("上传失败请稍后再试")
   },
   closeModal(){
     this.setData({

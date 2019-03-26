@@ -471,6 +471,8 @@ Component({
             setTimeout(() => {
               wx.canvasToTempFilePath({
                 canvasId: 'canvasid',
+                quality: 0.5,
+                fileType: 'jpg',
                 success: (res) => {
                   this.triggerEvent('success', res.tempFilePath);
                 },

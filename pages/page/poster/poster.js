@@ -152,16 +152,39 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
+    // const ctx = wx.createCanvasContext('test');
 
+    // ctx.drawImage('/image/openpay-line.png', 0, 0, 200,200);
+    // ctx.draw()
   },
-
+  toRpx(px, int) {
+    const sysInfo = wx.getSystemInfoSync();
+    const screenWidth = sysInfo.screenWidth;
+    let factor = screenWidth / 750;
+    if (int) {
+      return parseInt(px / factor);
+    }
+    return px / factor;
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    const ctx = wx.createCanvasContext('test');
+    wx.downloadFile({
+      url: 'https://beta-image.youlife.net.cn/marketing/poster/qianmu-background.png',
+      success: (res) => {
+        wx.getImageInfo({
+          src: res.tempFilePath,
+          success:(info)=> {
+            ctx.drawImage(res.tempFilePath, 0, 0, 1358, 2903, 0, 0);
+            ctx.draw()
+          }
+        });
+      }
+    });
   },
-
+  
   /**
    * 生命周期函数--监听页面隐藏
    */

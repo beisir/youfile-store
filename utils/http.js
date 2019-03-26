@@ -224,6 +224,7 @@ class request {
       })
     })
   }
+  
   onlyUploadImg(url, types, noLoading) {
     if (!url) {
       console.warn('no upload url')
@@ -270,6 +271,43 @@ class request {
       })
     })
 
+  }
+
+  // 多图上传
+  uploadImgArr(arr, type = '') {
+    if (!arr || arr.length == 0) { return }
+    this.getImgArr = [],
+      this.nowIndex = 0;
+    this.handleImgList(0, arr, type)
+    wx.showLoading({
+      title: '开始上传',
+      mask: true
+    })
+  }
+  handleImgList(index, arr, type) {
+    let pages = getCurrentPages(),
+      current = pages[pages.length - 1];
+    if (!arr[index]) {
+      wx.hideLoading()
+      return
+    }
+    this.onlyUploadImg(arr[index], type, true).then(res => {
+      this.getImgArr.push(res)
+      if (arr[++index]) {
+        wx.showLoading({
+          title: '正在上传:' + index + '/' + arr.length,
+          mask: true
+        })
+        this.nowIndex = index
+        this.handleImgList(index, arr, type)
+      } else {
+        current.mulImgUploadSuccess ? current.mulImgUploadSuccess(this.getImgArr) : ''
+        wx.hideLoading()
+      }
+    }).catch(e => {
+      current.mulImgUploadFail ? current.mulImgUploadFail(e) : ''
+      wx.hideLoading()
+    })
   }
 }
 export default request
