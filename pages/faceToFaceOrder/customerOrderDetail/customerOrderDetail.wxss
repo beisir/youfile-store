@@ -54,8 +54,8 @@
   }
   /* 按钮 */
   .btn-icon{
-    width: 50rpx;
-    height: 50rpx;
+    width: 35rpx;
+    height: 35rpx;
     margin-right: 10rpx;
   }
   .white-box{background: #fff;}

@@ -10,7 +10,7 @@ page{background-color:#f7f7f7;font-family:"Helvetica Neue","Hiragino Sans GB","M
 .data-cont>view{position:relative;margin-top:20rpx}
 .data-cont>view view{margin-left:190rpx}
 .data-cont text{color:#999;position:absolute}
-.bf-img{position:absolute;width:60rpx;height:60rpx;position:absolute;left:-100rpx;top:25rpx}
+.bf-img{position:absolute;width:60rpx;height:60rpx;left:-100rpx;top:25rpx}
 .bf-img image{max-width:60rpx;max-height:60rpx;border-radius:50%}
 .search-box{position:relative;display:flex;justify-content:space-between;padding:0 25rpx;background:#fff;height:100rpx;font-size:28rpx}
 .search-input{flex:1;margin-top:13rpx;height:70rpx;line-height:70rpx;padding:0 70rpx;border-radius:10rpx;border:1rpx solid #F1F1F1}
@@ -132,6 +132,4 @@ input:focus{padding:0}
 .weui_cells .n-navigator{width: 80%;background: red}
 .tip-v view{font-size: 28rpx;color: #999;font-weight: normal}
 .tip-v button{margin-bottom: 40rpx;margin-top: 40rpx}
-.input-placeholder-common-color{
-  color: #999;
-}
+.input-placeholder-common-color{color: #999;font-weight: 500;}

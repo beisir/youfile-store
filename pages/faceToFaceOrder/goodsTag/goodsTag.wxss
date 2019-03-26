@@ -2,6 +2,7 @@
 page{
   background: #fff;
 }
+.flex-center{display: flex;align-items:center;}
 .box{
   padding: 50rpx;
   font-size: 30rpx;

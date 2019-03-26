@@ -12,7 +12,10 @@
   </view>
   <view class='input-box'>
     <input bindinput='getGoodsName' maxlength='15' placeholder-class='input-placeholder-common-color' placeholder='输入商品名称' class='goods-input' type='text' value="{{name}}"></input>
-    <view bindtap='addTip' class='sure-btn'>添加</view>
+    <view bindtap='addTip' class='sure-btn flex-center'>
+      <image style='width:30rpx;height:30rpx;margin-right:10rpx;' src='/image/add-gold.png'></image>
+      <text>添加</text>
+    </view>
   </view>
 
   <scroll-view scroll-y='true' style="height:1000rpx;">

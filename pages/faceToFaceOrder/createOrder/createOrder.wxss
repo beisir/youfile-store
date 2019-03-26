@@ -199,7 +199,7 @@ page{
 .tag-item-border{border-bottom: 1rpx solid #eee}
 .tag-name-box{width: 350rpx;font-weight: 600;}
 /* 加减器 */
-.stepper{display: flex;justify-content: space-between;align-items: center;width: 178rpx;
-height:48rpx;border: 1rpx solid #ddd;border-radius: 5rpx;font-size: 32rpx;}
-.stepper-sign{width: 49rpx;text-align: center;line-height: 48rpx;}
+.stepper{display: flex;justify-content: space-between;align-items: center;width: 200rpx;
+height:55rpx;border: 1rpx solid #ddd;border-radius: 5rpx;font-size: 32rpx;}
+.stepper-sign{width: 55rpx;text-align: center;line-height: 53rpx;font-size: 40rpx;}
 .num-input{flex: 1;text-align: center;font-size: 32rpx;}
