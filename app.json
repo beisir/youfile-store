@@ -1,16 +1,16 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/admin/addGoods/addGoods",
+    "pages/page/poster/poster",
     "pages/marketing/poster/prePoster/prePoster",
     "pages/page/navigateMiddleware/navigateMiddleware",
-    "pages/page/poster/poster",
     "pages/marketing/poster/success/success",
     "pages/admin/status/status",
     "pages/marketing/poster/posterStoreroom/posterStoreroom",
     "pages/marketing/poster/goodsList/goodsList",
     "pages/marketing/poster/storeroomDetail/storeroomDetail","pages/page/workIndex/workIndex",
     "pages/marketing/poster/choseGoodsimg/choseGoodsimg",
-    "pages/admin/addGoods/addGoods",
     "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
     "pages/admin/shopClass/shopClass",

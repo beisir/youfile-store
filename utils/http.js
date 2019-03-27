@@ -209,20 +209,36 @@ class request {
       })
     })
   }
-  onlychoseImg() {
-    return new Promise((resolve, reject) => {
-      wx.chooseImage({
-        count: 1,
-        sizeType: ['original'], // original 原图，compressed 压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-        success: function(res) {
-          resolve(res)
-        },
-        fail: (e => {
-          reject(e)
+  onlychoseImg(type) {
+    let pages = getCurrentPages(),
+      current = pages[pages.length - 1];
+      let oritype = ['album', 'camera']
+      if (type) {
+        oritype = type
+      }
+      return new Promise((resolve, reject) => {
+        if (current.data.choosingImg) {
+          reject("重复点击")
+          return
+        }else{
+          current.setData({ choosingImg: true })
+        }
+        wx.chooseImage({
+          count: 1,
+          sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+          sourceType: oritype, // album 从相册选图，camera 使用相机，默认二者都有
+          success: function (res) {
+            resolve(res)
+          },
+          fail: (e => {
+            reject(e)
+          }),
+          complete: () => {
+            current.setData({ choosingImg: false })
+          }
         })
       })
-    })
+
   }
   
   onlyUploadImg(url, types, noLoading) {

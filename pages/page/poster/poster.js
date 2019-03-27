@@ -177,7 +177,7 @@ Page({
         wx.getImageInfo({
           src: res.tempFilePath,
           success:(info)=> {
-            ctx.drawImage(res.tempFilePath, 0, 0, 1358, 2903, 0, 0);
+            ctx.drawImage(res.tempFilePath, 0, 0, this.toRpx(750), this.toRpx(1603), 0, 0);
             ctx.draw()
           }
         });
