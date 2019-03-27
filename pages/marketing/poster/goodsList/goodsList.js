@@ -79,7 +79,8 @@ Page({
     API.adminGoodsList({
       storeId: wx.getStorageSync('storeId'),
       keyword: this.data.sureSearchText,
-      containsImage: true
+      containsImage: true,
+      goodsStatus: '1,3'
     }).then(res=>{
       this.setData({ goods: this.data.goods.concat(res.obj.result)})
     })

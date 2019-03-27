@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "帮TA下单",
+  "backgroundColor": "#fff",
   "usingComponents": {
     "layer": "../../../assembly/layer/layer"
   }

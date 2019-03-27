@@ -182,6 +182,8 @@ Page({
       return
     }
 
+    if(this.data.ordering){return}
+    this.setData({ordering: true})
     let obj = {
       storeId: this.data.storeId,
       orderAmount: this.data.money,
@@ -197,6 +199,8 @@ Page({
           })
         }, 800)
       }
+    }).catch(e=>{
+      this.setData({ ordering: false })
     })
   },
   /**

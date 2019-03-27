@@ -106,7 +106,7 @@
       <view>
         <image mode='widthFix' src='/image/pic-icon.png'></image>
       </view>
-      <view>商品海报库</view>
+      <view>朋友圈海报</view>
     </navigator>
   </view>  
 </view>  
