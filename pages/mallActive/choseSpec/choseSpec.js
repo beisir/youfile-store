@@ -5,7 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    goods:[{
+      name:'asdas',
+      num: 12312
+    }]
   },
 
   /**
