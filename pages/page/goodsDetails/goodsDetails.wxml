@@ -76,11 +76,11 @@
       <view class='gd-view-n' wx:if='{{saleBatchAmount!=0}}'>
         <button>混批</button>全场满￥{{saleBatchAmount}}元可混批</view>
     </view>
-    <navigator class="weui_cells" url='../storeIcon/storeIcon'>
+    <navigator class="weui_cells" url='../goodsQRcode/goodsQRcode?goodsId={{goodsId}}'>
       <image src="/image/positionico.png"></image>
       <text class="store-address">北京 </text>
       <view class='weui-view'>
-        <image src="/image/er.png" class='erImg'></image>
+        <image src="/image/xcx.png" class='erImg'></image>
         <image class='img' src="/image/icl.png"></image>
       </view>
     </navigator>

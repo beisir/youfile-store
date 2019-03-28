@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/page/goodsQRcode/goodsQRcode",
     "pages/admin/addGoods/addGoods",
     "pages/page/poster/poster",
     "pages/marketing/poster/prePoster/prePoster",
