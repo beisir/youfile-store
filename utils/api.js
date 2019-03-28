@@ -155,6 +155,13 @@ import {
   getMyWXPhoneUrl,
   ftfuserSureOrderUrl,
   ftfpreOrderDetailUrl,
+  activityListUrl,
+  participateUrl,
+  activeDetailsUrl,
+  releaseGoodsUrl,
+  addActiveGoodsUrl,
+  addAMoreGoodsUrl,
+  releaseMoreGoodsUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -1003,7 +1010,51 @@ function getStoreId() {
     return true
   }
 }
-
+/**
+ *
+商贸云活动列表
+ */
+function activityList(data) {
+  return app.pageRequest.pageGet(activityListUrl, data)
+}
+// 参加活动
+function participate(data) {
+  return app.http.postRequest(participateUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
+/**
+ *
+活动详情
+ */
+function activeDetails(data) {
+  return app.http.getRequest(activeDetailsUrl, data)
+}
+/**
+ *
+发布活动商品
+ */
+function releaseGoods(data) {
+  return app.http.getRequest(releaseGoodsUrl, data)
+}
+//添加商品
+function addActiveGoods(data) {
+  return app.http.postRequest(addActiveGoodsUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
+// 批量添加商品
+function addAMoreGoods(data) {
+  return app.http.postRequest(addAMoreGoodsUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
+// 批量发布商品
+function releaseMoreGoods(data) {
+  return app.http.postRequest(releaseMoreGoodsUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
 
 module.exports = {
   ftfpreOrderDetail,
@@ -1172,5 +1223,12 @@ module.exports = {
   skuCode,
   specValCode,
   updateGooodsSku,
-  searchClass
+  searchClass,
+  activityList,
+  participate,
+  activeDetails,
+  releaseGoods,
+  addActiveGoods,
+  addAMoreGoods,
+  releaseMoreGoods
 }

@@ -43,7 +43,6 @@
 .ad-monery text{float:right;color:#CDAC7A}
 .ad-monery view{margin-top:10rpx}
 .heji{font-size:24rpx;color:#666;padding-top:10rpx}
-.bold-font{font-weight:600}
 .td-money{font-size:28rpx}
 .s-font{font-size:26rpx}
 .item-box{padding:0 50rpx;height:100rpx;background:#fff}

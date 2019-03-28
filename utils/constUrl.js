@@ -188,3 +188,11 @@ export const getMyWXPhoneUrl = '/api/weixin/user/decrypt'
 // 门店订单 买家
 export const ftfuserSureOrderUrl = '/api/ftf/order'
 export const ftfpreOrderDetailUrl = '/admin/ftf/order/{{qrCode}}/info'
+// 活动
+export const activityListUrl='/admin/mall/activity/{{mallCode}}/page'
+export const participateUrl="/admin/mall/activity/{{activityNumber}}/participate"
+export const activeDetailsUrl="/admin/mall/activity/{{activityNumber}}"
+export const releaseGoodsUrl="/admin/goods/activity/{{activityNumber}}/goods/{{goodsId}}/release"
+export const addActiveGoodsUrl="/admin/goods/activity"
+export const addAMoreGoodsUrl="/admin/goods/activity/batch"
+export const releaseMoreGoodsUrl="/admin/goods/activity/{{activityNumber}}/goods/release/batch"

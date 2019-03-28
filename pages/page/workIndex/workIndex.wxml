@@ -4,7 +4,7 @@
 <!-- 判断进来的身份 -->
 <view wx:if="{{isStoreOwerShow}}" class='isStoreOwer'></view>
 <login id="login"></login>
-<view class='wk-cont'>
+<view class='wk-cont wk-cont-title'>
   <view class='wk-title'>
     <text>今日收入（元）</text>
     <view>{{todaySaleNum==null?0.00:todaySaleNum}}</view>
@@ -39,6 +39,7 @@
 </view>
 <view class='wk-cont wk-cont'>
   <view class='wx-bot-cont'>
+    <view class='work-title'>管理中心</view>
     <navigator url='../../role/supplyOrder/supplyOrder'>
       <view>
         <image mode='widthFix' src='/image/ad1.png'></image>
@@ -70,7 +71,7 @@
       </view>
       <view>帮TA下单</view>
     </navigator>
-    
+
     <navigator url='../../admin/status/status'>
       <view>
         <image mode='widthFix' src='/image/ad3.png'></image>
@@ -94,6 +95,21 @@
         <image mode='widthFix' src='/image/zj.png' style='width:50rpx;'></image>
       </view>
       <view>资金中心</view>
+    </navigator>
+  </view>
+  <view class='wx-bot-cont'>
+    <view class='work-title'>营销宝</view>
+    <navigator url='../../role/supplyOrder/supplyOrder'>
+      <view>
+        <image mode='widthFix' src='/image/ad1.png'></image>
+      </view>
+      <view>商品码海报</view>
+    </navigator>
+    <navigator url='../../role/order/order'>
+      <view>
+        <image mode='widthFix' src='/image/ad2.png'></image>
+      </view>
+      <view>商贸云活动</view>
     </navigator>
   </view>
 </view>

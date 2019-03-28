@@ -102,9 +102,14 @@
 .lt-add-cart image{width:40rpx;height:40rpx;vertical-align:middle;margin-top:-17rpx}
 .lt-num{height:48rpx;border-left:2rpx solid #D5B98F;border-right:2rpx solid #D5B98F}
 .lt-table{color:#666;font-weight:normal;height:400rpx;overflow:scroll;height:350rpx;margin-bottom:150rpx;margin-top:10px}
-.lt-tr{position:relative}
-.lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:80rpx;}
-.jiage-t{position: absolute;top:-1rpx;border: 2rpx solid #CCAA77;padding: 0 5rpx;color:#CCAA77;height: 30rpx;line-height: 30rpx;border-radius: 5rpx;}
+.lt-tr{position:relative;border-bottom: 2rpx solid #F7F7F7;padding-bottom: 40rpx}
+.lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:80rpx;position: relative}
+.jiage-t{position: absolute;top:-8rpx;border: 2rpx solid #CCAA77;padding: 0 5rpx;color:#CCAA77;height: 30rpx;line-height: 30rpx;border-radius: 10rpx;left: 22%;}
+.lt-table>.lt-tr{padding-bottom: 20rpx}
+.lt-table>.lt-tr .lt-add-cart{top:-10rpx}
+.purch-num{font-size: 24rpx;color: #999;position: absolute;bottom: -10rpx;width: 100%;height: 0rpx;left: 30rpx}
+.jiage-t image{width: 15rpx;vertical-align: middle;margin-right: 2rpx;margin-top: -2rpx;}
+.jiage-tRed{border: 2rpx solid #F55353;color: #F55353}
 .lt-tr>view.setCss{line-height:30rpx;width:40%}
 .lt-tr>view:last-child{padding-top:20rpx;line-height:60rpx;width:32%}
 .lt-tr>view.add-xian{text-decoration:line-through}

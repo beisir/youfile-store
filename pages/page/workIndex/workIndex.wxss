@@ -1,4 +1,5 @@
-.wk-cont{background:#fff;margin:20rpx;border-radius:20rpx;overflow:hidden}
+.wk-cont{margin:20rpx;border-radius:20rpx;overflow:hidden}
+.wk-cont-title{border-radius: 10rpx;background: #fff;}
 .wk-title{font-size:24rpx;background:#CCAA77;color:#fff;padding:50rpx;position:relative}
 .wk-title view{font-size:72rpx;margin-top:30rpx}
 .wk-bot{position:relative}
@@ -7,8 +8,10 @@
 .wx-bot-cont>view,.wx-bot-cont>navigator{width:25%;margin-top:80rpx;display:inline-block;text-align:center}
 .wk-bot>view .wk-xian,.wk-bot>navigator .wk-xian{height:45rpx;background:#EEEEEE;width:2rpx;position:absolute;top:38rpx}
 .wk-bot>.wk-fg{background:#EEEEEE;width:88%;position:absolute;height:2rpx;top:140rpx;left:6%}
-.wx-bot-cont{font-size:28rpx;padding-bottom:80rpx;margin-bottom:120rpx}
+.wx-bot-cont{font-size:28rpx;padding-bottom:80rpx;margin: 20rpx 0;border-radius: 10rpx;background:#fff;}
 .wk-title image{width:55rpx;position:absolute;right:20rpx;top:50rpx}
 .wx-bot-cont image{width:45rpx}
-.wx-bot-cont>view view:first-child{width:50rpx;height:50rpx;margin:0 auto;padding-bottom:10rpx}
+.wk-cont>.wx-bot-cont:last-child{margin-bottom: 130rpx;}
+.wx-bot-cont>view view:first-child{width:50rpx;height:50rpx;margin:0 auto;padding-bottom:10rpx;}
 .isStoreOwer{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background: #F7F7F7;z-index:9999;}
+.wx-bot-cont>.work-title{width: 100%;height: 75rpx;line-height: 75rpx;font-size: 30rpx;font-weight: bold;text-align: left;border-bottom: 2rpx solid #EEEEEE;margin-top: 0;padding: 0 20rpx;}

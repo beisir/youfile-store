@@ -1,0 +1,31 @@
+<view class='alert-g'>选择参加活动的商品规格（2/3）</view>
+<view class='add-cont'>
+  <view>
+    <icon type="success" size="28" color="#CCAA77" />
+    <!-- <icon wx:else type="circle" size="28"/> -->
+    <view class='g-cont'>
+      <view>
+        <view>商品规格1：<text>“浅藕色”+“M”</text> </view>
+        <view>库存: <text>265</text></view>
+      </view>
+    </view>
+  </view>
+  <view>
+    <icon type="success" size="28" color="#CCAA77" />
+    <!-- <icon wx:else type="circle" size="28"/> -->
+    <view class='g-cont'>
+      <view>
+        <view>商品规格1：<text>“浅藕色”+“M”</text> </view>
+        <view>库存: <text>265</text></view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='add-bottom'>
+  <view bindtap='addClass'>
+    <icon wx:if="{{selectAllStatus}}" type="success" size="28" color="#CCAA77" class='iconall' bindtap="selectAll" />
+    <icon wx:else type="circle" class='iconall' size="28" bindtap="selectAll" /> 全选
+    <text>已选2个规格</text>
+  </view>
+  <view class='ma-re' bindtap='removeFun'>确定</view>
+</view>

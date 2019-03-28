@@ -1,0 +1,18 @@
+.list-t{height: 80rpx;line-height: 80rpx;background: #fff;border-top: 2rpx solid #F9F9F9;}
+.list-t >view{width: 25%;text-align: center;display: inline-block;font-size: 28rpx;position: relative}
+.list-t >view view{height: 4rpx;background: #CCAA77;width: 90rpx;position: absolute;bottom: 0;left: 50%;margin-left: -45rpx;}
+.list-t >view.active{color: #CCAA77;font-weight: bold}
+.listData>view{background: #fff;border-radius: 10rpx;margin: 20rpx;font-size: 26rpx;box-shadow: 5rpx 0 30rpx #ededed}
+.ld-t{font-size: 36rpx;font-weight: bold;border-bottom: 2rpx dashed #F0F0F0;height: 115rpx;line-height: 115rpx;padding:0 20rpx;}
+.ld-cont{padding:20rpx;}
+.ld-cont>view{height: 60rpx;line-height: 60rpx;}
+.ld-cont>view:first-child{font-size: 30rpx;font-weight: bold;}
+.ld-cont>view:first-child text{font-size: 30rpx;font-weight: bold;}
+.ld-red{color: #F02C2C;}
+.ld-yellow{color: #FF9900;}
+.ld-black{color: #666}
+.ld-cont>view text{margin-right: 25rpx;}
+.ld-cont>view:first-child .no-doing{color: #999}
+.ld-cont>view:first-child .ld-doing{color: #333;}
+.ld-bottom{zoom: 1;overflow: hidden;border-top: 2rpx solid #EFEFEF;}
+.ld-bottom button{font-size: 24rpx;color: #fff;background: #CCAA77;width: 155rpx;height: 60rpx;border-radius: 10rpx;float: right;margin: 15rpx 25rpx 15rpx 0;line-height: 57rpx;}

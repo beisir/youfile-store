@@ -150,18 +150,16 @@ Page({
       arr = [],
       goodsId = '180929212000'
     if (options != undefined) {
-      if (options.storeId) {
-        wx.setStorageSync("storeId", options.storeId)
-      }
       if (options.goodsId) {
         goodsId = options.goodsId
+        that.setData({
+          goodsId: goodsId
+        })
       }
-      that.setData({
-        goodsId: goodsId
-      })
+      // 修改进货车或者购物车
       if (options.code) {
         that.setData({
-          editCode: true,
+          editCode: true,//编辑进货车或者购物车
         })
         Api.cartList()
           .then(res => {
@@ -173,9 +171,10 @@ Page({
             }
             if (options.name == "more") {
               that.setData({
-                showCart: false,
+                showCart: false,//修改进货车或者多个规格
               })
             } else {
+              // 修改购物车
               that.setData({
                 showCartOne: false,
                 editOneName: true
@@ -192,10 +191,10 @@ Page({
             })
           })
       } else {
-        getIdentity(this, goodsId, false)
+        getIdentity(this, goodsId, false)//查看详情
       }
     } else {
-      getIdentity(this, this.data.goodsId, false)
+      getIdentity(this, this.data.goodsId, false)//刷新登录
     }
   },
 
@@ -1130,6 +1129,7 @@ Page({
       storeId = this.data.storeId,
       limitShow = this.data.limitShow
     if (limitShow == 3) {
+      // 根据商友关系 查询店铺的起批量和起批金额
       Api.config(goodsId)
         .then(res => {
           var obj = res.obj

@@ -1,0 +1,5 @@
+@import '../moreAdd/moreAdd';
+.g-cont {font-size: 30rpx;}
+.g-cont text{color: #000}
+.add-cont icon{top: 60rpx;}
+.add-cont>view{padding-left: 120rpx}

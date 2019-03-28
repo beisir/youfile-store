@@ -213,11 +213,12 @@
     <view>一键</view>
     <view class='gt-ku'>入库</view>
   </view>
+  <!-- 进货车 两个规格 -->
   <view wx:if='{{limitShow==3 && isShowNewOne==false}}'>
     <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
         <view class='new-man' wx:if='{{!discountShow}}'>
-          <text>已享受批发价，共优惠<text>{{difference}}</text>元</text>
+          <text>已享受批发价，共优惠<text>{{difference}}</text>元</text>(不包含活动商品)
         </view>
         <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount==0}}'>
           <text wx:if='{{differNum==0}}'>本店满<text>{{saleBatchNum}}</text>件可享受批发价</text>
@@ -247,7 +248,6 @@
             <view class='btn' wx:if='{{saleBatchNumGoods==0 && saleBatchNum>0}}'>{{saleBatchNum}}
               <text>件起批</text>
             </view>
-            <!-- <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view> -->
           </view>
         </view>
         <view wx:for='{{goodsSpecificationVOList}}' wx:for-item="list" wx:key="{{index}}">
@@ -287,8 +287,11 @@
                 <view class="lt-tr lt-tr1" wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
                   <view wx:if='{{!newSkuOnly}}'>{{item.name}}</view>
                   <view style='{{newSkuOnly?"width:33%":"width:22%"}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
-                  <view class='line-price' style='color:#000;{{newSkuOnly?"width:33%":"width:22%"}}'><text class="jiage-t" style='font-size:24rpx'>批发价</text>￥{{item.wholesalePrice}}</view>
+                  <view class='line-price' style='color:#000;{{newSkuOnly?"width:33%":"width:22%"}}'>
+                  <!-- <view class="jiage-t" style='font-size:20rpx'>批发价</view> -->
+                  <view class="jiage-t jiage-tRed" style='font-size:20rpx'> <image src="/image/ermR.png" mode='widthFix'></image>抢购价</view>￥{{item.wholesalePrice}}</view>
                   <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
+                    <view class='purch-num'>起购量：10</view>
                     <view class="lt-add-cart">
                       <view class="lt-down" data-index='{{index}}' bindtap="minusCount1">
                         <image src="/image/jian.png"></image>
@@ -318,6 +321,7 @@
       </view>
     </view>
   </view>
+  <!-- 进货车只有一个规格 -->
   <view wx:if='{{limitShow==3 && isShowNewOne}}'>
     <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
@@ -397,6 +401,7 @@
       </view>
     </view>
   </view>
+  <!-- 购物车 -->
   <view wx:if='{{limitShow!=3}}'>
     <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
@@ -455,6 +460,7 @@
       </view>
     </view>
   </view>
+  <!-- 修改进货车 -->
   <view hidden="{{showCart}}" class='alertAdd'>
     <view class='gd-alert' animation='{{animationData}}'>
       <view class='new-man' wx:if='{{!discountShow}}'>
@@ -485,7 +491,6 @@
           <view class='btn' wx:if='{{saleBatchNumGoods==0 && saleBatchNum>0 && limitShow==3}}'>{{saleBatchNum}}
             <text>件起批</text>
           </view>
-          <!-- <view>{{saleBatchNum}}<text class='lt-text'>件起批</text></view> -->
         </view>
       </view>
       <view wx:for='{{goodsSpecificationVOList}}' wx:for-item="list" wx:key="{{index}}">
@@ -556,6 +561,7 @@
       </view>
     </view>
   </view>
+  <!-- 修改购物车 -->
   <view hidden="{{showCartOne}}" class='alertAdd'>
     <view class='gd-alert' animation='{{animationData}}'>
       <view class='new-man' wx:if='{{!discountShow && limitShow==3}}'>

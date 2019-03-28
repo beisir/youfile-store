@@ -1,0 +1,8 @@
+@import '../addGoods/addGoods';
+.add-cont>view{padding-left: 60rpx;position: relative}
+.add-cont icon{position: absolute;left:25rpx;top: 80rpx;}
+.add-bottom{font-weight:normal;font-size: 30rpx}
+.add-bottom view:first-child{border-right:0;color:#333;}
+/* .add-bottom view{text-align:left;padding-left:20rpx;width:47%} */
+.add-bottom text{color: #999;margin-left: 20rpx;}
+.add-bottom .ma-re{width: 310rpx;background: #CCAA77;color: #fff;float: right;height:120rpx;margin-top: 0;line-height: 120rpx;font-size: 36rpx;}

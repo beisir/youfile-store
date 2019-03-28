@@ -1,0 +1,38 @@
+<!-- 确定添加商品 -->
+<mes show="{{joinShow}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确认添加？</text>
+    <button bindtap='addActiveGoods'>确定</button>
+  </view>
+</mes>
+
+<view class="search-box">
+  <input class="search-input" value="{{value}}" bindconfirm='initData' auto-focus='ture' placeholder-class='pre-input' placeholder='请输入商品名称' bindinput="searchInput" />
+  <image class="home-ser-new" src="/image/searchW.png"></image>
+  <view class='serCont' bindtap="initData">搜索</view>
+  <image class="home-ser-new ser-font" bindtap='emptyInput' hidden='{{hiddenClose}}' src="/image/close.png"></image>
+</view>
+<view class='alert-g'>请选择您想参加活动的商品</view>
+<view class='add-cont'>
+  <view wx:for="{{result}}" wx:key="{{index}}">
+    <view class='g-cont'>
+      <view class='g-image'>
+        <image wx:if="{{item.mainImgUrl}}" src='{{baseUrl}}{{item.mainImgUrl}}'></image>
+        <view wx:if="{{item.goodsSkuVOList!=null}}">{{item.goodsSkuVOList}}</view> <view wx:if="{{item.goodsSkuVOList==null}}">无</view>
+      </view>
+      <view>
+        <view class='g-title'>{{item.name}} </view>
+        <view class='gprice'>批发:
+          <text>￥{{item.sellPrice}}</text> </view>
+        <view class='gprice'>零售:
+          <text>￥{{item.wholesalePrice}}</text> </view>
+        <view>库存: {{item.stockNum}}</view>
+      </view>
+    </view>
+    <view class='g-bottom'>
+      <!-- <button>已添加</button> -->
+      <button class='add-g' data-id='{{item.id}}' bindtap='addActiveShow'>添加商品</button>
+    </view>
+  </view>
+</view>
+<navigator url='../moreAdd/moreAdd?activityNumber={{activityNumber}}' class='add-more'>批量添加</navigator>

@@ -1,0 +1,154 @@
+<view class='add-cont add-cont1-n'>
+  <view>
+    <view class='g-cont'>
+      <view class='g-image'>
+        <image src='/image/pre.png'></image>
+      </view>
+      <view>
+        <view class='g-title'>周大福 十二生肖狗 黄金吊坠配饰 </view>
+        <view class='gprice'>批发:
+          <text>￥1100</text> </view>
+        <view class='gprice'>零售:
+          <text>￥1100</text> </view>
+        <view>库存: 265</view>
+      </view>
+    </view>
+  </view>
+  <view class='goods-spec'>
+    <view class='spec-t'>商品规格（3）
+      <button bindtap='discountGoods' class='spec-one'>一键折扣</button>
+      <button bindtap='choiceSpec'>选择规格</button>
+    </view>
+    <view>
+      <view class='spec-cont'>
+        <view>商品规格1：
+          <text>“浅藕色”+“M”</text>
+        </view>
+      </view>
+      <view class='set-price'>
+        <view>
+          <view>
+            <input placeholder='添加活动价格'></input>
+            <view>批发价:¥2800</view>
+          </view>
+        </view>
+        <view>
+          <view>
+            <input placeholder='添加活动库存'></input>
+            <view>库存:100</view>
+          </view>
+        </view>
+        <view>
+          <view>
+            <input placeholder='添加活动起购量'></input>
+            <view>起购量</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view>
+      <view class='spec-cont'>
+        <view>商品规格3：
+          <text>无规格</text>（无SKU时，不能选择规格）
+        </view>
+      </view>
+      <view class='set-price'>
+        <view>
+          <view>
+            <input placeholder='添加活动价格'></input>
+            <view>批发价:¥2800</view>
+          </view>
+        </view>
+        <view>
+          <view>
+            <input placeholder='添加活动库存'></input>
+            <view>库存:100</view>
+          </view>
+        </view>
+        <view>
+          <view>
+            <input placeholder='添加活动起购量'></input>
+            <view>起购量</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<navigator class='add-more'>确 定</navigator>
+<view hidden='{{showFrame}}' class='frame'>
+  <view>
+    <image bindtap='closeFrame' src='/image/close.png'></image>
+    <view class='fra-t'>一键折扣</view>
+    <view class='fra-discout'>
+      <view>
+        <button>9折</button>
+      </view>
+      <view>
+        <button>9折</button>
+      </view>
+      <view>
+        <button>9折</button>
+      </view>
+      <view>
+        <button>9折</button>
+      </view>
+      <view>
+        <button>9折</button>
+      </view>
+      <view>
+        <button>9折</button>
+      </view>
+      <view>
+        <button>9折</button>
+      </view>
+      <view>
+        <button>9折</button>
+      </view>
+    </view>
+    <view class='fra-tip'>一键折扣的设置，会为您自动计算商品批发价的折扣后价格， 即活动价</view>
+    <view class='fra-self'>
+      <view>自定义折扣</view>
+      <view>
+        <input placeholder=' 请输入折扣'></input>折</view>
+    </view>
+    <view class='fra-goods'>折扣商品（共
+      <text>3</text>件商品）</view>
+    <view class='add-cont'>
+      <view>
+        <view class='g-cont'>
+          <view class='g-image'>
+            <image src='/image/pre.png'></image>
+          </view>
+          <view>
+            <view>周大福 十二生肖狗十二生肖狗十二生肖狗十二生肖狗 黄金吊坠配饰 </view>
+            <view>商品规格（16）</view>
+          </view>
+        </view>
+      </view>
+       <view>
+        <view class='g-cont'>
+          <view class='g-image'>
+            <image src='/image/pre.png'></image>
+          </view>
+          <view>
+            <view>周大福 十二生肖狗十二生肖狗十二生肖狗十二生肖狗 黄金吊坠配饰 </view>
+            <view>商品规格（16）</view>
+          </view>
+        </view>
+      </view>
+      <view>
+        <view class='g-cont'>
+          <view class='g-image'>
+            <image src='/image/pre.png'></image>
+          </view>
+          <view>
+            <view>周大福 十二生肖狗十二生肖狗十二生肖狗十二生肖狗 黄金吊坠配饰 </view>
+            <view>商品规格（16）</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='add-more'>确 定</view>
+  </view>
+</view>
