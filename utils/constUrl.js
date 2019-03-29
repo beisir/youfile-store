@@ -188,6 +188,24 @@ export const getMyWXPhoneUrl = '/api/weixin/user/decrypt'
 // 门店订单 买家
 export const ftfuserSureOrderUrl = '/api/ftf/order'
 export const ftfpreOrderDetailUrl = '/admin/ftf/order/{{qrCode}}/info'
+// 查询店铺信息
+export const simpleStoreMsgUrl = '/api/store/simple/{{storeId}}'
+/**
+ * 海报
+ * */
+export const posterModuleListUrl = '/admin/marketing/poster/template/list/onlines'
+export const uploadPosterUrl = '/admin/marketing/poster/batch'
+// 专辑
+export const addPosterTagUrl = '/admin/marketing/poster/tag'
+export const getPosterTagListUrl = '/admin/marketing/poster/tag/'
+export const delPosterTagUrl = '/admin/marketing/poster/tag/code'
+export const updatePosterTagNameUrl = '/admin/marketing/poster/tag/name'
+export const getPosterTagMsgUrl = '/admin/marketing/poster/tag/{{code}}/detail'
+export const getPosterTagDetailUrl = '/admin/marketing/poster/tag/{{tagCode}}'
+export const delPosterArrUrl = '/admin/marketing/poster/batch'
+export const toOtherPosterTagUrl = '/admin/marketing/poster/tag'
+export const delAllPosterUrl = '/admin/marketing/poster/tag/poster'
+export const goodsPosterNumUrl = '/admin/marketing/poster/goods/{{goodsId}}/count'
 // 活动
 export const activityListUrl='/admin/mall/activity/{{mallCode}}/page'
 export const participateUrl="/admin/mall/activity/{{activityNumber}}/participate"

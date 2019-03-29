@@ -155,6 +155,19 @@ import {
   getMyWXPhoneUrl,
   ftfuserSureOrderUrl,
   ftfpreOrderDetailUrl,
+  posterModuleListUrl,
+  uploadPosterUrl,
+  addPosterTagUrl,
+  getPosterTagListUrl,
+  delPosterTagUrl,
+  updatePosterTagNameUrl,
+  getPosterTagDetailUrl,
+  delPosterArrUrl,
+  toOtherPosterTagUrl,
+  delAllPosterUrl,
+  getPosterTagMsgUrl,
+  simpleStoreMsgUrl,
+  goodsPosterNumUrl,
   activityListUrl,
   participateUrl,
   activeDetailsUrl,
@@ -1010,6 +1023,54 @@ function getStoreId() {
     return true
   }
 }
+
+
+/**
+ *海报 
+*/
+function posterModuleList(data) {
+  return app.http.getRequest(posterModuleListUrl, data)
+}
+function uploadPoster(data) {
+  return app.http.putRequest(uploadPosterUrl, data, {}, true)
+}
+// 专辑
+function addPosterTag(data) {  // 添加专辑
+  data = initStoreId(data);
+  return app.http.putRequest(addPosterTagUrl, data)
+}
+function getPosterTagList(data) {  // 专辑列表
+  return app.http.getRequest(getPosterTagListUrl, data)
+}
+function delPosterTag(data) {  // 删除
+  return app.http.deleteRequest(delPosterTagUrl + "?tagCode=" + data.tagCode, data)
+}
+function updatePosterTagName(data) { // 更换名字
+  return app.http.postRequest(updatePosterTagNameUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+function getPosterTagDetail(data) {  // 详情
+  return app.pageRequest.pageGet(getPosterTagDetailUrl, data)
+}
+function getPosterTagMsg(data) {
+  return app.http.getRequest(getPosterTagMsgUrl, data)
+}
+function delPosterArr(data) {  // 批量删除
+  return app.http.deleteRequest(delPosterArrUrl + "?posterIds=" + encodeURI(data.posterIds), data)
+}
+function toOtherPosterTag(data) {
+  return app.http.postRequest(toOtherPosterTagUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+}
+function delAllPoster(data) {  // 全删
+  return app.http.deleteRequest(delAllPosterUrl + '?tagCode=' + data.tagCode, data)
+}
+function goodsPosterNum(data) {
+  return app.http.getRequest(goodsPosterNumUrl, data)
+}
+// 获取店铺信息
+function simpleStoreMsg(data) {
+  return app.http.getRequest(simpleStoreMsgUrl, data)
+}
+
 /**
  *
 商贸云活动列表
@@ -1057,6 +1118,19 @@ function releaseMoreGoods(data) {
 }
 
 module.exports = {
+  goodsPosterNum,
+  simpleStoreMsg,
+  getPosterTagMsg,
+  uploadPoster,
+  getPosterTagDetail,
+  delPosterArr,
+  toOtherPosterTag,
+  delAllPoster,
+  addPosterTag,
+  getPosterTagList,
+  delPosterTag,
+  updatePosterTagName,
+  posterModuleList,
   ftfpreOrderDetail,
   ftfuserSureOrder,
   getMyWXPhone,

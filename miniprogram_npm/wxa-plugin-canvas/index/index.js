@@ -252,7 +252,7 @@ const helper = {
           const setHeight = image.height;
           const width = this.toRpx(imgInfo.width);
           const height = this.toRpx(imgInfo.height);
-
+          
           if (width / height <= setWidth / setHeight) {
             sx = 0;
             sy = (height - ((width / setWidth) * setHeight)) / 2;
@@ -471,6 +471,8 @@ Component({
             setTimeout(() => {
               wx.canvasToTempFilePath({
                 canvasId: 'canvasid',
+                quality: 0.5,
+                fileType: 'jpg',
                 success: (res) => {
                   this.triggerEvent('success', res.tempFilePath);
                 },

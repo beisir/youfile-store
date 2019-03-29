@@ -117,6 +117,11 @@ Page({
         })
       }
     })
+    Api.simpleStoreMsg({ storeId: wx.getStorageSync('storeId') }).then(res => {
+      if (res.obj.mallMiniProgramAppId && res.obj.mallMiniProgramAppId !== app.globalData.navigateToAppID.platform) {
+        app.globalData.navigateToAppID.platform = res.obj.mallMiniProgramAppId
+      }
+    })  
   },
   getUnpaidNum() {
     if (authHandler.isLogin()) {

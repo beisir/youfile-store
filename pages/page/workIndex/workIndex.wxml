@@ -38,8 +38,8 @@
   </view>
 </view>
 <view class='wk-cont wk-cont'>
+  <view class='fun-title'>管理中心</view>
   <view class='wx-bot-cont'>
-    <view class='work-title'>管理中心</view>
     <navigator url='../../role/supplyOrder/supplyOrder'>
       <view>
         <image mode='widthFix' src='/image/ad1.png'></image>
@@ -97,13 +97,16 @@
       <view>资金中心</view>
     </navigator>
   </view>
+</view>
+
+<view class='wk-cont wk-cont'>
+  <view class='fun-title'>营销宝</view>
   <view class='wx-bot-cont'>
-    <view class='work-title'>营销宝</view>
-    <navigator url='../../role/supplyOrder/supplyOrder'>
+    <navigator url='../../marketing/poster/posterStoreroom/posterStoreroom'>
       <view>
-        <image mode='widthFix' src='/image/ad1.png'></image>
+        <image mode='widthFix' src='/image/pic-icon.png'></image>
       </view>
-      <view>商品码海报</view>
+      <view>朋友圈海报</view>
     </navigator>
     <navigator url='../../role/order/order'>
       <view>
@@ -111,8 +114,11 @@
       </view>
       <view>商贸云活动</view>
     </navigator>
-  </view>
-</view>
+  </view>  
+</view>  
+
+<view style='height:150rpx;'></view>
+
 <view class='goHome' bindtap='goHome'>
   <view>
     <image src="/image/home.png"></image>
