@@ -7,10 +7,3 @@
       </view>
   </view>
 </view>
-<!-- 子组件B  wxml -->
-<view class="inner" wx:if="{{paramAtoB=='test333'}}">
-  {{paramAtoB}}jj
-</view>
-<view class="inner" wx:if="{{paramAtoB=='2222'}}">
-  {{e}}
-</view>
