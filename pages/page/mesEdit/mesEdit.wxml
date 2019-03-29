@@ -122,7 +122,7 @@
   <view class='weui-xian weui-xian1'></view>
 </view>
 <view class='weui-time'>
-  <navigator url='../../payment/uploadPayment/uploadPayment'>付款码
+  <navigator url='../../payment/uploadPayment/uploadPayment'>收款码
     <view class='mes-tel'>
       <image src="/image/icl.png"></image>
     </view>

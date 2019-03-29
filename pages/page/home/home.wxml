@@ -141,7 +141,7 @@
 
   <!-- 轮播通知 -->
   <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
-    <swiper interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
+    <swiper circular='true' interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
       <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
         <image class="swiper-font-icon" src='/image/dingfont.png'></image>
         <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>

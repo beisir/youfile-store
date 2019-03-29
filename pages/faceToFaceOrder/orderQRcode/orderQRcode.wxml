@@ -4,15 +4,17 @@
 <view class='top-box'>
   <view class='order-price-box'>
     <text style='font-size:36rpx;'>订单金额</text>
-    <text style='font-size:60rpx;font-weight:600;'>￥{{filter.filterMoney(order.orderAmount)}}</text>
+    <text style='font-size:80rpx;'>￥{{filter.filterMoney(order.orderAmount)}}</text>
   </view>
+  <view style='overflow:hidden;position:relative;height:80rpx;'>
   <view class='roundedge'></view>
+  </view>
   <view class='QRcode-icon'>
     <image src='{{url}}'></image>
   </view>
 </view>
 <view class='code-tip'>
-  <text>使用微信扫码结账凭证</text>
+  <text>顾客微信扫码凭证</text>
   <text>二维码具有时效性，请尽快完成支付</text>
 </view>
 <view class='dashed-border padding-box'>

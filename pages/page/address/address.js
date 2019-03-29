@@ -93,7 +93,9 @@ Page({
     obj.orderDetailReqVOList = goodsArr;  //商品
     obj.orderCategory = this.data.orderCategory //订单种类
     obj.payType = this.data.checkedPaytype.type //支付种类
-   
+    // 防重
+    if (this.data.creatingOrder){return}
+    this.setData({creatingOrder: true})
     Api.supplyOrde(obj).then((res)=>{
       //'../success/success'
       setTimeout(()=>{
@@ -110,6 +112,8 @@ Page({
           })
         }
       },800)
+    }).catch(e=> {
+      this.setData({ creatingOrder: false })
     })
   },
 

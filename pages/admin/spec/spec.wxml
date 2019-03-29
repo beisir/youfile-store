@@ -14,7 +14,7 @@
 </mes>
 <!-- 新建规格 -->
 <spec show="{{addSpec}}" bind:sureSelectArea="sureSelectAreaListener">
-  <view class='spec-title'>新建规格</view>
+  <view class='spec-title'>新建规格值</view>
   <input placeholder-class='spec-class' bindinput='watchInput' value='{{value}}' class='spec-input' placeholder='请输入文字，最多15个字' />
   <view class='spec-view' bindtap='cancel'>取消</view>
   <view class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm'>确定</view>

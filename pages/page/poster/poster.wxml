@@ -4,3 +4,5 @@
     <button bindtap='save'>保存</button>
 
 <image bindtap='showImg' style="width:750rpx;height:1600rpx;" src="{{url}}"></image>
+
+<canvas id='test' canvas-id='test' style='height:1600rpx;width:750rpx;'></canvas>

@@ -33,7 +33,8 @@ Page({
       name: '2折',
       value: 0.2
     }],
-    ownCut: ''
+    ownCut: '',
+    activeSkuList: [{ id: 111, name: '黄', price: '222', num: '111' }, { id: 222, name: '123', price: '33333', num: '11'}]
   },
   // 关闭弹框
   closeFrame: function() {
@@ -83,7 +84,12 @@ Page({
   },
   cutPrice(discount) {
     if (discount && discount > 0 && discount < 1) {
-      discount
+      let arr = this.data.activeSkuList;
+      arr.forEach(el=>{
+        el.surePrice = (el.price * discount).toFixed(2)
+      })
+      this.setData({ activeSkuList: arr})
+      console.log(discount)
     } else {
       API.showToast("折扣值错误，请重新选择")
     }
@@ -91,7 +97,7 @@ Page({
   // 选择规格
   choiceSpec: function() {
     wx.navigateTo({
-      url: '../choseSpec/choseSpec',
+      url: '../choseSpec/choseSpec?sku=' + JSON.stringify(this.data.activeSkuList),
     })
   },
   watchInput(e) {
@@ -101,6 +107,9 @@ Page({
     switch (type) {
       case 'ownCut':
         obj.ownCut = val
+        let arr = this.data.discount;
+        arr.forEach(el=>{el.checked = false})
+        obj.discount = arr
         break;
     }
     this.setData(obj)
@@ -112,6 +121,9 @@ Page({
     this.setData({
       showFrame: true
     })
+  },
+  getSku(arr){
+    console.log(arr)
   },
   /**
    * 生命周期函数--监听页面加载

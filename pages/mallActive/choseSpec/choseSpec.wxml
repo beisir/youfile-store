@@ -1,6 +1,6 @@
-<view class='alert-g'>选择参加活动的商品规格（2/3）</view>
+<view class='alert-g'>选择参加活动的商品规格（{{checkednum}}/{{goods.length}}）</view>
 <view class='add-cont'>
-  <view wx:for='{{goods}}'>
+  <view wx:for='{{goods}}' wx:key="{{index}}" data-index="{{index}}" bindtap='chooseThis'>
     <icon wx:if="{{item.checked}}" type="success" size="28" color="#CCAA77" />
     <icon wx:else type="circle" size="28"/>
     <view class='g-cont'>
@@ -10,22 +10,12 @@
       </view>
     </view>
   </view>
-  <view>
-    <icon type="success" size="28" color="#CCAA77" />
-    <!-- <icon wx:else type="circle" size="28"/> -->
-    <view class='g-cont'>
-      <view>
-        <view>商品规格1：<text>“浅藕色”+“M”</text> </view>
-        <view>库存: <text>265</text></view>
-      </view>
-    </view>
-  </view>
 </view>
 <view class='add-bottom'>
-  <view bindtap='addClass'>
+  <view>
     <icon wx:if="{{selectAllStatus}}" type="success" size="28" color="#CCAA77" class='iconall' bindtap="selectAll" />
     <icon wx:else type="circle" class='iconall' size="28" bindtap="selectAll" /> 全选
-    <text>已选2个规格</text>
+    <text>已选{{checkednum}}个规格</text>
   </view>
-  <view class='ma-re' bindtap='removeFun'>确定</view>
+  <view class='ma-re' bindtap='sureSelect'>确定</view>
 </view>

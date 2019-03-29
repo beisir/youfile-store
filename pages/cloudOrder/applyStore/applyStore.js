@@ -232,8 +232,8 @@ Component({
       }
       let newArr = this.data.beforeChose
       this.setData({
-        choseFloor: this.data.choseMall[newArr[0]].childList,
-        choseArea: this.data.choseMall[newArr[0]].childList[newArr[1]].childList,
+        choseFloor: this.data.choseMall[newArr[0]] ? this.data.choseMall[newArr[0]].childList:[],
+        choseArea: this.data.choseMall[newArr[0]].childList[newArr[1]] ? this.data.choseMall[newArr[0]].childList[newArr[1]].childList:[],
       })
     },
     sureFloor() {
@@ -246,7 +246,12 @@ Component({
     next() {
       let obj = {},
         floorObj = {};
-
+      //商城
+      if (!this.data.mallSureChose.code){
+        Api.showToast("请选择所属商城")
+        return
+      }
+      floorObj.mallCode = this.data.mallSureChose.code;
       //选择范围
       let rangeItem = [];
       this.data.item.forEach(el => {
@@ -259,8 +264,7 @@ Component({
         return
       }
       obj.businessScope = rangeItem.join(",");
-      //商城
-      floorObj.mallCode = this.data.mallSureChose.code;
+      
 
       //楼层
       if (this.data.floorChose) {
@@ -325,8 +329,8 @@ Component({
         let arr = this.data.beforeChose;
         this.setData({
           choseMall: res.obj,
-          choseFloor: res.obj[arr[0]].childList,
-          choseArea: res.obj[arr[0]].childList[arr[1]].childList,
+          choseFloor: res.obj[arr[0]].childList ? res.obj[arr[0]].childList:[],
+          choseArea: res.obj[arr[0]].childList[arr[1]] ? res.obj[arr[0]].childList[arr[1]].childList:[],
         })
       })
     },
@@ -334,7 +338,7 @@ Component({
       App.http.getRequest("/api/floor/mall/findAll").then(res => {
         this.setData({
           mallList: res.obj,
-          mallSureChose: res.obj[0],
+          mallSureChose: {},
           mallChose: [0],
         })
         this.getFloorList();
