@@ -1,0 +1,7 @@
+@import '../list/list';
+.doc-top{font-size: 28rpx;font-weight: bold;text-align: center;margin: 0 auto;padding-top: 30rpx;}
+.doc-top image{height: 80rpx;width: 80rpx;border-radius: 50%;margin-bottom: 25rpx;}
+.doc-top>view:last-child{font-size: 48rpx;}
+.doc-details>view{height: 90rpx;line-height: 90rpx;}
+.doc-details{border-top: 2rpx solid #F9F9F9;padding: 20rpx 0;margin:40rpx;font-size: 28rpx;color: #666}
+.doc-details text{color: #333;float: right}

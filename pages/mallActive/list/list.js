@@ -21,7 +21,18 @@ Page({
   onLoad: function (options) {
 
   },
-
+  // 活动分析
+  activityAnalysis:function(){
+    wx.navigateTo({
+      url: '../activityAnalysis/activityAnalysis',
+    })
+  },
+  // 编辑商品
+  editGoods:function(){
+    wx.navigateTo({
+      url: '../editGoods/editGoods',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

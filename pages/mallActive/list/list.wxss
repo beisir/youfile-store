@@ -2,7 +2,7 @@
 .list-t >view{width: 25%;text-align: center;display: inline-block;font-size: 28rpx;position: relative}
 .list-t >view view{height: 4rpx;background: #CCAA77;width: 90rpx;position: absolute;bottom: 0;left: 50%;margin-left: -45rpx;}
 .list-t >view.active{color: #CCAA77;font-weight: bold}
-.listData>view{background: #fff;border-radius: 10rpx;margin: 20rpx;font-size: 26rpx;box-shadow: 5rpx 0 30rpx #ededed}
+.listData>view{background: #fff;border-radius: 10rpx;margin: 20rpx;font-size: 26rpx;}
 .ld-t{font-size: 36rpx;font-weight: bold;border-bottom: 2rpx dashed #F0F0F0;height: 115rpx;line-height: 115rpx;padding:0 20rpx;}
 .ld-cont{padding:20rpx;}
 .ld-cont>view{height: 60rpx;line-height: 60rpx;}

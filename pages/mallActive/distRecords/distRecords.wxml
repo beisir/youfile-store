@@ -1,0 +1,56 @@
+<view class='dr-back'></view>
+<view class='listData'>
+  <view>
+    <view class='dr-pic dr-pic1'>
+      <image src="/image/user.png"></image>
+    </view>
+    <view class='dr-cont'>
+      阳光百分百
+      <view>进货单200笔</view>
+      <view>进货金额 ¥30000</view>
+    </view>
+    <button>联系Ta</button>
+  </view>
+</view>
+<view class='dr-list'>
+  <view class='dr-date'>
+    <button class='active'>近7天</button>
+    <button>近30天</button>
+    <button>全部</button>
+  </view>
+  <view class='dr-order'>共进货30单</view>
+  <view class='dr-mon'>
+    <text>¥</text> 51,988.00</view>
+  <view class='dr-data'>
+    <navigator url='../detailsOfCollection/detailsOfCollection'>
+      <view class='dr-left'>
+        <view class='dr-dName'>商品名称商品名称商品名称商品名称</view>
+        <view>2018-04-08 09:00:00</view>
+      </view>
+      <view class='dr-right'>
+        ¥3000.00
+        <image src='/image/mallr.png'></image>
+      </view>
+    </navigator>
+    <navigator url='../detailsOfCollection/detailsOfCollection'>
+      <view class='dr-left'>
+        <view class='dr-dName'>商品名称商品名称商品名称商品名称</view>
+        <view>2018-04-08 09:00:00</view>
+      </view>
+      <view class='dr-right'>
+        ¥3000.00
+        <image src='/image/mallr.png'></image>
+      </view>
+    </navigator>
+    <navigator url='../detailsOfCollection/detailsOfCollection'>
+      <view class='dr-left'>
+        <view class='dr-dName'>商品名称商品名称商品名称商品名称</view>
+        <view>2018-04-08 09:00:00</view>
+      </view>
+      <view class='dr-right'>
+        ¥3000.00
+        <image src='/image/mallr.png'></image>
+      </view>
+    </navigator>
+  </view>
+</view>

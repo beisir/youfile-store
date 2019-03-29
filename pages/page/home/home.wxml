@@ -166,11 +166,9 @@
     <image src='/image/mallr.png'></image>
   </view>
   <view class='tab-cont'>
-    <view class='tab-view'>
-      <view bindtap='tabSwitch' wx:if="{{tabSwitchShow}}" data-index='0' class='tab-one {{tabSwitch=="0"?"tab-act":""}}'>正在抢订</view>
-      <view bindtap='tabSwitch' wx:if="{{tabSwitchShow}}" data-index='1' class='tab-one-1{{tabSwitch=="1"?"tab-act":""}}'>更多商品</view>
-      <view bindtap='tabSwitch' wx:if="{{!tabSwitchShow}}" data-index='0' class='tab-two-1'>正在抢订</view>
-      <view bindtap='tabSwitch' wx:if="{{!tabSwitchShow}}" data-index='1' class='tab-two'>更多商品</view>
+    <view class='tab-view {{tabSwitch=="0"?"tab-view3":"tab-view2"}}'>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}'  data-index='0'>正在抢订</view>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>更多商品</view>
       <view class='stop-time'>
         距结束
         <text>01</text> :
@@ -274,7 +272,7 @@
     <scroll-view scroll-y="true" style="height:100%;">
       <view class='flex-boxx'>
         <view class="result-list" wx:for="{{result}}" wx:key="index" id='{{index==0?"result-list":""}}'>
-          <view class='ac-time'>限时抢购</view>
+          <view class='ac-time'><image mode='widthFix' src="/image/sign.png"></image></view>
           <view wx:if='{{item.isHide}}' class='isHideGoods'>
             <image src="/image/isshow.png"></image>
             <view>该商品</view>

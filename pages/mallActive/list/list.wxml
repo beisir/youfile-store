@@ -26,8 +26,8 @@
     </navigator>
     <view class='ld-bottom'>
       <button wx:if="{{!item.participate}}" bindtap='joinShow' data-index="{{item.activityNumber}}">参加活动</button>
-      <button wx:if="{{item.participate}}">编辑商品</button>
-      <button wx:if="{{!item.participate}}">活动分析</button>
+      <button wx:if="{{item.participate}}" bindtap='editGoods'>编辑商品</button>
+      <button wx:if="{{!item.participate}}" bindtap='activityAnalysis'>活动分析</button>
     </view>
   </view>
 </view>
