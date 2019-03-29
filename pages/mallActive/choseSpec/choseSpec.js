@@ -1,4 +1,5 @@
 // pages/mallActive/choseSpec/choseSpec.js
+import API from '../../../utils/api.js'
 Page({
 
   /**
@@ -6,17 +7,11 @@ Page({
    */
   data: {
     checkednum:0,
-    goods: [{
-      name: 'asdas',
-      num: 12312
-    }, {
-      name: 'asdas',
-      num: 12312
-    }]
+    skuList: []
   },
   chooseThis(e) {
     let thisindex = e.currentTarget.dataset.index,
-      arr = this.data.goods;
+      arr = this.data.skuList;
     arr.forEach((el, index) => {
       thisindex == index ? el.checked = !el.checked : '';
     })
@@ -27,26 +22,26 @@ Page({
       this.setData({ selectAllStatus: true })
     }
     this.setData({
-      goods: arr,
+      skuList: arr,
       checkednum: checkednum.length
     })
   },
   // 全选
   selectAll(){
     let now = !this.data.selectAllStatus,
-      arr = this.data.goods;
+      arr = this.data.skuList;
     arr.forEach((el, index) => {
       el.checked = now;
     })
     let checkednum = arr.filter(el => el.checked)
     this.setData({
       selectAllStatus: now,
-      goods: arr,
+      skuList: arr,
       checkednum: checkednum.length
     })
   },
   sureSelect(){
-    let arr = this.data.goods;
+    let arr = this.data.skuList;
     let checkednum = arr.filter(el => el.checked)
     
     let pages = getCurrentPages(),
@@ -54,12 +49,36 @@ Page({
     current && current.getSku ? current.getSku(checkednum):''
     wx.navigateBack()
   },
+  // 获取详情
+  getDetail() {
+    API.getActiveGoodsDetail({ activityNumber: this.data.activityNumber, goodsId: this.data.goodsId }).then(res => {
+      this.setData({
+        goods: res.obj.goodsVO,
+        skuList: res.obj.goodsVO.goodsSkuVOList,
+        activeSkuList: res.obj.goodsActivityRelationVOS
+      })
+      let allArr = this.data.skuList
+      let acArr = this.data.acArr
+      if (allArr.length > 0) {  // 有sku
+        allArr.forEach(el => {
+          acArr.forEach(acitem => {
+            if (acitem == el.skuCode) {
+              el.checked = true
+            }
+          })
+        })
+        this.setData({ skuList: allArr })
+      } else {  // 无sku
+        this.setData({ noSku: true })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    
-    console.log(JSON.parse(options.sku))
+    this.setData({ goodsId: options.goodsId, activityNumber: options.activityNumber, acArr: JSON.parse(options.acArr)})
+    this.getDetail()
   },
 
   /**

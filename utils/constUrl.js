@@ -214,3 +214,5 @@ export const releaseGoodsUrl="/admin/goods/activity/{{activityNumber}}/goods/{{g
 export const addActiveGoodsUrl="/admin/goods/activity"
 export const addAMoreGoodsUrl="/admin/goods/activity/batch"
 export const releaseMoreGoodsUrl="/admin/goods/activity/{{activityNumber}}/goods/release/batch"
+export const getActiveGoodsDetailUrl = '/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}'
+export const editActiveGoodsUrl = '/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}/edit'

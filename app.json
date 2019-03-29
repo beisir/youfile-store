@@ -1,14 +1,14 @@
 {
   "pages": [
+    "pages/mallActive/list/list",
+    "pages/mallActive/editGoods/editGoods",
     "pages/page/home/home",
     "pages/mallActive/waitRalease/waitRalease",
-    "pages/mallActive/list/list",
     "pages/mallActive/detailsOfCollection/detailsOfCollection",
     "pages/mallActive/distRecords/distRecords",
     "pages/mallActive/batchRalease/batchRalease",
     "pages/mallActive/activityAnalysis/activityAnalysis",
     "pages/mallActive/yunDist/yunDist",
-    "pages/mallActive/editGoods/editGoods",
     "pages/page/goodsDetails/goodsDetails",
     "pages/mallActive/addGoods/addGoods",
     "pages/mallActive/moreAdd/moreAdd",
