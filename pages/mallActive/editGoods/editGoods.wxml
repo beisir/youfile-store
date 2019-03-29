@@ -19,6 +19,35 @@
       <button bindtap='discountGoods' class='spec-one'>一键折扣</button>
       <button bindtap='choiceSpec'>选择规格</button>
     </view>
+    <!-- sku -->
+    <view wx:for='{{activeSkuList}}' wx:key='{{index}}'>
+      <view class='spec-cont'>
+        <view>商品规格{{index}}：
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+      <view class='set-price'>
+        <view>
+          <view>
+            <input placeholder='添加活动价格' value='{{item.surePrice}}' type='digit' bindinput=''></input>
+            <view>批发价:¥{{item.price}}</view>
+          </view>
+        </view>
+        <view>
+          <view>
+            <input placeholder='添加活动库存' type='number'></input>
+            <view>库存:{{item.num}}</view>
+          </view>
+        </view>
+        <view>
+          <view>
+            <input placeholder='添加活动起购量' type='number'></input>
+            <view>起购量</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
     <view>
       <view class='spec-cont'>
         <view>商品规格1：
@@ -75,7 +104,7 @@
     </view>
   </view>
 </view>
-<navigator class='add-more'>确 定</navigator>
+<view class='add-more'>确 定</view>
 <view hidden='{{showFrame}}' class='frame' catchtouchmove='stopScroll'>
   <view>
     <image bindtap='closeFrame' src='/image/close.png'></image>

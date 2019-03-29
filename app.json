@@ -1,15 +1,14 @@
 {
   "pages": [
     "pages/mallActive/editGoods/editGoods",
+    "pages/mallActive/choseSpec/choseSpec",
     "pages/mallActive/list/list",
     "pages/page/goodsDetails/goodsDetails",
     "pages/page/home/home",
     "pages/mallActive/batchRalease/batchRalease",
-    
     "pages/mallActive/addGoods/addGoods",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/mallActive/moreAdd/moreAdd",
-    "pages/mallActive/choseSpec/choseSpec",
     "pages/page/workIndex/workIndex",
     "pages/page/cartList/cartList",
     "pages/page/serStatus/serStatus",
