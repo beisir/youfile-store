@@ -40,9 +40,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var _this=this
     if (options.activityNumber){
       this.setData({
         activityNumber: options.activityNumber
+      },function(){
+        _this.initData()
       })
     }
   },
@@ -66,8 +69,8 @@ Page({
   // 获取商品
   getList: function () {
     var _this = this
-    Api.adminGoodsStatus({
-      goodsStatus: "1",
+    Api.allGoods({
+      activityNumber: _this.data.activityNumber,
       keyword: _this.data.value
     })
       .then(res => {
@@ -89,7 +92,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initData()
   },
   // 添加商品
   addActiveShow:function(e){
@@ -106,6 +108,10 @@ Page({
       Api.showToast(res.message)
       _this.setData({
         joinShow:false
+      },function(){
+        setTimeout(res=>{
+          _this.initData()
+        },500 )
       })
     })
   },

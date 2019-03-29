@@ -161,7 +161,9 @@ import {
   releaseGoodsUrl,
   addActiveGoodsUrl,
   addAMoreGoodsUrl,
-  releaseMoreGoodsUrl
+  releaseMoreGoodsUrl,
+  activityGoodsUrl,
+  allGoodsUrl 
 } from './constUrl.js'
 
 const app = getApp()
@@ -1017,6 +1019,21 @@ function getStoreId() {
 function activityList(data) {
   return app.pageRequest.pageGet(activityListUrl, data)
 }
+/**
+ *
+获取可以添加的活动列表
+ */
+function allGoods(data) {
+  return app.pageRequest.pageGet(allGoodsUrl, data)
+}
+
+/**
+ *
+商贸云活动下的商品列表列表
+ */
+function activityGoods(data) {
+  return app.pageRequest.pageGet(activityGoodsUrl, data)
+}
 // 参加活动
 function participate(data) {
   return app.http.postRequest(participateUrl, data, {
@@ -1230,5 +1247,7 @@ module.exports = {
   releaseGoods,
   addActiveGoods,
   addAMoreGoods,
-  releaseMoreGoods
+  releaseMoreGoods,
+  activityGoods,
+  allGoods
 }
