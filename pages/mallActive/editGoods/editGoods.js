@@ -34,12 +34,62 @@ Page({
       value: 0.2
     }],
     ownCut: '',
-    activeSkuList: [{ id: 111, name: '黄', price: '222', num: '111' }, { id: 222, name: '123', price: '33333', num: '11'}]
+    activeSkuList: []
   },
   // 关闭弹框
   closeFrame: function() {
     this.setData({
       showFrame: true
+    })
+  },
+  // edit
+  editGoods(){
+    let obj = {
+      activityNumber: this.data.activityNumber,
+      goodsId: this.data.goodsId 
+    }
+    let acArr = [];
+    this.data.activeSkuList.forEach(el=>{
+      acArr.push({
+        activityNumber: this.data.activityNumber,
+        activityPrice: el.surePrice ? el.surePrice : el.sellPrice,
+        batchNum: el.buyNum?el.buyNum:0,
+        goodsActNumber: el.goodsActNumber ? el.goodsActNumber:'',
+        goodsId: this.data.goodsId,
+        skuCode: el.skuCode,
+        stockNum: el.sureNum ? el.sureNum:0
+      })
+    })
+    obj.goodsActivityPromotionVOList = acArr
+
+    API.editActiveGoods(obj).then(res=>{
+
+    })
+  },
+  // 获取详情
+  getDetail(){
+    API.getActiveGoodsDetail({ activityNumber: this.data.activityNumber, goodsId: this.data.goodsId}).then(res=>{
+      this.setData({
+        goods:res.obj.goodsVO,
+        skuList: res.obj.goodsVO.goodsSkuVOList,
+        activeSkuList: res.obj.goodsActivityRelationVOS
+      })
+      let allArr = this.data.skuList
+      let acArr = this.data.activeSkuList
+      if(allArr.length>0){  // 有sku
+        allArr.forEach(el => {
+          acArr.forEach(acitem => {
+            if (acitem.skuCode == el.skuCode) {
+              acitem.hasIt = true
+              el.checked = true
+            }
+          })
+        })
+
+        this.setData({ activeSkuList: acArr })
+      } else {  // 无sku
+        this.setData({noSku: true})
+      }
     })
   },
   // 折扣
@@ -96,8 +146,12 @@ Page({
   },
   // 选择规格
   choiceSpec: function() {
+    let acArr = []
+    this.data.activeSkuList.forEach(el=>{
+      acArr.push(el.skuCode)
+    })
     wx.navigateTo({
-      url: '../choseSpec/choseSpec?sku=' + JSON.stringify(this.data.activeSkuList),
+      url: '../choseSpec/choseSpec?goodsId=' + this.data.goodsId + '&activityNumber=' + this.data.activityNumber+'&acArr='+ JSON.stringify(acArr),
     })
   },
   watchInput(e) {
@@ -111,6 +165,12 @@ Page({
         arr.forEach(el=>{el.checked = false})
         obj.discount = arr
         break;
+      case 'price':
+        let index = e.currentTarget.dataset.index
+        this.setData({
+          ['activeSkuList[' + index +'].surePrice'] : val
+        })
+      break;  
     }
     this.setData(obj)
   },
@@ -123,13 +183,21 @@ Page({
     })
   },
   getSku(arr){
-    console.log(arr)
+    this.setData({
+      activeSkuList:arr
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.setData({
+      // acCode: options.activityNumber,
+      // goodsId: options.goodsId
+      activityNumber: 1903280301000012,
+      goodsId: 180929212000
+    })
+    this.getDetail()
   },
 
   /**

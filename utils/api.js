@@ -175,8 +175,10 @@ import {
   addActiveGoodsUrl,
   addAMoreGoodsUrl,
   releaseMoreGoodsUrl,
+  getActiveGoodsDetailUrl,
+  editActiveGoodsUrl,
   activityGoodsUrl,
-  allGoodsUrl 
+  allGoodsUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1133,8 +1135,18 @@ function releaseMoreGoods(data) {
     'content-type': 'application/x-www-form-urlencoded'
   })
 }
+// 活动商品详情
+function getActiveGoodsDetail(data) {
+  return app.http.getRequest(getActiveGoodsDetailUrl, data)
+}
+// 编辑活动商品
+function editActiveGoods(data){
+  return app.http.postRequest(editActiveGoodsUrl, data)
+}
 
 module.exports = {
+  editActiveGoods,
+  getActiveGoodsDetail,
   goodsPosterNum,
   simpleStoreMsg,
   getPosterTagMsg,
