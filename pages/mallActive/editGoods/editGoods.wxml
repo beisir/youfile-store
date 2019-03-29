@@ -76,43 +76,25 @@
   </view>
 </view>
 <navigator class='add-more'>确 定</navigator>
-<view hidden='{{showFrame}}' class='frame'>
+<view hidden='{{showFrame}}' class='frame' catchtouchmove='stopScroll'>
   <view>
     <image bindtap='closeFrame' src='/image/close.png'></image>
-    <view class='fra-t'>一键折扣</view>
-    <view class='fra-discout'>
-      <view>
-        <button>9折</button>
-      </view>
-      <view>
-        <button>9折</button>
-      </view>
-      <view>
-        <button>9折</button>
-      </view>
-      <view>
-        <button>9折</button>
-      </view>
-      <view>
-        <button>9折</button>
-      </view>
-      <view>
-        <button>9折</button>
-      </view>
-      <view>
-        <button>9折</button>
-      </view>
-      <view>
-        <button>9折</button>
+    <view class='fra-t bold-font'>一键折扣</view>
+    <view class='fra-discout' style='padding:0 40rpx;'>
+      <view wx:for='{{discount}}' wx:key='{{index}}' data-index='{{index}}' bindtap='chooseOff'>
+        <button class='{{item.checked?"ac-btn":""}}'>{{item.name}}</button>
       </view>
     </view>
-    <view class='fra-tip'>一键折扣的设置，会为您自动计算商品批发价的折扣后价格， 即活动价</view>
-    <view class='fra-self'>
-      <view>自定义折扣</view>
-      <view>
-        <input placeholder=' 请输入折扣'></input>折</view>
+    <view class='padding-box'>
+
+      <view class='fra-tip'>一键折扣的设置，会为您自动计算商品批发价的折扣后价格， 即活动价</view>
+      <view class='fra-self'>
+        <view class='bold-font'>自定义折扣</view>
+        <view>
+          <input placeholder=' 请输入折扣' type='digit' bindinput='watchInput' data-type='ownCut' value='{{ownCut}}' maxlength='3'></input>折</view>
+      </view>
     </view>
-    <view class='fra-goods'>折扣商品（共
+    <view class='fra-goods padding-box bold-font'>折扣商品（共
       <text>3</text>件商品）</view>
     <view class='add-cont'>
       <view>
@@ -126,7 +108,7 @@
           </view>
         </view>
       </view>
-       <view>
+      <view>
         <view class='g-cont'>
           <view class='g-image'>
             <image src='/image/pre.png'></image>
@@ -149,6 +131,6 @@
         </view>
       </view>
     </view>
-    <view class='add-more'>确 定</view>
+    <view class='add-more' bindtap='sureDiscount'>确 定</view>
   </view>
 </view>
