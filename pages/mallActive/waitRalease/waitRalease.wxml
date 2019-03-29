@@ -5,10 +5,10 @@
       <view class='ld-yellow' wx:if="{{activeDetails.activityStatus=='init'}}">
         活动未开始
       </view>
-      <view class='ld-red'  wx:if="{{activeDetails.activityStatus=='be_doing'}}">
+      <view class='ld-red' wx:if="{{activeDetails.activityStatus=='be_doing'}}">
         活动进行中
       </view>
-      <view class='ld-red'  wx:if="{{activeDetails.activityStatus=='finish'}}">
+      <view class='ld-red' wx:if="{{activeDetails.activityStatus=='finish'}}">
         活动已结束
       </view>
       <view>
@@ -22,11 +22,9 @@
 </view>
 <view class='wait-cont'>
   <view class='tab-cont'>
-    <view class='tab-view'>
-      <view bindtap='tabSwitch' wx:if="{{tabSwitchShow}}" data-index='0' class='tab-one {{tabSwitch=="0"?"tab-act":""}}'>待发布</view>
-      <view bindtap='tabSwitch' wx:if="{{tabSwitchShow}}" data-index='1' class='tab-one-1{{tabSwitch=="1"?"tab-act":""}}'>已参加</view>
-      <view bindtap='tabSwitch' wx:if="{{!tabSwitchShow}}" data-index='0' class='tab-two-1'>待发布</view>
-      <view bindtap='tabSwitch' wx:if="{{!tabSwitchShow}}" data-index='1' class='tab-two'>已参加</view>
+    <view class='tab-view {{tabSwitch=="0"?"tab-view3":"tab-view2"}}'>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>待发布</view>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>已参加</view>
     </view>
   </view>
   <view class='add-cont' wx:if='{{tabSwitch=="0"}}'>
@@ -102,7 +100,7 @@
       </view>
     </view>
   </view>
-   <view class='add-cont' wx:if='{{tabSwitch=="1"}}'>
+  <view class='add-cont' wx:if='{{tabSwitch=="1"}}'>
     <view>
       <view class='g-cont'>
         <view class='g-image'>
@@ -122,7 +120,7 @@
         <button class='g-border'>分享</button>
       </view>
     </view>
-     <view>
+    <view>
       <view class='g-cont'>
         <view class='g-image'>
           <image src='/image/pre.png'></image>
@@ -137,8 +135,8 @@
           <view>活动库存: 265</view>
         </view>
       </view>
-       <view class='g-bottom'>
-        <button class='g-border'  bindtap='editGoods'>编辑</button>
+      <view class='g-bottom'>
+        <button class='g-border' bindtap='editGoods'>编辑</button>
         <button class='g-border'>分享</button>
       </view>
     </view>
