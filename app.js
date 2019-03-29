@@ -57,7 +57,19 @@ App({
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
+    // 获取屏幕大小
+    var _that = this;
+    wx: wx.getSystemInfo({
+      success: function (res) {
+        _that.systemInfo = res;
+      }
+    });
   },
+
+  /**
+   * 系统信息
+   */
+  systemInfo: null,//系统信息
   onShow(options){
     if (!this.globalData.notOnshow){
       //跳转进入的入口
