@@ -22,52 +22,55 @@
 </view>
 <view class='wait-cont'>
   <view class='tab-cont'>
-    <view class='tab-view {{tabSwitch=="0"?"tab-view3":"tab-view2"}}'>
+    <view class='tab-view {{tabSwitch=="0"?"tab-view1":"tab-view2"}}'>
       <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>待发布</view>
       <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>已参加</view>
     </view>
   </view>
   <view class='add-cont' wx:if='{{tabSwitch=="0"}}'>
-    <view>
-      <view class='g-cont'>
-        <view class='g-image'>
-          <image src='/image/pre.png'></image>
-          <view>待完善</view>
+    <block wx:for="{{listData}}" wx:key="{{index}}">
+      <view wx:if="{{item.editStatus=='not_edit'}}">
+        <view class='g-cont'>
+          <view class='g-image'>
+            <image src='/image/pre.png'></image>
+            <view>待完善</view>
+          </view>
+          <view>
+            <view class='g-title'>{{item.goodsVO.name}} </view>
+            <view class='gprice'>活动价:待完善 </view>
+            <view class='gprice'>起批量:待完善 </view>
+            <view>活动库存: 待完善</view>
+          </view>
         </view>
-        <view>
-          <view class='g-title'>周大福 十二生肖狗 黄金吊坠配饰 </view>
-          <view class='gprice'>活动价:待完善 </view>
-          <view class='gprice'>起批量:待完善 </view>
-          <view>活动库存: 待完善</view>
-        </view>
-      </view>
-      <view class='g-bottom'>
-        <button class='g-border' bindtap='editGoods'>编辑</button>
-        <button>预览</button>
-        <button>发布</button>
-      </view>
-    </view>
-    <view>
-      <view class='g-cont'>
-        <view class='g-image'>
-          <image src='/image/pre.png'></image>
-        </view>
-        <view>
-          <view class='g-title'>周大福 十二生肖狗 黄金吊坠配饰 </view>
-          <view class='gprice'>活动价:
-            <text>￥1100</text> </view>
-          <view class='gprice'>起批量:
-            <text>100</text> </view>
-          <view>活动库存: 265</view>
+        <view class='g-bottom'>
+          <button class='g-border' data-id="{{item.goodsVO.id}}" bindtap='editGoods'>编辑</button>
+          <button>预览</button>
+          <button>发布</button>
         </view>
       </view>
-      <view class='g-bottom'>
-        <button class='g-border' bindtap='editGoods'>编辑</button>
-        <button class='g-border'>预览</button>
-        <button class='g-border' data-id='180929212000' bindtap='releaseGoods'>发布</button>
+      <view wx:if="{{item.editStatus=='edit'}}">
+        <view class='g-cont'>
+          <view class='g-image'>
+            <image src='/image/pre.png'></image>
+          </view>
+          <view>
+            <view class='g-title'>{{item.goodsVO.name}} </view>
+            <view class='gprice'>活动价:
+              <text>￥{{item.goodsActivityRelationVOS.name[0].goodsPromotionList[0].activityPricr}}</text> </view>
+            <view class='gprice'>起批量:
+              <text>{{item.goodsActivityRelationVOS.name[0].batchNum}}</text> </view>
+            <view>活动库存: {{item.goodsActivityRelationVOS.name[0].stockNum}}</view>
+          </view>
+        </view>
+        <view class='g-bottom'>
+          <button class='g-border' data-id="{{item.goodsVO.id}}" bindtap='editGoods'>编辑</button>
+          <button class='g-border' >预览</button>
+          <button class='g-border' data-id='"{{item.goodsVO.id}}' bindtap='releaseGoods'>发布</button>
+        </view>
       </view>
-    </view>
-    <view>
+    </block>
+
+    <!-- <view>
       <view class='g-cont'>
         <view class='g-image'>
           <image src='/image/pre.png'></image>
@@ -98,9 +101,9 @@
           <view>活动库存: 265</view>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
-  <view class='add-cont' wx:if='{{tabSwitch=="1"}}'>
+  <!-- <view class='add-cont' wx:if='{{tabSwitch=="1"}}'>
     <view>
       <view class='g-cont'>
         <view class='g-image'>
@@ -140,7 +143,7 @@
         <button class='g-border'>分享</button>
       </view>
     </view>
-  </view>
+  </view> -->
   <!-- <view class="nomore">
     <view>
       <image src="/image/nohome.png"></image>

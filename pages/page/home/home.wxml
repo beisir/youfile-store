@@ -272,7 +272,7 @@
     <scroll-view scroll-y="true" style="height:100%;">
       <view class='flex-boxx'>
         <view class="result-list" wx:for="{{result}}" wx:key="index" id='{{index==0?"result-list":""}}'>
-          <view class='ac-time'><image mode='widthFix' src="/image/sign.png"></image></view>
+          <view class='ac-time'><image src="/image/sign.png"></image></view>
           <view wx:if='{{item.isHide}}' class='isHideGoods'>
             <image src="/image/isshow.png"></image>
             <view>该商品</view>
