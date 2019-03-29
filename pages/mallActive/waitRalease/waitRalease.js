@@ -10,7 +10,8 @@ Page({
     tabSwitchShow: true,
     tabSwitch: "0",
     activityNumber: '1903260301000010',
-    listData: []
+    listData: [],
+    releaseStatus: "init"
   },
   // 编辑
   editGoods: function(e) {
@@ -24,24 +25,31 @@ Page({
   },
   // 切换抢购商品
   tabSwitch: function(e) {
-    var index = e.target.dataset.index
+    var index = e.target.dataset.index,
+    _this=this
+    console.log(index)
     if (index == "1") {
       this.setData({
-        tabSwitchShow: false
+        tabSwitchShow: false,
+        releaseStatus:'release'
       })
     } else {
       this.setData({
-        tabSwitchShow: true
+        tabSwitchShow: true,
+        releaseStatus: "init"
       })
     }
     this.setData({
       tabSwitch: index
+    },function(){
+      _this.onLoad({ options: _this.data.activityNumber})
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options)
     if (options.activityNumber) {
       app.pageRequest.pageData.pageNum = 0
       this.setData({
@@ -73,7 +81,8 @@ Page({
   getGoodsList: function(activityNumber) {
     var _this = this
     Api.activityGoods({
-      activityNumber: activityNumber
+      activityNumber: activityNumber,
+      releaseStatus: this.data.releaseStatus
     }).then(res => {
       console.log(res)
       if (res.obj) {
