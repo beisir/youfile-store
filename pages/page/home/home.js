@@ -437,6 +437,9 @@ Page({
         if (Api.isNotEmpty(detailList)) {
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
+          for (var i of newArr){
+            console.log(i)
+          }
           _this.setData({
             result: newArr,
             totalCount: totalCount,
