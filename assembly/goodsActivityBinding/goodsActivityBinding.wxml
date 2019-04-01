@@ -1,24 +1,25 @@
- <!--活动展位1-->
- <block wx:if="{{position == '1'}}">
-      <block wx:if="{{activityShowInfo['activity_1']}}">
-             <block wx:for="{{activityShowInfo['activity_1']}}" wx:for-item="item" wx:key="">
-             <!--优惠模版-->
-                <block wx:if="{{item.promotionMode=='special_offer'}}">
-                        <view class='active-g'>
-                          <view>￥<text>{{item.activityPrice}}</text><text>￥{{item.sellPrice}}</text></view>
-                          <view>
-                            <view>距结束还有</view>
-                            <text>{{item.beginDate}} </text>
-                          </view>
-                        </view>
-                </block>
-
-              
-             </block>
+<!--活动展位1-->
+<block wx:if="{{position == '1'}}">
+  <block wx:if="{{activityShowInfo['activity_1']}}">
+    <block wx:for="{{activityShowInfo['activity_1']}}" wx:for-item="item" wx:key="">
+      <!--优惠模版-->
+      <block wx:if="{{item.promotionMode=='special_offer'}}">
+        <view class='active-g'>
+          <view>￥
+            <text>{{item.activityPrice}}</text>
+            <text>￥{{item.sellPrice}}</text>
+          </view>
+          <view>
+            <view>距结束还有</view>
+            <text>{{item.beginDate}} </text>
+          </view>
+        </view>
       </block>
- </block>
+    </block>
+  </block>
+</block>
 
- <!--活动展位2-->
- <block wx:if="{{position == '2'}}">
-    
- </block>
+<!--活动展位2-->
+<block wx:if="{{position == '2'}}">
+
+</block>

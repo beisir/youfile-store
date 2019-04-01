@@ -323,6 +323,9 @@ Page({
     this.getNewData1(current, swichNavCode)
   },
   getSpecDetails: function(index, code) {
+    console.log(index)
+    console.log(code)
+    
     var that = this,
       swichNavCode = index,
       code = code,
@@ -1153,12 +1156,14 @@ Page({
           store = res.obj.store,
           skuArrTwo = [],
           name = ''
+          //隐私商品直接返回首页
         if (limitShow == 1 && obj.privacy == 1) {
           wx.switchTab({
             url: '../home/home'
           })
           return
         }
+        // 描述信息编辑器解析
         var that = this;
         var article = '<div>' + obj.description + '</div>'
         if (Api.isNotEmpty(obj.description)) {
@@ -1171,6 +1176,7 @@ Page({
           })
         }
         WxParse.wxParse('article', 'html', article, that, 5);
+        // 是否关注信息
         if (store.isFollow) {
           app.globalData.isFollow = true
           _this.setData({
@@ -1182,8 +1188,10 @@ Page({
             likeShow: false
           })
         }
+        // 查看商品规格是否为空
         if (Api.isNotEmpty(obj.goodsSpecificationVOList)) {
           if (obj.goodsSpecificationVOList.length > 1) {
+            // 两个规格属性
             skuArrTwo.push(obj.goodsSpecificationVOList[1])
             name = obj.goodsSpecificationVOList[1].specName
           }
@@ -1198,12 +1206,15 @@ Page({
         if (!Api.isNotEmpty(obj.goodsSkuVOList)) {
           obj.goodsSkuVOList = []
         }
+        // 统计关注人数
         var favoriteNum = 0
         if (store.favoriteNum.obj) {
           favoriteNum = store.favoriteNum.obj
         }
+        // 商品下架或者库存为0
         var stockNum = obj.stockNum
-        if (stockNum == 0) {
+        var status = obj.status
+        if (stockNum == 0 || status!=1) {
           _this.setData({
             stockNumHide: true
           })
@@ -1273,49 +1284,53 @@ Page({
           favoriteNum: favoriteNum,
           sdescription: store.description == null ? '' : store.description
         }, function() {
+          // isTrue为true编辑进货车或者购物车 false是添加
           var lenNum = true
-          if (_this.data.getSpecDetails) {
-            if (obj.goodsSpecificationVOList.length != 0) {
-              var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
-              var len = obj.goodsSpecificationVOList
-              if (len.length == 1) {
+          // 有规格
+          if (obj.goodsSpecificationVOList.length != 0) {
+            var arr = obj.goodsSpecificationVOList[0].goodsSpecificationValueVOList
+            var len = obj.goodsSpecificationVOList
+            // 只有一个规格
+            if (len.length == 1) {
+              for (var i = arr.length - 1; i >= 0; i--) {
+                _this.getSpecDetails(i, arr[i].specValueCode)
+              }
+              if (isTrue) {
+                var newArrOne = obj.goodsSkuVOList
+                if (newArrOne[0].specValueCodeList.length == 1) {
+                  _this.setData({
+                    newSkuOnly: true,
+                    newSkuOnlyEdit: true
+                  })
+                } else {
+                  _this.setData({
+                    newSkuOnly: false,
+                    newSkuOnlyEdit: true
+                  })
+                }
+              } else {
+                _this.setData({
+                  newSkuOnly: true
+                })
+              }
+            }
+            // console.log(this.data.newCartList)
+            // if (this.data.newCartList.length == 0) {
+            //   _this.getSpecDetails(0, arr[0].specValueCode)
+            // }
+            // showCartOne为false 修改购物车
+            // if (!this.data.showCartOne) {
+            //   _this.getSpecDetails(0, arr[0].specValueCode)
+            // }
+            // 只有两个规格
+            if (len.length == 2) {
+              lenNum = false
+              if (isTrue) {
                 for (var i = arr.length - 1; i >= 0; i--) {
                   _this.getSpecDetails(i, arr[i].specValueCode)
                 }
-                if (isTrue) {
-                  var newArrOne = obj.goodsSkuVOList
-                  if (newArrOne[0].specValueCodeList.length == 1) {
-                    _this.setData({
-                      newSkuOnly: true,
-                      newSkuOnlyEdit: true
-                    })
-                  } else {
-                    _this.setData({
-                      newSkuOnly: false,
-                      newSkuOnlyEdit: true
-                    })
-                  }
-                } else {
-                  _this.setData({
-                    newSkuOnly: true
-                  })
-                }
-              }
-              if (this.data.newCartList.length == 0) {
+              } else {
                 _this.getSpecDetails(0, arr[0].specValueCode)
-              }
-              if (!this.data.showCartOne) {
-                _this.getSpecDetails(0, arr[0].specValueCode)
-              }
-              if (len.length == 2) {
-                lenNum = false
-                if (isTrue) {
-                  for (var i = arr.length - 1; i >= 0; i--) {
-                    _this.getSpecDetails(i, arr[i].specValueCode)
-                  }
-                } else {
-                  _this.getSpecDetails(0, arr[0].specValueCode)
-                }
               }
             }
           }
@@ -1323,6 +1338,7 @@ Page({
           this.setData({
             numbers: num
           })
+          // editOneName编辑进货车购物车
           if (this.data.editOneName) {
             var newSkuArrTwo = this.data.newSkuArrTwo
             if (lenNum) {
@@ -1338,7 +1354,6 @@ Page({
               this.getTotalPrice();
             })
           }
-
         })
       })
   },

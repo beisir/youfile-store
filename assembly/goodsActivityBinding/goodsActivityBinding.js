@@ -50,7 +50,7 @@ Component({
       this.handleActivityPosition1(goodsVO);
 
       //绑定活动到sku上
-      this.bindingTOSKU(goodsVO);
+      console.log(this.bindingTOSKU(goodsVO))
 
       //绑定活动到spu上
       this.bindingTOSPU(goodsVO);
@@ -73,16 +73,18 @@ Component({
 
     //把活动绑定sku上
     bindingTOSKU(goodsVO){
-      // standardGoodsSkuPromotions = goodsVO.standardGoodsSkuPromotions;
-      // var temp = {};
-      // for(var item  in standardGoodsSkuPromotions ){
-      //   temp[item.skuCode].push(item);
-      // }
-
-      // for (item in goodsVO.goodsSkuVOList){
-      //   item.skuPromotions = temp[item.skuCode]
-      // }
-        
+      var goodsSkuVOList = goodsVO.goodsSkuVOList
+      var standardGoodsSkuPromotions = goodsVO.extInfo.SALES_PROMOTION[0].standardGoodsSkuPromotions
+      for (var val of goodsSkuVOList){
+        val.standardGoodsSkuPromotions=[]
+        for (var v of standardGoodsSkuPromotions){
+          if (val.skuCode == v.skuCode){
+            val.standardGoodsSkuPromotions.push(v)
+            val.isActivity=true
+          }
+        }
+      }
+      return goodsSkuVOList
     },
     //把活动绑定到spu上
     bindingTOSPU(goodsVO){
