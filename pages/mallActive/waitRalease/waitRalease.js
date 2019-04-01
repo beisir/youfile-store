@@ -18,9 +18,9 @@ Page({
   editGoods: function(e) {
     var id = e.target.dataset.id,
       activityNumber = this.data.activityNumber
-    console.log('../editGoods/editGoods?id' + id + "&activityNumber=" + activityNumber)
+    console.log('../editGoods/editGoods?goodsId=' + id + "&activityNumber=" + activityNumber)
     wx.navigateTo({
-      url: '../editGoods/editGoods?id' + id + "&activityNumber=" + activityNumber,
+      url: '../editGoods/editGoods?goodsId=' + id + "&activityNumber=" + activityNumber,
     })
   },
   // 切换抢购商品

@@ -61,7 +61,7 @@ Page({
       })
     })
     obj.goodsActivityPromotionVOList = acArr
-
+    console.log(obj)
     API.editActiveGoods(obj).then(res=>{
 
     })
@@ -166,11 +166,21 @@ Page({
         obj.discount = arr
         break;
       case 'price':
-        let index = e.currentTarget.dataset.index
         this.setData({
-          ['activeSkuList[' + index +'].surePrice'] : val
+          ['activeSkuList[' + e.currentTarget.dataset.index +'].surePrice'] : parseInt(val)
         })
-      break;  
+        break;  
+      case 'stockNum':
+        
+        this.setData({
+          ['activeSkuList[' + e.currentTarget.dataset.index + '].sureNum']: parseInt(val)
+        })
+        break; 
+      case 'buyNum':
+        this.setData({
+          ['activeSkuList[' + e.currentTarget.dataset.index + '].buyNum']: parseInt(val)
+        })
+      break; 
     }
     this.setData(obj)
   },
@@ -183,19 +193,49 @@ Page({
     })
   },
   getSku(arr){
+    if(arr.length>0){
+      arr.forEach(checkel => {
+        let hasarr = this.data.activeSkuList.filter(el => el.skuCode == checkel.skuCode)
+        if (hasarr.length==0){
+        } else {
+
+        }
+      })
+    } else {
+      this.setData({
+        activeSkuList: []
+      })
+    }
+
     this.setData({
-      activeSkuList:arr
+      activeSkuList: arr
     })
+   
+  },
+  remarkSkuList(acArr, allArr){
+    if (allArr.length > 0) {  // 有sku
+      allArr.forEach(el => {
+        acArr.forEach(acitem => {
+          if (acitem.skuCode == el.skuCode) {
+            acitem.hasIt = true
+            el.checked = true
+          }
+        })
+      })
+      this.setData({ activeSkuList: acArr })
+    } else {  // 无sku
+      this.setData({ noSku: true })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     this.setData({
-      // acCode: options.activityNumber,
-      // goodsId: options.goodsId
-      activityNumber: 1903280301000012,
-      goodsId: 180929212000
+      activityNumber: options.activityNumber,
+      goodsId: options.goodsId
+      // activityNumber: 1903280301000012,
+      // goodsId: 180929212000
     })
     this.getDetail()
   },

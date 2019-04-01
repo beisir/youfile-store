@@ -1,6 +1,8 @@
 {
   "pages": [
+
     "pages/page/home/home",
+    
     
     "pages/mallActive/waitRalease/waitRalease",
     "pages/mallActive/batchRalease/batchRalease",
