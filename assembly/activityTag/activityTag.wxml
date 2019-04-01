@@ -1,0 +1,3 @@
+<view class='ac-time'>
+  <image mode='widthFix' src="{{extInfo}}"></image>
+</view>

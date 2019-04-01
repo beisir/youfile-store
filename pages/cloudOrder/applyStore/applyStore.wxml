@@ -43,7 +43,7 @@
     <text class='com-tip'>{{globalData.projectName}}ID：{{storeID}}</text>
   </view>
 
-   <view class='item-box padding-right' bindtap='showModal' data-type='mall'>
+   <view class='item-box' bindtap='showModal' data-type='mall'>
     <view class="flex-center">
       <image class='floor' src='/image/lou.png'></image>
       <text>所属商城</text>
@@ -52,6 +52,7 @@
     <view class="flex-center">
       <image class='logo' wx:if="{{mallSureChose}}" src='{{baseUrl+mallSureChose.logo}}'></image>
       <text>{{mallSureChose.name}}</text>
+      <image class='more' src='/image/icl.png'></image>
     </view>
 
   </view>

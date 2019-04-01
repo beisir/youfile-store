@@ -139,6 +139,7 @@ class request {
     wx.showNavigationBarLoading()
     wx.showLoading({
       title: "正在加载",
+      mask: true
     })
     return new Promise((resolve, reject) => {
       this.authHandler.getTokenOrRefresh().then(token => {
@@ -208,22 +209,39 @@ class request {
       })
     })
   }
-  onlychoseImg() {
-    return new Promise((resolve, reject) => {
-      wx.chooseImage({
-        count: 1,
-        sizeType: ['original'], // original 原图，compressed 压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-        success: function(res) {
-          resolve(res)
-        },
-        fail: (e => {
-          reject(e)
+  onlychoseImg(type) {
+    let pages = getCurrentPages(),
+      current = pages[pages.length - 1];
+      let oritype = ['album', 'camera']
+      if (type) {
+        oritype = type
+      }
+      return new Promise((resolve, reject) => {
+        if (current.data.choosingImg) {
+          reject("重复点击")
+          return
+        }else{
+          current.setData({ choosingImg: true })
+        }
+        wx.chooseImage({
+          count: 1,
+          sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+          sourceType: oritype, // album 从相册选图，camera 使用相机，默认二者都有
+          success: function (res) {
+            resolve(res)
+          },
+          fail: (e => {
+            reject(e)
+          }),
+          complete: () => {
+            current.setData({ choosingImg: false })
+          }
         })
       })
-    })
+
   }
-  onlyUploadImg(url, types) {
+  
+  onlyUploadImg(url, types, noLoading) {
     if (!url) {
       console.warn('no upload url')
       return
@@ -237,9 +255,11 @@ class request {
         } else {
           delete header['Authorization'];
         }
-        wx.showLoading({
-          title: '上传中',
-        })
+        if (!noLoading) {
+          wx.showLoading({
+            title: '上传中',
+          })
+        }
         wx.uploadFile({
           url: uploadImg,
           filePath: url,
@@ -259,12 +279,51 @@ class request {
             }
           }),
           complete: (res => {
-            wx.hideLoading();
+            if (!noLoading) {
+              wx.hideLoading();
+            }
           })
         })
       })
     })
 
+  }
+
+  // 多图上传
+  uploadImgArr(arr, type = '') {
+    if (!arr || arr.length == 0) { return }
+    this.getImgArr = [],
+      this.nowIndex = 0;
+    this.handleImgList(0, arr, type)
+    wx.showLoading({
+      title: '开始上传',
+      mask: true
+    })
+  }
+  handleImgList(index, arr, type) {
+    let pages = getCurrentPages(),
+      current = pages[pages.length - 1];
+    if (!arr[index]) {
+      wx.hideLoading()
+      return
+    }
+    this.onlyUploadImg(arr[index], type, true).then(res => {
+      this.getImgArr.push(res)
+      if (arr[++index]) {
+        wx.showLoading({
+          title: '正在上传:' + index + '/' + arr.length,
+          mask: true
+        })
+        this.nowIndex = index
+        this.handleImgList(index, arr, type)
+      } else {
+        current.mulImgUploadSuccess ? current.mulImgUploadSuccess(this.getImgArr) : ''
+        wx.hideLoading()
+      }
+    }).catch(e => {
+      current.mulImgUploadFail ? current.mulImgUploadFail(e) : ''
+      wx.hideLoading()
+    })
   }
 }
 export default request

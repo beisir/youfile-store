@@ -1,6 +1,6 @@
 /* pages/faceToFaceOrder/orderQRcode/orderQRcode.wxss */
 page{border: 0;color: #333;}
-.top-box{height: 590rpx;position: relative;}
+.top-box{height: 590rpx;position: relative;margin-bottom: 30rpx;}
 .order-price-box{
   height: 310rpx;
   background: #ca7;
@@ -11,17 +11,17 @@ page{border: 0;color: #333;}
   padding-top: 48rpx;
   box-sizing: border-box;
 }
-.roundedge{height: 50rpx;background: #ca7;border-radius: 0 0 50% 50%;}
-.QRcode-icon{width: 300rpx;height: 300rpx;position: absolute;left:0;right: 0;margin: auto;bottom:40rpx;box-shadow: 0 0 15rpx #999;display: flex;align-items: center;justify-content: center;box-sizing: border-box;border: 3rpx solid #eee;background: #fff;border-radius:10rpx;}
-.QRcode-icon image{width: 270rpx;height: 270rpx;}
+.roundedge{height: 100%;width:110%;position:absolute;background: #ca7;border-radius: 0 0 50% 50%;left: -5%;}
+.QRcode-icon{width: 350rpx;height: 350rpx;position: absolute;left:0;right: 0;margin: auto;bottom:0;box-shadow: 0 0 15rpx #999;display: flex;align-items: center;justify-content: center;box-sizing: border-box;border: 3rpx solid #eee;background: #fff;border-radius:10rpx;}
+.QRcode-icon image{width: 320rpx;height: 320rpx;}
 .code-tip{display: flex;flex-direction: column;align-items: center;font-size: 26rpx;color:#333;}
 /* 线 */
 .dashed-border{display: flex;justify-content: space-between;margin: 60rpx 50rpx 40rpx;}
 .dashed-border view{width: 13rpx;height: 1rpx; background: #ddd;}
  /* 新货物 */
-.goods-title{font-size:30rpx;font-weight: 600;margin:0 50rpx 33rpx;line-height: 1;}
+.goods-title{font-size:30rpx;font-weight: 600;margin:0 80rpx 33rpx;line-height: 1;}
 .new-goods-box{
-  padding: 0 50rpx 12rpx;
+  padding: 0 80rpx 12rpx;
   position: relative;
 }
 .new-goods-box .goods-item{padding-bottom: 38rpx;display: flex;justify-content: space-between;font-size: 26rpx;color: #666;}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "朋友圈海报",
+  "usingComponents": {
+    "tips": "/assembly/tips/tips"
+  }
+}

@@ -5,48 +5,51 @@
         <image src='/image/pre.png'></image>
       </view>
       <view>
-        <view class='g-title'>周大福 十二生肖狗 黄金吊坠配饰 </view>
+        <view class='g-title'>{{goods.name}}</view>
         <view class='gprice'>批发:
-          <text>￥1100</text> </view>
+          <text>￥{{goods.sellPrice}}</text> </view>
         <view class='gprice'>零售:
-          <text>￥1100</text> </view>
-        <view>库存: 265</view>
+          <text>￥{{goods.wholesalePrice}}</text> </view>
+        <view>库存: {{goods.stockNum}}</view>
       </view>
     </view>
   </view>
   <view class='goods-spec'>
-    <view class='spec-t'>商品规格（3）
+    <view class='spec-t'>商品规格（{{activeSkuList.length}}/{{goods.goodsSkuVOList.length}}）
       <button bindtap='discountGoods' class='spec-one'>一键折扣</button>
       <button bindtap='choiceSpec'>选择规格</button>
     </view>
-    <view>
+    <!-- sku -->
+    <block wx:if="{{!noSku}}">
+    <view wx:for='{{activeSkuList}}' wx:key='{{index}}'>
       <view class='spec-cont'>
-        <view>商品规格1：
-          <text>“浅藕色”+“M”</text>
+        <view>商品规格{{index+1}}：
+          <text>{{item.skuName}}</text>
         </view>
       </view>
       <view class='set-price'>
         <view>
           <view>
-            <input placeholder='添加活动价格'></input>
-            <view>批发价:¥2800</view>
+            <input placeholder='添加活动价格' value='{{item.surePrice}}' type='digit' bindinput='watchInput' data-type='price' data-index="{{index}}"></input>
+            <view>批发价:¥{{item.wholesalePrice}}</view>
           </view>
         </view>
         <view>
           <view>
-            <input placeholder='添加活动库存'></input>
-            <view>库存:100</view>
+            <input placeholder='添加活动库存' value='{{item.sureNum}}' type='number' bindinput='watchInput' data-type='stockNum' data-index="{{index}}"></input>
+            <view>库存:{{item.stockNum}}</view>
           </view>
         </view>
         <view>
           <view>
-            <input placeholder='添加活动起购量'></input>
+            <input placeholder='添加活动起购量' value='{{item.buyNum}}' type='number' bindinput='watchInput' data-type='buyNum' data-index="{{index}}"></input>
             <view>起购量</view>
           </view>
         </view>
       </view>
     </view>
-    <view>
+    </block>
+    <view wx:else>
       <view class='spec-cont'>
         <view>商品规格3：
           <text>无规格</text>（无SKU时，不能选择规格）
@@ -75,7 +78,7 @@
     </view>
   </view>
 </view>
-<navigator class='add-more'>确 定</navigator>
+<view class='add-more' bindtap='editGoods'>确 定</view>
 <view hidden='{{showFrame}}' class='frame' catchtouchmove='stopScroll'>
   <view>
     <image bindtap='closeFrame' src='/image/close.png'></image>

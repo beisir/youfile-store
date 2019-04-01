@@ -7,6 +7,7 @@
     "retailStore": "../retailStore/retailStore",
     "initstroe": "../../cloudOrder/applyStore/applyStore",
     "storeOrder":"../../faceToFaceOrder/remindLayer/remindLayer",
-    "returnBall": "../../../assembly/returnBall/returnBall"
+    "returnBall": "../../../assembly/returnBall/returnBall",
+    "activityTag": "../../../assembly/activityTag/activityTag"
   }
 }

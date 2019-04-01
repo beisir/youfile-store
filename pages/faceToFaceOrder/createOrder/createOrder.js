@@ -56,7 +56,8 @@ Page({
           }
         }else{
           obj.warnText = '请输入正确金额格式,最多两位小数';
-          obj.redColor = true;          
+          obj.redColor = true;     
+          !val ? obj.money = '' : ''     
         }
       break;
       case "tip":
@@ -181,6 +182,8 @@ Page({
       return
     }
 
+    if(this.data.ordering){return}
+    this.setData({ordering: true})
     let obj = {
       storeId: this.data.storeId,
       orderAmount: this.data.money,
@@ -188,7 +191,7 @@ Page({
       faceToFaceOrderDetailVOList: this.data.tag
     };
     app.http.postRequest("/admin/ftf/order",obj).then(res=>{
-      API.showToast(res.message)
+      // API.showToast(res.message)
       if(res.code == '0'){
         setTimeout(() => {
           wx.redirectTo({
@@ -196,6 +199,8 @@ Page({
           })
         }, 800)
       }
+    }).catch(e=>{
+      this.setData({ ordering: false })
     })
   },
   /**

@@ -1,25 +1,29 @@
-<view class='add-cont'>
+<view class='add-cont' wx:if="{{result.length>0}}">
   <view wx:for="{{result}}" wx:key="{{index}}">
-    <icon data-id='{{item.id}}' data-index="{{index}}" bindtap="selectList" type="success" wx:if="{{item.selected}}" size="28" color="#CCAA77" />
-    <icon data-id='{{item.id}}' data-index="{{index}}" bindtap="selectList" wx:else type="circle" size="28" />
+    <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" type="success" wx:if="{{item.selected}}" size="28" color="#CCAA77" />
+    <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" wx:else type="circle" size="28" />
     <view class='g-cont'>
       <view class='g-image'>
-        <image wx:if="{{item.mainImgUrl}}" src='{{baseUrl}}{{item.mainImgUrl}}'></image>
-        <view wx:if="{{item.goodsSkuVOList!=null}}">{{item.goodsSkuVOList}}</view>
-        <view wx:if="{{item.goodsSkuVOList==null}}">无</view>
+        <image wx:if="{{item.goodsVO.mainImgUrl}}" src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>
       </view>
       <view>
-        <view class='g-title'>{{item.name}} </view>
+        <view class='g-title'>{{item.goodsVO.name}} </view>
         <view class='gprice'>活动价:
-          <text>￥{{item.sellPrice}}</text> </view>
+          <text>￥{{item.goodsActivityRelationVOS[0].goodsPromotionList[0].activityPrice}}</text> </view>
         <view class='gprice'>起购量:
-          <text>{{item.wholesalePrice}}</text> </view>
-        <view>活动库存: {{item.stockNum}}</view>
+          <text>{{item.goodsActivityRelationVOS[0].batchNum==null?"未完善":item.goodsActivityRelationVOS[0].batchNum}}</text> </view>
+        <view>活动库存: {{item.goodsActivityRelationVOS[0].salesNum?"未完善":item.goodsActivityRelationVOS[0].salesNum}}</view>
       </view>
     </view>
   </view>
 </view>
-<view class='add-bottom'>
+<view class="nomore"  wx:else>
+    <view>
+      <image src="/image/huodong.png"></image>
+    </view>
+    <text>暂未添加活动商品</text>
+  </view>
+<view class='add-bottom'  wx:if="{{result.length>0}}">
   <view>
     <icon wx:if="{{selectAllStatus}}" type="success" size="28" color="#CCAA77" class='iconall' bindtap="selectAll" />
     <icon wx:else type="circle" class='iconall' size="28" bindtap="selectAll" /> 全选

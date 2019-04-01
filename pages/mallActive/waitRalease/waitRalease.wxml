@@ -5,10 +5,10 @@
       <view class='ld-yellow' wx:if="{{activeDetails.activityStatus=='init'}}">
         活动未开始
       </view>
-      <view class='ld-red'  wx:if="{{activeDetails.activityStatus=='be_doing'}}">
+      <view class='ld-red' wx:if="{{activeDetails.activityStatus=='be_doing'}}">
         活动进行中
       </view>
-      <view class='ld-red'  wx:if="{{activeDetails.activityStatus=='finish'}}">
+      <view class='ld-red' wx:if="{{activeDetails.activityStatus=='finish'}}">
         活动已结束
       </view>
       <view>
@@ -22,87 +22,59 @@
 </view>
 <view class='wait-cont'>
   <view class='tab-cont'>
-    <view class='tab-view'>
-      <view bindtap='tabSwitch' wx:if="{{tabSwitchShow}}" data-index='0' class='tab-one {{tabSwitch=="0"?"tab-act":""}}'>待发布</view>
-      <view bindtap='tabSwitch' wx:if="{{tabSwitchShow}}" data-index='1' class='tab-one-1{{tabSwitch=="1"?"tab-act":""}}'>已参加</view>
-      <view bindtap='tabSwitch' wx:if="{{!tabSwitchShow}}" data-index='0' class='tab-two-1'>待发布</view>
-      <view bindtap='tabSwitch' wx:if="{{!tabSwitchShow}}" data-index='1' class='tab-two'>已参加</view>
+    <view class='tab-view {{tabSwitch=="0"?"tab-view1":"tab-view2"}}'>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>待发布</view>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>已参加</view>
     </view>
   </view>
-  <view class='add-cont' wx:if='{{tabSwitch=="0"}}'>
-    <view>
-      <view class='g-cont'>
-        <view class='g-image'>
-          <image src='/image/pre.png'></image>
-          <view>待完善</view>
+  <view class='add-cont' wx:if="{{listData.length>0}}">
+    <block wx:for="{{listData}}" wx:key="{{index}}">
+      <view wx:if="{{item.editStatus=='not_edit'}}">
+        <view class='g-cont'>
+          <view class='g-image'>
+            <image src='/image/pre.png'></image>
+            <view>待完善</view>
+          </view>
+          <view>
+            <view class='g-title'>{{item.goodsVO.name}} </view>
+            <view class='gprice'>活动价:待完善 </view>
+            <view class='gprice'>起批量:待完善 </view>
+            <view>活动库存: 待完善</view>
+          </view>
         </view>
-        <view>
-          <view class='g-title'>周大福 十二生肖狗 黄金吊坠配饰 </view>
-          <view class='gprice'>活动价:待完善 </view>
-          <view class='gprice'>起批量:待完善 </view>
-          <view>活动库存: 待完善</view>
-        </view>
-      </view>
-      <view class='g-bottom'>
-        <button class='g-border' bindtap='editGoods'>编辑</button>
-        <button>预览</button>
-        <button>发布</button>
-      </view>
-    </view>
-    <view>
-      <view class='g-cont'>
-        <view class='g-image'>
-          <image src='/image/pre.png'></image>
-        </view>
-        <view>
-          <view class='g-title'>周大福 十二生肖狗 黄金吊坠配饰 </view>
-          <view class='gprice'>活动价:
-            <text>￥1100</text> </view>
-          <view class='gprice'>起批量:
-            <text>100</text> </view>
-          <view>活动库存: 265</view>
+        <view class='g-bottom'>
+          <button class='g-border' data-id="{{item.goodsVO.id}}" bindtap='editGoods'>编辑</button>
+          <button>预览</button>
+          <button>发布</button>
         </view>
       </view>
-      <view class='g-bottom'>
-        <button class='g-border' bindtap='editGoods'>编辑</button>
-        <button class='g-border'>预览</button>
-        <button class='g-border' data-id='180929212000' bindtap='releaseGoods'>发布</button>
-      </view>
-    </view>
-    <view>
-      <view class='g-cont'>
-        <view class='g-image'>
-          <image src='/image/pre.png'></image>
-          <view class='nouse'>商品失效</view>
+      <view wx:if="{{item.editStatus=='edit'}}">
+        <view class='g-cont'>
+          <view class='g-image'>
+            <image src='/image/pre.png'></image>
+          </view>
+          <view>
+            <view class='g-title'>{{item.goodsVO.name}} </view>
+            <view class='gprice'>活动价:
+              <text>￥{{item.goodsActivityRelationVOS.name[0].goodsPromotionList[0].activityPricr}}</text> </view>
+            <view class='gprice'>起批量:
+              <text>{{item.goodsActivityRelationVOS.name[0].batchNum}}</text> </view>
+            <view>活动库存: {{item.goodsActivityRelationVOS.name[0].stockNum}}</view>
+          </view>
         </view>
-        <view>
-          <view class='g-title'>周大福 十二生肖狗 黄金吊坠配饰 </view>
-          <view class='gprice'>活动价:
-            <text>￥1100</text> </view>
-          <view class='gprice'>起批量:
-            <text>100</text> </view>
-          <view>活动库存: 265</view>
+        <view class='g-bottom' wx:if="{{item.releaseStatus=='init'}}">
+          <button class='g-border' data-id="{{item.goodsVO.id}}" bindtap='editGoods'>编辑</button>
+          <button class='g-border'>预览</button>
+          <button class='g-border' data-id='"{{item.goodsVO.id}}' bindtap='releaseGoods'>发布</button>
         </view>
-      </view>
-    </view>
-    <view>
-      <view class='g-cont'>
-        <view class='g-image'>
-          <image src='/image/pre.png'></image>
-          <view class='activing'>活动中</view>
-        </view>
-        <view>
-          <view class='g-title'>周大福 十二生肖狗 黄金吊坠配饰 </view>
-          <view class='gprice'>活动价:
-            <text>￥1100</text> </view>
-          <view class='gprice'>起批量:
-            <text>100</text> </view>
-          <view>活动库存: 265</view>
+        <view class='g-bottom' wx:else>
+          <button class='g-border' bindtap='editGoods'>编辑</button>
+          <button class='g-border'>分享</button>
         </view>
       </view>
-    </view>
+    </block>
   </view>
-   <view class='add-cont' wx:if='{{tabSwitch=="1"}}'>
+  <!-- <view class='add-cont' wx:if='{{tabSwitch=="1"}}'>
     <view>
       <view class='g-cont'>
         <view class='g-image'>
@@ -122,7 +94,7 @@
         <button class='g-border'>分享</button>
       </view>
     </view>
-     <view>
+    <view>
       <view class='g-cont'>
         <view class='g-image'>
           <image src='/image/pre.png'></image>
@@ -137,19 +109,22 @@
           <view>活动库存: 265</view>
         </view>
       </view>
-       <view class='g-bottom'>
-        <button class='g-border'  bindtap='editGoods'>编辑</button>
+      <view class='g-bottom'>
+        <button class='g-border' bindtap='editGoods'>编辑</button>
         <button class='g-border'>分享</button>
       </view>
     </view>
-  </view>
-  <!-- <view class="nomore">
-    <view>
-      <image src="/image/nohome.png"></image>
-    </view>
-    <text>暂未添加活动商品</text>
   </view> -->
-  <!-- <button bindtap='addGoods' class='addgoods'>添加活动商品</button> -->
-  <button bindtap='releaseGoods' class='addgoods more-add'>批量发布商品</button>
-  <button bindtap='addGoods' class='addgoods more-add'>添加活动商品</button>
+  <view class="nomore" wx:else>
+    <view>
+      <image src="/image/huodong.png"></image>
+    </view>
+    <text wx:if='{{tabSwitch=="0"}}'>暂未添加活动商品</text>
+    <text wx:if='{{tabSwitch=="1"}}'>暂未参加活动商品</text>
+  </view>
+  <block wx:if='{{tabSwitch=="0"}}'>
+    <button bindtap='addGoods' wx:if="{{listData.length==0}}" class='addgoods'>添加活动商品</button>
+    <button bindtap='releaseGoods' wx:if="{{listData.length>0}}" class='addgoods more-add'>批量发布商品</button>
+    <button bindtap='addGoods' wx:if="{{listData.length>0}}" class='addgoods more-add'>添加活动商品</button>
+  </block>
 </view>

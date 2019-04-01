@@ -17,21 +17,20 @@
   <view wx:for="{{result}}" wx:key="{{index}}">
     <view class='g-cont'>
       <view class='g-image'>
-        <image wx:if="{{item.mainImgUrl}}" src='{{baseUrl}}{{item.mainImgUrl}}'></image>
-        <view wx:if="{{item.goodsSkuVOList!=null}}">{{item.goodsSkuVOList}}</view> <view wx:if="{{item.goodsSkuVOList==null}}">无</view>
+        <image wx:if="{{item.goodsVO.mainImgUrl}}" src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>
       </view>
       <view>
-        <view class='g-title'>{{item.name}} </view>
+        <view class='g-title'>{{item.goodsVO.name}} </view>
         <view class='gprice'>批发:
-          <text>￥{{item.sellPrice}}</text> </view>
+          <text>￥{{item.goodsVO.sellPrice}}</text> </view>
         <view class='gprice'>零售:
-          <text>￥{{item.wholesalePrice}}</text> </view>
-        <view>库存: {{item.stockNum}}</view>
+          <text>￥{{item.goodsVO.wholesalePrice}}</text> </view>
+        <view>库存: {{item.goodsVO.stockNum}}</view>
       </view>
     </view>
     <view class='g-bottom'>
-      <!-- <button>已添加</button> -->
-      <button class='add-g' data-id='{{item.id}}' bindtap='addActiveShow'>添加商品</button>
+      <button wx:if="{{item.participate}}">已添加</button>
+      <button wx:else class='add-g' data-id='{{item.goodsVO.id}}' bindtap='addActiveShow'>添加商品</button>
     </view>
   </view>
 </view>

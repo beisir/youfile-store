@@ -22,7 +22,7 @@
 .np-mes view{width:49%;height:40rpx;margin-top:27rpx;display:inline-block;position:relative}
 .kf_button{position:absolute;width:100%;top:0px;height:60rpx;background:none}
 .np-mes view:first-child{border-right:2rpx solid #f3f3f3}
-.np-mes image{width:42rpx;height:43rpx;vertical-align:middle;margin-top:-2rpx;margin-right:10rpx}
+.np-mes image{width:35rpx;height:35rpx;vertical-align:middle;margin-top:-2rpx;margin-right:10rpx}
 .np-order{font-size:26rpx;color:#333;background:#fff;margin-bottom:20rpx;padding:20rpx 50rpx 30rpx}
 .np-order-bar{margin-bottom:120rpx}
 .np-order view{margin-top:10rpx}

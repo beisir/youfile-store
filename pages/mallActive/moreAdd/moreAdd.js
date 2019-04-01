@@ -44,8 +44,8 @@ Page({
   // 获取商品
   getList: function() {
     var _this = this
-    Api.adminGoodsStatus({
-      goodsStatus: "1"
+    Api.allGoods({
+      activityNumber: this.data.activityNumber
       })
       .then(res => {
         var obj = res.obj.result

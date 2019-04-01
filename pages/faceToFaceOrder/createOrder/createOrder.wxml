@@ -21,7 +21,7 @@
       <text class="item-title">订单金额</text>
     </view>
     <view class='flex-center'>
-      <input value='{{money}}' type='digit' bindinput='watchInput' data-type="money" class='price-input'></input>
+      <input value='{{money}}' placeholder='请输入订单金额' placeholder-style='font-weight:500;color:#999;font-size:26rpx;' type='digit' bindinput='watchInput' data-type="money" class='price-input'></input>
       <text class='yuan'>元</text>
     </view>
   </view>
@@ -32,7 +32,10 @@
 <view class='common-box'>
   <view class='goods-title flex-between' bindtap='editTag'>
     <view class='item-title'>购买商品</view>
-    <image class='addgoods-icon' src='/image/ftf-add.png'></image>
+    <view class='flex-center'>
+      <image class='addgoods-icon' src='/image/ftf-add.png'></image>
+      <text style='color:#ca7;font-size:28rpx;margin-left:5rpx;'>选择商品</text>
+    </view>
   </view>
   <view class=''>
     <view wx:if="{{tag.length == 0}}" class='no-goods-tip goods-list-box'>请添加购买商品</view>

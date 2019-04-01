@@ -1,18 +1,28 @@
 {
   "pages": [
+
     "pages/page/home/home",
-    "pages/mallActive/yunDist/yunDist",
-    "pages/mallActive/distRecords/distRecords",
-    "pages/mallActive/detailsOfCollection/detailsOfCollection",
-    "pages/admin/status/status",
-    "pages/mallActive/activityAnalysis/activityAnalysis",
-    "pages/mallActive/editGoods/editGoods",
-    "pages/mallActive/list/list",
-    "pages/page/goodsDetails/goodsDetails",
-    "pages/mallActive/batchRalease/batchRalease",
+    
+    
+    "assembly/activityTag/activityTag",
+    
+    "pages/mallActive/waitRalease/waitRalease",
     
     "pages/mallActive/addGoods/addGoods",
-    "pages/mallActive/waitRalease/waitRalease",
+    
+    
+    "pages/page/goodsDetails/goodsDetails",
+    
+    "pages/mallActive/list/list",
+    
+    
+    
+    "pages/mallActive/detailsOfCollection/detailsOfCollection",
+    "pages/mallActive/distRecords/distRecords",
+    "pages/mallActive/batchRalease/batchRalease",
+    "pages/mallActive/activityAnalysis/activityAnalysis",
+    "pages/mallActive/yunDist/yunDist",
+    "pages/mallActive/editGoods/editGoods",
     "pages/mallActive/moreAdd/moreAdd",
     "pages/mallActive/choseSpec/choseSpec",
     "pages/page/workIndex/workIndex",
@@ -22,7 +32,16 @@
     "pages/admin/addGoods/addGoods",
     "pages/admin/class/class",
     "pages/businessFriend/merchant/index/index",
+    "pages/page/goodsQRcode/goodsQRcode",
+    "pages/page/poster/poster",
+    "pages/marketing/poster/prePoster/prePoster",
     "pages/page/navigateMiddleware/navigateMiddleware",
+    "pages/marketing/poster/success/success",
+    "pages/admin/status/status",
+    "pages/marketing/poster/posterStoreroom/posterStoreroom",
+    "pages/marketing/poster/goodsList/goodsList",
+    "pages/marketing/poster/storeroomDetail/storeroomDetail",
+    "pages/marketing/poster/choseGoodsimg/choseGoodsimg",
     "pages/faceToFaceOrder/createOrder/createOrder",
     "pages/faceToFaceOrder/customerSureOrder/customerSureOrder",
     "pages/admin/shopClass/shopClass",
@@ -35,7 +54,6 @@
     "pages/page/user/user",
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
-    "pages/page/poster/poster",
     "pages/admin/goodsSpec/goodsSpec",
     "pages/admin/specSet/specSet",
     "pages/businessFriend/merchant/list/list",
@@ -180,6 +198,7 @@
   "navigateToMiniProgramAppIdList": [
     "wx6241529c7dc70d51",
     "wx1a7532a2abdd1698",
-    "wx5e0828787c26f235"
+    "wx5e0828787c26f235",
+    "wx3cfbe069368479ce"
   ]
 }

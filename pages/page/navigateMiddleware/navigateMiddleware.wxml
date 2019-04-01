@@ -1,1 +1,8 @@
 <login closeBtnType='tohome' id="login"></login>
+<view hidden='{{indexEmpty}}'>
+  <no></no>
+</view>
+<view hidden='{{goRetailStore}}'>
+  <retailStore></retailStore>
+</view>
+<image src='/image/lodingGif.gif' style='width:50rpx;height:50rpx;position:fixed;left:0;right:0;margin:auto;top:300rpx;z-index:1;'></image>
