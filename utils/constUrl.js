@@ -218,5 +218,5 @@ export const activityGoodsUrl="/admin/mall/goods/activity/goods/in/{{activityNum
 export const allGoodsUrl="/admin/mall/goods/activity/goods/for/{{activityNumber}}/page"
 
 export const getActiveGoodsDetailUrl = '/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}'
-export const editActiveGoodsUrl = '/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}/edit'
+export const editActiveGoodsUrl = '/admin/mall/goods/activity/goods/edit'
 

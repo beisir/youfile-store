@@ -33,20 +33,19 @@ Page({
     arr.forEach((el, index) => {
       el.checked = now;
     })
-    let checkednum = arr.filter(el => el.checked)
+    this.setCheckNum(arr)
     this.setData({
       selectAllStatus: now,
       skuList: arr,
-      checkednum: checkednum.length
     })
   },
   sureSelect(){
     let arr = this.data.skuList;
-    let checkednum = arr.filter(el => el.checked)
+    let checkedarr = arr.filter(el => el.checked)
     
     let pages = getCurrentPages(),
         current = pages[pages.length-2];
-    current && current.getSku ? current.getSku(checkednum):''
+    current && current.getSku ? current.getSku(checkedarr):''
     wx.navigateBack()
   },
   // 获取详情
@@ -67,11 +66,16 @@ Page({
             }
           })
         })
+        this.setCheckNum(allArr)
         this.setData({ skuList: allArr })
       } else {  // 无sku
         this.setData({ noSku: true })
       }
     })
+  },
+  setCheckNum(arr){
+    let checkednum = arr.filter(el => el.checked)
+    this.setData({ checkednum: checkednum.length})
   },
   /**
    * 生命周期函数--监听页面加载

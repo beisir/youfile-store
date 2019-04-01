@@ -24,7 +24,7 @@
     <view wx:for='{{activeSkuList}}' wx:key='{{index}}'>
       <view class='spec-cont'>
         <view>商品规格{{index+1}}：
-          <text>{{item.name}}</text>
+          <text>{{item.skuName}}</text>
         </view>
       </view>
       <view class='set-price'>
@@ -36,13 +36,13 @@
         </view>
         <view>
           <view>
-            <input placeholder='添加活动库存' type='number'></input>
+            <input placeholder='添加活动库存' value='{{item.sureNum}}' type='number' bindinput='watchInput' data-type='stockNum' data-index="{{index}}"></input>
             <view>库存:{{item.stockNum}}</view>
           </view>
         </view>
         <view>
           <view>
-            <input placeholder='添加活动起购量' type='number'></input>
+            <input placeholder='添加活动起购量' value='{{item.buyNum}}' type='number' bindinput='watchInput' data-type='buyNum' data-index="{{index}}"></input>
             <view>起购量</view>
           </view>
         </view>
