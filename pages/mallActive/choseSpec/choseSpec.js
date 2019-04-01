@@ -42,10 +42,27 @@ Page({
   sureSelect(){
     let arr = this.data.skuList;
     let checkedarr = arr.filter(el => el.checked)
-    
+
+    // 打标签
+    arr.forEach(el=>{
+      if(this.data.acArr.indexOf(el.skuCode) > -1){
+        if(el.checked){
+          el.ownstatus = 'stay'
+        } else {
+          el.ownstatus = 'del'
+        }
+      } else {
+        if (el.checked) {
+          el.ownstatus = 'add'
+        } else {
+          el.ownstatus = 'no'
+        }
+      }
+    })
+
     let pages = getCurrentPages(),
         current = pages[pages.length-2];
-    current && current.getSku ? current.getSku(checkedarr):''
+    current && current.getSku ? current.getSku(arr):''
     wx.navigateBack()
   },
   // 获取详情

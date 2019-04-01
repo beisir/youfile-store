@@ -5,7 +5,7 @@
       <image class='close-img' src='/image/close.png'></image>
     </view>
     <view class='title padding-box {{align=="center"?"flex-center":""}}'>{{title}}</view>
-    <scroll-view class='scroll padding-box' scroll-y='true'>
+    <scroll-view class='scroll padding-box' scroll-y='true' style='min-height:40%;'>
       <slot/>
     </scroll-view>
     <view class='sure-btn' bindtap='sure'>{{btn}}</view>

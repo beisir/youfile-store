@@ -1,21 +1,19 @@
 {
   "pages": [
-    "pages/page/goodsDetails/goodsDetails",
-    
     "pages/page/home/home",
     
+    "pages/page/goodsDetails/goodsDetails",
     
+    "pages/mallActive/editGoods/editGoods",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/mallActive/batchRalease/batchRalease",
     "pages/mallActive/yunDist/yunDist",
     "pages/mallActive/list/list",
     "assembly/activityTag/activityTag",
     "pages/mallActive/addGoods/addGoods",
-    
     "pages/mallActive/detailsOfCollection/detailsOfCollection",
     "pages/mallActive/distRecords/distRecords",
     "pages/mallActive/activityAnalysis/activityAnalysis",
-    "pages/mallActive/editGoods/editGoods",
     "pages/mallActive/moreAdd/moreAdd",
     "pages/mallActive/choseSpec/choseSpec",
     "pages/page/workIndex/workIndex",
