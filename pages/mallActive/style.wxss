@@ -1,0 +1,8 @@
+.touch-item{overflow: hidden;margin-right:10rpx}
+.g-cont>view view{margin-bottom: unset}
+.content{padding-top: 0;padding-bottom: 0;padding-left: 40rx;margin-right: 0}
+.content icon{position: absolute;top: 50%;margin-top: -30rpx;left: 30rpx;z-index: 100}
+.st-cont{height: unset}
+.g-image {margin-left: 70rpx;}
+.del {margin-left: 20rpx}
+.g-cont{display: flex;align-items: center;justify-content: space-between}

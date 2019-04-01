@@ -28,9 +28,10 @@ Page({
     })
   },
   // 编辑商品
-  editGoods:function(){
+  editGoods: function (e){
+    var activityNumber = e.target.dataset.index
     wx.navigateTo({
-      url: '../editGoods/editGoods',
+      url: '../waitRalease/waitRalease?activityNumber=' + activityNumber,
     })
   },
   /**
@@ -55,15 +56,19 @@ Page({
       mallCode: this.data.mallCode, activityStatus: this
       .data.navIndex}).then(res=>{
       var listData = res.obj.result
-      for (var v of listData){
-        v.startTime = util.formatTimeday(new Date(v.startTime))
-        v.endTime = util.formatTimeday(new Date(v.endTime))
-      }
-      var datas = _this.data.listData,
-        newArr = app.pageRequest.addDataList(datas, listData)
-      _this.setData({
-        listData: newArr
-      })
+        if (listData.length>0){
+          for (var v of listData) {
+            v.startTime = util.formatTimeday(new Date(v.startTime))
+            v.endTime = util.formatTimeday(new Date(v.endTime))
+          }
+          var datas = _this.data.listData,
+            newArr = app.pageRequest.addDataList(datas, listData)
+          _this.setData({
+            listData: newArr
+          })
+        }else{
+          Api.showToast("暂无更多了！")
+        }
     })
   },
   /**
@@ -91,11 +96,13 @@ Page({
     var _this=this,
       activityNumber = this.data.joinNumber
     Api.participate({ activityNumber: activityNumber}).then(res=>{
-      Api.showToast("参加活动成功！")
-      _this.initData()
-      _this.setData({
-        joinShow: false,
-      })
+      Api.showToast(res.message)
+      setTimeout(res=>{
+        _this.initData()
+        _this.setData({
+          joinShow: false,
+        })
+      },500)
     })
   },
   /**

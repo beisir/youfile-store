@@ -179,6 +179,7 @@ import {
   editActiveGoodsUrl,
   activityGoodsUrl,
   allGoodsUrl,
+  delActGoodsUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -1143,7 +1144,10 @@ function getActiveGoodsDetail(data) {
 function editActiveGoods(data){
   return app.http.postRequest(editActiveGoodsUrl, data)
 }
-
+// 活动商品详情
+function delActGoods(data) {
+  return app.http.deleteRequest(delActGoodsUrl, data)
+}
 module.exports = {
   editActiveGoods,
   getActiveGoodsDetail,
@@ -1335,5 +1339,6 @@ module.exports = {
   addAMoreGoods,
   releaseMoreGoods,
   activityGoods,
-  allGoods
+  allGoods,
+  delActGoods
 }

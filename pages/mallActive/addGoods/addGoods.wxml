@@ -30,7 +30,7 @@
     </view>
     <view class='g-bottom'>
       <button wx:if="{{item.participate}}">已添加</button>
-      <button wx:else class='add-g' data-id='{{item.goodsVO.id}}' bindtap='addActiveShow'>添加商品</button>
+      <button wx:else class='add-g' data-id='{{item.goodsVO.id}}' data-index='{{index}}' bindtap='addActiveShow'>添加商品</button>
     </view>
   </view>
 </view>

@@ -1,4 +1,5 @@
 @import '../distRecords/distRecords';
+.dr-pic{margin: 0}
 .dr-back{height: 300rpx;}
 .listData>view{margin-top: 90rpx;}
 .yd-top{position: relative;width: 100%;padding-top: 95rpx;padding-bottom: 20rpx;}

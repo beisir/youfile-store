@@ -32,7 +32,7 @@
       <view wx:if="{{item.editStatus=='not_edit'}}">
         <view class='g-cont'>
           <view class='g-image'>
-            <image src='/image/pre.png'></image>
+            <image src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>
             <view>待完善</view>
           </view>
           <view>
@@ -51,7 +51,7 @@
       <view wx:if="{{item.editStatus=='edit'}}">
         <view class='g-cont'>
           <view class='g-image'>
-            <image src='/image/pre.png'></image>
+            <image src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>
           </view>
           <view>
             <view class='g-title'>{{item.goodsVO.name}} </view>
@@ -65,7 +65,7 @@
         <view class='g-bottom' wx:if="{{item.releaseStatus=='init'}}">
           <button class='g-border' data-id="{{item.goodsVO.id}}" bindtap='editGoods'>编辑</button>
           <button class='g-border'>预览</button>
-          <button class='g-border' data-id='"{{item.goodsVO.id}}' bindtap='releaseGoods'>发布</button>
+          <button class='g-border' data-id='"{{item.goodsVO.id}}' bindtap='releaseGood'>发布</button>
         </view>
         <view class='g-bottom' wx:else>
           <button class='g-border' bindtap='editGoods'>编辑</button>

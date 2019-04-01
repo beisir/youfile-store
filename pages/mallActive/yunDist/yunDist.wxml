@@ -31,7 +31,7 @@
   <view class='yd-datas'>
     <view class='yd-purch'>共80个进货商</view>
     <navigator url="../distRecords/distRecords" class='yd-pList'>
-      <view class='dr-pic'>
+      <view class='dr-pic dr-pic1'>
         <image src='/image/user.png'></image>
       </view>
       <view class='ydpl-right'>
@@ -47,8 +47,42 @@
       </view>
       <view class='ydpl-r'></view>
     </navigator>
-    <navigator url="../distRecords/distRecords" class='yd-pList'>
-      <view class='ydpl-left'>
+      <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic dr-pic2'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator>
+      <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic dr-pic3'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator>
+      <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic'>
         <image src='/image/user.png'></image>
       </view>
       <view class='ydpl-right'>

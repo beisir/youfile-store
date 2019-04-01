@@ -5,7 +5,7 @@
 .ser-font{left: unset;right: 120rpx;width: 30rpx;height: 30rpx;top: 52rpx;}
 .serCont{padding-top: 42rpx}
 .alert-g{font-size: 40rpx;font-weight: bold;padding: 30rpx 50rpx 10rpx 50rpx;}
-.add-cont{margin-bottom: 130rpx;}
+.add-cont{margin-bottom: 70rpx;}
 .add-cont>view{border-radius: 10rpx;margin: 20rpx;background: #fff;box-shadow: 1rpx 0 20rpx #ededed;}
 .g-cont{position: relative;color: #666;font-size: 24rpx;padding-top: 30rpx;padding-bottom: 25rpx;zoom: 1;overflow: hidden}
 .g-cont>view{float: left}
