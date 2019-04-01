@@ -11,6 +11,7 @@ Page({
     tabSwitch: "0",
     activityNumber: '1903260301000010',
     listData: [],
+    baseUrl: app.globalData.imageUrl,
     releaseStatus: "init"
   },
   // 编辑
@@ -97,7 +98,7 @@ Page({
     })
   },
   // 发布商品
-  releaseGoods: function(e) {
+  releaseGood: function(e) {
     var goodsId = e.target.dataset.id,
       activityNumber = this.data.activityNumber
     Api.releaseGoods({

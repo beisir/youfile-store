@@ -21,12 +21,12 @@
         <text class='ld-doing' wx:if="{{item.participate}}"> 已参加</text>
       </view>
       <view><text>活动时间</text>{{item.startTime}} 至 {{item.endTime}}</view>
-      <view><text>活动类目</text>{{item.categoryCode}}</view>
+      <view><text>活动类目</text><block wx:if="{{item.categoryCode}}">{{item.categoryCode}}</block></view>
       <view><text>活动介绍</text>{{item.introduction}}</view>
     </navigator>
     <view class='ld-bottom'>
       <button wx:if="{{!item.participate}}" bindtap='joinShow' data-index="{{item.activityNumber}}">参加活动</button>
-      <button wx:if="{{item.participate}}" bindtap='editGoods'>编辑商品</button>
+      <button wx:if="{{item.participate}}" data-index="{{item.activityNumber}}" bindtap='editGoods'>编辑商品</button>
       <button wx:if="{{!item.participate}}" bindtap='activityAnalysis'>活动分析</button>
     </view>
   </view>

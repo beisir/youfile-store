@@ -11,6 +11,7 @@ Page({
     joinShow:false,
     baseUrl: app.globalData.imageUrl,
     result: [],
+    goodsIndex:'',
     value:'',
     hiddenClose:true
   },
@@ -97,21 +98,26 @@ Page({
   addActiveShow:function(e){
     this.setData({
       goodsId:e.target.dataset.id,
+      goodsIndex: e.target.dataset.index,
       joinShow:true
     })
   },
   addActiveGoods:function(){
     var _this=this,
       goodsId = this.data.goodsId,
-      activityNumber = this.data.activityNumber
+      activityNumber = this.data.activityNumber,
+      result = this.data.result,
+      goodsIndex = this.data.goodsIndex
     Api.addActiveGoods({ goodsId: goodsId, activityNumber: activityNumber }).then(res=>{
       Api.showToast(res.message)
+      result[goodsIndex].participate=true
+      goodsIndex
       _this.setData({
         joinShow:false
       },function(){
-        setTimeout(res=>{
-          _this.initData()
-        },500 )
+       _this.setData({
+         result: result
+       })
       })
     })
   },

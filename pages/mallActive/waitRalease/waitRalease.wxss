@@ -3,7 +3,7 @@
 @import '../addGoods/addGoods';
 .nomore{height: 650rpx}
 .wait-cont{background: #fff;position: relative;padding-top: 20rpx}
-.addgoods{height: 100rpx;color: #fff;line-height: 100rpx;font-size: 32rpx;background:#CCAA77;bottom: 20rpx;width: 90%;margin: 20rpx 5%;border-radius:100rpx;margin-top: 180rpx;}
+.addgoods{height: 100rpx;color: #fff;line-height: 100rpx;font-size: 32rpx;background:#CCAA77;width: 90%;margin: 0rpx 5%;border-radius:100rpx;margin-top: 180rpx;}
 .tab-view .tab-one-1,.tab-view .tab-two{padding-right: 50rpx;}
 .tab-view .tab-one,.tab-view .tab-two-1{padding-left: 50rpx;}
 .add-cont>view{box-shadow: 5rpx 0 30rpx #ededed}

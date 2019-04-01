@@ -1,29 +1,40 @@
-<view class='add-cont' wx:if="{{result.length>0}}">
-  <view wx:for="{{result}}" wx:key="{{index}}">
-    <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" type="success" wx:if="{{item.selected}}" size="28" color="#CCAA77" />
-    <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" wx:else type="circle" size="28" />
-    <view class='g-cont'>
-      <view class='g-image'>
-        <image wx:if="{{item.goodsVO.mainImgUrl}}" src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>
+<!-- 删除-->
+<mes show="{{showDel}}">
+  <view>
+    <text>确认删除？</text>
+    <button bindtap='confirmDetele'>确定</button>
+  </view>
+</mes>
+<view wx:if="{{result.length>0}}" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{result}}" wx:key="">
+  <view class='content st-cont' data-index="{{index}}">
+      <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" type="success" wx:if="{{item.selected}}" size="28" color="#CCAA77" />
+      <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" wx:else type="circle" size="28" />
+      <view class='g-cont'>
+        <view class='g-image'>
+          <image wx:if="{{item.goodsVO.mainImgUrl}}" src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>
+        </view>
+        <view>
+          <view class='g-title'>{{item.goodsVO.name}} </view>
+          <view class='gprice'>活动价:
+            <text>￥{{item.goodsActivityRelationVOS[0].goodsPromotionList[0].activityPrice}}</text> </view>
+          <view class='gprice'>起购量:
+            <text>{{item.goodsActivityRelationVOS[0].batchNum==null?"未完善":item.goodsActivityRelationVOS[0].batchNum}}</text> </view>
+          <view>活动库存: {{item.goodsActivityRelationVOS[0].salesNum==null?"未完善":item.goodsActivityRelationVOS[0].salesNum}}</view>
+        </view>
       </view>
-      <view>
-        <view class='g-title'>{{item.goodsVO.name}} </view>
-        <view class='gprice'>活动价:
-          <text>￥{{item.goodsActivityRelationVOS[0].goodsPromotionList[0].activityPrice}}</text> </view>
-        <view class='gprice'>起购量:
-          <text>{{item.goodsActivityRelationVOS[0].batchNum==null?"未完善":item.goodsActivityRelationVOS[0].batchNum}}</text> </view>
-        <view>活动库存: {{item.goodsActivityRelationVOS[0].salesNum?"未完善":item.goodsActivityRelationVOS[0].salesNum}}</view>
-      </view>
-    </view>
+  </view>
+  <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.goodsVO.id}}'>
+    <image mode='widthFix' src="/image/sBai.png"></image>删除
   </view>
 </view>
-<view class="nomore"  wx:else>
-    <view>
-      <image src="/image/huodong.png"></image>
-    </view>
-    <text>暂未添加活动商品</text>
+
+<view class="nomore" wx:if="{{result.length==0}}">
+  <view>
+    <image src="/image/huodong.png"></image>
   </view>
-<view class='add-bottom'  wx:if="{{result.length>0}}">
+  <text>暂未添加活动商品</text>
+</view>
+<view class='add-bottom' wx:if="{{result.length>0}}">
   <view>
     <icon wx:if="{{selectAllStatus}}" type="success" size="28" color="#CCAA77" class='iconall' bindtap="selectAll" />
     <icon wx:else type="circle" class='iconall' size="28" bindtap="selectAll" /> 全选

@@ -10,9 +10,10 @@ Page({
     result: [],
     baseUrl: app.globalData.imageUrl,
     goodsIds: [],
+    showDel:false,
     goodsIdsLen: 0,
     releaseStatus: "init",
-    editStatus:"edit"
+    editStatus:"edit",
   },
 
   /**
@@ -51,8 +52,8 @@ Page({
       editStatus: this.data.editStatus
     })
       .then(res => {
-        var obj = res.obj.result
-        if (obj) {
+        if (res.obj) {
+          var obj = res.obj.result
           if (obj.length == 0) {
             Api.showToast("暂无更多了！")
           } else {
@@ -69,7 +70,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.initData()
+   
   },
   // 选择商品
   indexOf(val, arr) {
@@ -146,17 +147,42 @@ Page({
 
   },
   // 左滑删除
-  moveStart:function(e){
-    console.log("moveStart")
-    console.log(e)
-  }, 
-  movIng: function(e) {
-    console.log("doing")
-    console.log(e)
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.result)
+    this.setData({
+      result: data
+    })
   },
-  moveEnd: function (e) {
-    console.log("moveEnd")
-    console.log(e)
+  //滑动事件处理
+  touchmove: function (e) {
+    let data = app.touch._touchmove(e, this.data.result)
+    this.setData({
+      result: data
+    })
+  },
+  // 删除活动商品
+  del:function(e){
+    var goodsId=e.target.dataset.id
+    this.setData({
+      goodsId: goodsId,
+      showDel:true
+    })
+  },
+  confirmDetele:function(){
+    var _this=this,
+      goodsId = this.data.goodsId,
+      activityNumber = this.data.activityNumber
+    Api.delActGoods({ activityNumber: activityNumber, goodsId: goodsId }).then(res=>{
+      Api.showToast(res.message)
+      setTimeout(res => {
+        _this.onLoad({ activityNumber: _this.data.activityNumber})
+        _this.setData({
+          showDel: false,
+        })
+      }, 500)
+    })
   },
   /**
    * 生命周期函数--监听页面卸载
@@ -178,7 +204,6 @@ Page({
   onReachBottom: function () {
     this.getList(this.data.activityNumber)
   },
-
   /**
    * 用户点击右上角分享
    */

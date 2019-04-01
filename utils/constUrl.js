@@ -216,7 +216,7 @@ export const addAMoreGoodsUrl ="/admin/mall/goods/activity/batch"
 export const releaseMoreGoodsUrl ="/admin/mall/goods/activity/{{activityNumber}}/goods/release/batch"
 export const activityGoodsUrl="/admin/mall/goods/activity/goods/in/{{activityNumber}}/page"
 export const allGoodsUrl="/admin/mall/goods/activity/goods/for/{{activityNumber}}/page"
-
+export const delActGoodsUrl="/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}"
 export const getActiveGoodsDetailUrl = '/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}'
 export const editActiveGoodsUrl = '/admin/mall/goods/activity/goods/edit'
 
