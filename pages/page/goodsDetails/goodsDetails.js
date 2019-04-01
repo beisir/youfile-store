@@ -1254,6 +1254,9 @@ Page({
             }
           })
         }
+        //绑定活动
+        _this.selectComponent("#goodsActivityBinding").bindingForGoodsDetail(res);
+
         _this.setData({
           imgUrls: obj.goodsImageVOList,
           wholesalePrice: obj.wholesalePrice,

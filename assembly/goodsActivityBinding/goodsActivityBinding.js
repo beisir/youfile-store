@@ -43,17 +43,17 @@ Component({
           }
         ]
       }
-      var goodsVO = res.obj.goodsVO
-      var store = res.obj.store
+      var goodsVO = response.obj.goodsVO
+      var store = response.obj.store
       
       //处理展位1的数据集
-      handleActivityPosition1(goodsVO);
+      this.handleActivityPosition1(goodsVO);
 
       //绑定活动到sku上
-      bindingTOSKU(goodsVO);
+      this.bindingTOSKU(goodsVO);
 
       //绑定活动到spu上
-      bindingTOSPU(goodsVO);
+      this.bindingTOSPU(goodsVO);
 
 
       let pages = getCurrentPages()
@@ -70,18 +70,18 @@ Component({
       }
       var promotion = goodsVO.extInfo.SALES_PROMOTION;
     },
-    
+
     //把活动绑定sku上
     bindingTOSKU(goodsVO){
-      standardGoodsSkuPromotions = goodsVO.standardGoodsSkuPromotions;
-      var temp = {};
-      for(var item  in standardGoodsSkuPromotions ){
-        temp[item.skuCode].push(item);
-      }
+      // standardGoodsSkuPromotions = goodsVO.standardGoodsSkuPromotions;
+      // var temp = {};
+      // for(var item  in standardGoodsSkuPromotions ){
+      //   temp[item.skuCode].push(item);
+      // }
 
-      for (item in goodsVO.goodsSkuVOList){
-        item.skuPromotions = temp[item.skuCode]
-      }
+      // for (item in goodsVO.goodsSkuVOList){
+      //   item.skuPromotions = temp[item.skuCode]
+      // }
         
     },
     //把活动绑定到spu上

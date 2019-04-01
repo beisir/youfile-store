@@ -1,3 +1,4 @@
+  <goodsActivityBinding id="goodsActivityBinding"/>
 <!-- 悬浮球 -->
 <returnBall>
   <login id="login"></login>
@@ -50,6 +51,7 @@
         <text>1天15：15：15</text>
       </view>
     </view>
+    <goodsActivityBinding position="1" activityShowInfo="{{activityData}}"/>
   </view>
   <view class='gd-details'>
     <view class='gd-title' wx:if='{{limitShow==1}}'>
