@@ -1,28 +1,17 @@
 {
   "pages": [
-
-    "pages/page/home/home",
-    
-    
-    "assembly/activityTag/activityTag",
-    
     "pages/mallActive/waitRalease/waitRalease",
-    
+    "pages/mallActive/editGoods/editGoods",
+    "pages/page/home/home",
+    "assembly/activityTag/activityTag",
     "pages/mallActive/addGoods/addGoods",
-    
-    
     "pages/page/goodsDetails/goodsDetails",
-    
     "pages/mallActive/list/list",
-    
-    
-    
     "pages/mallActive/detailsOfCollection/detailsOfCollection",
     "pages/mallActive/distRecords/distRecords",
     "pages/mallActive/batchRalease/batchRalease",
     "pages/mallActive/activityAnalysis/activityAnalysis",
     "pages/mallActive/yunDist/yunDist",
-    "pages/mallActive/editGoods/editGoods",
     "pages/mallActive/moreAdd/moreAdd",
     "pages/mallActive/choseSpec/choseSpec",
     "pages/page/workIndex/workIndex",

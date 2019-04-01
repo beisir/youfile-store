@@ -30,7 +30,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    bottomLayer: true
+    bottomLayer: false
   },
 
   /**

@@ -1,4 +1,5 @@
 // pages/mallActive/editGoods/editGoods.js
+const app = getApp()
 import API from '../../../utils/api.js';
 Page({
 
@@ -6,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    baseUrl: app.globalData.imageUrl,
     goodsId: "181105902000",
     showFrame: true,
     discount: [{
@@ -34,66 +36,138 @@ Page({
       value: 0.2
     }],
     ownCut: '',
-    activeSkuList: []
+    activeSkuList: [],
+    // 选择规格
+    checkedNum: 0,
+    // 无SKU
+    noSkuPrich: 0,
+    noSkuNum: 0,
+    noSkuBuynum: 0
   },
   // 关闭弹框
-  closeFrame: function() {
+  closeFrame: function () {
     this.setData({
       showFrame: true
     })
   },
   // edit
-  editGoods(){
+  editGoods() {
     let obj = {
       activityNumber: this.data.activityNumber,
-      goodsId: this.data.goodsId 
+      goodsId: this.data.goodsId
     }
-    let acArr = [];
-    this.data.activeSkuList.forEach(el=>{
-      acArr.push({
-        activityNumber: this.data.activityNumber,
-        activityPrice: el.surePrice ? el.surePrice : el.sellPrice,
-        batchNum: el.buyNum?el.buyNum:0,
-        goodsActNumber: el.goodsActNumber ? el.goodsActNumber:'',
-        goodsId: this.data.goodsId,
-        skuCode: el.skuCode,
-        stockNum: el.sureNum ? el.sureNum:0
-      })
-    })
-    obj.goodsActivityPromotionVOList = acArr
-    console.log(obj)
-    API.editActiveGoods(obj).then(res=>{
+    let err = '';
 
+    if (this.data.noSku) {
+      let price = this.data.noSkuPrich,
+        num = this.data.noSkuNum,
+        buyNum = this.data.noSkuBuynum;
+      if (!buyNum || buyNum == 0) {
+        err = '请填写起购量'
+      }
+      if (num > this.data.goods.stockNum) {
+        err = '活动库存不能大于货物库存'
+      }
+      if (!price || price == 0) {
+        err = '请填写活动价格'
+      } else {
+        if (!/^(([1-9][0-9]*)|([0]\.\d?[1-9])|([1-9][0-9]*\.\d{1,2}))$/.test(price)) {
+          err = '请输入正确金额格式，最多两位小数'
+        }
+      }
+
+      let noskuarr = [{
+        activityNumber: this.data.activityNumber,
+        activityPrice: price,
+        batchNum: buyNum,
+        goodsActNumber: this.data.noSkugoodsActNumber ? this.data.noSkugoodsActNumber : '',
+        goodsId: this.data.goodsId,
+        skuCode: '',
+        stockNum: num
+      }]
+      obj.goodsActivityPromotionVOList = noskuarr
+    } else {
+      let acArr = [];
+      this.data.skuList.forEach((el, index) => {
+        if (el.checked) {
+          if (!el.buyNum || el.buyNum == 0) {
+            err = '商品规格' + (index + 1) + '：请填写起购量'
+          }
+          if (el.sureNum > el.stockNum) {
+            err = '商品规格' + (index + 1) + '：活动库存不能大于货物库存'
+          }
+          if (!el.surePrice || el.surePrice == 0) {
+            err = '商品规格' + (index + 1) + '：请填写活动价格'
+          } else {
+            if (!/^(([1-9][0-9]*)|([0]\.\d?[1-9])|([1-9][0-9]*\.\d{1,2}))$/.test(el.surePrice)) {
+              err = '请输入正确金额格式，最多两位小数'
+            }
+          }  
+
+            acArr.push({
+              activityNumber: this.data.activityNumber,
+              activityPrice: el.surePrice ? el.surePrice : el.sellPrice,
+              batchNum: el.buyNum ? el.buyNum : 0,
+              goodsActNumber: el.goodsActNumber ? el.goodsActNumber : '',
+              goodsId: this.data.goodsId,
+              skuCode: el.skuCode,
+              stockNum: el.sureNum ? el.sureNum : 0
+            })
+          }
+        })
+
+      obj.goodsActivityPromotionVOList = acArr
+    }
+
+    if (err) {
+      API.showToast(err);
+      return
+    }
+
+    API.editActiveGoods(obj).then(res => {
+      API.showToast(res.message)
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 1000)
     })
   },
   // 获取详情
-  getDetail(){
-    API.getActiveGoodsDetail({ activityNumber: this.data.activityNumber, goodsId: this.data.goodsId}).then(res=>{
+  getDetail() {
+    API.getActiveGoodsDetail({ activityNumber: this.data.activityNumber, goodsId: this.data.goodsId }).then(res => {
       this.setData({
-        goods:res.obj.goodsVO,
-        skuList: res.obj.goodsVO.goodsSkuVOList,
-        activeSkuList: res.obj.goodsActivityRelationVOS
+        goods: res.obj.goodsVO,
       })
-      let allArr = this.data.skuList
-      let acArr = this.data.activeSkuList
-      if(allArr.length>0){  // 有sku
+      let allArr = res.obj.goodsVO.goodsSkuVOList
+      let acArr = res.obj.goodsActivityRelationVOS
+      if (allArr && allArr.length > 0) {  // 有sku
         allArr.forEach(el => {
           acArr.forEach(acitem => {
             if (acitem.skuCode == el.skuCode) {
-              acitem.hasIt = true
               el.checked = true
+              el.surePrice = acitem.goodsPromotionList[0].activityPrice
+              el.sureNum = acitem.stockNum
+              el.goodsActNumber = acitem.goodsActNumber
+              el.buyNum = acitem.batchNum
             }
+            acitem.hasIt = true
           })
         })
 
-        this.setData({ activeSkuList: acArr })
+        this.setData({ activeSkuList: acArr, skuList: allArr })
+        this.getCheckedNum()
       } else {  // 无sku
-        this.setData({noSku: true})
+        this.setData({
+          noSku: true,
+          noSkuPrich: acArr[0].goodsPromotionList[0] ? acArr[0].goodsPromotionList[0].activityPrice : '',
+          noSkuNum: acArr[0].stockNum,
+          noSkuBuynum: acArr[0].batchNum,
+          noSkugoodsActNumber: acArr[0].goodsActNumber
+        })
       }
     })
   },
   // 折扣
-  discountGoods: function() {
+  discountGoods: function () {
     this.setData({
       showFrame: false
     })
@@ -109,7 +183,8 @@ Page({
       }
     })
     this.setData({
-      discount: arr
+      discount: arr,
+      ownCut: ""
     })
   },
   sureDiscount() {
@@ -134,24 +209,26 @@ Page({
   },
   cutPrice(discount) {
     if (discount && discount > 0 && discount < 1) {
-      let arr = this.data.activeSkuList;
-      arr.forEach(el=>{
-        el.surePrice = (el.price * discount).toFixed(2)
+      let arr = this.data.skuList;
+      arr.forEach(el => {
+        el.surePrice = (el.wholesalePrice * discount).toFixed(2)
       })
-      this.setData({ activeSkuList: arr})
+      this.setData({ skuList: arr })
       console.log(discount)
     } else {
       API.showToast("折扣值错误，请重新选择")
     }
   },
   // 选择规格
-  choiceSpec: function() {
+  choiceSpec: function () {
     let acArr = []
-    this.data.activeSkuList.forEach(el=>{
-      acArr.push(el.skuCode)
+    this.data.skuList.forEach(el => {
+      if (el.checked) {
+        acArr.push(el.skuCode)
+      }
     })
     wx.navigateTo({
-      url: '../choseSpec/choseSpec?goodsId=' + this.data.goodsId + '&activityNumber=' + this.data.activityNumber+'&acArr='+ JSON.stringify(acArr),
+      url: '../choseSpec/choseSpec?goodsId=' + this.data.goodsId + '&activityNumber=' + this.data.activityNumber + '&acArr=' + JSON.stringify(acArr),
     })
   },
   watchInput(e) {
@@ -162,25 +239,34 @@ Page({
       case 'ownCut':
         obj.ownCut = val
         let arr = this.data.discount;
-        arr.forEach(el=>{el.checked = false})
+        arr.forEach(el => { el.checked = false })
         obj.discount = arr
         break;
       case 'price':
         this.setData({
-          ['activeSkuList[' + e.currentTarget.dataset.index +'].surePrice'] : parseInt(val)
+          ['skuList[' + e.currentTarget.dataset.index + '].surePrice']: val
         })
-        break;  
+        break;
       case 'stockNum':
-        
+
         this.setData({
-          ['activeSkuList[' + e.currentTarget.dataset.index + '].sureNum']: parseInt(val)
+          ['skuList[' + e.currentTarget.dataset.index + '].sureNum']: parseInt(val)
         })
-        break; 
+        break;
       case 'buyNum':
         this.setData({
-          ['activeSkuList[' + e.currentTarget.dataset.index + '].buyNum']: parseInt(val)
+          ['skuList[' + e.currentTarget.dataset.index + '].buyNum']: parseInt(val)
         })
-      break; 
+        break;
+      case 'noSku-price':
+        obj.noSkuPrich = val
+        break;
+      case 'noSku-num':
+        obj.noSkuNum = val
+        break;
+      case 'noSku-buynum':
+        obj.noSkuBuynum = val
+        break;
     }
     this.setData(obj)
   },
@@ -192,37 +278,59 @@ Page({
       showFrame: true
     })
   },
-  getSku(arr){
-    if(arr.length>0){
+  getSku(arr) {
+    let nowArr = this.data.skuList
+    if (arr.length > 0) {
       arr.forEach(checkel => {
-        let hasarr = this.data.activeSkuList.filter(el => el.skuCode == checkel.skuCode)
-        if (hasarr.length==0){
-        } else {
+        switch (checkel.ownstatus) {
+          case 'add':
+            nowArr.forEach((el, index) => {
+              if (el.skuCode === checkel.skuCode) {
+                this.setData({
+                  ['skuList[' + index + '].checked']: true
+                })
+              }
+            })
+            break;
+          case 'del':
+            nowArr.forEach((el, index) => {
+              if (el.skuCode === checkel.skuCode) {
+                this.setData({
+                  ['skuList[' + index + '].checked']: false
+                })
+              }
+            })
+            break;
+          case 'stay':
 
+            break;
+          case 'no':
+
+            break;
         }
-      })
-    } else {
-      this.setData({
-        activeSkuList: []
       })
     }
 
-    this.setData({
-      activeSkuList: arr
-    })
-   
+    this.getCheckedNum()
   },
-  remarkSkuList(acArr, allArr){
+  getCheckedNum() {
+    let arr = this.data.skuList.filter(el => el.checked);
+    this.setData({ checkedNum: arr.length })
+  },
+  remarkSkuList(acArr, allArr) {
     if (allArr.length > 0) {  // 有sku
       allArr.forEach(el => {
         acArr.forEach(acitem => {
           if (acitem.skuCode == el.skuCode) {
-            acitem.hasIt = true
             el.checked = true
+            el.surePrice = acitem.goodsPromotionList[0].activityPrice
+            el.sureNum = acitem.stockNum
+            el.goodsActNumber = acitem.goodsActNumber
+            el.buyNum = acitem.batchNum
           }
+          acitem.hasIt = true
         })
       })
-      this.setData({ activeSkuList: acArr })
     } else {  // 无sku
       this.setData({ noSku: true })
     }
@@ -230,11 +338,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
       activityNumber: options.activityNumber,
       goodsId: options.goodsId
-      // activityNumber: 1903280301000012,
+      // activityNumber: 1903260301000010,
       // goodsId: 180929212000
     })
     this.getDetail()
@@ -243,14 +351,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     wx.setNavigationBarTitle({
       title: '活动商品设置',
     })
@@ -259,35 +367,35 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })
