@@ -11,7 +11,8 @@ Page({
     baseUrl: app.globalData.imageUrl,
     goodsIds: [],
     goodsIdsLen: 0,
-    selectAllStatus: false
+    releaseStatus: "init",
+    editStatus:"edit"
   },
 
   /**
@@ -19,6 +20,8 @@ Page({
    */
   onLoad: function (options) {
     if (options.activityNumber) {
+      this.initData()
+      this.getList(options.activityNumber)
       this.setData({
         activityNumber: options.activityNumber
       })
@@ -37,15 +40,15 @@ Page({
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       result: []
-    }, function () {
-      _this.getList()
     })
   },
   // 获取商品
-  getList: function () {
+  getList: function (activityNumber) {
     var _this = this
-    Api.adminGoodsStatus({
-      goodsStatus: "1"
+    Api.activityGoods({
+      activityNumber: activityNumber,
+      releaseStatus: this.data.releaseStatus,
+      editStatus: this.data.editStatus
     })
       .then(res => {
         var obj = res.obj.result
@@ -173,7 +176,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList()
+    this.getList(this.data.activityNumber)
   },
 
   /**

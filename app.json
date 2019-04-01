@@ -1,8 +1,12 @@
 {
   "pages": [
-    "pages/mallActive/waitRalease/waitRalease",
+
     "pages/page/home/home",
     
+    
+    "assembly/activityTag/activityTag",
+    
+    "pages/mallActive/waitRalease/waitRalease",
     
     "pages/mallActive/addGoods/addGoods",
     

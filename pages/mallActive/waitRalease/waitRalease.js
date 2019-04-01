@@ -15,7 +15,6 @@ Page({
   },
   // 编辑
   editGoods: function(e) {
-    console.log(e)
     var id = e.target.dataset.id,
       activityNumber = this.data.activityNumber
     console.log('../editGoods/editGoods?goodsId=' + id + "&activityNumber=" + activityNumber)
@@ -27,7 +26,6 @@ Page({
   tabSwitch: function(e) {
     var index = e.target.dataset.index,
     _this=this
-    console.log(index)
     if (index == "1") {
       this.setData({
         tabSwitchShow: false,
@@ -42,19 +40,22 @@ Page({
     this.setData({
       tabSwitch: index
     },function(){
-      _this.onLoad({ options: _this.data.activityNumber})
+      _this.initData()
+      _this.getGoodsList(_this.data.activityNumber)
+    })
+  },
+  initData:function(){
+    app.pageRequest.pageData.pageNum = 0
+    this.setData({
+      listData: []
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
     if (options.activityNumber) {
-      app.pageRequest.pageData.pageNum = 0
-      this.setData({
-        listData: []
-      })
+      this.initData()
       this.getDetails(options.activityNumber)
       this.getGoodsList(options.activityNumber)
       this.setData({

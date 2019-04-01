@@ -27,7 +27,7 @@
       <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>已参加</view>
     </view>
   </view>
-  <view class='add-cont'  wx:if="{{listData.length>0}}">
+  <view class='add-cont' wx:if="{{listData.length>0}}">
     <block wx:for="{{listData}}" wx:key="{{index}}">
       <view wx:if="{{item.editStatus=='not_edit'}}">
         <view class='g-cont'>
@@ -62,10 +62,14 @@
             <view>活动库存: {{item.goodsActivityRelationVOS.name[0].stockNum}}</view>
           </view>
         </view>
-        <view class='g-bottom'>
+        <view class='g-bottom' wx:if="{{item.releaseStatus=='init'}}">
           <button class='g-border' data-id="{{item.goodsVO.id}}" bindtap='editGoods'>编辑</button>
-          <button class='g-border' >预览</button>
+          <button class='g-border'>预览</button>
           <button class='g-border' data-id='"{{item.goodsVO.id}}' bindtap='releaseGoods'>发布</button>
+        </view>
+        <view class='g-bottom' wx:else>
+          <button class='g-border' bindtap='editGoods'>编辑</button>
+          <button class='g-border'>分享</button>
         </view>
       </view>
     </block>
@@ -113,11 +117,14 @@
   </view> -->
   <view class="nomore" wx:else>
     <view>
-      <image src="/image/nohome.png"></image>
+      <image src="/image/huodong.png"></image>
     </view>
-    <text>暂未添加活动商品</text>
+    <text wx:if='{{tabSwitch=="0"}}'>暂未添加活动商品</text>
+    <text wx:if='{{tabSwitch=="1"}}'>暂未参加活动商品</text>
   </view>
-  <button bindtap='addGoods'  wx:if="{{listData.length==0}}" class='addgoods'>添加活动商品</button>
-  <button bindtap='releaseGoods' wx:if="{{listData.length>0}}" class='addgoods more-add'>批量发布商品</button>
-  <button bindtap='addGoods' wx:if="{{listData.length>0}}" class='addgoods more-add'>添加活动商品</button>
+  <block wx:if='{{tabSwitch=="0"}}'>
+    <button bindtap='addGoods' wx:if="{{listData.length==0}}" class='addgoods'>添加活动商品</button>
+    <button bindtap='releaseGoods' wx:if="{{listData.length>0}}" class='addgoods more-add'>批量发布商品</button>
+    <button bindtap='addGoods' wx:if="{{listData.length>0}}" class='addgoods more-add'>添加活动商品</button>
+  </block>
 </view>

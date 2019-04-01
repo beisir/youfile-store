@@ -9,10 +9,7 @@ Component({
       type: Boolean,
       value: false
     },
-    paramAtoB: {
-      type: String,//类型
-      value: '111'//默认值
-    }
+  
   },
 
   /**
