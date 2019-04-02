@@ -1,14 +1,19 @@
 {
   "pages": [
+    "pages/page/goodsDetails/goodsDetails",
+    
+    "pages/mallActive/yunDist/yunDist",
+    
+    "pages/mallActive/list/list",
+    
+    
+    
     "pages/page/home/home",
     
-    "pages/page/goodsDetails/goodsDetails",
     
     "pages/mallActive/editGoods/editGoods",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/mallActive/batchRalease/batchRalease",
-    "pages/mallActive/yunDist/yunDist",
-    "pages/mallActive/list/list",
     "assembly/activityTag/activityTag",
     "pages/mallActive/addGoods/addGoods",
     "pages/mallActive/detailsOfCollection/detailsOfCollection",
@@ -49,8 +54,8 @@
     "pages/admin/specSet/specSet",
     "pages/businessFriend/merchant/list/list",
     "pages/capital/bank/bank",
-    "pages/capital/index/index",
     "pages/capital/record/record",
+    "pages/capital/index/index",
     "pages/page/address/address",
     "pages/page/payWay/payWay",
     "pages/faceToFaceOrder/helpOrder/helpOrder",
@@ -61,7 +66,6 @@
     "pages/cloudOrder/webInitStore/webInitStore",
     "pages/businessFriend/merchant/dealUser/dealUser",
     "pages/capital/haveRecord/haveRecord",
-    "pages/capital/index/iworkIndex/workIndendex",
     "pages/capital/recordDetails/recordDetails",
     "pages/admin/spec/spec",
     "pages/role/supplyVoucher/supplyVoucher",
