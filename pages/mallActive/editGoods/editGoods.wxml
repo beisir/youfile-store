@@ -8,9 +8,9 @@
         <view>
           <view class='g-title'>{{goods.name}}</view>
           <view class='gprice'>批发:
-            <text>￥{{goods.sellPrice}}</text> </view>
-          <view class='gprice'>零售:
             <text>￥{{goods.wholesalePrice}}</text> </view>
+          <view class='gprice'>零售:
+            <text>￥{{goods.sellPrice}}</text> </view>
           <view>库存: {{goods.stockNum}}</view>
         </view>
       </view>
