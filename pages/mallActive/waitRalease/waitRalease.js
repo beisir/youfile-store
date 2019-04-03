@@ -9,28 +9,51 @@ Page({
   data: {
     tabSwitchShow: true,
     tabSwitch: "0",
-    activityNumber: '1903260301000010',
+    activityNumber: '',
     listData: [],
+    confirm:false,
     baseUrl: app.globalData.imageUrl,
-    releaseStatus: "init"
+    releaseStatus: "init",
+    loadData: false
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
+    if (options.activityNumber) {
+      this.setData({
+        activityNumber: options.activityNumber,
+        loadData:true
+      })
+    }
+  },
+  /**
+  * 生命周期函数--监听页面显示
+  */
+  onShow: function () {
+    if (this.data.loadData){
+      this.initData()
+      this.getDetails(this.data.activityNumber)
+      this.getGoodsList(this.data.activityNumber)
+    }
+  },
+
   // 编辑
-  editGoods: function(e) {
+  editGoods: function (e) {
     var id = e.target.dataset.id,
       activityNumber = this.data.activityNumber
-    console.log('../editGoods/editGoods?goodsId=' + id + "&activityNumber=" + activityNumber)
     wx.navigateTo({
       url: '../editGoods/editGoods?goodsId=' + id + "&activityNumber=" + activityNumber,
     })
   },
   // 切换抢购商品
-  tabSwitch: function(e) {
+  tabSwitch: function (e) {
     var index = e.target.dataset.index,
-    _this=this
+      _this = this
     if (index == "1") {
       this.setData({
         tabSwitchShow: false,
-        releaseStatus:'release'
+        releaseStatus: 'release'
       })
     } else {
       this.setData({
@@ -40,31 +63,16 @@ Page({
     }
     this.setData({
       tabSwitch: index
-    },function(){
+    }, function () {
       _this.initData()
       _this.getGoodsList(_this.data.activityNumber)
     })
   },
-  initData:function(){
+  initData: function () {
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       listData: []
     })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    if (options.activityNumber) {
-      this.initData()
-      this.getDetails(options.activityNumber)
-      this.getGoodsList(options.activityNumber)
-      this.setData({
-        activityNumber: options.activityNumber
-      })
-    }
-    this.getGoodsList("1903260301000010")
-    this.getDetails("1903260301000010")
   },
   // 获取活动xiangq和活动下的列表
   getDetails: function(activityNumber) {
@@ -76,6 +84,7 @@ Page({
       obj.startTime = util.formatTimeday(new Date(obj.startTime))
       obj.endTime = util.formatTimeday(new Date(obj.endTime))
       _this.setData({
+        participate: obj.participate,
         activeDetails: obj
       })
     })
@@ -86,7 +95,6 @@ Page({
       activityNumber: activityNumber,
       releaseStatus: this.data.releaseStatus
     }).then(res => {
-      console.log(res)
       if (res.obj) {
         var listData = res.obj.result
         var datas = _this.data.listData,
@@ -99,13 +107,27 @@ Page({
   },
   // 发布商品
   releaseGood: function(e) {
-    var goodsId = e.target.dataset.id,
+    var goodsId = e.target.dataset.id
+    this.setData({
+      goodsId: goodsId,
+      confirm:true
+    })
+  },
+  confirmRalease:function(){
+    var _this=this,
+      goodsId = this.data.goodsId,
       activityNumber = this.data.activityNumber
     Api.releaseGoods({
       goodsId: goodsId,
       activityNumber: activityNumber
     }).then(res => {
-      console.log(res)
+      Api.showToast("发布成功！")
+      setTimeout(res=>{
+        _this.setData({
+          confirm: false
+        })
+        _this.onShow()
+      },500)
     })
   },
   // 添加活动商品
@@ -114,23 +136,43 @@ Page({
       url: '../addGoods/addGoods?activityNumber=' + this.data.activityNumber,
     })
   },
+  joinAct:function(){
+    // 参加活动
+    this.setData({
+      joinShow: true,
+    })
+  },
+  // 参加活动
+  joinActive: function () {
+    var _this = this,
+      activityNumber = this.data.activityNumber
+    Api.participate({ activityNumber: activityNumber }).then(res => {
+      Api.showToast(res.message)
+      setTimeout(res => {
+        _this.onShow()
+        _this.setData({
+          joinShow: false,
+        })
+      }, 500)
+    })
+  },
   // 批量发布商品
   releaseGoods: function() {
     wx.navigateTo({
       url: '../batchRalease/batchRalease?activityNumber=' + this.data.activityNumber,
     })
   },
+  // 查看商品详情
+  lookDetails: function (e) {
+    var goodsId = e.target.dataset.id
+    wx.navigateTo({
+      url: '/pages/page/goodsDetails/goodsDetails?goodsId=' + goodsId,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
 
   },
 
@@ -165,7 +207,25 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage: function(e) {
+    var storeId = Api.getThisStoreId()
+    if (e.from === 'button') {
+      var goodsId = e.target.dataset.id,
+        img = e.target.dataset.img,
+        goodsName = e.target.dataset.name
+      return {
+        title: goodsName,
+        path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + goodsId + "&storeId" + storeId,
+        imageUrl: img,
+        success: (res) => { },
+        fail: (res) => { }
+      }
+    } else {
+      return {
+        path: '/pages/page/home/home?storeId=' + storeId,
+        success: (res) => { },
+        fail: (res) => { }
+      }
+    }
   }
 })

@@ -299,13 +299,13 @@
                 <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>现价</view>
                 <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                   <view class="lt-add-cart">
-                    <view class="lt-down" bindtap="minusCountAll">
+                    <view class="lt-down" data-sign='reduce' bindtap="batchChange">
                       <image src="/image/lt-jian.png"></image>
                     </view>
                     <view class="lt-num" style='border-top:0'>
                       <input disabled='disabled' value='批量'></input>
                     </view>
-                    <view class="lt-add" bindtap="addCountAll">
+                    <view class="lt-add" data-sign='add' bindtap="batchChange">
                       <image src="/image/lt-add.png"></image>
                     </view>
                   </view>
@@ -324,13 +324,13 @@
                   <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                     <view class='purch-num' wx:if="{{item.isActivity}}">起购量：{{item.saleBatch}}</view>
                     <view class="lt-add-cart">
-                      <view class="lt-down" data-index='{{index}}' bindtap="minusCount1">
+                      <view class="lt-down" data-index='{{index}}' data-sign='reduce' bindtap="updateSkuNum">
                         <image src="/image/jian.png"></image>
                       </view>
                       <view class="lt-num" style='border-top:0'>
-                        <input value='{{item.num}}' type='number' data-code='{{pItem.code}}' data-index='{{index}}' bindinput='changeNum'></input>
+                        <input value='{{item.num}}' type='number' data-index='{{index}}' data-sign='input' bindblur='updateSkuNum'></input>
                       </view>
-                      <view class="lt-add" data-index='{{index}}' bindtap="addCount1">
+                      <view class="lt-add" data-index='{{index}}' data-sign='add' bindtap="updateSkuNum">
                         <image src="/image/lt-a.png"></image>
                       </view>
                     </view>
@@ -546,13 +546,13 @@
               <view style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>现价</view>
               <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                 <view class="lt-add-cart">
-                  <view class="lt-down" bindtap="minusCountAll">
+                  <view class="lt-down" data-sign='reduce' bindtap="batchChange">
                     <image src="/image/lt-jian.png"></image>
                   </view>
                   <view class="lt-num" style='border-top:0'>
                     <input disabled='disabled' value='批量'></input>
                   </view>
-                  <view class="lt-add" bindtap="addCountAll">
+                  <view class="lt-add" data-sign='add' bindtap="batchChange">
                     <image src="/image/lt-add.png"></image>
                   </view>
                 </view>
@@ -570,13 +570,13 @@
                 </view>
                 <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
                   <view class="lt-add-cart">
-                    <view class="lt-down" data-index='{{index}}' bindtap="minusCount1">
+                    <view class="lt-down" data-index='{{index}}' data-sign='reduce' bindtap="updateSkuNum">
                       <image src="/image/jian.png"></image>
                     </view>
                     <view class="lt-num" style='border-top:0'>
-                      <input value='{{item.num}}' type='number' data-code='{{pItem.code}}' data-index='{{index}}' bindinput='changeNum'></input>
+                      <input value='{{item.num}}' type='number' data-index='{{index}}' data-sign='input' bindblur='updateSkuNum'></input>
                     </view>
-                    <view class="lt-add" data-index='{{index}}' bindtap="addCount1">
+                    <view class="lt-add" data-index='{{index}}' data-sign='add' bindtap="updateSkuNum">
                       <image src="/image/lt-a.png"></image>
                     </view>
                   </view>

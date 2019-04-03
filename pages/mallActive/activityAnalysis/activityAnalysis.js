@@ -1,4 +1,5 @@
 const app = getApp();
+import Api from "../../../utils/api.js";
 var rate = 0;
 var doubleColumnCanvasWidth = 0;
 var doubleColumnCanvasHeight = 0;
@@ -11,13 +12,21 @@ Page({
     doubleColumnCanvasData: {
       canvasId: 'doubleColumn',
     },
+    activityNumber: '1903260301000010',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.systemInfo);
+    if (options.activityNumber){
+      this.getSalesList(options.activityNumber)
+    }
+    this.getSalesList("1903260301000010")
+    this.initStatic()
+  },
+  // 初始化统计表
+  initStatic:function(){
     var systemInfo = app.systemInfo;
     rate = systemInfo.screenWidth / 750;
     var updateData = {};
@@ -50,7 +59,7 @@ Page({
 
 
     updateData['doubleColumnCanvasData.canvasHeight'] = doubleColumnCanvasHeight;
-    updateData['doubleColumnCanvasData.enableScroll'] = false;
+    updateData['doubleColumnCanvasData.enableScroll'] = true;
 
 
     updateData['doubleColumnCanvasData.point'] = { bColor: "#FFA848", sClor: "#FFFFFF", size: rate * 4, isShow: true };
@@ -69,19 +78,44 @@ Page({
     let doubleColumnSeries = {
       cloumnData: {
         data: [
-          { x: '搜索类', y: 100, title: "搜索类|展现量10000|点击量:1000|点击率:10%" },
-          { x: '资讯类', y: 930, title: "资讯类|展现量:10000|点击量:1000|点击率:10%" },
-          { x: '社交类', y: 430, title: "社交类|展现量:10000|点击量:1000|点击率:10%" },
-
+          { x: '1', y: 100, title: "2" },
+          { x: '2', y: 230, title: "2" },
+          { x: '3', y: 430, title: "22222222" },
+          { x: '4', y: 430, title: "222222222" },
+          { x: '5', y: 430, title: "2" },
+          { x: '6', y: 430, title: "" },
+          { x: '7', y: 430, title: "" },
+          { x: '8', y: 430, title: "" },
+          { x: '9', y: 430, title: "" },
+          { x: '10', y: 430, title: "" },
+          { x: '11', y: 430, title: "" },
+          { x: '12', y: 430, title: "" },
+          { x: '13', y: 430, title: "" },
+          { x: '14', y: 430, title: "" },
+          { x: '15', y: 430, title: "" },
+          { x: '16', y: 430, title: "" },
         ],
         columnStartColor: "#2BE99F",
         columnEndColor: "#13CE66"
       },
       lineData: [{
         data: [
-          { x: '搜索类', y: 100, title: "" },
-          { x: '资讯类', y: 230, title: "" },
-          { x: '社交类', y: 430, title: "" },
+          { x: '1', y: 100, title: "" },
+          { x: '2', y: 230, title: "" },
+          { x: '3', y: 430, title: "" },
+          { x: '4', y: 430, title: "" },
+          { x: '5', y: 430, title: "" },
+          { x: '6', y: 430, title: "" },
+          { x: '7', y: 430, title: "" },
+          { x: '8', y: 430, title: "" },
+          { x: '9', y: 430, title: "" },
+          { x: '10', y: 430, title: "" },
+          { x: '11', y: 430, title: "" },
+          { x: '12', y: 430, title: "" },
+          { x: '13', y: 430, title: "" },
+          { x: '14', y: 430, title: "" },
+          { x: '15', y: 430, title: "" },
+          { x: '16', y: 430, title: "" },
         ],
         lineColor: "#FFA848",
         point: {
@@ -93,9 +127,22 @@ Page({
       }]
     };
     let doubleColumnXAxisData = [
-      { x: '搜索类', y: 0, title: "搜索类" },
-      { x: '资讯类', y: 0, title: "资讯类" },
-      { x: '社交类', y: 0, title: "社交类" },
+      { x: '1', y: 100, title: "2019-09-09" },
+      { x: '2', y: 230, title: "2019-09-09" },
+      { x: '3', y: 430, title: "2019-09-09" },
+      { x: '4', y: 430, title: "2019-09-09" },
+      { x: '5', y: 430, title: "2019-09-09" },
+      { x: '6', y: 430, title: "2019-09-09" },
+      { x: '7', y: 430, title: "2019-09-09" },
+      { x: '8', y: 430, title: "2019-09-09" },
+      { x: '9', y: 430, title: "2019-09-09" },
+      { x: '10', y: 430, title: "2019-09-09" },
+      { x: '11', y: 430, title: "2019-09-09" },
+      { x: '12', y: 430, title: "2019-09-09" },
+      { x: '13', y: 430, title: "2019-09-09" },
+      { x: '14', y: 430, title: "2019-09-09" },
+      { x: '15', y: 430, title: "2019-09-09" },
+      { x: '16', y: 430, title: "2019-09-09" },
     ];
     let doubleColumnYAxisData = [];
     doubleColumnYMax = 1000;
@@ -116,7 +163,21 @@ Page({
     updateData['doubleColumnCanvasData.yAxis.padd'] = rate * 304 / (doubleColumnYMax - doubleColumnYMin);
     this.setData(updateData);
   },
+  // 获取统计店铺销售量列表 和商品销售总额
+  getSalesList: function (activityNumber){
+    Api.saleActiveList({ activityNumber: activityNumber}).then(res=>{
+      console.log(res)
+      if (res.obj){
 
+      }
+    })
+    Api.statisticSales({ activityNumber: activityNumber }).then(res => {
+      console.log(res)
+      if (res.obj) {
+
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */

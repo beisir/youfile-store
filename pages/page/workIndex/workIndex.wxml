@@ -108,9 +108,9 @@
       </view>
       <view>朋友圈海报</view>
     </navigator>
-    <navigator url='../../role/order/order'>
+    <navigator url='/pages/mallActive/list/list'>
       <view>
-        <image mode='widthFix' src='/image/ad2.png'></image>
+        <image mode='widthFix' src='/image/ziyuan.png'></image>
       </view>
       <view>商贸云活动</view>
     </navigator>

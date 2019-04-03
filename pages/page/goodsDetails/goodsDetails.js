@@ -1,5 +1,7 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+import Calculation from '../../../utils/calculation.js'
+var Method = new Calculation()
 import {
   uploadImg
 } from '../../../utils/const.js'
@@ -527,6 +529,7 @@ Page({
       url: '../cartList/cartList'
     })
   },
+  // 添加购物车
   cratHome: function(e) {
     var _this = this,
       num = this.data.numbers,
@@ -830,69 +833,88 @@ Page({
     }
 
   },
+  
   /**
-   * 绑定加数量事件
+   * 绑定减数量事件/绑定加数量事件
    */
-  addCount1(e) {
+  updateSkuNum:function(e){
+    var sign = e.currentTarget.dataset.sign//获取是增加还是减少 或者手动输入 input代表手动输入
     const index = e.currentTarget.dataset.index;
+    if (sign=="input"){
+      var nums=e.detail.value
+      this.updateSkuVoList(sign, index, parseInt(nums))
+    }else{
+      this.updateSkuVoList(sign, index)
+    }
+  },
+  updateSkuVoList: function (sign, index, nums){
     let spectArrDifference = this.data.spectArrDifference
     let code = this.data.moreCode
+    let newSkuOnly = this.data.newSkuOnly//只有一个sku
     var goodsSpecificationVOListNew = this.data.goodsSpecificationVOList
     var goodsSpecificationVOList = goodsSpecificationVOListNew[0].goodsSpecificationValueVOList
     for (var i = 0; i < spectArrDifference.length; i++) {
       if (spectArrDifference[i].code == code) {
-        if (spectArrDifference[i].newSkuArrTwo[index].num == undefined) {
-          spectArrDifference[i].newSkuArrTwo[index].num = 0
-        }
-        if (spectArrDifference[i].newSkuArrTwo[index].num >= spectArrDifference[i].newSkuArrTwo[index].stockNum) {
-          Api.showToast("库存不足！")
-          return
-        } else {
-          spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num + 1
-        }
-      }
-    }
-    if (this.data.newSkuOnly) {
-      for (var i = 0; i < goodsSpecificationVOList.length; i++) {
-        for (var j = 0; j < spectArrDifference.length; j++) {
-          if ((spectArrDifference[j].newSkuArrTwo[0].specValueCodeList).indexOf(goodsSpecificationVOList[i].specValueCode) != -1) {
-            goodsSpecificationVOList[i].num = spectArrDifference[j].newSkuArrTwo[0].num
+        if (sign == "add") {
+          if (spectArrDifference[i].newSkuArrTwo[index].num == undefined) {
+            spectArrDifference[i].newSkuArrTwo[index].num = 0
           }
+          this.selectedSkuNum(spectArrDifference[i].newSkuArrTwo[index], spectArrDifference[i].newSkuArrTwo[index].num + 1)
         }
-        goodsSpecificationVOListNew[0].goodsSpecificationValueVOList = goodsSpecificationVOList
-      }
-      this.setData({
-        goodsSpecificationVOList: goodsSpecificationVOListNew,
-        spectArrDifference: spectArrDifference
-      })
-      this.getTotalPrice();
-    } else {
-      this.setData({
-        spectArrDifference: spectArrDifference
-      });
-      this.getTotalPrice();
-    }
-  },
-
-  /**
-   * 绑定减数量事件
-   */
-  minusCount1(e) {
-    const index = e.currentTarget.dataset.index;
-    let spectArrDifference = this.data.spectArrDifference
-    let code = this.data.moreCode
-    for (var i = 0; i < spectArrDifference.length; i++) {
-      if (spectArrDifference[i].code == code) {
-        if (spectArrDifference[i].newSkuArrTwo[index].num <= 0) {
-          return false;
+        if (sign == "reduce") {
+          if (spectArrDifference[i].newSkuArrTwo[index].num <= 0) {
+            return false;
+          }
+          this.selectedSkuNum(spectArrDifference[i].newSkuArrTwo[index], spectArrDifference[i].newSkuArrTwo[index].num - 1, true)
         }
-        spectArrDifference[i].newSkuArrTwo[index].num = spectArrDifference[i].newSkuArrTwo[index].num - 1
+        if (sign == "input"){
+          this.selectedSkuNum(spectArrDifference[i].newSkuArrTwo[index], nums)
+        }
       }
     }
     this.setData({
       spectArrDifference: spectArrDifference
     });
     this.getTotalPrice();
+  },
+  // 批量减少 或者批量增加
+  batchChange: function (e) {
+    var sign = e.currentTarget.dataset.sign//获取是增加还是减少 或者手动输入
+    let _this = this;
+    let newSkuArrTwo = [];
+    let spectArrDifference = this.data.spectArrDifference
+    let code = this.data.moreCode
+    let index = null
+    for (var i = 0; i < spectArrDifference.length; i++) {
+      if (spectArrDifference[i].code == code) {
+        index = i
+        newSkuArrTwo = spectArrDifference[i].newSkuArrTwo
+      }
+    }
+    for (let i = 0; i < newSkuArrTwo.length; i++) {
+      if (newSkuArrTwo[i].num == undefined || newSkuArrTwo[i].num == NaN) {
+        newSkuArrTwo[i].num = 0
+      }
+      if (sign == "add") {
+        this.selectedSkuNum(newSkuArrTwo[i], newSkuArrTwo[i].num + 1)
+      }
+      if (sign == "reduce") {
+        if (newSkuArrTwo[i].num > 0) {
+          this.selectedSkuNum(newSkuArrTwo[i], newSkuArrTwo[i].num - 1, true)
+        }
+      }
+    }
+    spectArrDifference[index].newSkuArrTwo = newSkuArrTwo
+    this.setData({
+      spectArrDifference: spectArrDifference
+    }, function () {
+      _this.getTotalPrice();
+    });
+
+  },
+  // 添加商品数量，判断活动商品是否超出库存
+  selectedSkuNum: function (obj, value, isTrue) {
+    Method.selectedSkuNum(obj, value, isTrue)//调用calculation。js 中selectedSkuNum方法 判断起购量库存
   },
   /**
    * 计算总价
@@ -915,18 +937,19 @@ Page({
     let classNums = 0;
     let saleBatchAmount = this.data.saleBatchAmount //店铺的起批金额
     let saleBatchNum = this.data.saleBatchNum //店铺的起批数量
-    let saleBatchNumGoods = this.data.saleBatchNumGoods //商品的起批金额
+    let saleBatchNumGoods = this.data.saleBatchNumGoods //商品的起批数量
     let difference = 0 //差价
     let discountShow = true //是否享受批发价
-    let newSkuOnly = this.data.newSkuOnly
     let limitShow = this.data.limitShow //判断是否是进货商身份  3代表是
-    let goodsSpecificationVOList = this.data.goodsSpecificationVOList
+    let goodsSpecificationVOList = this.data.goodsSpecificationVOList//获取当前商品规格属性
+
     if (goodsSpecificationVOList.length > 0) {
-      var childArr = goodsSpecificationVOList[0].goodsSpecificationValueVOList
+      var childArr = goodsSpecificationVOList[0].goodsSpecificationValueVOList//获取商品的第一个规格属性
     }
     if (saleBatchNumGoods == 0) {
       saleBatchNumGoods = saleBatchNum
     }
+    console.log(spectArrDifference)
     for (var j = 0; j < spectArrDifference.length; j++) {
       newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
       for (let i = 0; i < newSkuArrTwo.length; i++) {
@@ -1024,134 +1047,7 @@ Page({
       goodsSpecificationVOList: goodsSpecificationVOList
     });
   },
-  // 批量减少
-  minusCountAll: function() {
-    let _this = this;
-    let newSkuArrTwo = [];
-    let spectArrDifference = this.data.spectArrDifference
-    let code = this.data.moreCode
-    let index = null
-    for (var i = 0; i < spectArrDifference.length; i++) {
-      if (spectArrDifference[i].code == code) {
-        index = i
-        newSkuArrTwo = spectArrDifference[i].newSkuArrTwo
-      }
-    }
-    for (let i = 0; i < newSkuArrTwo.length; i++) {
-      if (newSkuArrTwo[i].num > 0) {
-        // 改变数量
-        this.selectedSkuNum(newSkuArrTwo[i], newSkuArrTwo[i].num - 1,true)
-      }
-    }
-    spectArrDifference[index].newSkuArrTwo = newSkuArrTwo
-    this.setData({
-      spectArrDifference: spectArrDifference
-    }, function() {
-      _this.getTotalPrice();
-    });
-  },
-  // 批量添加
-  addCountAll: function() {
-    let newSkuArrTwo = [];
-    let spectArrDifference = this.data.spectArrDifference
-    let code = this.data.moreCode
-    let index = null
-    for (var i = 0; i < spectArrDifference.length; i++) {
-      if (spectArrDifference[i].code == code) {
-        index = i
-        newSkuArrTwo = spectArrDifference[i].newSkuArrTwo
-      }
-    }
-    for (let i = 0; i < newSkuArrTwo.length; i++) {
-      if (newSkuArrTwo[i].num == undefined || newSkuArrTwo[i].num == NaN) {
-        newSkuArrTwo[i].num = 0
-      }
-      // 改变数量
-      this.selectedSkuNum(newSkuArrTwo[i], newSkuArrTwo[i].num+1)
-    }
-    spectArrDifference[index].newSkuArrTwo = newSkuArrTwo
-    this.setData({
-      spectArrDifference: spectArrDifference, //选择哪些规格属性的数组
-    }, function() {
-      this.getTotalPrice();
-    });
-  },
-  // 手动输入数量
-  changeNum: function(e) {
-    const index = e.currentTarget.dataset.index;
-    const code = e.currentTarget.dataset.code;
-    const obj = e.currentTarget.dataset.obj;
-    var value = parseInt(e.detail.value)
-    var goodsSpecificationVOListNew = this.data.goodsSpecificationVOList
-    var goodsSpecificationVOList = goodsSpecificationVOListNew[0].goodsSpecificationValueVOList
-    if (value < 0 || isNaN(value)) {
-      value = 0
-    }
-    let spectArrDifference = this.data.spectArrDifference;
-    if (this.data.newSkuOnly) {
-      var current = this.data.newSkuOnlyIndex
-      goodsSpecificationVOList[current].num = value
-      for (var j = 0; j < spectArrDifference.length; j++) {
-        if ((spectArrDifference[j].newSkuArrTwo[0].specValueCodeList).indexOf(goodsSpecificationVOList[current].specValueCode) != -1) {
-          // 改变数量
-          this.selectedSkuNum(spectArrDifference[j].newSkuArrTwo[0], value)
 
-          // if (value >= spectArrDifference[j].newSkuArrTwo[0].stockNum) {
-          //   value = spectArrDifference[j].newSkuArrTwo[0].stockNum
-          //   spectArrDifference[j].newSkuArrTwo[0].num = value
-          //   Api.showToast("库存不足！")
-          // } else {
-          //   spectArrDifference[j].newSkuArrTwo[0].num = value
-          // }
-        }
-      }
-      goodsSpecificationVOListNew[0].goodsSpecificationValueVOList = goodsSpecificationVOList
-      this.setData({
-        goodsSpecificationVOList: goodsSpecificationVOListNew,
-      })
-    } else {
-      for (let i = 0; i < spectArrDifference.length; i++) {
-        if (spectArrDifference[i].code == code) {
-          // 改变数量
-          this.selectedSkuNum(spectArrDifference[i].newSkuArrTwo[index], value)
-        }
-      }
-    }
-    this.setData({
-      spectArrDifference: spectArrDifference
-    }, function() {
-      this.getTotalPrice();
-    });
-
-  },
-
-  // 添加商品数量，判断活动商品是否超出库存
-  selectedSkuNum: function(obj, value,isTrue) {
-    // isTrue为true代表减
-    console.log(value)
-    var isActivity = obj.isActivity //判断是否是活动商品
-    if (isActivity) {
-      // 判断数量不能小于起购量
-      var saleBatch = obj.saleBatch
-      if (value >= saleBatch) {
-        obj.num = value
-      } else {
-        // 判断起购量不能小于库存才可以购买
-        if (obj.stockNum >= obj.saleBatch) {
-          obj.num = obj.saleBatch
-        } else {
-          obj.num = 0
-        }
-      }
-    } else {
-      obj.num = value + 1
-    }
-    if (value >= obj.stockNum) {
-      obj.num = obj.stockNum
-      // Api.showToast("库存不足！")
-    }
-    return obj
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

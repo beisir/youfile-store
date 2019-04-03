@@ -9,6 +9,7 @@ function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
   isStoreOwner.enterIdentity().then(res => {
     _this.homeIndex()
+    _this.getActiveGoods()
   }).catch(res => {
   });
 }
@@ -52,7 +53,8 @@ Page({
     openStore: false,
     tipIndex: 0,
     tabSwitch: "0",
-    tabSwitchShow:true
+    tabSwitchShow:true,
+    avtiveGoods:[]
   },
   // 切换抢购商品
   tabSwitch:function(e){
@@ -253,20 +255,6 @@ Page({
 
     }
   },
-  // 扫码
-  addFriend: function () {
-    var _this = this;
-    app.globalData.notOnshow = true
-    wx.scanCode({
-      success: (res) => {
-        handleQRCode(res.result,'home')
-      },
-      fail: (res) => {
-        // Api.showToast("未获取用户信息！")
-      },
-      complete: (res) => { app.globalData.notOnshow = false }
-    })
-  },
   // 获取当前登录的身份
   getUserInfor: function (userId, storeId) {
     var limitShow = wx.getStorageSync("admin")
@@ -391,11 +379,6 @@ Page({
       currentTab: 0
     })
   },
-  // editDp: function () {
-  //   this.setData({
-  //     showDp: false,
-  //   })
-  // }, 
   // 编辑信息
   editDpMes: function () {
     var limitShow = this.data.limitShow
@@ -437,9 +420,6 @@ Page({
         if (Api.isNotEmpty(detailList)) {
           var datas = _this.data.result,
             newArr = app.pageRequest.addDataList(datas, detailList)
-          for (var i of newArr){
-            console.log(i)
-          }
           _this.setData({
             result: newArr,
             totalCount: totalCount,
@@ -505,6 +485,19 @@ Page({
           that.getHeight(result)
         })
       })
+  },
+  // 获取店铺活动商品列表
+  getActiveGoods:function(){
+    var _this=this
+    Api.storeActiveGoods().then(res=>{
+      var obj = res.obj
+      console.log(obj)
+      if (obj){
+        _this.setData({
+          avtiveGoods:obj
+        })
+      }
+    })
   },
   // 获取高度
   getHeight(result){
@@ -677,6 +670,7 @@ Page({
       _this.getListNew()
     });
   },
+  // 切换商品tab
   swichNav: function (e) {
     var that = this,
       descShow = this.data.descShow,
@@ -697,10 +691,19 @@ Page({
         if (index == 1) {
           that.emptyArrNew()
         } else {
-          this.emptyArr()
+          that.emptyArr()
         }
       })
     }
+  },
+  // 切换活动商品tab
+  swichNavActive:function(e){
+    var _this=this,
+      index = e.target.dataset.current
+    console.log(index)
+    _this.setData({
+      currentTabActive:index
+    })
   },
   // 置顶
   topGoods: function () {

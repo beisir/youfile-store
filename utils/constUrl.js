@@ -206,6 +206,9 @@ export const delPosterArrUrl = '/admin/marketing/poster/batch'
 export const toOtherPosterTagUrl = '/admin/marketing/poster/tag'
 export const delAllPosterUrl = '/admin/marketing/poster/tag/poster'
 export const goodsPosterNumUrl = '/admin/marketing/poster/goods/{{goodsId}}/count'
+
+// 查询店铺有效活动
+export const storeActiveGoodsUrl="/api/mall/activity/store/{{storeId}}/participate/activity/release/list"
 // 活动
 export const activityListUrl='/admin/mall/activity/{{mallCode}}/page'
 export const participateUrl="/admin/mall/activity/{{activityNumber}}/participate"
@@ -219,4 +222,6 @@ export const allGoodsUrl="/admin/mall/goods/activity/goods/for/{{activityNumber}
 export const delActGoodsUrl="/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}"
 export const getActiveGoodsDetailUrl = '/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}'
 export const editActiveGoodsUrl = '/admin/mall/goods/activity/goods/edit'
+export const saleActiveListUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/sales/list"
+export const statisticSalesUrl="/admin/mall/activity/statistic/sum/{{activityNumber}}/store/sales/all"
 

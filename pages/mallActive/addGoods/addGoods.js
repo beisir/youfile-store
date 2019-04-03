@@ -7,6 +7,7 @@ Page({
    */
   data: {
     goodsId:'',
+    goodsStatus:"1",//上架商品
     activityNumber:'',
     joinShow:false,
     baseUrl: app.globalData.imageUrl,
@@ -72,7 +73,8 @@ Page({
     var _this = this
     Api.allGoods({
       activityNumber: _this.data.activityNumber,
-      keyword: _this.data.value
+      keyword: _this.data.value,
+      goodsStatus: this.data.goodsStatus
     })
       .then(res => {
         var obj = res.obj.result

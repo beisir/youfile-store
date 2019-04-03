@@ -179,7 +179,10 @@ import {
   editActiveGoodsUrl,
   activityGoodsUrl,
   allGoodsUrl,
-  delActGoodsUrl
+  delActGoodsUrl,
+  storeActiveGoodsUrl,
+  saleActiveListUrl,
+  statisticSalesUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -1144,9 +1147,23 @@ function getActiveGoodsDetail(data) {
 function editActiveGoods(data){
   return app.http.postRequest(editActiveGoodsUrl, data)
 }
-// 活动商品详情
+// 删除活动商品详情
 function delActGoods(data) {
   return app.http.deleteRequest(delActGoodsUrl, data)
+}
+// 店铺活动商品列表
+function storeActiveGoods() {
+  var data={}
+  data = initStoreId(data);
+  return app.http.getRequest(storeActiveGoodsUrl, data)
+}
+// 统计店铺销售量总额
+function saleActiveList(data) {
+  return app.http.getRequest(saleActiveListUrl, data)
+}
+// 统计店铺销售量总额
+function statisticSales(data) {
+  return app.http.getRequest(statisticSalesUrl, data)
 }
 module.exports = {
   editActiveGoods,
@@ -1340,5 +1357,8 @@ module.exports = {
   releaseMoreGoods,
   activityGoods,
   allGoods,
-  delActGoods
+  delActGoods,
+  storeActiveGoods,
+  saleActiveList,
+  statisticSales
 }

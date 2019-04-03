@@ -200,35 +200,11 @@
   </view>
   <!-- 活动商品 -->
   <view wx:else class="swiper-tab active-nav" id='swiper-tab'>
-    <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
-      <view></view>
-    </view>
-    <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">新品
-      <view></view>
-    </view>
-    <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">销量
-      <view></view>
-    </view>
-    <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
-      <view></view>
-    </view>
-    <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">新品
-      <view></view>
-    </view>
-    <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">销量
-      <view></view>
-    </view>
-    <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
-      <view></view>
-    </view>
-    <view class="swiper-tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">新品
-      <view></view>
-    </view>
-    <view class="swiper-tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">销量
+    <view wx:for="{{avtiveGoods}}" wx:key="{{index}}" class="swiper-tab-item {{currentTabActive==index ? 'on' : ''}}" data-current="{{index}}" bindtap="swichNavActive">{{item.activityName}}
       <view></view>
     </view>
   </view>
-  <view class='dc-list' wx:if="{{result.length > 0 && tabSwitchShow}}">
+  <view class='dc-list' wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
     <view wx:for="{{result}}" wx:key="index" class='{{item.isHide?"opa-view":""}}'>
       <view>
         <image class='g-img' src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small" />
@@ -260,6 +236,18 @@
           <view class='no-a-goods'>已抢光</view>
         </block>
       </view> -->
+    </view>
+  </view>
+  <view class="result-null" wx:if="{{avtiveGoods.length == 0 && tabSwitchShow}}">
+    <view class="nomore">
+      <view>
+        <image src="/image/nohome.png"></image>
+      </view>
+      <block>
+        <view class='no-active'>暂时没有抢订</view>
+        <text>我们正在为您准备更优惠的商品</text>
+      </block>
+      <block>暂时还没有上架商品</block>
     </view>
   </view>
   <!-- 结束 -->
@@ -324,18 +312,6 @@
       <view class='nomore'>优生活技术支持</view>
     </scroll-view>
   </view>
-  <!-- <view class="result-null" wx:else>
-    <view class="nomore">
-      <view>
-        <image src="/image/nohome.png"></image>
-      </view>
-      <block>
-        <view class='no-active'>暂时没有抢订</view>
-        <text>我们正在为您准备更优惠的商品</text>
-      </block>
-      <block>暂时还没有上架商品</block>
-    </view>
-  </view> -->
   <view class='showHide' hidden='{{showHide}}'>
     <view class='sh-cont'>
       <view>
