@@ -26,7 +26,7 @@
   </view>
   <input class='spec-input spec-input1' value='{{changePriceVal}}' bindinput='changePrice' placeholder-class='spec-class spec-class1' placeholder='统一输入批发价' />
   <input class='spec-input spec-input1' value='{{changeSellVal}}' bindinput='changeSell' placeholder-class='spec-class spec-class1' placeholder='统一输入零售价' />
-  <input class='spec-input spec-input1' value='{{changeStockVal}}' bindinput='changeStock' placeholder-class='spec-class spec-class1' placeholder='统一输入库存' type='number' maxlength='4' />
+  <input class='spec-input spec-input1' value='{{changeStockVal}}' bindinput='changeStock' placeholder-class='spec-class spec-class1' placeholder='统一输入库存' type='number' maxlength='6' />
   <view class='spec-view' bindtap='cancel'>取消</view>
   <view class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirmSet'>确定</view>
 </spec>
@@ -85,7 +85,7 @@
             <input maxlength='8' bindinput='monitor' data-index='{{index}}' data-name='sellPrice' value='{{item.sellPrice}}' placeholder='输入零售价'></input>
           </view>
           <view>
-            <input type='number' bindinput='monitor' data-index='{{index}}' data-name='stockNum' maxlength='4' value='{{item.stockNum}}' placeholder='输入库存'></input>
+            <input type='number' bindinput='monitor' data-index='{{index}}' data-name='stockNum' maxlength='6' value='{{item.stockNum}}' placeholder='输入库存'></input>
           </view>
         </view>
       </view>
