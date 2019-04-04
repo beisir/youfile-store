@@ -137,10 +137,10 @@
     <text wx:if='{{tabSwitch=="0"}}'>暂未添加活动商品</text>
     <text wx:if='{{tabSwitch=="1"}}'>暂未参加活动商品</text>
   </view>
-  <block wx:if='{{tabSwitch=="0"}}'>
+  <view class='wr-bottom' wx:if='{{tabSwitch=="0"}}'>
     <button bindtap='joinAct' wx:if="{{!participate}}" class='addgoods bottom-btn'>参加活动</button>
     <button bindtap='addGoods' wx:if="{{listData.length==0 && participate}}" class='addgoods bottom-btn'>添加活动商品</button>
     <button bindtap='releaseGoods' wx:if="{{listData.length>0 && participate}}" class='addgoods more-add'>批量发布商品</button>
     <button bindtap='addGoods' wx:if="{{listData.length>0 && participate}}" class='addgoods more-add'>添加活动商品</button>
-  </block>
+  </view>
 </view>

@@ -1,25 +1,12 @@
 {
   "pages": [
     "pages/page/goodsDetails/goodsDetails",
-    "pages/page/home/home",
-    
+    "pages/admin/status/status",
     "pages/mallActive/list/list",
-    
-    
-    "pages/page/workIndex/workIndex",
-    
-    
-    
-    
-    
-    
-    
-    
-    "pages/mallActive/activityAnalysis/activityAnalysis",
-    
-    
-    
+    "pages/page/home/home",
     "pages/mallActive/waitRalease/waitRalease",
+    "pages/page/workIndex/workIndex",
+    "pages/mallActive/activityAnalysis/activityAnalysis",
     "pages/mallActive/yunDist/yunDist",
     "pages/page/serStatus/serStatus",
     "pages/mallActive/editGoods/editGoods",
@@ -41,7 +28,6 @@
     "pages/marketing/poster/prePoster/prePoster",
     "pages/page/navigateMiddleware/navigateMiddleware",
     "pages/marketing/poster/success/success",
-    "pages/admin/status/status",
     "pages/marketing/poster/posterStoreroom/posterStoreroom",
     "pages/marketing/poster/goodsList/goodsList",
     "pages/marketing/poster/storeroomDetail/storeroomDetail",
