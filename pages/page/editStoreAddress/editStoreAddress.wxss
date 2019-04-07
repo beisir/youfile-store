@@ -1,6 +1,6 @@
 @import '../set/set';
 .picker{
-  color: #333;font-size:28rpx;position: relative;z-index: 100;min-width:400rpx;height:80rpx;line-height:87rpx;margin-left:20rpx;
+  color: #333;font-size:30rpx;position: relative;z-index: 100;min-width:400rpx;height:80rpx;line-height:87rpx;margin-left:20rpx;
 }
 .weui-cell__bd1{
   height: 180rpx;position: relative
@@ -12,5 +12,11 @@
   position: absolute;top: 25rpx
 }
 .weui-cell__bd1 textarea{
-  padding-left:30rpx;height:170rpx;width:70%;position: absolute;top:18rpx;left: 147rpx;font-size:28rpx;
+  padding-left:30rpx;height:170rpx;width:70%;position: absolute;top:29rpx;left: 147rpx;font-size:30rpx;
+}
+.weui-cell__bd1 textarea.platformIos{
+  top:18rpx
+}
+.noCity{
+  color: #999;
 }

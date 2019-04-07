@@ -1,7 +1,8 @@
 import AuthHandler from './authHandler.js';
 import {
   baseUrl,
-  uploadImg
+  uploadImg,
+  imageUrl
 } from './const.js'
 /**
  请求
@@ -20,26 +21,26 @@ class request {
   /**
    * PUT类型的网络请求
    */
-  putRequest(url, data, header) {
-    return this.requestAll(url, data, 'PUT', header)
+  putRequest(url, data, header, hideLoading) {
+    return this.requestAll(url, data, 'PUT', header, hideLoading)
   }
   /**
    * GET类型的网络请求
    */
-  getRequest(url, data, header) {
-    return this.requestAll(url, data, 'GET', header)
+  getRequest(url, data, header, hideLoading) {
+    return this.requestAll(url, data, 'GET', header, hideLoading)
   }
   /**
    * DELETE类型的网络请求
    */
-  deleteRequest(url, data, header) {
-    return this.requestAll(url, data, 'DELETE', header)
+  deleteRequest(url, data, header, hideLoading) {
+    return this.requestAll(url, data, 'DELETE', header, hideLoading)
   }
   /**
    * POST类型的网络请求
    */
-  postRequest(url, data, header) {
-    return this.requestAll(url, data, 'POST', header)
+  postRequest(url, data, header, hideLoading) {
+    return this.requestAll(url, data, 'POST', header, hideLoading)
   }
   /**
    * 解析URL
@@ -53,11 +54,14 @@ class request {
   /**
    * 网络请求
    */
-  requestAll(url, data, method, customHeader) {
+  requestAll(url, data, method, customHeader, hideLoading) {
     wx.showNavigationBarLoading()
-    wx.showLoading({
-      title: "正在加载",
-    })
+    if (!hideLoading) {
+      wx.showLoading({
+        title: "正在加载",
+      })
+    }
+
     return new Promise((resolve, reject) => {
       url = this.analysisUrl(url, data);
       var header = (customHeader === undefined || customHeader == null || customHeader == "") ? this.defaultHeader : customHeader;
@@ -67,10 +71,6 @@ class request {
         } else {
           delete header['Authorization'];
         }
-        // var formId = wx.getStorageSync('formId')
-        // var storeId = wx.getStorageSync('storeId')
-        // header['formId'] = formId;
-        // header['storeId'] = storeId;
         wx.request({
           url: this._baseUrl + url,
           data: data,
@@ -84,24 +84,24 @@ class request {
               if (res.data.code == 0) {
                 resolve(res.data);
               } else if (res.data.code == 1) {
-                setTimeout(()=>{
+                setTimeout(() => {
                   wx.showToast({
                     title: res.data.message,
-                    duration: 2000,
+                    duration: 4000,
                     icon: 'none'
                   })
-                },0)
+                }, 0)
                 reject(res);
               } else {
                 reject(res);
               }
             } else if (res.statusCode === 401) {
-              if (res.data && res.data.error_description 
-                  && res.data.error_description.indexOf("Access token expired")!=-1){
+              if (res.data && res.data.error_description &&
+                res.data.error_description.indexOf("Access token expired") != -1) {
                 this.authHandler.flushTokenInfo();
-              }else{
-              curPage.loginCom = curPage.selectComponent("#login");
-              curPage.loginCom.showPage();
+              } else {
+                curPage.loginCom = curPage.selectComponent("#login");
+                curPage.loginCom.showPage();
               }
               reject(res)
             } else {
@@ -119,7 +119,9 @@ class request {
             reject(res)
           }),
           complete: function() {
-            wx.hideLoading()
+            if (!hideLoading) {
+              wx.hideLoading()
+            }
             wx.hideNavigationBarLoading()
           }
         })
@@ -129,14 +131,15 @@ class request {
   /**
    * 上传图片
    */
-  chooseImageUpload(types) {
-    return this.chooseImage(types)
+  chooseImageUpload(types, ifUploadMore, index) {
+    return this.chooseImage(types, ifUploadMore, index)
   }
 
-  chooseImage(types) {
+  chooseImage(types, ifUploadMore, index) {
     wx.showNavigationBarLoading()
     wx.showLoading({
       title: "正在加载",
+      mask: true
     })
     return new Promise((resolve, reject) => {
       this.authHandler.getTokenOrRefresh().then(token => {
@@ -147,31 +150,50 @@ class request {
           delete header['Authorization'];
         }
         wx.chooseImage({
-          count: 6,
+          count: ifUploadMore ? 6 : 1,
           sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
           sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
           success: function(res) {
-            var imgSrc = res.tempFilePaths;
-            var tempFilePaths = res.tempFilePaths
-            wx.uploadFile({
-              url: uploadImg,
-              filePath: tempFilePaths[0],
-              name: 'file',
-              header: header,
-              formData: {
-                'type': types ? types:""
-              },
-              success: (res => {
-                if (res.statusCode === 200) {
-                  resolve(res.data)
-                } else {
-                  if (this._errorHandler != null) {
-                    this._errorHandler(res)
+            var tempFilePaths = res.tempFilePaths;
+            for (var v of tempFilePaths) {
+              wx.uploadFile({
+                url: uploadImg,
+                filePath: v,
+                name: 'file',
+                header: header,
+                formData: {
+                  'type': types ? types : ""
+                },
+                success: (res => {
+                  if (res.statusCode === 200) {
+                    let pages = getCurrentPages()
+                    let curPage = pages[pages.length - 1]
+                    // 多张
+                    if (ifUploadMore){
+                      var addGoodsDetails = curPage.data.addGoodsDetails
+                      if (index) {
+                        addGoodsDetails.splice(index, 0, { "img": imageUrl + JSON.parse(res.data).obj })
+                      } else {
+                        addGoodsDetails.push({
+                          "img": imageUrl + JSON.parse(res.data).obj
+                        })
+                      }
+                      curPage.setData({
+                        addGoodsDetails: addGoodsDetails
+                      })
+                    }else{
+                      resolve(res.data)
+                    }
+                  } else {
+                    if (this._errorHandler != null) {
+                      this._errorHandler(res)
+                    }
+                    reject(res)
                   }
-                  reject(res)
-                }
-              }),
-            })
+                }),
+
+              })
+            }
           },
           fail: (res => {
             if (this._errorHandler != null) {
@@ -187,27 +209,44 @@ class request {
       })
     })
   }
-  onlychoseImg() {
-    return new Promise((resolve, reject) => {
-      wx.chooseImage({
-        count: 6,
-        sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
-        sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-        success: function(res) {
-          resolve(res)
-        },
-        fail: (e => {
-          reject(e)
+  onlychoseImg(type) {
+    let pages = getCurrentPages(),
+      current = pages[pages.length - 1];
+      let oritype = ['album', 'camera']
+      if (type) {
+        oritype = type
+      }
+      return new Promise((resolve, reject) => {
+        if (current.data.choosingImg) {
+          reject("重复点击")
+          return
+        }else{
+          current.setData({ choosingImg: true })
+        }
+        wx.chooseImage({
+          count: 1,
+          sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
+          sourceType: oritype, // album 从相册选图，camera 使用相机，默认二者都有
+          success: function (res) {
+            resolve(res)
+          },
+          fail: (e => {
+            reject(e)
+          }),
+          complete: () => {
+            current.setData({ choosingImg: false })
+          }
         })
       })
-    })
+
   }
-  onlyUploadImg(url, types) {
-    if(!url){
+  
+  onlyUploadImg(url, types, noLoading) {
+    if (!url) {
       console.warn('no upload url')
       return
     }
-    
+
     return new Promise((resolve, reject) => {
       this.authHandler.getTokenOrRefresh().then(token => {
         var header = this.defaultUploadHeader
@@ -216,16 +255,18 @@ class request {
         } else {
           delete header['Authorization'];
         }
-        wx.showLoading({
-          title: '上传中',
-        })
+        if (!noLoading) {
+          wx.showLoading({
+            title: '上传中',
+          })
+        }
         wx.uploadFile({
           url: uploadImg,
           filePath: url,
           name: 'file',
           header: header,
           formData: {
-            'type': types ? types:""
+            'type': types ? types : ""
           },
           success: (res => {
             if (res.statusCode === 200) {
@@ -237,13 +278,52 @@ class request {
               reject(res)
             }
           }),
-          complete: (res=>{
-            wx.hideLoading();
+          complete: (res => {
+            if (!noLoading) {
+              wx.hideLoading();
+            }
           })
         })
       })
     })
 
+  }
+
+  // 多图上传
+  uploadImgArr(arr, type = '') {
+    if (!arr || arr.length == 0) { return }
+    this.getImgArr = [],
+      this.nowIndex = 0;
+    this.handleImgList(0, arr, type)
+    wx.showLoading({
+      title: '开始上传',
+      mask: true
+    })
+  }
+  handleImgList(index, arr, type) {
+    let pages = getCurrentPages(),
+      current = pages[pages.length - 1];
+    if (!arr[index]) {
+      wx.hideLoading()
+      return
+    }
+    this.onlyUploadImg(arr[index], type, true).then(res => {
+      this.getImgArr.push(res)
+      if (arr[++index]) {
+        wx.showLoading({
+          title: '正在上传:' + index + '/' + arr.length,
+          mask: true
+        })
+        this.nowIndex = index
+        this.handleImgList(index, arr, type)
+      } else {
+        current.mulImgUploadSuccess ? current.mulImgUploadSuccess(this.getImgArr) : ''
+        wx.hideLoading()
+      }
+    }).catch(e => {
+      current.mulImgUploadFail ? current.mulImgUploadFail(e) : ''
+      wx.hideLoading()
+    })
   }
 }
 export default request

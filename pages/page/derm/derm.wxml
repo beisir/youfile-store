@@ -1,6 +1,6 @@
 <view class="weui-cell">
   <view class="weui-cell__hd">
-    <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic+"?x-oss-process=style/goods-small":"/image/42.png"}}'></image>
+    <image hidden='{{!hasUser}}' mode='aspectFit' class='user-headPic' src='{{user.headPic?baseUrl+user.headPic+"?x-oss-process=style/goods-small":"/image/user.png"}}'></image>
   </view>
   <view class="weui-cell__name">
     {{user.nickName}}
@@ -9,7 +9,7 @@
   </view>
 </view>
 <view class='erm-cont' style='padding:0;'>
-  <view class='erm-img'><image style='height:540rpx;' wx:if="{{user}}" src="{{baseUrl+user.qrcode}}?x-oss-process=style/qrcode"></image></view>
+  <view class='erm-img'><image style='height:540rpx;' wx:if="{{user.qrcode}}" src="{{baseUrl+user.qrcode}}?x-oss-process=style/qrcode"></image></view>
   <view style='margin-top:0;'>扫一扫二维码图案，加我商友</view>
 </view>
 <view class='bottom-box' style='font-weight:100;'>

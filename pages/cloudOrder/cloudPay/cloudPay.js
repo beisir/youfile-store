@@ -31,7 +31,7 @@ Page({
         "channel": "wx_pay",
         "currency": "CNY",
         "code": code,
-        "goodsInfo": "小云店购买",
+        "goodsInfo": "购买",
         "orderNumber": this.data.num,
         "payWay": "wx_mini_app_pay",
         "tradeType": "JSAPI"
@@ -43,10 +43,7 @@ Page({
         if (res.data.code == 0) {
           this.payment(res.data.obj.payData);
         } else {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'none'
-          })
+          Api.showToast(res.data.message)
           setTimeout(() => {
             wx.navigateBack()
           }, 1000)

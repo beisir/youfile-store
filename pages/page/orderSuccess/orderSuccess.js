@@ -21,7 +21,7 @@ Page({
     })
   },
   toDetail(){
-    let type = this.data.user.orderCategory; //订单分类[1 进货单|2 小云店订单|3 普通订单]
+    let type = this.data.user.orderCategory; //订单分类[1 进货单|2 店订单|3 普通订单]
     let sendType = this.data.user.logisticsMode; //订单类型[0 其他|1 门店自提|2 物流配送]
     let url = "";
     if (type == 1 && sendType == 1){
@@ -52,10 +52,7 @@ Page({
       wx.setClipboardData({
         data: this.data.user.storeInfo.wechatNumber,
         success: () => {
-          wx.showToast({
-            title: '复制微信号成功',
-            icon: "none"
-          })
+          API.showToast('复制微信号成功')
         }
       })
     }

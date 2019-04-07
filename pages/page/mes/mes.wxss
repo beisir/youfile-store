@@ -22,6 +22,7 @@
 .new-left image.img{width:24rpx;height:29rpx;margin-left:10rpx}
 .weui-time{margin:20rpx;margin-top:-21rpx;color:#333;border-top:2rpx solid #F4F4F4;position:relative;font-size:28rpx;background:#fff;padding:25rpx 0 0 75rpx}
 .weui-time text{margin-left:40rpx;color:#666}
+.weui-time .wePublicAccount{margin-left:71rpx;color:#666}
 .weui-time>view,.weui-time>navigator{border-bottom:2rpx solid #F4F4F4;padding-bottom:27rpx;margin-top:27rpx;position:relative}
 .weui-time .mes-tel{position:absolute;right:25rpx;top:0rpx;padding-left:20rpx}
 .weui-time .mes-tel image{width:24rpx;height:29rpx}
@@ -35,7 +36,7 @@
 .weui_cells .weui-xian1{top:100rpx}
 .xyd{height:40rpx;width:40rpx;vertical-align:middle;margin-left:15rpx}
 .weui_cells .up-new-img image{height:100rpx;width:100rpx;margin:30rpx 10rpx}
-.weui_cells .up-new-img{text-align:left}
+.weui_cells .up-new-img{text-align:left;margin-left:42rpx}
 .new-weui .new-view{width:33.3%;display:inline-block;text-align:center;color:#999;font-size:26rpx;line-height:1;margin-bottom:65rpx}
 .new-weui .new-view view{color:#333;font-size:40rpx;margin-bottom:20rpx}
 .new-text{color:#CCAA77}

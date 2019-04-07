@@ -1,12 +1,14 @@
 import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     followNum: 0,
     payOrders: 0,
     todaySaleNum: 0,
@@ -63,6 +65,8 @@ Page({
         })
       }
     }
+    // 是否支持在线支付
+    this.getPayway()
   },
   goDerm: function() {
     wx.navigateTo({
@@ -99,6 +103,15 @@ Page({
         this.setData({
           initOrder: false
         })
+      }
+    })
+  },
+  getPayway() {
+    Api.storeOnlinePay().then(res => {
+      if (res.obj && res.obj.onlinePay) {
+        this.setData({onlinePay: true});
+      }else{
+        this.setData({ onlinePay: false });
       }
     })
   },

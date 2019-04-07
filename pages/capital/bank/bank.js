@@ -15,7 +15,12 @@ Page({
   onLoad: function (options) {
 
   },
-
+  //打电话
+  tel: function () {
+    wx.makePhoneCall({
+      phoneNumber: app.globalData.servesPhone
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

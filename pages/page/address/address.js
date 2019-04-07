@@ -15,7 +15,17 @@ Page({
     phone:"", //电话
     msg:"",  //留言
     sendData:{}, //获取列表传递参数
-    orderTitle:"订单"
+    orderTitle:"订单",
+    payType:[{
+      name: "其他支付方式",
+      check: true,
+      type: 'offline'
+    }],
+    checkedPaytype: {
+      name: "其他支付方式",
+      check: true,
+      type: 'offline'
+    }
   },
   //自动获取手机
   getMobile(){
@@ -25,10 +35,7 @@ Page({
           phone: res.obj.mobile
         })
       }else{
-        wx.showToast({
-          title: '获取手机号码失败，请您手动填写',
-          icon: 'none'
-        })
+        Api.showToast('获取手机号码失败，请您手动填写')
       }
     })
   },
@@ -40,22 +47,16 @@ Page({
       //自提
       let phone = this.data.phone;
       if (!phone || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
-        wx.showToast({
-          title: '请输入正确手机号码',
-          icon:'none'
-        })
+        Api.showToast('请输入正确手机号码')
         return false;
       }
-      obj.userPhone = phone;
+      obj.pickerPhone = phone;
       obj.logisticsMode = 1;
     }else if(type == 1){
       //物流
       let add = this.data.address;
       if(add=={}||!add){
-        wx.showToast({
-          title: '请选择收货人信息',
-          icon: 'none'
-        })
+        Api.showToast('请选择收货人信息')
         return false;
       }
       obj.consigneeInfo = add;
@@ -91,21 +92,28 @@ Page({
     obj.userMemo = this.data.msg  //留言
     obj.orderDetailReqVOList = goodsArr;  //商品
     obj.orderCategory = this.data.orderCategory //订单种类
-
-   
+    obj.payType = this.data.checkedPaytype.type //支付种类
+    // 防重
+    if (this.data.creatingOrder){return}
+    this.setData({creatingOrder: true})
     Api.supplyOrde(obj).then((res)=>{
       //'../success/success'
       setTimeout(()=>{
-        wx.showToast({
-          title: res.message,
-          icon: "none"
-        })
+        Api.showToast(res.message)
       },0)
       setTimeout(()=>{
-        wx.redirectTo({
-          url: '../orderSuccess/orderSuccess?num=' + res.obj.orderNumber
-        })
+        if (obj.payType == 'online'){
+          wx.redirectTo({
+            url: '../../casher/casher/casher?num=' + res.obj.orderNumber
+          })
+        }else{
+          wx.redirectTo({
+            url: '../orderSuccess/orderSuccess?num=' + res.obj.orderNumber
+          })
+        }
       },800)
+    }).catch(e=> {
+      this.setData({ creatingOrder: false })
     })
   },
 
@@ -269,6 +277,60 @@ Page({
       })
     })
   },
+  //支付方式
+  showPayway(){
+    this.selectComponent("#payway").open();
+  },
+  getPayway(){
+    Api.storeOnlinePay().then(res => {
+      let obj = {};
+      if (res.obj && res.obj.onlinePay) {
+        obj.onlinePay = true
+        let arr = this.data.payType;
+        arr.forEach(el=>{
+          el.check = false
+        })
+        let onlinepayObj = {
+          name: '在线支付',
+          type: "online",
+          check: true
+        };
+        arr.unshift(onlinepayObj)
+        this.setData({
+          payType: arr,
+          checkedPaytype: onlinepayObj
+        })
+
+        this.setData(obj);
+      }
+    }).catch(e => {
+
+    })
+  },
+  sureBottomLayer(){
+    let arr = this.data.payType;
+    let checkedItem = "";
+    arr.forEach(el => {
+      if(el.check == true){
+        checkedItem = el
+      }
+    })
+    this.setData({
+      checkedPaytype: checkedItem
+    })
+  },
+  chosePaytype(e){
+    let type = e.currentTarget.dataset.type;
+    let arr = this.data.payType;
+    arr.forEach(el => {
+      if (el.type == type){
+        el.check = true
+      }else{
+        el.check = false
+      }
+    })
+    this.setData({ payType:arr})
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -297,7 +359,10 @@ Page({
     }
 
     //let type = options.type;
-    let model = JSON.parse(options.model);
+    let model = "";
+    if (options.model){
+      model = JSON.parse(options.model);
+    }
     //model = { "goodsId": "180904092152685923df", "num": 1, "skuCode": "180904092152685923df_38a" }
     
     //读取数据
@@ -314,6 +379,8 @@ Page({
     this.getDefaultAdress();
 
     this.getStore();
+    //初始化支付方式
+    this.getPayway();
   },
   swichNav: function (e) {
     var that = this;

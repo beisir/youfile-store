@@ -1,0 +1,32 @@
+<view class='listData'>
+  <view>
+    <view class='doc-top'>
+      <image src='/image/cloudStoreIcon.png'></image>
+      <view>入帐金额</view>
+      <view>￥3980.00</view>
+    </view>
+     <view class='doc-details'>
+        <view>商品说明
+          <text>商品名称一</text>
+        </view>
+        <view>订单号
+          <text>478758768576857</text>
+        </view>
+        <view>交易单号
+          <text>54086985968598</text>
+        </view>
+        <view>支付时间
+          <text>2019-04-08 09:00:00</text>
+        </view>
+        <view>付款方手机号
+          <text>187****4675</text>
+        </view>
+        <view>支付方式
+          <text>微信支付</text>
+        </view>
+        <view>收款总金额
+          <text>￥3980.00</text>
+        </view>
+      </view>
+  </view>
+</view>

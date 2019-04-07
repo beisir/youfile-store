@@ -44,10 +44,31 @@ var my_slice = function(str,a){
   return str;  
 }
 
+var filterOrderNum = function (num) {
+  if (num) {
+    num = parseInt(num)
+    if (num >= 100){
+      return "99+"
+    }
+    return num
+  } else {
+    return 0
+  }
+}
+
+var hideTelephone = function (tel) {
+  if(tel) {
+    return tel.substring(0, 3) + "****" + tel.substring(7);
+  }
+  return tel
+} 
+
 module.exports = {
   filterMoney: filterMoney,
   plusNum: plusNum,
   filterTime: filterTime,
   filterNull: filterNull,
-  my_slice: my_slice
+  my_slice: my_slice,
+  filterOrderNum: filterOrderNum,
+  hideTelephone: hideTelephone
 }

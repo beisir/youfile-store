@@ -9,14 +9,33 @@ Page({
   data: {
     sexData: [{ sex: "男", val: '1' }, { sex: "女", val: '2' }, { sex: "保密", val: '0' }],
     sex: '男',
-    show: true
+    show: true,
+    region: ['', '', ''],
+    customItem: '全部'
   },
-
+  // 选择地区
+  bindRegionChange(e) {
+    this.setData({
+      region: e.detail.value
+    })
+    let obj = {
+      province: e.detail.value[0],
+      city: e.detail.value[1],
+      area: e.detail.value[2],
+    }
+    Api.updateUserInfo(obj).then(res=> {
+      Api.showToast('修改成功')
+    })
+  },
   getData() {
     app.http.getRequest("/api/user/byuserid").then(res => {
       if (res.success) {
         this.setData({
           user: res.obj
+        })
+        let addArr = [res.obj.province, res.obj.city, res.obj.area]
+        this.setData({
+          region: addArr
         })
       }
     })
@@ -41,6 +60,10 @@ Page({
       this.getData()
     }
   },
+  // 改地区
+  changeArea(){
+    
+  },
   //改微信
   changeWx() {
 
@@ -62,10 +85,7 @@ Page({
         Api.changeIcon({
           headPic: url
         }).then(res => {
-          wx.showToast({
-            title: res.message,
-            icon: 'none'
-          })
+          Api.showToast(res.message)
           this.setData({
             ['user.headPic']: url
           })

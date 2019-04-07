@@ -1,0 +1,8 @@
+<poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess" bind:fail="onPosterFail" style="z-index:100;"></poster>
+    <button bindtap='creatpink'>点击生成海报p</button>
+    <button bindtap='creatblue'>点击生成海报b</button>
+    <button bindtap='save'>保存</button>
+
+<image bindtap='showImg' style="width:750rpx;height:1600rpx;" src="{{url}}"></image>
+
+<canvas id='test' canvas-id='test' style='height:1600rpx;width:750rpx;'></canvas>

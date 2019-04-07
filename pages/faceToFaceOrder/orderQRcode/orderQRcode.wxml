@@ -1,0 +1,29 @@
+<wxs src="../../../public/filter.wxs" module="filter" />
+
+<canvas class='canvas' style="width:{{qrcodeWidth}}px; height:{{qrcodeWidth}}px;left:-9999rpx;position:fixed;" canvas-id='canvas' bindlongtap='save'></canvas>
+<view class='top-box'>
+  <view class='order-price-box'>
+    <text style='font-size:36rpx;'>订单金额</text>
+    <text style='font-size:80rpx;'>￥{{filter.filterMoney(order.orderAmount)}}</text>
+  </view>
+  <view style='overflow:hidden;position:relative;height:80rpx;'>
+  <view class='roundedge'></view>
+  </view>
+  <view class='QRcode-icon'>
+    <image src='{{url}}'></image>
+  </view>
+</view>
+<view class='code-tip'>
+  <text>顾客微信扫码凭证</text>
+  <text>二维码具有时效性，请尽快完成支付</text>
+</view>
+<view class='dashed-border padding-box'>
+  <view wx:for='[1,1,1,1,1,1,1,1,1,1]' wx:key='{{item}}'></view>
+</view>
+<view class='goods-title'>商品明细</view>
+<view class='new-goods-box'>
+  <view wx:for='{{order.orderDetailReqVOList}}' wx:for-item="tip" wx:key="{{index}}" class='goods-item'>
+    <text class='goods-item-goodsname'>{{tip.goodsName}}</text>
+    <text>x{{tip.num}}</text>
+  </view>
+</view>

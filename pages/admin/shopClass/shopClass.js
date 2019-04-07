@@ -38,9 +38,9 @@ Page({
       .then(res => {
         const obj = res.obj,
           categoryCustomCode = this.data.categoryCustomCode
-        if (Api.isNotEmpty(categoryCustomCode)){
-          for(var i=0;i<obj.length;i++){
-            if (obj[i].customCategoryCode!="0"){
+        if (Api.isNotEmpty(categoryCustomCode)) {
+          for (var i = 0; i < obj.length; i++) {
+            if (obj[i].customCategoryCode != "0") {
               if (categoryCustomCode.indexOf(obj[i].customCategoryCode) != -1) {
                 obj[i].selected = true
               }
@@ -59,7 +59,10 @@ Page({
     const index = e.currentTarget.dataset.index;
     let dataList = this.data.dataList;
     const selected = dataList[index].selected;
-    dataList[index].selected = !selected;
+    for (var v of dataList) {
+      v.selected=false
+    }
+    dataList[index].selected = true;
     this.setData({
       dataList: dataList
     });
@@ -72,10 +75,10 @@ Page({
     for(var i=0;i<dataList.length;i++){
       if (dataList[i].selected){
         codeList.push({ name: dataList[i].name, customCategoryCode:dataList[i].customCategoryCode})
-        strCode += dataList[i].customCategoryCode + ","
+        strCode+= dataList[i].customCategoryCode + ","
       }
     }
-    strCode = strCode.slice(0, -1)
+    strCode =strCode.slice(0, -1)
     if (this.data.shouTitile) {
         app.http.putRequest('/admin/shop/goods/customcategory/'+strCode+'/goods', this.data.codeArr)
           .then(res => {
@@ -113,7 +116,7 @@ Page({
     var _this=this,
         tempArr={},
         name=this.data.value
-    if (_this.data.watchInput) {
+    if(_this.data.watchInput){
       Api.addClass({name: name})
         .then(res => {
           wx.showToast({
@@ -129,7 +132,7 @@ Page({
             watchInput: false
           })
         })
-    }
+      }
   },
   // 监听input
   watchInput: function (event) {
@@ -139,19 +142,18 @@ Page({
       this.setData({
         watchInput: false
       })
-    } else {
+    }  else {
       if (num > 11) {
         wx.showToast({
           title: '超过最长数字限制',
           icon: 'none',
           duration: 2000,
         })
-      } else {
-        this.setData({
-          value: value.substring(0, 10),
-          watchInput: true,
-        })
       }
+      this.setData({
+        value: value.substring(0, 10),
+        watchInput: true,
+      })
     }
   },
   /**

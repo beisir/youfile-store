@@ -1,2 +1,2 @@
-@import '../status/status';.result{padding-left:0}
-.st-all{margin-top:0}
+@import '../status/status';
+.showHide {left: 0;background:#000;opacity: 0.02;z-index: 8888;top: 0}

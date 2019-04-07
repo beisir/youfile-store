@@ -1,11 +1,13 @@
 {
   "navigationBarTitleText": "小云店",
-  "enablePullDownRefresh": true,
   "usingComponents": {
     "mes": "../../../../assembly/tips/tips",
     "login": "../../login/login/login",
     "no": "../indexEmpty/indexEmpty",
     "retailStore": "../retailStore/retailStore",
-    "initstroe": "../../cloudOrder/applyStore/applyStore"
+    "initstroe": "../../cloudOrder/applyStore/applyStore",
+    "storeOrder":"../../faceToFaceOrder/remindLayer/remindLayer",
+    "returnBall": "../../../assembly/returnBall/returnBall",
+    "activityTag": "../../../assembly/activityTag/activityTag"
   }
 }

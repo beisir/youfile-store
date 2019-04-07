@@ -1,3 +1,10 @@
+<!-- 确定要删除吗 -->
+<spec show="{{deleteUser}}">
+  <view class='spec-title'>确定解除商友关系？</view>
+  <view class='is-font'><image src="/image/ca1.png"></image>解除商友关系后，您将失去该分销商，他将无法查看您的批发价，确定要解除么？</view>
+  <view class='spec-view' bindtap='cancel'>取消</view>
+  <view class="spec-view spec-view-ac spec-view-active" bindtap='conSpecName'>确定</view>
+</spec>
 <navigator class='bf-cont' url='../details/details?userId={{userId}}'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
@@ -30,4 +37,4 @@
    <text>生日</text><view wx:if='{{birthday!==""}}'>{{birthday}}</view>
   </view>
 </view>
-<!-- <view class='re-bottom'  hidden='{{showMes}}' bindtap='urlHome'>91笔进货单</view> -->
+<view class='re-bottom'   bindtap='deleteFriend'>解除商友关系</view>

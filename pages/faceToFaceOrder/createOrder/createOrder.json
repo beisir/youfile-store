@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "帮TA下单",
+  "navigationBarBackgroundColor": "#ccaa77",
+  "backgroundColor": "#ccaa77",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "layer":"../../../assembly/layer/layer"
+  }
+}

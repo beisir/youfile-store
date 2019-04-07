@@ -8,26 +8,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    reson: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
+    reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他原因", selected: false }],
     cancelIndex: 0,
     orderName: "订单",
-    timeOnce:true,
+    timeOnce: true,
     remark: ""
   },
 
-  toHome(){
+  toHome() {
     API.toHome();
   },
-  
+
   //复制订单号
-  copyCode(){
+  copyCode() {
     wx.setClipboardData({
       data: this.data.order.orderNumber,
-      success: ()=>{
-        wx.showToast({
-          title: '复制' + this.data.orderName+'号成功',
-          icon:"none"
-        })
+      success: () => {
+        API.showToast('复制' + this.data.orderName + '号成功')
       }
     })
   },
@@ -37,10 +34,7 @@ Page({
       wx.setClipboardData({
         data: this.data.order.expressNumber,
         success: () => {
-          wx.showToast({
-            title: '复制快递单号成功',
-            icon: "none"
-          })
+          API.showToast('复制快递单号成功')
         }
       })
     }
@@ -67,7 +61,7 @@ Page({
       case "goodCode": key = "getGoodCode"; break;
       case "exCom": key = "expressageCom"; break;
       case "exCode": key = "expressageCode"; break;
-      case "tip": key = "tipText";break;
+      case "tip": key = "tipText"; break;
     }
 
     let val = e.detail.value
@@ -87,8 +81,8 @@ Page({
     switch (type) {
       case "tip":
         obj = {
-          tipModal:true,
-          tipText:""
+          tipModal: true,
+          tipText: ""
         };
         break;
       case "change":
@@ -142,10 +136,7 @@ Page({
           urls: [this.data.baseUrl + res.obj.payVoucher]
         })
       } else {
-        wx.showToast({
-          title: '未上传付款凭证',
-          icon: 'none'
-        })
+        API.showToast('未上传付款凭证')
       }
     })
   },
@@ -155,10 +146,7 @@ Page({
     let num = this.data.num;
     let money = this.data.getGoodCode;
     if (!money || money < 0) {
-      wx.showToast({
-        title: '请输入验证码',
-        icon: 'none'
-      })
+      API.showToast('请输入验证码')
       return
     }
     API.testGoodCode({
@@ -166,10 +154,7 @@ Page({
       claimGoodsNum: money
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
 
@@ -178,20 +163,17 @@ Page({
     let num = this.data.num,
       index = this.data.cancelIndex;
     API.closeOrder({
-      reason: this.data.reson[index].title,
+      reason: this.data.reason[index].title,
       orderNumber: num
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
   //取消理由
   swichReason(e) {
     var current = e.currentTarget.dataset.current;
-    var array = this.data.reson
+    var array = this.data.reason
     array.forEach((item, index, arr) => {
       if (current == index) {
         item.selected = true;
@@ -200,11 +182,11 @@ Page({
       }
     })
     this.setData({
-      reson: array,
+      reason: array,
       cancelIndex: current
     })
   },
-  
+
 
   // 我要发货
   // 待填表
@@ -221,19 +203,13 @@ Page({
       obj.expressCompany = this.data.expressageCom;
       obj.expressNumber = this.data.expressageCode;
       if (!obj.expressNumber) {
-        wx.showToast({
-          title: "请填写运单号",
-          icon: 'none'
-        })
+        API.showToast("请填写运单号")
         return
       }
     }
     API.addExpress(obj).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
 
   },
@@ -242,21 +218,15 @@ Page({
     let num = this.data.num;
     let money = this.data.changeMoney;
     if (!money || money <= 0) {
-      wx.showToast({
-        title: '请输入金额',
-        icon: 'none'
-      })
+      API.showToast('请输入金额')
       return
     }
-    app.http.requestAll("/admin/order/" + num + "/updatetotal", {
+    API.updatetotal({
       orderNumber: num,
       orderAmount: money
-    }, "PUT").then((res) => {
+    }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
   //确认收款
@@ -265,31 +235,22 @@ Page({
     app.http.requestAll("/admin/order/orderpayment/" + num + "/confirm", {
       orderNumber: num
     }, "POST").then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
   // 保存备注
   saveRemark(e) {
     let val = this.data.tipText;
-    if(!val){
-      wx.showToast({
-        title: '请修改备注',
-        icon: 'none'
-      })
+    if (!val) {
+      API.showToast('请修改备注')
       return
     }
     API.addRemark({
       orderNumber: this.data.num,
       remark: val
     }).then(res => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
@@ -309,7 +270,7 @@ Page({
       delModal: false,  //删除
       cancelModal: false, //取消订单
       expressage: false, //发货
-      tipModal:false //备注
+      tipModal: false //备注
     })
   },
   /**
@@ -324,29 +285,31 @@ Page({
         orderName: '供货单'
       })
     }
+    if (options.num.substring(6, 8) == '04'){
+      wx.redirectTo({
+        url: '../../faceToFaceOrder/shopkeeperDetail/shopkeeperDetail?code=' + options.num,
+      })
+    }
     this.setData({
-      status: options.status,
+      // status: options.status,
       num: options.num,
       baseUrl: app.globalData.imageUrl,
-      orderType: options.type, //order订单 list进货单
-      self: options.self  //是否自提
+      // orderType: options.type, //order订单 list进货单
+      // self: options.self  //是否自提
     })
 
   },
   //打电话
   tel: function () {
-    if (this.data.order.userInfo.mobile){
+    if (this.data.order.userInfo.mobile) {
       wx.makePhoneCall({
         phoneNumber: this.data.order.userInfo.mobile,
       })
-    }else{
-      wx.showToast({
-        title: '买家未设置电话号码',
-        icon: "none"
-      })
+    } else {
+      API.showToast('买家未设置电话号码')
     }
   },
-  
+
 
   getData() {
     API.getOrderDetail({ orderNumber: this.data.num }).then((res) => {
@@ -354,7 +317,21 @@ Page({
         order: res.obj,
         status: res.obj.orderStatus  //状态
       })
-      if(this.data.orderType=='order'){
+
+      //自提  //订单类型[0 其他|1 门店自提|2 物流配送]
+      if (this.data.order.logisticsMode == '1') {
+        this.setData({ self: 'true' })
+      } else {
+        this.setData({ self: 'false' })
+      }
+      //订单种类 //订单分类[1 进货单|2 店订单|3 普通订单]
+      if (this.data.order.orderCategory == '1') {
+        this.setData({ orderType: 'list' })
+      } else {
+        this.setData({ orderType: 'order' })
+      }
+
+      if (this.data.orderType == 'order') {
         this.resetData([this.data.order]);
       }
       this.setData({
@@ -366,9 +343,9 @@ Page({
       })
       //倒计时
       let timm = this.data.timeOnce;
-      if (timm){
+      if (timm) {
         util.count_down(this, res.obj.timeoutExpressSecond ? res.obj.timeoutExpressSecond * 1000 : "")
-        this.setData({ timeOnce:false})        
+        this.setData({ timeOnce: false })
       }
     })
   },

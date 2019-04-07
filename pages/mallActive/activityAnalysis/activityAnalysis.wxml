@@ -1,0 +1,84 @@
+<view class='listData'>
+  <view>
+    <view class='ld-t'>第一届中国（郑州）百荣云·订货商博会</view>
+    <view class='aa-doing'>
+      <button>活动进行中</button>
+    </view>
+  </view>
+</view>
+<view class='listData'>
+  <view>
+    <view class='ld-t'>累计收入</view>
+    <view class='aa-money'>
+      <view>¥
+        <text> 51,988.00</text>
+      </view>
+      <text>总金额</text>
+    </view>
+    <view class='aa-chart'>
+      <double-column-chart id="double-column-chart" canvasData="{{doubleColumnCanvasData}}" />
+    </view>
+  </view>
+</view>
+<view class='listData'>
+  <view>
+    <view class='aa-top'>进货商TOP10排行榜</view>
+    <view class='aa-info'>
+      1
+      <image src='/image/user.png'></image>
+      <view class='aa-name'>诺曼先生（微信昵称）</view>
+      <view>
+        <text>￥1980.00</text>
+      </view>
+    </view>
+    <view class='aa-info'>
+      1
+      <image src='/image/user.png'></image>
+      <view class='aa-name'>诺曼先生（微信昵称）</view>
+      <view>
+        <text>￥1980.00</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='listData'>
+  <view>
+    <view class='aa-top'>商品销量榜</view>
+    <view class='aa-info'>
+      1
+      <view class='aa-dot aa-fot-o'></view>
+      <view class='aa-name'>商品名称一商品名称一商品名称一商品名称一</view>
+      <view>
+        <text class='aa-sale'>已售500件</text>
+        <text>￥1980.00</text>
+      </view>
+    </view>
+    <view class='aa-info'>
+      1
+      <view class='aa-dot aa-fot-t'></view>
+      <view class='aa-name'>商品名称一商品名称一商品名称一商品名称一</view>
+      <view>
+        <text class='aa-sale'>已售500件</text>
+        <text>￥1980.00</text>
+      </view>
+    </view>
+    <view class='aa-info'>
+      1
+      <view class='aa-dot aa-fot-th'></view>
+      <view class='aa-name'>商品名称一商品名称一商品名称一商品名称一</view>
+      <view>
+        <text class='aa-sale'>已售500件</text>
+        <text>￥1980.00</text>
+      </view>
+    </view>
+    <view class='aa-info'>
+      1
+      <view class='aa-dot'></view>
+      <view class='aa-name'>商品名称一商品名称一商品名称一商品名称一</view>
+      <view>
+        <text class='aa-sale'>已售500件</text>
+        <text>￥1980.00</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发布商品",
+  "usingComponents": {
+    "mes": "../../../../assembly/tips/tips"
+  }
+}

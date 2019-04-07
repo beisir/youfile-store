@@ -8,7 +8,7 @@ Page({
     baseUrl: app.globalData.imageUrl,
     result: [],
     value: '',
-    limitShow: wx.getStorageSync('admin'),
+    limitShow: '',
     showResult: false,
     closeCont: false,
   },
@@ -130,6 +130,11 @@ Page({
       }
     });
   },
+  onShow(){
+    this.setData({
+      limitShow:wx.getStorageSync('admin')
+    })
+  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -189,11 +194,7 @@ Page({
         _this.setData({
           result: result,
         })
-        wx.showToast({
-          title: '上架成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast('上架成功')
       })
 
   },
@@ -215,11 +216,7 @@ Page({
     that.data.detailList.splice(indexDel, 1)
     Api.adminGoodsDelete({ goodId: goodsIdDel })
       .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast('删除成功')
         that.setData({
           detailList: that.data.detailList
         })
@@ -239,11 +236,7 @@ Page({
         _this.setData({
           result: result,
         })
-        wx.showToast({
-          title: '下架成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast('下架成功')
       })
   },
   /**

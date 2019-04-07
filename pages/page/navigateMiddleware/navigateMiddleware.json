@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "login": "../../login/login/login",
+    "no": "../indexEmpty/indexEmpty",
+    "retailStore": "../retailStore/retailStore"
+  }
+}

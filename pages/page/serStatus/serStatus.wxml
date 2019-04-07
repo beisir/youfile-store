@@ -1,49 +1,71 @@
 <view class="main">
-    <view class="search-box">
-        <input class="search-input" value="{{value}}" bindconfirm='searchBtn' auto-focus='ture' placeholder-class='pre-input' placeholder='请输入商品关键词'   bindinput="searchInput" />
-        <image class="home-ser-new"  src="/image/search.png"></image>
-        <view class='serCont' bindtap="searchBtn" wx:if="{{!closeCont}}">搜索</view>
-        <image class="home-ser-new ser-font" bindtap='emptyInput' wx:if="{{closeCont}}" src="/image/ser.png"></image>
+  <view class="search-box">
+    <input class="search-input" value="{{value}}" bindconfirm='searchBtn' auto-focus='ture' placeholder-class='pre-input' placeholder='请输入商品关键词' bindinput="searchInput" />
+    <image class="home-ser-new" src="/image/searchW.png"></image>
+    <view class='serCont' bindtap="searchBtn" wx:if="{{!closeCont}}">搜索</view>
+    <image class="home-ser-new ser-font" bindtap='emptyInput' wx:if="{{closeCont}}" src="/image/ser.png"></image>
+  </view>
+  <view class='dc-list' wx:if="{{showResult}}">
+    <view wx:for="{{result}}" wx:key="index" class='{{item.isHide?"opa-view":""}}'>
+      <view>
+        <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" />
+        <image class='g-img' src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small" />
+      </view>
+      <view class='dc-cont'>
+        <view class='s-name'>{{item.name}}</view>
+        <block wx:if="{{item.extInfo}}">
+          <view class='dc-price'>
+            <view class='shan'>
+              <image mode="widthFix" src="/image/shan.png" />抢订价</view>
+            ￥
+            <text>{{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
+            <view class='goods-zize'>￥{{item.wholesalePrice}}</view>
+          </view>
+          <view class='dc-xian'>
+            <view>
+              <view></view>
+            </view>
+            <text>已抢50%</text>
+          </view>
+        </block>
+        <block  wx:if="{{!item.extInfo}}">
+          <view class='no-act-pri'>
+            <view>零售  <text>¥ {{item.sellPrice}}</text></view>
+            <view>批发  <text class='ss-active'>¥ {{item.wholesalePrice}}</text></view>
+          </view>
+        </block>
+      </view>
+      <view class='isHideacti' wx:if="{{item.isHide}}">
+        <block>
+          <image src="/image/isshow.png"></image>
+          <view>该商品</view>
+          <view>加商友可见</view>
+        </block>
+        <!-- <block>
+          <view class='no-a-goods'>已抢光</view>
+        </block> -->
+      </view>
     </view>
-    <view class="result" wx:if="{{showResult}}">
-        <view class="result-box" wx:if="{{result.length > 0}}">
-          <scroll-view  scroll-y="true" style="height:100%">
-            <view class="result-list" wx:for="{{result}}" wx:key="index">
-                <navigator url="../../page/goodsDetails/goodsDetails?goodsId={{item.id}}">
-                    <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
-                    <view class="result-text r-h">
-                        <text>{{item.name}}</text>
-                    </view>
-                    <view class="result-text result-text2">
-                        <text>零售 <text>￥{{item.sellPrice}}</text></text>
-                    </view>
-                   <view style='padding-left:20rpx;color:#666'>
-                      批发 <text wx:if='{{limitShow!=1}}'  style='color:#CCAA77'>￥{{item.wholesalePrice}}</text>
-                       <image style='width:30rpx;height:30rpx;vertical-align:middle;margin-top:-2rpx' wx:if='{{limitShow==1}}' src='/image/wh.png'></image>
-                  </view>
-                </navigator>
-            </view>
-            <view class='nomore'>没有更多了</view>
-            </scroll-view>
+  </view>
+  <view class="init-page" wx:else>
+    <view wx:if="{{history.length > 0}}">
+      <image bindtap="removeAll" src="/image/rev.png"></image>
+      <view class="title">
+        <text>历史搜索</text>
+      </view>
+      <view class="tags">
+        <view wx:for="{{history}}" wx:key="index">
+          <text bindtap="keywordHandle" data-name="{{item}}" data-id='{{index}}'>{{item}}</text>
         </view>
-        <view class="result-null" wx:if="{{result.length==0}}">
-           <view class="nomore">
-              <view>
-                <image src="/image/nohome.png"></image>
-              </view>
-              暂时还没有上架商品
-            </view>
-        </view>
+      </view>
     </view>
-    <view class="init-page" wx:else>
-        <view wx:if="{{history.length > 0}}">
-          <image  bindtap="removeAll"  src="/image/rev.png"></image>
-            <view class="title">
-                <text>历史搜索</text>
-            </view>
-            <view class="tags">
-                <view wx:for="{{history}}" wx:key="index" ><text  bindtap="keywordHandle" data-name="{{item}}"  data-id='{{index}}'>{{item}}</text></view>
-            </view>
+  </view>
+   <view class="result-null" wx:if="{{showResult && result.length==0}}">
+      <view class="nomore">
+        <view>
+          <image src="/image/nohome.png"></image>
         </view>
+        暂时还没有上架商品
+      </view>
     </view>
 </view>

@@ -1,6 +1,47 @@
+<!--今日收款-->
+<mes show="{{tradeAmount}}" >
+  <view>
+    <view class='v-font'>今日的收入金额</view>
+    <view class='v-font'>已减去手续费的动态实时数据</view>
+    <button class='v-but' bindtap='closeBtn'>知道了</button>
+  </view>
+</mes>
+<!--收款总金额-->
+<mes show="{{tradeCounts}}" >
+  <view>
+    <view class='v-font'>累计的总收入金额</view>
+    <view class='v-font'>已减去手续费的动态实时数据</view>
+    <button class='v-but' bindtap='closeBtn'>知道了</button>
+  </view>
+</mes>
+<!--已结算金额-->
+<mes show="{{threeMountSettles}}" >
+  <view>
+    <view class='v-font'>打款记录</view>
+    <view class='v-font'>打入您绑定银行账户的金额总和</view>
+    <button class='v-but' bindtap='closeBtn'>知道了</button>
+  </view>
+</mes>
+<!--昨日收款-->
+<mes show="{{yesterdayMerchantTrades}}" >
+  <view>
+    <view class='v-font'>昨日的收入金额</view>
+    <view class='v-font'>已减去手续费的动态实时数据</view>
+    <button class='v-but' bindtap='closeBtn'>知道了</button>
+  </view>
+</mes>
+<!--待结算金额-->
+<mes show="{{waitingSettleAmounts}}" >
+  <view>
+    <view class='v-font'>交易未完成、订单货款暂未结算的</view>
+    <view class='v-font'>资金之和、该数据为实时统计结果</view>
+    <button class='v-but' bindtap='closeBtn'>知道了</button>
+  </view>
+</mes>
+
 <view class='wk-cont'>
   <view class='wk-title'>
-    <text>今日收款 (元）</text><image src="/image/ca2.png"></image>
+    <text bindtap='tradeAmount'>今日收款 (元）</text><image bindtap='tradeAmount' src="/image/ca2.png"></image>
     <view>
       {{todayMerchantTrade.tradeAmount}}
       <view class='ca-right' bindtap='goRecord'>
@@ -10,17 +51,17 @@
     </view>
   </view>
   <view class='ca-num'>
-    <view>{{todayMerchantTrade.tradeCount}}<view>今日收款笔数</view></view>
+    <view>{{todayMerchantTrade.tradeCount}}<view>今收款笔数</view></view>
     <view>{{yesterdayMerchantTrade.tradeCount}}<view>昨收款笔数</view></view>
     <view>{{threeMonthMerchantTrade.tradeCount}}<view>总收款笔数 </view></view>
   </view>
 </view>
  <view class='wk-bot'>
-    <navigator url=''><view>收款总金额 (元)<image src="/image/ca1.png"></image></view>{{threeMonthMerchantTrade.tradeAmount}}</navigator>
-    <navigator url=''><view>已结算金额 (元)<image src="/image/ca1.png"></image></view>{{threeMountSettle.tradeAmount}}<view class='wk-xian'></view></navigator>
+    <view bindtap='tradeCounts' class='v-block'><view>收款总金额 (元)<image src="/image/ca1.png"></image></view>{{threeMonthMerchantTrade.tradeAmount}}</view>
+    <view bindtap='threeMountSettles' class='v-block'><view>已结算金额 (元)<image src="/image/ca1.png"></image></view>{{threeMountSettle.tradeAmount}}<view class='wk-xian'></view></view>
     <view class='wk-bot-xian'></view>
-    <navigator url=''><view>昨日收款 (元)<image src="/image/ca1.png"></image></view>{{yesterdayMerchantTrade.tradeAmount}}</navigator>
-    <navigator url=''><view>待结算金额 (元)<image src="/image/ca1.png"></image></view>{{waitingSettleAmount}}<view class='wk-xian'></view></navigator>
+    <view bindtap='yesterdayMerchantTrades' class='v-block'><view>昨日收款 (元)<image src="/image/ca1.png"></image></view>{{yesterdayMerchantTrade.tradeAmount}}</view>
+    <view bindtap='waitingSettleAmounts' class='v-block'><view>待结算金额 (元)<image src="/image/ca1.png"></image></view>{{waitingSettleAmount}}<view class='wk-xian'></view></view>
   </view>
   <view class='page_bd page_hd1'>
     <view class='weui-back'>

@@ -1,8 +1,9 @@
 import http from './utils/http.js'
 import pageRequest from './utils/pageRequest.js'
 import AuthHandler from './utils/authHandler.js'
-import { imageUrl, payUrl} from './utils/const.js'
+import { imageUrl, payUrl, projectName, payAppNum, projectType, servesPhone, navigateToAppID} from './utils/const.js'
 import touch from './utils/touch.js'
+import Navigate from "./utils/navigate.js"
 App({
   // 监听错误
   onError: function (err) {
@@ -13,12 +14,15 @@ App({
     })
   },
   onLaunch: function (options) {
+    //跳转进入的入口
+    this.navigate.parseExtraDataOnlunch(options)
     if (options.query && options.query.storeId){
       wx.setStorageSync("storeId",options.query.storeId)
     }
-    // wx.setStorageSync("storeId", "S1000604")
-    // wx.setStorageSync("storeId", "S1000349")
+    // wx.setStorageSync("storeId", "S1000631")
+    wx.setStorageSync("storeId", "S1000349")
     // wx.setStorageSync("storeId", "S001")
+    // wx.setStorageSync("storeId", "S1000323")
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
@@ -53,6 +57,25 @@ App({
         content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
       })
     }
+    // 获取屏幕大小
+    var _that = this;
+    wx: wx.getSystemInfo({
+      success: function (res) {
+        _that.systemInfo = res;
+      }
+    });
+  },
+
+  /**
+   * 系统信息
+   */
+  systemInfo: null,//系统信息
+  onShow(options){
+    if (!this.globalData.notOnshow){
+      //跳转进入的入口
+      this.navigate.parseExtraDataOnShow(options)
+    }
+    
   },
   globalData: {
     userInfo: null,
@@ -60,16 +83,25 @@ App({
     imageUrl: imageUrl,
     switchStore: false,
     isFollow: null,
-    projectType:"xpl",
+    projectType,
     userShowTip:false,
     payUrl: payUrl,    
-    payAppNum: "APP001",
-    storeIdRetail:false
+    payAppNum,
+    storeIdRetail:false,
+    projectName,
+    servesPhone,
+    navigateToAppID,
+    returnBall: {
+      x: 10000,
+      y: 50,
+      show: true
+    },
   },
   http: new http(),
   pageRequest: new pageRequest(),
   authHandler: new AuthHandler(),
-  touch: new touch()
+  touch: new touch(),
+  navigate: new Navigate()
 });
 
 

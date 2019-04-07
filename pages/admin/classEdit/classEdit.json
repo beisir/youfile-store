@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "管理分类",
   "usingComponents": {
-    "spec": "../../../../assembly/specifications/spec"
+    "spec": "../../../../assembly/specifications/spec",
+    "mes": "../../../../assembly/tips/tips"
   }
 }

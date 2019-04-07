@@ -5,7 +5,7 @@
   bind:sureSelectArea="sureSelectAreaListener"
 >
   <view class='spec-title'>新建分类</view>
-  <input placeholder-class='spec-class'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入文字，最多10个字' />
+  <input placeholder-class='spec-class' maxlength='10'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入文字，最多10个字' />
   <view class='spec-view' bindtap='cancel'>取消</view><view  class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm'>确定</view>
 </spec>
 <view class='page'>
@@ -15,7 +15,7 @@
         <image bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' class='weui-img' src="/image/icl.png"></image>
     </view>
   </view>
-  <view class='shop-cont'>
+  <view class='shop-cont' wx:if='{{list.length>1}}'>
     <view  wx:for='{{list}}' wx:key='{{index}}' wx:if="{{item.customCategoryCode!=0}}" bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}' >
       {{item.name}}<view bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'>{{item.count}}件</view>
         <image class='weui-img' src="/image/icl.png" bindtap='classList'  data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'></image>

@@ -92,6 +92,21 @@
   color: #333;
   font-size: 30rpx;
   display:inline-block;
+  position: relative;
+}
+/* 订单数字 */
+.unpaid-order-num-ball{
+  position: absolute;
+  min-width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  background: #eb3941;
+  border-radius: 50%;
+  right:34%;
+  top:14rpx;
+  color: white;
+  font-size: 18rpx;
+  text-align: center;
 }
 .weui-back{
   background: #fff;
@@ -114,3 +129,28 @@
   height: 50rpx;
   width: 50rpx;
 } 
+
+.service-btn{
+  position: fixed;
+  bottom:14rpx;
+  right: 30rpx;
+  border-radius: 50%;
+  height: 100rpx;
+  width: 100rpx;
+  background: #fff;
+  border: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+  line-height: normal;
+  font-size: 18rpx;
+  padding: 0;
+  margin: 0;
+}
+.service-btn image{
+  height: 43rpx;
+  width: 43rpx;
+  margin-bottom: 3rpx;
+}

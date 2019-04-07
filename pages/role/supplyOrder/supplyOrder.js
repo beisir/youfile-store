@@ -28,7 +28,7 @@ Page({
       title: "已完成",
       state: "finish"
     }],
-    reson: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
+    reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他原因", selected: false }],
     navindex: 0,
     cancelIndex: 0,
     inputActive: 'inputActive ',
@@ -132,10 +132,7 @@ Page({
           urls: [this.data.baseUrl + res.obj.payVoucher]
         })
       } else {
-        wx.showToast({
-          title: '未上传付款凭证',
-          icon: 'none'
-        })
+        API.showToast('未上传付款凭证')
       }
     })
   },
@@ -145,10 +142,7 @@ Page({
     let num = this.data.testNum;
     let money = this.data.getGoodCode;
     if (!money || money < 0) {
-      wx.showToast({
-        title: '请输入验证码',
-        icon: 'none'
-      })
+      API.showToast('请输入验证码')
       return
     }
     API.testGoodCode({
@@ -156,10 +150,7 @@ Page({
       claimGoodsNum: money
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
 
@@ -168,20 +159,17 @@ Page({
     let num = this.data.closeNum,
       index = this.data.cancelIndex;
     API.closeOrder({
-      reason: this.data.reson[index].title,
+      reason: this.data.reason[index].title,
       orderNumber: num
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
   //取消理由
   swichReason(e) {
     var current = e.currentTarget.dataset.current;
-    var array = this.data.reson
+    var array = this.data.reason
     array.forEach((item, index, arr) => {
       if (current == index) {
         item.selected = true;
@@ -190,7 +178,7 @@ Page({
       }
     })
     this.setData({
-      reson: array,
+      reason: array,
       cancelIndex: current
     })
   },
@@ -210,19 +198,13 @@ Page({
       obj.expressCompany = this.data.expressageCom;
       obj.expressNumber = this.data.expressageCode;
       if (!obj.expressNumber) {
-        wx.showToast({
-          title: "请填写运单号",
-          icon: 'none'
-        })
+        API.showToast("请填写运单号")
         return
       }
     }
     API.addExpress(obj).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
 
   },
@@ -231,21 +213,15 @@ Page({
     let num = this.data.changeNum;
     let money = this.data.changeMoney;
     if (!money || money <= 0) {
-      wx.showToast({
-        title: '请输入金额',
-        icon: 'none'
-      })
+      API.showToast('请输入金额')
       return
     }
-    app.http.requestAll("/admin/order/" + num + "/updatetotal", {
+    API.updatetotal({
       orderNumber: num,
       orderAmount: money
-    }, "PUT").then((res) => {
+    }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
     })
   },
   //确认收款
@@ -254,10 +230,7 @@ Page({
     app.http.requestAll("/admin/order/orderpayment/" + num + "/confirm", {
       orderNumber: num
     }, "POST").then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
@@ -268,10 +241,7 @@ Page({
       orderNumber: this.data.num,
       remark: val
     }).then(res => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+      API.showToast(res.message)
       if (res.success) {
 
       }

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "活动分析",
+  "usingComponents": {
+    "double-column-chart": "../../../assembly/double-column-chart/double-column-chart"
+  }
+}

@@ -10,7 +10,16 @@ const formatTime = date => {
   const second = date.getSeconds()
   return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
-
+/* 时间格式化 只有年月日 */
+const formatTimeday = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  return [year, month, day].map(formatNumber).join('-')
+}
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -72,16 +81,10 @@ const saveImgToPhone = imgUrl => {
           wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success(res) {
-              wx.showToast({
-                title: '保存图片成功！',
-                icon: 'none'
-              })
+              Api.showToast('保存图片成功！')
             },
             fail(res) {
-              wx.showToast({
-                title: '保存图片失败！',
-                icon: 'none'
-              })
+              Api.showToast('保存图片失败！')
             }
           })
         }
@@ -169,6 +172,18 @@ function ramNum1() {
 function ramData(){
   return Date.parse(new Date()) + parseInt(89999 * Math.random() + 10000 + 1)
 }
+
+function testTel(tel) {
+  if(tel){
+    let phone = tel.trim();
+    if (!phone || phone.trim().length != 11 || !/^1[3|4|5|6|7|8|9]\d{9}$/.test(phone)) {
+      return false;
+    }
+    return true;
+  }else{
+    return false
+  }
+}
 module.exports = {
   formatTime: formatTime,
   count_down:count_down,
@@ -178,5 +193,7 @@ module.exports = {
   ramNum: ramNum,
   ramData: ramData,
   ramNum1: ramNum1,
+  testTel: testTel,
+  formatTimeday: formatTimeday
 }
 

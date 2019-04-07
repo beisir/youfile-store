@@ -7,6 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     showHide: true,
     countData: '',
     storeId:'',
@@ -110,10 +111,7 @@ Page({
       _this.onShow()
     })
     .catch(e => {
-      wx.showToast({
-        title: e.message,
-        icon: 'none'
-      })
+      Api.showToast(e.message)
     })
     this.closeModal();
   },

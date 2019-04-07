@@ -1,0 +1,122 @@
+<scroll-view scroll-y='true' class='all-box'>
+  <view class='add-cont add-cont1-n'>
+    <view>
+      <view class='g-cont'>
+        <view class='g-image'>
+          <image wx:if="{{goods.mainImgUrl}}" src='{{baseUrl+goods.mainImgUrl}}'></image>
+        </view>
+        <view>
+          <view class='g-title'>{{goods.name}}</view>
+          <view class='gprice'>批发:
+            <text>￥{{goods.wholesalePrice}}</text> </view>
+          <view class='gprice'>零售:
+            <text>￥{{goods.sellPrice}}</text> </view>
+          <view>库存: {{goods.stockNum}}</view>
+        </view>
+      </view>
+    </view>
+    <view class='goods-spec'>
+      <view class='spec-t' wx:if="{{!noSku}}"><block>商品规格（{{checkedNum}}/{{goods.goodsSkuVOList.length}}）</block>
+        <button bindtap='discountGoods' class='spec-one'>一键折扣</button>
+        <button bindtap='choiceSpec'>选择规格</button>
+      </view>
+      <view wx:else class='spec-t'>商品规格</view>
+      <!-- sku -->
+      <block wx:if="{{!noSku}}">
+        <view wx:for='{{skuList}}' wx:key='{{index}}' wx:if="{{item.checked}}">
+          <view class='spec-cont'>
+            <view>商品规格{{index+1}}：
+              <text>{{item.skuName}}</text>
+            </view>
+          </view>
+          <view class='set-price'>
+            <view>
+              <view>
+                <input placeholder='添加活动价格' value='{{item.surePrice}}' type='digit' bindinput='watchInput' data-type='price' data-index="{{index}}"></input>
+                <view>批发价:¥{{item.wholesalePrice}}</view>
+              </view>
+            </view>
+            <view>
+              <view>
+                <input placeholder='添加活动库存' value='{{item.sureNum}}' type='number' bindinput='watchInput' data-type='stockNum' data-index="{{index}}"></input>
+                <view>库存:{{item.stockNum}}</view>
+              </view>
+            </view>
+            <view>
+              <view>
+                <input placeholder='添加活动起购量' value='{{item.buyNum}}' type='number' bindinput='watchInput' data-type='buyNum' data-index="{{index}}"></input>
+                <view>起购量</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <view wx:else>
+        <view class='spec-cont'>
+          <view>商品规格：
+            <text>无规格</text>（无SKU时，不能选择规格）
+          </view>
+        </view>
+        <view class='set-price'>
+          <view>
+            <view>
+              <input placeholder='添加活动价格' value='{{noSkuPrich}}' type='digit' bindinput='watchInput' data-type='noSku-price'></input>
+              <view>批发价:¥{{goods.wholesalePrice}}</view>
+            </view>
+          </view>
+          <view>
+            <view>
+              <input placeholder='添加活动库存' value='{{noSkuNum}}' type='number' bindinput='watchInput' data-type='noSku-num'></input>
+              <view>库存:{{goods.stockNum}}</view>
+            </view>
+          </view>
+          <view>
+            <view>
+              <input placeholder='添加活动起购量' value='{{noSkuBuynum}}' type='number' bindinput='watchInput' data-type='noSku-buynum'></input>
+              <view>起购量</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class='add-more' bindtap='editGoods' style='position:initial;'>确 定</view>
+
+<view hidden='{{showFrame}}' class='frame' catchtouchmove='stopScroll'>
+  <view>
+    <image bindtap='closeFrame' src='/image/close.png'></image>
+    <view class='fra-t bold-font'>一键折扣</view>
+    <view class='fra-discout' style='padding:0 40rpx;'>
+      <view wx:for='{{discount}}' wx:key='{{index}}' data-index='{{index}}' bindtap='chooseOff'>
+        <button class='{{item.checked?"ac-btn":""}}'>{{item.name}}</button>
+      </view>
+    </view>
+    <view class='padding-box'>
+
+      <view class='fra-tip'>一键折扣的设置，会为您自动计算商品批发价的折扣后价格， 即活动价</view>
+      <view class='fra-self'>
+        <view class='bold-font'>自定义折扣</view>
+        <view>
+          <input placeholder=' 请输入折扣' type='digit' bindinput='watchInput' data-type='ownCut' value='{{ownCut}}' maxlength='3'></input>折</view>
+      </view>
+    </view>
+    <view class='fra-goods padding-box bold-font'>折扣商品（共<text>{{checkedNum}}</text>件商品）</view>
+    <view class='add-cont'>
+      <view wx:for='{{skuList}}' wx:if='{{item.checked}}' wx:key="{{index}}">
+        <view class='g-cont'>
+          <view class='g-image'>
+            <image src='{{baseUrl+goods.mainImgUrl}}'></image>
+          </view>
+          <view>
+            <view>{{item.skuName}}</view>
+            <view>商品规格（{{index+1}}）</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='add-more' bindtap='sureDiscount'>确 定</view>
+  </view>
+
+</view>

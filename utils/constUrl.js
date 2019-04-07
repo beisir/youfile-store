@@ -62,7 +62,7 @@ export const uploadLogoImgUrl='/admin/store/{{storeId}}/logo'
 export const topGoodsUrl='/admin/shop/goods/top/{{goodsId}}'
 export const storeIndexUrl='/admin/store/{{storeId}}/index'
 export const setUserNameUrl='/admin/shop/storecustomer/remark/{{storeId}}/{{userId}}/{{remark}}'
-export const getUserDetaislUrl='/api/user/bymobile/{{mobile}}'
+export const getUserDetailUrl='/api/user/bymobile/{{mobile}}'
 export const userIdentityUrl='/api/store/{{storeId}}/user/identity'
 export const miniProgramCodeUrl='/api/store/{{storeId}}'
 export const recentGoodsUrl='/api/shop/store/{{storeId}}/user/goods/recent'
@@ -111,8 +111,10 @@ export const closedOrderUrl = "/admin/order/{{orderNumber}}/closed"
 export const cancelOrderUrl = "/api/order/{{orderNumber}}/cancel"
 export const addDxpressUrl = "/admin/order/{{orderNumber}}/addexpress"
 export const addRemarkUrl = "/admin/order/{{orderNumber}}/addRemark"
+export const updatetotalUrl = "/admin/order/{{orderNumber}}/updatetotal"
 export const seeVoucherUrl = "/api/order/orderpayment/{{orderNumber}}"
 export const supplyOrderUrl = "/api/order/"
+export const receiveOrderUrl = "/api/order/{{orderNumber}}/receive"
 // 扫一扫
 export const showPurchaserUrl='/admin/bizscan/purchaser/{{userId}}'
 export const showMerchantUrl='/admin/bizscan/merchant/{{userId}}'
@@ -125,9 +127,109 @@ export const copyGoodsUrl='/api/shop/goods/copy/{{originGoodsId}}'
 export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 //订单详情
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
+// 是否为进货商
+export const ifWholesalerUrl = "/admin/user/profile/{{userId}}"
+// 商家门店订单
+export const shopkeeperOrderListUrl = "/admin/ftf/order/store/{{storeId}}/orderstatus/{{orderStatus}}"
+export const customerOrderListUrl ="/api/ftf/order/user/store/{{storeId}}/orderstatus/{{orderStatus}}"
+// 帮他下单
+export const helpOrderUrl = "/admin/ftf/order"
+//门店订单详情
+export const ftfAdminOrderDetailUrl = "/admin/ftf/order/byordernumber/{{orderNumber}}"
+export const ftfCustomerOrderDetailUrl = "/api/ftf/order/byordernumber/{{orderNumber}}"
+//门店关闭订单
+export const ftfCloseOrderUrl = "/admin/ftf/order/{{orderNumber}}/closed"
+export const ftfCaneledOrderUrl = "/api/ftf/order/{{orderNumber}}/cancel"
+// 删除订单
+export const ftfDelOrderUrl = "/api/ftf/order/{{orderNumber}}"
+// 线下商品
+export const ftfGoodsListUrl = "/admin/shop/offlinegoods/{{storeId}}/list" 
+export const ftfCreatGoodsUrl = "/admin/shop/offlinegoods"
+export const ftfDelGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}"
+export const ftfEditGoodsUrl = "/admin/shop/offlinegoods/{{goodsId}}/byid"
+export const ftfGoodsIfExistUrl = "/admin/shop/offlinegoods/{{storeId}}/exist" 
+//最近关注
+export const recentlyFocusUserUrl = "/admin/store/{{storeId}}/favoriteusers/recently"
+//用户肖像
+export const searchUserInfoByTelUrl = "/admin/user/profile/{{mobile}}/mobile"
+//用户待付款订单
+export const unpaidOrderNumUrl = "/api/all/order/{{storeId}}/unpaid/count/group/category"
+//买单首页弹窗
+export const ftfRecentOrderUrl = "/api/ftf/order/user/store/{{storeId}}/unpaid/last"
+//商家是否支持在线支付
+export const storeOnlinePayUrl = "/api/merchant/pay/config/{{storeId}}/pay"
+
 // 资金管理
 export const getBankcardUrl='/admin/user/profile/bankcard'
 export const getTradeUrl ='/admin/store/trade/statistic'
 export const getAccountinUrl='/admin/store/trade/accountin'
 export const getAccountDetailUrl ='/admin/store/trade/{{paymentNumber}}/account/detail'
 export const getHaveRecordUrl ='/admin/store/trade/settle'
+// 删除进货商关系
+export const deleteUserUrl='/admin/merchantpurchaser/{{storeId}}/{{purchaserUserId}}'
+// 根据商品查SKU
+export const goodsSkuUrl = '/admin/shop/goods/specification/sku/{{goodsId}}'
+// 查询SKUcode,
+export const skuCodeUrl = '/admin/shop/goods/specification/specification/value/codes'
+// 批量生成规格值code
+export const specValCodeUrl = '/admin/shop/goods/specification/spec/value/codes'
+// 修改SKU
+export const updateGooodsSkuUrl = '/admin/shop/goods/specification/sku'
+// 分类搜索
+export const searchClassUrl = '/api/shop/category/search'
+
+// 修改用户信息
+export const updateUserInfoUrl = '/api/user/update'
+// 微信信息
+export const hasSavedWXmsgUrl = '/api/weixin/user/exist'
+export const saveWXmsgUrl = '/api/weixin/user/save'
+// 解密手机
+export const getMyWXPhoneUrl = '/api/weixin/user/decrypt'
+// 门店订单 买家
+export const ftfuserSureOrderUrl = '/api/ftf/order'
+export const ftfpreOrderDetailUrl = '/admin/ftf/order/{{qrCode}}/info'
+// 查询店铺信息
+export const simpleStoreMsgUrl = '/api/store/simple/{{storeId}}'
+/**
+ * 海报
+ * */
+export const posterModuleListUrl = '/admin/marketing/poster/template/list/onlines'
+export const uploadPosterUrl = '/admin/marketing/poster/batch'
+// 专辑
+export const addPosterTagUrl = '/admin/marketing/poster/tag'
+export const getPosterTagListUrl = '/admin/marketing/poster/tag/'
+export const delPosterTagUrl = '/admin/marketing/poster/tag/code'
+export const updatePosterTagNameUrl = '/admin/marketing/poster/tag/name'
+export const getPosterTagMsgUrl = '/admin/marketing/poster/tag/{{code}}/detail'
+export const getPosterTagDetailUrl = '/admin/marketing/poster/tag/{{tagCode}}'
+export const delPosterArrUrl = '/admin/marketing/poster/batch'
+export const toOtherPosterTagUrl = '/admin/marketing/poster/tag'
+export const delAllPosterUrl = '/admin/marketing/poster/tag/poster'
+export const goodsPosterNumUrl = '/admin/marketing/poster/goods/{{goodsId}}/count'
+
+// 查询店铺有效活动
+export const storeActiveGoodsUrl="/api/mall/activity/store/{{storeId}}/participate/activity/release/list"
+// 活动
+export const activityListUrl='/admin/mall/activity/{{mallCode}}/page'
+export const participateUrl="/admin/mall/activity/{{activityNumber}}/participate"
+export const activeDetailsUrl="/admin/mall/activity/{{activityNumber}}"
+export const releaseGoodsUrl ="/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}/release"
+export const addActiveGoodsUrl ="/admin/mall/goods/activity"
+export const addAMoreGoodsUrl ="/admin/mall/goods/activity/batch"
+export const releaseMoreGoodsUrl ="/admin/mall/goods/activity/{{activityNumber}}/goods/release/batch"
+export const activityGoodsUrl="/admin/mall/goods/activity/goods/in/{{activityNumber}}/page"
+export const allGoodsUrl="/admin/mall/goods/activity/goods/for/{{activityNumber}}/page"
+export const delActGoodsUrl="/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}"
+export const getActiveGoodsDetailUrl = '/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}'
+export const editActiveGoodsUrl = '/admin/mall/goods/activity/goods/edit'
+export const saleActiveListUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/sales/list"
+export const statisticSalesUrl="/admin/mall/activity/statistic/sum/{{activityNumber}}/store/sales/all"
+// 统计云分销数据
+export const yunStatisticsUrl="/order/statistics/distribution"
+export const aAnalysisAGoodsUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/goods/top"
+export const aAnalysisCustomUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/custom/top"
+// 统计查询进货商汇总数据列表
+export const statPurchasersUrl="/order/statistics/purchasers/trade/data/page"
+export const statPurchasersDetailsUrl="/order/statistics/purchaser/{{userId}}/trade/data"
+export const purchaserTransUrl="/admin/order/purchaser/{{userId}}/"
+

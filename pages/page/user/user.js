@@ -26,10 +26,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     hasUser: false,
     limitShow:1,
     indexEmpty: true,
     goRetailStore: true,
+  },
+  navigateToMyStore() {
+    app.navigate.toMyStore(app.globalData.navigateToAppID.xls, this.data.user.storeId)
   },
   toMyStore(){
     let toID = this.data.user.storeId;
@@ -55,7 +59,7 @@ Page({
           user: res.obj,
           hasUser: true
         })
-        //申请小云店小云点订单列表
+        //申请店订单列表
         //新批零店主
         if (res.obj.isStoreOwner == true && res.obj.storeNature == 1){
           this.setData({
@@ -113,6 +117,29 @@ Page({
         })
       }
     })
+    Api.simpleStoreMsg({ storeId: wx.getStorageSync('storeId') }).then(res => {
+      if (res.obj.mallMiniProgramAppId && res.obj.mallMiniProgramAppId !== app.globalData.navigateToAppID.platform) {
+        app.globalData.navigateToAppID.platform = res.obj.mallMiniProgramAppId
+      }
+    })  
+  },
+  getUnpaidNum() {
+    if (authHandler.isLogin()) {
+      //用户订单查询
+      Api.unpaidOrderNum().then(res => {
+        this.setData({
+          retailOrderCount: res.obj.retailOrderCount,
+          wholesaleOrderCount: res.obj.wholesaleOrderCount,
+          faceToFaceOrderCount: res.obj.faceToFaceOrderCount
+        })
+      })
+    } else {
+      this.setData({
+        retailOrderCount: 0,
+        wholesaleOrderCount: 0,
+        faceToFaceOrderCount: 0
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
@@ -156,20 +183,10 @@ Page({
       app.globalData.userShowTip = false;
       wx.showModal({
         title: '',
-        content: '请登录您的账号（购买时的手机号），开启您的小云店吧！',
+        content: '请登录您的账号（购买时的手机号），开启您的' + app.globalData.projectName+'吧！',
         showCancel:false,
-        complete: () => {
-          if (!Api.getStoreId()) {
-            this.setData({
-              indexEmpty: false
-            })
-          }
-          getIdentity(this)
-
-          this.getStore();
-        }
       })
-    }else{
+    }
       if (!Api.getStoreId()) {
         this.setData({
           indexEmpty: false
@@ -183,8 +200,7 @@ Page({
         getIdentity(this)
         this.getStore();
       }
-    }
-    
+    this.getUnpaidNum();
   },
 
   /**

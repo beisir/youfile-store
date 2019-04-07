@@ -39,16 +39,15 @@ Page({
     } else {
        if (num > 11) {
          wx.showToast({
-           title: '超过最长数字限制',
+           title: '超过最长字数限制',
            icon: 'none',
            duration: 2000,
          })
-       } else {
-         this.setData({
-           value: value.substring(0, 10),
-           watchInput: true,
-         })
        }
+       this.setData({
+         value: value.substring(0, 10),
+         watchInput: true,
+       })
     }
   },
   addClass: function (e) {

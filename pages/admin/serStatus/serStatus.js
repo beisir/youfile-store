@@ -8,10 +8,19 @@ Page({
     value: '',
     showResult: false,
     closeCont: false,
+    showMore:true,
   },
   searchInput(e) {
     this.setData({
       value: e.detail.value
+    })
+  },
+  // 显示更多操作
+  showMoreClick: function (e) {
+    var index = e.target.dataset.index
+    this.setData({
+      showMore: false,
+      showIndex: index
     })
   },
   //手指触摸动作开始 记录起点X坐标
@@ -31,18 +40,18 @@ Page({
     })
   },
   //搜索确定键
-  getList:function(){
+  getList: function () {
     var keyword = this.data.value,
       _this = this
     Api.goodsSearchList({ keyword: keyword })
       .then(res => {
         var obj = res.obj.result
-        if(obj){
-          if (obj.length==0){
+        if (obj) {
+          if (obj.length == 0) {
             Api.showToast("暂无更多了！")
-          }else{
-           var datas = _this.data.result,
-            newArr = app.pageRequest.addDataList(datas, obj)
+          } else {
+            var datas = _this.data.result,
+              newArr = app.pageRequest.addDataList(datas, obj)
             _this.setData({
               result: newArr,
             })
@@ -51,7 +60,7 @@ Page({
       })
   },
   // 初始化数据
-  initData:function(){
+  initData: function () {
     app.pageRequest.pageData.pageNum = 0
     this.setData({
       result: []
@@ -59,20 +68,18 @@ Page({
   },
   searchBtn(e) {
     var val = this.data.value
-    if (!val){return}
+    if (!val) { return }
     this.initData()
     this.getList()
   },
   onLoad(options) {
-    // var _this = this
-    // this.initData()
-    // if (options.value){
-    //   _this.setData({
-    //     value:options.value
-    //   },function(){
-    //     _this.getList()
-    //   })
-    // }
+   
+  },
+  onShow() {
+    var val = this.data.value
+    if (!val) { return }
+    this.initData()
+    this.getList()
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -96,16 +103,16 @@ Page({
       name = res.name
       return {
         title: name,
-        path: '/pages/page/goodsDetails/goodsDetails?goodsId='+id+"&storeId="+storeId,
+        path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id + "&storeId=" + storeId,
         imageUrl: img,
         success: (res) => {
         },
         fail: (res) => {
         }
       }
-    }else{
+    } else {
       return {
-        path: '/pages/page/home/home?storeId='+storeId,
+        path: '/pages/page/home/home?storeId=' + storeId,
         success: (res) => {
         },
         fail: (res) => {
@@ -124,28 +131,95 @@ Page({
     wx.navigateTo({
       url: '../editGoods/editGoods?goodsId=' + id,
     })
-  }, 
+  },
   // 上下架
-  changeStatus: function (e) {
-    const goodId = e.currentTarget.dataset.id,
-      index = e.currentTarget.dataset.index,
-      _this = this,
+  confirmUp: function () {
+    var _this = this,
+      goodsIdList = [],
+      index = this.data.upIndex,
       result = this.data.result,
-      goodsIdList = []
+      goodId = this.data.goodsId
     goodsIdList.push(goodId)
     Api.adminGoodsUp(goodsIdList)
       .then(res => {
         result[index].status = "1"
         _this.setData({
           result: result,
+          confirmUp: false
         })
-        wx.showToast({
-          title: '上架成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast("上架成功")
       })
+  },
+  changeStatus: function (e) {
+    const goodId = e.currentTarget.dataset.id,
+      num = e.currentTarget.dataset.num,
+      index = e.currentTarget.dataset.index
+    this.setData({
+      goodsId: goodId
+    })
+    if (1 > num) {
+      this.setData({
+        showNum: true
+      })
+    } else {
+      this.setData({
+        confirmUp: true,
+        upIndex: index
+      })
+    }
+  },
+  confirmDown: function () {
+    var _this = this,
+      goodsIdList = [],
+      index = this.data.upIndex,
+      result = this.data.result,
+      goodId = this.data.goodsId
+    goodsIdList.push(goodId)
+    Api.adminGoodsDown(goodsIdList)
+      .then(res => {
+        result[index].status = "0"
+        _this.setData({
+          result: result,
+          confirmDown: false
+        })
+        Api.showToast("下架成功")
+      })
+  },
+  upStatus: function (e) {
+    const goodId = e.currentTarget.dataset.id,
+      index = e.currentTarget.dataset.index
+    this.setData({
+      confirmDown: true,
+      upIndex: index,
+      goodsId: goodId
+    })
 
+  },
+  // 操作之后隐藏弹框
+  cancel:function(){
+    this.setData({
+      showMore: true,
+      confirmDown: false,
+      confirmUp: false,
+      showNum: false,
+      show1:false,
+      showIndex: -1
+    })
+  },
+  // 隐藏更多操作
+  closeShow: function () {
+    this.setData({
+      showMore: true,
+      showIndex: -1
+    })
+  },
+  // 修改规格
+  updateSpec: function (e) {
+    var id = e.target.dataset.id,
+      storeTd = e.target.dataset.storeid
+    wx.navigateTo({
+      url: '../goodsSpec/goodsSpec?goodsId=' + id + '&storeTd=' + storeTd,
+    })
   },
   //删除事件
   del: function (e) {
@@ -162,7 +236,7 @@ Page({
     var that = this,
       indexDel = this.data.indexDel,
       goodsIdDel = this.data.goodsIdDel
-    that.data.detailList.splice(indexDel, 1)
+    that.data.result.splice(indexDel, 1)
     Api.adminGoodsDelete({ goodId: goodsIdDel })
       .then(res => {
         wx.showToast({
@@ -171,29 +245,9 @@ Page({
           duration: 2000
         })
         that.setData({
-          detailList: that.data.detailList
+          result: that.data.result
         })
         that.cancel()
-      })
-  },
-  upStatus: function (e) {
-    const goodId = e.currentTarget.dataset.id,
-      index = e.currentTarget.dataset.index,
-      _this = this,
-      result = this.data.result,
-      goodsIdList = []
-    goodsIdList.push(goodId)
-    Api.adminGoodsDown(goodsIdList)
-      .then(res => {
-        result[index].status = "0"
-        _this.setData({
-          result: result,
-        })
-        wx.showToast({
-          title: '下架成功',
-          icon: 'none',
-          duration: 2000
-        })
       })
   },
   /**

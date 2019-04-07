@@ -21,7 +21,7 @@
 </mes>
 <!-- 关闭订单 -->
 <clo show="{{cancelModal}}" bind:sureSelectArea="sureSelectAreaListener">
-  <view class='layer-reason-item' wx:for='{{reson}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
+  <view class='layer-reason-item' wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
     <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select" />
     <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
   </view>
@@ -170,13 +170,13 @@
     <view>收货人：{{order.consigneeInfo.userName}}</view>
     <view class='address-box' style='padding:0;'>
       <view class='address-title'>收货地址：</view>
-      <view class='address-inner'>{{order.consigneeInfo.detailAddress}}</view>
+      <view class='address-inner'>{{order.consigneeInfo.province}} {{order.consigneeInfo.city}} {{order.consigneeInfo.county}} {{order.consigneeInfo.detailAddress}}</view>
     </view>
   </view>
 
   <view wx:else class='np-view {{order.userMemo?"":"no-border"}}'>
     <image src="/image/ad.png"></image>
-    <text class='np-text'>{{order.userInfo.mobile}}</text>
+    <text class='np-text'>{{order.pickerPhone?order.pickerPhone:order.userInfo.mobile}}</text>
     <view>取货人：{{order.userInfo.nickName}}</view>
   </view>
 
@@ -210,8 +210,7 @@
         <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{good.goodsId}}'>
           <image class="cart-thumb" src="{{baseUrl+good.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           <view class='ct-title ct-title1'>{{good.goodsName}}</view>
-          <view class="heji">共 
-          <text style='font-size:26rpx;'>{{order.num}} 件</text>商品</view>
+          <view class="heji"><text style='font-size:26rpx;'>{{good.goodsNum}} 件</text>商品</view>
         </navigator>
       </view>
 
@@ -289,7 +288,7 @@
 
 <view class='np-fapiao'>
   <view>发票信息
-    <text>{{order.receiptInfo && order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceCategory:"不开发票"}}</text>
+    <text>{{order.receiptInfo && order.receiptInfo.invoiceCategory?order.receiptInfo.invoiceType+""+order.receiptInfo.invoiceCategory:"不开发票"}}</text>
   </view>
   <view wx:if="{{order.receiptInfo.invoiceType=='公司'}}">
     <view>公司名称
@@ -314,12 +313,12 @@
     </block>
   </view>
   <view style='margin:0;'>支付方式
-    <text>其他支付方式</text>
+    <text wx:if="{{order.payType=='online'}}">在线支付</text>
+    <text wx:else>其他支付方式</text>
   </view>
 </view>
 
-<view class='os-mon'>
-  配送方式
+<view class='os-mon'>配送方式
   <block wx:if='{{self=="false"}}'>
     <text>物流配送</text>
     <block wx:if="{{order.expressStatus != '0'}}">
@@ -365,7 +364,7 @@
 <view class='cf-button' wx:if="{{!((!order.payVoucher) && (status=='canceled' || (status=='delivered' && self=='false') || status=='finish'))}}">
   <block wx:if="{{status=='unpaid'}}">
     <!-- <button class='or-active'> 提醒付款 </button> -->
-    <button data-type='sureGet' bindtap='showModal' class='or-active'> 确认收款 </button>
+    <button wx:if="{{order.payType!=='online'}}" data-type='sureGet' bindtap='showModal' class='or-active'> 确认收款 </button>
     <button data-type='change' bindtap='showModal' data-change="{{order.orderAmount}}" class='or-active'> 整单改价 </button>
     <!-- <button class='or-active' data-type='ex' bindtap='showModal'> 收款发货 </button> -->
     <button wx:if="{{order.payVoucher}}" bindtap='seeVoucher' data-num="{{order.orderNumber}}">付款凭证</button>    

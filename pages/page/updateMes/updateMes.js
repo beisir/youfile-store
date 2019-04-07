@@ -1,11 +1,12 @@
 import Api from '../../../utils/api.js'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    palceName:"小云店名称",
+    palceName: app.globalData.projectName+"名称",
     value:'',
     emptyVal:0,
     num:0,
@@ -22,59 +23,39 @@ Page({
       status = this.data.status 
     if (status==1){
       if (num > 20) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
-      } else {
-        this.setData({
-          value: value.substring(0, 19),
-          num: num
-        })
+        Api.showToast('超过最长数字限制')
       }
+      this.setData({
+        value: value.substring(0, 19),
+        num: num
+      })
     }
     if (status == 2) {
       if (num > 100) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
-      } else {
-        this.setData({
-          value: value.substring(0, 99),
-          num: num
-        })
+        Api.showToast('超过最长数字限制')
       }
+      this.setData({
+        value: value.substring(0, 99),
+        num: num
+      })
     }
     if (status == 3) {
       if (num > 30) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
-      } else {
-        this.setData({
-          value: value.substring(0, 29),
-          num: num
-        })
+        Api.showToast('超过最长数字限制')
       }
+      this.setData({
+        value: value.substring(0, 29),
+        num: num
+      })
     }
     if (status == 4) {
       if (num > 32) {
-        wx.showToast({
-          title: '超过最长数字限制',
-          icon: 'none',
-          duration: 2000,
-        })
-      } else {
-        this.setData({
-          value: value.substring(0, 21),
-          num: num
-        })
+        Api.showToast('超过最长数字限制')
       }
+      this.setData({
+        value: value.substring(0, 21),
+        num: num
+      })
     }
     if(status==0){
       this.setData({
@@ -91,14 +72,8 @@ Page({
           icon: 'none',
           duration: 2000,
           success:function(){
-            var pages = getCurrentPages();             //  获取页面栈
-            var currPage = pages[pages.length - 1];
-            var prevPage = pages[pages.length - 2];    // 上一个页面
-            prevPage.setData({
-              code:0
-            })
-            wx.navigateBack({
-              data: 1
+            wx.redirectTo({
+              url: '../mesEdit/mesEdit',
             })
           }
         })

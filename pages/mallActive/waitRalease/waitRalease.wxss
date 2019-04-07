@@ -1,0 +1,14 @@
+@import '../list/list';
+@import '/pages/page/home/home';
+@import '../addGoods/addGoods';
+page {background: #fff;}
+.wait-cont{background: #fff;position: relative;padding-top: 20rpx}
+.addgoods{height: 100rpx;color: #fff;line-height: 100rpx;font-size: 32rpx;background:#CCAA77;width: 90%;margin: 0rpx 5%;border-radius:100rpx;margin-top: 180rpx;}
+.wr-bottom{position: fixed;bottom: 20rpx;width: 100%;}
+.tab-view .tab-one-1,.tab-view .tab-two{padding-right: 50rpx;}
+.tab-view .tab-one,.tab-view .tab-two-1{padding-left: 50rpx;}
+.add-cont>view{box-shadow: 5rpx 0 30rpx #ededed}
+.tab-cont{padding: 0 25rpx}
+.g-image .nouse{height: 75rpx;padding:45rpx;font-size: 28rpx;width: 60rpx;display: flex;align-content: center;justify-content: space-around}
+.g-image .activing{height: 100rpx;line-height: 100rpx;padding:30rpx;font-size: 28rpx;width: 90rpx;display: flex;align-content: center;justify-content: space-around}
+.more-add{width: 40%;display:inline-block;margin-top: 20rpx;}

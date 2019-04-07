@@ -1,0 +1,33 @@
+<!-- 确定参加活动 -->
+<mes show="{{joinShow}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确认参加？</text>
+    <button bindtap='joinActive'>确定</button>
+  </view>
+</mes>
+
+<view class='list-t'>
+  <view bindtap='clickNav' wx:for="{{navData}}" wx:key="{{index}}" data-index="{{item.index}}" class='{{item.index==navIndex?"active":""}}'>{{item.name}}<view  wx:if="{{item.index==navIndex}}"></view></view>
+</view>
+<view class='listData'>
+  <view wx:for="{{listData}}" wx:key="{{index}}">
+    <view class='ld-t'>{{item.activityName}}</view>
+    <navigator url='../waitRalease/waitRalease?activityNumber={{item.activityNumber}}' class='ld-cont'>
+      <view>
+        <text class='ld-yellow'  wx:if="{{item.activityStatus=='init'}}">活动未开始</text>
+        <text class='ld-black'  wx:if="{{item.activityStatus=='finish'}}">活动已结束</text>
+        <text class='ld-red'  wx:if="{{item.activityStatus=='be_doing'}}">活动进行中</text>
+        <text class='no-doing' wx:if="{{!item.participate}}"> 未参加</text>
+        <text class='ld-doing' wx:if="{{item.participate}}"> 已参加</text>
+      </view>
+      <view><text>活动时间</text>{{item.startTime}} 至 {{item.endTime}}</view>
+      <view><text>活动类目</text><block wx:if="{{item.categoryCode}}">{{item.categoryCode}}</block></view>
+      <view><text>活动介绍</text>{{item.introduction}}</view>
+    </navigator>
+    <view class='ld-bottom'>
+      <button wx:if="{{!item.participate}}" bindtap='joinShow' data-index="{{item.activityNumber}}">参加活动</button>
+      <button wx:if="{{item.participate}}" data-index="{{item.activityNumber}}" bindtap='editGoods'>编辑商品</button>
+      <button wx:if="{{item.activityStatus=='finish' || item.activityStatus=='be_doing'}}" bindtap='activityAnalysis'>活动分析</button>
+    </view>
+  </view>
+</view>

@@ -3,12 +3,19 @@ import API from '../../../utils/api.js';
 Component({
   properties: {
     // 这里定义了innerText属性，属性值可以在组件使用时指定
-    innerText: {
+    closeBtnType: {
       type: String,
-      value: 'default value',
+      value: '',
     }
   },
   data: {
+    // 登录显示界面
+    loginChoseTypeModal: true,
+    // 验证码界面
+    getCodeModal: false,
+    inputFocus: false,  //输入框
+    codearr: ["", "", "", ""],
+    reSendCode: false,
     //登录头信息
     loginTitle: '快捷登录',
     //界面显示隐藏
@@ -34,9 +41,96 @@ Component({
     //登录按钮样式class
     btnID: "loginBtnDis",
     //关注
-    attention:true
+    attention: true
   },
   methods: {
+    // 获取用户信息
+    getWXUserInfo(data) {
+      this.login()
+    },
+    // 输入验证码
+    getFocus() {
+      this.setData({ inputFocus: true })
+    },
+    coolCode(e) {
+      var value = e.detail.value;
+      if (value.length >= 4) {
+        this.setData({ verificationCode: value.substr(0, 4) })
+      } else {
+        this.setData({ verificationCode: value })
+      }
+      let arr = [
+        value[0] ? value[0] : "",
+        value[1] ? value[1] : "",
+        value[2] ? value[2] : "",
+        value[3] ? value[3] : "",
+      ]
+      this.setData({ codearr: arr })
+      this.checkComplete();
+    },
+    // 微信授权登录
+    getPhoneNumber(e) {
+      // 区分授权按钮种类
+      let btnType = e.target.dataset.type
+      if (e.detail.iv && e.detail.encryptedData) {
+        wx.checkSession({
+          success: (res) => {
+            this.getMyPhone(e.detail.iv, e.detail.encryptedData, this.data.code, btnType)
+          },
+          fail: function (res) {
+            // 微信code过期
+            wx.login({
+              success: function (res) {
+                this.getMyPhone(e.detail.iv, e.detail.encryptedData, res.code, btnType)
+              },
+              fail: function (res) { },
+              complete: function (res) { },
+            })
+          },
+          complete: function (res) { },
+        })
+      }
+    },
+    // 不同获取手机号场景
+    switchGetPhoneWay(data, btnType) {
+      if (data.phoneNumber) {
+        this.setData({ telephone: data.phoneNumber })
+        if (btnType == 'wxLogin') {
+          // 微信一键登录
+          this.setData({ getCodeModal: true, loginType: 'code' })
+          this.getCode()
+        } else {
+          // 正常登录
+        }
+      } else {
+        API.showToast('获取手机号码失败，请手动填写')
+      }
+    },
+    // 解密手机号
+    getMyPhone(iv, encryptedData, code, btnType) {
+      let obj = {
+        iv,
+        encryptData: encryptedData,
+        jsCode: code
+      }
+      API.getMyWXPhone(obj).then(res => {
+        let data = JSON.parse(res.obj)
+        this.switchGetPhoneWay(data, btnType)
+
+        wx.login({
+          success: (res) => {
+            if (res.code) {
+              this.setData({
+                code: res.code
+              })
+            }
+          }
+        })
+      })
+    },
+    touserLogin() {
+      this.setData({ loginChoseTypeModal: false })
+    },
     // 自动关注
     attentionStore() {
       this.setData({
@@ -46,14 +140,14 @@ Component({
     //判断是否输入完整
     checkComplete() {
       if (this.data.loginType === 'code') {
-        if (this.data.telephone.length > 0 && this.data.verificationCode.length > 0) {
+        if (this.data.telephone.length > 0 && this.data.verificationCode.length >= 4) {
           this.setData({
             btnID: 'loginBtnAc'
           })
           return
         }
       } else {
-        if (this.data.telephone.length > 0 && this.data.password.length > 0) {
+        if (this.data.telephone.length > 0 && this.data.password.length >= 6) {
           this.setData({
             btnID: 'loginBtnAc'
           })
@@ -75,24 +169,15 @@ Component({
     //忘记密码修改新密码
     creatNewPassword() {
       if (!this.testTel()) {
-        wx.showToast({
-          title: '请输入正确手机号码',
-          icon: 'none',
-        })
+        API.showToast('请输入正确手机号码')
         return;
       }
       if (this.data.verificationCode.length == 0) {
-        wx.showToast({
-          title: '请输入验证码',
-          icon: 'none',
-        })
+        API.showToast('请输入验证码')
         return;
       }
       if (this.data.password.length < 6 || this.data.password.length > 16) {
-        wx.showToast({
-          title: '密码必须是6 - 16位的数字或字母',
-          icon: 'none'
-        })
+        API.showToast('密码必须是6 - 16位的数字或字母')
         return
       }
       let obj = {
@@ -101,48 +186,33 @@ Component({
         smsCode: this.data.verificationCode
       }
       API.resetPassword(obj).then(res => {
-        wx.showToast({
-          title: res.message,
-          icon: 'none',
-        })
+        API.showToast(res.message)
         this.setData({
           forget: false,
           password: "",
           verificationCode: ""
         })
-      }).catch(e=>{
-        wx.showToast({
-          title: e.data.message,
-          icon: 'none'
-        })
+      }).catch(e => {
+        API.showToast(e.data.message)
       })
     },
     //登录
     login() {
-      if(this.data.stopLoginBtn){
+      if (this.data.stopLoginBtn) {
         return
       }
-      if (this.data.btnID === 'loginBtnDis') {
-        wx.showToast({
-          title: '请填写完整',
-          icon: 'none',
-        })
-        return;
-      }
+      // if (this.data.btnID === 'loginBtnDis') {
+      //   API.showToast('请填写完整')
+      //   return;
+      // }
       //校验
       if (!this.testTel()) {
-        wx.showToast({
-          title: '请输入正确手机号码',
-          icon: 'none',
-        })
+        API.showToast('请输入正确手机号码')
         return;
       }
       if (this.data.loginType == 'code') {
         if (this.data.verificationCode.length == 0) {
-          wx.showToast({
-            title: '请输入验证码',
-            icon: 'none',
-          })
+          API.showToast('请输入验证码')
           return;
         }
         let obj = {
@@ -157,7 +227,9 @@ Component({
         loginApp.authHandler.loginByMobile(this.data.telephone, this.data.verificationCode).then(res => {
           //关注
           if (this.data.attention) {
-            API.likeStore();
+            API.likeStore().then(res => {
+              loginApp.globalData.switchStore = true
+            });
           }
           this.loginAfter(res);
         }).catch(e => {
@@ -170,10 +242,7 @@ Component({
       } else {
 
         if (this.data.password.length < 6 || this.data.password.length > 16) {
-          wx.showToast({
-            title: '密码必须是6 - 16位的数字或字母',
-            icon: 'none'
-          })
+          API.showToast('密码必须是6 - 16位的数字或字母')
           return
         }
 
@@ -186,13 +255,13 @@ Component({
         this.setData({
           stopLoginBtn: true
         })
-        
+
         loginApp.authHandler.loginByUser(this.data.telephone, this.data.password).then(res => {
           this.loginAfter(res);
         }).catch(e => {
           this.setData({
             stopLoginBtn: false
-          })        
+          })
         })
       }
 
@@ -202,23 +271,45 @@ Component({
         stopLoginBtn: false
       })
       if (res.message) {
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
+        API.showToast(res.message)
         return
       }
       if (res.access_token) {
         this.closePage()
-        let pages = getCurrentPages();
-        let curPage = pages[pages.length - 1];
+        API.showToast("登录成功")
+        // 存储微信信息
+        this.saveWXmsg()
+      }
+    },
+    saveWXmsg() {
+      API.hasSavedWXmsg().then(res => {
+        if (res.obj === false) {
+          wx.getUserInfo({
+            success: (res) => {
+              API.saveWXmsg({
+                avatarUrl: res.userInfo.avatarUrl,
+                gender: res.userInfo.gender,
+                nickName: res.userInfo.nickName
+              }).then(res => {
+                this.refreshPage()
+              })
+            },
+            fail: (e) => {
+              this.refreshPage()
+            }
+          })
+        } else {
+          this.refreshPage()
+        }
+      })
+    },
+    refreshPage() {
+      let pages = getCurrentPages();
+      let curPage = pages[pages.length - 1];
+      setTimeout(() => {
         curPage.onLoad();
         curPage.onShow();
-        wx.showToast({
-          title: "登录成功",
-          icon: 'none'
-        })
-      }
+      }, 800)
     },
     //显示隐藏密码
     showHide() {
@@ -279,16 +370,15 @@ Component({
     //获取验证码
     getCode() {
       if (!this.testTel()) {
-        wx.showToast({
-          title: '请输入正确手机号码',
-          icon: 'none',
-        })
+        API.showToast('请输入正确手机号码')
       } else {
-        API.phoneMessage({
-          mobile: this.data.telephone
-        }).then(res => {
+        if (!this.data.disabled){
+          API.phoneMessage({
+            mobile: this.data.telephone
+          }).then(res => {
 
-        })
+          })
+        }
         // loginApp.http.getRequest("/oauth/code/sms", {
         //   mobile: this.data.telephone
         // }).then(res => {
@@ -299,18 +389,22 @@ Component({
         let sec = this.data.btnSec;
         this.setData({
           buttonTimer: sec + "s",
-          disabled: true
+          disabled: true,
+          reSendCode: false
         })
         let timer = setInterval(() => {
           sec--;
           this.setData({
-            buttonTimer: sec + "s"
+            buttonTimer: sec + "s",
+            btnSec: sec
           })
 
           if (sec <= 1) {
             clearInterval(timer)
             this.setData({
+              reSendCode: true,
               buttonTimer: "获取验证码",
+              btnSec: 60,
               disabled: false
             })
           }
@@ -324,20 +418,62 @@ Component({
       }
       return true;
     },
+    closePageBtn() {
+      this.closePage()
+      if (this.data.closeBtnType) {
+        switch (this.data.closeBtnType) {
+          case 'quit':
+            wx.navigateBack()
+            break;
+          case 'tohome':
+            wx.switchTab({
+              url: '../../page/home/home'
+            })
+            break;
+        }
+      }
+    },
     closePage() {
+      loginApp.globalData.notOnshow = false
       this.setData({
+        loginChoseTypeModal: true,
+        getCodeModal: false,
+        codearr: ["", "", "", ""],
+        reSendCode: false,
         pageShow: false,
         forget: false,
         telephone: "",
         password: "",
         verificationCode: "",
-        loginType: 'code'
+        loginType: 'code',
+        btnID: 'loginBtnDis'
       })
+      clearInterval(this.data.closetimer)
     },
     showPage() {
+      loginApp.globalData.notOnshow = true
       this.setData({
         pageShow: true
       })
+      wx.login({
+        success: (res) => {
+          if (res.code) {
+            this.setData({
+              code: res.code
+            })
+          }
+        },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+      let closetimer = setInterval(() => {
+        let token = wx.getStorageSync('access_token')
+        if (token) {
+          this.closePage()
+          clearInterval(this.data.closetimer)
+        }
+      }, 1000)
+      this.setData({ closetimer })
     }
   }
 })

@@ -7,20 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    token: ""
+    token: "",
+    closeBall: app.globalData.returnBall.show
   },
 
   quit() {
 
     API.quit({ accesstoken: this.data.token}).then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: "none"
-      })
+      API.showToast(res.message)
       app.authHandler.flushTokenInfo();
       this.setData({
         token: ""
       })
+      app.globalData.switchStore = true
       setTimeout(() => {
         wx.navigateBack()
       }, 800)
@@ -39,6 +38,17 @@ Page({
       })
     }
   },
+  switchBallChange() {
+    let now = app.globalData.returnBall.show;
+    this.setData({
+      closeBall: !now
+    })
+    app.globalData.returnBall.show = !now
+    if (!now == true) {
+      app.globalData.returnBall.x = 1000;
+      app.globalData.returnBall.y = 50;
+    }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -51,7 +61,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.setData({
+      closeBall: app.globalData.returnBall.show
+    })
   },
 
   /**

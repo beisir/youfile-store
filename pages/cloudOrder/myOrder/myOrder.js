@@ -6,13 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
   },
 
   getData() {
     let storeId = wx.getStorageSync("storeId");
     app.http.getRequest("/admin/yunstore/order/store/" + storeId +"/page").then(res=>{
       this.setData({
-        list: res.obj.result
+        list: res.data.obj.result
       })
     })
   },

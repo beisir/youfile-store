@@ -1,0 +1,29 @@
+<!-- 搜索 -->
+<view class='cus-search-box'>
+  <image src='/image/search1.png' class='cus-search-icon'></image>
+  <input type='text' bindconfirm='search' bindinput='watchInput' placeholder-class='input-placeholder-common-color' placeholder='输入昵称、手机、备注名'></input>
+  <view bindtap='search' class='search-font'>搜索</view>
+</view>
+<!-- 切换 -->
+<view class='nav-box'>
+  <view wx:key="{{index}}" class='nav-item {{item.checked?"nav-ac":""}}' bindtap='switchNav' data-type="{{item.type}}" wx:for="{{nav}}">{{item.name}}</view>
+</view>
+
+<view class='list-box'>
+  <block wx:for="{{list}}" wx:if="{{list}}" wx:key="{{index}}">
+    <view class='user-item'>
+      <navigator url="../../businessFriend/merchant/lookInfo/lookInfo?userId={{item.userId}}&mobile={{item.mobile}}&entry=faceOrder">
+        <view class='flex-center'>
+          <image class='user-icon' src='{{item.headPic?baseUrl+item.headPic+"?x-oss-process=style/logo":"/image/preson.png"}}'></image>
+          <text>{{item.nickName}}</text>
+        </view>
+      </navigator>  
+      <navigator url="../createOrder/createOrder?user={{item.userId}}">
+        <view class='help-btn'>帮TA下单</view>
+      </navigator>
+    </view>
+    <view hidden='{{index==list.length-1}}' class='line-border'></view>
+  </block>
+</view>
+
+<view class='gray-num'>{{totalNum}} 位{{checkedNav.name}}</view>

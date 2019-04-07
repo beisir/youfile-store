@@ -33,8 +33,11 @@ class EnterStoreHandler {
           }
         }
         //获取店铺性质
-        Api.getStoreNature({ storeId: storeId }).then(res => {
-          var nature = res.obj
+        Api.simpleStoreMsg({ storeId: storeId }).then(res => {
+          if (res.obj.mallMiniProgramAppId && res.obj.mallMiniProgramAppId !== app.globalData.navigateToAppID.platform){
+            app.globalData.navigateToAppID.platform = res.obj.mallMiniProgramAppId
+          }
+          var nature = res.obj.storeNature;
           store.storeNature = nature;
           if (nature == "1") {
             if (options.getUserIdFromQrCode) {
@@ -102,9 +105,23 @@ class EnterStoreHandler {
 
       //从小程序码中获取店铺编号
       if (options.scene) {
+
         let scene = decodeURIComponent(options.scene);
         storeId = scene.split("store_")[1]
+        if (!storeId){
+          storeId = scene.split("_")[1]
+        }
       }
+
+      //从二维码获取店铺编号
+      if (options.q) {
+        let urlObj = this.parseUrlToObj(decodeURIComponent(options.q))
+        if (urlObj.storeId){
+          storeId = urlObj.storeId;
+        }
+      }
+
+
 
       //从链接中获取店铺编号
       if (options.storeId) {
@@ -162,6 +179,17 @@ class EnterStoreHandler {
       return userId;
     }
     return null;
+  }
+
+  parseUrlToObj(qrUrl) {
+    // 处理传参
+    let data = qrUrl.split("?")[1],
+      arr = data.split("&"),
+      obj = {};
+    arr.forEach(el => {
+      obj[el.split("=")[0]] = el.split("=")[1]
+    })
+    return obj
   }
 
 }

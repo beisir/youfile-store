@@ -12,7 +12,7 @@ Page({
     showList: [],
     hasList: false, 
     nav: [{ title: "全部" }, { title: "待付款" }, { title: "待发货" }, { title: "待收货" }, { title: "已完成" }],
-    reason: [{ title: "我不想买了", selected: true }, { title: "信息填写错误，重新拍", selected: false }, { title: "卖家缺货", selected: false }, { title: "同城见面交易", selected: false }, { title: "其他", selected: false}],
+    reason: [{ title: "我不想买了", selected: true }, { title: "信息填写错误，重新拍", selected: false }, { title: "卖家缺货", selected: false }, { title: "重复下单/误下单", selected: false }, { title: "其他原因", selected: false }],
     navindex:0,
     inputActive:'inputActive ',
 
@@ -30,10 +30,7 @@ Page({
           urls: [this.data.baseUrl + res.obj.payVoucher]
         })
       } else {
-        wx.showToast({
-          title: '未上传付款凭证',
-          icon: 'none'
-        })
+        API.showToast('未上传付款凭证')
       }
     })
   },
@@ -93,11 +90,8 @@ Page({
   // 确认收货
   sureSure(e) {
     let num = this.data.getNum;
-    app.http.requestAll("/api/order/" + num + "/receive", {}, "PUT").then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+    API.receiveOrder({ orderNumber: num }).then((res) => {
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
@@ -109,10 +103,7 @@ Page({
     if (del) {
       app.http.deleteRequest("/api/order/" + del.num).then((res) => {
         this.afterOperation()
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
+        API.showToast(res.message)
         //删除成功剔除
         // if (code == 0) {
         //   list.splice(del.index, 1);
@@ -149,10 +140,7 @@ Page({
       orderNumber:num
     }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: "none"
-      })
+      API.showToast(res.message)
     })  
   
   },

@@ -30,8 +30,14 @@ Component({
     cancel() {
       this.setData({ show: false })
       this.triggerEvent('cancel')
+      let pages = getCurrentPages()
+      let curPage = pages[pages.length - 1]
+      if (curPage.data.showTale){
+        curPage.setData({
+          showTale: false
+        })
+      }
     },
-
     confirm() {
       this.setData({ show: false })
       this.triggerEvent('confirm')

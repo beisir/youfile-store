@@ -1,0 +1,24 @@
+.box{padding: 20rpx 30rpx 120rpx;}
+.common-box{margin-bottom: 20rpx;background: #fff;border-radius: 10rpx;padding-left: 50rpx;padding-right: 50rpx;}
+.flex-between{display: flex;align-items: center;justify-content: space-between;}
+.flex-center{display: flex;align-items: center;}
+.title-font{font-size: 36rpx;font-weight: 600;}
+.chose-goods-box{height: 120rpx;box-sizing: border-box;}
+.goods-icon{height: 35rpx;width: 35rpx;margin-right:20rpx;}
+.right-icon{width: 16rpx;height: 30rpx;}
+/* 仓库 */
+.storeroom-item{padding:0 50rpx; overflow: hidden;}
+.storeroom-title{font-size: 36rpx;font-weight: 600;padding: 40rpx 0;line-height: 1;}
+.all-img-box{display: flex;margin-bottom: 70rpx;}
+.all-img-box .show-img-box:last-child{margin: 0;}
+.show-img-box{width: 140rpx;height: 240rpx;background: #fff;border-radius: 10rpx;display: flex;align-items: center;justify-content: center;box-shadow: 0 0 20rpx #ddd;margin-right: 20rpx;}
+.show-img-box image{width:100rpx;height: 210rpx;}
+.red-btn{position:fixed;bottom:20rpx;left:0;right:0;margin:auto;width: 710rpx;height:100rpx;line-height:100rpx;color:#fff;text-align:center;background-size:cover;background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAArIAAABkCAMAAABNXyOpAAAArlBMVEUAAADwPjbwPTbuLzTxSzjuLzTwPjbxSzjxSzjwOzXwPjbxTDjxTDjuLzTwQTbuLzTxSzjxSzjwPDXuLzTuLzTxSzjuLzTxSzjuLzTxTDjwPjbxSzjuLzTuLzTuLzTxSzjuLzTxSzjuLzTuLzTuLzTuLzTuLzTxSjjwRjfuMjTuLzTvNDXvNjXwQzfwQTfwQDbvPDbvOjbuMTTxSDfxSTjvOTXvODXwPTbxTDjxSDjXgGZjAAAAJ3RSTlMAFCfw75cimW5CN/Pi4i7b2soZ/POmpoxsYAf5yffAv7KxiHJlXMsHnphyAAAEQUlEQVR42uzdh3LaUBBA0RUqIEDCYHpwL0peen/+/x+LiZORTRUueHfm3m84s6PyilQtSBujs+5B1Coq9mN9Nzc33zf09il9rNqnan2u1u/lvlTqa6V+rujXij5U7/0uvXtE3zbn/tUPO7PTeJwG8pwljUG7+B9kIfuMZMuy4TiRZ6k2OpgLhCxkX4psWee8Jk8saHRv9UEWsi9Mtmw2Dp4yYOtvigKykN0H2bKjuPZYsANfFJCF7L7Ilh0OH4M2mE9YyEJ2r2RLtHEgOzaJigKykN032bLwUnYpOSkKyEL2NciWHSc7jVjIQva1ybrwSqo1rXsPWci+Plnn4qlUqNf1kIWsDrJu1pOt5W0PWchqIeuyXLbUjDxkIauHrAubsrG05SELWU1kXT/dOGNbHrKQ1UXW9TfM2TzykIWsNrIuzGVNvbaHLGT1kXVZT1Y27XrIQlYjWTebyqrqHrKQ1UnWxbKiiYcsZLWSdVeyVBJBFrJ6yYaJLHbiIQtZvWTd8fJjAWQhq5msu5QHBRFkIaubbBgsfC2ALGR1k3341aD2BrKQ1U72sCZlAw9ZyGon64b3hqyHLGT1k703ZuuQhawBsuXTbNCCLGQtkD0K5K6GhyxkLZB1F3LXAWQha4NsR/6We8hC1gZZ15R5I8hC1grZc5l3AFnIWiHbkdsSD1nIWiHrEhFpQBaydsiORWQAWcjaITsUkTZkIWuHbCYSeMhC1g5ZF0gKWchaIptKA7KQtUR2LCPIQtYS2VjOIAtZS2RPpQtZyFoiey1tyELWEtlMIshC1hLZUFqQhawlsn3xkIWsJbIOspC1RpYHA8iaItvn9QuytsiGfOSCrC2yGb8SIGuL7DU/bCFri+wpy2Iga4tszOJDyNoiO2aJN2RtkU3ZSANZW2R7bFeErCmyGZvCIWuL7JCjNyBri+yYA44ga4tswjFykDVFtsNhnZC1RfacI5Eha4tsk4PnIWuKbIfrPSBri+wFlyhB1hTZo4Cr6iBrimzMhaCQNUX2sMa1y5A1RXbI5faQNUV2PmTL6pCFrHaysdwviCALWd1kw0AeNIEsZHWTvZSFTiALWc1kj2WxJIIsZPWSDRNZagJZyOoleyUrqkMWslrJxrKqaReykNVJ9noqK+u1IQtZjWSznqwpjyALWX1kw1zW1mxBFrLayPabsqG0BVnI6iLbT2VjzQiykNVENmzKlvI2ZCGrh2yWy9Z6Xcj+aZfO0hAEoTCAXpBJqw/K1BwarT20/5W1BTAEH/6zhoOyWyk7ncjDoFEWZbdRVg7kpxcoi7L5yxYf8qbuKIuyucveFIXoBcqibM6yxZsCMT2iLMrmKltLRuF480VZlM1Rtm45LcP1iLIom7rsVXJajhmHsiibsqydGf2p6hzKomyasvZVURTKNHuURdl1yx7ai6KYWGm659GJHcqibMyy58JODzmXjDz9AEU6gX6mx3FYAAAAAElFTkSuQmCC")}
+
+/* 弹框 */
+.showmodal{font-size:30rpx;padding: 50rpx 40rpx;}
+.modal-input{border-bottom: 1rpx solid #ddd;margin-bottom: 50rpx;text-align: left;padding:15rpx 0;font-size:30rpx;font-weight: 500;}
+.btn-group{display: flex;justify-content: space-between;}
+.btn-group button{margin: 0;}
+.cancel-btn{color: #999;border: 1rpx solid #ddd;background: #fff;}
+.noabled-btn{border-color: #ddd;background: #ddd;}

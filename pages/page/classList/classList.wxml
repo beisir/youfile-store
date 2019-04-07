@@ -1,29 +1,54 @@
 <view>
- <scroll-view scroll-y="true" style="height:100%;">
+  <scroll-view scroll-y="true" style="height:100%;">
     <view class="result" wx:if="{{result.length > 0}}">
       <view class="result-list" wx:for="{{result}}" wx:key="index">
-        <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
-          <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
-          <view class="result-text result-text-h">
-            <text>{{item.name}}</text>
-          </view>
-          <!-- <view class="result-text">
-            <text>￥ {{item.marketPrice}}</text>
-          </view> -->
-          <view class="result-text result-text1">
-            零售
-            <text style='{{limitShow!=1?"color:#666":"#CCAA77"}};'>￥ {{item.sellPrice}}</text>
-            <view wx:if='{{limitShow==1}}'>
-              批发
-              <image src='/image/wh.png'></image>
+        <view wx:if='{{item.isHide}}' class='isHideGoods'>
+          <image src="/image/isshow.png"></image>
+          <view>该商品</view>
+          <view>加商友可见</view>
+        </view>
+        <block wx:if='{{item.isHide}}'>
+          <view>
+            <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <view class="result-text result-text-h">
+              <text>{{item.name}}</text>
             </view>
-            <view wx:if='{{limitShow!=1}}'>
-              批发
-              <text>￥ {{item.wholesalePrice}}</text>
+            <view class="result-text result-text1">
+              零售
+              <text style='{{limitShow!=1?"color:#666":"#CCAA77"}};'>￥ {{item.sellPrice}}</text>
+              <view wx:if='{{limitShow==1}}'>
+                批发
+                <image src='/image/wh.png'></image>
+              </view>
+              <view wx:if='{{limitShow!=1}}'>
+                批发
+                <text>￥ {{item.wholesalePrice}}</text>
+              </view>
             </view>
           </view>
+        </block>
+        <block wx:if='{{!item.isHide}}'>
+          <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
+            <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <view class="result-text result-text-h">
+              <text>{{item.name}}</text>
+            </view>
+            <view class="result-text result-text1">
+              零售
+              <text style='{{limitShow!=1?"color:#666":"#CCAA77"}};'>￥ {{item.sellPrice}}</text>
+              <view wx:if='{{limitShow==1}}'>
+                批发
+                <image src='/image/wh.png'></image>
+              </view>
+              <view wx:if='{{limitShow!=1}}'>
+                批发
+                <text>￥ {{item.wholesalePrice}}</text>
+              </view>
+            </view>
 
-        </navigator>
+          </navigator>
+        </block>
+
       </view>
       <view class='nomore'>没有更多了</view>
     </view>

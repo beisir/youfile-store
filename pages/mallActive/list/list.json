@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "商贸云活动",
+  "usingComponents": {
+    "mes": "../../../../assembly/tips/tips"
+  }
+}

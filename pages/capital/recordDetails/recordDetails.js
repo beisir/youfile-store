@@ -37,16 +37,20 @@ Page({
           dataDetails:obj
         })
       }
-      console.log(obj)
     })
   },
   onLoad: function (options) {
     if (options.paymentNumber){
-      console.log(options)
-      this.getDetails("PO1000341122")
+      this.getDetails(options.paymentNumber)
     }
   },
-
+  // 查看订单详情
+  goOrderDetails(){
+    var dataDetails=this.data.dataDetails
+    wx.navigateTo({
+      url: '/pages/role/allOrder/allOrder?num=' + dataDetails.orderNumber
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

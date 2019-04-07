@@ -1,12 +1,12 @@
 <view class='re-cont'>
   <view wx:for='{{dataArr}}' wx:key='{{index}}'>
-    <view class='re-data'>{{dataArr.settleDate}}
+    <view class='re-data'>{{item.settleDate}}
       <text>已结算</text>
     </view>
     <navigator class='weui-back'>
       <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-          ￥{{dataArr.actualSettleAmount}}
+          ￥{{item.actualSettleAmount}}
         </view>
       </view>
     </navigator>

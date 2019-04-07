@@ -1,0 +1,19 @@
+@import '../waitRalease/waitRalease';
+.ld-t{border-bottom: 0;}
+.aa-doing{padding: 0 0 50rpx 25rpx;text-align: left}
+.aa-doing button{background: #F02B2B;height: 50rpx;line-height: 48rpx;width: 160rpx;border-radius: 10rpx;text-align: center;font-size: 26rpx;color: #fff;margin: 0}
+.aa-money{text-align: center;color: #999;font-size: 26rpx;font-weight: bold}
+.aa-money view{color: #BB7916;}
+.aa-money view text{font-size: 48rpx;}
+.listData .aa-info{border-bottom: 2rpx solid #F0F0F0;font-size: 28rpx;margin:0 40rpx;height: 100rpx;line-height: 100rpx;display: flex;align-items: center;}
+.listData .aa-info:last-child{border-bottom: 0}
+.aa-info image{width: 60rpx;height: 60rpx;border-radius:50%;vertical-align: middle;margin-right: 10rpx;margin-left: 20rpx;}
+.aa-info view,.aa-info text{font-size: 26rpx;display: inline-block}
+.aa-info .aa-sale{color: #999;padding-right: 8rpx;}
+.aa-dot{width: 20rpx;height: 20rpx;background: #F2E1C6;border-radius: 50%;margin-left: 20rpx;margin-right: 15rpx;}
+.aa-fot-o{background:#FDCE26}
+.aa-fot-t{background:#E5E5E5}
+.aa-fot-th{background:#D3A470}
+.aa-info .aa-name{max-width: 280rpx;overflow: hidden;text-overflow: ellipsis;white-space:nowrap}
+.aa-info>view:last-child{position: absolute;right:60rpx;}
+.aa-top{font-size: 36rpx;font-weight: bold;height: 100rpx;line-height: 100rpx;border-bottom: 2rpx solid #F0F0F0;padding-left: 25rpx;}

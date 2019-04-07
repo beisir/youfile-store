@@ -50,6 +50,7 @@ Page({
     var that = this,
       name=e.target.dataset.name,
       limitShow = this.data.limitShow
+    // 修改进货车
     if (name == "more") {
       var index = e.target.dataset.index,
         detailList = this.data.detailList[index]
@@ -57,12 +58,14 @@ Page({
         url: '../goodsDetails/goodsDetails?goodsId=' + detailList["goodsId"] + "&code=" + index + "&name=more",
       })
     }
+    // 修改进货车
     if (limitShow == 3 && name == "one") {
       var gid = e.target.dataset.gid
       wx.navigateTo({
         url: '../goodsDetails/goodsDetails?goodsId=' + gid + "&code=" + index + "&name=more",
       })
     }
+    // 修改购物车
     if (limitShow != 3 && name == "one") {
       var gid = e.target.dataset.gid
       wx.navigateTo({
@@ -362,11 +365,7 @@ Page({
     var _this=this
     Api.deteleCartFai()
      .then(res => {
-        wx.showToast({
-          title: '清空成功',
-          icon: 'none',
-          duration: 2000
-        })
+       Api.showToast('清空成功')
        setTimeout(function () {
          _this.getList()
        }, 1000)

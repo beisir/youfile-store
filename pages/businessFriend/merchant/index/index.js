@@ -31,6 +31,11 @@ Page({
         })
       })
   },
+  goHome: function () {
+    wx.switchTab({
+      url: '../../../page/home/home'
+    })
+  },
   onLoad: function (options) {
     
   },

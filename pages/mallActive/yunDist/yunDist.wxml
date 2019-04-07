@@ -1,0 +1,102 @@
+<view class='dr-back'></view>
+<view class='listData'>
+  <view>
+    <view class='yd-top'>
+      <view>
+        <image src='/image/user.png'></image>
+      </view>
+      <view>童泰母婴</view>
+      <view>累计收入(元)
+        <view class='yd-down'></view>
+      </view>
+      <view class='yd-m'>{{staticData.totalSales}}</view>
+      <view class='yd-data'>
+        <view>
+          昨日收入
+          <view>{{staticData.yesterdaySales}}</view>
+          <view class='yd-xian'></view>
+        </view>
+        <view>
+          累计件数
+          <view>{{staticData.countTotalGoodsNum}}</view>
+          <view class='yd-xian'></view>
+        </view>
+        <view>
+          累计订单
+          <view>{{staticData.countTotalOrder}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='yd-datas'>
+    <view class='yd-purch'>共{{totalCount}}个进货商</view>
+    <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic dr-pic1'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator>
+      <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic dr-pic2'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator>
+      <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic dr-pic3'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator>
+      <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator>
+  </view>
+</view>

@@ -3,11 +3,13 @@ import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
 import EnterStoreHandler from '../../../utils/enterStoreHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
+import { handleQRCode } from '../../../utils/scanCode.js';
 // 身份判断
 function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
   isStoreOwner.enterIdentity().then(res => {
     _this.homeIndex()
+    _this.getActiveGoods()
   }).catch(res => {
   });
 }
@@ -16,6 +18,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     indexEmpty: true,
     show: false,
     samePre: false,
@@ -47,12 +50,67 @@ Page({
     src: '',
     goodsName: '',
     copyGoods: false,
-    openStore: false
+    openStore: false,
+    tipIndex: 0,
+    tabSwitch: "0",
+    tabSwitchShow:true,
+    avtiveGoods:[]
+  },
+  // 切换抢购商品
+  tabSwitch:function(e){
+    var index = e.target.dataset.index
+    if(index=="1"){
+      this.setData({
+        tabSwitchShow: false
+      })
+    }else{
+      this.setData({
+        tabSwitchShow: true
+      })
+    }
+    this.setData({
+      tabSwitch:index
+    })
   },
   //到店弹框
   showStoreOrder() {
-    this.selectComponent("#storeOrder").open();
+    if (authHandler.isLogin()) {
+      this.selectComponent("#storeOrder").open(this);
+    }else{
+      this.selectComponent("#storeOrder").close();
+    }
   },
+  //轮播消息
+  toUser() {
+    wx.switchTab({
+      url: '/pages/page/user/user'
+    })
+  },
+  stopSwiperTip() {
+    this.setData({
+      showAllTip: true,
+      tipIndex: 0
+    })
+  },
+  continueSwiperTip() {
+    this.setData({
+      showAllTip: false,
+    })
+  },
+  swiperItemControl(){
+    if (authHandler.isLogin()) {
+      Api.unpaidOrderNum().then(res=>{
+        this.setData({
+          unpaidOrderNum: res.obj.totalOrderCount
+        })
+      })
+    }else{
+      this.setData({
+        unpaidOrderNum:0
+      })
+    }
+  },
+  //开店
   openStore: function () {
     wx.navigateTo({
       url: '../../cloudOrder/newCloud/newCloud',
@@ -197,34 +255,6 @@ Page({
 
     }
   },
-  // 扫码
-  addFriend: function () {
-    var _this = this;
-    wx.scanCode({
-      success: (res) => {
-        var qrUrl = res.result
-        let options = {
-          getUserIdFromQrCode: qrUrl
-        }
-        let enEnterStoreHandler = new EnterStoreHandler("1");
-        enEnterStoreHandler.enterStore(options).then(store => {
-          if (store.storeNature == "1") {
-            var userId = store.userId
-            var storeId = store.storeId
-            _this.getUserInfor(userId, storeId)
-          }
-        }).catch(store => {
-          let userId = store.userId
-          _this.getFriendMes(userId)
-
-        });
-      },
-      fail: (res) => {
-        // Api.showToast("未获取用户信息！")
-      },
-      complete: (res) => { }
-    })
-  },
   // 获取当前登录的身份
   getUserInfor: function (userId, storeId) {
     var limitShow = wx.getStorageSync("admin")
@@ -273,11 +303,9 @@ Page({
    */
   // 查看资料
   addTip: function () {
-    var Id = Api.getThisStoreId(),
-      logo = this.data.store.logo,
-      name = this.data.store.storeName
+    var Id = Api.getThisStoreId()
     wx.navigateTo({
-      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=&logo=' + logo + '&name=' + name,
+      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=',
     })
   },
   addWholesalePrice: function () {
@@ -351,12 +379,7 @@ Page({
       currentTab: 0
     })
   },
-  // editDp: function () {
-  //   this.setData({
-  //     showDp: false,
-  //   })
-  // }, 
-  // 编辑小云店信息
+  // 编辑信息
   editDpMes: function () {
     var limitShow = this.data.limitShow
     if (limitShow == 2) {
@@ -382,9 +405,9 @@ Page({
       sortType = 'sales'
     } else if (currentTab == 3) {
       if (descShow) {
-        sortType = 'prices_asc'
-      } else {
         sortType = 'prices_desc'
+      } else {
+        sortType = 'prices_asc'
       }
     }
     Api.shopList({
@@ -445,7 +468,7 @@ Page({
       .then(res => {
         var obj = res.obj
         wx.setNavigationBarTitle({
-          title: obj.store.storeName == null ? "小云店" : obj.store.storeName
+          title: obj.store.storeName == null ? app.globalData.projectName : obj.store.storeName
         })
         app.globalData.isFollow = obj.isFollow
         var result = obj.goods.result
@@ -459,31 +482,54 @@ Page({
           totalCount: obj.goods.totalCount,
           likeShow: app.globalData.isFollow
         }, function () {
-          var query = wx.createSelectorQuery();
-          query.select('#myText').boundingClientRect()
-          query.exec(function (res) {
-            that.setData({
-              bannerHeight: res[0].height
-            })
-          })
-          if (result.length > 0) {
-            var query2 = wx.createSelectorQuery();
-            query2.select('#result-list').boundingClientRect()
-            query2.exec(function (res) {
-              that.setData({
-                goodsHeight: res[0].height
-              })
-            })
-          }
-          var query1 = wx.createSelectorQuery();
-          query1.select('#swiper-tab').boundingClientRect()
-          query1.exec(function (res) {
-            that.setData({
-              swiperHeight: res[0].height
-            })
-          })
+          that.getHeight(result)
         })
       })
+  },
+  // 获取店铺活动商品列表
+  getActiveGoods:function(){
+    var _this=this
+    Api.storeActiveGoods().then(res=>{
+      var obj = res.obj
+      if (obj){
+        _this.setData({
+          avtiveGoods:obj
+        })
+      }
+    })
+  },
+  // 获取高度
+  getHeight(result){
+    var that = this;
+    var query = wx.createSelectorQuery();
+    query.select('#myText').boundingClientRect()
+    query.exec(function (res) {
+      if (res[0]) {
+        that.setData({
+          bannerHeight: res[0].height
+        })
+      }
+    })
+    if (result.length > 0) {
+      var query2 = wx.createSelectorQuery();
+      query2.select('#result-list').boundingClientRect()
+      query2.exec(function (res) {
+        if (res[0]) {
+          that.setData({
+            goodsHeight: res[0].height
+          })
+        }
+      })
+    }
+    var query1 = wx.createSelectorQuery();
+    query1.select('#swiper-tab').boundingClientRect()
+    query1.exec(function (res) {
+      if (res[0]) {
+        that.setData({
+          swiperHeight: res[0].height
+        })
+      }
+    })
   },
   getStore() {
     Api.storeIdInfo().then(res => {
@@ -533,6 +579,7 @@ Page({
     if (options != undefined) {
       let enEnterStoreHandler = new EnterStoreHandler("1");
       enEnterStoreHandler.enterStore(options).then(store => {
+        _this.loadData()
         //进店成功
         if (store.userId) {
           let userId = store.userId
@@ -541,7 +588,6 @@ Page({
         _this.setData({
           isOnloaded: true
         });
-        _this.loadData()
 
       }).catch(store => {
         _this.setData({
@@ -623,6 +669,7 @@ Page({
       _this.getListNew()
     });
   },
+  // 切换商品tab
   swichNav: function (e) {
     var that = this,
       descShow = this.data.descShow,
@@ -643,10 +690,19 @@ Page({
         if (index == 1) {
           that.emptyArrNew()
         } else {
-          this.emptyArr()
+          that.emptyArr()
         }
       })
     }
+  },
+  // 切换活动商品tab
+  swichNavActive:function(e){
+    var _this=this,
+      index = e.target.dataset.current
+    console.log(index)
+    _this.setData({
+      currentTabActive:index
+    })
   },
   // 置顶
   topGoods: function () {
@@ -758,6 +814,9 @@ Page({
       getFollw: authHandler.isLogin(),
       disLike: false,
     })
+
+    // this.showStoreOrder();  //到店订单弹窗
+    this.swiperItemControl()  //轮播接口
   },
 
   /**
@@ -824,7 +883,7 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  toBottom: function () {
     var noMoreData = this.data.noMoreData
     var currentTab = this.data.currentTab
     if (noMoreData) {
@@ -835,8 +894,8 @@ Page({
       }
     }
   },
-  onPageScroll: function (e) {
-    var top = e.scrollTop,
+  myPageScroll(e){
+    var top = e.detail.scrollTop,
       result = this.data.result,
       goodsHeight = this.data.goodsHeight,
       totalCount = this.data.totalCount,

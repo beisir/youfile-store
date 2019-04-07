@@ -1,10 +1,12 @@
 import Api from '../../../utils/api.js'
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     id: Api.getThisStoreId(),
     data:[{
           name: "服饰内衣",
@@ -119,7 +121,7 @@ Page({
           icon: 'none',
           duration: 2000,
           success: function () {
-            wx.navigateTo({
+            wx.redirectTo({
               url: '../mesEdit/mesEdit',
             })
           }

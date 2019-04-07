@@ -12,7 +12,8 @@ Page({
     userId:'',
     mobile:'',
     baseUrl: app.globalData.imageUrl,
-    data:''
+    data:'',
+    ifWholesaler:true
   },
   calling: function () {
     var mobile = this.data.data.mobile
@@ -31,10 +32,17 @@ Page({
     var _this=this
     this.setData({
       userId: options.userId,
-      mobile: options.mobile
+      mobile: options.mobile ? options.mobile:""
     })
     if (options.userId){
       _this.getUserDetails({ userId: options.userId })
+    }
+    //门店订单
+    if (options.entry == "faceOrder") {
+      this.setData({
+        faceOrderIn: true,
+        entry: 'ftf'
+      })
     }
   },
   // 获取信息
@@ -106,16 +114,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    var that = this
-    var pages = getCurrentPages();
-    var currPage = pages[pages.length - 1]
-    if (currPage.data.userId) {
-      that.getUserDetails({ userId: currPage.data.userId })
-      this.setData({
-        userId: currPage.data.userId,
-      })
-    }
-
+    //门店订单
+    // if (this.data.entry === 'ftf'){
+    //   Api.ifWholesaler({ userId: this.data.userId }).then(res => {
+    //     if (res.obj.isPurchaser) {
+    //       this.setData({ ifWholesaler: true })
+    //     } else {
+    //       this.setData({ ifWholesaler: false })
+    //     }
+    //   })
+    // }
   },
 
   /**
