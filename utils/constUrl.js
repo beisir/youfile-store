@@ -224,4 +224,12 @@ export const getActiveGoodsDetailUrl = '/admin/mall/goods/activity/{{activityNum
 export const editActiveGoodsUrl = '/admin/mall/goods/activity/goods/edit'
 export const saleActiveListUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/sales/list"
 export const statisticSalesUrl="/admin/mall/activity/statistic/sum/{{activityNumber}}/store/sales/all"
+// 统计云分销数据
+export const yunStatisticsUrl="/order/statistics/distribution"
+export const aAnalysisAGoodsUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/goods/top"
+export const aAnalysisCustomUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/custom/top"
+// 统计查询进货商汇总数据列表
+export const statPurchasersUrl="/order/statistics/purchasers/trade/data/page"
+export const statPurchasersDetailsUrl="/order/statistics/purchaser/{{userId}}/trade/data"
+export const purchaserTransUrl="/admin/order/purchaser/{{userId}}/"
 

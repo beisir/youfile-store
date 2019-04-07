@@ -182,7 +182,13 @@ import {
   delActGoodsUrl,
   storeActiveGoodsUrl,
   saleActiveListUrl,
-  statisticSalesUrl
+  statisticSalesUrl,
+  yunStatisticsUrl,
+  aAnalysisAGoodsUrl,
+  aAnalysisCustomUrl,
+  statPurchasersUrl,
+  statPurchasersDetailsUrl,
+  purchaserTransUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -1165,6 +1171,31 @@ function saleActiveList(data) {
 function statisticSales(data) {
   return app.http.getRequest(statisticSalesUrl, data)
 }
+// 统计云分销数据
+function yunStatistics() {
+  return app.http.getRequest(yunStatisticsUrl )
+}
+// 统计活动商品销量排行榜
+function aAnalysisAGoods(data) {
+  return app.http.getRequest(aAnalysisAGoodsUrl,data)
+}
+// 统计活动消费排行榜
+function aAnalysisCustom(data) {
+  return app.http.getRequest(aAnalysisCustomUrl, data)
+}
+/**统计查询进货商汇总数据列表**/
+function statPurchasers(data) {
+  return app.pageRequest.pageGet(statPurchasersUrl, data)
+}
+// 统计查询进货商信息
+function statPurchasersDetails(data) {
+  return app.http.getRequest(statPurchasersDetailsUrl, data)
+}
+//进货商交易数据列表
+function purchaserTrans(data) {
+  return app.pageRequest.pageGet(purchaserTransUrl, data)
+}
+
 module.exports = {
   editActiveGoods,
   getActiveGoodsDetail,
@@ -1360,5 +1391,11 @@ module.exports = {
   delActGoods,
   storeActiveGoods,
   saleActiveList,
-  statisticSales
+  statisticSales,
+  yunStatistics,
+  aAnalysisAGoods,
+  aAnalysisCustom,
+  statPurchasers,
+  statPurchasersDetails,
+  purchaserTrans
 }

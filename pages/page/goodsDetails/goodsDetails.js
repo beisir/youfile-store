@@ -557,8 +557,7 @@ Page({
       skuArrTwo = this.data.skuArrTwo,
       skuArr = this.data.goodsSkuVOList,
       skuValueVOList = [],
-      newSkuArrTwo = []
-    codeName = this.data.goodsSpecificationVOList,
+      newSkuArrTwo = [],
     newList = {},
     returnStop = false,
     spectArrDifference = this.data.spectArrDifference
@@ -582,7 +581,6 @@ Page({
       skuArr = this.data.goodsSkuVOList,
       skuValueVOList = [],
       newSkuArrTwo = [],
-      codeName = this.data.goodsSpecificationVOList,
       newList = {},
       returnStop = false,
       spectArrDifference = this.data.spectArrDifference
@@ -752,6 +750,7 @@ Page({
       newArr = [],
       newSkuArrTwo = [],
       _this = this,
+      attr = e.target.dataset.attr,
       status = e.target.dataset.status //判断是否是立即下单
     // 判断商品属性是否有异常
     if (goodsSpecificationVOList.length > 0) {
@@ -760,8 +759,9 @@ Page({
         return
       }
     }
-    // 批量添加数据
-    if (goodsSelectdLen > 0) {
+    //small代表购物车或者属性规格没有
+    if (attr =="more"){
+       if (goodsSelectdLen > 0) {
       // 多个规格数据组装
       for (var j = 0; j < spectArrDifference.length; j++) {
         newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
@@ -773,7 +773,6 @@ Page({
               skuCode: newSkuArrTwo[i].skuCode,
               storeId: wx.getStorageSync('storeId')
             })
-
           }
         }
       }
@@ -805,10 +804,11 @@ Page({
             })
         }
       }
-    } else {
+    } 
+    }else{
       // 不是批量添加
       var num = this.data.numbers,
-        skuCode = 0, //没有规格的时候默认code为0
+        skuCode = '', //没有规格的时候默认code为0
         changeButtonCode = this.data.changeButtonCode,
         swichNavCode = this.data.swichNavCode,
         goodsSkuVOList = this.data.goodsSkuVOList
@@ -823,6 +823,18 @@ Page({
             skuCode = goodsSkuVOList[i].skuCode
           }
         }
+      }
+      if (goodsSpecificationVOList.length > 0) {
+        if (skuCode == '') {
+          Api.showToast("请选择商品属性!")
+          return
+        }
+      } else {
+        skuCode = 0
+      }
+      if (num < 1) {
+        Api.showToast("请添加购买数量！")
+        return
       }
       if (status == 0) {
         if (this.data.editOneName) {
@@ -841,8 +853,8 @@ Page({
               })
             })
         } else {
+          //添加购物车或者没有规格的进火车
           _this.selectedSku()
-          if (num>0){
             Api.addCart({
               goodsId: goodsId,
               num: num,
@@ -854,11 +866,9 @@ Page({
                   hidden: true
                 })
               })
-          }else{
-            Api.showToast("请添加购买数量！")
-          }
         }
       } else {
+        //预订单
         var model = {
           goodsId: goodsId,
           num: num,
@@ -870,12 +880,44 @@ Page({
       }
     }
   },
+  addCount: function () {
+    let num = this.data.numbers
+    var stockNum = this.data.goodsInfo.stockNum
+    if (num >= stockNum) {
+      Api.showToast("库存不足！")
+      return
+    }
+    num = num + 1
+    this.setData({
+      numbers: num,
+    })
+    this.selectedSku()
+    // if (this.data.isShowNewOne) {
+    //   this.getTotalPriceNew(num)
+    // }
+    // if (this.data.editOneName) {
+    //   var newSkuArrTwo = this.data.newSkuArrTwo
+    //   for (var i = 0; i < newSkuArrTwo.length; i++) {
+    //     if (newSkuArrTwo[i].num > 0) {
+    //       newSkuArrTwo[i].num = num
+    //     }
+    //   }
+    //   this.setData({
+    //     newSkuArrTwo: newSkuArrTwo
+    //   }, function () {
+    //     this.getTotalPrice();
+    //   })
+    // }
+
+  },
+
   // 判断选中的SKU
   selectedSku: function() {
     var skuStr = '',
       swichNavCode = this.data.swichNavCode,//第一个规格code
       changeButtonCode = this.data.changeButtonCode,//第二个规格code
-      goodsSkuVOList = this.data.goodsSkuVOList
+      goodsSkuVOList = this.data.goodsSkuVOList,
+      numbers=this.data.numbers
     for (var i = 0; i < goodsSkuVOList.length; i++) {
       var childArr = goodsSkuVOList[i].specValueCodeList
       if (childArr.length == 1) {
@@ -884,7 +926,12 @@ Page({
         }
       } else {
         if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
-          console.log(goodsSkuVOList[i])
+          var stockNum = goodsSkuVOList[i].stockNum
+          if (numbers > stockNum){
+            this.setData({
+              numbers: stockNum
+            })
+          }
           skuStr = goodsSkuVOList[i].skuName
         }
       }
@@ -1004,22 +1051,6 @@ Page({
    * 计算总价
    */
   getTotalPrice() {
-    var childArr = [],
-      colorNum = 0,
-      differNum = 0,
-      differMoney = 0,
-      newSkuArrTwo = [],
-      skuStr = '', //页面显示选择的规格
-      total = 0, //总价
-      activeGoodsTotal = 0, //活动商品总价
-      newTotal = 0,
-      discount = 0,
-      nomalGoodsNums = 0, //除了活动的数量
-      nums = 0, //一共的数量
-      classNums = 0,
-      difference = 0, //差价
-      discountShow = true, //是否享受批发价
-      limitShow = wx.getStorageSync('admin') //判断是否是进货商身份  3代表是
     let code = this.data.moreCode;
     let showCartOne = this.data.showCartOne //是否是修改购物车
     let swichNav = this.data.swichNav;
@@ -1027,116 +1058,8 @@ Page({
     let saleBatchAmount = this.data.saleBatchAmount //店铺的起批金额
     let saleBatchNum = this.data.saleBatchNum //店铺的起批数量
     let saleBatchNumGoods = this.data.saleBatchNumGoods //商品的起批数量
-    // Method.getTotalPrice(code, showCartOne, swichNav, spectArrDifference, saleBatchAmount, saleBatchNum, saleBatchNumGoods, limitShow) 
-    let goodsSpecificationVOList = this.data.goodsSpecificationVOList //获取当前商品规格属性
-    let goodsSkuLen = goodsSpecificationVOList.length
-    // 判断商品是否存在起批量
-    if (saleBatchNumGoods == 0) {
-      saleBatchNumGoods = saleBatchNum
-    }
-    //判断是是否有规格
-    if (goodsSkuLen > 0) {
-      if (goodsSpecificationVOList.length > 0) {
-        var childArr = goodsSpecificationVOList[0].goodsSpecificationValueVOList //获取商品的第一个规格属性
-      }
-      for (var j = 0; j < spectArrDifference.length; j++) {
-        newSkuArrTwo = spectArrDifference[j].newSkuArrTwo
-        for (let i = 0; i < newSkuArrTwo.length; i++) {
-          //用来表示有多少个规格 红色显示数量
-          if (spectArrDifference[j].code == code) {
-            colorNum += newSkuArrTwo[i].num
-            childArr[swichNav].num = colorNum
-          }
-          // 计算选择的SKU 数量大于0的相加
-          if (newSkuArrTwo[i].num > 0) {
-            skuStr += newSkuArrTwo[i].skuName + ","
-            classNums += 1 //种类
-            // 当前SKU是否是活动商品isActivity
-            var isActivity = newSkuArrTwo[i].isActivity ? true : false
-            if (!isActivity) {
-              nums += newSkuArrTwo[i].num //数量
-            }
-            nomalGoodsNums += newSkuArrTwo[i].num
-            if (showCartOne) { //true添加 为false 是修改购物车
-              if (isActivity) {
-                activeGoodsTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].activityPrice;
-              } else {
-                total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice;
-              }
-            } else {
-              if (!isActivity) {
-                total += newSkuArrTwo[i].num * this.data.goodsInfo.sell;
-              }
-            }
-            if (!isActivity) {
-              newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice; //总的批发价
-
-            }
-          }
-        }
-      }
-      goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
-    } else {
-      var goodsInfo = this.data.goodsInfo
-      var hasActiveGoods = goodsInfo.hasActiveGoods
-      if (hasActiveGoods) {
-        activeGoodsTotal = goodsInfo.num * goodsInfo.activityPrice
-      } else {
-        total = goodsInfo.num * goodsInfo.sellPrice
-        newTotal = goodsInfo.num * goodsInfo.wholesalePrice
-      }
-      nomalGoodsNums = this.data.numbers
-      classNums = 1
-    }
-    // 进货商身份
-    if (limitShow == 3) {
-      difference = total - newTotal //差价
-      // 判断是否享受 起批设置
-      if (saleBatchNum == 0) {
-        if (saleBatchAmount == 0) {
-          discountShow = false
-        } else {
-          discountShow = true
-          if (total >= saleBatchAmount) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
-        }
-        differMoney = saleBatchAmount - total
-      } else {
-        if (saleBatchAmount == 0) {
-          if (nums >= saleBatchNum || nums >= saleBatchNumGoods) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
-        }
-        if (saleBatchAmount > 0) {
-          if (nums >= saleBatchNum || total >= saleBatchAmount || nums >= saleBatchNumGoods) {
-            discountShow = false
-          } else {
-            discountShow = true
-          }
-        }
-        differNum = saleBatchNumGoods - nums
-        differMoney = saleBatchAmount - total
-      }
-    }
-    skuStr = (skuStr.substring(skuStr.length - 1) == ',') ? skuStr.substring(0, skuStr.length - 1) : skuStr
-    this.setData({
-      newSkuArrTwo: newSkuArrTwo,
-      skuStr: skuStr, ///页面显示选择的规格
-      totalPrice: (total + activeGoodsTotal).toFixed(2),
-      nums: nomalGoodsNums, //数量
-      differNum: differNum == 0 ? saleBatchNumGoods : differNum, //差的数量
-      differMoney: differMoney == 0 ? saleBatchAmount : differMoney.toFixed(2), //差价
-      discountShow: discountShow,
-      classNums: classNums, //种类商品
-      newTotal: (newTotal + activeGoodsTotal).toFixed(2),
-      difference: parseInt(difference),
-      goodsSpecificationVOList: goodsSpecificationVOList
-    });
+    let goodsSpecificationVOList = this.data.goodsSpecificationVOList
+    Method.getTotalPrice(goodsSpecificationVOList,spectArrDifference,code, showCartOne, swichNav, saleBatchAmount, saleBatchNum, saleBatchNumGoods)
   },
 
   /**

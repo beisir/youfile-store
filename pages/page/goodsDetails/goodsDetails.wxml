@@ -44,16 +44,6 @@
       </block>
     </swiper>
     <!-- 活动条 -->
-    <view class='active-g'>
-      <view>￥
-        <text>1000</text>
-        <text>￥1200</text>
-      </view>
-      <view>
-        <view>距结束还有</view>
-        <text>1天15：15：15</text>
-      </view>
-    </view>
     <goodsActivityBinding position="1" activityShowInfo="{{activityData}}" />
   </view>
   <view class='gd-details'>
@@ -367,8 +357,8 @@
               <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
               <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
             </view>
-            <view class='gd-botoom1' data-status='0' bindtap='moreAddCart'>加入进货车</view>
-            <view class='gd-botoom1' data-status='1' bindtap='moreAddCart'>立即下单</view>
+            <view class='gd-botoom1' data-attr="more" data-status='0' bindtap='moreAddCart'>加入进货车</view>
+            <view class='gd-botoom1' data-attr="more" data-status='1' bindtap='moreAddCart'>立即下单</view>
           </view>
       </view>
     </view>
@@ -415,19 +405,20 @@
           <view class='cart-list gd-cart-list'>
             <view class="cart-count-box">
               <text class="cart-count-down" bindtap="minusCount">
-                  <text wx:if="{{numbers!=1}}" class='ct-xian'></text>
-              <text wx:if="{{numbers==1}}"><text class='ct-xian ct-xian1'></text></text>
+                  <text wx:if="{{numbers!=0}}" class='ct-xian'></text>
+              <text wx:if="{{numbers==0}}"><text class='ct-xian ct-xian1'></text></text>
               </text>
               <text class="cart-count-num">{{numbers}}</text>
-              <view class="cart-count-add" bindtap="addCount" data-index="0"  bindtap="updateSkuNum" data-sign='add'>
+              <view class="cart-count-add" bindtap="addCount" data-index="0"  bindtap="addCount" data-sign='add'>
                 <image src="/image/add.png"></image>
               </view>
+              <view class='qiGou'>起购量：10</view>
             </view>
           </view>
         </view>
         <view class='weui-bottom'>
-          <view data-status='0' bindtap='cratHome'>加入购物车</view>
-          <view data-status='1' bindtap='cratHome'>立即购买</view>
+          <view data-status='0' data-attr="small" bindtap='moreAddCart'>加入购物车</view>
+          <view data-status='1' data-attr="small" bindtap='moreAddCart'>立即购买</view>
         </view>
       </view>
     </view>

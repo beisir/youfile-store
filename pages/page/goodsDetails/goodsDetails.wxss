@@ -132,7 +132,7 @@
 .lt-weui-bottom1 view:last-child{color:#CCAA77;background:none;position:relative;width:57%}
 .lt-weui-bottom1>view{width:40%}
 .lt-weui-bottom1 view>text{left:70rpx}
-.weui_cells1 .skuStr{text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;position:absolute;top:2rpx;left:180rpx;color:#666;font-size:26rpx;width:460rpx;text-align: right}
+.weui_cells1 .skuStr{text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;position:absolute;top:2rpx;left:180rpx;color:#666;font-size:26rpx;width:470rpx;text-align: right}
 .goods-total{bottom:200rpx;border:2rpx solid #CCAA77;color:#CCAA77;font-size:28rpx;font-size:30rpx;padding:10rpx;line-height:1.2}
 .goods-total .gt-ku{line-height:3.5;}
 .goods-total-ku{padding-top: 13rpx;background: #fff;overflow: hidden}

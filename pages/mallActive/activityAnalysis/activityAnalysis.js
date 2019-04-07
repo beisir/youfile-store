@@ -12,6 +12,8 @@ Page({
     doubleColumnCanvasData: {
       canvasId: 'doubleColumn',
     },
+    activeGoods:[],//商品销量榜
+    customData:[],//进货商排行榜
     activityNumber: '1903260301000010',
   },
 
@@ -24,6 +26,7 @@ Page({
     }
     this.getSalesList("1903260301000010")
     this.initStatic()
+    this.getAnalysisAGoods("1903260301000010")
   },
   // 初始化统计表
   initStatic:function(){
@@ -178,6 +181,22 @@ Page({
       }
     })
   },
+  // 获取商品销量排行榜
+  getAnalysisAGoods: function (activityNumber){
+    var _this=this
+    Api.aAnalysisAGoods({ activityNumber: activityNumber, limit :10}).then(res=>{
+      _this.setData({
+        activeGoods:res.obj
+      })
+    })
+    Api.aAnalysisCustom({ activityNumber: activityNumber, limit: 10 }).then(res => {
+      _this.setData({
+        customData: res.obj
+      })
+      console.log(res.obj)
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -189,7 +208,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    console.log("22222");
+
   },
 
   /**
