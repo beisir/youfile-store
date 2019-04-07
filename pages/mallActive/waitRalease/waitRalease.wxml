@@ -134,8 +134,8 @@
     <view>
       <image src="/image/huodong.png"></image>
     </view>
-    <text wx:if='{{tabSwitch=="0"}}'>暂未添加活动商品</text>
-    <text wx:if='{{tabSwitch=="1"}}'>暂未参加活动商品</text>
+    <text wx:if='{{tabSwitch=="0"}}'>暂无加活动商品</text>
+    <text wx:if='{{tabSwitch=="1"}}'>暂无加活动商品</text>
   </view>
   <view class='wr-bottom' wx:if='{{tabSwitch=="0"}}'>
     <button bindtap='joinAct' wx:if="{{!participate}}" class='addgoods bottom-btn'>参加活动</button>

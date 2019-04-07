@@ -32,7 +32,7 @@
   <view>
     <image src="/image/huodong.png"></image>
   </view>
-  <text>暂未添加活动商品</text>
+  <text>暂无加活动商品</text>
 </view>
 <view class='add-bottom' wx:if="{{result.length>0}}">
   <view>

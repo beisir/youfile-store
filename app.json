@@ -1,12 +1,15 @@
 {
   "pages": [
     "pages/page/home/home",
+    
+    "pages/mallActive/list/list",
+    
+    
     "pages/page/goodsDetails/goodsDetails",
     "pages/page/workIndex/workIndex",
     "pages/mallActive/activityAnalysis/activityAnalysis",
     "pages/mallActive/yunDist/yunDist",
     "pages/admin/status/status",
-    "pages/mallActive/list/list",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/page/serStatus/serStatus",
     "pages/mallActive/editGoods/editGoods",
