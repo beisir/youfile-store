@@ -65,8 +65,14 @@ Page({
       if (!buyNum || buyNum == 0) {
         err = '请填写起购量'
       }
+      if(!num || num == 0){
+        err = '请填写活动库存'
+      }
+      if (buyNum > num){
+        err = '商品活动库存不能低于商品起购量'
+      }
       if (num > this.data.goods.stockNum) {
-        err = '活动库存不能大于货物库存'
+        err = '商品活动库存不能超过商品库存'
       }
       if (!price || price == 0) {
         err = '请填写活动价格'
@@ -74,6 +80,10 @@ Page({
         if (!/^(([1-9][0-9]*)|([0]\.\d?[1-9])|([1-9][0-9]*\.\d{1,2}))$/.test(price)) {
           err = '请输入正确金额格式，最多两位小数'
         }
+      }
+
+      if (price > this.data.goods.wholesalePrice){
+        err = '商品活动价格不能超过商品批发价'
       }
 
       let noskuarr = [{
@@ -93,8 +103,14 @@ Page({
           if (!el.buyNum || el.buyNum == 0) {
             err = '商品规格' + (index + 1) + '：请填写起购量'
           }
+          if (!el.sureNum || el.sureNum == 0) {
+            err = '商品规格' + (index + 1) + '：请填写活动库存'
+          }
+          if (el.buyNum > el.sureNum) {
+            err = '商品规格' + (index + 1) + '：商品活动库存不能低于商品起购量'
+          }
           if (el.sureNum > el.stockNum) {
-            err = '商品规格' + (index + 1) + '：活动库存不能大于货物库存'
+            err = '商品规格' + (index + 1) + '：商品活动库存不能超过商品库存'
           }
           if (!el.surePrice || el.surePrice == 0) {
             err = '商品规格' + (index + 1) + '：请填写活动价格'
@@ -103,6 +119,9 @@ Page({
               err = '请输入正确金额格式，最多两位小数'
             }
           }  
+          if (el.surePrice > el.wholesalePrice) {
+            err = '商品活动价格不能超过商品批发价'
+          }
 
             acArr.push({
               activityNumber: this.data.activityNumber,
@@ -262,10 +281,10 @@ Page({
         obj.noSkuPrich = val
         break;
       case 'noSku-num':
-        obj.noSkuNum = val
+        obj.noSkuNum = parseInt(val)
         break;
       case 'noSku-buynum':
-        obj.noSkuBuynum = val
+        obj.noSkuBuynum = parseInt(val)
         break;
     }
     this.setData(obj)
@@ -342,7 +361,7 @@ Page({
     this.setData({
       activityNumber: options.activityNumber,
       goodsId: options.goodsId
-      // activityNumber: 1903260301000010,
+      // activityNumber: 1903280301000012,
       // goodsId: 180929212000
     })
     this.getDetail()

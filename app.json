@@ -1,9 +1,9 @@
 {
   "pages": [
-    "pages/page/goodsDetails/goodsDetails",
     "pages/page/home/home",
-    
     "pages/mallActive/list/list",
+    "pages/page/goodsDetails/goodsDetails",
+    
     
     
     "pages/page/workIndex/workIndex",
