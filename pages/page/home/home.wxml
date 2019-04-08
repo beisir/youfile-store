@@ -166,17 +166,9 @@
     </block>
   </view>
   <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
-    <view class='flex-center'>
-      <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
-    </view>
-    <image class='more-tri-icon' src='/image/mallr.png'></image>
+    <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
   </view>
-  <!-- <view class='newadd-friend' wx:if='{{limitShow==3}}'>
-    <view class='flex-center'>
-      <view class='icon-view' style='background:#ccaa77'>友</view>已成商友，现可查看批发价！
-    </view>
-    <view></view>
-  </view> -->
+  
   <view class='tab-cont'>
     <view class='tab-view {{tabSwitch=="0"?"tab-view3":"tab-view2"}}'>
       <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}'  data-index='0'>正在抢订</view>

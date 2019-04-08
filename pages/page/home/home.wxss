@@ -121,6 +121,6 @@
   width: 30rpx;
 }
 /* 商友 */
-.newadd-friend{background:#fff;display: flex;align-items: center;justify-content: space-between; height: 80rpx;padding: 0 50rpx 0 45rpx;font-size:24rpx;font-weight:600;}
+.newadd-friend{background:#fff;display: flex;align-items: center; height: 80rpx;padding: 0 50rpx 0 45rpx;font-size:24rpx;font-weight:600;}
 .icon-view{font-weight:500;width: 30rpx;height: 30rpx;font-size: 22rpx;text-align: center; line-height: 30rpx;color: #fff;background: #000;margin-right: 20rpx;}
 .flex-center{display: flex;align-items: center;}
