@@ -1,5 +1,5 @@
 @import '../userDetails/userDetails';
-.banner{position:relative}
+.banner{position:relative;background: #fff;}
 .hm-fx image{width:35rpx;height:35rpx;vertical-align:middle;margin-right:10rpx;margin-top:-3rpx}
 .hm-fx{position:absolute;right:0;background:#CCAA77;color:#fff;font-size:30rpx;width:140rpx;height:58rpx;text-align:center;border-top-left-radius:65rpx;border-bottom-left-radius:65rpx;padding-top:7rpx;top:25rpx}
 .slide-image{width:100%;display:inherit}
@@ -120,3 +120,7 @@
   height: 30rpx;
   width: 30rpx;
 }
+/* 商友 */
+.newadd-friend{background:#fff;display: flex;align-items: center;justify-content: space-between; height: 80rpx;padding: 0 50rpx 0 45rpx;font-size:24rpx;font-weight:600;}
+.icon-view{font-weight:500;width: 30rpx;height: 30rpx;font-size: 22rpx;text-align: center; line-height: 30rpx;color: #fff;background: #000;margin-right: 20rpx;}
+.flex-center{display: flex;align-items: center;}
