@@ -140,7 +140,7 @@
 
 
   <!-- 轮播通知 -->
-  <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1 || limitShow==3)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
+  <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
     <swiper circular='true' interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
       <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
         <view class='icon-view' style='background:#f7ac25;'>订</view>
@@ -150,13 +150,9 @@
         <view class='icon-view' style='background:#ccaa77;'>商</view>
         <text>点此加为商友，即刻查看批发价！</text>
       </swiper-item>
-      <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==3}}'>
-        <view class='icon-view' style='background:#ccaa77;'>友</view>
-        <text>已成商友，现可查看批发价！</text>
-      </swiper-item>
     </swiper>
     <!-- 箭头图标开关 -->
-    <block wx:if="{{(limitShow == 1 || limitShow == 3) && unpaidOrderNum > 0}}">
+    <block wx:if="{{limitShow == 1 && unpaidOrderNum > 0}}">
       <view class='swiper-tri-box' wx:if='{{!showAllTip}}' bindtap='stopSwiperTip'>
         <image class='more-tri-icon' src='/image/down.png'></image>
       </view>
