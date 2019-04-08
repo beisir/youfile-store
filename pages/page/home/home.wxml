@@ -140,20 +140,24 @@
 
 
   <!-- 轮播通知 -->
-  <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
+  <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1 || limitShow==3)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
     <swiper circular='true' interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
       <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
-        <image class="swiper-font-icon" src='/image/dingfont.png'></image>
+        <view class='icon-view' style='background:#f7ac25;'>订</view>
         <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>
       </swiper-item>
       <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==1}}' bindtap='addTip'>
-        <image class="swiper-font-icon" src='/image/shangfont.png'></image>
+        <view class='icon-view' style='background:#ccaa77;'>商</view>
         <text>点此加为商友，即刻查看批发价！</text>
+      </swiper-item>
+      <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==3}}'>
+        <view class='icon-view' style='background:#ccaa77;'>友</view>
+        <text>已成商友，现可查看批发价！</text>
       </swiper-item>
     </swiper>
     <!-- 箭头图标开关 -->
-    <block wx:if="{{limitShow == 1 && unpaidOrderNum > 0}}">
-      <view class='swiper-tri-box' wx:if='{{limitShow==1 && !showAllTip}}' bindtap='stopSwiperTip'>
+    <block wx:if="{{(limitShow == 1 || limitShow == 3) && unpaidOrderNum > 0}}">
+      <view class='swiper-tri-box' wx:if='{{!showAllTip}}' bindtap='stopSwiperTip'>
         <image class='more-tri-icon' src='/image/down.png'></image>
       </view>
       <view class='swiper-tri-box' wx:else bindtap='continueSwiperTip'>
@@ -161,15 +165,10 @@
       </view>
     </block>
   </view>
-
-  <!-- <view class='add-firend' wx:if='{{limitShow==1}}' bindtap='addTip'>
-  <view>商</view>点此加为商友，即刻查看批发价！
-  <image src='/image/mallr.png'></image>
-</view> -->
-  <!-- <view class='add-firend add-firend1' wx:if='{{limitShow==1}}'  hidden='{{!isShow}}'><view>验</view>商友关系验证中，通过后即可查看批发价！<image src='/image/down.png'></image></view> -->
-  <!-- <view class='add-firend add-firend2' wx:if='{{limitShow==3}}'>
-  <view>友</view>已成商友，现可查看批发价！</view> -->
-  <!-- <view class='add-firend add-firend3' wx:if='{{limitShow==3}}'><view>混</view>全场满3000元可混批！</view> -->
+  <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
+    <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
+  </view>
+ 
   <view class="swiper-tab" id='swiper-tab'>
     <!-- <form class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" bind:submit="swichNav" data-current="0"   report-submit="true"> <button formType="submit">综合</button><view></view></form> -->
     <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
