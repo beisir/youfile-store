@@ -45,7 +45,8 @@ Page({
   getList: function() {
     var _this = this
     Api.allGoods({
-      activityNumber: this.data.activityNumber
+      activityNumber: this.data.activityNumber,
+      goodsStatus:"1,3"
       })
       .then(res => {
         var obj = res.obj.result

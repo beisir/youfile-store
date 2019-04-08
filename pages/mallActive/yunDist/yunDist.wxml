@@ -9,27 +9,27 @@
       <view>累计收入(元)
         <view class='yd-down'></view>
       </view>
-      <view class='yd-m'>51988.00</view>
+      <view class='yd-m'>{{staticData.totalSales}}</view>
       <view class='yd-data'>
         <view>
           昨日收入
-          <view>2500.32</view>
+          <view>{{staticData.yesterdaySales}}</view>
           <view class='yd-xian'></view>
         </view>
         <view>
           累计件数
-          <view>2500.32</view>
+          <view>{{staticData.countTotalGoodsNum}}</view>
           <view class='yd-xian'></view>
         </view>
         <view>
           累计订单
-          <view>2500</view>
+          <view>{{staticData.countTotalOrder}}</view>
         </view>
       </view>
     </view>
   </view>
   <view class='yd-datas'>
-    <view class='yd-purch'>共80个进货商</view>
+    <view class='yd-purch'>共{{totalCount}}个进货商</view>
     <navigator url="../distRecords/distRecords" class='yd-pList'>
       <view class='dr-pic dr-pic1'>
         <image src='/image/user.png'></image>

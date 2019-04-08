@@ -1,8 +1,8 @@
 <view class='alert-g'>请选择您想参加活动的商品</view>
 <view class='add-cont'>
-  <view wx:for="{{result}}" wx:key="{{index}}">
-    <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" type="success" wx:if="{{item.selected}}" size="28" color="#CCAA77" />
-    <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" wx:else type="circle" size="28" />
+  <view wx:for="{{result}}" wx:key="{{index}}" data-id='{{item.goodsVO.id}}' catchtap='selectList' data-index="{{index}}">
+    <icon type="success" wx:if="{{item.selected}}" size="28" color="#CCAA77" />
+    <icon wx:else type="circle" size="28" />
     <view class='g-cont'>
       <view class='g-image'>
         <image wx:if="{{item.goodsVO.mainImgUrl}}" src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>

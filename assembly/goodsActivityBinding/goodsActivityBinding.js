@@ -49,7 +49,7 @@ Component({
       this.handleActivityPosition1(goodsVO);
 
       //绑定活动到sku上
-      console.log(this.bindingTOSKU(goodsVO))
+      this.bindingTOSKU(goodsVO)
 
       //绑定活动到spu上
       this.bindingTOSPU(goodsVO);
@@ -72,22 +72,27 @@ Component({
 
     //把活动绑定sku上
     bindingTOSKU(goodsVO) {
-      console.log(goodsVO)
       var goodsSkuVOList = goodsVO.goodsSkuVOList
-      var standardGoodsSkuPromotions = goodsVO.extInfo.SALES_PROMOTION[0].standardGoodsSkuPromotions
-      for (var val of goodsSkuVOList) {
-        val.standardGoodsSkuPromotions = []
-        for (var v of standardGoodsSkuPromotions) {
-          if (val.skuCode == v.skuCode) {
-            val.standardGoodsSkuPromotions.push(v)
-            val.isActivity = true
-            val.saleBatch = 5
-            val.activityPrice = v.activityPrice
-            goodsVO.hasActiveGoods=true
+      var extInfoLen = (goodsVO.extInfo.SALES_PROMOTION).length
+      // 判断是否有额外参数
+      if(extInfoLen>0){
+        var standardGoodsSkuPromotions = goodsVO.extInfo.SALES_PROMOTION[0].standardGoodsSkuPromotions
+        for (var val of goodsSkuVOList) {
+          val.standardGoodsSkuPromotions = []
+          for (var v of standardGoodsSkuPromotions) {
+            if (val.skuCode == v.skuCode) {
+              val.standardGoodsSkuPromotions.push(v)
+              val.isActivity = true
+              val.saleBatch = 5
+              val.activityPrice = v.activityPrice
+              goodsVO.hasActiveGoods = true
+            }
           }
         }
+      }else{
+        goodsVO.hasActiveGoods = false
       }
-      return goodsSkuVOList
+      return goodsVO
     },
     //把活动绑定到spu上
     bindingTOSPU(goodsVO) {

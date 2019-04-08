@@ -491,7 +491,6 @@ Page({
     var _this=this
     Api.storeActiveGoods().then(res=>{
       var obj = res.obj
-      console.log(obj)
       if (obj){
         _this.setData({
           avtiveGoods:obj

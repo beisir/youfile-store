@@ -27,7 +27,7 @@
 .gd-details .weui_cells{border-bottom:2rpx solid #F5F5F5}
 .gd-title{font-size:34rpx;color:#333;padding:40rpx 20rpx 20rpx 30rpx;border-radius: 10rpx;margin: 0 20rpx;background: #fff}
 .gd-title view{margin-bottom:10rpx}
-.gd-title view:first-child{position:relative;padding-right:70rpx;word-wrap:break-word}
+.gd-title view:first-child{position:relative;padding-right:70rpx;word-wrap:break-word;min-height: 90rpx}
 .gd-title view:first-child image,.gd-title view:first-child button{width:38rpx;height:38rpx;position:absolute;right:10rpx;top:10rpx;border:0}
 .gd-title view:first-child button{width:60rpx;height:60rpx}
 .gd-title view.gd-font{font-size:30rpx;color:#C7945A}
@@ -45,7 +45,7 @@
 .store-address{color:#999;font-size:26rpx}
 .weui_cells1 .store-address{color:#333;font-size:30rpx;font-weight:bold}
 .weui_cells image{width:40rpx;height:40rpx;margin-top:-4rpx;vertical-align:middle;margin-right:10rpx}
-.weui-view{position:absolute;top:0rpx;right:0rpx}
+.weui-view{position:absolute;top:3rpx;right:0rpx}
 .weui-view image{width:40rpx;height:40rpx}
 .weui-view image.img{width:24rpx;height:29rpx;margin-left:15rpx;margin-top:-3rpx}
 .weui-view image.erImg{width:50rpx;height:50rpx;margin-right:0}
@@ -103,15 +103,15 @@
 .lt-num{height:48rpx;border-left:2rpx solid #D5B98F;border-right:2rpx solid #D5B98F}
 .lt-table{color:#666;font-weight:normal;height:400rpx;overflow:scroll;height:350rpx;margin-bottom:150rpx;margin-top:10px}
 .lt-tr{position:relative;border-bottom: 2rpx solid #F7F7F7;padding-bottom: 40rpx}
-.lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:80rpx;position: relative}
-.jiage-t{position: absolute;top:-8rpx;border: 2rpx solid #CCAA77;padding: 0 5rpx;color:#CCAA77;height: 30rpx;line-height: 30rpx;border-radius: 10rpx;left: 22%;}
+.lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:60rpx;position: relative;padding:10rpx 0}
+.jiage-t{border: 2rpx solid #CCAA77;padding: 0 5rpx;color:#CCAA77;height: 30rpx;line-height: 30rpx;border-radius: 10rpx;width: 90rpx;margin: 0 auto;}
 .lt-table>.lt-tr{padding-bottom: 20rpx}
 .lt-table>.lt-tr .lt-add-cart{top:-10rpx}
-.purch-num{font-size: 24rpx;color: #999;position: absolute;bottom: -10rpx;width: 100%;height: 0rpx;left: 30rpx}
+.purch-num{font-size: 24rpx;color: #999;position: absolute;bottom: -3rpx;width: 100%;height: 0rpx;left: 20rpx}
 .jiage-t image{width: 15rpx;vertical-align: middle;margin-right: 2rpx;margin-top: -2rpx;}
-.jiage-tRed{border: 2rpx solid #F55353;color: #F55353}
+.jiage-tRed{border: 2rpx solid #F55353;color: #F55353;margin: 0 auto;}
 .lt-tr>view.setCss{line-height:30rpx;width:40%}
-.lt-tr>view:last-child{padding-top:20rpx;line-height:60rpx;width:32%}
+/* .lt-tr>view:last-child{padding-top:20rpx;line-height:60rpx;width:32%} */
 .lt-tr>view.add-xian{text-decoration:line-through}
 .lt-tr1>view:nth-child(3){color:#CCAA77}
 .lt-weui-bottom>view{width:33%;color:#CCAA77;position:relative}
@@ -132,7 +132,7 @@
 .lt-weui-bottom1 view:last-child{color:#CCAA77;background:none;position:relative;width:57%}
 .lt-weui-bottom1>view{width:40%}
 .lt-weui-bottom1 view>text{left:70rpx}
-.weui_cells1 .skuStr{text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;position:absolute;top:2rpx;left:180rpx;color:#666;font-size:26rpx;width:480rpx;text-align: right}
+.weui_cells1 .skuStr{text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;position:absolute;top:2rpx;left:180rpx;color:#666;font-size:26rpx;width:470rpx;text-align: right}
 .goods-total{bottom:200rpx;border:2rpx solid #CCAA77;color:#CCAA77;font-size:28rpx;font-size:30rpx;padding:10rpx;line-height:1.2}
 .goods-total .gt-ku{line-height:3.5;}
 .goods-total-ku{padding-top: 13rpx;background: #fff;overflow: hidden}
@@ -144,7 +144,7 @@
 .goods-er{float: right;color: #999;font-size: 26rpx;text-align: right;padding-right:10rpx;margin-top: -35rpx;}
 .goods-er view:first-child{padding-right: 0rpx;margin-bottom: 50rpx;}
 .goods-er image{width: 50rpx;height: 50rpx;}
-.weui_cells1 .skuStr1{text-align:left}
+.weui_cells1 .skuStr1{text-align:right}
 .buy-view{height: auto;}
 .b-view{border-top: 2rpx solid #EEEEEE;padding-bottom: 30rpx;}
 .weui_cells .b-view view{display: inline-block;width: 20%;text-align: center;margin-top: 30rpx;}
