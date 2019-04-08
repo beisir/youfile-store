@@ -72,9 +72,9 @@ Page({
           icon: 'none',
           duration: 2000,
           success:function(){
-            wx.redirectTo({
-              url: '../mesEdit/mesEdit',
-            })
+            setTimeout(()=>{
+              wx.navigateBack()
+            },800)
           }
         })
       })

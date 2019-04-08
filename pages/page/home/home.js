@@ -89,7 +89,7 @@ Page({
         unpaidOrderNum:0
       })
     }
-    this.setData({ tipIndex: 0 })
+    this.setData({ tipIndex: 0, showAllTip: false})
   },
   //开店
   openStore: function () {
