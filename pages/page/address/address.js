@@ -186,8 +186,20 @@ Page({
           goodsConfig: conObj,
           storeConfig: res.obj.storeWholesaleConfig
         })
+      this.handleActionGoods()
       this.resetGoods();
     })
+  },
+  // 处理活动商品
+  handleActionGoods(){
+    let goods = this.data.goods
+    goods.forEach(el=> {
+      if (el.promotions && el.promotions.SALES_PROMOTION && el.promotions.SALES_PROMOTION[0]){
+        let acGoods = el.promotions.SALES_PROMOTION[0],
+            acSkuArr = acGoods.standardGoodsSkuPromotions;
+      }
+    })
+    
   },
   //重置goods
   resetGoods(){
