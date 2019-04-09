@@ -739,7 +739,7 @@ Page({
   // 批量添加购物车、添加购物车
   moreAddCart: function(e) {
     if (!authHandler.isLogin()) {
-      _this.showLogo()
+      this.showLogo()
       return
     }
     var goodsId = this.data.goodsId,

@@ -143,17 +143,17 @@
   <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
     <swiper circular='true' interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
       <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
-        <image class="swiper-font-icon" src='/image/dingfont.png'></image>
+        <view class='icon-view' style='background:#f7ac25;'>订</view>
         <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>
       </swiper-item>
       <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==1}}' bindtap='addTip'>
-        <image class="swiper-font-icon" src='/image/shangfont.png'></image>
+        <view class='icon-view' style='background:#ccaa77;'>商</view>
         <text>点此加为商友，即刻查看批发价！</text>
       </swiper-item>
     </swiper>
     <!-- 箭头图标开关 -->
     <block wx:if="{{limitShow == 1 && unpaidOrderNum > 0}}">
-      <view class='swiper-tri-box' wx:if='{{limitShow==1 && !showAllTip}}' bindtap='stopSwiperTip'>
+      <view class='swiper-tri-box' wx:if='{{!showAllTip}}' bindtap='stopSwiperTip'>
         <image class='more-tri-icon' src='/image/down.png'></image>
       </view>
       <view class='swiper-tri-box' wx:else bindtap='continueSwiperTip'>
@@ -161,10 +161,10 @@
       </view>
     </block>
   </view>
-  <view class='add-firend add-firend2' wx:if='{{limitShow==3}}'>
-    <view>友</view>已成商友，现可查看批发价！
-    <image src='/image/mallr.png'></image>
+  <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
+    <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
   </view>
+  
   <view class='tab-cont'>
     <view class='tab-view {{tabSwitch=="0"?"tab-view3":"tab-view2"}}'>
       <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}'  data-index='0'>正在抢订</view>

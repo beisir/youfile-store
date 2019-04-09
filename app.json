@@ -1,13 +1,8 @@
 {
   "pages": [
     "pages/page/home/home",
-    
     "pages/page/goodsDetails/goodsDetails",
-    
-    
     "pages/mallActive/list/list",
-    
-    
     "pages/page/workIndex/workIndex",
     "pages/mallActive/activityAnalysis/activityAnalysis",
     "pages/mallActive/yunDist/yunDist",

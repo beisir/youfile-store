@@ -26,25 +26,25 @@
         <view wx:for='{{skuList}}' wx:key='{{index}}' wx:if="{{item.checked}}">
           <view class='spec-cont'>
             <view>商品规格{{index+1}}：
-              <text>{{item.skuName}}</text>
+              <text style='font-weight:600;'>"{{item.skuName}}"</text>
             </view>
           </view>
           <view class='set-price'>
             <view>
               <view>
-                <input placeholder='添加活动价格' value='{{item.surePrice}}' type='digit' bindinput='watchInput' data-type='price' data-index="{{index}}"></input>
+                <input placeholder='添加活动价格' value='{{item.surePrice}}' type='digit' bindinput='watchInput' data-type='price' data-index="{{index}}" maxlength='8'></input>
                 <view>批发价:¥{{item.wholesalePrice}}</view>
               </view>
             </view>
             <view>
               <view>
-                <input placeholder='添加活动库存' value='{{item.sureNum}}' type='number' bindinput='watchInput' data-type='stockNum' data-index="{{index}}"></input>
+                <input placeholder='添加活动库存' value='{{item.sureNum}}' type='number' bindinput='watchInput' data-type='stockNum' data-index="{{index}}" maxlength='6'></input>
                 <view>库存:{{item.stockNum}}</view>
               </view>
             </view>
             <view>
               <view>
-                <input placeholder='添加活动起购量' value='{{item.buyNum}}' type='number' bindinput='watchInput' data-type='buyNum' data-index="{{index}}"></input>
+                <input placeholder='添加活动起购量' value='{{item.buyNum}}' type='number' bindinput='watchInput' data-type='buyNum' data-index="{{index}}" maxlength='6'></input>
                 <view>起购量</view>
               </view>
             </view>
@@ -60,19 +60,19 @@
         <view class='set-price'>
           <view>
             <view>
-              <input placeholder='添加活动价格' value='{{noSkuPrich}}' type='digit' bindinput='watchInput' data-type='noSku-price'></input>
+              <input placeholder='添加活动价格' value='{{noSkuPrich}}' type='digit' bindinput='watchInput' data-type='noSku-price' maxlength='8'></input>
               <view>批发价:¥{{goods.wholesalePrice}}</view>
             </view>
           </view>
           <view>
             <view>
-              <input placeholder='添加活动库存' value='{{noSkuNum}}' type='number' bindinput='watchInput' data-type='noSku-num'></input>
+              <input placeholder='添加活动库存' value='{{noSkuNum}}' type='number' bindinput='watchInput' data-type='noSku-num' maxlength='6'></input>
               <view>库存:{{goods.stockNum}}</view>
             </view>
           </view>
           <view>
             <view>
-              <input placeholder='添加活动起购量' value='{{noSkuBuynum}}' type='number' bindinput='watchInput' data-type='noSku-buynum'></input>
+              <input placeholder='添加活动起购量' value='{{noSkuBuynum}}' type='number' bindinput='watchInput' data-type='noSku-buynum' maxlength='6'></input>
               <view>起购量</view>
             </view>
           </view>

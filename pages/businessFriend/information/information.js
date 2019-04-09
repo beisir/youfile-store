@@ -92,6 +92,7 @@ Page({
     })
 },
   onLoad: function (options) {
+    if(!options){return}
     var status = options.status,
         send=options.send,
         accept = options.accept,
