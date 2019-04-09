@@ -58,7 +58,7 @@ Page({
     saleBatchNum: 0,
     saleBatchAmount: 0,
     totalPrice: '0.00',
-    goodsId: '190404134700',
+    goodsId: '180929216000',
     skuStr: '',
     numAll: 0,
     moreCode: '',
@@ -84,7 +84,7 @@ Page({
   onLoad: function(options) {
     var that = this,
       arr = [],
-      goodsId = '190404134700'
+      goodsId = '180929216000'
     if (options != undefined) {
       if (options.goodsId) {
         goodsId = options.goodsId
@@ -1059,7 +1059,8 @@ Page({
     let saleBatchNum = this.data.saleBatchNum //店铺的起批数量
     let saleBatchNumGoods = this.data.saleBatchNumGoods //商品的起批数量
     let goodsSpecificationVOList = this.data.goodsSpecificationVOList
-    Method.getTotalPrice(goodsSpecificationVOList,spectArrDifference,code, showCartOne, swichNav, saleBatchAmount, saleBatchNum, saleBatchNumGoods)
+    let goodsInfo = this.data.goodsInfo
+    Method.getTotalPrice(goodsSpecificationVOList, spectArrDifference, code, showCartOne, swichNav, saleBatchAmount, saleBatchNum, saleBatchNumGoods, goodsInfo)
   },
 
   /**

@@ -102,7 +102,7 @@ class Calculation {
               }
             } else {
               if (!isActivity) {
-                total += newSkuArrTwo[i].num * this.data.goodsInfo.sell;
+                total += newSkuArrTwo[i].num * goodsInfo.sell;
               }
             }
             if (!isActivity) {
@@ -114,7 +114,7 @@ class Calculation {
       }
       goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
     } else {
-      var goodsInfo = this.data.goodsInfo
+      var goodsInfo = goodsInfo
       var hasActiveGoods = goodsInfo.hasActiveGoods
       if (hasActiveGoods) {
         activeGoodsTotal = goodsInfo.num * goodsInfo.activityPrice
