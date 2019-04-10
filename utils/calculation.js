@@ -49,7 +49,7 @@ class Calculation {
   /**
   * 计算总价
   */
-  getTotalPrice(goodsSpecificationVOList, spectArrDifference, code, showCartOne, swichNav, saleBatchAmount, saleBatchNum, saleBatchNumGoods) {
+  getTotalPrice(goodsSpecificationVOList, spectArrDifference, code, swichNav, saleBatchAmount, saleBatchNum, saleBatchNumGoods, goodsInfo){
     var childArr = [],
       colorNum = 0,
       differNum = 0,
@@ -66,6 +66,8 @@ class Calculation {
       difference = 0, //差价
       discountShow = true, //是否享受批发价
       limitShow = wx.getStorageSync('admin') //判断是否是进货商身份  3代表是
+    let pages = getCurrentPages()
+    let curPage = pages[pages.length - 1]
     let goodsSkuLen = goodsSpecificationVOList.length
     // 判断商品是否存在起批量
     if (saleBatchNumGoods == 0) {
@@ -94,17 +96,17 @@ class Calculation {
               nums += newSkuArrTwo[i].num //数量
             }
             nomalGoodsNums += newSkuArrTwo[i].num
-            if (showCartOne) { //true添加 为false 是修改购物车
+            // if (showCartOne) { //true添加 为false 是修改购物车
               if (isActivity) {
                 activeGoodsTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].activityPrice;
               } else {
                 total += newSkuArrTwo[i].num * newSkuArrTwo[i].sellPrice;
               }
-            } else {
-              if (!isActivity) {
-                total += newSkuArrTwo[i].num * goodsInfo.sell;
-              }
-            }
+            // } else {
+            //   if (!isActivity) {
+              // total += newSkuArrTwo[i].num * goodsInfo.sell;
+            //   }
+            // }
             if (!isActivity) {
               newTotal += newSkuArrTwo[i].num * newSkuArrTwo[i].wholesalePrice; //总的批发价
 
@@ -122,7 +124,7 @@ class Calculation {
         total = goodsInfo.num * goodsInfo.sellPrice
         newTotal = goodsInfo.num * goodsInfo.wholesalePrice
       }
-      nomalGoodsNums = this.data.numbers
+      nomalGoodsNums = curPage.data.numbers
       classNums = 1
     }
     // 进货商身份
@@ -161,8 +163,6 @@ class Calculation {
       }
     }
     skuStr = (skuStr.substring(skuStr.length - 1) == ',') ? skuStr.substring(0, skuStr.length - 1) : skuStr
-    let pages = getCurrentPages()
-    let curPage = pages[pages.length - 1]
     curPage.setData({
       newSkuArrTwo: newSkuArrTwo,
       skuStr: skuStr, ///页面显示选择的规格

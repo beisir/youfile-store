@@ -39,7 +39,6 @@ Page({
     differNum: 0,
     differMoney: 0,
     newSkuOnly: false, //只有一个规格
-    newSkuOnlyEdit: false,
     className: 'active',
     indicatorDots: true,
     autoplay: true,
@@ -58,7 +57,7 @@ Page({
     saleBatchNum: 0,
     saleBatchAmount: 0,
     totalPrice: '0.00',
-    goodsId: '180929216000',
+    goodsId: '',
     skuStr: '',
     numAll: 0,
     moreCode: '',
@@ -84,7 +83,7 @@ Page({
   onLoad: function(options) {
     var that = this,
       arr = [],
-      goodsId = '180929216000'
+      goodsId = ''
     if (options != undefined) {
       if (options.goodsId) {
         goodsId = options.goodsId
@@ -105,6 +104,7 @@ Page({
                 arr = res[i].shoppingCartSkuList
               }
             }
+            console.log(arr)
             if (options.name == "more") {
               that.setData({
                 showCart: false, //修改进货车或者多个规格
@@ -119,11 +119,12 @@ Page({
             that.setData({
               newCartList: arr,
             }, function() {
-              if (options.name == "more") {
-                getIdentity(this, goodsId, true)
-              } else {
-                getIdentity(this, goodsId, false)
-              }
+              getIdentity(this, goodsId, true)
+              // if (options.name == "more") {
+              //   getIdentity(this, goodsId, true)
+              // } else {
+              //   getIdentity(this, goodsId, false)
+              // }
             })
           })
       } else {
@@ -290,25 +291,12 @@ Page({
               for (var i = arr.length - 1; i >= 0; i--) {
                 _this.getSpecDetails(i, arr[i].specValueCode)
               }
-              if (isTrue) {
-                var newArrOne = obj.goodsSkuVOList
-                if (newArrOne[0].specValueCodeList.length == 1) {
-                  _this.setData({
-                    newSkuOnly: true,
-                    newSkuOnlyEdit: true
-                  })
-                } else {
-                  _this.setData({
-                    newSkuOnly: false,
-                    newSkuOnlyEdit: true
-                  })
-                }
-              } else {
-                _this.setData({
+               _this.setData({
                   newSkuOnly: true
                 })
-              }
-            }
+              
+            //   }
+            // }
             // console.log(this.data.newCartList)
             // if (this.data.newCartList.length == 0) {
             //   _this.getSpecDetails(0, arr[0].specValueCode)
@@ -316,7 +304,7 @@ Page({
             // showCartOne为false 修改购物车
             // if (!this.data.showCartOne) {
             //   _this.getSpecDetails(0, arr[0].specValueCode)
-            // }
+            }
             // 只有两个规格
             if (len.length == 2) {
               if (isTrue) {
@@ -583,7 +571,10 @@ Page({
       newSkuArrTwo = [],
       newList = {},
       returnStop = false,
-      spectArrDifference = this.data.spectArrDifference
+      codeName = this.data.goodsSpecificationVOList,
+      spectArrDifference = this.data.spectArrDifference,
+      newCartList=this.data.newCartList,
+      newCartListLen = newCartList.length
     if (skuArrTwo.length == 1) {
       skuValueVOList = skuArrTwo[0].goodsSpecificationValueVOList
     }
@@ -604,61 +595,69 @@ Page({
       }
     }
     // // 修改购物车
-    // if (that.data.editCode) {
-    //   var arr = []
-    //   arr = this.data.newCartList
-    //   for (var i = 0; i < arr.length; i++) {
-    //     if (this.data.editOneName) {
-    //       var newArr = codeName[0].goodsSpecificationValueVOList
-    //       if (newArr.length > 0) {
-    //         if (codeName.length == 1) {
-    //           var newArrLast = codeName[0].goodsSpecificationValueVOList
-    //         }
-    //         if (codeName.length == 2) {
-    //           var newArrLast = codeName[1].goodsSpecificationValueVOList
-    //         }
-    //         for (var l = 0; l < newArrLast.length; l++) {
-    //           if (arr[i].specValueCodes.indexOf(newArrLast[l].specValueCode) != -1) {
-    //             this.getNewData1(l, newArrLast[l].specValueCode)
-    //           }
-    //         }
-    //       }
-    //       for (var l = 0; l < newArr.length; l++) {
-    //         if (arr[i].specValueCodes.indexOf(newArr[l].specValueCode) != -1) {
-    //           newSkuArrTwo[i].num = arr[i].num
-    //           this.getNewData(l, newArr[l].specValueCode)
-    //           that.setData({
-    //             numbers: arr[i].num
-    //           })
-    //         }
-    //       }
-    //       that.setData({
-    //         goodsSpecificationVOList: codeName
-    //       })
-    //     } else {
-    //       var skuCode = arr[i].skuCode
-    //       var lenNum = 1
-    //       if (arr[0].specValueCodes) {
-    //         var lenArr = arr[0].specValueCodes
-    //         lenNum = lenArr.length
-    //       }
-    //       for (var j = 0; j < newSkuArrTwo.length; j++) {
-    //         if (newSkuArrTwo[j].skuCode == skuCode) {
-    //           if (lenNum == 1) {
-    //             newSkuArrTwo[j].num = arr[i].num
+    if (this.data.limitShow == 1 && newCartList.length>1){
+      this.setData({
+        limitShow:4,
+      })
+    }
+    if(newCartListLen> 0){
+      this.setData({
+        hidden: false
+      })
+      var arr = []
+      arr = this.data.newCartList
+      for (var i = 0; i < arr.length; i++) {
+        if (this.data.editOneName) {
+          var newArr = codeName[0].goodsSpecificationValueVOList
+          if (newArr.length > 0) {
+            if (codeName.length == 1) {
+              var newArrLast = codeName[0].goodsSpecificationValueVOList
+            }
+            if (codeName.length == 2) {
+              var newArrLast = codeName[1].goodsSpecificationValueVOList
+            }
+            for (var l = 0; l < newArrLast.length; l++) {
+              if (arr[i].specValueCodes.indexOf(newArrLast[l].specValueCode) != -1) {
+                this.getNewData1(l, newArrLast[l].specValueCode)
+              }
+            }
+          }
+          for (var l = 0; l < newArr.length; l++) {
+            if (arr[i].specValueCodes.indexOf(newArr[l].specValueCode) != -1) {
+              newSkuArrTwo[i].num = arr[i].num
+              this.getNewData(l, newArr[l].specValueCode)
+              that.setData({
+                numbers: arr[i].num
+              })
+            }
+          }
+          that.setData({
+            goodsSpecificationVOList: codeName
+          })
+        } else {
+          var skuCode = arr[i].skuCode
+          var lenNum = 1
+          if (arr[0].specValueCodes) {
+            var lenArr = arr[0].specValueCodes
+            lenNum = lenArr.length
+          }
+          for (var j = 0; j < newSkuArrTwo.length; j++) {
+            if (newSkuArrTwo[j].skuCode == skuCode) {
+              if (lenNum == 1) {
+                newSkuArrTwo[j].num = arr[i].num
 
-    //           } else {
-    //             if (newSkuArrTwo[j].num == 0) {
-    //               newSkuArrTwo[j].num = arr[i].num
-    //               arr[i].num = 0
-    //             }
-    //           }
+              } else {
+                if (newSkuArrTwo[j].num == 0) {
+                  newSkuArrTwo[j].num = arr[i].num
+                  arr[i].num = 0
+                }
+              }
 
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+            }
+          }
+        }
+      }
+    }
     if (spectArrDifference.length == 0) {
       spectArrDifference.push({
         code: code,
@@ -965,7 +964,6 @@ Page({
       var goodsSpecificationVOList = goodsSpecificationVOListNew[0].goodsSpecificationValueVOList
       for (var i = 0; i < spectArrDifference.length; i++) {
         if (spectArrDifference[i].code == code) {
-          console.log(spectArrDifference[i])
           if (sign == "add") {
             if (spectArrDifference[i].newSkuArrTwo[index].num == undefined) {
               spectArrDifference[i].newSkuArrTwo[index].num = 0
@@ -1052,7 +1050,6 @@ Page({
    */
   getTotalPrice() {
     let code = this.data.moreCode;
-    let showCartOne = this.data.showCartOne //是否是修改购物车
     let swichNav = this.data.swichNav;
     let spectArrDifference = this.data.spectArrDifference //SKU组合
     let saleBatchAmount = this.data.saleBatchAmount //店铺的起批金额
@@ -1060,7 +1057,7 @@ Page({
     let saleBatchNumGoods = this.data.saleBatchNumGoods //商品的起批数量
     let goodsSpecificationVOList = this.data.goodsSpecificationVOList
     let goodsInfo = this.data.goodsInfo
-    Method.getTotalPrice(goodsSpecificationVOList, spectArrDifference, code, showCartOne, swichNav, saleBatchAmount, saleBatchNum, saleBatchNumGoods, goodsInfo)
+    Method.getTotalPrice(goodsSpecificationVOList, spectArrDifference, code, swichNav, saleBatchAmount, saleBatchNum, saleBatchNumGoods, goodsInfo)
   },
 
   /**
@@ -1147,7 +1144,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    this.setData({
+      limitShow: wx.getStorageSync("admin")
+    })
   },
 
   /**

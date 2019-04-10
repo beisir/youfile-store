@@ -217,7 +217,7 @@
       </view>
     </view>
     <view class='gd_b_right {{stockNumHide?"no-cart":""}}' wx:if='{{limitShow!=3}}' bindtap='showAlert'>
-      加入购物车
+      {{editCode?"修改购物车":"加入购物车"}}
     </view>
     <view class='gd_b_right {{stockNumHide?"no-cart":""}}' wx:if='{{limitShow==3}}' bindtap='showAlert'>
       <view>
@@ -357,14 +357,14 @@
               <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
               <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
             </view>
-            <view class='gd-botoom1' data-attr="more" data-status='0' bindtap='moreAddCart'>加入进货车</view>
-            <view class='gd-botoom1' data-attr="more" data-status='1' bindtap='moreAddCart'>立即下单</view>
+            <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>{{editCode?"修改进货车":"加入进货车"}}</view>
+            <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}"  data-status='1' bindtap='moreAddCart'>立即下单</view>
           </view>
       </view>
     </view>
   </view>
   <!-- 购物车 -->
-  <view wx:if='{{limitShow!=3}}'>
+  <view wx:if='{{limitShow==1 || limitShow==2}}'>
     <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
         <view class='gd-top'>
@@ -423,182 +423,94 @@
       </view>
     </view>
   </view>
-  <!-- 修改进货车 -->
-  <view hidden="{{showCart}}" class='alertAdd'>
-    <view class='gd-alert' animation='{{animationData}}'>
-      <view class='new-man' wx:if='{{!discountShow}}'>
-        <text>已享受批发价，共优惠<text>{{difference}}</text>元</text>
-      </view>
-      <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount==0}}'>
-        <text wx:if='{{differNum==0}}'>本店满<text>{{saleBatchNum}}</text>件可享受批发价</text>
-        <text wx:if='{{differNum>0}}'>本品差<text>{{differNum}}</text>件可享受批发价</text>
-      </view>
-      <view class='new-man' wx:if='{{discountShow && saleBatchNum==0 && saleBatchAmount>0}}'>
-        <text wx:if='{{differMoney==0}}'>本店满<text>{{saleBatchAmount}}</text>元可享受批发价</text>
-        <text wx:if='{{differMoney>0}}'>全场金额差<text>{{differMoney}}</text>元可享受批发价</text>
-      </view>
-      <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount>0 && differNum>0}}'>
-        <text>本品差<text>{{differNum}}</text>件 全场金额差
-        <text>{{differMoney}}</text>元 可享受批发价</text>
-      </view>
-      <view class='gd-top'>
-        <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
-        <view class='gd-image'>
-          <image wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
-        </view>
-        <view class='gd-ins'>
-          <view class='gd-title1'>{{goodsInfo.name}}</view>
-          <view class='btn' wx:if='{{saleBatchNumGoods>0 && limitShow==3 && saleBatchNum>0}}'>{{saleBatchNumGoods}}
-            <text>件起批</text>
+    <!-- 进货车 有规格 -->
+  <view wx:if='{{limitShow==4}}'>
+    <view hidden="{{hidden}}" class='alertAdd'>
+      <view class='gd-alert' animation='{{animationData}}'>
+        <view class='gd-top'>
+          <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
+          <view class='gd-image'>
+            <image wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
-          <view class='btn' wx:if='{{saleBatchNumGoods==0 && saleBatchNum>0 && limitShow==3}}'>{{saleBatchNum}}
-            <text>件起批</text>
+          <view class='gd-ins'>
+            <view class='gd-title1'>{{goodsInfo.name}}</view>
           </view>
         </view>
-      </view>
-      <view wx:for='{{goodsSpecificationVOList}}' wx:for-item="list" wx:key="{{index}}">
-        <view class='gd-gg' wx:if='{{index==0}}'>
-          <text>{{list.specName}}</text>
-          <view>
-            <block wx:for="{{list.goodsSpecificationValueVOList}}" wx:key="{{index}}">
-              <view class='gd-view'>
-                <view data-code='{{item.specValueCode}}' data-codeP="{{list.specCode}}" class="lt-view {{swichNav==index?'active':''}}" data-current="{{index}}" bindtap='swichNav'>{{item.specValueName}}
-                  <text class='new-red' wx:if='{{item.num>0}}'>{{item.num}}</text>
-                </view>
-              </view>
-            </block>
-          </view>
-        </view>
-        <view class='gd-gg lt-attr' wx:if='{{index==0}}'>
-          <view class="lt-table">
-            <view class="lt-tr">
-              <view wx:if='{{!newSkuOnlyEdit}}' class='{{limitShow==1?"setCss":""}}'>{{nameTwo}}</view>
-              <view style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow!=1}}'>零售价</view>
-              <view style='{{newSkuOnly?"width:50%":"width:22%"}}' wx:if='{{limitShow==1}}'>零售价</view>
-              <view style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>现价</view>
-              <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
-                <view class="lt-add-cart">
-                  <view class="lt-down" data-sign='reduce' bindtap="batchChange">
-                    <image src="/image/lt-jian.png"></image>
+        <!-- 规格展示 两个规格或者一个规格 -->
+        <block>
+          <view wx:for='{{goodsSpecificationVOList}}' wx:for-item="list" wx:key="{{index}}">
+            <view class='gd-gg' wx:if='{{index==0}}'>
+              <text>{{list.specName}}</text>
+              <view>
+                <block wx:for="{{list.goodsSpecificationValueVOList}}" wx:key="{{index}}">
+                  <view class='gd-view'>
+                    <view data-code='{{item.specValueCode}}' data-codeP="{{list.specCode}}" class="lt-view {{swichNav==index?'active':''}}" data-current="{{index}}" bindtap='swichNav'>{{item.specValueName}}
+                      <text class='new-red' wx:if='{{item.num>0}}'>{{item.num}}</text>
+                    </view>
                   </view>
-                  <view class="lt-num" style='border-top:0'>
-                    <input disabled='disabled' value='批量'></input>
-                  </view>
-                  <view class="lt-add" data-sign='add' bindtap="batchChange">
-                    <image src="/image/lt-add.png"></image>
-                  </view>
-                </view>
+                </block>
               </view>
             </view>
-            <view wx:for="{{spectArrDifference}}" wx:for-item="pItem" wx:key="{{index}}">
-              <view class="lt-tr lt-tr1" wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
-                <view wx:if='{{!newSkuOnlyEdit}}' class='{{limitShow==1?"setCss":""}}'>{{item.name}}</view>
-                <view style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow!=1}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
-                <view style='{{newSkuOnly?"width:50%":"width:22%"}}' wx:if='{{limitShow==1}}'>￥{{item.sellPrice}}</view>
-                <view style='{{newSkuOnly?"width:33%":"width:22%"}}' wx:if='{{limitShow==3}}'>
-                  <view class="jiage-t jiage-tRed" wx:if="{{item.isActivity}}" style='font-size:20rpx'><image src="/image/shans.png" mode='widthFix'></image>抢购价</view>
-                  <view class="jiage-t" wx:else style='font-size:20rpx'>批发价</view>
-                  ￥{{item.isActivity?item.activityPrice:item.wholesalePrice}}
+            <!-- 价格展示 -->
+            <view class='gd-gg lt-attr' wx:if='{{index==0}}'>
+              <view class="lt-table">
+                <view class="lt-tr">
+                  <view wx:if='{{!newSkuOnly}}'>{{nameTwo}}</view>
+                  <view style='{{newSkuOnly?"width:28%":"width:22%"}}'>零售价</view>
+                  <view style='{{newSkuOnly?"width:28%":"width:22%"}}'>现价</view>
+                  <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
+                    <view class="lt-add-cart">
+                      <view class="lt-down" data-sign='reduce' bindtap="batchChange">
+                        <image src="/image/lt-jian.png"></image>
+                      </view>
+                      <view class="lt-num" style='border-top:0'>
+                        <input disabled='disabled' value='批量'></input>
+                      </view>
+                      <view class="lt-add" data-sign='add' bindtap="batchChange">
+                        <image src="/image/lt-add.png"></image>
+                      </view>
+                    </view>
+                  </view>
                 </view>
-                <view style='{{newSkuOnly?"width:33%":"width:22%"}}'>
-                  <view class="lt-add-cart">
-                    <view class="lt-down" data-index='{{index}}' data-sign='reduce' bindtap="updateSkuNum">
-                      <image src="/image/jian.png"></image>
+                <view wx:for="{{spectArrDifference}}" wx:for-item="pItem" wx:key="{{index}}">
+                  <view class="lt-tr lt-tr1" wx:for="{{pItem.newSkuArrTwo}}" wx:key="{{index}}" wx:if='{{pItem.code==moreCode}}'>
+                    <view wx:if='{{!newSkuOnly}}'>{{item.name}}</view>
+                    <view style='{{newSkuOnly?"width:28%":"width:22%"}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
+                    <view class='line-price' style='color:#000;{{newSkuOnly?"width:28%":"width:22%"}}'>
+                      <view class="jiage-t jiage-tRed" wx:if="{{item.isActivity}}" style='font-size:20rpx'>
+                        <image src="/image/shans.png" mode='widthFix'></image>抢购价</view>
+                      <view class="jiage-t" wx:else style='font-size:20rpx'>批发价</view>
+                      ￥{{item.isActivity?item.activityPrice:item.wholesalePrice}}
                     </view>
-                    <view class="lt-num" style='border-top:0'>
-                      <input value='{{item.num}}' type='number' data-index='{{index}}' data-sign='input' bindblur='updateSkuNum'></input>
-                    </view>
-                    <view class="lt-add" data-index='{{index}}' data-sign='add' bindtap="updateSkuNum">
-                      <image src="/image/lt-a.png"></image>
+                    <view style='width:22%"'>
+                      <view class='purch-num' wx:if="{{item.isActivity}}">起购量：{{item.saleBatch}}</view>
+                      <view class="lt-add-cart">
+                        <view class="lt-down" data-index='{{index}}' data-sign='reduce' bindtap="updateSkuNum">
+                          <image src="/image/jian.png"></image>
+                        </view>
+                        <view class="lt-num" style='border-top:0'>
+                          <input value='{{item.num}}' type='number' data-index='{{index}}' data-sign='input' bindblur='updateSkuNum'></input>
+                        </view>
+                        <view class="lt-add" data-index='{{index}}' data-sign='add' bindtap="updateSkuNum">
+                          <image src="/image/lt-a.png"></image>
+                        </view>
+                      </view>
                     </view>
                   </view>
                 </view>
               </view>
             </view>
           </view>
-        </view>
-      </view>
-      <view class='weui-bottom lt-weui-bottom lt-weui-bottom1'>
-        <view>
-          <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
-          <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
-          <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
-        </view>
-        <view data-status='0' bindtap='moreAddCart'>确认修改</view>
-      </view>
-    </view>
-  </view>
-  <!-- 修改购物车 -->
-  <view hidden="{{showCartOne}}" class='alertAdd'>
-    <view class='gd-alert' animation='{{animationData}}'>
-      <view class='new-man' wx:if='{{!discountShow && limitShow==3}}'>
-        <text>已享受批发价，共优惠<text>{{difference}}</text>元</text>
-      </view>
-      <view class='new-man' wx:if='{{discountShow && saleBatchNum!=0  && limitShow==3}}'>本店满
-        <text>{{saleBatchNum}}</text>件可享受批发价</view>
-      <view class='new-man' wx:if='{{discountShow && saleBatchNum==0  && limitShow==3}}'>本店满
-        <text>{{saleBatchAmount}}</text>元可享受批发价</view>
-      <view class='gd-top'>
-        <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
-        <view class='gd-image'>
-          <image mode="aspectFill" wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
-        </view>
-        <view class='gd-ins'>
-          <view class='gd-title1'>{{goodsInfo.name}}</view>
-          <view wx:if='{{saleBatchNum!=0  && limitShow==3}}' class='btn'>{{saleBatchNumGoods==0?saleBatchNum:saleBatchNumGoods}}
-            <text>件起批</text>
-          </view>
-          <view wx:if='{{limitShow==3 && !discountShow}}'>￥{{goodsInfo.wholesalePrice}}</view>
-          <view wx:if='{{limitShow==3 && discountShow}}'>￥{{goodsInfo.sellPrice}}</view>
-          <view wx:if='{{limitShow!=3}}'>￥{{goodsInfo.sellPrice}}</view>
-          <text>库存：{{goodsInfo.stockNum}}件</text>
-        </view>
-      </view>
-      <view wx:for='{{goodsSpecificationVOList}}' wx:key="{{index}}">
-        <view class='gd-gg' wx:if='{{index==0}}'>
-          <text>{{item.specName}}</text>
-          <view>
-            <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
-              <view class='gd-view'>
-                <view data-code='{{item.specValueCode}}' class="{{specsTab==index?'active':''}}" data-current="{{index}}" bindtap='changeButton'>{{item.specValueName}}</view>
-              </view>
-            </block>
-          </view>
-        </view>
-        <view class='gd-gg gd-gg1' wx:if='{{index==1}}'>
-          <text>{{item.specName}}</text>
-          <view style='max-height:250rpx;overflow:scroll;'>
-            <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
-              <view class='gd-view'>
-                <view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.specValueName}}</view>
-              </view>
-            </block>
-          </view>
-        </view>
-      </view>
-      <view class='gd-gg gd-gg1'>
-        <text>购买数量</text>
-        <view class='cart-list gd-cart-list'>
-          <view class="cart-count-box">
-            <text class="cart-count-down" bindtap="minusCount">
-                  <text wx:if="{{numbers!=1}}" class='ct-xian'></text>
-            <text wx:if="{{numbers==1}}"><text class='ct-xian ct-xian1'></text></text>
-            </text>
-            <text class="cart-count-num">{{numbers}}</text>
-            <view class="cart-count-add" bindtap="addCount">
-              <image src="/image/add.png"></image>
+        </block>
+         <view class='weui-bottom lt-weui-bottom'>
+            <view class='gd-botoom'>
+              <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
+              <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
+              <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
             </view>
+            <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>修改购物车</view>
+            <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}"  data-status='1' bindtap='moreAddCart'>立即下单</view>
           </view>
-        </view>
-      </view>
-      <view class='weui-bottom lt-weui-bottom lt-weui-bottom1'>
-        <view>
-          <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
-          <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
-          <text>共<text>{{classNums}}</text>种
-          <text>{{nums}}</text>件商品</text>
-        </view>
-        <view data-status='0' bindtap='cratHome'>确认修改</view>
       </view>
     </view>
   </view>

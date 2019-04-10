@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/page/home/home",
+    
+    "pages/page/cartList/cartList",
+    
     "pages/page/goodsDetails/goodsDetails",
     "pages/mallActive/list/list",
     "pages/page/workIndex/workIndex",
@@ -18,7 +21,6 @@
     "pages/mallActive/moreAdd/moreAdd",
     "pages/mallActive/choseSpec/choseSpec",
 
-    "pages/page/cartList/cartList",
     "pages/admin/serStatus/serStatus",
     "pages/admin/addGoods/addGoods",
     "pages/admin/class/class",
