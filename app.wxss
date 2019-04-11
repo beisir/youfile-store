@@ -138,11 +138,11 @@ input:focus{padding:0}
   color: #999;
 }
 .dc-list{background: #fff;}
-.dc-list>view{border-bottom: 20rpx solid #F7F7F7;zoom: 1;overflow: auto;padding: 30rpx;position: relative;padding-top: 35rpx;}
-.dc-list>view.opa-view{opacity: 0.5}
+.dc-list>view,.dc-list>navigator{border-bottom: 20rpx solid #F7F7F7;zoom: 1;overflow: auto;padding: 30rpx;position: relative;padding-top: 35rpx;}
+.dc-list>view.opa-view,.dc-list>navigator.opa-view{opacity: 0.5}
 .dc-list .g-img{width: 240rpx;height: 240rpx;}
-.dc-list>view>view{float: left;font-size: 32rpx;position: relative}
-.dc-list>view>view:first-child{margin-right: 20rpx;}
+.dc-list>view>view,.dc-list>navigator>view{float: left;font-size: 32rpx;position: relative}
+.dc-list>view>view:first-child,.dc-list>navigator>view:first-child{margin-right: 20rpx;}
 .g-name,.s-name{word-break:break-all;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;width:415rpx;}
 .shan{background: #F02B2B;border-radius: 10rpx;float: left;line-height: 30rpx;font-size: 24rpx;color: #fff;text-align: center;padding:4rpx 8rpx;margin-right: 30rpx;margin-top: 16rpx;}
 .shan image{width: 20rpx;vertical-align: middle;margin-top: -2rpx;margin-right: 6rpx;}
@@ -154,10 +154,10 @@ input:focus{padding:0}
 .dc-xian{font-size: 24rpx;color: #999;display: flex;align-items: center;width: 100%;}
 .dc-cont>view{margin-bottom: 10rpx;}
 .dc-price .copy-img{width: 35rpx;height: 35rpx;float: right;margin-top: -25rpx;}
-.tab-view .stop-time{float: right;background-image: unset;width: unset;font-size: 24rpx;color: #666;}
-.stop-time text{color: #fff;background: #454545;padding: 5rpx 7rpx;border-radius: 10rpx;}
-.stop-time text:first-of-type{margin-left: 10rpx;}
-.isHideacti{width: 240rpx;height: 240rpx;top: 30rpx;left: 30rpx;position: absolute;text-align: center;font-size: 27rpx;color: #fff;padding-top: 35rpx;text-shadow: #000 0 2rpx 0;}
+.tab-view .stop-time{position: absolut;right:-10rpx;top:0rpx;background-image: unset;width: unset;font-size: 24rpx;color: #666;}
+.stop-time text{color: #fff;background: #454545;padding: 5rpx;border-radius: 10rpx;}
+.stop-time text:first-of-type{background: #F02B2B}
+.dc-list>view>.isHideacti{width: 240rpx;height: 240rpx;top: 30rpx;left: 30rpx;position: absolute;text-align: center;font-size: 27rpx;color: #fff;padding-top: 35rpx;text-shadow: #000 0 2rpx 0;}
 .isHideacti image{width: 55rpx;height: 55rpx;}
 .isHideacti view{line-height: 38rpx;}
 .isHideacti .no-a-goods{width: 160rpx;height: 160rpx;background:rgba(0,0,0,0.8);border-radius: 100%;margin: 0 auto;color: #fff;text-shadow: unset;line-height: 160rpx;}

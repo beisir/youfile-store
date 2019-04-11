@@ -188,7 +188,8 @@ import {
   aAnalysisCustomUrl,
   statPurchasersUrl,
   statPurchasersDetailsUrl,
-  purchaserTransUrl
+  purchaserTransUrl,
+  storeIndexAGoodsUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -1195,7 +1196,11 @@ function statPurchasersDetails(data) {
 function purchaserTrans(data) {
   return app.pageRequest.pageGet(purchaserTransUrl, data)
 }
-
+//店铺首页接口
+function storeIndexAGoods(data) {
+  data = initStoreId(data);
+  return app.pageRequest.pageGetActive(storeIndexAGoodsUrl, data)
+}
 module.exports = {
   editActiveGoods,
   getActiveGoodsDetail,
@@ -1397,5 +1402,6 @@ module.exports = {
   aAnalysisCustom,
   statPurchasers,
   statPurchasersDetails,
-  purchaserTrans
+  purchaserTrans,
+  storeIndexAGoods
 }

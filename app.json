@@ -3,12 +3,11 @@
     "pages/page/home/home",
     
     "pages/page/cartList/cartList",
-    
     "pages/page/goodsDetails/goodsDetails",
+    "pages/mallActive/yunDist/yunDist",
     "pages/mallActive/list/list",
     "pages/page/workIndex/workIndex",
     "pages/mallActive/activityAnalysis/activityAnalysis",
-    "pages/mallActive/yunDist/yunDist",
     "pages/admin/status/status",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/page/serStatus/serStatus",
@@ -20,7 +19,6 @@
     "pages/mallActive/distRecords/distRecords",
     "pages/mallActive/moreAdd/moreAdd",
     "pages/mallActive/choseSpec/choseSpec",
-
     "pages/admin/serStatus/serStatus",
     "pages/admin/addGoods/addGoods",
     "pages/admin/class/class",
@@ -191,5 +189,6 @@
     "wx1a7532a2abdd1698",
     "wx5e0828787c26f235",
     "wx3cfbe069368479ce"
-  ]
+  ],
+  "sitemapLocation": "sitemap.json"
 }

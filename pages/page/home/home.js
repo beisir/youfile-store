@@ -3,6 +3,7 @@ import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
 import EnterStoreHandler from '../../../utils/enterStoreHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
+import util from '../../../utils/util.js';
 import { handleQRCode } from '../../../utils/scanCode.js';
 // 身份判断
 function getIdentity(_this) {
@@ -27,8 +28,10 @@ Page({
     showDp: true,
     goRetailStore: true,
     currentTab: 0,
+    currentTabActive:0,
     confirmDown: false,
     baseUrl: '',
+    activeResult:[],
     result: [],
     noMoreData: true,
     keyword: '',
@@ -487,14 +490,34 @@ Page({
         })
       })
   },
-  // 获取店铺活动商品列表
+  // 根据时间戳设置倒计时
+  getDjs(time){
+    var _this=this
+    clearInterval(timer)
+    var timer=setInterval(res=>{
+      var data = util.timeStamp(time)
+      if (data.shengyuD == 0 && data.shengyuD == 0 && data.shengyuM == 0 && data.S == 0){
+        _this.onShow()
+      }else{
+        _this.setData({
+          endTime: util.timeStamp(time)
+        })
+      }
+    },1000)
+  },
+  // 获取店铺活动列表
   getActiveGoods:function(){
     var _this=this
     Api.storeActiveGoods().then(res=>{
       var obj = res.obj
+      _this.getDjs(obj[0].endTime)
       if (obj){
         _this.setData({
-          avtiveGoods:obj
+          avtiveGoods:obj,
+          activeResult:[],
+          activityNumber: obj[0].activityNumber
+        },function(){
+          _this.getActiveList()
         })
       }
     })
@@ -553,6 +576,7 @@ Page({
     this.closeShow()
     app.pageRequest.pageDataIndex.pageNum = 1
     app.pageRequest.pageData.pageNum = 0
+    app.pageRequest.pageDataActive.pageNum = 0
     getIdentity(this)
     app.globalData.switchStore = false
   },
@@ -571,6 +595,21 @@ Page({
       })
       _this.initStoreData()
     }
+  },
+  // 获取活动商品
+  getActiveList(){
+    var _this=this
+    Api.storeIndexAGoods({ activityNumber:this.data.activityNumber}).then(res=>{
+      var detailList = res.obj.result,
+        totalCount = res.obj.totalCount
+      if (Api.isNotEmpty(detailList)) {
+        var datas = _this.data.activeResult,
+          newArr = app.pageRequest.addDataList(datas, detailList)
+        _this.setData({
+          activeResult: newArr,
+        })
+      }
+    })
   },
     /**
    * 生命周期函数--监听页面加载
@@ -699,10 +738,17 @@ Page({
   // 切换活动商品tab
   swichNavActive:function(e){
     var _this=this,
-      index = e.target.dataset.current
-    console.log(index)
+      index = e.target.dataset.current,
+      activityNumber = e.target.dataset.number
+    app.pageRequest.pageDataActive.pageNum = 0
+    // _this.getDjs(this.data.avtiveGoods[index].endTime)
     _this.setData({
-      currentTabActive:index
+      currentTabActive:index,
+      activeResult:[],
+      // endTime:'',
+       activityNumber: activityNumber
+    }, function () {
+      _this.getActiveList()
     })
   },
   // 置顶
@@ -887,13 +933,18 @@ Page({
   toBottom: function () {
     var noMoreData = this.data.noMoreData
     var currentTab = this.data.currentTab
-    if (noMoreData) {
-      if (currentTab == 1) {
-        this.getListNew()
-      } else {
-        this.getList()
-      }
+    if (this.data.tabSwitchShow){
+      this.getActiveList()
+    }else{
+      if (noMoreData) {
+        if (currentTab == 1) {
+          this.getListNew()
+        } else {
+          this.getList()
+        }
+      } 
     }
+   
   },
   myPageScroll(e){
     var top = e.detail.scrollTop,

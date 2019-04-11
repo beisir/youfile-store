@@ -1,4 +1,5 @@
 // assembly/goodsActivityBinding/goodsActivityBinding.js
+import utils from '../../utils/util.js';
 Component({
   /**
    * 组件的属性列表
@@ -32,17 +33,28 @@ Component({
    */
   methods: {
     bindingForGoodsDetail(response) {
+      var goodsVO = response.obj.goodsVO
+      var activeVal = goodsVO.extInfo.SALES_PROMOTION[0]
+      var date = activeVal.endDate
+      var endDate = utils.formatTime(new Date(date))
+      var lit = wx.getStorageSync("admin")
       var data = {
         "activity_1": [
           {
-            "promotionMode": "special_offer",
-            "activityPrice": 200,
-            "sellPrice": 500,
-            "beginDate": "2019-04-20 10:00:00"
+            "promotionMode": activeVal.promotionMode,
+            "activityPrice": activeVal.activityPrice,
+            "sellPrice": lit == 1 ? goodsVO.sellPrice : goodsVO.wholesalePrice,
+            "beginDate": endDate
           }
         ]
       }
-      var goodsVO = response.obj.goodsVO
+      // setInterval(function () {
+      //   var newDate = utils.formatTime(new Date(date))
+      //   console.log(newDate)
+      //   data.activity_1[0].beginDate = newDate
+      //   date = date - 1000
+      // }, 1000)
+   
       var store = response.obj.store
 
       //处理展位1的数据集
@@ -60,7 +72,6 @@ Component({
       curPage.setData({
         activityData: data
       })
-
     },
     //处理展位1
     handleActivityPosition1(goodsVO) {
@@ -77,18 +88,26 @@ Component({
       // 判断是否有额外参数
       if(extInfoLen>0){
         var standardGoodsSkuPromotions = goodsVO.extInfo.SALES_PROMOTION[0].standardGoodsSkuPromotions
-        for (var val of goodsSkuVOList) {
-          val.standardGoodsSkuPromotions = []
-          for (var v of standardGoodsSkuPromotions) {
-            if (val.skuCode == v.skuCode) {
-              val.standardGoodsSkuPromotions.push(v)
-              val.isActivity = true
-              val.saleBatch = 5
-              val.activityPrice = v.activityPrice
-              goodsVO.hasActiveGoods = true
+        goodsVO.hasActiveGoods = true
+        if (goodsSkuVOList.length==0){
+          goodsVO.saleBatch = goodsVO.extInfo.SALES_PROMOTION[0].salesNum
+          goodsVO.activityPrice = goodsVO.extInfo.SALES_PROMOTION[0].activityPrice
+        }else{
+          for (var val of goodsSkuVOList) {
+            val.standardGoodsSkuPromotions = []
+            if (standardGoodsSkuPromotions) {
+              for (var v of standardGoodsSkuPromotions) {
+                if (val.skuCode == v.skuCode) {
+                  val.standardGoodsSkuPromotions.push(v)
+                  val.isActivity = true
+                  val.saleBatch = v.salesNum
+                  val.activityPrice = v.activityPrice
+                }
+              }
             }
           }
         }
+       
       }else{
         goodsVO.hasActiveGoods = false
       }

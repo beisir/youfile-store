@@ -6,6 +6,10 @@ class pageRequest extends http {
       pageNum: 0,
       pageSize:20
     }
+    this.pageDataActive = {
+      pageNum: 0,
+      pageSize: 20
+    }
     this.pageDataIndex = {
       pageNum: 1,
       pageSize: 20
@@ -24,6 +28,13 @@ class pageRequest extends http {
     }
     this.pageDataIndex.pageNum++
     return this.getRequest(url, Object.assign(data, this.pageDataIndex))
+  }
+  pageGetActive(url, data) {
+    if (data == undefined) {
+      var data = {}
+    }
+    this.pageDataActive.pageNum++
+    return this.getRequest(url, Object.assign(data, this.pageDataActive))
   }
   // 追加数组
   addDataList(data, newArr){

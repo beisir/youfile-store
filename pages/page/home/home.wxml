@@ -164,16 +164,17 @@
   <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
     <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
   </view>
-  
+
   <view class='tab-cont'>
-    <view class='tab-view {{tabSwitch=="0"?"tab-view3":"tab-view2"}}'>
-      <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}'  data-index='0'>正在抢订</view>
-      <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>更多商品</view>
-      <view class='stop-time'>
+    <view class='tab-view {{tabSwitch=="0"?avtiveGoods.length == 0?"tab-view1":"tab-view3":"tab-view2"}}'>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>正在抢订</view>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>全部商品</view>
+      <view class='stop-time'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
         距结束
-        <text>01</text> :
-        <text>12</text> :
-        <text>01</text>
+         <text style='day-text'>{{endTime.shengyuD}}</text> 天
+        <text>{{endTime.shengyuH}}</text> :
+        <text>{{endTime.shengyuM}}</text> :
+        <text>{{endTime.S}}</text>
       </view>
     </view>
   </view>
@@ -200,12 +201,12 @@
   </view>
   <!-- 活动商品 -->
   <view wx:else class="swiper-tab active-nav" id='swiper-tab'>
-    <view wx:for="{{avtiveGoods}}" wx:key="{{index}}" class="swiper-tab-item {{currentTabActive==index ? 'on' : ''}}" data-current="{{index}}" bindtap="swichNavActive">{{item.activityName}}
+    <view wx:for="{{avtiveGoods}}" wx:key="{{index}}" class="swiper-tab-item {{currentTabActive==index ? 'on' : ''}}" data-current="{{index}}" data-number="{{item.activityNumber}}" bindtap="swichNavActive">{{item.activityName}}
       <view></view>
     </view>
   </view>
   <view class='dc-list' wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
-    <view wx:for="{{result}}" wx:key="index" class='{{item.isHide?"opa-view":""}}'>
+    <navigator wx:for="{{activeResult}}" wx:key="index"  url="{{item.isHide?'':'../goodsDetails/goodsDetails?goodsId='+item.id}}" class='{{item.isHide?"opa-view":""}}'>
       <view>
         <image class='g-img' src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small" />
       </view>
@@ -215,9 +216,9 @@
           <view class='shan'>
             <image mode="widthFix" src="/image/shan.png" />抢订价</view>
           ￥
-          <text>1234</text>
-          <view class='goods-zize'>￥5847</view>
-          <image bindtap='copyGoods' class='copy-img' src="/image/dd.png" />
+          <text>{{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
+          <view class='goods-zize'>￥{{item.sellPrice}}</view>
+          <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='copy-img' src="/image/dd.png" />
         </view>
         <view class='dc-xian'>
           <view>
@@ -226,17 +227,15 @@
           <text>已抢50%</text>
         </view>
       </view>
-      <!-- <view class='isHideacti'>
-        <block>
-          <image src="/image/isshow.png"></image>
-          <view>该商品</view>
-          <view>加商友可见</view>
-        </block>
-        <block>
+      <view wx:if="{{item.isHide}}" class='isHideacti'>
+        <image src="/image/isshow.png"></image>
+        <view>该商品</view>
+        <view>加商友可见</view>
+        <!-- <block>
           <view class='no-a-goods'>已抢光</view>
-        </block>
-      </view> -->
-    </view>
+        </block> -->
+      </view>
+    </navigator>
   </view>
   <view class="result-null" wx:if="{{avtiveGoods.length == 0 && tabSwitchShow}}">
     <view class="nomore">
@@ -247,6 +246,14 @@
         <view class='no-active'>暂时没有抢订</view>
         <text>我们正在为您准备更优惠的商品</text>
       </block>
+      <!-- <block>暂时还没有上架商品</block> -->
+    </view>
+  </view>
+  <view class="result-null" wx:if="{{avtiveGoods.length > 0 && tabSwitchShow  && activeResult.length==0}}">
+    <view class="nomore">
+      <view>
+        <image src="/image/nohome.png"></image>
+      </view>
       <block>暂时还没有上架商品</block>
     </view>
   </view>
@@ -260,7 +267,7 @@
     <scroll-view scroll-y="true" style="height:100%;">
       <view class='flex-boxx'>
         <view class="result-list" wx:for="{{result}}" wx:key="index" id='{{index==0?"result-list":""}}'>
-          <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}"  extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}"/>
+          <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" />
           <view wx:if='{{item.isHide}}' class='isHideGoods'>
             <image src="/image/isshow.png"></image>
             <view>该商品</view>
