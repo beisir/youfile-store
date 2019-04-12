@@ -1,184 +1,136 @@
 const app = getApp();
 import Api from "../../../utils/api.js";
+import util from "../../../utils/util.js";
 var rate = 0;
-var doubleColumnCanvasWidth = 0;
-var doubleColumnCanvasHeight = 0;
+var canvasWidth = 0;
+var canvasHeight = 0;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    doubleColumnCanvasData: {
-      canvasId: 'doubleColumn',
+    columnCanvasData: {
+      canvasId: 'columnCanvas',
     },
+    baseUrl: app.globalData.imageUrl,
     activeGoods:[],//商品销量榜
     customData:[],//进货商排行榜
-    activityNumber: '1903260301000010',
+    activityNumber: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options.title){
+      this.setData({
+        title: options.title
+      })
+    }
+    if (options.status){
+      var status=options.status
+      if (status =='finish'){
+        status = "活动已结束"
+      }
+      if (status == 'be_doing') {
+        status = "活动进行中"
+      }
+      this.setData({
+        status: status
+      })
+    }
     if (options.activityNumber){
       this.getSalesList(options.activityNumber)
+      this.getAnalysisAGoods(options.activityNumber)
+      this.initStatic()
     }
-    this.getSalesList("1903260301000010")
-    this.initStatic()
-    this.getAnalysisAGoods("1903260301000010")
+  },
+  onShow:function(){
+  
   },
   // 初始化统计表
-  initStatic:function(){
+  initStatic: function () {
     var systemInfo = app.systemInfo;
     rate = systemInfo.screenWidth / 750;
     var updateData = {};
-    doubleColumnCanvasWidth = systemInfo.screenWidth - rate * 64;
-    doubleColumnCanvasHeight = rate * 304 + rate * 20 + rate * 32 + rate * 24;
-    var doubleColumnYMax = 0;
-    var doubleColumnYMin = 0;
-    updateData['doubleColumnCanvasData.canvasWidth'] = doubleColumnCanvasWidth;
-    updateData['doubleColumnCanvasData.axisPadd'] = { left: rate * 10, top: rate * 20, right: rate * 10 };
-    updateData['doubleColumnCanvasData.axisMargin'] = { bottom: rate * 32, left: rate * 20, right: rate * 20 };
-    updateData['doubleColumnCanvasData.yAxis.fontSize'] = rate * 22;
-    updateData['doubleColumnCanvasData.yAxis.fontColor'] = '#637280';
-    updateData['doubleColumnCanvasData.yAxis.lineColor'] = '#DCE0E6';
-    updateData['doubleColumnCanvasData.yAxis.lineWidth'] = rate * 2;
-    updateData['doubleColumnCanvasData.yAxis.dataWidth'] = rate * 62;
-    updateData['doubleColumnCanvasData.yAxis.isShow'] = true;
-    updateData['doubleColumnCanvasData.yAxis.isDash'] = true;
-    updateData['doubleColumnCanvasData.yAxis.minData'] = doubleColumnYMin;
-    updateData['doubleColumnCanvasData.yAxis.maxData'] = doubleColumnYMax;
-    updateData['doubleColumnCanvasData.yAxis.padd'] = rate * 304 / (doubleColumnYMax - doubleColumnYMin);
+    canvasWidth = systemInfo.screenWidth - rate * 64;
+    canvasHeight = rate * 306 + rate * 44 + rate * 34 + rate * 22;
 
-    updateData['doubleColumnCanvasData.xAxis.dataHeight'] = rate * 26;
-    updateData['doubleColumnCanvasData.xAxis.fontSize'] = rate * 22;
-    updateData['doubleColumnCanvasData.xAxis.fontColor'] = '#637280';
-    updateData['doubleColumnCanvasData.xAxis.lineColor'] = '#DCE0E6';
-    updateData['doubleColumnCanvasData.xAxis.lineWidth'] = rate * 2;
-    updateData['doubleColumnCanvasData.xAxis.padd'] = rate * 132;
-    updateData['doubleColumnCanvasData.xAxis.dataWidth'] = rate * 48;
-    updateData['doubleColumnCanvasData.xAxis.leftOffset'] = rate * 48;
+    var culumnYMax = 100;
+    var culumnYMin = 0;
+    updateData['columnCanvasData.canvasWidth'] = canvasWidth;
+    updateData['columnCanvasData.axisPadd'] = { left: rate * 5, top: rate * 13, right: rate * 5 };
+    updateData['columnCanvasData.axisMargin'] = { bottom: rate * 34, left: rate * 26 };
+    updateData['columnCanvasData.yAxis.fontSize'] = rate * 22;
+    updateData['columnCanvasData.yAxis.fontColor'] = '#637280';
+    updateData['columnCanvasData.yAxis.lineColor'] = '#DCE0E6';
+    updateData['columnCanvasData.yAxis.lineWidth'] = rate * 5;
+    updateData['columnCanvasData.yAxis.dataWidth'] = rate * 62;
+    updateData['columnCanvasData.yAxis.isShow'] = true;
+    updateData['columnCanvasData.yAxis.isDash'] = true;
+    updateData['columnCanvasData.yAxis.minData'] = culumnYMin;
+    updateData['columnCanvasData.yAxis.maxData'] = culumnYMax;
+    updateData['columnCanvasData.yAxis.padd'] = rate * 306 / (culumnYMax - culumnYMin);
 
-
-    updateData['doubleColumnCanvasData.canvasHeight'] = doubleColumnCanvasHeight;
-    updateData['doubleColumnCanvasData.enableScroll'] = true;
+    updateData['columnCanvasData.xAxis.dataHeight'] = rate * 26;
+    updateData['columnCanvasData.xAxis.fontSize'] = rate * 18;
+    updateData['columnCanvasData.xAxis.fontColor'] = '#637280';
+    updateData['columnCanvasData.xAxis.lineColor'] = '#DCE0E6';
+    updateData['columnCanvasData.xAxis.lineWidth'] = rate * 5;
+    updateData['columnCanvasData.xAxis.padd'] = rate * 52;
+    updateData['columnCanvasData.xAxis.dataWidth'] = rate * 64;
+    updateData['columnCanvasData.xAxis.leftOffset'] = rate * 40;
 
 
-    updateData['doubleColumnCanvasData.point'] = { bColor: "#FFA848", sClor: "#FFFFFF", size: rate * 4, isShow: true };
-    updateData['doubleColumnCanvasData.touchDetail.width'] = rate * 144;
-    updateData['doubleColumnCanvasData.touchDetail.height'] = rate * 149;
-    updateData['doubleColumnCanvasData.touchDetail.fontSize'] = rate * 20;
-    updateData['doubleColumnCanvasData.touchDetail.fontColor'] = '#ffffff';
-    updateData['doubleColumnCanvasData.touchDetail.padd'] = rate * 12;
-    updateData['doubleColumnCanvasData.touchDetail.bgColor'] = "#637280";
-    updateData['doubleColumnCanvasData.touchDetail.lineSpacingExtra'] = rate * 12;
-    let doubleCloumnRightYAxisData = [];
-    let doubleCloumnRightYMax = 0;
-    let doubleCloumnRightYMin = 0;
-    let doubleCloumnRatio = 1;
+    updateData['columnCanvasData.canvasHeight'] = canvasHeight;
+    updateData['columnCanvasData.enableScroll'] = true;
 
-    let doubleColumnSeries = {
-      cloumnData: {
-        data: [
-          { x: '1', y: 100, title: "2" },
-          { x: '2', y: 230, title: "2" },
-          { x: '3', y: 430, title: "22222222" },
-          { x: '4', y: 430, title: "222222222" },
-          { x: '5', y: 430, title: "2" },
-          { x: '6', y: 430, title: "" },
-          { x: '7', y: 430, title: "" },
-          { x: '8', y: 430, title: "" },
-          { x: '9', y: 430, title: "" },
-          { x: '10', y: 430, title: "" },
-          { x: '11', y: 430, title: "" },
-          { x: '12', y: 430, title: "" },
-          { x: '13', y: 430, title: "" },
-          { x: '14', y: 430, title: "" },
-          { x: '15', y: 430, title: "" },
-          { x: '16', y: 430, title: "" },
-        ],
-        columnStartColor: "#2BE99F",
-        columnEndColor: "#13CE66"
-      },
-      lineData: [{
-        data: [
-          { x: '1', y: 100, title: "" },
-          { x: '2', y: 230, title: "" },
-          { x: '3', y: 430, title: "" },
-          { x: '4', y: 430, title: "" },
-          { x: '5', y: 430, title: "" },
-          { x: '6', y: 430, title: "" },
-          { x: '7', y: 430, title: "" },
-          { x: '8', y: 430, title: "" },
-          { x: '9', y: 430, title: "" },
-          { x: '10', y: 430, title: "" },
-          { x: '11', y: 430, title: "" },
-          { x: '12', y: 430, title: "" },
-          { x: '13', y: 430, title: "" },
-          { x: '14', y: 430, title: "" },
-          { x: '15', y: 430, title: "" },
-          { x: '16', y: 430, title: "" },
-        ],
-        lineColor: "#FFA848",
-        point: {
-          size: rate * 5,
-          bColor: '#FFA848',
-          sClor: '#ffffff',
-          isShow: true
-        }
-      }]
-    };
-    let doubleColumnXAxisData = [
-      { x: '1', y: 100, title: "2019-09-09" },
-      { x: '2', y: 230, title: "2019-09-09" },
-      { x: '3', y: 430, title: "2019-09-09" },
-      { x: '4', y: 430, title: "2019-09-09" },
-      { x: '5', y: 430, title: "2019-09-09" },
-      { x: '6', y: 430, title: "2019-09-09" },
-      { x: '7', y: 430, title: "2019-09-09" },
-      { x: '8', y: 430, title: "2019-09-09" },
-      { x: '9', y: 430, title: "2019-09-09" },
-      { x: '10', y: 430, title: "2019-09-09" },
-      { x: '11', y: 430, title: "2019-09-09" },
-      { x: '12', y: 430, title: "2019-09-09" },
-      { x: '13', y: 430, title: "2019-09-09" },
-      { x: '14', y: 430, title: "2019-09-09" },
-      { x: '15', y: 430, title: "2019-09-09" },
-      { x: '16', y: 430, title: "2019-09-09" },
+    this.setData(updateData);
+  },
+  initDataBiao: function (arr) {
+    var updateData = {};
+    var columnYMax = 100;
+    var columnYMin = 0;
+    var salesDate = [],
+      salesVolume = []
+    for (var a of arr) {
+      salesDate.push(util.formatTimeday(new Date(a.salesDate)))
+      if (a.salesVolume==0){
+        salesVolume.push(a.salesVolume)
+      }else{
+        salesVolume.push((a.salesVolume)*0.02)
+      }
+    }
+    updateData['columnCanvasData.yAxis.minData'] = columnYMin;
+    updateData['columnCanvasData.yAxis.maxData'] = columnYMax;
+    updateData['columnCanvasData.series'] = [{
+      data: salesVolume,
+    }];
+    updateData['columnCanvasData.xAxis.data'] = salesDate;
+    updateData['columnCanvasData.yAxis.data'] = [
+      { x: 0, y: 0, title: '0' },
+      { x: 0, y: 20, title: '1000' },
+      { x: 0, y: 40, title: '2000' },
+      { x: 0, y: 60, title: '3000' },
+      { x: 0, y: 80, title: '4000' },
+      { x: 0, y: 100, title: '5000' }
     ];
-    let doubleColumnYAxisData = [];
-    doubleColumnYMax = 1000;
-    doubleColumnYMin = 0;
-    doubleColumnYMax = this.getYMax(doubleColumnYMax);
-    doubleColumnYAxisData = this.getYAxiss(doubleColumnYMax);
 
-    doubleCloumnRightYMax = this.getYMax(6.0 * 100);
-    doubleCloumnRatio = doubleColumnYMax / doubleCloumnRightYMax;
-    doubleCloumnRightYAxisData = this.getRightYAxiss(doubleCloumnRightYMax, doubleCloumnRatio);
-
-    updateData['doubleColumnCanvasData.yAxis.minData'] = doubleColumnYMin;
-    updateData['doubleColumnCanvasData.yAxis.maxData'] = doubleColumnYMax;
-    updateData['doubleColumnCanvasData.series'] = doubleColumnSeries;
-    updateData['doubleColumnCanvasData.xAxis.data'] = doubleColumnXAxisData;
-    updateData['doubleColumnCanvasData.yAxis.data'] = doubleColumnYAxisData;
-    updateData['doubleColumnCanvasData.yAxis.rightData'] = doubleCloumnRightYAxisData;
-    updateData['doubleColumnCanvasData.yAxis.padd'] = rate * 304 / (doubleColumnYMax - doubleColumnYMin);
     this.setData(updateData);
   },
   // 获取统计店铺销售量列表 和商品销售总额
   getSalesList: function (activityNumber){
+    var _this=this
     Api.saleActiveList({ activityNumber: activityNumber}).then(res=>{
-      console.log(res)
       if (res.obj){
-
+        _this.initDataBiao(res.obj)
       }
     })
     Api.statisticSales({ activityNumber: activityNumber }).then(res => {
-      console.log(res)
-      if (res.obj) {
-
-      }
+      _this.setData({
+        total:res.obj
+      })
     })
   },
   // 获取商品销量排行榜
@@ -193,7 +145,6 @@ Page({
       _this.setData({
         customData: res.obj
       })
-      console.log(res.obj)
     })
     
   },
@@ -232,101 +183,24 @@ Page({
 
   },
 
-  /**
-      * 获得y轴最大值
-      * @param  {[type]} yMax 当前最大值
-      * @return {[type]}      [description]
-      */
-  getYMax: function (yMax) {
-    let maxInt = Math.floor(yMax);
-    let maxLength = maxInt.toString().length;
-    let interval = 0;
-    if (maxInt == 0) {
-      interval = 3 * Math.pow(10, 1);
-    } else {
-      if (maxLength > 3) {
-        interval = 3 * Math.pow(10, maxLength - 2);
-      } else {
-        interval = 3 * Math.pow(10, maxLength - 1);
-      }
+  onTouchHandler(e) {
+    if (null == this.column_chart) {
+      this.column_chart = this.selectComponent("#column-chart");
     }
-
-    let remainder = maxInt % interval;
-    let conversionMax = ((maxInt - remainder) / interval + 1) * interval;
-    return conversionMax;
+    this.column_chart.onTouchHandler(e);
   },
-
-  /**
-   * 获得y轴数组
-   * @param  {[type]} yMax y轴最大值
-   * @return {[type]}      [description]
-   */
-  getYAxiss: function (yMax) {
-    let yAxisData = [];
-
-    let avg = yMax / 3;
-
-    let point = {};
-    point.x = 0;
-    point.y = 0;
-    point.title = '0'
-    yAxisData.push(point);
-
-    let point1 = {};
-    point1.x = 0;
-    point1.y = Math.floor(avg);
-    point1.title = Math.floor(avg);
-    yAxisData.push(point1);
-
-    let point2 = {};
-    point2.x = 0;
-    point2.y = Math.floor(avg) * 2;;
-    point2.title = Math.floor(avg) * 2;
-    yAxisData.push(point2);
-
-    let point3 = {};
-    point3.x = 0;
-    point3.y = Math.floor(avg) * 3;
-    point3.title = Math.floor(avg) * 3;
-    yAxisData.push(point3);
-    return yAxisData;
+  onTouchMoveHandler(e) {
+    if (null == this.column_chart) {
+      this.column_chart = this.selectComponent("#column-chart");
+    }
+    this.column_chart.onTouchMoveHandler(e);
   },
-
-  /**
-   * 获得y轴数组
-   * @param  {[type]} yMax y轴最大值
-   * @return {[type]}      [description]
-   */
-  getRightYAxiss: function (yMax, ratio) {
-    let yAxisData = [];
-
-    let avg = yMax / 3;
-
-    let point = {};
-    point.x = 0;
-    point.y = 0 * ratio;
-    point.title = '0'
-    yAxisData.push(point);
-
-    let point1 = {};
-    point1.x = 0;
-    point1.y = Math.floor(avg) * ratio;
-    point1.title = Math.floor(avg) / 100 + "%";
-    yAxisData.push(point1);
-
-    let point2 = {};
-    point2.x = 0;
-    point2.y = Math.floor(avg) * 2 * ratio;;
-    point2.title = Math.floor(avg) * 2 / 100 + "%";
-    yAxisData.push(point2);
-
-    let point3 = {};
-    point3.x = 0;
-    point3.y = Math.floor(avg) * 3 * ratio;
-    point3.title = Math.floor(avg) * 3 / 100 + "%";
-    yAxisData.push(point3);
-    return yAxisData;
-  }
+  onTouchEndHandler(e) {
+    if (null == this.column_chart) {
+      this.ccolumn_chart = this.selectComponent("#column-chart");
+    }
+    this.column_chart.onTouchEndHandler(e);
+  },
 
 
 })

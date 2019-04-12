@@ -22,15 +22,10 @@ var config = {
     top: 0,
     bottom: 0,
   },
-  point: {
-    size: 0,
-    bColor: '#0077FF',
-    sClor: '#ffffff',
-    isShow: true
-  },
   //x轴的数据
   xAxis: {
-    data: [],
+    data: [
+    ],
     isShow: true, //是否显示
     padd: 50, //间隔
     dataWidth: 32, //数据宽度，用于柱状图
@@ -49,9 +44,8 @@ var config = {
   //y轴的数据注释同上
   yAxis: {
     data: [
-      // { x: 0, y: 0, title: '' }
+      { x: 0, y: 0, title: '' }
     ],
-    rightData: [],
     isShow: true,
     minData: 0, //区块最小值
     maxData: 60, //区块的最大值
@@ -69,18 +63,6 @@ var config = {
   },
   canvasWidth: 0, //画布宽度
   canvasHeight: 0, //画布高度
-  touchDetail: {
-    isShow: false,
-    x: 0,
-    y: 0,
-    padd: 0,
-    width: 0,
-    height: 0,
-    bgColor: "",
-    fontColor: "",
-    fontSize: 12,
-    lineSpacingExtra: 0,
-  }
 };
 
 var util = {};
@@ -246,11 +228,7 @@ function drawYAxisGrid(leftOffset, topOffset, config, context) {
     startPoint.y = config.yAxis.padd * (config.yAxis.maxData - config.yAxis.data[i].y) + topOffset;
     line.startPoint = startPoint;
     let endPoint = {};
-    if (config.yAxis.rightData != undefined && config.yAxis.rightData != null && config.yAxis.rightData.length > 1) {
-      endPoint.x = config.canvasWidth - config.padd.right - config.axisMargin.right - config.axisPadd.right - config.yAxis.dataWidth;
-    } else {
-      endPoint.x = config.canvasWidth - config.padd.right - config.axisMargin.right - config.axisPadd.right;
-    }
+    endPoint.x = config.xAxis.data.length * (config.xAxis.padd + config.xAxis.dataWidth) * config.xAxis.padd + leftOffset;
     endPoint.y = config.yAxis.padd * (config.yAxis.maxData - config.yAxis.data[i].y) + topOffset;
     line.endPoint = endPoint;
     yGridLines.push(line);
@@ -261,8 +239,8 @@ function drawYAxisGrid(leftOffset, topOffset, config, context) {
   context.setLineWidth(config.yAxis.lineWidth);
   context.moveTo(yGridLines[0].startPoint.x, yGridLines[0].startPoint.y);
   context.lineTo(yGridLines[0].endPoint.x, yGridLines[0].endPoint.y);
-  context.closePath();
   context.stroke();
+  context.closePath();
 
   context.beginPath();
   context.setStrokeStyle(config.yAxis.lineColor);
@@ -290,10 +268,10 @@ function drawXAxis(opts, config, context) {
   var dataLength = config.xAxis.data.length;
   for (var i = 0; i < dataLength; i++) {
     let axis = {};
-    axis.x = leftOffset + (config.xAxis.padd + config.xAxis.dataWidth) * i - measureText(config.xAxis.data[i].title, config.xAxis.fontSize) / 2 + config.xAxis.dataWidth / 2;
+    axis.x = leftOffset + (config.xAxis.padd + config.xAxis.dataWidth) * i - measureText(config.xAxis.data[i], config.xAxis.fontSize) / 2 + config.xAxis.dataWidth / 2;
 
     axis.y = (config.yAxis.maxData - config.yAxis.minData) * config.yAxis.padd + topOffset;
-    axis.content = config.xAxis.data[i].title;
+    axis.content = config.xAxis.data[i];
     xAxis.push(axis);
   }
 
@@ -336,7 +314,7 @@ function measureText(text, fontSize) {
       width += 10;
     }
   });
-  return width * fontSize / 10 + 3;
+  return width * fontSize / 10;
 }
 
 //绘制y轴
@@ -372,29 +350,6 @@ function drawYAxis(opts, config, context) {
     context.fillText(item.content, item.x, item.y);
   });
   context.closePath();
-
-  if (config.yAxis.rightData != undefined && config.yAxis.rightData != null && config.yAxis.rightData.length > 1) {
-    var yRightAxis = [];
-    var rightDataLength = config.yAxis.rightData.length;
-    for (var i = 0; i < rightDataLength; i++) {
-      let axis = {};
-      axis.x = config.canvasWidth - config.yAxis.dataWidth;
-      axis.y = config.yAxis.padd * (config.yAxis.maxData - config.yAxis.rightData[i].y) + padd.top + axisMargin.top + config.axisPadd.top + config.yAxis.fontSize / 2;
-      axis.content = config.yAxis.rightData[i].title;
-      yRightAxis.push(axis);
-    }
-
-    context.beginPath();
-    context.setFontSize(config.yAxis.fontSize);
-    context.setFillStyle(config.yAxis.fontColor);
-    yRightAxis.forEach(function (item) {
-      let metricsContent = measureText(item.content, config.yAxis.fontSize);
-      let rigthX = item.x + config.yAxis.dataWidth - metricsContent;
-      context.fillText(item.content, rigthX, item.y);
-    });
-    context.closePath();
-  }
-
   context.restore();
 }
 
@@ -403,7 +358,7 @@ function drawYAxis(opts, config, context) {
  * 绘制数据区域
  */
 function drawColumn(series, opts, config, context) {
-  if (series == null || series == undefined || series.cloumnData == null || series.cloumnData.data == null) {
+  if (series == null || series == undefined) {
     return;
   }
   var padd = config.padd;
@@ -413,202 +368,38 @@ function drawColumn(series, opts, config, context) {
   var topOffset = padd.top + axisMargin.top + axisPadd.top;
 
   var yAxisHeight = (config.yAxis.maxData - config.yAxis.minData) * config.yAxis.padd;
-  var yAxisMaxPoint = config.canvasWidth - padd.right - axisPadd.right;
 
-  var distance = 0;
-  var realTouch = {};
-
-  var columnsData = [];
 
   var areaDatas = [];
-  var columnColor = {};
-  columnColor.startColor = series.cloumnData.columnStartColor;
-  columnColor.endColor = series.cloumnData.columnEndColor;
-  series.cloumnData.data.forEach(function (item, index) {
+  series[0].data.forEach(function (item, index) {
     let areaData = {};
     areaData.x = leftOffset + index * (config.xAxis.padd + config.xAxis.dataWidth);
-    areaData.y = topOffset + yAxisHeight - (item.y - config.yAxis.minData) * config.yAxis.padd;
+    areaData.y = topOffset + yAxisHeight - (item - config.yAxis.minData) * config.yAxis.padd;
     areaDatas.push(areaData);
-
-    if (distance == 0 || Math.abs(areaData.x - config.touchDetail.x) < distance) {
-      realTouch.x = areaData.x + config.xAxis.dataWidth / 2;
-      realTouch.y = areaData.y;
-      realTouch.title = [];
-      realTouch.title = item.title.split('|');
-      distance = Math.abs(areaData.x - config.touchDetail.x);
-    }
-
-    if (undefined != item.axis && item.axis != null) {
-      let columnSize = item.axis.length;
-      let columns = {};
-      let columnAreas = [];
-      item.axis.forEach(function (item1, index1) {
-        let columnArea = {};
-        columnArea.x = leftOffset + index * (config.xAxis.padd + config.xAxis.dataWidth) + index1 * config.xAxis.dataWidth / columnSize;
-        columnArea.y = topOffset + yAxisHeight - (item1.y - config.yAxis.minData) * config.yAxis.padd;
-        columnArea.startColor = item1.columnStartColor;
-        columnArea.endColor = item1.columnEndColor;
-        columnAreas.push(columnArea);
-      });
-      columns.columnAreas = columnAreas;
-      columnsData.push(columns);
-    }
   });
-
-
-  context.save();
 
   //原点坐标
   var startPoint = {};
   startPoint.x = leftOffset;
   startPoint.y = topOffset + yAxisHeight;
 
-  if (columnsData.length < 1) {
-    //单柱状图
-    context.beginPath();
-    areaDatas.forEach(function (item) {
-      let grd = context.createLinearGradient(item.x, item.y, item.x, startPoint.y)
-      grd.addColorStop(1, columnColor.startColor);
-      grd.addColorStop(0, columnColor.endColor);
+  context.save();
 
-      // Fill with gradient
-      context.setFillStyle(grd)
-      context.fillRect(item.x, item.y, config.xAxis.dataWidth, startPoint.y - item.y)
-    });
-    context.closePath();
-  } else {
-    //多柱状图
-    columnsData.forEach(function (item) {
-      let columnSize = item.columnAreas.length;
-      item.columnAreas.forEach(function (item1) {
-        context.beginPath();
-        let grd = context.createLinearGradient(item1.x, item1.y, item1.x, startPoint.y)
-        grd.addColorStop(1, item1.startColor);
-        grd.addColorStop(0, item1.endColor);
+  //滑动数据
+  context.translate(opts._scrollDistance_ && opts._scrollDistance_ !== 0 && opts.enableScroll === true ? opts._scrollDistance_ : 0, 0);
 
-        // Fill with gradient
-        context.setFillStyle(grd)
-        context.fillRect(item1.x, item1.y, config.xAxis.dataWidth / columnSize, startPoint.y - item1.y)
-        context.closePath();
-      });
-    });
-  }
+  context.beginPath();
+  //绘制数据连接点样式
+  areaDatas.forEach(function (item) {
+    const grd = context.createLinearGradient(item.x, item.y, item.x, startPoint.y)
+    grd.addColorStop(0, '#0077FF')
+    grd.addColorStop(1, '#3DB2FF')
 
-
-  if (series.lineData != null && series.lineData != undefined) {
-    var lines = [];
-    series.lineData.forEach(function (items, indexs) {
-      let lineDatas = [];
-      items.data.forEach(function (item, index) {
-        let lineData = {};
-        lineData.x = leftOffset + index * (config.xAxis.padd + config.xAxis.dataWidth) + config.xAxis.dataWidth / 2;
-        lineData.y = topOffset + yAxisHeight - (item.y - config.yAxis.minData) * config.yAxis.padd;
-        lineDatas.push(lineData);
-      });
-      let lineItem = {};
-      let lineItemPoint = {};
-      lineItem.data = lineDatas;
-      lineItem.linesColor = items.lineColor;
-
-      lineItemPoint.size = items.point.size;
-      lineItemPoint.bColor = items.point.bColor;
-      lineItemPoint.sClor = items.point.sClor;
-      lineItemPoint.isShow = items.point.isShow;
-
-      lineItem.point = lineItemPoint;
-      lines.push(lineItem);
-    });
-
-    //绘制折线  
-    lines.forEach(function (items, index) {
-      context.beginPath();
-      context.setStrokeStyle(items.linesColor)
-      items.data.forEach(function (item, index) {
-        if (index == 0) {
-          context.moveTo(item.x, item.y);
-        } else {
-          context.lineTo(item.x, item.y);
-        }
-
-        if (item.isShowLine) {
-          context.lineTo(item.x, topOffset + yAxisHeight);
-          context.moveTo(item.x, item.y);
-        }
-      });
-      context.stroke();
-
-      //绘制数据连接点样式
-      if (items.point.isShow) {
-        items.data.forEach(function (item) {
-          context.beginPath();
-          let bgrd = context.createLinearGradient(0, 0, 1, 1);
-          bgrd.addColorStop(0, items.point.bColor)
-          bgrd.addColorStop(1, items.point.bColor)
-          context.setFillStyle(bgrd);
-          context.arc(item.x, item.y, items.point.size, 0, 2 * Math.PI)
-          context.fill();
-
-          context.beginPath();
-          let sgrd = context.createLinearGradient(0, 0, 1, 1);
-          sgrd.addColorStop(0, items.point.sClor)
-          sgrd.addColorStop(1, items.point.sClor)
-          context.setFillStyle(sgrd)
-          context.arc(item.x, item.y, items.point.size / 2, 0, 2 * Math.PI)
-          context.fill();
-        });
-      }
-    });
-
-  }
-
-
-  if (config.touchDetail.isShow) {
-
-    context.beginPath();
-    let bgColorGrd = context.createLinearGradient(0, 0, 1, 1);
-    bgColorGrd.addColorStop(0, config.touchDetail.bgColor)
-    bgColorGrd.addColorStop(1, config.touchDetail.bgColor)
-    context.setFillStyle(bgColorGrd)
-    if ((realTouch.x + config.touchDetail.padd * 2 + config.touchDetail.width) < yAxisMaxPoint) {
-      context.fillRect(realTouch.x + config.touchDetail.padd * 2, topOffset - axisPadd.top, config.touchDetail.width, config.touchDetail.height);
-    } else {
-      context.fillRect(realTouch.x - config.touchDetail.padd * 2 - config.touchDetail.width, topOffset - axisPadd.top, config.touchDetail.width, config.touchDetail.height);
-    }
-    context.closePath();
-
-
-    context.beginPath();
-    if ((realTouch.x + config.touchDetail.padd * 2 + config.touchDetail.width) < yAxisMaxPoint) {
-      context.setFontSize(config.touchDetail.fontSize);
-      context.setFillStyle(config.touchDetail.fontColor);
-      realTouch.title.forEach(function (item, index) {
-        context.fillText(item, realTouch.x + config.touchDetail.padd * 3, topOffset - axisPadd.top + config.touchDetail.padd + config.touchDetail.lineSpacingExtra * index + config.touchDetail.fontSize * (index + 1));
-      });
-    } else {
-      context.setFontSize(config.touchDetail.fontSize);
-      context.setFillStyle(config.touchDetail.fontColor);
-      realTouch.title.forEach(function (item, index) {
-        context.fillText(item, realTouch.x - config.touchDetail.padd - config.touchDetail.width, topOffset - axisPadd.top + config.touchDetail.padd + config.touchDetail.lineSpacingExtra * index + config.touchDetail.fontSize * (index + 1));
-      });
-    }
-
-    context.closePath();
-
-
-    context.beginPath();
-    context.setStrokeStyle(config.yAxis.lineColor);
-    context.setLineWidth(config.yAxis.lineWidth);
-    if (config.yAxis.isDash) {
-      context.setLineDash(config.yAxis.lineDash.pattern, config.yAxis.lineDash.offset);
-    }
-    context.moveTo(realTouch.x, topOffset - axisPadd.top);
-    context.lineTo(realTouch.x, topOffset + yAxisHeight);
-    context.stroke();
-    context.closePath();
-
-
-  }
-
+    // Fill with gradient
+    context.setFillStyle(grd)
+    context.fillRect(item.x, item.y, config.xAxis.dataWidth, startPoint.y - item.y)
+  });
+  context.closePath();
 
   context.restore();
 
@@ -763,8 +554,6 @@ Charts.prototype.updateData = function (opts) {
   this.config = util.extend(true, {}, this.config, opts);
   this.config.xAxis.data = opts.xAxis != undefined && opts.xAxis != null && opts.xAxis.data != null && opts.xAxis.data != undefined ? opts.xAxis.data : this.config.xAxis.data;
   this.config.yAxis.data = opts.yAxis != undefined && opts.yAxis != null && opts.yAxis.data != undefined && opts.yAxis.data != null ? opts.yAxis.data : this.config.yAxis.data;
-  this.config.yAxis.rightData = opts.yAxis != undefined && opts.rightData != null && opts.yAxis.rightData != undefined && opts.yAxis.rightData != null ? opts.yAxis.rightData : this.config.yAxis.rightData;
-
   this.config.series = opts.series != undefined && opts.series != null ? opts.series : this.config.series;
   this.opts.series = opts.series != undefined && opts.series != null ? opts.series : this.opts.series;
 
@@ -786,115 +575,28 @@ Charts.prototype.addEventListener = function (type, listener) {
   this.event.addEventListener(type, listener);
 };
 
-// Charts.prototype.scrollStart = function(e) {
-//     if (e.touches[0] && this.opts.enableScroll === true) {
-//         this.scrollOption.startTouchX = e.touches[0].x;
-//     }
-// };
-
-// Charts.prototype.scroll = function(e) {
-//     if (e.touches[0] && this.opts.enableScroll === true) {
-//         var _distance = e.touches[0].x - this.scrollOption.startTouchX;
-//         var currentOffset = this.scrollOption.currentOffset;
-
-//         var validDistance = calValidDistance(_distance, currentOffset, this.config);
-
-//         this.scrollOption.distance = _distance = validDistance - currentOffset;
-
-//         var opts = util.extend(true, this.opts, {
-//             _scrollDistance_: validDistance,
-//             animation: false
-//         });
-
-//         drawCharts.call(this, this.config.type, opts, this.config, this.context);
-//     }
-// };
-
-
-Charts.prototype.touchstart = function (e) {
-  if (!isInAxis(this, e.touches[0].x, e.touches[0].y)) {
-    return;
-  }
-  this.config.touchDetail.isShow = true;
-  this.config.touchDetail.x = e.touches[0].x;
-  this.config.touchDetail.y = e.touches[0].y;
-  drawCharts.call(this, this.config.type, this.opts, this.config, this.context);
-};
-
-Charts.prototype.touchmove = function (e) {
-  if (!isInAxis(this, e.touches[0].x, e.touches[0].y)) {
-    return;
-  }
-  var direction = getDirection(this.config.touchDetail.x, this.config.touchDetail.y, e.touches[0].x, e.touches[0].y);
-  switch (direction) {
-    case 0:
-      //未滑动
-      break;
-    case 1:
-      //向上
-      break;
-    case 2:
-      //向下
-      break;
-    case 3:
-    //向左
-    case 4:
-      //向右
-      if (Math.abs(e.touches[0].x - this.config.touchDetail.x) > this.config.xAxis.padd / 2) {
-        this.config.touchDetail.isShow = true;
-        this.config.touchDetail.x = e.touches[0].x;
-        this.config.touchDetail.y = e.touches[0].y;
-        drawCharts.call(this, this.config.type, this.opts, this.config, this.context);
-      }
-      break;
-    default:
+Charts.prototype.scrollStart = function (e) {
+  if (e.touches[0] && this.opts.enableScroll === true) {
+    this.scrollOption.startTouchX = e.touches[0].x;
   }
 };
 
-/**
- * 是否在坐标轴内
- * @param  float  x x轴                   
- * @param  float  y y轴
- * @return Boolean   是否在坐标轴内
- */
-function isInAxis(_that, x, y) {
-  var axisStartX = _that.config.padd.left + _that.config.axisMargin.left + _that.config.yAxis.dataWidth;
-  var axisEndX = _that.config.canvasWidth;
-  var axisStartY = _that.config.padd.top + _that.config.axisMargin.top;
-  var axisEndY = _that.config.canvasHeight - _that.config.axisMargin.bottom - _that.config.xAxis.fontSize;
-  if (axisStartX <= x && x <= axisEndX && axisStartY <= y && y <= axisEndY) {
-    return true;
+Charts.prototype.scroll = function (e) {
+  if (e.touches[0] && this.opts.enableScroll === true) {
+    var _distance = e.touches[0].x - this.scrollOption.startTouchX;
+    var currentOffset = this.scrollOption.currentOffset;
+
+    var validDistance = calValidDistance(_distance, currentOffset, this.config);
+
+    this.scrollOption.distance = _distance = validDistance - currentOffset;
+
+    var opts = util.extend(true, this.opts, {
+      _scrollDistance_: validDistance,
+      animation: false
+    });
+
+    drawCharts.call(this, this.config.type, opts, this.config, this.context);
   }
-  return false;
-}
-
-//根据起点终点返回方向 1向上 2向下 3向左 4向右 0未滑动
-function getDirection(startx, starty, endx, endy) {
-  var angx = endx - startx;
-  var angy = endy - starty;
-  var result = 0;
-  //如果滑动距离太短
-  if (Math.abs(angx) < 2 && Math.abs(angy) < 2) {
-    return result;
-  }
-
-  var angle = Math.atan2(angy, angx) * 180 / Math.PI;
-  if (angle >= -135 && angle <= -45) {
-    result = 1;
-  } else if (angle > 45 && angle < 135) {
-    result = 2;
-  } else if ((angle >= 135 && angle <= 180) || (angle >= -180 && angle < -135)) {
-    result = 3;
-  } else if (angle >= -45 && angle <= 45) {
-    result = 4;
-  }
-
-  return result;
-}
-
-Charts.prototype.touchend = function (e) {
-  this.config.touchDetail.isShow = false;
-  drawCharts.call(this, this.config.type, this.opts, this.config, this.context);
 };
 
 /**
@@ -920,15 +622,15 @@ function calValidDistance(distance, currentOffset, config) {
   return validDistance;
 }
 
-// Charts.prototype.scrollEnd = function(e) {
-//     if (this.opts.enableScroll === true) {
-//         var _scrollOption = this.scrollOption,
-//             currentOffset = _scrollOption.currentOffset,
-//             distance = _scrollOption.distance;
+Charts.prototype.scrollEnd = function (e) {
+  if (this.opts.enableScroll === true) {
+    var _scrollOption = this.scrollOption,
+      currentOffset = _scrollOption.currentOffset,
+      distance = _scrollOption.distance;
 
-//         this.scrollOption.currentOffset = currentOffset + distance;
-//         this.scrollOption.distance = 0;
-//     }
-// };
+    this.scrollOption.currentOffset = currentOffset + distance;
+    this.scrollOption.distance = 0;
+  }
+};
 
 module.exports = Charts;
