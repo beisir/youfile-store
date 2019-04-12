@@ -133,7 +133,7 @@ Page({
       activityNumber = this.data.activityNumber,
       goodsIds = this.data.goodsIds
     if (goodsIds.length>0){
-      Api.releaseMoreGoods({ activityNumber: activityNumber, goodsId: goodsIds }).then(res => {
+      Api.releaseMoreGoods({ activityNumber: activityNumber, goodsIds: goodsIds }).then(res => {
         Api.showToast(res.message)
       })
     }else{

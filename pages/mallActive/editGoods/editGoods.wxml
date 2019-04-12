@@ -17,8 +17,8 @@
     </view>
     <view class='goods-spec'>
       <view class='spec-t' wx:if="{{!noSku}}"><block>商品规格（{{checkedNum}}/{{goods.goodsSkuVOList.length}}）</block>
-        <button bindtap='discountGoods' class='spec-one'>一键折扣</button>
-        <button bindtap='choiceSpec'>选择规格</button>
+        <button bindtap='discountGoods' class='spec-one' style='padding:0;'>一键折扣</button>
+        <button bindtap='choiceSpec' style='padding:0;'>选择规格</button>
       </view>
       <view wx:else class='spec-t'>商品规格</view>
       <!-- sku -->
@@ -26,7 +26,7 @@
         <view wx:for='{{skuList}}' wx:key='{{index}}' wx:if="{{item.checked}}">
           <view class='spec-cont'>
             <view>商品规格{{index+1}}：
-              <text style='font-weight:600;'>"{{item.skuName}}"</text>
+              <text wx:for="{{item.specValueCodeList}}" wx:for-item='skuCode' wx:key="{{index}}" style='font-weight:600;'>“{{skuNameList[skuCode]}}”<block wx:if="{{index<item.specValueCodeList.length-1}}">+</block></text>
             </view>
           </view>
           <view class='set-price'>
