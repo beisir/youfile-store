@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/mallActive/editGoods/editGoods",
     
     "pages/page/cartList/cartList",
     "pages/page/goodsDetails/goodsDetails",
@@ -11,7 +12,6 @@
     "pages/admin/status/status",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/page/serStatus/serStatus",
-    "pages/mallActive/editGoods/editGoods",
     "pages/mallActive/batchRalease/batchRalease",
     "assembly/activityTag/activityTag",
     "pages/mallActive/addGoods/addGoods",

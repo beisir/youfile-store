@@ -99,7 +99,7 @@ Page({
     } else {
       let acArr = [];
       this.data.skuList.forEach((el, index) => {
-        if (el.checked) {
+        if (el.checked && err == '') {
           if (!el.buyNum || el.buyNum == 0) {
             err = '商品规格' + (index + 1) + '：请填写起购量'
           }
@@ -115,13 +115,12 @@ Page({
           if (!el.surePrice || el.surePrice == 0) {
             err = '商品规格' + (index + 1) + '：请填写活动价格'
           } else {
-            console.log(el.surePrice)
             if (!/^(([1-9][0-9]*)|([0]\.\d?[0-9])|([1-9][0-9]*\.\d{1,2}))$/.test(el.surePrice)) {
               err = '请输入正确金额格式，最多两位小数'
             }
           }  
           if (el.surePrice > el.wholesalePrice) {
-            err = '商品活动价格不能超过商品批发价'
+            err = '商品规格' + (index + 1) + '：商品活动价格不能超过商品批发价'
           }
 
             acArr.push({
@@ -159,6 +158,7 @@ Page({
       })
       let allArr = res.obj.goodsVO.goodsSkuVOList
       let acArr = res.obj.goodsActivityRelationVOS
+      this.handleSkuList(res.obj.goodsVO.goodsSpecificationVOList)
       if (allArr && allArr.length > 0) {  // 有sku
         allArr.forEach(el => {
           acArr.forEach(acitem => {
@@ -185,6 +185,17 @@ Page({
         })
       }
     })
+  },
+  handleSkuList(list){
+    if(list && list.length>0){
+      let obj = {}
+      list.forEach(el=>{
+        el.goodsSpecificationValueVOList.forEach(sku=>{
+          obj[sku.specValueCode] = sku.specValueName
+        })
+      })
+      this.setData({ skuNameList: obj })
+    }
   },
   // 折扣
   discountGoods: function () {
@@ -362,8 +373,8 @@ Page({
     this.setData({
       activityNumber: options.activityNumber,
       goodsId: options.goodsId
-      // activityNumber: 1903280301000012,
-      // goodsId: 180929212000
+      // activityNumber: 1904110301000031,
+      // goodsId: 190411135300
     })
     this.getDetail()
   },
