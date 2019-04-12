@@ -28,8 +28,8 @@
       </view>
       <view>
         <text>活动时间</text>{{activeDetails.startTime}} 至 {{activeDetails.endTime}}</view>
-      <view>
-        <text>活动类目</text>{{activeDetails.categoryCode}}</view>
+      <view  class='classs_l'>
+        <text>活动类目</text>{{activeDetails.mallCategoryCodeName}}</view>
       <view>
         <text>活动介绍</text>{{activeDetails.introduction}}</view>
     </view>

@@ -15,7 +15,7 @@
 .yd-xian{width: 2rpx;height:36rpx;background: #F5F5F5;position: absolute;right: 0;top: 50%;margin-top:-18rpx;}
 .yd-down{width: 0;height: 0;border-left: 15rpx solid transparent;border-right: 15rpx solid transparent;border-top: 15rpx solid #818181;display: inline}
 .yd-purch{height: 90rpx;line-height: 90rpx;background: #CCAA77;color: #fff;font-size: 36rpx;font-weight: bold;padding-left: 65rpx;width: 100%;margin-top: -20rpx;}
-.listData>.yd-datas{overflow: hidden;margin-top: 20rpx;justify-content: unset;align-items: unset;display:block;align-items: unset}
+.listData>.yd-datas{overflow: hidden;margin-top: 20rpx;justify-content: unset;align-items: unset;display:block;align-items: unset;margin-bottom: 100rpx}
 .yd-pList{display: flex;align-items: center;padding: 20rpx 55rpx;position: relative}
 .ydpl-left image{width: 105rpx;height: 105rpx;border-radius: 50%;}
 .ydpl-right>view{margin-top: 10rpx;}

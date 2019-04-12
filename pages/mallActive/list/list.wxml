@@ -21,7 +21,7 @@
         <text class='ld-doing' wx:if="{{item.participate}}"> 已参加</text>
       </view>
       <view><text>活动时间</text>{{item.startTime}} 至 {{item.endTime}}</view>
-      <view><text>活动类目</text><block wx:if="{{item.categoryCode}}">{{item.categoryCode}}</block></view>
+      <view class='classs_l'><text>活动类目</text><block wx:if="{{item.mallCategoryCodeName}}">{{item.mallCategoryCodeName}}</block></view>
       <view><text>活动介绍</text>{{item.introduction}}</view>
     </navigator>
     <view class='ld-bottom'>

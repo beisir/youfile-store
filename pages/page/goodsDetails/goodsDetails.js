@@ -271,6 +271,12 @@ Page({
         }
         //绑定活动
         _this.selectComponent("#goodsActivityBinding").bindingForGoodsDetail(res);
+        if (obj.extInfo.PURCHASE_HISTORY) {
+          _this.setData({
+            histtory: obj.extInfo.PURCHASE_HISTORY
+          })
+        }
+        console.log(obj)
         _this.setData({
           goodsInfo: obj,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
@@ -456,6 +462,20 @@ Page({
               goodsInfo.wholesale = dataList[i].wholesalePrice
               goodsInfo.stockNum = dataList[i].stockNum
               goodsInfo.sellPrice = dataList[i].sellPrice
+              if (dataList[i].isActivity) {
+                var num=this.data.numbers
+                _this.selectedSkuNum(dataList[i], num)
+                goodsInfo.saleBatch = dataList[i].num
+                _this.setData({
+                  goodsInfo: goodsInfo,
+                  numbers: dataList[i].num,
+                  hasActiveGoodsClick:true,
+                })
+              }else{
+                _this.setData({
+                  hasActiveGoodsClick: false,
+                })
+              }
               _this.setData({
                 goodsInfo: goodsInfo
               })
@@ -879,8 +899,10 @@ Page({
       }
     }
   },
+  //添加
   addCount: function () {
     let num = this.data.numbers
+    let goodsInfo = this.data.goodsInfo
     var stockNum = this.data.goodsInfo.stockNum
     if (num >= stockNum) {
       Api.showToast("库存不足！")
@@ -890,28 +912,26 @@ Page({
     this.setData({
       numbers: num,
     })
-    this.selectedSku()
-    // if (this.data.isShowNewOne) {
-    //   this.getTotalPriceNew(num)
-    // }
-    // if (this.data.editOneName) {
-    //   var newSkuArrTwo = this.data.newSkuArrTwo
-    //   for (var i = 0; i < newSkuArrTwo.length; i++) {
-    //     if (newSkuArrTwo[i].num > 0) {
-    //       newSkuArrTwo[i].num = num
-    //     }
-    //   }
-    //   this.setData({
-    //     newSkuArrTwo: newSkuArrTwo
-    //   }, function () {
-    //     this.getTotalPrice();
-    //   })
-    // }
-
+    this.selectedSku(false)
+  },
+  //减少
+  // 购买数量
+  minusCount: function () {
+    let num = this.data.numbers
+    num = num - 1
+    if (num == -1) {
+      return
+    } else {
+      this.setData({
+        numbers: num
+      })
+    }
+    this.selectedSku(true)
+    
   },
 
   // 判断选中的SKU
-  selectedSku: function() {
+  selectedSku: function(isTrue) {
     var skuStr = '',
       swichNavCode = this.data.swichNavCode,//第一个规格code
       changeButtonCode = this.data.changeButtonCode,//第二个规格code
@@ -921,6 +941,17 @@ Page({
       var childArr = goodsSkuVOList[i].specValueCodeList
       if (childArr.length == 1) {
         if (childArr.indexOf(changeButtonCode) != -1) {
+          if (goodsSkuVOList[i].isActivity){
+            var num=this.data.numbers
+            if (isTrue){
+              this.selectedSkuNum(goodsSkuVOList[i], num, true)
+            }else{
+              this.selectedSkuNum(goodsSkuVOList[i], num)
+            }
+            this.setData({
+              numbers: goodsSkuVOList[i].num
+            })
+          }
           skuStr = goodsSkuVOList[i].skuName
         }
       } else {
@@ -929,6 +960,17 @@ Page({
           if (numbers > stockNum){
             this.setData({
               numbers: stockNum
+            })
+          }
+          if (goodsSkuVOList[i].isActivity) {
+            var num = this.data.numbers
+            if (isTrue) {
+              this.selectedSkuNum(goodsSkuVOList[i], num, true)
+            } else {
+              this.selectedSkuNum(goodsSkuVOList[i], num)
+            }
+            this.setData({
+              numbers: goodsSkuVOList[i].num
             })
           }
           skuStr = goodsSkuVOList[i].skuName

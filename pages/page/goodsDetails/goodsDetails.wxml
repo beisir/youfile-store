@@ -98,41 +98,14 @@
       </view>
     </view>
     <!-- 购买记录 -->
-    <view class="weui_cells weui_cells1 buy-view">
+    <view wx:if='{{histtory.length>0}}' class="weui_cells weui_cells1 buy-view">
       <text class="store-address">购买记录 </text>
       <view class='skuStr'>已有
         <text>3840</text> 人购买，商品共销售
         <text>4769</text> 份</view>
       <view class='b-view'>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
-        </view>
-        <view>
-          <image class='img' src="/image/ww.png"></image>
+        <view wx:for='{{histtory}}' wx:key='index' wx:if='{{index<10}}'>
+          <image class='img' src="{{baseUrl}}{{item.headPic}}"></image>
         </view>
       </view>
     </view>
@@ -412,7 +385,8 @@
               <view class="cart-count-add" bindtap="addCount" data-index="0"  bindtap="addCount" data-sign='add'>
                 <image src="/image/add.png"></image>
               </view>
-              <view class='qiGou'>起购量：10</view>
+              <view class='qiGou' wx:if='{{hasActiveGoodsClick}}'>起购量：{{ goodsInfo.saleBatch}}</view>
+              <view class='qiGou' wx:if='{{goodsSpecificationVOList.length==0 && goodsInfo.hasActiveGoods}}'>起购量：{{ goodsInfo.saleBatch}}</view>
             </view>
           </view>
         </view>

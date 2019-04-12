@@ -232,4 +232,5 @@ export const aAnalysisCustomUrl="/admin/mall/activity/statistic/{{activityNumber
 export const statPurchasersUrl="/order/statistics/purchasers/trade/data/page"
 export const statPurchasersDetailsUrl="/order/statistics/purchaser/{{userId}}/trade/data"
 export const purchaserTransUrl="/admin/order/purchaser/{{userId}}/"
+export const storeIndexAGoodsUrl ="/api/mall/activity/goods/{{activityNumber}}/store/{{storeId}}/goods/page"
 

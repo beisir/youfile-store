@@ -3,52 +3,52 @@ var that
 import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
+
 function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
   isStoreOwner.enterIdentity().then(res => {
     _this.getList(_this)
-  }).catch(res => {
-  });
+  }).catch(res => {});
 }
 Page({
   data: {
     indexEmpty: true,
-    enjoyCost:false,
-    detailList:[],
-    detailList1:[],
-    hasList:false,
+    enjoyCost: false,
+    detailList: [],
+    detailList1: [],
+    hasList: false,
     lostcarts: [],
     lostList: false,
-    totalPrice:0, 
-    enjoyCostNew:false,
+    totalPrice: 0,
+    enjoyCostNew: false,
     baseUrl: app.globalData.imageUrl,
-    selectAllStatus:true, 
-    allEmpty:true,
+    selectAllStatus: true,
+    allEmpty: true,
     goRetailStore: true,
-    total1:0,
-    obj:{
-        name:"hello"
+    total1: 0,
+    obj: {
+      name: "hello"
     },
-    storeMes:[],
+    storeMes: [],
     storeId: wx.getStorageSync('storeId'),
     hidden: true,
-    idnex:'',
-    leftVal:'',
+    idnex: '',
+    leftVal: '',
     numbers: 1,
     baseUrl: app.globalData.imageUrl,
-    limitShow:1,
+    limitShow: 1,
     storeAmount: 0,
     storeNum: 0,
-    differentPrice:0,
-    editDetailList:'',
-    goodsConfig:[]
+    differentPrice: 0,
+    editDetailList: '',
+    goodsConfig: []
   },
-  
+
   // 规格
   //选择规格
-  showAlert: function (e) {
+  showAlert: function(e) {
     var that = this,
-      name=e.target.dataset.name,
+      name = e.target.dataset.name,
       limitShow = this.data.limitShow
     // 修改进货车
     if (name == "more") {
@@ -73,9 +73,11 @@ Page({
       })
     }
   },
-  changeNum: function (e) {
+  changeNum: function(e) {
     var num = e.detail.value
-    if (num == '') { return }
+    if (num == '') {
+      return
+    }
     num = num.replace(/\b(0+)/gi, "")
     if (num == 0) {
       num = 1
@@ -94,7 +96,12 @@ Page({
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
     var dataArr = []
-    dataArr.push({ goodsId: data[0]["goodsId"], num: parseInt(num), skuCode: data[0]["skuCode"], storeId: storeId })
+    dataArr.push({
+      goodsId: data[0]["goodsId"],
+      num: parseInt(num),
+      skuCode: data[0]["skuCode"],
+      storeId: storeId
+    })
     this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -102,7 +109,7 @@ Page({
     this.getTotalPrice();
   },
   //选择规格属性
-  changeButton: function (e) {
+  changeButton: function(e) {
     var that = this;
     if (this.data.specsTab === e.target.dataset.current) {
       return false;
@@ -112,14 +119,14 @@ Page({
       })
     }
   },
-  lookDetails: function (e) {
+  lookDetails: function(e) {
     var goodsId = e.target.dataset.id
     wx.navigateTo({
       url: '../goodsDetails/goodsDetails?goodsId=' + goodsId,
     })
   },
   // 购买数量
-  minusCount1: function () {
+  minusCount1: function() {
     var num = this.data.numbers
     num = num - 1
     if (num == 0) {
@@ -130,14 +137,14 @@ Page({
       })
     }
   },
-  addCount1: function () {
+  addCount1: function() {
     var num = this.data.numbers
     num = parseInt(num) + 1
     this.setData({
       numbers: num
     })
   },
-  weghtSwi: function (e) {
+  weghtSwi: function(e) {
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -147,13 +154,13 @@ Page({
       })
     }
   },
-  urlHome: function () {
+  urlHome: function() {
     wx.switchTab({
       url: '../home/home'
     })
   },
   //关闭弹框
-  closeAlert: function () {
+  closeAlert: function() {
     var that = this;
     var animation = wx.createAnimation({
       duration: 500,
@@ -165,7 +172,7 @@ Page({
       animationData: animation.export(),
 
     })
-    setTimeout(function () {
+    setTimeout(function() {
       animation.translateY(0).step()
       that.setData({
         animationData: animation.export(),
@@ -173,14 +180,14 @@ Page({
 
       })
     }, 300)
-  },  
-  rightList:function(e){
+  },
+  rightList: function(e) {
     this.setData({
-      leftVal:0
+      leftVal: 0
     });
   },
   //手指触摸动作开始 记录起点X坐标
-  touchstart: function (e) {
+  touchstart: function(e) {
     //开始触摸时 重置所有删除
     let data = app.touch._touchstart(e, this.data.detailList)
     this.setData({
@@ -189,54 +196,54 @@ Page({
   },
 
   //滑动事件处理
-  touchmove: function (e) {
+  touchmove: function(e) {
     let data = app.touch._touchmove(e, this.data.detailList)
     this.setData({
       detailList: data
     })
   },
-  urlHome: function () {
+  urlHome: function() {
     wx.switchTab({
       url: '../home/home'
     })
   },
-  getList:function(){
+  getList: function() {
     this.setData({
       detailList: [],
-      lostcarts:[],
+      lostcarts: [],
     })
-    var _this=this
+    var _this = this
     Api.cartList()
       .then(res => {
-        const obj=res.obj
-        if (obj==null){
+        const obj = res.obj
+        if (obj == null) {
           _this.setData({
             allEmpty: false
           })
           return
-        }else{
+        } else {
           _this.setData({
             allEmpty: true
           })
         }
-          var newEffectiveListLen = res.obj.effectiveList.length,
-          newFailureListLen= res.obj.failureList.length,
-          storeMes=[]
-        if (newEffectiveListLen>0){
-         var  effectiveList = obj.effectiveList[0].goodsList,
-           store = obj.effectiveList[0].store
-        }else{
-          var effectiveList=[]
+        var newEffectiveListLen = res.obj.effectiveList.length,
+          newFailureListLen = res.obj.failureList.length,
+          storeMes = []
+        if (newEffectiveListLen > 0) {
+          var effectiveList = obj.effectiveList[0].goodsList,
+            store = obj.effectiveList[0].store
+        } else {
+          var effectiveList = []
         }
         if (newFailureListLen > 0) {
           var failureList = obj.failureList[0].goodsList
         } else {
           var failureList = []
         }
-        if (effectiveList.length>0){
+        if (effectiveList.length > 0) {
           _this.setData({
             hasList: true,
-            selectAllStatus:true,
+            selectAllStatus: true,
           });
           for (var i = 0; i < effectiveList.length; i++) {
             effectiveList[i].selected = true
@@ -264,48 +271,77 @@ Page({
             lostList: true,
           });
         }
-        if (effectiveList.length == 0 && failureList.length==0){
+        if (effectiveList.length == 0 && failureList.length == 0) {
           _this.setData({
-            allEmpty:false
+            allEmpty: false
           })
         }
-        if (store){
+        if (store) {
           storeMes.push(store)
         }
-        if(effectiveList.length==0){
+        if (effectiveList.length == 0) {
           _this.setData({
-            hasList:false
+            hasList: false
           })
         }
         var saleBatchNum = 0
-        var saleBatchAmount=0
-        if (Api.isNotEmpty(store)){
-          if (store.saleBatchAmount == null){
-            saleBatchAmount=0
-          }else{
+        var saleBatchAmount = 0
+        if (Api.isNotEmpty(store)) {
+          if (store.saleBatchAmount == null) {
+            saleBatchAmount = 0
+          } else {
             saleBatchAmount = store.saleBatchAmount
           }
           if (store.saleBatchNum == null) {
-            saleBatchNum =0
+            saleBatchNum = 0
           } else {
             saleBatchNum = store.saleBatchNum
           }
         }
+        //绑定活动
+        if (effectiveList.length > 0) {
+          for (var v of effectiveList) {
+            var extInfo = v.extInfo.SALES_PROMOTION
+            if (extInfo.length > 0) {
+              var standardGoodsSkuPromotions = extInfo[0].standardGoodsSkuPromotions
+              v.hasActiveGoods = true
+              if (standardGoodsSkuPromotions){
+                var goodsSkuVOList = v.shoppingCartSkuList
+                for (var val of goodsSkuVOList) {
+                  for (var k of standardGoodsSkuPromotions) {
+                    if (val.skuCode == k.skuCode) {
+                      val.isActivity = true
+                      val.salesNum = k.salesNum
+                      val.activityPrice = k.activityPrice
+                    }
+                  }
+                }
+              }else{
+                v.salesNum = extInfo[0].salesNum
+                v.activityPrice = extInfo[0].activityPrice
+              }
+              
+            }else{
+              v.hasActiveGoods=false
+            }
+          }
+          console.log(effectiveList)
+        }
         _this.setData({
-          storeAmount:saleBatchAmount,
+          storeAmount: saleBatchAmount,
           storeNum: saleBatchNum,
           detailList: effectiveList,
           lostcarts: failureList,
           storeMes: storeMes
-        },function(){
+        }, function() {
           _this.getTotalPrice();
         })
       })
-    
+
   },
-  
-  onLoad: function (options) {
-    
+
+  onLoad: function(options) {
+
   },
   onShow() {
     this.setData({
@@ -320,11 +356,11 @@ Page({
         this.setData({
           goRetailStore: false
         })
-      }else{
+      } else {
         getIdentity(this)
       }
     }
-    
+
   },
   /**
    * 当前商品选中事件
@@ -338,17 +374,17 @@ Page({
     const selected = detailList[index].selected;
     detailList[index].selected = !selected;
     var len = detailList.length,
-        num=0;
-    for (var i = 0; i < detailList.length;i++){
-      if (detailList[i].selected){
-        num=num+1
+      num = 0;
+    for (var i = 0; i < detailList.length; i++) {
+      if (detailList[i].selected) {
+        num = num + 1
       }
     }
-    if(num==len){
+    if (num == len) {
       this.setData({
         selectAllStatus: true
       })
-    }else{
+    } else {
       this.setData({
         selectAllStatus: false
       })
@@ -362,14 +398,14 @@ Page({
    * 清空失效宝贝
    */
   emptyAll(e) {
-    var _this=this
+    var _this = this
     Api.deteleCartFai()
-     .then(res => {
-       Api.showToast('清空成功')
-       setTimeout(function () {
-         _this.getList()
-       }, 1000)
-    })
+      .then(res => {
+        Api.showToast('清空成功')
+        setTimeout(function() {
+          _this.getList()
+        }, 1000)
+      })
   },
 
   /**
@@ -378,12 +414,14 @@ Page({
   deleteList(e) {
     const index = e.currentTarget.dataset.index,
       goodsId = e.currentTarget.dataset.id,
-          _this=this
-    Api.deteleCartGoods({ goodsId: goodsId})
-    .then(res=>{
-      Api.showToast("删除成功")
-      _this.getList()
-    })
+      _this = this
+    Api.deteleCartGoods({
+        goodsId: goodsId
+      })
+      .then(res => {
+        Api.showToast("删除成功")
+        _this.getList()
+      })
   },
 
   /**
@@ -407,10 +445,9 @@ Page({
   /**
    * 绑定加数量事件
    */
-  addCart(goodsId,data){
+  addCart(goodsId, data) {
     Api.updateMoreCart(data)
-      .then(res => {
-      })
+      .then(res => {})
   },
   addCount(e) {
     const index = e.currentTarget.dataset.index;
@@ -428,9 +465,14 @@ Page({
     detailList[index].allGoodsAmount = arr[0]
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
-    var dataArr=[]
-    dataArr.push({ goodsId: data[0]["goodsId"], num: parseInt(num), skuCode: data[0]["skuCode"], storeId:storeId})
-    this.addCart(data[0]["goodsId"],JSON.stringify(dataArr))
+    var dataArr = []
+    dataArr.push({
+      goodsId: data[0]["goodsId"],
+      num: parseInt(num),
+      skuCode: data[0]["skuCode"],
+      storeId: storeId
+    })
+    this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
     });
@@ -440,7 +482,7 @@ Page({
   /**
    * 绑定减数量事件
    */
-  
+
   minusCountNew(e) {
     const index = e.currentTarget.dataset.index;
     const obj = e.currentTarget.dataset.obj;
@@ -455,18 +497,23 @@ Page({
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
     detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
-    dataArr.push({ goodsId: detailList[index]["goodsId"], num: parseInt(num), skuCode:0, storeId: storeId })
+    dataArr.push({
+      goodsId: detailList[index]["goodsId"],
+      num: parseInt(num),
+      skuCode: 0,
+      storeId: storeId
+    })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
-    },function(){
+    }, function() {
       this.getTotalPrice();
     });
-    
+
   },
-  blurInput:function(e){
+  blurInput: function(e) {
     var num = e.detail.value
-    if(num==''){
+    if (num == '') {
       num = 1
     }
     const index = e.currentTarget.dataset.index;
@@ -479,14 +526,19 @@ Page({
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
     var dataArr = []
-    dataArr.push({ goodsId: data[0]["goodsId"], num: parseInt(num), skuCode: data[0]["skuCode"], storeId: storeId })
+    dataArr.push({
+      goodsId: data[0]["goodsId"],
+      num: parseInt(num),
+      skuCode: data[0]["skuCode"],
+      storeId: storeId
+    })
     this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
     });
     this.getTotalPrice();
   },
-  blurInput1: function (e) {
+  blurInput1: function(e) {
     var num = e.detail.value
     if (num == '') {
       num = 1
@@ -498,37 +550,49 @@ Page({
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
     detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
-    dataArr.push({ goodsId: detailList[index]["goodsId"], num: parseInt(num), skuCode: 0, storeId: storeId })
+    dataArr.push({
+      goodsId: detailList[index]["goodsId"],
+      num: parseInt(num),
+      skuCode: 0,
+      storeId: storeId
+    })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
-    }, function () {
+    }, function() {
       this.getTotalPrice();
     });
   },
-  changeNum1: function (e) {
+  changeNum1: function(e) {
     var num = e.detail.value
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;
-    if (num == '') { return }
+    if (num == '') {
+      return
+    }
     num = num.replace(/\b(0+)/gi, "")
     if (num == 0) {
       num = 1
     }
     let storeId = this.data.storeId
     let stockNum = detailList[index].stockNum
-    if (num > stockNum){
+    if (num > stockNum) {
       num = stockNum
     }
     detailList[index].num = num
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
     detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
-    dataArr.push({ goodsId: detailList[index]["goodsId"], num: parseInt(num), skuCode: 0, storeId: storeId })
+    dataArr.push({
+      goodsId: detailList[index]["goodsId"],
+      num: parseInt(num),
+      skuCode: 0,
+      storeId: storeId
+    })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
-    }, function () {
+    }, function() {
       this.getTotalPrice();
     });
   },
@@ -538,7 +602,7 @@ Page({
     let num = parseInt(detailList[index].num);
     num = parseInt(num) + 1;
     let stockNum = detailList[index].stockNum
-    if (num > stockNum){
+    if (num > stockNum) {
       num = stockNum
     }
     let storeId = this.data.storeId
@@ -546,24 +610,29 @@ Page({
     detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
     detailList[index].allGoodsAmount = num * detailList[index].sellPrice
     var dataArr = []
-    dataArr.push({ goodsId: detailList[index]["goodsId"], num: parseInt(num), skuCode: 0, storeId: storeId })
+    dataArr.push({
+      goodsId: detailList[index]["goodsId"],
+      num: parseInt(num),
+      skuCode: 0,
+      storeId: storeId
+    })
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
-    },function(){
+    }, function() {
       this.getTotalPrice();
     });
   },
   // 更改商品价格
-  updatePrice:function(num,index){
+  updatePrice: function(num, index) {
     var effectiveList = this.data.detailList[index],
       shoppingCartSkuList = effectiveList.shoppingCartSkuList
-    if (Api.isNotEmpty(shoppingCartSkuList)){
+    if (Api.isNotEmpty(shoppingCartSkuList)) {
       var arr = []
       arr.push(shoppingCartSkuList[0].sellPrice * num)
       arr.push(shoppingCartSkuList[0].wholesalePrice * num)
       return arr
-    }else{
+    } else {
       var arr = []
       arr.push(effectiveList.sellPrice * num)
       arr.push(effectiveList.wholesalePrice * num)
@@ -582,12 +651,17 @@ Page({
     num = num - 1;
     detailList[index].shoppingCartSkuList[0].num = num;
     detailList[index].num = num
-    var arr=this.updatePrice(num,index)
+    var arr = this.updatePrice(num, index)
     detailList[index].allGoodsAmount = arr[0]
     detailList[index].allGoodsPf = arr[1]
     var data = detailList[index].shoppingCartSkuList
     var dataArr = []
-    dataArr.push({ goodsId: data[0]["goodsId"], num: parseInt(num), skuCode: data[0]["skuCode"], storeId: storeId })
+    dataArr.push({
+      goodsId: data[0]["goodsId"],
+      num: parseInt(num),
+      skuCode: data[0]["skuCode"],
+      storeId: storeId
+    })
     this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
@@ -601,47 +675,47 @@ Page({
     var limitShow = this.data.limitShow,
       storeNum = this.data.storeNum,
       storeAmount = this.data.storeAmount,
-      allTotalNum=0,
-      total1=0,
-      totalNew=0,
+      allTotalNum = 0,
+      total1 = 0,
+      totalNew = 0,
       differentPrice = this.data.differentPrice,
       differentPriceNew = 0,
-      saleBatchGoodsNum=0,
+      saleBatchGoodsNum = 0,
       allGoodsAmount = 0,
-      enjoyCost=false
-    var detailList = this.data.detailList;// 获取购物车列表
-    for (var i = 0; i < detailList.length; i++) { 
+      enjoyCost = false
+    var detailList = this.data.detailList; // 获取购物车列表
+    for (var i = 0; i < detailList.length; i++) {
       if (detailList[i].selected) {
-        if (limitShow==3){
+        if (limitShow == 3) {
           saleBatchGoodsNum = detailList[i].saleBatchNum
           if (!Api.isNotEmpty(saleBatchGoodsNum)) {
             detailList[i].saleBatchNum = storeNum
           }
-        }else{
+        } else {
           total1 += parseFloat(detailList[i].allGoodsAmount);
         }
-        
+
       }
     }
-    if (limitShow == 3){
-      var allGoodsNum=0
-      var allGoodsTotal=0
-      for (var i = 0; i < detailList.length;i++){
-        if (detailList[i].selected){
+    if (limitShow == 3) {
+      var allGoodsNum = 0
+      var allGoodsTotal = 0
+      for (var i = 0; i < detailList.length; i++) {
+        if (detailList[i].selected) {
           allTotalNum = parseInt(detailList[i].num)
           allGoodsAmount = parseFloat(detailList[i].allGoodsAmount)
           differentPriceNew += allGoodsAmount
           saleBatchGoodsNum = detailList[i].saleBatchNum
           allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
-          if (storeNum==0){
-            if (storeAmount==0){
+          if (storeNum == 0) {
+            if (storeAmount == 0) {
               detailList[i].enjoyPrice = true
               enjoyCost = true
-            }else{
+            } else {
               detailList[i].enjoyPrice = false
               enjoyCost = false
-              if (storeAmount>0){
+              if (storeAmount > 0) {
                 if (allGoodsTotal > storeAmount) {
                   detailList[i].enjoyPrice = true
                   enjoyCost = true
@@ -652,18 +726,18 @@ Page({
               }
             }
           }
-          if (storeNum > 0){
+          if (storeNum > 0) {
             var saleBatchGoodsNum = detailList[i].saleBatchNum
-            if (storeAmount==0){
-              if (allGoodsNum >= storeNum){
+            if (storeAmount == 0) {
+              if (allGoodsNum >= storeNum) {
                 detailList[i].enjoyPrice = true
                 enjoyCost = true
-              }else{
+              } else {
                 detailList[i].enjoyPrice = false
                 enjoyCost = false
               }
             }
-            if(storeAmount>0){
+            if (storeAmount > 0) {
               if (allGoodsNum >= storeNum || allGoodsTotal > storeAmount) {
                 detailList[i].enjoyPrice = true
                 enjoyCost = true
@@ -680,31 +754,31 @@ Page({
               }
             }
           }
-        }else{
+        } else {
           detailList[i].enjoyPrice = false
         }
       }
       var newTotalPrice = 0
-      var newTotalPrice1=0
+      var newTotalPrice1 = 0
       var len = detailList.length
-      var numTrue=0
+      var numTrue = 0
       for (var i = 0; i < detailList.length; i++) {
         var newChild1 = 0
         var newChild2 = 0
         if (detailList[i].selected) {
-          if (enjoyCost){
-              detailList[i].enjoyPrice = true
-              if (detailList[i].shoppingCartSkuList != null) {
-                var arr = detailList[i].shoppingCartSkuList
-                for (var j = 0; j < arr.length; j++) {
-                  newTotalPrice += arr[j].num * arr[j].wholesalePrice;
-                }
-              } else {
-                newTotalPrice1 += detailList[i].num * detailList[i].wholesalePrice
+          if (enjoyCost) {
+            detailList[i].enjoyPrice = true
+            if (detailList[i].shoppingCartSkuList != null) {
+              var arr = detailList[i].shoppingCartSkuList
+              for (var j = 0; j < arr.length; j++) {
+                newTotalPrice += arr[j].num * arr[j].wholesalePrice;
               }
-          }else{
+            } else {
+              newTotalPrice1 += detailList[i].num * detailList[i].wholesalePrice
+            }
+          } else {
             var enjoy = detailList[i].enjoyPrice
-            if (enjoy){
+            if (enjoy) {
               numTrue++
               if (detailList[i].shoppingCartSkuList != null) {
                 var arr = detailList[i].shoppingCartSkuList
@@ -715,7 +789,7 @@ Page({
                 newTotalPrice += detailList[i].num * detailList[i].wholesalePrice
               }
               // newTotalPrice = newChild1 + newChild2
-            }else{
+            } else {
               if (detailList[i].shoppingCartSkuList != null) {
                 var arr = detailList[i].shoppingCartSkuList
                 for (var j = 0; j < arr.length; j++) {
@@ -732,49 +806,57 @@ Page({
           total1 = newTotalPrice1 + newTotalPrice
         }
       }
-      if (numTrue==len){
+      if (numTrue == len) {
         this.setData({
           enjoyCostNew: true
         })
-      }else{
+      } else {
         this.setData({
           enjoyCostNew: false
         })
       }
       differentPrice = storeAmount - differentPriceNew
     }
-    this.setData({ 
+    this.setData({
       detailList: detailList,
       total1: total1.toFixed(2),
       enjoyCost: enjoyCost,
       differentPrice: parseInt(differentPrice),
     });
   },
-  creatOrder:function(){
-    var data=this.data.detailList,
-        model=[]
-    for(var i=0;i<data.length;i++){
-      if (data[i].selected){
+  creatOrder: function() {
+    var data = this.data.detailList,
+      model = []
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].selected) {
         var dataArr = data[i].shoppingCartSkuList
-        if (dataArr!=null){
+        if (dataArr != null) {
           for (var j = 0; j < dataArr.length; j++) {
-            model.push({ goodsId: data[i].goodsId, num: parseInt(dataArr[j].num), skuCode: dataArr[j].skuCode })
+            model.push({
+              goodsId: data[i].goodsId,
+              num: parseInt(dataArr[j].num),
+              skuCode: dataArr[j].skuCode
+            })
           }
-        }else{
-          model.push({ goodsId: data[i].goodsId, num: parseInt(data[i].num), skuCode:0})
+        } else {
+          model.push({
+            goodsId: data[i].goodsId,
+            num: parseInt(data[i].num),
+            skuCode: 0
+          })
         }
       }
     }
-   if(model.length==0){
-     Api.showToast("请勾选商品！")
-     return
-   }
+    if (model.length == 0) {
+      Api.showToast("请勾选商品！")
+      return
+    }
     var model = JSON.stringify(model);
     wx.navigateTo({
       url: '../address/address?model=' + model + '&enjoyCost=' + this.data.enjoyCost + '&totalPrice=' + this.data.totalPrice,
     })
   },
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     this.onShow()
     wx.stopPullDownRefresh();
   },

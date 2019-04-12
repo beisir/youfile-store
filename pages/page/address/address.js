@@ -1,6 +1,7 @@
 // pages/address/address.js
 const app = getApp();
 import Api from '../../../utils/api.js'
+import { goodsListBindingSku } from '../../../utils/goodsActivity.js'
 Page({
 
   /**
@@ -186,16 +187,24 @@ Page({
           goodsConfig: conObj,
           storeConfig: res.obj.storeWholesaleConfig
         })
-      this.resetGoods();
+      this.handleActionGoods(res.obj.preOrderGoodsList)
     })
   },
+  // 处理活动商品
+  handleActionGoods(goods){
+    console.log(goods)
+    goods
+    let newGoods = goodsListBindingSku(goods, 'preorder')
+    this.resetGoods(newGoods);
+  },
   //重置goods
-  resetGoods(){
-    let goods = this.data.goods,
-        price = 0,
+  resetGoods(goods){
+    let price = 0,
         allnum = 0,
         config = this.data.goodsConfig;
     goods.forEach((el)=>{
+      //是否参与活动
+      let active = el.hasActiveGoods
       //是否优惠
       let off = el.satisfiedWholesale;
       //起批量
@@ -205,6 +214,7 @@ Page({
 
       //有sku
       if (!el.num && el.preOrderGoodsSkuList){
+        el.hasSku = true
         let num = 0,
             myprice = 0 ; 
         el.preOrderGoodsSkuList.forEach((item)=>{
@@ -212,9 +222,11 @@ Page({
             num += item.num;
             let thisPrice = 0;
             //价格
-            if(off==true){
+            if (item.isActivity==true){
+              thisPrice = item.activityPrice;
+            } else if(off==true){
               thisPrice = item.wholesalePrice;
-            }else{
+            } else {
               thisPrice = item.sellPrice;
             }
 
@@ -229,9 +241,12 @@ Page({
       }
       //没有sku
       if (el.num && !el.preOrderGoodsSkuList){
+        el.hasSku = false
         let thisPrice = 0;
         //价格
-        if (off==true) {
+        if (active == true) {
+          thisPrice = el.activityPrice;
+        } else if (off==true) {
           thisPrice = el.wholesalePrice;
         } else {
           thisPrice = el.sellPrice;

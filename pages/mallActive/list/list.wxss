@@ -5,7 +5,8 @@
 .listData>view{background: #fff;border-radius: 10rpx;margin: 20rpx;font-size: 26rpx;}
 .ld-t{font-size: 36rpx;font-weight: bold;border-bottom: 2rpx dashed #F0F0F0;height: 115rpx;line-height: 115rpx;padding:0 20rpx;}
 .ld-cont{padding:20rpx;}
-.ld-cont>view{height: 60rpx;line-height: 60rpx;}
+.ld-cont>view{line-height: 60rpx;}
+.ld-cont>view.classs_l{overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
 .ld-cont>view:first-child{font-size: 30rpx;font-weight: bold;}
 .ld-cont>view:first-child text{font-size: 30rpx;font-weight: bold;}
 .ld-red{color: #F02C2C;}

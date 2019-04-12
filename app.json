@@ -1,14 +1,15 @@
 {
   "pages": [
     "pages/page/home/home",
-    
-    "pages/page/cartList/cartList",
-    
-    "pages/page/goodsDetails/goodsDetails",
     "pages/mallActive/list/list",
     "pages/page/workIndex/workIndex",
-    "pages/mallActive/activityAnalysis/activityAnalysis",
+    "pages/mallActive/detailsOfCollection/detailsOfCollection",
     "pages/mallActive/yunDist/yunDist",
+    "pages/mallActive/distRecords/distRecords",
+    "pages/capital/index/index",
+    "pages/page/cartList/cartList",
+    "pages/page/goodsDetails/goodsDetails",
+    "pages/mallActive/activityAnalysis/activityAnalysis",
     "pages/admin/status/status",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/page/serStatus/serStatus",
@@ -16,11 +17,8 @@
     "pages/mallActive/batchRalease/batchRalease",
     "assembly/activityTag/activityTag",
     "pages/mallActive/addGoods/addGoods",
-    "pages/mallActive/detailsOfCollection/detailsOfCollection",
-    "pages/mallActive/distRecords/distRecords",
     "pages/mallActive/moreAdd/moreAdd",
     "pages/mallActive/choseSpec/choseSpec",
-
     "pages/admin/serStatus/serStatus",
     "pages/admin/addGoods/addGoods",
     "pages/admin/class/class",
@@ -51,7 +49,6 @@
     "pages/businessFriend/merchant/list/list",
     "pages/capital/bank/bank",
     "pages/capital/record/record",
-    "pages/capital/index/index",
     "pages/page/address/address",
     "pages/page/payWay/payWay",
     "pages/faceToFaceOrder/helpOrder/helpOrder",
@@ -191,5 +188,6 @@
     "wx1a7532a2abdd1698",
     "wx5e0828787c26f235",
     "wx3cfbe069368479ce"
-  ]
+  ],
+  "sitemapLocation": "sitemap.json"
 }
