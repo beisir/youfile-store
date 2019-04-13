@@ -20,9 +20,9 @@
         <text class='no-doing' wx:if="{{!item.participate}}"> 未参加</text>
         <text class='ld-doing' wx:if="{{item.participate}}"> 已参加</text>
       </view>
-      <view><text>活动时间</text>{{item.startTime}} 至 {{item.endTime}}</view>
-      <view class='classs_l'><text>活动类目</text><block wx:if="{{item.mallCategoryCodeName}}">{{item.mallCategoryCodeName}}</block></view>
-      <view><text>活动介绍</text>{{item.introduction}}</view>
+      <view class='lr-item'><text>活动时间</text><view>{{item.startTime}} 至 {{item.endTime}}</view></view>
+      <view class='lr-item'><text>活动类目</text><view wx:if="{{item.mallCategoryCodeName}}">{{item.mallCategoryCodeName}}</view></view>
+      <view class='lr-item'><text>活动介绍</text><view>{{item.introduction}}</view></view>
     </navigator>
     <view class='ld-bottom'>
       <button wx:if="{{!item.participate && item.activityStatus!='finish'}}" bindtap='joinShow' data-index="{{item.activityNumber}}">参加活动</button>

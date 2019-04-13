@@ -1,8 +1,10 @@
 {
   "pages": [
     "pages/page/home/home",
-    "pages/mallActive/yunDist/yunDist",
     "pages/mallActive/list/list",
+    
+    "pages/mallActive/waitRalease/waitRalease",
+    "pages/mallActive/yunDist/yunDist",
     "pages/page/cartList/cartList",
     "pages/page/workIndex/workIndex",
     "pages/mallActive/activityAnalysis/activityAnalysis",
@@ -12,7 +14,6 @@
     "pages/mallActive/editGoods/editGoods",
     "pages/page/goodsDetails/goodsDetails",
     "pages/admin/status/status",
-    "pages/mallActive/waitRalease/waitRalease",
     "pages/page/serStatus/serStatus",
     "pages/mallActive/batchRalease/batchRalease",
     "assembly/activityTag/activityTag",

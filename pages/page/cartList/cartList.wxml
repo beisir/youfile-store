@@ -199,7 +199,7 @@
           合计：<text>￥{{total1}}</text>
           <view>(不含运费)</view>
         </view> -->
-        <view class="order-icon" bindtap='creatOrder '>
+        <view class="order-icon" bindtap='creatOrder'>
           结算
         </view>
         <text>全选</text>
