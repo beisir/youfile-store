@@ -258,7 +258,7 @@ Page({
       }
       allnum += el.num;      
     })
-
+  
     //全场混批设置
     let storeNum = this.data.storeConfig.saleBatchNum,
         storeAmount = this.data.storeConfig.saleBatchAmount,
@@ -279,6 +279,17 @@ Page({
       numsatisfy,
       pricesatisfy      
     })
+  },
+  handleSkuList(list) {
+    if (list && list.length > 0) {
+      let obj = {}
+      list.forEach(el => {
+        el.goodsSpecificationValueVOList.forEach(sku => {
+          obj[sku.specValueCode] = sku.specValueName
+        })
+      })
+      this.setData({ skuNameList: obj })
+    }
   },
   //获取店铺信息，得到运费类型
   getStore(){
