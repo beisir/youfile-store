@@ -19,7 +19,7 @@
             <text>￥{{item.goodsActivityRelationVOS[0].goodsPromotionList[0].activityPrice}}</text> </view>
           <view class='gprice'>起购量:
             <text>{{item.goodsActivityRelationVOS[0].batchNum==null?"未完善":item.goodsActivityRelationVOS[0].batchNum}}</text> </view>
-          <view>活动库存: {{item.goodsActivityRelationVOS[0].salesNum==null?"未完善":item.goodsActivityRelationVOS[0].salesNum}}</view>
+          <view>活动库存: {{item.goodsActivityRelationVOS[0].stockNum==null?"未完善":item.goodsActivityRelationVOS[0].stockNum}}</view>
         </view>
       </view>
   </view>

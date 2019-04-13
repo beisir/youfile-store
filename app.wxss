@@ -113,7 +113,7 @@ input:focus{padding:0}
 .sh-cont view:last-child{margin-top:10rpx;border-radius:10rpx}
 .sh-cont view.sh-title{color:#999;font-size:28rpx}
 .bottom_M{width:100%;position:fixed;bottom:0}
-.bottom_M>view,.bottom_M>navigator{width:33%;text-align:center;color:#888;font-size:20rpx;display:inline-block;background:#fff;height:104rpx;padding-top:20rpx}
+.bottom_M>view,.bottom_M>navigator{width:25%;text-align:center;color:#888;font-size:20rpx;display:inline-block;background:#fff;height:104rpx;padding-top:20rpx}
 .bottom_M image{width:47rpx;height:47rpx}
 .bottom_M .active{color:#CCAA77}
 .pre-input{color:#aaa}

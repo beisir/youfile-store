@@ -1,20 +1,50 @@
-// pages/mallActive/detailsOfCollection/detailsOfCollection.js
+import Api from '../../../utils/api.js'
+const util = require('../../../utils/util.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    dataDetails: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (options.paymentNumber){
+          // Api.getAccountDetail({ paymentNumber: paymentNumber }).then(res =>
 
+    }
   },
-
+  getDetails: function (paymentNumber) {
+    var _this = this
+    Api.getAccountDetail({ paymentNumber: paymentNumber }).then(res => {
+      let obj = res.obj
+      if (obj) {
+        if (obj.paidDate) {
+          obj.paidDate = util.formatTime(new Date(obj.paidDate))
+        }
+        if (obj.payWay == "wx_mini_app_pay") {
+          obj.payWay = "微信小程序支付"
+        }
+        if (obj.customerPhone) {
+          var tel = obj.customerPhone;
+          tel = "" + tel;
+          var ary = tel.split("");
+          ary.splice(3, 4, "****");
+          var tel1 = ary.join("");
+          obj.customerPhone = tel1
+        } else {
+          obj.customerPhone = ''
+        }
+        _this.setData({
+          dataDetails: obj
+        })
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

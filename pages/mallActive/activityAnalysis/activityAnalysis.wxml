@@ -1,8 +1,8 @@
 <view class='listData'>
   <view>
-    <view class='ld-t'>第一届中国（郑州）百荣云·订货商博会</view>
+    <view class='ld-t'>{{title}}</view>
     <view class='aa-doing'>
-      <button>活动进行中</button>
+      <button>{{status}}</button>
     </view>
   </view>
 </view>
@@ -11,32 +11,24 @@
     <view class='ld-t'>累计收入</view>
     <view class='aa-money'>
       <view>¥
-        <text> 51,988.00</text>
+        <text> {{total}}</text>
       </view>
       <text>总金额</text>
     </view>
     <view class='aa-chart'>
-      <double-column-chart id="double-column-chart" canvasData="{{doubleColumnCanvasData}}" />
+       <column-chart id="column-chart" canvasData="{{columnCanvasData}}" />
     </view>
   </view>
 </view>
 <view class='listData'>
   <view>
     <view class='aa-top'>进货商TOP10排行榜</view>
-    <view class='aa-info'>
-      1
-      <image src='/image/user.png'></image>
-      <view class='aa-name'>诺曼先生（微信昵称）</view>
+    <view class='aa-info'  wx:for='{{customData}}' wx:key='{{index}}'>
+      {{index+1}}
+      <image src='{{baseUrl}}{{item.headPic}}'></image>
+      <view class='aa-name'>{{item.nickName}}</view>
       <view>
-        <text>￥1980.00</text>
-      </view>
-    </view>
-    <view class='aa-info'>
-      1
-      <image src='/image/user.png'></image>
-      <view class='aa-name'>诺曼先生（微信昵称）</view>
-      <view>
-        <text>￥1980.00</text>
+        <text>￥{{item.orderAmount}}</text>
       </view>
     </view>
   </view>
@@ -44,40 +36,16 @@
 <view class='listData'>
   <view>
     <view class='aa-top'>商品销量榜</view>
-    <view class='aa-info'>
-      1
-      <view class='aa-dot aa-fot-o'></view>
-      <view class='aa-name'>商品名称一商品名称一商品名称一商品名称一</view>
+    <view class='aa-info' wx:for='{{activeGoods}}' wx:key='{{index}}'>
+      {{index+1}}
+      <view class='aa-dot aa-fot-o' wx:if='{{index==0}}'></view>
+      <view class='aa-dot aa-fot-t' wx:if='{{index==1}}'></view>
+      <view class='aa-dot aa-fot-th' wx:if='{{index==2}}'></view>
+      <view class='aa-dot' wx:if='{{index>2}}'></view>
+      <view class='aa-name'>{{item.goodsName}}</view>
       <view>
-        <text class='aa-sale'>已售500件</text>
-        <text>￥1980.00</text>
-      </view>
-    </view>
-    <view class='aa-info'>
-      1
-      <view class='aa-dot aa-fot-t'></view>
-      <view class='aa-name'>商品名称一商品名称一商品名称一商品名称一</view>
-      <view>
-        <text class='aa-sale'>已售500件</text>
-        <text>￥1980.00</text>
-      </view>
-    </view>
-    <view class='aa-info'>
-      1
-      <view class='aa-dot aa-fot-th'></view>
-      <view class='aa-name'>商品名称一商品名称一商品名称一商品名称一</view>
-      <view>
-        <text class='aa-sale'>已售500件</text>
-        <text>￥1980.00</text>
-      </view>
-    </view>
-    <view class='aa-info'>
-      1
-      <view class='aa-dot'></view>
-      <view class='aa-name'>商品名称一商品名称一商品名称一商品名称一</view>
-      <view>
-        <text class='aa-sale'>已售500件</text>
-        <text>￥1980.00</text>
+        <text class='aa-sale'>已售{{item.salesNum}}件</text>
+        <!-- <text>￥1980.00</text> -->
       </view>
     </view>
   </view>

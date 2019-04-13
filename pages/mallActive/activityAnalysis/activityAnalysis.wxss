@@ -1,7 +1,7 @@
 @import '../waitRalease/waitRalease';
 .ld-t{border-bottom: 0;}
 .aa-doing{padding: 0 0 50rpx 25rpx;text-align: left}
-.aa-doing button{background: #F02B2B;height: 50rpx;line-height: 48rpx;width: 160rpx;border-radius: 10rpx;text-align: center;font-size: 26rpx;color: #fff;margin: 0}
+.aa-doing button{background: #F02B2B;height: 50rpx;line-height: 48rpx;width: 160rpx;border-radius: 10rpx;text-align: center;font-size: 26rpx;color: #fff;margin: 0;padding: 0}
 .aa-money{text-align: center;color: #999;font-size: 26rpx;font-weight: bold}
 .aa-money view{color: #BB7916;}
 .aa-money view text{font-size: 48rpx;}

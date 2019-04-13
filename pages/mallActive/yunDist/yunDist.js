@@ -6,7 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    totalCount:0
+    totalCount:0,
+    result:[],
+    baseUrl: app.globalData.imageUrl,
   },
 
   /**
@@ -50,8 +52,8 @@ Page({
   },
   // 进货商汇总列表
   getlist:function(){
+    var _this=this
     Api.statPurchasers().then(res=>{
-      console.log(res)
       if (res.obj) {
         var obj = res.obj.result
         if (obj.length == 0) {

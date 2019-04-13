@@ -22,9 +22,12 @@ Page({
 
   },
   // 活动分析
-  activityAnalysis:function(){
+  activityAnalysis:function(e){
+    var activityNumber = e.target.dataset.index,
+      title=e.target.dataset.title,
+      status = e.target.dataset.status
     wx.navigateTo({
-      url: '../activityAnalysis/activityAnalysis',
+      url: '../activityAnalysis/activityAnalysis?activityNumber=' + activityNumber + "&title=" + title + "&status=" + status,
     })
   },
   // 编辑商品

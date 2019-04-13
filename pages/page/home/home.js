@@ -597,7 +597,7 @@ Page({
     }
   },
   // 获取活动商品
-  getActiveList(){
+  getActiveList() {
     var _this=this
     Api.storeIndexAGoods({ activityNumber:this.data.activityNumber}).then(res=>{
       var detailList = res.obj.result,
@@ -610,6 +610,32 @@ Page({
         })
       }
     })
+  },
+  //倒计时
+  timerhandle(timeSeconds, index) {
+    if (timeSeconds) {
+      this.setData({
+        ['timerList[' + index + ']']: [parseInt(timeSeconds / 60 / 60 % 24), parseInt(timeSeconds / 60 % 60), parseInt(timeSeconds % 60)]
+      }, () => {
+        let timer = setInterval(() => {
+          timeSeconds--
+          if (timeSeconds <= 0) {
+            clearInterval(timer)
+          }
+          this.setData({
+            ['timerList[' + index + ']']: [parseInt(timeSeconds / 60 / 60 % 24), parseInt(timeSeconds / 60 % 60), parseInt(timeSeconds % 60)]
+          })
+        }, 1000)
+        let ll = this.data.allTimerList
+        ll.push(timer)
+        this.setData({ allTimerList: ll })
+      })
+    } else {
+      this.setData({
+        ['timerList[' + index + ']']: ['00', '00', '00']
+      })
+    }
+
   },
     /**
    * 生命周期函数--监听页面加载

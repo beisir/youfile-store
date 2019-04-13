@@ -170,8 +170,7 @@
       <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>正在抢订</view>
       <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>全部商品</view>
       <view class='stop-time'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
-        距结束
-         <text style='day-text'>{{endTime.shengyuD}}</text> 天
+        距结束{{endTime.shengyuD}}天
         <text>{{endTime.shengyuH}}</text> :
         <text>{{endTime.shengyuM}}</text> :
         <text>{{endTime.S}}</text>
