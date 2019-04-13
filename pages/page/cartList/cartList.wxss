@@ -1,5 +1,6 @@
 @import '../../../style/style.wxss';@import '../goodsDetails/goodsDetails.wxss';.main{padding-bottom:180rpx}
 .cart-list .hide_mes{display:none}
+.jiage-t image {height: 20rpx;}
 .cart-list .cart-pro-name2{margin-left:216rpx}
 .allNumShow{font-size:28rpx;text-align:right;color:#999;margin-right:40rpx;height: 100rpx;line-height: 100rpx;}
 .allNumShow text{color:#CCAA77;font-weight:600}

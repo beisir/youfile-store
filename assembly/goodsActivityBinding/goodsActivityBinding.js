@@ -35,25 +35,45 @@ Component({
     bindingForGoodsDetail(response) {
       var goodsVO = response.obj.goodsVO
       var activeVal = goodsVO.extInfo.SALES_PROMOTION[0]
-      var date = activeVal.endDate
-      var endDate = utils.formatTime(new Date(date))
-      var lit = wx.getStorageSync("admin")
-      var data = {
-        "activity_1": [
-          {
-            "promotionMode": activeVal.promotionMode,
-            "activityPrice": activeVal.activityPrice,
-            "sellPrice": lit == 1 ? goodsVO.sellPrice : goodsVO.wholesalePrice,
-            "beginDate": endDate
-          }
-        ]
-      }
-      // setInterval(function () {
+     if(activeVal){
+       var newData=[]
+       var timestamp = (new Date()).valueOf();
+       var beginDate = activeVal.beginDate
+       var endDate = activeVal.endDate
+       console.log(timestamp)
+       console.log(beginDate)
+       var timeSeconds=''
+       if (beginDate-timestamp >0){
+         console.log(3)
+         //未开始
+         timeSeconds = beginDate - timestamp
+       }else{
+         console.log(33)
+         timeSeconds = endDate - beginDate
+       }
+       console.log(timeSeconds)
+       newData.push({ d: parseInt(timeSeconds / 86400), h: parseInt(timeSeconds / 60 / 60 % 24), m: parseInt(timeSeconds / 60 % 60), s: parseInt(timeSeconds % 60)})
+       console.log(newData)
+      //  console.log(utils.timeStamp(timeSeconds)); 
+          // setInterval(function () {
       //   var newDate = utils.formatTime(new Date(date))
       //   console.log(newDate)
       //   data.activity_1[0].beginDate = newDate
       //   date = date - 1000
       // }, 1000)
+
+       var data = {
+         "activity_1": [
+           {
+             "promotionMode": activeVal.promotionMode,
+             "activityPrice": activeVal.activityPrice,
+             "sellPrice": lit == 1 ? goodsVO.sellPrice : goodsVO.wholesalePrice,
+             "beginDate": ''
+           }
+         ]
+       }
+     }
+      var lit = wx.getStorageSync("admin")
    
       var store = response.obj.store
 

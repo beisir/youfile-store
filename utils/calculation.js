@@ -11,10 +11,11 @@ class Calculation {
       if (isActivity) {
         if (saleBatch > stockNum) {
           obj.num = 0
-          // Api.showToast("库存小于起购量！")
+          Api.showToast("库存小于起购量！")
         } else {
           if (value >= stockNum) {
             obj.num = stockNum
+            Api.showToast("库存不足哦！")
           } else {
             obj.num = value
           }

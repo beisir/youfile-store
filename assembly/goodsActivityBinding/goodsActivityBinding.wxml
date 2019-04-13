@@ -11,7 +11,7 @@
           </view>
           <view>
             <view>距结束还有</view>
-            <text>{{item.beginDate}} </text>
+            <!-- <text>{{item.beginDate}} </text> -->
           </view>
         </view>
       </block>

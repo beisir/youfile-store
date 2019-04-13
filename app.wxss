@@ -144,19 +144,19 @@ input:focus{padding:0}
 .dc-list>view>view,.dc-list>navigator>view{float: left;font-size: 32rpx;position: relative}
 .dc-list>view>view:first-child,.dc-list>navigator>view:first-child{margin-right: 20rpx;}
 .g-name,.s-name{word-break:break-all;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:1;overflow:hidden;width:415rpx;}
-.shan{background: #F02B2B;border-radius: 10rpx;float: left;line-height: 30rpx;font-size: 24rpx;color: #fff;text-align: center;padding:4rpx 8rpx;margin-right: 30rpx;margin-top: 16rpx;}
+.shan{background: #F02B2B;border-radius: 10rpx;float: left;line-height: 30rpx;font-size: 24rpx;color: #fff;text-align: center;padding:4rpx 8rpx;margin-right: 10rpx;margin-top: 16rpx;}
 .shan image{width: 20rpx;vertical-align: middle;margin-top: -2rpx;margin-right: 6rpx;}
 .dc-price{font-size:24rpx;color: #F02B2B;margin-top: 40rpx;}
 .dc-price text{font-size: 46rpx;margin-right: 10rpx;}
-.dc-price .goods-zize{color: #999999;text-decoration: line-through;font-size:24rpx;justify-content: space-around;font-weight: bold}
+.dc-price .goods-zize{color: #999999;text-decoration: line-through;font-size:24rpx;justify-content: space-around;}
 .dc-xian>view{float: left;width: 240rpx;height: 4rpx;border-radius:4rpx;border:2rpx solid #F02B2B;overflow: hidden;margin-right: 30rpx;}
 .dc-xian>view view{height: 4rpx;width: 50%;background: #F02B2B;}
 .dc-xian{font-size: 24rpx;color: #999;display: flex;align-items: center;width: 100%;}
 .dc-cont>view{margin-bottom: 10rpx;}
 .dc-price .copy-img{width: 35rpx;height: 35rpx;float: right;margin-top: -25rpx;}
-.tab-view .stop-time{position: absolut;right:-10rpx;top:0rpx;background-image: unset;width: unset;font-size: 24rpx;color: #666;}
+.tab-view .stop-time{position: absolut;right:-35rpx;top:0rpx;background-image: unset;width: unset;font-size: 24rpx;color: #666;}
 .stop-time text{color: #fff;background: #454545;padding: 5rpx;border-radius: 10rpx;}
-.stop-time text:first-of-type{background: #F02B2B}
+/* .stop-time text:first-of-type{background: #F02B2B} */
 .dc-list>view>.isHideacti{width: 240rpx;height: 240rpx;top: 30rpx;left: 30rpx;position: absolute;text-align: center;font-size: 27rpx;color: #fff;padding-top: 35rpx;text-shadow: #000 0 2rpx 0;}
 .isHideacti image{width: 55rpx;height: 55rpx;}
 .isHideacti view{line-height: 38rpx;}

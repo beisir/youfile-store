@@ -31,7 +31,7 @@
       <view  class='classs_l'>
         <text>活动类目</text>{{activeDetails.mallCategoryCodeName}}</view>
       <view>
-        <text>活动介绍</text>{{activeDetails.introduction}}</view>
+        <text>活动介绍</text>{{activeDetails.introduction}}顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水水</view>
     </view>
   </view>
 </view>
