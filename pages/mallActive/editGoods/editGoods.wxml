@@ -44,7 +44,7 @@
             </view>
             <view>
               <view>
-                <input placeholder='添加活动起购量' value='{{item.buyNum}}' type='number' bindinput='watchInput' data-type='buyNum' data-index="{{index}}" maxlength='6'></input>
+                <input placeholder='添加起购量' value='{{item.buyNum}}' type='number' bindinput='watchInput' data-type='buyNum' data-index="{{index}}" maxlength='6'></input>
                 <view>起购量</view>
               </view>
             </view>
@@ -57,7 +57,7 @@
             <text>无规格</text>（无SKU时，不能选择规格）
           </view>
         </view>
-        <view class='set-price'>
+        <view class='set-price' style='border:0;'>
           <view>
             <view>
               <input placeholder='添加活动价格' value='{{noSkuPrich}}' type='digit' bindinput='watchInput' data-type='noSku-price' maxlength='8'></input>
@@ -72,7 +72,7 @@
           </view>
           <view>
             <view>
-              <input placeholder='添加活动起购量' value='{{noSkuBuynum}}' type='number' bindinput='watchInput' data-type='noSku-buynum' maxlength='6'></input>
+              <input placeholder='添加起购量' value='{{noSkuBuynum}}' type='number' bindinput='watchInput' data-type='noSku-buynum' maxlength='6'></input>
               <view>起购量</view>
             </view>
           </view>
