@@ -2,6 +2,7 @@ const app = getApp();
 import Api from '../../../utils/api.js'
 import Calculation from '../../../utils/calculation.js'
 var Method = new Calculation()
+var timerList = []
 import {
   uploadImg
 } from '../../../utils/const.js'
@@ -104,7 +105,6 @@ Page({
                 arr = res[i].shoppingCartSkuList
               }
             }
-            console.log(arr)
             if (options.name == "more") {
               that.setData({
                 showCart: false, //修改进货车或者多个规格
@@ -276,15 +276,44 @@ Page({
             histtory: obj.extInfo.PURCHASE_HISTORY
           })
         }
-        console.log(obj)
+        timerList.forEach(el => {
+          clearInterval(el)
+        })
+        timerList = []
+        var timeSeconds=''
+        if (obj.extInfo.SALES_PROMOTION.length>0){
+          var activeVal = obj.extInfo.SALES_PROMOTION[0]
+          var timestamp = new Date().getTime();
+          var beginDate = activeVal.beginDate
+          var endDate = activeVal.endDate
+          if (beginDate - timestamp > 0) {
+            //未开始
+            timeSeconds = beginDate - timestamp
+            this.setData({
+              activeMes:"距开始还有"
+            })
+          } else {
+            //已经结束
+            timeSeconds = endDate - timestamp
+            this.setData({
+              activeMes: "距结束还有"
+            })
+          }
+          timeSeconds = timeSeconds/1000
+          activeVal.timeSeconds = timeSeconds
+          var newArr = []
+          newArr.push(activeVal)
+          for (var i = 0; i < newArr.length; i++) {
+            this.timerhandle(newArr[i].timeSeconds, i, 'doing')
+          }
+        }
         _this.setData({
           goodsInfo: obj,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
           goodsSkuVOList: obj.goodsSkuVOList,
-          skuArrTwo: skuArrTwo,
+          skuArrTwo: skuArrTwo, 
           nameTwo: name,
           store: store,
-          hasActiveGoods: obj.hasActiveGoods ? true : false, //标识这个商品是否有活动商品
           favoriteNum: favoriteNum,
         }, function () {
           // isTrue为true编辑进货车或者购物车 false是添加
@@ -300,16 +329,6 @@ Page({
                _this.setData({
                   newSkuOnly: true
                 })
-              
-            //   }
-            // }
-            // console.log(this.data.newCartList)
-            // if (this.data.newCartList.length == 0) {
-            //   _this.getSpecDetails(0, arr[0].specValueCode)
-            // }
-            // showCartOne为false 修改购物车
-            // if (!this.data.showCartOne) {
-            //   _this.getSpecDetails(0, arr[0].specValueCode)
             }
             // 只有两个规格
             if (len.length == 2) {
@@ -322,28 +341,30 @@ Page({
               }
             }
           }
-          // let num = this.data.numbers
-          // this.setData({
-          //   numbers: num
-          // })
-          // // editOneName编辑进货车购物车
-          // if (this.data.editOneName) {
-          //   var newSkuArrTwo = this.data.newSkuArrTwo
-          //   if (lenNum) {
-          //     for (var i = 0; i < newSkuArrTwo.length; i++) {
-          //       if (newSkuArrTwo[i].num >= 0) {
-          //         newSkuArrTwo[i].num = num
-          //       }
-          //     }
-          //   }
-          //   this.setData({
-          //     newSkuArrTwo: newSkuArrTwo
-          //   }, function() {
-          //     this.getTotalPrice();
-          //   })
-          // }
         })
       })
+  },
+  timerhandle(timeSeconds, index, type) {
+    let dataName = 'timerList'
+    if (timeSeconds) {
+      this.setData({
+        [dataName + '[' + index + ']']: [parseInt(timeSeconds / 86400), parseInt(timeSeconds / 60 / 60 % 24), parseInt(timeSeconds / 60 % 60), parseInt(timeSeconds % 60)]
+      })
+      let timer = setInterval(() => {
+        timeSeconds--
+        if (timeSeconds <= 0) {
+          clearInterval(timer)
+        }
+        this.setData({
+          [dataName + '[' + index + ']']: [parseInt(timeSeconds / 86400), parseInt(timeSeconds / 60 / 60 % 24), parseInt(timeSeconds / 60 % 60), parseInt(timeSeconds % 60)]
+        })
+      }, 1000)
+      timerList.push(timer)
+    } else {
+      this.setData({
+        [dataName + '[' + index + ']']: ['00', '00', '00', '00']
+      })
+    }
   },
   call() {
     if (this.data.store.servicePhone) {
@@ -900,36 +921,22 @@ Page({
     }
   },
   //添加
-  addCount: function () {
+  addCount: function (e) {
+    var sign = e.currentTarget.dataset.sign //获取是增加还是减少 或者手动输入 input代表手动输入
     let num = this.data.numbers
     let goodsInfo = this.data.goodsInfo
-    var stockNum = this.data.goodsInfo.stockNum
-    if (num >= stockNum) {
-      Api.showToast("库存不足！")
-      return
-    }
-    num = num + 1
-    this.setData({
-      numbers: num,
-    })
-    this.selectedSku(false)
-  },
-  //减少
-  // 购买数量
-  minusCount: function () {
-    let num = this.data.numbers
-    num = num - 1
-    if (num == -1) {
-      return
+    if (sign == "add") {
+      num = num + 1
+      Method.selectedSkuNum(goodsInfo, num) //调用calculation。js 中selectedSkuNum方法 判断起购量库存
     } else {
-      this.setData({
-        numbers: num
-      })
+      num = num - 1
+      Method.selectedSkuNum(goodsInfo, num,true) 
     }
-    this.selectedSku(true)
-    
+    this.setData({
+      numbers:goodsInfo.num,
+    })
+    // this.selectedSku(false)
   },
-
   // 判断选中的SKU
   selectedSku: function(isTrue) {
     var skuStr = '',

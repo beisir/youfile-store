@@ -117,7 +117,7 @@ Page({
         arr = []
       } else {
         data[i].selected = true
-        arr.push(data[i].id)
+        arr.push(data[i].goodsVO.id)
       }
     }
     this.setData({
@@ -135,6 +135,18 @@ Page({
     if (goodsIds.length>0){
       Api.releaseMoreGoods({ activityNumber: activityNumber, goodsIds: goodsIds }).then(res => {
         Api.showToast(res.message)
+        setTimeout(res=>{
+          var index = this.data.currentTab
+          var pages = getCurrentPages();             //  获取页面栈
+          var currPage = pages[pages.length - 1];
+          var prevPage = pages[pages.length - 2];    // 上一个页面
+          prevPage.setData({
+            status: 'init'
+          })
+          wx.navigateBack({
+            data: 1
+          })
+        },500)
       })
     }else{
       Api.showToast("请选择商品！")

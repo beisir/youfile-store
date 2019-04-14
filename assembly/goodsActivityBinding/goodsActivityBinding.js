@@ -35,44 +35,7 @@ Component({
     bindingForGoodsDetail(response) {
       var goodsVO = response.obj.goodsVO
       var activeVal = goodsVO.extInfo.SALES_PROMOTION[0]
-     if(activeVal){
-       var newData=[]
-       var timestamp = (new Date()).valueOf();
-       var beginDate = activeVal.beginDate
-       var endDate = activeVal.endDate
-       console.log(timestamp)
-       console.log(beginDate)
-       var timeSeconds=''
-       if (beginDate-timestamp >0){
-         console.log(3)
-         //未开始
-         timeSeconds = beginDate - timestamp
-       }else{
-         console.log(33)
-         timeSeconds = endDate - beginDate
-       }
-       console.log(timeSeconds)
-       newData.push({ d: parseInt(timeSeconds / 86400), h: parseInt(timeSeconds / 60 / 60 % 24), m: parseInt(timeSeconds / 60 % 60), s: parseInt(timeSeconds % 60)})
-       console.log(newData)
-      //  console.log(utils.timeStamp(timeSeconds)); 
-          // setInterval(function () {
-      //   var newDate = utils.formatTime(new Date(date))
-      //   console.log(newDate)
-      //   data.activity_1[0].beginDate = newDate
-      //   date = date - 1000
-      // }, 1000)
-
-       var data = {
-         "activity_1": [
-           {
-             "promotionMode": activeVal.promotionMode,
-             "activityPrice": activeVal.activityPrice,
-             "sellPrice": lit == 1 ? goodsVO.sellPrice : goodsVO.wholesalePrice,
-             "beginDate": ''
-           }
-         ]
-       }
-     }
+   
       var lit = wx.getStorageSync("admin")
    
       var store = response.obj.store
@@ -89,9 +52,9 @@ Component({
 
       let pages = getCurrentPages()
       let curPage = pages[pages.length - 1]
-      curPage.setData({
-        activityData: data
-      })
+      // curPage.setData({
+      //   activityData: data
+      // })
     },
     //处理展位1
     handleActivityPosition1(goodsVO) {
@@ -108,11 +71,11 @@ Component({
       // 判断是否有额外参数
       if(extInfoLen>0){
         var standardGoodsSkuPromotions = goodsVO.extInfo.SALES_PROMOTION[0].standardGoodsSkuPromotions
-        goodsVO.hasActiveGoods = true
-        if (goodsSkuVOList.length==0){
-          goodsVO.saleBatch = goodsVO.extInfo.SALES_PROMOTION[0].salesNum
-          goodsVO.activityPrice = goodsVO.extInfo.SALES_PROMOTION[0].activityPrice
-        }else{
+        goodsVO.isActivity = true
+        goodsVO.saleBatch = goodsVO.extInfo.SALES_PROMOTION[0].batchNum
+        goodsVO.saleStockNum = goodsVO.extInfo.SALES_PROMOTION[0].stockNum
+        goodsVO.activityPrice = goodsVO.extInfo.SALES_PROMOTION[0].activityPrice
+        if (goodsSkuVOList.length>0){
           for (var val of goodsSkuVOList) {
             val.standardGoodsSkuPromotions = []
             if (standardGoodsSkuPromotions) {
@@ -120,7 +83,8 @@ Component({
                 if (val.skuCode == v.skuCode) {
                   val.standardGoodsSkuPromotions.push(v)
                   val.isActivity = true
-                  val.saleBatch = v.salesNum
+                  val.saleBatch = v.batchNum
+                  val.saleStockNum = v.stockNum
                   val.activityPrice = v.activityPrice
                 }
               }
@@ -129,7 +93,7 @@ Component({
         }
        
       }else{
-        goodsVO.hasActiveGoods = false
+        goodsVO.isActivity  = false
       }
       return goodsVO
     },

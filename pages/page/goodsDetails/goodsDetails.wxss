@@ -154,3 +154,4 @@
 .goods-des{text-align: center;color: 36rpx;font-weight: bold;margin-top: 40rpx;}
 .goods-des>view:last-child{font-size:16rpx;color: #999;font-weight: normal}
 .goods-des>view:first-child{letter-spacing: 10rpx;}
+.cart-list .sale-b{font-weight: normal;color: #999;text-align: center;padding:5rpx 0;width: 350rpx;}

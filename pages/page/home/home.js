@@ -622,13 +622,15 @@ Page({
       if (Api.isNotEmpty(detailList)) {
         if (detailList.length>0){
           detailList.forEach(el => {
-            let stockNum = el.extInfo.PRIORITY_SALES_PROMOTION.stockNum,
-              salesNum = el.extInfo.PRIORITY_SALES_PROMOTION.salesNum
-            if (!stockNum || stockNum == 0) {
-              el.salepercent = 100
-            } else {
-              let all = salesNum + stockNum
-              el.salepercent = parseInt(salesNum / all)
+            if (el.extInfo) {
+              let stockNum = el.extInfo.PRIORITY_SALES_PROMOTION.stockNum,
+                salesNum = el.extInfo.PRIORITY_SALES_PROMOTION.salesNum
+              if (!stockNum || stockNum == 0) {
+                el.salepercent = 100
+              } else {
+                let all = salesNum + stockNum
+                el.salepercent = parseInt(salesNum / all)
+              }
             }
           })
         }

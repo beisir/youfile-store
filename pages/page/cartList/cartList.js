@@ -3,7 +3,8 @@ var that
 import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
-
+import Calculation from '../../../utils/calculation.js'
+var Method = new Calculation()
 function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
   isStoreOwner.enterIdentity().then(res => {
@@ -245,24 +246,69 @@ Page({
             hasList: true,
             selectAllStatus: true,
           });
+          //绑定活动
+          if (effectiveList.length > 0) {
+            for (var v of effectiveList) {
+              var extInfo = v.extInfo.SALES_PROMOTION
+              if (extInfo.length > 0) {
+                var standardGoodsSkuPromotions = extInfo[0].standardGoodsSkuPromotions
+                v.isActivity = true
+                if (standardGoodsSkuPromotions) {
+                  var goodsSkuVOList = v.shoppingCartSkuList
+                  for (var val of goodsSkuVOList) {
+                    for (var k of standardGoodsSkuPromotions) {
+                      if (val.skuCode == k.skuCode) {
+                        val.isActivity = true
+                        val.saleBatch = k.batchNum
+                        val.saleStockNum = k.stockNum
+                        val.activityPrice = k.activityPrice
+                      }
+                    }
+                  }
+                }
+                v.saleBatch = extInfo[0].batchNum
+                v.saleStockNum = extInfo[0].stockNum
+                v.activityPrice = extInfo[0].activityPrice
+              } else {
+                v.isActivity = false
+              }
+            }
+          }
           for (var i = 0; i < effectiveList.length; i++) {
             effectiveList[i].selected = true
             var newSkvArr = effectiveList[i].shoppingCartSkuList
+            var isActivity = effectiveList[i].isActivity
             if (Api.isNotEmpty(newSkvArr)) {
               var num = 0;
               var allGoodsAmount = 0
               var allGoodsPf = 0
+              var sellPrice = 0;
+              var sellPrice1 = 0;
+              var wPrice = 0;
+              var wPrice1 = 0;
               for (var j = 0; j < newSkvArr.length; j++) {
                 num += newSkvArr[j].num
-                allGoodsAmount += newSkvArr[j].sellPrice * newSkvArr[j].num
-                allGoodsPf += newSkvArr[j].wholesalePrice * newSkvArr[j].num
+                var isActivity = newSkvArr[j].isActivity
+                if (isActivity){
+                  sellPrice += newSkvArr[j].activityPrice * newSkvArr[j].num
+                  wPrice += newSkvArr[j].activityPrice * newSkvArr[j].num
+                }else{
+                  sellPrice1 += newSkvArr[j].sellPrice * newSkvArr[j].num
+                  wPrice1 += newSkvArr[j].wholesalePrice * newSkvArr[j].num
+                }
               }
               effectiveList[i].num = num
-              effectiveList[i].allGoodsAmount = allGoodsAmount.toFixed(2)
-              effectiveList[i].allGoodsPf = allGoodsPf.toFixed(2)
+              effectiveList[i].allGoodsAmount = (sellPrice + sellPrice1).toFixed(2)
+              effectiveList[i].allGoodsPf = (wPrice + wPrice1).toFixed(2)
             } else {
-              effectiveList[i].allGoodsAmount = (effectiveList[i].sellPrice * effectiveList[i].num).toFixed(2)
-              effectiveList[i].allGoodsPf = (effectiveList[i].wholesalePrice * effectiveList[i].num).toFixed(2)
+              if (isActivity){
+                effectiveList[i].allGoodsAmount = (effectiveList[i].activityPrice * effectiveList[i].num).toFixed(2)
+                effectiveList[i].allGoodsPf = (effectiveList[i].activityPrice * effectiveList[i].num).toFixed(2)
+              }else{
+                effectiveList[i].allGoodsAmount = (effectiveList[i].sellPrice * effectiveList[i].num).toFixed(2)
+                effectiveList[i].allGoodsPf = (effectiveList[i].wholesalePrice * effectiveList[i].num).toFixed(2)
+              }
+              
             }
           }
         }
@@ -298,35 +344,7 @@ Page({
             saleBatchNum = store.saleBatchNum
           }
         }
-        //绑定活动
-        if (effectiveList.length > 0) {
-          for (var v of effectiveList) {
-            var extInfo = v.extInfo.SALES_PROMOTION
-            if (extInfo.length > 0) {
-              var standardGoodsSkuPromotions = extInfo[0].standardGoodsSkuPromotions
-              v.hasActiveGoods = true
-              if (standardGoodsSkuPromotions){
-                var goodsSkuVOList = v.shoppingCartSkuList
-                for (var val of goodsSkuVOList) {
-                  for (var k of standardGoodsSkuPromotions) {
-                    if (val.skuCode == k.skuCode) {
-                      val.isActivity = true
-                      val.salesNum = k.salesNum
-                      val.activityPrice = k.activityPrice
-                    }
-                  }
-                }
-              }else{
-                v.salesNum = extInfo[0].salesNum
-                v.activityPrice = extInfo[0].activityPrice
-              }
-              
-            }else{
-              v.hasActiveGoods=false
-            }
-          }
-          console.log(effectiveList)
-        }
+       
         _this.setData({
           storeAmount: saleBatchAmount,
           storeNum: saleBatchNum,
@@ -450,14 +468,26 @@ Page({
       .then(res => {})
   },
   addCount(e) {
+    var sign = e.currentTarget.dataset.sign
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;
     let num = detailList[index].shoppingCartSkuList[0].num;
-    num = parseInt(num) + 1;
-    let stockNum = detailList[index].shoppingCartSkuList[0].stockNum
-    if (num > stockNum) {
-      num = stockNum
+    if (sign=="reduce"){
+      num = parseInt(num) - 1;
+      Method.selectedSkuNum(detailList[index].shoppingCartSkuList[0], num,true,"cart")
     }
+    if(sign=="add"){
+      num = parseInt(num) + 1;
+      Method.selectedSkuNum(detailList[index].shoppingCartSkuList[0], num)
+    }
+    if (sign == "input") {
+      num = e.detail.value
+      if (num == '') {
+        num = 1
+      }
+      Method.selectedSkuNum(detailList[index].shoppingCartSkuList[0], num)
+    } 
+    num = detailList[index].shoppingCartSkuList[0].num
     let storeId = this.data.storeId
     detailList[index].shoppingCartSkuList[0].num = num;
     detailList[index].num = num
@@ -480,135 +510,46 @@ Page({
   },
 
   /**
-   * 绑定减数量事件
+   * 绑定改变数量事件
    */
-
-  minusCountNew(e) {
-    const index = e.currentTarget.dataset.index;
-    const obj = e.currentTarget.dataset.obj;
-    let detailList = this.data.detailList;
-    let storeId = this.data.storeId
-    let num = parseInt(detailList[index].num)
-    if (num <= 1) {
-      return false;
-    }
-    num = num - 1;
-    detailList[index].num = num;
-    detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
-    detailList[index].allGoodsAmount = num * detailList[index].sellPrice
-    var dataArr = []
-    dataArr.push({
-      goodsId: detailList[index]["goodsId"],
-      num: parseInt(num),
-      skuCode: 0,
-      storeId: storeId
-    })
-    this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
-    this.setData({
-      detailList: detailList
-    }, function() {
-      this.getTotalPrice();
-    });
-
-  },
-  blurInput: function(e) {
-    var num = e.detail.value
-    if (num == '') {
-      num = 1
-    }
-    const index = e.currentTarget.dataset.index;
-    let detailList = this.data.detailList;
-    let storeId = this.data.storeId
-    detailList[index].shoppingCartSkuList[0].num = num;
-    detailList[index].num = num
-    var arr = this.updatePrice(num, index)
-    detailList[index].allGoodsAmount = arr[0]
-    detailList[index].allGoodsPf = arr[1]
-    var data = detailList[index].shoppingCartSkuList
-    var dataArr = []
-    dataArr.push({
-      goodsId: data[0]["goodsId"],
-      num: parseInt(num),
-      skuCode: data[0]["skuCode"],
-      storeId: storeId
-    })
-    this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
-    this.setData({
-      detailList: detailList
-    });
-    this.getTotalPrice();
-  },
-  blurInput1: function(e) {
-    var num = e.detail.value
-    if (num == '') {
-      num = 1
-    }
-    const index = e.currentTarget.dataset.index;
-    let detailList = this.data.detailList;
-    let storeId = this.data.storeId
-    detailList[index].num = num
-    detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
-    detailList[index].allGoodsAmount = num * detailList[index].sellPrice
-    var dataArr = []
-    dataArr.push({
-      goodsId: detailList[index]["goodsId"],
-      num: parseInt(num),
-      skuCode: 0,
-      storeId: storeId
-    })
-    this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
-    this.setData({
-      detailList: detailList
-    }, function() {
-      this.getTotalPrice();
-    });
-  },
-  changeNum1: function(e) {
-    var num = e.detail.value
-    const index = e.currentTarget.dataset.index;
-    let detailList = this.data.detailList;
-    if (num == '') {
-      return
-    }
-    num = num.replace(/\b(0+)/gi, "")
-    if (num == 0) {
-      num = 1
-    }
-    let storeId = this.data.storeId
-    let stockNum = detailList[index].stockNum
-    if (num > stockNum) {
-      num = stockNum
-    }
-    detailList[index].num = num
-    detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
-    detailList[index].allGoodsAmount = num * detailList[index].sellPrice
-    var dataArr = []
-    dataArr.push({
-      goodsId: detailList[index]["goodsId"],
-      num: parseInt(num),
-      skuCode: 0,
-      storeId: storeId
-    })
-    this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
-    this.setData({
-      detailList: detailList
-    }, function() {
-      this.getTotalPrice();
-    });
-  },
   addCountNew(e) {
+    var sign = e.currentTarget.dataset.sign //获取是增加还是减少 或者手动输入 input代表手动输入
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;
     let num = parseInt(detailList[index].num);
-    num = parseInt(num) + 1;
-    let stockNum = detailList[index].stockNum
-    if (num > stockNum) {
-      num = stockNum
+    if (sign == "input") {
+       num = e.detail.value
+      if (num == '') {
+        num = 1
+      }
+      Method.selectedSkuNum(detailList[index], num)
     }
-    let storeId = this.data.storeId
-    detailList[index].num = num
-    detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
-    detailList[index].allGoodsAmount = num * detailList[index].sellPrice
+    if (sign == "add") {
+      num = parseInt(num) + 1;
+      Method.selectedSkuNum(detailList[index], num)
+    }
+    if (sign == "reduce") {
+      num = parseInt(num) - 1;
+      Method.selectedSkuNum(detailList[index], num,true,"cart")
+    }
+    num = detailList[index].num
+    console.log(detailList[index])
+    let storeId = this.data.storeIdFV
+    var isActivity = detailList[index].isActivity
+    if (isActivity) {
+      detailList[index].allGoodsPf = num * detailList[index].activityPrice
+      detailList[index].allGoodsAmount = num * detailList[index].activityPrice
+      if (num >= detailList[index].saleStockNum) {
+        Api.showToast("活动库存不足！")
+      }
+    } else {
+      detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
+      detailList[index].allGoodsAmount = num * detailList[index].sellPrice
+      if (num >= detailList[index].stockNum) {
+        Api.showToast("库存不足！")
+      }
+    }
+
     var dataArr = []
     dataArr.push({
       goodsId: detailList[index]["goodsId"],
@@ -619,55 +560,38 @@ Page({
     this.addCart(detailList[index]["goodsId"], JSON.stringify(dataArr))
     this.setData({
       detailList: detailList
-    }, function() {
+    }, function () {
       this.getTotalPrice();
     });
   },
+
   // 更改商品价格
   updatePrice: function(num, index) {
     var effectiveList = this.data.detailList[index],
       shoppingCartSkuList = effectiveList.shoppingCartSkuList
     if (Api.isNotEmpty(shoppingCartSkuList)) {
       var arr = []
-      arr.push(shoppingCartSkuList[0].sellPrice * num)
-      arr.push(shoppingCartSkuList[0].wholesalePrice * num)
+      if (shoppingCartSkuList[0].isActivity){
+        arr.push(shoppingCartSkuList[0].activityPrice * num)
+        arr.push(shoppingCartSkuList[0].activityPrice * num)
+      }else{
+        arr.push(shoppingCartSkuList[0].sellPrice * num)
+        arr.push(shoppingCartSkuList[0].wholesalePrice * num)
+      }
       return arr
     } else {
       var arr = []
-      arr.push(effectiveList.sellPrice * num)
-      arr.push(effectiveList.wholesalePrice * num)
+      if (effectiveList.isActivity){
+        arr.push(effectiveList.activityPrice * num)
+        arr.push(effectiveList.activityPrice * num)
+      }else{
+        arr.push(effectiveList.sellPrice * num)
+        arr.push(effectiveList.wholesalePrice * num)
+      }
       return arr
     }
   },
-  minusCount(e) {
-    const index = e.currentTarget.dataset.index;
-    const obj = e.currentTarget.dataset.obj;
-    let detailList = this.data.detailList;
-    let storeId = this.data.storeId
-    let num = detailList[index].shoppingCartSkuList[0].num;
-    if (num <= 1) {
-      return false;
-    }
-    num = num - 1;
-    detailList[index].shoppingCartSkuList[0].num = num;
-    detailList[index].num = num
-    var arr = this.updatePrice(num, index)
-    detailList[index].allGoodsAmount = arr[0]
-    detailList[index].allGoodsPf = arr[1]
-    var data = detailList[index].shoppingCartSkuList
-    var dataArr = []
-    dataArr.push({
-      goodsId: data[0]["goodsId"],
-      num: parseInt(num),
-      skuCode: data[0]["skuCode"],
-      storeId: storeId
-    })
-    this.addCart(data[0]["goodsId"], JSON.stringify(dataArr))
-    this.setData({
-      detailList: detailList
-    });
-    this.getTotalPrice();
-  },
+
   /**
    * 计算总价
    */
@@ -768,41 +692,16 @@ Page({
         if (detailList[i].selected) {
           if (enjoyCost) {
             detailList[i].enjoyPrice = true
-            if (detailList[i].shoppingCartSkuList != null) {
-              var arr = detailList[i].shoppingCartSkuList
-              for (var j = 0; j < arr.length; j++) {
-                newTotalPrice += arr[j].num * arr[j].wholesalePrice;
-              }
-            } else {
-              newTotalPrice1 += detailList[i].num * detailList[i].wholesalePrice
-            }
+            newTotalPrice1 += parseFloat(detailList[i].allGoodsPf) 
           } else {
             var enjoy = detailList[i].enjoyPrice
             if (enjoy) {
               numTrue++
-              if (detailList[i].shoppingCartSkuList != null) {
-                var arr = detailList[i].shoppingCartSkuList
-                for (var j = 0; j < arr.length; j++) {
-                  newTotalPrice += arr[j].num * arr[j].wholesalePrice;
-                }
-              } else {
-                newTotalPrice += detailList[i].num * detailList[i].wholesalePrice
-              }
-              // newTotalPrice = newChild1 + newChild2
+              newTotalPrice += parseFloat(detailList[i].allGoodsPf) 
             } else {
-              if (detailList[i].shoppingCartSkuList != null) {
-                var arr = detailList[i].shoppingCartSkuList
-                for (var j = 0; j < arr.length; j++) {
-                  newTotalPrice1 += arr[j].num * arr[j].sellPrice;
-                }
-              } else {
-                newTotalPrice1 += detailList[i].num * detailList[i].sellPrice
-              }
-              // console.log(newChild1 + "///" + newChild2)
-              // newTotalPrice1 = newChild1 + newChild2
+              newTotalPrice1+= parseFloat(detailList[i].allGoodsAmount)
             }
           }
-          // console.log(newTotalPrice1 + "///" + newTotalPrice)
           total1 = newTotalPrice1 + newTotalPrice
         }
       }

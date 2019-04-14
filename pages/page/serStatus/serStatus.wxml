@@ -6,46 +6,44 @@
     <image class="home-ser-new ser-font" bindtap='emptyInput' wx:if="{{closeCont}}" src="/image/ser.png"></image>
   </view>
   <view class='dc-list' wx:if="{{showResult}}">
-    <view wx:for="{{result}}" wx:key="index" class='{{item.isHide?"opa-view":""}}'>
+     <navigator wx:for="{{result}}" wx:key="index"   url="{{item.isHide?'':'../goodsDetails/goodsDetails?goodsId='+item.id}}" class='{{item.isHide?"opa-view":""}}'>
       <view>
-        <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" />
         <image class='g-img' src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small" />
       </view>
       <view class='dc-cont'>
         <view class='s-name'>{{item.name}}</view>
-        <block wx:if="{{item.extInfo}}">
+        <block wx:if='{{item.isHaveActive}}'>
           <view class='dc-price'>
             <view class='shan'>
               <image mode="widthFix" src="/image/shan.png" />抢订价</view>
             ￥
             <text>{{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
-            <view class='goods-zize'>￥{{item.wholesalePrice}}</view>
+            <view class='goods-zize'>￥{{item.sellPrice}}</view>
+            <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='copy-img' src="/image/dd.png" />
           </view>
           <view class='dc-xian'>
             <view>
-              <view></view>
+              <view style='width:{{item.salepercent}}%'></view>
             </view>
-            <text>已抢50%</text>
+            <text>已抢{{item.salepercent}}%</text>
           </view>
         </block>
-        <block  wx:if="{{!item.extInfo}}">
+        <block wx:else>
           <view class='no-act-pri'>
             <view>零售  <text>¥ {{item.sellPrice}}</text></view>
             <view>批发  <text class='ss-active'>¥ {{item.wholesalePrice}}</text></view>
           </view>
         </block>
       </view>
-      <view class='isHideacti' wx:if="{{item.isHide}}">
-        <block>
-          <image src="/image/isshow.png"></image>
-          <view>该商品</view>
-          <view>加商友可见</view>
-        </block>
+      <view wx:if="{{item.isHide}}" class='isHideacti'>
+        <image src="/image/isshow.png"></image>
+        <view>该商品</view>
+        <view>加商友可见</view>
         <!-- <block>
           <view class='no-a-goods'>已抢光</view>
         </block> -->
       </view>
-    </view>
+    </navigator>
   </view>
   <view class="init-page" wx:else>
     <view wx:if="{{history.length > 0}}">
