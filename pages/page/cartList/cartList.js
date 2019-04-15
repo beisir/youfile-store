@@ -312,6 +312,7 @@ Page({
             }
           }
         }
+        console.log(effectiveList)
         if (failureList.length > 0) {
           _this.setData({
             lostList: true,
@@ -518,13 +519,13 @@ Page({
     let num = parseInt(detailList[index].num);
     if (sign == "input") {
       num = (e.detail.value).replace(/\s/g, "")
-      console.log(num)
       if (num == 0 || num == '') {
         num = 1
       }
       Method.selectedSkuNum(detailList[index], num)
     }
     if (sign == "add") {
+      console.log(detailList[index])
       num = parseInt(num) + 1;
       Method.selectedSkuNum(detailList[index], num)
     }

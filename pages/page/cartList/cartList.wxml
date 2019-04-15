@@ -39,7 +39,7 @@
                   <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}">
                     <image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image>
                   </navigator>
-                   <view style='width:270rpx' data-id='{{item.goodsId}}' bindtap="lookDetails" class='ct-title ct-title1'>{{item.goodsName}}
+                   <view style='width:300rpx' data-id='{{item.goodsId}}' bindtap="lookDetails" class='ct-title ct-title1'>{{item.goodsName}}
                   <block wx:if='{{item.isActivity}}'>
                     <block wx:if='{{item.shoppingCartSkuList.length==1}}'>
                       <view class='ct-text ct-text1-active'  data-id='{{item.goodsId}}' bindtap="lookDetails"><view class="jiage-t jiage-tRed" style='font-size:20rpx'>
@@ -172,7 +172,7 @@
                 <image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image>
               </navigator>
               <text class='ct-text '>￥{{item.sellPrice}}</text>
-              <view style='width:270rpx ' class='ct-title ct-t-title '>{{item.goodsName}}</view>
+              <view style='width:300rpx ' class='ct-title ct-t-title '>{{item.goodsName}}</view>
               <!-- <text class="cart-pro-name">规格：{{item.small}}</text> -->
             </view>
             <view class="table" wx:if="{{item.shoppingCartSkuList.length>0}}">

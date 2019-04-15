@@ -14,12 +14,16 @@ class Calculation {
       } else {
         if (isTrue) {
           if (type =="cart"){
-            obj.num = saleBatch
+            if (value==0){
+              obj.num = 1
+            }else{
+              obj.num = value
+            }
           }else{
             obj.num = 0
           }
         } else {
-          obj.num = saleBatch
+          obj.num = value
         }
       }
     }else{
