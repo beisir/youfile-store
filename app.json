@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/mallActive/yunDist/yunDist",
     "pages/page/cartList/cartList",
     "pages/mallActive/list/list",
     "pages/page/goodsDetails/goodsDetails",
@@ -8,7 +9,6 @@
     "pages/mallActive/batchRalease/batchRalease",
     "pages/page/serStatus/serStatus",
     "pages/mallActive/waitRalease/waitRalease",
-    "pages/mallActive/yunDist/yunDist",
     "pages/page/workIndex/workIndex",
     "pages/mallActive/activityAnalysis/activityAnalysis",
     "pages/mallActive/detailsOfCollection/detailsOfCollection",
