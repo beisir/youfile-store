@@ -15,6 +15,7 @@
 .gd-ins text{color:#999;font-size:26rpx}
 .gd-ins text.lt-text{font-size:28rpx;color:#333}
 .gd-ins view:nth-child(2){line-height: 22rpx}
+.gd-ins view.hasc-a{line-height: 22rpx;color: #F02B2B}
 .gd-gg{color:#333;font-size:28rpx;font-weight:bold;padding:0 40rpx;max-height:350rpx;overflow-y:scroll}
 .gd-gg .gd-view{display:inline-block;text-align:center;margin-right:20rpx}
 .gd-gg .gd-view view{font-size:28rpx;padding:0 15rpx;min-width:90rpx;column-rule-color:#fff;height:50rpx;line-height:50rpx;color:#333;font-weight:normal;background:#fff;border:0;border:2rpx solid #F5F5F5;border-radius:10rpx;margin-top:25rpx}
@@ -25,9 +26,9 @@
 .gd-gg1 .gd-view view{padding:0 30rpx}
 .gd-gg1 .cart-list{margin-top:0rpx;padding-left:0;background:#fff;margin-left:0}
 .gd-details .weui_cells{border-bottom:2rpx solid #F5F5F5}
-.gd-title{font-size:34rpx;color:#333;padding:40rpx 20rpx 20rpx 30rpx;border-radius: 10rpx;margin: 0 20rpx;background: #fff}
+.gd-title{font-size:34rpx;color:#333;padding:40rpx 20rpx 20rpx 30rpx;border-radius: 10rpx;margin: 0 20rpx;background: #fff;position: relative}
 .gd-title view{margin-bottom:10rpx}
-.gd-title view:first-child{position:relative;padding-right:70rpx;word-wrap:break-word;min-height: 90rpx}
+.gd-title view:first-child{position:relative;padding-right:70rpx;word-wrap:break-word;min-height: 90rpx;font-weight: bold}
 .gd-title view:first-child image,.gd-title view:first-child button{width:38rpx;height:38rpx;position:absolute;right:10rpx;top:10rpx;border:0}
 .gd-title view:first-child button{width:60rpx;height:60rpx}
 .gd-title view.gd-font{font-size:30rpx;color:#C7945A}
@@ -37,7 +38,7 @@
 .gd-title .btn{border:0;text-align:right}
 .gd-title view.gd-font .gd-yan{font-size:28rpx;color:#999;margin-left:10rpx}
 .gd-title view.gd-font image{width:40rpx;height:40rpx;vertical-align:middle;margin-top:-4rpx}
-.gd-title button{width:180rpx;border-radius:10rpx;color:#C7945A;border:2rpx solid #C7945A;font-size:24rpx;background:#fff;padding:0;margin-top:0rpx;vertical-align:middle;margin-left:30rpx;line-height:38rpx;float:right}
+.gd-title button{width:180rpx;border-radius:10rpx;color:#C7945A;border:2rpx solid #C7945A;font-size:24rpx;background:#fff;padding:0;margin-top:0rpx;vertical-align:middle;margin-left:0rpx;line-height:38rpx;margin-top: 5rpx;}
 .gd-title .gd-view-n{color:#999999;font-size:28rpx;margin-top:20rpx}
 .gd-title .gd-view-n button{float:left;width:75rpx;margin:0rpx 10rpx 0 0;height:45rpx}
 .gd-title text{color:#C79359;font-size:38rpx;margin-top:20rpx}
@@ -47,7 +48,7 @@
 .weui_cells image{width:40rpx;height:40rpx;margin-top:-4rpx;vertical-align:middle;margin-right:10rpx}
 .weui-view{position:absolute;top:3rpx;right:0rpx}
 .weui-view image{width:40rpx;height:40rpx}
-.weui-view image.img{width:24rpx;height:29rpx;margin-left:15rpx;margin-top:-3rpx}
+.weui-view image.img{width:24rpx;height:29rpx;margin-left:15rpx;margin-top:-3rpx;margin-right: 0}
 .weui-view image.erImg{width:50rpx;height:50rpx;margin-right:0}
 .weui_cells1 .weui-view{right:40rpx}
 .gd-content{text-align:center;color:#333;font-size:30rpx;padding-bottom:80rpx;padding-top:50rpx;border-radius: 10rpx;margin:0 20rpx;background: #fff;padding-left: 20%;padding-right: 20%}
@@ -88,7 +89,7 @@
 .no_stock{height: 100rpx;line-height:100rpx;background: #CCAA77;color: #fff;text-align: center;bottom: 120rpx;font-size: 28rpx;}
 .gd_b_left,.gd_b_right{display:inline-block;width:50%;text-align:center}
 .gd_b_left>view,.gd_b_left>navigator{width:33.3%;position:relative;display:inline-block;color:#888;font-size:20rpx;padding-top:30rpx}
-.gd_b_right{background:#CCAA77;height:120rpx;position:absolute;right:0;top:0;font-size:36rpx;color:#fff;line-height:120rpx}
+.gd_b_right{background:#CCAA77;height:120rpx;position:absolute;right:0;bottom:0;font-size:36rpx;color:#fff;line-height:120rpx}
 .no-cart{background: #DDDDDD;}
 .gd_b_left image{width:40rpx;height:40rpx}
 .mesImage{position:absolute;text-align:center;top:-35rpx;width:100%;height:60rpx;padding:0}
@@ -109,7 +110,7 @@
 .lt-table>.lt-tr .lt-add-cart{top:-10rpx}
 .purch-num{font-size: 24rpx;color: #999;position: absolute;bottom: -3rpx;width: 100%;height: 0rpx;left: 20rpx}
 .jiage-t image{width: 15rpx;vertical-align: middle;margin-right: 2rpx;margin-top: -2rpx;}
-.jiage-tRed{border: 2rpx solid #F55353;color: #F55353;margin: 0 auto;}
+.jiage-tRed{border: 2rpx solid #F02B2B;color: #F02B2B;margin: 0 auto;}
 .lt-tr>view.setCss{line-height:30rpx;width:40%}
 /* .lt-tr>view:last-child{padding-top:20rpx;line-height:60rpx;width:32%} */
 .lt-tr>view.add-xian{text-decoration:line-through}
@@ -132,7 +133,7 @@
 .lt-weui-bottom1 view:last-child{color:#CCAA77;background:none;position:relative;width:57%}
 .lt-weui-bottom1>view{width:40%}
 .lt-weui-bottom1 view>text{left:70rpx}
-.weui_cells1 .skuStr{text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;position:absolute;top:2rpx;left:180rpx;color:#666;font-size:26rpx;width:470rpx;text-align: right}
+.weui_cells1 .skuStr{text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;position:absolute;top:2rpx;left:180rpx;color:#666;font-size:26rpx;width:450rpx;text-align: right}
 .goods-total{bottom:200rpx;border:2rpx solid #CCAA77;color:#CCAA77;font-size:28rpx;font-size:30rpx;padding:10rpx;line-height:1.2}
 .goods-total .gt-ku{line-height:3.5;}
 .goods-total-ku{padding-top: 13rpx;background: #fff;overflow: hidden}
@@ -141,7 +142,7 @@
 .canvasStyle canvas{width:100%;height:100%;margin:1px 0 0 1px;position:relative;z-index:10;}
 .image-back{position: relative;z-index: 10}
 .sale-num{border-top: 2rpx solid #FAFAFA;margin-top: 20rpx;}
-.goods-er{float: right;color: #999;font-size: 26rpx;text-align: right;padding-right:10rpx;margin-top: -35rpx;}
+.goods-er{position: absolute;right:20rpx;bottom: -5rpx}
 .goods-er view:first-child{padding-right: 0rpx;margin-bottom: 50rpx;}
 .goods-er image{width: 50rpx;height: 50rpx;}
 .weui_cells1 .skuStr1{text-align:right}
@@ -153,3 +154,4 @@
 .goods-des{text-align: center;color: 36rpx;font-weight: bold;margin-top: 40rpx;}
 .goods-des>view:last-child{font-size:16rpx;color: #999;font-weight: normal}
 .goods-des>view:first-child{letter-spacing: 10rpx;}
+.cart-list .sale-b{font-weight: normal;color: #999;text-align: center;padding:5rpx 0;width: 350rpx;}

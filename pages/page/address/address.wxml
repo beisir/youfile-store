@@ -99,11 +99,11 @@
           <view class="tr" wx:for="{{item.preOrderGoodsSkuList}}" wx:key="{{index}}" wx:for-item="sku">
             <view class="td">{{sku.skuName}}</view>
             <view class="td">{{sku.num}}件</view>
-            <view class="td price-line" wx:if="{{item.satisfiedWholesale || item.hasActiveGoods}}">{{sku.sellPrice}}</view>
+            <view class="td price-line" wx:if="{{item.satisfiedWholesale || item.hasActiveGoods}}">￥{{sku.sellPrice}}</view>
             <view class="td bold-font td-money">
               <!-- 抢购价 -->
               <view class='td-red' wx:if="{{sku.isActivity}}">
-                <view class="jiage-t jiage-tRed" style='font-size:20rpx'> <image src="/image/ermR.png" mode='widthFix'></image>抢购价</view>
+                <view class="jiage-t jiage-tRed" style='font-size:20rpx'> <image src="/image/ccc.png" mode='widthFix'></image>抢购价</view>
             ￥{{sku.activityPrice}}
               </view>
               <!-- 批发价 -->
@@ -126,7 +126,7 @@
           <view class="tr">
             <view class="td">默认</view>
             <view class="td">{{item.num}}件</view>
-            <view class="td price-line" wx:if="{{item.satisfiedWholesale || item.hasActiveGoods}}">{{item.sellPrice}}</view>
+            <view class="td price-line" wx:if="{{item.satisfiedWholesale || item.hasActiveGoods}}">￥{{item.sellPrice}}</view>
             <view class="td bold-font td-money">
               <!-- 抢购价 -->
               <view class='td-red' wx:if="{{item.hasActiveGoods}}">

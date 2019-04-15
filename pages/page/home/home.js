@@ -5,6 +5,7 @@ import EnterStoreHandler from '../../../utils/enterStoreHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
 import util from '../../../utils/util.js';
 import { handleQRCode } from '../../../utils/scanCode.js';
+var timerList = []
 // 身份判断
 function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
@@ -490,27 +491,20 @@ Page({
         })
       })
   },
-  // 根据时间戳设置倒计时
-  getDjs(time){
-    var _this=this
-    clearInterval(timer)
-    var timer=setInterval(res=>{
-      var data = util.timeStamp(time)
-      if (data.shengyuD == 0 && data.shengyuD == 0 && data.shengyuM == 0 && data.S == 0){
-        _this.onShow()
-      }else{
-        _this.setData({
-          endTime: util.timeStamp(time)
-        })
-      }
-    },1000)
-  },
   // 获取店铺活动列表
   getActiveGoods:function(){
     var _this=this
+    timerList.forEach(el => {
+      clearInterval(el)
+    })
+    timerList = []
     Api.storeActiveGoods().then(res=>{
       var obj = res.obj
-      _this.getDjs(obj[0].endTime)
+      if(obj.length>0){
+      for(var i=0;i<obj.length;i++){
+        this.timerhandle(obj[i].timeSeconds, i, 'doing')
+      }
+      }
       if (obj){
         _this.setData({
           avtiveGoods:obj,
@@ -522,6 +516,29 @@ Page({
       }
     })
   },
+  timerhandle(timeSeconds, index, type) {
+    let dataName = 'timerList'
+    if (timeSeconds) {
+      this.setData({
+        [dataName + '[' + index + ']']: [parseInt(timeSeconds / 86400), parseInt(timeSeconds / 60 / 60 % 24), parseInt(timeSeconds / 60 % 60), parseInt(timeSeconds % 60)]
+      })
+      let timer = setInterval(() => {
+        timeSeconds--
+        if (timeSeconds <= 0) {
+          clearInterval(timer)
+        }
+        this.setData({
+          [dataName + '[' + index + ']']: [parseInt(timeSeconds / 86400), parseInt(timeSeconds / 60 / 60 % 24), parseInt(timeSeconds / 60 % 60), parseInt(timeSeconds % 60)]
+        })
+      }, 1000)
+      timerList.push(timer)
+    } else {
+      this.setData({
+        [dataName + '[' + index + ']']: ['00', '00', '00', '00']
+      })
+    }
+  },
+
   // 获取高度
   getHeight(result){
     var that = this;
@@ -597,12 +614,26 @@ Page({
     }
   },
   // 获取活动商品
-  getActiveList() {
+  getActiveList(){
     var _this=this
     Api.storeIndexAGoods({ activityNumber:this.data.activityNumber}).then(res=>{
       var detailList = res.obj.result,
         totalCount = res.obj.totalCount
       if (Api.isNotEmpty(detailList)) {
+        if (detailList.length>0){
+          detailList.forEach(el => {
+            if (el.extInfo) {
+              let stockNum = el.extInfo.PRIORITY_SALES_PROMOTION.stockNum,
+                salesNum = el.extInfo.PRIORITY_SALES_PROMOTION.salesNum
+              if (!stockNum || stockNum == 0) {
+                el.salepercent = 100
+              } else {
+                let all = salesNum + stockNum
+                el.salepercent = parseInt(salesNum / all)
+              }
+            }
+          })
+        }
         var datas = _this.data.activeResult,
           newArr = app.pageRequest.addDataList(datas, detailList)
         _this.setData({
@@ -611,32 +642,7 @@ Page({
       }
     })
   },
-  //倒计时
-  timerhandle(timeSeconds, index) {
-    if (timeSeconds) {
-      this.setData({
-        ['timerList[' + index + ']']: [parseInt(timeSeconds / 60 / 60 % 24), parseInt(timeSeconds / 60 % 60), parseInt(timeSeconds % 60)]
-      }, () => {
-        let timer = setInterval(() => {
-          timeSeconds--
-          if (timeSeconds <= 0) {
-            clearInterval(timer)
-          }
-          this.setData({
-            ['timerList[' + index + ']']: [parseInt(timeSeconds / 60 / 60 % 24), parseInt(timeSeconds / 60 % 60), parseInt(timeSeconds % 60)]
-          })
-        }, 1000)
-        let ll = this.data.allTimerList
-        ll.push(timer)
-        this.setData({ allTimerList: ll })
-      })
-    } else {
-      this.setData({
-        ['timerList[' + index + ']']: ['00', '00', '00']
-      })
-    }
 
-  },
     /**
    * 生命周期函数--监听页面加载
    */

@@ -44,7 +44,20 @@
       </block>
     </swiper>
     <!-- 活动条 -->
-    <goodsActivityBinding position="1" activityShowInfo="{{activityData}}" />
+        <view class='active-g'  wx:if='{{goodsInfo.isActivity}}'>
+          <view>￥
+            <text>{{goodsInfo.activityPrice}}</text>
+            <text>￥{{goodsInfo.sellPrice}}</text>
+          </view>
+          <view>
+            <view>{{activeMes}}</view>
+            {{timerList[0][0]}}天
+            <text>{{timerList[0][1]}}</text> :
+            <text>{{timerList[0][2]}}</text> :
+            <text>{{timerList[0][3]}}</text>
+          </view>
+        </view>
+    <!-- <goodsActivityBinding position="1" activityShowInfo="{{activityData}}" /> -->
   </view>
   <view class='gd-details'>
     <view class='gd-title' wx:if='{{limitShow==1}}'>
@@ -56,9 +69,11 @@
       <view class='gd-font gd-font2'>零售价：
         <text style='color:#333'>￥{{goodsInfo.sellPrice}}</text>
       </view>
-      <view class='gd-font'>批发价：
-        <image src='/image/wh.png'></image>
+      <view class='gd-font'>
         <button bindtap='addTip'>享受批发价</button>
+      </view>
+      <view class='goods-er'>
+        <image src="/image/er.png"></image>
       </view>
     </view>
     <view class='gd-title' wx:if='{{limitShow!=1}}'>
@@ -68,25 +83,18 @@
           <image src="/image/fx.png"></image>
         </button>
       </view>
-      <view class='goods-er'>
-        <view>北京</view>
-        <image src="/image/er.png"></image>
-      </view>
       <view class='gd-font gd-font2'>零售价：￥{{goodsInfo.sellPrice}}</view>
-      <view class='gd-font'>批发价：
-        <text>￥{{goodsInfo.wholesalePrice}}</text>
-        <!-- <button wx:if='{{saleBatchNum!=0}}' class='btn'>
-          <text>{{saleBatchNumGoods ==0?saleBatchNum:saleBatchNumGoods}}</text>件起批</button> -->
+      <view class='gd-font'>批发价：￥{{goodsInfo.wholesalePrice}}
       </view>
-      <!-- <view class='gd-view-n' wx:if='{{saleBatchAmount==0}}' style='min-height:50rpx'>
-        <button>混批</button>
-      </view> -->
       <view class='sale-num' wx:if='{{saleBatchNum!=0 || saleBatchAmount!=0}}'></view>
       <view class='gd-view-n' wx:if='{{saleBatchNum!=0}}'>
         <button>起批</button>每单满{{saleBatchNumGoods ==0?saleBatchNum:saleBatchNumGoods}}件起批
       </view>
       <view class='gd-view-n' wx:if='{{saleBatchAmount!=0}}'>
         <button>混批</button>全场满￥{{saleBatchAmount}}元可混批
+      </view>
+      <view class='goods-er'>
+        <image src="/image/er.png"></image>
       </view>
     </view>
     <view class="weui_cells weui_cells1" bindtap='showAlert'>
@@ -100,9 +108,6 @@
     <!-- 购买记录 -->
     <view wx:if='{{histtory.length>0}}' class="weui_cells weui_cells1 buy-view">
       <text class="store-address">购买记录 </text>
-      <view class='skuStr'>已有
-        <text>3840</text> 人购买，商品共销售
-        <text>4769</text> 份</view>
       <view class='b-view'>
         <view wx:for='{{histtory}}' wx:key='index' wx:if='{{index<10}}'>
           <image class='img' src="{{baseUrl}}{{item.headPic}}"></image>
@@ -209,7 +214,7 @@
       <view class='gd-alert' animation='{{animationData}}'>
         <!-- 判断满足条件 -->
         <view class='new-man' wx:if='{{!discountShow}}'>
-          <text>已享受批发价，共优惠<text>{{difference}}</text>元</text>{{hasActiveGoods?'(不包含活动商品)':''}}
+          <text>已享受批发价，共优惠<text>{{difference}}</text>元</text>{{goodsInfo.isActivity?'(不包含活动商品)':''}}
         </view>
         <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount==0}}'>
           <text wx:if='{{differNum==0}}'>本店满<text>{{saleBatchNum}}</text>件可享受批发价</text>
@@ -255,6 +260,7 @@
                   <image src="/image/add.png"></image>
                 </view>
               </view>
+              <view class='sale-b' wx:if='{{goodsInfo.isActivity}}'>起购量：{{goodsInfo.saleBatch}}</view>
             </view>
           </view>
         </block>
@@ -347,7 +353,8 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{goodsInfo.name}}</view>
-            <view>￥{{goodsInfo.sellPrice}}</view>
+            <view class='hasc-a' wx:if='{{goodsInfo.isActivity}}'>抢订价：￥{{goodsInfo.sellPrice}}</view>
+            <view wx:else>￥{{goodsInfo.sellPrice}}</view>
             <text>库存：{{goodsInfo.stockNum}}件</text>
           </view>
         </view>
@@ -377,16 +384,16 @@
           <text>购买数量</text>
           <view class='cart-list gd-cart-list'>
             <view class="cart-count-box">
-              <text class="cart-count-down" bindtap="minusCount">
+              <text class="cart-count-down" bindtap="addCount" data-index="0"   data-sign='reduce'>
                   <text wx:if="{{numbers!=0}}" class='ct-xian'></text>
               <text wx:if="{{numbers==0}}"><text class='ct-xian ct-xian1'></text></text>
               </text>
               <text class="cart-count-num">{{numbers}}</text>
-              <view class="cart-count-add" bindtap="addCount" data-index="0"  bindtap="addCount" data-sign='add'>
+              <view class="cart-count-add" bindtap="addCount" data-index="0"   data-sign='add'>
                 <image src="/image/add.png"></image>
               </view>
-              <view class='qiGou' wx:if='{{hasActiveGoodsClick}}'>起购量：{{ goodsInfo.saleBatch}}</view>
-              <view class='qiGou' wx:if='{{goodsSpecificationVOList.length==0 && goodsInfo.hasActiveGoods}}'>起购量：{{ goodsInfo.saleBatch}}</view>
+              <view class='qiGou' wx:if='{{isActivity}}'>起购量：{{ goodsInfo.saleBatch}}</view>
+              <view class='qiGou' wx:if='{{goodsSpecificationVOList.length==0 && goodsInfo.isActivity}}'>起购量：{{ goodsInfo.saleBatch}}</view>
             </view>
           </view>
         </view>
@@ -397,7 +404,7 @@
       </view>
     </view>
   </view>
-    <!-- 进货车 有规格 -->
+    <!-- 有规格 -->
   <view wx:if='{{limitShow==4}}'>
     <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>

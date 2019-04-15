@@ -6,9 +6,9 @@
   </view>
 </mes>
 <view wx:if="{{result.length>0}}" class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{result}}" wx:key="">
-  <view class='content st-cont' data-index="{{index}}">
-      <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" type="success" wx:if="{{item.selected}}" size="28" color="#CCAA77" />
-      <icon data-id='{{item.goodsVO.id}}' data-index="{{index}}" bindtap="selectList" wx:else type="circle" size="28" />
+  <view  data-id='{{item.goodsVO.id}}'  bindtap="selectList" class='content st-cont' data-index="{{index}}">
+      <icon type="success" wx:if="{{item.selected}}" size="28" color="#CCAA77" />
+      <icon wx:else type="circle" size="28" />
       <view class='g-cont'>
         <view class='g-image'>
           <image wx:if="{{item.goodsVO.mainImgUrl}}" src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>

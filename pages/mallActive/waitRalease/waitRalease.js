@@ -31,10 +31,22 @@ Page({
   * 生命周期函数--监听页面显示
   */
   onShow: function () {
-    if (this.data.loadData){
-      this.initData()
-      this.getDetails(this.data.activityNumber)
-      this.getGoodsList(this.data.activityNumber)
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1]
+    if (currPage.data.status) {
+      this.setData({
+        tabSwitch: 1,
+        releaseStatus: "release"
+      },function(){
+        this.initData()
+        this.getGoodsList(this.data.activityNumber)
+      })
+    }else{
+      if (this.data.loadData) {
+        this.initData()
+        this.getDetails(this.data.activityNumber)
+        this.getGoodsList(this.data.activityNumber)
+      }
     }
   },
 

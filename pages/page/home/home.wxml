@@ -170,10 +170,10 @@
       <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>正在抢订</view>
       <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>全部商品</view>
       <view class='stop-time'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
-        距结束{{endTime.shengyuD}}天
-        <text>{{endTime.shengyuH}}</text> :
-        <text>{{endTime.shengyuM}}</text> :
-        <text>{{endTime.S}}</text>
+        距结束{{timerList[currentTabActive][0]}}天
+        <text>{{timerList[currentTabActive][1]}}</text> :
+        <text>{{timerList[currentTabActive][2]}}</text> :
+        <text>{{timerList[currentTabActive][3]}}</text>
       </view>
     </view>
   </view>
@@ -200,7 +200,7 @@
   </view>
   <!-- 活动商品 -->
   <view wx:else class="swiper-tab active-nav" id='swiper-tab'>
-    <view wx:for="{{avtiveGoods}}" wx:key="{{index}}" class="swiper-tab-item {{currentTabActive==index ? 'on' : ''}}" data-current="{{index}}" data-number="{{item.activityNumber}}" bindtap="swichNavActive">{{item.activityName}}
+    <view wx:for="{{avtiveGoods}}" wx:key="{{index}}" class="swiper-tab-item {{currentTabActive==index ? 'on' : ''}}" data-current="{{index}}" data-number="{{item.activityNumber}}" bindtap="swichNavActive">{{item.activityAbbr}}
       <view></view>
     </view>
   </view>
@@ -221,9 +221,9 @@
         </view>
         <view class='dc-xian'>
           <view>
-            <view></view>
+            <view style='width:{{item.salepercent}}%'></view>
           </view>
-          <text>已抢50%</text>
+          <text>已抢{{item.salepercent}}%</text>
         </view>
       </view>
       <view wx:if="{{item.isHide}}" class='isHideacti'>
@@ -267,7 +267,7 @@
       <view class='flex-boxx'>
         <view class="result-list" wx:for="{{result}}" wx:key="index" id='{{index==0?"result-list":""}}'>
           <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" />
-          <view wx:if='{{item.isHide}}' class='isHideGoods'>
+          <view wx:if='{{item.isHide}}' class='isHideGoods' bindtap='addTip'>
             <image src="/image/isshow.png"></image>
             <view>该商品</view>
             <view>加商友可见</view>

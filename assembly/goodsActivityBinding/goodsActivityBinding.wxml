@@ -11,7 +11,9 @@
           </view>
           <view>
             <view>距结束还有</view>
-            <text>{{item.beginDate}} </text>
+            <text>{{timerList[0][1]}}</text> :
+            <text>{{timerList[0][2]}}</text> :
+            <text>{{timerList[0][3]}}</text>
           </view>
         </view>
       </block>

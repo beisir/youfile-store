@@ -50,6 +50,23 @@ Page({
       .then(res => {
         var obj = res.obj.result,
           totalCount = res.obj.totalCount
+        if (obj.length > 0) {
+          obj.forEach(el => {
+            if (el.extInfo){
+              el.isHaveActive=true
+              let stockNum = el.extInfo.PRIORITY_SALES_PROMOTION.stockNum,
+                salesNum = el.extInfo.PRIORITY_SALES_PROMOTION.salesNum
+              if (!stockNum || stockNum == 0) {
+                el.salepercent = 100
+              } else {
+                let all = salesNum + stockNum
+                el.salepercent = parseInt(salesNum / all)
+              }
+            }else{
+              el.isHaveActive = false
+            }
+          })
+        }
         var datas = _this.data.result,
           newArr = app.pageRequest.addDataList(datas, obj)
         _this.setData({

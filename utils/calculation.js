@@ -1,52 +1,48 @@
 import Api from './api.js'
 class Calculation {
   // 添加商品数量，判断活动商品是否超出库存
-  selectedSkuNum(obj, value, isTrue) {
+  selectedSkuNum(obj, value, isTrue,type) {
     // isTrue为true代表减
     var isActivity = obj.isActivity //判断是否是活动商品
     var stockNum = obj.stockNum
+    var saleStockNum = obj.saleStockNum
     var saleBatch = obj.saleBatch
-    // 判断修改的数量是否超出库存
-    if (value >= stockNum) {
-      if (isActivity) {
-        if (saleBatch > stockNum) {
-          obj.num = 0
-          // Api.showToast("库存小于起购量！")
-        } else {
-          if (value >= stockNum) {
-            obj.num = stockNum
-          } else {
-            obj.num = value
-          }
-        }
+    if (isActivity){
+      if (value >= saleStockNum) {
+        obj.num = saleStockNum
+        Api.showToast("活动库存不足！")
       } else {
-        obj.num = stockNum
-      }
-    } else {
-      // 判断是否有活动SKU
-      if (isActivity) {
-        // 判断数量不能小于起购量
-        if (saleBatch > stockNum) {
-          // 如果起购量大于库存 数量为0 不能购买
-          obj.num = 0
+        if (isTrue) {
+          if (type =="cart"){
+            obj.num = saleBatch
+          }else{
+            obj.num = 0
+          }
         } else {
-          if (value >= saleBatch) {
-            obj.num = value
-          } else {
-            if (isTrue) {
-              obj.num = 0
+          obj.num = saleBatch
+        }
+      }
+    }else{
+      if (value >= stockNum) {
+        obj.num = stockNum
+        Api.showToast("库存不足！")
+      } else {
+        obj.num = value
+        if (isTrue) {
+          if (value<0){
+            if (type == "cart") {
+              obj.num = 1
             } else {
-              obj.num = saleBatch
+              obj.num = 0
             }
           }
         }
-      } else {
-        obj.num = value
       }
     }
     return obj
   }
   /**
+   * 
   * 计算总价
   */
   getTotalPrice(goodsSpecificationVOList, spectArrDifference, code, swichNav, saleBatchAmount, saleBatchNum, saleBatchNumGoods, goodsInfo){
