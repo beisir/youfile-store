@@ -40,7 +40,7 @@
 .record .cart-list{width:100%}
 .cart-list{height:auto}
 .record{display:flex;flex-direction:row;align-items:center;width:100%;height:230rpx;position:absolute;justify-content:space-between;background-color:#fff}
-.ct-text {right: 35rpx;}
+.ct-text {right: 35rpx;right: unset;text-align: left}
 .ct-text1-active{color: #F02B2B}
 .lostcarts-table{padding-left:20rpx;padding-right: 20rpx;}
 .cart-list .table{width:144%;position:relative;background:#fff;margin-left:-260rpx;margin-top:30rpx;padding-left:30rpx;padding-right:60rpx;border-bottom: 2rpx solid #EBEBEB}

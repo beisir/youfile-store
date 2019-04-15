@@ -39,25 +39,25 @@
                   <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}">
                     <image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image>
                   </navigator>
+                   <view style='width:270rpx' data-id='{{item.goodsId}}' bindtap="lookDetails" class='ct-title ct-title1'>{{item.goodsName}}
                   <block wx:if='{{item.isActivity}}'>
                     <block wx:if='{{item.shoppingCartSkuList.length==1}}'>
-                      <view class='ct-text ct-text1-active'  data-id='{{item.goodsId}}' bindtap="lookDetails">抢订价：￥{{item.shoppingCartSkuList[0].activityPrice}}</view>
-                    <view class='ct-text' style='top:70rpx'>起购量：{{item.shoppingCartSkuList[0].saleBatch}}</view>
+                      <view class='ct-text ct-text1-active'  data-id='{{item.goodsId}}' bindtap="lookDetails"><view class="jiage-t jiage-tRed" style='font-size:20rpx'>
+                            <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>￥{{item.shoppingCartSkuList[0].activityPrice}}</view>
+                    <!-- <view class='ct-text' style='top:70rpx'>起购量：{{item.shoppingCartSkuList[0].saleBatch}}</view> -->
                     </block>
                     <block  wx:if='{{item.shoppingCartSkuList==null}}' >
-                      <view class='ct-text ct-text1-active' data-id='{{item.goodsId}}' bindtap="lookDetails">抢订价：￥{{item.activityPrice}}</view>
-                    <view class='ct-text' style='top:70rpx'>起购量：{{item.saleBatch}}</view>
+                      <view class='ct-text ct-text1-active' data-id='{{item.goodsId}}' bindtap="lookDetails"><view class="jiage-t jiage-tRed" style='font-size:20rpx'>
+                            <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>￥{{item.activityPrice}}</view>
+                    <!-- <view class='ct-text' style='top:70rpx'>起购量：{{item.saleBatch}}</view> -->
                     </block>
                   </block>
                   <block wx:else>
-                     <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList==null}}' data-id='{{item.goodsId}}' bindtap="lookDetails">￥{{item.sellPrice}}</view>
-                  <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList!=null}}' data-id='{{item.goodsId}}' bindtap="lookDetails">￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
-                  <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}' data-id='{{item.goodsId}}' bindtap="lookDetails">￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
-                  <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList!=null}}' data-id='{{item.goodsId}}' bindtap="lookDetails">￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
+                     <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList==null}}' data-id='{{item.goodsId}}' bindtap="lookDetails"><view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.sellPrice}}</view>
+                  <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList!=null}}' data-id='{{item.goodsId}}' bindtap="lookDetails"><view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
+                  <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}' data-id='{{item.goodsId}}' bindtap="lookDetails"><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
+                  <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList!=null}}' data-id='{{item.goodsId}}' bindtap="lookDetails"><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
                   </block>
-                 
-                  <view style='width:270rpx' data-id='{{item.goodsId}}' bindtap="lookDetails" class='ct-title ct-title1'>{{item.goodsName}}
-
                   </view>
                   <view class="cart-pro-name cart-pro-name1" wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" bindtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record" wx:key="{{index}}">规格：{{record.skuName}}
                     <image class='down' src="/image/down.png"></image>

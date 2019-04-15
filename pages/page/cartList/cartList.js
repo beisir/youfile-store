@@ -253,6 +253,9 @@ Page({
               if (extInfo.length > 0) {
                 var standardGoodsSkuPromotions = extInfo[0].standardGoodsSkuPromotions
                 v.isActivity = true
+                v.saleBatch = extInfo[0].batchNum
+                v.saleStockNum = extInfo[0].stockNum
+                v.activityPrice = extInfo[0].activityPrice
                 if (standardGoodsSkuPromotions) {
                   var goodsSkuVOList = v.shoppingCartSkuList
                   for (var val of goodsSkuVOList) {
@@ -262,15 +265,10 @@ Page({
                         val.saleBatch = k.batchNum
                         val.saleStockNum = k.stockNum
                         val.activityPrice = k.activityPrice
-                      }else{
-                        val.isActivity = false
                       }
                     }
                   }
                 }
-                v.saleBatch = extInfo[0].batchNum
-                v.saleStockNum = extInfo[0].stockNum
-                v.activityPrice = extInfo[0].activityPrice
               } else {
                 v.isActivity = false
               }

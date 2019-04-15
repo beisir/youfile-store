@@ -105,7 +105,7 @@
 .lt-table{color:#666;font-weight:normal;height:400rpx;overflow:scroll;height:350rpx;margin-bottom:150rpx;margin-top:10px}
 .lt-tr{position:relative;border-bottom: 2rpx solid #F7F7F7;padding-bottom: 40rpx}
 .lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:60rpx;position: relative;padding:10rpx 0}
-.jiage-t{border: 2rpx solid #CCAA77;padding: 0 5rpx;color:#CCAA77;height: 30rpx;line-height: 30rpx;border-radius: 10rpx;width: 90rpx;margin: 0 auto;}
+.ct-text1  .jiage-t,.jiage-t{border: 2rpx solid #CCAA77;padding: 0 5rpx;color:#CCAA77;height: 30rpx;line-height: 30rpx;border-radius: 10rpx;width: 90rpx;margin: 0 auto;text-align: center}
 .lt-table>.lt-tr{padding-bottom: 20rpx}
 .lt-table>.lt-tr .lt-add-cart{top:-10rpx}
 .purch-num{font-size: 24rpx;color: #999;position: absolute;bottom: -3rpx;width: 100%;height: 0rpx;left: 20rpx}
