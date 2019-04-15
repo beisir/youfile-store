@@ -312,7 +312,6 @@ Page({
             }
           }
         }
-        console.log(effectiveList)
         if (failureList.length > 0) {
           _this.setData({
             lostList: true,

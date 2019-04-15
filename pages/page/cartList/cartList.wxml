@@ -39,7 +39,7 @@
                   <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}">
                     <image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image>
                   </navigator>
-                   <view style='width:300rpx'  class='ct-title ct-title1'>{{item.goodsName}}
+                  <view style='width:300rpx'  class='ct-title ct-title1'>{{item.goodsName}}
                   <block wx:if='{{item.isActivity}}'>
                     <!-- <block wx:if='{{item.shoppingCartSkuList.length==1}}'>
                       <view class='ct-text ct-text1-active' style='right:20rpx;top:42rpx;'  data-id='{{item.goodsId}}' catchtap="lookDetails"><view class="jiage-t jiage-tRed" style='font-size:20rpx'>
@@ -48,14 +48,13 @@
                     <block  wx:if='{{item.shoppingCartSkuList==null}}' >
                       <view class='ct-text ct-text1-active'><view class="jiage-t jiage-tRed" style='font-size:20rpx'>
                             <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>￥{{item.activityPrice}}</view>
-                    <!-- <view class='ct-text' style='top:70rpx'>起购量：{{item.saleBatch}}</view> -->
                     </block>
                   </block>
                   <block wx:else>
-                     <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList==null}}' data-id='{{item.goodsId}}' catchtap="lookDetails"><view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.sellPrice}}</view>
-                  <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList!=null}}' data-id='{{item.goodsId}}' catchtap="lookDetails"><view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
-                  <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}' data-id='{{item.goodsId}}' catchtap="lookDetails"><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
-                  <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList!=null}}' data-id='{{item.goodsId}}' catchtap="lookDetails"><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
+                     <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList==null}}'><view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.sellPrice}}</view>
+                  <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList!=null}}'><view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
+                  <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}'><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
+                  <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList!=null}}'><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
                   </block>
                   </view>
                   <view class="cart-pro-name cart-pro-name1" wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" catchtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record" wx:key="{{index}}">规格：{{record.skuName}}
@@ -142,9 +141,9 @@
                     <view catchtap="addCount" data-sign="add"  class='{{item.num==item.shoppingCartSkuList[0].stockNum? "classFontAdd": ""}} ' data-index="{{index}}">+</view>
                   </view>
                   <view class="cc-coun-new" wx:if="{{item.shoppingCartSkuList==null}}" wx:for-item="record">
-                    <view catchtap="addCountNew" data-sign="reduce" data-obj="{{obj}}" class='{{item.num==1? "classFont": ""}} ' data-index="{{index}}">-</view>
+                    <view bindtap="addCountNew" data-sign="reduce" data-obj="{{obj}}" class='{{item.num==1? "classFont": ""}} ' data-index="{{index}}">-</view>
                     <input class='cc-add ' data-sign="input" type='number ' data-index="{{index}}" bindblur='addCountNew' value='{{item.num}} '></input>
-                    <view catchtap="addCountNew" data-sign="add" class='{{item.num==item.stockNum? "classFontAdd": ""}} ' data-index="{{index}}">+</view>
+                    <view bindtap="addCountNew" data-sign="add" class='{{item.num==item.stockNum? "classFontAdd": ""}} ' data-index="{{index}}">+</view>
                   </view>
                 </view>
               </view>

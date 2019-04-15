@@ -953,7 +953,6 @@ Page({
             numbers: goodsInfo.num,
           })
         }
-      
     }
   },
   // 判断选中的SKU
@@ -983,7 +982,11 @@ Page({
               num++
               this.selectedSkuNum(goodsSkuVOList[i], num)
             }
-
+            goodsInfo.isActivity = goodsSkuVOList[i].isActivity
+            this.setData({
+              numbers: goodsSkuVOList[i].num,
+              goodsInfo: goodsInfo
+            })
           }
           goodsInfo.isActivity = goodsSkuVOList[i].isActivity
           this.setData({
@@ -1009,7 +1012,6 @@ Page({
               num++
               this.selectedSkuNum(goodsSkuVOList[i], num)
             }
-            
           }
           goodsInfo.isActivity = goodsSkuVOList[i].isActivity
           this.setData({
