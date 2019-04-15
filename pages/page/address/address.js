@@ -77,14 +77,21 @@ Page({
           obj.goodsId = item.goodsId;
           obj.num = item.num;
           obj.skuCode = item.skuCode;
+          if (item.isActivity){
+            obj.activityNumber = item.standardGoodsSkuPromotions[0].activityNumber
+          }
           goodsArr.push(obj);
         })
       }else{
-        goodsArr.push({
+        let newObj = {
           goodsId: el.goodsId,
           num: el.num,
           skuCode: 0
-        });
+        }
+        if (el.hasActiveGoods){
+          newObj.activityNumber = el.promotions.SALES_PROMOTION[0].activityNumber
+        }
+        goodsArr.push(newObj);
       }
     })
     if (this.data.invoice){
