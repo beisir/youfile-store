@@ -1,5 +1,6 @@
 {
   "navigationBarTitleText": "分销记录",
   "navigationBarTextStyle": "white",
-  "navigationBarBackgroundColor": "#CCAA77"
+  "navigationBarBackgroundColor": "#CCAA77",
+  "backgroundColor": "#CCAA77"
 }

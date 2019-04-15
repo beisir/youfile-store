@@ -4,7 +4,7 @@
 .dr-cont{font-size: 30rpx;font-weight: bold}
 .dr-cont view{font-size: 24rpx;color: #666;margin-top: 10rpx;font-weight: normal}
 .listData>view button{position: absolute;right: 40rpx;color: #CCAA77;background: #fff;border-radius:50rpx;height: 50rpx;line-height: 48rpx;width: 120rpx;text-align: center;font-size: 24rpx;border: 2rpx solid #CCAA77;padding: 0}
-.dr-list{background: #fff;min-height: 1000rpx;}
+.dr-list{background: #fff;min-height: 1000rpx;margin:0 20rpx;border-radius:10rpx;}
 .dr-date{overflow: hidden;zoom: 1;padding: 40rpx 60rpx}
 .dr-date button{height: 50rpx;background: #fff;border-radius: 20rpx;width: 135rpx;float:left;line-height: 48rpx;font-size: 24rpx;border: 2rpx solid #F1F1F1;color: #999;margin-right: 15rpx;}
 .dr-date button.active{border: 2rpx solid #CCAA77;color: #CCAA77}
@@ -14,5 +14,6 @@
 .dr-data{margin-top: 40rpx;}
 .dr-data>view,.dr-data>navigator{border-top: 2rpx solid #EFEFEF;font-size: 26rpx;color: #999;display: flex;align-items: center;padding: 30rpx 60rpx;position: relative}
 .dr-data image{width: 40rpx;height: 40rpx;vertical-align: middle}
-.dr-data .dr-dName{font-size: 26rpx;color: #000;font-weight: bold;margin-bottom: 20rpx;width: 400rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
+.dr-data .dr-dName{font-size: 28rpx;color: #000;font-weight: bold;margin-bottom: 10rpx;width: 400rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
 .dr-right{position: absolute;right: 60rpx}
+.gold-font{color: #ca7}
