@@ -37,6 +37,9 @@ Page({
         _this.initData()
       })
     }
+    this.setData({
+      nowIndex: options.index ? options.index:6
+    })
   },
 
   /**
