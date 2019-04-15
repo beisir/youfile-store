@@ -22,7 +22,7 @@ Page({
         url: '../detailsOfCollection/detailsOfCollection?paymentNumber=' + paymentNumber,
       })
     }else{
-      Api.showToast("线下交易没有收款明细哦！")
+      Api.showToast("其他支付方式没有收款明细哦～")
     }
   },
   /** 
