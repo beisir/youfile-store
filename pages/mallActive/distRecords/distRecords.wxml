@@ -2,8 +2,8 @@
 <view class='dr-back'></view>
 <view class='listData'>
   <view>
-    <view class='dr-pic dr-pic1'>
-      <image src="{{baseUrl}}{{userDetails.headPic}}"></image>
+    <view class='dr-pic {{nowIndex==0?"dr-pic1":""}} {{nowIndex==1?"dr-pic2":""}} {{nowIndex==2?"dr-pic3":""}}'>
+      <image wx:if="{{userDetails.headPic}}" src="{{baseUrl}}{{userDetails.headPic}}"></image>
     </view>
     <view class='dr-cont'>
       {{userDetails.userName}}

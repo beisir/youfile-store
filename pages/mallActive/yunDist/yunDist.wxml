@@ -30,7 +30,7 @@
   </view>
   <view class='yd-datas'>
     <view class='yd-purch'>共{{totalCount}}个进货商</view>
-    <navigator wx:for="{{result}}" wx:key='index' url="../distRecords/distRecords?userId={{item.userId}}" class='yd-pList'>
+    <navigator wx:for="{{result}}" wx:key='index' url="../distRecords/distRecords?userId={{item.userId}}&index={{index}}" class='yd-pList'>
       <view class='dr-pic dr-pic1' wx:if='{{index==0}}'>
         <image src='{{baseUrl}}{{item.headPic}}'></image>
       </view>
