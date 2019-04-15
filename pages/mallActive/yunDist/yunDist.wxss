@@ -2,14 +2,13 @@
 .dr-pic{margin: 0}
 .dr-back{height: 300rpx;}
 .listData>view{margin-top: 90rpx;}
-.yd-top{position: relative;width: 100%;padding-top: 95rpx;padding-bottom: 20rpx;}
+.yd-top{position: relative;width: 100%;padding-top: 95rpx;padding-bottom: 10rpx;}
 .yd-top>view{text-align: center;}
 .yd-top>view:first-child{height: 150rpx;width: 150rpx;border-radius: 20rpx;box-shadow: 5rpx 0 20rpx rgb(177, 175, 175);overflow: hidden;position: absolute;left: 50%;margin-left:-75rpx;top: -80rpx;background: #fff}
 .yd-top>view image{width: 150rpx;height: 150rpx;}
-.yd-top>view:nth-child(2){font-weight: bold;font-size: 40rpx;margin-bottom: 30rpx;}
+.yd-top>view:nth-child(2){font-weight: bold;font-size: 40rpx;margin-bottom: 20rpx;}
 .yd-top>view:nth-child(3){font-size: 26rpx;color: #666;display: flex;align-items: center;justify-content: space-around;width: 200rpx;margin: 0 auto;padding-left: 32rpx;}
-.yd-top>view.yd-m{font-size: 80rpx;color: #BB7916;font-weight: bold}
-.yd-data{margin-top: 40rpx;}
+.yd-top>view.yd-m{font-size: 80rpx;color: #BB7916;font-weight: bold;line-height: 1;margin:20rpx 0 30rpx;}
 .yd-data>view{display: inline-block;width: 33.3%;font-size: 26rpx;color: #666;position: relative}
 .yd-data>view view{font-size: 40rpx;color: #CCAA77}
 .yd-xian{width: 2rpx;height:36rpx;background: #F5F5F5;position: absolute;right: 0;top: 50%;margin-top:-18rpx;}
