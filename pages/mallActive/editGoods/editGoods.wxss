@@ -26,7 +26,7 @@ page{height: 100%;display: flex;flex-direction: column;overflow: hidden;}
 .fra-self input{height: 60rpx;line-height: 60rpx;width: 240rpx;border: 2rpx solid #E6E6E6;border-radius: 10rpx;display: inline-block;vertical-align: middle;margin-right: 20rpx;padding-left: 20rpx;}
 .fra-goods{font-size: 28rpx;}
 .fra-goods text{color: #CCAA77;height: 70rpx;line-height: 70rpx;}
-.frame .add-cont{flex: 1;overflow: scroll;margin:0;padding-bottom: 20rpx;}
+.frame .add-cont{flex: 1;margin:0;padding-bottom: 20rpx;}
 .frame .add-cont>view{margin:0 50rpx;margin-top: 20rpx;}
 .frame .g-cont>view view{font-size: 26rpx;color: #333;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;width: 470rpx;}
 .frame .g-cont{padding-top: 20rpx;padding-left: 20rpx;}

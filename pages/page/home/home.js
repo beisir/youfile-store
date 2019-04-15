@@ -56,8 +56,8 @@ Page({
     copyGoods: false,
     openStore: false,
     tipIndex: 0,
-    tabSwitch: "0",
-    tabSwitchShow:true,
+    tabSwitch: "1",
+    tabSwitchShow:false,
     avtiveGoods:[]
   },
   // 切换抢购商品
@@ -505,7 +505,7 @@ Page({
         this.timerhandle(obj[i].timeSeconds, i, 'doing')
       }
       }
-      if (obj){
+      if (obj[0]){
         _this.setData({
           avtiveGoods:obj,
           activeResult:[],
@@ -513,7 +513,19 @@ Page({
         },function(){
           _this.getActiveList()
         })
-      }
+      }else{
+        // 清空
+        _this.setData({
+          avtiveGoods:[],
+          activeResult:[],
+          activityNumber: ''
+        })
+        // 切换到全部商品
+        this.setData({
+          tabSwitchShow: false,
+          tabSwitch: 1
+        })
+      }  
     })
   },
   timerhandle(timeSeconds, index, type) {

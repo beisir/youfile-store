@@ -1,1 +1,2 @@
 @import '../serStatus/serStatus';
+.result-list .result-text{min-height: 77rpx}

@@ -1126,7 +1126,7 @@ function activeDetails(data) {
 发布活动商品
  */
 function releaseGoods(data) {
-  return app.http.getRequest(releaseGoodsUrl, data)
+  return app.http.postRequest(releaseGoodsUrl, data)
 }
 //添加商品
 function addActiveGoods(data) {

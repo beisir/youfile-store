@@ -14,12 +14,24 @@ class Calculation {
       } else {
         if (isTrue) {
           if (type =="cart"){
-            obj.num = saleBatch
+            if (value==0){
+              obj.num = 1
+            }else{
+              obj.num = value
+            }
           }else{
-            obj.num = 0
+            if (value >= saleBatch) {
+              obj.num = value
+            } else {
+              obj.num = 0
+            }
           }
         } else {
-          obj.num = saleBatch
+          if (value >= saleBatch){
+            obj.num = value
+          }else{
+            obj.num = saleBatch
+          }
         }
       }
     }else{
@@ -27,15 +39,18 @@ class Calculation {
         obj.num = stockNum
         Api.showToast("库存不足！")
       } else {
-        obj.num = value
         if (isTrue) {
-          if (value<0){
+          if (value==0){
             if (type == "cart") {
               obj.num = 1
             } else {
               obj.num = 0
             }
+          }else{
+            obj.num = value
           }
+        }else{
+          obj.num = value
         }
       }
     }

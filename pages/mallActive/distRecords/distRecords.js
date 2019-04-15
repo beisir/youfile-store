@@ -12,6 +12,7 @@ Page({
     dayData: [{ val: "近7天", index: 0 }, { val: "近30天", index: 1 }, { val: "全部", index: 2 }],
     datIndex:0,
     result:[],
+    resultObj:'',
     baseUrl: app.globalData.imageUrl,
   },
   clickFun:function(e){
@@ -21,7 +22,7 @@ Page({
         url: '../detailsOfCollection/detailsOfCollection?paymentNumber=' + paymentNumber,
       })
     }else{
-      Api.showToast("线下交易没有收款明细哦！")
+      Api.showToast("其他支付方式没有收款明细哦～")
     }
   },
   /** 
@@ -36,6 +37,9 @@ Page({
         _this.initData()
       })
     }
+    this.setData({
+      nowIndex: options.index ? options.index:6
+    })
   },
 
   /**
@@ -110,6 +114,7 @@ Page({
           var newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            resultObj: res.obj
           })
         }
       }

@@ -2,6 +2,7 @@
   <scroll-view scroll-y="true" style="height:100%;">
     <view class="result" wx:if="{{result.length > 0}}">
       <view class="result-list" wx:for="{{result}}" wx:key="index">
+        <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" />
         <view wx:if='{{item.isHide}}' class='isHideGoods'>
           <image src="/image/isshow.png"></image>
           <view>该商品</view>
@@ -34,16 +35,38 @@
               <text>{{item.name}}</text>
             </view>
             <view class="result-text result-text1">
-              零售
-              <text style='{{limitShow!=1?"color:#666":"#CCAA77"}};'>￥ {{item.sellPrice}}</text>
-              <view wx:if='{{limitShow==1}}'>
-                批发
-                <image src='/image/wh.png'></image>
-              </view>
-              <view wx:if='{{limitShow!=1}}'>
-                批发
-                <text>￥ {{item.wholesalePrice}}</text>
-              </view>
+               <block wx:if='{{limitShow==1 && item.extInfo.PRIORITY_SALES_PROMOTION}}'>
+                    <view class='line-font'>
+                     零售
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                   </view>
+                </block>
+                 <block wx:if='{{limitShow==1 && !item.extInfo.PRIORITY_SALES_PROMOTION}}'>
+                    零售
+                  <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                </block>
+                <block wx:if='{{limitShow!=1}}'>
+                   <view class='line-font'>
+                     零售
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                   </view>
+                </block>
+              <block wx:if="{{!item.extInfo.PRIORITY_SALES_PROMOTION}}">
+                <view wx:if='{{limitShow==1}}'>
+                  批发
+                  <image src='/image/wh.png'></image>
+                </view>
+                <view wx:if='{{limitShow!=1}}'>
+                  批发
+                  <text>￥ {{item.wholesalePrice}}</text>
+                </view>
+              </block>
+              <block wx:else>
+                <view  class='extInfo-color'>
+                  抢订
+                  <text bindtap='lookDetails'>￥ {{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
+                </view>
+              </block>
             </view>
 
           </navigator>

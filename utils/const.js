@@ -29,7 +29,7 @@ export const projectType = "xpl"
 export const servesPhone = "01053361798"
 export const navigateToAppID = {
   me: 'wx4f385374765e4cbb',
-  xls: 'wx1a7532a2abdd1698',
+  xls: 'wx1a7532a2abdd1698', 
   xpl: 'wx4f385374765e4cbb',
   platform: 'wx6241529c7dc70d51'
 }

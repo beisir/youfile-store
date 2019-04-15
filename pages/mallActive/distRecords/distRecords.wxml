@@ -1,13 +1,14 @@
+<wxs src="../../../public/filter.wxs" module="filter" />
 <view class='dr-back'></view>
 <view class='listData'>
   <view>
-    <view class='dr-pic dr-pic1'>
-      <image src="{{baseUrl}}{{userDetails.headPic}}"></image>
+    <view class='dr-pic {{nowIndex==0?"dr-pic1":""}} {{nowIndex==1?"dr-pic2":""}} {{nowIndex==2?"dr-pic3":""}}'>
+      <image wx:if="{{userDetails.headPic}}" src="{{baseUrl}}{{userDetails.headPic}}"></image>
     </view>
     <view class='dr-cont'>
       {{userDetails.userName}}
-      <view>进货单{{userDetails.orderNum}}笔</view>
-      <view>进货金额 ¥{{userDetails.orderAmount}}</view>
+      <view>进货单<text class='gold-font'> {{userDetails.orderNum}} </text>笔</view>
+      <view>进货金额<text class='gold-font'> ¥{{filter.filterMoney(userDetails.orderAmount)}}</text></view>
     </view>
     <!-- <button>联系Ta</button> -->
   </view>
@@ -16,17 +17,17 @@
   <view class='dr-date'>
     <button wx:for='{{dayData}}' bindtap='cickButton' data-index='{{item.index}}' wx:key='{{index}}' class='{{datIndex==item.index?"active":""}}'>{{item.val}}</button>
   </view>
-  <view class='dr-order'>共进货30单</view>
-  <view class='dr-mon'>
-    <text>¥</text> 51,988.00</view>
+  <view class='dr-order' wx:if='{{result.length>0}}'>共进货{{resultObj.orderPage.totalCount}}单</view>
+  <view class='dr-mon' wx:if='{{result.length>0}}'>
+    <text>¥</text> {{filter.filterMoney(resultObj.sumTotalSales)}}</view>
   <view class='dr-data'>
-    <view wx:for='{{result}}' wx:key='index' catchtap='clickFun' data-id='{{item.paymentNumber}}'>
+    <view wx:for='{{result}}' wx:key='index' bindtap='clickFun' catchtap='clickFun' data-id='{{item.paymentNumber}}'>
       <view class='dr-left'>
         <view class='dr-dName'>{{item.goodsInfoList[0].goodsName}}</view>
         <view>{{item.payDate}}</view>
       </view>
       <view class='dr-right'>
-        ¥{{item.orderAmount}}
+        ¥{{filter.filterMoney(item.orderAmount)}}
         <image src='/image/mallr.png'></image>
       </view>
     </view>

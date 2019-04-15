@@ -253,6 +253,9 @@ Page({
               if (extInfo.length > 0) {
                 var standardGoodsSkuPromotions = extInfo[0].standardGoodsSkuPromotions
                 v.isActivity = true
+                v.saleBatch = extInfo[0].batchNum
+                v.saleStockNum = extInfo[0].stockNum
+                v.activityPrice = extInfo[0].activityPrice
                 if (standardGoodsSkuPromotions) {
                   var goodsSkuVOList = v.shoppingCartSkuList
                   for (var val of goodsSkuVOList) {
@@ -266,9 +269,6 @@ Page({
                     }
                   }
                 }
-                v.saleBatch = extInfo[0].batchNum
-                v.saleStockNum = extInfo[0].stockNum
-                v.activityPrice = extInfo[0].activityPrice
               } else {
                 v.isActivity = false
               }
@@ -312,6 +312,7 @@ Page({
             }
           }
         }
+        console.log(effectiveList)
         if (failureList.length > 0) {
           _this.setData({
             lostList: true,
@@ -344,7 +345,6 @@ Page({
             saleBatchNum = store.saleBatchNum
           }
         }
-       
         _this.setData({
           storeAmount: saleBatchAmount,
           storeNum: saleBatchNum,
@@ -362,6 +362,15 @@ Page({
 
   },
   onShow() {
+    if (this.data.limitShow==3){
+      wx.setNavigationBarTitle({
+        title: '进货车',
+      })
+    }else{
+      wx.setNavigationBarTitle({
+        title: '购物车',
+      })
+    }
     this.setData({
       detailList: []
     })
@@ -518,13 +527,14 @@ Page({
     let detailList = this.data.detailList;
     let num = parseInt(detailList[index].num);
     if (sign == "input") {
-       num = e.detail.value
-      if (num == '') {
+      num = (e.detail.value).replace(/\s/g, "")
+      if (num == 0 || num == '') {
         num = 1
       }
       Method.selectedSkuNum(detailList[index], num)
     }
     if (sign == "add") {
+      console.log(detailList[index])
       num = parseInt(num) + 1;
       Method.selectedSkuNum(detailList[index], num)
     }
@@ -533,7 +543,6 @@ Page({
       Method.selectedSkuNum(detailList[index], num,true,"cart")
     }
     num = detailList[index].num
-    console.log(detailList[index])
     let storeId = this.data.storeIdFV
     var isActivity = detailList[index].isActivity
     if (isActivity) {

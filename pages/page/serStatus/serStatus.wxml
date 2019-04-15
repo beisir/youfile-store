@@ -6,7 +6,7 @@
     <image class="home-ser-new ser-font" bindtap='emptyInput' wx:if="{{closeCont}}" src="/image/ser.png"></image>
   </view>
   <view class='dc-list' wx:if="{{showResult}}">
-     <navigator wx:for="{{result}}" wx:key="index"   url="{{item.isHide?'':'../goodsDetails/goodsDetails?goodsId='+item.id}}" class='{{item.isHide?"opa-view":""}}'>
+    <navigator wx:for="{{result}}" wx:key="index" url="{{item.isHide?'':'../goodsDetails/goodsDetails?goodsId='+item.id}}" class='{{item.isHide?"opa-view":""}}'>
       <view>
         <image class='g-img' src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small" />
       </view>
@@ -16,8 +16,7 @@
           <view class='dc-price'>
             <view class='shan'>
               <image mode="widthFix" src="/image/shan.png" />抢订价</view>
-            ￥
-            <text>{{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
+            ￥<text>{{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
             <view class='goods-zize'>￥{{item.sellPrice}}</view>
             <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='copy-img' src="/image/dd.png" />
           </view>
@@ -30,8 +29,27 @@
         </block>
         <block wx:else>
           <view class='no-act-pri'>
-            <view>零售  <text>¥ {{item.sellPrice}}</text></view>
-            <view>批发  <text class='ss-active'>¥ {{item.wholesalePrice}}</text></view>
+            <block wx:if='{{limitShow==1}}'>
+             <view>零售
+              <text>¥ {{item.sellPrice}}</text>
+            </view>
+            </block>
+            <block wx:if='{{limitShow!=1}}'>
+              <view class='line-font'>
+                零售
+               <text>¥ {{item.sellPrice}}</text>
+              </view>
+            </block>
+            <view wx:if='{{limitShow==1}}'>
+                  批发
+                  <image src='/image/wh.png'></image>
+                </view>
+                <view wx:if='{{limitShow!=1}}'>
+                  批发
+                  <text class='ss-active'>¥ {{item.wholesalePrice}}</text>
+                </view>
+            <view>
+            </view>
           </view>
         </block>
       </view>
@@ -58,12 +76,12 @@
       </view>
     </view>
   </view>
-   <view class="result-null" wx:if="{{showResult && result.length==0}}">
-      <view class="nomore">
-        <view>
-          <image src="/image/nohome.png"></image>
-        </view>
-        暂时还没有上架商品
+  <view class="result-null" wx:if="{{showResult && result.length==0}}">
+    <view class="nomore">
+      <view>
+        <image src="/image/nohome.png"></image>
       </view>
+      暂时还没有上架商品
     </view>
+  </view>
 </view>
