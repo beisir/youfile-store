@@ -346,7 +346,6 @@ Page({
             saleBatchNum = store.saleBatchNum
           }
         }
-        console.log(effectiveList)
         _this.setData({
           storeAmount: saleBatchAmount,
           storeNum: saleBatchNum,
