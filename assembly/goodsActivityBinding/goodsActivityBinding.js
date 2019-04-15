@@ -86,8 +86,6 @@ Component({
                   val.saleBatch = v.batchNum
                   val.saleStockNum = v.stockNum
                   val.activityPrice = v.activityPrice
-                } else {
-                  val.isActivity = false
                 }
               }
             }
@@ -96,7 +94,6 @@ Component({
       } else {
         goodsVO.isActivity = false
       }
-      console.log(goodsVO)
       return goodsVO
     },
     //把活动绑定到spu上

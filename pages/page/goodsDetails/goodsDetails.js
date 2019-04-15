@@ -4,7 +4,8 @@ import Calculation from '../../../utils/calculation.js'
 var Method = new Calculation()
 var timerList = []
 import {
-  uploadImg
+  uploadImg,
+  navigateToAppID
 } from '../../../utils/const.js'
 var WxParse = require('../../../wxParse/wxParse.js');
 import authHandler from '../../../utils/authHandler.js';
@@ -26,6 +27,7 @@ Page({
   data: {
     globalData: app.globalData,
     limitShow: 1,
+    mallApp: navigateToAppID.platform,
     storeId: wx.getStorageSync('storeId'),
     baseUrl: app.globalData.imageUrl,
     goodsSpecificationVOList: [],
@@ -307,6 +309,7 @@ Page({
             this.timerhandle(newArr[i].timeSeconds, i, 'doing')
           }
         }
+        console.log(obj)
         _this.setData({
           goodsInfo: obj,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,

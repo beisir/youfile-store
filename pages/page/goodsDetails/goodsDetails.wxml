@@ -34,6 +34,8 @@
   <view class="canvasStyle">
     <canvas canvas-id="myCanvas" />
   </view>
+  <image mode='widthFix' wx:if='{{goodsInfo.isActivity && mallApp=="wx6241529c7dc70d51"}}' class='act-img' src='/image/beijing.png.png'></image>
+  <image mode='widthFix' wx:if='{{goodsInfo.isActivity && mallApp=="wx3cfbe069368479ce"}}' class='act-img' src='/image/zhengzhou.png.png'></image>
   <view class="image-back">
     <image style='display:inherit' wx:if='{{goodsInfo.goodsImageVOList.length==1}}' wx:for="{{goodsInfo.goodsImageVOList}}" wx:key="{{index}}" src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight' />
     <swiper wx:if='{{goodsInfo.goodsImageVOList.length>1}}' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{bg}}" style='height:{{Height}}'>
