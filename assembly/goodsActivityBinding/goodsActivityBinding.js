@@ -9,14 +9,14 @@ Component({
      * 位置 
      */
     position: {
-      type: String,//类型
-      value: ""//默认值
+      type: String, //类型
+      value: "" //默认值
     },
     /**
      * 活动数据
      */
     activityShowInfo: {
-      type: JSON,//类型
+      type: JSON, //类型
       value: [] //默认值
     }
   },
@@ -35,9 +35,9 @@ Component({
     bindingForGoodsDetail(response) {
       var goodsVO = response.obj.goodsVO
       var activeVal = goodsVO.extInfo.SALES_PROMOTION[0]
-   
+
       var lit = wx.getStorageSync("admin")
-   
+
       var store = response.obj.store
 
       //处理展位1的数据集
@@ -69,13 +69,13 @@ Component({
       var goodsSkuVOList = goodsVO.goodsSkuVOList
       var extInfoLen = (goodsVO.extInfo.SALES_PROMOTION).length
       // 判断是否有额外参数
-      if(extInfoLen>0){
+      if (extInfoLen > 0) {
         var standardGoodsSkuPromotions = goodsVO.extInfo.SALES_PROMOTION[0].standardGoodsSkuPromotions
         goodsVO.isActivity = true
         goodsVO.saleBatch = goodsVO.extInfo.SALES_PROMOTION[0].batchNum
         goodsVO.saleStockNum = goodsVO.extInfo.SALES_PROMOTION[0].stockNum
         goodsVO.activityPrice = goodsVO.extInfo.SALES_PROMOTION[0].activityPrice
-        if (goodsSkuVOList.length>0){
+        if (goodsSkuVOList.length > 0) {
           for (var val of goodsSkuVOList) {
             val.standardGoodsSkuPromotions = []
             if (standardGoodsSkuPromotions) {
@@ -86,15 +86,17 @@ Component({
                   val.saleBatch = v.batchNum
                   val.saleStockNum = v.stockNum
                   val.activityPrice = v.activityPrice
+                } else {
+                  val.isActivity = false
                 }
               }
             }
           }
         }
-       
-      }else{
-        goodsVO.isActivity  = false
+      } else {
+        goodsVO.isActivity = false
       }
+      console.log(goodsVO)
       return goodsVO
     },
     //把活动绑定到spu上

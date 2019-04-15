@@ -519,8 +519,9 @@ Page({
     let detailList = this.data.detailList;
     let num = parseInt(detailList[index].num);
     if (sign == "input") {
-       num = e.detail.value
-      if (num == '') {
+      num = (e.detail.value).replace(/\s/g, "")
+      console.log(num)
+      if (num == 0 || num == '') {
         num = 1
       }
       Method.selectedSkuNum(detailList[index], num)
@@ -534,7 +535,6 @@ Page({
       Method.selectedSkuNum(detailList[index], num,true,"cart")
     }
     num = detailList[index].num
-    console.log(detailList[index])
     let storeId = this.data.storeIdFV
     var isActivity = detailList[index].isActivity
     if (isActivity) {

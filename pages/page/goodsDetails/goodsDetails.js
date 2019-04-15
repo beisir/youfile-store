@@ -925,17 +925,21 @@ Page({
     var sign = e.currentTarget.dataset.sign //获取是增加还是减少 或者手动输入 input代表手动输入
     let num = this.data.numbers
     let goodsInfo = this.data.goodsInfo
-    if (sign == "add") {
-      num = num + 1
-      Method.selectedSkuNum(goodsInfo, num) //调用calculation。js 中selectedSkuNum方法 判断起购量库存
-    } else {
-      num = num - 1
-      Method.selectedSkuNum(goodsInfo, num,true) 
+    let goodsSkuVOList = this.data.goodsSkuVOList
+    if (goodsSkuVOList.length>0){
+      this.selectedSku(false)
+    }else{
+      if (sign == "add") {
+        num = num + 1
+        Method.selectedSkuNum(goodsInfo, num) //调用calculation。js 中selectedSkuNum方法 判断起购量库存
+      } else {
+        num = num - 1
+        Method.selectedSkuNum(goodsInfo, num, true)
+      }
+      this.setData({
+        numbers: goodsInfo.num,
+      })
     }
-    this.setData({
-      numbers:goodsInfo.num,
-    })
-    // this.selectedSku(false)
   },
   // 判断选中的SKU
   selectedSku: function(isTrue) {
@@ -944,6 +948,7 @@ Page({
       changeButtonCode = this.data.changeButtonCode,//第二个规格code
       goodsSkuVOList = this.data.goodsSkuVOList,
       numbers=this.data.numbers
+    var goodsInfo = this.data.goodsInfo
     for (var i = 0; i < goodsSkuVOList.length; i++) {
       var childArr = goodsSkuVOList[i].specValueCodeList
       if (childArr.length == 1) {
@@ -955,31 +960,28 @@ Page({
             }else{
               this.selectedSkuNum(goodsSkuVOList[i], num)
             }
+            goodsInfo.isActivity = goodsSkuVOList[i].isActivity
             this.setData({
-              numbers: goodsSkuVOList[i].num
+              numbers: goodsSkuVOList[i].num,
+              goodsInfo: goodsInfo
             })
           }
           skuStr = goodsSkuVOList[i].skuName
         }
       } else {
         if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
-          var stockNum = goodsSkuVOList[i].stockNum
-          if (numbers > stockNum){
-            this.setData({
-              numbers: stockNum
-            })
+          var num = this.data.numbers
+          num++
+          if (isTrue) {
+            this.selectedSkuNum(goodsSkuVOList[i], num, true)
+          } else {
+            this.selectedSkuNum(goodsSkuVOList[i], num)
           }
-          if (goodsSkuVOList[i].isActivity) {
-            var num = this.data.numbers
-            if (isTrue) {
-              this.selectedSkuNum(goodsSkuVOList[i], num, true)
-            } else {
-              this.selectedSkuNum(goodsSkuVOList[i], num)
-            }
-            this.setData({
-              numbers: goodsSkuVOList[i].num
-            })
-          }
+          goodsInfo.isActivity = goodsSkuVOList[i].isActivity
+          this.setData({
+            numbers: goodsSkuVOList[i].num,
+            goodsInfo: goodsInfo
+          })
           skuStr = goodsSkuVOList[i].skuName
         }
       }

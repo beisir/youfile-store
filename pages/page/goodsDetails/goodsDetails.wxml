@@ -353,7 +353,9 @@
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{goodsInfo.name}}</view>
-            <view class='hasc-a' wx:if='{{goodsInfo.isActivity}}'>抢订价：￥{{goodsInfo.sellPrice}}</view>
+            <view class='hasc-a' wx:if='{{goodsInfo.isActivity}}'>￥{{goodsInfo.activityPrice
+}}<view class="jiage-t jiage-tRed" style='font-size:20rpx'>
+                        <image src="/image/shans.png" mode='widthFix'></image>抢购价</view></view>
             <view wx:else>￥{{goodsInfo.sellPrice}}</view>
             <text>库存：{{goodsInfo.stockNum}}件</text>
           </view>

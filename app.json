@@ -1,9 +1,10 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/mallActive/list/list",
     "pages/page/cartList/cartList",
     "pages/page/goodsDetails/goodsDetails",
-    "pages/mallActive/list/list",
+    "pages/admin/addGoods/addGoods",
     "pages/mallActive/batchRalease/batchRalease",
     "pages/page/serStatus/serStatus",
     "pages/mallActive/waitRalease/waitRalease",
@@ -20,7 +21,6 @@
     "pages/mallActive/moreAdd/moreAdd",
     "pages/mallActive/choseSpec/choseSpec",
     "pages/admin/serStatus/serStatus",
-    "pages/admin/addGoods/addGoods",
     "pages/admin/class/class",
     "pages/businessFriend/merchant/index/index",
     "pages/page/goodsQRcode/goodsQRcode",
