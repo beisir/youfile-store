@@ -166,9 +166,10 @@
   </view>
 
   <view class='tab-cont'>
-    <view class='tab-view {{tabSwitch=="0"?avtiveGoods.length == 0?"tab-view1":"tab-view3":"tab-view2"}}'>
-      <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>正在抢订</view>
+    <view class='tab-view {{tabSwitch=="1"?"tab-view1":"teb-view4"}}'>
+      <!-- avtiveGoods.length == 0?"tab-view3":"teb-view4" -->
       <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>全部商品</view>
+      <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>正在抢订</view>
       <view class='stop-time'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
         距结束{{timerList[currentTabActive][0]}}天
         <text>{{timerList[currentTabActive][1]}}</text> :
@@ -199,7 +200,7 @@
 
   </view>
   <!-- 活动商品 -->
-  <view wx:else class="swiper-tab active-nav" id='swiper-tab'>
+  <view wx:else class="swiper-tab active-nav" id='swiper-tab' hidden="{{avtiveGoods.length == 0}}">
     <view wx:for="{{avtiveGoods}}" wx:key="{{index}}" class="swiper-tab-item {{currentTabActive==index ? 'on' : ''}}" data-current="{{index}}" data-number="{{item.activityNumber}}" bindtap="swichNavActive">{{item.activityAbbr}}
       <view></view>
     </view>
