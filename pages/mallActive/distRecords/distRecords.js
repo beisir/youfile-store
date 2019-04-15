@@ -12,6 +12,7 @@ Page({
     dayData: [{ val: "近7天", index: 0 }, { val: "近30天", index: 1 }, { val: "全部", index: 2 }],
     datIndex:0,
     result:[],
+    resultObj:'',
     baseUrl: app.globalData.imageUrl,
   },
   clickFun:function(e){
@@ -110,6 +111,7 @@ Page({
           var newArr = app.pageRequest.addDataList(datas, detailList)
           _this.setData({
             result: newArr,
+            resultObj: res.obj
           })
         }
       }

@@ -16,9 +16,9 @@
   <view class='dr-date'>
     <button wx:for='{{dayData}}' bindtap='cickButton' data-index='{{item.index}}' wx:key='{{index}}' class='{{datIndex==item.index?"active":""}}'>{{item.val}}</button>
   </view>
-  <view class='dr-order'>共进货30单</view>
-  <view class='dr-mon'>
-    <text>¥</text> 51,988.00</view>
+  <view class='dr-order' wx:if='{{result.length>0}}'>共进货{{resultObj.orderPage.totalCount}}单</view>
+  <view class='dr-mon' wx:if='{{result.length>0}}'>
+    <text>¥</text> {{resultObj.sumTotalSales}}</view>
   <view class='dr-data'>
     <view wx:for='{{result}}' wx:key='index' catchtap='clickFun' data-id='{{item.paymentNumber}}'>
       <view class='dr-left'>
