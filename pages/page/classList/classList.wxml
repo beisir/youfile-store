@@ -35,8 +35,16 @@
               <text>{{item.name}}</text>
             </view>
             <view class="result-text result-text1">
-              零售
-              <text style='{{limitShow!=1?"color:#666":"#CCAA77"}};'>￥ {{item.sellPrice}}</text>
+               <block wx:if='{{limitShow==1}}'>
+                    零售
+                  <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                </block>
+                <block wx:if='{{limitShow!=1}}'>
+                   <view class='line-font'>
+                     零售
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                   </view>
+                </block>
               <block wx:if="{{!item.extInfo.PRIORITY_SALES_PROMOTION}}">
                 <view wx:if='{{limitShow==1}}'>
                   批发

@@ -301,8 +301,16 @@
                 <text data-id='{{item.id}}' bindtap='lookDetails'>{{item.name}}</text>
               </view>
               <view class="result-text result-text1">
-                零售
-                <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                <block wx:if='{{limitShow==1}}'>
+                    零售
+                  <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                </block>
+                <block wx:if='{{limitShow!=1}}'>
+                   <view class='line-font'>
+                     零售
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                   </view>
+                </block>
                 <view wx:if="{{!item.extInfo.PRIORITY_SALES_PROMOTION}}">
                   批发
                   <text wx:if='{{limitShow!=1}}' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.wholesalePrice}}</text>

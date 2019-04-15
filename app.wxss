@@ -35,6 +35,7 @@ button::after{border:none}
 .result-list .result-text:last-child{margin-top:10rpx}
 .result-list .result-text1,.result-list .result-text1 text.h-font{color:#666}
 .result-list .result-text1 text{color:#CCAA77;margin-left:10rpx}
+.result-list .result-text1 .line-font,.no-act-pri  .line-font{color: #999;text-decoration: line-through;}
 .result-list .result-text1 .extInfo-color,.result-list .result-text1 .extInfo-color text{color:#F02B2B;}
 .result-list .result-text1 image{width:30rpx;height:30rpx;vertical-align:middle;background:none;margin-top:-2rpx;margin-left:15rpx}
 .null-tips{padding:200rpx 0;text-align:center;color:#787878}
