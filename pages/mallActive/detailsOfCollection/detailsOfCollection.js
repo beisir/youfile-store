@@ -14,8 +14,7 @@ Page({
    */
   onLoad: function (options) {
     if (options.paymentNumber){
-          // Api.getAccountDetail({ paymentNumber: paymentNumber }).then(res =>
-
+      this.getDetails(options.paymentNumber)
     }
   },
   getDetails: function (paymentNumber) {

@@ -21,7 +21,7 @@
   <view class='dr-mon' wx:if='{{result.length>0}}'>
     <text>¥</text> {{filter.filterMoney(resultObj.sumTotalSales)}}</view>
   <view class='dr-data'>
-    <view wx:for='{{result}}' wx:key='index' bindtap='clickFun' catchtap='clickFun' data-id='{{item.paymentNumber}}'>
+    <view wx:for='{{result}}' wx:key='index' bindtap='clickFun' data-id='{{item.paymentNumber}}'>
       <view class='dr-left'>
         <view class='dr-dName'>{{item.goodsInfoList[0].goodsName}}</view>
         <view>{{item.payDate}}</view>
