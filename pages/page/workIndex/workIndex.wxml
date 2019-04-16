@@ -110,9 +110,9 @@
     </navigator>
     <navigator url='/pages/mallActive/list/list'>
       <view>
-        <image mode='widthFix' src='/image/ziyuan.png'></image>
+        <image mode='widthFix' src='/image/notice-icon.png' style='height:46rpx;width:55rpx;'></image>
       </view>
-      <view>商贸云活动</view>
+      <view>云促销</view>
     </navigator>
   </view>  
 </view>  
