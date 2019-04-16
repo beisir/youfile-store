@@ -49,6 +49,7 @@ page{background: #fff;}
 .store_name image{width:35rpx;height:35rpx;margin-left:18rpx;margin-top:0}
 .result-list .result-text1 image.h-img{height:40rpx;width:40rpx;float:right}
 .result-list{height:530rpx;border:0;margin:0 0 30rpx}
+.result-list image{background: none;}
 .flex-boxx{display:flex;justify-content:space-between;flex-wrap:wrap;align-content:flex-start;width:680rpx;margin:0 auto}
 .result{padding:0}
 .result-list .result-text{height:80rpx}
