@@ -312,7 +312,6 @@ Page({
             }
           }
         }
-        console.log(effectiveList)
         if (failureList.length > 0) {
           _this.setData({
             lostList: true,
@@ -362,6 +361,15 @@ Page({
 
   },
   onShow() {
+    if (this.data.limitShow==3){
+      wx.setNavigationBarTitle({
+        title: '进货车',
+      })
+    }else{
+      wx.setNavigationBarTitle({
+        title: '购物车',
+      })
+    }
     this.setData({
       detailList: []
     })
@@ -525,7 +533,6 @@ Page({
       Method.selectedSkuNum(detailList[index], num)
     }
     if (sign == "add") {
-      console.log(detailList[index])
       num = parseInt(num) + 1;
       Method.selectedSkuNum(detailList[index], num)
     }

@@ -302,7 +302,13 @@
                 <text data-id='{{item.id}}' bindtap='lookDetails'>{{item.name}}</text>
               </view>
               <view class="result-text result-text1">
-                <block wx:if='{{limitShow==1}}'>
+                <block wx:if='{{limitShow==1 && item.extInfo.PRIORITY_SALES_PROMOTION}}'>
+                    <view class='line-font'>
+                     零售
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                   </view>
+                </block>
+                 <block wx:if='{{limitShow==1 && !item.extInfo.PRIORITY_SALES_PROMOTION}}'>
                     零售
                   <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
                 </block>

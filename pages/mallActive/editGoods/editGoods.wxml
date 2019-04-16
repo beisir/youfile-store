@@ -103,7 +103,7 @@
       </view>
     </view>
     <view class='fra-goods padding-box bold-font'>折扣商品（共<text>{{checkedNum}}</text>件商品）</view>
-    <view class='add-cont'>
+    <scroll-view scroll-y='{{true}}' class='add-cont'>
       <view wx:for='{{skuList}}' wx:if='{{item.checked}}' wx:key="{{index}}">
         <view class='g-cont'>
           <view class='g-image'>
@@ -115,7 +115,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </scroll-view>
     <view class='add-more' bindtap='sureDiscount'>确 定</view>
   </view>
 

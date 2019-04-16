@@ -1,13 +1,14 @@
 {
   "pages": [
     "pages/page/home/home",
-    "pages/mallActive/yunDist/yunDist",
     "pages/page/cartList/cartList",
+    
+    "pages/page/serStatus/serStatus",
+    "pages/mallActive/yunDist/yunDist",
     "pages/mallActive/list/list",
     "pages/page/goodsDetails/goodsDetails",
     "pages/admin/addGoods/addGoods",
     "pages/mallActive/batchRalease/batchRalease",
-    "pages/page/serStatus/serStatus",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/page/workIndex/workIndex",
     "pages/mallActive/activityAnalysis/activityAnalysis",

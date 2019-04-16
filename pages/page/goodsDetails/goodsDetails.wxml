@@ -334,8 +334,8 @@
         </block>
          <view class='weui-bottom lt-weui-bottom'>
             <view class='gd-botoom'>
-              <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
-              <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
+              <view wx:if='{{discountShow==true}}' style='font-size:28rpx'>￥{{totalPrice}}</view>
+              <view wx:if='{{discountShow==false}}' style='font-size:28rpx'>￥{{newTotal}}</view>
               <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
             </view>
             <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>{{editCode?"修改进货车":"加入进货车"}}</view>
@@ -356,10 +356,31 @@
           <view class='gd-ins'>
             <view class='gd-title1'>{{goodsInfo.name}}</view>
             <view class='hasc-a' wx:if='{{goodsInfo.isActivity}}'>￥{{goodsInfo.activityPrice
-}}<view class="jiage-t jiage-tRed" style='font-size:20rpx'>
+}}<view class="jiage-t jiage-tRed" style='font-size:20rpx;margin:unset;float:left;margin-left:5px;'>
                         <image src="/image/shans.png" mode='widthFix'></image>抢购价</view></view>
             <view wx:else>￥{{goodsInfo.sellPrice}}</view>
-            <text>库存：{{goodsInfo.stockNum}}件</text>
+            <text wx:if='{{!goodsInfo.isActivity}}'>库存：{{goodsInfo.stockNum}}件</text>
+            <text wx:else style='display:block;margin-top:-30rpx'>
+              <block  wx:if='{{goodsSpecificationVOList.length==0}}'>
+                活动库存：{{goodsInfo.saleStockNum}}件
+              </block>
+              <block  wx:if='{{goodsSpecificationVOList.length==1}}'>
+                <block  wx:if='{{changeButtonCode}}'>
+                活动库存：{{goodsInfo.saleStockNum}}件
+              </block>
+               <block  wx:else>
+                库存：{{goodsInfo.stockNum}}件
+              </block>
+              </block>
+              <block  wx:if='{{goodsSpecificationVOList.length==2}}'>
+                <block  wx:if='{{swichNavCode && changeButtonCode}}'>
+                活动库存：{{goodsInfo.saleStockNum}}件
+              </block>
+               <block  wx:else>
+                库存：{{goodsInfo.stockNum}}件
+              </block>
+              </block>
+            </text>
           </view>
         </view>
         <view wx:for='{{goodsSpecificationVOList}}' wx:key="{{index}}">
@@ -396,7 +417,7 @@
               <view class="cart-count-add" bindtap="addCount" data-index="0"   data-sign='add'>
                 <image src="/image/add.png"></image>
               </view>
-              <view class='qiGou' wx:if='{{isActivity}}'>起购量：{{ goodsInfo.saleBatch}}</view>
+              <view class='qiGou' wx:if='{{goodsInfo.isActivity && goodsSpecificationVOList.length>0 && goodsInfo.saleBatch!=null}}'>起购量：{{ goodsInfo.saleBatch}}</view>
               <view class='qiGou' wx:if='{{goodsSpecificationVOList.length==0 && goodsInfo.isActivity}}'>起购量：{{ goodsInfo.saleBatch}}</view>
             </view>
           </view>
@@ -489,8 +510,8 @@
         </block>
          <view class='weui-bottom lt-weui-bottom'>
             <view class='gd-botoom'>
-              <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
-              <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
+              <view wx:if='{{discountShow==true}}' style='font-size:28rpx'>￥{{totalPrice}}</view>
+              <view wx:if='{{discountShow==false}}' style='font-size:28rpx'>￥{{newTotal}}</view>
               <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
             </view>
             <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>修改购物车</view>

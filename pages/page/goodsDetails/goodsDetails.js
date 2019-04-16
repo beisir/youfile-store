@@ -53,9 +53,9 @@ Page({
     numbers: 0,
     likeShow: false,
     introduction: '',
-    swichNavCode: true,
+    swichNavCode: '',
     swichNav: -1,
-    changeButtonCode: true,
+    changeButtonCode: '',
     sell: '',
     saleBatchNum: 0,
     saleBatchAmount: 0,
@@ -485,6 +485,7 @@ Page({
             if (dataList[i].specValueCodeList.indexOf(swichNavCode) != -1) {
               goodsInfo.wholesale = dataList[i].wholesalePrice
               goodsInfo.stockNum = dataList[i].stockNum
+              goodsInfo.saleStockNum = dataList[i].saleStockNum
               goodsInfo.sellPrice = dataList[i].sellPrice
               if (dataList[i].isActivity) {
                 var num=this.data.numbers
@@ -509,6 +510,7 @@ Page({
             if (dataList[i].specValueCodeList.indexOf(changeButtonCode) != -1) {
               goodsInfo.wholesale = dataList[i].wholesalePrice
               goodsInfo.stockNum = dataList[i].stockNum
+              goodsInfo.saleStockNum = dataList[i].saleStockNum
               goodsInfo.sellPrice = dataList[i].sellPrice
               _this.setData({
                 goodsInfo: goodsInfo
@@ -519,6 +521,7 @@ Page({
         } else {
           goodsInfo.wholesale = dataList[i].wholesalePrice
           goodsInfo.stockNum = dataList[i].stockNum
+          goodsInfo.saleStockNum = dataList[i].saleStockNum
           goodsInfo.sellPrice = dataList[i].sellPrice
           _this.setData({
             goodsInfo: goodsInfo
@@ -547,7 +550,7 @@ Page({
         specsTab: current,//高亮选择规格值标识
         changeButtonCode: changeButtonCode
       }, function () {
-        that.selectedSku()
+        that.selectedSku(false, 1)
       })
     }
   },
@@ -567,7 +570,7 @@ Page({
         currentTab: current,//高亮选择规格值标识
         swichNavCode: swichNavCode
       }, function () {
-        that.selectedSku()
+        that.selectedSku(false,1)
       })
     }
   },
@@ -897,7 +900,7 @@ Page({
             })
         } else {
           //添加购物车或者没有规格的进火车
-          _this.selectedSku()
+          // _this.selectedSku()
             Api.addCart({
               goodsId: goodsId,
               num: num,
@@ -929,38 +932,54 @@ Page({
     let num = this.data.numbers
     let goodsInfo = this.data.goodsInfo
     let goodsSkuVOList = this.data.goodsSkuVOList
-    if (goodsSkuVOList.length>0){
-      this.selectedSku(false)
-    }else{
       if (sign == "add") {
-        num = num + 1
-        Method.selectedSkuNum(goodsInfo, num) //调用calculation。js 中selectedSkuNum方法 判断起购量库存
-      } else {
-        num = num - 1
-        Method.selectedSkuNum(goodsInfo, num, true)
-      }
-      this.setData({
-        numbers: goodsInfo.num,
-      })
+        if (goodsSkuVOList.length > 0) {
+          this.selectedSku(false)
+        } else {
+          num = num + 1
+          Method.selectedSkuNum(goodsInfo, num) //调用calculation。js 中selectedSkuNum方法 判断起购量库存
+          this.setData({
+            numbers: goodsInfo.num,
+          })
+        }
+      } 
+      if (sign =="reduce") {
+        if (goodsSkuVOList.length > 0) {
+          this.selectedSku(true)
+        }else{
+          num = num - 1
+          Method.selectedSkuNum(goodsInfo, num, true)
+          this.setData({
+            numbers: goodsInfo.num,
+          })
+        }
     }
   },
   // 判断选中的SKU
-  selectedSku: function(isTrue) {
+  selectedSku: function(isTrue,index) {
     var skuStr = '',
       swichNavCode = this.data.swichNavCode,//第一个规格code
       changeButtonCode = this.data.changeButtonCode,//第二个规格code
       goodsSkuVOList = this.data.goodsSkuVOList,
-      numbers=this.data.numbers
+      num=this.data.numbers
     var goodsInfo = this.data.goodsInfo
     for (var i = 0; i < goodsSkuVOList.length; i++) {
       var childArr = goodsSkuVOList[i].specValueCodeList
       if (childArr.length == 1) {
         if (childArr.indexOf(changeButtonCode) != -1) {
-          if (goodsSkuVOList[i].isActivity){
-            var num=this.data.numbers
-            if (isTrue){
-              this.selectedSkuNum(goodsSkuVOList[i], num, true)
-            }else{
+          if (goodsSkuVOList[i].isActivity) {
+            goodsInfo.saleBatch = goodsSkuVOList[i].saleBatch
+          }
+          if (isTrue) {
+            if (num > 0) {
+              num--
+            }
+            this.selectedSkuNum(goodsSkuVOList[i], num, true)
+          } else {
+            if (index) {
+              goodsSkuVOList[i].num = 0
+            } else {
+              num++
               this.selectedSkuNum(goodsSkuVOList[i], num)
             }
             goodsInfo.isActivity = goodsSkuVOList[i].isActivity
@@ -969,16 +988,30 @@ Page({
               goodsInfo: goodsInfo
             })
           }
+          goodsInfo.isActivity = goodsSkuVOList[i].isActivity
+          this.setData({
+            numbers: goodsSkuVOList[i].num,
+            goodsInfo: goodsInfo
+          })
           skuStr = goodsSkuVOList[i].skuName
         }
       } else {
         if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
-          var num = this.data.numbers
-          num++
+          if (goodsSkuVOList[i].isActivity) {
+            goodsInfo.saleBatch=goodsSkuVOList[i].saleBatch
+          }
           if (isTrue) {
+            if (num>0){
+              num--
+            }
             this.selectedSkuNum(goodsSkuVOList[i], num, true)
           } else {
-            this.selectedSkuNum(goodsSkuVOList[i], num)
+            if(index){
+              goodsSkuVOList[i].num=0
+            }else{
+              num++
+              this.selectedSkuNum(goodsSkuVOList[i], num)
+            }
           }
           goodsInfo.isActivity = goodsSkuVOList[i].isActivity
           this.setData({
@@ -1047,12 +1080,8 @@ Page({
         let num = this.data.numbers
         if (num == 0) {
           return
-        } else {
-          this.setData({
-            numbers: num
-          })
         }
-        this.selectedSkuNum(goodsInfo, num - 1)
+        this.selectedSkuNum(goodsInfo, num - 1,true)
       }
       this.setData({
         numbers: goodsInfo.num

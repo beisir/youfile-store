@@ -2,6 +2,7 @@ import Api from './api.js'
 class Calculation {
   // 添加商品数量，判断活动商品是否超出库存
   selectedSkuNum(obj, value, isTrue,type) {
+    console.log(type)
     // isTrue为true代表减
     var isActivity = obj.isActivity //判断是否是活动商品
     var stockNum = obj.stockNum
@@ -17,13 +18,25 @@ class Calculation {
             if (value==0){
               obj.num = 1
             }else{
-              obj.num = value
+              if (value >= saleBatch) {
+                obj.num = value
+              } else {
+                obj.num = 0
+              }
             }
           }else{
-            obj.num = 0
+            if (value >= saleBatch) {
+              obj.num = value
+            } else {
+              obj.num = 0
+            }
           }
         } else {
-          obj.num = value
+          if (value >= saleBatch){
+            obj.num = value
+          }else{
+            obj.num = saleBatch
+          }
         }
       }
     }else{
@@ -31,15 +44,18 @@ class Calculation {
         obj.num = stockNum
         Api.showToast("库存不足！")
       } else {
-        obj.num = value
         if (isTrue) {
-          if (value<0){
+          if (value==0){
             if (type == "cart") {
               obj.num = 1
             } else {
               obj.num = 0
             }
+          }else{
+            obj.num = value
           }
+        }else{
+          obj.num = value
         }
       }
     }
