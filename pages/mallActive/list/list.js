@@ -82,7 +82,13 @@ Page({
     this.setData({
       listData:[]
     })
-    this.getList()
+    Api.simpleStoreMsg({ storeId: wx.getStorageSync('storeId')}).then(res=>{
+      this.setData({
+        mallCode: res.obj.mallCode ? res.obj.mallCode:'1000'
+      },()=>{
+        this.getList()
+      })
+    })
   },
   onShow: function () {
     this.initData()

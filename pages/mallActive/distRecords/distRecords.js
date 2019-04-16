@@ -16,7 +16,7 @@ Page({
     baseUrl: app.globalData.imageUrl,
   },
   clickFun:function(e){
-    var paymentNumber=e.target.dataset.id
+    var paymentNumber = e.currentTarget.dataset.id
     if (Api.isNotEmpty(paymentNumber)){
       wx.navigateTo({
         url: '../detailsOfCollection/detailsOfCollection?paymentNumber=' + paymentNumber,

@@ -1080,12 +1080,8 @@ Page({
         let num = this.data.numbers
         if (num == 0) {
           return
-        } else {
-          this.setData({
-            numbers: num
-          })
         }
-        this.selectedSkuNum(goodsInfo, num - 1)
+        this.selectedSkuNum(goodsInfo, num - 1,true)
       }
       this.setData({
         numbers: goodsInfo.num

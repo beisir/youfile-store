@@ -60,7 +60,7 @@ Page({
                 el.salepercent = 100
               } else {
                 let all = salesNum + stockNum
-                el.salepercent = parseInt(salesNum / all)
+                el.salepercent = parseInt(salesNum / all * 100)
               }
             }else{
               el.isHaveActive = false

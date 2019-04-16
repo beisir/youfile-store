@@ -38,7 +38,8 @@ Page({
     var _this=this
     Api.yunStatistics().then(res=>{
       _this.setData({
-        staticData:res.obj
+        staticData:res.obj,
+        storeMes: res.obj.store
       })
     })
   },

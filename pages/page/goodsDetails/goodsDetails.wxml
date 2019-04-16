@@ -75,7 +75,7 @@
         <button bindtap='addTip'>享受批发价</button>
       </view>
       <view class='goods-er'>
-        <image src="/image/er.png"></image>
+        <image src="/image/xcx.png"></image>
       </view>
     </view>
     <view class='gd-title' wx:if='{{limitShow!=1}}'>
@@ -96,7 +96,7 @@
         <button>混批</button>全场满￥{{saleBatchAmount}}元可混批
       </view>
       <view class='goods-er'>
-        <image src="/image/er.png"></image>
+        <image src="/image/xcx.png"></image>
       </view>
     </view>
     <view class="weui_cells weui_cells1" bindtap='showAlert'>

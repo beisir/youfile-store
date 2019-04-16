@@ -533,7 +533,6 @@ Page({
       Method.selectedSkuNum(detailList[index], num)
     }
     if (sign == "add") {
-      console.log(detailList[index])
       num = parseInt(num) + 1;
       Method.selectedSkuNum(detailList[index], num)
     }

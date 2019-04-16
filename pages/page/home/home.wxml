@@ -1,3 +1,4 @@
+<wxs src="../../../public/filter.wxs"  module="filter"></wxs>
 <!-- 悬浮球 -->
 <returnBall>
 
@@ -172,9 +173,9 @@
       <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>正在抢订</view>
       <view class='stop-time'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
         距结束{{timerList[currentTabActive][0]}}天
-        <text>{{timerList[currentTabActive][1]}}</text> :
-        <text>{{timerList[currentTabActive][2]}}</text> :
-        <text>{{timerList[currentTabActive][3]}}</text>
+        <text>{{filter.doubleNum(timerList[currentTabActive][1])}}</text> :
+        <text>{{filter.doubleNum(timerList[currentTabActive][2])}}</text> :
+        <text>{{filter.doubleNum(timerList[currentTabActive][3])}}</text>
       </view>
     </view>
   </view>
@@ -200,9 +201,11 @@
 
   </view>
   <!-- 活动商品 -->
-  <view wx:else class="swiper-tab active-nav" id='swiper-tab' hidden="{{avtiveGoods.length == 0}}">
-    <view wx:for="{{avtiveGoods}}" wx:key="{{index}}" class="swiper-tab-item {{currentTabActive==index ? 'on' : ''}}" data-current="{{index}}" data-number="{{item.activityNumber}}" bindtap="swichNavActive">{{item.activityAbbr}}
-      <view></view>
+  <view wx:else style='width:670rpx;overflow:hidden;margin:0 auto;'>
+    <view class="swiper-tab active-nav" id='swiper-tab' hidden="{{avtiveGoods.length == 0}}">
+      <view wx:for="{{avtiveGoods}}" wx:key="{{index}}" class="swiper-tab-item {{currentTabActive==index ? 'on' : ''}}" data-current="{{index}}" data-number="{{item.activityNumber}}" bindtap="swichNavActive">{{item.activityAbbr}}
+        <view></view>
+      </view>
     </view>
   </view>
   <view class='dc-list' wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">

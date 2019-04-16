@@ -29,9 +29,9 @@
 .gd-title{font-size:34rpx;color:#333;padding:40rpx 20rpx 20rpx 30rpx;border-radius: 10rpx;margin: 0 20rpx;background: #fff;position: relative}
 .gd-title view{margin-bottom:10rpx}
 .gd-title view:first-child{position:relative;padding-right:70rpx;word-wrap:break-word;min-height: 90rpx;font-weight: bold}
-.gd-title view:first-child image,.gd-title view:first-child button{width:38rpx;height:38rpx;position:absolute;right:10rpx;top:10rpx;border:0}
+.gd-title view:first-child image,.gd-title view:first-child button{width:38rpx;height:38rpx;position:absolute;right:10rpx;top:5rpx;border:0}
 .gd-title view:first-child button{width:60rpx;height:60rpx}
-.gd-title view.gd-font{font-size:30rpx;color:#C7945A}
+.gd-title view.gd-font{font-size:30rpx;color:#999}
 .gd-title view.gd-font1{color:#999999;text-decoration-line:line-through}
 .gd-title view.gd-font2{color:#999999}
 .gd-font button{height:45rpx}
@@ -60,7 +60,7 @@
 .ym_goodsstore{background:#fff;padding:40rpx 0;border-radius: 10rpx;margin:20rpx;}
 .ym_goodsstoreh{overflow:hidden;padding-left:58rpx}
 .ym_goodsstoresprs{margin-top:56rpx;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;font-size:24rpx;color:#888888}
-.ym_goodsstoreop{text-align:center;margin-top:60rpx}
+.ym_goodsstoreop{text-align:center;margin-top:30rpx}
 .ym_goodsstorelogo{width:100rpx;height:100rpx;float:left;border-radius:100rpx;border:2rpx solid #F3F3F3;margin-right:30rpx;overflow:hidden}
 .ym_goodsstorename{float:left;padding-top:10rpx}
 .ym_goodsstorelogo image{max-width:100rpx;max-height:100rpx}
@@ -142,7 +142,7 @@
 .canvasStyle canvas{width:100%;height:100%;margin:1px 0 0 1px;position:relative;z-index:10;}
 .image-back{position: relative;z-index: 10}
 .sale-num{border-top: 2rpx solid #FAFAFA;margin-top: 20rpx;}
-.goods-er{position: absolute;right:20rpx;bottom: -5rpx}
+.goods-er{position: absolute;right:35rpx;top: 190rpx}
 .goods-er view:first-child{padding-right: 0rpx;margin-bottom: 50rpx;}
 .goods-er image{width: 50rpx;height: 50rpx;}
 .weui_cells1 .skuStr1{text-align:right}
