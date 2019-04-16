@@ -60,7 +60,7 @@
 .ym_goodsstore{background:#fff;padding:40rpx 0;border-radius: 10rpx;margin:20rpx;}
 .ym_goodsstoreh{overflow:hidden;padding-left:58rpx}
 .ym_goodsstoresprs{margin-top:56rpx;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;font-size:24rpx;color:#888888}
-.ym_goodsstoreop{text-align:center;margin-top:60rpx}
+.ym_goodsstoreop{text-align:center;margin-top:30rpx}
 .ym_goodsstorelogo{width:100rpx;height:100rpx;float:left;border-radius:100rpx;border:2rpx solid #F3F3F3;margin-right:30rpx;overflow:hidden}
 .ym_goodsstorename{float:left;padding-top:10rpx}
 .ym_goodsstorelogo image{max-width:100rpx;max-height:100rpx}
