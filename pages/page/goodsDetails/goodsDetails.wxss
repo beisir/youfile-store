@@ -50,7 +50,7 @@
 .weui-view image{width:40rpx;height:40rpx}
 .weui-view image.img{width:24rpx;height:29rpx;margin-left:15rpx;margin-top:-3rpx;margin-right: 0}
 .weui-view image.erImg{width:50rpx;height:50rpx;margin-right:0}
-.weui_cells1 .weui-view{right:40rpx}
+.weui_cells1 .weui-view{right:30rpx}
 .gd-content{text-align:center;color:#333;font-size:30rpx;padding-bottom:80rpx;padding-top:50rpx;border-radius: 10rpx;margin:0 20rpx;background: #fff;padding-left: 20%;padding-right: 20%}
 .gd-content view{margin-bottom:10rpx}
 .gd-content view image{width:30rpx;height:30rpx;vertical-align:middle;margin-top:-4rpx;margin-right:10rpx}
