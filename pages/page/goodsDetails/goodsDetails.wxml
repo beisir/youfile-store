@@ -1,3 +1,4 @@
+<wxs src='../../../public/filter.wxs' module='filter'></wxs>
 <goodsActivityBinding id="goodsActivityBinding" />
 <!-- 悬浮球 -->
 <returnBall>
@@ -54,9 +55,9 @@
           <view>
             <view>{{activeMes}}</view>
             {{timerList[0][0]}}天
-            <text>{{timerList[0][1]}}</text> :
-            <text>{{timerList[0][2]}}</text> :
-            <text>{{timerList[0][3]}}</text>
+            <text>{{filter.doubleNum(timerList[0][1])}}</text> :
+            <text>{{filter.doubleNum(timerList[0][2])}}</text> :
+            <text>{{filter.doubleNum(timerList[0][3])}}</text>
           </view>
         </view>
     <!-- <goodsActivityBinding position="1" activityShowInfo="{{activityData}}" /> -->
