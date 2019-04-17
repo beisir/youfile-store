@@ -2,7 +2,6 @@ import Api from './api.js'
 class Calculation {
   // 添加商品数量，判断活动商品是否超出库存
   selectedSkuNum(obj, value, isTrue,type) {
-    console.log(type)
     // isTrue为true代表减
     var isActivity = obj.isActivity //判断是否是活动商品
     var stockNum = obj.stockNum
@@ -133,7 +132,7 @@ class Calculation {
       goodsSpecificationVOList[0].goodsSpecificationValueVOList = childArr
     } else {
       var goodsInfo = goodsInfo
-      var hasActiveGoods = goodsInfo.hasActiveGoods
+      var hasActiveGoods = goodsInfo.isActivity
       if (hasActiveGoods) {
         activeGoodsTotal = goodsInfo.num * goodsInfo.activityPrice
       } else {
