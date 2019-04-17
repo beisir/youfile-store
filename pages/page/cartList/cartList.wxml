@@ -142,7 +142,7 @@
                   </view>
                   <view class="cc-coun-new" wx:if="{{item.shoppingCartSkuList==null}}" wx:for-item="record">
                     <view bindtap="addCountNew" data-sign="reduce" data-obj="{{obj}}" class='{{item.num==1? "classFont": ""}} ' data-index="{{index}}">-</view>
-                    <input class='cc-add ' data-sign="input" type='number ' data-index="{{index}}" bindblur='addCountNew' value='{{item.num}} '></input>
+                    <input class='cc-add ' data-sign="input" type='number' data-index="{{index}}" bindblur='addCountNew' value='{{item.num}} '></input>
                     <view bindtap="addCountNew" data-sign="add" class='{{item.num==item.stockNum? "classFontAdd": ""}} ' data-index="{{index}}">+</view>
                   </view>
                 </view>
@@ -174,25 +174,25 @@
               <!-- <text class="cart-pro-name">规格：{{item.small}}</text> -->
             </view>
             <view class="table" wx:if="{{item.shoppingCartSkuList.length>0}}">
-              <view class="tr" wx:if='{{limitShow==3}} '>
+              <view class="tr" wx:if='{{limitShow=="3"}}'>
                 <view class="th">规格</view>
                 <view class="th">数量</view>
                 <view class="th">零售价</view>
                 <view class="th">批发价</view>
               </view>
-              <view class="tr" wx:if='{{limitShow==3}} ' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
+              <view class="tr" wx:if='{{limitShow=="3"}}' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
                 <view class="td">{{item.skuName}}</view>
                 <view class="td">2件</view>
                 <view class="td">￥{{item.sellPrice}}</view>
                 <view class="td">￥{{item.wholesalePrice}}</view>
               </view>
 
-              <view class="tr" wx:if='{{limitShow!=3}} '>
+              <view class="tr" wx:if='{{limitShow!="3"}}'>
                 <view class="th">规格</view>
                 <view class="th">数量</view>
                 <view class="th">零售价</view>
               </view>
-              <view class="tr" wx:if='{{limitShow!=3}} ' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
+              <view class="tr" wx:if='{{limitShow!="3"}}' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
                 <view class="td">{{item.skuName}}</view>
                 <view class="td">2件</view>
                 <view class="td">￥{{item.sellPrice}}</view>

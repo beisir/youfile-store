@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/page/home/home",
-    "pages/mallActive/yunDist/yunDist",
     "pages/page/cartList/cartList",
+    "pages/mallActive/yunDist/yunDist",
     "pages/page/serStatus/serStatus",
     "pages/mallActive/list/list",
     "pages/page/goodsDetails/goodsDetails",
