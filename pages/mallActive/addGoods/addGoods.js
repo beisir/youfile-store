@@ -45,8 +45,6 @@ Page({
     if (options.activityNumber){
       this.setData({
         activityNumber: options.activityNumber
-      },function(){
-        _this.initData()
       })
     }
   },
@@ -94,6 +92,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.initData()
   },
   // 添加商品
   addActiveShow:function(e){

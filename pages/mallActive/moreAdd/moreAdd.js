@@ -132,6 +132,9 @@ Page({
     if (goodsIds.length>0){
       Api.addAMoreGoods({ activityNumber: activityNumber, goodsId: goodsIds }).then(res => {
         Api.showToast(res.message)
+        setTimeout(() => {
+          wx.navigateBack()
+        }, 800)
       })
     }else{
       Api.showToast("请选择商品！")
