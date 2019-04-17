@@ -159,10 +159,10 @@ input:focus{padding:0}
 .tab-view .stop-time{position: absolut;right:-35rpx;top:0rpx;background-image: unset;width: unset;font-size: 24rpx;color: #666;}
 .stop-time text{color: #fff;background: #454545;padding: 5rpx;border-radius: 10rpx;}
 /* .stop-time text:first-of-type{background: #F02B2B} */
-.dc-list>view>.isHideacti{width: 240rpx;height: 240rpx;top: 30rpx;left: 30rpx;position: absolute;text-align: center;font-size: 27rpx;color: #fff;padding-top: 35rpx;text-shadow: #000 0 2rpx 0;}
-.isHideacti image{width: 55rpx;height: 55rpx;}
-.isHideacti view{line-height: 38rpx;}
-.isHideacti .no-a-goods{width: 160rpx;height: 160rpx;background:rgba(0,0,0,0.8);border-radius: 100%;margin: 0 auto;color: #fff;text-shadow: unset;line-height: 160rpx;}
+.dc-list>navigator>.isHideacti{width: 240rpx;height: 240rpx;top: 30rpx;left: 30rpx;position: absolute;text-align: center;font-size: 27rpx;color: #fff;padding-top: 35rpx;text-shadow: #000 0 2rpx 0;}
+.dc-list>navigator>.isHideacti image{width: 55rpx;height: 55rpx;}
+.dc-list>navigator>.isHideacti view{line-height: 38rpx;}
+.dc-list>navigator>.isHideacti .no-a-goods{width: 160rpx;height: 160rpx;background:rgba(0,0,0,0.8);border-radius: 100%;margin: 0 auto;color: #fff;text-shadow: unset;line-height: 160rpx;}
 .no-act-pri{position: absolute;bottom: 30rpx;color: #666;font-size: 28rpx;}
 .no-act-pri text{margin-left: 10rpx;}
 .no-act-pri .ss-active{color: #CCAA77}

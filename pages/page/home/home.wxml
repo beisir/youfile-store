@@ -209,7 +209,7 @@
     </view>
   </view>
   <view class='dc-list' wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
-    <navigator wx:for="{{activeResult}}" wx:key="index"  url="{{item.isHide?'':'../goodsDetails/goodsDetails?goodsId='+item.id}}" class='{{item.isHide?"opa-view":""}}'>
+    <navigator wx:for="{{activeResult}}" wx:key="index"  url="{{item.isHide?'':'../goodsDetails/goodsDetails?goodsId='+item.id}}" class='{{item.isHide?"opa-view":""}} {{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice<1?"opa-view":""}}'>
       <view>
         <image class='g-img' src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small" />
       </view>
@@ -234,9 +234,9 @@
         <image src="/image/isshow.png"></image>
         <view>该商品</view>
         <view>加商友可见</view>
-        <!-- <block>
-          <view class='no-a-goods'>已抢光</view>
-        </block> -->
+      </view>
+      <view wx:if="{{!item.isHide && item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice<1}}" class='isHideacti'>
+        <view class='no-a-goods'>已抢光</view>
       </view>
     </navigator>
   </view>
