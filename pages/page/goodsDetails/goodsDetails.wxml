@@ -74,9 +74,9 @@
       <view class='gd-font'>
         <button bindtap='addTip'>享受批发价</button>
       </view>
-      <view class='goods-er'>
+      <navigator url='../goodsQRcode/goodsQRcode?goodsId={{goodsInfo.id}}' class='goods-er'>
         <image src="/image/xcx.png"></image>
-      </view>
+      </navigator>
     </view>
     <view class='gd-title' wx:if='{{limitShow!=1}}'>
       <view>
@@ -95,9 +95,9 @@
       <view class='gd-view-n' wx:if='{{saleBatchAmount!=0}}'>
         <button>混批</button>全场满￥{{saleBatchAmount}}元可混批
       </view>
-      <view class='goods-er'>
+      <navigator url='../goodsQRcode/goodsQRcode?goodsId={{goodsInfo.id}}' class='goods-er'>
         <image src="/image/xcx.png"></image>
-      </view>
+      </navigator>
     </view>
     <view class="weui_cells weui_cells1" bindtap='showAlert'>
       <text class="store-address">选择规格 </text>
