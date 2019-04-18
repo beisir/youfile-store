@@ -49,7 +49,10 @@
         <view class='active-g'  wx:if='{{goodsInfo.isActivity}}'>
           <view>￥
             <text>{{goodsInfo.activityPrice}}</text>
-            <text>￥{{goodsInfo.sellPrice}}</text>
+            <view class='sale-num'>
+              <view>{{goodsInfo.extInfo.SALES_PROMOTION[0].batchNum}}件起购</view>
+              <text>￥{{goodsInfo.sellPrice}}</text>
+            </view>
           </view>
           <view>
             <view>{{activeMes}}</view>

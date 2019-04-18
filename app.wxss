@@ -178,6 +178,6 @@ input:focus{padding:0}
 .active-g>view:last-child{width: 260rpx;height: 0;position: absolute;right: 0;top: -8rpx;color: #CCAA77;font-size: 26rpx;text-align:center;}
 .active-g>view view{border-radius: 10rpx;margin-top:10rpx;padding-top: 12rpx;}
 .active-g>view:first-child{font-size: 26rpx;color: #fff;padding-top: 0rpx;padding-left: 30rpx;}
-.active-g>view:first-child text:first-child{font-size: 48rpx;}
+.active-g>view:first-child text:first-child{font-size: 55rpx;}
 .active-g>view:first-child text:last-child{text-decoration: line-through;margin-left: 10rpx;}
 
