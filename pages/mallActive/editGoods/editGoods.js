@@ -42,7 +42,11 @@ Page({
     // 无SKU
     noSkuPrich: 0,
     noSkuNum: 0,
-    noSkuBuynum: 0
+    noSkuBuynum: 0,
+    // 统一设置值
+    allBuyNum:'',
+    allPrice: '',
+    allStockNum: ''
   },
   // 关闭弹框
   closeFrame: function () {
@@ -215,12 +219,64 @@ Page({
     })
     this.setData({
       discount: arr,
-      ownCut: ""
     })
+    this.clearOther('choose')
+  },
+  clearOther(type){
+    let obj = {};
+    let arr = this.data.discount;
+    switch(type){
+      case 'choose':
+        obj.ownCut = ""
+        obj.allPrice = ""
+      break;
+      case 'inputCut':
+        arr.forEach(el => { el.checked = false })
+        obj.discount = arr
+        obj.allPrice = ""
+      break;
+      case 'allPrice':
+        arr.forEach(el => { el.checked = false })
+        obj.discount = arr
+        obj.ownCut = ""
+      break;
+    }
+    this.setData(obj)
   },
   sureDiscount() {
     let cut = this.data.ownCut;
-    if (cut) {
+    // 统一设置
+    let allP = this.data.allPrice,
+      allStockNum = this.data.allStockNum,
+      allBuyNum = this.data.allBuyNum;
+
+    if (allStockNum || allBuyNum){
+      let arr = this.data.skuList;
+      arr.forEach(el => {
+        if (allStockNum){
+          el.sureNum = allStockNum
+        }
+        if (allBuyNum){
+          el.buyNum = allBuyNum
+        }
+        el.surePrice = allP
+      })
+      this.setData({ skuList: arr })
+    }
+
+    // 统一价格
+    if (allP){
+      if (!/^(([1-9][0-9]*)|([0]\.\d?[0-9])|([1-9][0-9]*\.\d{1,2}))$/.test(allP)) {
+        API.showToast('请输入正确金额格式，最多两位小数')
+        return
+      }
+      let arr = this.data.skuList;
+      arr.forEach(el => {
+        el.surePrice = allP
+      })
+      this.setData({ skuList: arr })
+    }else if (cut) {
+      // 自定义折扣
       if (cut > 0 && cut < 10) {
         this.cutPrice(cut / 10)
       } else {
@@ -231,9 +287,9 @@ Page({
       let arr = this.data.discount.filter(el => el.checked)
       if (arr[0]) {
         this.cutPrice(arr[0].value)
-      } else {
-        API.showToast("请选择折扣，或输入自定义折扣")
-        return
+      // } else {
+      //   API.showToast("请选择折扣，或输入自定义折扣")
+      //   return
       }
     }
     this.closeModal()
@@ -269,9 +325,7 @@ Page({
     switch (type) {
       case 'ownCut':
         obj.ownCut = val
-        let arr = this.data.discount;
-        arr.forEach(el => { el.checked = false })
-        obj.discount = arr
+        this.clearOther('inputCut')
         break;
       case 'price':
         this.setData({
@@ -297,6 +351,16 @@ Page({
         break;
       case 'noSku-buynum':
         obj.noSkuBuynum = parseInt(val)
+        break;
+      case 'allPrice':
+        obj.allPrice = val
+        this.clearOther('allPrice')
+        break;
+      case 'allStockNum':
+        obj.allStockNum = val
+        break;
+      case 'allBuyNum':
+        obj.allBuyNum = val
         break;
     }
     this.setData(obj)
@@ -373,8 +437,8 @@ Page({
     this.setData({
       activityNumber: options.activityNumber,
       goodsId: options.goodsId
-      // activityNumber: 1904110301000031,
-      // goodsId: 190411135300
+      // activityNumber: 1904180301000056,
+      // goodsId: 180929212000
     })
     this.getDetail()
   },
