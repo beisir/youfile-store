@@ -13,3 +13,4 @@ page {background: #fff;}
 .g-image .nouse{height: 75rpx;padding:45rpx;font-size: 28rpx;width: 60rpx;display: flex;align-content: center;justify-content: space-around}
 .g-image .activing{height: 100rpx;line-height: 100rpx;padding:30rpx;font-size: 28rpx;width: 90rpx;display: flex;align-content: center;justify-content: space-around}
 .more-add{width: 40%;display:inline-block;margin-top: 20rpx;}
+.listData{background: #f7f7f7;overflow:hidden;}
