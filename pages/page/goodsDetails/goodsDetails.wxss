@@ -51,10 +51,10 @@
 .weui-view image.img{width:24rpx;height:29rpx;margin-left:15rpx;margin-top:-3rpx;margin-right: 0}
 .weui-view image.erImg{width:50rpx;height:50rpx;margin-right:0}
 .weui_cells1 .weui-view{right:30rpx}
-.gd-content{text-align:center;color:#333;font-size:30rpx;padding-bottom:80rpx;padding-top:50rpx;border-radius: 10rpx;margin:0 20rpx;background: #fff;padding-left: 20%;padding-right: 20%}
-.gd-content view{margin-bottom:10rpx}
+.gd-content{text-align:center;color:#333;font-size:30rpx;padding-bottom:50rpx;padding-top:40rpx;border-radius: 10rpx;margin:0 20rpx;background: #fff;padding-left: 30rpx;padding-right: 30rpx}
+.gd-content view{margin-bottom:10rpx;color: #333;font-weight: 600;}
 .gd-content view image{width:30rpx;height:30rpx;vertical-align:middle;margin-top:-4rpx;margin-right:10rpx}
-.gd-content text{color:#888;margin-top:10rpx;font-size:28rpx}
+.gd-content text{color:#333;margin-top:10rpx;font-size:28rpx}
 .weui_cells1 .store-address{color:#333;font-size:#333}
 .weui_cells1{margin-top:20rpx;height:90rpx;margin:20rpx;line-height:90rpx;padding:0 30rpx;border-radius: 10rpx;}
 .ym_goodsstore{background:#fff;padding:40rpx 0;border-radius: 10rpx;margin:20rpx;}
