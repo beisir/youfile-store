@@ -70,7 +70,7 @@ Page({
             listData: newArr
           })
         }else{
-          Api.showToast("暂无更多了！")
+          // Api.showToast("暂无更多了！")
         }
     })
   },

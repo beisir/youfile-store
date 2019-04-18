@@ -17,8 +17,8 @@
     </view>
     <view class='goods-spec'>
       <view class='spec-t' wx:if="{{!noSku}}"><block>商品规格（{{checkedNum}}/{{goods.goodsSkuVOList.length}}）</block>
-        <button bindtap='discountGoods' class='spec-one' style='padding:0;'>一键折扣</button>
-        <button bindtap='choiceSpec' style='padding:0;'>选择规格</button>
+      <button bindtap='choiceSpec' class='spec-one' style='padding:0;'>选择规格</button>
+      <button bindtap='discountGoods' style='padding:0;'>批量设置</button>
       </view>
       <view wx:else class='spec-t'>商品规格</view>
       <!-- sku -->
@@ -87,7 +87,24 @@
 <view hidden='{{showFrame}}' class='frame' catchtouchmove='stopScroll'>
   <view>
     <image bindtap='closeFrame' src='/image/close.png'></image>
-    <view class='fra-t bold-font'>一键折扣</view>
+    <view class='fra-t bold-font'>批量设置</view>
+    <view class='padding-box'>
+      <view class='common-set-box'>
+        <view class='common-set-item'>
+          <input type='digit' maxlength='8' value='{{allPrice}}' bindinput='watchInput' data-type='allPrice' placeholder='未输入' placeholder-class='no-text'></input>
+          <view class='common-set-title'>统一输入活动价</view>
+        </view>
+        <view class='common-set-item'>
+          <input type='number' maxlength='6' value='{{allStockNum}}' bindinput='watchInput' data-type='allStockNum' placeholder='未输入' placeholder-class='no-text'></input>
+          <view class='common-set-title'>统一输入库存</view>
+        </view>
+        <view class='common-set-item'>
+          <input type='number' maxlength='6' value='{{allBuyNum}}' bindinput='watchInput' data-type='allBuyNum' placeholder='未输入' placeholder-class='no-text'></input>
+          <view class='common-set-title'>统一输入起购量</view>
+        </view>
+      </view>
+    </view>
+    <view class='padding-box' style='font-size:28rpx;font-weight:600;line-height:1;margin:60rpx 0 28rpx;'>一键折扣</view>
     <view class='fra-discout' style='padding:0 40rpx;'>
       <view wx:for='{{discount}}' wx:key='{{index}}' data-index='{{index}}' bindtap='chooseOff'>
         <button class='{{item.checked?"ac-btn":""}}'>{{item.name}}</button>
@@ -102,7 +119,7 @@
           <input placeholder=' 请输入折扣' type='digit' bindinput='watchInput' data-type='ownCut' value='{{ownCut}}' maxlength='3'></input>折</view>
       </view>
     </view>
-    <view class='fra-goods padding-box bold-font'>折扣商品（共<text>{{checkedNum}}</text>件商品）</view>
+    <!-- <view class='fra-goods padding-box bold-font'>折扣商品（共<text>{{checkedNum}}</text>件商品）</view>
     <scroll-view scroll-y='{{true}}' class='add-cont'>
       <view wx:for='{{skuList}}' wx:if='{{item.checked}}' wx:key="{{index}}">
         <view class='g-cont'>
@@ -115,7 +132,7 @@
           </view>
         </view>
       </view>
-    </scroll-view>
+    </scroll-view> -->
     <view class='add-more' bindtap='sureDiscount'>确 定</view>
   </view>
 
