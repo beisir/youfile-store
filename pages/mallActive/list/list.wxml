@@ -9,7 +9,7 @@
 <view class='list-t'>
   <view bindtap='clickNav' wx:for="{{navData}}" wx:key="{{index}}" data-index="{{item.index}}" class='{{item.index==navIndex?"active":""}}'>{{item.name}}<view  wx:if="{{item.index==navIndex}}"></view></view>
 </view>
-<view class='listData'>
+<view class='listData' wx:if="{{listData.length>0}}">
   <view wx:for="{{listData}}" wx:key="{{index}}">
     <view class='ld-t'>{{item.activityName}}</view>
     <navigator url='../waitRalease/waitRalease?activityNumber={{item.activityNumber}}' class='ld-cont'>
@@ -30,4 +30,10 @@
       <button wx:if="{{item.activityStatus=='finish' || item.activityStatus=='be_doing'}}" data-index="{{item.activityNumber}}" data-title="{{item.activityName}}" data-status='{{item.activityStatus}}' bindtap='activityAnalysis'>活动分析</button>
     </view>
   </view>
+</view>
+<view class="nomore" wx:else>
+  <view>
+    <image src="/image/huodong.png"></image>
+  </view>
+  <text>暂无活动哦~</text>
 </view>
