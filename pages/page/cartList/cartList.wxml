@@ -1,8 +1,9 @@
 <!-- 悬浮球 -->
 <returnBall>
   <login id="login"></login>
-  <view class="main" catchtap='rightList'>
-    <view class='cf-cont' wx:if="{{hasList}}" wx:if='{{allEmpty}}'>
+  <view class='top-b' wx:if="{{detailList.length>0}}"></view>
+  <view class="main" catchtap='rightList'   wx:if="{{detailList.length>0}}">
+    <view class='cf-cont'>
       <view class='c-title' wx:for="{{storeMes}}" wx:key="{{index}}">
         <view catchtap='urlHome'>
           <image src="{{baseUrl}}{{item.logo}}?x-oss-process=style/logo"></image> {{item.storeName}}
@@ -46,7 +47,7 @@
                             <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>￥{{item.shoppingCartSkuList[0].activityPrice}}</view>
                     </block>
                     <block wx:if='{{item.shoppingCartSkuList.length==1 && !item.shoppingCartSkuList[0].isActivity}}'>
-                      <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
+                      <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
                     </block>
                       <block wx:if='{{item.shoppingCartSkuList==null}}'>
                         <view class='ct-text ct-text1-active'>
@@ -56,12 +57,12 @@
                     </block>
                     <block wx:else>
                       <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList==null}}'>
-                        <view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.sellPrice}}</view>
+                        ￥{{item.sellPrice}}</view>
                       <view class='ct-text ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList!=null}}'>
-                        <view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
+                       ￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
                       <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}'>
-                        <view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
-                      <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length==1}}'><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
+                       ￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
+                      <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length==1}}'>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
                     </block>
                   </view>
                   <view class="cart-pro-name cart-pro-name1" wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" catchtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record" wx:key="{{index}}">规格：{{record.skuName}}
@@ -162,8 +163,10 @@
         </view>
       </view>
     </view>
-    <view class='cf-cont '>
-      <view class="c-title c-title1 hide{{lostList?'show ':' '}}" wx:if="{{lostcarts.length>0}}">
+  </view>
+  <view class="main main1" wx:if="{{lostcarts.length>0}}">
+     <view class='cf-cont '>
+      <view class="c-title c-title1 hide{{lostList?'show ':' '}}" >
         <image src="/image/ic2.png"></image> 失效宝贝
         <text catchtap="emptyAll">全部清空</text>
       </view>
@@ -210,7 +213,9 @@
         <view class='bot-back '></view>
       </view>
     </view>
-    <view wx:if="{{hasList}}">
+    
+  </view>
+  <view wx:if="{{detailList.length>0}}">
       <view class="cart-footer">
         <icon wx:if="{{selectAllStatus}}" type="success" color="#CCAA77" class="total-select" catchtap="selectAll" />
         <icon wx:else type="circle" color="#A5A5A5" class="total-select" catchtap="selectAll" />
@@ -229,7 +234,6 @@
         <text>全选</text>
       </view>
     </view>
-  </view>
   <view hidden='{{goRetailStore}}'>
     <retailStore></retailStore>
   </view>

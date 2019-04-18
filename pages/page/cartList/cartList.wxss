@@ -1,4 +1,4 @@
-@import '../../../style/style.wxss';@import '../goodsDetails/goodsDetails.wxss';.main{padding-bottom:180rpx}
+@import '../../../style/style.wxss';@import '../goodsDetails/goodsDetails.wxss';
 .cart-list .hide_mes{display:none}
 .jiage-t image {height: 20rpx;}
 .cart-list .cart-pro-name2{margin-left:216rpx}
@@ -71,3 +71,12 @@
 .tr>.td:last-child> .td-red{width: 100rpx;margin: 0 auto;text-align: center;margin-top: -10rpx;color: #FF4141}
 .tr>.td:last-child> .td-nonal{width: 100rpx;margin: 0 auto;text-align: center;margin-top: -10rpx;}
 .jiage-t{position: relative;top:unset;left: unset}
+.top-b{height: 200rpx;background: #CCAA77;position: absolute;top: 0;width: 100%;left: 0}
+page{border-top:none;}
+.main{border-radius: 10rpx;margin: 0 20rpx;background: #fff;position: relative;z-index: 10;overflow: hidden}
+.main{border-bottom: 0}
+.main1{margin-bottom:180rpx;margin-top: 20rpx;}
+.cart-list .table {padding-left:0rpx;padding-right: 0;width: unset}
+.c-title{border-bottom:0}
+.table{margin: 0}
+.cart-no-data{margin-top: 80rpx}
