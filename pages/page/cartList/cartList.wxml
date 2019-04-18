@@ -41,10 +41,13 @@
                   </navigator>
                   <view style='width:300rpx' class='ct-title ct-title1'>{{item.goodsName}}
                     <block wx:if='{{item.isActivity}}'>
-                      <!-- <block wx:if='{{item.shoppingCartSkuList.length==1}}'>
+                      <block wx:if='{{item.shoppingCartSkuList.length==1 && item.shoppingCartSkuList[0].isActivity}}'>
                       <view class='ct-text ct-text1-active' style='right:20rpx;top:42rpx;'  data-id='{{item.goodsId}}' catchtap="lookDetails"><view class="jiage-t jiage-tRed" style='font-size:20rpx'>
                             <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>￥{{item.shoppingCartSkuList[0].activityPrice}}</view>
-                    </block> -->
+                    </block>
+                    <block wx:if='{{item.shoppingCartSkuList.length==1 && !item.shoppingCartSkuList[0].isActivity}}'>
+                      <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
+                    </block>
                       <block wx:if='{{item.shoppingCartSkuList==null}}'>
                         <view class='ct-text ct-text1-active'>
                           <view class="jiage-t jiage-tRed" style='font-size:20rpx'>
