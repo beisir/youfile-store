@@ -100,7 +100,7 @@
         <image src="/image/xcx.png"></image>
       </navigator>
     </view>
-    <view class="weui_cells weui_cells1" bindtap='showAlert'>
+    <view class="weui_cells weui_cells1" style="height:110rpx;line-Height:110rpx;" bindtap='showAlert'>
       <text class="store-address">选择规格 </text>
       <view class='skuStr'>{{skuStr}}</view>
       <view class='skuStr skuStr1' wx:if='{{!skuStr}}'>请选择商品规格</view>

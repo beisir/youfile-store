@@ -16,9 +16,9 @@
 .gd-ins text.lt-text{font-size:28rpx;color:#333}
 .gd-ins view:nth-child(2){line-height: 22rpx}
 .gd-ins view.hasc-a{line-height: 22rpx;color: #F02B2B;display: flex;align-items: center;}
-.gd-gg{color:#333;font-size:28rpx;font-weight:bold;padding:0 40rpx;max-height:350rpx;overflow-y:scroll}
+.gd-gg{color:#333;font-size:28rpx;font-weight:bold;padding:0 40rpx;max-height:500rpx;overflow-y:scroll}
 .gd-gg .gd-view{display:inline-block;text-align:center;margin-right:20rpx}
-.gd-gg .gd-view view{font-size:28rpx;padding:0 15rpx;min-width:90rpx;column-rule-color:#fff;height:50rpx;line-height:50rpx;color:#333;font-weight:normal;background:#fff;border:0;border:2rpx solid #F5F5F5;border-radius:10rpx;margin-top:25rpx}
+.gd-gg .gd-view view{font-size:28rpx;padding:5px 15rpx;min-width:90rpx;column-rule-color:#fff;height:50rpx;line-height:50rpx;color:#333;font-weight:normal;background:#fff;border:0;border:2rpx solid #F5F5F5;border-radius:10rpx;margin-top:25rpx}
 .gd-gg .gd-view view.lt-view{border-radius:10rpx;background:#EEEEEE;position:relative}
 .gd-gg view.active,.gd-gg .gd-view view.active{color:#fff;background:#CCAA77}
 .gd-gg view.nohave{color:#999;background:#fff;border:2rpx solid #F5F5F5}
@@ -102,7 +102,7 @@
 .lt-attr{margin-top:40rpx;border-top:2rpx solid #E5E5E5;padding:0;margin-left:25rpx;max-height:470rpx}
 .lt-add-cart image{width:40rpx;height:40rpx;vertical-align:middle;margin-top:-17rpx}
 .lt-num{height:48rpx;border-left:2rpx solid #D5B98F;border-right:2rpx solid #D5B98F}
-.lt-table{color:#666;font-weight:normal;height:400rpx;overflow:scroll;height:350rpx;margin-bottom:150rpx;margin-top:10px}
+.lt-table{color:#666;font-weight:normal;height:500rpx;overflow:scroll;height:450rpx;margin-bottom:150rpx;margin-top:10px}
 .lt-tr{position:relative;border-bottom: 2rpx solid #F7F7F7;padding-bottom: 40rpx}
 .lt-tr>view{display:inline-block;width:22%;text-align:center;line-height:60rpx;position: relative;padding:10rpx 0}
 .ct-text1  .jiage-t,.jiage-t{border: 2rpx solid #CCAA77;padding: 0 5rpx;color:#CCAA77;height: 30rpx;line-height: 30rpx;border-radius: 10rpx;width: 90rpx;margin: 0 auto;text-align: center}

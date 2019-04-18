@@ -58,7 +58,7 @@
                         <view class="jiage-t" style='font-size:20rpx'>零售价</view>￥{{item.shoppingCartSkuList[0].sellPrice}}</view>
                       <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}'>
                         <view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
-                      <!-- <view class='ct-text ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList!=null}}'><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view> -->
+                      <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length==1}}'><view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
                     </block>
                   </view>
                   <view class="cart-pro-name cart-pro-name1" wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" catchtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record" wx:key="{{index}}">规格：{{record.skuName}}
