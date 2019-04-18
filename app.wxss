@@ -49,7 +49,7 @@ button::after{border:none}
 .weui-bottom view{width:50%;text-align:center;line-height:120rpx;display:inline-block}
 .weui-bottom view:last-child{color:#fff;background:#CCAA77;position:absolute;right:0;line-height:122rpx;height:122rpx;top:0rpx}
 .home-ser-new{position:absolute;top:30rpx;left:45rpx;height:40rpx;width:40rpx}
-.cf-cont{height:auto;margin-top:20rpx;background:#fff}
+.cf-cont{height:auto;margin-top:20rpx;background:#fff;padding-bottom: 20rpx}
 .cart-list:last-child{border-bottom:0}
 .ct-text{color:#999;text-align:right;position:absolute;font-size:28rpx;right:30rpx}
 .ct-title{font-size:28rpx;color:#999;height:88rpx;margin-right:120rpx;width:410rpx;word-break:break-all;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
