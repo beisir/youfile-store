@@ -130,7 +130,7 @@
             <view class="td bold-font td-money">
               <!-- 抢购价 -->
               <view class='td-red' wx:if="{{item.hasActiveGoods}}">
-                <view class="jiage-t jiage-tRed" style='font-size:20rpx'> <image src="/image/ermR.png" mode='widthFix'></image>抢购价</view>
+                <view class="jiage-t jiage-tRed" style='font-size:20rpx'> <image src="/image/ccc.png" mode='widthFix'></image>抢购价</view>
             ￥{{item.activityPrice}}
               </view>
               <!-- 批发价 -->
