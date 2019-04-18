@@ -89,6 +89,7 @@ Page({
   },
   // 获取进货商交易记录
   getTransList: function (){
+    if (this.data.loadingList) { return }
     var _this=this,
       lastDay = this.data.datIndex,
       userId = this.data.userId
@@ -101,7 +102,11 @@ Page({
     if (lastDay == 2) {
       lastDay = ''
     }
+    this.setData({
+      loadingList: true
+    })
     Api.purchaserTrans({ userId: userId, lastDay: lastDay}).then(res=>{
+      
       if(res.obj){
         var detailList = res.obj.orderPage.result,
           datas = _this.data.result
@@ -115,6 +120,10 @@ Page({
           _this.setData({
             result: newArr,
             resultObj: res.obj
+          },()=>{
+            this.setData({
+              loadingList: false
+            })
           })
         }
       }

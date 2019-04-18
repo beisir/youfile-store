@@ -5,7 +5,7 @@ page {background: #fff;}
 .nomore{margin-bottom: 100rpx;}
 .wait-cont{background: #fff;position: relative;padding-top: 20rpx}
 .addgoods{height: 100rpx;color: #fff;line-height: 100rpx;font-size: 32rpx;background:#CCAA77;width: 90%;margin: 0rpx 5%;border-radius:10rpx;margin-top: 180rpx;}
-.wr-bottom{position: fixed;bottom: 20rpx;width: 100%;}
+.wr-bottom{position: fixed;bottom: 20rpx;width:690rpx;background: #CCAA77;border-radius: 100rpx;height: 100rpx;left: 0;right: 0;margin: auto;display: flex;align-items: center;overflow: hidden;}
 .tab-view .tab-one-1,.tab-view .tab-two{padding-right: 50rpx;}
 .tab-view .tab-one,.tab-view .tab-two-1{padding-left: 50rpx;}
 .add-cont>view{box-shadow: 5rpx 0 30rpx #ededed}
@@ -14,3 +14,8 @@ page {background: #fff;}
 .g-image .activing{height: 100rpx;line-height: 100rpx;padding:30rpx;font-size: 28rpx;width: 90rpx;display: flex;align-content: center;justify-content: space-around}
 .more-add{width: 40%;display:inline-block;margin-top: 20rpx;}
 .listData{background: #f7f7f7;overflow:hidden;}
+
+.white-line{width: 2rpx;height: 30rpx;background: #fff; }
+.wr-bottom button{padding: 0;margin: 0;line-height: 100rpx;}
+.line-btn{height: 100%;width: 100%;}
+.group-btn{height: 100%;width: 50%;}
