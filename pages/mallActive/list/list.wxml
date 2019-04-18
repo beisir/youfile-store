@@ -11,6 +11,7 @@
 </view>
 <view class='listData' wx:if="{{listData.length>0}}">
   <view wx:for="{{listData}}" wx:key="{{index}}">
+    <image wx:if="{{item.activityStatus=='finish'}}" src='/image/ac-end.png' class='tip-icon'></image>
     <view class='ld-t'>{{item.activityName}}</view>
     <navigator url='../waitRalease/waitRalease?activityNumber={{item.activityNumber}}' class='ld-cont'>
       <view>
