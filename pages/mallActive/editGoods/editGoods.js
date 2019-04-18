@@ -123,7 +123,7 @@ Page({
               err = '请输入正确金额格式，最多两位小数'
             }
           }  
-          if (el.surePrice > el.wholesalePrice) {
+          if (parseFloat(el.surePrice) > el.wholesalePrice) {
             err = '商品规格' + (index + 1) + '：商品活动价格不能超过商品批发价'
           }
 
@@ -250,14 +250,14 @@ Page({
       allStockNum = this.data.allStockNum,
       allBuyNum = this.data.allBuyNum;
 
-    if (allStockNum || allBuyNum){
+    if (allStockNum || allBuyNum) {
       let arr = this.data.skuList;
       arr.forEach(el => {
-        if (allStockNum){
-          el.sureNum = allStockNum
+        if (allStockNum) {
+          el.sureNum = parseInt(allStockNum)
         }
-        if (allBuyNum){
-          el.buyNum = allBuyNum
+        if (allBuyNum) {
+          el.buyNum = parseInt(allBuyNum)
         }
         el.surePrice = allP
       })
