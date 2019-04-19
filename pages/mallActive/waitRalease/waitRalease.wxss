@@ -19,3 +19,11 @@ page {background: #fff;}
 .wr-bottom button{padding: 0;margin: 0;line-height: 100rpx;}
 .line-btn{height: 100%;width: 100%;}
 .group-btn{height: 100%;width: 50%;}
+/* 分享 */
+.share-item{width: 50%;display: flex;flex-direction: column; align-items: center;padding-top:40rpx;height: 100%;box-sizing: border-box;position: relative;}
+.share-poster-tip{height: 30rpx;padding: 0 13rpx;line-height: 30rpx;background:#f14c38;color: #fff;font-size: 24rpx;border-radius: 30rpx;position:absolute;right:76rpx;top:26rpx;}
+.share-item image{height: 97rpx;width: 97rpx;margin-bottom: 30rpx;}
+.share-item text{font-size: 28rpx;}
+.share-item button{background: rgba(255,255,255,0);padding:0;margin:0;border: 0;position: absolute;width: 90%;height: 90%;box-sizing: border-box;top: 0;}
+.flex-between{display: flex;align-items: center;justify-content: space-between;}
+.layerline{height: 1rpx;background: #eee;}

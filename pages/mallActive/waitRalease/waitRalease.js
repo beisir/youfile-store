@@ -16,6 +16,16 @@ Page({
     releaseStatus: "init",
     loadData: false
   },
+  // 分享
+  share(e) {
+    this.setData({
+      shareItem: e.currentTarget.dataset.item 
+    })
+    this.selectComponent("#shareway").open();
+  },
+  closeBootom(){
+    this.selectComponent("#shareway").close();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -239,5 +249,6 @@ Page({
         fail: (res) => { }
       }
     }
+    this.closeBootom()
   }
 })

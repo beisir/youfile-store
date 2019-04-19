@@ -1,5 +1,6 @@
 <!--assembly/bottomLayer.wxml-->
-<view class='modal' hidden='{{bottomLayer}}'>
+<view hidden='{{bottomLayer}}'>
+  <view class='modal' bindtap='close'></view>
   <view class='layer-body' style='height:{{height}}rpx;'>
     <view wx:if='{{closeBtn}}' class='close-header' bindtap='close'>
       <image class='close-img' src='/image/close.png'></image>

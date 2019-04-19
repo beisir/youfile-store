@@ -82,8 +82,7 @@
       </navigator>
     </view>
     <view class='gd-title' wx:if='{{limitShow!=1}}'>
-      <view>
-        {{goodsInfo.name}}
+      <view>{{goodsInfo.name}}
         <button class='shre_btn' open-type='share' data-name='{{goodsInfo.name}}' data-id='{{goodsId}}'>
           <image src="/image/fx.png"></image>
         </button>
