@@ -259,7 +259,9 @@ Page({
         if (allBuyNum) {
           el.buyNum = parseInt(allBuyNum)
         }
-        el.surePrice = allP
+        if (allP){
+          el.surePrice = allP
+        }
       })
       this.setData({ skuList: arr })
     }
