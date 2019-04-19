@@ -52,7 +52,7 @@
     <image src="/image/home.png"></image>
   </view>回首页</view>
 <view class='bottom_M'>
-  <navigator  url='../workIndex/workIndex'>
+  <navigator open-type="redirect"  url='../workIndex/workIndex'>
     <image src="/image/ww1.png"></image>
     <view>工作台</view>
   </navigator>
@@ -60,7 +60,7 @@
     <image src="/image/fenxiao2.png"></image>
     <view>云分销</view>
   </navigator>
-  <navigator url='../../businessFriend/merchant/index/index'>
+  <navigator open-type="redirect" url='../../businessFriend/merchant/index/index'>
     <image src="/image/admin2.png"></image>
     <view>商友录</view>
   </navigator>
