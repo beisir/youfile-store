@@ -6,7 +6,7 @@
     <view class='cf-cont'>
       <view class='c-title' wx:for="{{storeMes}}" wx:key="{{index}}">
         <view catchtap='urlHome'>
-          <image src="{{baseUrl}}{{item.logo}}?x-oss-process=style/logo"></image> {{item.storeName}}
+          <image src="/image/u4.png"></image> {{item.storeName}}
           <image class='itimg' src="/image/icl.png"></image>
         </view>
         <view wx:if='{{limitShow==3}}' class='new-c-t'>
@@ -40,7 +40,7 @@
                   <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}">
                     <image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image>
                   </navigator>
-                  <view style='width:300rpx' class='ct-title ct-title1'>{{item.goodsName}}
+                  <view class='ct-title ct-title1'>{{item.goodsName}}
                     <block wx:if='{{item.isActivity}}'>
                       <block wx:if='{{item.shoppingCartSkuList.length==1 && item.shoppingCartSkuList[0].isActivity}}'>
                       <view class='ct-text ct-text1-active' style='right:20rpx;top:42rpx;'  data-id='{{item.goodsId}}' catchtap="lookDetails"><view class="jiage-t jiage-tRed" style='font-size:20rpx'>
