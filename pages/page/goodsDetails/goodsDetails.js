@@ -27,7 +27,7 @@ Page({
   data: {
     globalData: app.globalData,
     limitShow: 1,
-    mallApp: navigateToAppID.platform,
+    mallCode: '',
     storeId: wx.getStorageSync('storeId'),
     baseUrl: app.globalData.imageUrl,
     goodsSpecificationVOList: [],
@@ -135,6 +135,15 @@ Page({
     } else {
       getIdentity(this, this.data.goodsId, false) //刷新登录
     }
+    this.getMallCode()
+  },
+  // 获取mallcode
+  getMallCode(){
+    Api.simpleStoreMsg({ storeId: wx.getStorageSync('storeId') }).then(res => {
+      this.setData({
+        mallCode: res.obj.mallCode ? res.obj.mallCode : '1000'
+      })
+    })
   },
   // 获取商品详情
   getDetails: function (goodsId, isTrue) {
