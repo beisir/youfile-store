@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "购物车",
-  "enablePullDownRefresh": true,
+  "enablePullDownRefresh": false,
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#CCAA77",
   "backgroundColor": "#CCAA77",

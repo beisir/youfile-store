@@ -1,10 +1,10 @@
 @import '../../../style/style.wxss';@import '../goodsDetails/goodsDetails.wxss';
 .cart-list .hide_mes{display:none}
 .jiage-t image {height: 20rpx;}
-.cart-list .cart-pro-name2{margin-left:216rpx}
-.allNumShow{font-size:28rpx;text-align:right;color:#999;margin-right:40rpx;height: 100rpx;line-height: 100rpx;}
-.allNumShow text{color:#CCAA77;font-weight:600}
-.man-j{font-size:24rpx;position:absolute;margin-top:15rpx}
+/* .cart-list .cart-pro-name2{margin-left:216rpx} */
+.allNumShow{font-size:24rpx;text-align:right;color:#999;margin-right:40rpx;height: 100rpx;line-height: 100rpx;}
+.allNumShow text{color:#CCAA77;font-weight:600;font-size: 30rpx;}
+.man-j{font-size:24rpx;margin-top:-6rpx}
 .man-j text{color:#CCAA77}
 .classTd{color:#999;text-decoration:line-through}
 .cart-del{position:absolute;right:-120rpx;top:0rpx;width:120rpx;line-height:225rpx;background:#FF4141;height:225rpx;color:#fff;text-align:center;font-size:30rpx}
@@ -80,3 +80,5 @@ page{border-top:none;}
 .c-title{border-bottom:0}
 .table{margin: 0}
 .cart-no-data{margin-top: 80rpx}
+.price-n{width: 110rpx;}
+.price-n .ct-text{position: relative;right: unset}
