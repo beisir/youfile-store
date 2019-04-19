@@ -68,7 +68,7 @@
 .st-cont{width:100%}
 .st-d-status view{width:35%}
 .st-all{padding-top:50rpx}
-.table .tr{padding: 25rpx 0;}
+.table .tr{padding: 35rpx 0 25rpx;}
 .table>.tr:first-child{padding-top:12rpx;background: #FAFAFA;}
 .tr>.td:last-child> .td-red{margin-top: -10rpx;color: #FF4141}
 .tr>.td:last-child> .td-nonal{margin-top: -10rpx;}
