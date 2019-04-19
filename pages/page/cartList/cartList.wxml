@@ -85,7 +85,7 @@
                     <view class="tr" wx:if='{{limitShow!=3}}' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}" wx:for-item="record">
                       <view class="td">{{record.skuName}}</view>
                       <view class="td">{{record.num}}件</view>
-                      <view class="td classTd">￥{{record.sellPrice}}</view>
+                      <view class="td {{item.isActivity?'classTd':''}}">￥{{record.sellPrice}}</view>
                       <view class="td" wx:if="{{item.isActivity}}">
                         <view class='td-red' wx:if="{{record.isActivity}}">
                           <view class="jiage-t jiage-tRed" style='font-size:20rpx'>

@@ -247,6 +247,7 @@ Page({
             selectAllStatus: true,
           });
           //绑定活动
+          var numAc = 0
           if (effectiveList.length > 0) {
             for (var v of effectiveList) {
               var extInfo = v.extInfo.SALES_PROMOTION
@@ -261,12 +262,18 @@ Page({
                   for (var val of goodsSkuVOList) {
                     for (var k of standardGoodsSkuPromotions) {
                       if (val.skuCode == k.skuCode) {
+                        numAc++
                         val.isActivity = true
                         val.saleBatch = k.batchNum
                         val.saleStockNum = k.stockNum
                         val.activityPrice = k.activityPrice
                       }
                     }
+                  }
+                  if (numAc > 0) {
+                    v.isActivity = true
+                  } else {
+                    v.isActivity = false
                   }
                 }
               } else {
