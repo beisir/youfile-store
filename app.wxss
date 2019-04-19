@@ -58,8 +58,8 @@ button::after{border:none}
 .c-title view{display:inline}
 .c-title text{position:absolute;right:30rpx}
 .c-title image{width:50rpx;height:50rpx;margin-top:-2rpx;margin-right:5rpx;vertical-align:middle}
-.cart-list .cart-thumb{position:absolute;top:35rpx;left:-170rpx;background:#fff;width:150rpx;height:150rpx}
-.cart-list .cart-pro-name{display:inline-block;color:#888;margin-top:17rpx;padding:3rpx 0rpx;font-size:24rpx;overflow:hidden}
+.cart-list .cart-thumb{border-radius:10rpx;position:absolute;top:35rpx;left:-170rpx;background:#fff;width:150rpx;height:150rpx}
+.cart-list .cart-pro-name{display:inline-block;color:#888;margin-top:20rpx;padding:3rpx 0rpx;font-size:24rpx;overflow:hidden}
 .cart-pro-name image{width:20rpx;height:20rpx;position:absolute;right:8rpx;top:16rpx;vertical-align:middle;margin-left:5rpx}
 .cart-list .cart-pro-price{display:inline-block;float:right;height:105rpx;line-height:50rpx}
 .cart-list{position:relative;margin-left:265rpx;height:230rpx;padding-top:35rpx;border-bottom:2rpx solid #ECECEC}
