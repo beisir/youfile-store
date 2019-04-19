@@ -90,3 +90,4 @@ page{border-top:none;}
 .cart-list .cart-pro-select{top:72rpx;left: -250rpx;}
 .sm-cny-icon{font-size: 24rpx!important;}
 .goods-main-part{min-height: 162rpx;}
+.goods-main-part .jiage-tRed{margin: 0;}

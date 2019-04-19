@@ -113,7 +113,7 @@
 .lt-table>.lt-tr .lt-add-cart{top:-10rpx}
 .purch-num{font-size: 24rpx;color: #999;position: absolute;bottom: -3rpx;width: 100%;height: 0rpx;left: 20rpx}
 .jiage-t image{width: 15rpx;vertical-align: middle;margin-right: 2rpx;margin-top: -2rpx;}
-.jiage-tRed{border: 2rpx solid #F02B2B;color: #F02B2B;margin: 0;}
+.jiage-tRed{border: 2rpx solid #F02B2B;color: #F02B2B;margin: 0 auto;}
 .lt-tr>view.setCss{line-height:30rpx;width:40%}
 /* .lt-tr>view:last-child{padding-top:20rpx;line-height:60rpx;width:32%} */
 .lt-tr>view.add-xian{text-decoration:line-through}
