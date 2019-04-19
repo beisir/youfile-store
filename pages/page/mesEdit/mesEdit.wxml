@@ -1,3 +1,4 @@
+<wxs src='../../../public/filter.wxs' module='filter'></wxs>
 <view class='mes-cont'>
   <view class="ym_jpstorename">
     <view class="ym_jpstorelogo">
@@ -76,7 +77,7 @@
   <view>
     <text>  主营范围</text>
     <navigator class='new-left' url='../main/main?name={{storeMes.businessScope}}'>
-      {{storeMes.businessScope}}
+      {{filter.my_slice(storeMes.businessScope,9)}}
       <image class='img' src="/image/icl.png"></image>
     </navigator>
   </view>

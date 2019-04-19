@@ -15,7 +15,7 @@
 .gd-ins text{color:#999;font-size:26rpx}
 .gd-ins text.lt-text{font-size:28rpx;color:#333}
 .gd-ins view:nth-child(2){line-height: 22rpx}
-.gd-ins view.hasc-a{line-height: 22rpx;color: #F02B2B;display: flex;align-items: center;font-size: 30rpx;}
+.gd-ins view.hasc-a{line-height:40rpx;color: #F02B2B;display: flex;align-items: center;font-size: 40rpx;}
 .hasc-a .jiage-tRed{font-size: 22rpx;}
 .gd-gg{color:#333;font-size:28rpx;font-weight:bold;padding:0 40rpx;max-height:450rpx;overflow-y:scroll}
 .gd-gg .gd-view{display:inline-block;text-align:center;margin-right:20rpx}

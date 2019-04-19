@@ -65,7 +65,7 @@
                       <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'  wx:if='{{limitShow==3 && item.shoppingCartSkuList.length==1}}'>￥{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
                     </block>
                   </view>
-                  <view class="cart-pro-name cart-pro-name1" wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" catchtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record" wx:key="{{index}}">规格：{{record.skuName}}
+                  <view class="cart-pro-name cart-pro-name1" wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" catchtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record" wx:key="{{index}}">{{record.skuName}}
                     <image class='down' src="/image/down.png"></image>
                   </view>
                   <view wx:if='{{limitShow==3 && item.shoppingCartSkuList.length>1 && storeNum>0}}' class='man-j'>满
