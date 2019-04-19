@@ -59,7 +59,7 @@
                           <view class='ct-text ct-text1-active'>
                             <view class="jiage-t jiage-tRed" style='font-size:20rpx'>
                               <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>
-                            <text class='sm-cny-icon'>￥</text>{{item.shoppingCartSkuList[0].activityPrice}}11111</view>
+                            <text class='sm-cny-icon'>￥</text>{{item.shoppingCartSkuList[0].activityPrice}}</view>
                         </block>
                         <block wx:if='{{item.shoppingCartSkuList.length==1 && !item.shoppingCartSkuList[0].isActivity}}'>
                           <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'>
