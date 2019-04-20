@@ -286,7 +286,7 @@
               </view>
             </view>
             <!-- 价格展示 -->
-            <view class='gd-gg lt-attr' wx:if='{{index==0}}'>
+            <view class='gd-gg lt-attr'  wx:if='{{index==0}}'>
               <view class="lt-table">
                 <view class="lt-tr">
                   <view wx:if='{{!newSkuOnly}}'>{{nameTwo}}</view>
@@ -390,7 +390,7 @@
         <view wx:for='{{goodsSpecificationVOList}}' wx:key="{{index}}">
           <view class='gd-gg' wx:if='{{index==0}}'>
             <text>{{item.specName}}</text>
-            <view>
+            <view style='max-height: 280rpx;overflow-y: scroll;'>
               <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                 <view class='gd-view'>
                   <view data-code='{{item.specValueCode}}' class="{{specsTab==index?'active':''}}" data-current="{{index}}" bindtap='changeButton'>{{item.specValueName}}</view>
@@ -400,7 +400,7 @@
           </view>
           <view class='gd-gg gd-gg1' wx:if='{{index==1}}'>
             <text>{{item.specName}}</text>
-            <view style='max-height:250rpx;overflow:scroll;'>
+            <view style='max-height:220rpx;overflow:scroll;'>
               <block wx:for="{{item.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                 <view class='gd-view'>
                   <view data-code='{{item.specValueCode}}' class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi' style='padding:10rpx 15rpx;'>{{item.specValueName}}</view>
@@ -409,7 +409,7 @@
             </view>
           </view>
         </view>
-        <view class='gd-gg gd-gg1' style="margin-bottom:60rpx;">
+        <view class='gd-gg gd-gg1'>
           <text>购买数量</text>
           <view class='cart-list gd-cart-list'>
             <view class="cart-count-box">

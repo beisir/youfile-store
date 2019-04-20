@@ -136,6 +136,7 @@ class Calculation {
       if (hasActiveGoods) {
         activeGoodsTotal = goodsInfo.num * goodsInfo.activityPrice
       } else {
+        nums = goodsInfo.num
         total = goodsInfo.num * goodsInfo.sellPrice
         newTotal = goodsInfo.num * goodsInfo.wholesalePrice
       }
@@ -173,6 +174,7 @@ class Calculation {
             discountShow = true
           }
         }
+        console.log(saleBatchNumGoods+"//"+nums)
         differNum = saleBatchNumGoods - nums
         differMoney = saleBatchAmount - total
       }

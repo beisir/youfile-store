@@ -49,10 +49,12 @@
                     <view class="cart-pro-name cart-pro-name1 cart-pro-name2" data-name="more" data-index="{{index}}" wx:if="{{item.shoppingCartSkuList.length>1}}" catchtap='showAlert'>修改规格 / 数量
                       <image class='down' src="/image/down.png"></image>
                     </view>
-                    <view wx:if='{{limitShow==3 && item.saleBatchNum && storeNum>0}}' class='man-j'>满
-                      <text>{{item.saleBatchNum}}</text>起批
-                      <text wx:if='{{item.saleBatchNum-item.num>0 && !item.enjoyPrice}}' style='color:#333;'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum-item.num}}</text>件</text>
-                    </view>
+                     <block  wx:if='{{!item.isActivity}}'>
+                      <view wx:if='{{limitShow==3 && item.saleBatchNum && storeNum>0}}' class='man-j'>满
+                        <text>{{item.saleBatchNum}}</text>起批
+                        <text wx:if='{{item.saleBatchNum-item.num>0 && !item.enjoyPrice}}' style='color:#333;'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum-item.num}}</text>件</text>
+                      </view>
+                    </block>
                     <view class='price-n'>
                       <block wx:if='{{item.isActivity}}'>
                         <block wx:if='{{item.shoppingCartSkuList.length==1 && item.shoppingCartSkuList[0].isActivity}}'>
@@ -77,8 +79,10 @@
                           <text class='sm-cny-icon'>￥</text>{{item.sellPrice}}</view>
                         <view class='ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList.length==1}}'><text class='sm-cny-icon'>￥</text>{{item.shoppingCartSkuList[0].sellPrice}}</view>
                         <view class='ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}'>
+                         <view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>
                           <text class='sm-cny-icon'>￥</text>{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
                         <view class='ct-text1' style='right:20rpx;top:42rpx;' wx:if='{{limitShow==3 && item.shoppingCartSkuList.length==1}}'>
+                         <view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>
                           <text class='sm-cny-icon'>￥</text>{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
                       </block>
 

@@ -625,7 +625,9 @@ Page({
     for (var i = 0; i < detailList.length; i++) {
       if (detailList[i].selected) {
         if (limitShow == 3) {
-          saleBatchGoodsNum = detailList[i].saleBatchNum
+          if(!detailList[i].isActivity){
+            saleBatchGoodsNum = detailList[i].saleBatchNum
+          }
           if (!Api.isNotEmpty(saleBatchGoodsNum)) {
             detailList[i].saleBatchNum = storeNum
           }
@@ -642,9 +644,11 @@ Page({
         if (detailList[i].selected) {
           allTotalNum = parseInt(detailList[i].num)
           allGoodsAmount = parseFloat(detailList[i].allGoodsAmount)
-          differentPriceNew += allGoodsAmount
+          if (!detailList[i].isActivity) {
+            differentPriceNew += allGoodsAmount
+            allGoodsNum += allTotalNum
+          }
           saleBatchGoodsNum = detailList[i].saleBatchNum
-          allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
           if (storeNum == 0) {
             if (storeAmount == 0) {

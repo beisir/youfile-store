@@ -1,7 +1,6 @@
 <wxs src="../../../public/filter.wxs"  module="filter"></wxs>
 <!-- 悬浮球 -->
 <returnBall>
-
   <view wx:if="{{initOrder && limitShow == 2}}">
     <initstroe></initstroe>
   </view>

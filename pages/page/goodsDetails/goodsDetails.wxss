@@ -9,6 +9,7 @@
 .gd-image{width:160rpx;height:160rpx;overflow:hidden;border-radius:10rpx}
 .gd-image image{max-width:160rpx;max-height:160rpx}
 .gd-top{border-bottom:2rpx solid #E2E2E2;margin:40rpx;padding:10rpx 0 40rpx 0;position:relative}
+/* .gd-top>view{max-height:790rpx;overflow-y:scroll} */
 .gdclose{position:absolute;right:-10rpx;top:-10rpx;width:40rpx;z-index:10;height:40rpx}
 .gd-ins{position:absolute;left:185rpx;top:0rpx;font-size:28rpx;color:#CCAA77}
 .gd-ins .gd-title1{color:#333;font-weight:bold;padding-right:30rpx;margin-top:10rpx;margin-bottom:10rpx;text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical}
@@ -17,9 +18,9 @@
 .gd-ins view:nth-child(2){line-height: 22rpx}
 .gd-ins view.hasc-a{line-height:40rpx;color: #F02B2B;display: flex;align-items: center;font-size: 40rpx;}
 .hasc-a .jiage-tRed{font-size: 22rpx;}
-.gd-gg{color:#333;font-size:28rpx;font-weight:bold;padding:0 40rpx;max-height:450rpx;overflow-y:scroll}
+.gd-gg{color:#333;font-size:28rpx;font-weight:bold;padding:0 40rpx}
 .gd-gg .gd-view{display:inline-block;text-align:center;margin-right:20rpx}
-.gd-alert  view>.gd-gg:first-child{max-height: 320rpx}
+/* .gd-alert  view>.gd-gg:first-child{max-height: 320rpx} */
 .gd-gg .gd-view view{font-size:28rpx;padding:5px 15rpx;min-width:90rpx;column-rule-color:#fff;height:50rpx;line-height:52rpx;color:#333;font-weight:normal;background:#fff;border:0;border:2rpx solid #F5F5F5;border-radius:10rpx;margin-top:25rpx}
 .gd-gg .gd-view view.lt-view{border-radius:10rpx;background:#EEEEEE;position:relative}
 .gd-gg view.active,.gd-gg .gd-view view.active{color:#fff;background:#CCAA77}
