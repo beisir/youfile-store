@@ -3,7 +3,7 @@
 .jiage-t image {height: 20rpx;}
 /* .cart-list .cart-pro-name2{margin-left:216rpx} */
 .cart-pro-name{margin-bottom: 10rpx;}
-.allNumShow{font-size:24rpx;text-align:right;color:#999;margin-right:40rpx;height: 100rpx;line-height: 100rpx;}
+.allNumShow{font-size:24rpx;text-align:right;color:#999;margin-right:40rpx;height: 100rpx;line-height: 100rpx;margin-left: -100rpx;}
 .allNumShow text{color:#CCAA77;font-weight:600;font-size: 30rpx;}
 .man-j{font-size:24rpx;margin-top:-6rpx}
 .man-j text{color:#CCAA77}
@@ -82,7 +82,7 @@ page{border-top:none;}
 .c-title{border-bottom:0;}
 .table{margin: 0}
 .cart-no-data{margin-top: 80rpx}
-.price-n{display: flex;align-items: center;justify-content: space-between;padding-right: 10rpx;}
+.price-n{display: flex;align-items: center;justify-content: space-between;padding-right: 10rpx;font-size: 28rpx;}
 .cf-cont{margin: 0;}
 .flex-center-store-name{font-weight: 600;color: #333;font-size: 26rpx;display: flex!important;align-items: center;}
 .goodsName-box{line-height: 38rpx;max-height:76rpx;height:auto;margin-bottom: 10rpx;}

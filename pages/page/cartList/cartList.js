@@ -9,6 +9,15 @@ function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
   isStoreOwner.enterIdentity().then(res => {
     _this.getList(_this)
+    if (wx.getStorageSync("admin") == 3) {
+      wx.setNavigationBarTitle({
+        title: '进货车',
+      })
+    } else {
+      wx.setNavigationBarTitle({
+        title: '购物车',
+      })
+    }
   }).catch(res => {});
 }
 Page({
@@ -37,7 +46,7 @@ Page({
     leftVal: '',
     numbers: 1,
     baseUrl: app.globalData.imageUrl,
-    limitShow: 1,
+    limitShow: wx.getStorageSync("admin"),
     storeAmount: 0,
     storeNum: 0,
     differentPrice: 0,
@@ -368,15 +377,6 @@ Page({
 
   },
   onShow() {
-    if (this.data.limitShow==3){
-      wx.setNavigationBarTitle({
-        title: '进货车',
-      })
-    }else{
-      wx.setNavigationBarTitle({
-        title: '购物车',
-      })
-    }
     this.setData({
       detailList: []
     })
@@ -625,9 +625,7 @@ Page({
     for (var i = 0; i < detailList.length; i++) {
       if (detailList[i].selected) {
         if (limitShow == 3) {
-          if(!detailList[i].isActivity){
-            saleBatchGoodsNum = detailList[i].saleBatchNum
-          }
+          saleBatchGoodsNum = detailList[i].saleBatchNum
           if (!Api.isNotEmpty(saleBatchGoodsNum)) {
             detailList[i].saleBatchNum = storeNum
           }
@@ -642,13 +640,36 @@ Page({
       var allGoodsTotal = 0
       for (var i = 0; i < detailList.length; i++) {
         if (detailList[i].selected) {
-          allTotalNum = parseInt(detailList[i].num)
-          allGoodsAmount = parseFloat(detailList[i].allGoodsAmount)
-          if (!detailList[i].isActivity) {
-            differentPriceNew += allGoodsAmount
-            allGoodsNum += allTotalNum
+          //求除了活动商品数量
+          if (detailList[i].isActivity){
+            if (detailList[i].shoppingCartSkuList){
+              var tempA = detailList[i].shoppingCartSkuList
+              var num1 = 0
+              var newAllSellPrice=0
+              for(var v of tempA){
+                if (!v.isActivity){
+                  console.log(v)
+                  num1 += v.num
+                  newAllSellPrice += parseInt(v.num) * v.sellPrice
+                }
+              }
+              detailList[i].newAllSellPrice = newAllSellPrice
+              detailList[i].tempLen = num1
+            }else{
+              detailList[i].tempLen = 0
+              detailList[i].newAllSellPrice = 0
+            }
+          }else{
+            detailList[i].tempLen = detailList[i].num
+            detailList[i].newAllSellPrice = detailList[i].allGoodsAmount
           }
+          // console.log(detailList[i])
+          allTotalNum = parseInt(detailList[i].num)
+          allGoodsAmount = parseFloat(detailList[i].newAllSellPrice)
+          differentPriceNew += allGoodsAmount
           saleBatchGoodsNum = detailList[i].saleBatchNum
+          
+          allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
           if (storeNum == 0) {
             if (storeAmount == 0) {

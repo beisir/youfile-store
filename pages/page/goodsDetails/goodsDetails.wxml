@@ -342,7 +342,7 @@
               <view wx:if='{{discountShow==false}}' style='font-size:28rpx'>￥{{newTotal}}</view>
               <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
             </view>
-            <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>{{editCode?"修改进货车":"加入进货车"}}</view>
+            <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>{{editCode?"确认修改":"加入进货车"}}</view>
             <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}"  data-status='1' bindtap='moreAddCart'>立即下单</view>
           </view>
       </view>
@@ -426,7 +426,13 @@
             </view>
           </view>
         </view>
-        <view class='weui-bottom'>
+        <view class='weui-bottom lt-weui-bottom lt-weui-bottom1' wx:if="{{editCode}}">
+          <view><view>￥{{totalPrice}}</view>
+          <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text></view>
+          <view data-status='0' bindtap='moreAddCart'>确认修改</view>
+        </view>
+
+        <view class='weui-bottom' wx:else>
           <view data-status='0' data-attr="small" bindtap='moreAddCart'>加入购物车</view>
           <view data-status='1' data-attr="small" bindtap='moreAddCart'>立即购买</view>
         </view>
@@ -451,7 +457,7 @@
           <view wx:for='{{goodsSpecificationVOList}}' wx:for-item="list" wx:key="{{index}}">
             <view class='gd-gg' wx:if='{{index==0}}'>
               <text>{{list.specName}}</text>
-              <view>
+              <view style="max-height: 220rpx;overflow-y: scroll;">
                 <block wx:for="{{list.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                   <view class='gd-view'>
                     <view data-code='{{item.specValueCode}}' data-codeP="{{list.specCode}}" class="lt-view {{swichNav==index?'active':''}}" data-current="{{index}}" bindtap='swichNav'>{{item.specValueName}}
@@ -512,16 +518,12 @@
             </view>
           </view>
         </block>
-         <view class='weui-bottom lt-weui-bottom'>
-            <view class='gd-botoom'>
-              <view wx:if='{{discountShow==true}}' style='font-size:28rpx'>￥{{totalPrice}}</view>
-              <view wx:if='{{discountShow==false}}' style='font-size:28rpx'>￥{{newTotal}}</view>
-              <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
-            </view>
-            <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>修改购物车</view>
-            <view class='gd-botoom1' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}"  data-status='1' bindtap='moreAddCart'>立即下单</view>
-          </view>
-      </view>
+        <view class='weui-bottom lt-weui-bottom lt-weui-bottom1'>
+          <view><view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view><view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
+          <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text></view>
+          <view data-status='0' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>确认修改</view>
+        </view>
+      </view> 
     </view>
   </view>
 </returnBall>

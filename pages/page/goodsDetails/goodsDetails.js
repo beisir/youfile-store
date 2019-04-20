@@ -318,7 +318,6 @@ Page({
             this.timerhandle(newArr[i].timeSeconds, i, 'doing')
           }
         }
-        console.log(obj)
         _this.setData({
           goodsInfo: obj,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
@@ -496,22 +495,17 @@ Page({
               goodsInfo.stockNum = dataList[i].stockNum
               goodsInfo.saleStockNum = dataList[i].saleStockNum
               goodsInfo.sellPrice = dataList[i].sellPrice
+              var num = this.data.numbers
+              _this.selectedSkuNum(dataList[i], num)
+              // goodsInfo.saleBatch = dataList[i].num
               if (dataList[i].isActivity) {
-                var num=this.data.numbers
-                _this.selectedSkuNum(dataList[i], num)
-                goodsInfo.saleBatch = dataList[i].num
-                _this.setData({
-                  goodsInfo: goodsInfo,
-                  numbers: dataList[i].num,
-                  hasActiveGoodsClick:true,
-                })
+                goodsInfo.isActivity = true
               }else{
-                _this.setData({
-                  hasActiveGoodsClick: false,
-                })
+                goodsInfo.isActivity = false
               }
               _this.setData({
-                goodsInfo: goodsInfo
+                goodsInfo: goodsInfo,
+                numbers: dataList[i].num,
               })
               break
             }
@@ -547,9 +541,9 @@ Page({
   changeButton: function(e) {
     var changeButtonCode = e.target.dataset.code,
       current = e.target.dataset.current
-    this.getNewData(current, changeButtonCode)
+    this.getNewData(current, changeButtonCode,false)
   },
-  getNewData: function (current, changeButtonCode) {
+  getNewData: function (current, changeButtonCode,isTrue) {
     this.goodsSku(changeButtonCode, 0)
     var that = this;
     if (this.data.specsTab === current) {
@@ -559,7 +553,9 @@ Page({
         specsTab: current,//高亮选择规格值标识
         changeButtonCode: changeButtonCode
       }, function () {
-        that.selectedSku(false, 1)
+        if (!isTrue){
+          that.selectedSku(false, 1)
+        }
       })
     }
   },
@@ -567,9 +563,9 @@ Page({
   weghtSwi: function(e) {
     var swichNavCode = e.target.dataset.code,
       current = e.target.dataset.current
-    this.getNewData1(current, swichNavCode)
+    this.getNewData1(current, swichNavCode,false)
   },
-  getNewData1: function (current, swichNavCode) {
+  getNewData1: function (current, swichNavCode,isTrue) {
     this.goodsSku(swichNavCode, 1)
     var that = this;
     if (this.data.currentTab === current) {
@@ -579,7 +575,9 @@ Page({
         currentTab: current,//高亮选择规格值标识
         swichNavCode: swichNavCode
       }, function () {
-        that.selectedSku(false,1)
+        if (!isTrue) {
+          that.selectedSku(false, 1)
+        }
       })
     }
   },
@@ -674,14 +672,14 @@ Page({
             }
             for (var l = 0; l < newArrLast.length; l++) {
               if (arr[i].specValueCodes.indexOf(newArrLast[l].specValueCode) != -1) {
-                this.getNewData1(l, newArrLast[l].specValueCode)
+                this.getNewData1(l, newArrLast[l].specValueCode, true)
               }
             }
           }
           for (var l = 0; l < newArr.length; l++) {
             if (arr[i].specValueCodes.indexOf(newArr[l].specValueCode) != -1) {
-              newSkuArrTwo[i].num = arr[i].num
-              this.getNewData(l, newArr[l].specValueCode)
+              // newSkuArrTwo[i].num = arr[i].num
+              this.getNewData(l, newArr[l].specValueCode, true)
               that.setData({
                 numbers: arr[i].num
               })
@@ -977,7 +975,9 @@ Page({
       if (childArr.length == 1) {
         if (childArr.indexOf(changeButtonCode) != -1) {
           if (goodsSkuVOList[i].isActivity) {
-            goodsInfo.saleBatch = goodsSkuVOList[i].saleBatch
+            // goodsInfo.saleBatch = goodsSkuVOList[i].saleBatch
+            goodsInfo.saleStockNum = goodsSkuVOList[i].saleStockNum
+            goodsInfo.activityPrice = goodsSkuVOList[i].activityPrice
           }
           if (isTrue) {
             if (num > 0) {
@@ -1007,7 +1007,9 @@ Page({
       } else {
         if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
           if (goodsSkuVOList[i].isActivity) {
-            goodsInfo.saleBatch=goodsSkuVOList[i].saleBatch
+            // goodsInfo.saleBatch=goodsSkuVOList[i].saleBatch
+            goodsInfo.saleStockNum = goodsSkuVOList[i].saleStockNum
+            goodsInfo.activityPrice = goodsSkuVOList[i].activityPrice
           }
           if (isTrue) {
             if (num>0){
@@ -1031,8 +1033,28 @@ Page({
         }
       }
     }
+    if (this.data.editCode){
+      this.getTotalPriceNew()
+    }
     this.setData({
       skuStr: skuStr
+    })
+  },
+  getTotalPriceNew(){
+    var goodsInfo = this.data.goodsInfo,
+      totalPrice=0,
+      classNums=0,
+      nums=0,
+      numbers=this.data.numbers
+    if (goodsInfo.isActivity){
+      totalPrice = goodsInfo.activityPrice * numbers
+    }else{
+      totalPrice = goodsInfo.sellPrice * numbers
+    }
+    this.setData({
+      totalPrice: (totalPrice).toFixed(2),
+      classNums: 1,
+      nums: numbers
     })
   },
   /**
