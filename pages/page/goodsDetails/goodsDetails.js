@@ -497,7 +497,7 @@ Page({
               goodsInfo.sellPrice = dataList[i].sellPrice
               var num = this.data.numbers
               _this.selectedSkuNum(dataList[i], num)
-              // goodsInfo.saleBatch = dataList[i].num
+              goodsInfo.saleBatch = dataList[i].num
               if (dataList[i].isActivity) {
                 goodsInfo.isActivity = true
               }else{
@@ -975,7 +975,7 @@ Page({
       if (childArr.length == 1) {
         if (childArr.indexOf(changeButtonCode) != -1) {
           if (goodsSkuVOList[i].isActivity) {
-            // goodsInfo.saleBatch = goodsSkuVOList[i].saleBatch
+            goodsInfo.saleBatch = goodsSkuVOList[i].saleBatch
             goodsInfo.saleStockNum = goodsSkuVOList[i].saleStockNum
             goodsInfo.activityPrice = goodsSkuVOList[i].activityPrice
           }
@@ -1007,7 +1007,7 @@ Page({
       } else {
         if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
           if (goodsSkuVOList[i].isActivity) {
-            // goodsInfo.saleBatch=goodsSkuVOList[i].saleBatch
+            goodsInfo.saleBatch=goodsSkuVOList[i].saleBatch
             goodsInfo.saleStockNum = goodsSkuVOList[i].saleStockNum
             goodsInfo.activityPrice = goodsSkuVOList[i].activityPrice
           }
