@@ -20,6 +20,17 @@ const formatTimeday = date => {
   const second = date.getSeconds()
   return [year, month, day].map(formatNumber).join('-')
 }
+/* 时间格式化 只有年月日 */
+const formatMD = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+  return [ month, day].map(formatNumber).join('/')
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -229,6 +240,7 @@ module.exports = {
   ramNum1: ramNum1,
   testTel: testTel,
   timeStamp: timeStamp,
-  formatTimeday: formatTimeday
+  formatTimeday: formatTimeday,
+  formatMD: formatMD
 }
 

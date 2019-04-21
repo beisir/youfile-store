@@ -1,6 +1,4 @@
 {
   "navigationBarTitleText": "活动分析",
-  "usingComponents": {
-      "column-chart": "../../../assembly/column-chart/column-chart"
-  }
+  "enablePullDownRefresh": false
 }

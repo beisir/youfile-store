@@ -15,15 +15,17 @@
       </view>
       <text>总金额</text>
     </view>
-    <view class='aa-chart'>
-       <column-chart id="column-chart" canvasData="{{columnCanvasData}}" />
+    <view class="container">
+      <view>单位：元</view>
+      <canvas canvas-id="lineCanvas" disable-scroll="true" class="canvas" bindtouchstart="touchHandler" bindtouchmove="moveHandler" bindtouchend="touchEndHandler"></canvas>
     </view>
+
   </view>
 </view>
 <view class='listData'>
   <view>
     <view class='aa-top'>进货商TOP10排行榜</view>
-    <view class='aa-info'  wx:for='{{customData}}' wx:key='{{index}}'>
+    <view class='aa-info' wx:for='{{customData}}' wx:key='{{index}}'>
       {{index+1}}
       <image src='{{baseUrl}}{{item.headPic}}'></image>
       <view class='aa-name'>{{item.nickName}}</view>

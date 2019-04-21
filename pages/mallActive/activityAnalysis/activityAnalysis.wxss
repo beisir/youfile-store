@@ -17,3 +17,13 @@
 .aa-info .aa-name{max-width: 280rpx;overflow: hidden;text-overflow: ellipsis;white-space:nowrap}
 .aa-info>view:last-child{position: absolute;right:60rpx;}
 .aa-top{font-size: 36rpx;font-weight: bold;height: 100rpx;line-height: 100rpx;border-bottom: 2rpx solid #F0F0F0;padding-left: 25rpx;}
+.container {
+    height: 100%;
+    padding: 30rpx 0;
+    font-family: Helvetica,Arial,"Helvetica Neue","Droid Sans","Microsoft YaHei",sans-serif;
+}
+.container view{margin-left:25rpx;color:#999;margin-bottom:20rpx;text-align: left;width: 100%;padding-left: 30rpx;}
+.canvas {
+    width: 100%;
+    height: 230px;
+}

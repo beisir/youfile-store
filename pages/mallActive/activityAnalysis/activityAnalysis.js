@@ -1,4 +1,7 @@
 const app = getApp();
+var wxCharts = require('../../../utils/wxcharts.js');
+var lineChart = null;
+var startPos = null;
 import Api from "../../../utils/api.js";
 import util from "../../../utils/util.js";
 var rate = 0;
@@ -10,9 +13,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    columnCanvasData: {
-      canvasId: 'columnCanvas',
-    },
     baseUrl: app.globalData.imageUrl,
     activeGoods:[],//商品销量榜
     customData:[],//进货商排行榜
@@ -43,88 +43,118 @@ Page({
     if (options.activityNumber){
       this.getSalesList(options.activityNumber)
       this.getAnalysisAGoods(options.activityNumber)
-      this.initStatic()
     }
   },
   onShow:function(){
   
   },
-  // 初始化统计表
-  initStatic: function () {
-    var systemInfo = app.systemInfo;
-    rate = systemInfo.screenWidth / 750;
-    var updateData = {};
-    canvasWidth = systemInfo.screenWidth - rate * 64;
-    canvasHeight = rate * 306 + rate * 44 + rate * 34 + rate * 22;
-
-    var culumnYMax = 100;
-    var culumnYMin = 0;
-    updateData['columnCanvasData.canvasWidth'] = canvasWidth;
-    updateData['columnCanvasData.axisPadd'] = { left: rate * 5, top: rate * 13, right: rate * 5 };
-    updateData['columnCanvasData.axisMargin'] = { bottom: rate * 34, left: rate * 26 };
-    updateData['columnCanvasData.yAxis.fontSize'] = rate * 22;
-    updateData['columnCanvasData.yAxis.fontColor'] = '#637280';
-    updateData['columnCanvasData.yAxis.lineColor'] = '#DCE0E6';
-    updateData['columnCanvasData.yAxis.lineWidth'] = rate * 5;
-    updateData['columnCanvasData.yAxis.dataWidth'] = rate * 62;
-    updateData['columnCanvasData.yAxis.isShow'] = true;
-    updateData['columnCanvasData.yAxis.isDash'] = true;
-    updateData['columnCanvasData.yAxis.minData'] = culumnYMin;
-    updateData['columnCanvasData.yAxis.maxData'] = culumnYMax;
-    updateData['columnCanvasData.yAxis.padd'] = rate * 306 / (culumnYMax - culumnYMin);
-
-    updateData['columnCanvasData.xAxis.dataHeight'] = rate * 26;
-    updateData['columnCanvasData.xAxis.fontSize'] = rate * 18;
-    updateData['columnCanvasData.xAxis.fontColor'] = '#637280';
-    updateData['columnCanvasData.xAxis.lineColor'] = '#DCE0E6';
-    updateData['columnCanvasData.xAxis.lineWidth'] = rate * 5;
-    updateData['columnCanvasData.xAxis.padd'] = rate * 52;
-    updateData['columnCanvasData.xAxis.dataWidth'] = rate * 64;
-    updateData['columnCanvasData.xAxis.leftOffset'] = rate * 40;
-
-
-    updateData['columnCanvasData.canvasHeight'] = canvasHeight;
-    updateData['columnCanvasData.enableScroll'] = true;
-
-    this.setData(updateData);
+  touchHandler: function (e) {
+    lineChart.scrollStart(e);
   },
-  initDataBiao: function (arr) {
-    var updateData = {};
-    var columnYMax = 100;
-    var columnYMin = 0;
-    var salesDate = [],
-      salesVolume = []
-    for (var a of arr) {
-      salesDate.push(util.formatTimeday(new Date(a.salesDate)))
-      if (a.salesVolume==0){
-        salesVolume.push(a.salesVolume)
-      }else{
-        salesVolume.push((a.salesVolume)*0.02)
+  moveHandler: function (e) {
+    lineChart.scroll(e);
+  },
+  touchEndHandler: function (e) {
+    lineChart.scrollEnd(e);
+    lineChart.showToolTip(e, {
+      format: function (item, category) {
+        return category + ' ' + item.name + ':' + item.data
       }
-    }
-    updateData['columnCanvasData.yAxis.minData'] = columnYMin;
-    updateData['columnCanvasData.yAxis.maxData'] = columnYMax;
-    updateData['columnCanvasData.series'] = [{
-      data: salesVolume,
-    }];
-    updateData['columnCanvasData.xAxis.data'] = salesDate;
-    updateData['columnCanvasData.yAxis.data'] = [
-      { x: 0, y: 0, title: '0' },
-      { x: 0, y: 20, title: '1000' },
-      { x: 0, y: 40, title: '2000' },
-      { x: 0, y: 60, title: '3000' },
-      { x: 0, y: 80, title: '4000' },
-      { x: 0, y: 100, title: '5000' }
-    ];
-
-    this.setData(updateData);
+    });
   },
+  createSimulationData: function (arr) {
+    var categories = [];
+    var data = [];
+    
+    for (var a of arr) {
+       categories.push(util.formatMD(new Date(a.salesDate)))
+        data.push(a.salesVolume)
+    }
+    this.initStatic({
+      categories: categories,
+      data: data
+    })
+  },
+  // 初始化统计表
+  initStatic: function (obj) {
+    var windowWidth = app.systemInfo.screenWidth-20;
+    try {
+      var res = wx.getSystemInfoSync();
+      windowWidth = app.systemInfo.screenWidth-20
+    } catch (e) {
+      console.error('getSystemInfoSync failed!');
+    }
+
+    var simulationData = obj
+    lineChart = new wxCharts({
+      canvasId: 'lineCanvas',
+      type: 'line',
+      categories: simulationData.categories,
+      animation: true,
+      series: [{
+        name: '成交量',
+        data: simulationData.data,
+        format: function (val, name) {
+          return val.toFixed(2) + '元';
+        }
+      }],
+      xAxis: {
+        disableGrid: false,
+      },
+      yAxis: {
+        // title: '成交金额 (元)',
+        format: function (val) {
+          return val.toFixed(2);
+        },
+        min: 0
+      },
+      width: windowWidth,
+      height: 260,
+      dataLabel: true,
+      dataPointShape: true,
+      enableScroll: true,
+      extra: {
+        lineStyle: ''//curve
+      }
+    });
+  },
+  // initDataBiao: function (arr) {
+  //   var updateData = {};
+  //   var columnYMax = 100;
+  //   var columnYMin = 0;
+  //   var salesDate = [],
+  //     salesVolume = []
+    // for (var a of arr) {
+    //   salesDate.push(util.formatTimeday(new Date(a.salesDate)))
+    //   if (a.salesVolume==0){
+    //     salesVolume.push(a.salesVolume)
+    //   }else{
+    //     salesVolume.push((a.salesVolume)*0.02)
+    //   }
+    // }
+  //   updateData['columnCanvasData.yAxis.minData'] = columnYMin;
+  //   updateData['columnCanvasData.yAxis.maxData'] = columnYMax;
+  //   updateData['columnCanvasData.series'] = [{
+  //     data: salesVolume,
+  //   }];
+  //   updateData['columnCanvasData.xAxis.data'] = salesDate;
+  //   updateData['columnCanvasData.yAxis.data'] = [
+  //     { x: 0, y: 0, title: '0' },
+  //     { x: 0, y: 20, title: '1000' },
+  //     { x: 0, y: 40, title: '2000' },
+  //     { x: 0, y: 60, title: '3000' },
+  //     { x: 0, y: 80, title: '4000' },
+  //     { x: 0, y: 100, title: '5000' }
+  //   ];
+
+  //   this.setData(updateData);
+  // },
   // 获取统计店铺销售量列表 和商品销售总额
   getSalesList: function (activityNumber){
     var _this=this
     Api.saleActiveList({ activityNumber: activityNumber}).then(res=>{
       if (res.obj){
-        _this.initDataBiao(res.obj)
+        _this.createSimulationData(res.obj)
       }
     })
     Api.statisticSales({ activityNumber: activityNumber }).then(res => {
@@ -182,25 +212,5 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-  onTouchHandler(e) {
-    if (null == this.column_chart) {
-      this.column_chart = this.selectComponent("#column-chart");
-    }
-    this.column_chart.onTouchHandler(e);
-  },
-  onTouchMoveHandler(e) {
-    if (null == this.column_chart) {
-      this.column_chart = this.selectComponent("#column-chart");
-    }
-    this.column_chart.onTouchMoveHandler(e);
-  },
-  onTouchEndHandler(e) {
-    if (null == this.column_chart) {
-      this.ccolumn_chart = this.selectComponent("#column-chart");
-    }
-    this.column_chart.onTouchEndHandler(e);
-  },
-
 
 })
