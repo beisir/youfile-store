@@ -496,10 +496,10 @@ Page({
       Api.showToast("请填写零售价")
       return;
     }
-    if (stockNum == 0 && Api.isNotEmpty(stockNum)) {
-      Api.showToast("库存不得低于0")
-      return;
-    }
+    // if (stockNum == 0 && Api.isNotEmpty(stockNum)) {
+    //   Api.showToast("库存不得低于0")
+    //   return;
+    // }
     if (!Api.isNotEmpty(stockNum)) {
       Api.showToast("请填写库存")
       return;

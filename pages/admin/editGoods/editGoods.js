@@ -669,17 +669,17 @@ Page({
       Api.showToast("请填写零售价")
       return;
     }
-    if (this.data.stockNumLock){
-      if (stockNum == 0 && this.data.stockNumLock) {
-        Api.showToast("库存不得低于0")
-        return;
-      }
-    }else{
-      if (stockNum == 0 && Api.isNotEmpty(stockNum)) {
-        Api.showToast("库存不得低于0")
-        return;
-      }
-    }
+    // if (this.data.stockNumLock){
+    //   if (stockNum == 0 && this.data.stockNumLock) {
+    //     Api.showToast("库存不得低于0")
+    //     return;
+    //   }
+    // }else{
+    //   if (stockNum == 0 && Api.isNotEmpty(stockNum)) {
+    //     Api.showToast("库存不得低于0")
+    //     return;
+    //   }
+    // }
     if (!Api.isNotEmpty(stockNum)) {
       Api.showToast("请填写库存")
       return;

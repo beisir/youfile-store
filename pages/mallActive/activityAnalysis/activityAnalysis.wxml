@@ -11,7 +11,7 @@
     <view class='ld-t'>累计收入</view>
     <view class='aa-money'>
       <view>¥
-        <text> {{total}}</text>
+        <text style='font-size:80rpx;'> {{total}}</text>
       </view>
       <text>总金额</text>
     </view>
@@ -25,19 +25,23 @@
 <view class='listData'>
   <view>
     <view class='aa-top'>进货商TOP10排行榜</view>
-    <view class='aa-info' wx:for='{{customData}}' wx:key='{{index}}'>
-      {{index+1}}
-      <image src='{{baseUrl}}{{item.headPic}}'></image>
-      <view class='aa-name'>{{item.nickName}}</view>
-      <view>
-        <text>￥{{item.orderAmount}}</text>
+    <block wx:if="{{customData && customData.length > 0}}">
+      <view class='aa-info' wx:for='{{customData}}' wx:key='{{index}}'>
+        {{index+1}}
+        <image src='{{baseUrl}}{{item.headPic}}'></image>
+        <view class='aa-name'>{{item.nickName}}</view>
+        <view>
+          <text>￥{{item.orderAmount}}</text>
+        </view>
       </view>
-    </view>
+    </block>
+    <view wx:else class='no-result-box'>暂无进货商数据</view>
   </view>
 </view>
-<view class='listData'>
+<view class='listData' style='padding-bottom:20rpx;'>
   <view>
     <view class='aa-top'>商品销量榜</view>
+    <block wx:if="{{activeGoods && activeGoods.length > 0}}">
     <view class='aa-info' wx:for='{{activeGoods}}' wx:key='{{index}}'>
       {{index+1}}
       <view class='aa-dot aa-fot-o' wx:if='{{index==0}}'></view>
@@ -50,5 +54,7 @@
         <!-- <text>￥1980.00</text> -->
       </view>
     </view>
+    </block>
+    <view wx:else class='no-result-box'>暂无销量数据</view>
   </view>
 </view>

@@ -195,7 +195,7 @@ import {
 const app = getApp()
 /**判断是否为空**/
 function isNotEmpty(str) {
-  if (str == '' || str == undefined || str == null || str == "undefined") {
+  if (str === '' || str == undefined || str == null || str == "undefined") {
     return false
   } else {
     return true
