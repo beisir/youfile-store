@@ -118,37 +118,6 @@ Page({
       }
     });
   },
-  // initDataBiao: function (arr) {
-  //   var updateData = {};
-  //   var columnYMax = 100;
-  //   var columnYMin = 0;
-  //   var salesDate = [],
-  //     salesVolume = []
-    // for (var a of arr) {
-    //   salesDate.push(util.formatTimeday(new Date(a.salesDate)))
-    //   if (a.salesVolume==0){
-    //     salesVolume.push(a.salesVolume)
-    //   }else{
-    //     salesVolume.push((a.salesVolume)*0.02)
-    //   }
-    // }
-  //   updateData['columnCanvasData.yAxis.minData'] = columnYMin;
-  //   updateData['columnCanvasData.yAxis.maxData'] = columnYMax;
-  //   updateData['columnCanvasData.series'] = [{
-  //     data: salesVolume,
-  //   }];
-  //   updateData['columnCanvasData.xAxis.data'] = salesDate;
-  //   updateData['columnCanvasData.yAxis.data'] = [
-  //     { x: 0, y: 0, title: '0' },
-  //     { x: 0, y: 20, title: '1000' },
-  //     { x: 0, y: 40, title: '2000' },
-  //     { x: 0, y: 60, title: '3000' },
-  //     { x: 0, y: 80, title: '4000' },
-  //     { x: 0, y: 100, title: '5000' }
-  //   ];
-
-  //   this.setData(updateData);
-  // },
   // 获取统计店铺销售量列表 和商品销售总额
   getSalesList: function (activityNumber){
     var _this=this

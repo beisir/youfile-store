@@ -268,6 +268,9 @@ function fillSeriesColor(series, config) {
 
 function getDataRange(minData, maxData) {
   var limit = 0;
+  if (minData<0){
+    var minData=0
+  }
   var range = maxData - minData;
   if (range >= 10000) {
     limit = 1000;
