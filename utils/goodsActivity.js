@@ -3,7 +3,7 @@ function bindingTOSKU(goodsVO, entry) {
   switch(entry){
     case 'preorder':
       var goodsSkuVOList = goodsVO.preOrderGoodsSkuList
-      var acInfo = goodsVO.promotions.SALES_PROMOTION
+      var acInfo = goodsVO.promotions ? goodsVO.promotions.SALES_PROMOTION:[]
     break;
     default:
     break;
