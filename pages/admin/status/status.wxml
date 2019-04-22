@@ -99,10 +99,10 @@
             <view>
               <text>库存：</text>
               <text style='color:#888;font-size:26rpx'>{{item.stockNum}}</text>
-              <image class='warn' wx:if='{{item.stockNum<10}}' src="/image/warn.png"></image>
+              <image class='warn' wx:if='{{item.stockNum<5}}' src="/image/warn.png"></image>
             </view>
           </view>
-          <view class='not' wx:if='{{item.stockNum<10}}'>
+          <view class='not' wx:if='{{item.stockNum<5}}'>
             <view class='triangle_border_up'></view>该商品库存不足 请及时补货</view>
         </view>
       </view>
