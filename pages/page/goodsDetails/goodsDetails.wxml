@@ -234,7 +234,7 @@
           <text>本品差<text>{{differNum}}</text>件 全场金额差<text>{{differMoney}}</text>元 可享受批发价</text>
         </view>
         <view class='gd-top'>
-          <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
+          <view class='gdclose-box' bindtap='closeAlert'><image class='gdclose' src="/image/close.png"></image></view>
           <view class='gd-image'>
             <image wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
@@ -353,7 +353,7 @@
     <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
         <view class='gd-top'>
-          <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
+          <view class='gdclose-box' bindtap='closeAlert'><image class='gdclose' src="/image/close.png"></image></view>
           <view class='gd-image'>
             <image mode="aspectFill" wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
@@ -434,7 +434,7 @@
     <view hidden="{{hidden}}" class='alertAdd'>
       <view class='gd-alert' animation='{{animationData}}'>
         <view class='gd-top'>
-          <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
+          <view class='gdclose-box' bindtap='closeAlert'><image class='gdclose' src="/image/close.png"></image></view>
           <view class='gd-image'>
             <image wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
