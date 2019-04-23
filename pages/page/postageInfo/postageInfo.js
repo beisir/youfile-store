@@ -14,6 +14,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if (!options.code || options.code == 'null') {
+      this.setData({
+        switch1Change: true
+      })
+      return
+    }
     if (options.code=='邮费到付'){
       this.setData({
         switch1Change:true

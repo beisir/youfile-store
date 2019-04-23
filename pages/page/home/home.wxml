@@ -208,7 +208,7 @@
     </view>
   </view>
   <view class='dc-list' wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
-    <navigator wx:for="{{activeResult}}" wx:key="index"  url="{{item.isHide?'':'../goodsDetails/goodsDetails?goodsId='+item.id}}" class='{{item.isHide?"opa-view":""}} {{item.extInfo.PRIORITY_SALES_PROMOTION.stockNum==0?"opa-view":""}} {{item.extInfo.PRIORITY_SALES_PROMOTION.stockNum==null?"opa-view":""}}'>
+    <navigator wx:for="{{activeResult}}" wx:key="index"  url="{{item.isHide?'':'../goodsDetails/goodsDetails?goodsId='+item.id}}" class='{{item.isHide?"opa-view":""}} {{item.extInfo.PRIORITY_SALES_PROMOTION.stockNum==0?"opa-view":""}} {{item.extInfo.PRIORITY_SALES_PROMOTION.stockNum==null?"opa-view":""}}' hidden="{{item.isHide}}">
       <view>
         <image class='g-img' src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small" />
       </view>

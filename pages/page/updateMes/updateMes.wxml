@@ -10,7 +10,7 @@
   <view class='page__hd page__hd1  page__hd2'  wx:if='{{status==2}}'>
     <view class='weui-cell weui-cell_access'>
       <view class='weui-cell__bd'>
-        <textarea placeholder='请输入{{types}}' data-name='{{name}}' value='{{value}}' bindinput='changeValue'></textarea>
+        <textarea placeholder='请输入{{types}}' data-name='{{name}}' maxlength='150' value='{{value}}' bindinput='changeValue'></textarea>
       </view>
     </view>
   </view>

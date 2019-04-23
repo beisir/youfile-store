@@ -26,16 +26,16 @@ Page({
         Api.showToast('超过最长数字限制')
       }
       this.setData({
-        value: value.substring(0, 19),
+        value: value.substring(0, 20),
         num: num
       })
     }
     if (status == 2) {
-      if (num > 100) {
+      if (num > 150) {
         Api.showToast('超过最长数字限制')
       }
       this.setData({
-        value: value.substring(0, 99),
+        value: value.substring(0, 150),
         num: num
       })
     }
@@ -44,7 +44,7 @@ Page({
         Api.showToast('超过最长数字限制')
       }
       this.setData({
-        value: value.substring(0, 29),
+        value: value.substring(0, 30),
         num: num
       })
     }
@@ -53,7 +53,7 @@ Page({
         Api.showToast('超过最长数字限制')
       }
       this.setData({
-        value: value.substring(0, 21),
+        value: value.substring(0, 32),
         num: num
       })
     }
@@ -131,7 +131,7 @@ Page({
     }
     if (name == "description") {
       this.setData({
-        allNum: 100,
+        allNum: 150,
         status:2
       })
     } 

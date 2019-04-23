@@ -117,11 +117,21 @@ Page({
       return
     }
     this.setData({ posterArr:false, postering: true})
-    wx.showLoading({
-      title: '海报生成中',
-      mask: true
-    })
-    this.canvasPoset(this.data.checkedImg[0].imageUrl)
+    
+    // 是否在活动  列表详情两种数据格式
+    if (this.data.goods.extInfo && ((this.data.goods.extInfo.SALES_PROMOTION && this.data.goods.extInfo.SALES_PROMOTION.length > 0) || (this.data.goods.extInfo.PRIORITY_SALES_PROMOTION))) {
+      API.simpleStoreMsg({ storeId: wx.getStorageSync('storeId') }).then(res => {
+        this.setData({ mallCode: res.obj.mallCode }, () => {
+          wx.showLoading({ title: '海报生成中', mask: true })
+          this.canvasPoset(this.data.checkedImg[0].imageUrl)
+        })
+      })
+    } else {
+      this.setData({ mallCode: false }, () => {
+        wx.showLoading({ title: '海报生成中', mask: true })
+        this.canvasPoset(this.data.checkedImg[0].imageUrl)
+      })
+    }
   },
   // 海报配置与生成
   canvasPoset(imgUrl){
@@ -135,6 +145,12 @@ Page({
       storeName: this.data.goods.storeName ? this.data.goods.storeName:'',
       qrcode: this.data.goods.miniProgramCode ? this.data.baseUrl + this.data.goods.miniProgramCode : '/image/login-store-icon.png'
     });
+
+    if (this.data.mallCode == 2000) {
+      obj.images.push({ x: 40, y: 437, zIndex: 1001, url: "/image/zhengzhou.png", width: 108, height: 133 })
+    } else if (this.data.mallCode == 1000) {
+      obj.images.push({ x: 40, y: 437, zIndex: 1001, url: "/image/beijing.png", width: 108, height: 133 })
+    }
     this.setData({ posterConfig: obj }, () => {
       Poster.create(true);
     })

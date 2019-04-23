@@ -106,7 +106,9 @@ Page({
       loadingList: true
     })
     Api.purchaserTrans({ userId: userId, lastDay: lastDay}).then(res=>{
-      
+      this.setData({
+        loadingList: false
+      })
       if(res.obj){
         var detailList = res.obj.orderPage.result,
           datas = _this.data.result
@@ -120,10 +122,6 @@ Page({
           _this.setData({
             result: newArr,
             resultObj: res.obj
-          },()=>{
-            this.setData({
-              loadingList: false
-            })
           })
         }
       }

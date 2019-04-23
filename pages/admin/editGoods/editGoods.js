@@ -793,7 +793,7 @@ Page({
         goodsSkuVOList: goodsSkuVOList,
         skuListData: skuListData,
         stockNumLock:false,
-        stockNum: stockNum == 0 ? '' : stockNum,
+        stockNum: stockNum ? stockNum : 0,
         sellPrice: sellPrice == Infinity ? '' : sellPrice,
         wholesalePrice: wholesalePrice == Infinity ? '' : wholesalePrice
       })

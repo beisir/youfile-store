@@ -362,27 +362,17 @@
             <view class='hasc-a' wx:if='{{goodsInfo.isActivity}}'>￥{{goodsInfo.activityPrice
 }}<view class="jiage-t jiage-tRed" style='font-size:20rpx;margin:unset;float:left;margin-left:5px;'>
                         <image src="/image/shans.png" mode='widthFix'></image>抢购价</view></view>
-            <view wx:else>￥{{goodsInfo.sellPrice}}</view>
-            <text wx:if='{{!goodsInfo.isActivity}}'>库存：{{goodsInfo.stockNum}}件</text>
-            <text wx:else style='display:block;margin-top:-30rpx'>
-              <block  wx:if='{{goodsSpecificationVOList.length==0}}'>
-                活动库存：{{goodsInfo.saleStockNum}}件
-              </block>
+            <view class='hasc-a' style='color:#ca7;' wx:else>￥{{goodsInfo.sellPrice}}</view>
+            <text class='stockNum-box' wx:if='{{!goodsInfo.isActivity}}'>库存：{{goodsInfo.stockNum}}件</text>
+            <text class='stockNum-box' wx:else>
+              <block  wx:if='{{goodsSpecificationVOList.length==0}}'>活动库存：{{goodsInfo.saleStockNum}}件</block>
               <block  wx:if='{{goodsSpecificationVOList.length==1}}'>
-                <block  wx:if='{{changeButtonCode}}'>
-                活动库存：{{goodsInfo.saleStockNum}}件
-              </block>
-               <block  wx:else>
-                库存：{{goodsInfo.stockNum}}件
-              </block>
+                <block  wx:if='{{changeButtonCode}}'>活动库存：{{goodsInfo.saleStockNum}}件</block>
+                <block  wx:else>库存：{{goodsInfo.stockNum}}件</block>
               </block>
               <block  wx:if='{{goodsSpecificationVOList.length==2}}'>
-                <block  wx:if='{{swichNavCode && changeButtonCode}}'>
-                活动库存：{{goodsInfo.saleStockNum}}件
-              </block>
-               <block  wx:else>
-                库存：{{goodsInfo.stockNum}}件
-              </block>
+                <block  wx:if='{{swichNavCode && changeButtonCode}}'>活动库存：{{goodsInfo.saleStockNum}}件</block>
+                <block  wx:else>库存：{{goodsInfo.stockNum}}件</block>
               </block>
             </text>
           </view>

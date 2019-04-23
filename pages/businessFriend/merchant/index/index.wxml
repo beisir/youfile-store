@@ -67,6 +67,10 @@
     <image src="/image/ww1.png"></image>
     <view>工作台</view>
   </navigator>
+  <navigator url='/pages/mallActive/yunDist/yunDist'>
+    <image src="/image/fenxiao2.png"></image>
+    <view>云分销</view>
+  </navigator>
   <view>
     <image src="/image/admin1.png"></image>
     <view class='active'>商友录</view>

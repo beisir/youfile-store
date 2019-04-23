@@ -613,7 +613,7 @@ Page({
       that.setData({
         goodsSkuVOList: goodsSkuVOList,
         skuListData: skuListData,
-        stockNum: stockNum == 0 ? '' : stockNum,
+        stockNum: stockNum? stockNum:0,
         sellPrice: sellPrice == Infinity ? '' : sellPrice,
         wholesalePrice: wholesalePrice == Infinity ? '' : wholesalePrice
       })

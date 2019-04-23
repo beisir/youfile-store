@@ -3,7 +3,7 @@
     <view class='doc-top'>
       <image src='/image/cloudStoreIcon.png'></image>
       <view>入帐金额</view>
-      <view>￥+{{dataDetails.accountAmount}}</view>
+      <view>+{{dataDetails.accountAmount}}</view>
     </view>
      <view class='doc-details'>
         <view>商品说明
