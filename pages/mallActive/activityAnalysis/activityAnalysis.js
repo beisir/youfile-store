@@ -44,6 +44,7 @@ Page({
       this.getSalesList(options.activityNumber)
       this.getAnalysisAGoods(options.activityNumber)
     }
+    
   },
   onShow:function(){
   
@@ -65,10 +66,23 @@ Page({
   createSimulationData: function (arr) {
     var categories = [];
     var data = [];
-    
-    for (var a of arr) {
-       categories.push(util.formatMD(new Date(a.salesDate)))
+    var mindata = Math.min.apply(Math, arr.map(function (o) {
+      return o.salesDate
+    }))
+    var maxdata = Math.max.apply(Math, arr.map(function (o) {
+      return o.salesDate
+    }))
+    var time = (maxdata - mindata) / 3600/1000
+    if (time>24){
+      for (var a of arr) {
+        categories.push(util.formatMD(new Date(a.salesDate)))
         data.push(a.salesVolume)
+      }
+    }else{
+      for (var a of arr) {
+        categories.push(util.formatHour(new Date(a.salesDate)))
+        data.push(a.salesVolume)
+      }
     }
     this.initStatic({
       categories: categories,

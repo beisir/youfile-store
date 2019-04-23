@@ -1404,8 +1404,8 @@ function drawYAxisGrid(opts, config, context) {
   points.push(config.padding + eachSpacing * config.yAxisSplit + 2);
 
   context.beginPath();
-  context.setStrokeStyle(opts.yAxis.gridColor || "#cccccc");
-  context.setLineWidth(1);
+  context.setStrokeStyle(opts.yAxis.gridColor || "#999");
+  context.setLineWidth(0.1);
   points.forEach(function (item, index) {
     context.moveTo(startX, item);
     context.lineTo(endX, item);
