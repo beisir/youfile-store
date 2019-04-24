@@ -44,6 +44,8 @@ Page({
       this.getSalesList(options.activityNumber)
       this.getAnalysisAGoods(options.activityNumber)
     }
+    // this.getSalesList("1904230301000063")
+    // this.getAnalysisAGoods("1904230301000063")
     
   },
   onShow:function(){
