@@ -823,9 +823,7 @@ Page({
       Api.updateGooodsSku(dataVo)
         .then(res => {
           Api.showToast(res.message)
-          wx.navigateTo({
-            url: '../status/status',
-          })
+          wx.navigateBack()
         })
     } else {
       var pages = getCurrentPages(),

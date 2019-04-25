@@ -17,3 +17,5 @@
 .dr-data .dr-dName{font-size: 28rpx;color: #000;font-weight: bold;margin-bottom: 10rpx;width: 400rpx;overflow: hidden;text-overflow: ellipsis;white-space: nowrap}
 .dr-right{position: absolute;right: 30rpx}
 .gold-font{color: #ca7}
+.dr-pic2{background-size: 70%;background-position-x: center;background-position-y: 15rpx;}
+.dr-pic3{background-size: 53%;background-position-x: center;background-position-y: 18rpx;}
