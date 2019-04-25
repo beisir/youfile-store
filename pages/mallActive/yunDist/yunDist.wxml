@@ -1,3 +1,4 @@
+<wxs src='../../../public/filter.wxs' module='filter'></wxs>
 <view class='dr-back'></view>
 <view class='listData'>
   <view>
@@ -44,8 +45,7 @@
         <image src='{{baseUrl}}{{item.headPic}}'></image>
       </view>
       <view class='ydpl-right'>
-        <view>
-          {{item.userName}}
+        <view>{{filter.my_slice(item.userName,6)}}
           <text>{{item.storeNature=="2"?"新零售":"进货商"}}</text>
           <image wx:if="{{item.storeNature=='2'}}" src='/image/u4.png'></image>
         </view>
