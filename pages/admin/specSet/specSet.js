@@ -92,7 +92,7 @@ Page({
             }
             for (var item of specValueNameList) {
               for (var kItem of goodsSpecificationValueVOList) {
-                if (item.specValueName == kItem.specValueName) {
+                if ((item.specValueName).toUpperCase() == (kItem.specValueName).toUpperCase()) {
                   if (kItem.newSpec == undefined) {
                     item.haveSelected = true
                   }
@@ -573,7 +573,6 @@ Page({
     if (sign == 'add') {
       if (Api.isNotEmpty(value)) {
         if (specValueList != null) {
-          console.log(specValueList)
           for (var v of specValueList){
             if (v.toUpperCase() == value.toUpperCase()){
               Api.showToast("此规格名称已存在！")
