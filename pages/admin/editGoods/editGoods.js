@@ -49,6 +49,24 @@ Page({
     switchChange:false,
     mainImgUrl: "",
   },
+  // 清空文本框
+  clearText(e) {
+    let type = e.currentTarget.dataset.type
+    switch (type) {
+      case 'title':
+        this.setData({
+          name: '',
+          nameLen: 0
+        })
+        break;
+      case 'des':
+        this.setData({
+          recommendDesc: '',
+          recommendDescLen: 0
+        })
+        break;
+    }
+  },
   // 弹框出现 隐藏文本域
   showTaleFun:function(){
     this.setData({

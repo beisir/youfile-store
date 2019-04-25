@@ -50,6 +50,24 @@ Page({
     moveImgShow: true,
     addGitShow: true
   },
+  // 清空文本框
+  clearText(e) {
+    let type = e.currentTarget.dataset.type
+    switch (type) {
+      case 'title':
+        this.setData({
+          name: '',
+          nameLen: 0
+        })
+        break;
+      case 'des':
+        this.setData({
+          recommendDesc: '',
+          recommendDescLen: 0
+        })
+        break;
+    }
+  },
   confirmMes:function(){
     this.setData({
       show1:false,

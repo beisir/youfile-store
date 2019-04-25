@@ -53,6 +53,7 @@
           <view class="weui-cell__bd">
             <text>标题</text>
           </view>
+          <text wx:if='{{nameLen>0}}' bindtap='clearText' data-type='title' class='clearText'>清空</text>
         </view>
         <textarea wx:if="{{!showTale}}" auto-height="true" maxlength='55' class="weui-input1 {{nameLen>0?'weui-input2':''}}" type="text" bindinput='watchName' value='{{name}}' placeholder-class="palce-class"  placeholder='请填写商品标题'></textarea>
         <view class='change-num' wx:if='{{nameLen>0}}'>{{nameLen}}/55</view>
@@ -63,6 +64,7 @@
           <view class="weui-cell__bd">
             <text>推荐心语</text>
           </view>
+          <text wx:if='{{recommendDescLen>0}}' bindtap='clearText' data-type='des' class='clearText'>清空</text>
         </view>
         <textarea wx:if="{{!showTale}}" auto-height="true" maxlength='60' class="weui-input1 {{recommendDescLen>0?'weui-input2':''}}" type="text" bindinput='watchRec'  placeholder-class="palce-class"  value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
         <view  class='change-num'  wx:if='{{recommendDescLen>0}}'>{{recommendDescLen}}/60</view>

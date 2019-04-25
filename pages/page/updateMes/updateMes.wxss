@@ -15,7 +15,7 @@
   color: #999;font-size: 30rpx;text-align: right;padding-right: 50rpx;
 }
 .page__hd2,.page__hd2 .weui-cell{
-  height: auto;padding-top: 15rpx;
+  height: auto;padding-top: 15rpx;padding-bottom: 15rpx;
 }
 
 
