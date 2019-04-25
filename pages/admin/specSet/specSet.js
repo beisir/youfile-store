@@ -573,9 +573,12 @@ Page({
     if (sign == 'add') {
       if (Api.isNotEmpty(value)) {
         if (specValueList != null) {
-          if (specValueList.indexOf(value) != -1) {
-            Api.showToast("此规格名称已存在！")
-            return
+          console.log(specValueList)
+          for (var v of specValueList){
+            if (v.toUpperCase() == value.toUpperCase()){
+              Api.showToast("此规格名称已存在！")
+              return
+            }
           }
         }
         specValueNameList.push({
