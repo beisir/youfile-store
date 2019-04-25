@@ -24,5 +24,6 @@
 .ydpl-right>view text{position: relative;border-radius: 10rpx;font-weight: bold;margin-left: 0;border: 2rpx solid #CCAA77;color: #CCAA77;font-size: 24rpx;padding: 0rpx 10rpx;margin: 0 20rpx;}
 .ydpl-right>view:last-child{font-size: 26rpx;color: #666}
 .ydpl-r{width: 20rpx;height: 20rpx;border-top: 6rpx solid #B3B3B3;border-right: 6rpx solid #B3B3B3;transform: rotate(45deg);position: absolute;right:50rpx}
-.dr-pic2{background-size: 70%;background-position-x: center;background-position-y: 15rpx;}
+.dr-pic2{background-size: 66%;background-position-x: center;background-position-y: 15rpx;}
 .dr-pic3{background-size: 53%;background-position-x: center;background-position-y: 18rpx;}
+.ydpl-right>view text{border:1rpx solid #ca7;width:80rpx;text-align: center;}
