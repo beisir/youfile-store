@@ -86,14 +86,19 @@ Page({
     this.setData({
       tabSwitch: index
     }, function () {
-      _this.initData()
-      _this.getGoodsList(_this.data.activityNumber)
+      _this.initData().then(()=>{
+        _this.getGoodsList(_this.data.activityNumber)
+      })
     })
   },
   initData: function () {
     app.pageRequest.pageData.pageNum = 0
-    this.setData({
-      listData: []
+    return new Promise((resolve,reject)=>{
+      this.setData({
+        listData: []
+      },()=>{
+        resolve()
+      })
     })
   },
   // 获取活动xiangq和活动下的列表
@@ -112,6 +117,8 @@ Page({
     })
   },
   getGoodsList: function(activityNumber) {
+    if(this.data.loadingList){return}
+    this.setData({ loadingList: true})
     var _this = this
     Api.activityGoods({
       activityNumber: activityNumber,
@@ -123,8 +130,14 @@ Page({
           newArr = app.pageRequest.addDataList(datas, listData)
         _this.setData({
           listData: newArr
+        },()=>{
+          this.setData({ loadingList: false })
         })
+      }else{
+        this.setData({ loadingList: false })
       }
+    }).catch(e=>{
+      this.setData({ loadingList: false })
     })
   },
   // 发布商品
