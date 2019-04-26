@@ -248,7 +248,7 @@ Page({
     if (Api.isNotEmpty(value)) {
       var newArr = listData[addSpexIndex].goodsSpecificationValueVOList
       for (let v of newArr) {
-        if (v.specValueName == value) {
+        if ((v.specValueName).toUpperCase() == value.toUpperCase()) {
           Api.showToast("规格值不能重复")
           return
         }

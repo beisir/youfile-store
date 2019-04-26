@@ -1,13 +1,14 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/admin/addGoods/addGoods",
+    "pages/admin/goodsSpec/goodsSpec",
     "pages/mallActive/list/list",
     "pages/mallActive/activityAnalysis/activityAnalysis",
     "pages/page/cartList/cartList",
     "pages/mallActive/yunDist/yunDist",
     "pages/page/serStatus/serStatus",
     "pages/page/goodsDetails/goodsDetails",
-    "pages/admin/addGoods/addGoods",
     "pages/mallActive/batchRalease/batchRalease",
     "pages/mallActive/waitRalease/waitRalease",
     "pages/page/workIndex/workIndex",
@@ -44,7 +45,6 @@
     "pages/page/user/user",
     "pages/faceToFaceOrder/shopkeeperList/shopkeeperList",
     "pages/faceToFaceOrder/customerOrderList/customerOrderList",
-    "pages/admin/goodsSpec/goodsSpec",
     "pages/admin/specSet/specSet",
     "pages/businessFriend/merchant/list/list",
     "pages/capital/bank/bank",
