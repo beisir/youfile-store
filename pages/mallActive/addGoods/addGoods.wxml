@@ -22,9 +22,9 @@
       <view>
         <view class='g-title'>{{item.goodsVO.name}} </view>
         <view class='gprice'>批发:
-          <text>￥{{item.goodsVO.sellPrice}}</text> </view>
-        <view class='gprice'>零售:
           <text>￥{{item.goodsVO.wholesalePrice}}</text> </view>
+        <view class='gprice'>零售:
+          <text>￥{{item.goodsVO.sellPrice}}</text> </view>
         <view>库存: {{item.goodsVO.stockNum}}</view>
       </view>
     </view>
