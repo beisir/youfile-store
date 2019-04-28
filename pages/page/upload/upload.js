@@ -40,7 +40,7 @@ Page({
 
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success(res) {
         const src = res.tempFilePaths[0]
@@ -53,12 +53,13 @@ Page({
 
   //裁剪
   btnHandle() {
-    //高清裁剪
-    let quality = 0.7;
-    if (this.data.quality) {
-      quality = 1;
-    }
-    // if (this.data.quality) {
+    let sys = wx.getSystemInfoSync().system
+    if (sys.indexOf("iOS") >= 0) {
+      console.log('ios', sys)
+      let quality = 0.7;
+      if (this.data.quality) {
+        quality = 1;
+      }
       let _that = this;
       // 点击了裁剪按钮
       let devicePixelRatio = this.data.cropperOpt.pixelRatio
@@ -87,7 +88,7 @@ Page({
           height,
           destWidth: _that.data.uploadWidth,
           destHeight: _that.data.uploadHeight,
-          fileType:'jpg',
+          fileType: 'jpg',
           quality,
           success(res) {
             const tmpPath = res.tempFilePath;
@@ -98,11 +99,12 @@ Page({
           }
         })
       })
-    // } else {
-    //   this.wecropper.getCropperImage((avatar) => {
-    //     this.afterGetPath(avatar)
-    //   })
-    // }
+    } else {
+      console.log('and', sys)
+      this.wecropper.getCropperImage((avatar) => {
+        this.afterGetPath(avatar)
+      })
+    }
   },
   afterGetPath(avatar) {
     if (avatar) {
@@ -133,7 +135,7 @@ Page({
     })
 
     const { cropperOpt } = this.data
-    
+
     //裁图质量
     if (option.quality) {
       this.setData({
@@ -141,8 +143,8 @@ Page({
       })
     }
     this.setData({
-      uploadWidth:option.width,
-      uploadHeight:option.height
+      uploadWidth: option.width,
+      uploadHeight: option.height
     })
 
     if (option.src) {

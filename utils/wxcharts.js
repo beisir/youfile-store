@@ -1989,12 +1989,11 @@ Charts.prototype.addEventListener = function (type, listener) {
 };
 
 Charts.prototype.getCurrentDataIndex = function (e) {
-  var touches = e.touches && e.touches.length ? e.touches : e.changedTouches;
+  var touches = e.touches && e.touches.length && e.touches[e.touches.length-1].x? e.touches : e.changedTouches;
   if (touches && touches.length) {
     var _touches$ = touches[0],
       x = _touches$.x,
       y = _touches$.y;
-
     if (this.opts.type === 'pie' || this.opts.type === 'ring') {
       return findPieChartCurrentIndex({
         x: x,
@@ -2050,14 +2049,20 @@ Charts.prototype.showToolTip = function (e) {
 
 Charts.prototype.scrollStart = function (e) {
   if (e.touches[0] && this.opts.enableScroll === true) {
-    this.scrollOption.startTouchX = e.touches[0].x;
+    this.scrollOption.startTouchX = e.touches[e.touches.length - 1].x;
   }
 };
 
 Charts.prototype.scroll = function (e) {
   // TODO throtting...
   if (e.touches[0] && this.opts.enableScroll === true) {
-    var _distance = e.touches[0].x - this.scrollOption.startTouchX;
+    let nowitem = {}
+    e.touches.forEach(el => {
+      if (el.x) {
+        nowitem = el
+      }
+    })
+    var _distance = nowitem.x - this.scrollOption.startTouchX;
     var currentOffset = this.scrollOption.currentOffset;
 
     var validDistance = calValidDistance(currentOffset + _distance, this.chartData, this.config, this.opts);
