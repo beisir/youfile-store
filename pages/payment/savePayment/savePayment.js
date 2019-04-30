@@ -198,11 +198,11 @@ Component({
               filePath: this.data.imagePath,
               success: function (res) {
                 Api.showToast('已保存到手机相册')
+              },
+              fail: (res) => {
+                Api.openSetting()
               }
             })
-          },
-          fail: (res) => {
-            Api.openSetting()
           },
           complete:(()=>{
             this.setData({
