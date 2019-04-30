@@ -103,9 +103,9 @@ const saveImgToPhone = imgUrl => {
             success(res) {
               Api.showToast('保存图片成功！')
             },
-            fail(res) {
-              Api.showToast('保存图片失败！')
-            }
+            fail: (res) => {
+              Api.openSetting()
+            },
           })
         }
       },

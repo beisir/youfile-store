@@ -624,6 +624,10 @@ Page({
   },
   // 更新
   updateGoods: function (e) {
+    // 强制更新弹框
+    this.setData({ acSaveModal: false })
+    this.hideTaleFun()
+    
     var _this = this,
       pics = this.data.pics,
       status = e.target.dataset.status,
@@ -736,6 +740,9 @@ Page({
       Api.showToast("请输入商品类目！")
       return;
     }
+    if(e.currentTarget.dataset.sure == 'sure'){
+      goodsVO.forceSave = true
+    }
     this.setData({
       saveHide: false
     }, function () {
@@ -753,6 +760,11 @@ Page({
           _this.setData({
             saveHide: true
           })
+          if (res.data.code == '2') {
+            this.showTaleFun()
+            this.setData({ acSaveModal: true })
+            return
+          }
         })
     })
   },

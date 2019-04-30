@@ -74,7 +74,7 @@
         </view>
       </navigator>
     </view>
-    <view class='weui-back'>
+    <view class='weui-back' wx:if="{{hasBankcard}}">
       <navigator class='weui-cell weui-cell_access' url='../bank/bank'>
         <view class='weui-cell__bd'>
           我的银行卡

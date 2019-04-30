@@ -1,3 +1,10 @@
+<!-- 确认强制修改 与活动冲突-->
+<mes show="{{acSaveModal}}">
+  <view class='font-color'>
+    <text>该商品已有部分规格参加抢订活动，保存后关联活动将会下架，确定保存?</text>
+    <button bindtap='updateGoods' data-sure='sure'>确定</button>
+  </view>
+</mes>
 <!-- 提示-->
 <mes show="{{show1}}" bind:sureSelectArea="sureSelectAreaListener">
   <view class='font-color'>

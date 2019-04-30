@@ -1201,7 +1201,26 @@ function storeIndexAGoods(data) {
   data = initStoreId(data);
   return app.pageRequest.pageGetActive(storeIndexAGoodsUrl, data)
 }
+// 打开设置页
+function openSetting(data){
+  data?'':data={};
+  wx.showModal({
+    title: data.title ? data.title:'您未授权相册权限',
+    content: data.des ? data.des:'点击确定跳转至设置，授权后即可保存',
+    success(res) {
+      if (res.confirm) {
+        wx.openSetting({
+          success(res) {
+            
+          }
+        })
+      } else if (res.cancel) {
+      }
+    }
+  })
+}
 module.exports = {
+  openSetting,
   editActiveGoods,
   getActiveGoodsDetail,
   goodsPosterNum,

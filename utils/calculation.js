@@ -8,7 +8,7 @@ class Calculation {
     var saleStockNum = obj.saleStockNum
     var saleBatch = obj.saleBatch
     if (isActivity){
-      if (value >= saleStockNum) {
+      if (value > saleStockNum) {
         obj.num = saleStockNum
         Api.showToast("活动库存不足！")
       } else {
@@ -39,7 +39,7 @@ class Calculation {
         }
       }
     }else{
-      if (value >= stockNum) {
+      if (value > stockNum) {
         obj.num = stockNum
         Api.showToast("库存不足！")
       } else {

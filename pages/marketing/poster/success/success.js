@@ -66,7 +66,7 @@ Page({
         })
       },
       fail(e) {
-        API.showToast("您未授权相册权限~")
+        API.openSetting()
       }
     })
   },

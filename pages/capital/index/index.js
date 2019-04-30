@@ -21,7 +21,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getBankData()
+  },
+  getBankData: function () {
+    var _this = this
+    Api.getBankcard().then(res => {
+      if (res.obj) {
+        this.setData({hasBankcard: true})
+      }
+    })
   },
   goRecord:function(){
     wx.navigateTo({

@@ -202,7 +202,7 @@ Component({
             })
           },
           fail: (res) => {
-            console.log(res);
+            Api.openSetting()
           },
           complete:(()=>{
             this.setData({

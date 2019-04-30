@@ -553,13 +553,13 @@ Page({
     if (isActivity) {
       detailList[index].allGoodsPf = num * detailList[index].activityPrice
       detailList[index].allGoodsAmount = num * detailList[index].activityPrice
-      if (num >= detailList[index].saleStockNum) {
+      if (num > detailList[index].saleStockNum) {
         Api.showToast("活动库存不足！")
       }
     } else {
       detailList[index].allGoodsPf = num * detailList[index].wholesalePrice
       detailList[index].allGoodsAmount = num * detailList[index].sellPrice
-      if (num >= detailList[index].stockNum) {
+      if (num > detailList[index].stockNum) {
         Api.showToast("库存不足！")
       }
     }
