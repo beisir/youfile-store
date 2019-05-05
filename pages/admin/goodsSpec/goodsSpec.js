@@ -82,7 +82,8 @@ Page({
       }
       _this.setData({
         listData: voListData,
-        goodsSkuVOList: goodsSkuVOList
+        goodsSkuVOList: goodsSkuVOList,
+        oldgoodsSkuVOList: goodsSkuVOList
       })
     }
   },
@@ -246,11 +247,13 @@ Page({
       addSpexIndex = this.data.addSpexIndex,
       listData = this.data.listData
     if (Api.isNotEmpty(value)) {
-      var newArr = listData[addSpexIndex].goodsSpecificationValueVOList
-      for (let v of newArr) {
-        if ((v.specValueName).toUpperCase() == value.toUpperCase()) {
-          Api.showToast("规格值不能重复")
-          return
+      for (let el of listData){
+        let newArr = el.goodsSpecificationValueVOList
+        for (let v of newArr) {
+          if ((v.specValueName).toUpperCase() == value.toUpperCase()) {
+            Api.showToast("规格值不能重复")
+            return
+          }
         }
       }
       listData[addSpexIndex].goodsSpecificationValueVOList.push({
@@ -795,6 +798,19 @@ Page({
   },
   // 修改规格
   updataGoodsSku(skuListData, goodsSkuVOList) {
+    let oldarr = this.data.oldgoodsSkuVOList;
+    if (oldarr && oldarr.length > 0) {
+      goodsSkuVOList.forEach(newEL => {
+        oldarr.forEach(old => {
+          try {
+            if (newEL.specValueCodeList.sort().toString() == old.specValueCodeList.sort().toString() && old.skuCode) {
+              newEL.skuCode = old.skuCode
+            }
+          }
+          catch (e) { }
+        })
+      })
+    }
     var goodsId = this.data.goodsId
     // 有ID单独修改的规格
     if (goodsId) {

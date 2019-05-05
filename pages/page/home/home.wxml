@@ -219,7 +219,7 @@
             <image mode="widthFix" src="/image/shan.png" />抢订价</view>
           ￥
           <text>{{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
-          <view class='goods-zize'>￥{{item.sellPrice}}</view>
+          <view class='goods-zize'>￥{{item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice}}</view>
           <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='copy-img' src="/image/dd.png" />
         </view>
         <view class='dc-xian'>
@@ -307,7 +307,7 @@
                 <block wx:if='{{limitShow==1 && item.extInfo.PRIORITY_SALES_PROMOTION}}'>
                     <view class='line-font'>
                      零售
-                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice}}</text>
                    </view>
                 </block>
                  <block wx:if='{{limitShow==1 && !item.extInfo.PRIORITY_SALES_PROMOTION}}'>
@@ -317,7 +317,7 @@
                 <block wx:if='{{limitShow!=1}}'>
                    <view class='line-font'>
                      零售
-                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice?item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice:item.sellPrice}}</text>
                    </view>
                 </block>
                 <view wx:if="{{!item.extInfo.PRIORITY_SALES_PROMOTION}}">

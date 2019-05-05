@@ -52,7 +52,7 @@
             <text>{{goodsInfo.activityPrice}}</text>
             <view class='sale-num'>
               <view>{{goodsInfo.extInfo.SALES_PROMOTION[0].batchNum}}件起购</view>
-              <text>￥{{goodsInfo.sellPrice}}</text>
+              <text>￥{{goodsInfo.extInfo.SALES_PROMOTION[0].sellPrice}}</text>
             </view>
           </view>
           <view>
@@ -73,7 +73,7 @@
         </button>
       </view>
       <view class='gd-font gd-font2'>零售价：
-        <text style='color:#333'>￥{{goodsInfo.sellPrice}}</text>
+        <text style='color:#333'>￥{{goodsInfo.extInfo.SALES_PROMOTION[0].sellPrice?goodsInfo.extInfo.SALES_PROMOTION[0].sellPrice:goodsInfo.sellPrice}}</text>
       </view>
       <view class='gd-font'>
         <button bindtap='addTip'>享受批发价</button>
