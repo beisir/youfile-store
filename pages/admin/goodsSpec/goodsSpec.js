@@ -516,7 +516,11 @@ Page({
     })
   },
   //确定返回
-  goback: function () {
+  goback: function (e) {
+    let sureChange = false
+    if (e.target.dataset.sure == 'sure') {
+      sureChange = true
+    }
     var _this = this,
       goodsSkuVOList = this.data.goodsSkuVOList,
       listData = this.data.listData,
@@ -597,7 +601,7 @@ Page({
               skuListData[i].goodsSpecificationValueVOList = specVoList
             }
             goodsSkuVOList = _this.copySkuCode(getTempCode, goodsSkuVOList)
-            _this.updataGoodsSku(skuListData, goodsSkuVOList)
+            _this.updataGoodsSku(skuListData, goodsSkuVOList, sureChange)
           })
       }
       // 编辑
@@ -677,7 +681,7 @@ Page({
               skuListData[i].goodsSpecificationValueVOList = specVoList
             }
             goodsSkuVOList = _this.copySkuCode(getTempCode, goodsSkuVOList)
-            _this.updataGoodsSku(skuListData, goodsSkuVOList)
+            _this.updataGoodsSku(skuListData, goodsSkuVOList, sureChange)
           })
       }
       // 一个新增一个编辑
@@ -763,14 +767,14 @@ Page({
                     }
                     childVoData1.goodsSpecificationValueVOList = specVoList
                     goodsSkuVOList = _this.copySkuCode(getTempCode, goodsSkuVOList)
-                    _this.updataGoodsSku(skuListData, goodsSkuVOList)
+                    _this.updataGoodsSku(skuListData, goodsSkuVOList, sureChange)
                   })
               })
           }
         }
       }
     } else {
-      _this.updataGoodsSku(skuListData, goodsSkuVOList)
+      _this.updataGoodsSku(skuListData, goodsSkuVOList, sureChange)
     }
   },
   //code赋值
@@ -797,7 +801,7 @@ Page({
     return goodsSkuVOList
   },
   // 修改规格
-  updataGoodsSku(skuListData, goodsSkuVOList) {
+  updataGoodsSku(skuListData, goodsSkuVOList, sureChange) {
     let oldarr = this.data.oldgoodsSkuVOList;
     if (oldarr && oldarr.length > 0) {
       goodsSkuVOList.forEach(newEL => {
@@ -836,10 +840,19 @@ Page({
         stockNum: stockNum,
         wholesalePrice: wholesalePrice
       }
+      if (sureChange) {
+        dataVo.forceSave = true
+      }
       Api.updateGooodsSku(dataVo)
         .then(res => {
           Api.showToast(res.message)
           wx.navigateBack()
+        }).catch(res => {
+          if (res.data.code == '2') {
+            // this.showTaleFun()
+            this.setData({ acSaveModal: true })
+            return
+          }
         })
     } else {
       var pages = getCurrentPages(),

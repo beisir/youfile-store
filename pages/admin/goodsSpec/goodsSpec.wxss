@@ -25,3 +25,4 @@
 .spec-class1{color: #888;}
 .spec-input1{height: 95rpx;text-align: center}
 .last-num{position: absolute;right: 80rpx;top: 72rpx;font-weight: bold}
+.font-color{font-size:32rpx;text-align: left;padding:30rpx;}
