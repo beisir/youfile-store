@@ -8,72 +8,154 @@ Page({
   data: {
     globalData: app.globalData,
     id: Api.getThisStoreId(),
-    data:[{
-          name: "服饰内衣",
-          checked: false,
-          color: "#fff",
-          colorTrue: "#cde6dc"
-        },
-          {
-            name: "母婴玩具",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#d6cde6"
-          },
-          {
-            name: "鞋类箱包",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#cddee6"
-          },
-          {
-            name: "运动户外",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#d4e6cd"
-          },
-          {
-            name: "珠宝配饰",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#cde6dc"
-          },
-          {
-            name: "化妆品",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#d6cde6"
-          },
-          {
-            name: "家居家纺",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#cddee6"
-          },
-          {
-            name: "日用百货",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#d4e6cd"
-          },
-          {
-            name: "电子产品",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#cde6dc"
-          },
-          {
-            name: "礼品婚庆",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#d6cde6"
-          },
-          {
-            name: "仿真花艺",
-            checked: false,
-            color: "#fff",
-            colorTrue: "#cddee6"
-          },
+    data:[],
+    zzshoplist: [{
+      name: "食品",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cde6dc"
+    }, {
+      name: "文体玩具",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d6cde6"
+    }, {
+      name: "家居建材",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cddee6"
+    }, {
+      name: "汽摩配件",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d4e6cd"
+    }, {
+      name: "服饰内衣",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cde6dc"
+    },
+    {
+      name: "母婴",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d6cde6"
+    },
+    {
+      name: "鞋类箱包",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cddee6"
+    },
+    {
+      name: "运动户外",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d4e6cd"
+    },
+    {
+      name: "珠宝配饰",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cde6dc"
+    },
+    {
+      name: "化妆品",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d6cde6"
+    },
+    {
+      name: "家居家纺",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cddee6"
+    },
+    {
+      name: "日用百货",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d4e6cd"
+    },
+    {
+      name: "电子产品",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cde6dc"
+    },
+    {
+      name: "节庆礼品",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d6cde6"
+    }
+    ],
+    bjshoplist: [{
+      name: "服饰内衣",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cde6dc"
+    },
+    {
+      name: "母婴",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d6cde6"
+    },
+    {
+      name: "鞋类箱包",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cddee6"
+    },
+    {
+      name: "运动户外",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d4e6cd"
+    },
+    {
+      name: "珠宝配饰",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cde6dc"
+    },
+    {
+      name: "化妆品",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d6cde6"
+    },
+    {
+      name: "家居家纺",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cddee6"
+    },
+    {
+      name: "日用百货",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d4e6cd"
+    },
+    {
+      name: "电子产品",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cde6dc"
+    },
+    {
+      name: "礼品婚庆",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d6cde6"
+    },
+    {
+      name: "仿真花艺",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cddee6"
+    },
     ],
     name:''
   },
@@ -84,7 +166,13 @@ Page({
   onLoad: function (options) {
     var name =options.name,
         arr=[],
-        data=this.data.data
+        data=[]
+    if (options.mallCode == 2000) {
+      data = this.data.zzshoplist
+    } else {
+      data = this.data.bjshoplist
+    }   
+        
     arr=name.split(",")
     for(var i=0;i<data.length;i++){
       if(arr.indexOf(data[i].name)!=-1){
@@ -98,6 +186,12 @@ Page({
   selectedFun:function(e){
     var data=this.data.data,
         index = e.target.dataset.index
+
+    let selectArr = data.filter(el => el.selected)
+    if (selectArr.length >= 2 && !data[index].selected) {
+      Api.showToast('最多选择两项主营范围')
+      return
+    }    
     data[index].selected = !data[index].selected
     this.setData({
       data: data
@@ -121,9 +215,7 @@ Page({
           icon: 'none',
           duration: 2000,
           success: function () {
-            wx.redirectTo({
-              url: '../mesEdit/mesEdit',
-            })
+            wx.navigateBack()
           }
         })
       })

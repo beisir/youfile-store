@@ -395,6 +395,7 @@ Page({
   cancel: function () {
     this.setData({
       show1: false,
+      showTale: false
     })
   },
   onLoad: function (options) {

@@ -111,6 +111,13 @@
         <image class='img' src="/image/icl.png"></image>
       </view>
     </view>
+    <view class='wx-box' bindtap='copywx' wx:if="{{store.wechatNumber}}">
+    <view class='flex-center'>
+      <image src='/image/wx.png' style='width:60rpx;height:46rpx;margin-right:30rpx;'></image>
+      <text>官方微信：{{store.wechatNumber}}</text>
+    </view>
+    <image src='/image/copy-icon.png' style='width:30rpx;height:30rpx;'></image>
+    </view>
     <!-- 购买记录 -->
     <view wx:if='{{histtory.length>0}}' class="weui_cells weui_cells1 buy-view">
       <text class="store-address">购买记录 </text>
@@ -120,7 +127,7 @@
         </view>
       </view>
     </view>
-    <view class='gd-content'>
+    <view class='gd-content' wx:if="{{goodsInfo.recommendDesc}}">
       <view>
         <image src="/image/xin.png"></image>推荐心语</view>
       <text>{{goodsInfo.recommendDesc}}</text>

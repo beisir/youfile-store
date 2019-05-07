@@ -94,6 +94,7 @@ Page({
       pics = this.data.pics
     pics.splice(index, 1)
     this.setData({
+      showTale: false,
       show: false,
       pics
     })

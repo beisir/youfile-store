@@ -85,6 +85,7 @@
       <view class='column'>
         <image class="editGoods" src="/image/mallr.png"></image>
         <image class="cart-thumb" src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+        <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" left='40' top='44'/>
         <view class='st-d-t'>{{item.name}}</view>
         <view class='st-details'>
           <view class='st-d-status'>

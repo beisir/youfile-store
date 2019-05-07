@@ -76,8 +76,8 @@
   </view>
   <view>
     <text>  主营范围</text>
-    <navigator class='new-left' url='../main/main?name={{storeMes.businessScope}}'>
-      {{filter.my_slice(storeMes.businessScope,9)}}
+    <navigator class='new-left' url='../main/main?name={{storeMes.businessScope}}&mallCode={{floorInfo.mallCode}}'>
+      {{filter.my_slice(storeMes.businessScope,10)}}
       <image class='img' src="/image/icl.png"></image>
     </navigator>
   </view>

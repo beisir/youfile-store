@@ -165,3 +165,5 @@
 .active-g>view:first-child .sale-num text{text-decoration: line-through}
 .active-g>view:first-child{margin-top: -20rpx}
 .gd-ins .stockNum-box{padding-top:5rpx;display:block;}
+.wx-box{height: 120rpx;border-radius: 10rpx;background: #fff;display: flex;padding:0 30rpx;margin-top:20rpx;align-items: center;justify-content: space-between;font-size: 30rpx;font-weight: 600;margin:20rpx;}
+.flex-center{display: flex;align-items: center;}

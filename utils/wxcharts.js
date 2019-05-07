@@ -321,8 +321,8 @@ function measureText(text) {
       width += 10;
     }
   });
-  //改变底部距离
-  return width * fontSize / 20;
+
+  return width * fontSize / 10;
 }
 
 function dataCombine(series) {

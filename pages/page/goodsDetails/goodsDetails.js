@@ -137,6 +137,16 @@ Page({
     }
     this.getMallCode()
   },
+  copywx(){
+    if (this.data.store.wechatNumber){
+      wx.setClipboardData({
+        data: this.data.store.wechatNumber,
+        success(res) {
+          Api.showToast("复制微信号成功~")
+        }
+      })
+    }
+  },
   // 获取mallcode
   getMallCode(){
     Api.simpleStoreMsg({ storeId: wx.getStorageSync('storeId') }).then(res => {

@@ -4,6 +4,7 @@
   "usingComponents": {
     "login-component": "../../login/login/login",
     "mes": "../../../../assembly/tips/tips",
-    "bottomLayer": "../../../../assembly/bottomLayer/bottomLayer"
+    "bottomLayer": "../../../../assembly/bottomLayer/bottomLayer",
+    "activityTag": "../../../assembly/activityTag/activityTag"
   }
 }
