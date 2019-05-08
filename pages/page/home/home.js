@@ -753,8 +753,20 @@ Page({
       _this.getListNew()
     });
   },
+  preventPulldown(){
+    this.setData({
+      noPulldown: true
+    },()=>{
+      setTimeout(()=>{
+        this.setData({
+          noPulldown: false
+        })
+      },1000)
+    })
+  },
   // 切换商品tab
   swichNav: function (e) {
+    this.preventPulldown()
     var that = this,
       descShow = this.data.descShow,
       index = e.target.dataset.current
@@ -781,6 +793,7 @@ Page({
   },
   // 切换活动商品tab
   swichNavActive:function(e){
+    this.preventPulldown()
     var _this=this,
       index = e.target.dataset.current,
       activityNumber = e.target.dataset.number
@@ -793,6 +806,14 @@ Page({
        activityNumber: activityNumber
     }, function () {
       _this.getActiveList()
+    })
+  },
+  reloadAcList(){
+    app.pageRequest.pageDataActive.pageNum = 0
+    this.setData({
+      activeResult: [],
+    }, function () {
+      this.getActiveList()
     })
   },
   // 置顶
@@ -930,13 +951,25 @@ Page({
       currentTab: currentTab,
       noMoreData: true
     }, function () {
-      if (currentTab == 1) {
-        this.emptyArrNew()
+      if (this.data.tabSwitchShow){
+        this.reloadAcList()
       } else {
-        this.emptyArr()
+        if (currentTab == 1) {
+          this.emptyArrNew()
+        } else {
+          this.emptyArr()
+        }
       }
       wx.stopPullDownRefresh();
     })
+  },
+  toPageTop(){
+    setTimeout(()=>{
+      if (!this.data.noPulldown) {
+        this.preventPulldown()
+        wx.startPullDownRefresh()
+      }
+    },200)
   },
 
 

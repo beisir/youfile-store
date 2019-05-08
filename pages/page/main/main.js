@@ -15,79 +15,67 @@ Page({
       color: "#fff",
       colorTrue: "#cde6dc"
     }, {
-      name: "文体玩具",
+      name: "粮油调味",
       checked: false,
       color: "#fff",
       colorTrue: "#d6cde6"
     }, {
-      name: "家居建材",
+      name: "酒水饮料",
       checked: false,
       color: "#fff",
       colorTrue: "#cddee6"
     }, {
-      name: "汽摩配件",
+      name: "食化",
       checked: false,
       color: "#fff",
       colorTrue: "#d4e6cd"
     }, {
-      name: "服饰内衣",
+      name: "文体玩具",
       checked: false,
       color: "#fff",
       colorTrue: "#cde6dc"
+    },
+    {
+      name: "百货",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d6cde6"
     },
     {
       name: "母婴",
       checked: false,
       color: "#fff",
-      colorTrue: "#d6cde6"
-    },
-    {
-      name: "鞋类箱包",
-      checked: false,
-      color: "#fff",
       colorTrue: "#cddee6"
-    },
-    {
-      name: "运动户外",
-      checked: false,
-      color: "#fff",
-      colorTrue: "#d4e6cd"
-    },
-    {
-      name: "珠宝配饰",
-      checked: false,
-      color: "#fff",
-      colorTrue: "#cde6dc"
-    },
-    {
-      name: "化妆品",
-      checked: false,
-      color: "#fff",
-      colorTrue: "#d6cde6"
     },
     {
       name: "家居家纺",
       checked: false,
       color: "#fff",
-      colorTrue: "#cddee6"
-    },
-    {
-      name: "日用百货",
-      checked: false,
-      color: "#fff",
       colorTrue: "#d4e6cd"
     },
     {
-      name: "电子产品",
+      name: "箱包",
       checked: false,
       color: "#fff",
       colorTrue: "#cde6dc"
     },
     {
-      name: "节庆礼品",
+      name: "美妆",
       checked: false,
       color: "#fff",
       colorTrue: "#d6cde6"
+    },
+    {
+      name: "电子产品",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#cddee6"
+    },
+    {
+      name: "节庆礼品",
+      checked: false,
+      color: "#fff",
+      colorTrue: "#d4e6cd"
     }
     ],
     bjshoplist: [{

@@ -74,13 +74,13 @@
       购物
     </view>
   </view>
-  <view>
+  <navigator url='../main/main?name={{storeMes.businessScope}}&mallCode={{floorInfo.mallCode}}'>
     <text>  主营范围</text>
-    <navigator class='new-left' url='../main/main?name={{storeMes.businessScope}}&mallCode={{floorInfo.mallCode}}'>
+    <view class='new-left' url='../main/main?name={{storeMes.businessScope}}&mallCode={{floorInfo.mallCode}}'>
       {{filter.my_slice(storeMes.businessScope,10)}}
       <image class='img' src="/image/icl.png"></image>
-    </navigator>
-  </view>
+    </view>
+  </navigator>
 </view>
 <navigator class="weui_cells" url="../storeIcon/storeIcon">
   <image src="/image/mes12.png"></image>

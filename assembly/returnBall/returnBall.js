@@ -9,7 +9,8 @@ Component({
     x: app.globalData.returnBall.x,
     y: app.globalData.returnBall.y,
     movableBlo: app.globalData.returnBall.show,
-    animate: false
+    animate: false,
+    topcount: 0
   },
   methods: {
     change(e) {
@@ -69,6 +70,16 @@ Component({
       let curPage = pages[pages.length - 1];
       if (curPage.toBottom) {
         curPage.toBottom()
+      }
+    },
+    toTop(){
+      this.setData({
+        topcount: 1
+      })
+      let pages = getCurrentPages();
+      let curPage = pages[pages.length - 1];
+      if (curPage.toPageTop) {
+        curPage.toPageTop()
       }
     }
   },
