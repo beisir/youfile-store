@@ -210,7 +210,7 @@
               </view>
               <view class="tr" wx:if='{{limitShow=="3"}}' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
                 <view class="td">{{item.skuName}}</view>
-                <view class="td">2件</view>
+                <view class="td">{{item.num}}件</view>
                 <view class="td">
                   <text class='sm-cny-icon'>￥</text>{{item.sellPrice}}</view>
                 <!-- <view class="td"><text class='sm-cny-icon'>￥</text>{{item.wholesalePrice}}</view> -->
@@ -223,7 +223,7 @@
               </view>
               <view class="tr" wx:if='{{limitShow!="3"}}' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
                 <view class="td">{{item.skuName}}</view>
-                <view class="td">2件</view>
+                <view class="td">{{item.num}}件</view>
                 <view class="td">
                   <text class='sm-cny-icon'>￥</text>{{item.sellPrice}}</view>
               </view>

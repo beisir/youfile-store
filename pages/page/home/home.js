@@ -10,8 +10,10 @@ var timerList = []
 function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
   isStoreOwner.enterIdentity().then(res => {
-    _this.homeIndex()
-    _this.getActiveGoods()
+    if (_this){
+      _this.homeIndex()
+      _this.getActiveGoods()
+    }
   }).catch(res => {
   });
 }
@@ -62,6 +64,7 @@ Page({
   },
   // 切换抢购商品
   tabSwitch:function(e){
+    this.preventPulldown()
     var index = e.target.dataset.index
     if(index=="1"){
       this.setData({
@@ -946,30 +949,34 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    var currentTab = this.data.currentTab
-    this.setData({
-      currentTab: currentTab,
-      noMoreData: true
-    }, function () {
-      if (this.data.tabSwitchShow){
-        this.reloadAcList()
-      } else {
-        if (currentTab == 1) {
-          this.emptyArrNew()
-        } else {
-          this.emptyArr()
-        }
-      }
-      wx.stopPullDownRefresh();
-    })
+    this.initStoreData()
+    wx.stopPullDownRefresh();
+    // 刷新列表
+    // var currentTab = this.data.currentTab
+    // this.setData({
+    //   currentTab: currentTab,
+    //   noMoreData: true
+    // }, function () {
+    //   if (this.data.tabSwitchShow){
+    //     this.reloadAcList()
+    //   } else {
+    //     if (currentTab == 1) {
+    //       this.emptyArrNew()
+    //     } else {
+    //       this.emptyArr()
+    //     }
+    //   }
+    //   wx.stopPullDownRefresh();
+    // })
   },
   toPageTop(){
+    if (this.data.noPulldown) {return}
     setTimeout(()=>{
       if (!this.data.noPulldown) {
         this.preventPulldown()
         wx.startPullDownRefresh()
       }
-    },200)
+    },300)
   },
 
 
