@@ -1,6 +1,9 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/role/allOrder/allOrder",
+    "pages/role/changeOrderAdd/changeOrderAdd",
+    "pages/role/supplyOrder/supplyOrder",
     "pages/admin/addGoods/addGoods",
     "pages/admin/goodsSpec/goodsSpec",
     "pages/mallActive/list/list",
@@ -65,7 +68,6 @@
     "pages/businessFriend/merchant/follow/follow",
     "pages/faceToFaceOrder/remindLayer/remindLayer",
     "pages/faceToFaceOrder/customerOrderDetail/customerOrderDetail",
-    "pages/role/supplyOrder/supplyOrder",
     "pages/page/order/order",
     "pages/casher/success/success",
     "pages/casher/casher/casher",
@@ -82,7 +84,6 @@
     "pages/cloudOrder/cloudPay/cloudPay",
     "pages/cloudOrder/newCloud/newCloud",
     "pages/page/orderSuccess/orderSuccess",
-    "pages/role/allOrder/allOrder",
     "pages/payment/uploadPayment/uploadPayment",
     "pages/admin/batchSet/batchSet",
     "pages/page/invoice/invoice",

@@ -127,6 +127,8 @@ export const copyGoodsUrl='/api/shop/goods/copy/{{originGoodsId}}'
 export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 //订单详情
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
+//商家订单详情
+export const adminorderDetailUrl = '/admin/order/byordernumber/{{orderNumber}}'
 // 是否为进货商
 export const ifWholesalerUrl = "/admin/user/profile/{{userId}}"
 // 商家门店订单
@@ -233,4 +235,7 @@ export const statPurchasersUrl="/order/statistics/purchasers/trade/data/page"
 export const statPurchasersDetailsUrl="/order/statistics/purchaser/{{userId}}/trade/data"
 export const purchaserTransUrl="/admin/order/purchaser/{{userId}}/"
 export const storeIndexAGoodsUrl ="/api/mall/activity/goods/{{activityNumber}}/store/{{storeId}}/goods/page"
-
+// 修改收货人信息
+export const editConsigneeUrl = '/admin/order/{{orderNumber}}/consignee'
+// 修改物流
+export const editExpressUrl = '/admin/order/{{orderNumber}}/express'

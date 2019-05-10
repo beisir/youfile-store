@@ -238,6 +238,32 @@ function timeStamp(time) {
    data = { shengyuD: shengyuD, shengyuH: shengyuH, shengyuM: shengyuM,S:S}
   return data
 }
+
+function regTest(obj) {
+  if (!obj) return;
+  var type = obj.type;
+  var str = obj.str;
+  switch (type) {
+    case "phone":
+      return /^((0\d{2,3})?(-)?\d{6,10}|1[35874]\d{9})$/.test(str);
+    case "id":
+      return /^((\d{15})|(\d{18})|(\d{17}(\d|X|x)))$/.test(str);
+    case "telephone":
+      return /^1[3456789][0-9]\d{8}$/.test(str);
+    case "email":
+      return /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/.test(str);
+    case "sum":
+      return /^([1-9]\d*(\.\d+)?|0\.\d*[1-9]\d*|0)%?$/.test(str);
+    case "password":
+      return /^\w{6,20}$/.test(str);
+    case "money":
+      return /^([1-9]\d{0,9}(\.\d{1,2})?|0\.\d{1,2}|0)$/.test(str);
+    case "empty":
+      return isNotEmpty(str);
+    default:
+      alert("regTest no this type"); break;
+  }
+}
 module.exports = {
   formatTime: formatTime,
   count_down:count_down,
@@ -251,6 +277,7 @@ module.exports = {
   timeStamp: timeStamp,
   formatTimeday: formatTimeday,
   formatMD: formatMD,
-  formatHour: formatHour
+  formatHour: formatHour,
+  regTest: regTest
 }
 

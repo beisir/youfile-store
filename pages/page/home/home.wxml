@@ -260,6 +260,14 @@
     </view>
   </view>
   <!-- 结束 -->
+  <view class="result-null" wx:if="{{(!result || result.length == 0) && !tabSwitchShow}}">
+    <view class="nomore">
+      <view>
+        <image src="/image/nohome.png"></image>
+      </view>
+      <block>暂时还没有上架商品</block>
+    </view>
+  </view>
   <view class="result result-box" wx:if="{{result.length > 0 && !tabSwitchShow}}">
     <view class='goods-total'>
       <text>{{goodsNum==null?0:goodsNum}}</text>

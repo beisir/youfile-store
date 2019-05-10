@@ -21,8 +21,8 @@
   <view class='modal-box'>
     <text>填写运单号</text>
     <view class='inputCon'>
-      <input class='alertInput' value='{{expressageCom}}' bindinput='watchInput' data-type='exCom' placeholder='请输入物流公司名称 '></input>
-      <input class='alertInput' value='{{expressageCode}}' bindinput='watchInput' data-type='exCode' placeholder='请输入运单号 '></input>
+      <input class='alertInput' value='{{expressageCom}}' bindinput='watchInput' data-type='exCom' placeholder='请输入物流公司名称 'maxlength='15'></input>
+      <input class='alertInput' value='{{expressageCode}}' bindinput='watchInput' data-type='exCode' placeholder='请输入运单号 'maxlength='25'></input>
     </view>
     <view style='display:flex;'>
       <!-- <button wx:if="{{!noBtn}}" data-type='no' bindtap='sendGoods' style="padding:0;">先发货，再填单</button> -->

@@ -1,0 +1,8 @@
+/* pages/role/changeOrderAdd/changeOrderAdd.wxss */
+page{color: #333;}
+.tip-box{height: 80rpx;background: #fef8ce;font-size: 24rpx;padding: 0 50rpx;display: flex;align-items: center;}
+.box{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;}
+.add-item{height: 100rpx;padding: 0 30rpx;display: flex;align-items: center;justify-content: space-between;}
+.flex-center{display: flex;align-items: center;}
+.r-icon{height: 30rpx;width: 25rpx;}
+.clo-icon{width: 35rpx;height: 35rpx;}

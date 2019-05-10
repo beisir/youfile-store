@@ -116,6 +116,7 @@ import {
   updateClassUrl,
   threeFloorListUrl,
   orderDetailUrl,
+  adminorderDetailUrl,
   ifWholesalerUrl,
   shopkeeperOrderListUrl,
   helpOrderUrl,
@@ -189,7 +190,9 @@ import {
   statPurchasersUrl,
   statPurchasersDetailsUrl,
   purchaserTransUrl,
-  storeIndexAGoodsUrl
+  storeIndexAGoodsUrl,
+  editConsigneeUrl,
+  editExpressUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -236,6 +239,7 @@ function ftfuserSureOrder(data) {
 function ftfpreOrderDetail(data) {
   return app.http.getRequest(ftfpreOrderDetailUrl, data)
 }
+
 
 /**判断楼座是否为空**/
 function isFloorInfo(obj) {
@@ -828,6 +832,10 @@ function threeFloorList(data) {
 function getOrderDetail(data) {
   return app.http.getRequest(orderDetailUrl, data);
 }
+// 商家订单详情
+function adminGetOrderDetail(data) {
+  return app.http.getRequest(adminorderDetailUrl, data); 
+}
 //是否进货商
 function ifWholesaler(data) {
   return app.http.getRequest(ifWholesalerUrl, data);
@@ -1219,7 +1227,19 @@ function openSetting(data){
     }
   })
 }
+// 编辑收货人信息
+function editConsignee(data){
+  return app.http.postRequest(editConsigneeUrl, data)
+}
+// 编辑物流
+function editExpress(data){
+  return app.http.postRequest(editExpressUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
 module.exports = {
+  editExpress,
+  editConsignee,
   openSetting,
   editActiveGoods,
   getActiveGoodsDetail,
@@ -1265,6 +1285,7 @@ module.exports = {
   getStoreData: getStoreData,
   getUserInfo: getUserInfo,
   getOrderDetail: getOrderDetail,
+  adminGetOrderDetail,
   threeFloorList: threeFloorList,
   copyGoods: copyGoods,
   getFormId: getFormId,

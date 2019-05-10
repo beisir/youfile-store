@@ -14,6 +14,38 @@ Page({
     timeOnce: true,
     remark: ""
   },
+  // 编辑物流
+  editExpress(){
+    if (this.data.editexpressCom && this.data.editexpressNum){
+      API.editExpress({ 
+        orderNumber: this.data.num,
+        expressNumber: this.data.editexpressNum,
+        expressCompany: this.data.editexpressCom
+      }).then(res => {
+        API.showToast(res.message)
+        this.afterOperation();
+      })
+    }else{
+      API.showToast("请填写完整")
+    }
+  },
+  // 复制地址
+  copyAdd(){
+    wx.setClipboardData({
+      data: `收货人：`+ this.data.order.consigneeInfo.userName + `
+手机号码: ` + this.data.order.consigneeInfo.userPhone + `
+收货地址：` + this.data.order.consigneeInfo.province +this.data.order.consigneeInfo.city+ this.data.order.consigneeInfo.county+ this.data.order.consigneeInfo.detailAddress,
+      success(res) {
+        API.showToast("已成功复制收货人信息和收货地址")
+      }
+    })
+  },
+  // 编辑地址
+  editAdd(){
+    wx.navigateTo({
+      url: '../changeOrderAdd/changeOrderAdd?num=' + this.data.order.orderNumber,
+    })
+  },
 
   toHome() {
     API.toHome();
@@ -62,6 +94,8 @@ Page({
       case "exCom": key = "expressageCom"; break;
       case "exCode": key = "expressageCode"; break;
       case "tip": key = "tipText"; break;
+      case 'editExCom': key = 'editexpressCom';break;
+      case 'editExCode': key = 'editexpressNum'; break;
     }
 
     let val = e.detail.value
@@ -75,10 +109,18 @@ Page({
     })
   },
   showModal(e) {
+    console.log(e)
     let type = e.currentTarget.dataset.type;
     let num = e.currentTarget.dataset.num;
     let obj = {};
     switch (type) {
+      case 'express':
+        obj = {
+          expressModal: true,
+          editexpressCom: this.data.order.expressCompany ? this.data.order.expressCompany : "",
+          editexpressNum: this.data.order.expressNumber ? this.data.order.expressNumber : "",
+        }
+        break;
       case "tip":
         obj = {
           tipModal: true,
@@ -270,7 +312,8 @@ Page({
       delModal: false,  //删除
       cancelModal: false, //取消订单
       expressage: false, //发货
-      tipModal: false //备注
+      tipModal: false, //备注
+      expressModal: false //物流
     })
   },
   /**

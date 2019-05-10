@@ -180,4 +180,6 @@ input:focus{padding:0}
 .active-g>view:first-child{font-size: 26rpx;color: #fff;padding-top: 0rpx;padding-left: 30rpx;}
 .active-g>view:first-child text:first-child{font-size: 55rpx;}
 .active-g>view:first-child text:last-child{text-decoration: line-through;margin-left: 10rpx;}
+/* 公用按钮样式 */
+.bottom-single-btn{position: fixed;bottom: 20rpx;left: 0;right: 0;margin: auto;width: 690rpx;background: #CCAA77;font-size: 35rpx;color: #fff;height: 100rpx;line-height: 100rpx;border-radius: 100rpx;}
 
