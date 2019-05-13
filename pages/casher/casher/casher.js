@@ -98,27 +98,36 @@ Page({
     })
   },
   payment(res) {
-    wx.requestPayment({
-      "timeStamp": res.timeStamp,
-      "package": res.package,
-      "paySign": res.paySign,
-      "signType": res.signType,
-      "nonceStr": res.nonceStr,
-      success: (res) => {
-        wx.showToast({
-          title: '付款成功',
-          icon: "none"
-        })
-        setTimeout(() => {
-          this.afterPayment();
-        }, 800)
-      },
-      fail: (err) => {
-        console.log(err)
-      },
-      complete: (res) => {
-
-      }
+    if (this.data.reBuy==true){return}
+    this.setData({
+      reBuy: true
+    }, ()=>{
+      wx.requestPayment({
+        "timeStamp": res.timeStamp,
+        "package": res.package,
+        "paySign": res.paySign,
+        "signType": res.signType,
+        "nonceStr": res.nonceStr,
+        success: (res) => {
+          wx.showToast({
+            title: '付款成功',
+            icon: "none"
+          })
+          setTimeout(() => {
+            this.afterPayment();
+          }, 800)
+        },
+        fail: (err) => {
+          console.log(err)
+        },
+        complete: (res) => {
+          setTimeout(() => {
+            this.setData({
+              reBuy: false
+            })
+          }, 800)
+        }
+      })
     })
   },
   afterPayment() {
