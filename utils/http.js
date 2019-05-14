@@ -325,5 +325,81 @@ class request {
       wx.hideLoading()
     })
   }
+  
+  // 选择视频
+  chooseVedio(obj){
+    return new Promise((resolve,reject)=>{
+      wx.chooseVideo({
+        sourceType: obj.sourceType ? obj.sourceType:['album', 'camera'],
+        compressed: obj.compressed === false ? false:true, //压缩
+        maxDuration: obj.maxDuration ? obj.maxDuration : 30,
+        success: (res) => {
+          console.log(res)
+          // 大小
+          if (obj.size && res.size > obj.size){
+            reject({errtype:'size',size:res.size})
+            return
+          }
+          // 宽高
+          if (obj.height && res.height > obj.height) {
+            reject({ errtype: 'height', size: res.height })
+            return
+          }
+          if (obj.width && res.width > obj.width) {
+            reject({ errtype: 'width', size: res.width })
+            return
+          }
+        
+          if(obj.upload){
+            uploadVedio({
+              url: res.tempFilePath,
+            }).then(res=>{
+              resolve(res)
+            }).catch(e=>{
+              reject(e)
+            })
+          } else {
+            resolve(res)
+          }
+        },
+        fail: (e) => {
+          reject(e)
+        }
+      })
+    })
+  }
+  // 上传视频
+  uploadVedio(obj){
+    return new Promise((resolve,reject)=>{
+      if (!obj.noLoading) {
+        wx.showLoading({
+          title: '上传视频中',
+        })
+      }
+      wx.uploadFile({
+        url: uploadImg,
+        filePath: obj.url,
+        name: 'file',
+        formData: {
+          'type': types ? types : ""
+        },
+        success: (res => {
+          if (res.statusCode === 200) {
+            resolve(res.data)
+          } else {
+            if (this._errorHandler != null) {
+              this._errorHandler(res)
+            }
+            reject(res)
+          }
+        }),
+        complete: (res => {
+          if (!noLoading) {
+            wx.hideLoading();
+          }
+        })
+      })
+    })
+  }
 }
 export default request
