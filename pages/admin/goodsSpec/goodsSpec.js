@@ -80,10 +80,15 @@ Page({
           }
         }
       }
+     
       _this.setData({
         listData: voListData,
         goodsSkuVOList: goodsSkuVOList,
         oldgoodsSkuVOList: goodsSkuVOList
+      },()=>{
+        if (voListData.length>0 && goodsSkuVOList.length == 0) {
+          this.getSkuData()
+        }
       })
     }
   },
@@ -95,7 +100,7 @@ Page({
     })
       .then(res => {
         var voListData = res.obj.goodsSpecificationVOList,
-          goodsSkuVOList = res.obj.goodsSkuVOList
+          goodsSkuVOList = res.obj.goodsSkuVOList ? res.obj.goodsSkuVOList:[]
         _this.getConent(voListData, goodsSkuVOList)
       })
   },
