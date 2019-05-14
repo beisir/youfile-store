@@ -328,25 +328,29 @@ class request {
   
   // 选择视频
   chooseVedio(obj){
+    if(!obj){obj = {}}
     return new Promise((resolve,reject)=>{
       wx.chooseVideo({
         sourceType: obj.sourceType ? obj.sourceType:['album', 'camera'],
         compressed: obj.compressed === false ? false:true, //压缩
         maxDuration: obj.maxDuration ? obj.maxDuration : 30,
         success: (res) => {
-          console.log(res)
           // 大小
-          if (obj.size && res.size > obj.size){
-            reject({errtype:'size',size:res.size})
+          if (obj.size && res.size/1024/1024 > obj.size){
+            reject({ errtype: 'size', res: res})
             return
           }
           // 宽高
           if (obj.height && res.height > obj.height) {
-            reject({ errtype: 'height', size: res.height })
+            reject({ errtype: 'height', res: res })
             return
           }
           if (obj.width && res.width > obj.width) {
-            reject({ errtype: 'width', size: res.width })
+            reject({ errtype: 'width', res: res })
+            return
+          }
+          if (obj.duration && res.duration > obj.duration){
+            reject({ errtype: 'duration', res: res })
             return
           }
         

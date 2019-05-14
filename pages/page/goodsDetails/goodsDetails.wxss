@@ -144,7 +144,7 @@
 .goods-total-ku view{background: #fff;height: auto;}
 .canvasStyle{width:740rpx;height:740rpx;margin:0 auto;position:absolute;z-index: -1;top:-740rpx}
 .canvasStyle canvas{width:100%;height:100%;margin:1px 0 0 1px;position:relative;z-index:10;}
-.image-back{position: relative;z-index: 10}
+.image-back{position: relative;z-index: 10;}
 .sale-num{border-top: 2rpx solid #FAFAFA;margin-top: 20rpx;}
 .goods-er{position: absolute;right:35rpx;top: 190rpx}
 .goods-er view:first-child{padding-right: 0rpx;margin-bottom: 50rpx;}
@@ -167,3 +167,10 @@
 .gd-ins .stockNum-box{padding-top:5rpx;display:block;}
 .wx-box{height: 120rpx;border-radius: 10rpx;background: #fff;display: flex;padding:0 30rpx;margin-top:20rpx;align-items: center;justify-content: space-between;font-size: 30rpx;font-weight: 600;margin:20rpx;}
 .flex-center{display: flex;align-items: center;}
+/* 视频 */
+.imgVideBox{position: relative;}
+.video-box{position: relative;}
+.video-box video{width: 100%;}
+.show-tab-box{width: 100%;position: absolute;bottom: 157rpx; display:flex;z-index:99;justify-content: center;}
+.show-tab-item{background: rgba(255, 255, 255, 0.4);width: 100rpx;height: 40rpx;border-radius: 40rpx;text-align: center;font-size: 24rpx;line-height: 40rpx;margin: 0 10rpx 0;}
+.ac-show-tab-item{background: #fa6449;color:#fff;}

@@ -78,7 +78,10 @@ Page({
     editOneName: false,
     store: '',
     copyGoods: false,
-    openStore: false
+    openStore: false,
+    // 视频
+    showVideo: true,
+    videoUrl: 'https://dev-image.youlife.net.cn/default/1557113660070971.mp4'
   },
   /**
    * 生命周期函数--监听页面加载
@@ -137,6 +140,17 @@ Page({
     }
     this.getMallCode()
   },
+  // 视频
+  changeImgVideoTab(e){
+    let type = e.currentTarget.dataset.type;
+    if(type == 'video'){
+      this.setData({ showVideo: true})
+    }else{
+      this.setData({ showVideo: false })
+    }
+  },
+
+
   copywx(){
     if (this.data.store.wechatNumber){
       wx.setClipboardData({

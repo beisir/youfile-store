@@ -76,7 +76,7 @@
   color: #333;font-size: 30rpx;position: absolute;right: 0;font-weight: bold; top:20rpx;
 }
 .np-ct .new-tel-box{color: #ca7;font-size: 30rpx;margin-left:15rpx;font-weight: bold;}
-.add-btn-box{position: absolute;color: #ca7;width: 135rpx; right: 0;top: 27rpx;display: flex;align-items: center;justify-content: space-between;font-size: 24rpx;padding: 0!important;font-weight:normal!important;}
+.add-btn-box{position: absolute;color: #ca7;width: 135rpx; right: 0;top: 27rpx;display: flex;align-items: center;justify-content: space-between;font-size: 26rpx;padding: 0!important;font-weight:normal!important;}
 .half{width: 50%;}
 .textright{text-align: right;}
 .gold-line{background: #ca7;height: 20rpx;border-right:1rpx solid #ca7;}

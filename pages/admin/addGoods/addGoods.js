@@ -48,7 +48,56 @@ Page({
     show: false,
     reImgIndex: 0,
     moveImgShow: true,
-    addGitShow: true
+    addGitShow: true,
+    // 视频
+    videoUrl: false
+    // 'https://dev-image.youlife.net.cn/default/1557113660070971.mp4'
+  },
+  // 上传视频
+  // 展示图片视频底部菜单
+  chooseImgOrVideo(){
+    if (this.data.videoUrl){
+      this.chooseImage()
+    } else {
+      wx.showActionSheet({
+        itemList: ['视频', '图片'],
+        success: (res) => {
+          if (res.tapIndex === 0) {
+            app.http.chooseVedio().then(res => {
+              console.log(res)
+              this.setData({ videoUrl: res.tempFilePath})
+            }).catch(e => {
+              console.log(e)
+            })
+          } else {
+            this.chooseImage()
+          }
+        }
+      })
+    }
+  },
+  allScreen(){
+    wx.createVideoContext('myVideo').requestFullScreen()
+  },
+  screenChange(e){
+    if (e.detail.fullScreen === true){
+      this.hideInput()
+    } else {
+      this.hideInput(true)
+      wx.createVideoContext('myVideo').pause()
+    }
+  },
+  removeVideo(){
+    this.setData({
+      videoUrl: false
+    })
+  },
+  hideInput(show){
+    if(show){
+      this.setData({ showTale: false })
+      return
+    }
+    this.setData({ showTale: true})
   },
   // 清空文本框
   clearText(e) {
