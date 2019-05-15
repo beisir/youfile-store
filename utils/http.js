@@ -150,7 +150,7 @@ class request {
           delete header['Authorization'];
         }
         wx.chooseImage({
-          count: ifUploadMore ? 6 : 1,
+          count: ifUploadMore ? 9 : 1,
           sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
           sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
           success: function(res) {
