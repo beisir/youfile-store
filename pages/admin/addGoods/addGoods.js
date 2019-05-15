@@ -63,11 +63,11 @@ Page({
         itemList: ['视频', '图片'],
         success: (res) => {
           if (res.tapIndex === 0) {
-            app.http.chooseVedio().then(res => {
-              console.log(res)
-              this.setData({ videoUrl: res.tempFilePath})
+            app.http.chooseVedio({upload:true}).then(res => {
+              var url = JSON.parse(res).obj
+              this.setData({ videoUrl: url })
             }).catch(e => {
-              console.log(e)
+              Api.showToast("上传失败")
             })
           } else {
             this.chooseImage()
@@ -426,9 +426,18 @@ Page({
       var newImg = arr1[currindex - 1]
       arr1.splice(currindex - 1, 1);
       if (num == 1) {
-        arr1.splice(leftIndex, 0, newImg);
+        if(this.data.videoUrl){
+          let nowindex = leftIndex == 0 ? 0 : leftIndex - 1;
+          arr1.splice(nowindex, 0, newImg);
+        }else{
+          arr1.splice(leftIndex, 0, newImg);
+        }
       } else if (num == 2) {
-        arr1.splice(leftIndex + 4, 0, newImg);
+        if (this.data.videoUrl) {
+          arr1.splice(leftIndex + 3, 0, newImg);
+        } else {
+          arr1.splice(leftIndex + 4, 0, newImg);
+        }
       }
       this.setData({
         mainx: "",
@@ -580,6 +589,7 @@ Page({
       "goodsSkuVOList": goodsSkuVOList,
       "goodsSpecificationVOList": skuListData,
       "mainImgUrl": mainImgUrl,
+      "mainVideoUrl": this.data.videoUrl ? this.data.videoUrl : '',
       "marketPrice": this.data.marketPrice,
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,

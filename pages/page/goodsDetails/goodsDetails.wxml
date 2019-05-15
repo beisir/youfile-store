@@ -40,13 +40,13 @@
 
   <view class='imgVideBox' style='height:{{Height}}'>
     <!-- 切换tab -->
-    <view class='show-tab-box' wx:if="{{videoUrl}}">
+    <view class='show-tab-box' wx:if="{{goodsInfo.mainVideoUrl}}">
       <view class='show-tab-item {{showVideo?"ac-show-tab-item":""}}' bindtap='changeImgVideoTab' data-type='video'><image style='width:17rpx;height:17rpx;margin-right:10rpx;' src='/image/play.png'></image>视频</view>
       <view class='show-tab-item {{showVideo?"":"ac-show-tab-item"}}' data-type='img' bindtap='changeImgVideoTab'>图片</view>
     </view>
     <!-- 视频 -->
-    <view class='video-box' hidden='{{!showVideo || !videoUrl}}'>
-      <video style='height:{{Height}}' src='{{videoUrl}}'></video>
+    <view class='video-box' hidden='{{!showVideo || !goodsInfo.mainVideoUrl}}'>
+      <video style='height:{{Height}}' src='{{goodsInfo.mainVideoUrl}}'></video>
     </view>
     <view class="image-back" hidden='{{showVideo}}'>
       <image style='display:inherit' wx:if='{{goodsInfo.goodsImageVOList.length==1}}' wx:for="{{goodsInfo.goodsImageVOList}}" wx:key="{{index}}" src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight'

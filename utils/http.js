@@ -246,7 +246,6 @@ class request {
       console.warn('no upload url')
       return
     }
-
     return new Promise((resolve, reject) => {
       this.authHandler.getTokenOrRefresh().then(token => {
         var header = this.defaultUploadHeader
@@ -258,6 +257,7 @@ class request {
         if (!noLoading) {
           wx.showLoading({
             title: '上传中',
+            mask: true
           })
         }
         wx.uploadFile({
@@ -337,27 +337,29 @@ class request {
         success: (res) => {
           // 大小
           if (obj.size && res.size/1024/1024 > obj.size){
+            wx.showToast({ title: '视频不能超过' + obj.size+ 'M',icon: 'none'})
             reject({ errtype: 'size', res: res})
             return
           }
           // 宽高
           if (obj.height && res.height > obj.height) {
+            wx.showToast({ title: '视频高度不能超过' + obj.height, icon: 'none' })
             reject({ errtype: 'height', res: res })
             return
           }
           if (obj.width && res.width > obj.width) {
+            wx.showToast({ title: '视频宽度不能超过' + obj.width, icon: 'none' })
             reject({ errtype: 'width', res: res })
             return
           }
           if (obj.duration && res.duration > obj.duration){
+            wx.showToast({ title: '视频宽度不能超过' + obj.maxDuration ? obj.maxDuration:30 +'s', icon: 'none' })
             reject({ errtype: 'duration', res: res })
             return
           }
-        
           if(obj.upload){
-            uploadVedio({
-              url: res.tempFilePath,
-            }).then(res=>{
+            // 上传公用一套
+            this.onlyUploadImg(res.tempFilePath, obj.uploadType ? obj.uploadType:'', obj.noLoading?true:false).then(res=>{
               resolve(res)
             }).catch(e=>{
               reject(e)
@@ -369,39 +371,6 @@ class request {
         fail: (e) => {
           reject(e)
         }
-      })
-    })
-  }
-  // 上传视频
-  uploadVedio(obj){
-    return new Promise((resolve,reject)=>{
-      if (!obj.noLoading) {
-        wx.showLoading({
-          title: '上传视频中',
-        })
-      }
-      wx.uploadFile({
-        url: uploadImg,
-        filePath: obj.url,
-        name: 'file',
-        formData: {
-          'type': types ? types : ""
-        },
-        success: (res => {
-          if (res.statusCode === 200) {
-            resolve(res.data)
-          } else {
-            if (this._errorHandler != null) {
-              this._errorHandler(res)
-            }
-            reject(res)
-          }
-        }),
-        complete: (res => {
-          if (!noLoading) {
-            wx.hideLoading();
-          }
-        })
       })
     })
   }

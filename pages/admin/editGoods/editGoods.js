@@ -11,14 +11,14 @@ Page({
     stockHide: false,
     isShow: true,
     isStatus: true,
-    deleteGoods1:false,//删除商品
-    confirmUp: false,//上架
-    confirmDown:false,//下架
+    deleteGoods1: false, //删除商品
+    confirmUp: false, //上架
+    confirmDown: false, //下架
     mainx: 0,
-    stockNumLock:false,
+    stockNumLock: false,
     saveHide: true,
     isEmptySku: false,
-    showTale:false,
+    showTale: false,
     skuListData: [],
     pageShow: true,
     currentTab: 0,
@@ -46,9 +46,67 @@ Page({
     wholesalePrice: 0,
     goodsId: '',
     addGoodsDetails: [],
-    switchChange:false,
-    mainImgUrl: "",
+    switchChange: false,
+    mainImgUrl: "", // 视频
+    videoUrl: false
+    // 'https://dev-image.youlife.net.cn/default/1557113660070971.mp4'
   },
+  // 上传视频
+  // 展示图片视频底部菜单
+  chooseImgOrVideo() {
+    if (this.data.videoUrl) {
+      this.chooseImage()
+    } else {
+      wx.showActionSheet({
+        itemList: ['视频', '图片'],
+        success: (res) => {
+          if (res.tapIndex === 0) {
+            app.http.chooseVedio({ upload: true, size: 10}).then(res => {
+              var url = JSON.parse(res).obj
+              this.setData({
+                videoUrl: url
+              })
+            }).catch(e => {
+              // Api.showToast("上传失败")
+            })
+          } else {
+            this.chooseImage()
+          }
+        }
+      })
+    }
+  },
+  allScreen() {
+    wx.createVideoContext('myVideo').requestFullScreen()
+  },
+  screenChange(e) {
+    if (e.detail.fullScreen === true) {
+      this.hideInput()
+    } else {
+      this.hideInput(true)
+      wx.createVideoContext('myVideo').pause()
+    }
+  },
+  removeVideo() {
+    this.setData({
+      videoUrl: false
+    })
+    this.setData({
+      pics: this.data.pics
+    })
+  },
+  hideInput(show) {
+    if (show) {
+      this.setData({
+        showTale: false
+      })
+      return
+    }
+    this.setData({
+      showTale: true
+    })
+  },
+
   // 清空文本框
   clearText(e) {
     let type = e.currentTarget.dataset.type
@@ -68,30 +126,30 @@ Page({
     }
   },
   // 弹框出现 隐藏文本域
-  showTaleFun:function(){
+  showTaleFun: function() {
     this.setData({
-      showTale:true
+      showTale: true
     })
   },
-  hideTaleFun: function () {
+  hideTaleFun: function() {
     this.setData({
       showTale: false
     })
   },
-  confirmMes: function () {
+  confirmMes: function() {
     this.setData({
       show1: false,
       showTale: false
     })
   },
-  tipMes: function () {
+  tipMes: function() {
     this.setData({
       show1: true,
       showTale: true
     })
   },
   // 删除商品图
-  showRemoveImg: function (e) {
+  showRemoveImg: function(e) {
     var index = e.target.dataset.index
     this.setData({
       show: true,
@@ -99,7 +157,7 @@ Page({
     })
     this.showTaleFun()
   },
-  removeImg: function () {
+  removeImg: function() {
     var index = this.data.reImgIndex,
       pics = this.data.pics
     pics.splice(index, 1)
@@ -110,11 +168,11 @@ Page({
     this.hideTaleFun()
   },
   // 删除详情信息
-  removeImage: function (e) {
+  removeImage: function(e) {
     var index = e.target.dataset.index
     this.changeData(index)
   },
-  changeData: function (index) {
+  changeData: function(index) {
     var data = this.data.addGoodsDetails
     data.splice(index, 1)
     this.setData({
@@ -122,11 +180,13 @@ Page({
     })
   },
   // 下移
-  upData: function (e) {
+  upData: function(e) {
     var addGoodsDetails = this.data.addGoodsDetails,
       index = e.target.dataset.index,
       newObj = ''
-    if (index == addGoodsDetails.length - 1) { return }
+    if (index == addGoodsDetails.length - 1) {
+      return
+    }
     newObj = addGoodsDetails[index]
     addGoodsDetails.splice(index, 1)
     addGoodsDetails.splice(index + 1, 0, newObj)
@@ -135,11 +195,13 @@ Page({
     })
   },
   // 上移
-  topData: function (e) {
+  topData: function(e) {
     var addGoodsDetails = this.data.addGoodsDetails,
       index = e.target.dataset.index,
       newObj = ''
-    if (index == 0) { return }
+    if (index == 0) {
+      return
+    }
     newObj = addGoodsDetails[index]
     addGoodsDetails.splice(index, 1)
     addGoodsDetails.splice(index - 1, 0, newObj)
@@ -147,20 +209,23 @@ Page({
       addGoodsDetails: addGoodsDetails
     })
   },
-  insertData: function (e) {
+  insertData: function(e) {
     var index = e.target.dataset.index
-    this.insertImg(parseInt(index)+1)
+    this.insertImg(parseInt(index) + 1)
   },
   // 输入描述内容
-  addTitle: function () {
+  addTitle: function() {
     var _this = this,
       data = this.data.addGoodsDetails
-    data.push({ input: true, value: '' })
+    data.push({
+      input: true,
+      value: ''
+    })
     _this.setData({
       addGoodsDetails: data
     })
   },
-  watchInput: function (e) {
+  watchInput: function(e) {
     var value = e.detail.value,
       index = e.target.dataset.index,
       data = this.data.addGoodsDetails
@@ -169,7 +234,7 @@ Page({
       addGoodsDetails: data
     })
   },
-  watchDec: function (e) {
+  watchDec: function(e) {
     var value = e.detail.value,
       index = e.target.dataset.index,
       data = this.data.addGoodsDetails
@@ -178,15 +243,18 @@ Page({
       addGoodsDetails: data
     })
   },
-  addCont: function () {
+  addCont: function() {
     var _this = this,
       data = this.data.addGoodsDetails
-    data.push({ textInput: true, value: '' })
+    data.push({
+      textInput: true,
+      value: ''
+    })
     _this.setData({
       addGoodsDetails: data
     })
   },
-  watchName: function (event) {
+  watchName: function(event) {
     var _this = this,
       val = event.detail.value,
       num = val.length
@@ -199,12 +267,12 @@ Page({
     })
   },
   // 设置隐私
-  switchChange: function (e) {
+  switchChange: function(e) {
     this.setData({
       switchChange: e.detail.value
     })
   },
-  watchRec: function (event) {
+  watchRec: function(event) {
     var _this = this,
       val = event.detail.value,
       num = val.length
@@ -216,16 +284,15 @@ Page({
       recommendDescLen: (val.substring(0, 60)).length
     })
   },
-  addImage: function () {
+  addImage: function() {
     this.insertImg()
   },
-  insertImg: function (index) {
+  insertImg: function(index) {
     var _this = this
     Api.uploadImage("GOODS", true, index)
-      .then(res => {
-      })
+      .then(res => {})
   },
-  sellPrice: function (event) {
+  sellPrice: function(event) {
     var _this = this,
       val = event.detail.value,
       num = val.length
@@ -245,7 +312,7 @@ Page({
     })
   },
   // 库存
-  stockNum: function (event) {
+  stockNum: function(event) {
     var _this = this,
       val = event.detail.value,
       num = val.length
@@ -259,10 +326,10 @@ Page({
     }
     this.setData({
       stockNum: event.detail.value,
-      stockNumLock:false
+      stockNumLock: false
     })
   },
-  stockFun: function (e) {
+  stockFun: function(e) {
     var _this = this,
       val = e.detail.value
     if (val > 0) {
@@ -276,7 +343,7 @@ Page({
       Api.showToast("请输入大于0的有效值！")
     }
   },
-  sellPrice: function (event) {
+  sellPrice: function(event) {
     var _this = this,
       val = event.detail.value,
       num = val.length
@@ -295,7 +362,7 @@ Page({
       sellPrice: (util.newVal(val)).substring(0, 8)
     })
   },
-  wholesalePrice: function (event) {
+  wholesalePrice: function(event) {
     var _this = this,
       val = event.detail.value,
       num = val.length
@@ -317,9 +384,11 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  getDetails: function (goodsId) {
+  getDetails: function(goodsId) {
     var _this = this
-    Api.adminGetDetails({ goodsId: goodsId })
+    Api.adminGetDetails({
+        goodsId: goodsId
+      })
       .then(res => {
         var obj = res.obj,
           arrs = [],
@@ -332,16 +401,24 @@ Page({
         var data = _this.data.addGoodsDetails
         for (var i = 0; i < arr.length; i++) {
           if (arr[i].tag == "h4") {
-            data.push({ input: true, value: arr[i].content })
+            data.push({
+              input: true,
+              value: arr[i].content
+            })
           }
           if (arr[i].tag == "p") {
-            data.push({ textInput: true, value: arr[i].content })
+            data.push({
+              textInput: true,
+              value: arr[i].content
+            })
           }
           if (arr[i].tag == "img") {
-            data.push({ img: arr[i].content })
+            data.push({
+              img: arr[i].content
+            })
           }
         }
-        if (obj.saleBatchNum){
+        if (obj.saleBatchNum) {
           _this.setData({
             stock: obj.saleBatchNum
           })
@@ -353,13 +430,14 @@ Page({
           recommendDescLen: (obj.recommendDesc).length,
           isStatus: obj.status,
           mainImgUrl: obj.mainImgUrl,
-          switchChange: obj.privacy==0?false:true,
+          videoUrl: obj.mainVideoUrl ? obj.mainVideoUrl: '',
+          switchChange: obj.privacy == 0 ? false : true,
           recommendDesc: obj.recommendDesc,
           skuListData: obj.goodsSpecificationVOList == null ? [] : obj.goodsSpecificationVOList,
           sellPrice: obj.sellPrice,
           addGoodsDetails: data,
           stockNum: obj.stockNum,
-          stockNumLock:true,
+          stockNumLock: true,
           storeId: obj.storeId,
           goodsId: obj.id,
           storeName: obj.storeName,
@@ -368,12 +446,12 @@ Page({
           description: obj.description,
           categoryCode: obj.categoryCode,
           strName: obj.customCategoryName,
-          codeName: obj.categoryName.replace(/,/g,">"),
+          codeName: obj.categoryName.replace(/,/g, ">"),
           categoryCustomCode: obj.customCategoryCode
         })
       })
   },
-  getConfig: function () {
+  getConfig: function() {
     var _this = this
     Api.saleBatch()
       .then(res => {
@@ -392,13 +470,13 @@ Page({
       })
   },
   // 取消
-  cancel: function () {
+  cancel: function() {
     this.setData({
       show1: false,
       showTale: false
     })
   },
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.getConfig()
     this.setData({
       goodsId: options.goodsId
@@ -406,7 +484,7 @@ Page({
     this.getDetails(options.goodsId)
   },
   // tab切换
-  swichNav: function (e) {
+  swichNav: function(e) {
     var that = this;
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
@@ -429,20 +507,20 @@ Page({
     }
   },
   // 清空起批量
-  clearInput: function (e) {
+  clearInput: function(e) {
     this.setData({
       stock: null
     })
   },
   //长按拖动图片
-  movestart: function (e) {
+  movestart: function(e) {
     currindex = e.currentTarget.dataset.index;
     x = e.touches[0].clientX;
     y = e.touches[0].clientY;
     x1 = e.currentTarget.offsetLeft;
     y1 = e.currentTarget.offsetTop;
   },
-  move: function (e) {
+  move: function(e) {
     yy = e.currentTarget.offsetTop;
     x2 = e.touches[0].clientX - x + x1;
     y2 = e.touches[0].clientY - y + y1;
@@ -450,10 +528,13 @@ Page({
       mainx: currindex,
       moveImgShow: false,
       opacity: 0.7,
-      start: { x: x2, y: y2 }
+      start: {
+        x: x2,
+        y: y2
+      }
     })
   },
-  moveend: function (e) {
+  moveend: function(e) {
     var arr1 = this.data.pics
     if (y2 != 0) {
       var left = e.currentTarget.offsetLeft
@@ -467,9 +548,18 @@ Page({
       var newImg = arr1[currindex - 1]
       arr1.splice(currindex - 1, 1);
       if (num == 1) {
-        arr1.splice(leftIndex, 0, newImg);
+        if (this.data.videoUrl) {
+          let nowindex = leftIndex == 0 ? 0 : leftIndex - 1;
+          arr1.splice(nowindex, 0, newImg);
+        } else {
+          arr1.splice(leftIndex, 0, newImg);
+        }
       } else if (num == 2) {
-        arr1.splice(leftIndex + 4, 0, newImg);
+        if (this.data.videoUrl) {
+          arr1.splice(leftIndex + 3, 0, newImg);
+        } else {
+          arr1.splice(leftIndex + 4, 0, newImg);
+        }
       }
       this.setData({
         mainx: "",
@@ -507,7 +597,7 @@ Page({
           _this.setData({
             pics: pics,
             isAllImg: false
-          }, function () {
+          }, function() {
             if (pics.length == 6) {
               _this.setData({
                 isAllImg: true
@@ -519,7 +609,7 @@ Page({
     })
   },
   // 图片预览
-  previewImage: function (e) {
+  previewImage: function(e) {
     var current = e.target.dataset.src
     wx.previewImage({
       current: current,
@@ -527,12 +617,14 @@ Page({
     })
   },
   /**
- * 删除
- */
-  confirmDetele: function () {
+   * 删除
+   */
+  confirmDetele: function() {
     const goodId = this.data.goodsId,
       _this = this
-    Api.adminGoodsDelete({ goodId: goodId })
+    Api.adminGoodsDelete({
+        goodId: goodId
+      })
       .then(res => {
         wx.showToast({
           title: '删除成功',
@@ -542,10 +634,10 @@ Page({
         _this.goback()
       })
   },
-  goback: function () {
-    var pages = getCurrentPages();             //  获取页面栈
+  goback: function() {
+    var pages = getCurrentPages(); //  获取页面栈
     var currPage = pages[pages.length - 1];
-    var prevPage = pages[pages.length - 2];    // 上一个页面
+    var prevPage = pages[pages.length - 2]; // 上一个页面
     wx.navigateBack({
       data: 1
     })
@@ -557,32 +649,32 @@ Page({
     })
   },
   // 删除商品
-  deleteGoods:function(){
+  deleteGoods: function() {
     this.setData({
-      deleteGoods1:true
+      deleteGoods1: true
     })
     this.showTaleFun()
   },
-  confirmdelete:function(){
-    var _this=this
+  confirmdelete: function() {
+    var _this = this
     Api.adminGoodsDelete({
-      goodId: this.data.goodsId
-    })
+        goodId: this.data.goodsId
+      })
       .then(res => {
         Api.showToast("删除成功")
-        setTimeout(function () {
+        setTimeout(function() {
           _this.goback()
         }, 1000)
       })
   },
   // 下架
-  confirmDown: function () {
+  confirmDown: function() {
     this.setData({
-      confirmDown:true
+      confirmDown: true
     })
     this.showTaleFun()
   },
-  confirmDownS:function(){
+  confirmDownS: function() {
     var _this = this,
       goodsIdList = [],
       goodId = this.data.goodsId
@@ -594,19 +686,19 @@ Page({
           icon: 'none',
           duration: 2000
         })
-        setTimeout(function () {
+        setTimeout(function() {
           _this.goback()
         }, 1000)
       })
   },
   // 上架
-  confirmUpGoods:function(){
+  confirmUpGoods: function() {
     this.setData({
-      confirmUp:true
+      confirmUp: true
     })
     this.showTaleFun()
   },
-  confirmUp: function () {
+  confirmUp: function() {
     var _this = this,
       goodsIdList = [],
       goodId = this.data.goodsId
@@ -618,17 +710,19 @@ Page({
           icon: 'none',
           duration: 2000
         })
-        setTimeout(function () {
+        setTimeout(function() {
           _this.goback()
         }, 1000)
       })
   },
   // 更新
-  updateGoods: function (e) {
+  updateGoods: function(e) {
     // 强制更新弹框
-    this.setData({ acSaveModal: false })
+    this.setData({
+      acSaveModal: false
+    })
     this.hideTaleFun()
-    
+
     var _this = this,
       pics = this.data.pics,
       status = e.target.dataset.status,
@@ -661,7 +755,9 @@ Page({
       if (i == 0) {
         mainImgUrl = pics[i].replace(this.data.baseUrl, '')
       }
-      goodsImageVOList.push({ imageUrl: pics[i].replace(this.data.baseUrl, '') })
+      goodsImageVOList.push({
+        imageUrl: pics[i].replace(this.data.baseUrl, '')
+      })
     }
     if (!Api.isNotEmpty(mainImgUrl)) {
       Api.showToast("请上传商品图片！")
@@ -716,7 +812,8 @@ Page({
       "goodsSpecificationVOList": this.data.skuListData,
       "id": this.data.goodsId,
       "mainImgUrl": mainImgUrl,
-      "privacy":this.data.switchChange?1:0,
+      "mainVideoUrl": this.data.videoUrl ? this.data.videoUrl: '',
+      "privacy": this.data.switchChange ? 1 : 0,
       "marketPrice": 10,
       "name": this.data.name,
       "recommendDesc": this.data.recommendDesc,
@@ -741,12 +838,12 @@ Page({
       Api.showToast("请输入商品类目！")
       return;
     }
-    if(e.currentTarget.dataset.sure == 'sure'){
+    if (e.currentTarget.dataset.sure == 'sure') {
       goodsVO.forceSave = true
     }
     this.setData({
       saveHide: false
-    }, function () {
+    }, function() {
       Api.updateGoods(goodsVO)
         .then(res => {
           wx.showToast({
@@ -763,7 +860,9 @@ Page({
           })
           if (res.data.code == '2') {
             this.showTaleFun()
-            this.setData({ acSaveModal: true })
+            this.setData({
+              acSaveModal: true
+            })
             return
           }
         })
@@ -772,12 +871,11 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  },
+  onReady: function() {},
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var that = this
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]
@@ -811,7 +909,7 @@ Page({
         sellPrice = '',
         stockNum = 0
       //获取最小价格和总库存
-      sellPrice = Math.min.apply(Math, goodsSkuVOList.map(function (o) {
+      sellPrice = Math.min.apply(Math, goodsSkuVOList.map(function(o) {
         return o.sellPrice
       }))
       for (var v of goodsSkuVOList) {
@@ -823,7 +921,7 @@ Page({
       that.setData({
         goodsSkuVOList: goodsSkuVOList,
         skuListData: skuListData,
-        stockNumLock:false,
+        stockNumLock: false,
         stockNum: stockNum ? stockNum : 0,
         sellPrice: sellPrice == Infinity ? '' : sellPrice,
         wholesalePrice: wholesalePrice == Infinity ? '' : wholesalePrice
@@ -832,7 +930,7 @@ Page({
 
   },
   // 选择规格
-  alertSpec: function () {
+  alertSpec: function() {
     var goodsSkuVOList = this.data.goodsSkuVOList,
       skuListData = this.data.skuListData
     goodsSkuVOList = JSON.stringify(goodsSkuVOList)
@@ -844,28 +942,28 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 

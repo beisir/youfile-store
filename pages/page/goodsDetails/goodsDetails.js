@@ -80,8 +80,8 @@ Page({
     copyGoods: false,
     openStore: false,
     // 视频
-    showVideo: true,
-    videoUrl: 'https://dev-image.youlife.net.cn/default/1557113660070971.mp4'
+    showVideo: false
+    // 'https://dev-image.youlife.net.cn/default/1557113660070971.mp4'
   },
   /**
    * 生命周期函数--监听页面加载
@@ -344,6 +344,7 @@ Page({
         }
         _this.setData({
           goodsInfo: obj,
+          showVideo: obj.mainVideoUrl?true:false,
           goodsSpecificationVOList: obj.goodsSpecificationVOList,
           goodsSkuVOList: obj.goodsSkuVOList,
           skuArrTwo: skuArrTwo, 

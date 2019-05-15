@@ -22,7 +22,7 @@
             <!-- 视频 -->
             <view class="weui-uploader__file" wx:if="{{videoUrl}}">
               <image wx:if='{{moveImgShow}}' class="re_img" bindtap='removeVideo' src="/image/rimg.png"></image>
-              <video id='myVideo' class="weui-uploader__img" src='{{videoUrl}}' bindplay='allScreen' bindfullscreenchange='screenChange'></video>
+              <video id='myVideo' class="weui-uploader__img" src='{{baseUrl + videoUrl}}' bindplay='allScreen' bindfullscreenchange='screenChange'></video>
             </view>
             <!-- 图片 -->
             <view wx:for="{{pics}}" wx:for-item="image" wx:key="index" catchtouchmove="move" bindtouchstart="movestart" bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weui-uploader__file  {{mainx ==index+1? 'mainmove':'mainend'}}" style="left:{{start.x}}px; top:{{start.y}}px">
