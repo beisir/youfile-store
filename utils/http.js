@@ -278,6 +278,9 @@ class request {
               reject(res)
             }
           }),
+          fail: (e=>{
+            Api.showToast("上传失败")
+          }),
           complete: (res => {
             if (!noLoading) {
               wx.hideLoading();
@@ -352,8 +355,9 @@ class request {
             reject({ errtype: 'width', res: res })
             return
           }
-          if (obj.duration && res.duration > obj.duration){
-            wx.showToast({ title: '视频宽度不能超过' + obj.maxDuration ? obj.maxDuration:30 +'s', icon: 'none' })
+          if ((obj.duration && res.duration > obj.duration) || (!obj.duration && res.duration >30)){
+            let time = obj.maxDuration ? obj.maxDuration : 30
+            wx.showToast({ title: '视频长度不能超过' + time +'s', icon: 'none' })
             reject({ errtype: 'duration', res: res })
             return
           }

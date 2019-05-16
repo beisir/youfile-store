@@ -57,25 +57,32 @@ Page({
     if (this.data.videoUrl) {
       this.chooseImage()
     } else {
-      wx.showActionSheet({
-        itemList: ['视频', '图片'],
-        success: (res) => {
-          if (res.tapIndex === 0) {
-            app.http.chooseVedio({ upload: true, size: 10}).then(res => {
-              var url = JSON.parse(res).obj
-              this.setData({
-                videoUrl: url
-              }, () => {
-                this.refreshCloseIcon()
+      if (this.data.pics.length >= 6) {
+        app.http.chooseVedio({ upload: true, size: 10 }).then(res => {
+          var url = JSON.parse(res).obj
+          this.setData({ videoUrl: url }, () => {
+            this.refreshCloseIcon()
+          })
+        })
+      } else {
+        wx.showActionSheet({
+          itemList: ['视频', '图片'],
+          success: (res) => {
+            if (res.tapIndex === 0) {
+              app.http.chooseVedio({ upload: true, size: 10 }).then(res => {
+                var url = JSON.parse(res).obj
+                this.setData({ videoUrl: url }, () => {
+                  this.refreshCloseIcon()
+                })
+              }).catch(e => {
+                // Api.showToast("上传失败")
               })
-            }).catch(e => {
-              // Api.showToast("上传失败")
-            })
-          } else {
-            this.chooseImage()
+            } else {
+              this.chooseImage()
+            }
           }
-        }
-      })
+        })
+      }
     }
   },
   allScreen() {
@@ -566,9 +573,9 @@ Page({
         }
       } else if (num == 2) {
         if (this.data.videoUrl) {
-          arr1.splice(leftIndex + 3, 0, newImg);
+          arr1.splice(parseInt(leftIndex) + 3, 0, newImg);
         } else {
-          arr1.splice(leftIndex + 4, 0, newImg);
+          arr1.splice(parseInt(leftIndex) + 4, 0, newImg);
         }
       }
       this.setData({

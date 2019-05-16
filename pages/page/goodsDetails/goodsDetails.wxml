@@ -46,7 +46,7 @@
     </view>
     <!-- 视频 -->
     <view class='video-box' hidden='{{!showVideo || !goodsInfo.mainVideoUrl}}'>
-      <video id='myVideo' wx:if="{{goodsInfo.mainVideoUrl}}" style='height:{{goodsInfo.isActivity?videoHeight:Height}}' src='{{baseUrl+goodsInfo.mainVideoUrl}}' play-btn-position='center' enable-play-gesture='true' show-fullscreen-btn='true' show-play-btn='false' muted='true' show-mute-btn='true'></video>
+      <video id='myVideo' wx:if="{{goodsInfo.mainVideoUrl}}" style='height:{{goodsInfo.isActivity?videoHeight:Height}}' src='{{baseUrl+goodsInfo.mainVideoUrl}}' play-btn-position='center' enable-play-gesture='true' show-fullscreen-btn='true' show-play-btn='false'  show-mute-btn='true'></video>
     </view>
     <view class="image-back" hidden='{{showVideo}}'>
       <image style='display:inherit' wx:if='{{goodsInfo.goodsImageVOList.length==1}}' wx:for="{{goodsInfo.goodsImageVOList}}" wx:key="{{index}}" src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight'
