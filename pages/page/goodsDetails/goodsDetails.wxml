@@ -46,7 +46,7 @@
     </view>
     <!-- 视频 -->
     <view class='video-box' hidden='{{!showVideo || !goodsInfo.mainVideoUrl}}'>
-      <video style='height:{{Height}}' src='{{goodsInfo.mainVideoUrl}}'></video>
+      <video id='myVideo' wx:if="{{goodsInfo.mainVideoUrl}}" style='height:{{goodsInfo.isActivity?videoHeight:Height}}' src='{{baseUrl+goodsInfo.mainVideoUrl}}' play-btn-position='center' enable-play-gesture='true' show-fullscreen-btn='true' show-play-btn='false' muted='true' show-mute-btn='true'></video>
     </view>
     <view class="image-back" hidden='{{showVideo}}'>
       <image style='display:inherit' wx:if='{{goodsInfo.goodsImageVOList.length==1}}' wx:for="{{goodsInfo.goodsImageVOList}}" wx:key="{{index}}" src="{{baseUrl}}{{item.imageUrl}}?x-oss-process=style/general" class="slide-image" mode="widthFix" bindload='imgHeight'
@@ -58,25 +58,25 @@
           </swiper-item>
         </block>
       </swiper>
-      <!-- 活动条 -->
-      <view class='active-g' wx:if='{{goodsInfo.isActivity}}'>
-        <view>￥
-          <text>{{goodsInfo.activityPrice}}</text>
-          <view class='sale-num'>
-            <view>{{goodsInfo.extInfo.SALES_PROMOTION[0].batchNum}}件起购</view>
-            <text>￥{{goodsInfo.extInfo.SALES_PROMOTION[0].sellPrice}}</text>
-          </view>
-        </view>
-        <view>
-          <view>{{activeMes}}</view>
-          {{timerList[0][0]}}天
-          <text>{{filter.doubleNum(timerList[0][1])}}</text> :
-          <text>{{filter.doubleNum(timerList[0][2])}}</text> :
-          <text>{{filter.doubleNum(timerList[0][3])}}</text>
+    </view>
+    <!-- 活动条 -->
+    <view class='active-g' wx:if='{{goodsInfo.isActivity}}'>
+      <view>￥
+        <text>{{goodsInfo.activityPrice}}</text>
+        <view class='sale-num'>
+          <view>{{goodsInfo.extInfo.SALES_PROMOTION[0].batchNum}}件起购</view>
+          <text>￥{{goodsInfo.extInfo.SALES_PROMOTION[0].sellPrice}}</text>
         </view>
       </view>
-      <!-- <goodsActivityBinding position="1" activityShowInfo="{{activityData}}" /> -->
+      <view>
+        <view>{{activeMes}}</view>
+        {{timerList[0][0]}}天
+        <text>{{filter.doubleNum(timerList[0][1])}}</text> :
+        <text>{{filter.doubleNum(timerList[0][2])}}</text> :
+        <text>{{filter.doubleNum(timerList[0][3])}}</text>
+      </view>
     </view>
+    <!-- <goodsActivityBinding position="1" activityShowInfo="{{activityData}}" /> -->
   </view>
   <view class='gd-details'>
     <view class='gd-title' wx:if='{{limitShow==1}}'>
@@ -140,7 +140,7 @@
         </view>
       </view>
     </view>
-    <view class='gd-content' wx:if="{{goodsInfo.recommendDesc}}">
+    <view class='gd-content'>
       <view>
         <image src="/image/xin.png"></image>推荐心语</view>
       <text>{{goodsInfo.recommendDesc}}</text>
@@ -187,7 +187,7 @@
   </view>
   <view class='gd_dp'>
     <view class='gd-new-img'>
-      <image mode="aspectFill" wx:if='{{store!=""}}' src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"></image>
+      <image mode="aspectFill" wx:if='{{store.logo}}' src="{{baseUrl}}{{store.logo}}?x-oss-process=style/logo"></image>
     </view>
     <view>{{store.storeName}}</view>
     <view class='gd-dp-text' wx:if='{{store.description!=""}}'>{{store.description}}</view>
@@ -259,7 +259,7 @@
             <image class='gdclose' src="/image/close.png"></image>
           </view>
           <view class='gd-image'>
-            <image wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <image wx:if='{{goodsInfo.mainImgUrl}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{goodsInfo.name}}</view>
@@ -381,7 +381,7 @@
             <image class='gdclose' src="/image/close.png"></image>
           </view>
           <view class='gd-image'>
-            <image mode="aspectFill" wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <image mode="aspectFill" wx:if='{{goodsInfo.mainImgUrl}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{goodsInfo.name}}</view>
@@ -468,7 +468,7 @@
             <image class='gdclose' src="/image/close.png"></image>
           </view>
           <view class='gd-image'>
-            <image wx:if='{{goodsInfo.mainImgUrl!=""}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <image wx:if='{{goodsInfo.mainImgUrl}}' src="{{baseUrl}}{{goodsInfo.mainImgUrl}}?x-oss-process=style/goods-small"></image>
           </view>
           <view class='gd-ins'>
             <view class='gd-title1'>{{goodsInfo.name}}</view>

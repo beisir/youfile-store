@@ -65,7 +65,9 @@ Page({
           if (res.tapIndex === 0) {
             app.http.chooseVedio({upload:true}).then(res => {
               var url = JSON.parse(res).obj
-              this.setData({ videoUrl: url })
+              this.setData({ videoUrl: url },()=>{
+                this.refreshCloseIcon()
+              })
             }).catch(e => {
               Api.showToast("上传失败")
             })
@@ -90,6 +92,17 @@ Page({
   removeVideo(){
     this.setData({
       videoUrl: false
+    }, () => {
+      this.refreshCloseIcon()
+    })
+  },
+  refreshCloseIcon(){
+    this.setData({
+      moveImgShow: false
+    }, () => {
+      this.setData({
+        moveImgShow: true
+      })
     })
   },
   hideInput(show){

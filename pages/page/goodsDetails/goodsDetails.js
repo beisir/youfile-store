@@ -147,6 +147,7 @@ Page({
       this.setData({ showVideo: true})
     }else{
       this.setData({ showVideo: false })
+      wx.createVideoContext('myVideo').pause()
     }
   },
 
@@ -466,7 +467,8 @@ Page({
     var imgw = e.detail.width; //图片宽度
     var swiperH = winWid * imgh / imgw + "px" //等比设置swiper的高度。 即 屏幕宽度 / swiper高度 = 图片宽度 / 图片高度  ==》swiper高度 = 屏幕宽度 * 图片高度 / 图片宽度
     this.setData({
-      Height: swiperH //设置高度
+      Height: swiperH, //设置高度
+      videoHeight: winWid * imgh / imgw -55 +'px'
     })
   },
   cancel: function() {

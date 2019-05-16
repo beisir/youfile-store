@@ -53,7 +53,7 @@
           </view>
           <!-- 图片 -->
           <view wx:for="{{pics}}" wx:for-item="image" wx:key="index" catchtouchmove="move" bindtouchstart="movestart" bindtouchend="moveend" data-index="{{index+1}}" data-main="{{mainx}}" class="weui-uploader__file  {{mainx ==index+1? 'mainmove':'mainend'}}" style="left:{{start.x}}px; top:{{start.y}}px">
-            <image wx:if='{{moveImgShow}}' class="re_img" data-index="{{index}}" style='{{index>3?"top:179rpx":"top:5rpx"}}' bindtap='showRemoveImg' src="/image/rimg.png"></image>
+            <image wx:if='{{moveImgShow}}' class="re_img" data-index="{{index}}" style='{{(videoUrl&&index>2)||(!videoUrl&&index>3)?"top:179rpx":"top:5rpx"}}' bindtap='showRemoveImg' src="/image/rimg.png"></image>
             <image class="weui-uploader__img" src="{{image}}" data-src="{{image}}" bindtap="previewImage"></image>
           </view>
         </view>

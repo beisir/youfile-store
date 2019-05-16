@@ -65,6 +65,8 @@ Page({
               var url = JSON.parse(res).obj
               this.setData({
                 videoUrl: url
+              }, () => {
+                this.refreshCloseIcon()
               })
             }).catch(e => {
               // Api.showToast("上传失败")
@@ -90,9 +92,17 @@ Page({
   removeVideo() {
     this.setData({
       videoUrl: false
+    },()=>{
+      this.refreshCloseIcon()
     })
+  },
+  refreshCloseIcon() {
     this.setData({
-      pics: this.data.pics
+      moveImgShow: false
+    }, () => {
+      this.setData({
+        moveImgShow: true
+      })
     })
   },
   hideInput(show) {
