@@ -84,6 +84,9 @@ Page({
       showIndex: index
     })
   },
+  closeShowModal(){
+    this.setData({ showIndex: -1})
+  },
   // 修改规格
   updateSpec: function (e) {
     var id = e.target.dataset.id,
@@ -132,6 +135,7 @@ Page({
   },
   //删除事件
   del: function (e) {
+    this.closeShowModal()
     var indexDel = e.currentTarget.dataset.index,
       goodsId = e.currentTarget.dataset.id
     var _this = this
@@ -264,6 +268,7 @@ Page({
       })
   },
   changeStatus: function (e) {
+    this.closeShowModal()
     const goodId = e.currentTarget.dataset.id,
       num = e.currentTarget.dataset.num,
       index = e.currentTarget.dataset.index
@@ -300,6 +305,7 @@ Page({
       })
   },
   upStatus: function (e) {
+    this.closeShowModal()
     const goodId = e.currentTarget.dataset.id,
       index = e.currentTarget.dataset.index
     this.setData({

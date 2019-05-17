@@ -111,20 +111,47 @@
         <view bindtap='share' data-item="{{item}}" data-id='{{item.id}}'>分享</view>
           <!-- <button open-type="share" data-name='{{item.name}}' data-img='{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{item.id}}'></button> -->
         <view data-id='{{item.id}}' data-storeid='{{item.storeId}}' bindtap='updateSpec'>改规格</view>
-        <view wx:if='{{item.status==0}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'>上架</view>
-        <view wx:if='{{item.status==1}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
-        <view wx:if='{{item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'>上架</view>
-        <view wx:if='{{item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
+        
+         <!-- 有活动 -->
+        <block wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}">
+          <view>
+            <navigator url='../../mallActive/editGoods/editGoods?activityNumber={{item.extInfo.PRIORITY_SALES_PROMOTION.activityNumber}}&goodsId={{item.extInfo.PRIORITY_SALES_PROMOTION.goodsId}}'>活动设置</navigator>
+          </view>
+        </block>
+        <!-- 无活动 -->
+        <block wx:else>
+          <view class='more-btn-item' wx:if='{{item.status==0 || item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'>上架</view>
+          <view class='more-btn-item' wx:if='{{item.status==1 || item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
+        </block>
         <view bindtap='showMoreClick' data-index="{{index}}"></view>
       </view>
     </view>
     <view class='showHide' catchtouchmove='true' bindtap='closeShow' wx:if='{{showIndex==index}}'></view>
     <view class='showMore' wx:if='{{showIndex==index}}'>
-      <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.id}}'>
-        <image mode='widthFix' src="/image/sYan.png"></image>预览</navigator>
-      <view catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>
-        <view class='v-san'></view>
-        <image mode='widthFix' src="/image/sRe.png"></image>删除</view>
+      <!-- 有活动 -->
+      <block wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}">
+        <view class='more-btn-group'>
+          <view class='more-btn-item' wx:if='{{item.status==0 || item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'><image mode='widthFix' src="/image/upload-icon.png"></image>上架</view>
+          <view class='more-btn-item' wx:if='{{item.status==1 || item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'><image mode='widthFix' src="/image/download-icon.png"></image>下架</view>
+          <view class='gray-line'></view>
+          <navigator class='more-btn-item' url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.id}}'>
+            <image mode='widthFix' src="/image/sYan.png"></image>预览
+          </navigator>
+          <view class='gray-line'></view>
+          <view class='more-btn-item' catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>
+            <view class='v-san'></view>
+            <image mode='widthFix' src="/image/sRe.png"></image>删除
+          </view>
+        </view>
+      </block>
+      <!-- 无活动 -->
+      <block wx:else>
+        <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.id}}'>
+          <image mode='widthFix' src="/image/sYan.png"></image>预览</navigator>
+        <view catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>
+          <view class='v-san'></view>
+          <image mode='widthFix' src="/image/sRe.png"></image>删除</view>
+      </block>  
     </view>
     <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>
       <image mode='widthFix' src="/image/sBai.png"></image>删除</view>
