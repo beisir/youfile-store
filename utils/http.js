@@ -279,7 +279,7 @@ class request {
             }
           }),
           fail: (e=>{
-            Api.showToast("上传失败")
+            wx.showToast({ title: "上传失败", icon: 'none' })
           }),
           complete: (res => {
             if (!noLoading) {

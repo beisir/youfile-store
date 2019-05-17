@@ -172,5 +172,5 @@
 .video-box{position: relative;}
 .video-box video{width: 100%;}
 .show-tab-box{width: 100%;position: absolute;bottom: 157rpx; display:flex;z-index:99;justify-content: center;}
-.show-tab-item{background: rgba(255, 255, 255, 0.4);width: 100rpx;height: 40rpx;border-radius: 40rpx;text-align: center;font-size: 24rpx;line-height: 40rpx;margin: 0 10rpx 0;}
+.show-tab-item{background: rgba(255, 255, 255, 0.7);width: 100rpx;height: 40rpx;border-radius: 40rpx;text-align: center;font-size: 24rpx;line-height: 40rpx;margin: 0 10rpx 0;}
 .ac-show-tab-item{background: #fa6449;color:#fff;}

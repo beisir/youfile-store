@@ -40,7 +40,7 @@
 
   <view class='imgVideBox' style='height:{{Height}}'>
     <!-- 切换tab -->
-    <view class='show-tab-box' wx:if="{{goodsInfo.mainVideoUrl}}">
+    <view class='show-tab-box' style='bottom:{{goodsInfo.isActivity?"190rpx":"87rpx"}}' wx:if="{{goodsInfo.mainVideoUrl}}">
       <view class='show-tab-item {{showVideo?"ac-show-tab-item":""}}' bindtap='changeImgVideoTab' data-type='video'><image style='width:17rpx;height:17rpx;margin-right:10rpx;' src='/image/play.png'></image>视频</view>
       <view class='show-tab-item {{showVideo?"":"ac-show-tab-item"}}' data-type='img' bindtap='changeImgVideoTab'>图片</view>
     </view>
