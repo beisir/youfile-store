@@ -17,7 +17,8 @@
     </view>
     <view class='goods-spec'>
       <view class='spec-t' wx:if="{{!noSku}}"><block>商品规格（{{checkedNum}}/{{goods.goodsSkuVOList.length}}）</block>
-      <button bindtap='choiceSpec' class='spec-one' style='padding:0;'>选择规格</button>
+      <!-- 发布商品不能修改规格 -->
+      <button bindtap='choiceSpec' class='spec-one' style='padding:0;' hidden='{{noEdit}}'>选择规格</button>
       <button bindtap='discountGoods' style='padding:0;'>批量设置</button>
       </view>
       <view wx:else class='spec-t'>商品规格</view>

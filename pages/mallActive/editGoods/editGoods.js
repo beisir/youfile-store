@@ -46,7 +46,8 @@ Page({
     // 统一设置值
     allBuyNum:'',
     allPrice: '',
-    allStockNum: ''
+    allStockNum: '',
+    noEdit: true
   },
   // 关闭弹框
   closeFrame: function () {
@@ -187,6 +188,12 @@ Page({
           noSkuBuynum: acArr[0].batchNum,
           noSkugoodsActNumber: acArr[0].goodsActNumber
         })
+      }
+      // 编辑状态
+      if (res.obj.releaseStatus && res.obj.releaseStatus == 'release'){
+        this.setData({ noEdit: true})
+      }else {
+        this.setData({ noEdit: false })
       }
     })
   },
