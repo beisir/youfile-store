@@ -239,3 +239,9 @@ export const storeIndexAGoodsUrl ="/api/mall/activity/goods/{{activityNumber}}/s
 export const editConsigneeUrl = '/admin/order/{{orderNumber}}/consignee'
 // 修改物流
 export const editExpressUrl = '/admin/order/{{orderNumber}}/express'
+// 商品分区
+export const adminShowZoneListUrl = '/admin/goods/zone/list'
+export const zoneToTopUrl = '/admin/goods/zone/{{zoneNumber}}/top'
+export const zoneOnOrOffUrl = '/admin/goods/zone/{{zoneNumber}}/setting'
+export const getZoneListUrl = '/admin/goods/zone/on/excludeall/list'
+export const apiShowZoneListUrl = '/api/goods/zone/{{storeId}}/on/list'

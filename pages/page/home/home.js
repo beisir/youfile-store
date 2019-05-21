@@ -66,6 +66,7 @@ Page({
   tabSwitch:function(e){
     this.preventPulldown()
     var index = e.target.dataset.index
+    // 1 活动 0全部  
     if(index=="1"){
       this.setData({
         tabSwitchShow: false

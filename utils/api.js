@@ -192,7 +192,12 @@ import {
   purchaserTransUrl,
   storeIndexAGoodsUrl,
   editConsigneeUrl,
-  editExpressUrl
+  editExpressUrl,
+  getZoneListUrl, // 分区
+  zoneToTopUrl,
+  zoneOnOrOffUrl,
+  adminShowZoneListUrl,
+  apiShowZoneListUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1237,7 +1242,33 @@ function editExpress(data){
     'content-type': 'application/x-www-form-urlencoded'
   })
 }
+/**分区**/
+// 显示隐藏
+function zoneOnOrOff(data) {
+  return app.http.putRequest(zoneOnOrOffUrl, data)
+}
+// 置顶分区
+function zoneToTop(data) {
+  return app.http.putRequest(zoneToTopUrl, data)
+}
+// 所有分区列表
+function getZoneList(data) {
+  return app.http.getRequest(getZoneListUrl, data)
+}
+// 除去所有商品的显示分区列表
+function adminShowZoneList(data) {
+  return app.http.getRequest(adminShowZoneListUrl, data)
+}
+function apiShowZoneList(data) {
+  return app.http.getRequest(apiShowZoneListUrl, data)
+}
+
 module.exports = {
+  getZoneList,
+  zoneToTop,
+  zoneOnOrOff,
+  adminShowZoneList,
+  apiShowZoneList,
   editExpress,
   editConsignee,
   openSetting,

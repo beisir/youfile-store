@@ -86,10 +86,10 @@
           <view>
             <view class='g-title'>{{item.goodsVO.name}} </view>
             <view class='gprice'>活动价:
-              <text>￥{{item.goodsActivityRelationVOS[0].goodsPromotionList[0].activityPrice}}</text> </view>
+              <text>￥{{item.activityPrice}}</text> </view>
             <view class='gprice'>起购量:
-              <text>{{item.goodsActivityRelationVOS[0].batchNum}}</text> </view>
-            <view>活动库存: {{item.goodsActivityRelationVOS[0].stockNum}}</view>
+              <text>{{item.batchNumOnActivity}}</text> </view>
+            <view>活动库存: {{item.stockNumOnActivity}}</view>
           </view>
         </view>
         <view class='g-bottom' wx:if="{{item.releaseStatus=='init'}}">
