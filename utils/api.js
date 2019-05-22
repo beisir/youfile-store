@@ -198,6 +198,7 @@ import {
   zoneOnOrOffUrl,
   adminShowZoneListUrl,
   apiShowZoneListUrl,
+  editZoneUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1264,8 +1265,15 @@ function adminShowZoneList(data) {
 function apiShowZoneList(data) {
   return app.http.getRequest(apiShowZoneListUrl, data)
 }
+// 编辑分区
+function editZone(data){
+  return app.http.putRequest(editZoneUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
 
 module.exports = {
+  editZone,
   getZoneList,
   zoneToTop,
   zoneOnOrOff,

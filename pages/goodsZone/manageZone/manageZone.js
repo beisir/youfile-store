@@ -11,7 +11,6 @@ Page({
   },
   getList(){
     Api.adminShowZoneList().then(res=>{
-      console.log(res)
       this.setData({
         list: res.obj
       })
@@ -38,15 +37,20 @@ Page({
   },  
   sureName(){
     let item = this.data.editItem
-    Api.editZone({ zoneNumber: item.zoneNumber, zoneName: item.zoneName}).then(res=>{
-      
+    if (!item.zoneAlias || item.zoneAlias.length<=0){
+      Api.showToast("请输入别名")
+      return 
+    }
+    Api.editZone({ zoneNumber: item.zoneNumber, zoneAlias: item.zoneAlias}).then(res=>{
+      Api.showToast(res.message)
+      this.setData({ editModal: false})
+      this.getList()
     })
   },
   watchInput(e){
-    console.log(e)
     let val = e.detail.value
     this.setData({
-      ['editItem.zoneName']: e.detail.value
+      ['editItem.zoneAlias']: e.detail.value
     })
   },
   /**

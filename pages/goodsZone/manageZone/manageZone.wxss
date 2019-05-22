@@ -6,3 +6,4 @@
 .zone-des{font-size: 26rpx;color: #666;}
 .editName input{border-bottom:2rpx solid #F6F6F6;margin-bottom: 50rpx;}
 .editName button{background: #ca7;color: #fff;}
+.aliasName{color: #999}
