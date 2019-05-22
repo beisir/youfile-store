@@ -10,7 +10,6 @@ Page({
     value:'',
     emptyVal:0,
     num:0,
-    id:Api.getThisStoreId(),
     name:'',
     allNum:0,
     status:0,
@@ -81,7 +80,7 @@ Page({
   },
   updateMes:function(){
     var value = this.data.value,
-      id=this.data.id,
+      id= Api.getThisStoreId(),
       name = this.data.name,
       data={}
     if (name == "name") {
