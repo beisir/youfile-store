@@ -1,7 +1,7 @@
 <!-- 编辑弹框 -->
 <layer show="{{editModal}}" title='设置专区名称'>
   <view class='editName'>
-    <input maxlength='4'></input>
+    <input maxlength='4' value='{{editItem.zoneName}}' bindinput='watchInput'></input>
     <button bindtap='sureName'>确定</button>
   </view>
 </layer>
@@ -15,7 +15,7 @@
     <view class='icon-box' hidden='{{item.status === "on"}}' bindtap='onOrOff' data-num='{{item.zoneNumber}}' data-type='on'><image src='/image/see-gold.png'></image></view>
     <view class='icon-box' hidden='{{item.status === "off"}}' bindtap='onOrOff' data-num='{{item.zoneNumber}}' data-type='off'><image src='/image/nosee-gold.png'></image></view>
     <view class='icon-box' hidden='{{index==0}}' bindtap='toTop' data-num='{{item.zoneNumber}}'><image src='/image/top-gold.png'></image></view>
-    <view class='icon-box' bindtap='edit'><image src='/image/edit-gold.png'></image></view>
+    <view class='icon-box' bindtap='edit' data-item='{{item}}'><image src='/image/edit-gold.png'></image></view>
   </view>
 </view>
 

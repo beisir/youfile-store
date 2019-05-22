@@ -30,11 +30,25 @@ Page({
       this.getList()
     })
   },
-  edit(){
+  edit(e){
     this.setData({
-      editModal: true
+      editModal: true,
+      editItem: e.currentTarget.dataset.item
     })
   },  
+  sureName(){
+    let item = this.data.editItem
+    Api.editZone({ zoneNumber: item.zoneNumber, zoneName: item.zoneName}).then(res=>{
+      
+    })
+  },
+  watchInput(e){
+    console.log(e)
+    let val = e.detail.value
+    this.setData({
+      ['editItem.zoneName']: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
