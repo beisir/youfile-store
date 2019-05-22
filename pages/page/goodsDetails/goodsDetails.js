@@ -667,10 +667,10 @@ Page({
     }
     for (var i = 0; i < newSkuArrTwo.length; i++) {
       for (var j = 0; j < skuValueVOList.length; j++) {
-        if ((newSkuArrTwo[j].specValueCodeList).indexOf(skuValueVOList[j].specValueCode) != -1) {
-          newSkuArrTwo[j].name = skuValueVOList[j].specValueName
-          if (newSkuArrTwo[j].num == undefined) {
-            newSkuArrTwo[j].num = 0
+        if ((newSkuArrTwo[i].specValueCodeList).indexOf(skuValueVOList[j].specValueCode) != -1) {
+          newSkuArrTwo[i].name = skuValueVOList[j].specValueName
+          if (newSkuArrTwo[i].num == undefined) {
+            newSkuArrTwo[i].num = 0
           }
         }
       }

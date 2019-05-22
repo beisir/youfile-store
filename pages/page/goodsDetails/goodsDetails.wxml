@@ -298,7 +298,7 @@
           <view wx:for='{{goodsSpecificationVOList}}' wx:for-item="list" wx:key="{{index}}">
             <view class='gd-gg' wx:if='{{index==0}}'>
               <text>{{list.specName}}</text>
-              <view>
+              <view style="max-height: 240rpx;overflow-y: scroll;">
                 <block wx:for="{{list.goodsSpecificationValueVOList}}" wx:key="{{index}}">
                   <view class='gd-view'>
                     <view data-code='{{item.specValueCode}}' data-codeP="{{list.specCode}}" class="lt-view {{swichNav==index?'active':''}}" data-current="{{index}}" bindtap='swichNav'>{{item.specValueName}}
