@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/page/home/home",
     "pages/goodsZone/manageZone/manageZone",
+    "pages/page/home/home",
     "pages/page/goodsDetails/goodsDetails",
     "pages/role/allOrder/allOrder",
     "pages/role/changeOrderAdd/changeOrderAdd",

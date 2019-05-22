@@ -6,26 +6,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: []
+    list: [],
+    editModal: false
   },
   getList(){
-    Api.getZoneList().then(res=>{
+    Api.adminShowZoneList().then(res=>{
       console.log(res)
+      this.setData({
+        list: res.obj
+      })
     })
   },
   onOrOff(e){
     let id = e.currentTarget.dataset.num,
       type = e.currentTarget.dataset.type
-    Api.zoneOnOrOffUrl({ zoneNumber: id, onOrOff: type}).then(res=>{
-
+    Api.zoneOnOrOff({ zoneNumber: id, onOrOff: type}).then(res=>{
+      this.getList()
     })
   },
   toTop(e) {
     let id = e.currentTarget.dataset.num
     Api.zoneToTop({ zoneNumber: id }).then(res => {
-
+      this.getList()
     })
   },
+  edit(){
+    this.setData({
+      editModal: true
+    })
+  },  
   /**
    * 生命周期函数--监听页面加载
    */

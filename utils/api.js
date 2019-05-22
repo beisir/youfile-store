@@ -1245,7 +1245,9 @@ function editExpress(data){
 /**分区**/
 // 显示隐藏
 function zoneOnOrOff(data) {
-  return app.http.putRequest(zoneOnOrOffUrl, data)
+  return app.http.putRequest(zoneOnOrOffUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 // 置顶分区
 function zoneToTop(data) {

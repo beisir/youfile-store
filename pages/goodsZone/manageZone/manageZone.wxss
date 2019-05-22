@@ -4,3 +4,5 @@
 .icon-box image{width: 40rpx;height: 40rpx;}
 .zone-name{font-size: 36rpx;color: #333;font-weight: bold;}
 .zone-des{font-size: 26rpx;color: #666;}
+.editName input{border-bottom:2rpx solid #F6F6F6;margin-bottom: 50rpx;}
+.editName button{background: #ca7;color: #fff;}
