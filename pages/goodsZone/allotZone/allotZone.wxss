@@ -1,0 +1,6 @@
+/* pages/goodsZone/allotZone/allotZone.wxss */
+.page-title{height: 130rpx;padding: 0 50rpx;line-height: 130rpx;font-size: 36rpx;font-weight: 600;}
+.zone-box{padding: 0 30rpx; margin: 0 20rpx 0;background: #fff;border-radius: 10rpx;}
+.goods-num{border: 1rpx dashed #ca7;min-width: 100rpx;padding: 0 10rpx;color: #ca7; font-size: 28rpx;height: 40rpx;line-height: 40rpx;text-align: center;}
+.zone-item{height: 100rpx;}
+.icon-item{margin-right: 40rpx;}

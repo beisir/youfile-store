@@ -419,9 +419,12 @@ Page({
         sortType = 'prices_asc'
       }
     }
+    
+
     Api.shopList({
       keyword: '',
-      sortType: sortType
+      sortType: sortType,
+      zoneNumber: this.getZoneNum()
     })
       .then(res => {
         var detailList = res.obj.result,
@@ -476,6 +479,9 @@ Page({
     })
       .then(res => {
         var obj = res.obj
+       // 获取tab切换列表
+        this.getTabList(obj)
+
         wx.setNavigationBarTitle({
           title: obj.store.storeName == null ? app.globalData.projectName : obj.store.storeName
         })
@@ -659,6 +665,104 @@ Page({
     })
   },
 
+  // 获取tab切换列表
+  getTabList(obj){
+    // 是否参与活动
+    obj.existActivity ? this.setData({ hasAc: true }) : this.setData({ hasAc: false })
+    let tabArr = []
+    Api.getShowZoneList().then(res=> {
+      if (res.obj && res.obj.length>0){
+        res.obj.forEach(el => {
+          tabArr.push({
+            name: el.zoneAlias ? el.zoneAlias : el.zoneName,
+            acback: '/image/tab-ye-center.png',
+            back: '/image/tab-gray-center.png',
+            type: el.zoneType,
+            selected: false,
+            zoneNumber: el.zoneNumber
+          })
+        })
+      }
+      if (obj.existActivity) {
+        // 有参加活动 活动标签放前面
+        tabArr.unshift({
+          name: '正在抢订',
+          acback: '/image/tab-red-left.png',
+          back: '/image/tab-gray-left.png',
+          type: 'ac',
+          selected: true,
+        })
+        tabArr.push({
+          name: '全部商品',
+          acback: '/image/tab-ye-right.png',
+          back: '/image/tab-gray-right.png',
+          type: 'all',
+          selected: false,
+        })
+        this.setData({ tabSwitchShow: true })
+      } else {
+        // 无参加活动
+        tabArr.unshift({
+          name: '全部商品',
+          acback: '/image/tab-ye-left.png',
+          back: '/image/tab-gray-left.png',
+          type: 'all',
+          selected: true,
+        })
+        tabArr.push({
+          name: '正在抢订',
+          acback: '/image/tab-red-right.png',
+          back: '/image/tab-gray-right.png',
+          type: 'ac',
+          selected: false,
+        })
+      }
+      this.setData({
+        tabList: tabArr
+      })
+    })
+  },
+  // 切换tab
+  selectTab(e){
+    let thisindex = e.currentTarget.dataset.index,
+        tabarr = this.data.tabList
+
+    tabarr.forEach((el,index)=> {
+      if (index == thisindex){
+        el.selected = true
+        // 是否是活动
+        switch (el.type){
+          case 'ac':
+            this.setData({ tabSwitchShow: true })
+          break;
+          case 'all':
+            this.setData({ tabSwitchShow: false })
+            this.emptyArr()
+          break;
+          default:
+            this.setData({ tabSwitchShow: false })
+            this.emptyArr()
+          break;
+        }
+      } else {
+        el.selected = false
+      }
+    })    
+
+    this.setData({
+      tabList: tabarr
+    })
+  },
+  getZoneNum(){
+    // tab
+    let tab = this.data.tabList.filter(el => el.selected),
+      zoneNumber = ''
+    if (tab[0] && tab[0].zoneNumber) {
+      zoneNumber = tab[0].zoneNumber
+    }
+    return zoneNumber
+  },
+
     /**
    * 生命周期函数--监听页面加载
    */
@@ -667,6 +771,7 @@ Page({
     if (options != undefined) {
       let enEnterStoreHandler = new EnterStoreHandler("1");
       enEnterStoreHandler.enterStore(options).then(store => {
+        console.log(store)
         _this.loadData()
         //进店成功
         if (store.userId) {
@@ -718,7 +823,7 @@ Page({
   },
   getListNew: function () {
     var _this = this
-    Api.recentGoods()
+    Api.recentGoods({ zoneNumber:this.getZoneNum()})
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount

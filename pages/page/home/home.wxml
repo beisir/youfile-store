@@ -165,6 +165,16 @@
     <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
   </view>
 
+
+  <view style='padding:0 40rpx;'>
+  <scroll-view scroll-x='true' class='tab-box com-flex-center' style='border-color:{{tabSwitchShow?"#f02b2b":"#ca7"}}'>
+    <view class='tab-item' wx:for="{{tabList}}" wx:key='{{index}}' style='left:-{{index*15}}rpx;z-index:{{item.selected?999:99}}' bindtap='selectTab' data-index='{{index}}'>
+    <view class='tab-text-box' style='color:{{item.selected?"#fff":"#333"}}'>{{item.name}}</view>
+    <image src='{{item.selected?item.acback:item.back}}'></image>
+    </view>
+  </scroll-view>
+  </view>
+  
   <view class='tab-cont'>
     <view class='tab-view {{tabSwitch=="1"?"tab-view1":"teb-view4"}}'>
       <!-- avtiveGoods.length == 0?"tab-view3":"teb-view4" -->

@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/goodsZone/manageZone/manageZone",
     "pages/page/home/home",
+    "pages/goodsZone/allotZone/allotZone",
+    "pages/admin/batch/batch",
+    "pages/goodsZone/manageZone/manageZone",
     "pages/page/goodsDetails/goodsDetails",
     "pages/role/allOrder/allOrder",
     "pages/role/changeOrderAdd/changeOrderAdd",
@@ -120,7 +122,6 @@
     "pages/page/editInvoice/editInvoice",
     "pages/page/mes/mes",
     "pages/role/orderSelf/orderSelf",
-    "pages/admin/batch/batch",
     "assembly/partnerAlert/partnerAlert",
     "pages/login/login/login",
     "pages/businessFriend/merchant/newMerchant/newMerchant",

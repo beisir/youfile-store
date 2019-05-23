@@ -51,3 +51,4 @@ scroll-view{margin-top:0rpx;padding-bottom:100rpx}
 .showMore .more-btn-group{display: flex;align-items: center;justify-content: space-between;width: 100%!important;flex-direction: row;margin: 0;height:100%;}
 .gray-line{width: 2rpx;height: 38rpx;background: #eee;}
 .more-btn-group .more-btn-item{position: relative;flex: 1;}
+.name-tag{height: 34rpx;padding: 0 10rpx;line-height: 34rpx;font-size: 24rpx;color: #fff;border-radius: 10rpx;margin-right: 10rpx;}

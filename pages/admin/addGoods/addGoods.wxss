@@ -94,5 +94,6 @@
 .weui-cell-new{font-size: 36rpx;padding-bottom: 0;padding-left: 75rpx;}
 .clearText{color: #999;font-size: 24rpx;position: absolute;right: 0;top:30rpx;width: 116rpx;text-align: right;}
 /* 分区 */
-.zone-item{height: 120rpx;}
+.zone-item{height: 120rpx;margin-left: 40rpx;font-size: 30rpx;border-bottom: 1rpx solid #ddd;}
+.zone-item:last-child{border: 0;}
 .zone-item image{width: 35rpx;height: 35rpx;}

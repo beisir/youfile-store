@@ -86,7 +86,9 @@
         <image class="editGoods" src="/image/mallr.png"></image>
         <image class="cart-thumb" src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
         <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" left='40' top='44'/>
-        <view class='st-d-t'>{{item.name}}</view>
+        <view class='st-d-t'>
+          <text wx:if='{{item.zoneType == "substitute"}}' class='name-tag' style='background:#ff9900'>代发</text><text wx:if='{{item.zoneType == "whole"}}' class='name-tag' style='background:#fd4c4c'>拿货</text>{{item.name}}
+        </view>
         <view class='st-details'>
           <view class='st-d-status'>
             <view>

@@ -12,8 +12,8 @@
     <view class='zone-des'>{{item.zoneDesc?item.zoneDesc:''}}</view>
   </view>
   <view class='com-flex-center'>
-    <view class='icon-box' hidden='{{item.status === "on"}}' bindtap='onOrOff' data-num='{{item.zoneNumber}}' data-type='on'><image src='/image/see-gold.png'></image></view>
-    <view class='icon-box' hidden='{{item.status === "off"}}' bindtap='onOrOff' data-num='{{item.zoneNumber}}' data-type='off'><image src='/image/nosee-gold.png'></image></view>
+    <view class='icon-box' hidden='{{item.status === "on"}}' bindtap='onOrOff' data-num='{{item.zoneNumber}}' data-type='on'><image src='/image/nosee-gold.png'></image></view>
+    <view class='icon-box' hidden='{{item.status === "off"}}' bindtap='onOrOff' data-num='{{item.zoneNumber}}' data-type='off'><image src='/image/see-gold.png'></image></view>
     <view class='icon-box' hidden='{{index==0}}' bindtap='toTop' data-num='{{item.zoneNumber}}'><image src='/image/top-gold.png'></image></view>
     <view class='icon-box' bindtap='edit' wx:if="{{item.zoneType !== 'all'}}" data-item='{{item}}'><image src='/image/edit-gold.png'></image></view>
   </view>

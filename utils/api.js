@@ -193,12 +193,15 @@ import {
   storeIndexAGoodsUrl,
   editConsigneeUrl,
   editExpressUrl,
-  getZoneListUrl, // 分区
+  getZoneListAdminUrl, // 分区
+  getShowZoneListUrl,
   zoneToTopUrl,
   zoneOnOrOffUrl,
   adminShowZoneListUrl,
   apiShowZoneListUrl,
   editZoneUrl,
+  addGoodsToZoneUrl,
+  delGoodsToZoneUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1254,9 +1257,12 @@ function zoneOnOrOff(data) {
 function zoneToTop(data) {
   return app.http.putRequest(zoneToTopUrl, data)
 }
-// 所有分区列表
-function getZoneList(data) {
-  return app.http.getRequest(getZoneListUrl, data)
+// 显示分区列表 除去所有
+function getZoneListAdmin(data) {
+  return app.http.getRequest(getZoneListAdminUrl, data)
+}
+function getShowZoneList(data) {
+  return app.http.getRequest(getShowZoneListUrl, data)
 }
 // 除去所有商品的显示分区列表
 function adminShowZoneList(data) {
@@ -1271,10 +1277,24 @@ function editZone(data){
     'content-type': 'application/x-www-form-urlencoded'
   })
 }
+// 添加商品到分区
+function addGoodsToZone(data){
+  return app.http.postRequest(addGoodsToZoneUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
+function delGoodsToZone(data) {
+  return app.http.deleteRequest(delGoodsToZoneUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
 
 module.exports = {
+  delGoodsToZone,
+  addGoodsToZone,
   editZone,
-  getZoneList,
+  getZoneListAdmin,
+  getShowZoneList,
   zoneToTop,
   zoneOnOrOff,
   adminShowZoneList,

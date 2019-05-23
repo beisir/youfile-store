@@ -13,7 +13,7 @@ Page({
     allSelected:false,
     goodsStatus:1,
     setCode:[],
-    showBottom:true,
+    showBottom:false,
     numSle:0,
   },
 
@@ -96,6 +96,17 @@ Page({
     }else{
       wx.navigateTo({
         url: '../shopClass/shopClass?code=' + code,
+      })
+    }
+  },
+  // 分区至
+  addZone(){
+    var code = this.data.setCode
+    if (code.length == 0) {
+      Api.showToast("请选择商品！")
+    } else {
+      wx.navigateTo({
+        url: '../../goodsZone/allotZone/allotZone?code=' + code,
       })
     }
   },

@@ -214,13 +214,13 @@
           </view>
         </view>
       </view>
-      <view class="page__category-content page__new weui-cell1_new">
+      <view class="page__category-content page__new weui-cell1_new" wx:if="{{zoneList && zoneList.length>0}}">
         <view class='weui-title'>小云店展示区
           <text>(只能选择一种展示模式) </text>
         </view>
-        <view class='zone-item com-flex-between'>
-          <view>一件代发</view>
-          <image src='/image/right-gold.png'></image>
+        <view class='zone-item com-flex-between' wx:for="{{zoneList}}" wx:key='{{index}}' bindtap='selectZone' data-num='{{item.zoneNumber}}'>
+          <view>{{item.zoneAlias?item.zoneAlias:item.zoneName}}</view>
+          <image hidden='{{item.zoneNumber !== zoneNum}}' src='/image/right-gold.png'></image>
         </view>
       </view>
     </view>

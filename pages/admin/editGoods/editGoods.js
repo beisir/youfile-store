@@ -1,3 +1,10 @@
+/***
+ * 新建商品与修改商品
+ * 1. 分区选择取消逻辑不同
+ * 
+ * 
+ * ***/ 
+
 const app = getApp();
 import Api from '../../../utils/api.js'
 import util from '../../../utils/util.js'
@@ -48,8 +55,29 @@ Page({
     addGoodsDetails: [],
     switchChange: false,
     mainImgUrl: "", // 视频
-    videoUrl: false
-    // 'https://dev-image.youlife.net.cn/default/1557113660070971.mp4'
+    videoUrl: false,
+    // 分区
+    zoneList: []
+  },
+  // 分区
+  getZoneList() {
+    Api.getZoneListAdmin().then(res => {
+      this.setData({
+        zoneList: res.obj
+      })
+    })
+  },
+  selectZone(e) {
+    let num = e.currentTarget.dataset.num
+    if (num == this.data.zoneNum){
+      this.setData({
+        zoneNum: ''
+      })
+    }else{
+      this.setData({
+        zoneNum: num
+      })
+    }
   },
   // 上传视频
   // 展示图片视频底部菜单
@@ -464,7 +492,8 @@ Page({
           categoryCode: obj.categoryCode,
           strName: obj.customCategoryName,
           codeName: obj.categoryName.replace(/,/g, ">"),
-          categoryCustomCode: obj.customCategoryCode
+          categoryCustomCode: obj.customCategoryCode,
+          zoneNum: obj.zoneNumber
         })
       })
   },
@@ -499,6 +528,7 @@ Page({
       goodsId: options.goodsId
     })
     this.getDetails(options.goodsId)
+    this.getZoneList()
   },
   // tab切换
   swichNav: function(e) {
@@ -841,7 +871,8 @@ Page({
       "storeId": this.data.storeId,
       "storeName": this.data.storeName,
       "top": false,
-      "wholesalePrice": wholesalePrice
+      "wholesalePrice": wholesalePrice,
+      "zoneNumber": this.data.zoneNum
     }
     if (!Api.isNotEmpty(mainImgUrl)) {
       Api.showToast("请上传商品图片！")

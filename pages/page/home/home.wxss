@@ -127,3 +127,8 @@ page{background: #fff;}
 .newadd-friend{background:#fff;display: flex;align-items: center; height: 80rpx;padding: 0 50rpx 0 45rpx;font-size:24rpx;font-weight:600;}
 .icon-view{font-weight:500;width: 30rpx;height: 30rpx;font-size: 22rpx;text-align: center; line-height: 30rpx;color: #fff;background: #000;margin-right: 20rpx;}
 .flex-center{display: flex;align-items: center;}
+/* 菜单切换 */
+.tab-box{width: 100%;box-sizing:border-box;border-bottom: 3rpx solid #fff;height:66rpx;}
+.tab-item {width: 180rpx;height: 66rpx;display:inline-block;position: relative;}
+.tab-text-box{position: absolute;height: 100%;width: 100%;display: flex;align-items: center;justify-content: center;z-index: 9;font-size: 26rpx;color: #666;}
+.tab-item image{width: 180rpx;height: 66rpx;position: absolute;z-index:1;bottom: 0;left: 0;}

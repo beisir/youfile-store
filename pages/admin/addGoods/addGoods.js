@@ -50,8 +50,31 @@ Page({
     moveImgShow: true,
     addGitShow: true,
     // 视频
-    videoUrl: false
-    // 'https://dev-image.youlife.net.cn/default/1557113660070971.mp4'
+    videoUrl: false,
+    // 分区
+    zoneList: []
+  },
+  // 分区
+  getZoneList(){
+    Api.getZoneListAdmin().then(res=> {
+      this.setData({
+        zoneList: res.obj
+      })
+    })
+  },
+  selectZone(e){
+    let num = e.currentTarget.dataset.num,
+        arr = this.data.zoneList
+    arr.forEach(el=>{
+      if (el.zoneNumber == num){
+        el.selected = !!!el.selected
+      } else {
+        el.selected = false
+      }
+    })
+    this.setData({
+      zoneList: arr
+    })
   },
   // 上传视频
   // 展示图片视频底部菜单
@@ -381,6 +404,7 @@ Page({
   },
   onLoad: function(options) {
     this.getConfig()
+    this.getZoneList()
   },
   // tab切换
   swichNav: function(e) {
@@ -603,6 +627,16 @@ Page({
       Api.showToast("请填写库存")
       return;
     }
+    // 分区
+    let zoneNum = ''
+    try{
+      let zoneArr = this.data.zoneList.filter(el => el.selected)
+      if (zoneArr.length > 0 && zoneArr[0]) {
+        zoneNum = zoneArr[0].zoneNumber
+      }
+    }catch(e){}
+    
+
     var goodsVO = {
       "categoryCode": this.data.categoryCode,
       "customCategoryCode": this.data.categoryCustomCode,
@@ -620,7 +654,8 @@ Page({
       "privacy":this.data.switchChange?1:0,
       "stockNum": stockNum,
       "saleBatchNum": saleBatchNum,
-      "wholesalePrice": wholesalePrice
+      "wholesalePrice": wholesalePrice,
+      "zoneNumber": zoneNum
     }
     this.setData({
       addGitShow: false
