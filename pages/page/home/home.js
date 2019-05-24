@@ -670,7 +670,7 @@ Page({
     // 是否参与活动
     obj.existActivity ? this.setData({ hasAc: true }) : this.setData({ hasAc: false })
     let tabArr = []
-    Api.getShowZoneList().then(res=> {
+    Api.apiShowAllZone().then(res=> {
       if (res.obj && res.obj.length>0){
         res.obj.forEach(el => {
           tabArr.push({
@@ -679,7 +679,7 @@ Page({
             back: '/image/tab-gray-center.png',
             type: el.zoneType,
             selected: false,
-            zoneNumber: el.zoneNumber
+            zoneNumber: el.zoneType=='all'?'':el.zoneNumber
           })
         })
       }
@@ -692,23 +692,12 @@ Page({
           type: 'ac',
           selected: true,
         })
-        tabArr.push({
-          name: '全部商品',
-          acback: '/image/tab-ye-right.png',
-          back: '/image/tab-gray-right.png',
-          type: 'all',
-          selected: false,
-        })
+        
+        tabArr[tabArr.length - 1].acback = '/image/tab-ye-right.png'
+        tabArr[tabArr.length - 1].back = '/image/tab-gray-right.png'
         this.setData({ tabSwitchShow: true })
       } else {
         // 无参加活动
-        tabArr.unshift({
-          name: '全部商品',
-          acback: '/image/tab-ye-left.png',
-          back: '/image/tab-gray-left.png',
-          type: 'all',
-          selected: true,
-        })
         tabArr.push({
           name: '正在抢订',
           acback: '/image/tab-red-right.png',
@@ -716,6 +705,10 @@ Page({
           type: 'ac',
           selected: false,
         })
+        tabArr[0].acback = '/image/tab-ye-left.png'
+        tabArr[0].back = '/image/tab-gray-left.png'
+        tabArr[0].selected = true
+        this.setData({ tabSwitchShow: false })
       }
       this.setData({
         tabList: tabArr
@@ -724,6 +717,7 @@ Page({
   },
   // 切换tab
   selectTab(e){
+    this.preventPulldown()
     let thisindex = e.currentTarget.dataset.index,
         tabarr = this.data.tabList
 
@@ -736,12 +730,13 @@ Page({
             this.setData({ tabSwitchShow: true })
           break;
           case 'all':
-            this.setData({ tabSwitchShow: false })
-            this.emptyArr()
-          break;
           default:
             this.setData({ tabSwitchShow: false })
-            this.emptyArr()
+            if (this.data.currentTab == 1){
+              this.emptyArrNew()
+            }else{
+              this.emptyArr()
+            }
           break;
         }
       } else {

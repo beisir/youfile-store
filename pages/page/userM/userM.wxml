@@ -25,7 +25,7 @@
         <view class='weui-xian weui-xian1'></view>
     </navigator> -->
   <navigator url='../../goodsZone/manageZone/manageZone'>
-    <text class="store-address">专区设置</text>
+    <text class="store-address">首页专区设置</text>
     <view class='weui-view'>
       <image class='img' src="/image/icl.png"></image>
     </view>

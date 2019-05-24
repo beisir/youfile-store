@@ -17,3 +17,4 @@
 .btn-box-all{flex: 1;justify-content: space-around;}
 .btn-box-all text{flex: 1;text-align: center;}
 .gold-line{width: 2rpx; height: 30rpx; background: #ca7;}
+.name-tag{height: 34rpx;padding: 0 10rpx;line-height: 34rpx;font-size: 24rpx;color: #fff;border-radius: 10rpx;margin-right: 10rpx;}

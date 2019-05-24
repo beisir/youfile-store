@@ -55,25 +55,37 @@
       </view>
     </view> -->
   </view>
-  <view class='st-title'>
-    <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中
-      <view></view>
+  <scroll-view scroll-x="{{true}}">
+    <view class='st-title'>
+      <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中
+        <view></view>
+      </view>
+      <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中
+        <view></view>
+      </view>
+      <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完
+        <view></view>
+      </view>
+      <view class="{{classStatus=='classify'? 'active' : ''}}" bindtap="swichNavLast" data-type='classify'>{{className}}
+        <image src="{{classStatus=='classify'?'/image/xl1.png':'/image/xl.png'}}"></image>
+        <view></view>
+      </view>
+      <view class="{{classStatus=='zone'? 'active' : ''}}" bindtap="swichNavLast" data-type='zone'>{{zoneName}}
+        <image src="{{classStatus=='zone'?'/image/xl1.png':'/image/xl.png'}}"></image>
+        <view></view>
+      </view>
     </view>
-    <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中
-      <view></view>
-    </view>
-    <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完
-      <view></view>
-    </view>
-    <view class="{{classStatus? 'active' : ''}}" bindtap="swichNavLast">{{className}}
-      <image src="{{sImg}}"></image>
-      <view></view>
-    </view>
-  </view>
+  </scroll-view>
 </view>
 <view class='hideSer' hidden='{{hidden}}' bindtap='hideSer'>
-  <view class='serList'>
+  <view class='serList' hidden='{{classStatus!=="classify"}}'>
     <view wx:for='{{list}}' wx:key='{{index}}' data-name='{{item.name}}' data-code='{{item.customCategoryCode}}' class="{{currentTabSer==index? 'active' : ''}}" data-current="{{index}}" bindtap="swichSer">{{item.name}}
+      <image src="/image/dui.png"></image>
+    </view>
+  </view>
+  <!-- 分区 -->
+  <view class='serList' hidden='{{classStatus!=="zone"}}'>
+    <view wx:for='{{zoneList}}' wx:key='{{index}}' class="{{item.selected? 'active' : ''}}" data-index="{{index}}" bindtap="swichZone">{{item.zoneAlias?item.zoneAlias:item.zoneName}}
       <image src="/image/dui.png"></image>
     </view>
   </view>

@@ -202,6 +202,7 @@ import {
   editZoneUrl,
   addGoodsToZoneUrl,
   delGoodsToZoneUrl,
+  apiShowAllZoneUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1264,11 +1265,12 @@ function getZoneListAdmin(data) {
 function getShowZoneList(data) {
   return app.http.getRequest(getShowZoneListUrl, data)
 }
-// 除去所有商品的显示分区列表
+// 分区列表
 function adminShowZoneList(data) {
   return app.http.getRequest(adminShowZoneListUrl, data)
 }
 function apiShowZoneList(data) {
+  data = initStoreId(data);
   return app.http.getRequest(apiShowZoneListUrl, data)
 }
 // 编辑分区
@@ -1288,8 +1290,14 @@ function delGoodsToZone(data) {
     'content-type': 'application/x-www-form-urlencoded'
   })
 }
+// 所有展示的包含全部
+function apiShowAllZone(data) {
+  data = initStoreId(data);
+  return app.http.getRequest(apiShowAllZoneUrl, data)
+}
 
 module.exports = {
+  apiShowAllZone,
   delGoodsToZone,
   addGoodsToZone,
   editZone,

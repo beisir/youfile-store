@@ -25,6 +25,7 @@ Page({
     isCopied: '',
     value: '',
     className: '本店分类',
+    zoneName: '本店分区',
     totalCount: '',
     sImg: '/image/xl.png',
     detailList: [],
@@ -33,6 +34,7 @@ Page({
     selGoods: 0,
     baseUrl: app.globalData.imageUrl,
     code: '',
+    zoneNumber: '',
     showMore: true,
     allGoodsShow: false,
     alertData: ["全部商品", "引用商品", "自建商品"],
@@ -164,12 +166,13 @@ Page({
         })
       })
   },
-  swichNavLast: function () {
+  swichNavLast: function (e) {
+    this.setData({
+      classStatus: e.currentTarget.dataset.type
+    })
     if (this.data.currentTab > -1) {
       this.setData({
-        hidden: false,
-        sImg: '/image/xl1.png',
-        classStatus: true,
+        hidden: false
       })
     }
   },
@@ -202,6 +205,8 @@ Page({
   swichNav: function (e) {
     var that = this,
       status = e.target.dataset.index
+
+    this.initNavStyle()
     that.setData({
       hidden: true,
       allGoodsShow: false,
@@ -211,7 +216,6 @@ Page({
       showMore: true,
       showHidet: true,
       showHideb: true,
-      code: '',
     }, function () {
       that.initData()
     })
@@ -220,10 +224,22 @@ Page({
     } else {
       that.setData({
         currentTab: e.target.dataset.current,
-        sImg: '/image/xl.png',
-        className: "本店分类"
       })
     }
+  },
+  initNavStyle(){
+    let arr = this.data.zoneList
+    arr.forEach(el=> {
+      el.selected = false
+    })
+    this.setData({
+      className: "本店分类",
+      zoneName: '本店分区',
+      classStatus: false,
+      code: '',
+      zoneNumber: '',
+      zoneList: arr
+    })
   },
   alertNav: function (e) {
     var that = this;
@@ -239,6 +255,7 @@ Page({
   hideSer: function () {
     this.setData({
       hidden: true,
+      zoneShow: false,
     })
   },
 
@@ -315,12 +332,20 @@ Page({
     })
 
   },
+  getZoneList(){
+    Api.getZoneListAdmin().then(res => {
+      let arr = [{zoneName:'全部商品',zoneNumber:''}]
+      this.setData({
+        zoneList: arr.concat(res.obj)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
 
   onLoad: function (options) {
-
+    this.getZoneList()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -350,6 +375,7 @@ Page({
     Api.adminGoodsStatus({
       goodsStatus: goodsStatus,
       customCategoryCodes: customCategoryCodes,
+      zoneNumber: this.data.zoneNumber,
       isCopied: isCopied
     })
       .then(res => {
@@ -381,6 +407,7 @@ Page({
 
   },
   swichSer: function (e) {
+    this.initNavStyle()  
     var that = this,
       code = e.target.dataset.code,
       name = e.target.dataset.name
@@ -395,6 +422,22 @@ Page({
         that.initData()
       })
     }
+  },
+  swichZone(e){
+    this.initNavStyle()  
+    let arr = this.data.zoneList,
+        thisIndex = e.currentTarget.dataset.index
+    arr.forEach((el,index)=> {
+      if(index == thisIndex){
+        el.selected = true
+        this.setData({ zoneName :el.zoneAlias ? el.zoneAlias : el.zoneName,zoneNumber: el.zoneNumber})
+      }else {
+        el.selected = false
+      }
+    })
+    this.setData({ zoneList: arr },()=> {
+      this.initData()
+    })
   },
   /**
    * 生命周期函数--监听页面显示

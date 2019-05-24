@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/admin/status/status",
     "pages/goodsZone/allotZone/allotZone",
     "pages/admin/batch/batch",
     "pages/goodsZone/manageZone/manageZone",
@@ -22,7 +23,6 @@
     "pages/mallActive/distRecords/distRecords",
     "pages/capital/index/index",
     "pages/mallActive/editGoods/editGoods",
-    "pages/admin/status/status",
     "assembly/activityTag/activityTag",
     "pages/mallActive/addGoods/addGoods",
     "pages/mallActive/moreAdd/moreAdd",

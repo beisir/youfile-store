@@ -7,7 +7,7 @@ page{background: #fff;}
 .sh-cont view{position:relative}
 .sh-cont view button.shre_btns{position:absolute;background:#fff;width:100%;border:0;opacity:0}
 .ym_sydtdmgzs{font-size:28rpx;text-shadow:none !important;margin-left:45rpx;color:#fff;line-height:40rpx;margin-bottom:10rpx;padding-bottom: 20rpx}
-.ym_sydtstore{left:0;background:#fff;bottom:10rpx;position:relative;padding-bottom:40rpx;padding-top:60rpx;z-index:12}
+.ym_sydtstore{left:0;background:#fff;bottom:10rpx;position:relative;padding-bottom:20rpx;padding-top:60rpx;z-index:12}
 .shre_btn,.ym_sydtgzbtn .button-hover{position:absolute;width:150rpx;bottom:20rpx;height:80rpx;border:0;border-left:2rpx solid #eeeeee;background:unset;border-radius:0;height:90rpx;bottom:0}
 .ym_sydtlogo{width:80rpx;top:-100rpx;height:80rpx;position:absolute;margin-right:20rpx;left:45rpx}
 .ym_sydtlogo image{border-radius:10rpx;max-width:120rpx;border:2rpx solid #fff;max-height:120rpx}
@@ -58,7 +58,7 @@ page{background: #fff;}
 .tipMes text{color:#CCAA77}
 .result{background:#fff;margin-top:0rpx;padding-top:30rpx}
 .nomore{margin-bottom:0rpx;margin-top:0rpx;text-align:center;padding:30rpx}
-.ym_sydtdmgzs text{position: absolute;height: auto;width:500rpx;word-wrap:break-word}
+.ym_sydtdmgzs text{position: absolute;height: auto;width:500rpx;word-break: break-all;}
 .isHideGoods{position: absolute;width:330rpx;height: 330rpx;background:rgba(201, 201, 201, 0.9);left: 0rpx;z-index: 10;text-align: center;font-size: 30rpx;color: #fff;}
 .isHideGoods view{line-height: 1.3}
 .result-list{position: relative}
@@ -81,7 +81,6 @@ page{background: #fff;}
   align-items: center;
   background: #fff;  
   padding: 0 50rpx 0 45rpx;
-  margin-top: -10rpx;  
 }
 .swiper-tips{
   height: 80rpx;  
@@ -128,7 +127,15 @@ page{background: #fff;}
 .icon-view{font-weight:500;width: 30rpx;height: 30rpx;font-size: 22rpx;text-align: center; line-height: 30rpx;color: #fff;background: #000;margin-right: 20rpx;}
 .flex-center{display: flex;align-items: center;}
 /* 菜单切换 */
-.tab-box{width: 100%;box-sizing:border-box;border-bottom: 3rpx solid #fff;height:66rpx;}
+.tab-box{width: 100%;box-sizing:border-box;border-bottom: 3rpx solid #fff;height:66rpx;margin-top:20rpx;white-space:nowrap;}
 .tab-item {width: 180rpx;height: 66rpx;display:inline-block;position: relative;}
 .tab-text-box{position: absolute;height: 100%;width: 100%;display: flex;align-items: center;justify-content: center;z-index: 9;font-size: 26rpx;color: #666;}
 .tab-item image{width: 180rpx;height: 66rpx;position: absolute;z-index:1;bottom: 0;left: 0;}
+.ac-stop-time{font-size: 24rpx;color: #666;padding: 0 40rpx;height: 80rpx;font-weight: 600;}
+.ac-stop-time text{margin: 0 8rpx;}
+
+.top-btn-box{height: 100rpx;width: 150rpx;display: flex;align-items: center;justify-content: center;flex-direction: column;position: absolute;top: 60rpx;right: 5rpx;color: #666;z-index: 13;font-size: 26rpx;background: #fff;border: 0;border-left: 1rpx solid #ddd;border-radius: 0;margin: 0;}
+.top-btn-box text{line-height: 1;margin-top: 15rpx;}
+.shareIcon{width: 35rpx;height: 35rpx;}
+.focus-box text{color: #ca7;}
+.focus-box .shareIcon{width: 40rpx;height: 40rpx;}

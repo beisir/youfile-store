@@ -113,8 +113,15 @@
         <image class='logoimg' wx:if='{{floorInfo.mallLogo!=""}}' src="{{baseUrl}}{{floorInfo.mallLogo}}" />
         <text wx:if='{{floorInfo!=null}}'>{{floorInfo.mallName}} {{floorInfo.balconyName}} {{floorInfo.floorName}} {{floorInfo.areaName}} {{floorInfo.storeDoorNum}}</text>
       </view>
-    </view>
-    <view class="ym_sydtgzbtn share-v" wx:if='{{limitShow==2}}' style='color:#666 !important'>
+      <!-- 按钮组 -->
+      <button class='top-btn-box' open-type='share' wx:if='{{limitShow==2}}'><image class='shareIcon' src="/image/fx.png" /><text>分享</text></button>
+      <view class='top-btn-box focus-box' wx:if='{{store!="" && !likeShow && limitShow!=2}}' bindtap='likeStore'><image class='shareIcon' src="/image/f.png" /><text><text style='font-size:34rpx;margin-top:-5rpx;'>+</text>关注</text></view>
+      <view class='top-btn-box focus-box' wx:if='{{!likeShow  && !getFollw && limitShow!=2}}' bindtap='likeStore'><image class='shareIcon' src="/image/f.png" /><text><text style='font-size:34rpx;margin-top:-5rpx;'>+</text>关注</text></view>
+      <view class='top-btn-box focus-box' wx:if='{{likeShow && getFollw && limitShow!=2}}' bindtap='deteleLikeStore'><image class='shareIcon' src="/image/dis.png" /><text style='color:#666;'>已关注</text></view>
+
+      
+
+      <!-- <view class="ym_sydtgzbtn share-v" wx:if='{{limitShow==2}}' style='color:#666 !important'>
       <view>
         <image src="/image/fx.png" />
       </view>
@@ -135,34 +142,43 @@
       <view>
         <image src="/image/dis.png" />
       </view>
-      <button class='shre_btn'></button>已关注</view>
+      <button class='shre_btn'></button>已关注</view> -->
+    </view>
   </view>
 
 
   <!-- 轮播通知 -->
-  <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
-    <swiper circular='true' interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
-      <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
-        <view class='icon-view' style='background:#f7ac25;'>订</view>
-        <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>
-      </swiper-item>
-      <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==1}}' bindtap='addTip'>
-        <view class='icon-view' style='background:#ccaa77;'>商</view>
-        <text>点此加为商友，即刻查看批发价！</text>
-      </swiper-item>
-    </swiper>
-    <!-- 箭头图标开关 -->
-    <block wx:if="{{limitShow == 1 && unpaidOrderNum > 0}}">
-      <view class='swiper-tri-box' wx:if='{{!showAllTip}}' bindtap='stopSwiperTip'>
-        <image class='more-tri-icon' src='/image/down.png'></image>
-      </view>
-      <view class='swiper-tri-box' wx:else bindtap='continueSwiperTip'>
-        <image class='more-tri-icon' src='/image/sy.png'></image>
-      </view>
-    </block>
-  </view>
-  <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
-    <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
+  <block wx:if='{{!tabSwitchShow}}'>
+    <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
+      <swiper circular='true' interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
+        <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
+          <view class='icon-view' style='background:#f7ac25;'>订</view>
+          <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>
+        </swiper-item>
+        <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==1}}' bindtap='addTip'>
+          <view class='icon-view' style='background:#ccaa77;'>商</view>
+          <text>点此加为商友，即刻查看批发价！</text>
+        </swiper-item>
+      </swiper>
+      <!-- 箭头图标开关 -->
+      <block wx:if="{{limitShow == 1 && unpaidOrderNum > 0}}">
+        <view class='swiper-tri-box' wx:if='{{!showAllTip}}' bindtap='stopSwiperTip'>
+          <image class='more-tri-icon' src='/image/down.png'></image>
+        </view>
+        <view class='swiper-tri-box' wx:else bindtap='continueSwiperTip'>
+          <image class='more-tri-icon' src='/image/sy.png'></image>
+        </view>
+      </block>
+    </view>
+    <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
+      <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
+    </view>
+  </block>
+  <view class='ac-stop-time stop-time com-flex-center'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
+    <view class='icon-view' style='background:#f02b2b;'>抢</view>限时抢订活动距结束{{timerList[currentTabActive][0]}}天
+    <text>{{filter.doubleNum(timerList[currentTabActive][1])}}</text>: 
+    <text>{{filter.doubleNum(timerList[currentTabActive][2])}}</text>:
+    <text>{{filter.doubleNum(timerList[currentTabActive][3])}}</text>
   </view>
 
 
@@ -175,9 +191,9 @@
   </scroll-view>
   </view>
   
-  <view class='tab-cont'>
+  <!-- <view class='tab-cont'>
     <view class='tab-view {{tabSwitch=="1"?"tab-view1":"teb-view4"}}'>
-      <!-- avtiveGoods.length == 0?"tab-view3":"teb-view4" -->
+      avtiveGoods.length == 0?"tab-view3":"teb-view4"
       <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>全部商品</view>
       <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>正在抢订</view>
       <view class='stop-time'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
@@ -187,7 +203,7 @@
         <text>{{filter.doubleNum(timerList[currentTabActive][3])}}</text>
       </view>
     </view>
-  </view>
+  </view> -->
   <view wx:if="{{!tabSwitchShow}}" class="swiper-tab" id='swiper-tab'>
     <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
       <view></view>
