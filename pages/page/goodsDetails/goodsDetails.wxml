@@ -251,8 +251,7 @@
           <text wx:if='{{differMoney>0}}'>全场金额差<text>{{differMoney}}</text>元可享受批发价</text>
         </view>
         <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount>0 && differNum>0}}'>
-          <text>本品差<text>{{differNum}}</text>件 全场金额差
-          <text>{{differMoney}}</text>元 可享受批发价</text>
+          <text>本品差<text>{{differNum}}</text>件 全场金额差<text>{{differMoney}}</text>元 可享受批发价</text>
         </view>
         <view class='gd-top'>
           <view class='gdclose-box' bindtap='closeAlert'>
@@ -445,8 +444,7 @@
         <view class='weui-bottom lt-weui-bottom lt-weui-bottom1' wx:if="{{editCode}}">
           <view>
             <view>￥{{totalPrice}}</view>
-            <text>共<text>{{classNums}}</text>种
-            <text>{{nums}}</text>件商品</text>
+            <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
           </view>
           <view data-status='0' bindtap='moreAddCart'>确认修改</view>
         </view>
@@ -543,8 +541,7 @@
           <view>
             <view wx:if='{{discountShow==true}}'>￥{{totalPrice}}</view>
             <view wx:if='{{discountShow==false}}'>￥{{newTotal}}</view>
-            <text>共<text>{{classNums}}</text>种
-            <text>{{nums}}</text>件商品</text>
+            <text>共<text>{{classNums}}</text>种<text>{{nums}}</text>件商品</text>
           </view>
           <view data-status='0' data-attr="{{goodsSpecificationVOList.length==0?'small':'more'}}" data-status='0' bindtap='moreAddCart'>确认修改</view>
         </view>
