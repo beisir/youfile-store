@@ -203,6 +203,10 @@ import {
   addGoodsToZoneUrl,
   delGoodsToZoneUrl,
   apiShowAllZoneUrl,
+  getUserInfoAdminUrl,
+  // 商户资质
+  merchantClassOneUrl,
+  merchantClassTwoUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1296,7 +1300,25 @@ function apiShowAllZone(data) {
   return app.http.getRequest(apiShowAllZoneUrl, data)
 }
 
+/***
+ * 商户资质
+ */
+function getUserInfoAdmin(data){
+  return app.http.getRequest(getUserInfoAdminUrl, data);
+}
+// 一级二级分类列表
+function merchantClassOne(data) {
+  return app.http.getRequest(merchantClassOneUrl, data);
+}
+function merchantClassTwo(data) {
+  return app.http.getRequest(merchantClassTwoUrl, data);
+}
+
+
 module.exports = {
+  merchantClassOne,
+  merchantClassTwo,
+  getUserInfoAdmin,
   apiShowAllZone,
   delGoodsToZone,
   addGoodsToZone,

@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/merchantCA/commonMsg/commonMsg",
+    "pages/merchantCA/merchantType/merchantType",
+    "pages/page/userM/userM",
     "pages/page/home/home",
     "pages/admin/status/status",
     "pages/goodsZone/allotZone/allotZone",
@@ -115,7 +118,6 @@
     "pages/businessFriend/information/information",
     "pages/businessFriend/invitation/invitation",
     "pages/cloudOrder/orderDetail/orderDetail",
-    "pages/page/userM/userM",
     "pages/page/editStoreAddress/editStoreAddress",
     "pages/page/main/main",
     "pages/page/cost/cost",

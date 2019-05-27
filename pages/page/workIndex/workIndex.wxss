@@ -13,3 +13,7 @@
 .wx-bot-cont>view view:first-child{width:50rpx;height:50rpx;margin:0 auto;padding-bottom:10rpx}
 .isStoreOwer{position: fixed;width: 100%;height: 100%;top: 0;left: 0;background: #F7F7F7;z-index:9999;}
 .fun-title{height: 80rpx;line-height: 80rpx;padding-left: 35rpx;font-size: 30rpx;font-family: 'STSong';font-weight: 600;border-bottom: 1rpx solid #eee;}
+/* 公告 */
+.tips-box{height: 100rpx;background: #fdfced;}
+.tip-item{color: #e5723a;font-size: 30rpx;height: 100rpx;font-weight: 600;font-family:STHeiti;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;padding: 0 20rpx;}
+.tip-icon{height: 30rpx;width: 30rpx;padding-right: 20rpx;}

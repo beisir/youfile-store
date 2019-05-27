@@ -10,6 +10,16 @@
     <view>{{todaySaleNum==null?0.00:todaySaleNum}}</view>
     <image mode='widthFix' bindtap='goDerm' src='/image/xcx2.png'></image>
   </view>
+  <!-- 公告  hidden="{{merchantCA}}"-->
+  <view class='tips-box'>
+    <navigator url='../userM/userM' class='tip-item com-flex-between'>
+      <view class='com-flex-center'>
+        <image src='/image/notice-icon.png' class='tip-icon'></image>
+        <text>完善资质信息后，可开通线上支付，去完善</text>
+      </view>
+      <image src='/image/ca-you.png' class='tip-icon'></image>
+    </navigator>
+  </view>
   <!-- ../follow/follow -->
   <view class='wk-bot'>
     <navigator url='../../businessFriend/merchant/follow/follow'>{{followNum==null?0:followNum}}

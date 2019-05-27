@@ -69,6 +69,7 @@ export const recentGoodsUrl='/api/shop/store/{{storeId}}/user/goods/recent'
 export const updateClassUrl='/admin/shop/customcategory/update'
 export const getStoreDataUrl='/api/store/owner/{{userId}}'
 export const getUserInfoUrl = '/api/user/byuserid'
+export const getUserInfoAdminUrl = '/admin/user/byuserid'
 export const getStoreNatureUrl ='/api/store/nature/{{storeId}}'
 // 批发商管理信息
 export const indexUrl = '/admin/purchasermerchant/index'
@@ -250,3 +251,6 @@ export const editZoneUrl = '/admin/goods/zone/{{zoneNumber}}/update'
 export const addGoodsToZoneUrl = '/admin/goods/zone/relation/{{zoneNumber}}/batch/add'
 export const delGoodsToZoneUrl = '/admin/goods/zone/relation/{{zoneNumber}}/batch/del'
 export const apiShowAllZoneUrl = '/api/goods/zone/{{storeId}}/on/list'
+// 商户资质
+export const merchantClassOneUrl = '/admin/industry/top'  // 一级分类
+export const merchantClassTwoUrl = '/admin/industry/{{parentCode}}/next'  // 一级分类

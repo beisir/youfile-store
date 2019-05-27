@@ -17,7 +17,8 @@ Page({
     isStoreOwerShow: false,
     loadOnece: false,
     unshippedPurchaseOrders: 0,
-    payPurchaseOrders: 0
+    payPurchaseOrders: 0,
+    merchantCA: true
   },
   // 页面跳转
   goUser: function() {
@@ -86,6 +87,7 @@ Page({
           todaySaleNum: obj.todaySaleNum == null ? 0 : (obj.todaySaleNum).toFixed(2),
           unshippedOrders: obj.unshippedOrders,
           verifyFriends: obj.verifyFriends,
+          merchantCA: obj.isEntryComplete
         })
       })
   },

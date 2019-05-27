@@ -1,0 +1,10 @@
+<view class='type-item com-flex-between'>
+  <view class='com-flex-center'>
+    <image class='title-icon' src='/image/poster-title.png'></image>
+    <view>
+      <view class='catitle'>个体</view>
+      <view class='des'>业务办理</view>
+    </view>
+  </view>
+  <image class='right-icon' src='/image/poster-right-in.png'></image>
+</view>

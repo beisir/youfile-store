@@ -1,45 +1,20 @@
-// pages/page/manageM/manageM.js
-import Api from '../../../utils/api.js';
-const app = getApp();
+// pages/merchantCA/merchantType/merchantType.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    globalData: app.globalData,
-  },
 
-  getData(){
-    Api.getUserInfoAdmin().then(res=>{
-        if(res.success){
-          this.setData({
-            user:res.obj
-          })
-        }
-    })
-  },  
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getData();
-    this.setData({
-      baseUrl: app.globalData.imageUrl
-    })
+
   },
-  goHome: function () {
-    wx.switchTab({
-      url: '../../page/home/home'
-    })
-  },
-  //打电话
-  tel: function () {
-    wx.makePhoneCall({
-      phoneNumber: app.globalData.servesPhone
-    })
-  },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -51,6 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+
   },
 
   /**
@@ -81,4 +57,10 @@ Page({
 
   },
 
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  }
 })

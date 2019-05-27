@@ -1,0 +1,17 @@
+<view class='common-form-item {{noborder?"noborder":""}}'>
+  <view class='com-flex-center content-box'>
+    <view class='form-title'>{{item.name}}</view>
+    <view class='form-content'>
+      <!-- 输入框 -->
+      <input wx:if="{{!item.type}}" maxlength='{{item.maxlength?item.maxlength:-1}}' class='flex-one' placeholder-class='input-placeholder-common-color' disabled='{{item.disabled}}' value='{{item.value}}' placeholder='请输入{{item.name}}' bindinput='watchInput' data-index='{{index}}'></input>
+      <!-- 选择框 -->
+      <picker wx:if="{{item.type=='select'}}" class='flex-one' range="{{item.selectData}}" bindchange='pickerChange' data-index='{{index}}' range-key='name'>
+        <text wx:if="{{item.value}}">{{item.selectData[item.value].name}}</text>
+        <text class='input-placeholder-common-color' wx:else>请选择{{item.name}}</text>
+      </picker>
+    </view>
+  </view>
+  <image wx:if="{{item.type=='select'}}" class='right-icon' src='/image/poster-right-in.png'></image>
+</view>
+
+<view></view>

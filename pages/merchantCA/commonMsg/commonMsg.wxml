@@ -1,0 +1,53 @@
+<image class='' style='height:160rpx;'></image>
+<!-- 第一步 -->
+<view>
+  <view class='common-box'>
+    <view class='step-title'>
+      <view class='step-tip'>
+        <text>01</text>
+      </view>基本信息
+    </view>
+    <block wx:for='{{oneList}}' wx:key='{{index}}' wx:if="{{index<5}}">
+      <formItem index='{{index}}' outer-class='no-border' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' noborder='{{index==4}}'></formItem>
+    </block>
+  </view>
+
+
+  <view class='common-box'>
+    <block wx:for='{{oneList}}' wx:key='{{index}}' wx:if="{{index>=5 && index<=7 }}">
+      <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput'  noborder='{{index==7}}'></formItem>
+    </block>
+  </view>
+
+  <view class='common-box'>
+    <block wx:for='{{oneList}}' wx:key='{{index}}' wx:if="{{index>=8 && index<=10 }}">
+      <formItem index='{{index}}' item='{{item}}' class='form-item' bindpickerChange='pickerChange' bindwatchInput='watchInput' noborder='{{index==10}}'></formItem>
+    </block>
+  </view>
+
+  <view class='common-box'>
+    <block wx:for='{{oneList}}' wx:key='{{index}}' wx:if="{{index>=11}}">
+      <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' noborder='{{index==14}}'></formItem>
+    </block>
+  </view>
+
+  <button bindtap='toTwo' class='own-btn'>下一步</button>
+</view>
+
+
+<!-- 第二步 -->
+<view>
+  <view class='common-box'>
+    <view class='step-title'>
+      <view class='step-tip'>
+        <text>02</text>
+      </view>商户资质
+    </view>
+    <view>
+      <block wx:for='{{twoList}}' wx:key='{{index}}'>
+        <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput'></formItem>
+      </block>
+    </view>
+  </view>    
+
+</view>
