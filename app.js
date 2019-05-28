@@ -1,7 +1,7 @@
 import http from './utils/http.js'
 import pageRequest from './utils/pageRequest.js'
 import AuthHandler from './utils/authHandler.js'
-import { imageUrl, payUrl, projectName, payAppNum, projectType, servesPhone, navigateToAppID} from './utils/const.js'
+import { imageUrl, imageUrlSafe, payUrl, projectName, payAppNum, projectType, servesPhone, navigateToAppID} from './utils/const.js'
 import touch from './utils/touch.js'
 import Navigate from "./utils/navigate.js"
 App({
@@ -81,6 +81,7 @@ App({
     userInfo: null,
     skin: "normal",
     imageUrl: imageUrl,
+    imageUrlSafe: imageUrlSafe,
     switchStore: false,
     isFollow: null,
     projectType,

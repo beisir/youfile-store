@@ -207,6 +207,14 @@ import {
   // 商户资质
   merchantClassOneUrl,
   merchantClassTwoUrl,
+  getAddressMesUrl,
+  imagesignUpUrl,
+  bankListUrl,
+  subBankListUrl,
+  merchantBaseMsgUrl,
+  merchantCAMsgUrl,
+  merchantSettleMsgUrl,
+  merchantDeatailUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1313,9 +1321,43 @@ function merchantClassOne(data) {
 function merchantClassTwo(data) {
   return app.http.getRequest(merchantClassTwoUrl, data);
 }
-
+function getAddressMes(data){
+  return app.http.getRequest(getAddressMesUrl, data); 
+}
+//图片签名
+function imagesignUp(data){
+  return app.http.getRequest(imagesignUpUrl, data); 
+}
+// 总行列表
+function getbankList(data){
+  return app.http.getRequest(bankListUrl, data); 
+}
+function getSubBankList(data){
+  return app.http.getRequest(subBankListUrl, data); 
+}
+// 存信息
+function merchantBaseMsg(data) {
+  return app.http.putRequest(merchantBaseMsgUrl, data);
+}
+function merchantCAMsg(data) {
+  return app.http.postRequest(merchantCAMsgUrl, data);
+}
+function merchantSettleMsg(data) {
+  return app.http.postRequest(merchantSettleMsgUrl, data);
+}
+function merchantDeatail(data){
+  return app.http.getRequest(merchantDeatailUrl, data); 
+}
 
 module.exports = {
+  merchantDeatail,
+  merchantBaseMsg,
+  merchantCAMsg,
+  merchantSettleMsg,
+  getSubBankList,
+  getbankList,
+  imagesignUp,
+  getAddressMes,
   merchantClassOne,
   merchantClassTwo,
   getUserInfoAdmin,

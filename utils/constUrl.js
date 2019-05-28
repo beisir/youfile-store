@@ -253,4 +253,12 @@ export const delGoodsToZoneUrl = '/admin/goods/zone/relation/{{zoneNumber}}/batc
 export const apiShowAllZoneUrl = '/api/goods/zone/{{storeId}}/on/list'
 // 商户资质
 export const merchantClassOneUrl = '/admin/industry/top'  // 一级分类
-export const merchantClassTwoUrl = '/admin/industry/{{parentCode}}/next'  // 一级分类
+export const merchantClassTwoUrl = '/admin/industry/{{parentCode}}/next'  // 
+export const getAddressMesUrl = '/admin/district/parentcode'
+export const imagesignUpUrl = '/base/image/sign' // 图片签名
+export const bankListUrl = '/admin/headbank/list' //总行
+export const subBankListUrl = '/admin/subbank/{{headBankCode}}/list'  //支行
+export const merchantBaseMsgUrl = '/admin/merchant'   // 保存基本信息
+export const merchantCAMsgUrl = '/admin/merchant/qualification'   // 保存基本信息
+export const merchantSettleMsgUrl = '/admin/merchant/settle'   // 保存基本信息
+export const merchantDeatailUrl = '/admin/merchant/detail' //获取信息

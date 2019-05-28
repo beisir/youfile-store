@@ -1,6 +1,8 @@
-<image class='' style='height:160rpx;'></image>
+<image wx:if="{{nowStep == 1}}" src='/image/merchantCA-step1.png' class='top-img'></image>
+<image wx:if="{{nowStep == 2}}" src='/image/merchantCA-step2.png' class='top-img'></image>
+<image wx:if="{{nowStep == 3}}" src='/image/merchantCA-step3.png' class='top-img'></image>
 <!-- 第一步 -->
-<view>
+<view wx:if="{{nowStep == 1}}">
   <view class='common-box'>
     <view class='step-title'>
       <view class='step-tip'>
@@ -11,43 +13,102 @@
       <formItem index='{{index}}' outer-class='no-border' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' noborder='{{index==4}}'></formItem>
     </block>
   </view>
-
-
   <view class='common-box'>
     <block wx:for='{{oneList}}' wx:key='{{index}}' wx:if="{{index>=5 && index<=7 }}">
       <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput'  noborder='{{index==7}}'></formItem>
     </block>
   </view>
-
   <view class='common-box'>
     <block wx:for='{{oneList}}' wx:key='{{index}}' wx:if="{{index>=8 && index<=10 }}">
       <formItem index='{{index}}' item='{{item}}' class='form-item' bindpickerChange='pickerChange' bindwatchInput='watchInput' noborder='{{index==10}}'></formItem>
     </block>
   </view>
-
   <view class='common-box'>
     <block wx:for='{{oneList}}' wx:key='{{index}}' wx:if="{{index>=11}}">
       <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' noborder='{{index==14}}'></formItem>
     </block>
   </view>
-
   <button bindtap='toTwo' class='own-btn'>下一步</button>
 </view>
 
 
 <!-- 第二步 -->
-<view>
+<view wx:if="{{nowStep == 2}}">
   <view class='common-box'>
     <view class='step-title'>
       <view class='step-tip'>
         <text>02</text>
       </view>商户资质
     </view>
-    <view>
-      <block wx:for='{{twoList}}' wx:key='{{index}}'>
-        <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput'></formItem>
+    <!-- 个人 -->
+    <block wx:for='{{twoList}}' wx:key='{{index}}' wx:if="{{merchantType == 1 && index<=2}}">
+      <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
+    </block>
+    <!-- 个体 -->
+    <block wx:for='{{twoList}}' wx:key='{{index}}' wx:if="{{merchantType == 2 && index<=3}}">
+      <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
+    </block>
+    <!-- 企业 -->
+    <block wx:for='{{twoList}}' wx:key='{{index}}' wx:if="{{merchantType == 3 && index<=1}}">
+      <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
+    </block>
+  </view>
+  <!-- 个人 -->
+  <block wx:if='{{merchantType == 1}}'>
+    <view class='common-box' wx:for='{{[3,4,5,6,7]}}' wx:for-item='indexnum' wx:key='{{indexnum}}'>
+      <block wx:for='{{twoList}}' wx:key='{{index}}' wx:if="{{index==indexnum}}">
+        <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
       </block>
     </view>
-  </view>    
+  </block>
+  <!-- 个体 -->
+  <block wx:if='{{merchantType == 2}}'>
+    <view class='common-box' wx:for='{{[4,5,6,7,8,9]}}' wx:for-item='indexnum' wx:key='{{indexnum}}'>
+      <block wx:for='{{twoList}}' wx:key='{{index}}' wx:if="{{index==indexnum}}">
+        <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
+      </block>
+    </view>
+  </block>
+  <!-- 企业 -->
+  <block wx:if='{{merchantType == 3}}'>
+    <view class='common-box' wx:for='{{[2,3]}}' wx:for-item='indexnum' wx:key='{{indexnum}}'>
+      <block wx:for='{{twoList}}' wx:key='{{index}}' wx:if="{{index==indexnum}}">
+        <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
+      </block>
+    </view>
 
+    <view class='common-box'>
+      <block wx:for='{{twoList}}' wx:key='{{index}}' wx:if="{{index>=4 && index<=6}}">
+        <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
+      </block>
+    </view>
+    <view class='common-box' wx:for='{{[7,8,9,10,11]}}' wx:for-item='indexnum' wx:key='{{indexnum}}'>
+      <block wx:for='{{twoList}}' wx:key='{{index}}' wx:if="{{index==indexnum}}">
+        <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
+      </block>
+    </view>
+  </block>
+  <button bindtap='toThree' class='own-btn'>下一步</button>
+</view>
+
+<!-- 第三步 -->
+<view wx:if="{{nowStep == 3}}">
+  <view class='common-box'>
+    <view class='step-title'>
+      <view class='step-tip'>
+        <text>03</text>
+      </view>商户结算信息
+    </view>
+    <block wx:for='{{threeList}}' wx:key='{{index}}' wx:if="{{index<=6}}">
+      <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' bindclickItem='clickItem'></formItem>
+    </block>
+  </view>
+  <block wx:if='{{merchantType == 1 || merchantType == 2}}'>
+    <view class='common-box' wx:for='{{[7,8]}}' wx:for-item='indexnum' wx:key='{{indexnum}}'>
+      <block wx:for='{{threeList}}' wx:key='{{index}}' wx:if="{{index==indexnum}}">
+        <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' binduploadImg='uploadImg'></formItem>
+      </block>
+    </view>
+  </block>
+  <button bindtap='submit' class='own-btn'>确认提交</button>
 </view>

@@ -1,0 +1,8 @@
+.search-box{background: #f7f7f7;padding-right: 50rpx;height: auto;}
+.serCont{color: #333;font-size: 28rpx;padding-top: 25px;margin-left: 40rpx;}
+.search-input{background: #fff;height: 95rpx;line-height: 95rpx;margin-top:20rpx;}
+.home-ser-new{width: 50rpx;height: 50rpx;top: 47rpx;}
+.shop-cont{margin-top: 40rpx;}
+.list-box{border-radius: 10rpx;background: #fff;margin: 20rpx;}
+.list-box .list-item:last-child{border: 0;}
+.list-item{height: 80rpx;padding:  0 30rpx;border-bottom: 1rpx solid #ddd;}

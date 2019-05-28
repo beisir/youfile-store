@@ -1,5 +1,6 @@
 export const baseUrl = 'https://dev-store.youlife.net.cn'
 export const imageUrl = 'https://dev-image.youlife.net.cn/'
+export const imageUrlSafe = 'https://dev-image-safe.youlife.net.cn/'
 export const basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnREZXY6YWIwMjE0MjhmMDZiZGQ2MzMwMzhiNWEzYzhmOTQxOWE=';
 export const uploadImg = 'https://dev-store.youlife.net.cn/base/image'
 export const payUrl = "https://dev-pay.youlife.net.cn/api/pay"
@@ -8,6 +9,7 @@ export const authUrl = "https://dev-accounts.youlife.net.cn"
 
 // export const baseUrl = 'https://beta-store.youlife.net.cn'
 // export const imageUrl = 'https://beta-image.youlife.net.cn/'
+// export const imageUrlSafe = 'https://beta-image-safe.youlife.net.cn/'
 // export const basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnRCYXRhOjlhZDRiZmUxMzcyZWJhMjFjZTg3MDViYWMwNjJiOGY3';
 // export const uploadImg = 'https://beta-store.youlife.net.cn/base/image'
 // export const payUrl = "https://beta-pay.youlife.net.cn/api/pay"
@@ -19,6 +21,7 @@ export const authUrl = "https://dev-accounts.youlife.net.cn"
 // export const payUrl = "https://pay.youlife.net.cn/api/pay"
 // export const baseUrl = 'https://store.youlife.net.cn'
 // export const imageUrl = 'https://image.youlife.net.cn/'
+// export const imageUrlSafe = 'https://image-safe.youlife.net.cn/'
 // export const basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=';
 // export const uploadImg = 'https://store.youlife.net.cn/base/image'
 // export const authUrl = "https://accounts.youlife.net.cn"

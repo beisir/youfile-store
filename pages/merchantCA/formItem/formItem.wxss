@@ -7,3 +7,8 @@
 .gold-font{color: #ca7;}
 .input-placeholder-common-color{color: #999;}
 .noborder{border: 0;}
+.upload-img-box{padding: 40rpx 30rpx;}
+.upload-img-icon{width: 240rpx;height: 150rpx;}
+.flex-center{display: flex;justify-content: space-between;}
+.upload-title{font-size: 32rpx;font-weight: 600;}
+.upload-des{font-size: 28rpx;color: #c0bfc0;}
