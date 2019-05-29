@@ -1,0 +1,10 @@
+/* pages/merchantCA/auditStatus/auditStatus.wxss */
+.com-box{position:relative;margin: 20rpx;background: #fff;border-radius: 10rpx;font-size: 30rpx;color: #333;}
+.own-title{font-size: 36rpx;font-weight: 600;}
+.status{padding: 15rpx 0 ;font-weight: 600;}
+.time{font-weight: 500;}
+.des-title{color: #999;padding: 20rpx 0 10rpx;}
+.des-msg{font-weight: 600;}
+.btn-box{height: 100rpx;border-top: 1rpx solid #eee;display: flex;align-items: center;flex-direction: row-reverse;margin: 0 30rpx;}
+.btn{width: 160rpx;height: 60rpx;background: #ca7;color: #fff;border-radius: 10rpx;text-align: center;line-height: 60rpx;font-size: 24rpx;}
+.status-img{position: absolute;width: 127rpx;height: 110rpx;right: 30rpx;top:20rpx;}

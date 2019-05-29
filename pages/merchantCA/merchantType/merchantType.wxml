@@ -1,10 +1,11 @@
-<view class='type-item com-flex-between'>
-  <view class='com-flex-center'>
-    <image class='title-icon' src='/image/poster-title.png'></image>
-    <view>
-      <view class='catitle'>个体</view>
-      <view class='des'>业务办理</view>
+<!-- 1、个人；2；个体；3；企业 -->
+<navigator class='type-item com-flex-between' wx:for='{{list}}' wx:key='{{index}}' url='../commonMsg/commonMsg?merchantType={{item.type}}'>
+  <view class='com-flex-center' style='flex:1;'>
+    <image class='title-icon' src='{{item.url}}'></image>
+    <view style='flex:1;'>
+      <view class='catitle'>{{item.name}}</view>
+      <view class='des'>{{item.des}}</view>
     </view>
   </view>
   <image class='right-icon' src='/image/poster-right-in.png'></image>
-</view>
+</navigator>

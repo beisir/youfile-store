@@ -10,12 +10,13 @@
     <view>{{todaySaleNum==null?0.00:todaySaleNum}}</view>
     <image mode='widthFix' bindtap='goDerm' src='/image/xcx2.png'></image>
   </view>
-  <!-- 公告  hidden="{{merchantCA}}"-->
-  <view class='tips-box'>
+  <view class='tips-box' wx:if="{{!auditStatus || auditStatus=='init' || auditStatus=='fail'}}">
     <navigator url='../userM/userM' class='tip-item com-flex-between'>
       <view class='com-flex-center'>
         <image src='/image/notice-icon.png' class='tip-icon'></image>
-        <text>完善资质信息后，可开通线上支付，去完善</text>
+        <text wx:if="{{!auditStatus}}">完善资质信息后，可开通线上支付，去完善</text>
+        <text wx:if="{{auditStatus=='init'}}">开通线上支付资质信息正在审核中，请耐心等待~</text>
+        <text wx:if="{{auditStatus=='fail'}}">开通线上支付资质信息审核未通过，查看原因</text>
       </view>
       <image src='/image/ca-you.png' class='tip-icon'></image>
     </navigator>

@@ -3,7 +3,7 @@
   <view class='upload-title'>{{item.name}}</view>
   <view class='upload-des'>上传您的{{item.name}}</view>
 </view>  
-<image wx:if="{{item.imgUrl}}" mode='aspectFit' src='{{item.value?baseUrl+item.value:item.imgUrl}}' class='upload-img-icon'></image>
+<image wx:if="{{item.imgUrl}}" mode='aspectFit' src='{{item.showUrl?baseUrl+item.showUrl:item.imgUrl}}' class='upload-img-icon'></image>
 </view>
 <view wx:else class='common-form-item {{noborder?"noborder":""}}'>
   <view class='com-flex-center content-box'>
@@ -13,7 +13,7 @@
       <input wx:if="{{!item.type}}" maxlength='{{item.maxlength?item.maxlength:-1}}' class='flex-one' placeholder-class='input-placeholder-common-color' disabled='{{item.disabled}}' value='{{item.value}}' placeholder='请输入{{item.name}}' bindinput='watchInput' data-index='{{index}}' type='{{item.inputType?item.inputType:"text"}}'></input>
       <!-- 选择框 -->
       <picker wx:if="{{item.type=='select'}}" class='flex-one' range="{{item.selectData}}" bindchange='pickerChange' data-index='{{index}}' range-key='name'>
-        <text wx:if="{{item.value}}">{{item.selectData[item.value].name}}</text>
+        <text wx:if="{{item.value || item.value === 0}}">{{item.selectData[item.value].name}}</text>
         <text class='input-placeholder-common-color' wx:else>请选择{{item.name}}</text>
       </picker>
     </view>

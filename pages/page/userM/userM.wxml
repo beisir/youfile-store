@@ -31,14 +31,16 @@
     </view>
     <view class='weui-xian weui-xian1'></view>
   </navigator>  
-  <navigator url='../../merchantCA/merchantType/merchantType'>
+  <view bindtap='merchantTo'>
     <text class="store-address">商户认证</text>
     <view class='weui-view'>
-      <text class='gold-font'>已认证</text>
+      <text wx:if="{{user.auditStatus === 'success' }}" class='gold-font'>已认证</text>
+      <text wx:if="{{!user.auditStatus}}" class='gold-font'>未认证</text>
+      <text wx:if="{{user.auditStatus === 'init' }}" class='gold-font'>认证中</text>
       <image class='img' src="/image/icl.png"></image>
     </view>
     <view class='weui-xian weui-xian1'></view>
-  </navigator>
+  </view>
   <navigator url='../../businessFriend/merchant/setUp/setUp'>
     <text class="store-address">商友权限</text>
     <view class='weui-view'>

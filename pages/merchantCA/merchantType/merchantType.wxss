@@ -3,4 +3,4 @@
 .title-icon{height:113rpx;width: 113rpx;margin-right: 36rpx;}
 .right-icon{width: 16rpx;height: 30rpx;}
 .catitle{font-size: 42rpx;font-weight: 600;color: #333;margin-bottom: 15rpx;}
-.des{color: #666;font-size: 26rpx;}
+.des{color: #666;font-size: 26rpx;padding-right: 20rpx;}

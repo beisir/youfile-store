@@ -1,10 +1,11 @@
 {
   "pages": [
-    "pages/merchantCA/commonMsg/commonMsg",
-    "pages/merchantCA/bankList/bankList",
     "pages/page/home/home",
+    "pages/merchantCA/auditStatus/auditStatus",
     "pages/merchantCA/merchantType/merchantType",
+    "pages/merchantCA/commonMsg/commonMsg",
     "pages/page/userM/userM",
+    "pages/merchantCA/bankList/bankList",
     "pages/admin/status/status",
     "pages/goodsZone/allotZone/allotZone",
     "pages/admin/batch/batch",

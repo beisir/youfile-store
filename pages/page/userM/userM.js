@@ -19,12 +19,40 @@ Page({
         }
     })
   },  
+  merchantTo(){
+    if(!this.data.user){return}
+    let data = this.data.user
 
+    if(data.auditStatus){
+      wx.navigateTo({
+        url: '../../merchantCA/auditStatus/auditStatus',
+      })
+    } else {
+      if (data.entryStepNo){
+        let step = 1
+        switch (data.entryStepNo){
+          case 'step_one': step =2;break;
+          case 'step_two': step =3;break;
+          case 'step_last': 
+            wx.navigateTo({
+              url: '../../merchantCA/auditStatus/auditStatus',
+            })
+          break;
+        }
+        wx.navigateTo({
+          url: '../../merchantCA/commonMsg/commonMsg?merchantType='+data.merchantCharacter+'&step='+step,
+        })
+      } else {
+        wx.navigateTo({
+          url: '../../merchantCA/merchantType/merchantType',
+        })
+      }
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getData();
     this.setData({
       baseUrl: app.globalData.imageUrl
     })
@@ -51,6 +79,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getData();
   },
 
   /**
