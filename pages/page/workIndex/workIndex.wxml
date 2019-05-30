@@ -17,6 +17,7 @@
         <text wx:if="{{!auditStatus}}">完善资质信息后，可开通线上支付，去完善</text>
         <text wx:if="{{auditStatus=='init'}}">开通线上支付资质信息正在审核中，请耐心等待~</text>
         <text wx:if="{{auditStatus=='fail'}}">开通线上支付资质信息审核未通过，查看原因</text>
+        <!-- <text wx:if="{{auditStatus=='success'}}">恭喜您~您已开通线上支付服务，点击查看</text> -->
       </view>
       <image src='/image/ca-you.png' class='tip-icon'></image>
     </navigator>

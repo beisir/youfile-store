@@ -13,10 +13,13 @@
     <view class='des-msg'>
       <text wx:if="{{message.auditStatus == 'init'}}">我们会尽快为您审核您的资质信息</text>
       <text wx:if="{{message.auditStatus == 'success'}}">恭喜您审核通过，您已开通在线支付功能</text>
-      <text wx:if="{{message.auditStatus == 'fail'}}">{{message.auditRemark?message.auditRemark:''}}</text>
+      <text wx:if="{{message.auditStatus == 'fail'}}" style='color:#f11111'>{{message.auditRemark?message.auditRemark:''}}</text>
     </view>
   </view>
   <view class='btn-box' wx:if="{{message.auditStatus == 'fail' || message.auditStatus == 'success'}}">
-    <view class='btn' bindtap='toDetail'>查看详情</view>
+    <view class='btn' bindtap='toDetail'>
+      <text wx:if="{{message.auditStatus == 'success'}}">查看详情</text>
+      <text wx:if="{{message.auditStatus == 'fail'}}">修改提交</text>
+    </view>
   </view>
 </view>
