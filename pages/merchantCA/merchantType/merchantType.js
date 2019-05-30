@@ -12,16 +12,16 @@ Page({
       type: '3',
       url: '/image/merchant-qy.png',
       des: '企业组织商户认证，优先审核开通在线支付服务，需要提供企业营业执照等资质；'
-    },{
-      name: '个人',
-      type: '1',
-      url: '/image/merchant-gr.png',
-      des: '个人商户认证，申请开通在线支付服务，需要提供个人身份证等资质；'
-    },{
+    }, {
       name: '个体',
       type: '2',
       url: '/image/merchant-gt.png',
       des: '个体工商户认证，优先审核开通在线支付服务，需要提供个体营业执照等资质；'
+    }, {
+      name: '个人',
+      type: '1',
+      url: '/image/merchant-gr.png',
+      des: '个人商户认证，申请开通在线支付服务，需要提供个人身份证等资质；'
     }]
   },
 

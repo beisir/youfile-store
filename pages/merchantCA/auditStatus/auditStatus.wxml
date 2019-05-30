@@ -2,13 +2,13 @@
   <image wx:if="{{message.auditStatus == 'fail'}}" src='/image/nopass-icon.png' class='status-img'></image>
   <image wx:if="{{message.auditStatus == 'success'}}" src='/image/pass-icon.png' class='status-img'></image>
   <view style='padding:20rpx 30rpx 50rpx;'>
-    <view class='own-title'>七月家具</view>
+    <view class='own-title'>{{message.merchantVO.merchantName}}</view>
     <view class='status'>
       <text wx:if="{{message.auditStatus == 'init'}}" style='color:#ff9900'>信息审核中</text>
       <text wx:if="{{message.auditStatus == 'success'}}" style='color:#ccaa77'>审核通过</text>
       <text wx:if="{{message.auditStatus == 'fail'}}" style='color:#f11111'>审核未通过</text>
     </view>
-    <view class='time'>审核时间：{{message.auditTime}}</view>
+    <view class='time' wx:if="{{message.auditTime}}">审核时间：{{message.auditTime}}</view>
     <view class='des-title'>审核详细信息</view>
     <view class='des-msg'>
       <text wx:if="{{message.auditStatus == 'init'}}">我们会尽快为您审核您的资质信息</text>

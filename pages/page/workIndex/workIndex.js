@@ -17,7 +17,8 @@ Page({
     isStoreOwerShow: false,
     loadOnece: false,
     unshippedPurchaseOrders: 0,
-    payPurchaseOrders: 0
+    payPurchaseOrders: 0,
+    auditStatus:true
   },
   // 页面跳转
   goUser: function() {

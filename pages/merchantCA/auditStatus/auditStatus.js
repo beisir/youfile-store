@@ -11,7 +11,11 @@ Page({
   },
   getDetail() {
     Api.merchantDeatail().then(res => {
-      res.obj.auditTime = formatTimeday(new Date(res.obj.auditTime))
+      if (res.obj.auditTime){
+        res.obj.auditTime = formatTimeday(new Date(res.obj.auditTime))
+      } else {
+        res.obj.auditTime = ''
+      }
       this.setData({
         message: res.obj
       })

@@ -37,12 +37,12 @@ Page({
       case 'firstCategory':
         this.getClassTwo(item.code)
         break;
-      case 'province':
-        this.clearSelect('county')
-        this.getAddressMes(item.code, 'city')
+      case 'provinceCode':
+        this.clearSelect('countyCode')
+        this.getAddressMes(item.code, 'cityCode')
         break;
-      case 'city':
-        this.getAddressMes(item.code, 'county')
+      case 'cityCode':
+        this.getAddressMes(item.code, 'countyCode')
         break;
       case 'bankProvinceCode':
         this.getAddressMes(item.code, 'bankCityCode')
@@ -55,6 +55,7 @@ Page({
   },
   watchInput(e) {
     e = e.detail
+    if (!e.currentTarget){return}
     let index = e.currentTarget.dataset.index,
       value = e.detail.value
     switch (this.data.nowStep) {
@@ -203,14 +204,35 @@ Page({
     for (let el of dataArr) {
       if (el.type === 'select' && el.value) {
         obj[el.key] = el.selectData[el.value].code
+        switch (el.key){
+          case 'provinceCode':
+            obj.province = el.selectData[el.value].name
+          break; 
+          case 'cityCode':
+            obj.city = el.selectData[el.value].name
+          break; 
+          case 'countyCode':
+            obj.county = el.selectData[el.value].name
+          break;
+          case 'bankProvinceCode': 
+            obj.bankProvince = el.selectData[el.value].name
+          break;
+          case 'bankCityCode':
+            obj.bankCity = el.selectData[el.value].name
+          break;
+        }
         continue
       }
-      obj[el.key] = el.value
-      if (obj[el.key] == '' || !obj[el.key]) {
+      if (el.value == '' || !el.value) {
         if (ex.indexOf(el.key) == -1){
           Api.showToast("请完善" + el.name)
           return false
         }
+      }
+      try{
+        obj[el.key] = el.value.replace(/\s*/g, "")
+      }catch(e){
+        obj[el.key] = el.value
       }
     }
     return obj
@@ -231,13 +253,12 @@ Page({
 
     obj.merchantType = app.globalData.projectType == 'xpl' ? 1 : 2
     Api.merchantBaseMsg(obj).then(res => {
-      
-    })
-    this.setData({
-      merchantType: obj.merchantCharacter,  // 1、个人；2；个体；3；企业
-      nowStep: 2
-    }, () => {
-      this.getTwoList()
+      this.setData({
+        merchantType: obj.merchantCharacter,  // 1、个人；2；个体；3；企业
+        nowStep: 2
+      }, () => {
+        this.getTwoList()
+      })
     })
   },
   toThree() {
@@ -256,12 +277,11 @@ Page({
 
     obj.merchantNumber = this.data.message.merchantNumber
     Api.merchantCAMsg(obj).then(res => {
-      
-    })
-    this.setData({
-      nowStep: 3
-    }, () => {
-      this.getThreeList()
+      this.setData({
+        nowStep: 3
+      }, () => {
+        this.getThreeList()
+      })
     })
   },
   submit() {
@@ -269,14 +289,18 @@ Page({
     dataArr
     let obj = this.ifEmpty(dataArr, ['subBankCode'])
     if (!obj) { return }
-    console.log(obj)
     
     //1 对公 2 对私
     obj.bankCardType = this.data.merchantType == 3 ? 1 : 2,
     obj.headBankCode = this.data.choseBank.bankCode
     obj.merchantNumber = this.data.message.merchantNumber
     Api.merchantSettleMsg(obj).then(res => {
-
+      Api.showToast(res.message)
+      setTimeout(()=>{
+        wx.redirectTo({
+          url: '../../page/userM/userM',
+        })
+      },800)
     })
   },
   // 获取省市区
@@ -302,9 +326,9 @@ Page({
         if (targetKey) {
           let reData = ''
           switch (targetKey){
-            case 'province':
-            case 'city': 
-            case 'county':
+            case 'provinceCode':
+            case 'cityCode': 
+            case 'countyCode':
             reData = this.data.message.merchantVO[targetKey]
             break;
             case 'bankProvinceCode':
@@ -361,7 +385,8 @@ Page({
     let arr = [{
       name: '商户名称',
       value: '',
-      key: "merchantName"
+      key: "merchantName",
+      maxlength: 40
     },
     {
       name: '商户编号',
@@ -372,7 +397,8 @@ Page({
     {
       name: '商户简称',
       value: '',
-      key: "merchantAbbre"
+      key: "merchantAbbre",
+      maxlength: 40
     },
     {
       name: '商户类型',
@@ -391,19 +417,21 @@ Page({
     {
       name: '联系人',
       key: 'linkman',
-      value: ''
+      value: '',
+      maxlength: 30
     },
     {
       name: '联系人电话',
       key: 'linkmanPhone',
       value: '',
-      maxlength: 11,
+      maxlength: 18,
       inputType: 'number'
     },
     {
       name: '联系人邮箱',
       key: 'linkmanEmail',
-      value: ''
+      value: '',
+      maxlength: 40
     },
     // index 8
     {
@@ -427,20 +455,20 @@ Page({
     },
     {
       name: '经营省份',
-      key: 'province',
+      key: 'provinceCode',
       value: '',
       code: '',
       type: 'select',
       selectData: this.data.province
     }, {
       name: '经营市',
-      key: 'city',
+      key: 'cityCode',
       value: '',
       code: '',
       type: 'select'
     }, {
       name: '经营区县',
-      key: 'county',
+      key: 'countyCode',
       value: '',
       code: '',
       type: 'select'
@@ -458,16 +486,16 @@ Page({
       this.setSelect('merchantCharacter', [{
         name: '企业',
         code: '3'
-      },{
-        name: '个人',
-        code: '1'
       }, {
         name: '个体',
         code: '2'
+      },{
+        name: '个人',
+        code: '1'
       }], this.data.merchantType)
-      this.getAddressMes('', 'province')
-      this.getAddressMes(data.province, 'city')
-      this.getAddressMes(data.city, 'county')
+      this.getAddressMes('', 'provinceCode')
+      this.getAddressMes(data.provinceCode, 'cityCode')
+      this.getAddressMes(data.cityCode, 'countyCode')
       this.getClassone() //一级分类
     })
   },
@@ -476,11 +504,13 @@ Page({
     let arr = [{
       name: '统一社会信用代码证号',
       key: 'unifiedCertificateNo',
-      role: '3'
+      role: '3',
+      maxlength: 30
     }, {
       name: '开户许可证编号',
       key: 'openCertificateNo',
-      role: '3'
+      role: '3',
+      maxlength: 32
     }, {
       name: '统一社会信用代码证',
       key: 'unifiedCertificateUrl',
@@ -496,21 +526,24 @@ Page({
     }, {
       name: '法人姓名',
       key: 'legalPerson',
-      role: '1,2,3'
+      role: '1,2,3',
+      maxlength: 30
     }, {
       name: '法人电话',
       key: 'legalPhone',
       role: '1,2,3',
       inputType: 'number',
-      maxlength: 11
+      maxlength: 18
     }, {
       name: '法人身份证号',
       key: 'legalIdCard',
-      role: '1,2,3'
+      role: '1,2,3',
+      maxlength: 18
     }, {
       name: '营业执照编号',
       key: 'businessLicenseNo',
-      role: '2'
+      role: '2',
+      maxlength: 30
     }, {
       name: '营业执照',
       key: 'businessLicenseUrl',
@@ -534,7 +567,7 @@ Page({
       key: 'handIdCardUrl',
       type: 'img',
       imgUrl: '/image/scsfz.png',
-      role: '1,2,3'
+      role: '1,2'
     }, {
       name: '经营场所门头照',
       key: 'storePhotoUrl',
@@ -563,7 +596,8 @@ Page({
     let arr = [{
       name: '银行账户',
       key: 'bankCard',
-      role: '1,2,3'
+      role: '1,2,3',
+      maxlength: 32
     }, {
       name: '开户卡类型',
       key: 'bankCardType',
@@ -573,12 +607,14 @@ Page({
     }, {
       name: '开户名',
       key: 'accountName',
-      role: '1,2,3'
+      role: '1,2,3',
+      maxlength: 30
     }, {
       name: '开户银行总行',
       key: 'headBankCode',
       role: '1,2,3',
-      disabled: true
+      disabled: true,
+      placeholder:'请选择开户银行总行'
     }, {
       name: '开户银行省份',
       key: 'bankProvinceCode',
@@ -691,6 +727,11 @@ Page({
       }
       if (!res.obj.merchantSettleVO){
         res.obj.merchantSettleVO = {}
+      }
+      if (res.obj.merchantVO.merchantCharacter){
+        this.setData({
+          merchantType: parseInt(res.obj.merchantVO.merchantCharacter)
+        })
       }
       this.setData({
         message: res.obj

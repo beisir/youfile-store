@@ -37,6 +37,7 @@
       <text wx:if="{{user.auditStatus === 'success' }}" class='gold-font'>已认证</text>
       <text wx:if="{{!user.auditStatus}}" class='gold-font'>未认证</text>
       <text wx:if="{{user.auditStatus === 'init' }}" class='gold-font'>认证中</text>
+      <text wx:if="{{user.auditStatus === 'fail' }}" class='gold-font'>认证失败</text>
       <image class='img' src="/image/icl.png"></image>
     </view>
     <view class='weui-xian weui-xian1'></view>
