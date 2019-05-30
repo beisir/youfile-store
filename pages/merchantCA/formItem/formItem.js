@@ -42,6 +42,7 @@ Component({
       this.triggerEvent('clickItem', {e,item:this.data.item})
     },
     uploadImg(e){
+      if (this.data.item.disabled){return}
       Api.uploadImage('MERCHANT_QUALIFICATION').then(res=>{
         var url = JSON.parse(res).obj
         this.triggerEvent('uploadImg', {url:url,index:this.data.index})

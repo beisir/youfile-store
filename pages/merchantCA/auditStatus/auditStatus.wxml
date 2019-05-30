@@ -16,7 +16,7 @@
       <text wx:if="{{message.auditStatus == 'fail'}}">{{message.auditRemark?message.auditRemark:''}}</text>
     </view>
   </view>
-  <view class='btn-box' wx:if="{{message.auditStatus == 'fail'}}">
+  <view class='btn-box' wx:if="{{message.auditStatus == 'fail' || message.auditStatus == 'success'}}">
     <view class='btn' bindtap='toDetail'>查看详情</view>
   </view>
 </view>

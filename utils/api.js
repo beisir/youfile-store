@@ -203,8 +203,8 @@ import {
   addGoodsToZoneUrl,
   delGoodsToZoneUrl,
   apiShowAllZoneUrl,
-  getUserInfoAdminUrl,
   // 商户资质
+  getUserInfoAdminUrl,
   merchantClassOneUrl,
   merchantClassTwoUrl,
   getAddressMesUrl,

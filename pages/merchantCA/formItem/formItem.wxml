@@ -12,13 +12,13 @@
       <!-- 输入框 -->
       <input wx:if="{{!item.type}}" maxlength='{{item.maxlength?item.maxlength:100}}' class='flex-one' placeholder-class='input-placeholder-common-color' disabled='{{item.disabled}}' value='{{item.value}}' placeholder='{{item.placeholder?item.placeholder:"请输入"+item.name}}' bindinput='watchInput' data-index='{{index}}' type='{{item.inputType?item.inputType:"text"}}'></input>
       <!-- 选择框 -->
-      <picker wx:if="{{item.type=='select'}}" class='flex-one' range="{{item.selectData}}" bindchange='pickerChange' data-index='{{index}}' range-key='name'>
+      <picker wx:if="{{item.type=='select'}}" disabled='{{item.disabled}}' class='flex-one' range="{{item.selectData}}" bindchange='pickerChange' data-index='{{index}}' range-key='name'>
         <text wx:if="{{item.value || item.value === 0}}">{{item.selectData[item.value].name}}</text>
         <text class='input-placeholder-common-color' wx:else>请选择{{item.name}}</text>
       </picker>
     </view>
   </view>
-  <image wx:if="{{item.type=='select' || item.key=='headBankCode'}}" class='right-icon' src='/image/poster-right-in.png'></image>
+  <image wx:if="{{item.type=='select' || item.key=='headBankCode'}}" hidden='{{item.hideIcon}}' class='right-icon' src='/image/poster-right-in.png'></image>
 </view>
 
 <view></view>

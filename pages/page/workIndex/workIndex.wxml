@@ -13,7 +13,7 @@
   <view class='tips-box' wx:if="{{!auditStatus || auditStatus=='init' || auditStatus=='fail'}}">
     <navigator url='../userM/userM' class='tip-item com-flex-between'>
       <view class='com-flex-center'>
-        <image src='/image/notice-icon.png' class='tip-icon'></image>
+        <image src='/image/tips.png' class='tip-icon'></image>
         <text wx:if="{{!auditStatus}}">完善资质信息后，可开通线上支付，去完善</text>
         <text wx:if="{{auditStatus=='init'}}">开通线上支付资质信息正在审核中，请耐心等待~</text>
         <text wx:if="{{auditStatus=='fail'}}">开通线上支付资质信息审核未通过，查看原因</text>

@@ -100,6 +100,7 @@ Page({
     })
   },
   clickItem(e) {
+    if (this.data.alreadySuccess) { return }
     if (this.data.reClick) { return }
     let item = e.detail.item
     if (item.key === "headBankCode") {
@@ -347,6 +348,10 @@ Page({
   resetList(arr,data){
     data = data?data:{}
     arr.forEach((el,index)=>{
+      if (this.data.alreadySuccess) {
+        el.disabled = true
+        el.hideIcon = true
+      }
       if(el.type === 'select'){
         if(el.selectData){
           this.setSelect(el.key, el.selectData, data[el.key])
@@ -733,6 +738,11 @@ Page({
           merchantType: parseInt(res.obj.merchantVO.merchantCharacter)
         })
       }
+      if (res.obj.auditStatus == 'success'){
+        this.setData({
+          alreadySuccess: true
+        })
+      }
       this.setData({
         message: res.obj
       }, () => {
@@ -747,6 +757,39 @@ Page({
         })
       })
     })
+  },
+  navStep(e){
+    if (!this.data.alreadySuccess) { return }
+    let step = e.currentTarget.dataset.step
+    switch (step) {
+      case '1':
+        this.setData({
+          nowStep: 1
+        }, () => {
+          if (!this.data.oneList || this.data.oneList.length == 0) {
+            this.getOneList()
+          }
+        })
+        break;
+      case '2':
+        this.setData({
+          nowStep: 2
+        }, () => {
+          if (!this.data.twoList || this.data.twoList.length == 0) {
+            this.getTwoList()
+          }
+        })
+        break;
+      case '3':
+        this.setData({
+          nowStep: 3
+        }, () => {
+          if (!this.data.threeList || this.data.threeList.length == 0) {
+            this.getThreeList()
+          }
+        })
+        break;
+    }
   },
   /**
    * 生命周期函数--监听页面加载

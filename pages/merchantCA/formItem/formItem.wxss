@@ -1,7 +1,7 @@
 .common-form-item{height: 120rpx;border-bottom: 1rpx solid #eee;display: flex;align-items: center;justify-content: space-between;padding: 0 30rpx;background: #fff;}
 .content-box{flex: 1;}
 .form-title{font-size: 30rpx;font-weight: 600;padding-right: 20rpx;min-width: 180rpx;}
-.form-content{font-size: 30rpx;flex: 1;}
+.form-content{font-size: 30rpx;flex: 1;padding-right:10rpx;}
 .right-icon{width: 16rpx;height: 30rpx;}
 .com-flex-center{display: flex;align-items: center;}.com-flex-between{display: flex;align-items: center;justify-content: space-between;}
 .gold-font{color: #ca7;}

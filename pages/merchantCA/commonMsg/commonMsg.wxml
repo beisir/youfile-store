@@ -1,6 +1,11 @@
+<view style='position:relative;'>
+<view class='nav-box' style='left:64rpx;' bindtap='navStep' data-step='1'></view>
+<view class='nav-box' style='left:0;right:0;margin:auto;' bindtap='navStep' data-step='2'></view>
+<view class='nav-box' style='right:83rpx;' bindtap='navStep' data-step='3'></view>
 <image wx:if="{{nowStep == 1}}" src='/image/merchantCA-step1.png' class='top-img'></image>
 <image wx:if="{{nowStep == 2}}" src='/image/merchantCA-step2.png' class='top-img'></image>
 <image wx:if="{{nowStep == 3}}" src='/image/merchantCA-step3.png' class='top-img'></image>
+</view>
 <!-- 第一步 -->
 <view wx:if="{{nowStep == 1}}">
   <view class='common-box'>
@@ -28,7 +33,7 @@
       <formItem index='{{index}}' item='{{item}}' bindpickerChange='pickerChange' bindwatchInput='watchInput' noborder='{{index==14}}'></formItem>
     </block>
   </view>
-  <button bindtap='toTwo' class='own-btn'>下一步</button>
+  <button hidden='{{alreadySuccess}}' bindtap='toTwo' class='own-btn'>下一步</button>
 </view>
 
 
@@ -88,7 +93,7 @@
       </block>
     </view>
   </block>
-  <button bindtap='toThree' class='own-btn'>下一步</button>
+  <button hidden='{{alreadySuccess}}' bindtap='toThree' class='own-btn'>下一步</button>
 </view>
 
 <!-- 第三步 -->
@@ -110,5 +115,7 @@
       </block>
     </view>
   </block>
-  <button bindtap='submit' class='own-btn'>确认提交</button>
+  <button hidden='{{alreadySuccess}}' bindtap='submit' class='own-btn'>确认提交</button>
 </view>
+
+<view wx:if='{{alreadySuccess}}' style='height:80rpx;'></view>
