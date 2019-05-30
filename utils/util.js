@@ -251,7 +251,7 @@ function regTest(obj) {
     case "telephone":
       return /^1[3456789][0-9]\d{8}$/.test(str);
     case "email":
-      return /^([a-zA-Z0-9_-])+@([a-z0-9_-])+(.[a-z0-9_-])+/.test(str);
+      return /^[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)+$/.test(str);
     case "sum":
       return /^([1-9]\d*(\.\d+)?|0\.\d*[1-9]\d*|0)%?$/.test(str);
     case "password":
