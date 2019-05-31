@@ -19,6 +19,9 @@ Page({
       this.setData({
         message: res.obj
       })
+      if (res.obj.auditStatus === 'success' && !res.obj.auditBroadcast){
+        Api.hideMerchantTip()
+      }
     })
   },  
   toDetail(){

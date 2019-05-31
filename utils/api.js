@@ -215,6 +215,7 @@ import {
   merchantCAMsgUrl,
   merchantSettleMsgUrl,
   merchantDeatailUrl,
+  hideMerchantTipUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1348,8 +1349,11 @@ function merchantSettleMsg(data) {
 function merchantDeatail(data){
   return app.http.getRequest(merchantDeatailUrl, data); 
 }
-
+function hideMerchantTip(data) {
+  return app.http.putRequest(hideMerchantTipUrl, data);
+}
 module.exports = {
+  hideMerchantTip,
   merchantDeatail,
   merchantBaseMsg,
   merchantCAMsg,

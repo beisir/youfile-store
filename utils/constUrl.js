@@ -262,3 +262,4 @@ export const merchantBaseMsgUrl = '/admin/merchant'   // 保存基本信息
 export const merchantCAMsgUrl = '/admin/merchant/qualification'   // 保存基本信息
 export const merchantSettleMsgUrl = '/admin/merchant/settle'   // 保存基本信息
 export const merchantDeatailUrl = '/admin/merchant/detail' //获取信息
+export const hideMerchantTipUrl = '/admin/merchant/audit/broadcast/close' //隐藏tip

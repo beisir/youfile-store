@@ -80,6 +80,7 @@ Page({
       .then(res => {
         var obj = res.obj
         _this.setData({
+          indexData: obj,
           followNum: obj.followNum,
           payOrders: obj.payOrders,
           unshippedPurchaseOrders: obj.unshippedPurchaseOrders,
