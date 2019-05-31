@@ -10,7 +10,7 @@ var timerList = []
 function getIdentity(_this) {
   let isStoreOwner = new IsStoreOwner();
   isStoreOwner.enterIdentity().then(res => {
-    if (_this){
+    if (_this) {
       _this.homeIndex()
       _this.getActiveGoods()
     }
@@ -31,10 +31,10 @@ Page({
     showDp: true,
     goRetailStore: true,
     currentTab: 0,
-    currentTabActive:0,
+    currentTabActive: 0,
     confirmDown: false,
     baseUrl: '',
-    activeResult:[],
+    activeResult: [],
     result: [],
     noMoreData: true,
     keyword: '',
@@ -52,39 +52,39 @@ Page({
     identity: '',
     likeShow: false,
     isOnloaded: false,
-    limitShow:1,
+    limitShow: 1,
     src: '',
     goodsName: '',
     copyGoods: false,
     openStore: false,
     tipIndex: 0,
     tabSwitch: "1",
-    tabSwitchShow:false,
-    avtiveGoods:[]
+    tabSwitchShow: false,
+    avtiveGoods: []
   },
   // 切换抢购商品
-  tabSwitch:function(e){
+  tabSwitch: function (e) {
     this.preventPulldown()
     var index = e.target.dataset.index
     // 1 活动 0全部  
-    if(index=="1"){
+    if (index == "1") {
       this.setData({
         tabSwitchShow: false
       })
-    }else{
+    } else {
       this.setData({
         tabSwitchShow: true
       })
     }
     this.setData({
-      tabSwitch:index
+      tabSwitch: index
     })
   },
   //到店弹框
   showStoreOrder() {
     if (authHandler.isLogin()) {
       this.selectComponent("#storeOrder").open(this);
-    }else{
+    } else {
       this.selectComponent("#storeOrder").close();
     }
   },
@@ -105,19 +105,19 @@ Page({
       showAllTip: false,
     })
   },
-  swiperItemControl(){
+  swiperItemControl() {
     if (authHandler.isLogin()) {
-      Api.unpaidOrderNum().then(res=>{
+      Api.unpaidOrderNum().then(res => {
         this.setData({
           unpaidOrderNum: res.obj.totalOrderCount
         })
       })
-    }else{
+    } else {
       this.setData({
-        unpaidOrderNum:0
+        unpaidOrderNum: 0
       })
     }
-    this.setData({ tipIndex: 0, showAllTip: false})
+    this.setData({ tipIndex: 0, showAllTip: false })
   },
   //开店
   openStore: function () {
@@ -419,7 +419,7 @@ Page({
         sortType = 'prices_asc'
       }
     }
-    
+
 
     Api.shopList({
       keyword: '',
@@ -437,6 +437,8 @@ Page({
             totalCount: totalCount,
             baseUrl: app.globalData.imageUrl,
             noMoreData: true
+          },()=>{
+            _this.getHeight(newArr)
           })
         } else {
           _this.setData({
@@ -469,9 +471,9 @@ Page({
           })
       })
   },
-   /**
-   * 获取首页数据
-   */
+  /**
+  * 获取首页数据
+  */
   homeIndex: function () {
     var that = this;
     Api.homeIndex({
@@ -479,55 +481,57 @@ Page({
     })
       .then(res => {
         var obj = res.obj
-       // 获取tab切换列表
-        this.getTabList(obj)
+        // 获取tab切换列表
+        this.getTabList(obj).then(res=>{
 
-        wx.setNavigationBarTitle({
-          title: obj.store.storeName == null ? app.globalData.projectName : obj.store.storeName
-        })
-        app.globalData.isFollow = obj.isFollow
-        var result = obj.goods.result
-        var floorInfo = Api.isFloorInfo(obj.store.floor)
-        that.setData({
-          store: obj.store,
-          floorInfo: floorInfo,
-          baseUrl: app.globalData.imageUrl,
-          coverUrl: obj.store.coverUrl,
-          result: result,
-          totalCount: obj.goods.totalCount,
-          likeShow: app.globalData.isFollow
-        }, function () {
-          that.getHeight(result)
+          wx.setNavigationBarTitle({
+            title: obj.store.storeName == null ? app.globalData.projectName : obj.store.storeName
+          })
+          app.globalData.isFollow = obj.isFollow
+          var result = obj.goods.result
+          var floorInfo = Api.isFloorInfo(obj.store.floor)
+          that.setData({
+            store: obj.store,
+            floorInfo: floorInfo,
+            baseUrl: app.globalData.imageUrl,
+            coverUrl: obj.store.coverUrl,
+            // result: result,
+            totalCount: obj.goods.totalCount,
+            likeShow: app.globalData.isFollow
+          }, function () {
+            // that.getHeight(result)
+          })
+          this.emptyArr()
         })
       })
   },
   // 获取店铺活动列表
-  getActiveGoods:function(){
-    var _this=this
+  getActiveGoods: function () {
+    var _this = this
     timerList.forEach(el => {
       clearInterval(el)
     })
     timerList = []
-    Api.storeActiveGoods().then(res=>{
+    Api.storeActiveGoods().then(res => {
       var obj = res.obj
-      if(obj.length>0){
-      for(var i=0;i<obj.length;i++){
-        this.timerhandle(obj[i].timeSeconds, i, 'doing')
+      if (obj.length > 0) {
+        for (var i = 0; i < obj.length; i++) {
+          this.timerhandle(obj[i].timeSeconds, i, 'doing')
+        }
       }
-      }
-      if (obj[0]){
+      if (obj[0]) {
         _this.setData({
-          avtiveGoods:obj,
-          activeResult:[],
+          avtiveGoods: obj,
+          activeResult: [],
           activityNumber: obj[0].activityNumber
-        },function(){
+        }, function () {
           _this.getActiveList()
         })
-      }else{
+      } else {
         // 清空
         _this.setData({
-          avtiveGoods:[],
-          activeResult:[],
+          avtiveGoods: [],
+          activeResult: [],
           activityNumber: ''
         })
         // 切换到全部商品
@@ -535,7 +539,7 @@ Page({
           tabSwitchShow: false,
           tabSwitch: 1
         })
-      }  
+      }
     })
   },
   timerhandle(timeSeconds, index, type) {
@@ -562,7 +566,7 @@ Page({
   },
 
   // 获取高度
-  getHeight(result){
+  getHeight(result) {
     var that = this;
     var query = wx.createSelectorQuery();
     query.select('#myText').boundingClientRect()
@@ -636,13 +640,13 @@ Page({
     }
   },
   // 获取活动商品
-  getActiveList(){
-    var _this=this
-    Api.storeIndexAGoods({ activityNumber:this.data.activityNumber}).then(res=>{
+  getActiveList() {
+    var _this = this
+    Api.storeIndexAGoods({ activityNumber: this.data.activityNumber }).then(res => {
       var detailList = res.obj.result,
         totalCount = res.obj.totalCount
       if (Api.isNotEmpty(detailList)) {
-        if (detailList.length>0){
+        if (detailList.length > 0) {
           detailList.forEach(el => {
             if (el.extInfo) {
               let stockNum = el.extInfo.PRIORITY_SALES_PROMOTION.stockNum,
@@ -666,89 +670,96 @@ Page({
   },
 
   // 获取tab切换列表
-  getTabList(obj){
-    // 是否参与活动
-    obj.existActivity ? this.setData({ hasAc: true }) : this.setData({ hasAc: false })
-    let tabArr = []
-    Api.apiShowAllZone().then(res=> {
-      if (res.obj && res.obj.length>0){
-        res.obj.forEach(el => {
-          tabArr.push({
-            name: el.zoneAlias ? el.zoneAlias : el.zoneName,
-            acback: '/image/tab-ye-center.png',
-            back: '/image/tab-gray-center.png',
-            type: el.zoneType,
-            selected: false,
-            zoneNumber: el.zoneType=='all'?'':el.zoneNumber
+  getTabList(obj) {
+    return new Promise((resolve, reject) => {
+      // 是否参与活动
+      obj.existActivity ? this.setData({ hasAc: true }) : this.setData({ hasAc: false })
+      let tabArr = []
+      Api.apiShowAllZone().then(res => {
+        if (res.obj && res.obj.length > 0) {
+          res.obj.forEach(el => {
+            tabArr.push({
+              name: el.zoneAlias ? el.zoneAlias : el.zoneName,
+              acback: '/image/tab-ye-center.png',
+              back: '/image/tab-gray-center.png',
+              type: el.zoneType,
+              selected: false,
+              zoneNumber: el.zoneType == 'all' ? '' : el.zoneNumber
+            })
           })
+        }
+        if (obj.existActivity) {
+          // 有参加活动 活动标签放前面
+          tabArr.unshift({
+            name: '正在抢订',
+            acback: '/image/tab-red-left.png',
+            back: '/image/tab-gray-left.png',
+            type: 'ac',
+            selected: true,
+          })
+
+          tabArr[tabArr.length - 1].acback = '/image/tab-ye-right.png'
+          tabArr[tabArr.length - 1].back = '/image/tab-gray-right.png'
+          this.setData({ tabSwitchShow: true })
+        } else {
+          // 无参加活动
+          tabArr.push({
+            name: '正在抢订',
+            acback: '/image/tab-red-right.png',
+            back: '/image/tab-gray-right.png',
+            type: 'ac',
+            selected: false,
+          })
+          tabArr[0].acback = '/image/tab-ye-left.png'
+          tabArr[0].back = '/image/tab-gray-left.png'
+          tabArr[0].selected = true
+          this.setData({ tabSwitchShow: false })
+        }
+        this.setData({
+          tabList: tabArr
+        }, () => {
+          resolve()
         })
-      }
-      if (obj.existActivity) {
-        // 有参加活动 活动标签放前面
-        tabArr.unshift({
-          name: '正在抢订',
-          acback: '/image/tab-red-left.png',
-          back: '/image/tab-gray-left.png',
-          type: 'ac',
-          selected: true,
-        })
-        
-        tabArr[tabArr.length - 1].acback = '/image/tab-ye-right.png'
-        tabArr[tabArr.length - 1].back = '/image/tab-gray-right.png'
-        this.setData({ tabSwitchShow: true })
-      } else {
-        // 无参加活动
-        tabArr.push({
-          name: '正在抢订',
-          acback: '/image/tab-red-right.png',
-          back: '/image/tab-gray-right.png',
-          type: 'ac',
-          selected: false,
-        })
-        tabArr[0].acback = '/image/tab-ye-left.png'
-        tabArr[0].back = '/image/tab-gray-left.png'
-        tabArr[0].selected = true
-        this.setData({ tabSwitchShow: false })
-      }
-      this.setData({
-        tabList: tabArr
+      }).catch(e => {
+        reject()
       })
     })
+
   },
   // 切换tab
-  selectTab(e){
+  selectTab(e) {
     this.preventPulldown()
     let thisindex = e.currentTarget.dataset.index,
-        tabarr = this.data.tabList
+      tabarr = this.data.tabList
 
-    tabarr.forEach((el,index)=> {
-      if (index == thisindex){
+    tabarr.forEach((el, index) => {
+      if (index == thisindex) {
         el.selected = true
         // 是否是活动
-        switch (el.type){
+        switch (el.type) {
           case 'ac':
             this.setData({ tabSwitchShow: true })
-          break;
+            break;
           case 'all':
           default:
             this.setData({ tabSwitchShow: false })
-            if (this.data.currentTab == 1){
+            if (this.data.currentTab == 1) {
               this.emptyArrNew()
-            }else{
+            } else {
               this.emptyArr()
             }
-          break;
+            break;
         }
       } else {
         el.selected = false
       }
-    })    
+    })
 
     this.setData({
       tabList: tabarr
     })
   },
-  getZoneNum(){
+  getZoneNum() {
     // tab
     let tab = this.data.tabList.filter(el => el.selected),
       zoneNumber = ''
@@ -758,9 +769,9 @@ Page({
     return zoneNumber
   },
 
-    /**
-   * 生命周期函数--监听页面加载
-   */
+  /**
+ * 生命周期函数--监听页面加载
+ */
   onLoad: function (options) {
     var _this = this
     if (options != undefined) {
@@ -788,10 +799,10 @@ Page({
             _this.getFriendMes(userId)
           }
           // 判断零售店进到批零
-          if (store.storeIdRetail){
-           _this.setData({
-             goRetailStore:false
-           })
+          if (store.storeIdRetail) {
+            _this.setData({
+              goRetailStore: false
+            })
           }
         }
       });
@@ -818,7 +829,7 @@ Page({
   },
   getListNew: function () {
     var _this = this
-    Api.recentGoods({ zoneNumber:this.getZoneNum()})
+    Api.recentGoods({ zoneNumber: this.getZoneNum() })
       .then(res => {
         var detailList = res.obj.result,
           totalCount = res.obj.totalCount
@@ -830,6 +841,8 @@ Page({
             totalCount: totalCount,
             baseUrl: app.globalData.imageUrl,
             noMoreData: true
+          }, () => {
+            _this.getHeight(newArr)
           })
           if (newArr.length > 0) {
             var query2 = wx.createSelectorQuery();
@@ -857,15 +870,15 @@ Page({
       _this.getListNew()
     });
   },
-  preventPulldown(){
+  preventPulldown() {
     this.setData({
       noPulldown: true
-    },()=>{
-      setTimeout(()=>{
+    }, () => {
+      setTimeout(() => {
         this.setData({
           noPulldown: false
         })
-      },1000)
+      }, 1000)
     })
   },
   // 切换商品tab
@@ -896,23 +909,23 @@ Page({
     }
   },
   // 切换活动商品tab
-  swichNavActive:function(e){
+  swichNavActive: function (e) {
     this.preventPulldown()
-    var _this=this,
+    var _this = this,
       index = e.target.dataset.current,
       activityNumber = e.target.dataset.number
     app.pageRequest.pageDataActive.pageNum = 0
     // _this.getDjs(this.data.avtiveGoods[index].endTime)
     _this.setData({
-      currentTabActive:index,
-      activeResult:[],
+      currentTabActive: index,
+      activeResult: [],
       // endTime:'',
-       activityNumber: activityNumber
+      activityNumber: activityNumber
     }, function () {
       _this.getActiveList()
     })
   },
-  reloadAcList(){
+  reloadAcList() {
     app.pageRequest.pageDataActive.pageNum = 0
     this.setData({
       activeResult: [],
@@ -1070,14 +1083,14 @@ Page({
     //   wx.stopPullDownRefresh();
     // })
   },
-  toPageTop(){
-    if (this.data.noPulldown) {return}
-    setTimeout(()=>{
+  toPageTop() {
+    if (this.data.noPulldown) { return }
+    setTimeout(() => {
       if (!this.data.noPulldown) {
         this.preventPulldown()
         wx.startPullDownRefresh()
       }
-    },300)
+    }, 300)
   },
 
 
@@ -1118,20 +1131,20 @@ Page({
   toBottom: function () {
     var noMoreData = this.data.noMoreData
     var currentTab = this.data.currentTab
-    if (this.data.tabSwitchShow){
+    if (this.data.tabSwitchShow) {
       this.getActiveList()
-    }else{
+    } else {
       if (noMoreData) {
         if (currentTab == 1) {
           this.getListNew()
         } else {
           this.getList()
         }
-      } 
+      }
     }
-   
+
   },
-  myPageScroll(e){
+  myPageScroll(e) {
     var top = e.detail.scrollTop,
       result = this.data.result,
       goodsHeight = this.data.goodsHeight,

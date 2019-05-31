@@ -12,3 +12,5 @@
 .flex-center{display: flex;justify-content: space-between;}
 .upload-title{font-size: 32rpx;font-weight: 600;}
 .upload-des{font-size: 28rpx;color: #c0bfc0;}
+.check-eximg{font-size: 24rpx;color: #ca7;margin-top: 10rpx;}
+.eye-icon{width: 25rpx;height: 25rpx;margin-right: 10rpx;}

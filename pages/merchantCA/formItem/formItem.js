@@ -24,7 +24,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-    baseUrl: app.globalData.imageUrlSafe
+    baseUrl: app.globalData.imageUrlSafe,
+    imgUrl: app.globalData.imageUrl
   },
   
 
@@ -32,6 +33,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    seeEximg(e){
+      let url = e.currentTarget.dataset.url
+      if(!url){return}
+      wx.previewImage({
+        urls: [this.data.imgUrl+url],
+      })
+    },
     pickerChange(e) {
       this.triggerEvent('pickerChange', e)
     },

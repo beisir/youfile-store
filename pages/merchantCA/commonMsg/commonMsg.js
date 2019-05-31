@@ -521,13 +521,15 @@ Page({
       key: 'unifiedCertificateUrl',
       type: 'img',
       role: '3',
-      imgUrl: '/image/xydmz.png'
+      imgUrl: '/image/xydmz.png',
+      eximg: 'default/businessLicense.png'  
     }, {
       name: '银行开户许可证',
       key: 'bankOrganUrl',
       type: 'img',
       imgUrl: '/image/yhkkhxkz.png',
-      role: '3'
+      role: '3',
+      eximg: 'default/licenceForOpeningAccounts.png'  
     }, {
       name: '法人姓名',
       key: 'legalPerson',
@@ -554,38 +556,43 @@ Page({
       key: 'businessLicenseUrl',
       type: 'img',
       imgUrl: '/image/xydmz.png',
-      role: '2'
+      role: '2',
+      eximg: 'default/businessLicense.png'
     }, {
       name: '身份证正面',
       key: 'idCardFaceUrl',
       type: 'img',
       imgUrl: '/image/sfzzm.png',
-      role: '1,2,3'
+      role: '1,2,3',
+      eximg: 'default/IDcard.png'
     }, {
       name: '身份证反面',
       key: 'idCardConUrl',
       type: 'img',
       imgUrl: '/image/sfzfm.png',
-      role: '1,2,3'
+      role: '1,2,3',
+      eximg: 'default/IDcardReverse.png'
     }, {
       name: '手持身份证',
       key: 'handIdCardUrl',
       type: 'img',
       imgUrl: '/image/scsfz.png',
-      role: '1,2'
+      role: '1,2',
+      eximg: 'default/handleIDcard.png'
     }, {
       name: '经营场所门头照',
       key: 'storePhotoUrl',
       type: 'img',
       imgUrl: '/image/mtz.png',
-
-      role: '1,2,3'
+      role: '1,2,3',
+      eximg: 'default/shopFront.jpg'
     }, {
       name: '收银台场景照',
       key: 'scenePhoneUrl',
       type: 'img',
       imgUrl: '/image/syt.png',
-      role: '1,2,3'
+      role: '1,2,3',
+      eximg: 'default/cashierDesk.jpg'
     }]
 
     if (this.data.merchantType) {
@@ -646,13 +653,15 @@ Page({
       key: 'settlementCardUrl',
       type: 'img',
       imgUrl: '/image/yhk.png',
-      role: '1,2'
+      role: '1,2',
+      eximg: '/default/bankCard.png'
     }, {
       name: '手持银行卡',
       key: 'handBankCardUrl',
       type: 'img',
       imgUrl: '/image/scyhk.png',
-      role: '1,2'
+      role: '1,2',
+      eximg: '/default/handlebankCard.png'
     }]
     if (this.data.merchantType) {
       let newThree = arr.filter(el => {
