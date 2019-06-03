@@ -5,6 +5,6 @@
 .step-tip text{font-family: LiSu;font-weight:600;position: absolute;right: 25rpx;bottom: 18rpx;color: #fff;font-size: 36rpx;}
 .own-btn{margin: 60rpx auto 20rpx;width: 690rpx;background: #CCAA77;font-size: 35rpx;color: #fff;height: 100rpx;line-height: 100rpx;border-radius: 100rpx;overflow: hidden;}
 .own-btn button{padding: 0;margin: 0;width: 50%;background: #ca7;color: #fff;}
-.btn-line{width: 1rpx;height: 50rpx;background: #fff;}
+.btn-line{width: 1rpx;height: 30rpx;background: #fff;}
 .top-img{height: 90rpx;width: 629rpx;margin: 40rpx auto;display: block;}
 .nav-box{position: absolute;height: 90rpx;width: 120rpx;}
