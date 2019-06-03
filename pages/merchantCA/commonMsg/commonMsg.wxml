@@ -93,7 +93,11 @@
       </block>
     </view>
   </block>
-  <button hidden='{{alreadySuccess}}' bindtap='toThree' class='own-btn'>下一步</button>
+  <view class='own-btn com-flex-between' hidden='{{alreadySuccess}}'>
+    <button bindtap='returnPreStep'>上一步</button>
+    <view class='btn-line'></view>
+    <button bindtap='toThree'>下一步</button>
+  </view>
 </view>
 
 <!-- 第三步 -->
@@ -115,7 +119,11 @@
       </block>
     </view>
   </block>
-  <button hidden='{{alreadySuccess}}' bindtap='submit' class='own-btn'>确认提交</button>
+  <view class='own-btn com-flex-between' hidden='{{alreadySuccess}}'>
+    <button bindtap='returnPreStep'>上一步</button>
+    <view class='btn-line'></view>
+    <button bindtap='submit'>确认提交</button>
+  </view>
 </view>
 
 <view wx:if='{{alreadySuccess}}' style='height:80rpx;'></view>

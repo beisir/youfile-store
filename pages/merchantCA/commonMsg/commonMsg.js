@@ -285,6 +285,25 @@ Page({
       })
     })
   },
+  returnPreStep(){
+    let nowStep = this.data.nowStep
+    switch (nowStep){
+      case 2:
+        this.setData({
+          nowStep:1
+        },()=>{
+          this.getDetail()
+        })
+      break;
+      case 3:
+        this.setData({
+          nowStep: 2
+        }, () => {
+          this.getDetail()
+        })
+      break;
+    }
+  },
   submit() {
     let dataArr = this.data.threeList
     dataArr
@@ -721,13 +740,15 @@ Page({
           provinceCode: obj.bankProvinceCode,
           cityCode: obj.bankCityCode
         }).then(res => {
-          if (!res.obj){return}
+          if (!res.obj) { this.setSelect('subBankCode', []);return}
           let arr = []
           res.obj.forEach(el => {
             arr.push({ name: el.bankName, code: el.bankCode })
           })
           this.setSelect('subBankCode', arr, this.data.message.merchantSettleVO.subBankCode)
         })
+      }else{
+        this.setSelect('subBankCode', [])
       }
     }, 300)
   },
