@@ -139,3 +139,9 @@ page{background: #fff;}
 .shareIcon{width: 35rpx;height: 35rpx;}
 .focus-box text{color: #ca7;}
 .focus-box .shareIcon{width: 40rpx;height: 40rpx;}
+/* acbanner */
+.acbanner-box{height: 360rpx;}
+.ac-banner{display: flex;justify-content: center;position: relative;}
+.ac-banner-timer{position: absolute;bottom: 0;width: 690rpx;left: 0;right: 0;margin: auto;background: #fff;justify-content: center;z-index: 1}
+.timer-line{height: 2rpx;width: 50rpx;background: #666;margin: 0 30rpx;}
+.ac-timer-backimg{position: absolute;bottom: 0;width: 690rpx;height: 90rpx;left: 0;right: 0;margin: auto;}

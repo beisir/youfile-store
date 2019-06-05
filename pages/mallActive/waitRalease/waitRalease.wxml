@@ -43,7 +43,7 @@
       </view>
       <view class='lr-item'>
         <text>活动时间</text><view>{{activeDetails.startTime}} 至 {{activeDetails.endTime}}</view></view>
-      <view class='lr-item'>
+      <view class='lr-item' wx:if="{{activeDetails.mallCategoryCodeName}}">
         <text>活动类目</text><view>{{activeDetails.mallCategoryCodeName}}</view></view>
       <view class='lr-item'>
         <text>活动介绍</text><view>{{activeDetails.introduction}}</view></view>

@@ -1,0 +1,5 @@
+/* pages/active/acBanner/acBanner.wxss */
+.banner-box{position: relative;width: 690rpx;height: 280rpx;margin: 0 auto;text-align: center;}
+.image-style{width: 690rpx;height: 280rpx;border-radius: 10rpx;}
+.ac-name{position: absolute;width: 100%;text-align: center;top: 135rpx;font-size: 56rpx;line-height: 1;color: #fff;}
+.ac-des{position: absolute;width: 80%;left: 0;right: 0;margin: auto;bottom: 0;top: 203rpx;font-size: 24rpx;color: #fff;}

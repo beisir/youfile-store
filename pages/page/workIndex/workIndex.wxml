@@ -126,6 +126,12 @@
       </view>
       <view>云促销</view>
     </navigator>
+    <navigator url='/pages/active/acList/acList'>
+      <view>
+        <image mode='widthFix' src='/image/thunder-icon.png' ></image>
+      </view>
+      <view>限时抢订</view>
+    </navigator>
   </view>  
 </view>  
 

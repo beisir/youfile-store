@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "spec": "../../../../assembly/specifications/spec"
+  },
+  "navigationBarTitleText": "限时抢订"
+}

@@ -1,0 +1,5 @@
+<view class='banner-box'>
+  <image src='{{baseUrl+item.activityPosterList[0]}}' mode='aspectFit' class='image-style'></image>
+  <view class='ac-name'>{{item.activityName}}</view>
+  <view class='ac-des'>{{item.introduction?item.introduction:''}}</view>
+</view>

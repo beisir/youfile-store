@@ -32,6 +32,7 @@ Page({
     goRetailStore: true,
     currentTab: 0,
     currentTabActive: 0,
+    acSwiperIndex: 0, // bannerindex
     confirmDown: false,
     baseUrl: '',
     activeResult: [],
@@ -497,13 +498,21 @@ Page({
             coverUrl: obj.store.coverUrl,
             // result: result,
             totalCount: obj.goods.totalCount,
-            likeShow: app.globalData.isFollow
+            likeShow: app.globalData.isFollow,
+            acSwiperList: obj.activityVOList ? obj.activityVOList:[]
           }, function () {
             // that.getHeight(result)
+            this.handelACBanner()
           })
           this.emptyArr()
         })
       })
+  },
+  handelACBanner(){
+    let arr = this.data.acSwiperList
+    arr.forEach((el,index)=>{
+      this.timerhandle(el.timeSeconds, index)
+    })
   },
   // 获取店铺活动列表
   getActiveGoods: function () {
@@ -516,7 +525,7 @@ Page({
       var obj = res.obj
       if (obj.length > 0) {
         for (var i = 0; i < obj.length; i++) {
-          this.timerhandle(obj[i].timeSeconds, i, 'doing')
+          // this.timerhandle(obj[i].timeSeconds, i, 'doing')
         }
       }
       if (obj[0]) {
@@ -916,6 +925,8 @@ Page({
       activityNumber = e.target.dataset.number
     app.pageRequest.pageDataActive.pageNum = 0
     // _this.getDjs(this.data.avtiveGoods[index].endTime)
+    // 切换活动swiper
+    this.acswiperChange(activityNumber)
     _this.setData({
       currentTabActive: index,
       activeResult: [],
@@ -923,6 +934,22 @@ Page({
       activityNumber: activityNumber
     }, function () {
       _this.getActiveList()
+    })
+  },
+  acswiperChange(activityNumber){
+    let arr = this.data.acSwiperList
+    arr.forEach((el,index)=>{
+      if (el.activityNumber == activityNumber){
+        this.setData({
+          acSwiperIndex: index,
+        })
+      }
+    })
+  },
+  acswiper(e){
+    let cur = e.detail.current
+    this.setData({
+      acSwiperIndex: cur,
     })
   },
   reloadAcList() {

@@ -148,39 +148,46 @@
 
 
   <!-- 轮播通知 -->
-  <block wx:if='{{!tabSwitchShow}}'>
-    <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
-      <swiper circular='true' interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
-        <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
-          <view class='icon-view' style='background:#f7ac25;'>订</view>
-          <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>
-        </swiper-item>
-        <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==1}}' bindtap='addTip'>
-          <view class='icon-view' style='background:#ccaa77;'>商</view>
-          <text>点此加为商友，即刻查看批发价！</text>
-        </swiper-item>
-      </swiper>
-      <!-- 箭头图标开关 -->
-      <block wx:if="{{limitShow == 1 && unpaidOrderNum > 0}}">
-        <view class='swiper-tri-box' wx:if='{{!showAllTip}}' bindtap='stopSwiperTip'>
-          <image class='more-tri-icon' src='/image/down.png'></image>
-        </view>
-        <view class='swiper-tri-box' wx:else bindtap='continueSwiperTip'>
-          <image class='more-tri-icon' src='/image/sy.png'></image>
-        </view>
-      </block>
-    </view>
-    <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
-      <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
-    </view>
-  </block>
-  <view class='ac-stop-time stop-time com-flex-center'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
-    <view class='icon-view' style='background:#f02b2b;'>抢</view>限时抢订活动距结束{{timerList[currentTabActive][0]}}天
-    <text>{{filter.doubleNum(timerList[currentTabActive][1])}}</text>: 
-    <text>{{filter.doubleNum(timerList[currentTabActive][2])}}</text>:
-    <text>{{filter.doubleNum(timerList[currentTabActive][3])}}</text>
+  <view wx:if="{{getFollw &&(unpaidOrderNum>0 || limitShow==1)}}" class='swiper-tip-box {{showAllTip?"swipter-tip-height":""}}'>
+    <swiper circular='true' interval="3000" current="{{tipIndex}}" display-multiple-items='{{showAllTip?2:1}}' autoplay='{{!showAllTip}}' vertical='true' class='swiper-tips {{showAllTip?"swipter-tip-height":""}}'>
+      <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if="{{unpaidOrderNum>0}}" bindtap='toUser'>
+        <view class='icon-view' style='background:#f7ac25;'>订</view>
+        <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>
+      </swiper-item>
+      <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==1}}' bindtap='addTip'>
+        <view class='icon-view' style='background:#ccaa77;'>商</view>
+        <text>点此加为商友，即刻查看批发价！</text>
+      </swiper-item>
+    </swiper>
+    <!-- 箭头图标开关 -->
+    <block wx:if="{{limitShow == 1 && unpaidOrderNum > 0}}">
+      <view class='swiper-tri-box' wx:if='{{!showAllTip}}' bindtap='stopSwiperTip'>
+        <image class='more-tri-icon' src='/image/down.png'></image>
+      </view>
+      <view class='swiper-tri-box' wx:else bindtap='continueSwiperTip'>
+        <image class='more-tri-icon' src='/image/sy.png'></image>
+      </view>
+    </block>
+  </view>
+  <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
+    <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
   </view>
 
+  <swiper wx:if="{{acSwiperList && acSwiperList.length>0}}" current='{{acSwiperIndex}}' class='acbanner-box' bindchange='acswiper'>
+    <swiper-item class='ac-banner' wx:for="{{acSwiperList}}" wx:key="{{index}}">
+      <acBanner wx:if="{{item.sponsorType=='store'}}" item='{{item}}'></acBanner>
+      <image wx:else src='{{baseUrl+item.activityPosterList[0]}}' style='height:360rpx;width:690rpx;border-radius:10rpx;' mode='scaleToFill'></image>
+      <image class='ac-timer-backimg' src='/image/ac-timer-back.png'></image>
+      <view class='ac-banner-timer ac-stop-time stop-time com-flex-center'>
+        <view class='timer-line'></view>
+        限时抢订活动距<block wx:if="{{item.activityStatus=='be_doing'}}">结束</block><block wx:if="{{item.activityStatus=='init'}}">开始</block>{{timerList[acSwiperIndex][0]}}天
+        <text>{{filter.doubleNum(timerList[acSwiperIndex][1])}}</text>: 
+        <text>{{filter.doubleNum(timerList[acSwiperIndex][2])}}</text>:
+        <text>{{filter.doubleNum(timerList[acSwiperIndex][3])}}</text>
+        <view class='timer-line'></view>
+      </view>
+    </swiper-item>
+  </swiper>
 
   <view style='padding:0 40rpx;'>
   <scroll-view scroll-x='true' class='tab-box com-flex-center' style='border-color:{{tabSwitchShow?"#f02b2b":"#ca7"}}'>
@@ -190,20 +197,6 @@
     </view>
   </scroll-view>
   </view>
-  
-  <!-- <view class='tab-cont'>
-    <view class='tab-view {{tabSwitch=="1"?"tab-view1":"teb-view4"}}'>
-      avtiveGoods.length == 0?"tab-view3":"teb-view4"
-      <view bindtap='tabSwitch' class='{{tabSwitch=="1"?"tab-act":""}}' data-index='1'>全部商品</view>
-      <view bindtap='tabSwitch' class='{{tabSwitch=="0"?"tab-act":""}}' data-index='0'>正在抢订</view>
-      <view class='stop-time'  wx:if="{{avtiveGoods.length > 0 && tabSwitchShow}}">
-        距结束{{timerList[currentTabActive][0]}}天
-        <text>{{filter.doubleNum(timerList[currentTabActive][1])}}</text> :
-        <text>{{filter.doubleNum(timerList[currentTabActive][2])}}</text> :
-        <text>{{filter.doubleNum(timerList[currentTabActive][3])}}</text>
-      </view>
-    </view>
-  </view> -->
   <view wx:if="{{!tabSwitchShow}}" class="swiper-tab" id='swiper-tab'>
     <view class="swiper-tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">综合
       <view></view>

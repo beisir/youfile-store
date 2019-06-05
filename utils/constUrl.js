@@ -210,20 +210,20 @@ export const delAllPosterUrl = '/admin/marketing/poster/tag/poster'
 export const goodsPosterNumUrl = '/admin/marketing/poster/goods/{{goodsId}}/count'
 
 // 查询店铺有效活动
-export const storeActiveGoodsUrl="/api/mall/activity/store/{{storeId}}/participate/activity/release/list"
+export const storeActiveGoodsUrl="/api/activity/{{storeId}}/activity/doing/list"
 // 活动
 export const activityListUrl='/admin/mall/activity/{{mallCode}}/page'
 export const participateUrl="/admin/mall/activity/{{activityNumber}}/participate"
 export const activeDetailsUrl="/admin/mall/activity/{{activityNumber}}"
-export const releaseGoodsUrl ="/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}/release"
-export const addActiveGoodsUrl ="/admin/mall/goods/activity"
-export const addAMoreGoodsUrl ="/admin/mall/goods/activity/batch"
-export const releaseMoreGoodsUrl ="/admin/mall/goods/activity/{{activityNumber}}/goods/release/batch"
-export const activityGoodsUrl="/admin/mall/goods/activity/goods/in/{{activityNumber}}/page"
-export const allGoodsUrl="/admin/mall/goods/activity/goods/for/{{activityNumber}}/page"
-export const delActGoodsUrl="/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}"
-export const getActiveGoodsDetailUrl = '/admin/mall/goods/activity/{{activityNumber}}/goods/{{goodsId}}'
-export const editActiveGoodsUrl = '/admin/mall/goods/activity/goods/edit'
+export const releaseGoodsUrl ="/admin/goods/activity/{{activityNumber}}/goods/{{goodsId}}/release"
+export const addActiveGoodsUrl ="/admin/goods/activity"
+export const addAMoreGoodsUrl ="/admin/goods/activity/batch"
+export const releaseMoreGoodsUrl ="/admin/goods/activity/{{activityNumber}}/goods/release/batch"
+export const activityGoodsUrl="/admin/goods/activity/goods/in/{{activityNumber}}/page"
+export const allGoodsUrl="/admin/goods/activity/goods/for/{{activityNumber}}/page"
+export const delActGoodsUrl="/admin/goods/activity/{{activityNumber}}/goods/{{goodsId}}"
+export const getActiveGoodsDetailUrl = '/admin/goods/activity/{{activityNumber}}/goods/{{goodsId}}'
+export const editActiveGoodsUrl = '/admin/goods/activity/goods/edit'
 export const saleActiveListUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/sales/list"
 export const statisticSalesUrl="/admin/mall/activity/statistic/sum/{{activityNumber}}/store/sales/all"
 // 统计云分销数据
@@ -234,7 +234,7 @@ export const aAnalysisCustomUrl="/admin/mall/activity/statistic/{{activityNumber
 export const statPurchasersUrl="/order/statistics/purchasers/trade/data/page"
 export const statPurchasersDetailsUrl="/order/statistics/purchaser/{{userId}}/trade/data"
 export const purchaserTransUrl="/admin/order/purchaser/{{userId}}/"
-export const storeIndexAGoodsUrl ="/api/mall/activity/goods/{{activityNumber}}/store/{{storeId}}/goods/page"
+export const storeIndexAGoodsUrl ="/api/activity/goods/{{activityNumber}}/store/{{storeId}}/goods/page"
 // 修改收货人信息
 export const editConsigneeUrl = '/admin/order/{{orderNumber}}/consignee'
 // 修改物流
@@ -263,3 +263,6 @@ export const merchantCAMsgUrl = '/admin/merchant/qualification'   // 保存基�
 export const merchantSettleMsgUrl = '/admin/merchant/settle'   // 保存基本信息
 export const merchantDeatailUrl = '/admin/merchant/detail' //获取信息
 export const hideMerchantTipUrl = '/admin/merchant/audit/broadcast/close' //隐藏tip
+// 店铺活动
+export const createACUrl = '/admin/store/activity' 
+export const storeACListUrl = '/admin/store/activity/store/activity/page'

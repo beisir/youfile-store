@@ -1,6 +1,8 @@
 {
   "pages": [
     "pages/page/home/home",
+    "pages/active/acList/acList",
+    "pages/active/createAC/createAC",
     "pages/merchantCA/commonMsg/commonMsg",
     "pages/merchantCA/auditStatus/auditStatus",
     "pages/merchantCA/merchantType/merchantType",

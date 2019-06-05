@@ -209,13 +209,13 @@ class request {
       })
     })
   }
-  onlychoseImg(type) {
+  onlychoseImg(obj) {
+    if(!obj){obj = {}}
+    obj.sourceType ? '' : obj.sourceType = ['album', 'camera']
+    obj.sizeType ? '' : obj.sizeType = ['original', 'compressed']
+    obj.count ? '' : obj.count = 1
     let pages = getCurrentPages(),
       current = pages[pages.length - 1];
-      let oritype = ['album', 'camera']
-      if (type) {
-        oritype = type
-      }
       return new Promise((resolve, reject) => {
         if (current.data.choosingImg) {
           reject("重复点击")
@@ -224,10 +224,31 @@ class request {
           current.setData({ choosingImg: true })
         }
         wx.chooseImage({
-          count: 1,
-          sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
-          sourceType: oritype, // album 从相册选图，camera 使用相机，默认二者都有
-          success: function (res) {
+          count: obj.count,
+          sizeType: obj.sizeType, // original 原图，compressed 压缩图，默认二者都有
+          sourceType: obj.sourceType, // album 从相册选图，camera 使用相机，默认二者都有
+          success: (res)=> {
+            if (obj.size) {
+              let ifsize = true
+              res.tempFiles.forEach(el => {
+                console.log(el.size / 1024 / 1204 > obj.size)
+                if (el.size / 1024 / 1204 > obj.size) {
+                  ifsize = false
+                }
+              })
+              if (!ifsize) {
+                wx.showToast({
+                  title: '图片大小不能超过' + obj.size + 'M',
+                  duration: 2000,
+                  icon: 'none'
+                })
+                reject('image to large')
+                return
+              }
+            }
+            if(obj.upload){
+              this.uploadImgArr(res.tempFilePaths,obj.type)
+            }
             resolve(res)
           },
           fail: (e => {
@@ -320,7 +341,7 @@ class request {
         this.nowIndex = index
         this.handleImgList(index, arr, type)
       } else {
-        current.mulImgUploadSuccess ? current.mulImgUploadSuccess(this.getImgArr) : ''
+        current.mulImgUploadSuccess ? current.mulImgUploadSuccess(this.getImgArr,type) : ''
         wx.hideLoading()
       }
     }).catch(e => {

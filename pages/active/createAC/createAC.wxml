@@ -1,0 +1,92 @@
+<!-- 是否创建提示 -->
+<spec show="{{confirmCreate}}">
+  <view class='spec-title'>提示</view>
+  <view class='cr-cont'>活动一经发布，将不可提前终止，直到活动结束，是否确定发布</view>
+  <view class='spec-view' bindtap='cancel'>取消</view>
+  <view class="spec-view spec-view-ac" bindtap='confirm'>确认发布</view>
+</spec>
+
+<view class='ac-type-box com-flex-between com-box com-padding'>
+  <text>活动类型</text>
+  <text class='gray-color blod-font'>限时抢订活动</text>
+</view>
+
+<view class='com-box'>
+  <view class='ac-type-box com-flex-between com-padding'>
+    <text class='blod-font'>选择活动背景图模板</text>
+    <view class='up-img-btn com-flex-center' bindtap='uploadModul'>
+      <image src='/image/addimg-gold.png' class='img-icon'></image>
+      <text class=''>自定义模板</text>
+    </view>
+  </view>
+  <view class='border-line'></view>
+  <view class='scroll-box com-flex-center'>
+    <scroll-view scroll-x='{{true}}'>
+      <view class='scroll-item' wx:for='{{moduleList}}' wx:key='{{index}}' bindtap='checkModel' data-index="{{index}}">
+        <image wx:if='{{item.checked}}' src='/image/square-check.png' class='check-icon'></image>
+        <image src='{{item.url?baseUrl+item.url:"/image/scyhk.png"}}' class='show-img' mode='aspectFit'></image>
+      </view>
+    </scroll-view>
+  </view>
+  <view class='border-line'></view>
+  <view class='tip-box com-flex-center com-padding'>自定义上传活动背景图片模板时，图片尺寸690*280像素，图片大小不超过1M</view>
+</view>
+
+<view class='com-box com-padding'>
+  <view class='form-item com-flex-between'>
+    <view class='com-flex-center flex-one'>
+      <text class='form-title'>活动名称</text>
+      <input bindinput='watchInput' data-type='acname' placeholder='请输入活动名称' class='flex-one' maxlength='10'></input>
+    </view>
+  </view>
+  <view class='border-line com-border-width'></view>
+
+  <view class='form-item com-flex-between'>
+    <view class='com-flex-center flex-one'>
+      <text class='form-title'>活动简称</text>
+      <input bindinput='watchInput' data-type='acshortname' placeholder='请输入活动简称，最多五个字' class='flex-one' maxlength='5'></input>
+    </view>
+    <!-- <image src='/image/poster-right-in.png' class='com-right-icon'></image> -->
+  </view>
+  <view class='border-line com-border-width'></view>
+
+  <view class='form-item com-flex-between'>
+    <view class='com-flex-center flex-one'>
+      <text class='form-title'>开始时间</text>
+      <picker mode="multiSelector" bindchange="changeDateTime" value="{{dateTime1}}"  bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
+        <input placeholder='请选择活动开始时间' value='{{startDataTime}}' disabled='true'></input>
+      </picker>
+    </view>
+    <image src='/image/poster-right-in.png' class='com-right-icon'></image>
+  </view>
+  <view class='border-line com-border-width'></view>
+
+  <view class='form-item com-flex-between'>
+    <view class='com-flex-center flex-one'>
+      <text class='form-title'>持续时间</text>
+      <picker mode="multiSelector" value="{{[1,0]}}"  bindchange="changeTime" range="{{dayandhour}}">
+        <input placeholder='请选择活动持续时间'  value="{{time}}"  disabled='true'></input>
+      </picker>
+    </view>
+    <image src='/image/poster-right-in.png' class='com-right-icon'></image>
+  </view>
+  <view class='border-line com-border-width'></view>
+
+  <view class='form-item com-flex-between'>
+    <view class='com-flex-center flex-one'>
+      <text class='form-title'>结束时间</text>
+      <input class='flex-one' value='{{endDataTime}}' placeholder='根据开始时间和持续时间得出' disabled='true'></input>
+    </view>
+  </view>
+  <view class='border-line com-border-width'></view>
+
+</view>
+
+<view class='com-box com-padding'>
+  <view class='bottom-box'>
+    <text class='form-title'>活动介绍</text>
+    <textarea style='margin-top:{{iosTextarea?"-10rpx":0}}' maxlength='30'  bindinput='watchInput' data-type='acintro' value='{{introduction}}' class='textarea-ac' placeholder='请输入活动介绍'></textarea>
+  </view>
+</view>
+
+<button bindtap='submit' class='bottom-single-btn'>创建活动</button>

@@ -181,7 +181,14 @@ input:focus{padding:0}
 .active-g>view:first-child text:first-child{font-size: 55rpx;}
 .active-g>view:first-child text:last-child{text-decoration: line-through;margin-left: 10rpx;}
 /* 公用按钮样式 */
+.bottom-single-btn-box{position: fixed;bottom: 0;width: 100%;padding: 20rpx 0;background: #f7f7f7;}
+.bottom-single-btn-box .bottom-single-btn{position: static;}
 .bottom-single-btn{position: fixed;bottom: 20rpx;left: 0;right: 0;margin: auto;width: 690rpx;background: #CCAA77;font-size: 35rpx;color: #fff;height: 100rpx;line-height: 100rpx;border-radius: 100rpx;}
+.bottom-replace-box{height: 150rpx;}
 /* 公用flex布局 */
 .com-flex-center{display: flex;align-items: center;}.com-flex-between{display: flex;align-items: center;justify-content: space-between;}
 .gold-font{color: #ca7;}
+.com-red-color{color:#f02b2b;}
+.com-yellow-color{color:#ff9900;}
+.com-gray-color{color:#999;}
+.com-right-icon{width: 16rpx;height: 30rpx;}

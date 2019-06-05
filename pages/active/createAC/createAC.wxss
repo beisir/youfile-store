@@ -1,0 +1,26 @@
+/* pages/active/createAC/createAC.wxss */
+.ac-type-box{height: 100rpx;font-size: 30rpx;}
+.com-box{background: #fff;border-radius: 10rpx;margin: 20rpx 20rpx 0;}
+.com-padding{padding: 0 50rpx;}
+.img-icon{width: 36rpx;height: 36rpx;margin-right: 20rpx;}
+.border-line{border-bottom: 1rpx solid #eee;}
+.show-img{width: 305rpx;height: 124rpx;}
+.scroll-box{height: 260rpx;white-space: nowrap;padding: 0 40rpx;}
+.scroll-item{display: inline-block;position: relative;margin-right:20rpx;}
+.check-icon{width: 32rpx;height: 32rpx;position: absolute;right: 0;top: 0;}
+.tip-box{height: 120rpx;font-size: 24rpx;color: #999;}
+.form-item{height: 120rpx;font-size: 30rpx;}
+.flex-one{flex:1;}
+.form-title{width: 140rpx;font-size: 30rpx;}
+.com-border-width{width: 470rpx;margin-left: auto;}
+.bottom-box{padding: 40rpx 0;display: flex;}
+.textarea-ac{height: 120rpx;width: 485rpx;}
+.bottom-single-btn{position: relative;margin: 50rpx auto 20rpx;bottom: 0;}
+.gray-color{color:#999;}
+.blod-font{font-weight: 600;}
+.up-img-btn{color: #ca7;}
+/* 弹框 */
+.spec-title{font-size: 46rpx;font-weight: bold;text-align: center;margin-top: 30rpx;margin-bottom: 20rpx;}
+.cr-cont{color: #666;font-size: 30rpx;text-align: center;margin-bottom: 20rpx;}
+.spec-view{height: 80rpx;line-height: 80rpx;width:45%;display: inline-block;border: 2rpx solid #B2B2B2;color: #666;font-size: 30rpx;font-weight: bold;border-radius: 10rpx;text-align: center;margin:2%;}
+.spec-view-ac{border:2rpx solid #CCAA77;background: #CCAA77;color: #fff;}
