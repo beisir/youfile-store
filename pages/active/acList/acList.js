@@ -24,6 +24,15 @@ Page({
     }],
     list:[]  
   },
+  // 活动分析
+  activityAnalysis: function (e) {
+    var activityNumber = e.target.dataset.index,
+      title = e.target.dataset.title,
+      status = e.target.dataset.status
+    wx.navigateTo({
+      url: '../../mallActive/activityAnalysis/activityAnalysis?activityNumber=' + activityNumber + "&title=" + title + "&status=" + status,
+    })
+  },
   checkNav(e){
     let thisindex = e.currentTarget.dataset.index,
         arr = this.data.nav

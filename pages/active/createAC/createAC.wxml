@@ -24,7 +24,7 @@
     <scroll-view scroll-x='{{true}}'>
       <view class='scroll-item' wx:for='{{moduleList}}' wx:key='{{index}}' bindtap='checkModel' data-index="{{index}}">
         <image wx:if='{{item.checked}}' src='/image/square-check.png' class='check-icon'></image>
-        <image src='{{item.url?baseUrl+item.url:"/image/scyhk.png"}}' class='show-img' mode='aspectFit'></image>
+        <image src='{{baseUrl+item.showUrl}}' class='show-img' mode='aspectFit'></image>
       </view>
     </scroll-view>
   </view>

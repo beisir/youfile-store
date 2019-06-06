@@ -28,7 +28,7 @@ Page({
         this.setData({ uploadImg: obj.obj })
       }
       arr.forEach(el=>el.checked=false)
-      arr.unshift({ url: obj.obj ,checked:true})
+      arr.unshift({ url: obj.obj, showUrl: obj.obj,checked:true})
       this.setData({
         moduleList: arr
       })
@@ -126,10 +126,26 @@ Page({
       moduleList: arr
     })
   },
+  getTemList(){
+    Api.storeTemList().then(res=>{
+      console.log(res)
+      let arr = []
+      res.obj.forEach(el=>{
+        arr.push({
+          showUrl: el.posterTemplateSmallUrl,
+          url: el.posterTemplateBigUrl
+        })
+      })
+      this.setData({
+        moduleList: arr
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getTemList()
     this.initData()
     var phone = wx.getSystemInfoSync();  //调用方法获取机型
     if (phone.platform == 'ios') {

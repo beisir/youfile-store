@@ -173,17 +173,17 @@
     <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
   </view>
 
-  <swiper wx:if="{{acSwiperList && acSwiperList.length>0}}" current='{{acSwiperIndex}}' class='acbanner-box' bindchange='acswiper'>
+  <swiper wx:if="{{acSwiperList && acSwiperList.length>0}}" current='{{acSwiperIndex}}' class='acbanner-box' bindanimationfinish='acswiper' skip-hidden-item-layout='true'>
     <swiper-item class='ac-banner' wx:for="{{acSwiperList}}" wx:key="{{index}}">
       <acBanner wx:if="{{item.sponsorType=='store'}}" item='{{item}}'></acBanner>
       <image wx:else src='{{baseUrl+item.activityPosterList[0]}}' style='height:360rpx;width:690rpx;border-radius:10rpx;' mode='scaleToFill'></image>
       <image class='ac-timer-backimg' src='/image/ac-timer-back.png'></image>
       <view class='ac-banner-timer ac-stop-time stop-time com-flex-center'>
         <view class='timer-line'></view>
-        限时抢订活动距<block wx:if="{{item.activityStatus=='be_doing'}}">结束</block><block wx:if="{{item.activityStatus=='init'}}">开始</block>{{timerList[acSwiperIndex][0]}}天
-        <text>{{filter.doubleNum(timerList[acSwiperIndex][1])}}</text>: 
-        <text>{{filter.doubleNum(timerList[acSwiperIndex][2])}}</text>:
-        <text>{{filter.doubleNum(timerList[acSwiperIndex][3])}}</text>
+        限时抢订活动距<block wx:if="{{item.activityStatus=='be_doing'}}">结束</block><block wx:if="{{item.activityStatus=='init'}}">开始</block>{{timerList[index][0]}}天
+        <text>{{filter.doubleNum(timerList[index][1])}}</text>: 
+        <text>{{filter.doubleNum(timerList[index][2])}}</text>:
+        <text>{{filter.doubleNum(timerList[index][3])}}</text>
         <view class='timer-line'></view>
       </view>
     </swiper-item>
@@ -383,4 +383,5 @@
   <view hidden='{{goRetailStore}}'>
     <retailStore></retailStore>
   </view>
+  <view style='height:80rpx;background:#f7f7f7;'></view>
 </returnBall>

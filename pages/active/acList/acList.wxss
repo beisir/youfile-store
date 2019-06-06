@@ -5,7 +5,7 @@ page{color:#333;}
 .nav-ac{color: #ca7;border-color: #ca7;height: 100%;line-height: 80rpx;}
 
 .ac-item{margin: 30rpx 30rpx 0;border-radius: 10rpx;background: #fff;}
-.btn-box{height: 100rpx;display: flex;flex-direction: row-reverse;align-items: center;border-top: 1rpx solid #eee;margin-top: 35rpx;}
+.btn-box{height: 100rpx;display: flex;flex-direction: row-reverse;align-items: center;border-top: 1rpx solid #eee;}
 .com-padding{padding-left:30rpx;padding-right: 30rpx;}
 .add-btn{width: 160rpx;height: 60rpx;background: #ca7;color: #fff;font-size: 24rpx;text-align: center;line-height: 60rpx;border-radius: 10rpx;margin-left: 15rpx;}
 .banner-img{width: 100%;}
@@ -17,3 +17,4 @@ page{color:#333;}
 .flex-box{display: flex;}
 .flex-one{flex: 1;}
 .image-box{position: relative;}
+.msg-box{padding-bottom: 35rpx;}

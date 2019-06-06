@@ -266,3 +266,4 @@ export const hideMerchantTipUrl = '/admin/merchant/audit/broadcast/close' //隐�
 // 店铺活动
 export const createACUrl = '/admin/store/activity' 
 export const storeACListUrl = '/admin/store/activity/store/activity/page'
+export const storeTemListUrl = '/admin/store/activity/poster/temple'

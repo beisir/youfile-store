@@ -216,8 +216,10 @@ import {
   merchantSettleMsgUrl,
   merchantDeatailUrl,
   hideMerchantTipUrl,
+  // 活动
   createACUrl,
   storeACListUrl,
+  storeTemListUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1363,7 +1365,11 @@ function createAC(data){
 function storeACList(data){
   return app.pageRequest.pageGet(storeACListUrl, data); 
 }
+function storeTemList(data){
+  return app.http.getRequest(storeTemListUrl, data); 
+}
 module.exports = {
+  storeTemList,
   storeACList,
   createAC,
   hideMerchantTip,

@@ -131,7 +131,7 @@ page{background: #fff;}
 .tab-item {width: 180rpx;height: 66rpx;display:inline-block;position: relative;}
 .tab-text-box{position: absolute;height: 100%;width: 100%;display: flex;align-items: center;justify-content: center;z-index: 9;font-size: 26rpx;color: #666;}
 .tab-item image{width: 180rpx;height: 66rpx;position: absolute;z-index:1;bottom: 0;left: 0;}
-.ac-stop-time{font-size: 24rpx;color: #666;padding: 0 40rpx;height: 80rpx;font-weight: 600;}
+.ac-stop-time{font-size: 24rpx;color: #666;height: 80rpx;font-weight: 600;}
 .ac-stop-time text{margin: 0 8rpx;}
 
 .top-btn-box{height: 100rpx;width: 150rpx;display: flex;align-items: center;justify-content: center;flex-direction: column;position: absolute;top: 60rpx;right: 5rpx;color: #666;z-index: 13;font-size: 26rpx;background: #fff;border: 0;border-left: 1rpx solid #ddd;border-radius: 0;margin: 0;}
@@ -142,6 +142,6 @@ page{background: #fff;}
 /* acbanner */
 .acbanner-box{height: 360rpx;}
 .ac-banner{display: flex;justify-content: center;position: relative;}
-.ac-banner-timer{position: absolute;bottom: 0;width: 690rpx;left: 0;right: 0;margin: auto;background: #fff;justify-content: center;z-index: 1}
+.ac-banner-timer{position: absolute;bottom: 0;width: 690rpx;box-sizing:border-box;left: 0;right: 0;margin: auto;background: #fff;justify-content: center;z-index: 1}
 .timer-line{height: 2rpx;width: 50rpx;background: #666;margin: 0 30rpx;}
 .ac-timer-backimg{position: absolute;bottom: 0;width: 690rpx;height: 90rpx;left: 0;right: 0;margin: auto;}

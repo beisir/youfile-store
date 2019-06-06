@@ -1,5 +1,5 @@
 /* pages/active/acBanner/acBanner.wxss */
 .banner-box{position: relative;width: 690rpx;height: 280rpx;margin: 0 auto;text-align: center;}
 .image-style{width: 690rpx;height: 280rpx;border-radius: 10rpx;}
-.ac-name{position: absolute;width: 100%;text-align: center;top: 135rpx;font-size: 56rpx;line-height: 1;color: #fff;}
-.ac-des{position: absolute;width: 80%;left: 0;right: 0;margin: auto;bottom: 0;top: 203rpx;font-size: 24rpx;color: #fff;}
+.ac-name{position: absolute;width: 100%;text-align: center;top: 135rpx;font-size: 56rpx;line-height: 1;color: #fff;text-shadow:5rpx 5rpx 0 rgba(100,96,96,0.25); }
+.ac-des{position: absolute;width: 80%;left: 0;right: 0;margin: auto;top: 194rpx;font-size: 24rpx;color: #fff;line-height: 30rpx;text-shadow:5rpx 5rpx 0 rgba(100,96,96,0.25);}

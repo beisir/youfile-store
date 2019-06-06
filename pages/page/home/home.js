@@ -532,7 +532,8 @@ Page({
         _this.setData({
           avtiveGoods: obj,
           activeResult: [],
-          activityNumber: obj[0].activityNumber
+          activityNumber: obj[0].activityNumber,
+          currentTabActive: 0
         }, function () {
           _this.getActiveList()
         })

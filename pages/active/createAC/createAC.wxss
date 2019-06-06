@@ -4,8 +4,8 @@
 .com-padding{padding: 0 50rpx;}
 .img-icon{width: 36rpx;height: 36rpx;margin-right: 20rpx;}
 .border-line{border-bottom: 1rpx solid #eee;}
-.show-img{width: 305rpx;height: 124rpx;}
-.scroll-box{height: 260rpx;white-space: nowrap;padding: 0 40rpx;}
+.show-img{width: 305rpx;height: 124rpx;border-radius: 10rpx;}
+.scroll-box{height: 204rpx;white-space: nowrap;padding: 0 40rpx;}
 .scroll-item{display: inline-block;position: relative;margin-right:20rpx;}
 .check-icon{width: 32rpx;height: 32rpx;position: absolute;right: 0;top: 0;}
 .tip-box{height: 120rpx;font-size: 24rpx;color: #999;}
