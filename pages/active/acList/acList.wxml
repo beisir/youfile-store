@@ -20,8 +20,8 @@
         <text class='flex-one'>{{item.introduction?item.introduction:''}}</text>
       </view>
     </view>
-    <view class='btn-box com-padding' wx:if="{{item.activityStatus!=='finish'}}">
-      <view class='add-btn'>
+    <view class='btn-box com-padding'>
+      <view class='add-btn' wx:if="{{item.activityStatus!=='finish'}}">
         <navigator url='../../mallActive/waitRalease/waitRalease?activityNumber={{item.activityNumber}}'>添加活动商品</navigator>
       </view>
       <view class='add-btn' wx:if="{{item.activityStatus=='finish' || item.activityStatus=='be_doing'}}" data-index="{{item.activityNumber}}" data-title="{{item.activityName}}" data-status='{{item.activityStatus}}' bindtap='activityAnalysis'>活动分析</view>

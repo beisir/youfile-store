@@ -15,7 +15,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.6.6",
+	"libVersion": "2.7.1",
 	"appid": "wx4f385374765e4cbb",
 	"projectname": "miniprogram-test-1",
 	"debugOptions": {

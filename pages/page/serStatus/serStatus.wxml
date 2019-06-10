@@ -18,7 +18,7 @@
               <image mode="widthFix" src="/image/shan.png" />抢订价</view>
             ￥<text>{{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
             <view class='goods-zize'>￥{{item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice}}</view>
-            <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='copy-img' src="/image/dd.png" />
+            <!-- <image catchtap='copyGoods' wx:if='{{limitShow==3}}' class='copy-img' src="/image/dd.png" /> -->
           </view>
           <view class='dc-xian'>
             <view>

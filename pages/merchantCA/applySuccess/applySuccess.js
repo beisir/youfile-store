@@ -1,6 +1,4 @@
-// pages/merchantCA/auditStatus/auditStatus.js
-import Api from '../../../utils/api.js'
-import { formatTimeday} from '../../../utils/util.js'
+// pages/active/applySuccess/applySuccess.js
 Page({
 
   /**
@@ -9,30 +7,12 @@ Page({
   data: {
 
   },
-  getDetail() {
-    Api.merchantDeatail().then(res => {
-      if (res.obj.auditTime){
-        res.obj.auditTime = formatTimeday(new Date(res.obj.auditTime))
-      } else {
-        res.obj.auditTime = ''
-      }
-      this.setData({
-        message: res.obj
-      })
-      if (res.obj.auditStatus === 'success' && !res.obj.auditBroadcast){
-        Api.hideMerchantTip()
-      }
-    })
-  },  
-  toDetail(){
-    wx.redirectTo({
-      url: '../commonMsg/commonMsg',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
   },
 
   /**
@@ -46,7 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getDetail()
+
   },
 
   /**

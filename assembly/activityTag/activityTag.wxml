@@ -1,3 +1,4 @@
 <view class='ac-time' style='top:{{top}}rpx;left:{{left}}rpx'>
-  <image mode='widthFix' src="{{baseUrl}}{{extInfo.promotionShowLogo}}"></image>
+  <!-- <image mode='widthFix' src="{{baseUrl}}{{extInfo.promotionShowLogo}}"></image> -->
+  <image mode='widthFix' src="/image/ac-list-icon.png"></image>
 </view>

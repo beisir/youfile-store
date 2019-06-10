@@ -239,7 +239,7 @@
           ￥
           <text>{{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
           <view class='goods-zize'>￥{{item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice}}</view>
-          <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='copy-img' src="/image/dd.png" />
+          <image catchtap='copyGoods' wx:if='{{limitShow==3}}' data-id='{{item.id}}' class='copy-img' src="/image/dd.png" />
         </view>
         <view class='dc-xian'>
           <view>
@@ -352,12 +352,13 @@
                   <text wx:if='{{limitShow!=1}}' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.wholesalePrice}}</text>
                   <image wx:if='{{limitShow==1}}' bindtap='addWholesalePrice' src='/image/wh.png'></image>
                   <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
-                  <image bindtap='copyGoods' wx:if='{{limitShow==3}}' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" />
+                  <image catchtap='copyGoods' wx:if='{{limitShow==3}}' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" />
                 </view>
                  <view wx:else  class='extInfo-color'>
                   抢订
                   <text bindtap='lookDetails'>￥ {{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
                   <image wx:if='{{limitShow==2}}' class='h-img' data-id='{{item.id}}' data-src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/store-cover" data-name='{{item.name}}' bindtap='editFun' src="/image/edit2.png" />
+                  <image catchtap='copyGoods' wx:if='{{limitShow==3}}' class='h-img h-img1' data-id='{{item.id}}' src="/image/dd.png" />
                 </view>
               </view>
             </block>

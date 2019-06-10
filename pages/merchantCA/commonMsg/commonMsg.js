@@ -318,7 +318,7 @@ Page({
       Api.showToast(res.message)
       setTimeout(()=>{
         wx.redirectTo({
-          url: '../../page/userM/userM',
+          url: '../applySuccess/applySuccess',
         })
       },800)
     })

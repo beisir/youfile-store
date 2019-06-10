@@ -1,0 +1,6 @@
+<view class='fix-box'>
+  <image src='/image/apply-success.png' style='width:326rpx;height:249rpx;margin-left:-26rpx;'></image>
+  <text class='pagetitle'>提交成功</text>
+  <text class='pagedes'>我们会尽快为您审核资质</text>
+  <navigator url='../auditStatus/auditStatus' open-type='redirect'><button class='gold-btn'>查看审核进度</button></navigator>
+</view>

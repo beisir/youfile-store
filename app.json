@@ -3,6 +3,7 @@
     "pages/page/home/home",
     "pages/active/createAC/createAC",
     "pages/active/acList/acList",
+    "pages/merchantCA/applySuccess/applySuccess",
     "pages/merchantCA/commonMsg/commonMsg",
     "pages/merchantCA/auditStatus/auditStatus",
     "pages/merchantCA/merchantType/merchantType",
@@ -188,7 +189,7 @@
         "pagePath": "pages/page/user/user",
         "iconPath": "image/42.png",
         "selectedIconPath": "image/41.png",
-        "text": "客户"
+        "text": "我的"
       }
     ]
   },

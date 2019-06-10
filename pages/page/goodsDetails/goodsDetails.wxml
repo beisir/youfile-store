@@ -334,7 +334,7 @@
                     <view style='{{newSkuOnly?"width:28%":"width:22%"}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
                     <view class='line-price' style='color:#000;{{newSkuOnly?"width:28%":"width:22%"}}'>
                       <view class="jiage-t jiage-tRed" wx:if="{{item.isActivity}}" style='font-size:20rpx'>
-                        <image src="/image/shans.png" mode='widthFix'></image>抢购价</view>
+                        <image src="/image/shans.png" mode='widthFix'></image>抢订价</view>
                       <view class="jiage-t" wx:else style='font-size:20rpx'>批发价</view>
                       ￥{{item.isActivity?item.activityPrice:item.wholesalePrice}}
                     </view>
@@ -385,7 +385,7 @@
             <view class='gd-title1'>{{goodsInfo.name}}</view>
             <view class='hasc-a' wx:if='{{goodsInfo.isActivity}}'>￥{{goodsInfo.activityPrice }}
               <view class="jiage-t jiage-tRed" style='font-size:20rpx;margin:unset;float:left;margin-left:5px;'>
-                <image src="/image/shans.png" mode='widthFix'></image>抢购价</view>
+                <image src="/image/shans.png" mode='widthFix'></image>抢订价</view>
             </view>
             <view class='hasc-a' style='color:#ca7;' wx:else>￥{{goodsInfo.sellPrice}}</view>
             <text class='stockNum-box' wx:if='{{!goodsInfo.isActivity}}'>库存：{{goodsInfo.stockNum}}件</text>
@@ -513,7 +513,7 @@
                     <view style='{{newSkuOnly?"width:28%":"width:22%"}}' class='{{discountShow?"":"add-xian"}}'>￥{{item.sellPrice}}</view>
                     <view class='line-price' style='color:#000;{{newSkuOnly?"width:28%":"width:22%"}}'>
                       <view class="jiage-t jiage-tRed" wx:if="{{item.isActivity}}" style='font-size:20rpx'>
-                        <image src="/image/shans.png" mode='widthFix'></image>抢购价</view>
+                        <image src="/image/shans.png" mode='widthFix'></image>抢订价</view>
                       <view class="jiage-t" wx:else style='font-size:20rpx'>批发价</view>
                       ￥{{item.isActivity?item.activityPrice:item.wholesalePrice}}
                     </view>

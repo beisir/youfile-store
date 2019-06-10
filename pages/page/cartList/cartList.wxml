@@ -88,12 +88,12 @@
 
                       <view class="cc-coun-new" wx:if="{{item.shoppingCartSkuList.length==1}}">
                         <view catchtap="addCount" data-sign="reduce" data-obj="{{obj}}" class='{{item.num==1? "classFont": ""}} ' data-index="{{index}}">-</view>
-                        <input class='cc-add ' data-sign="input" type='number' data-index="{{index}}" bindblur='addCount ' value='{{item.num}} '></input>
+                        <input class='cc-add ' data-sign="input" type='number' data-index="{{index}}" bindinput='bindInputValue' bindblur='addCount' value='{{item.num}}'></input>
                         <view catchtap="addCount" data-sign="add" class='{{item.num==item.shoppingCartSkuList[0].stockNum? "classFontAdd": ""}} ' data-index="{{index}}">+</view>
                       </view>
                       <view class="cc-coun-new" wx:if="{{item.shoppingCartSkuList==null}}" wx:for-item="record">
                         <view bindtap="addCountNew" data-sign="reduce" data-obj="{{obj}}" class='{{item.num==1? "classFont": ""}} ' data-index="{{index}}">-</view>
-                        <input class='cc-add ' data-sign="input" type='number' data-index="{{index}}" bindblur='addCountNew' value='{{item.num}} '></input>
+                        <input class='cc-add ' data-sign="input" type='number' data-index="{{index}}" bindinput='bindInputValue' bindblur='addCountNew' value='{{item.num}}'></input>
                         <view bindtap="addCountNew" data-sign="add" class='{{item.num==item.stockNum? "classFontAdd": ""}} ' data-index="{{index}}">+</view>
                       </view>
 

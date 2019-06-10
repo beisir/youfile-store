@@ -212,9 +212,9 @@ export const goodsPosterNumUrl = '/admin/marketing/poster/goods/{{goodsId}}/coun
 // 查询店铺有效活动
 export const storeActiveGoodsUrl="/api/activity/{{storeId}}/activity/doing/list"
 // 活动
-export const activityListUrl='/admin/mall/activity/{{mallCode}}/page'
-export const participateUrl="/admin/mall/activity/{{activityNumber}}/participate"
-export const activeDetailsUrl="/admin/mall/activity/{{activityNumber}}"
+export const activityListUrl ='/admin/activity/mall/{{mallCode}}/page'
+export const participateUrl ="/admin/activity/{{activityNumber}}/participate/mall/activity"
+export const activeDetailsUrl="/admin/activity/{{activityNumber}}"
 export const releaseGoodsUrl ="/admin/goods/activity/{{activityNumber}}/goods/{{goodsId}}/release"
 export const addActiveGoodsUrl ="/admin/goods/activity"
 export const addAMoreGoodsUrl ="/admin/goods/activity/batch"
@@ -224,12 +224,12 @@ export const allGoodsUrl="/admin/goods/activity/goods/for/{{activityNumber}}/pag
 export const delActGoodsUrl="/admin/goods/activity/{{activityNumber}}/goods/{{goodsId}}"
 export const getActiveGoodsDetailUrl = '/admin/goods/activity/{{activityNumber}}/goods/{{goodsId}}'
 export const editActiveGoodsUrl = '/admin/goods/activity/goods/edit'
-export const saleActiveListUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/sales/list"
-export const statisticSalesUrl="/admin/mall/activity/statistic/sum/{{activityNumber}}/store/sales/all"
+export const saleActiveListUrl="/admin/activity/statistic/{{activityNumber}}/store/sales/list"
+export const statisticSalesUrl="/admin/activity/statistic/sum/{{activityNumber}}/store/sales/all"
 // 统计云分销数据
 export const yunStatisticsUrl="/order/statistics/distribution"
-export const aAnalysisAGoodsUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/goods/top"
-export const aAnalysisCustomUrl="/admin/mall/activity/statistic/{{activityNumber}}/store/custom/top"
+export const aAnalysisAGoodsUrl="/admin/activity/statistic/{{activityNumber}}/store/goods/top"
+export const aAnalysisCustomUrl="/admin/activity/statistic/{{activityNumber}}/store/custom/top"
 // 统计查询进货商汇总数据列表
 export const statPurchasersUrl="/order/statistics/purchasers/trade/data/page"
 export const statPurchasersDetailsUrl="/order/statistics/purchaser/{{userId}}/trade/data"
@@ -264,6 +264,6 @@ export const merchantSettleMsgUrl = '/admin/merchant/settle'   // 保存基本�
 export const merchantDeatailUrl = '/admin/merchant/detail' //获取信息
 export const hideMerchantTipUrl = '/admin/merchant/audit/broadcast/close' //隐藏tip
 // 店铺活动
-export const createACUrl = '/admin/store/activity' 
-export const storeACListUrl = '/admin/store/activity/store/activity/page'
-export const storeTemListUrl = '/admin/store/activity/poster/temple'
+export const createACUrl = '/admin/activity' 
+export const storeACListUrl = '/admin/activity/store/activity/page'
+export const storeTemListUrl = '/admin/activity/poster/temple'

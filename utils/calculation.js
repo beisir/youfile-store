@@ -174,7 +174,6 @@ class Calculation {
             discountShow = true
           }
         }
-        console.log(saleBatchNumGoods+"//"+nums)
         differNum = saleBatchNumGoods - nums
         differMoney = saleBatchAmount - total
       }

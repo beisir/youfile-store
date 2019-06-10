@@ -523,11 +523,18 @@ Page({
     });
     this.getTotalPrice();
   },
-
+  bindInputValue(e){
+    let thisindex = e.currentTarget.dataset.index,
+        value = e.detail.value
+    this.setData({
+      ['detailList[' + thisindex+'].num']: value
+    })
+  },
   /**
    * 绑定改变数量事件
    */
   addCountNew(e) {
+    console.log(e)
     var sign = e.currentTarget.dataset.sign //获取是增加还是减少 或者手动输入 input代表手动输入
     const index = e.currentTarget.dataset.index;
     let detailList = this.data.detailList;

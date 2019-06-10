@@ -34,7 +34,7 @@ Page({
     currentTabActive: 0,
     acSwiperIndex: 0, // bannerindex
     confirmDown: false,
-    baseUrl: '',
+    baseUrl: app.globalData.imageUrl,
     activeResult: [],
     result: [],
     noMoreData: true,
@@ -436,7 +436,6 @@ Page({
           _this.setData({
             result: newArr,
             totalCount: totalCount,
-            baseUrl: app.globalData.imageUrl,
             noMoreData: true
           },()=>{
             _this.getHeight(newArr)
@@ -494,7 +493,6 @@ Page({
           that.setData({
             store: obj.store,
             floorInfo: floorInfo,
-            baseUrl: app.globalData.imageUrl,
             coverUrl: obj.store.coverUrl,
             // result: result,
             totalCount: obj.goods.totalCount,
@@ -849,7 +847,6 @@ Page({
           _this.setData({
             result: newArr,
             totalCount: totalCount,
-            baseUrl: app.globalData.imageUrl,
             noMoreData: true
           }, () => {
             _this.getHeight(newArr)
