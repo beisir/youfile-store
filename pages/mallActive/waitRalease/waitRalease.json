@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "商贸云活动",
+  "navigationBarTitleText": "活动商品管理",
   "usingComponents": {
     "mes": "../../../../assembly/tips/tips",
     "bottomLayer": "../../../../assembly/bottomLayer/bottomLayer"

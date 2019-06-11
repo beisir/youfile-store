@@ -345,7 +345,7 @@
                           <image src="/image/jian.png"></image>
                         </view>
                         <view class="lt-num" style='border-top:0'>
-                          <input value='{{item.num}}' type='number' data-index='{{index}}' data-sign='input' bindblur='updateSkuNum'></input>
+                          <input value='{{item.num}}' type='number' data-index='{{index}}' data-sign='input' maxlength='6' bindblur='updateSkuNum'></input>
                         </view>
                         <view class="lt-add" data-index='{{index}}' data-sign='add' bindtap="updateSkuNum">
                           <image src="/image/lt-a.png"></image>

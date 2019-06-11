@@ -38,7 +38,7 @@
     <view wx:else class='no-result-box'>暂无进货商数据</view>
   </view>
 </view>
-<view class='listData' style='padding-bottom:20rpx;'>
+<view class='listData' style='padding-bottom:80rpx;'>
   <view>
     <view class='aa-top'>商品销量榜</view>
     <block wx:if="{{activeGoods && activeGoods.length > 0}}">

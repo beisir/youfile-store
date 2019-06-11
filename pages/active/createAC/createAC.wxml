@@ -29,7 +29,7 @@
     </scroll-view>
   </view>
   <view class='border-line'></view>
-  <view class='tip-box com-flex-center com-padding'>自定义上传活动背景图片模板时，图片尺寸690*280像素，图片大小不超过1M</view>
+  <view class='tip-box com-padding'>自定义上传活动背景图片模板时，图片尺寸<text class='gold-font'>690*280</text>像素，图片大小不超过<text class='gold-font'>1M</text></view>
 </view>
 
 <view class='com-box com-padding'>
@@ -85,7 +85,7 @@
 <view class='com-box com-padding'>
   <view class='bottom-box'>
     <text class='form-title'>活动介绍</text>
-    <textarea style='margin-top:{{iosTextarea?"-10rpx":0}}' maxlength='30'  bindinput='watchInput' data-type='acintro' value='{{introduction}}' class='textarea-ac' placeholder='请输入活动介绍'></textarea>
+    <textarea style='margin-top:{{iosTextarea?"-10rpx":0}}' maxlength='40'  bindinput='watchInput' data-type='acintro' value='{{introduction}}' class='textarea-ac' placeholder='请输入活动介绍'></textarea>
   </view>
 </view>
 

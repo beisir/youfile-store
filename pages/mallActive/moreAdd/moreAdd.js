@@ -46,7 +46,8 @@ Page({
     var _this = this
     Api.allGoods({
       activityNumber: this.data.activityNumber,
-      goodsStatus:"1,3"
+      goodsStatus: "1,3",
+      participate: false
       })
       .then(res => {
         var obj = res.obj.result
@@ -89,6 +90,8 @@ Page({
       goodId = e.currentTarget.dataset.id,
       datas = this.data.result,
       arr = this.data.goodsIds
+    // 已参加禁止选择
+    if (datas[index].participate){return}  
     const selected = datas[index].selected;
     if (!datas[index].selected) {
       arr.push(goodId)
@@ -106,15 +109,18 @@ Page({
   selectAll(e) {
     var data = this.data.result,
       selectAllStatus = this.data.selectAllStatus,
-      arr = this.data.goodsIds
-    arr = []
+      arr = []
+    
     for (var i = 0; i < data.length; i++) {
+      if (data[i].participate){
+        continue
+      }
       if (selectAllStatus) {
         data[i].selected = false
         arr = []
       } else {
         data[i].selected = true
-        arr.push(data[i].id)
+        arr.push(data[i].goodsVO.id)
       }
     }
     this.setData({

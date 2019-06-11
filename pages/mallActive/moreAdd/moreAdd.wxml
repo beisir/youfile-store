@@ -6,6 +6,7 @@
     <view class='g-cont'>
       <view class='g-image'>
         <image wx:if="{{item.goodsVO.mainImgUrl}}" src='{{baseUrl}}{{item.goodsVO.mainImgUrl}}'></image>
+        <view wx:if='{{item.participate}}'>已参加</view>
       </view>
       <view>
         <view class='g-title'>{{item.goodsVO.name}} </view>

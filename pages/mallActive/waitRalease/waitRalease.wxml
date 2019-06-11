@@ -32,15 +32,9 @@
   <view>
     <view class='ld-t'>{{activeDetails.activityName}}</view>
     <view class='ld-cont'>
-      <view class='ld-yellow' wx:if="{{activeDetails.activityStatus=='init'}}">
-        活动未开始
-      </view>
-      <view class='ld-red' wx:if="{{activeDetails.activityStatus=='be_doing'}}">
-        活动进行中
-      </view>
-      <view class='ld-red' wx:if="{{activeDetails.activityStatus=='finish'}}">
-        活动已结束
-      </view>
+      <view class='ld-yellow' wx:if="{{activeDetails.activityStatus=='init'}}">活动未开始</view>
+      <view class='ld-red' wx:if="{{activeDetails.activityStatus=='be_doing'}}">活动进行中</view>
+      <view class='ld-red' wx:if="{{activeDetails.activityStatus=='finish'}}">活动已结束</view>
       <view class='lr-item'>
         <text>活动时间</text><view>{{activeDetails.startTime}} 至 {{activeDetails.endTime}}</view></view>
       <view class='lr-item' wx:if="{{activeDetails.mallCategoryCodeName}}">

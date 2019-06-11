@@ -8,7 +8,7 @@
 .scroll-box{height: 204rpx;white-space: nowrap;padding: 0 40rpx;}
 .scroll-item{display: inline-block;position: relative;margin-right:20rpx;}
 .check-icon{width: 32rpx;height: 32rpx;position: absolute;right: 0;top: 0;}
-.tip-box{height: 120rpx;font-size: 24rpx;color: #999;}
+.tip-box{padding-top:22rpx;padding-bottom:22rpx;font-size: 24rpx;color: #999;}
 .form-item{height: 120rpx;font-size: 30rpx;}
 .flex-one{flex:1;}
 .form-title{width: 140rpx;font-size: 30rpx;}

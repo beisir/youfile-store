@@ -179,12 +179,12 @@
       <image wx:else src='{{baseUrl+item.activityPosterList[0]}}' style='height:360rpx;width:690rpx;border-radius:10rpx;' mode='scaleToFill'></image>
       <image class='ac-timer-backimg' src='/image/ac-timer-back.png'></image>
       <view class='ac-banner-timer ac-stop-time stop-time com-flex-center'>
-        <view class='timer-line'></view>
-        限时抢订活动距<block wx:if="{{item.activityStatus=='be_doing'}}">结束</block><block wx:if="{{item.activityStatus=='init'}}">开始</block>{{timerList[index][0]}}天
+        <view class='timer-line' style='margin-left:0;'></view>
+        限时抢订活动距<block wx:if="{{item.activityStatus=='be_doing'}}">结束</block><block wx:if="{{item.activityStatus=='init'}}">开始</block><view class='com-red-color' style="font-size:28rpx;padding:0 5rpx;">{{timerList[index][0]}}</view>天
         <text>{{filter.doubleNum(timerList[index][1])}}</text>: 
         <text>{{filter.doubleNum(timerList[index][2])}}</text>:
         <text>{{filter.doubleNum(timerList[index][3])}}</text>
-        <view class='timer-line'></view>
+        <view class='timer-line' style='margin-right:0;'></view>
       </view>
     </swiper-item>
   </swiper>
