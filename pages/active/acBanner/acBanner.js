@@ -5,7 +5,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    item:{
+    item: {
       type: Object,
       value: {}
     }
@@ -17,7 +17,6 @@ Component({
   data: {
     baseUrl: app.globalData.imageUrl
   },
-
   /**
    * 组件的方法列表
    */

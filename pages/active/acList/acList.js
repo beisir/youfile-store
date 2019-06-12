@@ -52,9 +52,6 @@ Page({
   getList(re){
     if (re) {
       app.pageRequest.pageData.pageNum = 0;
-      this.setData({
-        list: []
-      })
     }
     let obj = {}
     let arr = this.data.nav
@@ -72,9 +69,15 @@ Page({
           el.startTime = util.formatTime(new Date(el.startTime))
           el.endTime = util.formatTime(new Date(el.endTime))
         })
-        this.setData({
-          list: this.data.list.concat(res.obj.result)
-        })
+        if (re) {
+          this.setData({
+            list: res.obj.result
+          })
+        } else {
+          this.setData({
+            list: this.data.list.concat(res.obj.result)
+          })
+        }
       }
     })
   },
@@ -117,13 +120,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getList()
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    this.getList()
   },
 })

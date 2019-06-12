@@ -507,6 +507,7 @@ Page({
       })
   },
   handelACBanner(){
+    this.setData({ acSwiperIndex: 0 })
     let arr = this.data.acSwiperList
     arr.forEach((el,index)=>{
       this.timerhandle(el.timeSeconds, index)

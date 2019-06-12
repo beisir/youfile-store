@@ -42,3 +42,4 @@
   </view>
   <view class='ma-re' bindtap='releaseMoreGoods'>发布</view>
 </view>
+<view class='bottom-replace-box'></view>

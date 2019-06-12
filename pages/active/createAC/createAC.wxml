@@ -50,26 +50,26 @@
   </view>
   <view class='border-line com-border-width'></view>
 
+  <picker mode="multiSelector" bindchange="changeDateTime" value="{{dateTime1}}"  bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
   <view class='form-item com-flex-between'>
     <view class='com-flex-center flex-one'>
       <text class='form-title'>开始时间</text>
-      <picker mode="multiSelector" bindchange="changeDateTime" value="{{dateTime1}}"  bindcolumnchange="changeDateTimeColumn1" range="{{dateTimeArray1}}">
         <input placeholder='请选择活动开始时间' value='{{startDataTime}}' disabled='true'></input>
-      </picker>
     </view>
     <image src='/image/poster-right-in.png' class='com-right-icon'></image>
   </view>
+  </picker>
   <view class='border-line com-border-width'></view>
 
+  <picker mode="multiSelector" value="{{[1,0]}}"  bindchange="changeTime" range="{{dayandhour}}">
   <view class='form-item com-flex-between'>
     <view class='com-flex-center flex-one'>
       <text class='form-title'>持续时间</text>
-      <picker mode="multiSelector" value="{{[1,0]}}"  bindchange="changeTime" range="{{dayandhour}}">
         <input placeholder='请选择活动持续时间'  value="{{time}}"  disabled='true'></input>
-      </picker>
     </view>
     <image src='/image/poster-right-in.png' class='com-right-icon'></image>
   </view>
+  </picker>
   <view class='border-line com-border-width'></view>
 
   <view class='form-item com-flex-between'>
