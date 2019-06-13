@@ -18,10 +18,12 @@ Page({
   },
   // 分享
   share(e) {
-    this.setData({
-      shareItem: e.currentTarget.dataset.item 
+    Api.goodsPosterNum({ goodsId: e.currentTarget.dataset.item.id }).then(res => {
+      let posterTip = false
+      res.obj > 0 ? posterTip = true : posterTip = false
+      this.setData({ shareItem: e.currentTarget.dataset.item, posterTip })
+      this.selectComponent("#shareway").open();
     })
-    this.selectComponent("#shareway").open();
   },
   closeBootom(){
     this.selectComponent("#shareway").close();
