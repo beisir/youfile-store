@@ -171,12 +171,15 @@
     </view>
   </view>
 </view>
+
+<form report-submit='true' bindsubmit='getFormId'>
 <view class="cart-footer">
   <view class='order-all'>
     实付款：
     <text class="bold-font">￥{{price}}</text>
   </view>
-  <view class="order-icon" bindtap='submit'>
+  <button form-type='submit' class="order-icon" bindtap='submit'>
     提交{{orderTitle}}
-  </view>
+  </button>
 </view>
+</form>

@@ -2,6 +2,7 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
 import { goodsListBindingSku } from '../../../utils/goodsActivity.js'
+import { saveFormID } from '../../../utils/modelMsg.js'
 Page({
 
   /**
@@ -27,6 +28,9 @@ Page({
       check: true,
       type: 'offline'
     }
+  },
+  getFormId(e) {
+    saveFormID(e)
   },
   //自动获取手机
   getMobile(){

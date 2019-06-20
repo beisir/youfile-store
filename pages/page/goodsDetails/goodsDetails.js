@@ -1215,8 +1215,9 @@ Page({
   // 下载多张图片
   dowLoadImg: function() {
     var _this = this,
-      imgUrls = this.data.goodsInfo.imgUrls,
+      imgUrls = this.data.goodsInfo.goodsImageVOList,
       arr = []
+    if (!imgUrls){return}
     for (var i = 0; i < imgUrls.length; i++) {
       arr.push(this.data.baseUrl + imgUrls[i].imageUrl + "?x-oss-process=style/store-cover")
       wx.getImageInfo({     //下载图片

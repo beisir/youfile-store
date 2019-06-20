@@ -145,3 +145,5 @@ page{background: #fff;}
 .ac-banner-timer{position: absolute;bottom: 0;width: 690rpx;box-sizing:border-box;left: 0;right: 0;margin: auto;background: #fff;justify-content: center;z-index: 1}
 .timer-line{height: 2rpx;width: 50rpx;background: #666;margin: 0 30rpx;}
 .ac-timer-backimg{position: absolute;bottom: 0;width: 690rpx;height: 90rpx;left: 0;right: 0;margin: auto;}
+/* 商品主图按钮 */
+.special-goods-btn{background: #fff!important;padding:0;margin-top:0;border-radius:0;border:0;}

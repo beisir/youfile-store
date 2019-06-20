@@ -220,6 +220,9 @@ import {
   createACUrl,
   storeACListUrl,
   storeTemListUrl,
+  // formid
+  getOpenidUrl,
+  saveFormidUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1368,7 +1371,19 @@ function storeACList(data){
 function storeTemList(data){
   return app.http.getRequest(storeTemListUrl, data); 
 }
+/**
+ * 存储formid
+ */
+function getOpenid(data) {
+  return app.http.getRequest(getOpenidUrl, data, { "platAppId": app.globalData.payAppNum});
+}
+function saveFormid(data) {
+  return app.http.postRequest(saveFormidUrl + "?openId=" + data.openId + "&formId=" + data.formId, data, { "platAppId": app.globalData.payAppNum });
+}
+
 module.exports = {
+  getOpenid,
+  saveFormid,
   storeTemList,
   storeACList,
   createAC,

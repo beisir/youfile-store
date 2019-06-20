@@ -267,3 +267,6 @@ export const hideMerchantTipUrl = '/admin/merchant/audit/broadcast/close' //隐�
 export const createACUrl = '/admin/activity' 
 export const storeACListUrl = '/admin/activity/store/activity/page'
 export const storeTemListUrl = '/admin/activity/poster/temple'
+// 储存openid以及formid
+export const getOpenidUrl = '/api/weixin/user/obtain/openid'
+export const saveFormidUrl = '/api/weixin/user/fromid/collect'

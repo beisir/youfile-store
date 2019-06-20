@@ -5,6 +5,7 @@ import EnterStoreHandler from '../../../utils/enterStoreHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
 import util from '../../../utils/util.js';
 import { handleQRCode } from '../../../utils/scanCode.js';
+import { saveFormID } from '../../../utils/modelMsg.js'
 var timerList = []
 // 身份判断
 function getIdentity(_this) {
@@ -62,6 +63,10 @@ Page({
     tabSwitch: "1",
     tabSwitchShow: false,
     avtiveGoods: []
+  },
+  // 埋点存储formid
+  getFormId(e){
+    saveFormID(e)
   },
   // 切换抢购商品
   tabSwitch: function (e) {
