@@ -1,6 +1,7 @@
 // pages/nopay/nopay.js
 const util = require('../../../utils/util.js');
 import API from "../../../utils/api.js";
+import { saveFormID } from '../../../utils/modelMsg.js'
 const app = getApp();
 Page({
 
@@ -13,6 +14,10 @@ Page({
     orderName: "订单",
     timeOnce: true,
     remark: ""
+  },
+  // 埋点存储formid
+  getFormId(e) {
+    saveFormID(e)
   },
   // 编辑物流
   editExpress(){

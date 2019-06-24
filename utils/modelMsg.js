@@ -31,7 +31,6 @@ function saveFormID(e){
     let formId = e.detail.formId
     // if (formId === 'the formId is a mock one'){return}
     getOpenid().then(openId=> {
-      console.log(openId)
       Api.saveFormid({ openId, formId}).then(res=> {
       })
     })

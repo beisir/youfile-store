@@ -3,6 +3,7 @@ const app = getApp();
 var seeImg = false;
 let timer;
 import API from '../../../utils/api.js';
+import { saveFormID } from '../../../utils/modelMsg.js'
 Page({
 
   /**
@@ -60,6 +61,10 @@ Page({
     //快递
     expressageCom:"",
     expressageCode: ""
+  },
+  // 埋点存储formid
+  getFormId(e) {
+    saveFormID(e)
   },
   initListType(type) {
     let list = this.data.nav;

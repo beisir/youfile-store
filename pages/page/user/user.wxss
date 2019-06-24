@@ -154,3 +154,10 @@
   width: 43rpx;
   margin-bottom: 3rpx;
 }
+.reset-form-button{
+  width:100%;
+  border:0;
+  margin-top:0;
+  background: #fff;
+  text-align:left;
+}

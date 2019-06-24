@@ -17,3 +17,6 @@
 .tips-box{height: 100rpx;background: #fdfced;}
 .tip-item{color: #e5723a;font-size: 30rpx;height: 100rpx;font-weight: 600;font-family:STHeiti;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;padding: 0 20rpx;}
 .tip-icon{height: 30rpx;width: 30rpx;padding-right: 20rpx;}
+/* 提交按钮 */
+.reset-form-btn{width: 100%;border: 0;height: 100rpx;color: #333;background: #fff;line-height: normal;padding: 0;margin: 0;}
+.entry-icon-box{height: 56rpx;}

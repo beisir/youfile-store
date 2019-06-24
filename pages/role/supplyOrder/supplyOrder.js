@@ -3,6 +3,7 @@ const app = getApp();
 var seeImg = false;
 import API from '../../../utils/api.js';
 let timer;
+import { saveFormID } from '../../../utils/modelMsg.js'
 Page({
 
   /**
@@ -35,6 +36,10 @@ Page({
     style: false,
     whitch: 'all' //切换
 
+  },
+  // 埋点存储formid
+  getFormId(e) {
+    saveFormID(e)
   },
   // 监听输入
   watchInput(e) {

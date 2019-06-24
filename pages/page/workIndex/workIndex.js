@@ -1,6 +1,7 @@
 import Api from '../../../utils/api.js'
 import authHandler from '../../../utils/authHandler.js';
 import IsStoreOwner from '../../../utils/isStoreOwner.js';
+import { saveFormID } from '../../../utils/modelMsg.js'
 const app = getApp()
 Page({
 
@@ -19,6 +20,10 @@ Page({
     unshippedPurchaseOrders: 0,
     payPurchaseOrders: 0,
     auditStatus:true
+  },
+  // 埋点存储formid
+  getFormId(e) {
+    saveFormID(e)
   },
   // 页面跳转
   goUser: function() {

@@ -73,6 +73,14 @@ function parseQRcode(options) {
 
 function parseNormal(options){
   switch (options.type){
+    case 'pay_success': // 买家已付款，通知买家
+    case 'send_goods':  // 已发货通知买家
+    case 'new_order': // 买家已付款，通知卖家
+      return {
+        path: '/pages/page/user/user',
+        data: options
+      }
+    break;      
     case 'workIndex':
       return {
         path: '/pages/page/workIndex/workIndex',

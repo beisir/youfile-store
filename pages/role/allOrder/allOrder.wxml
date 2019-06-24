@@ -382,27 +382,28 @@
 </view>
 
 <!-- 按钮 -->
+<form report-submit='true' bindsubmit='getFormId'>
 <view class='cf-button' wx:if="{{!((!order.payVoucher) && (status=='canceled' || (status=='delivered' && self=='false') || status=='finish'))}}">
   <block wx:if="{{status=='unpaid'}}">
     <!-- <button class='or-active'> 提醒付款 </button> -->
-    <button wx:if="{{order.payType!=='online'}}" data-type='sureGet' bindtap='showModal' class='or-active'> 确认收款 </button>
-    <button data-type='change' bindtap='showModal' data-change="{{order.orderAmount}}" class='or-active'> 整单改价 </button>
+    <button form-type='submit' wx:if="{{order.payType!=='online'}}" data-type='sureGet' bindtap='showModal' class='or-active'> 确认收款 </button>
+    <button form-type='submit' data-type='change' bindtap='showModal' data-change="{{order.orderAmount}}" class='or-active'> 整单改价 </button>
     <!-- <button class='or-active' data-type='ex' bindtap='showModal'> 收款发货 </button> -->
-    <button wx:if="{{order.payVoucher}}" bindtap='seeVoucher' data-num="{{order.orderNumber}}">付款凭证</button>    
-    <button data-type='cancel' bindtap='showModal'>取消{{orderName}}</button>
+    <button form-type='submit' wx:if="{{order.payVoucher}}" bindtap='seeVoucher' data-num="{{order.orderNumber}}">付款凭证</button>    
+    <button form-type='submit' data-type='cancel' bindtap='showModal'>取消{{orderName}}</button>
   </block>
 
  
   <!-- 待发货 -->
   <block wx:if="{{status=='wait_deliver'}}">
     <block wx:if="{{self=='false'}}">
-      <button class='or-active' data-type='ex' bindtap='showModal'> 我要发货 </button>
+      <button form-type='submit' class='or-active' data-type='ex' bindtap='showModal'> 我要发货 </button>
     </block>
   </block>
 
   <!-- 待收取货 -->
   <block wx:if="{{self=='true' && status=='delivered'}}">
-    <button data-type='goodCode' bindtap='showModal' class='or-active'> 验证取货码 </button>
+    <button form-type='submit' data-type='goodCode' bindtap='showModal' class='or-active'> 验证取货码 </button>
   </block>
 
   <block wx:if="{{status=='delivered' && self=='false'}}">
@@ -410,10 +411,11 @@
   </block>
 
   <block wx:if="{{status=='wait_deliver' || status=='delivered' || status=='finish' || status=='canceled'}}">
-    <button wx:if="{{order.payVoucher}}" bindtap='seeVoucher' data-num="{{order.orderNumber}}">付款凭证</button>    
+    <button form-type='submit' wx:if="{{order.payVoucher}}" bindtap='seeVoucher' data-num="{{order.orderNumber}}">付款凭证</button>    
   </block>
   
   <block wx:if="{{(status=='delivered' || status=='finish') && self=='false'}}">
     <!-- <button class='or-active'> 查看物流 </button> -->
   </block>
 </view>
+</form>
