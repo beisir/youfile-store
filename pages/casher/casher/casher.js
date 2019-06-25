@@ -1,5 +1,6 @@
 // pages/casher/casher/casher.js
 const app = getApp();
+import { saveFormID } from '../../../utils/modelMsg.js'
 Page({
 
   /**
@@ -7,6 +8,9 @@ Page({
    */
   data: {
 
+  },
+  getFormId(e) {
+    saveFormID(e)
   },
   buy() {
     if (!this.data.num) {

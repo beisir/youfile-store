@@ -1,3 +1,4 @@
+<form report-submit='true' bindsubmit='getFormId'>
 <bottomLayer closeBtn='{{false}}' title='图文分享更方便' id='shareway' height='475' btn="取消" align='center'>
   <view class='flex-between' style='height:100%;border-top:1rpx solid #eee;box-sizing:border-box;'>
     <navigator class='share-item' url='../../marketing/poster/prePoster/prePoster?goodsId={{shareItem.id}}'>
@@ -6,7 +7,7 @@
       <text>商品码海报</text>
     </navigator>
     <view class='share-item'>
-      <button open-type="share" data-name='{{shareItem.name}}' data-img='{{baseUrl}}{{shareItem.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{shareItem.id}}'></button>
+      <button form-type='submit' open-type="share" data-name='{{shareItem.name}}' data-img='{{baseUrl}}{{shareItem.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{shareItem.id}}'></button>
       <image src='/image/wx-icon.png'></image>
       <text>微信好友</text>
     </view>
@@ -19,30 +20,31 @@
   <view>
     <text>还未设置库存哦！</text>
     <view class='showNum'>库存不能为0</view>
-    <button bindtap='confirmTip' class='show_btn'>立即设置</button>
+    <button form-type='submit' bindtap='confirmTip' class='show_btn'>立即设置</button>
   </view>
 </mes>
 <!--是否上架-->
 <mes show="{{confirmUp}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
     <text>确定上架该商品？</text>
-    <button bindtap='confirmUp'>确定</button>
+    <button form-type='submit' bindtap='confirmUp'>确定</button>
   </view>
 </mes>
 <!--是否下架-->
 <mes show="{{confirmDown}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
     <text>确定下架该商品？</text>
-    <button bindtap='confirmDown'>确定</button>
+    <button form-type='submit' bindtap='confirmDown'>确定</button>
   </view>
 </mes>
 <!-- 删除-->
 <mes show="{{show1}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
     <text>确认删除？</text>
-    <button bindtap='confirmDetele'>确定</button>
+    <button form-type='submit' bindtap='confirmDetele'>确定</button>
   </view>
 </mes>
+</form>
 <view class='topScoll'>
   <view class="goods-ser">
     <navigator style='width:100%' url='../serStatus/serStatus'>
@@ -184,20 +186,15 @@
   <view>
     <image src="/image/ad5.png"></image>
   </view>工作台</view>
-<view class='st-bottom st-bottom1'>
-  <view>
-    <navigator url="../addGoods/addGoods">添加商品</navigator>
+
+<form report-submit='true' bindsubmit='getFormId'>
+  <view class='com-bottom-btn-group'>
+    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='addGoods'>添加商品</button>
+    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='batch'>批量管理</button>
+    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='batchSet'>起批设置</button>
+    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='class'>本店分类</button>
   </view>
-  <view>
-    <navigator url="../batch/batch">批量管理</navigator>
-  </view>
-  <view>
-    <navigator url="../batchSet/batchSet">起批设置</navigator>
-  </view>
-  <view>
-    <navigator url="../class/class">本店分类</navigator>
-  </view>
-</view>
+</form>
 <view class='showHide showHideb' bindtap='closeShow'  hidden='{{showHideb}}'></view>
 <view class='showHide showHidet' bindtap='closeShow' hidden='{{showHidet}}'></view>
 

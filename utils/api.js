@@ -1375,10 +1375,10 @@ function storeTemList(data){
  * 存储formid
  */
 function getOpenid(data) {
-  return app.http.getRequest(getOpenidUrl, data, { "platAppId": app.globalData.payAppNum});
+  return app.http.getRequest(getOpenidUrl, data, { "platAppId": app.globalData.payAppNum}, true);
 }
 function saveFormid(data) {
-  return app.http.postRequest(saveFormidUrl + "?openId=" + data.openId + "&formId=" + data.formId, data, { "platAppId": app.globalData.payAppNum });
+  return app.http.postRequest(saveFormidUrl + "?openId=" + data.openId + "&formId=" + data.formId, data, { "platAppId": app.globalData.payAppNum }, true);
 }
 
 module.exports = {

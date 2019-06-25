@@ -9,6 +9,8 @@ const app = getApp();
 import Api from '../../../utils/api.js'
 import util from '../../../utils/util.js'
 var x, y, x1, y1, x2, y2, index, currindex, n, yy;
+import { saveFormID } from '../../../utils/modelMsg.js'
+
 Page({
   /**
    * 页面的初始数据
@@ -58,6 +60,10 @@ Page({
     videoUrl: false,
     // 分区
     zoneList: []
+  },
+  // 埋点存储formid
+  getFormId(e) {
+    saveFormID(e)
   },
   // 分区
   getZoneList() {

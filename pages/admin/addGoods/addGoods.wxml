@@ -279,14 +279,12 @@
       </view>
     </view>
   </view>
-  <view class='add-bottom'>
-    <view wx:if='{{addGitShow}}' bindtap='addGit' data-status='0'>
-      <image src="/image/git.png"></image>放入仓库</view>
-    <view wx:if='{{!addGitShow}}'>
-      <image src="/image/git.png"></image>放入仓库</view>
-    <view wx:if='{{addGitShow}}' bindtap='addGit' data-status='1'>
-      <image src="/image/up.png"></image>上架出售</view>
-    <view wx:if='{{!addGitShow}}'>
-      <image src="/image/up.png"></image>上架出售</view>
-  </view>
+  <form report-submit='true' bindsubmit='getFormId'>
+    <view class='com-bottom-btn-group'>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='addGit' data-status='0'><image src="/image/git.png"/>放入仓库</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else data-status='0'><image src="/image/git.png"/>放入仓库</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='addGit' data-status='1'><image src="/image/up.png"/>上架出售</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else><image src="/image/up.png"/>上架出售</button>
+    </view>
+  </form>
 </view>

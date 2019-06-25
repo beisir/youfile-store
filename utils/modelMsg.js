@@ -29,7 +29,7 @@ function saveFormID(e){
   if (!wx.getStorageSync('access_token')){return}
   if (e && e.detail && e.detail.formId){
     let formId = e.detail.formId
-    // if (formId === 'the formId is a mock one'){return}
+    if (formId === 'the formId is a mock one'){return}
     getOpenid().then(openId=> {
       Api.saveFormid({ openId, formId}).then(res=> {
       })

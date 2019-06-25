@@ -1,6 +1,7 @@
 const app = getApp();
 var that
 import Api from '../../../utils/api.js'
+import { saveFormID } from '../../../utils/modelMsg.js'
 
 Page({
   /**
@@ -41,6 +42,32 @@ Page({
     platformIos: '',
     showHidet: true,
     showHideb: true,
+  },
+  // 埋点存储formid
+  getFormId(e) {
+    saveFormID(e)
+  },
+  navigateTo(e) {
+    let path = '',
+      type = e.currentTarget.dataset.type
+    console.log(type)
+    switch (type) {
+      case 'addGoods':
+        path = '../addGoods/addGoods'
+        break;
+      case 'batch':
+        path = '../batch/batch'
+        break;
+      case 'class':
+        path = '../class/class'
+        break;
+      case 'batchSet':
+        path = '../batchSet/batchSet'
+        break;
+    }
+    wx.navigateTo({
+      url: path,
+    })
   },
   // 分享
   share(e){

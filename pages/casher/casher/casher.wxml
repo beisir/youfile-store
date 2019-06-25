@@ -17,6 +17,8 @@
   </view>
 </view>
 
-<view class='bottom-btn' bindtap='buy'>立即支付 
+<form report-submit='true' bindsubmit='getFormId'>
+<button form-type='submit' class='bottom-btn' bindtap='buy'>立即支付 
 <text class='btn-price' wx:if="{{price}}">￥{{filter.filterMoney(price)}}</text>
-</view>
+</button>
+</form>

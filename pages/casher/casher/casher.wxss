@@ -10,5 +10,5 @@ view{line-height:1}
 .payItem{display:flex;align-items:center;justify-content:space-between;height:145rpx;font-size:32rpx}
 .wx-icon{width:50rpx;height:44rpx;margin-right:20rpx}
 .check-icon{width:50rpx;height:50rpx}
-.bottom-btn{position:fixed;bottom:0;width:100%;background:#ca7;color:#fff;font-size:40rpx;height:122rpx;display:flex;align-items:center;justify-content:center}
+.bottom-btn{position:fixed;bottom:0;width:100%;background:#ca7;color:#fff;font-size:40rpx;height:122rpx;display:flex;align-items:center;justify-content:center;border-radius: 0;}
 .btn-price{font-size:48rpx;font-weight:600;margin-left:20rpx}
