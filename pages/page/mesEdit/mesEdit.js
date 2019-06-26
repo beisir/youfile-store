@@ -85,7 +85,7 @@ Page({
       this.setData({
         choseMall: res.obj,
         choseFloor: res.obj[arr[0]].childList,
-        choseArea: res.obj[arr[0]].childList[arr[1]].childList,
+        choseArea: res.obj[arr[0]].childList[arr[1]]?res.obj[arr[0]].childList[arr[1]].childList:[],
       })
     })
   },

@@ -8,7 +8,6 @@ Page({
     region: [],
     show: false,
     value:'',
-    id: Api.getThisStoreId(),
     baseUrl: wx.getStorageSync('baseUrl'),
     platformIos:true
   },
@@ -83,7 +82,7 @@ Page({
       province = region[0],
       city = region[1],
       area = region[2],
-      id = this.data.id
+      id = Api.getThisStoreId()
     Api.updateMes({ address: value, id: id, province: province, city: city, county: area })
       .then(res => {
         wx.showToast({
@@ -91,9 +90,7 @@ Page({
           icon: 'none',
           duration: 2000,
           success: function () {
-            wx.redirectTo({
-              url: '../mesEdit/mesEdit',
-            })
+            wx.navigateBack()
           }
         })
       })

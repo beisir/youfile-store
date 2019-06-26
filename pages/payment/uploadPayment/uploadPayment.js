@@ -8,7 +8,6 @@ Page({
    */
   data: {
     getUser:false,
-    storeID: wx.getStorageSync('storeId'),
     baseUrl: app.globalData.imageUrl
   },
   getStoreImg(){

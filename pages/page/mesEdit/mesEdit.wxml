@@ -76,7 +76,7 @@
   </view>
   <navigator url='../main/main?name={{storeMes.businessScope}}&mallCode={{floorInfo.mallCode}}'>
     <text>  主营范围</text>
-    <view class='new-left' url='../main/main?name={{storeMes.businessScope}}&mallCode={{floorInfo.mallCode}}'>
+    <view class='new-left' wx:if="{{storeMes.businessScope}}">
       {{filter.my_slice(storeMes.businessScope,10)}}
       <image class='img' src="/image/icl.png"></image>
     </view>

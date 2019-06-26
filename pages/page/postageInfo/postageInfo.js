@@ -6,14 +6,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    switch1Change: true,
-    id: Api.getThisStoreId(),
+    switch1Change: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({ id: Api.getThisStoreId()})
     if (!options.code || options.code == 'null') {
       this.setData({
         switch1Change: true

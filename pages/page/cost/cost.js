@@ -7,7 +7,6 @@ Page({
    */
   data: {
     switch1Change: true,
-    id: Api.getThisStoreId(),
     name:''
   },
 
@@ -15,6 +14,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({ id: Api.getThisStoreId() })
     var name = options.name
     if (name =="邮费到付"){
       this.setData({

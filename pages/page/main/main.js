@@ -7,7 +7,6 @@ Page({
    */
   data: {
     globalData: app.globalData,
-    id: Api.getThisStoreId(),
     data:[],
     zzshoplist: [{
       name: "食品",
@@ -188,7 +187,7 @@ Page({
   goback:function(){
     var name=this.data.name,
         data = this.data.data,
-        id=this.data.id,
+        id = Api.getThisStoreId(),
         businessScope=''
     for (var i = 0; i < data.length;i++){
       if(data[i].selected){

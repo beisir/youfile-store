@@ -8,7 +8,6 @@ Page({
     switch1Change: '',
     name:'',
     show:true,
-    id: Api.getThisStoreId(),
     data: [{ name: "个人发票", selected: false }, { name: "提供增值税普通发票", selected: false }, { name: "提供增值税专用发票", selected: false }]
   },
   switch1Change: function (e) {
@@ -105,9 +104,7 @@ Page({
           icon: 'none',
           duration: 2000,
           success: function () {
-            wx.redirectTo({
-              url: '../mesEdit/mesEdit',
-            })
+            wx.navigateBack()
           }
         })
       })
