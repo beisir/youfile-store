@@ -44,7 +44,7 @@ Page({
     noSkuNum: 0,
     noSkuBuynum: 0,
     // 统一设置值
-    allBuyNum:'',
+    allBuyNum: '',
     allPrice: '',
     allStockNum: '',
     noEdit: true
@@ -70,10 +70,10 @@ Page({
       if (!buyNum || buyNum == 0) {
         err = '请填写起购量'
       }
-      if(!num || num == 0){
+      if (!num || num == 0) {
         err = '请填写活动库存'
       }
-      if (buyNum > num){
+      if (buyNum > num) {
         err = '商品活动库存不能低于商品起购量'
       }
       if (num > this.data.goods.stockNum) {
@@ -87,8 +87,8 @@ Page({
         }
       }
 
-      if (price > this.data.goods.wholesalePrice){
-        err = '商品活动价格不能超过商品批发价'
+      if (price > this.data.goods.sellPrice) {
+        err = '商品活动价格不能超过商品零售价'
       }
 
       let noskuarr = [{
@@ -123,22 +123,22 @@ Page({
             if (!/^(([1-9][0-9]*)|([0]\.\d?[0-9])|([1-9][0-9]*\.\d{1,2}))$/.test(el.surePrice)) {
               err = '请输入正确金额格式，最多两位小数'
             }
-          }  
-          if (parseFloat(el.surePrice) > el.wholesalePrice) {
-            err = '商品规格' + (index + 1) + '：商品活动价格不能超过商品批发价'
+          }
+          if (parseFloat(el.surePrice) > el.sellPrice) {
+            err = '商品规格' + (index + 1) + '：商品活动价格不能超过商品零售价'
           }
 
-            acArr.push({
-              activityNumber: this.data.activityNumber,
-              activityPrice: el.surePrice ? el.surePrice : el.sellPrice,
-              batchNum: el.buyNum ? el.buyNum : 0,
-              goodsActNumber: el.goodsActNumber ? el.goodsActNumber : '',
-              goodsId: this.data.goodsId,
-              skuCode: el.skuCode,
-              stockNum: el.sureNum ? el.sureNum : 0
-            })
-          }
-        })
+          acArr.push({
+            activityNumber: this.data.activityNumber,
+            activityPrice: el.surePrice ? el.surePrice : el.sellPrice,
+            batchNum: el.buyNum ? el.buyNum : 0,
+            goodsActNumber: el.goodsActNumber ? el.goodsActNumber : '',
+            goodsId: this.data.goodsId,
+            skuCode: el.skuCode,
+            stockNum: el.sureNum ? el.sureNum : 0
+          })
+        }
+      })
 
       obj.goodsActivityPromotionVOList = acArr
     }
@@ -190,18 +190,18 @@ Page({
         })
       }
       // 编辑状态
-      if (res.obj.releaseStatus && res.obj.releaseStatus == 'release'){
-        this.setData({ noEdit: true})
-      }else {
+      if (res.obj.releaseStatus && res.obj.releaseStatus == 'release') {
+        this.setData({ noEdit: true })
+      } else {
         this.setData({ noEdit: false })
       }
     })
   },
-  handleSkuList(list){
-    if(list && list.length>0){
+  handleSkuList(list) {
+    if (list && list.length > 0) {
       let obj = {}
-      list.forEach(el=>{
-        el.goodsSpecificationValueVOList.forEach(sku=>{
+      list.forEach(el => {
+        el.goodsSpecificationValueVOList.forEach(sku => {
           obj[sku.specValueCode] = sku.specValueName
         })
       })
@@ -229,24 +229,24 @@ Page({
     })
     this.clearOther('choose')
   },
-  clearOther(type){
+  clearOther(type) {
     let obj = {};
     let arr = this.data.discount;
-    switch(type){
+    switch (type) {
       case 'choose':
         obj.ownCut = ""
         obj.allPrice = ""
-      break;
+        break;
       case 'inputCut':
         arr.forEach(el => { el.checked = false })
         obj.discount = arr
         obj.allPrice = ""
-      break;
+        break;
       case 'allPrice':
         arr.forEach(el => { el.checked = false })
         obj.discount = arr
         obj.ownCut = ""
-      break;
+        break;
     }
     this.setData(obj)
   },
@@ -266,7 +266,7 @@ Page({
         if (allBuyNum) {
           el.buyNum = parseInt(allBuyNum)
         }
-        if (allP){
+        if (allP) {
           el.surePrice = allP
         }
       })
@@ -274,7 +274,7 @@ Page({
     }
 
     // 统一价格
-    if (allP){
+    if (allP) {
       if (!/^(([1-9][0-9]*)|([0]\.\d?[0-9])|([1-9][0-9]*\.\d{1,2}))$/.test(allP)) {
         API.showToast('请输入正确金额格式，最多两位小数')
         return
@@ -284,7 +284,7 @@ Page({
         el.surePrice = allP
       })
       this.setData({ skuList: arr })
-    }else if (cut) {
+    } else if (cut) {
       // 自定义折扣
       if (cut > 0 && cut < 10) {
         this.cutPrice(cut / 10)
@@ -296,9 +296,9 @@ Page({
       let arr = this.data.discount.filter(el => el.checked)
       if (arr[0]) {
         this.cutPrice(arr[0].value)
-      // } else {
-      //   API.showToast("请选择折扣，或输入自定义折扣")
-      //   return
+        // } else {
+        //   API.showToast("请选择折扣，或输入自定义折扣")
+        //   return
       }
     }
     this.closeModal()
@@ -307,7 +307,7 @@ Page({
     if (discount && discount > 0 && discount < 1) {
       let arr = this.data.skuList;
       arr.forEach(el => {
-        el.surePrice = (el.wholesalePrice * discount).toFixed(2)
+        el.surePrice = (el.sellPrice * discount).toFixed(2)
       })
       this.setData({ skuList: arr })
       console.log(discount)
@@ -493,6 +493,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
 
   }
 })

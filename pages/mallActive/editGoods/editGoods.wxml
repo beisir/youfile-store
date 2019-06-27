@@ -34,7 +34,7 @@
             <view>
               <view>
                 <input placeholder='添加活动价格' placeholder-class='noinputclass' value='{{item.surePrice}}' type='digit' bindinput='watchInput' data-type='price' data-index="{{index}}" maxlength='8'></input>
-                <view>批发价:¥{{item.wholesalePrice}}</view>
+                <view>零售价:¥{{item.sellPrice}}</view>
               </view>
             </view>
             <view>
@@ -62,7 +62,7 @@
           <view>
             <view>
               <input placeholder='添加活动价格' placeholder-class='noinputclass' value='{{noSkuPrich}}' type='digit' bindinput='watchInput' data-type='noSku-price' maxlength='8'></input>
-              <view>批发价:¥{{goods.wholesalePrice}}</view>
+              <view>零售价:¥{{goods.sellPrice}}</view>
             </view>
           </view>
           <view>
@@ -113,7 +113,7 @@
     </view>
     <view class='padding-box'>
 
-      <view class='fra-tip'>一键折扣的设置，会为您自动计算商品批发价的折扣后价格， 即活动价</view>
+      <view class='fra-tip'>一键折扣的设置，会为您自动计算商品零售价的折扣后价格， 即活动价</view>
       <view class='fra-self'>
         <view class='bold-font'>自定义折扣</view>
         <view>

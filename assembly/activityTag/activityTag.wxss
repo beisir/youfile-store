@@ -1,2 +1,2 @@
-.ac-time{position: absolute;top: 0;left: 20rpx;}
+.ac-time{position: absolute;top: 0;left: 20rpx;z-index: 99;}
 .ac-time image{width: 60rpx}

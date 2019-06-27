@@ -16,7 +16,7 @@ page {background: #fff;}
 .listData{background: #f7f7f7;overflow:hidden;padding-bottom: 20rpx;}
 
 .white-line{width: 2rpx;height: 30rpx;background: #fff; }
-.wr-bottom button{padding: 0;margin: 0;line-height: 100rpx;}
+.wr-bottom button{padding: 0;margin: 0;line-height: 100rpx;background: #CCAA77;color: #fff;font-size: 34rpx;}
 .line-btn{height: 100%;width: 100%;}
 .group-btn{height: 100%;width: 50%;}
 /* 分享 */
