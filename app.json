@@ -1,4 +1,15 @@
 {
+  "subpackages": [
+    {
+      "root": "distribution",
+      "pages": [
+        "pages/warehouse/createWarehouse/createWarehouse",
+        "pages/warehouse/warehouseManage/warehouseManage",
+        "pages/warehouse/index/index",
+        "pages/warehouse/warehouseDetail/warehouseDetail"
+      ]
+    }
+  ],
   "pages": [
     "pages/page/home/home",
     "pages/active/createAC/createAC",
@@ -147,6 +158,7 @@
     "pages/page/logs/logs",
     "pages/admin/batchClass/batchClass"
   ],
+  
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",

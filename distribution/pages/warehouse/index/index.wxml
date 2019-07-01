@@ -1,0 +1,63 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
+<view class='header'>
+  <view class='com-flex-between'>
+    <view class='statistics-item'>
+      <view class='font28'>今日入库</view>
+      <view class='font60'>{{filter.parseLongNum(1212100)}}</view>
+    </view>
+    <view class='statistics-item'>
+      <view class='font28'>今日出库</view>
+      <view class='font60'>111111112</view>
+    </view>
+    <view class='statistics-item'>
+      <view class='font28'>库存不足</view>
+      <view class='font60'>12</view>
+    </view>
+  </view>
+
+  <view class='com-flex-between goods-num-box'>
+    <view class='goods-num-item'>
+      <view class='font28'>商品总数</view>
+      <view class='font40'>{{filter.parseLongNum(111111)}}</view>
+    </view>
+    <view class='goods-num-item'>
+      <view class='font28'>库存总数</view>
+      <view class='font40'>{{filter.parseLongNum(111111)}}</view>
+    </view>
+    <view class='goods-num-item'>
+      <view class='font28'>库存总成本</view>
+      <view class='font40'><text class='font30'>￥</text>{{filter.parseLongNum(1212100)}}</view>
+    </view>
+  </view>
+</view>
+<view class='com-flex-between entry-box'>
+  <view class='entry-item com-flex-center'>
+    <image src='/image/11.png' class='entry-icon'></image>
+    <view>
+      <view class='font30 com-blod-font'>商品库存</view>
+      <view class='font24 com-gray-color'>商品库存总览</view>
+    </view>
+  </view>
+  <view class='entry-item com-flex-center'>
+    <image src='/image/11.png' class='entry-icon'></image>
+    <view>
+      <view class='font30 com-blod-font'>库存预警</view>
+      <view class='font24 com-gray-color'>上限下限预警</view>
+    </view>
+  </view>
+  <view class='entry-item com-flex-center'>
+    <image src='/image/11.png' class='entry-icon'></image>
+    <view>
+      <view class='font30 com-blod-font'>仓库</view>
+      <view class='font24 com-gray-color'>管理仓库信息</view>
+    </view>
+  </view>
+  <view class='entry-item com-flex-center'>
+    <image src='/image/11.png' class='entry-icon'></image>
+    <view>
+      <view class='font30 com-blod-font'>库存设置</view>
+      <view class='font24 com-gray-color'>销售预警设置</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,10 @@
+/* 表单 */
+.com-form-box .com-box{margin: 0 20rpx;background: #fff;border-radius: 10rpx;}
+.com-form-box .com-box .form-item:last-child{border: 0;}
+.com-form-box .form-title{width: 200rpx;padding-left:30rpx;font-weight: 600;box-sizing:border-box;color: #333;}
+.com-form-box .img-box{width: 60rpx;text-align: right;padding-right: 30rpx;box-sizing: border-box;}
+.com-form-box .form-item{height: 120rpx;font-size: 30rpx;border-bottom: 1rpx solid #eee;}
+.com-form-box .part-title{font-size: 26rpx;color: #666;margin: 0 20rpx;padding: 40rpx 30rpx 30rpx;line-height: 1;}
+.com-form-box .padding-box{padding: 10rpx;}
+.bottom-single-btn{background: #f8b616}
+/* 嵌套式heeader */

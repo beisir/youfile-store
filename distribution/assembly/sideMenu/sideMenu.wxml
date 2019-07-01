@@ -1,0 +1,4 @@
+<view class='modal' hidden='{{show}}' bindtap='hide' ></view>
+<view class='side-box' animation="{{animationData}}">
+  <slot/>
+</view>

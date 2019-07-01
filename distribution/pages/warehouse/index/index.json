@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "tip": "/assembly/tips/tips"
+  },
+  "navigationBarTitleText": "库存管理"
+}

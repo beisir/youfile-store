@@ -1,0 +1,76 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
+<view class='header com-background-color'>
+  <view class='com-flex-between'>
+    <view class='search-input-box com-flex-between'>
+      <view class='com-flex-center'>
+        <image src='/distribution/images/search-white.png' class='search-img'></image>
+        <input class='font26' placeholder='输入商品名称、货号' placeholder-style='color:#fff;'></input>
+      </view>
+      <text class='font30 ser-btn'>搜索</text>
+    </view>
+    <image src='/distribution/images/filter.png' class='filter-icon' bindtap='showFilter'></image>
+  </view>
+  <view class='warehouse-statistics'>
+    <view class='name-title com-flex-center font28'>
+      <view class='color-chunk com-background-color'></view>
+      <view class='house-name'>望京辅助仓库 A1</view>
+      <image src='/image/poster-right-in.png' class='com-right-icon' style='transform: rotate(90deg);'></image>
+    </view>
+    <view class='com-flex-between statistics-box'>
+      <view class='statistics-item'>
+        <view class='font28 com-gray-color'>商品数</view>
+        <view class='font40'>{{filter.parseLongNum(1212100)}}</view>
+      </view>
+      <view class='statistics-item'>
+        <view class='font28 com-gray-color'>库存数</view>
+        <view class='font40'>{{filter.parseLongNum(1212100)}}</view>
+      </view>
+      <view class='statistics-item'>
+        <view class='font28 com-gray-color'>库存预警</view>
+        <view class='font40'>{{filter.parseLongNum(1212100)}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='overflow:hidden;'>
+  <view class='goods-item com-flex-between'>
+    <image class='goods-icon' src='/image/poster-right-in.png'></image>
+    <view class='flexone' style='overflow:hidden;'>
+      <view class='com-flex-center font28 com-blod-font'>
+        <text class='warning-tip font24'>预警</text>
+        <text class='flexone com-text-ellipsis'>周大周大福周大福周大周大福周大福周大福周福周福周大福周福周福</text>
+      </view>
+      <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：23123123</view>
+      <view class='font26'>
+        <text>库存：</text>
+        <text class='com-red-color'>2</text>
+        <text class='com-yellow-color'>3</text>
+      </view>
+    </view>
+    <image class='com-right-icon' src='/image/poster-right-in.png' style='margin-top:60rpx;'></image>
+  </view>
+</view>
+
+<picker mode='multiSelector' range='warehouseList'></picker>
+
+<sideMenu id='side'>
+  <view class='side-box'>
+    <view class='com-blod-font'>全部分类</view>
+    <view class='class-item-box com-flex-between'>
+      <view wx:for='{{classList}}' class='class-item {{item.selected?"class-item-ac":""}}' bindtap='selectClass' data-index="{{index}}">{{item.name}}</view>
+    </view>
+    <view class='side-switch-item com-flex-between'>
+      <text>预警商品</text>
+      <switch checked='{{formData.warningGoods}}' color="#fdb813" bindchange='switchChange' data-type='warning'></switch>
+    </view>
+    <view class='side-switch-item com-flex-between'>
+      <text>过滤零库存商品</text>
+      <switch checked='{{formData.filterZero}}' color="#fdb813" bindchange='switchChange' data-type='zero'></switch>
+    </view>
+  </view>
+  <view class='com-flex-between side-btn-box'>
+    <button class='side-btn' hover-class="none" style='background:#fdb81a' bindtap='resetForm' form-type="reset">重置</button>
+    <button class='side-btn' hover-class="none" style='background-image:linear-gradient(to right, #ff7a83 , #ff253e);' bindtap='sureForm'>确定</button>
+  </view>
+</sideMenu>

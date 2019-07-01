@@ -72,7 +72,19 @@ var doubleNum = function(num) {
   }
 }
 
+function parseLongNum(num){
+  if(!num){return 0}
+  if(num > 100000000){
+    return parseInt(num / 100000000) + "亿+"
+  }
+  if(num > 1000000){
+    return parseInt(num / 10000) + "万"
+  }
+  return num
+}
+
 module.exports = {
+  parseLongNum: parseLongNum,
   filterMoney: filterMoney,
   plusNum: plusNum,
   filterTime: filterTime,

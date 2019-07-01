@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "sideMenu":"../..//assembly/sideMenu/sideMenu"
+  },
+  "navigationBarTitleText": "新建仓库",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b617"
+}
