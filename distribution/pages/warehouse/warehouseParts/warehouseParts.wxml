@@ -1,0 +1,76 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
+<view class='header com-background-color'>
+  <view class='header-layer'>
+    <view class='header-title com-flex-center'>
+      <image class='img30' src='/distribution/images/warehouse.png'></image>
+      <text class='house-name'>望京辅助仓库  A1</text>
+      <text class='com-default-tip'>默认</text>
+    </view>
+    <view class='com-flex-between statistics-box'>
+      <view class='statistics-item'>
+        <view class='font28 com-gray-color'>商品数</view>
+        <view class='font40'>{{filter.parseLongNum(1212100)}}</view>
+      </view>
+      <view class='statistics-item'>
+        <view class='font28 com-gray-color'>库存数</view>
+        <view class='font40'>{{filter.parseLongNum(1212100)}}</view>
+      </view>
+      <view class='statistics-item'>
+        <view class='font28 com-gray-color'>库存预警</view>
+        <view class='font40'>{{filter.parseLongNum(1212100)}}</view>
+      </view>
+    </view>
+    <view class='more-view' hidden='{{showMsg}}' bindtap='showmsg' data-type='{{true}}'>
+      <image class='com-tri-icon' src='/distribution/images/tri-down.png'></image>
+    </view>
+    <view class='font30' hidden='{{!showMsg}}'  bindtap='showmsg' data-type='{{false}}'>
+      <view class='msg-border'></view>
+      <view class='msg-item'>
+        <view class='msg-title'>负责人</view>
+        <view class='msg-content'>文竹</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>联系电话</view>
+        <view class='msg-content'>18677651314</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>地区</view>
+        <view class='msg-content'>北京 北京市 朝阳区</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>详细地址</view>
+        <view class='msg-content'>望京街道望京街道望京SOHO望京街道望京SOHO望京街道望京SOHO望京街道望京SOHO望京街道望京SOHO望京街道望京SOHO望京街道望京SOHO望京街道望京SOHO望京街道望京SOHO望京街道望京SOHO望京SOHO</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>邮箱</view>
+        <view class='msg-content'>wenzhu@163.com</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>备注</view>
+        <view class='msg-content'>服装、儿童母婴储存地</view>
+      </view>
+      <view class='more-view' style='padding-top:30rpx;'>
+        <image class='com-tri-icon' src='/distribution/images/tri-up.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='height:150rpx;'></view>
+<view class='part-item com-flex-between'>
+  <view>
+    <view class='font36 com-blod-font part-name'>羊绒围巾区</view>
+    <view class='font26 com-gray-color'>库区编号：A1</view>
+  </view>
+  <view class='com-flex-center'>
+    <view class='tag font24'>备货区</view>
+    <view class='tag font24'>拣货区拣货区拣货区</view>
+  </view>
+  <!-- <image src='/image/poster-right-in.png' class='com-right-icon'></image> -->
+</view>
+
+<view class='com-bottom-capsule-btn'>
+  <button bindtap='releaseGoods' class='group-btn'>编辑仓库</button>
+  <view class='white-line'></view>
+  <button bindtap='addGoods' class='group-btn'>新建库区</button>
+</view>

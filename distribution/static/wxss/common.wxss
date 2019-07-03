@@ -1,5 +1,5 @@
 /* 表单 */
-.com-form-box .com-box{margin: 0 20rpx;background: #fff;border-radius: 10rpx;}
+.com-form-box .com-box{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;}
 .com-form-box .com-box .form-item:last-child{border: 0;}
 .com-form-box .form-title{width: 200rpx;padding-left:30rpx;font-weight: 600;box-sizing:border-box;color: #333;}
 .com-form-box .img-box{width: 60rpx;text-align: right;padding-right: 30rpx;box-sizing: border-box;}
@@ -7,4 +7,20 @@
 .com-form-box .part-title{font-size: 26rpx;color: #666;margin: 0 20rpx;padding: 40rpx 30rpx 30rpx;line-height: 1;}
 .com-form-box .padding-box{padding: 10rpx;}
 .bottom-single-btn{background: #f8b616}
-/* 嵌套式heeader */
+.com-new-gold-font{color: #fdb813}
+/* 图片 */
+.img30{height: 30rpx;width: 30rpx;}
+.img40{height: 40rpx;width: 40rpx;}
+.img50{height: 50rpx;width: 50rpx;}
+.com-tri-icon{width: 20rpx;height: 11rpx;}
+/* 默认标签 */
+.com-default-tip{width: 80rpx;height: 30rpx;line-height:30rpx;text-align:center;font-size: 24rpx;border-radius:5rpx;border:1rpx solid #f8b616;color: #f8b616;}
+/* 圆边按钮 */
+.com-bottom-capsule-btn{position: fixed;bottom: 20rpx;width:690rpx;background: #f8b617;border-radius: 100rpx;height: 100rpx;left: 0;right: 0;margin: auto;display: flex;align-items: center;overflow: hidden;}
+.com-bottom-capsule-btn button{padding: 0;margin: 0;line-height: 100rpx;background: #f8b617;color: #fff;font-size: 34rpx;flex:1;} 
+.com-bottom-capsule-btn .white-line{width: 2rpx;height: 30rpx;background: #fff; }
+/* 公用paddingbox */
+.com-padding-box{padding-left: 30rpx;padding-right: 30rpx;}
+.com-margin-box{margin: 20rpx 20rpx 0;border-radius: 10rpx;background: #fff;}
+/* 库区标签 */
+.com-tag{padding: 0 15rpx;background: #ffa515;color: #fff;margin-left: 20rpx;border-radius: 5rpx;font-size: 24rpx;height: 40rpx;line-height: 40rpx;}

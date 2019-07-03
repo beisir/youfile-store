@@ -13,7 +13,7 @@
       <view class='com-flex-center' style='padding-bottom:10rpx;'>
         <image src='/distribution/images/warehouse.png' style='width:30rpx;height:30rpx;'></image>
         <text class='house-name'>默认仓库</text>
-        <text class='house-tip'>默认</text>
+        <text class='com-default-tip'>默认</text>
       </view>
       <view class='house-des-font'>库区数量：123</view>
       <view class='house-des-font'>库存数量：2877</view>

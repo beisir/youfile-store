@@ -204,4 +204,4 @@ input:focus{padding:0}
 /* 省略号 */
 .com-text-ellipsis{overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
 /* 字体大小 */
-.font24{font-size: 24rpx}.font26{font-size: 26rpx;}.font28{font-size: 28rpx}.font30{font-size: 30rpx;}.font40{font-size: 40rpx;}.font60{font-size: 60rpx;}
+.font24{font-size: 24rpx}.font26{font-size: 26rpx;}.font28{font-size: 28rpx}.font30{font-size: 30rpx;}.font36{font-size: 36rpx;}.font40{font-size: 40rpx;}.font60{font-size: 60rpx;}

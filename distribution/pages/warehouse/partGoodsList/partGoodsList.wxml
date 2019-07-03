@@ -1,0 +1,14 @@
+<import src="/distribution/static/template/goodNum/goodsNumItem.wxml" />
+<view class='header com-background-color'>
+  <view class='com-flex-between com-margin-box'>
+    <view class='search-input-box com-flex-center'>
+      <image src='/distribution/images/search-white.png' class='search-img'></image>
+      <input class='font26 flexone' placeholder='输入商品名称、货号' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
+    </view>
+    <text class='font30 ser-btn flexone'>搜索</text>
+  </view>
+</view>
+
+<view class='goods-box'>
+  <template is="goodsItem" data="{{...item}}"></template>
+</view>

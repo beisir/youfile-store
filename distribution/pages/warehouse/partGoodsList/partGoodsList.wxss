@@ -1,0 +1,7 @@
+.header{height: 230rpx;position: relative;padding:30rpx 20rpx 0;box-sizing: border-box;}
+/* 搜索 */
+.search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
+.search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
+.ser-btn{text-align: center;color: #fff;}
+/* 商品 */
+.goods-box{position: relative;top: -90rpx;}

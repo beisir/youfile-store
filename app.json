@@ -3,10 +3,15 @@
     {
       "root": "distribution",
       "pages": [
+        "pages/warehouse/partGoodsList/partGoodsList",
+        "pages/warehouse/partTags/partTags",
+        "pages/warehouse/partDetail/partDetail",
+        "pages/warehouse/createPart/createPart",
+        "pages/warehouse/warehouseParts/warehouseParts",
+        "pages/warehouse/warehouseDetail/warehouseDetail",
         "pages/warehouse/createWarehouse/createWarehouse",
         "pages/warehouse/warehouseManage/warehouseManage",
-        "pages/warehouse/index/index",
-        "pages/warehouse/warehouseDetail/warehouseDetail"
+        "pages/warehouse/index/index"
       ]
     }
   ],
