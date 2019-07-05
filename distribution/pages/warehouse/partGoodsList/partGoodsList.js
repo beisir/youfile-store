@@ -1,18 +1,45 @@
 // distribution/pages/warehouse/partGoodsList/partGoodsList.js
+const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    item: {name:'123',num: 213}
+    goodslList: [{name:'还是撒打算打算'}]
+  },
+  delGoods(){
+    this.setData({
+      delModal: true
+    })
+  }, 
+  closeModal(){
+    this.setData({
+      delModal: false
+    })
+  },
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.goodslList)
+    this.setData({
+      goodslList: data
+    })
   },
 
+  //滑动事件处理
+  touchmove: function (e) {
+    let data = app.touch._touchmove(e, this.data.goodslList)
+    this.setData({
+      goodslList: data
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**

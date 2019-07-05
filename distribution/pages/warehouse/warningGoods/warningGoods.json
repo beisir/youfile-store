@@ -1,6 +1,5 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "选择库区类型",
+  "navigationBarTitleText": "库区预警",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#f8b617"
 }

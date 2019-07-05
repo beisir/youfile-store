@@ -1,0 +1,13 @@
+<view class='header com-background-color'>
+  <view class='com-flex-between com-margin-box'>
+    <view class='search-input-box com-flex-center'>
+      <image src='/distribution/images/search-white.png' class='search-img'></image>
+      <input class='font26 flexone' placeholder='输入商品名称、货号' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
+    </view>
+    <text class='font30 ser-btn flexone'>搜索</text>
+  </view>
+
+  <view class='filter-box com-flex-center'>
+    <view></view>
+  </view>
+</view>

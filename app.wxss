@@ -43,7 +43,7 @@ button::after{border:none}
 .nomore image{width:150rpx;height:150rpx;margin-top:90rpx;margin-bottom:40rpx}
 .erm-cont{text-align:center;padding-top:155rpx}
 .erm-cont view{color:#999;margin-top:90rpx;font-size:30rpx}
-.erm-cont image{width:540rpx;height:540rpx}
+.erm-cont image{width:540rpx;heig:540rpx}
 .weui-bottom{position:fixed;bottom:0;color:#CCAA77;font-size:36rpx;background:#fff;width:100%;height:120rpx;z-index:9999}
 .weui-one-bottom{position:fixed;bottom:0;color:#666;font-size:36rpx;background:#fff;width:100%;line-height:120rpx;height:120rpx;z-index:9999;text-align:center;border-top:1rpx solid #EDEDED}
 .weui-bottom view{width:50%;text-align:center;line-height:120rpx;display:inline-block}
@@ -190,6 +190,7 @@ input:focus{padding:0}
 /* 公用颜色 */
 .com-background-color{background: rgb(248,182,23)}
 .gold-font{color: #ca7;}
+.com-new-gold-font{color: #fdb813}
 .com-red-color{color:#f02b2b;}
 .com-yellow-color{color:#ff9900;}
 .com-gray-color{color:#999;}
@@ -205,3 +206,8 @@ input:focus{padding:0}
 .com-text-ellipsis{overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
 /* 字体大小 */
 .font24{font-size: 24rpx}.font26{font-size: 26rpx;}.font28{font-size: 28rpx}.font30{font-size: 30rpx;}.font36{font-size: 36rpx;}.font40{font-size: 40rpx;}.font60{font-size: 60rpx;}
+/* 图片 */
+.img30{height: 30rpx;width: 30rpx;}
+.img40{height: 40rpx;width: 40rpx;}
+.img50{height: 50rpx;width: 50rpx;}
+.img60{height: 60rpx;width: 60rpx;}

@@ -3,6 +3,10 @@
     {
       "root": "distribution",
       "pages": [
+        "pages/warehouse/goodsDetail/goodsDetail",
+        "pages/warehouse/warningSetting/warningSetting",
+        "pages/warehouse/warningGoods/warningGoods",
+        "pages/warehouse/createTag/createTag",
         "pages/warehouse/partGoodsList/partGoodsList",
         "pages/warehouse/partTags/partTags",
         "pages/warehouse/partDetail/partDetail",

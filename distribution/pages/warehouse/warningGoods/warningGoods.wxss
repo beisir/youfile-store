@@ -1,0 +1,7 @@
+.header{height: 230rpx;position: relative;padding:30rpx 20rpx 0;box-sizing: border-box;}
+/* 搜索 */
+.search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
+.search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
+.ser-btn{text-align: center;color: #fff;}
+/* 白色悬浮 */
+.filter-box{width: 710rpx;height:120rpx;margin:auto;position: absolute;left: 0;right: 0;bottom: -30rpx;background: #fff;border-radius: 10rpx;}

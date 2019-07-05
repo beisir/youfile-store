@@ -1,11 +1,11 @@
-// distribution/pages/warehouse/partTags/partTags.js
+// distribution/pages/warehouse/warningSetting/warningSetting.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tags: [{name:'123123阿斯达',checked:true}]
+
   },
 
   /**

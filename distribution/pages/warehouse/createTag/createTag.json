@@ -1,6 +1,5 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "选择库区类型",
+  "navigationBarTitleText": "新建库区类型",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#f8b617"
 }

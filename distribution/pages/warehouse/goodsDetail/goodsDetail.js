@@ -1,13 +1,15 @@
-// distribution/pages/warehouse/partTags/partTags.js
+// distribution/pages/warehouse/goodsDetail/goodsDetail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    tags: [{name:'123123阿斯达',checked:true}]
-  },
 
+  },
+  bindDateChange(e){
+    console.log(e.detail.value)
+  },
   /**
    * 生命周期函数--监听页面加载
    */

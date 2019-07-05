@@ -1,0 +1,121 @@
+/* pages/floor/choseAdmin/choseAdmin.wxss */
+.tag-ser-box{
+  height: 100rpx;
+  padding-left: 30rpx;
+}
+.border-line{margin-left: 100rpx;border-top: 1rpx solid #f7f7f7;}
+.ball-box{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap
+}
+.ball {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  
+  margin: 60rpx 25rpx;
+  position: relative;
+}
+.active:after{
+    content: '';
+    position: absolute;
+    width: 20rpx;
+    height: 40rpx;
+    color: #fff;
+    border-bottom: 2px solid;
+    border-right: 2px solid;
+    left: 50%;
+    top: 25rpx;
+    transform-origin: center;
+    transform: translate(-50%, -30%) rotate(45deg);
+    -webkit-transform: translate(-50%, -30%) rotate(45deg);}
+
+.new-tag {
+  padding: 30rpx 0 0;
+}
+
+.font-gold {
+  color: #ca7;
+}
+
+.search-img {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 20rpx;
+}
+
+.admin-ball {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+}
+
+.admin-item-box {
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
+  border-bottom: 2rpx solid #eee;
+}
+
+.bingle {
+  width: 30rpx;
+  height: 27rpx;
+}
+
+.lou-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
+}
+
+.company-sm-name {
+  font-size: 24rpx;
+  padding-left: 20rpx;
+  color: #999;
+}
+
+.padding-box {
+  padding: 20rpx 0;
+}
+
+.lou-box {
+  padding: 30rpx 0;
+}
+.tip {
+  width: 26rpx;
+  height: 36rpx;
+  border-radius: 4rpx;
+  background: #ccaa77;
+  position: relative;
+}
+
+.tip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-width: 13rpx;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
+}
+.tri-icon{
+  width: 32rpx;
+  height: 32rpx;
+}
+.floor-box{
+   padding: 20rpx 20rpx 130rpx; 
+}
+.floor-part-box{
+  margin-top: 20rpx;
+}
+.floor-part{
+  border-radius: 5px;
+  background: white;    
+  padding: 0 30rpx 40rpx; 
+}
+.flex-box{
+  display: flex;
+  justify-content: space-between;
+}

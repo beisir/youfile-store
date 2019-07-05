@@ -19,9 +19,10 @@ class touch {
   }
 
   _touchmove(e, items) {
-    var index = e.currentTarget.dataset.index, //当前索引
-      touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
-      touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
+    var index = e.currentTarget.dataset.index; //当前索引
+    if (!e.changedTouches[0]){return}
+    var touchMoveX = e.changedTouches[0].clientX, //滑动变化坐标
+        touchMoveY = e.changedTouches[0].clientY, //滑动变化坐标
       //获取滑动角度
       angle = this._angle({
         X: startX,
