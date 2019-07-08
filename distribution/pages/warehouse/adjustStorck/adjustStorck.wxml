@@ -1,0 +1,39 @@
+<view class='com-flex-between padding-box sku-box'>
+  <view class='flexone skuname com-blod-font'>调整规格“黄色  柠檬味黄色”</view>
+  <view class='com-new-gold-font'>查看流水</view>
+</view>
+<view class='storckNum padding-box'>
+  <text>当前库存：</text> 
+  <text class='font60'>28</text>
+</view>
+
+<view class='supplier-box com-flex-center'>
+  <view>选择供应商</view>
+  <view class='flexone supplier-name com-text-ellipsis'>默认供应商默认供应商默认供应商默认供应商默认供应商默认供应商</view>
+  <image class='com-right-icon' src='/distribution/images/right-icon.png'></image>
+</view>
+
+<view class='padding-box'>
+  <view class='part-title'>调整数量</view>
+  <view class='com-flex-center'>
+    <view class='com-flex-center input-box'>
+      <view style='border-right:1rpx solid #eee' class='change-num-btn'>-</view>
+      <input type='number' maxlength='6'></input>
+      <view style='border-left:1rpx solid #eee' class='change-num-btn'>+</view>
+    </view>
+    <view>增加<text class='com-new-gold-font'>1</text>个</view>
+  </view>
+  <view class='part-title'>选择调整原因</view>
+  <view style='overflow:hidden'>
+    <view class='reason-item {{item.checked?"reason-item-ac":""}}' wx:for="{{reason}}" wx:key='{{index}}' data-index="{{index}}" bindtap='choseReason'>{{item.name}}</view>
+  </view>
+  <view class='part-title'>备注</view>
+  <input class='remark-textarea' maxlength='30' placeholder='请输入备注信息' type='textarea'></input>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <navigator>
+    <button class='bottom-single-btn'>确定</button>
+  </navigator>
+</view>

@@ -1,0 +1,19 @@
+/* distribution/pages/warehouse/adjustStorck/adjustStorck.wxss */
+page{background: #fff;font-size: 30rpx;color: #333;}
+.padding-box{padding-left: 50rpx;padding-right: 50rpx;}
+.skuname{padding-right: 30rpx;}
+.storckNum{display: flex;align-items: flex-end;line-height: 1;padding: 10rpx 50rpx 30rpx;}
+.sku-box{height: 120rpx;flex-wrap: wrap;}
+/* 供应商 */
+.supplier-box{height: 100rpx;margin: 0 20rpx;border:1rpx solid #eee;border-radius: 10rpx;padding: 0 30rpx;}
+.supplier-name{padding: 0 30rpx 0 50rpx;}
+/*  */
+.part-title{padding: 50rpx 0 30rpx;line-height: 1;}
+/* 调整 */
+.change-num-btn{width: 80rpx;height: 80rpx;text-align: center;line-height: 80rpx;font-size: 60rpx;color: #666;}
+.input-box{width: 400rpx;background: #fafafa;height: 80rpx;border-radius: 10rpx;border: 1rpx solid #eee;margin-right: 30rpx;}
+.input-box input{flex: 1;text-align: center;padding: 0 5rpx;font-size: 48rpx;}
+/* 原因 */
+.reason-item{padding: 30rpx 50rpx;border-radius:10rpx;border: 1rpx solid #eee;float: left;margin: 0 20rpx 30rpx 0;}
+.reason-item-ac{border-color: #f8b616;background: #f8b616;color: #fff;}
+.remark-textarea{background: #fafafa;height: 120rpx;border-radius: 10rpx;padding: 0 30rpx;border:1rpx solid #eee;}

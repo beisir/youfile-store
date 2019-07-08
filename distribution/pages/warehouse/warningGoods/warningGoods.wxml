@@ -1,3 +1,4 @@
+<import src="/distribution/static/template/goodNum/goodsNumItem.wxml" />
 <view class='header com-background-color'>
   <view class='com-flex-between com-margin-box'>
     <view class='search-input-box com-flex-center'>
@@ -8,6 +9,21 @@
   </view>
 
   <view class='filter-box com-flex-center'>
-    <view></view>
+    <view class='color-chunk com-background-color'></view>
+    <picker class='flexone com-text-ellipsis'>
+      <view class='com-flex-center'>
+        <text class='house-name'>阿阿斯达阿斯达阿斯达斯达</text>
+        <image class='com-tri-icon' src='/distribution/images/tri-down.png'></image>
+      </view>
+    </picker>
+    <radio-group class='lalala com-flex-center' bindchange='setLow'>
+      <radio color='#f8b617' value='low' checked></radio>
+      <text style='padding-right:20rpx;'>低于下限</text>
+      <radio color='#f8b617' value='high'></radio>
+      <text>高于上限</text>
+    </radio-group>
   </view>
+</view>
+<view style='overflow:hidden;'>
+  <template is="goodsWarning" data="{{item}}"></template>
 </view>

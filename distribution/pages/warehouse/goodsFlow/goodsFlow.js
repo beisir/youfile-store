@@ -1,15 +1,15 @@
-// distribution/pages/warehouse/warningGoods/warningGoods.js
+// distribution/pages/warehouse/goodsFlow/goodsFlow.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    item:{
+      name:'123123'
+    }
   },
-  setLow(e){
-    console.log(e.detail.value)
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

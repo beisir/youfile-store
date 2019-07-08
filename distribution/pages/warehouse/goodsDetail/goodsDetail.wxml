@@ -9,7 +9,7 @@
       <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：23123123</view>
       <view class='font24 com-flex-center house-tip-box'>
         <!-- <view class='house-tip'>望京辅助仓库  A1</view>
-          <view class='house-tip'>望京辅助仓库  A1</view>
+          <view class='house-tip'>望京  A1</view>
           <view class='house-tip'>望京辅助仓库  A1</view>
           <view class='house-tip'>望京辅助仓库  A1</view>
           <view class='house-tip'>望京辅助仓库  A1</view> -->
@@ -36,65 +36,70 @@
   </view>
 </view>
 
-<view class='main-box'>
-  <view class='tab-box'>
-    <view class='tab-item tab-item-ac'>库存信息</view>
-    <view class='gray-line'></view>
-    <view class='tab-item'>库存流水</view>
-    <view class='gray-line'></view>
-    <view class='tab-item com-gray-color'>分销库存看板</view>
-  </view>
-  <!-- 仓库 -->
-  <!-- <view class='com-form-box'>
-    <view class='com-box'>
-      <view class='com-flex-between form-item'>
-        <view class='form-title'>合并库存查看</view>
-        <switch checked='{{formData.warningGoods}}' color="#fdb813" bindchange='switchChange' data-type='warning' style='padding-right:30rpx;'></switch>
+<view class='main-box {{menuFixed?"padding-top":""}}'>
+  <view id='filter' class='{{menuFixed?"fixed-top":""}}'>
+    <view class='tab-box'>
+      <view class='tab-item {{tabType =="house"?"tab-item-ac":""}}' bindtap='tabclick' data-type="house">库存信息</view>
+      <view class='gray-line'></view>
+      <view class='tab-item {{tabType =="flow"?"tab-item-ac":""}}' bindtap='tabclick' data-type='flow'>库存流水</view>
+      <view class='gray-line'></view>
+      <view class='tab-item com-gray-color'>分销库存看板</view>
+    </view>
+    <!-- 流水 -->
+    <view class='filter-box' wx:if="{{tabType =='flow'}}">
+      <view class='com-flex-center'>
+        <view class='filter-item font26' wx:for="{{dayList}}" wx:key='{{index}}' bindtap='tabtab'>{{item.name}}</view>
+        <view class='filter-item font26'>
+          <text>全部仓库</text>
+          <view class='tri-icon'></view>
+        </view>
+      </view>
+      <view class='filter-date com-flex-center'>
+        <picker mode="date" bindchange='bindDateChange' data-type='start'>
+          <view class='date-input'>{{startTime}}</view>
+        </picker>
+        <view class='date-line'></view>
+        <view class='date-input com-flex-center'>
+          <picker class='flexone' mode="date" bindchange='bindDateChange' data-type='end'>{{endTime}}</picker>
+          <text bindtap='clearEnd'>x</text>
+        </view>
+        <button class='ser-btn'>确定</button>
       </view>
     </view>
-  </view>
-  <view class='house-item'>
-    <view class='house-title com-flex-center font24'>
-      <view class='color-chunk'></view>
-      <text class='house-name'>全部仓库</text>
-      <text>（库存数：</text>
-      <text class="font36 com-red-color">1821</text>
-      <text>）</text>
-    </view>
-    <view class='sku-item com-flex-center'>
-      <view class='sku-main'>
-        <text class='font30 com-blod-font'>黄色</text>
-        <text class='font40 com-blod-font com-red-color'>{{filter.parseLongNum(1212100)}}</text>
-      </view>
-      <view class='flexone'>
-        <view class='com-flex-center font30'>
-          <view class='sku-other-name'>啤啤酒味啤酒味啤酒味啤酒味啤酒味啤酒味酒味</view>
-          <text class='flexone' style='text-align:right;'>129129</text>
-          <image class='img30 edit-icon' src='/distribution/images/edit-gold.png'></image>
+    <!-- 仓库 -->
+    <view class='com-form-box' wx:if="{{tabType =='house'}}">
+      <view class='com-box'>
+        <view class='com-flex-between form-item'>
+          <view class='form-title' style='width:auto;'>合并库存查看</view>
+          <switch checked='{{formData.warningGoods}}' color="#fdb813" bindchange='switchChange' data-type='warning' style='padding-right:30rpx;'></switch>
         </view>
       </view>
     </view>
-  </view> -->
-  <!-- 流水 -->
-  <view class='filter-box'>
-    <view class='com-flex-center'>
-      <view class='filter-item font26'>近7天</view>
-      <view class='filter-item font26'>近30天</view>
-      <view class='filter-item font26'>自定义</view>
-      <view class='filter-item font26'>
-        <text>全部仓库</text>
-        <view class='tri-icon'></view>
+  </view>
+  <!-- 仓库列表 -->
+  <view wx:if="{{tabType =='house'}}">
+    <view class='house-item' wx:for=',,,,,,,,,,,,'>
+      <view class='house-title com-flex-center font24'>
+        <view class='color-chunk'></view>
+        <text class='house-name'>全部仓库</text>
+        <text>（库存数：</text>
+        <text class="font36 com-red-color">1821</text>
+        <text>）</text>
+      </view>
+      <view class='sku-item com-flex-center'>
+        <view class='sku-main'>
+          <text class='font30 com-blod-font'>黄色</text>
+          <text class='font40 com-blod-font com-red-color'>{{filter.parseLongNum(1212100)}}</text>
+        </view>
+        <view class='flexone'>
+          <view class='com-flex-center font30'>
+            <view class='sku-other-name'>{{index}}</view>
+            <text class='flexone' style='text-align:right;'>129129</text>
+            <image class='img30 edit-icon' src='/distribution/images/edit-gold.png'></image>
+          </view>
+        </view>
       </view>
     </view>
-    <view class='filter-date com-flex-center'>
-      <picker mode="date" bindchange='bindDateChange'>
-        <view class='date-input'></view>
-      </picker>
-      <view class='date-line'></view>
-      <picker mode="date" bindchange='bindDateChange'>
-        <input class='date-input' disabled></input>
-      </picker>
-      <button class='ser-btn'>确定</button>
-    </view>
   </view>
+
 </view>

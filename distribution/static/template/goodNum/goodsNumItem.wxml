@@ -18,3 +18,59 @@
     </view>
   </view>
 </template>
+<!-- 库存预警商品 -->
+<template name="goodsWarning">
+  <view class='template'>
+    <view class='goods-item com-flex-between'>
+      <image class='goods-icon' src='/image/poster-right-in.png'></image>
+      <view class='flexone' style='overflow:hidden;'>
+        <view class='com-flex-center font28 com-blod-font'>
+          <text class='flexone com-text-ellipsis'>啊实打实大苏打实打实的按说大苏打</text>
+        </view>
+        <view class='font24 com-gray-color' style='padding:10rpx 0'>粉色  XL 望京辅助一库</view>
+        <view class='font26 com-gray-color'>
+          <text>当前库存：</text>
+          <text class='com-red-color'>2</text>
+          <text style='padding-left:30rpx;'>库存下限值: </text>
+          <text class='com-yellow-color'>3</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<!-- 库存流水 -->
+<template name="goodsFlow">
+  <view class='flow-item'>
+    <view class='com-flex-between'>
+      <view class='com-flex-center'>
+        <view class='flow-tag' style='background:#f8b617'>入库</view>
+        <view class='flow-tag' style='background:#ea5037'>出库</view>
+        <view class='flow-tag' style='background:#3dbce6'>初期</view>
+        <text class='font30 com-blod-font'>调整</text>
+      </view>
+      <text class='flow-num'>+125</text>
+    </view>
+    <view class='msg-item com-flex-between'>
+      <view>出库仓库：默认仓库</view>
+      <view>剩余库存：128</view>
+    </view>
+    <view class='msg-item com-flex-between'>
+      <view>经手人：文竹</view>
+      <view>17:19</view>
+    </view>
+    <view class='msg-item com-flex-between'>
+      <view>供应商：木林批发</view>
+      <view class='change-type'>
+        <text>调整</text>
+        <text>订单</text>
+        <text>供货单</text>
+      </view>
+    </view>
+    <view class='remark-flex'>
+      <text class='remark-tip'>库存报溢</text>
+      <view class='remark-box'>
+        <text>备注：运输破运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损损</text>
+      </view>
+    </view>
+  </view>
+</template>
