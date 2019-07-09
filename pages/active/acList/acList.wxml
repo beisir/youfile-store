@@ -3,23 +3,25 @@
 </view>
 <block wx:if='{{list && list.length>0}}'>
   <view class='ac-item' wx:for="{{list}}" wx:key='{{index}}'>
-    <acBanner style='margin:0 auto;' item='{{item}}'></acBanner>
-    <view class='com-padding msg-box'>
-      <view class='ac-title'>{{item.activityName}}</view>
-      <view class='ac-status'>
-        <text wx:if="{{item.activityStatus=='be_doing'}}" class='com-red-color'>活动进行中</text>
-        <text wx:if="{{item.activityStatus=='init'}}" class='com-yellow-color'>活动未开始</text>
-        <text wx:if="{{item.activityStatus=='finish'}}" class='com-gray-color'>活动已结束</text>
+    <navigator url='../../mallActive/waitRalease/waitRalease?activityNumber={{item.activityNumber}}'>
+      <acBanner style='margin:0 auto;' item='{{item}}'></acBanner>
+      <view class='com-padding msg-box'>
+        <view class='ac-title'>{{item.activityName}}</view>
+        <view class='ac-status'>
+          <text wx:if="{{item.activityStatus=='be_doing'}}" class='com-red-color'>活动进行中</text>
+          <text wx:if="{{item.activityStatus=='init'}}" class='com-yellow-color'>活动未开始</text>
+          <text wx:if="{{item.activityStatus=='finish'}}" class='com-gray-color'>活动已结束</text>
+        </view>
+        <view class='normal-font flex-box'>
+          <text class='des-title'>活动时间</text>
+          <text class='flex-one'>{{item.startTime}} 至 {{item.endTime}}</text>
+        </view>
+        <view class='normal-font flex-box'>
+          <text class='des-title'>活动介绍</text>
+          <text class='flex-one'>{{item.introduction?item.introduction:''}}</text>
+        </view>
       </view>
-      <view class='normal-font flex-box'>
-        <text class='des-title'>活动时间</text>
-        <text class='flex-one'>{{item.startTime}} 至 {{item.endTime}}</text>
-      </view>
-      <view class='normal-font flex-box'>
-        <text class='des-title'>活动介绍</text>
-        <text class='flex-one'>{{item.introduction?item.introduction:''}}</text>
-      </view>
-    </view>
+    </navigator>
     <view class='btn-box com-padding'>
       <view class='add-btn' wx:if="{{item.activityStatus!=='finish'}}">
         <navigator url='../../mallActive/waitRalease/waitRalease?activityNumber={{item.activityNumber}}'>添加活动商品</navigator>
