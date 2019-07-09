@@ -27,37 +27,46 @@
     </view>
     <view class='goods-num-item'>
       <view class='font28'>库存总成本</view>
-      <view class='font40'><text class='font30'>￥</text>{{filter.parseLongNum(1212100)}}</view>
+      <view class='font40'>
+        <text class='font30'>￥</text>{{filter.parseLongNum(1212100)}}</view>
     </view>
   </view>
 </view>
 <view class='com-flex-between entry-box'>
-  <view class='entry-item com-flex-center'>
-    <image src='/image/11.png' class='entry-icon'></image>
-    <view>
-      <view class='font30 com-blod-font'>商品库存</view>
-      <view class='font24 com-gray-color'>商品库存总览</view>
+  <navigator url='../warehouseDetail/warehouseDetail'>
+    <view class='entry-item com-flex-center'>
+      <image src='/distribution/images/goods.png' class='entry-icon'></image>
+      <view>
+        <view class='font30 com-blod-font'>商品库存</view>
+        <view class='font24 com-gray-color'>商品库存总览</view>
+      </view>
     </view>
-  </view>
-  <view class='entry-item com-flex-center'>
-    <image src='/image/11.png' class='entry-icon'></image>
-    <view>
-      <view class='font30 com-blod-font'>库存预警</view>
-      <view class='font24 com-gray-color'>上限下限预警</view>
+  </navigator>
+  <navigator url='../warningGoods/warningGoods'>
+    <view class='entry-item com-flex-center'>
+      <image src='/distribution/images/warning.png' class='entry-icon'></image>
+      <view>
+        <view class='font30 com-blod-font'>库存预警</view>
+        <view class='font24 com-gray-color'>上限下限预警</view>
+      </view>
     </view>
-  </view>
-  <view class='entry-item com-flex-center'>
-    <image src='/image/11.png' class='entry-icon'></image>
-    <view>
-      <view class='font30 com-blod-font'>仓库</view>
-      <view class='font24 com-gray-color'>管理仓库信息</view>
+  </navigator>
+  <navigator url='../warehouseManage/warehouseManage'>
+    <view class='entry-item com-flex-center'>
+      <image src='/distribution/images/warehouse-entry.png' class='entry-icon'></image>
+      <view>
+        <view class='font30 com-blod-font'>仓库</view>
+        <view class='font24 com-gray-color'>管理仓库信息</view>
+      </view>
     </view>
-  </view>
-  <view class='entry-item com-flex-center'>
-    <image src='/image/11.png' class='entry-icon'></image>
-    <view>
-      <view class='font30 com-blod-font'>库存设置</view>
-      <view class='font24 com-gray-color'>销售预警设置</view>
+  </navigator>
+  <navigator url='../warningSetting/warningSetting'>
+    <view class='entry-item com-flex-center'>
+      <image src='/distribution/images/warehouse-setting.png' class='entry-icon'></image>
+      <view>
+        <view class='font30 com-blod-font'>库存设置</view>
+        <view class='font24 com-gray-color'>销售预警设置</view>
+      </view>
     </view>
-  </view>
+  </navigator>
 </view>

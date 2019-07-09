@@ -2,5 +2,7 @@
   "usingComponents": {
     "tip": "/assembly/tips/tips"
   },
-  "navigationBarTitleText": "库存管理"
+  "navigationBarTitleText": "库存管理",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b617"
 }

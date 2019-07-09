@@ -270,3 +270,8 @@ export const storeTemListUrl = '/admin/activity/poster/temple'
 // 储存openid以及formid
 export const getOpenidUrl = '/api/weixin/user/obtain/openid'
 export const saveFormidUrl = '/api/weixin/user/fromid/collect'
+// 仓库
+export const handleWarehouseUrl = '/admin/warehouses'
+export const handleHousePartUrl = '/admin/warehouses/regions'
+export const hamdleHousePartTipUrl = '/admin/warehouses/regions/types'
+

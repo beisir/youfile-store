@@ -1,4 +1,6 @@
 // distribution/pages/warehouse/warehouseDetail/warehouseDetail.js
+import Api from '../../../../utils/api.js'
+
 Page({
 
   /**
@@ -25,6 +27,21 @@ Page({
     warehouseList: [{
       name:'123',
     }]
+  },
+  search() {
+    
+  },
+  // 获取列表
+  getHouseList() {
+    Api.getWarehouseList().then(res=> {
+
+    })
+  },
+  // 获取详情
+  getHouseMsg() {
+    Api.getWarehouseMsg({code: 1}).then(res => {
+
+    })
   },
   showFilter() {
     const side = this.selectComponent('#side')
@@ -64,16 +81,16 @@ Page({
     this.setData({
       formData: {
         warningGoods: false,
-        filterZero: false,
-        classList: arr
-      }
+        filterZero: false
+      },
+      classList: arr
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getHouseList()
   },
 
   /**

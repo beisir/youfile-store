@@ -9,7 +9,7 @@
 
   <view class='com-flex-between form-item'>
     <view class='form-title'>仓库编号</view>
-    <input placeholder='请输入仓库编号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='num' class='input flexone'></input>
+    <input placeholder='请输入仓库编号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='no' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
 </view>
@@ -17,24 +17,29 @@
 <view class='com-box'>
   <view class='com-flex-between form-item'>
     <view class='form-title'>负责人</view>
-    <input placeholder='请输入仓库负责人' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='num' class='input flexone'></input>
+    <input placeholder='请输入仓库负责人' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='manager' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
   <view class='com-flex-between form-item'>
     <view class='form-title'>联系电话</view>
-    <input placeholder='请输入联系电话' placeholder-class='input-placeholder-common-color' type='number' bindinput='watchinput' data-type='num' class='input flexone'></input>
+    <input placeholder='请输入联系电话' placeholder-class='input-placeholder-common-color' type='number' bindinput='watchinput' data-type='phone' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
+
   <view class='com-flex-between form-item'>
     <view class='form-title'>选择地区</view>
-    <input placeholder='请选择地区' placeholder-class='input-placeholder-common-color' disabled bindinput='watchinput' data-type='num' class='input flexone'></input>
-    <view class='img-box'>
-      <image src='/image/poster-right-in.png' class='com-right-icon'></image>
-    </view>
+    <picker mode="region" class='flexone' bindchange='areachange'>
+      <view class='com-flex-center'>
+        <input placeholder='请选择地区' placeholder-class='input-placeholder-common-color' value='{{showarea}}' disabled class='input flexone'></input>
+        <view class='img-box'>
+          <image src='/image/poster-right-in.png' class='com-right-icon'></image>
+        </view>
+      </view>
+    </picker>
   </view>
   <view class='com-flex-between form-item'>
     <view class='form-title'>详细地址</view>
-    <input placeholder='请输入详细地址信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='num' class='input flexone'></input>
+    <input placeholder='请输入详细地址信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='address' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
 </view>
@@ -42,19 +47,17 @@
 <view class='com-box'>
   <view class='com-flex-between form-item'>
     <view class='form-title'>邮箱</view>
-    <input placeholder='请输入邮箱' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='num' class='input flexone'></input>
+    <input placeholder='请输入邮箱' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='email' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
   <view class='com-flex-between form-item'>
     <view class='form-title'>备注</view>
-    <input placeholder='请输入备注信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='num' class='input flexone'></input>
+    <input placeholder='请输入备注信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='remark' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
 </view>
 
 <view class='bottom-replace-box'></view>
 <view class='bottom-single-btn-box'>
-  <navigator>
-    <button class='bottom-single-btn'>新建仓库</button>
-  </navigator>
+  <button class='bottom-single-btn' bindtap='submit'>确定</button>
 </view>

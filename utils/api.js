@@ -223,6 +223,10 @@ import {
   // formid
   getOpenidUrl,
   saveFormidUrl,
+  // 仓库
+  handleWarehouseUrl,
+  handleHousePartUrl,
+  hamdleHousePartTipUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -864,7 +868,7 @@ function getOrderDetail(data) {
 }
 // 商家订单详情
 function adminGetOrderDetail(data) {
-  return app.http.getRequest(adminorderDetailUrl, data); 
+  return app.http.getRequest(adminorderDetailUrl, data);
 }
 //是否进货商
 function ifWholesaler(data) {
@@ -1080,42 +1084,56 @@ function getStoreId() {
 
 /**
  *海报 
-*/
+ */
 function posterModuleList(data) {
   return app.http.getRequest(posterModuleListUrl, data)
 }
+
 function uploadPoster(data) {
   return app.http.putRequest(uploadPosterUrl, data, {}, true)
 }
 // 专辑
-function addPosterTag(data) {  // 添加专辑
+function addPosterTag(data) { // 添加专辑
   data = initStoreId(data);
   return app.http.putRequest(addPosterTagUrl, data)
 }
-function getPosterTagList(data) {  // 专辑列表
+
+function getPosterTagList(data) { // 专辑列表
   return app.http.getRequest(getPosterTagListUrl, data)
 }
-function delPosterTag(data) {  // 删除
+
+function delPosterTag(data) { // 删除
   return app.http.deleteRequest(delPosterTagUrl + "?tagCode=" + data.tagCode, data)
 }
+
 function updatePosterTagName(data) { // 更换名字
-  return app.http.postRequest(updatePosterTagNameUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.postRequest(updatePosterTagNameUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
-function getPosterTagDetail(data) {  // 详情
+
+function getPosterTagDetail(data) { // 详情
   return app.pageRequest.pageGet(getPosterTagDetailUrl, data)
 }
+
 function getPosterTagMsg(data) {
   return app.http.getRequest(getPosterTagMsgUrl, data)
 }
-function delPosterArr(data) {  // 批量删除
+
+function delPosterArr(data) { // 批量删除
   return app.http.deleteRequest(delPosterArrUrl + "?posterIds=" + encodeURI(data.posterIds), data)
 }
+
 function toOtherPosterTag(data) {
-  return app.http.postRequest(toOtherPosterTagUrl, data, { 'content-type': 'application/x-www-form-urlencoded' })
+  return app.http.postRequest(toOtherPosterTagUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
-function delAllPoster(data) {  // 全删
+
+function delAllPoster(data) { // 全删
   return app.http.deleteRequest(delAllPosterUrl + '?tagCode=' + data.tagCode, data)
 }
+
 function goodsPosterNum(data) {
   return app.http.getRequest(goodsPosterNumUrl, data)
 }
@@ -1189,7 +1207,7 @@ function getActiveGoodsDetail(data) {
   return app.http.getRequest(getActiveGoodsDetailUrl, data)
 }
 // 编辑活动商品
-function editActiveGoods(data){
+function editActiveGoods(data) {
   return app.http.postRequest(editActiveGoodsUrl, data)
 }
 // 删除活动商品详情
@@ -1198,7 +1216,7 @@ function delActGoods(data) {
 }
 // 店铺活动商品列表
 function storeActiveGoods() {
-  var data={}
+  var data = {}
   data = initStoreId(data);
   return app.http.getRequest(storeActiveGoodsUrl, data)
 }
@@ -1212,11 +1230,11 @@ function statisticSales(data) {
 }
 // 统计云分销数据
 function yunStatistics() {
-  return app.http.getRequest(yunStatisticsUrl )
+  return app.http.getRequest(yunStatisticsUrl)
 }
 // 统计活动商品销量排行榜
 function aAnalysisAGoods(data) {
-  return app.http.getRequest(aAnalysisAGoodsUrl,data)
+  return app.http.getRequest(aAnalysisAGoodsUrl, data)
 }
 // 统计活动消费排行榜
 function aAnalysisCustom(data) {
@@ -1240,29 +1258,28 @@ function storeIndexAGoods(data) {
   return app.pageRequest.pageGetActive(storeIndexAGoodsUrl, data)
 }
 // 打开设置页
-function openSetting(data){
-  data?'':data={};
+function openSetting(data) {
+  data ? '' : data = {};
   wx.showModal({
-    title: data.title ? data.title:'您未授权相册权限',
-    content: data.des ? data.des:'点击确定跳转至设置，授权后即可保存',
+    title: data.title ? data.title : '您未授权相册权限',
+    content: data.des ? data.des : '点击确定跳转至设置，授权后即可保存',
     success(res) {
       if (res.confirm) {
         wx.openSetting({
           success(res) {
-            
+
           }
         })
-      } else if (res.cancel) {
-      }
+      } else if (res.cancel) {}
     }
   })
 }
 // 编辑收货人信息
-function editConsignee(data){
+function editConsignee(data) {
   return app.http.postRequest(editConsigneeUrl, data)
 }
 // 编辑物流
-function editExpress(data){
+function editExpress(data) {
   return app.http.postRequest(editExpressUrl, data, {
     'content-type': 'application/x-www-form-urlencoded'
   })
@@ -1282,6 +1299,7 @@ function zoneToTop(data) {
 function getZoneListAdmin(data) {
   return app.http.getRequest(getZoneListAdminUrl, data)
 }
+
 function getShowZoneList(data) {
   return app.http.getRequest(getShowZoneListUrl, data)
 }
@@ -1289,22 +1307,24 @@ function getShowZoneList(data) {
 function adminShowZoneList(data) {
   return app.http.getRequest(adminShowZoneListUrl, data)
 }
+
 function apiShowZoneList(data) {
   data = initStoreId(data);
   return app.http.getRequest(apiShowZoneListUrl, data)
 }
 // 编辑分区
-function editZone(data){
+function editZone(data) {
   return app.http.putRequest(editZoneUrl, data, {
     'content-type': 'application/x-www-form-urlencoded'
   })
 }
 // 添加商品到分区
-function addGoodsToZone(data){
+function addGoodsToZone(data) {
   return app.http.postRequest(addGoodsToZoneUrl, data, {
     'content-type': 'application/x-www-form-urlencoded'
   })
 }
+
 function delGoodsToZone(data) {
   return app.http.deleteRequest(delGoodsToZoneUrl, data, {
     'content-type': 'application/x-www-form-urlencoded'
@@ -1319,69 +1339,109 @@ function apiShowAllZone(data) {
 /***
  * 商户资质
  */
-function getUserInfoAdmin(data){
+function getUserInfoAdmin(data) {
   return app.http.getRequest(getUserInfoAdminUrl, data);
 }
 // 一级二级分类列表
 function merchantClassOne(data) {
   return app.http.getRequest(merchantClassOneUrl, data);
 }
+
 function merchantClassTwo(data) {
   return app.http.getRequest(merchantClassTwoUrl, data);
 }
-function getAddressMes(data){
-  return app.http.getRequest(getAddressMesUrl, data); 
+
+function getAddressMes(data) {
+  return app.http.getRequest(getAddressMesUrl, data);
 }
 //图片签名
-function imagesignUp(data){
-  return app.http.getRequest(imagesignUpUrl, data); 
+function imagesignUp(data) {
+  return app.http.getRequest(imagesignUpUrl, data);
 }
 // 总行列表
-function getbankList(data){
-  return app.http.getRequest(bankListUrl, data); 
+function getbankList(data) {
+  return app.http.getRequest(bankListUrl, data);
 }
-function getSubBankList(data){
-  return app.http.getRequest(subBankListUrl, data); 
+
+function getSubBankList(data) {
+  return app.http.getRequest(subBankListUrl, data);
 }
 // 存信息
 function merchantBaseMsg(data) {
   return app.http.putRequest(merchantBaseMsgUrl, data);
 }
+
 function merchantCAMsg(data) {
   return app.http.postRequest(merchantCAMsgUrl, data);
 }
+
 function merchantSettleMsg(data) {
   return app.http.postRequest(merchantSettleMsgUrl, data);
 }
-function merchantDeatail(data){
-  return app.http.getRequest(merchantDeatailUrl, data); 
+
+function merchantDeatail(data) {
+  return app.http.getRequest(merchantDeatailUrl, data);
 }
+
 function hideMerchantTip(data) {
   return app.http.putRequest(hideMerchantTipUrl, data);
 }
 /**
  * 店铺活动
  */
-function createAC(data){
+function createAC(data) {
   return app.http.postRequest(createACUrl, data);
 }
-function storeACList(data){
-  return app.pageRequest.pageGet(storeACListUrl, data); 
+
+function storeACList(data) {
+  return app.pageRequest.pageGet(storeACListUrl, data);
 }
-function storeTemList(data){
-  return app.http.getRequest(storeTemListUrl, data); 
+
+function storeTemList(data) {
+  return app.http.getRequest(storeTemListUrl, data);
 }
 /**
  * 存储formid
  */
 function getOpenid(data) {
-  return app.http.getRequest(getOpenidUrl, data, { "platAppId": app.globalData.payAppNum}, true);
-}
-function saveFormid(data) {
-  return app.http.postRequest(saveFormidUrl + "?openId=" + data.openId + "&formId=" + data.formId, data, { "platAppId": app.globalData.payAppNum }, true);
+  return app.http.getRequest(getOpenidUrl, data, {
+    "platAppId": app.globalData.payAppNum
+  }, true);
 }
 
+function saveFormid(data) {
+  return app.http.postRequest(saveFormidUrl + "?openId=" + data.openId + "&formId=" + data.formId, data, {
+    "platAppId": app.globalData.payAppNum
+  }, true);
+}
+
+// 仓库
+function createWareHouse(data) {
+  data = initStoreId(data);
+  return app.http.postRequest(handleWarehouseUrl, data)
+}
+function getWarehouseMsg(data) {
+  return app.http.getRequest(handleWarehouseUrl+"/"+data.code, data)
+}
+function getWarehouseList(data) {
+  return app.pageRequest.pageGet(handleWarehouseUrl, data)
+}
+function updateWarehouse(data) {
+  return app.http.putRequest(handleWarehouseUrl, data)
+}
+function delWarehouse(data) {
+  return app.http.deleteRequest(handleWarehouseUrl + "/" + data.code, data)
+}
+
+// handleWarehouseUrl,
+//   handleHousePartUrl,
+//   hamdleHousePartTipUrl
 module.exports = {
+  createWareHouse,
+  getWarehouseMsg,
+  getWarehouseList,
+  updateWarehouse,
+  delWarehouse,
   getOpenid,
   saveFormid,
   storeTemList,

@@ -7,7 +7,7 @@
         <image src='/distribution/images/search-white.png' class='search-img'></image>
         <input class='font26' placeholder='输入商品名称、货号' placeholder-style='color:#fff;'></input>
       </view>
-      <text class='font30 ser-btn'>搜索</text>
+      <text class='font30 ser-btn' bindtap='search'>搜索</text>
     </view>
     <image src='/distribution/images/filter.png' class='filter-icon' bindtap='showFilter'></image>
   </view>
@@ -58,7 +58,7 @@
   <view class='side-box'>
     <view class='com-blod-font'>全部分类</view>
     <view class='class-item-box com-flex-between'>
-      <view wx:for='{{classList}}' class='class-item {{item.selected?"class-item-ac":""}}' bindtap='selectClass' data-index="{{index}}">{{item.name}}</view>
+      <view wx:for='{{classList}}' wx:key='{{index}}' class='class-item {{item.selected?"class-item-ac":""}}' bindtap='selectClass' data-index="{{index}}">{{item.name}}</view>
     </view>
     <view class='side-switch-item com-flex-between'>
       <text>预警商品</text>

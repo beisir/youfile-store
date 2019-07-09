@@ -24,7 +24,7 @@
 
 <view class='bottom-replace-box'></view>
 <view class='bottom-single-btn-box'>
-  <navigator>
+  <navigator url='../createWarehouse/createWarehouse'>
     <button class='bottom-single-btn'>新建仓库</button>
   </navigator>
 </view>
