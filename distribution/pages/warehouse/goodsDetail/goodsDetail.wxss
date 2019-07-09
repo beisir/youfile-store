@@ -1,8 +1,7 @@
 @import "/distribution/static/template/goodNum/goodsNumItem";
 @import "/distribution/static/wxss/common";
 
-
-.template{background: #fff;border-radius: 10rpx;margin: 20rpx 20rpx 0;}
+.header-goods{background: #fff;border-radius: 10rpx;margin: 20rpx 20rpx 0;}
 .template .goods-item{display: flex;height: auto;min-height: 200rpx;}
 .house-tip{height: 40rpx;line-height:40rpx;padding:0 15rpx;border-radius: 40rpx;background: #000;color: #fff;margin:0 20rpx 20rpx 0;}
 .house-tip-box{flex-wrap: wrap;}
@@ -28,8 +27,16 @@
 .filter-item{height: 90rpx;flex: 1;overflow: hidden;display: flex;align-items: center;justify-content: center;}
 .tri-icon{width: 0;height: 0;border: 5px solid;border-color: #999 transparent transparent;margin: 12rpx 0 0 5rpx; }
 .filter-date{height: 120rpx;padding: 0 50rpx;}
-.date-input{width: 220rpx;height: 50rpx;border-radius: 10rpx;border: 1rpx solid #eee;padding: 0 20rpx;box-sizing: border-box;font-size: 28rpx;}
+.date-input{width: 190rpx;height: 50rpx;border-radius: 10rpx;border: 1rpx solid #eee;padding: 0 20rpx;box-sizing: border-box;font-size: 24rpx;}
 .date-line{width: 20rpx;height: 2rpx;background: #ddd;margin: 0 20rpx;}
 .ser-btn{width: 120rpx;height: 50rpx;color: #fff;background: #f8b617;line-height: 50rpx;font-size: 26rpx;margin:0;margin-left: auto;}
 .fixed-top{position: fixed;top: 0;width: 100%;background: #fff;}
 .padding-top{padding-top: 300rpx;}
+.clear-icon{padding: 0 10rpx;}
+.gray-back{background: #f7f7f7;}
+.date-item{padding:40rpx 50rpx 20rpx;line-height: 1;font-size: 24rpx;color: #999;}
+/* 流水切换 */
+.flowtab{padding: 30rpx 50rpx 0;border-radius: 10rpx;}
+.flowtab-item{flex: 1;border: 1rpx solid #f8b617;background: #fff;color: #f8b617;height: 50rpx;font-size: 26rpx;text-align: center;line-height: 50rpx;border-right: 0}
+.flowtab .flowtab-item:last-child{border-right: 1rpx solid #f8b617;}
+.flowtab-item-ac{background: #f8b617;color: #fff;}

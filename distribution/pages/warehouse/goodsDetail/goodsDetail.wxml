@@ -1,5 +1,6 @@
+<import src="/distribution/static/template/goodNum/goodsNumItem.wxml" />
 <wxs src="../../../../public/filter.wxs" module="filter" />
-<view class='template'>
+<view class='template header-goods'>
   <view class='goods-item'>
     <image class='goods-icon' src='/image/poster-right-in.png'></image>
     <view class='flexone' style='overflow:hidden;'>
@@ -48,31 +49,39 @@
     <!-- 流水 -->
     <view class='filter-box' wx:if="{{tabType =='flow'}}">
       <view class='com-flex-center'>
-        <view class='filter-item font26' wx:for="{{dayList}}" wx:key='{{index}}' bindtap='tabtab'>{{item.name}}</view>
+        <view class='filter-item font26 {{item.selected?"com-new-gold-font":""}}' wx:for="{{dayList}}" wx:key='{{index}}' data-index='{{index}}' bindtap='tabtab'>{{item.name}}</view>
         <view class='filter-item font26'>
           <text>全部仓库</text>
           <view class='tri-icon'></view>
         </view>
       </view>
-      <view class='filter-date com-flex-center'>
+      <view class='filter-date com-flex-center' wx:if="{{dataFilterType === 'own'}}">
         <picker mode="date" bindchange='bindDateChange' data-type='start'>
           <view class='date-input'>{{startTime}}</view>
         </picker>
         <view class='date-line'></view>
-        <view class='date-input com-flex-center'>
-          <picker class='flexone' mode="date" bindchange='bindDateChange' data-type='end'>{{endTime}}</picker>
-          <text bindtap='clearEnd'>x</text>
-        </view>
+        <picker mode="date" bindchange='bindDateChange' data-type='end'>
+          <view class='date-input'>{{endTime}}</view>
+        </picker>
+        <image src='/image/ser.png' class='img40 clear-icon' bindtap='clearDate'></image>
         <button class='ser-btn'>确定</button>
       </view>
     </view>
-    <!-- 仓库 -->
-    <view class='com-form-box' wx:if="{{tabType =='house'}}">
-      <view class='com-box'>
-        <view class='com-flex-between form-item'>
-          <view class='form-title' style='width:auto;'>合并库存查看</view>
-          <switch checked='{{formData.warningGoods}}' color="#fdb813" bindchange='switchChange' data-type='warning' style='padding-right:30rpx;'></switch>
-        </view>
+  </view>
+  <!-- 流水列表 -->
+  <view wx:if="{{tabType =='flow'}}" class='template gray-back'>
+    <view class='flowtab com-flex-center'>
+      <view bindtap='choseflowtab' data-index="{{index}}" class='flowtab-item {{item.selected?"flowtab-item-ac":""}}' wx:for='{{flowtab}}' wx:key="{{index}}">{{item.name}}</view>
+    </view>
+    <view class='date-item'>2019年06月08日 星期五</view>
+    <template is='goodsFlow' wx:for='.......'></template>
+  </view>
+  <!-- 仓库 -->
+  <view class='com-form-box' wx:if="{{tabType =='house'}}">
+    <view class='com-box'>
+      <view class='com-flex-between form-item'>
+        <view class='form-title' style='width:auto;'>合并库存查看</view>
+        <switch checked='{{formData.warningGoods}}' color="#fdb813" bindchange='switchChange' data-type='warning' style='padding-right:30rpx;'></switch>
       </view>
     </view>
   </view>

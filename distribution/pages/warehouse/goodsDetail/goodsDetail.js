@@ -1,4 +1,5 @@
 // distribution/pages/warehouse/goodsDetail/goodsDetail.js
+import { tabSelceted} from '../../../../distribution/static/js/common.js'
 Page({
 
   /**
@@ -9,7 +10,8 @@ Page({
     dayList: [{
       name: '近七天',
       type: 'day',
-      day: 7
+      day: 7,
+      selected: true
     }, {
       name: '近30天',
       type: 'day',
@@ -17,16 +19,40 @@ Page({
     }, {
       name: '自定义',
       type: 'own'
+    }],
+    flowtab: [{
+      name: "全部",
+      selected: true
+    }, {
+      name: "入库"
+    }, {
+      name: "出库"
     }]
+  },
+  tabtab(e){
+    let thisindex = e.currentTarget.dataset.index,
+        arr = this.data.dayList;
+
+    tabSelceted(thisindex, arr, 'dayList', this) 
+    this.setData({ dataFilterType: arr[thisindex].type})
+    if (arr[thisindex].type === 'day'){
+      this.clearDate()
+    }
+  },
+  choseflowtab(e){
+    tabSelceted(e.currentTarget.dataset.index, this.data.flowtab, 'flowtab',this)    
+  },
+  clearDate() {
+    this.setData({
+      endTime: '',
+      startTime: ''
+    })
   },
   tabclick(e) {
     let type = e.currentTarget.dataset.type
     this.setData({
       tabType: type
     })
-  },
-  clearEnd(){
-    this.setData({endTime:''})
   },
   bindDateChange(e) {
     let type = e.currentTarget.dataset.type,
