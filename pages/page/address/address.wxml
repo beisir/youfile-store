@@ -3,9 +3,9 @@
 </bottomLayer>
 <view class='ad-top'>
   <view class="{{currentTab==1?'ad-active':''}}" data-current="1" data-current="1" bindtap="swichNav">
-    <image src="{{currentTab==0?'/image/car0.png':'/image/car.png'}}"></image>物流配送</view>
+    <image src="{{currentTab==0?'/image/car0.png':'/image/car.png'}}"></image>到家配送</view>
   <view class="{{currentTab==0?'ad-active':''}}" data-current="0" data-current="0" bindtap="swichNav">
-    <image src="{{currentTab==0?'/image/men.png':'/image/men0.png'}}"></image>门店自提</view>
+    <image src="{{currentTab==0?'/image/men.png':'/image/men0.png'}}"></image>到店自提</view>
 </view>
 <view class='ad-send'>
   <view class='ad-tel flex-tel' hidden="{{hiddenSelt}}">

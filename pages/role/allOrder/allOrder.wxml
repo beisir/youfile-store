@@ -340,7 +340,7 @@
 
 <view class='os-mon'>配送方式
   <block wx:if='{{self=="false"}}'>
-    <text>物流配送</text>
+    <text>到家配送</text>
     <block wx:if="{{order.expressStatus && order.expressStatus != '0'}}">
       <view>物流公司
         <text>{{order.expressCompany?order.expressCompany:""}}</text>
@@ -351,7 +351,7 @@
       </view>
     </block>
   </block>
-  <text wx:else>门店自提</text>
+  <text wx:else>到店自提</text>
 </view>
 
 <view class='no-child'>
