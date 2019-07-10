@@ -1,0 +1,35 @@
+<view class='com-embed-header'>
+  <view class='com-flex-center'>
+    <image class='header-icon' src=''></image>
+    <text class='font36 status-text'>待入库</text>
+    <view class='status-tip'>手动录入</view>
+    <view class='header-msg-box flexone'>
+      <view class='font24'>合计数量：<text class='font30'>24</text></view>
+      <view class='font24'>合计金额：¥ <text class='font30'>3520</text></view>
+    </view>
+  </view>
+  <view class='com-embed-inner com-flex-between'>
+    <view>
+      <view class='com-flex-center'>
+        <image class='img30'></image>
+        <text class='suppler-text'>供应商：筑梦师</text>
+        <view class='suppler-tip'>云供应商</view>
+      </view>
+      <view class='font26 com-gray-color tele-text'>联系电话：18813165555</view>
+    </view>
+    <image class='img30' src=''></image>
+  </view>
+</view>
+
+<view class='com-margin-box' style='border-top:1rpx solid transparent;'>
+  <view class='goods-header com-padding-box com-flex-between'>
+    <view >
+      <view class='color-chunk'></view>
+      <text>采购商品</text>
+    </view>
+    <view>
+      <text>全部收起</text>
+      <image class='tri-icon'></image>
+    </view>
+  </view>
+</view>

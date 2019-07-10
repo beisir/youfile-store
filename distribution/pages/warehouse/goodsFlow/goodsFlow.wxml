@@ -14,5 +14,7 @@
     </view>
   </view>
 </view>
-<view class='date-item'>2019年06月08日  星期五</view>
-<template is="goodsFlow" data="{{item}}" class='goodsFlow'></template>
+<view class='template'>
+  <view class='date-item'>2019年06月08日 星期五</view>
+  <template is="goodsFlow" data="{{item}}" class='goodsFlow'></template>
+</view>

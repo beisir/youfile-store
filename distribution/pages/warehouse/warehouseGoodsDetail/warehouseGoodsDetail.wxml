@@ -12,11 +12,13 @@
     <image src='/distribution/images/filter.png' class='filter-icon' bindtap='showFilter'></image>
   </view>
   <view class='warehouse-statistics'>
-    <view class='name-title com-flex-center font28'>
-      <view class='color-chunk com-background-color'></view>
-      <view class='house-name'>望京辅助仓库 A1</view>
-      <image src='/image/poster-right-in.png' class='com-right-icon' style='transform: rotate(90deg);'></image>
-    </view>
+    <picker mode='multiSelector' range="{{pickerList}}" bindcolumnchange='bindMultiPickerColumnChange' bindchange='surePicker' range-key='name'>
+      <view class='name-title com-flex-center font28'>
+        <view class='color-chunk com-background-color'></view>
+        <view class='house-name'>望京辅助仓库 A1</view>
+        <image src='/image/poster-right-in.png' class='com-right-icon' style='transform: rotate(90deg);'></image>
+      </view>
+    </picker>
     <view class='com-flex-between statistics-box'>
       <view class='statistics-item'>
         <view class='font28 com-gray-color'>商品数</view>

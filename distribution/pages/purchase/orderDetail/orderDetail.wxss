@@ -1,0 +1,14 @@
+/* distribution/pages/purchase/orderDetail/orderDetail.wxss */
+@import '/distribution/static/wxss/common';
+
+.header-icon{height: 35rpx;width: 35rpx;}
+.status-tip{padding: 0 15rpx;height: 40rpx;line-height: 40rpx;text-align: center;font-size: 28rpx;border: 1rpx solid #fff;border-radius: 10rpx;}
+.status-text{padding: 0 30rpx 0 10rpx;}
+.header-msg-box{text-align: right;}
+.suppler-tip{width: 120rpx;height: 40rpx;line-height: 40rpx;font-size: 24rpx;color: #f8b617;border: 1rpx solid #f8b617;border-radius: 10rpx;text-align: center;}
+.suppler-text{padding: 0 20rpx 0 10rpx;}
+.tele-text{padding-left: 40rpx;padding-top: 15rpx;}
+/* 商品 */
+.goods-header{height: 8rpx;}
+.color-chunk{width: 10rpx;height: 30rpx;background: #f8b617;}
+.tri-icon{height: 25rpx;width: 25rpx;}

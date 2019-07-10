@@ -22,3 +22,12 @@
 /* 库区标签 */
 .com-tag{padding: 0 15rpx;background: #ffa515;color: #fff;margin-left: 20rpx;border-radius: 5rpx;font-size: 24rpx;height: 40rpx;line-height: 40rpx;}
 
+/* 搜索 */
+.com-search-box .search-padding-box{padding: 20rpx 20rpx 0;}
+.com-search-box .search-input-box{border-radius:10rpx;background: #fff;height: 100rpx;flex: 1;font-size: 28rpx;}
+.com-search-box .search-img{width: 30rpx;height: 30rpx;}
+.com-search-box .search-btn{width: 120rpx;padding: 0;}
+
+/* 公用嵌入头部 */
+.com-embed-header{margin-bottom:80rpx;background: #f8b617;color: #fff;position: relative;height: 210rpx;padding: 0 50rpx;}
+.com-embed-inner{position: absolute;background: #fff;border-radius: 10rpx;bottom: -80rpx;height: 160rpx;left: 0;right: 0;margin: auto;width: 710rpx;color: #333;padding: 0 30rpx;}

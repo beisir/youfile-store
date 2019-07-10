@@ -1,24 +1,24 @@
 <view class='com-padding-box com-flex-between'>
   <view class='com-flex-between search-input-box'>
     <image style='padding:0 20rpx 0 30rpx' src='/distribution/images/search-black.png' class='search-img'></image>
-    <input class='flexone' placeholder-class='input-placeholder-common-color' placeholder='输入仓库名称、编号、负责人名称'></input>
-    <image style='padding:0 30rpx 0 10rpx' src='/image/close.png' class='search-img'></image>
+    <input bindinput='serchinput' value='{{serchText}}' class='flexone' placeholder-class='input-placeholder-common-color' placeholder='输入仓库名称、编号、负责人名称'></input>
+    <image bindtap='clearSerch' style='padding:0 30rpx 0 10rpx' src='/image/close.png' class='search-img'></image>
   </view>
-  <button class='search-btn font28 com-blod-font' hover-class='none'>搜索</button>
+  <button class='search-btn font28 com-blod-font' hover-class='none' bindtap='search'>搜索</button>
 </view>
 <!-- 仓库列表 -->
 <view class='com-padding-box'>
-  <view class='house-item com-flex-between'>
+  <view class='house-item com-flex-between' wx:for="{{houseList}}" wx:key="{{index}}">
     <view>
       <view class='com-flex-center' style='padding-bottom:10rpx;'>
         <image src='/distribution/images/warehouse.png' style='width:30rpx;height:30rpx;'></image>
-        <text class='house-name'>默认仓库</text>
-        <text class='com-default-tip'>默认</text>
+        <text class='house-name'>{{item.name}}</text>
+        <text class='com-default-tip' wx:if="{{item.defaultFlag}}">默认</text>
       </view>
-      <view class='house-des-font'>库区数量：123</view>
-      <view class='house-des-font'>库存数量：2877</view>
+      <view class='house-des-font'>库区数量：{{item.stockNum}}</view>
+      <view class='house-des-font'>库存数量：{{item.goodsNum}}</view>
     </view>
-    <image src='/distribution/images/more.png' class='more-icon'></image>
+    <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
   </view>
 </view>
 

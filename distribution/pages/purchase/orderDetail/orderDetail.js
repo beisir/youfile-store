@@ -1,45 +1,18 @@
-// distribution/pages/warehouse/warehouseManage/warehouseManage.js
-import Api from '../../../../utils/api.js'
-const app = getApp()
+// distribution/pages/purchase/orderDetail/orderDetail.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    houseList: [],
-    serchText:''
+
   },
-  getList(re) {
-    if(re){
-      app.pageRequest.pageData.pageNum = 0
-      this.setData({ houseList:[]})
-    }
-    Api.getWarehouseList({ keyword: this.data.serchText},'page').then(res=> {
-      this.setData({
-        houseList: this.data.houseList.concat(res.obj.result)
-      })
-    })
-  },
-  // 搜索
-  search(){
-    this.getList(true)
-  },
-  serchinput(e){
-    this.setData({
-      serchText: e.detail.value
-    })
-  },
-  clearSerch(){
-    this.setData({
-      serchText: ''
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getList(true)
+
   },
 
   /**
@@ -74,13 +47,20 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.getList(true)
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    this.getList()
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
   }
 })

@@ -1416,6 +1416,21 @@ function saveFormid(data) {
 }
 
 // 仓库
+// 列表参数
+function listFindType(data, type) {
+  switch (type) {
+    case 'all':
+      data.findType = 'list'
+      break;
+    case 'page':
+      data.findType = 'page'
+      break;
+    case 'picker':
+      data.findType = 'simple'
+      break;
+  }
+  return data
+}
 function createWareHouse(data) {
   data = initStoreId(data);
   return app.http.postRequest(handleWarehouseUrl, data)
@@ -1423,8 +1438,14 @@ function createWareHouse(data) {
 function getWarehouseMsg(data) {
   return app.http.getRequest(handleWarehouseUrl+"/"+data.code, data)
 }
-function getWarehouseList(data) {
-  return app.pageRequest.pageGet(handleWarehouseUrl, data)
+function getWarehouseList(data, type) {
+  data = initStoreId(data);
+  data = listFindType(data,type)
+  if (type === 'page'){
+    return app.pageRequest.pageGet(handleWarehouseUrl, data)
+  } else {
+    return app.http.getRequest(handleWarehouseUrl, data)
+  }
 }
 function updateWarehouse(data) {
   return app.http.putRequest(handleWarehouseUrl, data)

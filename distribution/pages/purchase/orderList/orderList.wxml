@@ -1,0 +1,63 @@
+<view class='head-tab com-flex-center'>
+  <view class='flexone com-flex-around font30' style='height:100%;'>
+    <view class='tab-item tab-item-ac'>进货单</view>
+    <view class='tab-line'></view>
+    <view class='tab-item'>采购单</view>
+  </view>
+  <view class='addOrder-btn'>
+    <image class='img30'></image>
+    <text class='font28'>采购入库</text>
+  </view>
+</view>
+<!-- 公用搜索 -->
+<view class='com-search-box'>
+  <view class='search-padding-box com-flex-between'>
+    <view class='com-flex-between search-input-box'>
+      <image style='padding:0 20rpx 0 30rpx' src='/distribution/images/search-black.png' class='search-img'></image>
+      <input bindinput='serchinput' value='{{serchText}}' class='flexone' placeholder-class='input-placeholder-common-color' placeholder='输入单号、供应商名称、商品名称'></input>
+      <image bindtap='clearSerch' style='padding:0 30rpx 0 10rpx' src='/image/close.png' class='search-img'></image>
+    </view>
+    <button class='search-btn font28 com-blod-font' hover-class='none' bindtap='search'>搜索</button>
+  </view>
+</view>
+
+<view class='flowtab com-flex-center'>
+  <view bindtap='choseflowtab' data-index="{{index}}" class='flowtab-item {{item.selected?"flowtab-item-ac":""}}' wx:for='{{flowtab}}' wx:key="{{index}}">{{item.name}}</view>
+</view>
+<!-- 商品 -->
+<view class='goods-item'>
+  <view class='supplier-name common-padding com-flex-between font28'>
+    <view class='com-flex-center'>
+      <image class='img30 '></image>
+      <text class='name-text'>筑梦师</text>
+      <text class='com-gray-color'>手工录入</text>
+    </view>
+    <view class='order-tip com-red-background'>待入库</view>
+    <view class='order-tip com-yellow-background'>已入库</view>
+    <view class='order-tip com-blue-background'>部分入库</view>
+  </view>
+  <!-- 商品列表 -->
+  <view class='goods-detail'>
+    <image mode='aspectFit' class='goods-img'></image>
+    <view class='goods-name flexone font28'>周大福周大福周大福周大福周大福周大福周大福周大福周大福周大福周大福</view>
+    <view class='font24'>共五件</view>
+  </view>
+  <!-- 价格 -->
+  <view class='price-box'>
+    <text class='font24'>共3种商品 223件 合计:￥</text>
+    <text class='font30'>30500</text>
+  </view>
+  <!-- 按钮 -->
+  <view class='btn-box common-padding'>
+    <button class='order-btn'>去入库</button>
+  </view>
+</view>
+
+<view class="result-null">
+  <view class="nomore">
+    <view>
+      <image src="/image/class-i.png"></image>
+    </view>
+    当前还没有采购记录哦
+  </view>
+</view>

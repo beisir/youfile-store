@@ -33,7 +33,7 @@
   </view>
 </view>
 <view class='com-flex-between entry-box'>
-  <navigator url='../warehouseDetail/warehouseDetail'>
+  <navigator url='../warehouseGoodsDetail/warehouseGoodsDetail'>
     <view class='entry-item com-flex-center'>
       <image src='/distribution/images/goods.png' class='entry-icon'></image>
       <view>

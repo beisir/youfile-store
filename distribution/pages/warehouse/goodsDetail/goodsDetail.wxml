@@ -70,6 +70,7 @@
   </view>
   <!-- 流水列表 -->
   <view wx:if="{{tabType =='flow'}}" class='template gray-back'>
+    <view style='height:1rpx;'></view>
     <view class='flowtab com-flex-center'>
       <view bindtap='choseflowtab' data-index="{{index}}" class='flowtab-item {{item.selected?"flowtab-item-ac":""}}' wx:for='{{flowtab}}' wx:key="{{index}}">{{item.name}}</view>
     </view>

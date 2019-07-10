@@ -1,0 +1,16 @@
+<view class='com-padding-box com-flex-between'>
+  <view class='com-flex-between search-input-box'>
+    <image style='padding:0 20rpx 0 30rpx' src='/distribution/images/search-black.png' class='search-img'></image>
+    <input bindinput='serchinput' value='{{serchText}}' class='flexone' placeholder-class='input-placeholder-common-color' placeholder='输入仓库名称、编号、负责人名称'></input>
+    <image bindtap='clearSerch' style='padding:0 30rpx 0 10rpx' src='/image/close.png' class='search-img'></image>
+  </view>
+  <button class='search-btn font28 com-blod-font' hover-class='none' bindtap='search'>搜索</button>
+</view>
+
+<view class='com-flex-between com-margin-box'>
+  <view class='search-input-box com-flex-center'>
+    <image src='/distribution/images/search-white.png' class='search-img'></image>
+    <input class='font26 flexone' placeholder='输入库区类型名称' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
+  </view>
+  <text class='font30 ser-btn flexone'>搜索</text>
+</view>

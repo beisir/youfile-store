@@ -3,6 +3,9 @@
     {
       "root": "distribution",
       "pages": [
+        "pages/purchase/orderDetail/orderDetail",
+        "pages/purchase/orderList/orderList",
+        "pages/warehouse/warehouseGoodsDetail/warehouseGoodsDetail",
         "pages/warehouse/warningGoods/warningGoods",
         "pages/warehouse/adjustStorck/adjustStorck",
         "pages/warehouse/goodsFlow/goodsFlow",
@@ -14,7 +17,6 @@
         "pages/warehouse/partDetail/partDetail",
         "pages/warehouse/createPart/createPart",
         "pages/warehouse/warehouseParts/warehouseParts",
-        "pages/warehouse/warehouseDetail/warehouseDetail",
         "pages/warehouse/createWarehouse/createWarehouse",
         "pages/warehouse/warehouseManage/warehouseManage",
         "pages/warehouse/index/index"

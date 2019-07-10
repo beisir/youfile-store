@@ -33,7 +33,10 @@ Page({
       data.county = areaArr[2]
     }
     Api.createWareHouse(data).then(res=> {
-
+      Api.showToast(res.message)
+      setTimeout(()=>{
+        wx.navigateBack()
+      },800)
     })
   },
   watchinput(e){

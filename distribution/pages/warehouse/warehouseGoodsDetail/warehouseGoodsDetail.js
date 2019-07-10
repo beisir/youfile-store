@@ -33,9 +33,25 @@ Page({
   },
   // 获取列表
   getHouseList() {
-    Api.getWarehouseList().then(res=> {
-
+    Api.getWarehouseList({},'picker').then(res=> {
+      let arr = res.obj,
+          now = [res.obj,[]]
+      this.setData({
+        pickerList: now
+      })
     })
+  },
+  bindMultiPickerColumnChange(e){
+    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
+    if (e.detail.column === 0){
+      this.setData({
+        ['pickerList[1]']: [{name:1},{name:2}]
+      })
+    }
+  },
+  surePicker(e){
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    
   },
   // 获取详情
   getHouseMsg() {
