@@ -1,0 +1,62 @@
+<view class='com-embed-header' style='margin-bottom:80rpx;'>
+  <view class='com-flex-between'>
+    <view class='search-input-box com-flex-between'>
+      <view class='com-flex-center'>
+        <image src='/distribution/images/search-white.png' class='search-img'></image>
+        <input class='font26' placeholder='输入商品名称、货号' placeholder-style='color:#fff;'></input>
+      </view>
+      <text class='font30 ser-btn' bindtap='search'>搜索</text>
+    </view>
+    <view class='addbtn'>
+      <image src='/distribution/images/add-white.png' class='filter-icon' bindtap='showFilter'></image>
+      <text>新增</text>
+    </view>
+  </view>
+  <view class='com-embed-inner com-flex-between font30 com-blod-font'>
+    <text>选择供应商</text>
+    <view class='com-flex-center'>
+      <text class='com-gray-color'>默认供应商</text>
+      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+    </view>
+  </view>
+</view>
+
+<!-- 商品 -->
+<view class='goods-box'>
+  <view class='goods-item'>
+    <image class='goods-pic' src='/distribution/images/warehouse-setting.png'></image>
+    <view class='flexone goods-msg'>
+      <view class='goods-name com-blod-font'>周大福 绝绝色系列绝色系列色系列 热情似18K 金镶红蓝宝石钻</view>
+      <view class='font24 com-gray-color'>共4种规格 16件</view>
+    </view>
+    <view class='font24'>¥
+      <text class='goods-price'>2400</text>
+    </view>
+  </view>
+  <view class='table-box'>
+    <view class='sku-item com-flex-between font24 sku-title'>
+      <view>规格</view>
+      <view>采购价格</view>
+      <view>采购数量</view>
+    </view>
+    <view class='sku-item com-flex-between font24'>
+      <view>黑色 黑色黑色黑色黑色黑色黑色黑色黑色XS</view>
+      <view>50</view>
+      <view>50</view>
+    </view>
+    <view class='border-line'></view>
+  </view>
+</view>
+
+<view class='add-goods com-color-font font30 com-blod-font'>
+  <image src='/distribution/images/add-gold.png' class='img30' style='padding-right:10rpx;'></image>
+  <text>选择商品</text>
+</view>
+
+<view class='msg-item com-flex-between'>
+  <view class='font30'>支付方式</view>
+  <view class='com-flex-center'>
+    <text class='font28 com-gray-color'>选择支付方式</text>
+    <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+  </view>
+</view>

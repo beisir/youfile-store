@@ -2,10 +2,10 @@
 @import "/distribution/static/wxss/common";
 .common-padding{padding-left: 30rpx;padding-right: 30rpx;}
 /* 流水切换 */
-.flowtab{margin: 20rpx 50rpx 0;border-radius: 10rpx;border: 1rpx solid #f8b617;overflow: hidden;}
-.flowtab-item{flex: 1;border-right: 1rpx solid #f8b617;background: #fff;color: #f8b617;height: 50rpx;font-size: 26rpx;text-align: center;line-height: 50rpx;}
+.flowtab{margin: 20rpx 50rpx 0;border-radius: 10rpx;border: 1rpx solid #f8b616;overflow: hidden;}
+.flowtab-item{flex: 1;border-right: 1rpx solid #f8b616;background: #fff;color: #f8b616;height: 50rpx;font-size: 26rpx;text-align: center;line-height: 50rpx;}
 .flowtab .flowtab-item:last-child{border: 0;}
-.flowtab-item-ac{background: #f8b617;color: #fff;}
+.flowtab-item-ac{background: #f8b616;color: #fff;}
 /* 商品 */
 .goods-item{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;}
 .supplier-name{height: 100rpx;}
@@ -16,12 +16,12 @@
 .goods-name{padding: 0 70rpx 0 20rpx;}
 .price-box{padding:10rpx 30rpx 30rpx;text-align: right;}
 .btn-box{display: flex;flex-direction: row-reverse;padding-bottom: 20rpx;}
-.order-btn{font-size:24rpx;padding: 10rpx 30rpx;background: #fff;color: #f8b617;width: 140rpx;height: 50rpx;border: 1rpx solid #f8b617;margin:0;margin-left:20rpx;display: flex;align-items: center;justify-content: center;border-radius: 50rpx;}
+.order-btn{font-size:24rpx;padding: 10rpx 30rpx;background: #fff;color: #f8b616;width: 140rpx;height: 50rpx;border: 1rpx solid #f8b616;margin:0;margin-left:20rpx;display: flex;align-items: center;justify-content: center;border-radius: 50rpx;}
 /* 顶部切换 */
 .head-tab{height: 100rpx;background: #fff;}
 .tab-item{width: 190rpx;border-bottom: 5rpx solid #fff;height: 100%;box-sizing: border-box;display: flex;align-items: center;justify-content: center;}
-.tab-item-ac{border-color: #f8b617;color: #f8b617;}
+.tab-item-ac{border-color: #f8b616;color: #f8b616;}
 .tab-line{width: 2rpx; height: 30rpx;background: #eee;}
-.addOrder-btn{width: 210rpx;height: 100rpx;line-height: 100rpx;text-align: center;color: #f8b617;}
+.addOrder-btn{width: 210rpx;height: 100rpx;line-height: 100rpx;text-align: center;color: #f8b616;}
 
 .nomore image{height: 240rpx;width: 240rpx;}

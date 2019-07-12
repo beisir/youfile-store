@@ -43,7 +43,7 @@
   <view class='flow-item'>
     <view class='com-flex-between'>
       <view class='com-flex-center'>
-        <view class='flow-tag' style='background:#f8b617'>入库</view>
+        <view class='flow-tag' style='background:#f8b616'>入库</view>
         <view class='flow-tag' style='background:#ea5037'>出库</view>
         <view class='flow-tag' style='background:#3dbce6'>初期</view>
         <text class='font30 com-blod-font'>黄色啤酒味</text>

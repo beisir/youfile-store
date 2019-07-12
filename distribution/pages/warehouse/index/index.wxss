@@ -1,5 +1,5 @@
 /* distribution/pages/warehouse/index/index.wxss */
-.header{background: #f8b617;height: 336rpx;position: relative;margin-bottom: 90rpx;}
+.header{background: #f8b616;height: 336rpx;position: relative;margin-bottom: 90rpx;}
 .statistics-item{flex: 1;text-align: center;padding-top: 70rpx;color: #fff;overflow: hidden;}
 .goods-num-box{position: absolute;left:0;right:0;margin: 0 20rpx;border-radius:10rpx;height: 180rpx;background: #fff;bottom: -90rpx;}
 .goods-num-item{flex: 1;text-align: center;}

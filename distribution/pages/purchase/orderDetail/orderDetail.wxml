@@ -1,35 +1,135 @@
-<view class='com-embed-header'>
+<view class='com-embed-header' style='margin-bottom:230rpx;'>
   <view class='com-flex-center'>
-    <image class='header-icon' src=''></image>
-    <text class='font36 status-text'>待入库</text>
-    <view class='status-tip'>手动录入</view>
+    <view class='self-item com-flex-center'>
+      <image class='header-icon' src='/distribution/images/in-house-white.png'></image>
+      <!-- <text class='font36 status-text'>待入库</text> -->
+      <text class='font36 status-text'>部分入库</text>
+
+      <view class='status-tip'>手动录入</view>
+    </view>
     <view class='header-msg-box flexone'>
-      <view class='font24'>合计数量：<text class='font30'>24</text></view>
-      <view class='font24'>合计金额：¥ <text class='font30'>3520</text></view>
+      <view class='font24'>合计数量：
+        <text class='font30'>24</text>
+      </view>
+      <view class='font24'>合计金额：¥
+        <text class='font30'>3520</text>
+      </view>
     </view>
   </view>
-  <view class='com-embed-inner com-flex-between'>
-    <view>
-      <view class='com-flex-center'>
-        <image class='img30'></image>
-        <text class='suppler-text'>供应商：筑梦师</text>
-        <view class='suppler-tip'>云供应商</view>
+  <view class='com-embed-inner'>
+    <!-- 基本信息 -->
+    <view class='com-flex-between' style='height:160rpx;'>
+      <view>
+        <view class='com-flex-center'>
+          <image class='img30' src='/distribution/images/man-gray.png'></image>
+          <text class='suppler-text'>供应商：筑梦师</text>
+          <view class='suppler-tip'>云供应商</view>
+        </view>
+        <view class='font26 com-gray-color tele-text'>联系电话：18813165555</view>
       </view>
-      <view class='font26 com-gray-color tele-text'>联系电话：18813165555</view>
+      <image class='img30' src='/distribution/images/tele-gold.png'></image>
     </view>
-    <image class='img30' src=''></image>
+    <!-- 仓库信息 -->
+    <view class='house-box com-flex-center font30'>
+      <image src='/distribution/images/house-gray.png' class='img30'></image>
+      <text class='flexone com-text-ellipsis house-name'>仓库库区：望京仓库 A1、广州京仓库 A1、广州京仓库 A1、广州京仓库 A1、广州</text>
+      <text class='com-color-font'>入库详情</text>
+    </view>
   </view>
 </view>
 
-<view class='com-margin-box' style='border-top:1rpx solid transparent;'>
+<view class='com-margin-box'>
   <view class='goods-header com-padding-box com-flex-between'>
-    <view >
+    <view class='com-flex-center'>
       <view class='color-chunk'></view>
-      <text>采购商品</text>
+      <text class='font30 com-blod-font'>采购商品</text>
     </view>
     <view>
-      <text>全部收起</text>
-      <image class='tri-icon'></image>
+      <text class='font26'>全部收起</text>
+      <image class='tri-icon' src='/distribution/images/douTri-gold-up.png'></image>
+    </view>
+    <!-- <view>
+      <text class='font26'>全部展开</text>
+      <image class='tri-icon' src='/distribution/images/douTri-gold-down.png'></image>
+    </view> -->
+  </view>
+
+  <view class='goods-item'>
+    <image class='goods-pic' src='/distribution/images/warehouse-setting.png'></image>
+    <view class='flexone goods-msg'>
+      <view class='goods-name com-blod-font'>周大福 绝绝色系列绝色系列色系列 热情似18K 金镶红蓝宝石钻</view>
+      <view class='font24 com-gray-color'>共4种规格 16件</view>
+    </view>
+    <view class='font24'>¥
+      <text class='goods-price'>2400</text>
     </view>
   </view>
+  <block>
+    <view class='sku-item com-flex-between font24'>
+      <view>黑色 黑色黑色黑色黑色黑色黑色黑色黑色XS</view>
+      <view>¥ 150 * 4 件</view>
+      <view>¥600</view>
+    </view>
+    <view class='sku-item com-flex-between font24'>
+      <view>黑色 色XS</view>
+      <view>¥ 150 * 4 件</view>
+      <view>¥600</view>
+    </view>
+    <view class='border-line'></view>
+  </block>
+
+  <view class='goods-item'>
+    <image class='goods-pic' src='/distribution/images/warehouse-setting.png'></image>
+    <view class='flexone goods-msg'>
+      <view class='goods-name com-blod-font'>周大福 绝绝石钻</view>
+      <view class='font24 com-gray-color'>共4种规格 16件</view>
+    </view>
+    <view class='font24'>¥
+      <text class='goods-price'>2400</text>
+    </view>
+  </view>
+
+  <view class='border-line'></view>
+  <view class='price-box font24'>
+    <text>共48件商品</text>
+    <text style='margin:0 15rpx 0 20rpx;'>合计：</text>
+    <text class='com-color-font'>￥</text>
+    <text class='price-text com-color-font'>30500</text>
+  </view>
+</view>
+
+<view class='com-margin-box' style='padding:15rpx 30rpx;'>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>采购单号</text>
+    <text class='com-blod-font'>01021234569870</text>
+  </view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>采购时间</text>
+    <text class='com-blod-font'>2016-11-11 23:16</text>
+  </view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>支付方式</text>
+    <text class='com-blod-font'>微信转账</text>
+  </view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>备注</text>
+    <text class='com-blod-font'>有赠品</text>
+  </view>
+  <view class='border-line' style='margin:15rpx 0;'></view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>经办人</text>
+    <text class='com-blod-font'>林凡</text>
+  </view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>创建时间</text>
+    <text class='com-blod-font'>2016-11-11 23:16</text>
+  </view>
+</view>
+
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <navigator>
+    <button class='bottom-single-btn'>去入库</button>
+  </navigator>
 </view>

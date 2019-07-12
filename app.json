@@ -3,6 +3,10 @@
     {
       "root": "distribution",
       "pages": [
+        "pages/purchase/createOrder/createOrder",
+        "pages/purchase/chosePayType/chosePayType",
+        "pages/purchase/choseSupplier/choseSupplier",
+        "pages/purchase/orderInHouseDetail/orderInHouseDetail",
         "pages/purchase/orderDetail/orderDetail",
         "pages/purchase/orderList/orderList",
         "pages/warehouse/warehouseGoodsDetail/warehouseGoodsDetail",

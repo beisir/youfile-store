@@ -1,14 +1,33 @@
 /* distribution/pages/purchase/orderDetail/orderDetail.wxss */
 @import '/distribution/static/wxss/common';
 
+.com-embed-inner{top: 136rpx;bottom: auto;min-height: 160rpx;height: auto;}
+.self-item{align-self: flex-start;}
 .header-icon{height: 35rpx;width: 35rpx;}
 .status-tip{padding: 0 15rpx;height: 40rpx;line-height: 40rpx;text-align: center;font-size: 28rpx;border: 1rpx solid #fff;border-radius: 10rpx;}
-.status-text{padding: 0 30rpx 0 10rpx;}
+.status-text{padding: 0 20rpx 0 10rpx;}
 .header-msg-box{text-align: right;}
-.suppler-tip{width: 120rpx;height: 40rpx;line-height: 40rpx;font-size: 24rpx;color: #f8b617;border: 1rpx solid #f8b617;border-radius: 10rpx;text-align: center;}
+.suppler-tip{width: 120rpx;height: 40rpx;line-height: 40rpx;font-size: 24rpx;color: #f8b616;border: 1rpx solid #f8b616;border-radius: 10rpx;text-align: center;}
 .suppler-text{padding: 0 20rpx 0 10rpx;}
 .tele-text{padding-left: 40rpx;padding-top: 15rpx;}
+/* 收起 */
+.goods-header{height: 80rpx;}
+.color-chunk{width: 10rpx;height: 30rpx;background: #f8b616;margin-right: 10rpx;}
+.tri-icon{height: 25rpx;width: 25rpx;padding-left: 10rpx;}
 /* 商品 */
-.goods-header{height: 8rpx;}
-.color-chunk{width: 10rpx;height: 30rpx;background: #f8b617;}
-.tri-icon{height: 25rpx;width: 25rpx;}
+.goods-item{padding: 30rpx;display: flex;}
+.goods-msg{padding-right: 70rpx;font-size: 26rpx;display: flex;flex-direction: column;justify-content: space-between;padding-bottom: 10rpx;}
+.goods-pic{height: 150rpx;width: 150rpx;margin-right: 20rpx;}
+.goods-name{display: -webkit-box;overflow: hidden;text-overflow: ellipsis;word-wrap: break-word;
+white-space: normal !important;-webkit-line-clamp: 2;	/*  行数*/-webkit-box-orient: vertical;}
+.goods-price{font-size: 32rpx;font-weight: 600;}
+.sku-item{min-height: 90rpx;padding: 20rpx 30rpx;box-sizing:border-box;}
+.sku-item view{flex: 1;text-align: center;}
+.border-line{border-bottom: 1rpx solid #f0f0f0;margin: 0 30rpx;}
+/* 价格 */
+.price-box{line-height: 1;padding: 35rpx;display: flex;align-items: flex-end;justify-content: flex-end;}
+.price-text{font-size: 32rpx;}
+.msg-item-box{padding: 15rpx 0;}
+/* 仓库 */
+.house-box{height: 120rpx;border-top: 1rpx solid #f0f0f0;}
+.house-name{padding: 0 40rpx 0 20rpx;font-weight: 600;}

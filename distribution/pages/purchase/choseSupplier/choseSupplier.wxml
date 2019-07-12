@@ -1,0 +1,28 @@
+<view class='header com-background-color'>
+  <view class='com-flex-between com-margin-box'>
+    <view class='search-input-box com-flex-center'>
+      <image src='/distribution/images/search-white.png' class='search-img'></image>
+      <input class='font26 flexone' placeholder='输入供应商名称、手机号、备注名' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
+    </view>
+    <text class='font30 ser-btn flexone'>搜索</text>
+  </view>
+  <view class='choseTag com-flex-center com-new-gold-font font30'>
+    <image src='/distribution/images/man-add-gold.png' class='img40 add-icon'></image>
+    <text class='flexone'>添加供应商</text>
+    <image class='com-right-icon' src='/distribution/images/right-icon.png'></image>
+  </view>
+</view>
+
+<view class='com-flex-around tab-box'>
+  <view class='tab com-color-border'>云供应商  6</view>
+  <view class='line'></view>
+  <view class='tab com-color-border tab-ac'>供应商  5</view>
+</view>
+
+<view class='list-box'>
+  <view class='com-flex-center supplier-item'>
+    <image class='man-icon'></image>
+    <view class='flexone'>EMPIRE BLANC</view>
+    <image src='/distribution/images/right-gold.png' class='right'></image>
+  </view>
+</view>
