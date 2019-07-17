@@ -200,9 +200,9 @@ input:focus{padding:0}
 .com-yellow-background{background-color: #f8b616;}
 .com-red-background{background-color: #ea5037;}
 .com-blue-background{background-color:#3dbce6;}
-.com-color-border{border-color: #f8b616;}
-.com-color-font{color: #f8b616;}
-.com-color-back{background: #f8b616;}
+.com-color-border{border-color: #f8b616!important;}
+.com-color-font{color: #f8b616!important;}
+.com-color-back{background: #f8b616!important;}
 /* 底部按钮组 */
 .com-bottom-btn-group{display: flex;align-items: center;position: fixed;bottom: 0;height: 120rpx;background: #fff;width: 100%;z-index:999;
 }
@@ -218,3 +218,5 @@ input:focus{padding:0}
 .img40{height: 40rpx;width: 40rpx;}
 .img50{height: 50rpx;width: 50rpx;}
 .img60{height: 60rpx;width: 60rpx;}
+/* 公用盒子 */
+.common-box-style{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;padding: 0 30rpx;}

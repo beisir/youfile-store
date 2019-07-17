@@ -1,0 +1,52 @@
+<!-- 页面 -->
+<view class='header com-color-back'>
+  <view class='com-flex-between flexone'>
+    <view class='search-input-box com-flex-between'>
+      <view class='com-flex-center'>
+        <image src='/distribution/images/search-white.png' class='search-img'></image>
+        <input class='font26' placeholder='输入商品名称、货号' placeholder-style='color:#fff;'></input>
+      </view>
+      <text class='font30 ser-btn' bindtap='search'>搜索</text>
+    </view>
+    <view class='addbtn'>
+      <image src='/distribution/images/add-white.png' class='filter-icon' bindtap='showFilter'></image>
+      <text>新增</text>
+    </view>
+  </view>
+</view>
+<!-- tab -->
+<view class='com-flex-around tab-box'>
+  <view class='tab'>供应商商品</view>
+  <view class='line'></view>
+  <view class='tab com-color-border tab-ac'>店铺商品</view>
+</view>
+<!-- goods -->
+<view class='template'>
+  <view class='goods-item com-flex-between'>
+    <image class='goods-icon' src='/image/poster-right-in.png'></image>
+    <view class='flexone' style='overflow:hidden;padding-right:10rpx;'>
+      <view class='com-flex-center font28 com-blod-font'>
+        <text class='flexone com-text-ellipsis'>撒打算</text>
+      </view>
+      <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：23123123</view>
+      <view class='font24 com-flex-center'>
+        <text>上次采购价：</text>
+        <text class='com-color-font'>￥</text>
+        <text class='com-color-font font30'>189</text>
+        <text class='com-gray-color' style='margin-left:auto;'>共18件</text>
+      </view>
+    </view>
+    <image class='img40' src='/distribution/images/add-cir-gold.png'></image>
+  </view>
+</view>
+<!-- 公用底部按钮 -->
+<view class='com-half-btn-box'>
+  <view class='chb-msg-box'>
+    <view>合计:<text class='com-color-font font30'>1000000</text>件</view>
+    <view>共
+      <text class='com-color-font font30'>￥35203520</text>
+    </view>
+  </view>
+  <view class='chb-sure-btn'>确定</view>
+</view>
+<view class='bottom-replace-box'></view>

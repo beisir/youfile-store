@@ -1,5 +1,5 @@
 // pages/floor/choseAdmin/choseAdmin.js
-const app = getApp();
+import Api from '../../../../utils/api.js'
 Page({
 
   /**
@@ -39,8 +39,18 @@ Page({
   },
   create() {
     if (this.data.inputValue.trim() == "") {
+      Api.showToast("请填写库区类型名称")
       return
     }
+    Api.createHousePartTag({
+      iconColor: this.data.background,
+      name: this.data.inputValue
+    }).then(res=>{ 
+      Api.showToast(res.message)
+      setTimeout(()=>{
+        wx.navigateBack()
+      },800)
+    })
     // app.http.postRequest("/admin/floor/malltag/save", {
     //   "mallCode": app.http.mallCode,
     //   "tagColor": this.data.background,
@@ -65,9 +75,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      code: options.code
-    })
+
   },
 
   /**

@@ -1,6 +1,7 @@
 /* distribution/pages/purchase/orderDetail/orderDetail.wxss */
 @import '/distribution/static/wxss/common';
 
+.com-embed-header{padding: 0 50rpx;}
 .com-embed-inner{top: 136rpx;bottom: auto;min-height: 160rpx;height: auto;}
 .self-item{align-self: flex-start;}
 .header-icon{height: 35rpx;width: 35rpx;}

@@ -2,11 +2,11 @@
   <view class='com-flex-between com-margin-box'>
     <view class='search-input-box com-flex-center'>
       <image src='/distribution/images/search-white.png' class='search-img'></image>
-      <input class='font26 flexone' placeholder='输入供应商名称、手机号、备注名' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
+      <input class='font26 flexone' placeholder='输入供应商名称、手机号、备注名' placeholder-style='color:#fff;' style='padding-right:30rpx;' bindinput='serinput' value='{{serText}}'></input>
     </view>
-    <text class='font30 ser-btn flexone'>搜索</text>
+    <text class='font30 ser-btn flexone' bindtap='serch'>搜索</text>
   </view>
-  <view class='choseTag com-flex-center com-new-gold-font font30'>
+  <view class='choseTag com-flex-center font30'>
     <image src='/distribution/images/man-add-gold.png' class='img40 add-icon'></image>
     <text class='flexone'>添加供应商</text>
     <image class='com-right-icon' src='/distribution/images/right-icon.png'></image>
@@ -14,15 +14,16 @@
 </view>
 
 <view class='com-flex-around tab-box'>
-  <view class='tab com-color-border'>云供应商  6</view>
+  <view class='tab {{tabStatus==="cloud"?"tab-ac":""}}' data-type='cloud'>云供应商 <text wx:if="{{tabStatus==='cloud'}}">{{totalNum}}</text></view>
   <view class='line'></view>
-  <view class='tab com-color-border tab-ac'>供应商  5</view>
+  <view class='tab {{tabStatus==="sup"?"tab-ac":""}}' bindtap='choseTab' data-type='sup'>供应商 <text wx:if="{{tabStatus==='sup'}}">{{totalNum}}</text></view>
 </view>
 
 <view class='list-box'>
-  <view class='com-flex-center supplier-item'>
-    <image class='man-icon'></image>
-    <view class='flexone'>EMPIRE BLANC</view>
-    <image src='/distribution/images/right-gold.png' class='right'></image>
+  <view class='com-flex-center supplier-item' bindtap='chose' data-index='{{index}}' wx:for="{{supplierList}}" wx:key='{{index}}'>
+    <image class='man-icon' src='{{"/distribution/images/com-user-cion.png"}}'></image>
+    <view class='flexone'>{{item.name}}</view>
+    <image wx:if="{{item.selected}}" src='/distribution/images/right-gold.png' class='right'></image>
   </view>
 </view>
+

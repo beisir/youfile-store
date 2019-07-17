@@ -158,7 +158,7 @@
             <text>总库存</text>
           </view>
           <view class='weui-input'>
-            <input bindinput='stockNum' disabled='{{skuListData.length==0?false:"disabled"}}' value='{{stockNum}}' placeholder-class='pla-input' class="weui-input" type="number" maxlength='4'></input>
+            <input bindinput='stockNum' disabled='{{skuListData.length==0?false:"disabled"}}' value='{{stockNum}}' placeholder-class='pla-input' class="weui-input" type="number" maxlength='8'></input>
             <text>件</text>
           </view>
         </view>

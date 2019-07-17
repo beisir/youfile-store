@@ -1,0 +1,87 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+<layer show='{{settingsModal}}' title='批量设置采购价/采购数量'>
+  <view style='text-align:center;'>
+    <view class='font26' style='color:#999;padding-bottom:40rpx;'>您可以只设定采购价或只设定采购数量</view>
+    <input value='{{commonPrice}}' bindinput='watchInput' maxlength='6' bindblur='checkInput' data-type="commonPrice" type='digit' class='layer-input' type='number' placeholder='统一输入采购价'></input>
+    <input value='{{commonNum}}' bindinput='watchInput' maxlength='6' data-type="commonNum" type='number' class='layer-input' type='number' placeholder='统一输入采购数量'></input>
+    <view class='com-flex-between' style='margin-top:50rpx;'>
+      <button class='com-layer-cancel-btn' hover-class='none' bindtap='closeModal'>取消</button>
+      <button class='com-layer-sure-btn' hover-class='none' bindtap='sureCommonSet'>确定</button>
+    </view>
+  </view>
+</layer>
+<view class='com-color-back header'></view>
+<view class='position-box'>
+  <view class='common-box-style'>
+    <view class='goods-box com-flex-center'>
+      <image mode='aspectFit' class='goods-icon' wx:if="{{goods.mainImgUrl}}" src='{{baseUrl+goods.mainImgUrl}}'></image>
+      <view class='flexone flex-column'>
+        <view class='goods-name'>{{goods.name}}</view>
+        <view class='com-flex-between' style='margin-bottom:5rpx;'>
+          <view class='com-flex-center'>
+            <block wx:if="{{goods.lastPurchasePrice}}">
+              <text class='font26'>上次采购价:</text>
+              <text class='font24 com-color-font'>￥</text>
+              <text class='font28 com-color-font'>{{goods.lastPurchasePrice}}</text>
+            </block>
+          </view>
+          <view class='com-flex-center' bindtap='showModal'>
+            <image class='edit-icon' src='/distribution/images/pen-gold.png'></image>
+            <text class='com-color-font font26'>批量设置</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='skubox'>
+      <view wx:if="{{firstSkuTitle}}" style='line-height:1;margin-bottom:27rpx;font-size:28rpx;font-weight:600;'>{{firstSkuTitle}}</view>
+      <scroll-view scroll-x="{{true}}" style='overflow:hidden;white-space:nowrap;'>
+        <view class='sku-tip-item {{index===nowIndex?"sku-tip-item-ac":""}}' wx:for="{{skuPriceNumList}}" wx:key="{{index}}" bindtap='skuClick' data-index="{{index}}">{{item.specValueName}}
+          <view class='sku-red-num' wx:if="{{item.num}}">{{item.num}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 表格 -->
+  <view class='common-box-style' style='padding:0;'>
+    <view class='sku-table-title com-flex-center'>
+      <view class='flexone'>{{secondSkuTitle}}</view>
+      <view class='flexone'>当前库存</view>
+      <view class='price-box'>采购价</view>
+      <view class='com-flex-center calc-box'>
+        <button class='calc-btn' bindtap='changeNumBtn' data-type='allreduce' style='border-right:1rpx solid #ddd'>-</button>
+        <view class='calc-input'>批量</view>
+        <button class='calc-btn' bindtap='changeNumBtn' data-type='alladd' style='border-left:1rpx solid #ddd'>+</button>
+      </view>
+    </view>
+    <view class='border-line'></view>
+    <block wx:for="{{skuPriceNumList[nowIndex].secondSku}}" wx:key="{{index}}">
+      <view class='tr-box com-flex-center'>
+        <view class='flexone'>{{item.specValueName}}</view>
+        <view class='flexone'>{{item.stockNum}}</view>
+        <view class='price-box'>
+          <input bindinput='watchInput' data-index="{{index}}" data-type="price" value='{{item.price}}' class='price-input' bindblur='checkInput' maxlength='6' type='digit'></input>
+          <text class='pre-tip' wx:if="{{item.lastPurchasePrice}}">上次采购价<text class='com-color-font'>¥{{item.lastPurchasePrice}}</text></text>
+        </view>
+        <view class='com-flex-center calc-box'>
+          <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-type='reduce' disabled='{{!item.num || item.num==0}}' style='border-right:1rpx solid #ddd'>-</button>
+          <input bindinput='watchInput' type="number" data-index="{{index}}" data-type="num" value='{{item.num}}' class='calc-input' type='number' maxlength='6'></input>
+          <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-type='add' style='border-left:1rpx solid #ddd'>+</button>
+        </view>
+      </view>
+      <view class='border-line' wx:if="{{index!==skuPriceNumList[nowIndex].secondSku.length - 1}}"></view>
+    </block>
+  </view>
+
+</view>
+
+<view class='com-half-btn-box'>
+  <view class='chb-msg-box'>
+    <view>已选:
+      <text class='com-color-font font30'>{{totalNum}} </text>件</view>
+    <view>共
+      <text class='com-color-font font30'>￥{{filter.filterMoney(totalPrice)}}</text>
+    </view>
+  </view>
+  <view class='chb-sure-btn' bindtap='sureGoods'>确定</view>
+</view>
+<view class='bottom-replace-box'></view>

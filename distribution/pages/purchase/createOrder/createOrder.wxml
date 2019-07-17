@@ -1,3 +1,14 @@
+<!-- 删除弹框 -->
+<tips show="{{delmodal}}">
+  <view class='tips-btn-box'>
+    <view>确定删除该商品所有的规格吗？</view>
+    <view class='com-flex-between '>
+      <button bindtap='closeModal' class='cancel-btn' bindtap='closeModal'>取消</button>
+      <button bindtap='sureDel' class='com-color-back com-color-border'>确认</button>
+    </view>
+  </view>
+</tips>
+<!-- 页面 -->
 <view class='com-embed-header' style='margin-bottom:80rpx;'>
   <view class='com-flex-between'>
     <view class='search-input-box com-flex-between'>
@@ -12,26 +23,33 @@
       <text>新增</text>
     </view>
   </view>
-  <view class='com-embed-inner com-flex-between font30 com-blod-font'>
-    <text>选择供应商</text>
-    <view class='com-flex-center'>
-      <text class='com-gray-color'>默认供应商</text>
-      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+  <navigator url='../choseSupplier/choseSupplier'>
+    <view class='com-embed-inner com-flex-between font30 com-blod-font'>
+      <text>选择供应商</text>
+      <view class='com-flex-center'>
+        <text class='com-gray-color' wx:if="{{supplierObj}}">{{supplierObj.name}}</text>
+        <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+      </view>
     </view>
-  </view>
+  </navigator>
 </view>
 
 <!-- 商品 -->
-<view class='goods-box'>
+<view class='goods-box' wx:for="{{goodsList}}" wx:key="{{index}}">
   <view class='goods-item'>
-    <image class='goods-pic' src='/distribution/images/warehouse-setting.png'></image>
+    <image class='goods-pic' src='{{baseUrl + item.goods.mainImgUrl}}'></image>
     <view class='flexone goods-msg'>
-      <view class='goods-name com-blod-font'>周大福 绝绝色系列绝色系列色系列 热情似18K 金镶红蓝宝石钻</view>
-      <view class='font24 com-gray-color'>共4种规格 16件</view>
+      <view class='goods-name com-blod-font'>{{item.goods.name}}</view>
+      <view class='font24 com-gray-color'>共{{item.skuPriceNumList.length}}种规格 {{item.num}}件</view>
     </view>
     <view class='font24'>¥
-      <text class='goods-price'>2400</text>
+      <text class='goods-price'>{{item.price}}</text>
     </view>
+
+    <image bindtap='delGoods' data-index="{{index}}" style='right:30rpx;' src='/distribution/images/del-gold.png' class='img40 handle-icon'></image>
+    <navigator url='../choseGoodsDetail/choseGoodsDetail?goodsId={{item.goods.id}}'>
+      <image style='right:110rpx;' src='/distribution/images/edit-gold.png' class='img40 handle-icon'></image>
+    </navigator>
   </view>
   <view class='table-box'>
     <view class='sku-item com-flex-between font24 sku-title'>
@@ -39,10 +57,10 @@
       <view>采购价格</view>
       <view>采购数量</view>
     </view>
-    <view class='sku-item com-flex-between font24'>
-      <view>黑色 黑色黑色黑色黑色黑色黑色黑色黑色XS</view>
-      <view>50</view>
-      <view>50</view>
+    <view class='sku-item com-flex-between font24' wx:for="{{item.skuPriceNumList}}" wx:key="{{index}}">
+      <view>{{item.specValueName}}</view>
+      <view>{{item.price}}</view>
+      <view>{{item.num}}</view>
     </view>
     <view class='border-line'></view>
   </view>
@@ -53,10 +71,43 @@
   <text>选择商品</text>
 </view>
 
-<view class='msg-item com-flex-between'>
+<view class='msg-item com-flex-between common-box-style'>
   <view class='font30'>支付方式</view>
   <view class='com-flex-center'>
     <text class='font28 com-gray-color'>选择支付方式</text>
     <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
   </view>
 </view>
+
+<view class='msg-item com-flex-between common-box-style'>
+  <view class='font30'>经办人</view>
+  <text class='font28 com-gray-color'>林凡</text>
+</view>
+
+<view class='msg-item com-flex-between common-box-style'>
+  <view class='font30'>支付方式</view>
+  <view class='com-flex-center'>
+    <text class='font28 com-gray-color'>2019-06-26</text>
+    <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+  </view>
+</view>
+
+<view class='msg-item com-flex-between common-box-style'>
+  <view class='font30'>备注</view>
+  <input class='input-style' placeholder='请输入备注信息'></input>
+</view>
+
+<view>
+</view>
+
+<view class='com-half-btn-box'>
+  <view class='chb-msg-box'>
+    <view>合计：
+      <text class='com-color-font font30'>1000000</text>件</view>
+    <view>共
+      <text class='com-color-font font30'>￥35203520</text>
+    </view>
+  </view>
+  <view class='chb-sure-btn'>确定</view>
+</view>
+<view class='bottom-replace-box'></view>

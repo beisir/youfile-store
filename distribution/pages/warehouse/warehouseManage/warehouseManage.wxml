@@ -8,18 +8,20 @@
 </view>
 <!-- 仓库列表 -->
 <view class='com-padding-box'>
-  <view class='house-item com-flex-between' wx:for="{{houseList}}" wx:key="{{index}}">
-    <view>
-      <view class='com-flex-center' style='padding-bottom:10rpx;'>
-        <image src='/distribution/images/warehouse.png' style='width:30rpx;height:30rpx;'></image>
-        <text class='house-name'>{{item.name}}</text>
-        <text class='com-default-tip' wx:if="{{item.defaultFlag}}">默认</text>
+  <navigator url='../warehouseParts/warehouseParts?code={{item.code}}' wx:for="{{houseList}}" wx:key="{{index}}">
+    <view class='house-item com-flex-between'>
+      <view>
+        <view class='com-flex-center' style='padding-bottom:10rpx;'>
+          <image src='/distribution/images/warehouse.png' style='width:30rpx;height:30rpx;'></image>
+          <text class='house-name'>{{item.name}}</text>
+          <text class='com-default-tip' wx:if="{{item.defaultFlag}}">默认</text>
+        </view>
+        <view class='house-des-font'>库区数量：{{item.regionNum}}</view>
+        <view class='house-des-font'>库存数量：{{item.stockNum}}</view>
       </view>
-      <view class='house-des-font'>库区数量：{{item.stockNum}}</view>
-      <view class='house-des-font'>库存数量：{{item.goodsNum}}</view>
+      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
     </view>
-    <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
-  </view>
+  </navigator>
 </view>
 
 <view class='bottom-replace-box'></view>

@@ -1,42 +1,52 @@
 // distribution/pages/purchase/chosePayType/chosePayType.js
+import Api from '../../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    typeList: [{
-      name: '微信转账'
-    }, {
-      name: '支付宝转账'
-    }, {
-      name: '现金支付'
-    }, {
-      name: '银行转账'
-    }, {
-      name: 'POS刷卡'
-    }, {
-      name: '其他支付支付'
-    }]
+    typeList: []
   },
   checked(e){
     let thisindex = e.currentTarget.dataset.index,
-        arr = this.data.typeList
+        arr = this.data.typeList,
+        payway = {}
     arr.forEach((el,index)=>{
       el.selected = false
       if(index === thisindex){
         el.selected = true
+        payway = el
       }
     })    
     this.setData({
       typeList: arr
     })
+
+    let pages = getCurrentPages(),
+        pre = pages[pages.length-2]
+    if(pre){
+      pre.setData({
+        payway
+      })
+    }    
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    Api.getPurchaseOrderPayWay().then(res=>{
+      if (options.code) {
+        res.obj.forEach(el => {
+          if (el.payWayCode === options.code) {
+            el.selected = true
+          }
+        })
+      }
+      this.setData({
+        typeList: res.obj
+      })
+    })
   },
 
   /**

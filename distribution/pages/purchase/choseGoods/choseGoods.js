@@ -1,5 +1,4 @@
-// distribution/pages/warehouse/partDetail/partDetail.js
-import Api from '../../../../utils/api.js'
+// distribution/pages/purchase/choseGoods/choseGoods.js
 Page({
 
   /**
@@ -8,36 +7,12 @@ Page({
   data: {
 
   },
-  getDetail(){
-    Api.getHousePartMsg({code:this.data.code}).then(res=>{
-      let obj = res.obj
-      for(let key in obj){
-        !obj[key] ? obj[key]='':''
-      }
-      this.setData({
-        part: obj
-      })
-    })
-  },
-  del(){
-    Api.delHousePart({code:this.data.code}).then(res=>{
-      Api.showToast(res.message,()=>{
-        wx.navigateBack()
-      })
-    })
-  },
-  edit(){
-    wx.navigateTo({
-      url: '../createPart/createPart?type=edit&code='+this.data.code,
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      code: options.code
-    })
+
   },
 
   /**
@@ -51,7 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getDetail()
+
   },
 
   /**
@@ -79,6 +54,13 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
 
   }
 })

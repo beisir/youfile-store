@@ -1,15 +1,23 @@
+<tips show="{{closeModal}}">
+  <view>确认删除嘛?</view>
+  <view class='com-flex-between tips-btn'>
+    <button hover-class='none' bindtap='close' class='cancel-btn'>取消</button>
+    <button hover-class='none' bindtap='del'>确认</button>
+  </view>
+</tips>
+
 <view class='padding-box'></view>
 <view class='com-box'>
   <view class='com-flex-between form-item'>
     <view class='form-title'>仓库名称</view>
-    <input placeholder='请输入仓库名称（必填）' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='name' class='input flexone'></input>
+    <input value="{{formData.name}}" placeholder='请输入仓库名称（必填）' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='name' class='input flexone'></input>
     <view class='img-box'>
     </view>
   </view>
 
   <view class='com-flex-between form-item'>
     <view class='form-title'>仓库编号</view>
-    <input placeholder='请输入仓库编号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='no' class='input flexone'></input>
+    <input value="{{formData.no}}" placeholder='请输入仓库编号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='no' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
 </view>
@@ -17,12 +25,12 @@
 <view class='com-box'>
   <view class='com-flex-between form-item'>
     <view class='form-title'>负责人</view>
-    <input placeholder='请输入仓库负责人' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='manager' class='input flexone'></input>
+    <input value="{{formData.manager}}" placeholder='请输入仓库负责人' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='manager' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
   <view class='com-flex-between form-item'>
     <view class='form-title'>联系电话</view>
-    <input placeholder='请输入联系电话' placeholder-class='input-placeholder-common-color' type='number' bindinput='watchinput' data-type='phone' class='input flexone'></input>
+    <input value="{{formData.phone}}" placeholder='请输入联系电话' placeholder-class='input-placeholder-common-color' type='number' bindinput='watchinput' data-type='phone' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
 
@@ -39,7 +47,7 @@
   </view>
   <view class='com-flex-between form-item'>
     <view class='form-title'>详细地址</view>
-    <input placeholder='请输入详细地址信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='address' class='input flexone'></input>
+    <input value="{{formData.address}}" placeholder='请输入详细地址信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='address' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
 </view>
@@ -47,17 +55,24 @@
 <view class='com-box'>
   <view class='com-flex-between form-item'>
     <view class='form-title'>邮箱</view>
-    <input placeholder='请输入邮箱' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='email' class='input flexone'></input>
+    <input value="{{formData.email}}" placeholder='请输入邮箱' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='email' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
   <view class='com-flex-between form-item'>
     <view class='form-title'>备注</view>
-    <input placeholder='请输入备注信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='remark' class='input flexone'></input>
+    <input value="{{formData.remark}}" placeholder='请输入备注信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='remark' class='input flexone'></input>
     <view class='img-box'></view>
   </view>
 </view>
 
 <view class='bottom-replace-box'></view>
-<view class='bottom-single-btn-box'>
+<view wx:if="{{pageType === 'edit'}}" class='com-bottom-capsule-btn'>
+  <button bindtap='delModal' class='group-btn'>删除仓库</button>
+  <view class='white-line'></view>
+  <button bindtap='submit' class='group-btn'>确定</button>
+</view>
+
+<view wx:else class='bottom-single-btn-box'>
   <button class='bottom-single-btn' bindtap='submit'>确定</button>
 </view>
+

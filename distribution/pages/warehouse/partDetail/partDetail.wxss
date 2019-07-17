@@ -9,3 +9,4 @@
 .item-title{width: 130rpx;}
 .tag-box{padding-right: 10rpx;}
 .special-line{border-top: 1rpx solid #f0f0f0;margin-left: 130rpx;}
+.com-tag{display: inline-block;}

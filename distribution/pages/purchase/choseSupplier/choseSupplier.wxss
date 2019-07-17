@@ -4,7 +4,7 @@
 .search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
 .search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
 .filter-icon{width: 40rpx;height: 40rpx;padding-right: 20rpx;}
-.ser-btn{text-align: right;color: #fff;}
+.ser-btn{text-align: right;color: #fff;padding-right: 15rpx;}
 .choseTag{height: 120rpx;width: 710rpx;position: absolute;left: 0;right: 0;margin: auto;bottom: -60rpx;background: #fff;border-radius: 10rpx;padding: 0 30rpx;box-sizing: border-box;}
 .add-icon{margin-right:30rpx;}
 /* tab */

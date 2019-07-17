@@ -23,8 +23,7 @@ import {
   addressListUrl,
   addressDefaultUrl,
   addressDeleteUrl,
-  saveAddressUrl,
-  addressInfoUrl,
+  saveAddressUrl,addressInfoUrl,
   editAddressUrl,
   cartListUrl,
   addTemplateUrl,
@@ -226,7 +225,18 @@ import {
   // 仓库
   handleWarehouseUrl,
   handleHousePartUrl,
-  hamdleHousePartTipUrl
+  handleHousePartTagUrl,
+  // 供应商
+  createSupplierUrl,
+  ifExistSupplierUrl,
+  handleSupplierUrl,
+  getSupplierListUrl,
+  // 采购
+  createPurchaseOrderUrl,
+  getPurchaseMsgUrl,
+  getPurchaseOrderListUrl,
+  getPurchaseOrderPayWayUrl,
+  purchaseStockInUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -239,12 +249,17 @@ function isNotEmpty(str) {
   }
 }
 /**提示**/
-function showToast(message) {
+function showToast(message,fun) {
   wx.showToast({
     title: message,
     icon: 'none',
     duration: 3000,
   })
+  if(fun){
+    setTimeout(()=>{
+      fun()
+    },800)
+  }
 }
 // 判断是否存过微信信息
 function hasSavedWXmsg(data) {
@@ -1415,7 +1430,9 @@ function saveFormid(data) {
   }, true);
 }
 
-// 仓库
+/**
+ * 仓库
+ * */ 
 // 列表参数
 function listFindType(data, type) {
   switch (type) {
@@ -1428,6 +1445,9 @@ function listFindType(data, type) {
     case 'picker':
       data.findType = 'simple'
       break;
+    default:
+      data.findType = 'simple'
+    break;  
   }
   return data
 }
@@ -1439,7 +1459,9 @@ function getWarehouseMsg(data) {
   return app.http.getRequest(handleWarehouseUrl+"/"+data.code, data)
 }
 function getWarehouseList(data, type) {
+  console.log(data)
   data = initStoreId(data);
+  console.log(data)
   data = listFindType(data,type)
   if (type === 'page'){
     return app.pageRequest.pageGet(handleWarehouseUrl, data)
@@ -1453,11 +1475,120 @@ function updateWarehouse(data) {
 function delWarehouse(data) {
   return app.http.deleteRequest(handleWarehouseUrl + "/" + data.code, data)
 }
+/**
+ * 库区
+ * */ 
+function createHousePart(data) {
+  data = initStoreId(data);
+  return app.http.postRequest(handleHousePartUrl, data)
+}
+function getHousePartMsg(data) {
+  return app.http.getRequest(handleHousePartUrl + "/" + data.code, data)
+}
+function getHousePartList(data, type) {
+  data = initStoreId(data);
+  data = listFindType(data, type)
+  if (type === 'page') {
+    return app.pageRequest.pageGet(handleHousePartUrl, data)
+  } else {
+    return app.http.getRequest(handleHousePartUrl, data)
+  }
+}
+function updateHousePart(data) {
+  return app.http.putRequest(handleHousePartUrl, data)
+}
+function delHousePart(data) {
+  return app.http.deleteRequest(handleHousePartUrl + "/" + data.code, data)
+}
 
-// handleWarehouseUrl,
-//   handleHousePartUrl,
-//   hamdleHousePartTipUrl
+/**
+ * 库区种类
+ * */
+function createHousePartTag(data) {
+  data = initStoreId(data);
+  return app.http.postRequest(handleHousePartTagUrl, data)
+}
+function getHousePartTagMsg(data) {
+  return app.http.getRequest(handleHousePartTagUrl + "/" + data.code, data)
+}
+function getHousePartTagList(data, type) {
+  data = initStoreId(data);
+  data = listFindType(data, type)
+  if (type === 'page') {
+    return app.pageRequest.pageGet(handleHousePartTagUrl, data)
+  } else {
+    return app.http.getRequest(handleHousePartTagUrl, data)
+  }
+}
+function updateHousePartTag(data) {
+  return app.http.putRequest(handleHousePartTagUrl, data)
+}
+function delHousePartTag(data) {
+  return app.http.deleteRequest(handleHousePartTagUrl + "/" + data.code, data)
+}
+
+// 供应商
+function getSupplierList(data){ // 列表
+  return app.pageRequest.pageGet(getSupplierListUrl, data)
+}
+function createSupplier(data){  // 新增
+  return app.http.postRequest(createSupplierUrl, data)
+}
+function ifExistSupplier(data) {  // 是否存在
+  return app.http.getRequest(ifExistSupplierUrl, data)
+}
+function getSupplierMsg(data){ // 获取供应商信息
+  return app.http.getRequest(handleSupplierUrl, data)
+}
+function updateSupplier(data){
+  return app.http.putRequest(handleSupplierUrl, data) 
+}
+function delSupplier(data) {
+  return app.http.delRequest(handleSupplierUrl, data)
+}
+
+/**
+ * 采购
+*/
+
+function createPurchaseOrder(data) { // 获取供应商信息
+  return app.http.postRequest(createPurchaseOrderUrl, data)
+}
+function purchaseStockIn(data) { // 获取供应商信息
+  return app.http.postRequest(purchaseStockInUrl, data)
+}
+function getPurchaseMsg(data) {
+  return app.http.getRequest(getPurchaseMsgUrl, data)
+}
+function getPurchaseOrderList(data) {
+  return app.pageRequest.pageGet(getPurchaseOrderListUrl, data)
+}
+function getPurchaseOrderPayWay(data) {
+  return app.http.getRequest(getPurchaseOrderPayWayUrl, data)
+}
+
 module.exports = {
+  createPurchaseOrder,
+  getPurchaseMsg,
+  getPurchaseOrderList,
+  getPurchaseOrderPayWay,
+  purchaseStockIn,
+  getSupplierList,
+  createSupplier,
+  ifExistSupplier,
+  getSupplierMsg,
+  updateSupplier,
+  delSupplier,
+  createHousePartTag,
+  getHousePartTagMsg,
+  getHousePartTagList,
+  updateHousePartTag,
+  delHousePartTag,
+  createHousePart,
+  getHousePartMsg,
+  getHousePartList,
+  updateHousePart,
+  delHousePart,
   createWareHouse,
   getWarehouseMsg,
   getWarehouseList,

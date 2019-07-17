@@ -1,0 +1,19 @@
+/* distribution/pages/purchase/choseGoods/choseGoods.wxss */
+@import '/distribution/static/wxss/common';
+
+.header{height: 140rpx;padding: 0 30rpx;color: #fff;box-sizing: border-box;display: flex;align-items: center;}
+/* 搜索 */
+.search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
+.search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
+.ser-btn{padding-right: 30rpx;}
+.filter-icon{width: 35rpx;height: 35rpx;}
+.addbtn{display: flex;align-items: center;flex-direction: column;justify-content: center;font-size: 24rpx;padding-right: 10rpx;}
+/* tab */
+.tab-box{background: #fff;padding: 0 50rpx;}
+.line{width: 2rpx;height:30rpx;background:#eee;}
+.tab{height: 100rpx;border-bottom: 5rpx solid #fff;width: 200rpx;display: flex;align-items: center;justify-content: center;color: #999;}
+.tab-ac{border-color: #fdb813;color: #fdb813;}
+/* 商品 */
+.template .goods-item{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;min-height: 200rpx;padding: 30rpx;box-sizing: border-box;}
+.template .goods-icon{border-radius:10rpx;width: 140rpx;height:140rpx;border: 1rpx solid #ddd;margin-right: 30rpx;}
+.template .warning-tip{padding: 0 10rpx;background: rgb(254,61,61);border-radius: 5rpx;color: #fff;margin-right: 10rpx;}

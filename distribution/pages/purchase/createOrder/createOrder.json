@@ -1,4 +1,7 @@
 {
+  "usingComponents":{
+    "tips": "/assembly/tips/tips"
+  },
   "navigationBarTitleText": "手工采购单",
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#f8b616"
