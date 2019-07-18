@@ -29,6 +29,7 @@ Page({
       pre.setData({
         payway
       })
+      wx.navigateBack()
     }    
   },
   /**

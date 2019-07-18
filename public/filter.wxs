@@ -14,7 +14,7 @@ var plusNum = function(num){
  }
 }
 
-var filterTime = function (timestamp){
+var filterTime = function (timestamp,only){
   var str = "";
   if (timestamp != '' && timestamp != null && timestamp != undefined && timestamp != NaN) {
     var date = getDate(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -24,6 +24,9 @@ var filterTime = function (timestamp){
     var h = date.getHours();
     var m = date.getMinutes();
     var s = date.getSeconds();
+    if (only){
+      return Y + "-" + M + "-" + D ;
+    }
     return Y + "-" + M + "-" + D + " " + h + ":" + m + ":" + s;
   }
   return str

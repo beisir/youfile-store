@@ -280,11 +280,12 @@ export const createSupplierUrl = '/admin/supplier'
 export const ifExistSupplierUrl = '/admin/supplier/{{name}}/exist'
 export const handleSupplierUrl = '/admin/supplier/{{no}}'
 export const getSupplierListUrl = '/admin/supplier/page'
-
+export const getSupplierGoodsListUrl = '/admin/supplier/goods/{{supplierNumber}}/page'
 // 采购
 export const createPurchaseOrderUrl = '/admin/purchaseorder'
 export const getPurchaseMsgUrl = '/admin/purchaseorder/{{no}}'
 export const getPurchaseOrderListUrl = '/admin/purchaseorder/page'
 export const getPurchaseOrderPayWayUrl = '/admin/purchaseorder/payway'
 export const purchaseStockInUrl = '/admin/purchaseorder/stock'
+export const getAllGoodsUrl = '/admin/shop/store/{{storeId}}/goods'
 

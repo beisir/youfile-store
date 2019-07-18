@@ -1,0 +1,61 @@
+<view class='chosehouse com-box com-flex-between'>
+  <view class='msg-title'>选择仓库 库区</view>
+  <view class='com-flex-center'>
+    <text class='msg-des'>{{house?house:'请选择'}}</text>
+    <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+  </view>
+</view>
+<picker mode='date' bindchange='getDate'>
+  <view class='chosehouse com-box com-flex-between'>
+    <view class='msg-title'>入库时间</view>
+    <view class='com-flex-center'>
+      <text class='msg-des'>{{inDate?inDate:'请选择'}}</text>
+      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+    </view>
+  </view>
+</picker>
+<view class='com-box'>
+  <view class='header-box com-flex-center'>
+    <view class='color-chunk'></view>
+    <text class='font30 com-blod-font' style='padding-right:20rpx;'>采购商品</text>
+    <text class='font28 com-gray-color'>手工录入</text>
+  </view>
+  <block wx:for="{{goodsList}}" wx:key="{{index}}">
+    <view class='goods-item'>
+      <image class='goods-pic' src='{{baseUrl+item.mainImgUrl}}'></image>
+      <view class='flexone goods-msg'>
+        <view class='goods-name com-blod-font'>{{item.goodsName}}</view>
+        <view class='font24 com-gray-color'>共{{item.goodsNum}}种规格 {{item.totalNum}}件</view>
+      </view>
+      <view class='font24'>¥
+        <text class='goods-price'>{{item.amount}}</text>
+      </view>
+    </view>
+    <view class='border-line'></view>
+    <view class='my-tr com-flex-between font24'>
+      <text class='flexone'>规格</text>
+      <text class='flexone'>待入库数量</text>
+      <text style='width:220rpx;'>入库数量</text>
+    </view>
+    <view class='border-line'></view>
+    <block wx:for="{{item.purchaseOrderDetailVOList}}" wx:for-item="sku" wx:for-index="skuindex" wx:key="{{skuindex}}">
+      <view class='my-tr com-flex-between font24'>
+        <view class='flexone'>{{sku.goodsDesc?sku.goodsDesc:"默认"}}</view>
+        <view class='flexone'>{{sku.remainNum}}</view>
+        <view style='width:220rpx;' class='com-flex-center calc-box' style='flex:none;'>
+          <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-type='reduce' hover-class='none' disabled='{{!item.num || item.num==0}}' style='border-right:1rpx solid #ddd'>-</button>
+          <input bindinput='watchInput' type="number" data-index="{{index}}" data-type="num" value='{{item.num}}' class='calc-input' type='number' maxlength='6'></input>
+          <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-type='add' hover-class='none' style='border-left:1rpx solid #ddd'>+</button>
+        </view>
+      </view>
+    </block>
+    <view class='border-line'></view>
+    <view class='price-box font24'>
+      <text>共{{item.totalNum}}件商品</text>
+      <text style='margin:0 15rpx 0 20rpx;'>合计：</text>
+      <text class='com-color-font'>￥</text>
+      <text class='price-text com-color-font'>{{item.amount}}</text>
+    </view>
+    <view class='border-line'></view>
+  </block>
+</view>

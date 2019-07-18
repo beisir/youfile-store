@@ -1,4 +1,4 @@
-// distribution/pages/purchase/orderDetail/orderDetail.js
+// distribution/pages/purchase/inHouse/inHouse.js
 import Api from "../../../../utils/api.js"
 const app = getApp()
 Page({
@@ -7,34 +7,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    allshow:false,
     baseUrl: app.globalData.imageUrl
   },
-  // 是否展开
-  changeShow(){
+  getDate(e){
     this.setData({
-      allshow: !this.data.allshow
+      inDate: e.detai.value
     })
   },
-  getDetail(){
-    Api.getPurchaseMsg({no:this.data.no}).then(res=>{
+  getDetail() {
+    Api.getPurchaseMsg({ no: this.data.no }).then(res => {
       this.setData({
         order: res.obj
       })
-    })
-  },
-  call(){
-    if (!this.data.order.supplierPhone){
-      Api.showToast("未留下电话哦")
-      return
-    }
-    wx.makePhoneCall({
-      phoneNumber: this.data.order.supplierPhone,
-    })
-  },
-  copy(e){
-    wx.setClipboardData({
-      data: e.currentTarget.dataset.msg,
+      let goodsArr = res.obj.purchaseGoodsVOS
+      let waitArr = goodsArr.filter(el => el.remainNum>0)
+      waitArr.forEach(el=>{
+        el.purchaseOrderDetailVOList = el.purchaseOrderDetailVOList.filter(sku => sku.remainNum > 0)
+      })
+      this.setData({
+        goodsList: waitArr
+      })
     })
   },
   /**
@@ -44,6 +36,8 @@ Page({
     this.setData({
       // no: options.no
       no: 190718800000
+    },()=>{
+      this.getDetail()
     })
   },
 
@@ -58,7 +52,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getDetail()
+
   },
 
   /**

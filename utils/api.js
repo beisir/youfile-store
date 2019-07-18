@@ -231,12 +231,14 @@ import {
   ifExistSupplierUrl,
   handleSupplierUrl,
   getSupplierListUrl,
+  getSupplierGoodsListUrl,
   // 采购
   createPurchaseOrderUrl,
   getPurchaseMsgUrl,
   getPurchaseOrderListUrl,
   getPurchaseOrderPayWayUrl,
   purchaseStockInUrl,
+  getAllGoodsUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1546,12 +1548,16 @@ function updateSupplier(data){
 function delSupplier(data) {
   return app.http.delRequest(handleSupplierUrl, data)
 }
+function getSupplierGoodsList(data){
+  return app.pageRequest.pageGet(getSupplierGoodsListUrl, data)
+}
 
 /**
  * 采购
 */
 
-function createPurchaseOrder(data) { // 获取供应商信息
+function createPurchaseOrder(data) { // 创建采购单
+  data = initStoreId(data);
   return app.http.postRequest(createPurchaseOrderUrl, data)
 }
 function purchaseStockIn(data) { // 获取供应商信息
@@ -1566,8 +1572,14 @@ function getPurchaseOrderList(data) {
 function getPurchaseOrderPayWay(data) {
   return app.http.getRequest(getPurchaseOrderPayWayUrl, data)
 }
+function getAllGoods(data){
+  data = initStoreId(data);
+  return app.pageRequest.pageGet(getAllGoodsUrl, data)
+}
 
 module.exports = {
+  getAllGoods,
+  getSupplierGoodsList,
   createPurchaseOrder,
   getPurchaseMsg,
   getPurchaseOrderList,

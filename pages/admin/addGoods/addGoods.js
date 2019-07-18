@@ -411,6 +411,11 @@ Page({
   onLoad: function(options) {
     this.getConfig()
     this.getZoneList()
+    if(options.entryType){
+      this.setData({
+        entryType: options.entryType
+      })
+    }
   },
   // tab切换
   swichNav: function(e) {
@@ -673,9 +678,13 @@ Page({
               icon: 'none',
               duration: 2000,
               success: function() {
-                wx.redirectTo({
-                  url: '../success/success',
-                })
+                if (_this.data.entryType === 'createOrder'){
+                  wx.navigateBack()
+                }else{
+                  wx.redirectTo({
+                    url: '../success/success',
+                  })
+                }
               }
             })
         })

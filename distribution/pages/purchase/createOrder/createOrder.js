@@ -1,4 +1,5 @@
 // distribution/pages/purchase/createOrder/createOrder.js
+import Api from '../../../../utils/api.js'
 const app = getApp()
 Page({
 
@@ -7,7 +8,90 @@ Page({
    */
   data: {
     baseUrl: app.globalData.imageUrl,
+    allPrice: 0,
+    allNum: 0,
+    serText:"",
+    nickName:'',
+    remark: ''
   },
+  // 创建
+  createOrder(){
+    if (!this.data.supplierObj){
+      Api.showToast("请选择供应商")
+      return
+    }
+    if (!this.data.goodsList || this.data.goodsList.length==0) {
+      Api.showToast("请选择商品")
+      return
+    }
+    if (!this.data.payway) {
+      Api.showToast("请选择支付方式")
+      return
+    }
+    if (!this.data.orderDate) {
+      Api.showToast("请选择采购时间")
+      return
+    }
+
+    let obj = { 
+      supplierNumber: this.data.supplierObj.supplierNumber,
+      payWay: this.data.payway.payWayCode,
+      operator: this.data.nickName,
+      purchaseTime: this.data.orderDate,
+      remark: this.data.remark
+    }
+    let goodsList = this.data.goodsList,
+        sendGoodsList = []
+    goodsList.forEach(el=>{
+      el.skuPriceNumList.forEach(sku=>{
+        sendGoodsList.push({
+          totalNum: sku.num,
+          purchasePrice: sku.price,
+          skuCode: sku.skuCode ? sku.skuCode:0,
+          goodsId: el.goods.id
+        })
+      })
+      
+    })
+    obj.purchaseGoodsReqVOList = sendGoodsList
+    Api.createPurchaseOrder(obj).then(res=>{
+      Api.showToast(res.message,()=>{
+        wx.navigateBack()
+      })
+    })
+  },
+  // 备注
+  remarkInput(e){
+    this.setData({
+      remark: e.detail.value
+    })
+  },
+  // 时间
+  getTime(e){
+    this.setData({
+      orderDate: e.detail.value
+    })
+  },
+  // 搜索
+  ser(e){
+    this.setData({
+      serText: e.detail.value
+    })
+  },
+  search(){
+    this.tochoseGoods()
+  },
+  // 选择商品
+  tochoseGoods(){
+    if(this.data.supplierObj){
+      wx.navigateTo({
+        url: '../choseGoods/choseGoods?num=' + this.data.supplierObj.supplierNumber + '&name=' + this.data.supplierObj.name+"&serText="+ this.data.serText,
+      })
+    } else {
+      Api.showToast("请先选择供应商")
+    }
+  },
+  // 删除商品
   delGoods(e){
     this.setData({
       delmodal:true,
@@ -33,10 +117,14 @@ Page({
   },
   getGoodsList(){
     let goodsObj = wx.getStorageSync('purchaseGoods'),
-        goodsList = []
+        goodsList = [],
+        allPrice = 0,
+        allNum = 0
     for (let key in goodsObj){
       let skuList = goodsObj[key].skuPriceNumList.filter(el => el.num && el.num>0)
       let reSkuList = []
+      allPrice += goodsObj[key].price
+      allNum += goodsObj[key].num
       switch (goodsObj[key].skuNum){
         case 'two':
           skuList.forEach(el=>{
@@ -71,14 +159,24 @@ Page({
       goodsList.push(goodsObj[key])
     }
     this.setData({
-      goodsList
+      goodsList,
+      allPrice: allPrice.toFixed(2),
+      allNum
+    })
+  },
+  getUserInfo(){
+    Api.getUserInfo().then(res=>{
+      this.setData({
+        nickName: res.obj.nickName
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // wx.setStorageSync('purchaseGoods', {})
+    wx.setStorageSync('purchaseGoods', {})
+    this.getUserInfo()
   },
 
   /**

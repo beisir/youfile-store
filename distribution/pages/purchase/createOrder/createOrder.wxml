@@ -14,14 +14,16 @@
     <view class='search-input-box com-flex-between'>
       <view class='com-flex-center'>
         <image src='/distribution/images/search-white.png' class='search-img'></image>
-        <input class='font26' placeholder='输入商品名称、货号' placeholder-style='color:#fff;'></input>
+        <input value='{{serText}}' bindinput='ser' class='font26' placeholder='输入商品名称、货号' placeholder-style='color:#fff;'></input>
       </view>
       <text class='font30 ser-btn' bindtap='search'>搜索</text>
     </view>
+    <navigator url="/pages/admin/addGoods/addGoods?entryType=createOrder">
     <view class='addbtn'>
       <image src='/distribution/images/add-white.png' class='filter-icon' bindtap='showFilter'></image>
       <text>新增</text>
     </view>
+    </navigator>
   </view>
   <navigator url='../choseSupplier/choseSupplier'>
     <view class='com-embed-inner com-flex-between font30 com-blod-font'>
@@ -66,35 +68,40 @@
   </view>
 </view>
 
-<view class='add-goods com-color-font font30 com-blod-font'>
+<view class='add-goods com-color-font font30 com-blod-font' bindtap='tochoseGoods'>
   <image src='/distribution/images/add-gold.png' class='img30' style='padding-right:10rpx;'></image>
   <text>选择商品</text>
 </view>
 
-<view class='msg-item com-flex-between common-box-style'>
-  <view class='font30'>支付方式</view>
-  <view class='com-flex-center'>
-    <text class='font28 com-gray-color'>选择支付方式</text>
-    <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+<navigator url='../chosePayType/chosePayType?code={{payway.payWayCode}}'>
+  <view class='msg-item com-flex-between common-box-style'>
+    <view class='font30'>支付方式</view>
+    <view class='com-flex-center'>
+      <text class='font28 com-gray-color'>{{payway?payway.payWayName:'选择支付方式'}}</text>
+      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+    </view>
   </view>
-</view>
+</navigator>
 
 <view class='msg-item com-flex-between common-box-style'>
   <view class='font30'>经办人</view>
-  <text class='font28 com-gray-color'>林凡</text>
+  <text class='font28 com-gray-color'>{{nickName}}</text>
 </view>
 
-<view class='msg-item com-flex-between common-box-style'>
-  <view class='font30'>支付方式</view>
-  <view class='com-flex-center'>
-    <text class='font28 com-gray-color'>2019-06-26</text>
-    <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+<picker mode='date' bindchange='getTime'>
+  <view class='msg-item com-flex-between common-box-style'>
+    <view class='font30'>采购时间</view>
+    <view class='com-flex-center'>
+      <text class='font28 com-gray-color'>{{orderDate?orderDate:''}}</text>
+      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+    </view>
   </view>
-</view>
+</picker>
+
 
 <view class='msg-item com-flex-between common-box-style'>
   <view class='font30'>备注</view>
-  <input class='input-style' placeholder='请输入备注信息'></input>
+  <input bindinput='remarkInput' value='{{remark}}' class='input-style' placeholder='请输入备注信息'></input>
 </view>
 
 <view>
@@ -103,11 +110,11 @@
 <view class='com-half-btn-box'>
   <view class='chb-msg-box'>
     <view>合计：
-      <text class='com-color-font font30'>1000000</text>件</view>
+      <text class='com-color-font font30'>{{allNum}} </text>件</view>
     <view>共
-      <text class='com-color-font font30'>￥35203520</text>
+      <text class='com-color-font font30'>￥{{allPrice}}</text>
     </view>
   </view>
-  <view class='chb-sure-btn'>确定</view>
+  <view class='chb-sure-btn' bindtap='createOrder'>确定</view>
 </view>
 <view class='bottom-replace-box'></view>

@@ -1,35 +1,85 @@
 // distribution/pages/purchase/orderList/orderList.js
 import { tabSelceted } from '../../../../distribution/static/js/common.js'
+import Api from "../../../../utils/api.js"
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    baseUrl: app.globalData.imageUrl,
     flowtab: [{
       name: "全部",
+      type: '',
       selected: true
     }, {
-      name: "入库"
+      name: "待入库",
+      type: 'init,part'
     }, {
-      name: "出库"
+      name: "已入库",
+      type: 'whole'
     }],
-    tab:[{
-      name:'进货单'
-    },{
-      name: '采购单'
-    }]
+    tabType: 'caigou',
+    serText: ""
   },
-
+  toDetail(e){
+    wx.navigateTo({
+        url: '../orderDetail/orderDetail?no=' + e.currentTarget.dataset.no,
+    })
+  },
   choseflowtab(e) {
     tabSelceted(e.currentTarget.dataset.index, this.data.flowtab, 'flowtab', this)
+    this.getList(true)
   },
+  getList(re){
+    if (re) {
+      app.pageRequest.pageData.pageNum = 0
+      this.setData({ goodsList: [] })
+    }
+    
+    if (this.data.tabType === 'caigou') {
+      let obj = {
+        keywords: this.data.serText
+      }
+      let c = this.data.flowtab.filter(el => el.selected)
+      obj.status = c[0].type
 
+      Api.getPurchaseOrderList(obj).then(res => {
+        if (!res.obj.result) { res.obj.result = []}
+        this.setData({
+          goodsList: this.data.goodsList.concat(res.obj.result)
+        })
+      })
+    } else {
+
+    }
+  },
+  serchinput(e) {
+    this.setData({
+      serText: e.detail.value
+    })
+  },
+  search() {
+    this.getList(true)
+  },
+  clearSerch(){
+    this.setData({
+      serText: ''
+    })
+  },
+  tabclick(e) {
+    this.setData({
+      tabType: e.currentTarget.dataset.type
+    }, () => {
+      this.getList(true)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -43,7 +93,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList(true)
   },
 
   /**
@@ -71,13 +121,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.getList()
   }
 })
