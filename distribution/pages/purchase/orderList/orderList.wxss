@@ -22,6 +22,6 @@
 .tab-item{width: 190rpx;border-bottom: 5rpx solid #fff;height: 100%;box-sizing: border-box;display: flex;align-items: center;justify-content: center;}
 .tab-item-ac{border-color: #f8b616;color: #f8b616;}
 .tab-line{width: 2rpx; height: 30rpx;background: #eee;}
-.addOrder-btn{width: 210rpx;height: 100rpx;line-height: 100rpx;text-align: center;color: #f8b616;}
+.addOrder-btn{width: 210rpx;height: 100rpx;color: #f8b616;display: flex;align-items: center;justify-content: center;}
 
 .nomore image{height: 240rpx;width: 240rpx;}

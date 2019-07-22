@@ -1,7 +1,7 @@
 .header{height: 90rpx;}
 .box{position: relative;top: -70rpx;}
 .house-item{background: #fff;margin: 0 20rpx 20rpx;border-radius: 10rpx;background: #fff;padding: 0 30rpx;overflow: hidden;}
-.house-msg{height: 190rpx;border-bottom: 1rpx solid #f0f0f0;padding-top:20rpx;box-sizing: border-box;}
+.house-msg{min-height: 190rpx;border-bottom: 1rpx solid #f0f0f0;padding-top:20rpx;box-sizing: border-box;}
 /* 商品 */
 .goods-item{padding: 30rpx;display: flex;}
 .goods-msg{padding-right: 70rpx;font-size: 26rpx;display: flex;flex-direction: column;justify-content: space-between;padding-bottom: 10rpx;}

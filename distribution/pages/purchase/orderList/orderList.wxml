@@ -4,10 +4,12 @@
     <view class='tab-line'></view>
     <view class='tab-item {{tabType=="caigou"?"tab-item-ac":""}}' bindtap='tabclick' data-type='caigou'>采购单</view>
   </view>
-  <view class='addOrder-btn'>
-    <image class='img30'></image>
-    <text class='font28'>采购入库</text>
-  </view>
+  <navigator url='../createOrder/createOrder'>
+    <view class='addOrder-btn'>
+      <image class='img30' src='/distribution/images/in-house-gold.png' style='margin-right:10rpx;'></image>
+      <text class='font28'>采购入库</text>
+    </view>
+  </navigator>
 </view>
 <!-- 公用搜索 -->
 <view class='com-search-box'>
@@ -50,7 +52,9 @@
     </view>
     <!-- 按钮 -->
     <view class='btn-box common-padding' wx:if="{{item.status !=='whole'}}">
-      <button class='order-btn'>去入库</button>
+      <navigator url='../inHouse/inHouse?no={{item.no}}'>
+        <button class='order-btn'>去入库</button>
+      </navigator>
     </view>
   </view>
 </block>

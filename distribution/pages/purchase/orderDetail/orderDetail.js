@@ -10,6 +10,11 @@ Page({
     allshow:false,
     baseUrl: app.globalData.imageUrl
   },
+  toInhouse(){
+    wx.navigateTo({
+      url: '../inHouse/inHouse?no=' + this.data.no,
+    })
+  },
   // 是否展开
   changeShow(){
     this.setData({
@@ -42,8 +47,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      // no: options.no
-      no: 190718800000
+      no: options.no
+      // no: 190718800000
     })
   },
 

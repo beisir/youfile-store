@@ -1,10 +1,12 @@
-<view class='chosehouse com-box com-flex-between'>
-  <view class='msg-title'>选择仓库 库区</view>
-  <view class='com-flex-center'>
-    <text class='msg-des'>{{house?house:'请选择'}}</text>
-    <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+<picker mode="multiSelector" range="{{warehouse}}" range-key='name' bindchange="setHouse" bindcolumnchange="houseChange">
+  <view class='chosehouse com-box com-flex-between'>
+    <view class='msg-title'>选择仓库 库区</view>
+    <view class='com-flex-center'>
+      <text class='msg-des'>{{house?house.name:'请选择'}}</text>
+      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+    </view>
   </view>
-</view>
+</picker>
 <picker mode='date' bindchange='getDate'>
   <view class='chosehouse com-box com-flex-between'>
     <view class='msg-title'>入库时间</view>
@@ -18,7 +20,7 @@
   <view class='header-box com-flex-center'>
     <view class='color-chunk'></view>
     <text class='font30 com-blod-font' style='padding-right:20rpx;'>采购商品</text>
-    <text class='font28 com-gray-color'>手工录入</text>
+    <text class='font28 com-gray-color' wx:if="{{order.source === 'handmade'}}">手工录入</text>
   </view>
   <block wx:for="{{goodsList}}" wx:key="{{index}}">
     <view class='goods-item'>
@@ -43,19 +45,29 @@
         <view class='flexone'>{{sku.goodsDesc?sku.goodsDesc:"默认"}}</view>
         <view class='flexone'>{{sku.remainNum}}</view>
         <view style='width:220rpx;' class='com-flex-center calc-box' style='flex:none;'>
-          <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-type='reduce' hover-class='none' disabled='{{!item.num || item.num==0}}' style='border-right:1rpx solid #ddd'>-</button>
-          <input bindinput='watchInput' type="number" data-index="{{index}}" data-type="num" value='{{item.num}}' class='calc-input' type='number' maxlength='6'></input>
-          <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-type='add' hover-class='none' style='border-left:1rpx solid #ddd'>+</button>
+          <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-skuindex='{{skuindex}}' data-type='reduce' hover-class='none' disabled='{{!sku.num || sku.num==0}}' style='border-right:1rpx solid #ddd'>-</button>
+          <input bindinput='watchInput' bindblur='diffNum' data-num='{{sku.remainNum}}' type="number" data-index="{{index}}" data-skuindex='{{skuindex}}' data-type="num" value='{{sku.num}}' class='calc-input' type='number' maxlength='6'></input>
+          <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-skuindex='{{skuindex}}' data-type='add' hover-class='none' style='border-left:1rpx solid #ddd' disabled='{{sku.num >= sku.remainNum}}'>+</button>
         </view>
       </view>
     </block>
-    <view class='border-line'></view>
-    <view class='price-box font24'>
+    <view class='border-line' wx:if="{{index !== goodsList.length-1}}"></view>
+    <!-- <view class='price-box font24'>
       <text>共{{item.totalNum}}件商品</text>
       <text style='margin:0 15rpx 0 20rpx;'>合计：</text>
       <text class='com-color-font'>￥</text>
       <text class='price-text com-color-font'>{{item.amount}}</text>
     </view>
-    <view class='border-line'></view>
+    <view class='border-line'></view> -->
   </block>
 </view>
+
+<view class='com-half-btn-box'>
+  <view class='chb-msg-box'>
+    <view>已选：
+      <text class='com-color-font font30'>{{allnum}} </text>件
+    </view>
+  </view>
+  <view class='chb-sure-btn' bindtap='sureIn'>确定</view>
+</view>
+<view class='bottom-replace-box'></view>

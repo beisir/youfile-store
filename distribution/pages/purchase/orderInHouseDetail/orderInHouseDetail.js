@@ -1,18 +1,36 @@
 // distribution/pages/purchase/orderInHouseDetail/orderInHouseDetail.js
+import Api from "../../../../utils/api.js"
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    baseUrl: app.globalData.imageUrl
   },
-
+  getDetail(){
+    Api.orderInDetail({no: this.data.no}).then(res=>{
+      this.setData({
+        houseList: res.obj
+      })
+    })
+  },
+  showHide(e){
+    this.setData({
+      ['houseList[' + e.currentTarget.dataset.index + '].hide']: !this.data.houseList[e.currentTarget.dataset.index].hide
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      // no: options.no
+      no: 190718800000
+    },()=>{
+      this.getDetail()
+    })
   },
 
   /**

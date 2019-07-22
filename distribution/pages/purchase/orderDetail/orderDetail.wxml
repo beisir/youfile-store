@@ -33,11 +33,13 @@
       <image class='img30' src='/distribution/images/tele-gold.png' bindtap='call'></image>
     </view>
     <!-- 仓库信息 -->
-    <view class='house-box com-flex-center font30' wx:if="{{order.status!=='init'}}">
-      <image src='/distribution/images/house-gray.png' class='img30'></image>
-      <text class='flexone com-text-ellipsis house-name'>仓库库区：啊实打实大苏打阿斯达阿斯达阿斯达阿斯达阿斯达阿斯达阿斯达</text>
-      <text class='com-color-font'>入库详情</text>
-    </view>
+    <navigator url='../orderInHouseDetail/orderInHouseDetail?no={{no}}'>
+      <view class='house-box com-flex-center font30' wx:if="{{order.status!=='init'}}">
+        <image src='/distribution/images/house-gray.png' class='img30'></image>
+        <text class='flexone com-text-ellipsis house-name'>仓库库区：{{order.warehouseName}}</text>
+        <text class='com-color-font'>入库详情</text>
+      </view>
+    </navigator>
   </view>
 </view>
 
@@ -130,5 +132,5 @@
 
 <view class='bottom-replace-box'></view>
 <view class='bottom-single-btn-box' wx:if="{{order.status !=='whole'}}">
-  <button class='bottom-single-btn'>去入库</button>
+  <button class='bottom-single-btn' bindtap='toInhouse'>去入库</button>
 </view>

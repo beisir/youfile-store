@@ -239,6 +239,7 @@ import {
   getPurchaseOrderPayWayUrl,
   purchaseStockInUrl,
   getAllGoodsUrl,
+  orderInDetailUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1560,7 +1561,7 @@ function createPurchaseOrder(data) { // 创建采购单
   data = initStoreId(data);
   return app.http.postRequest(createPurchaseOrderUrl, data)
 }
-function purchaseStockIn(data) { // 获取供应商信息
+function purchaseStockIn(data) { // 入库
   return app.http.postRequest(purchaseStockInUrl, data)
 }
 function getPurchaseMsg(data) {
@@ -1576,8 +1577,12 @@ function getAllGoods(data){
   data = initStoreId(data);
   return app.pageRequest.pageGet(getAllGoodsUrl, data)
 }
+function orderInDetail(data){
+  return app.http.getRequest(orderInDetailUrl, data)
+}
 
 module.exports = {
+  orderInDetail,
   getAllGoods,
   getSupplierGoodsList,
   createPurchaseOrder,

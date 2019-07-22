@@ -288,4 +288,5 @@ export const getPurchaseOrderListUrl = '/admin/purchaseorder/page'
 export const getPurchaseOrderPayWayUrl = '/admin/purchaseorder/payway'
 export const purchaseStockInUrl = '/admin/purchaseorder/stock'
 export const getAllGoodsUrl = '/admin/shop/store/{{storeId}}/goods'
+export const orderInDetailUrl = '/admin/purchaseorder/{{no}}/stock/record'
 
