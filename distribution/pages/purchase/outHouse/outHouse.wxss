@@ -1,0 +1,4 @@
+/* distribution/pages/purchase/outHouse/outHouse.wxss */
+@import '../orderDetail/orderDetail';
+.header-text-box{padding: 0 50rpx;height: 100rpx;}
+.goods-msg{padding-right: 0;}

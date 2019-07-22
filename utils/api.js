@@ -240,6 +240,9 @@ import {
   purchaseStockInUrl,
   getAllGoodsUrl,
   orderInDetailUrl,
+  // 订单出库
+  outHouseUrl,
+  preOutHouseListUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1580,8 +1583,16 @@ function getAllGoods(data){
 function orderInDetail(data){
   return app.http.getRequest(orderInDetailUrl, data)
 }
-
+// 订单出库
+function outHouse(data){
+  return app.http.getRequest(outHouseUrl, data)
+}
+function preOutHouseList(data){
+  return app.http.postRequest(preOutHouseListUrl, data)
+}
 module.exports = {
+  preOutHouseList,
+  outHouse,
   orderInDetail,
   getAllGoods,
   getSupplierGoodsList,

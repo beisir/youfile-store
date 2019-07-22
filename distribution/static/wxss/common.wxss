@@ -20,7 +20,8 @@
 .com-padding-box{padding-left: 30rpx;padding-right: 30rpx;}
 .com-margin-box{margin: 20rpx 20rpx 0;border-radius: 10rpx;background: #fff;}
 /* 库区标签 */
-.com-tag{padding: 0 15rpx;background: #ffa515;color: #fff;margin-left: 20rpx;border-radius: 5rpx;font-size: 24rpx;height: 40rpx;line-height: 40rpx;display: inline-block;}
+.com-tag{padding: 0 15rpx;background: #f8b616;color: #fff;margin-left: 20rpx;border-radius: 5rpx;font-size: 24rpx;height: 40rpx;line-height: 40rpx;display: inline-block;}
+/* 滚动 */
 .com-scroll-view-style{overflow: hidden;white-space: nowrap;}
 /* 搜索 */
 .com-search-box .search-padding-box{padding: 20rpx 20rpx 0;}

@@ -1,0 +1,13 @@
+@import '../outHouse/outHouse';
+@import '../choseGoodsDetail/choseGoodsDetail';
+
+page{color: #333;}
+.header-box{margin: 20rpx 20rpx 0;border-radius: 10rpx;background: #fff;}
+.goodsicon{height: 150rpx;width: 150rpx;}
+.goods-name{margin-bottom: 20rpx;}
+.house-item{padding: 10rpx 0 30rpx;margin:20rpx 43rpx 0;font-size: 26rpx;border-bottom: 5rpx solid #fff;display: inline-block;position: relative;}
+.house-item-ac{border-color: #f8b616;color: #f8b616;}
+.sku-red-num{position: absolute;right: -18rpx;top: -18rpx;overflow: hidden;background: #f55353;color: #fff;line-height: 36rpx;height: 36rpx;min-width: 36rpx;padding:0 5rpx;text-align: center;border-radius: 36rpx;font-size: 24rpx;}
+/* 库区 */
+.region-item{margin: 20rpx 20rpx 0;border-radius: 10rpx;background: #fff;}
+.part-title{height: 80rpx;line-height: 80rpx;padding: 30rpx;font-size: 36rpx;font-weight: 600;}

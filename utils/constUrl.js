@@ -289,4 +289,6 @@ export const getPurchaseOrderPayWayUrl = '/admin/purchaseorder/payway'
 export const purchaseStockInUrl = '/admin/purchaseorder/stock'
 export const getAllGoodsUrl = '/admin/shop/store/{{storeId}}/goods'
 export const orderInDetailUrl = '/admin/purchaseorder/{{no}}/stock/record'
-
+// 订单出库
+export const outHouseUrl = '/admin/order/{{orderNumber}}/stock/out/advice'
+export const preOutHouseListUrl = '/admin/stocks/outParams'

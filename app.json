@@ -3,6 +3,9 @@
     {
       "root": "distribution",
       "pages": [
+        "pages/purchase/outHouseLogistics/outHouseLogistics",
+        "pages/purchase/outHouseSkuSet/outHouseSkuSet",
+        "pages/purchase/outHouse/outHouse",
         "pages/purchase/inHouse/inHouse",
         "pages/purchase/choseGoodsDetail/choseGoodsDetail",
         "pages/purchase/choseGoods/choseGoods",

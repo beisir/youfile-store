@@ -1,0 +1,63 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+<view class='header-box'>
+  <view class='goods-item'>
+    <image wx:if="{{goods}}" class='goods-pic' src='{{baseUrl+goods.goodsMainImgUrl}}'></image>
+    <view class='flexone goods-msg'>
+      <view class='goods-name com-blod-font'>{{goods.goodsName}}</view>
+      <view class='com-flex-between font30'>
+        <text class='flexone'>“ {{goods.adviceSkuList[skuIndex].skuName?goods.adviceSkuList[skuIndex].skuName:'默认'}} ”</text>
+        <view>待出库：
+          <text class='com-color-font'>{{goods.adviceSkuList[skuIndex].needOutNum}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-x="{{true}}" class='com-scroll-view-style'>
+    <view class='house-item {{houseIndex==chosedhouseIndex?"house-item-ac":""}}' wx:for="{{goods.adviceSkuList[skuIndex].warehouseList}}" wx:for-item="house" wx:for-index="houseIndex" wx:key="{{houseIndex}}" bindtap='choseHouse' data-index="{{houseIndex}}">{{house.warehouseName}}
+      <view class='sku-red-num' wx:if="{{house.setNum}}">{{house.setNum}}</view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class='region-item' wx:for="{{goods.adviceSkuList[skuIndex].warehouseList[chosedhouseIndex].regionList}}" wx:key="{{index}}">
+  <view class='part-title'>库区 {{item.regionName}}</view>
+  <view class='border-line'></view>
+  <view class='sku-table-title com-flex-center'>
+    <view class='flexone'>供应商</view>
+    <view class='flexone'>入库时间</view>
+    <view class='flexone'>当前库存</view>
+    <view class='calc-box-title'>出库数量</view>
+  </view>
+  <view class='border-line'></view>
+  <block wx:for="{{item.flowList}}" wx:for-item='flowItem' wx:for-index='flowIndex' wx:key="{{flowIndex}}">
+    <view class='tr-box com-flex-center'>
+      <view class='flexone'>{{flowItem.supplierName}}</view>
+      <view class='flexone'>{{filter.filterTime(flowItem.time,true)}}</view>
+      <view class='flexone'>{{flowItem.stockRemainNum}}</view>
+      <view class='com-flex-center calc-box'>
+        <button class='calc-btn' bindtap='changeNumBtn' data-index="{{flowIndex}}" data-regionindex="{{index}}" data-type='reduce' disabled='{{!flowItem.adviceOutNum || flowItem.adviceOutNum==0}}' style='border-right:1rpx solid #ddd'>-</button>
+        <input bindinput='watchInput' bindblur='checkNum' type="number" data-index="{{flowIndex}}" data-regionindex="{{index}}"  value='{{flowItem.adviceOutNum}}' class='calc-input' maxlength='6'></input>
+        <button class='calc-btn' bindtap='changeNumBtn' data-index="{{flowIndex}}" data-regionindex="{{index}}" data-type='add' style='border-left:1rpx solid #ddd' disabled="{{flowItem.adviceOutNum>=flowItem.stockRemainNum}}">+</button>
+      </view>
+    </view>
+    <view class='border-line' wx:if="{{flowIndex!==item.flowList.length-1}}"></view>
+  </block>
+</view>
+
+<!-- 公用底部按钮 -->
+<view class='com-half-btn-box'>
+  <view class='chb-msg-box'>
+    <view>已选:
+      <text class='com-color-font font30'>{{goods.adviceSkuList[skuIndex].setNum}} </text>件</view>
+    <block wx:if="{{diffNum || diffNum == 0}}">
+      <view wx:if="{{goods.needOutNum>=goods.adviceSkuList[skuIndex].setNum}}">还差:
+        <text class='com-color-font font30'>{{diffNum}} </text>件
+      </view>
+      <view wx:else>多出:
+        <text class='com-color-font font30'>{{diffNum}} </text>件
+      </view>
+    </block>
+  </view>
+  <view class='chb-sure-btn' bindtap='sure'>确定</view>
+</view>
+<view class='bottom-replace-box'></view>

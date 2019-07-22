@@ -1,0 +1,66 @@
+<view class='com-color-back' style="height:90rpx;"></view>
+<view class='position-box'>
+  <view class='com-margin-box' wx:for='{{list}}' wx:key='{{index}}'>
+    <view class='house-title com-flex-center'>
+      <image class='img30' src='/distribution/images/house-gray.png'></image>
+      <text class='flexone com-text-ellipsis com-blod-font font30' style='padding:0 15rpx;'>{{item.warehouseRegionName}}</text>
+      <text class='font26'>合计出售：</text>
+      <text class='com-color-font' style='font-size:46rpx;'>{{item.totalNum}}</text>
+    </view>
+    <view class='goods-header com-padding-box com-flex-between'>
+      <view class='com-flex-center'>
+        <view class='color-chunk'></view>
+        <text class='font30 com-blod-font'>出库商品</text>
+      </view>
+      <view wx:if="{{!item.hide}}" bindtap='showHide' data-index="{{index}}">
+        <text class='font26'>全部收起</text>
+        <image class='tri-icon' src='/distribution/images/douTri-gold-up.png'></image>
+      </view>
+      <view wx:else bindtap='showHide' data-index="{{index}}">
+        <text class='font26'>全部展开</text>
+        <image class='tri-icon' src='/distribution/images/douTri-gold-down.png'></image>
+      </view>
+    </view>
+    <block wx:for="{{item.outGoodsList}}" wx:for-item='goods' wx:for-index="goodsIndex" wx:key="{{goodsIndex}}">
+      <view class='goods-item'>
+        <image class='goods-pic' src='{{baseUrl+goods.goodsMainImgUrl}}'></image>
+        <view class='flexone goods-msg'>
+          <view class='goods-name com-blod-font'>{{goods.goodsName}}</view>
+          <view class='font24 com-gray-color'>共{{goods.skuNum}}种规格 {{goods.totalNum}}件</view>
+        </view>
+      </view>
+      <view class='border-line'></view>
+      <!-- 部分入库表头 -->
+      <view hidden='{{item.hide}}'>
+        <view class='sku-item com-flex-between font24'>
+          <view>规格</view>
+          <view>出库数量</view>
+        </view>
+        <view class='border-line'></view>
+        <block wx:for="{{goods.skuList}}" wx:for-item="sku" wx:for-index="skuIndex" wx:key="{{skuIndex}}">
+          <view class='sku-item com-flex-between font24'>
+            <view>{{sku.skuName?sku.skuName:"默认"}}</view>
+            <view>{{sku.totalNum}}</view>
+          </view>
+        </block>
+      </view>
+      <view class='border-line'></view>
+    </block>
+    <view class='goods-header com-padding-box com-flex-center'>
+      <view class='color-chunk'></view>
+      <text class='font30 com-blod-font'>填写运单号</text>
+    </view>
+    <view class='border-line'></view>
+    <view class='com-form-box'>
+      <view class='com-flex-between form-item'>
+        <view class='form-title'>物流公司名称</view>
+        <input value='{{}}' placeholder='请输入物流公司名称' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='name' class='flexone' data-index="{{index}}"></input>
+      </view>
+
+      <view class='com-flex-between form-item'>
+        <view class='form-title'>运单号</view>
+        <input value='{{}}' placeholder='请输入运单号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='no' class='flexone'></input>
+      </view>
+    </view>
+  </view>
+</view>

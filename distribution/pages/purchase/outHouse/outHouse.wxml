@@ -1,0 +1,45 @@
+<view class='com-flex-between font36 com-blod-font header-text-box'>
+  <text>订单出库商品信息</text>
+  <text>待出库：<text class='com-color-font'>{{totalNum}}</text></text>
+</view>
+<view class='com-margin-box'>
+  <view class='goods-header com-padding-box com-flex-between'>
+    <view class='com-flex-center'>
+      <view class='color-chunk'></view>
+      <text class='font30 com-blod-font'>待出库商品</text>
+    </view>
+  </view>
+  <block wx:for="{{goodsList}}" wx:key="{{index}}">
+    <view class='goods-item'>
+      <image class='goods-pic' src='{{baseUrl+item.goodsMainImgUrl}}'></image>
+      <view class='flexone goods-msg'>
+        <view class='goods-name com-blod-font'>{{item.goodsName}}</view>
+        <view class='font24 com-gray-color'>共{{item.skuNum}}种规格 {{item.totalNum}}件</view>
+      </view>
+    </view>
+    <view class='border-line'></view>
+    <!-- 部分入库表头 -->
+    <view class='sku-item com-flex-between font24'>
+      <view>规格</view>
+      <view>待出库</view>
+      <view>已出库</view>
+    </view>
+    <view class='border-line'></view>
+    <block wx:for="{{item.adviceSkuList}}" wx:for-item="sku" wx:for-index="skuIndex" wx:key="{{skuIndex}}">
+      <view class='sku-item com-flex-between font24' bindtap='toSetSku' data-goodsindex="{{index}}" data-skuindex="{{skuIndex}}">
+        <view>{{sku.skuName?sku.skuName:"默认"}}</view>
+        <view>{{sku.totalNum}}</view>
+        <view class='com-color-font' style='position:relative;'>
+          <text>{{sku.setNum?sku.setNum:0}}</text>
+          <image class='img30' style="position:absolute;right:0;" src='/distribution/images/pen-gold.png'></image>
+        </view>
+      </view>
+    </block>
+    <view class='border-line' wx:if="{{index != goodsList.length-1}}"></view>
+  </block>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='sure'>确定</button>
+</view>

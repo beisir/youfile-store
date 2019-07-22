@@ -186,7 +186,7 @@ input:focus{padding:0}
 .bottom-single-btn{position: fixed;bottom: 20rpx;left: 0;right: 0;margin: auto;width: 690rpx;background: #f8b616;font-size: 35rpx;color: #fff;height: 100rpx;line-height: 100rpx;border-radius: 100rpx;}
 .bottom-replace-box{height: 150rpx;}
 /* 公用flex布局 */
-.com-flex-center{display: flex;align-items: center;}.com-flex-between{display: flex;align-items: center;justify-content: space-between;}.flexone{flex: 1;}.com-flex-around{display: flex;align-items: center;justify-content: space-around;}
+.com-flex-center{display: flex;align-items: center;}.com-flex-between{display: flex;align-items: center;justify-content: space-between;}.flexone{flex: 1;}.com-flex-around{display: flex;align-items: center;justify-content: space-around;}.com-flex-allcenter{display: flex;align-items: center;justify-content: center;}
 /* 公用颜色 */
 .gold-font{color: #ca7;}
 .com-new-gold-font{color: #f8b616}

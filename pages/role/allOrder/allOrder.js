@@ -339,11 +339,8 @@ Page({
       })
     }
     this.setData({
-      // status: options.status,
       num: options.num,
       baseUrl: app.globalData.imageUrl,
-      // orderType: options.type, //order订单 list进货单
-      // self: options.self  //是否自提
     })
 
   },
