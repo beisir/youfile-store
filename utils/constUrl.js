@@ -292,3 +292,5 @@ export const orderInDetailUrl = '/admin/purchaseorder/{{no}}/stock/record'
 // 订单出库
 export const outHouseUrl = '/admin/order/{{orderNumber}}/stock/out/advice'
 export const preOutHouseListUrl = '/admin/stocks/outParams'
+export const sureOutHouseUrl = '/admin/order/stock/out'
+export const editOrderExpressUrl = '/admin/out-details/{{code}}/express-infos'

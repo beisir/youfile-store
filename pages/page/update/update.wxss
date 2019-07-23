@@ -14,7 +14,7 @@
   width: 40rpx;
   height: 40rpx;
 }
-.up-save{height:122rpx;line-height:122rpx;font-size:34rpx;text-align:center;background:#fff;position:fixed;bottom:0;width:100%;color: #ccaa77;}
+.up-save{height:122rpx;line-height:122rpx;font-size:34rpx;text-align:center;background:#fff;position:fixed;bottom:0;width:100%;color: #f8b616;}
 
 .up-save text{
   margin-right: 30rpx;

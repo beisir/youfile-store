@@ -13,7 +13,7 @@
  height:70rpx;height:70rpx;padding-top:30rpx;margin-bottom: 0;
 }
 .mes-tel{
-  color: #CCAA77;font-weight:normal;border-bottom: 2rpx solid #CCAA77;width:265rpx;margin:0 auto;padding-top: 10rpx;
+  color: #f8b616;font-weight:normal;border-bottom: 2rpx solid #f8b616;width:265rpx;margin:0 auto;padding-top: 10rpx;
 }
 .alertInput{
   width: 520rpx;height: 100rpx;border:2rpx solid #E1E1E1;border-radius: 8rpx;margin:0 auto;text-align:left;font-size: 30rpx;color: #333;font-weight: normal;margin-bottom: 20rpx;padding-left: 30rpx;
@@ -51,7 +51,7 @@ margin: 10rpx auto;
 .layer-money-input{
   display: inline-block;
   width: 262rpx;
-  border-bottom: 1rpx solid #CCAA77;
+  border-bottom: 1rpx solid #f8b616;
   font-size: 60rpx;
   height:60rpx;
 }
@@ -64,7 +64,7 @@ margin: 10rpx auto;
   justify-content:center;
 }
 .gold-money{
-  color: #CCAA77;
+  color: #f8b616;
   font-weight: 600;
 }
 

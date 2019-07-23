@@ -16,7 +16,7 @@
 <!-- 取消订单 -->
 <clo show="{{cancelModal}}">
   <view class='layer-reason-item' wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
-    <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select" />
+    <icon wx:if="{{item.selected}}" type="success" color="#f8b616" data-index="{{index}}" size='18' class="cart-pro-select" />
     <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
   </view>
   <button class='layer-reason-btn' bindtap='sureCancel'>确定</button>
@@ -104,15 +104,26 @@
 </view>
 <!-- 物流信息 -->
 <view class='np-ct' wx:else>
-  <view class='np-view np-code np-coden1' wx:if="{{status=='finish'||status=='delivered'}}">
-    <image src="/image/wl-car.png"></image>
-    <view>物流信息</view>
-    <text>承运公司：{{order.expressCompany?order.expressCompany:""}}</text>
-    <view>
-      <text bindtap="copyKdCode">运单编号：{{order.expressNumber?order.expressNumber:""}}</text>
+  <block wx:if="{{status=='finish'||status=='delivered'}}">
+    <block wx:if="{{order.stockOutDetailsVos && order.stockOutDetailsVos.length>0}}">
+      <view class='np-view np-code np-coden1' wx:for="{{order.stockOutDetailsVos}}" wx:key="{{index}}">
+        <image src="/image/wl-car.png"></image>
+        <view>物流信息</view>
+        <text>承运公司：{{item.expressCompany}}</text>
+        <view>
+          <text bindtap="copyKdCode">运单编号：{{item.expressNumber}}</text>
+        </view>
+      </view>
+    </block>
+    <view class='np-view np-code np-coden1' wx:else>
+      <image src="/image/wl-car.png"></image>
+      <view>物流信息</view>
+      <text>承运公司：{{order.expressCompany?order.expressCompany:""}}</text>
+      <view>
+        <text bindtap="copyKdCode">运单编号：{{order.expressNumber?order.expressNumber:""}}</text>
+      </view>
     </view>
-    <!-- <text>卖家暂未填写订单信息</text> -->
-  </view>
+  </block>
   <view class='np-view {{order.userMemo?"":"no-border"}}'>
     <image src="/image/ad.png"></image>
     <text class='np-text'>{{order.consigneeInfo.userPhone}}</text>
@@ -183,7 +194,7 @@
           <view class="th">金额</view>
         </view>
         <view class="tr" wx:for="{{item.goodsSkuInfoVOList}}" wx:key="{{index}}">
-          <view class="td">{{item.goodsDesc}}</view>
+          <view class="td">{{item.goodsDesc?item.goodsDesc:'默认'}}</view>
           <view class="td">{{item.num}}件</view>
           <view class="td">￥{{item.unitPrice}}</view>
         </view>

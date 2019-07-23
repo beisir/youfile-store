@@ -6,5 +6,5 @@
 .des-title{color: #999;padding: 20rpx 0 10rpx;}
 .des-msg{font-weight: 600;}
 .btn-box{height: 100rpx;border-top: 1rpx solid #eee;display: flex;align-items: center;flex-direction: row-reverse;margin: 0 30rpx;}
-.btn{width: 160rpx;height: 60rpx;background: #ca7;color: #fff;border-radius: 10rpx;text-align: center;line-height: 60rpx;font-size: 24rpx;}
+.btn{width: 160rpx;height: 60rpx;background: #f8b616;color: #fff;border-radius: 10rpx;text-align: center;line-height: 60rpx;font-size: 24rpx;}
 .status-img{position: absolute;width: 127rpx;height: 110rpx;right: 30rpx;top:20rpx;}

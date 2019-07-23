@@ -387,7 +387,7 @@
               <view class="jiage-t jiage-tRed" style='font-size:20rpx;margin:unset;float:left;margin-left:5px;'>
                 <image src="/image/shans.png" mode='widthFix'></image>抢订价</view>
             </view>
-            <view class='hasc-a' style='color:#ca7;' wx:else>￥{{goodsInfo.sellPrice}}</view>
+            <view class='hasc-a' style='color:#f8b616;' wx:else>￥{{goodsInfo.sellPrice}}</view>
             <text class='stockNum-box' wx:if='{{!goodsInfo.isActivity}}'>库存：{{goodsInfo.stockNum}}件</text>
             <text class='stockNum-box' wx:else>
               <block  wx:if='{{goodsSpecificationVOList.length==0}}'>活动库存：{{goodsInfo.saleStockNum}}件</block>

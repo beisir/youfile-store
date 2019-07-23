@@ -155,7 +155,7 @@
         <text>您有 <text class="order-num">{{unpaidOrderNum}}</text> 笔待支付订单！</text>
       </swiper-item>
       <swiper-item class='{{showAllTip?"swipter-tip-item-height":""}}' wx:if='{{limitShow==1}}' bindtap='addTip'>
-        <view class='icon-view' style='background:#ccaa77;'>商</view>
+        <view class='icon-view' style='background:#f8b616;'>商</view>
         <text>点此加为商友，即刻查看批发价！</text>
       </swiper-item>
     </swiper>
@@ -170,7 +170,7 @@
     </block>
   </view>
   <view class='newadd-friend' wx:if='{{!getFollw && limitShow==1}}' bindtap='addTip'>
-    <view class='icon-view' style='background:#ccaa77;'>商</view>点此加为商友，即刻查看批发价！
+    <view class='icon-view' style='background:#f8b616;'>商</view>点此加为商友，即刻查看批发价！
   </view>
 
   <swiper wx:if="{{acSwiperList && acSwiperList.length>0}}" current='{{acSwiperIndex}}' class='acbanner-box' bindanimationfinish='acswiper' skip-hidden-item-layout='true'>
@@ -190,7 +190,7 @@
   </swiper>
 
   <view style='padding:0 40rpx;'>
-  <scroll-view scroll-x='true' class='tab-box com-flex-center' style='border-color:{{tabSwitchShow?"#f02b2b":"#ca7"}}'>
+  <scroll-view scroll-x='true' class='tab-box com-flex-center' style='border-color:{{tabSwitchShow?"#f02b2b":"#f8b616"}}'>
     <view class='tab-item' wx:for="{{tabList}}" wx:key='{{index}}' style='left:-{{index*15}}rpx;z-index:{{item.selected?999:99}}' bindtap='selectTab' data-index='{{index}}'>
     <view class='tab-text-box' style='color:{{item.selected?"#fff":"#333"}}'>{{item.name}}</view>
     <image src='{{item.selected?item.acback:item.back}}'></image>

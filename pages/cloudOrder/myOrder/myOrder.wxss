@@ -3,8 +3,8 @@
 .order-box{padding:60rpx 50rpx 10rpx}
 .order-title{display:flex;align-items:center;justify-content:space-between}
 .store-name{font-size:36rpx;font-weight:600;padding-right:40rpx}
-.store-type{color:#ccaa77;font-size:24rpx;border:1rpx solid #ccaa77;padding:8rpx}
-.youyou{color:#ccaa77;font-size:28rpx;font-weight:600}
+.store-type{color:#f8b616;font-size:24rpx;border:1rpx solid #f8b616;padding:8rpx}
+.youyou{color:#f8b616;font-size:28rpx;font-weight:600}
 .price-box{text-align:center;padding:80rpx 0 90rpx;border-bottom:1px solid #eee}
 .tip-font{font-size:28rpx;color:#666}
 .line{border-right:1px solid #ddd;margin:0 20rpx}

@@ -67,7 +67,7 @@ page{
   padding: 30rpx 0 20rpx;
 }
 .price{
-  color: #ccaa77;
+  color: #f8b616;
   font-size: 60rpx;
   text-align: center;
   display: block;
@@ -92,10 +92,10 @@ page{
   text-align: center;
   line-height: 80rpx;
   margin: 0 auto;
-  border: 1px solid #ccaa77;
+  border: 1px solid #f8b616;
   border-radius: 10rpx;  
   margin-top: 40rpx;
-  color: #ccaa77;
+  color: #f8b616;
   font-weight: 600;
   font-size: 28rpx;
 }

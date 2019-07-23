@@ -2,8 +2,8 @@
   "navigationBarTitleText": "购物车",
   "enablePullDownRefresh": false,
   "navigationBarTextStyle": "white",
-  "navigationBarBackgroundColor": "#CCAA77",
-  "backgroundColor": "#CCAA77",
+  "navigationBarBackgroundColor": "#f8b616",
+  "backgroundColor": "#f8b616",
   "usingComponents": {
     "login": "../../login/login/login",
     "no": "../indexEmpty/indexEmpty",

@@ -1,5 +1,5 @@
 @import '../specSet/specSet';
-.sp-add{border: 0;background: #fff;margin: 20rpx;border-radius: 10rpx;height: 100rpx;line-height: 100rpx;color:#CCAA77;font-size: 36rpx;}
+.sp-add{border: 0;background: #fff;margin: 20rpx;border-radius: 10rpx;height: 100rpx;line-height: 100rpx;color:#f8b616;font-size: 36rpx;}
 .sp-add image{transform:rotate(45deg);width: 40rpx;height: 40rpx;margin-right: 18rpx;}
 .add-bottom view{width: 100%;}
 .gs-v,.gs-title,.gv-comp{background:#fff;border-radius: 10rpx;margin: 0 20rpx;}
@@ -15,7 +15,7 @@
 .gv-comp>view:nth-child(2){font-size: 26rpx;}
 .gv-comp>view{padding: 0 30rpx}
 .gv-comp>view:first-child,.gv-comp>view:nth-child(2){min-height: 100rpx;line-height: 100rpx;}
-.gv-comp>view:first-child view{float: right;color: #CCAA77;font-size: 32rpx;}
+.gv-comp>view:first-child view{float: right;color: #f8b616;font-size: 32rpx;}
 .gs-sku{border-bottom: 2rpx dashed #F4F4F4;}
 .gv-comp .gs-sku{padding:0;margin:30rpx;}
 .gs-sku>view:first-child{font-size: 34rpx;}

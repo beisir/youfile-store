@@ -1,3 +1,4 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
 <view class='supplier-modal' wx:if="{{supplierShow}}" bindtap='closeModal'>
   <scroll-view scroll-y class='scroll-modal' catchtouchmove='stopScroll'>
     <view class='modal-sku-item' wx:for="{{supSku}}" wx:key="{{index}}">
@@ -5,7 +6,7 @@
       <view class='com-color-font flexone'>
         <view class='com-flex-between flexone' wx:for="{{item.supplierList}}" wx:key="{{index}}" wx:for-item='sku'>
           <text>{{sku.supplierName}}</text>
-          <text>{{sku.num}}</text>
+          <text>{{filter.mathAbs(sku.num)}}</text>
         </view>
       </view>
     </view>
@@ -19,7 +20,7 @@
       <image class='img30' src='/distribution/images/house-gray.png'></image>
       <text class='flexone com-text-ellipsis com-blod-font font30' style='padding:0 15rpx;'>{{item.warehouseRegionName}}</text>
       <text class='font26'>合计出库：</text>
-      <text class='com-color-font' style='font-size:46rpx;'>{{item.totalNum}}</text>
+      <text class='com-color-font' style='font-size:46rpx;'>{{filter.mathAbs(item.totalNum)}}</text>
     </view>
     <view class='goods-header com-padding-box com-flex-between'>
       <view class='com-flex-center'>
@@ -40,7 +41,7 @@
         <image class='goods-pic' src='{{baseUrl+goods.goodsMainImgUrl}}'></image>
         <view class='flexone goods-msg'>
           <view class='goods-name com-blod-font'>{{goods.goodsName}}</view>
-          <view class='font24 com-gray-color'>共{{goods.skuNum}}种规格 {{goods.totalNum}}件</view>
+          <view class='font24 com-gray-color'>共{{goods.skuNum}}种规格 {{filter.mathAbs(goods.totalNum)}}件</view>
         </view>
       </view>
       <view class='border-line'></view>
@@ -54,7 +55,7 @@
         <block wx:for="{{goods.skuList}}" wx:for-item="sku" wx:for-index="skuIndex" wx:key="{{skuIndex}}">
           <view class='sku-item com-flex-between font24'>
             <view>{{sku.skuName?sku.skuName:"默认"}}</view>
-            <view>{{sku.totalNum}}</view>
+            <view>{{filter.mathAbs(sku.totalNum)}}</view>
           </view>
         </block>
       </view>
@@ -69,17 +70,17 @@
       <view class='com-form-box'>
         <view class='com-flex-between form-item'>
           <view class='form-title'>物流公司名称</view>
-          <input value='{{item.expressCompany}}' placeholder='请输入物流公司名称' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='expressCompany' class='flexone' data-index="{{index}}"></input>
+          <input disabled value='{{item.expressCompany}}' placeholder='请输入物流公司名称' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='expressCompany' class='flexone' data-index="{{index}}"></input>
         </view>
         <view class='com-flex-between form-item'>
           <view class='form-title'>运单号</view>
-          <input value='{{item.expressNumber}}' placeholder='请输入运单号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='expressNumber' class='flexone' data-index="{{index}}"></input>
+          <input disabled value='{{item.expressNumber}}' placeholder='请输入运单号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='expressNumber' class='flexone' data-index="{{index}}"></input>
         </view>
       </view>
     </block>
   </view>
 
-  <view class='com-margin-box' wx:if="{{orderType==='ziti'}}">
+  <!-- <view class='com-margin-box' wx:if="{{orderType==='ziti'}}">
     <view class='goods-header com-padding-box com-flex-center'>
       <view class='color-chunk'></view>
       <text class='font30 com-blod-font'>验证取货码</text>
@@ -87,13 +88,8 @@
     <view class='border-line'></view>
     <view class='com-form-box'>
       <view class='com-flex-between form-item' style='padding: 0 30rpx;'>
-        <input value='{{claimGoodsNum}}' type='number' placeholder='请输入取货码（买家提货时出示）' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='claimGoodsNum' class='flexone'></input>
+        <input disabled value='{{claimGoodsNum}}' type='number' placeholder='请输入取货码（买家提货时出示）' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='claimGoodsNum' class='flexone'></input>
       </view>
     </view>
-  </view>
-</view>
-
-<view class='bottom-replace-box'></view>
-<view class='bottom-single-btn-box'>
-  <button class='bottom-single-btn' bindtap='sure'>确定</button>
+  </view> -->
 </view>

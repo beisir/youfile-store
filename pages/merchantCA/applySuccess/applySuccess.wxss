@@ -2,4 +2,4 @@ page{background: #fff;height: 100%;width: 100%;}
 .fix-box{display: flex;flex-direction: column;align-items: center;padding-top: 180rpx;line-height: 1;}
 .pagetitle{font-size: 48rpx;font-weight: 600;}
 .pagedes{font-size: 36rpx;color: #999;margin: 60rpx 0 155rpx;}
-.gold-btn{height: 100rpx;width: 600rpx;background: #ca7;color: #fff;border-radius: 100rpx;}
+.gold-btn{height: 100rpx;width: 600rpx;background: #f8b616;color: #fff;border-radius: 100rpx;}

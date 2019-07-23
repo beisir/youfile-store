@@ -5,7 +5,7 @@
 .my-title{font-size:46rpx;font-weight:600}
 .id-tip{color:#666;font-size:25rpx}
 .congra{font-size:36rpx}
-.toStore{width:600rpx;height:80rpx;line-height:80rpx;color:#fff;background:#ca7;margin:60rpx 0 40rpx}
+.toStore{width:600rpx;height:80rpx;line-height:80rpx;color:#fff;background:#f8b616;margin:60rpx 0 40rpx}
 .footer-box{background:#fff;border-radius:5px;margin:20rpx;padding-bottom:30rpx}
 .f-title{padding:40rpx 60rpx 20rpx;font-size:34rpx;font-weight:600}
 .f-item{padding:0 30rpx 0 60rpx;display:flex;align-items:center;justify-content:space-between}

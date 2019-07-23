@@ -14,7 +14,7 @@
 
   <view class='goods-item' wx:for="{{goods}}" wx:key="{{index}}">
     <view class='flex-center goods-top-box' bindtap='checkedGoods' data-item='{{item}}'>
-      <icon wx:if="{{item.checked}}" type="success" size="40rpx" color="#CCAA77" />
+      <icon wx:if="{{item.checked}}" type="success" size="40rpx" color="#f8b616" />
       <icon wx:else type="circle" size="40rpx"/>
       <view class='goods-icon-box'>
         <image mode='aspectFit' class='goods-icon' src='{{baseUrl+item.mainImgUrl}}'></image>

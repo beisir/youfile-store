@@ -86,7 +86,13 @@ function parseLongNum(num){
   return num
 }
 
+function mathAbs(num){
+  if (!num) { return 0 }
+  return Math.abs(num)
+}
+
 module.exports = {
+  mathAbs: mathAbs,
   parseLongNum: parseLongNum,
   filterMoney: filterMoney,
   plusNum: plusNum,

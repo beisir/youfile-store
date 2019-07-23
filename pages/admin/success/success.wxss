@@ -9,5 +9,5 @@
 .su-cont .f-view{margin-bottom: 60rpx;}
 .su-icon{color: #666;font-size: 28rpx;padding:20rpx 0 0 40rpx;}
 .su-icon image{width: 30rpx;height: 30rpx;vertical-align: middle;margin-right: 10rpx;}
-.go-list{margin-top: 40rpx;font-size: 30rpx;color: #ccaa77;border:2rpx solid #ccaa77;width: 320rpx;height: 80rpx;
+.go-list{margin-top: 40rpx;font-size: 30rpx;color: #f8b616;border:2rpx solid #f8b616;width: 320rpx;height: 80rpx;
 text-align: center;line-height: 80rpx;margin:0 auto;border-radius:10rpx;}

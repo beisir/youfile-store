@@ -36,7 +36,7 @@
 }
 
 .font-gold {
-  color: #ca7;
+  color: #f8b616;
 }
 
 .search-img {
@@ -85,7 +85,7 @@
   width: 26rpx;
   height: 36rpx;
   border-radius: 4rpx;
-  background: #ccaa77;
+  background: #f8b616;
   position: relative;
 }
 

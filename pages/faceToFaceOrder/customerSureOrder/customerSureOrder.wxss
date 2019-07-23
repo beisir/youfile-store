@@ -10,13 +10,13 @@
   line-height: 1;
   font-size: 36rpx;
   font-weight: 600;
-  color: #ca7;
+  color: #f8b616;
 }
 .price-box{
   height: 156rpx;
   margin: 0 50rpx;
 }
-.bottom-btn{background: #ca7;color: #fff;font-size: 36rpx;height: 120rpx;
+.bottom-btn{background: #f8b616;color: #fff;font-size: 36rpx;height: 120rpx;
 line-height: 120rpx;text-align: center;position: fixed;bottom: 0;width: 100%;font-weight: 600;}
 .dashed-border{display: flex;justify-content: space-between;}
 .dashed-border view{width: 17rpx;height: 3rpx; background: #eee;}

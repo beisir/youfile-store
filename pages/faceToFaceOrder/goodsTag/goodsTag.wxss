@@ -33,7 +33,7 @@ page{
 }
 
 .input-box{
-  border: 1px solid #ca7;
+  border: 1px solid #f8b616;
   border-radius: 10rpx;
   padding-left: 32rpx;
   height: 120rpx;
@@ -48,7 +48,7 @@ page{
 }
 .sure-btn{
   font-weight: 600;
-  color: #ca7;
+  color: #f8b616;
   padding: 0 50rpx;
   height: 110rpx;
   line-height: 110rpx;
@@ -92,7 +92,7 @@ page{
   text-align: center;
   line-height: 120rpx;
   font-size: 36rpx;
-  color: #ca7;
+  color: #f8b616;
   letter-spacing:30rpx;
   font-weight: 600;
   z-index: 1;
@@ -112,9 +112,9 @@ page{
     height:70rpx;
     color:#fff;
     line-height:68rpx;
-    border:2rpx solid #ca7;
+    border:2rpx solid #f8b616;
     font-size:30rpx;
     margin:80rpx auto 0;
-    background:#ca7;
+    background:#f8b616;
     border-radius: 10rpx;
   }

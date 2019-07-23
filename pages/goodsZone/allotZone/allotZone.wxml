@@ -3,7 +3,7 @@
   <view class='zone-box'>
     <view class='com-flex-between zone-item' bindtap='selectItem' data-index='{{index}}' wx:for='{{list}}' wx:key='{{index}}'>
       <view class='com-flex-center'>
-        <icon class='icon-item' wx:if="{{item.selected}}"  data-index="{{index}}" type="success" size="28" color="#CCAA77"/>
+        <icon class='icon-item' wx:if="{{item.selected}}"  data-index="{{index}}" type="success" size="28" color="#f8b616"/>
         <icon class='icon-item' wx:else data-index="{{index}}" type="circle" size="28" />  
         <text>{{item.zoneAlias?item.zoneAlias:item.zoneName}}</text>
       </view>

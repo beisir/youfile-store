@@ -3,6 +3,7 @@
     {
       "root": "distribution",
       "pages": [
+        "pages/purchase/orderOutHouseDetail/orderOutHouseDetail",
         "pages/purchase/outHouseLogistics/outHouseLogistics",
         "pages/purchase/outHouseSkuSet/outHouseSkuSet",
         "pages/purchase/outHouse/outHouse",
@@ -35,6 +36,7 @@
   ],
   "pages": [
     "pages/page/home/home",
+    "pages/role/allOrder/allOrder",
     "pages/active/createAC/createAC",
     "pages/active/acList/acList",
     "pages/merchantCA/applySuccess/applySuccess",
@@ -48,7 +50,6 @@
     "pages/admin/batch/batch",
     "pages/goodsZone/manageZone/manageZone",
     "pages/page/goodsDetails/goodsDetails",
-    "pages/role/allOrder/allOrder",
     "pages/role/changeOrderAdd/changeOrderAdd",
     "pages/role/supplyOrder/supplyOrder",
     "pages/admin/addGoods/addGoods",
@@ -199,7 +200,7 @@
   "tabBar": {
     "borderStyle": "white",
     "backgroundColor": "#ffffff",
-    "selectedColor": "#CCAA77",
+    "selectedColor": "#f8b616",
     "color": "#888",
     "list": [
       {

@@ -19,7 +19,9 @@ Page({
               if (flow.adviceOutNum>0){
                 arr.push({
                   code: flow.code,
-                  outNum: flow.adviceOutNum
+                  outNum: flow.adviceOutNum,
+                  goodsId: el.goodsId,
+                  skuCode: sku.skuCode ? sku.skuCode:0
                 })
               }
             })
@@ -29,7 +31,7 @@ Page({
     })
     Api.preOutHouseList(arr).then(res=>{
       wx.navigateTo({
-        url: '../outHouseLogistics/outHouseLogistics',
+        url: '../outHouseLogistics/outHouseLogistics?orderType=' + this.data.orderType + '&orderNum=' + this.data.orderNum,
         success: (a) => {
           a.eventChannel.emit('sendSkuData', {
             list: res.obj
@@ -112,8 +114,10 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      // orderNum: options.orderNum
-      orderNum: 19072201001286
+      orderNum: options.orderNum,
+      orderType: options.orderType
+      // orderNum: 19072303001287
+
     }, () => {
       this.getDetail()
     })

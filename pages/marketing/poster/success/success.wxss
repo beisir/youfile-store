@@ -16,7 +16,7 @@
 .showmodal{padding-top:20rpx;}
 .roomscroll{max-height: 500rpx;padding: 0 50rpx;box-sizing:border-box;}
 .btn-group{display: flex;justify-content: space-between;}
-.btn-group button{margin-top:50rpx;width:240rpx;height:70rpx;color:#fff;line-height:68rpx;border:2rpx solid #ca7;font-size:30rpx;background:#ca7;}
+.btn-group button{margin-top:50rpx;width:240rpx;height:70rpx;color:#fff;line-height:68rpx;border:2rpx solid #f8b616;font-size:30rpx;background:#f8b616;}
 .btn-group .cancel-btn{color: #999;border: 1rpx solid #ddd;background: #fff;}
 .room-checked-icon{width: 40rpx;height: 40rpx;margin-right: 40rpx;}
 .room-item{height: 80rpx;font-size: 36rpx;}

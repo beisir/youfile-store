@@ -187,7 +187,7 @@
             <view class='ag-font'>与您成为商友关系的进货商可查看</view>
           </view>
           <view class='weui-input'>
-            <switch color="#CCAA77" checked='{{switchChange}}' bindchange="switchChange"/>
+            <switch color="#f8b616" checked='{{switchChange}}' bindchange="switchChange"/>
           </view>
         </view>
       </view>

@@ -59,7 +59,7 @@
   display: flex;
   align-items: center;
   font-size: 36rpx;
-  color: #ca7;
+  color: #f8b616;
   flex: 1;
   justify-content: center;
 }

@@ -27,13 +27,13 @@
   padding-bottom: 40rpx;
 }
 .u-pic button{
-  color: #CEAD7D;
+  color: #f8b616;
   height: 60rpx;
   padding:0;
   background: #fff;
   font-size: 24rpx;
   width: 160rpx;
-  border:2rpx solid #EEE3D2;
+  border:2rpx solid #f8b616;
   line-height: 60rpx;
 }
 .u-pic view{
@@ -41,7 +41,7 @@
 }
 .weui-img{
   font-size: 28rpx;
-  color: #C79359;
+  color: #f8b616;
 }
 .weui-img image{
   width:24rpx;

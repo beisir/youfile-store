@@ -34,7 +34,7 @@
     <view class='item-title'>购买商品</view>
     <view class='flex-center'>
       <image class='addgoods-icon' src='/image/ftf-add.png'></image>
-      <text style='color:#ca7;font-size:28rpx;margin-left:5rpx;'>选择商品</text>
+      <text style='color:#f8b616;font-size:28rpx;margin-left:5rpx;'>选择商品</text>
     </view>
   </view>
   <view class=''>

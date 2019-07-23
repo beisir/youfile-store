@@ -243,6 +243,8 @@ import {
   // 订单出库
   outHouseUrl,
   preOutHouseListUrl,
+  sureOutHouseUrl,
+  editOrderExpressUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1590,7 +1592,18 @@ function outHouse(data){
 function preOutHouseList(data){
   return app.http.postRequest(preOutHouseListUrl, data)
 }
+function sureOutHouse(data){
+  data = initStoreId(data);
+  return app.http.putRequest(sureOutHouseUrl, data)
+}
+function editOrderExpress(data){
+  return app.http.putRequest(editOrderExpressUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
+}
 module.exports = {
+  editOrderExpress,
+  sureOutHouse,
   preOutHouseList,
   outHouse,
   orderInDetail,

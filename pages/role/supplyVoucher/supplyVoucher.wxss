@@ -8,4 +8,4 @@ page{background:#fff}
 .tip-font{font-size:26rpx;color:#aaa}
 .tip-box{margin-top:20rpx}
 .pay-type{border-top:1rpx solid #eee;border-bottom:1rpx solid #eee;margin:160rpx 0 120rpx;padding:35rpx 0;display:flex;justify-content:space-between}
-.sure{background:#ccaa77;color:white;font-size:30rpx;font-weight:600;line-height:100rpx;height:100rpx}
+.sure{background:#f8b616;color:white;font-size:30rpx;font-weight:600;line-height:100rpx;height:100rpx}

@@ -30,7 +30,7 @@ scroll-view{margin-top:0rpx;padding-bottom:100rpx}
 .new-ser>view{height:75rpx;line-height:75rpx;border-top:2rpx solid #ddd}
 .new-ser view image,.new-ser>view view{position:absolute;width:25rpx;height:25rpx;left:60%;top:-18rpx;z-index:13}
 .new-ser>view view{background:#fff;height:4rpx;top:-2rpx;z-index:12;width:20rpx;margin-left:3rpx}
-.new-ser .on{color: #CCAA77}
+.new-ser .on{color: #f8b616}
 .st-bottom1 view{width:24%}
 .serCont{padding-top:18rpx;}
 .touch-item{overflow: unset}

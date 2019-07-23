@@ -1,7 +1,7 @@
 .list-t{height: 80rpx;line-height: 80rpx;background: #fff;border-top: 2rpx solid #F9F9F9;}
 .list-t >view{width: 25%;text-align: center;display: inline-block;font-size: 28rpx;position: relative}
-.list-t >view view{height: 4rpx;background: #CCAA77;width: 90rpx;position: absolute;bottom: 0;left: 50%;margin-left: -45rpx;}
-.list-t >view.active{color: #CCAA77;font-weight: bold}
+.list-t >view view{height: 4rpx;background: #f8b616;width: 90rpx;position: absolute;bottom: 0;left: 50%;margin-left: -45rpx;}
+.list-t >view.active{color: #f8b616;font-weight: bold}
 .listData>view{background: #fff;border-radius: 10rpx;margin: 20rpx 20rpx 0;font-size: 26rpx;position: relative;}
 .tip-icon{position: absolute;right: 30rpx;top: 145rpx;width: 127rpx;height: 110rpx;}
 .ld-t{font-size: 36rpx;font-weight: bold;border-bottom: 2rpx dashed #F0F0F0;height: 115rpx;line-height: 115rpx;padding:0 20rpx;}
@@ -16,7 +16,7 @@
 .ld-cont>view:first-child .no-doing{color: #999}
 .ld-cont>view:first-child .ld-doing{color: #333;}
 .ld-bottom{zoom: 1;overflow: hidden;border-top: 2rpx solid #EFEFEF;}
-.ld-bottom button{font-size: 24rpx;color: #fff;background: #CCAA77;width: 155rpx;height: 60rpx;border-radius: 10rpx;float: right;margin: 15rpx 25rpx 15rpx 0;line-height: 57rpx;padding: 0}
+.ld-bottom button{font-size: 24rpx;color: #fff;background: #f8b616;width: 155rpx;height: 60rpx;border-radius: 10rpx;float: right;margin: 15rpx 25rpx 15rpx 0;line-height: 57rpx;padding: 0}
 .overflowellipsis{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .lr-item{display: flex;min-height: 60rpx;height: auto!important;}
 .lr-item>text{width: 120rpx;}

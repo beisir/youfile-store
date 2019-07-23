@@ -18,7 +18,7 @@
 </spec>
 <view class='shop-cont shop-cont1'>
   <view>
-      起批量<switch color="#CCAA77" checked='{{!switch1Change}}' bindchange="switch1Change"/>
+      起批量<switch color="#f8b616" checked='{{!switch1Change}}' bindchange="switch1Change"/>
   </view>
   <view class='setnum' hidden='{{switch1Change}}' bindtap='togetherFun'>
     起批件数<view>{{value}}<image class='weui-img' src="/image/icl.png"></image></view>
@@ -27,7 +27,7 @@
 </view>
 <view class='shop-cont'>
   <view>
-      混批<switch color="#CCAA77" checked='{{!switch2Change}}' bindchange="switch2Change"/>
+      混批<switch color="#f8b616" checked='{{!switch2Change}}' bindchange="switch2Change"/>
   </view>
   <view class='setnum'  hidden='{{switch2Change}}' bindtap='batchFun'>
     混批金额<view><text wx:if='{{value1!=""}}'>￥</text>{{value1}}<image class='weui-img' src="/image/icl.png"></image></view>

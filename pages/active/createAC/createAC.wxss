@@ -18,9 +18,9 @@
 .bottom-single-btn{position: relative;margin: 50rpx auto 20rpx;bottom: 0;}
 .gray-color{color:#999;}
 .blod-font{font-weight: 600;}
-.up-img-btn{color: #ca7;}
+.up-img-btn{color: #f8b616;}
 /* 弹框 */
 .spec-title{font-size: 46rpx;font-weight: bold;text-align: center;margin-top: 30rpx;margin-bottom: 20rpx;}
 .cr-cont{color: #666;font-size: 30rpx;text-align: center;margin-bottom: 20rpx;}
 .spec-view{height: 80rpx;line-height: 80rpx;width:45%;display: inline-block;border: 2rpx solid #B2B2B2;color: #666;font-size: 30rpx;font-weight: bold;border-radius: 10rpx;text-align: center;margin:2%;}
-.spec-view-ac{border:2rpx solid #CCAA77;background: #CCAA77;color: #fff;}
+.spec-view-ac{border:2rpx solid #f8b616;background: #f8b616;color: #fff;}

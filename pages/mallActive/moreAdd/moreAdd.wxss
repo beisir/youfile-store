@@ -5,5 +5,5 @@
 .add-bottom view:first-child{border-right:0;color:#333;}
 /* .add-bottom view{text-align:left;padding-left:20rpx;width:47%} */
 .add-bottom text{color: #999;margin-left: 20rpx;}
-.add-bottom .ma-re{width: 310rpx;background: #CCAA77;color: #fff;float: right;height:120rpx;margin-top: 0;line-height: 120rpx;font-size: 36rpx;}
-.image-tip{position: relative;background: #CCAA77;color: #fff;right: 0;bottom: 0;font-size: 24rpx;}
+.add-bottom .ma-re{width: 310rpx;background: #f8b616;color: #fff;float: right;height:120rpx;margin-top: 0;line-height: 120rpx;font-size: 36rpx;}
+.image-tip{position: relative;background: #f8b616;color: #fff;right: 0;bottom: 0;font-size: 24rpx;}

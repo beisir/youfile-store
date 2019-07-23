@@ -13,7 +13,7 @@
   position: relative;height:80rpx;padding-top:20rpx;
 }
 .shop-cont>view view{
-  min-width: 110rpx;height: 40rpx;line-height: 40rpx;text-align: center;color: #CCAA77;border:2rpx dashed #CCAA77;position: absolute;
+  min-width: 110rpx;height: 40rpx;line-height: 40rpx;text-align: center;color: #f8b616;border:2rpx dashed #f8b616;position: absolute;
   right: 0;top: 20rpx;
 }
 .shop-cont icon{

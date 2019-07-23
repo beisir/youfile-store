@@ -37,6 +37,14 @@ Page({
     whitch: 'all' //切换
 
   },
+  // 发货
+  sendOutGoods(e) {
+    let type = e.currentTarget.dataset.type,
+      num = e.currentTarget.dataset.num
+    wx.navigateTo({
+      url: '/distribution/pages/purchase/outHouse/outHouse?orderNum=' + num + '&orderType=' + type,
+    })
+  },
   // 埋点存储formid
   getFormId(e) {
     saveFormID(e)

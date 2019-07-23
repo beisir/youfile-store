@@ -58,7 +58,7 @@ page{
   margin-bottom: 3rpx;
 }
 .return-text{
-  color: #ca7;
+  color: #f8b616;
   font-size: 18rpx;
   display: block;
 }

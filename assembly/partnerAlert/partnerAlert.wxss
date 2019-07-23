@@ -43,14 +43,14 @@ page{
 .next-button{
   width: 430rpx;
   height: 70rpx;
-  color: #ccaa77;
-  border: 1px solid #ccaa77;
+  color: #f8b616;
+  border: 1px solid #f8b616;
   border-radius: 5px;
   text-align: center;
   line-height: 68rpx;
 }
 .act-text{
-   color: #ccaa77;
+   color: #f8b616;
    text-align: center;
    margin-top: 30rpx;
 }

@@ -1,5 +1,5 @@
 .wk-cont{background:#fff;margin:20rpx;border-radius:20rpx;overflow:hidden}
-.wk-title{font-size:24rpx;background:#CCAA77;color:#fff;padding:50rpx;position:relative}
+.wk-title{font-size:24rpx;background:#f8b616;color:#fff;padding:50rpx;position:relative}
 .wk-title view{font-size:72rpx;margin-top:30rpx}
 .wk-bot{position:relative}
 .wk-bot>view,.wk-bot>navigator{width:33.3%;font-size:40rpx;display:inline-block;text-align:center;margin:30rpx 0;position:relative}

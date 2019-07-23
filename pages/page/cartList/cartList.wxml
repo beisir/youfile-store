@@ -36,7 +36,7 @@
               <view class='content st-cont' data-index="{{index}}">
                 <view class="cart-list">
                   <view class='goods-main-part'>
-                    <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" class="cart-pro-select" catchtap="selectList" />
+                    <icon wx:if="{{item.selected}}" type="success" color="#f8b616" data-index="{{index}}" class="cart-pro-select" catchtap="selectList" />
                     <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" catchtap="selectList" />
                     <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}">
                       <image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image>
@@ -52,7 +52,7 @@
                      <!-- <block  wx:if='{{!item.isActivity}}'> -->
                       <view wx:if='{{limitShow==3 && item.saleBatchNum && storeNum>0}}' class='man-j'>满
                         <text>{{item.saleBatchNum}}</text>件起批
-                        <text style='color:#333;' wx:if='{{item.saleBatchNum-item.tempLen>0}}'> 还差<text style='color:#CCAA77'>{{item.saleBatchNum-item.tempLen}}</text>件</text>
+                        <text style='color:#333;' wx:if='{{item.saleBatchNum-item.tempLen>0}}'> 还差<text style='color:#f8b616'>{{item.saleBatchNum-item.tempLen}}</text>件</text>
                       </view>
                     <!-- </block> -->
                     <view class='price-n'>
@@ -238,7 +238,7 @@
   <view style='height:120rpx;'></view>
   <view wx:if="{{detailList.length>0}}">
     <view class="cart-footer">
-      <icon wx:if="{{selectAllStatus}}" type="success" color="#CCAA77" class="total-select" catchtap="selectAll" />
+      <icon wx:if="{{selectAllStatus}}" type="success" color="#f8b616" class="total-select" catchtap="selectAll" />
       <icon wx:else type="circle" color="#A5A5A5" class="total-select" catchtap="selectAll" />
       <view class='order-all '>
         合计：

@@ -10,27 +10,27 @@ Page({
     baseUrl: app.globalData.imageUrl,
     claimGoodsNum: ''
   },
-  closeModal(){
+  closeModal() {
     this.setData({
       supplierShow: false
     })
   },
-  showSupplier(e){
+  showSupplier(e) {
     let goodsIndex = e.currentTarget.dataset.goodsindex,
-        houseIndex = e.currentTarget.dataset.index,
-        skuList = this.data.list[houseIndex].outGoodsList[goodsIndex].skuList
-    
+      houseIndex = e.currentTarget.dataset.index,
+      skuList = this.data.list[houseIndex].outGoodsList[goodsIndex].skuList
+
     this.setData({
       supplierShow: true,
       supSku: skuList
     })
   },
   stopScroll() { return },
-  sure(){
+  sure() {
     let obj = {}
-    if (this.data.orderType === 'ziti'){
+    if (this.data.orderType === 'ziti') {
       // 自提
-      if (this.data.claimGoodsNum.trim() === ''){
+      if (this.data.claimGoodsNum.trim() === '') {
         Api.showToast("请填写取货码")
         return
       }
@@ -38,13 +38,13 @@ Page({
     } else {
       // 物流
       let arr = this.data.list,
-          warning = false
-      arr.forEach(el=>{
-        if (!el.expressNumber || !el.expressCompany){
+        warning = false
+      arr.forEach(el => {
+        if (!el.expressNumber || !el.expressCompany) {
           warning = '请填写物流公司运单号'
         }
       })
-      if (warning){
+      if (warning) {
         Api.showToast(warning)
         return
       }
@@ -52,45 +52,44 @@ Page({
     obj.inFlowForOutList = this.data.flowList
     obj.outDetailsList = this.data.list
     obj.orderNumber = this.data.orderNum
-    Api.sureOutHouse(obj).then(res=>{
-      Api.showToast(res.message,()=>{
+    Api.sureOutHouse(obj).then(res => {
+      Api.showToast(res.message, () => {
         wx.navigateBack({ delta: 2 })
       })
     })
   },
-  showHide(e){
+  showHide(e) {
     this.setData({
-      ['list[' + e.currentTarget.dataset.index + '].hide']: !this.data.list[e.currentTarget.dataset.index ].hide
+      ['list[' + e.currentTarget.dataset.index + '].hide']: !this.data.list[e.currentTarget.dataset.index].hide
     })
   },
-  watchinput(e){
+  watchinput(e) {
     let type = e.currentTarget.dataset.type,
-        thisIndex = e.currentTarget.dataset.index
-    if (type === 'claimGoodsNum'){
+      thisIndex = e.currentTarget.dataset.index
+    if (type === 'claimGoodsNum') {
       this.setData({
         [type]: e.detail.value
       })
-    }else{
+    } else {
       this.setData({
         ['list[' + thisIndex + '].' + type + '']: e.detail.value
-      })    
+      })
     }
-  },  
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.on('sendSkuData', (data)=> {
+    eventChannel.on('sendSkuData', (data) => {
+      console.log(data)
       this.setData({
-        list: data.list.outDetailsList,
-        flowList: data.list.inFlowForOutList
+        list: data.list
       })
     })
 
     this.setData({
-      orderType: options.orderType,
-      orderNum: options.orderNum
+      orderType: options.orderType
     })
   },
 

@@ -7,7 +7,7 @@ page{
 .search-font{
   width: 90rpx;
   text-align: center;
-  color: #ca7;
+  color: #f8b616;
   font-size:30rpx;
 }
 .cus-search-box{
@@ -41,8 +41,8 @@ page{
   padding: 0 15rpx;
 }
 .nav-ac{
-  border-color: #ca7;
-  color: #ca7
+  border-color: #f8b616;
+  color: #f8b616
 }
 /* 列表 */
 .flex-center{
@@ -71,8 +71,8 @@ page{
 }
 
 .help-btn{
-  color: #ca7;
-  border: 1rpx solid #ca7;
+  color: #f8b616;
+  border: 1rpx solid #f8b616;
   text-align: center;
   width: 160rpx; 
   height: 60rpx;

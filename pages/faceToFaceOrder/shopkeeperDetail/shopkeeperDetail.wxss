@@ -19,7 +19,7 @@
 
 .time-left{
   margin-left: 33rpx;
-  color: #ca7;
+  color: #f8b616;
 }
 
 .status-img{

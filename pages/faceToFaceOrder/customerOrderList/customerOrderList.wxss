@@ -36,8 +36,8 @@ page{
   padding: 0 15rpx;
 }
 .nav-ac{
-  border-color: #ca7;
-  color: #ca7
+  border-color: #f8b616;
+  color: #f8b616
 }
 
 
@@ -74,15 +74,15 @@ page{
   .type-chunk{
     height: 40rpx;
     width: 80rpx;
-    border: 1rpx solid #ca7;
-    color: #ca7;
+    border: 1rpx solid #f8b616;
+    color: #f8b616;
     font-size: 24rpx;
     line-height: 40rpx;
     text-align: center;
     margin-top: 1rpx;
   }
   .status-text{
-    color: #ca7;
+    color: #f8b616;
   }
 
   /* 新货物 */
@@ -166,7 +166,7 @@ page{
   }  
 
   .gold-font{
-    color: #ca7;
+    color: #f8b616;
   }
   .gray-color{
     color: #999;
@@ -195,8 +195,8 @@ page{
   }
   .pay-btn{
     width: 160rpx;
-    border-color: #ca7;
-    background: #ca7;
+    border-color: #f8b616;
+    background: #f8b616;
     color: #fff;
   }
 

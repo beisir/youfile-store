@@ -1,7 +1,7 @@
 @import '../../page/home/home';
 @import '../index/index';
 .home-img{
-  color:#CCAA77;font-size: 30rpx;width: auto;top: 18rpx;
+  color:#f8b616;font-size: 30rpx;width: auto;top: 18rpx;
 }
 .bf-font{
   font-weight: bold

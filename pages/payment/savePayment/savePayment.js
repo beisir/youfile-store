@@ -177,7 +177,7 @@ Component({
 
       targetCtx.setFontSize(32);
       targetCtx.setTextAlign('center');
-      targetCtx.setFillStyle('#ccaa77');
+      targetCtx.setFillStyle('#f8b616');
       targetCtx.fillText("￥" + this.data.myprice, 187, 187);
 
       targetCtx.drawImage(this.data.paymentUrl, 112.5, 226, 150, 150);

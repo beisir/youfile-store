@@ -16,7 +16,7 @@
             </view>
             <view class="result-text result-text1">
               零售
-              <text style='{{limitShow!=1?"color:#666":"#CCAA77"}};'>￥ {{item.sellPrice}}</text>
+              <text style='{{limitShow!=1?"color:#666":"#f8b616"}};'>￥ {{item.sellPrice}}</text>
               <view wx:if='{{limitShow==1}}'>
                 批发
                 <image src='/image/wh.png'></image>

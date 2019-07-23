@@ -3,7 +3,7 @@
 <!-- 取消进货单 -->
 <clo show="{{cancelModal}}">
   <view class='layer-reason-item' wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
-    <icon wx:if="{{item.selected}}" type="success" color="#CCAA77" data-index="{{index}}" size='18' class="cart-pro-select" />
+    <icon wx:if="{{item.selected}}" type="success" color="#f8b616" data-index="{{index}}" size='18' class="cart-pro-select" />
     <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
   </view>
   <button class='layer-reason-btn' bindtap='sureCancel'>确定</button>

@@ -1,4 +1,4 @@
-.user-img{width:75rpx;height:75rpx;background:#CCAA77;border-radius:100%;line-height:82rpx;text-align:center;margin-right:30rpx;margin:0 auto}
+.user-img{width:75rpx;height:75rpx;background:#f8b616;border-radius:100%;line-height:82rpx;text-align:center;margin-right:30rpx;margin:0 auto}
 .user-img image{width:35rpx;height:35rpx}
 .re-cont{background:#fff;margin:20rpx;padding:40rpx}
 .re-mon{text-align:center;font-size:30rpx;margin-top:30rpx}
@@ -6,4 +6,4 @@
 .re-view{border-top:2rpx solid #F7F7F7;font-size:30rpx;color:#999;padding-top:30rpx;margin-top: 50rpx;}
 .re-view view{padding:20rpx 0}
 .re-view text{color:#333;float:right}
-.re-bottom{width:100%;position:fixed;bottom:0;color:#CCAA77;background:#fff;font-size:36rpx;text-align:center}
+.re-bottom{width:100%;position:fixed;bottom:0;color:#f8b616;background:#fff;font-size:36rpx;text-align:center}

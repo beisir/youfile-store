@@ -13,7 +13,7 @@
 .weui-title view{position:absolute;right:30rpx;top:0rpx;color:#999;font-size:30rpx}
 .weui-title text{color: #999;font-size: 28rpx;font-weight: normal;margin-left: 10rpx}
 .weui-title image{width: 35rpx;height: 35rpx;float: right;margin-top: 35rpx;margin-right: 30rpx;transform: rotate(180deg)}
-.weui-active{color:#C79359;font-weight:600;margin-right: 40rpx}
+.weui-active{color:#f8b616;font-weight:600;margin-right: 40rpx}
 .weui-cell__bd,.weui-cell__ft text{font-weight:600}
 .weui-cell__ft text{margin-right:30rpx}
 .weui-cell1{padding:10px 15px;display:-webkit-box;display:-webkit-flex;display:flex;padding-right:0;position:relative;padding-left:0}
@@ -24,13 +24,13 @@
 .weui-cell__ft1 image{position:absolute;right: 10rpx;top: 15rpx;}
 .weui-cell__ft1 text{margin-right: 20rpx;font-size: 28rpx}
 .weui-cell__ri image{width: 60rpx;height: 60rpx;margin-bottom: 2rpx;margin-top: 30rpx;}
-.weui-cell__ri{width: 160rpx;background: #CCAA77;height: 100%;top:0;right: 0;color: #fff;font-size: 28rpx;text-align: center}
+.weui-cell__ri{width: 160rpx;background: #f8b616;height: 100%;top:0;right: 0;color: #fff;font-size: 28rpx;text-align: center}
 .weui-input{position:relative;font-size:30rpx;color:#333}
 .weui-input text{position:absolute;right:0rpx;top:3rpx;font-size:28rpx}
 .weui-input .pla-input{font-weight:normal;font-size:28rpx;color:#999}
 .weui-input .weui-input{position:absolute;top:-4rpx;right:60rpx;text-align:right;font-size:32rpx;width:350rpx}
 .add-cont{margin-bottom:130rpx}
-.ed-co{color: #CCAA77}
+.ed-co{color: #f8b616}
 .ag-font{color: #999;font-size: 28rpx;font-weight: normal}
 .weui-uploader__input-box{margin-bottom:30rpx;border-radius:6rpx}
 .weui-uploader__img{border-radius:6rpx}
@@ -54,7 +54,7 @@
 .page-weui .add-size{margin-left:0;word-break:break-word;}
 .ad-top{background:none;padding:0;color:#333;font-weight:bold;margin-bottom:20rpx}
 .ad-top  .ad-active,.ad-top view{background:#fff;border:0}
-.ad-active{color:#CCAA77}
+.ad-active{color:#f8b616}
 .ad-top view{height:120rpx;line-height:120rpx;width:45.6%}
 .ad-top view:first-child image{width:55rpx;height:55rpx}
 .stock{color:#333;font-weight:bold;font-size:36rpx;text-align:right;padding-right:50rpx;width: 150rpx;margin-top: 10rpx;}

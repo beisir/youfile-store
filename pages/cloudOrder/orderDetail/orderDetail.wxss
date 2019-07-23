@@ -6,19 +6,19 @@
 .logo{height:80rpx;width:80rpx}
 .order-title{display:flex;align-items:center;justify-content:space-between;margin:50rpx 0}
 .store-name{font-size:34rpx;font-weight:600;padding-right:40rpx}
-.store-type{color:#ccaa77;font-size:24rpx;border:1rpx solid #ccaa77;padding:8rpx}
-.youyou{color:#ccaa77;font-size:28rpx;font-weight:600}
+.store-type{color:#f8b616;font-size:24rpx;border:1rpx solid #f8b616;padding:8rpx}
+.youyou{color:#f8b616;font-size:28rpx;font-weight:600}
 .msg-item{display:flex;font-size:26rpx;padding-bottom:50rpx;align-items:center}
 .msg-title{flex:0 0 140rpx;color:#797979}
 .invoiceBox .msg-title{flex:0 0 180rpx}
 .msg-content{}
 .border{border-bottom:1px solid #eee;margin:0 0 50rpx}
 .pay-item{display:flex;justify-content:space-between;font-size:26rpx;padding-bottom:50rpx}
-.gold{color:#ccaa77}
+.gold{color:#f8b616}
 .bottom-lr-box{display:flex;position:fixed;bottom:0;width:100%;left:0;align-items:center;height:122rpx;background:#fff}
 .bottom-price{flex:1;display:flex;align-items:center;padding:0 50rpx;height:100%}
-.buy-button{width:250rpx;background:#ccaa77;color:#fff;height:100%;text-align:center;line-height:122rpx}
-.gold-price-font{color:#ccaa77;font-size:36rpx}
+.buy-button{width:250rpx;background:#f8b616;color:#fff;height:100%;text-align:center;line-height:122rpx}
+.gold-price-font{color:#f8b616;font-size:36rpx}
 .red-price-font{color:#d30000;font-size:36rpx}
 .b-font{font-weight:600}
 .flex-center{display:flex;align-items:center}

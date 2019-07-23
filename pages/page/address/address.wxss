@@ -54,15 +54,15 @@
 .price-line{color:#999;text-decoration:line-through}
 .gray-font{color:#999}
 .item-total{height:100rpx;line-height:100rpx;font-size:28rpx;color:#999;text-align:right;border-top:1px solid #f7f7f7}
-.glod-font{color:#CCAA77}
+.glod-font{color:#f8b616}
 .item-price-font{font-size:30rpx;font-weight:600}
 .c-title .right-icon{width:24rpx;height:29rpx}
 .store-satisfy{font-size:24rpx;font-weight:500}
-.hunpi{border:1px solid #CCAA77;padding:5rpx 15rpx;margin-left:18rpx}
+.hunpi{border:1px solid #f8b616;padding:5rpx 15rpx;margin-left:18rpx}
 .border-line{height:1px;background:#eee;margin-left:50rpx;box-sizing:border-box}
 .el-size{font-size:26rpx}
 .com-name{max-width:155rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ad-fp-new{padding-right: 0;}
 .pay-item{width: 190rpx;height: 70rpx;background: #eeeeee;color: #333;font-size: 28rpx;text-align: center;line-height: 70rpx;border-radius: 10rpx;float: left;margin-right:40rpx;}
-.pay-item-ac{color: #fff;background: #ca7;}
+.pay-item-ac{color: #fff;background: #f8b616;}
 .ct-title{height: 75rpx;}

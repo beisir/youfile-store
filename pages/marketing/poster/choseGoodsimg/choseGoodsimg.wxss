@@ -3,4 +3,4 @@
 .flex-box{display: flex;flex-wrap: wrap;justify-content: space-between;padding: 40rpx 50rpx;}
 .empty-box{width: 180rpx;height: 180rpx;}
 .check-icon{position: absolute;right: 0;bottom: 0;width: 40rpx;height: 40rpx;}
-.bottom-btn{height: 122rpx;background: #fff;text-align: center;line-height: 122rpx;color: #ca7;position: fixed;bottom: 0;width: 100%;font-size: 36rpx;font-weight: 600;letter-spacing: 25rpx;}
+.bottom-btn{height: 122rpx;background: #fff;text-align: center;line-height: 122rpx;color: #f8b616;position: fixed;bottom: 0;width: 100%;font-size: 36rpx;font-weight: 600;letter-spacing: 25rpx;}

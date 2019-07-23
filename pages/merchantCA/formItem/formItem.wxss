@@ -4,7 +4,7 @@
 .form-content{font-size: 30rpx;flex: 1;padding-right:10rpx;}
 .right-icon{width: 16rpx;height: 30rpx;}
 .com-flex-center{display: flex;align-items: center;}.com-flex-between{display: flex;align-items: center;justify-content: space-between;}
-.gold-font{color: #ca7;}
+.gold-font{color: #f8b616;}
 .input-placeholder-common-color{color: #999;}
 .noborder{border: 0;}
 .upload-img-box{padding: 40rpx 30rpx;}
@@ -12,5 +12,5 @@
 .flex-center{display: flex;justify-content: space-between;}
 .upload-title{font-size: 32rpx;font-weight: 600;}
 .upload-des{font-size: 28rpx;color: #c0bfc0;}
-.check-eximg{font-size: 24rpx;color: #ca7;margin-top: 10rpx;}
+.check-eximg{font-size: 24rpx;color: #f8b616;margin-top: 10rpx;}
 .eye-icon{width: 25rpx;height: 25rpx;margin-right: 10rpx;}

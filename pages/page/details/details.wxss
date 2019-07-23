@@ -1,7 +1,7 @@
 /* pages/details/details.wxss */
 .weui-img{
   font-size: 28rpx;
-  color: #C79359;margin-top:-5rpx;
+  color: #f8b616;margin-top:-5rpx;
 }
 .weui-img image{
   width:24rpx;
@@ -38,7 +38,7 @@
   height:40rpx;
   line-height:40rpx;
   text-align:center;
-  color:#CCAA77;
+  color:#f8b616;
   position:absolute;
   right:70rpx;
   top:33rpx;

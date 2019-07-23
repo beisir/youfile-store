@@ -15,6 +15,24 @@ Page({
     timeOnce: true,
     remark: ""
   },
+  // 查看出库详情
+  toDetail(){
+    wx.navigateTo({
+      url: '/distribution/pages/purchase/orderOutHouseDetail/orderOutHouseDetail?orderType=' + this.data.orderType,
+      success: (a) => {
+        a.eventChannel.emit('sendSkuData', {
+          list: this.data.order.stockOutDetailsVos
+        })
+      }
+    })
+  },
+  // 发货
+  sendOutGoods(e){
+    let type = e.currentTarget.dataset.type
+    wx.navigateTo({
+      url: '/distribution/pages/purchase/outHouse/outHouse?orderNum=' + this.data.num + '&orderType=' + type,
+    })
+  },
   // 埋点存储formid
   getFormId(e) {
     saveFormID(e)
@@ -22,8 +40,8 @@ Page({
   // 编辑物流
   editExpress(){
     if (this.data.editexpressCom && this.data.editexpressNum){
-      API.editExpress({ 
-        orderNumber: this.data.num,
+      API.editOrderExpress({ 
+        code: this.data.order.stockOutDetailsVos[this.data.editexpressIndex].code,
         expressNumber: this.data.editexpressNum,
         expressCompany: this.data.editexpressCom
       }).then(res => {
@@ -120,10 +138,12 @@ Page({
     let obj = {};
     switch (type) {
       case 'express':
+        let index = e.currentTarget.dataset.index
         obj = {
           expressModal: true,
-          editexpressCom: this.data.order.expressCompany ? this.data.order.expressCompany : "",
-          editexpressNum: this.data.order.expressNumber ? this.data.order.expressNumber : "",
+          editexpressCom: this.data.order.stockOutDetailsVos[index].expressCompany,
+          editexpressNum: this.data.order.stockOutDetailsVos[index].expressNumber,
+          editexpressIndex: index
         }
         break;
       case "tip":

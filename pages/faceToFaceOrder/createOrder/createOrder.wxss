@@ -53,7 +53,7 @@ page{
 
 /* 订单定位 */
 .gold-box{height: 132rpx;position: relative;}
-.gold-back-box{background: #ca7;height: 50%;}
+.gold-back-box{background: #f8b616;height: 50%;}
 
 /* 金额 */
 .price-box{
@@ -94,7 +94,7 @@ page{
   line-height: 1.2;
   margin:10rpx 0;
   font-size: 32rpx;
-  color: #ca7;
+  color: #f8b616;
 }
 .no-tip{
  color: #999; 
@@ -126,10 +126,10 @@ page{
     height:70rpx;
     color:#fff;
     line-height:68rpx;
-    border:2rpx solid #ca7;
+    border:2rpx solid #f8b616;
     font-size:30rpx;
     margin:80rpx auto 0;
-    background:#ca7;
+    background:#f8b616;
     border-radius: 10rpx;
   }
 
@@ -151,7 +151,7 @@ page{
 }
 
 .help-btn{
-  background: #ca7;
+  background: #f8b616;
   width: 600rpx;
   height: 100rpx;
   line-height: 100rpx;

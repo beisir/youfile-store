@@ -5,5 +5,5 @@
 .zone-name{font-size: 36rpx;color: #333;font-weight: bold;}
 .zone-des{font-size: 26rpx;color: #666;}
 .editName input{border-bottom:2rpx solid #F6F6F6;margin-bottom: 50rpx;font-size:30rpx;}
-.editName button{background: #ca7;color: #fff;}
+.editName button{background: #f8b616;color: #fff;}
 .aliasName{color: #999;font-size: 30rpx;font-weight: 500;}
