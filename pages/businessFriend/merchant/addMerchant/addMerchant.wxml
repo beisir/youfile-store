@@ -8,22 +8,16 @@
   <button bindtap='samePreBtn'>确定</button>
 </view>
 </mes>
- <view class="goods-ser">
-    <input placeholder="输入进货商名称、手机号"  bindconfirm='searchBtn'    bindinput='changeValue'  value="{{value}}"/>
-    <image class="home-ser"  src="/image/search1.png"></image>
-    <view class='home-img' bindtap='searchBtn' >
-        搜索
-    </view>
-  </view>
-<view class='bf-cont'>
-  <view class='bf-weui add-bf-weui'>
-    <view class="weui_cells" bindtap='click'>
-      <image  mode="widthFix" src="/image/w4.png"></image>
-      <text class="bf-font">扫一扫 </text>
-    </view>
-    <!-- <view class="weui_cells">
-      <image  mode="widthFix" src="/image/w5.png"></image>
-      <text class="bf-font">微信添加 </text>
-    </view> -->
-  </view>
+
+<view class='header-title'>
+  <view class='title-text'>搜索云分销商</view>
+  <view class='title-tip'>快捷查找您的云分销商</view>
 </view>
+
+
+<view class='sup-search-box com-flex-center'>
+  <input class='sup-search-input flexone' placeholder='输入云分销商名称、手机号' bindconfirm='searchBtn' bindinput='changeValue' value="{{value}}"></input>
+  <view class='sup-search-btn' bindtap='searchBtn'>搜索</view>
+</view>
+
+

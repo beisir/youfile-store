@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "bottomLayer": "/assembly/bottomLayer/bottomLayer"
+  },
+  "navigationBarTitleText": "手动添加供应商 ",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616"
+}

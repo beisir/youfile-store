@@ -18,7 +18,13 @@
   </view>
   <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>邀请成功后，该进货商将以批发价购买您店铺的商品</view>
 </view>
-<view class='add-bottom'>
+<!-- <view class='add-bottom'>
   <view bindtap='goBack'>取消</view>
   <view bindtap='invita'>邀请</view>
+</view> -->
+
+
+<view class='com-bottom-btn-group'>
+    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='goBack'>取消</button>
+    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='invita'>邀请</button>
 </view>

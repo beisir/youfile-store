@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "商友"
+  "navigationBarTitleText": "商友录",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616"
 }

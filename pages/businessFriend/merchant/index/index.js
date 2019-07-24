@@ -1,4 +1,5 @@
 import Api from '../../../../utils/api.js'
+const app = getApp()
 Page({
 
   /**
@@ -10,7 +11,21 @@ Page({
     purchaserNumber: 0,
     buyPurchasers:0,
     buyUsers:0,
-    followUsers:0
+    followUsers:0,
+    // 新增
+    baseUrl: app.globalData.imageUrl,
+    tabType: 'distribution',
+    distributor: [],
+    supplierNum: 0,
+    supListType: 'sup',
+    supList: []
+  },
+  choseTab(e){
+    this.setData({
+      tabType: e.currentTarget.dataset.type
+    },()=>{
+      this.getList(true)
+    })
   },
 
   /**
@@ -36,8 +51,50 @@ Page({
       url: '../../../page/home/home'
     })
   },
+  getList(re){
+    if (re) {
+      app.pageRequest.pageData.pageNum = 0
+      this.setData({
+        distributor: [],
+        supList: []
+      })
+    }
+    if (this.data.tabType === 'distribution') {
+      this.getDistributorList()
+    } else {
+      this.getSupList()
+    }
+  },
+  // 获取分销商
+  getDistributorList(re){
+    Api.merchantList().then(res=>{
+      if (res.obj.result){
+        this.setData({
+          distributor: this.data.distributor.concat(res.obj.result),
+        })
+      }
+    })
+  },
+  // 获取供应商
+  getSupList(){
+    if(this.data.supListType == 'sup'){
+      Api.getSupplierList().then(res => {
+        this.setData({
+          supList: this.data.supList.concat(res.obj.result),
+          supplierNum: res.obj.totalCount
+        })
+      })
+    } else {
+      // 云供应商
+    }
+  },
+  choseSupType(e){
+    this.setData({
+      choseSupType: e.currentTarget.dataset.type
+    })
+  },
   onLoad: function (options) {
-    
+    this.getList(true)
   },
 
   /**
@@ -76,8 +133,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+    
   },
-
-
+  onReachBottom: function () {
+    this.getList()
+    
+  }
 })

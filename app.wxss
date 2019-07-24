@@ -14,7 +14,7 @@ page{background-color:#f7f7f7;font-family:"Helvetica Neue","Hiragino Sans GB","M
 .bf-img image{max-width:60rpx;max-height:60rpx;border-radius:50%}
 .search-box{position:relative;display:flex;justify-content:space-between;padding:0 25rpx;background:#fff;height:100rpx;font-size:28rpx}
 .search-input{flex:1;margin-top:13rpx;height:70rpx;line-height:70rpx;padding:0 70rpx;border-radius:10rpx;border:1rpx solid #F1F1F1}
-.serCont{color:#CFA272;font-size:34rpx;margin-left:20rpx;padding-top:20rpx}
+.serCont{color:#f8b616;font-size:34rpx;margin-left:20rpx;padding-top:20rpx}
 .ser-place{position:absolute;z-index:10;top:28rpx;color:#999;left:100rpx}
 button::after{border:none}
 .search-icon{position:absolute;left:45rpx;top:33rpx;width:45rpx;height:45rpx}
@@ -106,7 +106,7 @@ input:focus{padding:0}
 .toast-out .toast-in{min-width:100px;background:rgba(0,0,0,0.7);padding:6px;text-align:center;color:white;border-radius:8px}
 .toast-out .toast-in span{font-size:30px}
 .toast-out .toast-in .toast-txt{font-size:14px}
-.re-bottom{height:120rpx;line-height:120rpx;color:#CFA272;font-size:36rpx;bottom:0;position:fixed;width:100%;background:#fff;text-align:center}
+.re-bottom{height:120rpx;line-height:120rpx;color:#f8b616;font-size:36rpx;bottom:0;position:fixed;width:100%;background:#fff;text-align:center}
 .showHide{background:rgba(0,0,0,0.3);height:100%;width:100%;position:fixed;top:0;bottom:0;z-index:1000}
 .sh-cont{height:auto;width:96%;position:fixed;z-index:2;left:2%;bottom:20rpx}
 .sh-cont view{height:100rpx;line-height:100rpx;background:#fff;border-bottom:2rpx solid #F2F2F2;text-align:center;font-size:30rpx}
@@ -193,7 +193,7 @@ input:focus{padding:0}
 .com-red-color{color:#f02b2b;}
 .com-yellow-color{color:#ff9900;}
 .com-gray-color{color:#999;}
-.com-right-icon{width: 16rpx;height: 30rpx;}
+.com-right-icon{width: 16rpx!important;height: 30rpx!important;}
 .com-tri-icon{width: 20rpx;height: 11rpx;}
 .com-blod-font{font-weight: 600;}
 .com-background-color{background-color: #f8b616;}
@@ -220,3 +220,5 @@ input:focus{padding:0}
 .img60{height: 60rpx;width: 60rpx;}
 /* 公用盒子 */
 .common-box-style{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;padding: 0 30rpx;}
+/* 公用标题方块 */
+.com-color-chunk{width: 10rpx;height: 30rpx;background: #f8b616;display: inline-block;margin-right: 20rpx;}

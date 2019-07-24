@@ -13,13 +13,15 @@
       <view class='nbf-font'>昵称：{{nickName}}</view>
     </view>
     <view class='weui-view'>
-      <image  mode="widthFix" src="/image/icl.png"></image>
+      <image class='com-right-icon' src="/image/poster-right-in.png"></image>
     </view>
     <view wx:if='{{note!=""}}' class='re-font'>{{note}}</view>
   </view>
 </navigator>
 <view class='bf-cont'>
-  <view class='re-title'>交易数据</view>
+  <view class='re-title com-flex-center'>
+    <view class='com-color-chunk'></view>交易数据
+  </view>
     <view class='bt-view'>
       <view><view>{{buyTimes}}</view>交易次数</view>
       <view><view>{{recentBuy}}</view>最近购买</view>
@@ -37,4 +39,8 @@
    <text>生日</text><view wx:if='{{birthday!==""}}'>{{birthday}}</view>
   </view>
 </view>
-<view class='re-bottom'   bindtap='deleteFriend'>解除商友关系</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='deleteFriend'>解除商友关系</button>
+</view>

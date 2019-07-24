@@ -69,7 +69,10 @@
     </view>
   </view>
 </view>
-<view class='re-bottom' bindtap='addDetails'>确定</view>
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='addDetails'>确定</button>
+</view>
 <view class='showHide' hidden='{{show}}'>
   <view class='sh-cont'>
     <view wx:for='{{sexData}}' wx:key="index" data-text="{{item}}" bindtap='choseSex'>{{item.sex}}</view>

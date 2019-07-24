@@ -1,0 +1,82 @@
+<bottomLayer id='bottom' title="主营范围">
+  <view class='busArea'>
+    <button wx:for='{{shoplist}}' bindtap='selectedFun' data-index='{{index}}' wx:key='index' style='background:{{item.selected?item.colorTrue:"#fff"}};color:{{item.selected?"#fff":""}}' hover-class='none'>{{item.name}}</button>
+  </view>
+</bottomLayer>
+
+<view class='com-form-box'>
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>供应商名称</view>
+      <input value='{{formData.name}}' placeholder='请输入供应商名称' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='name' class='flexone' maxlength='30'></input>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>设置备注</view>
+      <input value='{{formData.remark}}' placeholder='请输入备注名' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='remark' class='flexone' maxlength='30'></input>
+    </view>
+  </view>
+
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title flexone'>星标供应商</view>
+      <switch checked='{{formData.starFlag}}' color="#fdb813" bindchange='watchinput' data-type='starFlag' style='transform: scale(0.8);'></switch>
+    </view>
+  </view>
+
+  <view class='com-box'>
+    <view class='com-flex-between form-item' bindtap='showBottom'>
+      <view class='form-title'>主营范围</view>
+      <input value='{{businessScope}}' disabled placeholder='请选择主营范围' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='businessScope' class='flexone' maxlength='30'></input>
+      <image class='com-right-icon' src='/image/poster-right-in.png'></image>
+    </view>
+  </view>
+
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>所在地区</view>
+      <picker mode="region" bindchange='areachange' class='flexone'>
+        <view class='com-flex-center'>
+          <input value='{{showarea}}' disabled placeholder='请选择所在地区' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='area' class='flexone' maxlength='30'></input>
+          <image class='com-right-icon' src='/image/poster-right-in.png'></image>
+        </view>
+      </picker>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>所属商城</view>
+      <input value='{{formData.expressCompany}}' placeholder='请输入所属商城' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='expressCompany' class='flexone' maxlength='30'></input>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>详细地址</view>
+      <input value='{{formData.address}}' placeholder='请输入详细地址' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='address' class='flexone' maxlength='30'></input>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>负责人</view>
+      <input value='{{formData.principal}}' placeholder='请输入负责人' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='principal' class='flexone' maxlength='30'></input>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>手机号</view>
+      <input value='{{formData.principalPhone}}' placeholder='请输入手机号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='principalPhone' class='flexone' maxlength='11' type='number'></input>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>联系人</view>
+      <input value='{{formData.linkman}}' placeholder='请输入联系人' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='linkman' class='flexone' maxlength='30'></input>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>手机号</view>
+      <input value='{{formData.linkmanPhone}}' placeholder='请输入手机号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='linkmanPhone' class='flexone' maxlength='11' type='number'></input>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>微信</view>
+      <input value='{{formData.weixinNumber}}' placeholder='请输入微信' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='weixinNumber' class='flexone' maxlength='30'></input>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>邮箱</view>
+      <input value='{{formData.email}}' placeholder='请输入邮箱' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='email' class='flexone' maxlength='30'></input>
+    </view>
+  </view>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='submit'>确定</button>
+</view>

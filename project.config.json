@@ -47,7 +47,7 @@
 				{
 					"id": 0,
 					"name": "分包",
-					"pathName": "distribution/pages/purchase/orderOutHouseDetail/orderOutHouseDetail",
+					"pathName": "distribution/pages/supplier/createSupplier/createSupplier",
 					"query": "",
 					"scene": null
 				}

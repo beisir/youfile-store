@@ -1,4 +1,4 @@
-<view class='bf-imput'>
+<!-- <view class='bf-imput'>
    <view class="goods-ser">
     <input placeholder="输入进货商名称、手机号"   bindconfirm="searchBtn" bindinput='changeValue'   value="{{value}}"/>
     <image class="home-ser"  src="/image/search.png"></image>
@@ -9,8 +9,16 @@
         搜索
     </view>
   </view>
+</view> -->
+
+<view class='header-ser-box com-flex-between'>
+  <view class='com-flex-center ser-white-box'>
+    <image class="ser-icon"  src="/image/search.png"></image>
+    <input class='flexone' placeholder="输入进货商名称、手机号"   bindconfirm="searchBtn" bindinput='changeValue' value="{{value}}"></input>
+    <image  src="/image/close.png" bindtap='emptyInput' class='close-btn'></image>
+  </view>
+  <view class='ser-btn flexone' bindtap='searchBtn'>搜索</view>
 </view>
-<view class='bf-all'>搜索结果</view>
 <view class='bf-cont'  wx:if='{{detailList.length>0}}'>
   <scroll-view scroll-y="true" style="height:100%;">
   <view class='bf-weui'>

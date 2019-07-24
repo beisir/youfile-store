@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "进货商资料",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616",
   "usingComponents": {
     "spec": "../../../../assembly/specifications/spec"
   }
