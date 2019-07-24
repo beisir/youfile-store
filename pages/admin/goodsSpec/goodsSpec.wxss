@@ -26,3 +26,5 @@
 .spec-input1{height: 95rpx;text-align: center}
 .last-num{position: absolute;right: 80rpx;top: 72rpx;font-weight: bold}
 .font-color{font-size:32rpx;text-align: left;padding:30rpx;}
+/* 删除库存编辑 */
+.gs-sku view .stockNumInput{background: #fff;}

@@ -54,7 +54,10 @@ Page({
     // 视频
     videoUrl: false,
     // 分区
-    zoneList: []
+    zoneList: [],
+    // 货号 备注
+    remark: '',
+    serialNumber:''
   },
   // 埋点存储formid
   getFormId(e) {
@@ -332,6 +335,17 @@ Page({
       recommendDescLen: (val.substring(0, 60)).length
     })
   },
+  // 备注 货号
+  watchRemark(e){
+    this.setData({
+      remark: e.detail.value
+    })
+  },
+  watchGoodsCode(e){
+    this.setData({
+      serialNumber: e.detail.value
+    })
+  },
   // 库存
   stockNum: function (event){
     var _this = this,
@@ -570,7 +584,7 @@ Page({
       skuList0 = [],
       skuList1 = [],
       sellPrice = this.data.sellPrice,
-      stockNum = this.data.stockNum,
+      // stockNum = this.data.stockNum,
       wholesalePrice = this.data.wholesalePrice,
       goodsSkuVOList = this.data.goodsSkuVOList,
       skuListData = this.data.skuListData,
@@ -634,10 +648,10 @@ Page({
     //   Api.showToast("库存不得低于0")
     //   return;
     // }
-    if (!Api.isNotEmpty(stockNum)) {
-      Api.showToast("请填写库存")
-      return;
-    }
+    // if (!Api.isNotEmpty(stockNum)) {
+    //   Api.showToast("请填写库存")
+    //   return;
+    // }
     // 分区
     let zoneNum = ''
     try{
@@ -663,10 +677,12 @@ Page({
       "sellPrice": sellPrice,
       "status": status,
       "privacy":this.data.switchChange?1:0,
-      "stockNum": stockNum,
+      // "stockNum": stockNum,
       "saleBatchNum": saleBatchNum,
       "wholesalePrice": wholesalePrice,
-      "zoneNumber": zoneNum
+      "zoneNumber": zoneNum,
+      "remark": this.data.remark,
+      "serialNumber": this.data.serialNumber
     }
     this.setData({
       addGitShow: false
@@ -758,12 +774,12 @@ Page({
         if (v.sellPrice == sellPrice) {
           wholesalePrice = v.wholesalePrice
         }
-        stockNum += parseInt(v.stockNum)
+        // stockNum += parseInt(v.stockNum)
       }
       that.setData({
         goodsSkuVOList: goodsSkuVOList,
         skuListData: skuListData,
-        stockNum: stockNum? stockNum:0,
+        // stockNum: stockNum? stockNum:0,
         sellPrice: sellPrice == Infinity ? '' : sellPrice,
         wholesalePrice: wholesalePrice == Infinity ? '' : wholesalePrice
       })

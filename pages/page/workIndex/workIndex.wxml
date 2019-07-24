@@ -135,6 +135,14 @@
           <view>库存</view>
         </button>
       </navigator>
+      <navigator url='/distribution/pages/purchase/orderList/orderList'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/zj.png' style='width:50rpx;'></image>
+          </view>
+          <view>采购单</view>
+        </button>
+      </navigator>
     </view>
   </view>
 

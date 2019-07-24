@@ -5,7 +5,7 @@
 .weui-title{font-size:34rpx;font-weight:bold;height:100rpx;line-height:100rpx;padding-left:30rpx;border-bottom:2rpx solid #EDEDED;width:101%;position:relative}
 .weui-input{padding-left:30rpx;color:#999999;font-size:28rpx;margin-bottom:10rpx}
 .weui-cell__hd image,.weui-cell__ft1 image,.weui-title image,.weui-cell__ft image{width:30rpx;height:30rpx;vertical-align:middle;margin-top:-6rpx;margin-right:15rpx}
-.weui-cell__hd image.img-n{width: 50rpx;height: 50rpx;margin-left: -57rpx}
+.weui-cell__hd image.img-n{width: 50rpx;height: 50rpx;margin-left: -65rpx}
 .weui-cell__hd image.img-n1{width: 50rpx;height: 50rpx;margin-left: -54rpx;margin-right: 6rpx;}
 .weui-cell:before{border-top:2rpx solid #EDEDED}
 .weui-cell__ft{color:#333}
@@ -97,3 +97,10 @@
 .zone-item{height: 120rpx;margin-left: 40rpx;font-size: 30rpx;border-bottom: 1rpx solid #ddd;}
 .zone-item:last-child{border: 0;}
 .zone-item image{width: 35rpx;height: 35rpx;}
+/* 新增 */
+.content-msg-box{background: #fff;border-radius: 10rpx;margin: 0 20rpx 30rpx;padding: 0 30rpx;}
+.msg-item{height: 120rpx;}
+.msg-icon{margin-right: 15rpx;}
+.msg-input{text-align: right;font-size: 28rpx;}
+.msg-title{width: 180rpx;}
+.msg-des{text-align: right;}

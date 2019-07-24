@@ -335,6 +335,17 @@ Page({
       recommendDescLen: (val.substring(0, 60)).length
     })
   },
+  // 备注 货号
+  watchRemark(e) {
+    this.setData({
+      remark: e.detail.value
+    })
+  },
+  watchGoodsCode(e) {
+    this.setData({
+      serialNumber: e.detail.value
+    })
+  },
   addImage: function() {
     this.insertImg()
   },
@@ -499,7 +510,11 @@ Page({
           strName: obj.customCategoryName,
           codeName: obj.categoryName.replace(/,/g, ">"),
           categoryCustomCode: obj.customCategoryCode,
-          zoneNum: obj.zoneNumber
+          zoneNum: obj.zoneNumber,
+          warehouseName: obj.warehouseName ? obj.warehouseName:'',
+          supplierName: obj.supplierName ? obj.supplierName:'',
+          serialNumber: obj.serialNumber ? obj.serialNumber:'',
+          remark: obj.remark ? obj.remark:''
         })
       })
   },
@@ -529,6 +544,7 @@ Page({
     })
   },
   onLoad: function(options) {
+    options.goodsId = '190724159700' //delit
     this.getConfig()
     this.setData({
       goodsId: options.goodsId
@@ -878,7 +894,9 @@ Page({
       "storeName": this.data.storeName,
       "top": false,
       "wholesalePrice": wholesalePrice,
-      "zoneNumber": this.data.zoneNum
+      "zoneNumber": this.data.zoneNum,
+      "serialNumber": this.data.serialNumber,
+      "remark": this.data.remark
     }
     if (!Api.isNotEmpty(mainImgUrl)) {
       Api.showToast("请上传商品图片！")

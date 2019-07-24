@@ -51,6 +51,7 @@
         <image src="{{currentTab==0?'/image/addming2.png':'/image/addming1.png'}}"></image>商品图文</view>
     </view>
     <view hidden='{{hiddenSelt}}'>
+      <!-- 标题 -->
       <view class="page__category-content">
         <view class="weui-cell1 weui-cell3">
           <view class="weui-cell__hd">
@@ -63,6 +64,17 @@
         </view>
         <textarea hidden="{{showTale}}" auto-height="true" maxlength='55' class="weui-input1 {{nameLen>0?'weui-input2':''}}" type="text" bindinput='watchName' value='{{name}}' placeholder-class="palce-class"  placeholder='请填写商品标题'></textarea>
         <view class='change-num' wx:if='{{nameLen>0}}'>{{nameLen}}/55</view>
+      </view>
+      <!-- 货号 -->
+      <view class="content-msg-box">
+        <view class='msg-item com-flex-center'>
+          <image class='img30 msg-icon' src='/image/spu-bloack.png'></image>
+          <text class='font36 com-blod-font flexone'>货号</text>
+          <input hidden="{{showTale}}" class='msg-input' type='msg-input' bindinput='watchGoodsCode' value='{{serialNumber}}' placeholder-class='pla-input' placeholder='请填写货号（选填）' maxlength='40'></input>
+        </view>
+      </view>
+      <!-- 推荐心语 -->
+      <view class="page__category-content">  
         <view class="weui-cell">
           <view class="weui-cell__hd">
             <image src="/image/tuijian.png"></image>
@@ -75,6 +87,7 @@
         <textarea hidden="{{showTale}}" auto-height="true" maxlength='60' class="weui-input1 {{recommendDescLen>0?'weui-input2':''}}" type="text" bindinput='watchRec'  placeholder-class="palce-class"  value='{{recommendDesc}}' placeholder='请输入推荐语（选填）'></textarea>
         <view  class='change-num'  wx:if='{{recommendDescLen>0}}'>{{recommendDescLen}}/60</view>
       </view>
+      
       <view class="page__category-content">
         <navigator  url='../firstClass/firstClass' class="weui-cell1 we-new-g">
           <view class="weui-cell__hd">
@@ -150,7 +163,7 @@
             <text>元</text>
           </view>
         </view>
-         <view class="weui-cell1">
+         <!-- <view class="weui-cell1">
           <view class="weui-cell__hd">
             <image class='img-n' src="/image/ic7.png"></image>
           </view>
@@ -161,7 +174,7 @@
             <input bindinput='stockNum' disabled='{{skuListData.length==0?false:"disabled"}}' value='{{stockNum}}' placeholder-class='pla-input' class="weui-input" type="number" maxlength='8'></input>
             <text>件</text>
           </view>
-        </view>
+        </view> -->
       </view>
       <view class="page__category-content page__new" wx:if='{{!stockHide}}'>
         <view class='weui-title'>其他设置</view>
@@ -201,6 +214,19 @@
           <image hidden='{{!item.selected}}' src='/image/right-gold.png'></image>
         </view>
       </view>
+      <!-- 备注 -->
+      <view class="page__category-content">
+        <view class="weui-cell1 weui-cell3">
+          <view class="weui-cell__hd">
+            <image src="/image/text-black.png"></image>
+          </view>
+          <view class="weui-cell__bd">
+            <text>备注</text>
+          </view>
+        </view>
+        <textarea hidden="{{showTale}}" auto-height maxlength='200' class="weui-input1" type="text" bindinput='watchRemark'  placeholder-class="palce-class"  value='{{remark}}' placeholder='200字以内' style='padding:10rpx 0 30rpx;'></textarea>
+      </view>
+
     </view>
     <view hidden='{{hiddenSend}}'>
       <view class='write'>

@@ -26,8 +26,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      // no: options.no
-      no: 190718800000
+      no: options.no
     },()=>{
       this.getDetail()
     })

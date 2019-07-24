@@ -3,5 +3,7 @@
   "enablePullDownRefresh": false,
   "usingComponents": {
     "mes": "../../../../assembly/tips/tips"
-  }
+  },
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616" 
 }

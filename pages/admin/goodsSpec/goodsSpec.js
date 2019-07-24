@@ -561,8 +561,9 @@ Page({
       //   return
       // }
       if (!Api.isNotEmpty(v.stockNum)) {
-        Api.showToast("库存不能为空！")
-        return
+        // Api.showToast("库存不能为空！")
+        // return
+        v.stockNum == 0
       }
     }
     if (skuListData.length > 0) {
