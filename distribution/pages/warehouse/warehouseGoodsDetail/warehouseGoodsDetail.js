@@ -1,6 +1,6 @@
 // distribution/pages/warehouse/warehouseDetail/warehouseDetail.js
 import Api from '../../../../utils/api.js'
-
+const app = getApp()
 Page({
 
   /**
@@ -8,9 +8,11 @@ Page({
    */
   data: {
     formData: {
-      warningGoods: false,
-      filterZero: false
+      warningFlag: false,
+      filterOutZeroFlag: false
     },
+    baseUrl: app.globalData.imageUrl,
+    serText: '',
     classList: [{
       name: '男装'
     }, {
@@ -28,45 +30,63 @@ Page({
       name:'123',
     }]
   },
-  search() {
-    
-  },
-  // 获取列表
-  getHouseList() {
-    Api.getWarehouseList({},'picker').then(res=> {
-      let arr = res.obj,
-          now = [res.obj,[]]
-      this.setData({
-        pickerList: now
-      })
+  toGoodsDetail(e){
+    wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?id='+e.currentTarget.dataset.id,
     })
   },
-  bindMultiPickerColumnChange(e){
-    console.log('修改的列为', e.detail.column, '，值为', e.detail.value);
-    if (e.detail.column === 0){
-      this.setData({
-        ['pickerList[1]']: [{name:1},{name:2}]
-      })
-    }
+  search() {
+    this.closeFilter()
+    this.getList(true)
   },
-  surePicker(e){
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    
+  watchInput(e){
+    this.setData({
+      serText: e.detail.value
+    })
   },
   // 获取详情
-  getHouseMsg() {
-    Api.getWarehouseMsg({code: 1}).then(res => {
+  getList(re) {
+    if(re){
+      app.pageRequest.pageData.pageNum = 0;
+      this.setData({
+        goods: []
+      })
+    }
 
+    let obj = {
+      keyword: this.data.serText
+    }
+    Object.assign(obj, this.data.formData)
+
+    let type = this.data.classList.filter(el => el.selected)
+    if(type[0]){
+      obj.customCategoryCode = type[0].customCategoryCode
+    }
+    Api.wareHouseGoodsList(obj).then(res => {
+      if (!res.obj.result){return}
+      this.setData({
+        goods: this.data.goods.concat(res.obj.result)
+      })
     })
   },
   showFilter() {
-    const side = this.selectComponent('#side')
-    side.show()
+    this.side.show()
+  },
+  closeFilter() {
+    this.side.hide()
   },
   selectClass(e) {
-    let thisindex = e.currentTarget.dataset.index
+    let thisindex = e.currentTarget.dataset.index,
+        arr = this.data.classList
+    arr.forEach((el,index)=>{
+      if (thisindex == index){
+        el.selected = !el.selected
+      }else{
+        el.selected = false
+      }
+    })    
     this.setData({
-      ["classList[" + thisindex + "].selected"]: !this.data.classList[thisindex].selected
+      classList: arr
     })
   },
   switchChange(e) {
@@ -75,12 +95,12 @@ Page({
     switch (type) {
       case "warning":
         obj = {
-          ["formData.warningGoods"]: e.detail.value
+          ["formData.warningFlag"]: e.detail.value
         }
         break;
       case "zero":
         obj = {
-          ["formData.filterZero"]: e.detail.value
+          ["formData.filterOutZeroFlag"]: e.detail.value
         }
         break;
     }
@@ -96,17 +116,26 @@ Page({
     })
     this.setData({
       formData: {
-        warningGoods: false,
-        filterZero: false
+        warningFlag: false,
+        filterOutZeroFlag: false
       },
       classList: arr
+    })
+  },
+  getZoneList() {
+    Api.classList().then(res => {
+      this.setData({
+        classList: res.obj
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getHouseList()
+    this.getList(true)
+    this.getZoneList()
+    this.side = this.selectComponent('#side')
   },
 
   /**
@@ -148,13 +177,7 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.getList()
   }
+
 })

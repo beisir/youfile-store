@@ -1,13 +1,21 @@
 // distribution/pages/warehouse/index/index.js
+import Api from '../../../../utils/api.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    msg: {}
   },
 
+  getData(){
+    Api.wareHouseAllgoods().then(res=>{
+      this.setData({
+        msg: res.obj
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -26,7 +34,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getData()
   },
 
   /**

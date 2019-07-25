@@ -5,5 +5,6 @@
 .goods-num-item{flex: 1;text-align: center;}
 /* 入口 */
 .entry-box{margin:0 20rpx;flex-wrap: wrap;}
-.entry-item{width: 340rpx;height:140rpx;background: #fff;border-radius: 10rpx;margin-top: 20rpx;justify-content: center;}
-.entry-icon{width: 60rpx;height: 60rpx;margin-right: 30rpx;}
+.entry-item{width: 340rpx;height:140rpx;background: #fff;border-radius: 10rpx;margin-top: 20rpx;}
+.entry-item>view{flex:1;}
+.entry-icon{width: 60rpx;height: 60rpx;margin-right: 30rpx;margin-left:50rpx;}

@@ -274,6 +274,10 @@ export const saveFormidUrl = '/api/weixin/user/fromid/collect'
 export const handleWarehouseUrl = '/admin/warehouses'
 export const handleHousePartUrl = '/admin/warehouses/regions'
 export const handleHousePartTagUrl = '/admin/warehouses/regions/types'
+// 库存商品
+export const wareHouseAllgoodsUrl = '/admin/stores/{{storeId}}/stocks/nums'
+export const wareHouseGoodsListUrl = '/admin/stores/{{storeId}}/stocks/goods'
+export const wareHouseGoodsFlowUrl = '/admin/stocks/goods/{{goodsId}}/flows'
 
 // 供应商
 export const createSupplierUrl = '/admin/supplier'
@@ -281,6 +285,7 @@ export const ifExistSupplierUrl = '/admin/supplier/{{name}}/exist'
 export const handleSupplierUrl = '/admin/supplier/{{no}}'
 export const getSupplierListUrl = '/admin/supplier/page'
 export const getSupplierGoodsListUrl = '/admin/supplier/goods/{{supplierNumber}}/page'
+export const getGoodswareHouseDetailUrl = '/admin/goods/{{goodsId}}/stocks'
 // 采购
 export const createPurchaseOrderUrl = '/admin/purchaseorder'
 export const getPurchaseMsgUrl = '/admin/purchaseorder/{{no}}'

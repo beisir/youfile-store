@@ -2,37 +2,33 @@
 <wxs src="../../../../public/filter.wxs" module="filter" />
 <view class='template header-goods'>
   <view class='goods-item'>
-    <image class='goods-icon' src='/image/poster-right-in.png'></image>
+    <image wx:if="{{goods}}" class='goods-icon' src='{{baseUrl+goods.mainImgUrl}}'></image>
     <view class='flexone' style='overflow:hidden;'>
       <view class='com-flex-center font28 com-blod-font'>
-        <text class='flexone com-text-ellipsis'>阿萨德阿萨德阿阿萨德阿萨德阿达萨达萨达萨达达萨达萨达萨达</text>
+        <text class='flexone com-text-ellipsis'>{{goods.name}}</text>
       </view>
-      <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：23123123</view>
+      <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：{{goods.goodsSerialNumber?goods.goodsSerialNumber:''}}</view>
       <view class='font24 com-flex-center house-tip-box'>
-        <!-- <view class='house-tip'>望京辅助仓库  A1</view>
-          <view class='house-tip'>望京  A1</view>
-          <view class='house-tip'>望京辅助仓库  A1</view>
-          <view class='house-tip'>望京辅助仓库  A1</view>
-          <view class='house-tip'>望京辅助仓库  A1</view> -->
+        <view class='house-tip com-color-back' wx:for="{{regionList}}" wx:key="{{index}}">{{item.warehouseName}} {{item.regionName}}</view>
       </view>
     </view>
   </view>
   <view class='com-flex-center'>
     <view class='num-item'>
       <view class='font28 com-gray-color'>当前库存</view>
-      <view class='font40'>96</view>
+      <view class='font40'>{{goods.realityStockNum}}</view>
     </view>
     <view class='num-item'>
-      <view class='font28 com-gray-color'>当前库存</view>
-      <view class='font40'>96</view>
+      <view class='font28 com-gray-color'>待出库</view>
+      <view class='font40'>{{goods.toBeOutNum}}</view>
     </view>
     <view class='num-item com-gray-color'>
-      <view class='font28'>当前库存</view>
-      <view class='font40 com-red-color'>96</view>
+      <view class='font28'>可用库存</view>
+      <view class='font40 com-red-color'>{{goods.stockNum}}</view>
     </view>
     <view class='num-item com-gray-color'>
-      <view class='font28'>当前库存</view>
-      <view class='font40'>96</view>
+      <view class='font28'>分销商库存</view>
+      <view class='font40'>0</view>
     </view>
   </view>
 </view>
@@ -50,10 +46,12 @@
     <view class='filter-box' wx:if="{{tabType =='flow'}}">
       <view class='com-flex-center'>
         <view class='filter-item font26 {{item.selected?"com-new-gold-font":""}}' wx:for="{{dayList}}" wx:key='{{index}}' data-index='{{index}}' bindtap='tabtab'>{{item.name}}</view>
-        <view class='filter-item font26'>
-          <text>全部仓库</text>
-          <view class='tri-icon'></view>
-        </view>
+        <picker range="{{wareHouse}}" range-key='name' bindchange="setHouse" bindcolumnchange="houseChange" class='flexone'>
+          <view class='filter-item font26'>
+            <text>{{sureWare.name}}</text>
+            <view class='tri-icon'></view>
+          </view>
+        </picker>
       </view>
       <view class='filter-date com-flex-center' wx:if="{{dataFilterType === 'own'}}">
         <picker mode="date" bindchange='bindDateChange' data-type='start'>
@@ -64,7 +62,7 @@
           <view class='date-input'>{{endTime}}</view>
         </picker>
         <image src='/image/ser.png' class='img40 clear-icon' bindtap='clearDate'></image>
-        <button class='ser-btn'>确定</button>
+        <button class='ser-btn' bindtap='reflow'>确定</button>
       </view>
     </view>
   </view>
@@ -74,8 +72,8 @@
     <view class='flowtab com-flex-center'>
       <view bindtap='choseflowtab' data-index="{{index}}" class='flowtab-item {{item.selected?"flowtab-item-ac":""}}' wx:for='{{flowtab}}' wx:key="{{index}}">{{item.name}}</view>
     </view>
-    <view class='date-item'>2019年06月08日 星期五</view>
-    <template is='goodsFlow' wx:for='.......'></template>
+    <!-- <view class='date-item'>2019年06月08日 星期五</view> -->
+    <template is='goodsFlow' wx:for='{{flow}}' wx:key="{{index}}" data="{{...item}}"></template>
   </view>
   <!-- 仓库 -->
   <view class='com-form-box' wx:if="{{tabType =='house'}}">
@@ -88,28 +86,107 @@
   </view>
   <!-- 仓库列表 -->
   <view wx:if="{{tabType =='house'}}">
-    <view class='house-item' wx:for=',,,,,,,,,,,,'>
-      <view class='house-title com-flex-center font24'>
-        <view class='color-chunk'></view>
-        <text class='house-name'>全部仓库</text>
-        <text>（库存数：</text>
-        <text class="font36 com-red-color">1821</text>
-        <text>）</text>
-      </view>
-      <view class='sku-item com-flex-center'>
-        <view class='sku-main'>
-          <text class='font30 com-blod-font'>黄色</text>
-          <text class='font40 com-blod-font com-red-color'>{{filter.parseLongNum(1212100)}}</text>
+    <view wx:if="{{!noSku}}">
+      <!-- 有sku -->
+      <view hidden="{{merger}}" class='house-item' wx:for='{{regionList}}' wx:key="{{index}}">
+        <view class='house-title com-flex-center font24'>
+          <view class='color-chunk'></view>
+          <text class='house-name'>{{item.warehouseName}} {{item.regionName}}</text>
+          <text>（库存数：</text>
+          <text class="font36 com-red-color">{{filter.parseLongNum(item.totalNum)}}</text>
+          <text>）</text>
         </view>
-        <view class='flexone'>
-          <view class='com-flex-center font30'>
-            <view class='sku-other-name'>{{index}}</view>
-            <text class='flexone' style='text-align:right;'>129129</text>
-            <image class='img30 edit-icon' src='/distribution/images/edit-gold.png'></image>
+        <view class='sku-item com-flex-center' wx:for="{{item.resetGoodsList}}" wx:key="{{goodsIndex}}" wx:for-item="goods" wx:for-index="goodsIndex">
+          <view class='sku-main'>
+            <text class='font30 com-blod-font'>{{goods.firstSku.specValueName}}</text>
+            <text class='font40 com-blod-font com-red-color'>{{filter.parseLongNum(goods.allnum)}}</text>
+          </view>
+          <view class='flexone' style='overflow:hidden;'>
+            <view class='com-flex-center font30' wx:for="{{goods.goodsList}}" wx:key="{{skuIndex}}" wx:for-item="sku" wx:for-index="skuIndex">
+              <view class='sku-other-name com-text-ellipsis flexone'>{{sku.myResetSku[1].specValueName}}</view>
+              <view wx:if="{{sku.warningMoreFlag}}" class='red-warning-box'>滞销</view>
+              <view wx:if="{{sku.warningLessFlag}}" class='red-warning-box'>需补货</view>
+              <text class='{{sku.warningMoreFlag || sku.warningLessFlag?"com-red-color":""}}' style='text-align:right;'>{{filter.parseLongNum(sku.stockNum)}}</text>
+              <image bindtap='editWare' data-code='{{sku.code}}' data-num="{{sku.stockNum}}" data-name="{{goods.firstSku.specValueName}}{{sku.myResetSku[1].specValueName?sku.myResetSku[1].specValueName:''}}"  class='img30 edit-icon' src='/distribution/images/pen-gold.png'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 合并 -->
+      <view hidden="{{!merger}}" class='house-item'>
+        <view class='house-title com-flex-center font24'>
+          <view class='color-chunk'></view>
+          <text class='house-name'>全部仓库</text>
+          <text>（库存数：</text>
+          <text class="font36 com-red-color">{{filter.parseLongNum(totalNum)}}</text>
+          <text>）</text>
+        </view>
+        <view class='sku-item com-flex-center' wx:for="{{mergeList}}" wx:key="{{goodsIndex}}" wx:for-item="goods" wx:for-index="goodsIndex">
+          <view class='sku-main'>
+            <text class='font30 com-blod-font'>{{goods.firstSku.specValueName}}</text>
+            <text class='font40 com-blod-font com-red-color'>{{filter.parseLongNum(goods.allnum)}}</text>
+          </view>
+          <view class='flexone' style='overflow:hidden;'>
+            <view class='com-flex-center font30' wx:for="{{goods.goodsList}}" wx:key="{{skuIndex}}" wx:for-item="sku" wx:for-index="skuIndex">
+              <view class='sku-other-name com-text-ellipsis flexone'>{{sku.myResetSku[1].specValueName}}</view>
+              <!-- <view wx:if="{{sku.warningMoreFlag}}" class='red-warning-box'>滞销</view>
+            <view wx:if="{{sku.warningLessFlag}}" class='red-warning-box'>需补货</view> -->
+              <text class='{{sku.warningMoreFlag || sku.warningLessFlag?"com-red-color":""}}' style='text-align:right;'>{{filter.parseLongNum(sku.totalNum)}}</text>
+              <!-- <image class='img30 edit-icon' src='/distribution/images/pen-gold.png'></image> -->
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 无sku -->
+    <view wx:else>
+      <view hidden="{{merger}}" class='house-item' wx:for='{{regionList}}' wx:key="{{index}}">
+        <view class='house-title com-flex-center font24'>
+          <view class='color-chunk'></view>
+          <text class='house-name'>{{item.warehouseName}} {{item.regionName}}</text>
+          <text>（库存数：{{item.warehouseName}}</text>
+          <text class="font36 com-red-color">{{filter.parseLongNum(item.totalNum)}}</text>
+          <text>）</text>
+        </view>
+        <view class='sku-item com-flex-center' wx:for="{{item.stockList}}" wx:key="{{goodsIndex}}" wx:for-item="goods" wx:for-index="goodsIndex">
+          <view class='sku-main'>
+            <text class='font30 com-blod-font'>默认规格</text>
+            <text class='font40 com-blod-font com-red-color'>{{filter.parseLongNum(goods.stockNum)}}</text>
+          </view>
+          <view class='flexone' style='overflow:hidden;'>
+            <view class='com-flex-center font30'>
+              <view class='sku-other-name com-text-ellipsis flexone'></view>
+              <view wx:if="{{goods.warningMoreFlag}}" class='red-warning-box'>滞销</view>
+              <view wx:if="{{goods.warningLessFlag}}" class='red-warning-box'>需补货</view>
+              <text class='{{goods.warningMoreFlag || goods.warningLessFlag?"com-red-color":""}}' style='text-align:right;'>{{filter.parseLongNum(goods.stockNum)}}</text>
+              <image bindtap='editWare' data-code='{{goods.code}}' data-num="{{goods.stockNum}}" data-name="默认规格" class='img30 edit-icon' src='/distribution/images/pen-gold.png'></image>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view hidden="{{!merger}}" class='house-item'>
+        <view class='house-title com-flex-center font24'>
+          <view class='color-chunk'></view>
+          <text class='house-name'>全部仓库</text>
+          <text>（库存数：</text>
+          <text class="font36 com-red-color">{{filter.parseLongNum(totalNum)}}</text>
+          <text>）</text>
+        </view>
+        <view class='sku-item com-flex-center' wx:for="{{mergeList}}" wx:key="{{goodsIndex}}" wx:for-item="goods" wx:for-index="goodsIndex">
+          <view class='sku-main'>
+            <text class='font30 com-blod-font'>默认规格</text>
+            <text class='font40 com-blod-font com-red-color'>{{filter.parseLongNum(goods.totalNum)}}</text>
+          </view>
+          <view class='flexone' style='overflow:hidden;'>
+            <view class='com-flex-center font30'>
+              <view class='sku-other-name com-text-ellipsis flexone'></view>
+              <text class='{{sku.warningMoreFlag || sku.warningLessFlag?"com-red-color":""}}' style='text-align:right;'>{{filter.parseLongNum(goods.totalNum)}}</text>
+              <!-- <image class='img30 edit-icon' src='/distribution/images/pen-gold.png'></image> -->
+            </view>
           </view>
         </view>
       </view>
     </view>
   </view>
-
 </view>

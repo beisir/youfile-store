@@ -4,31 +4,31 @@
   <view class='com-flex-between'>
     <view class='statistics-item'>
       <view class='font28'>今日入库</view>
-      <view class='font60'>{{filter.parseLongNum(1212100)}}</view>
+      <view class='font60'>{{filter.parseLongNum(msg.inNumToday)}}</view>
     </view>
     <view class='statistics-item'>
       <view class='font28'>今日出库</view>
-      <view class='font60'>111111112</view>
+      <view class='font60'>{{filter.parseLongNum(msg.outNumToday)}}</view>
     </view>
     <view class='statistics-item'>
       <view class='font28'>库存不足</view>
-      <view class='font60'>12</view>
+      <view class='font60'>{{filter.parseLongNum(msg.lackNum)}}</view>
     </view>
   </view>
 
   <view class='com-flex-between goods-num-box'>
     <view class='goods-num-item'>
       <view class='font28'>商品总数</view>
-      <view class='font40'>{{filter.parseLongNum(111111)}}</view>
+      <view class='font40'>{{filter.parseLongNum(mag.goodsNum)}}</view>
     </view>
     <view class='goods-num-item'>
       <view class='font28'>库存总数</view>
-      <view class='font40'>{{filter.parseLongNum(111111)}}</view>
+      <view class='font40'>{{filter.parseLongNum(msg.stockNum)}}</view>
     </view>
     <view class='goods-num-item'>
       <view class='font28'>库存总成本</view>
       <view class='font40'>
-        <text class='font30'>￥</text>{{filter.parseLongNum(1212100)}}</view>
+        <text class='font30'>￥</text>{{filter.parseLongNum(msg.procurementCost)}}</view>
     </view>
   </view>
 </view>
@@ -47,7 +47,8 @@
       <image src='/distribution/images/warning.png' class='entry-icon'></image>
       <view>
         <view class='font30 com-blod-font'>库存预警</view>
-        <view class='font24 com-gray-color'>上限下限预警</view>
+        <view wx:if="{{msg.warningNum>0}}" class='font24 com-gray-color'>预警商品 <text class='com-red-color'>{{filter.filterOrderNum(msg.warningNum)}}</text></view>
+        <view wx:else class='font24 com-gray-color'>上限下限预警</view>
       </view>
     </view>
   </navigator>

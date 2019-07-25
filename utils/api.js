@@ -226,6 +226,10 @@ import {
   handleWarehouseUrl,
   handleHousePartUrl,
   handleHousePartTagUrl,
+  wareHouseAllgoodsUrl,
+  wareHouseGoodsListUrl,
+  getGoodswareHouseDetailUrl,
+  wareHouseGoodsFlowUrl,
   // 供应商
   createSupplierUrl,
   ifExistSupplierUrl,
@@ -1474,7 +1478,12 @@ function getWarehouseList(data, type) {
   if (type === 'page'){
     return app.pageRequest.pageGet(handleWarehouseUrl, data)
   } else {
-    return app.http.getRequest(handleWarehouseUrl, data)
+    return new Promise((resolve,rej)=>{
+      app.http.getRequest(handleWarehouseUrl, data).then(res=>{
+        res.obj = res.obj.filter(el => el.regionList && el.regionList.length > 0)
+        resolve(res)
+      })
+    })
   }
 }
 function updateWarehouse(data) {
@@ -1601,7 +1610,28 @@ function editOrderExpress(data){
     'content-type': 'application/x-www-form-urlencoded'
   })
 }
+// 库存商品
+function wareHouseAllgoods(data){
+  data = initStoreId(data);
+  return app.http.getRequest(wareHouseAllgoodsUrl, data)
+}
+function wareHouseGoodsList(data){
+  data = initStoreId(data);
+  data = listFindType(data, 'page')
+  return app.pageRequest.pageGet(wareHouseGoodsListUrl, data)
+}
+function getGoodswareHouseDetail(data) {
+  return app.http.getRequest(getGoodswareHouseDetailUrl, data)
+}
+function wareHouseGoodsFlow(data){
+  data = listFindType(data, 'page')
+  return app.pageRequest.pageGet(wareHouseGoodsFlowUrl, data)
+}
 module.exports = {
+  wareHouseGoodsFlow,
+  getGoodswareHouseDetail,
+  wareHouseGoodsList,
+  wareHouseAllgoods,
   editOrderExpress,
   sureOutHouse,
   preOutHouseList,

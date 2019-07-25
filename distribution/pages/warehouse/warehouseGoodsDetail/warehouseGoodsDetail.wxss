@@ -1,8 +1,8 @@
 /* distribution/pages/warehouse/warehouseDetail/warehouseDetail.wxss */
-.header{height: 230rpx;position: relative;margin-bottom: 160rpx;padding: 30rpx;box-sizing: border-box;}
-.warehouse-statistics{position: absolute;bottom: -150rpx;left: 0;right: 0;margin: 0 20rpx;background: #fff;border-radius: 10rpx;}
+.header{height: 230rpx;position: relative;margin-bottom: 90rpx;padding: 30rpx;box-sizing: border-box;}
+.warehouse-statistics{position: absolute;bottom: -80rpx;left: 0;right: 0;margin: 0 20rpx;background: #fff;border-radius: 10rpx;}
 /* 商品 */
-.goods-item{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;height: 200rpx;padding: 30rpx;}
+.goods-item{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;height: 200rpx;padding: 0 30rpx;box-sizing: border-box}
 .goods-icon{width: 140rpx;height:140rpx;border: 1rpx solid #ddd;margin-right: 30rpx;}
 .warning-tip{padding: 0 10rpx;background: rgb(254,61,61);border-radius: 5rpx;color: #fff;margin-right: 10rpx;}
 /* 搜索 */
