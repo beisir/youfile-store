@@ -544,7 +544,6 @@ Page({
     })
   },
   onLoad: function(options) {
-    options.goodsId = '190724159700' //delit
     this.getConfig()
     this.setData({
       goodsId: options.goodsId

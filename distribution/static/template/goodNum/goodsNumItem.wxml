@@ -1,3 +1,5 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
 <template name="goodsItem">
   <view class='template'>
     <view class='goods-item com-flex-between'>
@@ -43,33 +45,37 @@
   <view class='flow-item'>
     <view class='com-flex-between'>
       <view class='com-flex-center'>
-        <view class='flow-tag' style='background:#f8b616'>入库</view>
-        <view class='flow-tag' style='background:#ea5037'>出库</view>
-        <view class='flow-tag' style='background:#3dbce6'>初期</view>
-        <text class='font30 com-blod-font'>黄色啤酒味</text>
+        <view class='flow-tag' wx:if="{{changeType=='in'}}" style='background:#f8b616'>入库</view>
+        <view class='flow-tag' wx:if="{{changeType=='out'}}" style='background:#ea5037'>出库</view>
+        <view class='flow-tag' wx:if="{{changeType=='init'}}" style='background:#3dbce6'>初期</view>
+        <text class='font30 com-blod-font'>{{goodsName}}</text>
       </view>
-      <text class='flow-num'>+125</text>
+      <text class='flow-num {{changeType=="in"?"com-red-color":""}}'>
+        <text wx:if="{{changeType=='in'}}">+</text>
+        <text>{{changeNum}}</text>
+      </text>
     </view>
     <view class='msg-item com-flex-between'>
-      <view>出库仓库：默认仓库</view>
-      <view>剩余库存：128</view>
+      <view>出库仓库：{{warehouseName}}</view>
+      <view>剩余库存：{{stockRemainNum}}</view>
     </view>
     <view class='msg-item com-flex-between'>
-      <view>经手人：文竹</view>
-      <view>17:19</view>
+      <view>经手人：{{operationUserName?operationUserName:''}}</view>
+      <view>{{filter.filterTime(time)}}</view>
     </view>
     <view class='msg-item com-flex-between'>
-      <view>供应商：木林批发</view>
+      <view>供应商：{{supplierName}}</view>
       <view class='change-type'>
-        <text>调整</text>
-        <text>订单</text>
-        <text>供货单</text>
+        <text wx:if="{{operationType === 'adjust'}}">调整</text>
+        <text wx:if="{{operationType === 'order'}}">订单</text>
+        <text wx:if="{{operationType === 'supply'}}">供货单</text>
+        <text wx:if="{{operationType === 'purchase'}}">采购</text>
       </view>
     </view>
-    <view class='remark-flex'>
-      <text class='remark-tip'>库存报溢</text>
+    <view class='remark-flex' wx:if="{{operationType === 'adjust'}}">
+      <text class='remark-tip'>{{adjustReason?adjustReason:''}}</text>
       <view class='remark-box'>
-        <text>备注：运输破运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损运输破损损</text>
+        <text>备注：{{remark?remark:''}}</text>
       </view>
     </view>
   </view>

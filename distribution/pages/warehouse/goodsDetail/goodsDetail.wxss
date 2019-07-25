@@ -20,7 +20,7 @@
 .color-chunk{width: 10rpx;height: 20rpx;background: #f8b616;}
 .sku-item{background: #fafafa;padding: 30rpx 0;border-radius: 10rpx;}
 .sku-main{display: flex;align-items: center;justify-content: center;width: 190rpx;flex-direction: column;}
-.sku-other-name{max-width: 200rpx;}
+.sku-other-name{padding-right: 10rpx;}
 .edit-icon{padding: 0 40rpx}
 /* 筛选器 */
 .filter-box{width: 100%;background: #fff;}
@@ -40,3 +40,5 @@
 .flowtab-item{flex: 1;border-right: 1rpx solid #f8b616;background: #fff;color: #f8b616;height: 50rpx;font-size: 26rpx;text-align: center;line-height: 50rpx;}
 .flowtab .flowtab-item:last-child{border: 0;}
 .flowtab-item-ac{background: #f8b616;color: #fff;}
+/* 警告 */
+.red-warning-box{padding:5rpx 10rpx;color: #fff;font-size: 24rpx;display: inline-block;border-radius: 5rpx;background: #ea5037;line-height: 1;margin-right: 20rpx;}

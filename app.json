@@ -36,10 +36,10 @@
     }
   ],
   "pages": [
+    "pages/page/home/home",
     "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/businessFriend/merchant/serList/serList",
-    "pages/page/home/home",
     "pages/admin/editGoods/editGoods",
     "pages/admin/addGoods/addGoods",
     "pages/role/allOrder/allOrder",
