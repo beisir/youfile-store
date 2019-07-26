@@ -6,13 +6,6 @@
     </view>
     <text class='font30 ser-btn flexone' bindtap='serch'>搜索</text>
   </view>
-  <navigator url='../../supplier/createSupplier/createSupplier' hover-class="none">
-    <view class='choseTag com-flex-center font30'>
-      <image src='/distribution/images/man-add-gold.png' class='img40 add-icon'></image>
-      <text class='flexone'>添加供应商</text>
-      <image class='com-right-icon' src='/distribution/images/right-icon.png'></image>
-    </view>
-  </navigator>
 </view>
 
 <view class='com-flex-around tab-box'>

@@ -1,20 +1,22 @@
 <import src="/distribution/static/template/goodNum/goodsNumItem.wxml" />
 
 <view class='com-background-color'>
-  <view class='goodsName'>“黄色 柠檬味”</view>
+  <view class='goodsName'>“{{goods.skuName?goods.skuName:'默认规格'}}”</view>
   <view class='com-flex-between'>
     <view class='tab-item'>
       <view class='font24'>合计入库</view>
-      <view class='font36'>128</view>
+      <view class='font36'>{{goods.inNum}}</view>
     </view>
     <view style='border-left:1rpx solid #fff;height:30rpx;'></view>
     <view class='tab-item'>
       <view class='font24'>合计出库</view>
-      <view class='font36'>0</view>
+      <view class='font36'>{{goods.outNum}}</view>
     </view>
   </view>
 </view>
 <view class='template'>
-  <view class='date-item'>2019年06月08日 星期五</view>
-  <template is="goodsFlow" data="{{item}}" class='goodsFlow'></template>
+  <!-- <view class='date-item'>2019年06月08日 星期五</view> -->
+  <view class='goodsFlow' wx:for="{{flow}}" wx:key='{{index}}'>
+  <template is="goodsFlow" data="{{...item}}"></template>
+  </view>
 </view>

@@ -16,6 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    cantEdit:false,
     pics: [],
     stockHide: false,
     isShow: true,
@@ -936,7 +937,20 @@ Page({
             })
             return
           }
+          if (res.data.code == '3') {
+            this.showTaleFun()
+            this.setData({
+              cantEdit: true
+            })
+            return
+          }
         })
+    })
+  },
+  closeModal(){
+    this.hideTaleFun()
+    this.setData({
+      cantEdit: false
     })
   },
   /**

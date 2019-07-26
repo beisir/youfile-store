@@ -25,7 +25,7 @@
     </view>
     </navigator>
   </view>
-  <navigator url='../choseSupplier/choseSupplier'>
+  <navigator url='../choseSupplier/choseSupplier' hover-class="none">
     <view class='com-embed-inner com-flex-between font30 com-blod-font'>
       <text>选择供应商</text>
       <view class='com-flex-center'>

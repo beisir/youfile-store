@@ -7,7 +7,7 @@
 .ser-btn{text-align: center;color: #fff;}
 /* 商品 */
 .goods-box{position: relative;top: -90rpx;}
-.item-box{width: 710rpx;margin: 0 auto;overflow: hidden;}
+.item-box{width: 710rpx;margin: 0 auto 20rpx;overflow: hidden;}
 .absolut-box{position: relative;left: 0;top: 0;transition:all 0.4s;}
 .delbtn-active{left: -110rpx;}
 .close-btn{height: 100%;width: 100rpx;background: #fb3d3c;color: #fff;border-radius: 10rpx;position: absolute;right: -110rpx;top: 0;display: flex;flex-direction: column;align-items: center;justify-content: center;}

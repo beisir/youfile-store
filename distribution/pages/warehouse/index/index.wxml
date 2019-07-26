@@ -19,7 +19,7 @@
   <view class='com-flex-between goods-num-box'>
     <view class='goods-num-item'>
       <view class='font28'>商品总数</view>
-      <view class='font40'>{{filter.parseLongNum(mag.goodsNum)}}</view>
+      <view class='font40'>{{filter.parseLongNum(msg.goodsNum)}}</view>
     </view>
     <view class='goods-num-item'>
       <view class='font28'>库存总数</view>

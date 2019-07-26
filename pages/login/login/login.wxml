@@ -129,7 +129,7 @@
         </view>
       </view>
       <view wx:if="{{!reSendCode}}" class='single-line' style='color:#999;margin:68rpx 0 52rpx;'>{{btnSec}}s可重新发送</view>
-      <view wx:else class='single-line' style='color:#ca7;margin:68rpx 0 52rpx;'  bindtap='getCode'>重新发送验证码</view>
+      <view wx:else class='single-line' style='color:#f8b616;margin:68rpx 0 52rpx;'  bindtap='getCode'>重新发送验证码</view>
       <button open-type='getUserInfo' bindgetuserinfo='getWXUserInfo' class='code-login-btn {{btnID}}' disabled='{{btnID=="loginBtnDis"?true:false}}'>确定</button>
     </view>
   </view>

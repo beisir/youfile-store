@@ -230,12 +230,17 @@ import {
   wareHouseGoodsListUrl,
   getGoodswareHouseDetailUrl,
   wareHouseGoodsFlowUrl,
+  stockCodeGoodsFlowUrl,
+  regionGoodsListUrl,
   // 供应商
   createSupplierUrl,
   ifExistSupplierUrl,
   handleSupplierUrl,
   getSupplierListUrl,
   getSupplierGoodsListUrl,
+  adjustGoodsStockUrl,
+  delRegionGoodsUrl,
+  getGoodsSupplierUrl,
   // 采购
   createPurchaseOrderUrl,
   getPurchaseMsgUrl,
@@ -249,6 +254,10 @@ import {
   preOutHouseListUrl,
   sureOutHouseUrl,
   editOrderExpressUrl,
+  // 预警
+  warningGoodsListUrl,
+  getWarningSettingUrl,
+  updateWarningSettingUrl,
 } from './constUrl.js'
 
 const app = getApp()
@@ -1447,6 +1456,7 @@ function saveFormid(data) {
  * */ 
 // 列表参数
 function listFindType(data, type) {
+  if(!data){data={}}
   switch (type) {
     case 'all':
       data.findType = 'list'
@@ -1471,9 +1481,7 @@ function getWarehouseMsg(data) {
   return app.http.getRequest(handleWarehouseUrl+"/"+data.code, data)
 }
 function getWarehouseList(data, type) {
-  console.log(data)
   data = initStoreId(data);
-  console.log(data)
   data = listFindType(data,type)
   if (type === 'page'){
     return app.pageRequest.pageGet(handleWarehouseUrl, data)
@@ -1627,7 +1635,48 @@ function wareHouseGoodsFlow(data){
   data = listFindType(data, 'page')
   return app.pageRequest.pageGet(wareHouseGoodsFlowUrl, data)
 }
+function stockCodeGoodsFlow(data) {
+  data = listFindType(data, 'page')
+  return app.pageRequest.pageGet(stockCodeGoodsFlowUrl, data)
+}
+function adjustGoodsStock(data){
+  return app.http.postRequest(adjustGoodsStockUrl, data)
+}
+function adjustGoodsStock(data) {
+  return app.http.postRequest(adjustGoodsStockUrl, data)
+}
+function regionGoodsList(data) {
+  data = listFindType(data, 'page')
+  return app.pageRequest.pageGet(regionGoodsListUrl, data)
+}
+function delRegionGoods(data){
+  return app.http.deleteRequest(delRegionGoodsUrl + "?regionCode=" + data.regionCode + "&goodsId=" + data.goodsId, data)
+}
+function warningGoodsList(data) {
+  data = initStoreId(data);
+  data = listFindType(data, 'page')
+  return app.pageRequest.pageGet(warningGoodsListUrl, data)
+}
+function getWarningSetting(data) {
+  data = initStoreId(data);
+  return app.http.getRequest(getWarningSettingUrl, data)
+}
+function updateWarningSetting(data) {
+  data = initStoreId(data);
+  return app.http.putRequest(updateWarningSettingUrl, data)
+}
+function getGoodsSupplier(data){
+  return app.pageRequest.pageGet(getGoodsSupplierUrl, data)
+}
 module.exports = {
+  getGoodsSupplier,
+  getWarningSetting,
+  updateWarningSetting,
+  warningGoodsList,
+  delRegionGoods,
+  regionGoodsList,
+  adjustGoodsStock,
+  stockCodeGoodsFlow,
   wareHouseGoodsFlow,
   getGoodswareHouseDetail,
   wareHouseGoodsList,

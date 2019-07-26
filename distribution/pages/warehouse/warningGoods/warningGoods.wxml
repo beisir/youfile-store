@@ -3,16 +3,16 @@
   <view class='com-flex-between com-margin-box'>
     <view class='search-input-box com-flex-center'>
       <image src='/distribution/images/search-white.png' class='search-img'></image>
-      <input class='font26 flexone' placeholder='输入商品名称、货号' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
+      <input value='{{serText}}' bindinput='watchInput' class='font26 flexone' placeholder='输入商品名称、货号' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
     </view>
-    <text class='font30 ser-btn flexone'>搜索</text>
+    <text class='font30 ser-btn flexone' bindtap='search'>搜索</text>
   </view>
 
   <view class='filter-box com-flex-center'>
     <view class='color-chunk com-background-color'></view>
-    <picker class='flexone com-text-ellipsis'>
+    <picker range="{{wareHouse}}" range-key='name' bindchange="setHouse" class='flexone com-text-ellipsis'>
       <view class='com-flex-center'>
-        <text class='house-name'>阿阿斯达阿斯达阿斯达斯达</text>
+        <text class='house-name'>{{sureWare.name}}</text>
         <image class='com-tri-icon' src='/distribution/images/tri-down.png'></image>
       </view>
     </picker>

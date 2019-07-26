@@ -278,6 +278,10 @@ export const handleHousePartTagUrl = '/admin/warehouses/regions/types'
 export const wareHouseAllgoodsUrl = '/admin/stores/{{storeId}}/stocks/nums'
 export const wareHouseGoodsListUrl = '/admin/stores/{{storeId}}/stocks/goods'
 export const wareHouseGoodsFlowUrl = '/admin/stocks/goods/{{goodsId}}/flows'
+export const stockCodeGoodsFlowUrl = "/admin/stocks/{{stockCode}}/flows"
+export const adjustGoodsStockUrl = '/admin/stocks/adjust'
+export const regionGoodsListUrl = '/admin/regions/{{regionCode}}/stocks/goods'
+export const delRegionGoodsUrl = '/admin/regions/goods/stocks'
 
 // 供应商
 export const createSupplierUrl = '/admin/supplier'
@@ -286,6 +290,7 @@ export const handleSupplierUrl = '/admin/supplier/{{no}}'
 export const getSupplierListUrl = '/admin/supplier/page'
 export const getSupplierGoodsListUrl = '/admin/supplier/goods/{{supplierNumber}}/page'
 export const getGoodswareHouseDetailUrl = '/admin/goods/{{goodsId}}/stocks'
+export const getGoodsSupplierUrl = '/admin/supplier/goods/{{goodsId}}/sku/{{skuCode}}/supplier/page'
 // 采购
 export const createPurchaseOrderUrl = '/admin/purchaseorder'
 export const getPurchaseMsgUrl = '/admin/purchaseorder/{{no}}'
@@ -299,3 +304,7 @@ export const outHouseUrl = '/admin/order/{{orderNumber}}/stock/out/advice'
 export const preOutHouseListUrl = '/admin/stocks/outParams'
 export const sureOutHouseUrl = '/admin/order/stock/out'
 export const editOrderExpressUrl = '/admin/out-details/{{code}}/express-infos'
+// 预警
+export const warningGoodsListUrl = '/admin/stores/{{storeId}}/warning-stocks'
+export const getWarningSettingUrl = '/admin/warehouses/settings/{{storeId}}'
+export const updateWarningSettingUrl = '/admin/warehouses/settings'

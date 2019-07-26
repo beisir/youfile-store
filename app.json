@@ -3,6 +3,7 @@
     {
       "root": "distribution",
       "pages": [
+        "pages/supplier/choseGoodsSupplier/choseGoodsSupplier",
         "pages/supplier/createSupplier/createSupplier",
         "pages/purchase/orderOutHouseDetail/orderOutHouseDetail",
         "pages/purchase/outHouseLogistics/outHouseLogistics",

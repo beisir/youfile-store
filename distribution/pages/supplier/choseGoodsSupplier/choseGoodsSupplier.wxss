@@ -1,0 +1,2 @@
+@import '../../purchase/choseSupplier/choseSupplier';
+.header{margin-bottom: 0;}

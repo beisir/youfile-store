@@ -1,6 +1,8 @@
 // distribution/pages/purchase/choseSupplier/choseSupplier.js
 import Api from '../../../../utils/api.js'
-import { tabSelceted } from '../../../../distribution/static/js/common.js'
+import {
+  tabSelceted
+} from '../../../../distribution/static/js/common.js'
 const app = getApp()
 Page({
 
@@ -8,26 +10,26 @@ Page({
    * 页面的初始数据
    */
   data: {
-    supplierList:[],
+    supplierList: [],
     serText: '',
     tabStatus: 'sup'
   },
   // 切换
-  choseTab(e){
+  choseTab(e) {
     this.setData({
       tabStatus: e.currentTarget.dataset.type
-    },()=>{
+    }, () => {
       this.getList(true)
     })
   },
-  chose(e){
-    tabSelceted(e.currentTarget.dataset.index, this.data.supplierList,'supplierList',this)
-    let arr = this.data.supplierList.filter(el=>el.selected)
+  chose(e) {
+    tabSelceted(e.currentTarget.dataset.index, this.data.supplierList, 'supplierList', this)
+    let arr = this.data.supplierList.filter(el => el.selected)
     let pages = getCurrentPages(),
-        pre = pages[pages.length-2]
-    if (pre){
+      pre = pages[pages.length - 2]
+    if (pre) {
       // 供应商 no 云供应商 storeId merchantNumber
-      if (this.data.tabStatus === 'sup'){
+      if (this.data.tabStatus === 'sup') {
         pre.setData({
           supplierObj: {
             supplierNumber: arr[0].no,
@@ -48,13 +50,20 @@ Page({
       wx.navigateBack()
     }
   },
-  getList(re){
+  getList(re) {
     if (re) {
       app.pageRequest.pageData.pageNum = 0
-      this.setData({ supplierList: [] })
+      this.setData({
+        supplierList: []
+      })
     }
-    if (this.data.tabStatus === 'sup'){
-      Api.getSupplierList({ keyword: this.data.serText }).then(res => {
+    if (this.data.tabStatus === 'sup') {
+      Api.getGoodsSupplier({
+        keyword: this.data.serText,
+        goodsId: this.data.goodsId,
+        skuCode: this.data.code,
+        supplierType: 'self_maintenance'
+      }).then(res => {
         this.setData({
           supplierList: this.data.supplierList.concat(res.obj.result),
           totalNum: res.obj.totalCount
@@ -64,61 +73,64 @@ Page({
 
     }
   },
-  serinput(e){
+  serinput(e) {
     this.setData({
       serText: e.detail.value
     })
   },
-  serch(){
+  serch() {
     this.getList()
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function(options) {
+    this.setData({
+      goodsId: options.goodsId,
+      code: options.code
+    })
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     this.getList(true)
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
     this.getList()
   }
- 
+
 })

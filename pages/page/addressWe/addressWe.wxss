@@ -13,4 +13,4 @@
 .aw-cont{margin-bottom:150rpx;width:690rpx;margin:20rpx auto}
 .aw-no{text-align:center;font-size:30rpx;color:#999;padding-top:100rpx}
 .aw-no image{width:151rpx;margin-bottom:20rpx;height:145rpx}
-.aw-no button{height:60rpx;width:200rpx;color:#fff;line-height:55rpx;position:relative;border-radius:0;font-size:30rpx;border:2rpx solid #f8b616;margin-top:50rpx}
+.aw-no button{height:60rpx;width:200rpx;color:#fff;line-height:55rpx;position:relative;border-radius:0;font-size:30rpx;border:2rpx solid #f8b616;margin-top:50rpx;background:#f8b616;}

@@ -18,10 +18,10 @@
 .house-title{height: 80rpx;}
 .house-name{padding:0 20rpx;}
 .color-chunk{width: 10rpx;height: 20rpx;background: #f8b616;}
-.sku-item{background: #fafafa;padding: 30rpx 0;border-radius: 10rpx;}
+.sku-item{background: #fafafa;padding: 30rpx 40rpx 30rpx 0;border-radius: 10rpx;}
 .sku-main{display: flex;align-items: center;justify-content: center;width: 190rpx;flex-direction: column;}
 .sku-other-name{padding-right: 10rpx;}
-.edit-icon{padding: 0 40rpx}
+.edit-icon{padding-left: 40rpx}
 /* 筛选器 */
 .filter-box{width: 100%;background: #fff;}
 .filter-item{height: 90rpx;flex: 1;overflow: hidden;display: flex;align-items: center;justify-content: center;}

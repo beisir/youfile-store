@@ -1,4 +1,5 @@
 // distribution/pages/warehouse/partGoodsList/partGoodsList.js
+import Api from '../../../../utils/api.js'
 const app = getApp();
 
 Page({
@@ -7,12 +8,23 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goodslList: [{name:'还是撒打算打算'}]
+    serText: '',
+    baseUrl: app.globalData.imageUrl
   },
-  delGoods(){
-    this.setData({
-      delModal: true
+  search(){
+    this.getGoodsList(true)
+  },
+  delGoods(e){
+    Api.delRegionGoods({ regionCode: this.data.code, goodsId: e.currentTarget.dataset.id}).then(res=>{
+      Api.showToast(res.message,()=>{
+        this.getGoodsList(true)
+      })
+
+      this.setData({
+        delModal: true
+      })
     })
+    
   }, 
   closeModal(){
     this.setData({
@@ -22,21 +34,43 @@ Page({
   //手指触摸动作开始 记录起点X坐标
   touchstart: function (e) {
     //开始触摸时 重置所有删除
-    let data = app.touch._touchstart(e, this.data.goodslList)
+    let data = app.touch._touchstart(e, this.data.goodsList)
     this.setData({
-      goodslList: data
+      goodsList: data
     })
   },
 
   //滑动事件处理
   touchmove: function (e) {
-    let data = app.touch._touchmove(e, this.data.goodslList)
+    let data = app.touch._touchmove(e, this.data.goodsList)
     this.setData({
-      goodslList: data
+      goodsList: data
     })
   },
-  getGoodsList(){
-    
+  getGoodsList(re){
+    if (re) {
+      app.pageRequest.pageData.pageNum = 0
+      this.setData({
+        goodsList: []
+      })
+    }
+    Api.regionGoodsList({ regionCode: this.data.code,keyword: this.data.serText}).then(res=>{
+      if (res.obj.result)
+        res.obj.result.forEach(el => el.baseUrl = this.data.baseUrl)
+      this.setData({
+        goodsList: this.data.goodsList.concat(res.obj.result)
+      })
+    })
+  },
+  watchinput(e){
+    this.setData({
+      serText: e.detail.value
+    })
+  },
+  toDetail(e){
+    wx.navigateTo({
+      url: '../goodsDetail/goodsDetail?id='+e.currentTarget.dataset.id,
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -44,8 +78,6 @@ Page({
   onLoad: function (options) {
     this.setData({
       code: options.code
-    },()=>{
-      this.getGoodsList()
     })
   },
 
@@ -60,7 +92,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getGoodsList(true)
   },
 
   /**
@@ -88,13 +120,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.getGoodsList()
   }
 })

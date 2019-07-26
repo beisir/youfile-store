@@ -2,7 +2,7 @@
 <layer show='{{settingsModal}}' title='批量设置采购价/采购数量'>
   <view style='text-align:center;'>
     <view class='font26' style='color:#999;padding-bottom:40rpx;'>您可以只设定采购价或只设定采购数量</view>
-    <input value='{{commonPrice}}' bindinput='watchInput' maxlength='6' bindblur='checkInput' data-type="commonPrice" type='digit' class='layer-input' type='number' placeholder='统一输入采购价'></input>
+    <input value='{{commonPrice}}' bindinput='watchInput' maxlength='6' bindblur='checkInput' data-type="commonPrice" type='digit' class='layer-input' type='digit' placeholder='统一输入采购价'></input>
     <input value='{{commonNum}}' bindinput='watchInput' maxlength='6' data-type="commonNum" type='number' class='layer-input' type='number' placeholder='统一输入采购数量'></input>
     <view class='com-flex-between' style='margin-top:50rpx;'>
       <button class='com-layer-cancel-btn' hover-class='none' bindtap='closeModal'>取消</button>

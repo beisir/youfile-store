@@ -6,6 +6,12 @@
     <button form-type='submit' bindtap='updateGoods' data-sure='sure'>确定</button>
   </view>
 </mes>
+<mes show="{{cantEdit}}">
+  <view class='font-color' style='text-align:center'>
+    <text>若要修改sku请先清空库存~~</text>
+    <button form-type='submit' bindtap='closeModal' data-sure='sure'>确定</button>
+  </view>
+</mes>
 <!-- 提示-->
 <mes show="{{show1}}" bind:sureSelectArea="sureSelectAreaListener">
   <view class='font-color'>
@@ -346,11 +352,11 @@
   </view>
 </view>
 <form report-submit='true' bindsubmit='getFormId'>
-  <view class='com-bottom-btn-group'>
+  <cover-view class='com-bottom-btn-group'>
     <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='confirmUpGoods' wx:if='{{isStatus==0 || isStatus==2}}' data-status='1'>上架</button>
     <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='confirmDown' wx:if='{{isStatus==1 || isStatus==4}}' data-status='2'>下架</button>
     <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='deleteGoods'>删除</button>
     <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='updateGoods' data-status='{{isStatus}}' wx:if="{{saveHide}}">保存</button>
     <button class='btngroup-btn-item' hover-class="none" form-type='submit' data-status='{{isStatus}}' wx:else>保存</button>
-  </view>
+  </cover-view>
 </form>

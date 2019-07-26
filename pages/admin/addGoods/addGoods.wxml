@@ -306,11 +306,11 @@
     </view>
   </view>
   <form report-submit='true' bindsubmit='getFormId'>
-    <view class='com-bottom-btn-group'>
+    <cover-view class='com-bottom-btn-group'>
       <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='addGit' data-status='0'><image src="/image/git.png"/>放入仓库</button>
       <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else data-status='0'><image src="/image/git.png"/>放入仓库</button>
       <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='addGit' data-status='1'><image src="/image/up.png"/>上架出售</button>
       <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else><image src="/image/up.png"/>上架出售</button>
-    </view>
+    </cover-view>
   </form>
 </view>

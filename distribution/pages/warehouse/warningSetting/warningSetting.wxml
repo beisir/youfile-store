@@ -6,19 +6,19 @@
   <view class='com-box'>
     <view class='com-flex-between form-item'>
       <view class='form-title'>库存预警</view>
-      <switch checked='{{formData.warningGoods}}' color="#fdb813" bindchange='switchChange' data-type='warning' style='padding-right:30rpx;'></switch>
+      <switch checked='{{formData.warningStatus}}' color="#fdb813" bindchange='switchChange' data-type='warningStatus' style='padding-right:30rpx;'></switch>
     </view>
   </view>
 
   <view class='com-box'>
     <view class='com-flex-between form-item'>
       <view class='form-title'>商品库存低于</view>
-      <input bindinput='watchinput' data-type='num' class='flexone' type='number'></input>
+      <input value='{{formData.warningLower}}' bindinput='watchinput' data-type='warningLower' class='flexone' type='number' maxlength='6'></input>
       <view class='img-box'></view>
     </view>
     <view class='com-flex-between form-item'>
       <view class='form-title'>商品库存高于</view>
-      <input bindinput='watchinput' data-type='num' class='flexone' type='number'></input>
+      <input value='{{formData.warningUpper}}' bindinput='watchinput' data-type='warningUpper' class='flexone' type='number' maxlength='6'></input>
       <view class='img-box'></view>
     </view>
   </view>
@@ -29,7 +29,12 @@
   <view class='com-box'>
     <view class='com-flex-between form-item'>
       <view class='form-title'>仓库 库区</view>
-      <switch checked='{{formData.warningGoods}}' color="#fdb813" bindchange='switchChange' data-type='warning' style='padding-right:30rpx;'></switch>
+      <switch checked='{{formData.warehouseStatus}}' color="#fdb813" bindchange='switchChange' data-type='warehouseStatus' style='padding-right:30rpx;'></switch>
     </view>
   </view>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='updateSet'>确定</button>
 </view>

@@ -116,7 +116,7 @@
   </view>
   <view class='com-flex-between font24 msg-item-box'>
     <text style='width:40%;'>备注</text>
-    <text class='com-blod-font flexone'>{{order.remark?item.remark:''}}</text>
+    <text class='com-blod-font flexone' style="text-align:right;">{{order.remark?order.remark:''}}</text>
   </view>
   <view class='border-line' style='margin:15rpx 0;'></view>
   <view class='com-flex-between font24 msg-item-box'>

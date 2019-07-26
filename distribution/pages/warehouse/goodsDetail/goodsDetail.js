@@ -55,6 +55,7 @@ Page({
   },
   choseflowtab(e){
     tabSelceted(e.currentTarget.dataset.index, this.data.flowtab, 'flowtab',this)    
+    this.getFlow(true)
   },
   clearDate() {
     this.setData({
@@ -213,20 +214,19 @@ Page({
   editWare(e){
     console.log(e.currentTarget.dataset)
     wx.navigateTo({
-      url: '../adjustStorck/adjustStorck?code=' + e.currentTarget.dataset.code + '&num=' + e.currentTarget.dataset.num + '&name=' + e.currentTarget.dataset.name,
+      url: '../adjustStorck/adjustStorck?code=' + e.currentTarget.dataset.code + '&num=' + e.currentTarget.dataset.num + '&name=' + e.currentTarget.dataset.name + '&goodsId=' + this.data.goodsId,
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    options.id = 190716159400  //delit
+    // options.id = 190716159400  
     // options.id = 190516152500 // 双
     // options.id = 190302125700 // 无
     this.setData({
       goodsId: options.id
     })
-    this.getDetail()
     
     this.getWarehouse()
   },
@@ -252,6 +252,8 @@ Page({
     })
 
     this.getFlow(true)
+    this.getDetail()
+
   },
 
   /**

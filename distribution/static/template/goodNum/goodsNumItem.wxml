@@ -3,17 +3,17 @@
 <template name="goodsItem">
   <view class='template'>
     <view class='goods-item com-flex-between'>
-      <image class='goods-icon' src='/image/poster-right-in.png'></image>
+      <image class='goods-icon' src='{{baseUrl+goodsMainImgUrl}}'></image>
       <view class='flexone' style='overflow:hidden;'>
         <view class='com-flex-center font28 com-blod-font'>
-          <text class='warning-tip font24'>预警</text>
-          <text class='flexone com-text-ellipsis'>{{name}}</text>
+          <text class='warning-tip font24' wx:if="{{warningFlag}}">预警</text>
+          <text class='flexone com-text-ellipsis'>{{goodsName}}</text>
         </view>
-        <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：23123123</view>
+        <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：{{stockNum?stockNum:''}}</view>
         <view class='font26'>
           <text>库存：</text>
-          <text class='com-red-color'>2</text>
-          <text class='com-yellow-color'>3</text>
+          <text class='com-red-color' wx:if="{{warningFlag}}">{{stockNum}}</text>
+          <text class='com-yellow-color' wx:else>{{stockNum}}</text>
         </view>
       </view>
       <image class='com-right-icon' src='/image/poster-right-in.png' style='margin-top:60rpx;'></image>
@@ -48,7 +48,7 @@
         <view class='flow-tag' wx:if="{{changeType=='in'}}" style='background:#f8b616'>入库</view>
         <view class='flow-tag' wx:if="{{changeType=='out'}}" style='background:#ea5037'>出库</view>
         <view class='flow-tag' wx:if="{{changeType=='init'}}" style='background:#3dbce6'>初期</view>
-        <text class='font30 com-blod-font'>{{goodsName}}</text>
+        <text class='font30 com-blod-font'>{{skuName?skuName:'默认规格'}}</text>
       </view>
       <text class='flow-num {{changeType=="in"?"com-red-color":""}}'>
         <text wx:if="{{changeType=='in'}}">+</text>

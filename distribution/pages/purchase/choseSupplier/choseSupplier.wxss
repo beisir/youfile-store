@@ -11,6 +11,7 @@
 .tab-box{background: #fff;padding: 0 50rpx;}
 .line{width: 2rpx;height:30rpx;background:#eee;}
 .tab{height: 100rpx;border-bottom: 5rpx solid #fff;width: 200rpx;display: flex;align-items: center;justify-content: center;color: #999;}
+.tab>text{padding-left: 10rpx;}
 .tab-ac{border-color: #fdb813;color: #fdb813;}
 .list-box{margin: 20rpx;background: #fff;border-radius: 10rpx;}
 
