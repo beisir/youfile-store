@@ -14,12 +14,12 @@ Page({
     dayList: [{
       name: '近七天',
       type: 'day',
-      day: 7,
-      selected: true
+      day: 7
     }, {
       name: '近30天',
       type: 'day',
-      day: 30
+      day: 30,
+      selected: true
     }, {
       name: '自定义',
       type: 'own'
@@ -183,8 +183,8 @@ Page({
     if(day.day){
       data.latestDay = day.day
     } else {
-      data.dateFrom = this.data.startTime
-      data.dateTo = this.data.endTime
+      data.dateFrom = this.data.startTime ? this.data.startTime:''
+      data.dateTo = this.data.endTime ? this.data.endTime:''
     }
     data.warehouseCode = this.data.sureWare.code
     Api.wareHouseGoodsFlow(data).then(res=>{
@@ -212,9 +212,8 @@ Page({
     this.getFlow(true)
   },
   editWare(e){
-    console.log(e.currentTarget.dataset)
     wx.navigateTo({
-      url: '../adjustStorck/adjustStorck?code=' + e.currentTarget.dataset.code + '&num=' + e.currentTarget.dataset.num + '&name=' + e.currentTarget.dataset.name + '&goodsId=' + this.data.goodsId,
+      url: '../adjustStorck/adjustStorck?code=' + e.currentTarget.dataset.code + '&num=' + e.currentTarget.dataset.num + '&name=' + e.currentTarget.dataset.name + '&goodsId=' + this.data.goodsId + '&skuName=' + e.currentTarget.dataset.skuname,
     })
   },
   /**

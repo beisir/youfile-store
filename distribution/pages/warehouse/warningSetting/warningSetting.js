@@ -44,7 +44,7 @@ Page({
     if (formData.warningStatus){
       obj.warningStatus = 'on'
       if (formData.warningLower !== '' && formData.warningUpper!=''){
-        if (formData.warningLower > formData.warningUpper){
+        if (parseInt(formData.warningLower) > parseInt(formData.warningUpper)){
           Api.showToast('下限应低于上限')
           return 
         }

@@ -38,6 +38,8 @@
   ],
   "pages": [
     "pages/page/home/home",
+    "pages/page/workIndex/workIndex",
+    "pages/businessFriend/customerManage/index/index",
     "pages/businessFriend/merchant/index/index",
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/businessFriend/merchant/serList/serList",
@@ -67,7 +69,6 @@
     "pages/page/serStatus/serStatus",
     "pages/mallActive/batchRalease/batchRalease",
     "pages/mallActive/waitRalease/waitRalease",
-    "pages/page/workIndex/workIndex",
     "pages/mallActive/detailsOfCollection/detailsOfCollection",
     "pages/mallActive/distRecords/distRecords",
     "pages/capital/index/index",

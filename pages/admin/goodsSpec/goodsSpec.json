@@ -2,6 +2,8 @@
   "navigationBarTitleText": "设置规格 | 价格 | 库存",
   "usingComponents": {
     "spec": "../../../../assembly/specifications/spec",
-     "mes": "../../../../assembly/tips/tips"
-  }
+    "mes": "../../../../assembly/tips/tips"
+  },
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616"
 }

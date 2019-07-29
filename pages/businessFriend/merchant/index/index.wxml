@@ -121,7 +121,7 @@
       <image class='img30'></image>
     </view>
   </view>
-
+  <view class='list-tip'>共 {{supplierNum}} 个供应商</view>
 </block>
 
 <view style="height:100rpx;"></view>

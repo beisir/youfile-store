@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "供货单管理",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616",
   "usingComponents": {
     "mes": "../../../assembly/tips/tips",
     "clo": "../../../assembly/close/close"

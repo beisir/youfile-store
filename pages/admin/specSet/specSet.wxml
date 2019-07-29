@@ -43,7 +43,7 @@
 <!-- 提示已经了规格值 -->
 <spec show="{{haveSpecShow}}">
   <view class='spec-title'>确定使用该规格模板？</view>
-  <view class='spec-title-c'>确定后，原有设置的规格信息将会被情况</view>
+  <view class='spec-title-c'>确定后，原有设置的规格信息将会被替代</view>
   <view class='spec-view' bindtap='cancelSpec'>取消</view>
   <view class="spec-view spec-view-ac spec-view-active" bindtap='conNewSpec'>确定</view>
 </spec>

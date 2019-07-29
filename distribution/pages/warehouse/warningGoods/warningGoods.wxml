@@ -25,5 +25,5 @@
   </view>
 </view>
 <view style='overflow:hidden;'>
-  <template is="goodsWarning" data="{{item}}"></template>
+  <template wx:for="{{goodsList}}" wx:key='{{index}}' is="goodsWarning" data="{{...item}}"></template>
 </view>

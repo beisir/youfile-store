@@ -8,7 +8,7 @@
 </mes>
 <mes show="{{cantEdit}}">
   <view class='font-color' style='text-align:center'>
-    <text>若要修改sku请先清空库存~~</text>
+    <text>若要修改请先清空库存~~</text>
     <button form-type='submit' bindtap='closeModal' data-sure='sure'>确定</button>
   </view>
 </mes>
@@ -85,7 +85,7 @@
       <!-- 供应商 -->
       <view class="content-msg-box">
         <view class='msg-item com-flex-center'>
-          <image class='img30 msg-icon' src='/image/man-bloack.png'></image>
+          <image class='img30 msg-icon' src='/image/man-black.png'></image>
           <text class='font36 com-blod-font msg-title'>供应商</text>
           <view class='flexone com-text-ellipsis font28 msg-des'>{{supplierName}}</view>
         </view>
@@ -176,7 +176,7 @@
             <view wx:if='{{skuListData.length==0}}'>添加</view>
             <view wx:if='{{skuListData.length>0}}'>编辑</view>
           </view>
-          <input class="weui-input input-l"  wx:if='{{skuListData.length==0}}' type="text" value='（选填）未设置' disabled='disabled' ></input>
+          <input class="weui-input input-l"  wx:if='{{skuListData.length==0}}' type="text" value='未设置（选填）' disabled='disabled' ></input>
           <input class="weui-input ed-co input-l" wx:if='{{skuListData.length>0}}' type="text" value='已设置' disabled='disabled'></input>
         </view>
       </view>

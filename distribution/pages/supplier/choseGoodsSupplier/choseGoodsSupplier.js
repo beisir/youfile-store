@@ -87,7 +87,7 @@ Page({
   onLoad: function(options) {
     this.setData({
       goodsId: options.goodsId,
-      code: options.code
+      code: options.code ? options.code:0
     })
   },
 

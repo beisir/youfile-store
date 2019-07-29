@@ -108,8 +108,10 @@ Page({
       stockCode: this.data.code,
       changeNum: this.data.num,
       supplierNumber: this.data.supplierObj.supplierNumber,
+      supplierName: this.data.supplierObj.supplierName,
       supplierType: this.data.supplierObj.supplierType,
-      remark: this.data.remark
+      remark: this.data.remark,
+      skuName: this.data.skuName
     }
     
     let reason = this.data.reason.filter(el => el.checked)
@@ -130,7 +132,8 @@ Page({
       name: options.name,
       stockNum: options.num,
       code: options.code,
-      goodsId: options.goodsId
+      goodsId: options.goodsId,
+      skuName: options.skuname ? options.skuname:'默认规格'
     })
   },
 

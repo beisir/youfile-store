@@ -107,7 +107,7 @@
               <view wx:if="{{sku.warningMoreFlag}}" class='red-warning-box'>滞销</view>
               <view wx:if="{{sku.warningLessFlag}}" class='red-warning-box'>需补货</view>
               <text class='{{sku.warningMoreFlag || sku.warningLessFlag?"com-red-color":""}}' style='text-align:right;'>{{filter.parseLongNum(sku.stockNum)}}</text>
-              <image bindtap='editWare' data-code='{{sku.code}}' data-num="{{sku.stockNum}}" data-name="{{goods.firstSku.specValueName}}{{sku.myResetSku[1].specValueName?sku.myResetSku[1].specValueName:''}}"  class='img30 edit-icon' src='/distribution/images/pen-gold.png'></image>
+              <image bindtap='editWare' data-code='{{sku.code}}' data-num="{{sku.stockNum}}" data-name="{{goods.firstSku.specValueName}}{{sku.myResetSku[1].specValueName?sku.myResetSku[1].specValueName:''}}" data-skuname="{{sku.skuName}}"  class='img30 edit-icon' src='/distribution/images/pen-gold.png'></image>
             </view>
           </view>
         </view>

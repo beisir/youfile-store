@@ -19,7 +19,8 @@ Page({
       Api.showToast(res.message,()=>{
         this.getGoodsList(true)
       })
-
+      
+    }).catch(e=>{
       this.setData({
         delModal: true
       })

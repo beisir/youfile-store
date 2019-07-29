@@ -10,6 +10,7 @@ Page({
     listType: 'low',
     serText: '',
     sureWare: { name: "全部仓库", code: '' },
+    baseUrl: app.globalData.imageUrl
   },
   search(){
     this.getList(true)
@@ -46,6 +47,10 @@ Page({
 
     Api.warningGoodsList(obj).then(res=>{
       if(!res.obj.result){return}
+      res.obj.result.forEach(el=>{
+        this.data.listType == 'low' ? el.warningLow = true : el.warningLow =false
+        el.goodsMainImgUrl = this.data.baseUrl + el.goodsMainImgUrl
+      })
       this.setData({
         goodsList: this.data.goodsList.concat(res.obj.result)
       })
@@ -113,13 +118,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.getList()
   }
 })

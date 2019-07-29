@@ -130,7 +130,7 @@
             <view wx:if='{{skuListData.length==0}}'>添加</view>
             <view wx:if='{{skuListData.length>0}}'>编辑</view>
           </view>
-          <input class="weui-input input-l"  wx:if='{{skuListData.length==0}}' type="text" value='( 选填 ) 未设置' disabled='disabled' ></input>
+          <input class="weui-input input-l"  wx:if='{{skuListData.length==0}}' type="text" value='未设置（选填）' disabled='disabled' ></input>
           <input class="weui-input ed-co input-l" wx:if='{{skuListData.length>0}}' type="text" value='已设置' disabled='disabled'></input>
         </view>
       </view>

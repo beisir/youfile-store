@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "云享品管理",
   "enablePullDownRefresh": true,
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616",
   "usingComponents": {
     "login-component": "../../login/login/login",
     "mes": "../../../../assembly/tips/tips",
