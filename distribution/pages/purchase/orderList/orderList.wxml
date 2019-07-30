@@ -1,13 +1,13 @@
 <view class='head-tab com-flex-center'>
   <view class='flexone com-flex-around font30' style='height:100%;'>
-    <view class='tab-item {{tabType=="jinhuo"?"tab-item-ac":""}}' data-type='jinhuo'>进货单</view>
+    <view class='tab-item {{tabType=="jinhuo"?"tab-item-ac":""}} com-gray-color' data-type='jinhuo' style='color:#ccc;'>进货单</view>
     <view class='tab-line'></view>
     <view class='tab-item {{tabType=="caigou"?"tab-item-ac":""}}' bindtap='tabclick' data-type='caigou'>采购单</view>
   </view>
   <navigator url='../createOrder/createOrder'>
     <view class='addOrder-btn'>
       <image class='img30' src='/distribution/images/in-house-gold.png' style='margin-right:10rpx;'></image>
-      <text class='font28'>采购入库</text>
+      <text class='font28 com-blod-font'>采购入库</text>
     </view>
   </navigator>
 </view>
@@ -43,11 +43,11 @@
     <view class='goods-detail' wx:for="{{item.purchaseGoodsVOS}}" wx:key="{{index}}" wx:for-item="goods" bindtap='toDetail' data-no='{{item.no}}'>
       <image mode='aspectFit' class='goods-img' src='{{baseUrl+goods.mainImgUrl}}'></image>
       <view class='goods-name flexone font28'>{{goods.goodsName}}</view>
-      <view class='font24'>共{{goods.totalNum}}件</view>
+      <view class='font24'>共 {{goods.totalNum}} 件</view>
     </view>
     <!-- 价格 -->
     <view class='price-box'>
-      <text class='font24'>共{{item.goodsNum}}种商品 {{item.totalNum}}件 合计:￥</text>
+      <text class='font24'>共 {{item.goodsNum}} 种商品 {{item.totalNum}} 件 合计: ￥</text>
       <text class='font30'>{{item.amount}}</text>
     </view>
     <!-- 按钮 -->

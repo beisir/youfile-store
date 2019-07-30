@@ -1,5 +1,6 @@
 // distribution/pages/purchase/inHouse/inHouse.js
 import Api from "../../../../utils/api.js"
+import { formatTimeday } from '../../../../utils/util.js'
 const app = getApp()
 Page({
 
@@ -67,12 +68,14 @@ Page({
       let waitArr = goodsArr.filter(el => el.remainNum > 0)
       waitArr.forEach(el => {
         el.purchaseOrderDetailVOList = el.purchaseOrderDetailVOList.filter(sku =>{
-          sku.num = 0
+          sku.num = sku.remainNum
           return sku.remainNum > 0
         })
       })
       this.setData({
         goodsList: waitArr
+      },()=>{
+        this.getAllnum()
       })
     })
   },
@@ -181,6 +184,10 @@ Page({
     }, () => {
       this.getDetail()
       this.getWarehouse()
+    })
+
+    this.setData({
+      inDate: formatTimeday(new Date())
     })
   },
 

@@ -22,7 +22,7 @@
       <view class='img-box'></view>
     </view>
   </view>
-  <view class="title-box">
+  <view class="title-box" style='margin-top:40rpx;'>
     <view class='msg-title'>仓库功能开启</view>
     <view class='msg-des'>开启后，入库出库操作可选择对应的仓库和库区</view>
   </view>

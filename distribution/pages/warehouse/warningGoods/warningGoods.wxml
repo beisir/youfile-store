@@ -17,11 +17,15 @@
       </view>
     </picker>
     <radio-group class='lalala com-flex-center' bindchange='setLow'>
-      <radio color='#f8b616' value='low' checked></radio>
-      <text style='padding-right:20rpx;'>低于下限</text>
-      <radio color='#f8b616' value='high'></radio>
-      <text>高于上限</text>
-    </radio-group>
+      <label class='com-flex-center'>
+        <radio color='#f8b616' value='low' checked></radio>
+        <text style='padding-right:20rpx;'>低于下限</text>
+      </label>
+      <label class='com-flex-center'>
+        <radio color='#f8b616' value='high'></radio>
+        <text>高于上限</text>
+      </label>
+      </radio-group>
   </view>
 </view>
 <view style='overflow:hidden;'>

@@ -14,7 +14,7 @@
     <view class='tips-box' wx:if="{{!auditStatus || auditStatus=='init' || auditStatus=='fail' || auditStatus=='success' && !indexData.auditBroadcast}}">
       <navigator url='../userM/userM' class='tip-item com-flex-between'>
         <view class='com-flex-center'>
-          <image src='/image/tips.png' class='tip-icon' style='padding-right:10rpx;'></image>
+          <image src='/image/tips.png' class='tip-icon' style='padding-right:20rpx;'></image>
           <text wx:if="{{!auditStatus}}">完善资质信息后，可开通线上支付，去完善</text>
           <text wx:if="{{auditStatus=='init'}}">开通线上支付资质信息正在审核中，请耐心等待~</text>
           <text wx:if="{{auditStatus=='fail'}}">开通线上支付资质信息审核未通过，查看原因</text>
@@ -38,14 +38,17 @@
       <view class='wk-xian'></view>
     </navigator>
     <navigator class='wk-fg'></navigator>
-    <navigator url='../../businessFriend/merchant/newMerchant/newMerchant'>{{verifyFriends==null?0:verifyFriends}}
+    <navigator url='../../businessFriend/merchant/newMerchant/newMerchant'>
+      <text class='{{verifyFriends>0?"com-red-color":""}}'>{{verifyFriends==null?0:verifyFriends}}</text>
       <view>待验证商友</view>
     </navigator>
-    <navigator url='../../role/supplyOrder/supplyOrder?navType=wait_deliver'>{{unshippedPurchaseOrders==null?0:unshippedPurchaseOrders}}
+    <navigator url='../../role/supplyOrder/supplyOrder?navType=wait_deliver'>
+      <text class='{{unshippedPurchaseOrders>0?"com-red-color":""}}'>{{unshippedPurchaseOrders==null?0:unshippedPurchaseOrders}}</text>
       <view>待发货供货单</view>
       <view class='wk-xian'></view>
     </navigator>
-    <navigator url='../../role/order/order?navType=wait_deliver'>{{unshippedOrders==null?0:unshippedOrders}}
+    <navigator url='../../role/order/order?navType=wait_deliver'>
+      <text class='{{unshippedOrders>0?"com-red-color":""}}'>{{unshippedOrders==null?0:unshippedOrders}}</text>
       <view>待发货订单</view>
       <view class='wk-xian'></view>
     </navigator>

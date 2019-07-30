@@ -59,10 +59,10 @@ Page({
     }
     if (this.data.tabStatus === 'sup') {
       Api.getGoodsSupplier({
-        keyword: this.data.serText,
+        keywords: this.data.serText,
         goodsId: this.data.goodsId,
         skuCode: this.data.code,
-        supplierType: 'self_maintenance'
+        // supplierType: 'self_maintenance'
       }).then(res => {
         this.setData({
           supplierList: this.data.supplierList.concat(res.obj.result),
@@ -79,7 +79,7 @@ Page({
     })
   },
   serch() {
-    this.getList()
+    this.getList(true)
   },
   /**
    * 生命周期函数--监听页面加载

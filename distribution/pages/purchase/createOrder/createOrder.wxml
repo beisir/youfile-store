@@ -19,10 +19,10 @@
       <text class='font30 ser-btn' bindtap='search'>搜索</text>
     </view>
     <navigator url="/pages/admin/addGoods/addGoods?entryType=createOrder">
-    <view class='addbtn'>
-      <image src='/distribution/images/add-white.png' class='filter-icon' bindtap='showFilter'></image>
-      <text>新增</text>
-    </view>
+      <view class='addbtn'>
+        <image src='/distribution/images/add-white.png' class='filter-icon' bindtap='showFilter'></image>
+        <text>新增</text>
+      </view>
     </navigator>
   </view>
   <navigator url='../choseSupplier/choseSupplier' hover-class="none">
@@ -73,37 +73,39 @@
   <text>选择商品</text>
 </view>
 
-<navigator url='../chosePayType/chosePayType?code={{payway.payWayCode}}'>
-  <view class='msg-item com-flex-between common-box-style'>
-    <view class='font30'>支付方式</view>
-    <view class='com-flex-center'>
-      <text class='font28 com-gray-color'>{{payway?payway.payWayName:'选择支付方式'}}</text>
-      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+<block wx:if='{{goodsList && goodsList.length>0}}'>
+  <navigator url='../chosePayType/chosePayType?code={{payway.payWayCode}}'>
+    <view class='msg-item com-flex-between common-box-style'>
+      <view class='font30'>支付方式</view>
+      <view class='com-flex-center'>
+        <text class='font28 com-gray-color'>{{payway?payway.payWayName:'选择支付方式'}}</text>
+        <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+      </view>
     </view>
-  </view>
-</navigator>
+  </navigator>
 
-<view class='msg-item com-flex-between common-box-style'>
-  <view class='font30'>经办人</view>
-  <text class='font28 com-gray-color'>{{nickName}}</text>
-</view>
-
-<picker mode='date' bindchange='getTime'>
   <view class='msg-item com-flex-between common-box-style'>
-    <view class='font30'>采购时间</view>
-    <view class='com-flex-center'>
-      <text class='font28 com-gray-color'>{{orderDate?orderDate:''}}</text>
-      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
-    </view>
+    <view class='font30'>经办人</view>
+    <text class='font28 com-gray-color'>{{nickName}}</text>
   </view>
-</picker>
+
+  <picker mode='date' bindchange='getTime'>
+    <view class='msg-item com-flex-between common-box-style'>
+      <view class='font30'>采购时间</view>
+      <view class='com-flex-center'>
+        <text class='font28 com-gray-color'>{{orderDate?orderDate:''}}</text>
+        <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+      </view>
+    </view>
+  </picker>
 
 
-<view class='msg-item com-flex-between common-box-style'>
-  <view class='font30'>备注</view>
-  <input bindinput='remarkInput' value='{{remark}}' class='input-style' placeholder='请输入备注信息'></input>
-</view>
+  <view class='msg-item com-flex-between common-box-style'>
+    <view class='font30'>备注</view>
+    <input bindinput='remarkInput' value='{{remark}}' class='input-style' placeholder='请输入备注信息'></input>
+  </view>
 
+</block>
 <view>
 </view>
 

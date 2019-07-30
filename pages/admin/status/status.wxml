@@ -62,7 +62,7 @@
       <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中
         <view></view>
       </view>
-      <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中
+      <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">待上架
         <view></view>
       </view>
       <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完

@@ -129,6 +129,7 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
+      skuCode: options.skuCode,
       name: options.name,
       stockNum: options.num,
       code: options.code,

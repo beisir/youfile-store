@@ -33,11 +33,11 @@
     <view class='tr-box com-flex-center'>
       <view class='flexone'>{{flowItem.supplierName}}</view>
       <view class='flexone'>{{filter.filterTime(flowItem.time,true)}}</view>
-      <view class='flexone'>{{flowItem.stockRemainNum}}</view>
+      <view class='flexone'>{{flowItem.inRemainNum}}</view>
       <view class='com-flex-center calc-box'>
         <button class='calc-btn' bindtap='changeNumBtn' data-index="{{flowIndex}}" data-regionindex="{{index}}" data-type='reduce' disabled='{{!flowItem.adviceOutNum || flowItem.adviceOutNum==0}}' style='border-right:1rpx solid #ddd'>-</button>
         <input bindinput='watchInput' bindblur='checkNum' type="number" data-index="{{flowIndex}}" data-regionindex="{{index}}"  value='{{flowItem.adviceOutNum}}' class='calc-input' maxlength='6'></input>
-        <button class='calc-btn' bindtap='changeNumBtn' data-index="{{flowIndex}}" data-regionindex="{{index}}" data-type='add' style='border-left:1rpx solid #ddd' disabled="{{flowItem.adviceOutNum>=flowItem.stockRemainNum}}">+</button>
+        <button class='calc-btn' bindtap='changeNumBtn' data-index="{{flowIndex}}" data-regionindex="{{index}}" data-type='add' style='border-left:1rpx solid #ddd' disabled="{{flowItem.adviceOutNum>=flowItem.inRemainNum}}">+</button>
       </view>
     </view>
     <view class='border-line' wx:if="{{flowIndex!==item.flowList.length-1}}"></view>

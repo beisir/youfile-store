@@ -134,7 +134,7 @@ Page({
     }
     data[index].selected = !data[index].selected
 
-    data.filter(el => el.selected).forEach(el=>{
+    data.filter(el => el.selected).forEach(el => {
       namearr.push(el.name)
     })
     this.setData({
@@ -142,10 +142,10 @@ Page({
       businessScope: namearr.join()
     })
   },
-  showBottom(){
+  showBottom() {
     this.selectComponent("#bottom").open()
   },
-  hideBottom(){
+  hideBottom() {
     this.selectComponent("#bottom").close()
   },
   watchinput(e) {
@@ -176,17 +176,17 @@ Page({
       return
     }
     if (data.linkmanPhone && !regTest({
-        type: 'telephone',
-        str: data.linkmanPhone
-      })) {
+      type: 'telephone',
+      str: data.linkmanPhone
+    })) {
       Api.showToast("请填写正确的联系人手机号")
       return
     }
 
     if (data.email && !regTest({
-        type: 'email',
-        str: data.email
-      })) {
+      type: 'email',
+      str: data.email
+    })) {
       Api.showToast("请填写正确的邮箱")
       return
     }
@@ -197,11 +197,11 @@ Page({
       data.city = areaArr[1]
       data.county = areaArr[2]
     }
-    if (this.data.businessScope){
+    if (this.data.businessScope) {
       data.businessScope = this.data.businessScope
     }
     if (this.data.pageType === 'edit') {
-      data.code = this.data.code
+      data.no = this.data.no
       Api.updateSupplier(data).then(res => {
         Api.showToast(res.message, () => {
           wx.navigateBack()
@@ -220,7 +220,7 @@ Page({
   // 编辑获取详情数据回填
   getDeatail() {
     Api.getSupplierMsg({
-      code: this.data.code
+      no: this.data.no
     }).then(res => {
       let obj = res.obj,
         formData = {}
@@ -231,13 +231,19 @@ Page({
       }
       formData.name = obj.name
       formData.no = obj.no
-      formData.manager = obj.manager
-      formData.phone = obj.phone
+      formData.starFlag = obj.starFlag
       formData.address = obj.address
+      formData.principal = obj.principal
+      formData.principalPhone = obj.principalPhone
+      formData.principalPhone = obj.principalPhone
+      formData.linkman = obj.linkman
+      formData.linkmanPhone = obj.linkmanPhone
+      formData.weixinNumber = obj.weixinNumber
       formData.email = obj.email
       formData.remark = obj.remark
       this.setData({
-        formData
+        formData,
+        businessScope: obj.businessScope
       })
       if (obj.province) {
         this.setData({
@@ -249,56 +255,63 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-
+  onLoad: function (options) {
+    if (options.no) {
+      this.setData({
+        no: options.no,
+        pageType: 'edit'
+      }, () => {
+        this.getDeatail()
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

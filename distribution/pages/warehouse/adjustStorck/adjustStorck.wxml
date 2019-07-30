@@ -7,7 +7,7 @@
   <text class='font60'>{{stockNum}}</text>
 </view>
 
-<navigator url='/distribution/pages/supplier/choseGoodsSupplier/choseGoodsSupplier?code={{code}}&goodsId={{goodsId}}'>
+<navigator url='/distribution/pages/supplier/choseGoodsSupplier/choseGoodsSupplier?code={{skuCode}}&goodsId={{goodsId}}'>
   <view class='supplier-box com-flex-center'>
     <view>选择供应商</view>
     <view class='flexone supplier-name com-text-ellipsis'>{{supplierObj.name}}</view>

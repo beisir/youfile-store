@@ -22,7 +22,7 @@ Page({
   checkNum(e) {
     let flowindex = e.currentTarget.dataset.index,
       regionindex = e.currentTarget.dataset.regionindex,
-      itemStocknum = this.data.goods.adviceSkuList[this.data.skuIndex].warehouseList[this.data.chosedhouseIndex].regionList[regionindex].flowList[flowindex].stockRemainNum,
+      itemStocknum = this.data.goods.adviceSkuList[this.data.skuIndex].warehouseList[this.data.chosedhouseIndex].regionList[regionindex].flowList[flowindex].inRemainNum,
       nowVal = e.detail.value
     if (!nowVal) {
       nowVal = 0
@@ -114,7 +114,7 @@ Page({
     this.eventChannel = this.getOpenerEventChannel()
     this.eventChannel.on('sendSkuData', (data) => {
       this.setData({
-        goods: data.goods,
+        goods: JSON.parse(JSON.stringify(data.goods)),
         skuIndex: data.skuIndex,
         goodsIndex: data.goodsIndex,
       })

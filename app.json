@@ -38,6 +38,7 @@
   ],
   "pages": [
     "pages/page/home/home",
+    "pages/businessFriend/selfinformation/selfinformation",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/customerManage/index/index",
     "pages/businessFriend/merchant/index/index",

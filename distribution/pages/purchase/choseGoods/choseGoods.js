@@ -34,7 +34,7 @@ Page({
     if (this.data.tabType === 'supplier'){
       Api.getSupplierGoodsList({
         supplierNumber: this.data.supplierNumber,
-        keyword: this.data.serText
+        keywords: this.data.serText
       }).then(res => {
         this.setData({
           goodsList: this.resetList(this.data.goodsList.concat(res.obj.result))

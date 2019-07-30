@@ -213,7 +213,7 @@ Page({
   },
   editWare(e){
     wx.navigateTo({
-      url: '../adjustStorck/adjustStorck?code=' + e.currentTarget.dataset.code + '&num=' + e.currentTarget.dataset.num + '&name=' + e.currentTarget.dataset.name + '&goodsId=' + this.data.goodsId + '&skuName=' + e.currentTarget.dataset.skuname,
+      url: '../adjustStorck/adjustStorck?code=' + e.currentTarget.dataset.code + '&num=' + e.currentTarget.dataset.num + '&name=' + e.currentTarget.dataset.name + '&goodsId=' + this.data.goodsId + '&skuName=' + e.currentTarget.dataset.skuname + '&skuCode=' + e.currentTarget.dataset.skucode,
     })
   },
   /**

@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "进货商管理"
+  "navigationBarTitleText": "进货商管理",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616"
 }

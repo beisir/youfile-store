@@ -79,8 +79,14 @@
       </view>
     </view>
     <view class='remark-flex' wx:if="{{operationType === 'adjust'}}">
-      <text class='remark-tip'>{{adjustReason?adjustReason:''}}</text>
-      <view class='remark-box'>
+      <block wx:if="{{adjustReason}}"> 
+        <text class='remark-tip' wx:if="{{adjustReason === 'stock_overflow'}}">库存报溢</text>
+        <text class='remark-tip' wx:if="{{adjustReason === 'sale_return'}}">销售退货</text>
+        <text class='remark-tip' wx:if="{{adjustReason === 'breakage'}}">破损</text>
+        <text class='remark-tip' wx:if="{{adjustReason === 'purchase_return'}}">采购退货</text>
+        <text class='remark-tip' wx:if="{{adjustReason === 'other'}}">其他</text>
+      </block>
+      <view class='remark-box' wx:if="{{remark}}">
         <text>备注：{{remark?remark:''}}</text>
       </view>
     </view>

@@ -40,13 +40,13 @@
     <image class='goods-icon' src='{{baseUrl+item.goodsMainImgUrl}}'></image>
     <view class='flexone' style='overflow:hidden;'>
       <view class='com-flex-center font28 com-blod-font'>
-        <text class='warning-tip font24' wx:if="{{item.warningLessFlag || item.warningMoreFlag}}">预警</text>
+        <text class='warning-tip font24' wx:if="{{item.warningFlag}}">预警</text>
         <text class='flexone com-text-ellipsis'>{{item.goodsName}}</text>
       </view>
       <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：{{item.goodsSerialNumber?item.goodsSerialNumber:''}}</view>
       <view class='font26'>
         <text>库存：</text>
-        <text class='com-red-color' wx:if="{{item.warningLessFlag || item.warningMoreFlag}}">{{item.stockNum}}</text>
+        <text class='com-red-color' wx:if="{{item.warningFlag}}">{{item.stockNum}}</text>
         <text class='com-yellow-color' wx:else>{{item.stockNum}}</text>
       </view>
     </view>

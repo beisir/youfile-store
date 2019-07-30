@@ -1,5 +1,6 @@
 // distribution/pages/purchase/createOrder/createOrder.js
 import Api from '../../../../utils/api.js'
+import { formatTimeday } from '../../../../utils/util.js'
 const app = getApp()
 Page({
 
@@ -177,6 +178,10 @@ Page({
   onLoad: function (options) {
     wx.setStorageSync('purchaseGoods', {})
     this.getUserInfo()
+
+    this.setData({
+      orderDate: formatTimeday(new Date())
+    })
   },
 
   /**

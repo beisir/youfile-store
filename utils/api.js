@@ -1566,10 +1566,12 @@ function getSupplierMsg(data){ // 获取供应商信息
   return app.http.getRequest(handleSupplierUrl, data)
 }
 function updateSupplier(data){
-  return app.http.putRequest(handleSupplierUrl, data) 
+  return app.http.putRequest(handleSupplierUrl, data, {
+    'content-type': 'application/x-www-form-urlencoded'
+  })
 }
 function delSupplier(data) {
-  return app.http.delRequest(handleSupplierUrl, data)
+  return app.http.deleteRequest(handleSupplierUrl, data)
 }
 function getSupplierGoodsList(data){
   return app.pageRequest.pageGet(getSupplierGoodsListUrl, data)

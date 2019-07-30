@@ -16,7 +16,7 @@
 </view>
 
 <view class='com-flex-around tab-box'>
-  <view class='tab {{tabStatus==="cloud"?"tab-ac":""}}' data-type='cloud'>云供应商
+  <view class='tab {{tabStatus==="cloud"?"tab-ac":""}}' data-type='cloud' style='color:#ccc;'>云供应商
     <text wx:if="{{tabStatus==='cloud'}}">{{totalNum}}</text>
   </view>
   <view class='line'></view>

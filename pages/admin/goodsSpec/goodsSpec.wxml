@@ -93,7 +93,7 @@
           </view>
           <view>
             <!-- <input disabled='' type='number' bindinput='monitor' data-index='{{index}}' data-name='stockNum' maxlength='6' value='{{item.stockNum}}' placeholder='输入库存'></input> -->
-            <input disabled wx:if="{{item.stockNum ||item.stockNum == 0}}" value='{{"库存:"+item.stockNum}}' class='stockNumInput'></input>
+            <input disabled wx:if="{{item.stockNum ||item.stockNum === 0}}" value='{{"库存:"+item.stockNum}}' class='stockNumInput'></input>
           </view>
         </view>
       </view>

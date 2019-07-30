@@ -19,8 +19,8 @@
 .order-btn{font-size:24rpx;padding: 10rpx 30rpx;background: #fff;color: #f8b616;width: 140rpx;height: 50rpx;border: 1rpx solid #f8b616;margin:0;margin-left:20rpx;display: flex;align-items: center;justify-content: center;border-radius: 50rpx;}
 /* 顶部切换 */
 .head-tab{height: 100rpx;background: #fff;}
-.tab-item{width: 190rpx;border-bottom: 5rpx solid #fff;height: 100%;box-sizing: border-box;display: flex;align-items: center;justify-content: center;}
-.tab-item-ac{border-color: #f8b616;color: #f8b616;}
+.tab-item{width: 190rpx;border-bottom: 6rpx solid #fff;height: 100%;box-sizing: border-box;display: flex;align-items: center;justify-content: center;}
+.tab-item-ac{border-color: #f8b616;color: #f8b616;font-weight: 600;}
 .tab-line{width: 2rpx; height: 30rpx;background: #eee;}
 .addOrder-btn{width: 210rpx;height: 100rpx;color: #f8b616;display: flex;align-items: center;justify-content: center;}
 

@@ -10,7 +10,7 @@
   <navigator url='../createTag/createTag'>
     <view class='choseTag com-flex-center com-new-gold-font font30'>
       <image src='/distribution/images/addTag.png' class='img40 add-icon'></image>
-      <text>创建新库区类型</text>
+      <text class='com-blod-font'>创建新库区类型</text>
     </view>
   </navigator>
 </view>
