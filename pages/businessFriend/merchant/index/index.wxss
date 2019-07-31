@@ -26,6 +26,7 @@
 .color-chunk{background: #f8b616;width: 10rpx;height: 30rpx;margin-right: 20rpx;}
 .list-item{height: 120rpx;font-size: 30rpx;font-weight: 600;}
 .list-item-title{padding: 0 30rpx;}
+.user-icon{border-radius: 10rpx;}
 
 .four-box>view{width: 24.5%!important;}
 .four-box>view:nth-child(3){border-right:2rpx solid #DDDDDD}

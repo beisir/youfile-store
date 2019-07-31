@@ -367,11 +367,11 @@
   <view class='os-mon' style='margin-bottom:0;border-bottom:1rpx solid #EFEFEF'>出库信息
     <text class='com-color-font' bindtap='toDetail'>出库详情</text>
   </view>
-  <view class='os-mon' style='margin-top:0'>
+  <view class='os-mon' style='margin-top:0' wx:for="{{order.stockOutDetailsVos}}" wx:key="{{index}}">
     <!-- 多快递出库 -->
-    <block wx:for="{{order.stockOutDetailsVos}}" wx:key="{{index}}">
+    <block>
       <view>出库仓库
-        <view class='house-num com-color-back'>{{index+1}}</view>
+        <view class='house-num com-color-back' wx:if="{{order.stockOutDetailsVos.length>1}}">{{index+1}}</view>
         <text bindtap='copyKdCode'>{{item.warehouseRegionName}}</text>
       </view>
       <view>物流公司

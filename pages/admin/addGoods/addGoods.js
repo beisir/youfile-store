@@ -571,8 +571,15 @@ Page({
       switchChange:e.detail.value
     })
   },
+  sureLayer() {
+    this.setData({ sureAddLayer: true })
+  },
+  closeLaye() {
+    this.setData({ sureAddLayer: false })
+  },
   // 放入仓库
   addGit: function(e) {
+    this.closeLaye()
     var status = e.target.dataset.status,
       pics = this.data.pics,
       _this=this,

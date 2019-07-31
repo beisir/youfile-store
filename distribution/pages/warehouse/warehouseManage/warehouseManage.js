@@ -8,7 +8,16 @@ Page({
    */
   data: {
     houseList: [],
-    serchText:''
+    serchText:'',
+    // 开启仓库弹窗
+    newFunLayer: false
+  },
+  // 关闭新功能弹窗
+  closeModal(e) {
+    this.setData({ newFunLayer: false })
+    if (e.currentTarget.dataset.type === 'know') {
+
+    }
   },
   getList(re) {
     if(re){
@@ -35,11 +44,19 @@ Page({
       serchText: ''
     })
   },
+  getSetting() {
+    Api.getWarningSetting().then(res => {
+      let data = res.obj
+      this.setData({
+        newFunLayer: data.warehouseStatus === 'off' ? true : false,
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.getSetting()
   },
 
   /**

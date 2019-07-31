@@ -150,6 +150,19 @@ Page({
         wareData: res.obj,
         warehouse: [res.obj, res.obj[0].regionList]
       })
+      let defaultHouse = res.obj.filter(el => el.defaultFlag)
+      if (defaultHouse[0]){
+        let region = defaultHouse[0].regionList.filter(region => region.defaultFlag)
+        if (region[0]){
+          this.setData({
+            house: {
+              name: defaultHouse[0].name + " " + region[0].name,
+              warehouseCode: defaultHouse[0].code,
+              regionCode: region[0].code
+            }
+          })
+        }
+      }
     })
   },
   setHouse(e){

@@ -109,18 +109,18 @@
       <view class='np-view np-code np-coden1' wx:for="{{order.stockOutDetailsVos}}" wx:key="{{index}}">
         <image src="/image/wl-car.png"></image>
         <view>物流信息</view>
-        <text>承运公司：{{item.expressCompany}}</text>
+        <text>物流公司：{{item.expressCompany}}</text>
         <view>
-          <text bindtap="copyKdCode">运单编号：{{item.expressNumber}}</text>
+          <text bindtap="copyKdCode">运单号：{{item.expressNumber}}</text>
         </view>
       </view>
     </block>
     <view class='np-view np-code np-coden1' wx:else>
       <image src="/image/wl-car.png"></image>
       <view>物流信息</view>
-      <text>承运公司：{{order.expressCompany?order.expressCompany:""}}</text>
+      <text>物流公司：{{order.expressCompany?order.expressCompany:""}}</text>
       <view>
-        <text bindtap="copyKdCode">运单编号：{{order.expressNumber?order.expressNumber:""}}</text>
+        <text bindtap="copyKdCode">运单号：{{order.expressNumber?order.expressNumber:""}}</text>
       </view>
     </view>
   </block>

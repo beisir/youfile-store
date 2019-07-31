@@ -1,11 +1,13 @@
 <view class='supplier-modal' wx:if="{{supplierShow}}" bindtap='closeModal'>
   <scroll-view scroll-y class='scroll-modal' catchtouchmove='stopScroll'>
-    <view class='modal-sku-item' wx:for="{{supSku}}" wx:key="{{index}}">
-      <text style='width:190rpx;padding-right:20rpx;font-weight:600;'>{{item.skuName?item.skuName:'默认'}}</text>
-      <view class='com-color-font flexone'>
-        <view class='com-flex-between flexone' wx:for="{{item.supplierList}}" wx:key="{{index}}" wx:for-item='sku'>
-          <text>{{sku.supplierName}}</text>
-          <text>{{sku.num}}</text>
+    <view class='supplier-modal-true-box'>
+      <view class='modal-sku-item' wx:for="{{supSku}}" wx:key="{{index}}">
+        <text style='width:190rpx;padding-right:20rpx;font-weight:600;'>{{item.skuName?item.skuName:'默认'}}</text>
+        <view class='com-color-font flexone'>
+          <view class='com-flex-between flexone' wx:for="{{item.supplierList}}" wx:key="{{index}}" wx:for-item='sku'>
+            <text>{{sku.supplierName}}</text>
+            <text>{{sku.num}}</text>
+          </view>
         </view>
       </view>
     </view>
@@ -45,10 +47,12 @@
       </view>
       <view class='border-line'></view>
       <!-- 部分入库表头 -->
-      <view hidden='{{item.hide}}'>
+      <view hidden='{{item.hide}}' style='padding-bottom:40rpx;'>
         <view class='sku-item com-flex-between font24'>
           <view>规格</view>
-          <view bindtap='showSupplier' data-index="{{index}}" data-goodsindex="{{goodsIndex}}" class='com-flex-allcenter'>出库数量 <image style='width:25rpx;height:25rpx;margin-left:10rpx;' src='/distribution/images/exclamation-gold.png'></image> </view>
+          <view bindtap='showSupplier' data-index="{{index}}" data-goodsindex="{{goodsIndex}}" class='com-flex-allcenter'>出库数量
+            <image style='width:25rpx;height:25rpx;margin-left:10rpx;' src='/distribution/images/exclamation-gold.png'></image>
+          </view>
         </view>
         <view class='border-line'></view>
         <block wx:for="{{goods.skuList}}" wx:for-item="sku" wx:for-index="skuIndex" wx:key="{{skuIndex}}">
@@ -57,8 +61,8 @@
             <view>{{sku.totalNum}}</view>
           </view>
         </block>
+        <view class='border-line'></view>
       </view>
-      <view class='border-line'></view>
     </block>
     <block wx:if="{{orderType!=='ziti'}}">
       <view class='goods-header com-padding-box com-flex-center'>
@@ -68,7 +72,7 @@
       <view class='border-line'></view>
       <view class='com-form-box'>
         <view class='com-flex-between form-item'>
-          <view class='form-title'>物流公司名称</view>
+          <view class='form-title'>物流公司</view>
           <input value='{{item.expressCompany}}' placeholder='请输入物流公司名称' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='expressCompany' class='flexone' data-index="{{index}}"></input>
         </view>
         <view class='com-flex-between form-item'>

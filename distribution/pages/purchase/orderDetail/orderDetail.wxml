@@ -28,9 +28,9 @@
           <view class='suppler-tip' wx:if="{{order.supplierType=='platform_merchant'}}">云供应商</view>
           <view class='suppler-tip' wx:if="{{order.supplierType=='self_maintenance'}}">供应商</view>
         </view>
-        <view class='font26 com-gray-color tele-text'>联系电话：{{order.supplierPhone?order.supplierPhone:''}}</view>
+        <view wx:if="{{order.supplierPhone}}" class='font26 com-gray-color tele-text'>联系电话：{{order.supplierPhone?order.supplierPhone:''}}</view>
       </view>
-      <image class='img30' src='/distribution/images/tele-gold.png' bindtap='call'></image>
+      <image wx:if="{{order.supplierPhone}}" class='img30' src='/distribution/images/tele-gold.png' bindtap='call'></image>
     </view>
     <!-- 仓库信息 -->
     <navigator url='../orderInHouseDetail/orderInHouseDetail?no={{no}}'>

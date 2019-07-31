@@ -98,6 +98,15 @@ Page({
     let val = e.detail.value,
       type = e.currentTarget.dataset.type
     let funobj = {
+      num: () => {
+        let firstIndex = this.data.nowIndex,
+            secIndex = e.currentTarget.dataset.index
+        if (!/^(0 | [1 - 9][0 - 9]*)$/.test(val) && val !==''){
+          this.setData({
+            ['skuPriceNumList[' + firstIndex + '].secondSku[' + secIndex + '].num']: parseInt(val)
+          })    
+        }
+      },
       price: () => {
         let firstIndex = this.data.nowIndex,
           secIndex = e.currentTarget.dataset.index
@@ -259,9 +268,11 @@ Page({
   },
   // 点击sku按钮
   skuClick(e) {
-    this.setData({
-      nowIndex: e.currentTarget.dataset.index
-    })
+    setTimeout(()=>{
+      this.setData({
+        nowIndex: e.currentTarget.dataset.index
+      })
+    }, 300)
   },
   showModal() {
     this.setData({
@@ -277,7 +288,7 @@ Page({
   },
   sureCommonSet() {
     this.closeModal()
-    let comNum = this.data.commonNum !== '' ? this.data.commonNum : false,
+    let comNum = this.data.commonNum !== '' ? parseInt(this.data.commonNum) : false,
       conPri = this.data.commonPrice !== '' ? this.data.commonPrice : false
     let arr = this.data.skuPriceNumList[this.data.nowIndex].secondSku
     arr.forEach(el => {

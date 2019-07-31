@@ -53,7 +53,7 @@
   <view class='bf-cont'>
     <navigator wx:for="{{distributor}}" wx:key="{{index}}" url='../reach/reach?accept={{item.purchaserUserId}}'>
       <view class='list-item com-flex-center'>
-        <image class='img60' src='{{baseUrl + item.headPic}}'></image>
+        <image class='img60 com-border-radius' src='{{baseUrl + item.headPic}}'></image>
         <text class='flexone list-item-title com-text-ellipsis'>{{item.nickName}}</text>
         <image class='img30'></image>
       </view>
@@ -117,7 +117,7 @@
   <view class='bf-cont'>
     <navigator class='' url="../../selfinformation/selfinformation?no={{item.no}}" wx:for="{{supList}}" wx:key="{{index}}">
     <view class='list-item com-flex-center'>
-      <image class='img60' src='/image/com-user-cion.png'></image>
+      <image class='img60 com-border-radius' src='/image/com-user-cion.png'></image>
       <text class='flexone list-item-title com-text-ellipsis'>{{item.name}}</text>
       <image class='img30'></image>
     </view>

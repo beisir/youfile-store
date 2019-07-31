@@ -11,7 +11,7 @@ page{background-color:#f7f7f7;font-family:"Helvetica Neue","Hiragino Sans GB","M
 .data-cont>view view{margin-left:190rpx}
 .data-cont text{color:#999;position:absolute}
 .bf-img{position:absolute;width:60rpx;height:60rpx;left:-100rpx;top:25rpx}
-.bf-img image{max-width:60rpx;max-height:60rpx;border-radius:50%}
+.bf-img image{max-width:60rpx;max-height:60rpx;border-radius:10rpx;}
 .search-box{position:relative;display:flex;justify-content:space-between;padding:0 25rpx;background:#fff;height:100rpx;font-size:28rpx}
 .search-input{flex:1;margin-top:13rpx;height:70rpx;line-height:70rpx;padding:0 70rpx;border-radius:10rpx;border:1rpx solid #F1F1F1}
 .serCont{color:#f8b616;font-size:34rpx;margin-left:20rpx;padding-top:20rpx}
@@ -218,6 +218,7 @@ input:focus{padding:0}
 .img40{height: 40rpx;width: 40rpx;}
 .img50{height: 50rpx;width: 50rpx;}
 .img60{height: 60rpx;width: 60rpx;}
+.com-border-radius{border-radius: 10rpx;}
 /* 公用盒子 */
 .common-box-style{margin: 20rpx 20rpx 0;background: #fff;border-radius: 10rpx;padding: 0 30rpx;}
 /* 公用标题方块 */

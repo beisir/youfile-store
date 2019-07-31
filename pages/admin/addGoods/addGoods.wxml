@@ -1,3 +1,10 @@
+<!-- 确认上架 -->
+<mes show="{{sureAddLayer}}">
+  <view class='font-color'>
+    <text>您还未设置库存，上架后该商品将进入已售完列表</text>
+    <button form-type='submit' bindtap='addGit' data-status='1'>确定</button>
+  </view>
+</mes>
 <!-- 提示-->
 <mes show="{{show1}}" bind:sureSelectArea="sureSelectAreaListener">
   <view class='font-color'>
@@ -309,7 +316,7 @@
     <cover-view class='com-bottom-btn-group'>
       <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='addGit' data-status='0'><image src="/image/git.png"/>确定</button>
       <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else data-status='0'><image src="/image/git.png"/>确定</button>
-      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='addGit' data-status='1'><image src="/image/up.png"/>上架</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='sureLayer'><image src="/image/up.png"/>上架</button>
       <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else><image src="/image/up.png"/>上架</button>
     </cover-view>
   </form>

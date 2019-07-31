@@ -32,8 +32,8 @@ Page({
       if (this.data.tabStatus === 'sup') {
         pre.setData({
           supplierObj: {
-            supplierNumber: arr[0].no,
-            name: arr[0].name,
+            supplierNumber: arr[0].supplierNumber,
+            name: arr[0].supplierName,
             supplierType: 'self_maintenance'
           }
         })
@@ -42,7 +42,7 @@ Page({
           supplierObj: {
             supplierNumber: arr[0].merchantNumber,
             supplierStoreId: arr[0].storeId,
-            name: arr[0].name,
+            name: arr[0].supplierName,
             supplierType: 'platform_merchant'
           }
         })
@@ -62,7 +62,7 @@ Page({
         keywords: this.data.serText,
         goodsId: this.data.goodsId,
         skuCode: this.data.code,
-        // supplierType: 'self_maintenance'
+        supplierType: 'self_maintenance'
       }).then(res => {
         this.setData({
           supplierList: this.data.supplierList.concat(res.obj.result),

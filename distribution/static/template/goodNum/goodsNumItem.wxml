@@ -62,15 +62,15 @@
       </text>
     </view>
     <view class='msg-item com-flex-between'>
-      <view>出库仓库：{{warehouseName}}</view>
+      <view>仓库：{{warehouseName}}</view>
       <view>剩余库存：{{stockRemainNum}}</view>
     </view>
     <view class='msg-item com-flex-between'>
       <view>经手人：{{operationUserName?operationUserName:''}}</view>
-      <view>{{filter.filterTime(time)}}</view>
+      <view>{{filter.filterTime(time,true)}}</view>
     </view>
     <view class='msg-item com-flex-between'>
-      <view>供应商：{{supplierName}}</view>
+      <view>供应商：{{supplierName?supplierName:''}}</view>
       <view class='change-type'>
         <text wx:if="{{operationType === 'adjust'}}">调整</text>
         <text wx:if="{{operationType === 'order'}}">订单</text>

@@ -1,7 +1,7 @@
 .uploadImg{height:300rpx;font-size:30rpx;text-align:center;color:#999}
 .uploadImg image{height:150rpx;width:150rpx;margin-top:40rpx;margin-bottom:10rpx}
 .write image{width:80%;margin-left:10%}
-.page__category-content{margin:0 20rpx;background:#fff;color:#333;margin-bottom:30rpx;border-radius:20rpx;font-size:36rpx;padding-right:30rpx;overflow:hidden;position: relative}
+.page__category-content{margin:0 20rpx;background:#fff;color:#333;margin-bottom:30rpx;border-radius:10rpx;font-size:36rpx;padding-right:30rpx;overflow:hidden;position: relative}
 .weui-title{font-size:34rpx;font-weight:bold;height:100rpx;line-height:100rpx;padding-left:30rpx;border-bottom:2rpx solid #EDEDED;width:101%;position:relative}
 .weui-input{padding-left:30rpx;color:#999999;font-size:28rpx;margin-bottom:10rpx}
 .weui-cell__hd image,.weui-cell__ft1 image,.weui-title image,.weui-cell__ft image{width:30rpx;height:30rpx;vertical-align:middle;margin-top:-6rpx;margin-right:15rpx}

@@ -82,6 +82,8 @@ Page({
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('sendSkuData', (data)=> {
+      // 初始化隐藏
+      data.list.outDetailsList.forEach(el=>el.hide=true)
       this.setData({
         list: data.list.outDetailsList,
         flowList: data.list.inFlowForOutList

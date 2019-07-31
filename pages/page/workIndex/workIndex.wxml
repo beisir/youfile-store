@@ -1,3 +1,21 @@
+<!-- 新功能弹窗 -->
+<view class='com-new-function-layer' wx:if="{{newFunLayer}}">
+  <view class='com-color-back com-new-function-inner'>
+    <image src='/image/close-white.png' style='position:absolute;right:20rpx;top:20rpx;width:35rpx;height:35rpx;' bindtap='closeModal'></image>
+    <image src='/image/appicon-whiteback.png' class='title-pic'></image>
+    <view class='white-title'>开启小云店库存一体化</view>
+    <view class='white-box'>
+      <view class='font24'>更新版本：</view>
+      <view class='font36 com-blod-font'>小云店版本 V4.0</view>
+      <image src='/image/new-funciton.png' style='width:140rpx;height:82rpx;margin:30rpx 0 25rpx;'></image>
+      <view class='layer-msg-item'>1.更新了新建云享品功能</view>
+      <view class='layer-msg-item'>2.更新了商品库存一体化功能</view>
+      <view class='layer-msg-item'>3.更新了小云店全新页面风格</view>
+      <button class='layer-bottom-btn com-color-back' hover-class='none' data-type='know' bindtap='closeModal'>体验库存一体化</button>
+    </view>
+  </view>
+</view>
+<!-- 初始化店铺 -->
 <view wx:if="{{initOrder && limitShow == 2}}">
   <initstroe></initstroe>
 </view>
@@ -74,7 +92,15 @@
           <view>订单管理</view>
         </button>
       </navigator>
-      <navigator wx:if="{{onlinePay}}" url='../../faceToFaceOrder/createOrder/createOrder'>
+       <navigator url='../../role/supplyOrder/supplyOrder'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-order.png'></image>
+          </view>
+          <view>供货单</view>
+        </button>
+      </navigator>
+      <!-- <navigator wx:if="{{onlinePay}}" url='../../faceToFaceOrder/createOrder/createOrder'>
         <button form-type='submit' class='reset-form-btn'>
           <view class='entry-icon-box'>
             <image mode='widthFix' src='/image/indexicon-openOrder.png'></image>
@@ -89,7 +115,7 @@
           </view>
           <view>开单</view>
         </button>
-      </navigator>
+      </navigator> -->
       <navigator url='../../admin/status/status'>
         <button form-type='submit' class='reset-form-btn'>
           <view class='entry-icon-box'>
@@ -135,22 +161,15 @@
         </button>
       </navigator>
 
-      <navigator url='../../role/supplyOrder/supplyOrder'>
-        <button form-type='submit' class='reset-form-btn'>
-          <view class='entry-icon-box'>
-            <image mode='widthFix' src='/image/indexicon-order.png'></image>
-          </view>
-          <view>供货单</view>
-        </button>
-      </navigator>
-      <navigator url='../../faceToFaceOrder/shopkeeperList/shopkeeperList'>
+     
+      <!-- <navigator url='../../faceToFaceOrder/shopkeeperList/shopkeeperList'>
         <button form-type='submit' class='reset-form-btn'>
           <view class='entry-icon-box'>
             <image mode='widthFix' src='/image/indexicon-order.png'></image>
           </view>
           <view>门店订单</view>
         </button>
-      </navigator>
+      </navigator> -->
     </view>
   </view>
 

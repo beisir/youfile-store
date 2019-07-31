@@ -7,10 +7,10 @@
 .edit-icon{width: 26rpx;height: 26rpx;margin-right: 10rpx;}
 .flex-column{display: flex;flex-direction: column;justify-content: space-between;height: 150rpx;}
 /* sku */
-.sku-tip-item{padding: 22rpx 27rpx;border-radius: 10rpx;background: #eeeeee;display:inline-block;margin-right: 20rpx;position: relative;margin-top:20rpx;}
+.sku-tip-item{padding: 15rpx 27rpx;border-radius: 10rpx;background: #eeeeee;display:inline-block;margin-right: 20rpx;position: relative;margin-top:20rpx;}
 .calc-box-title{min-width: 212rpx;margin-right: 30rpx;}
 .sku-red-num{position: absolute;right: -18rpx;top: -18rpx;overflow: hidden;background: #f55353;color: #fff;line-height: 36rpx;height: 36rpx;min-width: 36rpx;padding:0 5rpx;text-align: center;border-radius: 36rpx;font-size: 24rpx;}
-.skubox{padding: 30rpx 0 40rpx;}
+.skubox{padding: 30rpx 0 30rpx;}
 .sku-tip-item-ac{background: #f8b616;color: #fff;}
 .sku-table-title{height: 100rpx;color: #999;font-size: 24rpx;}
 .sku-table-title>view{text-align: center;}

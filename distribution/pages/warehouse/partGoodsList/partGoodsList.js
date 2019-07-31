@@ -21,8 +21,11 @@ Page({
       })
       
     }).catch(e=>{
+      wx.hideToast()
       this.setData({
         delModal: true
+      },()=>{
+        wx.hideToast()
       })
     })
     

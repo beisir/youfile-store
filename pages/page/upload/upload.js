@@ -45,7 +45,9 @@ Page({
       success(res) {
         const src = res.tempFilePaths[0]
         //  获取裁剪图片资源后，给data添加src属性及其值
-
+        self.setData({
+          ['cropperOpt.src']: src
+        })
         self.wecropper.pushOrign(src)
       }
     })

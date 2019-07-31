@@ -64,7 +64,7 @@
         </view>
         <view class='com-flex-center calc-box'>
           <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-type='reduce' disabled='{{!item.num || item.num==0}}' style='border-right:1rpx solid #ddd'>-</button>
-          <input bindinput='watchInput' type="number" data-index="{{index}}" data-type="num" value='{{item.num}}' class='calc-input' type='number' maxlength='6'></input>
+          <input bindinput='watchInput' type="number" data-index="{{index}}" data-type="num" value='{{item.num}}' class='calc-input' type='number' maxlength='6' bindblur='checkInput'></input>
           <button class='calc-btn' bindtap='changeNumBtn' data-index="{{index}}" data-type='add' style='border-left:1rpx solid #ddd'>+</button>
         </view>
       </view>

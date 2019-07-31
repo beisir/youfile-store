@@ -16,5 +16,5 @@
 .list-box{margin: 20rpx;background: #fff;border-radius: 10rpx;}
 
 .supplier-item{padding: 0 30rpx; height: 120rpx;font-size: 30rpx;font-weight: 600;}
-.man-icon{height: 66rpx;width: 66rpx;border-radius: 10rpx;padding-right: 30rpx;}
+.man-icon{height: 66rpx;width: 66rpx;border-radius: 10rpx;margin-right: 30rpx;}
 .right{width: 40rpx;height: 35rpx;}

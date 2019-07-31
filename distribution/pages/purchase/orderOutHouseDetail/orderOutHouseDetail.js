@@ -82,7 +82,7 @@ Page({
   onLoad: function (options) {
     const eventChannel = this.getOpenerEventChannel()
     eventChannel.on('sendSkuData', (data) => {
-      console.log(data)
+      data.list.forEach(el => el.hide = true)
       this.setData({
         list: data.list
       })

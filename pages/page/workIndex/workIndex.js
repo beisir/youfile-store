@@ -19,7 +19,16 @@ Page({
     loadOnece: false,
     unshippedPurchaseOrders: 0,
     payPurchaseOrders: 0,
-    auditStatus:true
+    auditStatus:true,
+    // 新功能弹窗
+    newFunLayer: true
+  },
+  // 关闭新功能弹窗
+  closeModal(e){
+    this.setData({newFunLayer: false})
+    if (e.currentTarget.dataset.type === 'know'){
+      
+    }
   },
   // 埋点存储formid
   getFormId(e) {

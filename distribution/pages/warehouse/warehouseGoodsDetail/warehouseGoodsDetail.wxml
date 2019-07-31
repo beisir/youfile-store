@@ -61,7 +61,7 @@
     <view class='com-blod-font'>全部分类</view>
     <view class='class-item-box com-flex-between'>
       <view wx:for='{{classList}}' wx:key='{{index}}' class='class-item {{item.selected?"class-item-ac":""}}' bindtap='selectClass' data-index="{{index}}">{{item.name}}</view>
-      <view class='class-item;' style='background:#fff;' wx:for="{{(classList.length-1)%3}}"></view>
+      <view class='class-item;' style='background:#fff;' wx:for="{{(classList.length-1)%3}}" wx:key="{{index}}"></view>
     </view>
     <view class='side-switch-item com-flex-between'>
       <text>预警商品</text>

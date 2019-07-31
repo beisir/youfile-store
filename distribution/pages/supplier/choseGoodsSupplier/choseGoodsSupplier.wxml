@@ -21,7 +21,7 @@
 <view class='list-box'>
   <view class='com-flex-center supplier-item' bindtap='chose' data-index='{{index}}' wx:for="{{supplierList}}" wx:key='{{index}}'>
     <image class='man-icon' src='{{"/distribution/images/com-user-cion.png"}}'></image>
-    <view class='flexone'>{{item.name}}</view>
+    <view class='flexone'>{{item.supplierName}}</view>
     <image wx:if="{{item.selected}}" src='/distribution/images/right-gold.png' class='right'></image>
   </view>
 </view>

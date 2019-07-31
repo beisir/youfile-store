@@ -8,5 +8,6 @@
 
 /* 蒙层 */
 .supplier-modal{width:100%;height:100%;background: rgba(0, 0, 0, 0.4);position: fixed;top: 0;right: 0;z-index: 99}
-.scroll-modal{height: 400rpx;width:650rpx;padding:20rpx;background: #fff;border-radius: 10rpx;position: fixed;z-index: 999;left: 0;right: 0;top: 0;bottom: 0;margin: auto;}
+.scroll-modal{height: 400rpx;width:650rpx;border-radius: 10rpx;position: fixed;z-index: 999;left: 0;right: 0;top: 0;bottom: 0;margin: auto;}
+.supplier-modal-true-box{background: #fff;border-radius:10rpx;padding:20rpx;}
 .modal-sku-item{padding: 20rpx;display: flex;word-break:break-all;align-items:flex-start;font-size: 30rpx;}

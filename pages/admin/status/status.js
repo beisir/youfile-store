@@ -319,16 +319,16 @@ Page({
     this.setData({
       goodsId: goodId
     })
-    if (1 > num) {
-      this.setData({
-        showNum: true
-      })
-    } else {
+    // if (1 > num) {
+    //   this.setData({
+    //     showNum: true
+    //   })
+    // } else {
       this.setData({
         confirmUp: true,
         upIndex: index
       })
-    }
+    // }
   },
   confirmDown: function () {
     var _this = this,
