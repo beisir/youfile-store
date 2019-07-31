@@ -743,7 +743,11 @@ Page({
           if (!res.obj) { this.setSelect('subBankCode', []);return}
           let arr = []
           res.obj.forEach(el => {
-            arr.push({ name: el.bankName, code: el.bankCode })
+            let name = el.bankName;
+            if(name.indexOf("有限公司")>-1) {
+              name = name.split("有限公司")[1]
+            }
+            arr.push({ name: name, code: el.bankCode })
           })
           this.setSelect('subBankCode', arr, this.data.message.merchantSettleVO.subBankCode)
         })
