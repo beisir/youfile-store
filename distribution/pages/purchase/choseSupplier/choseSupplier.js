@@ -49,12 +49,15 @@ Page({
     }
   },
   getList(re){
+    if (this.reloadList){return}
+    this.reloadList = true
     if (re) {
       app.pageRequest.pageData.pageNum = 0
       this.setData({ supplierList: [] })
     }
     if (this.data.tabStatus === 'sup'){
       Api.getSupplierList({ keyword: this.data.serText }).then(res => {
+        this.reloadList = false
         this.setData({
           supplierList: this.data.supplierList.concat(res.obj.result),
           totalNum: res.obj.totalCount

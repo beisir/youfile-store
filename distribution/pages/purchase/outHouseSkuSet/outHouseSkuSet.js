@@ -104,7 +104,7 @@ Page({
       });
       wx.navigateBack()
     } else {
-      Api.showToast('请设置正确哦~~')
+      Api.showToast('请设置正确的待出库数量')
     }
   },
   /**

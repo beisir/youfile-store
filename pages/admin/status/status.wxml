@@ -25,9 +25,10 @@
 </mes>
 <!--是否上架-->
 <mes show="{{confirmUp}}" bind:sureSelectArea="sureSelectAreaListener">
-  <view style='padding:0 20rpx 20rpx;'>
-    <text>{{confirmUpText}}</text>
-    <button form-type='submit' bindtap='confirmUp'>确定</button>
+  <view style='padding:0 20rpx'>
+    <text wx:if="{{confirmUpType=='zero'}}" style='font-size:32rpx;'>您还未设置库存，上架后该商品将进入已售完列表</text>
+    <text wx:if="{{confirmUpType=='normal'}}">确定上架该商品？</text>
+    <button style="{{confirmUpType=='zero'?'margin-bottom:50rpx;':''}}" form-type='submit' bindtap='confirmUp'>确定</button>
   </view>
 </mes>
 <!--是否下架-->

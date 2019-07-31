@@ -324,13 +324,13 @@ Page({
         // showNum: true // 零库存以前不让上 现在又让上架了~~~
         confirmUp: true,
         upIndex: index,
-        confirmUpText: '您还未设置库存，上架后该商品将进入已售完列表'
+        confirmUpType: 'zero'
       })
     } else {
       this.setData({
         confirmUp: true,
         upIndex: index,
-        confirmUpText: '确定上架该商品？'
+        confirmUpType: 'normal'
       })
     }
   },

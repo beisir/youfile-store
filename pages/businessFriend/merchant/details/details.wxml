@@ -71,7 +71,7 @@
 </view>
 <view class='bottom-replace-box'></view>
 <view class='bottom-single-btn-box'>
-  <button class='bottom-single-btn' bindtap='addDetails'>确定</button>
+  <button hover-class='none' class='bottom-single-btn' bindtap='addDetails'>确定</button>
 </view>
 <view class='showHide' hidden='{{show}}'>
   <view class='sh-cont'>
