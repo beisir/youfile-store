@@ -35,7 +35,7 @@
       <view>
         <image src="/image/user.png"></image>
       </view>
-      暂无进货商！
+      暂无云分销商
   </view>
 </view>
 <view class='allData'  wx:if='{{totalCount>0}}'>{{totalCount}}位进货商</view>
