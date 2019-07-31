@@ -51,7 +51,7 @@ Page({
       result: []
     })
   },
-  // 进货商汇总列表
+  // 云供应商汇总列表
   getlist:function(){
     var _this=this
     Api.statPurchasers().then(res=>{

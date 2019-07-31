@@ -163,7 +163,7 @@
       <view class="ym_goodsstorer">
         <view class='store-goodsNum-data'>{{favoriteNum}}</view>关注人数</view>
       <view class="ym_goodsstorer">
-        <view class='store-goodsNum-data'>{{store.purchaserNum}}</view>进货商</view>
+        <view class='store-goodsNum-data'>{{store.purchaserNum}}</view>云供应商</view>
     </view>
     <view class="ym_goodsstoreop" hidden='{{likeShow}}'>
       <view class="ui-link" bindtap='likeStore'>

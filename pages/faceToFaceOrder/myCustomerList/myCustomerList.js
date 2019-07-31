@@ -12,7 +12,7 @@ Page({
       type: "gzyh",
       checked: true
     }, {
-      name: "进货商",
+      name: "云供应商",
       type: "jhs",
       checked: false
     }, {

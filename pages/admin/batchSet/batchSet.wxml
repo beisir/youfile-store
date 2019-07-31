@@ -23,7 +23,7 @@
   <view class='setnum' hidden='{{switch1Change}}' bindtap='togetherFun'>
     起批件数<view>{{value}}<image class='weui-img' src="/image/icl.png"></image></view>
   </view>
-  <view class='nView'><image src="/image/bac.png"></image>进货商下单时受每件商品起批量的限制</view>
+  <view class='nView'><image src="/image/bac.png"></image>云供应商下单时受每件商品起批量的限制</view>
 </view>
 <view class='shop-cont'>
   <view>
@@ -32,5 +32,5 @@
   <view class='setnum'  hidden='{{switch2Change}}' bindtap='batchFun'>
     混批金额<view><text wx:if='{{value1!=""}}'>￥</text>{{value1}}<image class='weui-img' src="/image/icl.png"></image></view>
   </view>
-  <view class='nView'><image src="/image/bac.png"></image>进货商只要一次性采购总金额达到或高于混批金 额，即可享受批发价</view>
+  <view class='nView'><image src="/image/bac.png"></image>云供应商只要一次性采购总金额达到或高于混批金 额，即可享受批发价</view>
 </view>

@@ -12,7 +12,7 @@
     <view class='tipMes'>
       <view>我是
         <text>用户</text>,未开通新批零{{globalData.projectName}},</view>
-      <view>不提供进货商友功能哦~</view>
+      <view>不提供云供应商友功能哦~</view>
       <button bindtap='closeTip'>知道了</button>
     </view>
   </mes>
@@ -21,7 +21,7 @@
     <view class='tipMes'>
       <view>我是
         <text>新零售</text>{{globalData.projectName}}主,我们不 </view>
-      <view>提供进货商友功能哦~</view>
+      <view>提供云供应商友功能哦~</view>
       <button class='button-hover' bindtap='closeTip'>知道了</button>
     </view>
   </mes>

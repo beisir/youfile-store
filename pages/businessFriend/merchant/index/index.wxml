@@ -9,7 +9,7 @@
   <view class='com-color-back inner-header'>
     <view class='bf-cont bf-cont1 header-content'>
       <view class='bf-title'>云分销商数据</view>
-      <text>已达成商友关系的进货商</text>
+      <text>已达成商友关系的云供应商</text>
       <view class='bt-view'>
         <view>
           <navigator class="weui_cells" url='../list/list'>
@@ -166,17 +166,17 @@
     </view>
     <view>
       <navigator url='../dealCus/dealCus'>
-        <view>{{buyPurchasers}}</view>成交进货商</navigator>
+        <view>{{buyPurchasers}}</view>成交云供应商</navigator>
     </view>
   </view>
 </view>
 <view class='bf-cont bf-cont2'>
   <view class='me-title'>
-    <view></view>进货商管理</view>
+    <view></view>云供应商管理</view>
   <view class='bt-view'>
     <view>
       <navigator class="weui_cells" url='../list/list'>
-        <view>{{purchaserNumber}}</view>进货商总数</navigator>
+        <view>{{purchaserNumber}}</view>云供应商总数</navigator>
     </view>
     <view>
       <navigator class="weui_cells" url='../newMerchant/newMerchant'>
@@ -187,18 +187,18 @@
         <view>{{waitPass}}</view>等待通过</navigator>
     </view>
   </view>
-  <button class='bf-btn' bindtap='addWholesaler'>添加进货商</button>
+  <button class='bf-btn' bindtap='addWholesaler'>添加云供应商</button>
   <view class='bf-weui'>
     <navigator class="weui_cells" url='../newMerchant/newMerchant'>
       <image mode="widthFix" src="/image/w1.png"></image>
-      <text>新增的进货商 </text>
+      <text>新增的云供应商 </text>
       <view class='weui-view'>
         <image mode="widthFix" src="/image/icl.png"></image>
       </view>
     </navigator>
     <navigator class="weui_cells" url='../list/list'>
       <image mode="widthFix" src="/image/w2.png"></image>
-      <text>进货商管理 </text>
+      <text>云供应商管理 </text>
       <view class='weui-view'>
         <image mode="widthFix" src="/image/icl.png"></image>
       </view>

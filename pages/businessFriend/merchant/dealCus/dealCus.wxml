@@ -1,5 +1,5 @@
  <view class="goods-ser">
-    <input placeholder="输入进货商名称、手机号、备注名"   bindinput='changeValue' bindconfirm='searchBtn'    value="{{value}}"/>
+    <input placeholder="输入云供应商名称、手机号、备注名"   bindinput='changeValue' bindconfirm='searchBtn'    value="{{value}}"/>
     <image class="home-ser"  src="/image/search1.png"></image>
     <view class='home-img' bindtap='searchBtn' >
         搜索
@@ -38,4 +38,4 @@
       暂无云分销商
   </view>
 </view>
-<view class='allData'  wx:if='{{totalCount>0}}'>{{totalCount}}位进货商</view>
+<view class='allData'  wx:if='{{totalCount>0}}'>{{totalCount}}位云供应商</view>

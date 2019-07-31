@@ -67,7 +67,7 @@
         </view>
         <view wx:if='{{limitShow==3}}' class='weui-cell weui-cell_access'>
           <image class='user-img' src='/image/ad4-thin.png' style='margin-left:4rpx;margin-right:26rpx;'></image>
-          <view class='weui-cell__bd'>您是进货商 已达成商友</view>
+          <view class='weui-cell__bd'>您是云供应商 已达成商友</view>
         </view>
       </block>
       <navigator class='weui-cell weui-cell_access' url='../addressWe/addressWe'>

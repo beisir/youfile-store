@@ -17,7 +17,7 @@
         <navigator class="weui_cells" url='../../merchant/dealCus/dealCus'>
           <view>
             <text class='com-red-color'>{{buyPurchasers}}</text>
-          </view>成交进货商</navigator>
+          </view>成交云供应商</navigator>
       </view>
     </view>
   </view>
