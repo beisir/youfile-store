@@ -68,7 +68,7 @@
     <view class='bf-cont bf-cont1 header-content' style='padding-left:0;padding-right:0;'>
       <view style='padding:0 30rpx;'>
         <view class='bf-title'>供应商数据</view>
-        <text>手动添加的供应商</text>
+        <text style='color:#666;'>手动添加的供应商</text>
       </view>
       <view class='bt-view four-box'>
         <view>

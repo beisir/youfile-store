@@ -13,7 +13,7 @@ page{background-color:#f7f7f7;}
   border-bottom: 0;
 }
 .bf-img image{
-  border-radius: 50%;
+  border-radius: 10rpx;
 }
 .weui_cells .re-img{
   position: relative;width:40rpx;top: 0;left: 0;vertical-align: middle;margin-top: -8rpx;margin-left: 20rpx;

@@ -21,14 +21,21 @@ Page({
     payPurchaseOrders: 0,
     auditStatus:true,
     // 新功能弹窗
-    newFunLayer: true
+    newFunLayer: false
+  },
+  getNewFunStorage() {
+    let val = wx.getStorageSync("newFun")
+    if (!val) {
+      this.setData({ newFunLayer: true })
+    }
   },
   // 关闭新功能弹窗
-  closeModal(e){
-    this.setData({newFunLayer: false})
-    if (e.currentTarget.dataset.type === 'know'){
-      
-    }
+  closeModal(e) {
+    this.setData({ newFunLayer: false })
+    wx.setStorage({
+      key: 'newFun',
+      data: true,
+    })
   },
   // 埋点存储formid
   getFormId(e) {
@@ -52,6 +59,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // 新功能提示框
+    this.getNewFunStorage()
+    
     var _this = this
     if (options) {
       if (options.storeId) {

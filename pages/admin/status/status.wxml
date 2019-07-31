@@ -25,8 +25,8 @@
 </mes>
 <!--是否上架-->
 <mes show="{{confirmUp}}" bind:sureSelectArea="sureSelectAreaListener">
-  <view>
-    <text>确定上架该商品？</text>
+  <view style='padding:0 20rpx 20rpx;'>
+    <text>{{confirmUpText}}</text>
     <button form-type='submit' bindtap='confirmUp'>确定</button>
   </view>
 </mes>

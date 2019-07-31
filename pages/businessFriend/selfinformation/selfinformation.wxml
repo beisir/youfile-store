@@ -15,7 +15,7 @@
     <view>{{msg.businessScope}}</view>
   </view>
   <view class='in-cont'>
-    <text>所在地址</text>
+    <text>所在地区</text>
     <view>{{msg.province + msg.city + msg.county }} </view>
   </view>
   

@@ -104,3 +104,4 @@
 .msg-input{text-align: right;font-size: 28rpx;}
 .msg-title{width: 180rpx;}
 .msg-des{text-align: right;}
+.wx-button-cover-view-wrapper{border:0!important;}

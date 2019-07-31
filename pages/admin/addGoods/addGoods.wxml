@@ -1,6 +1,6 @@
 <!-- 确认上架 -->
 <mes show="{{sureAddLayer}}">
-  <view class='font-color'>
+  <view class='font-color' style='text-align:center;'>
     <text>您还未设置库存，上架后该商品将进入已售完列表</text>
     <button form-type='submit' bindtap='addGit' data-status='1'>确定</button>
   </view>

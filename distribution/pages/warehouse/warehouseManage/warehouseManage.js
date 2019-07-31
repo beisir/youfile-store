@@ -16,7 +16,9 @@ Page({
   closeModal(e) {
     this.setData({ newFunLayer: false })
     if (e.currentTarget.dataset.type === 'know') {
-
+      wx.redirectTo({
+        url: '../warningSetting/warningSetting',
+      })
     }
   },
   getList(re) {

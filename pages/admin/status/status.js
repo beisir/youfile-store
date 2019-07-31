@@ -319,16 +319,20 @@ Page({
     this.setData({
       goodsId: goodId
     })
-    // if (1 > num) {
-    //   this.setData({
-    //     showNum: true
-    //   })
-    // } else {
+    if (1 > num) {
+      this.setData({
+        // showNum: true // 零库存以前不让上 现在又让上架了~~~
+        confirmUp: true,
+        upIndex: index,
+        confirmUpText: '您还未设置库存，上架后该商品将进入已售完列表'
+      })
+    } else {
       this.setData({
         confirmUp: true,
-        upIndex: index
+        upIndex: index,
+        confirmUpText: '确定上架该商品？'
       })
-    // }
+    }
   },
   confirmDown: function () {
     var _this = this,
