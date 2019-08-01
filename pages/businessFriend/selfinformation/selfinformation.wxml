@@ -4,8 +4,11 @@
       <view class='bf-img'>
         <image mode="aspectFill" src="/image/com-user-cion.png"></image>
       </view>
-      <text>{{msg.name}}</text>
-      <text class='user-tip'>供应商</text>
+      <view class='com-flex-center'>
+        <text>{{msg.remark?msg.remark:msg.name}}</text>
+        <text class='user-tip'>供应商</text>
+      </view>
+      <view class='nbf-font' wx:if="{{msg.remark}}">昵称：{{msg.name}}</view>
     </view>
   </view>
 </view>
@@ -18,7 +21,7 @@
     <text>所在地区</text>
     <view>{{msg.province + msg.city + msg.county }} </view>
   </view>
-  
+
   <view class='in-cont'>
     <text>详细地址</text>
     <view>{{msg.address}}</view>

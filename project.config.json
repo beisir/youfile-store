@@ -47,7 +47,7 @@
 				{
 					"id": 0,
 					"name": "分包",
-					"pathName": "distribution/pages/warehouse/warehouseManage/warehouseManage",
+					"pathName": "distribution/pages/warehouse/partTags/partTags",
 					"query": "",
 					"scene": null
 				}

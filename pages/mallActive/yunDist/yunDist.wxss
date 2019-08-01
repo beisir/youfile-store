@@ -26,4 +26,4 @@
 .ydpl-r{width: 20rpx;height: 20rpx;border-top: 6rpx solid #B3B3B3;border-right: 6rpx solid #B3B3B3;transform: rotate(45deg);position: absolute;right:50rpx}
 .dr-pic2{background-size: 66%;background-position-x: center;background-position-y: 15rpx;}
 .dr-pic3{background-size: 53%;background-position-x: center;background-position-y: 18rpx;}
-.ydpl-right>view text{border:1rpx solid #f8b616;width:80rpx;text-align: center;}
+.ydpl-right>view text{border:1rpx solid #f8b616;text-align: center;}

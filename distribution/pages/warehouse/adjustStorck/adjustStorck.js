@@ -108,7 +108,7 @@ Page({
       stockCode: this.data.code,
       changeNum: this.data.num,
       supplierNumber: this.data.supplierObj.supplierNumber,
-      supplierName: this.data.supplierObj.supplierName,
+      supplierName: this.data.supplierObj.name,
       supplierType: this.data.supplierObj.supplierType,
       remark: this.data.remark,
       skuName: this.data.skuName

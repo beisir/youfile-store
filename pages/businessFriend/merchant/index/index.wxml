@@ -54,7 +54,7 @@
     <navigator wx:for="{{distributor}}" wx:key="{{index}}" url='../reach/reach?accept={{item.purchaserUserId}}'>
       <view class='list-item com-flex-center'>
         <image class='img60 com-border-radius' src='{{baseUrl + item.headPic}}'></image>
-        <text class='flexone list-item-title com-text-ellipsis'>{{item.nickName}}</text>
+        <text class='flexone list-item-title com-text-ellipsis'>{{item.remark?item.remark:item.nickName}}</text>
         <image class='img30'></image>
       </view>
     </navigator>
@@ -118,7 +118,7 @@
     <navigator class='' url="../../selfinformation/selfinformation?no={{item.no}}" wx:for="{{supList}}" wx:key="{{index}}">
     <view class='list-item com-flex-center'>
       <image class='img60 com-border-radius' src='/image/com-user-cion.png'></image>
-      <text class='flexone list-item-title com-text-ellipsis'>{{item.name}}</text>
+      <text class='flexone list-item-title com-text-ellipsis'>{{item.remark?item.remark:item.name}}</text>
       <image class='img30'></image>
     </view>
     </navigator>

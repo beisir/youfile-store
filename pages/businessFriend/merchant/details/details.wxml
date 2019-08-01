@@ -2,13 +2,13 @@
   <view class='in-cont'>
     <text>姓名</text>
     <view>
-      <input value='{{name}}' bindinput='changeValue' data-name='name' placeholder='请输入客户真实姓名'></input>
+      <input value='{{name}}' bindinput='changeValue' data-name='name' maxlength='10' placeholder='请输入客户真实姓名'></input>
     </view>
   </view>
   <view class='in-cont'>
     <text>备注名</text>
     <view>
-      <input placeholder='请输入备注名' bindinput='changeValue' data-name='nickName' value='{{nickName}}'></input>
+      <input placeholder='请输入备注名' bindinput='changeValue' data-name='nickName' maxlength='15' value='{{nickName}}'></input>
     </view>
   </view>
   <view class='in-cont'>

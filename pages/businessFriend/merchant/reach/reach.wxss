@@ -19,7 +19,7 @@ page{background-color:#f7f7f7;}
   position: relative;width:40rpx;top: 0;left: 0;vertical-align: middle;margin-top: -8rpx;margin-left: 20rpx;
 }
 .re-name{
-  display: inline-block;width: 95rpx;height: 35rpx;line-height: 35rpx;text-align: center;border-radius: 6rpx;border:2rpx solid #f8b616;color: #f8b616;font-size: 24rpx;margin-left: 20rpx;
+  display: inline-block;padding:0 10rpx;height: 35rpx;line-height: 35rpx;text-align: center;border-radius: 6rpx;border:2rpx solid #f8b616;color: #f8b616;font-size: 24rpx;margin-left: 20rpx;
 }
 .re-title{
   font-size: 30rpx;padding-top: 30rpx;font-weight: bold;padding-left: 5rpx;

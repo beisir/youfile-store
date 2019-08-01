@@ -94,7 +94,7 @@ Page({
     })
   },
   onLoad: function (options) {
-    this.getList(true)
+
   },
 
   /**
@@ -109,6 +109,7 @@ Page({
    */
   onShow: function () {
     this.getInfo()
+    this.getList(true)
   },
   addWholesaler: function () {
     wx.navigateTo({
