@@ -14,6 +14,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  // status 1 等待对方认证 2已添加 3等待自己认证 
   getList: function (data) {
     var _this = this
     Api.newMerchant(data)
@@ -28,6 +29,7 @@ Page({
               var greet=''
             }
             detailList[i].greet=greet
+            detailList[i].createDate = this.getTime(detailList[i].createDate)
           }
           var datas = _this.data.detailList,
             newArr = app.pageRequest.addDataList(datas, detailList)
@@ -44,6 +46,14 @@ Page({
         }
 
       })
+  },
+  getTime(timesec){
+    if (!timesec){return ''}
+    let date = new Date(timesec)
+    const month = date.getMonth() + 1
+    const day = date.getDate()
+    
+    return month + "月" + day + "日"
   },
   changeValue: function (e) {
     var val = e.detail.value

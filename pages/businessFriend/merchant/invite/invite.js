@@ -48,9 +48,7 @@ Page({
           duration: 1000,
           mask: true
         })
-        wx.navigateTo({
-          url: '../newMerchant/newMerchant',
-        })
+        wx.navigateBack()
       })
       .catch(res => {
         var data = res.data

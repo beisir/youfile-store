@@ -27,9 +27,10 @@ Page({
     })
   },
   getList(re){
+    let arr = this.data.goodsList
     if (re) {
       app.pageRequest.pageData.pageNum = 0
-      this.setData({ goodsList: [] })
+      arr = []
     }
     if (this.data.tabType === 'supplier'){
       Api.getSupplierGoodsList({
@@ -37,13 +38,13 @@ Page({
         keywords: this.data.serText
       }).then(res => {
         this.setData({
-          goodsList: this.resetList(this.data.goodsList.concat(res.obj.result))
+          goodsList: this.resetList(arr.concat(res.obj.result))
         })
       })
     }else{
       Api.getAllGoods({ keyword: this.data.serText}).then(res=>{
         this.setData({
-          goodsList: this.resetList(this.data.goodsList.concat(res.obj.result))
+          goodsList: this.resetList(arr.concat(res.obj.result))
         })
       })
     }

@@ -158,7 +158,7 @@ Page({
     })
   },
   invitation:function(){
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../invite/invite?accept=' + this.data.accept + "&remark=" + this.data.showName + "&headPic=" + this.data.headPic + "&name="+ this.data.name,
     })
   },
@@ -185,9 +185,7 @@ Page({
         duration: 1000,
         mask: true
       })
-      wx.navigateTo({
-        url: '../newMerchant/newMerchant'
-      })
+      wx.navigateBack()
     })
   },
   /**

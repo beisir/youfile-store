@@ -1,31 +1,63 @@
 // distribution/pages/warehouse/goodsFlow/goodsFlow.js
 import Api from '../../../../utils/api.js'
 const app = getApp()
+import { formatTimeday, formatHour} from '../../../../utils/util.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    flowObj: {}
   },
   getList(re){
     if (re) {
       app.pageRequest.pageData.pageNum = 0;
       this.setData({
-        flow: []
+        obj: {}
       })
     }
     Api.stockCodeGoodsFlow({ stockCode: this.data.code}).then(res=>{
+      this.resetList(res.obj.flows.result )
       this.setData({
         goods: res.obj.num,
-        flow: this.data.flow.concat(res.obj.flows.result ? res.obj.flows.result:[])
       })
+    })
+  },
+  resetList(arr){
+    let obj = this.data.flowObj
+    arr.forEach(el=>{
+      let nowDate = new Date(el.time)
+      let date = formatTimeday(nowDate)
+      el.newTime = formatHour(nowDate)
+      if (obj[date]){
+        obj[date].list.push(el)
+      } else {
+        let day = ''
+        switch(nowDate.getDay()){
+          case 0: day = '日';break;
+          case 1: day = '一'; break;
+          case 2: day = '二'; break;
+          case 3: day = '三'; break;
+          case 4: day = '四'; break;
+          case 5: day = '五'; break;
+          case 6: day = '六'; break;
+        }
+        obj[date] = {
+          date: date + " 星期" + day,
+          list: [el]
+        }
+      }    
+    })
+    this.setData({
+      flowObj: obj
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    options.code = 'S3233'
     this.setData({
       code: options.code
     },()=>{

@@ -6,6 +6,7 @@
   </view>
   <view class='ser-btn flexone' bindtap='searchBtn'>搜索</view>
 </view>  
+<!-- status 1 等待对方认证 2已添加 3等待自己认证 -->
 <view class='bf-cont' wx:if='{{detailList.length>0}}'>
   <view class='bf-weui'>
   <scroll-view scroll-y="true" style="height:100%;">
@@ -22,7 +23,10 @@
         <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}?x-oss-process=style/logo"></image></view>
           <text wx:if='{{item.status!=3}}'>{{item.remark==null || item.remark==''?item.nickName:item.remark}}</text>
           <text wx:if='{{item.status==3}}'>{{item.nickName}}</text>
-          <view class='nbf-font' wx:if='{{item.status!=1}}'>{{item.greet}}</view>
+          <view class='nbf-font'>
+            <text wx:if='{{item.status!=1}}'>{{item.greet}}</text>
+            <text wx:else>{{item.createDate}}邀请合作</text>
+          </view>
           <view class='weui-view' wx:if='{{item.status==1}}'>
             <text>等待验证</text>
           </view>

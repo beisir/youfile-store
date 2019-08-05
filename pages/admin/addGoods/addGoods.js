@@ -572,10 +572,10 @@ Page({
     })
   },
   sureLayer() {
-    this.setData({ sureAddLayer: true })
+    this.setData({ sureAddLayer: true, showTale: true })
   },
   closeLaye() {
-    this.setData({ sureAddLayer: false })
+    this.setData({ sureAddLayer: false, showTale: false })
   },
   // 放入仓库
   addGit: function(e) {

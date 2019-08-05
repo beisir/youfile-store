@@ -67,7 +67,7 @@
     </view>
     <view class='msg-item com-flex-between'>
       <view>经手人：{{operationUserName?operationUserName:''}}</view>
-      <view>{{filter.filterTime(time,true)}}</view>
+      <view>{{newTime?newTime:filter.filterTime(time,true)}}</view>
     </view>
     <view class='msg-item com-flex-between'>
       <view>供应商：{{supplierName?supplierName:''}}</view>

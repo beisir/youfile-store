@@ -16,12 +16,18 @@
 </view>
 
 <view class='tag-box font30'>
-  <view wx:for='{{tagList}}' wx:key='{{index}}'>
-    <view class='tag-item com-flex-center' bindtap='checked' data-index='{{index}}'>
-      <view class='tip' style='background:{{item.iconColor}}'></view>
-      <text class='flexone com-text-ellipsis'>{{item.name}}</text>
-      <image wx:if="{{item.selected}}" style='width:35rpx;height:35rpx;' src='/distribution/images/right-gold.png'></image>
+  <view wx:for='{{tagList}}' wx:key='{{index}}' style="overflow: hidden;">
+    <view class="absolut-box {{item.isTouchMove?'delbtn-active':''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+      <view class='tag-item com-flex-center' bindtap='checked' data-index='{{index}}'>
+        <view class='tip' style='background:{{item.iconColor}}'></view>
+        <text class='flexone com-text-ellipsis'>{{item.name}}</text>
+        <image wx:if="{{item.selected}}" style='width:35rpx;height:35rpx;' src='/distribution/images/right-gold.png'></image>
+      </view>
+      <view class='border-line' wx:if="{{index !== tagList.length-1}}"></view>
+      <view class='close-btn' bindtap='delGoods' data-code='{{item.code}}'>
+        <image class='img30' src='/image/sBai.png'></image>
+        <text>删除</text>
+      </view>
     </view>
-    <view class='border-line' wx:if="{{index !== tagList.length-1}}"></view>
   </view>
 </view>

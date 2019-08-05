@@ -12,7 +12,8 @@
 		"nodeModules": true,
 		"autoAudits": false,
 		"uglifyFileName": true,
-		"checkInvalidKey": true
+		"checkInvalidKey": true,
+		"checkSiteMap": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.7.7",
@@ -47,7 +48,7 @@
 				{
 					"id": 0,
 					"name": "分包",
-					"pathName": "distribution/pages/warehouse/partTags/partTags",
+					"pathName": "distribution/pages/warehouse/goodsFlow/goodsFlow",
 					"query": "",
 					"scene": null
 				}

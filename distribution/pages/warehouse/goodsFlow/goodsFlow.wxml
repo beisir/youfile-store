@@ -15,8 +15,10 @@
   </view>
 </view>
 <view class='template'>
-  <!-- <view class='date-item'>2019年06月08日 星期五</view> -->
-  <view class='goodsFlow' wx:for="{{flow}}" wx:key='{{index}}'>
-  <template is="goodsFlow" data="{{...item}}"></template>
+  <view class='goodsFlow' wx:for="{{flowObj}}" wx:key='{{index}}'>
+    <view class='date-item'>{{item.date}}</view>
+    <view wx:for='{{item.list}}' wx:for-item="flowItem" wx:key="{{index}}">
+      <template is="goodsFlow" data="{{...flowItem}}"></template>
+    </view>
   </view>
 </view>

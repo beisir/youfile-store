@@ -33,9 +33,7 @@ Page({
       .then(res => {
         Api.showToast(res.message)
         setTimeout(() => {
-          wx.navigateTo({
-            url: '../list/list',
-          })
+          wx.navigateBack()
         }, 1000)
       })
   },
