@@ -209,6 +209,12 @@ input:focus{padding:0}
 .com-bottom-btn-group .btngroup-btn-item{flex: 1;border:0;border-right: 1rpx solid #dedede;color: #f8b616;font-size: 36rpx;font-weight: 600;background: #fff;padding: 0;margin: 0;height: 50rpx;display: flex;align-items: center;justify-content: center;border-radius: 0;}
 .com-bottom-btn-group .btngroup-btn-item image{width: 40rpx;height: 40rpx;margin-right:10rpx;}
 .com-bottom-btn-group .btngroup-btn-item:last-child{border: 0;}
+/* 底部胶囊按钮组 */
+.com-bottom-capsule-btn-group-box{position: fixed;width: 100%;background: #f7f7f7;padding: 20rpx;bottom: 0;z-index:999;box-sizing: border-box;}
+.com-bottom-capsule-btn-group{display: flex;align-items: center;height: 100rpx;background: #f8b616;border-radius: 100rpx;overflow: hidden;}
+.com-bottom-capsule-btn-group .btngroup-btn-item{flex: 1;border:0;border-right: 1rpx solid #fff;color: #fff;font-size: 36rpx;font-weight: 600;background: #f8b616;padding: 0;margin: 0;height: 50rpx;display: flex;align-items: center;justify-content: center;border-radius: 0;}
+.com-bottom-capsule-btn-group .btngroup-btn-item image{width: 40rpx;height: 40rpx;margin-right:10rpx;}
+.com-bottom-capsule-btn-group .btngroup-btn-item:last-child{border: 0;}
 /* 省略号 */
 .com-text-ellipsis{overflow:hidden;text-overflow: ellipsis;white-space: nowrap;}
 /* 字体大小 */

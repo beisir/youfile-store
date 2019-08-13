@@ -105,3 +105,5 @@
 .msg-title{width: 180rpx;}
 .msg-des{text-align: right;}
 .wx-button-cover-view-wrapper{border:0!important;}
+
+.com-bottom-capsule-btn-group .btngroup-btn-item{border: 0;}

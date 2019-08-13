@@ -28,8 +28,8 @@
 </spec>
 <!-- 统一设置价格库存 -->
 <spec show="{{unifiedSet}}">
-  <view class='spec-title'>批量设置价格/库存
-    <view class='gs-tip'>您可以只设定价格或只设定库存</view>
+  <view class='spec-title'>批量设置价格
+    <view class='gs-tip'>您可以只设定批发价或只设定零售价</view>
   </view>
   <input class='spec-input spec-input1' value='{{changePriceVal}}' bindinput='changePrice' placeholder-class='spec-class spec-class1' placeholder='统一输入批发价' />
   <input class='spec-input spec-input1' value='{{changeSellVal}}' bindinput='changeSell' placeholder-class='spec-class spec-class1' placeholder='统一输入零售价' />
@@ -68,22 +68,29 @@
   </view>
   <block wx:if='{{goodsSkuVOList.length==0}}'>
     <view class='gs-v'>
-      <view>价格/库存</view>
+      <view>
+        <text>价格</text>
+        <text wx:if="{{editGoodsId}}" bindtap="toEditStock" class="com-color-font" style="font-size:24rpx;float:right;">添加库存</text>
+      </view>
       <view>您需要选择相应的销售属性，才能组合完整的规格信息</view>
     </view>
   </block>
   <block wx:else>
     <view class='gv-comp'>
-      <view bindtap='unifiedSet'>批发价 | 零售价 | 库存
+      <view bindtap='unifiedSet'>批发价 | 零售价
         <view>
           <image class='write' src="/image/write.png"></image>批量设置</view>
       </view>
       <view>
         <image src="/image/ca1.png"></image>默认对顾客展示价格为，最低零售价与对应的批发价</view>
       <view class='gs-sku' wx:for='{{goodsSkuVOList}}' wx:key='{{index}}'>
-        <view>“{{item.skuName}}”
-          <text wx:if='{{item.skuNameSign}}'>+ “{{item.skuNameSign}}”</text>
+        <view class="com-flex-center">
+          <view class="flexone" style="text-align:left;">“{{item.skuName}}”
+            <text wx:if='{{item.skuNameSign}}'>+ “{{item.skuNameSign}}”</text>
+          </view>
+          <view wx:if="{{editGoodsId}}" bindtap="toEditStock" class="com-color-font" style="width:100rpx;padding-left:10rpx;font-size:24rpx;">添加库存</view>
         </view>
+        
         <view>
           <view>
             <input maxlength='8' bindinput='monitor' data-index='{{index}}' data-name='wholesalePrice' value='{{item.wholesalePrice}}' placeholder='输入批发价'></input>
@@ -100,6 +107,7 @@
     </view>
   </block>
 </view>
-<view class='add-bottom'>
-  <view bindtap='goback'>确定</view>
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='goback'>确定</button>
 </view>

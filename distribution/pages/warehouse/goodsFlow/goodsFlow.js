@@ -14,7 +14,7 @@ Page({
     if (re) {
       app.pageRequest.pageData.pageNum = 0;
       this.setData({
-        obj: {}
+        flowObj: {}
       })
     }
     Api.stockCodeGoodsFlow({ stockCode: this.data.code}).then(res=>{
@@ -57,7 +57,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    options.code = 'S3233'
     this.setData({
       code: options.code
     },()=>{

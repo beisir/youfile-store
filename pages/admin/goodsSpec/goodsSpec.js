@@ -22,6 +22,12 @@ Page({
     changeStockVal: "", //统一设置库存
     resNum:0
   },
+  // 跳转修改库存
+  toEditStock (){
+    wx.navigateTo({
+      url: '/distribution/pages/warehouse/goodsDetail/goodsDetail?id='+this.data.editGoodsId,
+    })
+  },
   // 获取规格数量
   getNum:function(){
     var getTempList = new GetTempList(),
@@ -49,6 +55,13 @@ Page({
     // 编辑或添加规格
     if (options.skuListData) {
       this.getConent(JSON.parse(options.skuListData), JSON.parse(options.goodsSkuVOList))
+    }
+    // goodsId以前的逻辑是区分从商品列表进去，还是从修改云享品页面进入修改sku界面。
+    // 这个是区分编辑商品还是新增商品，如果是编辑商品则有跳转修改库存的按钮
+    if (options.goodsId || options.editGoodsId ){
+      this.setData({
+        editGoodsId: options.goodsId || options.editGoodsId
+      })
     }
   },
   // 接受上个页面传来的数据

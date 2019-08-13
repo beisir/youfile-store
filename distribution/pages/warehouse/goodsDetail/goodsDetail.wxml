@@ -20,7 +20,8 @@
     </view>
     <view class='num-item'>
       <view class='font28 num-item-title'>待出库</view>
-      <view class='font40'>{{goods.toBeOutNum}}</view>
+      <view class='font40 com-red-color' wx:if="{{goods.toBeOutNum}}">{{goods.toBeOutNum}}</view>
+      <view class='font40' wx:else>{{goods.toBeOutNum}}</view>
     </view>
     <view class='num-item num-item-title'>
       <view class='font28'>可用库存</view>
@@ -72,8 +73,14 @@
     <view class='flowtab com-flex-center'>
       <view bindtap='choseflowtab' data-index="{{index}}" class='flowtab-item {{item.selected?"flowtab-item-ac":""}}' wx:for='{{flowtab}}' wx:key="{{index}}">{{item.name}}</view>
     </view>
+    <view class='goodsFlow' wx:for="{{flowObj}}" wx:key='{{index}}'>
+      <view class='date-item'>{{item.date}}</view>
+      <view wx:for='{{item.list}}' wx:for-item="flowItem" wx:key="{{index}}">
+        <template is="goodsFlow" data="{{...flowItem}}"></template>
+      </view>
+  </view>
     <!-- <view class='date-item'>2019年06月08日 星期五</view> -->
-    <template is='goodsFlow' wx:for='{{flow}}' wx:key="{{index}}" data="{{...item}}"></template>
+    <!-- <template is='goodsFlow' wx:for='{{flow}}' wx:key="{{index}}" data="{{...item}}"></template> -->
   </view>
   <!-- 仓库 -->
   <view class='com-form-box' wx:if="{{tabType =='house'}}">

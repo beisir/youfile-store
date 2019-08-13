@@ -142,7 +142,7 @@
         </view>
       </view>
       <view class="page__category-content page__new">
-        <view class='weui-title'>商品价格库存
+        <view class='weui-title'>商品价格
           <text>(对顾客的展示价格)</text>
           <image bindtap='tipMes' src="/image/ca1.png"></image>
         </view>
@@ -313,11 +313,14 @@
     </view>
   </view>
   <form report-submit='true' bindsubmit='getFormId'>
-    <cover-view class='com-bottom-btn-group'>
-      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='addGit' data-status='0'><image src="/image/git.png"/>确定</button>
-      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else data-status='0'><image src="/image/git.png"/>确定</button>
-      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='sureLayer'><image src="/image/up.png"/>上架</button>
-      <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else><image src="/image/up.png"/>上架</button>
+    <cover-view class="com-bottom-capsule-btn-group-box">
+      <cover-view class='com-bottom-capsule-btn-group'>
+        <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='addGit' data-status='0'>确定</button>
+        <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else data-status='0'>确定</button>
+        <cover-view style="width:1rpx;height:50%;background:#fff;"></cover-view>
+        <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:if='{{addGitShow}}' bindtap='sureLayer'>上架</button>
+        <button class='btngroup-btn-item' hover-class="none" form-type='submit' wx:else>上架</button>
+      </cover-view>
     </cover-view>
   </form>
 </view>

@@ -1,7 +1,7 @@
 {
   "navigationBarTitleText": "供应商资料",
   "navigationBarTextStyle": "white",
-  "navigationBarBackgroundColor": "#F39800",
+  "navigationBarBackgroundColor": "#f8b616",
   "enablePullDownRefresh": false,
   "usingComponents": {
     "spec": "../../../../assembly/specifications/spec",

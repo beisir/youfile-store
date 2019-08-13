@@ -83,6 +83,21 @@ Page({
     showVideo: false
     // 'https://dev-image.youlife.net.cn/default/1557113660070971.mp4'
   },
+  // 展示商品主图
+  showImgs(e){
+    let nowIndex = e.currentTarget.dataset.index
+    let arr = []
+    this.data.goodsInfo.goodsImageVOList.forEach(el=>{
+      if (el.imageUrl){
+        arr.push(this.data.baseUrl + el.imageUrl)
+      }
+    })
+    wx.previewImage({
+      current: arr[nowIndex], 
+      urls: arr
+    })
+    
+  },
   /**
    * 生命周期函数--监听页面加载
    */

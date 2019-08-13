@@ -189,11 +189,13 @@
   </view>工作台</view>
 
 <form report-submit='true' bindsubmit='getFormId'>
-  <view class='com-bottom-btn-group'>
-    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='addGoods'>添加商品</button>
-    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='batch'>批量管理</button>
-    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='batchSet'>起批设置</button>
-    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='class'>本店分类</button>
+  <view class="com-bottom-capsule-btn-group-box">
+    <view class='com-bottom-capsule-btn-group'>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='addGoods'>添加商品</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='batch'>批量管理</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='batchSet'>起批设置</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='class'>本店分类</button>
+    </view>
   </view>
 </form>
 <view class='showHide showHideb' bindtap='closeShow'  hidden='{{showHideb}}'></view>

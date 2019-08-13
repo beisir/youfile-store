@@ -57,4 +57,4 @@ scroll-view{margin-top:0rpx;padding-bottom:100rpx}
 .st-title>view{background: #fff;}
 .serList{height: auto;max-height: 450rpx;}
 /* 底部按钮 */
-.com-bottom-btn-group .btngroup-btn-item{font-size: 28rpx;}
+.com-bottom-capsule-btn-group .btngroup-btn-item{font-size: 28rpx;}

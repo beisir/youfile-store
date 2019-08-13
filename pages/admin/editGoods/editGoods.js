@@ -1021,7 +1021,7 @@ Page({
     goodsSkuVOList = JSON.stringify(goodsSkuVOList)
     skuListData = JSON.stringify(skuListData)
     wx.navigateTo({
-      url: '../goodsSpec/goodsSpec?goodsSkuVOList=' + goodsSkuVOList + '&skuListData=' + skuListData
+      url: '../goodsSpec/goodsSpec?goodsSkuVOList=' + goodsSkuVOList + '&skuListData=' + skuListData + '&editGoodsId=' + this.data.goodsId
     })
   },
   /**
