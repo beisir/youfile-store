@@ -378,8 +378,8 @@ Component({
       obj.id = this.data.storeID;
       obj.name = this.data.comName;
 
-      App.http.onlyUploadImg(this.data.cUrl, "STORE_IMAGE").then(res => {
-        var url = JSON.parse(res).obj;
+      App.http.uploadImgArr([this.data.cUrl], "STORE_IMAGE").then(res => {
+        var url = res[0]
         let p1 = Api.updateMes(obj)
         let p2 = App.http.postRequest("/api/floor/store/addorupdate", floorObj)
         let p3 = Api.uploadLogoImg(url)

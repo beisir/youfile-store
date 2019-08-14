@@ -94,7 +94,7 @@ Page({
     } else {
       if (this.data.pics.length >= 6) {
         app.http.chooseVedio({ upload: true, size: 10 }).then(res => {
-          var url = JSON.parse(res).obj
+          var url = res
           this.setData({ videoUrl: url }, () => {
             this.refreshCloseIcon()
           })
@@ -105,7 +105,7 @@ Page({
           success: (res) => {
             if (res.tapIndex === 0) {
               app.http.chooseVedio({ upload: true, size: 10 }).then(res => {
-                var url = JSON.parse(res).obj
+                var url = res
                 this.setData({ videoUrl: url }, () => {
                   this.refreshCloseIcon()
                 })
@@ -350,10 +350,28 @@ Page({
   addImage: function() {
     this.insertImg()
   },
-  insertImg: function(index) {
-    var _this = this
-    Api.uploadImage("GOODS", true, index)
-      .then(res => {})
+  insertImg: function (index) {
+    let imageUrl = this.data.baseUrl
+    Api.uploadImage({
+      type: "GOODS",
+      count: 9
+    })
+      .then(res => {
+        var addGoodsDetails = this.data.addGoodsDetails
+        if (index) {
+          res.forEach(el => {
+            addGoodsDetails.splice(index, 0, { "img": imageUrl + el })
+            index++
+          })
+        } else {
+          res.forEach(el => {
+            addGoodsDetails.push({ "img": imageUrl + el })
+          })
+        }
+        this.setData({
+          addGoodsDetails: addGoodsDetails
+        })
+      })
   },
   sellPrice: function(event) {
     var _this = this,
@@ -652,8 +670,8 @@ Page({
     var _this = this,
       pics = this.data.pics;
     var _this = this
-    app.http.onlyUploadImg(url, "GOODS").then(res => {
-      var url = JSON.parse(res).obj
+    app.http.uploadImgArr([url], "GOODS").then(res => {
+      var url = res[0]
       if (url) {
         pics = pics.concat(_this.data.baseUrl + url);
         if (pics.length > 6) {

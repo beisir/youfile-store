@@ -456,9 +456,9 @@ Page({
   // 修改封面图
   chooseImage: function () {
     var _this = this
-    Api.uploadImage("STORE_IMAGE")
+    Api.uploadImage({type:"STORE_IMAGE"})
       .then(res => {
-        var url = JSON.parse(res).obj
+        var url = res[0]
         _this.setData({
           coverUrl: url
         })

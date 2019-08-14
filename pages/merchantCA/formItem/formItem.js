@@ -51,8 +51,8 @@ Component({
     },
     uploadImg(e){
       if (this.data.item.disabled){return}
-      Api.uploadImage('MERCHANT_QUALIFICATION').then(res=>{
-        var url = JSON.parse(res).obj
+      Api.uploadImage({ type: 'MERCHANT_QUALIFICATION', isPrivate: true }).then(res=>{
+        var url = res[0]
         this.triggerEvent('uploadImg', {url:url,index:this.data.index})
         console.log(url)
       })

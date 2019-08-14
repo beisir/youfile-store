@@ -19,16 +19,16 @@ Page({
     })
   },
   mulImgUploadSuccess(arr, type){
-    let obj = JSON.parse(arr[0])
-    if (obj.obj){
+    let uploadUrl = arr[0]
+    if (uploadUrl){
       let arr = this.data.moduleList
       if (this.data.uploadImg){
         arr.shift()
       }else{
-        this.setData({ uploadImg: obj.obj })
+        this.setData({ uploadImg: uploadUrl })
       }
       arr.forEach(el=>el.checked=false)
-      arr.unshift({ url: obj.obj, showUrl: obj.obj,checked:true})
+      arr.unshift({ url: uploadUrl, showUrl: uploadUrl,checked:true})
       this.setData({
         moduleList: arr
       })

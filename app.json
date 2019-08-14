@@ -38,6 +38,7 @@
   ],
   "pages": [
     "pages/page/home/home",
+    "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/selfinformation/selfinformation",
     "pages/businessFriend/customerManage/index/index",
@@ -45,7 +46,6 @@
     "pages/businessFriend/merchant/addMerchant/addMerchant",
     "pages/businessFriend/merchant/serList/serList",
     "pages/admin/editGoods/editGoods",
-    "pages/admin/addGoods/addGoods",
     "pages/role/allOrder/allOrder",
     "pages/active/createAC/createAC",
     "pages/active/acList/acList",

@@ -30,8 +30,8 @@ Page({
     });
   },
   afterCuttingImg(res){
-    app.http.onlyUploadImg(res,"STORE_RECEIPT_CODE").then(res=>{
-      var url = JSON.parse(res).obj
+    app.http.uploadImgArr([res],"STORE_RECEIPT_CODE").then(res=>{
+      var url = res[0]
       if (url){
         Api.putPaymentImg({ receiptCode:url}).then(res=>{
           Api.showToast(res.message)

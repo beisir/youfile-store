@@ -11,22 +11,10 @@ Page({
     val:""
   },
   choseImg(){
-
-    // wx.chooseImage({
-    //   count:1,
-    //   success: (res)=> {
-    //     var tempFilePaths = res.tempFilePaths
-    //     this.setData({
-    //       url: tempFilePaths
-    //     })
-        
-    //   }
-    // })
-    app.http.chooseImage().then(res=>{
-      res = JSON.parse(res)
+    API.uploadImage().then(res=>{
       this.setData({
-        url:res.obj,
-        showUrl: this.data.base + res.obj
+        url:res[0],
+        showUrl: this.data.base + res[0]
       })
     });
   },

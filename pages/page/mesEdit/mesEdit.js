@@ -150,8 +150,8 @@ Page({
   },
   afterCuttingImg(url) {
     var _this=this
-    app.http.onlyUploadImg(url,"STORE_IMAGE").then(res => {
-      var url = JSON.parse(res).obj
+    app.http.uploadImgArr([url],"STORE_IMAGE").then(res => {
+      var url = res[0]
       if (url) {
         Api.uploadLogoImg(url)
           .then(res => {

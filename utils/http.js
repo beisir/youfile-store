@@ -1,4 +1,5 @@
 import AuthHandler from './authHandler.js';
+import Uploader from './upload.js';
 import {
   baseUrl,
   uploadImg,
@@ -118,7 +119,7 @@ class request {
             }
             reject(res)
           }),
-          complete: function() {
+          complete: function () {
             if (!hideLoading) {
               wx.hideLoading()
             }
@@ -131,238 +132,91 @@ class request {
   /**
    * 上传图片
    */
-  chooseImageUpload(types, ifUploadMore, index) {
-    return this.chooseImage(types, ifUploadMore, index)
-  }
-
-  chooseImage(types, ifUploadMore, index) {
-    wx.showNavigationBarLoading()
-    wx.showLoading({
-      title: "正在加载",
-      mask: true
-    })
-    return new Promise((resolve, reject) => {
-      this.authHandler.getTokenOrRefresh().then(token => {
-        var header = this.defaultUploadHeader
-        if (token) {
-          header['Authorization'] = token;
-        } else {
-          delete header['Authorization'];
-        }
-        wx.chooseImage({
-          count: ifUploadMore ? 9 : 1,
-          sizeType: ['compressed'], // original 原图，compressed 压缩图，默认二者都有
-          sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
-          success: function(res) {
-            var tempFilePaths = res.tempFilePaths;
-            for (var v of tempFilePaths) {
-              wx.uploadFile({
-                url: uploadImg,
-                filePath: v,
-                name: 'file',
-                header: header,
-                formData: {
-                  'type': types ? types : ""
-                },
-                success: (res => {
-                  if (res.statusCode === 200) {
-                    let pages = getCurrentPages()
-                    let curPage = pages[pages.length - 1]
-                    // 多张
-                    if (ifUploadMore){
-                      var addGoodsDetails = curPage.data.addGoodsDetails
-                      if (index) {
-                        addGoodsDetails.splice(index, 0, { "img": imageUrl + JSON.parse(res.data).obj })
-                      } else {
-                        addGoodsDetails.push({
-                          "img": imageUrl + JSON.parse(res.data).obj
-                        })
-                      }
-                      curPage.setData({
-                        addGoodsDetails: addGoodsDetails
-                      })
-                    }else{
-                      resolve(res.data)
-                    }
-                  } else {
-                    if (this._errorHandler != null) {
-                      this._errorHandler(res)
-                    }
-                    reject(res)
-                  }
-                }),
-
-              })
-            }
-          },
-          fail: (res => {
-            if (this._errorHandler != null) {
-              this._errorHandler(res)
-            }
-            reject(res)
-          }),
-          complete: function() {
-            wx.hideLoading()
-            wx.hideNavigationBarLoading()
-          }
-        })
-      })
-    })
-  }
   onlychoseImg(obj) {
-    if(!obj){obj = {}}
+    if (!obj) { obj = {} }
     obj.sourceType ? '' : obj.sourceType = ['album', 'camera']
     obj.sizeType ? '' : obj.sizeType = ['original', 'compressed']
     obj.count ? '' : obj.count = 1
     let pages = getCurrentPages(),
       current = pages[pages.length - 1];
-      return new Promise((resolve, reject) => {
-        if (current.data.choosingImg) {
-          reject("重复点击")
-          return
-        }else{
-          current.setData({ choosingImg: true })
-        }
-        wx.chooseImage({
-          count: obj.count,
-          sizeType: obj.sizeType, // original 原图，compressed 压缩图，默认二者都有
-          sourceType: obj.sourceType, // album 从相册选图，camera 使用相机，默认二者都有
-          success: (res)=> {
-            if (obj.size) {
-              let ifsize = true
-              res.tempFiles.forEach(el => {
-                console.log(el.size / 1024 / 1204 > obj.size)
-                if (el.size / 1024 / 1204 > obj.size) {
-                  ifsize = false
-                }
-              })
-              if (!ifsize) {
-                wx.showToast({
-                  title: '图片大小不能超过' + obj.size + 'M',
-                  duration: 2000,
-                  icon: 'none'
-                })
-                reject('image to large')
-                return
-              }
-            }
-            if(obj.upload){
-              this.uploadImgArr(res.tempFilePaths,obj.type)
-            }
-            resolve(res)
-          },
-          fail: (e => {
-            reject(e)
-          }),
-          complete: () => {
-            current.setData({ choosingImg: false })
-          }
-        })
-      })
-
-  }
-  
-  onlyUploadImg(url, types, noLoading) {
-    if (!url) {
-      console.warn('no upload url')
-      return
-    }
     return new Promise((resolve, reject) => {
-      this.authHandler.getTokenOrRefresh().then(token => {
-        var header = this.defaultUploadHeader
-        if (token) {
-          header['Authorization'] = token;
-        } else {
-          delete header['Authorization'];
-        }
-        if (!noLoading) {
-          wx.showLoading({
-            title: '上传中',
-            mask: true
-          })
-        }
-        wx.uploadFile({
-          url: uploadImg,
-          filePath: url,
-          name: 'file',
-          header: header,
-          formData: {
-            'type': types ? types : ""
-          },
-          success: (res => {
-            if (res.statusCode === 200) {
-              resolve(res.data)
-            } else {
-              if (this._errorHandler != null) {
-                this._errorHandler(res)
+      if (current.data.choosingImg) {
+        reject("重复点击")
+        return
+      } else {
+        current.setData({ choosingImg: true })
+      }
+      wx.chooseImage({
+        count: obj.count,
+        sizeType: obj.sizeType, // original 原图，compressed 压缩图，默认二者都有
+        sourceType: obj.sourceType, // album 从相册选图，camera 使用相机，默认二者都有
+        success: (res) => {
+          if (obj.size) {
+            let ifsize = true
+            res.tempFiles.forEach(el => {
+              console.log(el.size / 1024 / 1204 > obj.size)
+              if (el.size / 1024 / 1204 > obj.size) {
+                ifsize = false
               }
-              reject(res)
+            })
+            if (!ifsize) {
+              wx.showToast({
+                title: '图片大小不能超过' + obj.size + 'M',
+                duration: 2000,
+                icon: 'none'
+              })
+              reject('image to large')
+              return
             }
-          }),
-          fail: (e=>{
-            wx.showToast({ title: "上传失败", icon: 'none' })
-          }),
-          complete: (res => {
-            if (!noLoading) {
-              wx.hideLoading();
-            }
-          })
-        })
+          }
+          if (obj.upload) {
+            this.uploadImgArr(res.tempFilePaths, obj.type, obj.isPrivate).then(res => {
+              resolve(res)
+            })
+          } else {
+            resolve(res)
+          }
+        },
+        fail: (e => {
+          reject(e)
+        }),
+        complete: () => {
+          current.setData({ choosingImg: false })
+        }
       })
     })
 
   }
 
   // 多图上传
-  uploadImgArr(arr, type = '') {
+  uploadImgArr(arr, type = '', isPrivate = false) {
     if (!arr || arr.length == 0) { return }
-    this.getImgArr = [],
-      this.nowIndex = 0;
-    this.handleImgList(0, arr, type)
-    wx.showLoading({
-      title: '开始上传',
-      mask: true
-    })
-  }
-  handleImgList(index, arr, type) {
     let pages = getCurrentPages(),
       current = pages[pages.length - 1];
-    if (!arr[index]) {
-      wx.hideLoading()
-      return
-    }
-    this.onlyUploadImg(arr[index], type, true).then(res => {
-      this.getImgArr.push(res)
-      if (arr[++index]) {
-        wx.showLoading({
-          title: '正在上传:' + index + '/' + arr.length,
-          mask: true
-        })
-        this.nowIndex = index
-        this.handleImgList(index, arr, type)
-      } else {
-        current.mulImgUploadSuccess ? current.mulImgUploadSuccess(this.getImgArr,type) : ''
+    return new Promise((resolve, reject) => {
+      new Uploader(this, isPrivate).uploadFile(type, { 'tempFilePaths': arr }).then(res => {
+        resolve(res)
+        current.mulImgUploadSuccess ? current.mulImgUploadSuccess(res, type) : ''
+      }).catch(e => {
+        current.mulImgUploadFail ? current.mulImgUploadFail(e) : ''
         wx.hideLoading()
-      }
-    }).catch(e => {
-      current.mulImgUploadFail ? current.mulImgUploadFail(e) : ''
-      wx.hideLoading()
+      })
     })
   }
-  
+
   // 选择视频
-  chooseVedio(obj){
-    if(!obj){obj = {}}
-    return new Promise((resolve,reject)=>{
+  chooseVedio(obj) {
+    if (!obj) { obj = {} }
+    return new Promise((resolve, reject) => {
       wx.chooseVideo({
-        sourceType: obj.sourceType ? obj.sourceType:['album', 'camera'],
-        compressed: obj.compressed === false ? false:true, //压缩
+        sourceType: obj.sourceType ? obj.sourceType : ['album', 'camera'],
+        compressed: obj.compressed === false ? false : true, //压缩
         maxDuration: obj.maxDuration ? obj.maxDuration : 30,
         success: (res) => {
           // 大小
-          if (obj.size && res.size/1024/1024 > obj.size){
-            wx.showToast({ title: '视频不能超过' + obj.size+ 'M',icon: 'none'})
-            reject({ errtype: 'size', res: res})
+          if (obj.size && res.size / 1024 / 1024 > obj.size) {
+            wx.showToast({ title: '视频不能超过' + obj.size + 'M', icon: 'none' })
+            reject({ errtype: 'size', res: res })
             return
           }
           // 宽高
@@ -376,17 +230,16 @@ class request {
             reject({ errtype: 'width', res: res })
             return
           }
-          if ((obj.duration && res.duration > obj.duration) || (!obj.duration && res.duration >30)){
+          if ((obj.duration && res.duration > obj.duration) || (!obj.duration && res.duration > 30)) {
             let time = obj.maxDuration ? obj.maxDuration : 30
-            wx.showToast({ title: '视频长度不能超过' + time +'s', icon: 'none' })
+            wx.showToast({ title: '视频长度不能超过' + time + 's', icon: 'none' })
             reject({ errtype: 'duration', res: res })
             return
           }
-          if(obj.upload){
-            // 上传公用一套
-            this.onlyUploadImg(res.tempFilePath, obj.uploadType ? obj.uploadType:'', obj.noLoading?true:false).then(res=>{
+          if (obj.upload) {
+            new Uploader(this).uploadFile('', res).then(res => {
               resolve(res)
-            }).catch(e=>{
+            }).catch(e => {
               reject(e)
             })
           } else {

@@ -727,8 +727,10 @@ function storeIdInfo(data) {
   return app.http.getRequest(storeIdInfoUrl, data)
 }
 /**上传图片**/
-function uploadImage(types, ifUploadMore, index) {
-  return app.http.chooseImageUpload(types, ifUploadMore, index)
+function uploadImage(obj) {
+  if(!obj){obj = {}}
+  obj.upload = true
+  return app.http.onlychoseImg(obj)
 }
 /**更换店封面**/
 function updateCover(url, data) {
