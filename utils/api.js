@@ -358,7 +358,7 @@ function recentGoods(data) {
 function adminGoodsDelete(data) {
   return app.http.deleteRequest(adminGoodsDeleteUrl, data)
 }
-/**获取云供应商资料**/
+/**获取云分销商资料**/
 function userInfor(data) {
   return app.http.getRequest(userInforUrl, data)
 }
@@ -621,7 +621,7 @@ function index(data) {
 function isFriendStore(data) {
   return app.http.getRequest(isFriendStoreUrl, data)
 }
-/**判断与此云供应商是否是好友关系**/
+/**判断与此云分销商是否是好友关系**/
 function isFriend(data) {
   data = initStoreId(data);
   return app.http.getRequest(isFriendUrl, data)
@@ -643,7 +643,7 @@ function addWholesaler(data) {
 function pass(data) {
   return app.http.postRequest(passUrl, data)
 }
-/**云供应商通过验证**/
+/**云分销商通过验证**/
 function acceptmerchant(data) {
   return app.http.postRequest(acceptmerchantUrl, data)
 }
@@ -651,12 +651,12 @@ function acceptmerchant(data) {
 function wholesalerAll(data) {
   return app.pageRequest.pageGet(wholesalerAllUrl, data)
 }
-/**云供应商数据**/
+/**云分销商数据**/
 function merchantIndex(data) {
   data = initStoreId(data);
   return app.http.getRequest(merchantIndexUrl, data)
 }
-/**云供应商列表**/
+/**云分销商列表**/
 function merchantList(data) {
   data = initStoreId(data);
   return app.pageRequest.pageGet(merchantListUrl, data)
@@ -666,17 +666,17 @@ function dealUser(data) {
   data = initStoreId(data);
   return app.pageRequest.pageGet(dealUserUrl, data)
 }
-/**新增云供应商列表**/
+/**新增云分销商列表**/
 function newMerchant(data) {
   data = initStoreId(data);
   return app.pageRequest.pageGet(newMerchantUrl, data)
 }
-/**发送商友申请 添加到云供应商**/
+/**发送商友申请 添加到云分销商**/
 function apply(data) {
   data = initStoreId(data);
   return app.http.postRequest(applyUrl, data)
 }
-/**接受申请添加到云供应商**/
+/**接受申请添加到云分销商**/
 function acceptPurchaser(data) {
   data = initStoreId(data);
   return app.http.postRequest(acceptPurchaserUrl, data)
@@ -695,11 +695,11 @@ function saveDetails(data) {
 function serWholesalerList(data) {
   return app.pageRequest.pageGet(serWholesalerListUrl, data)
 }
-/**添加云供应商分页查询列表**/
+/**添加云分销商分页查询列表**/
 function purchaserList(data) {
   return app.pageRequest.pageGet(purchaserListUrl, data)
 }
-/**云供应商资料**/
+/**云分销商资料**/
 function remakInfo(data) {
   data = initStoreId(data);
   return app.http.getRequest(remakInfoUrl, data)
@@ -712,7 +712,7 @@ function purchaserUserId(url) {
 function showPurchaser(data) {
   return app.http.getRequest(showPurchaserUrl, data)
 }
-/**扫一扫查看云供应商**/
+/**扫一扫查看云分销商**/
 function showMerchant(data) {
   return app.http.getRequest(showMerchantUrl, data)
 }
@@ -908,7 +908,7 @@ function getOrderDetail(data) {
 function adminGetOrderDetail(data) {
   return app.http.getRequest(adminorderDetailUrl, data);
 }
-//是否云供应商
+//是否云分销商
 function ifWholesaler(data) {
   return app.http.getRequest(ifWholesalerUrl, data);
 }
@@ -1278,15 +1278,15 @@ function aAnalysisAGoods(data) {
 function aAnalysisCustom(data) {
   return app.http.getRequest(aAnalysisCustomUrl, data)
 }
-/**统计查询云供应商汇总数据列表**/
+/**统计查询云分销商汇总数据列表**/
 function statPurchasers(data) {
   return app.pageRequest.pageGet(statPurchasersUrl, data)
 }
-// 统计查询云供应商信息
+// 统计查询云分销商信息
 function statPurchasersDetails(data) {
   return app.http.getRequest(statPurchasersDetailsUrl, data)
 }
-//云供应商交易数据列表
+//云分销商交易数据列表
 function purchaserTrans(data) {
   return app.pageRequest.pageGet(purchaserTransUrl, data)
 }

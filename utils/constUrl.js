@@ -82,7 +82,7 @@ export const acceptmerchantUrl='/admin/bizfriend/acceptmerchant'
 export const purchaserUserIdUrl='/admin/store/merchantinfo/{{storeId}}/{{purchaserUserId}}'
 export const applyinfoUrl='/admin/store/applyinfo/{{storeId}}/{{purchaserUserId}}'
 export const isFriendUrl='/admin/merchantpurchaser/{{storeId}}/purchaser/{{userId}}'
-// 云供应商
+// 云分销商
 export const merchantIndexUrl ='/admin/merchantpurchaser/{{storeId}}'
 export const merchantListUrl ='/admin/merchantpurchaser/{{storeId}}/merchants'
 export const newMerchantUrl='/admin/bizfriend/{{storeId}}/purchaserapply'
@@ -129,7 +129,7 @@ export const threeFloorListUrl = "/api/floor/threelevellist/{{mallCode}}"
 export const orderDetailUrl = "/api/order/byordernumber/{{orderNumber}}";
 //商家订单详情
 export const adminorderDetailUrl = '/admin/order/byordernumber/{{orderNumber}}'
-// 是否为云供应商
+// 是否为云分销商
 export const ifWholesalerUrl = "/admin/user/profile/{{userId}}"
 // 商家门店订单
 export const shopkeeperOrderListUrl = "/admin/ftf/order/store/{{storeId}}/orderstatus/{{orderStatus}}"
@@ -167,7 +167,7 @@ export const getTradeUrl ='/admin/store/trade/statistic'
 export const getAccountinUrl='/admin/store/trade/accountin'
 export const getAccountDetailUrl ='/admin/store/trade/{{paymentNumber}}/account/detail'
 export const getHaveRecordUrl ='/admin/store/trade/settle'
-// 删除云供应商关系
+// 删除云分销商关系
 export const deleteUserUrl='/admin/merchantpurchaser/{{storeId}}/{{purchaserUserId}}'
 // 根据商品查SKU
 export const goodsSkuUrl = '/admin/shop/goods/specification/sku/{{goodsId}}'
@@ -230,7 +230,7 @@ export const statisticSalesUrl="/admin/activity/statistic/sum/{{activityNumber}}
 export const yunStatisticsUrl="/order/statistics/distribution"
 export const aAnalysisAGoodsUrl="/admin/activity/statistic/{{activityNumber}}/store/goods/top"
 export const aAnalysisCustomUrl="/admin/activity/statistic/{{activityNumber}}/store/custom/top"
-// 统计查询云供应商汇总数据列表
+// 统计查询云分销商汇总数据列表
 export const statPurchasersUrl="/order/statistics/purchasers/trade/data/page"
 export const statPurchasersDetailsUrl="/order/statistics/purchaser/{{userId}}/trade/data"
 export const purchaserTransUrl="/admin/order/purchaser/{{userId}}/"

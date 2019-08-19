@@ -80,7 +80,7 @@ class Calculation {
       classNums = 0,
       difference = 0, //差价
       discountShow = true, //是否享受批发价
-      limitShow = wx.getStorageSync('admin') //判断是否是云供应商身份  3代表是
+      limitShow = wx.getStorageSync('admin') //判断是否是云分销商身份  3代表是
     let pages = getCurrentPages()
     let curPage = pages[pages.length - 1]
     let goodsSkuLen = goodsSpecificationVOList.length
@@ -143,7 +143,7 @@ class Calculation {
       nomalGoodsNums = curPage.data.numbers
       classNums = 1
     }
-    // 云供应商身份
+    // 云分销商身份
     if (limitShow == 3) {
       difference = total - newTotal //差价
       // 判断是否享受 起批设置

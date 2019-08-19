@@ -975,6 +975,14 @@ Page({
       }
     }
   },
+  // 聚焦如果是 0 就清空input
+  focusNuminput(e){
+    if(e.detail.value === '0'){
+      this.setData({
+        numbers: ''
+      })
+    }
+  },
   //添加
   addCount: function (e) {
     var sign = e.currentTarget.dataset.sign //获取是增加还是减少 或者手动输入 input代表手动输入
@@ -1002,10 +1010,22 @@ Page({
             numbers: goodsInfo.num,
           })
         }
-    }
+      }
+      if (sign =='input') {
+        num = e.detail.value ? parseInt(e.detail.value) : 0
+        if (goodsSkuVOList.length > 0) {
+          this.selectedSku('input',false,num)
+        } else {
+          Method.selectedSkuNum(goodsInfo, num)
+          this.setData({
+            numbers: goodsInfo.num
+          })
+        }
+      }
   },
   // 判断选中的SKU
-  selectedSku: function(isTrue,index) {
+  selectedSku: function(isTrue,index,inputNum) {
+    console.log(inputNum)
     var skuStr = '',
       swichNavCode = this.data.swichNavCode,//第一个规格code
       changeButtonCode = this.data.changeButtonCode,//第二个规格code
@@ -1014,14 +1034,16 @@ Page({
     var goodsInfo = this.data.goodsInfo
     for (var i = 0; i < goodsSkuVOList.length; i++) {
       var childArr = goodsSkuVOList[i].specValueCodeList
-      if (childArr.length == 1) {
+      if (childArr.length == 1) { // 单sku
         if (childArr.indexOf(changeButtonCode) != -1) {
           if (goodsSkuVOList[i].isActivity) {
             goodsInfo.saleBatch = goodsSkuVOList[i].saleBatch
             goodsInfo.saleStockNum = goodsSkuVOList[i].saleStockNum
             goodsInfo.activityPrice = goodsSkuVOList[i].activityPrice
           }
-          if (isTrue) {
+          if (isTrue === 'input'){
+            this.selectedSkuNum(goodsSkuVOList[i], inputNum, true)
+          } else if (isTrue) {
             if (num > 0) {
               num--
             }
@@ -1040,20 +1062,23 @@ Page({
             })
           }
           goodsInfo.isActivity = goodsSkuVOList[i].isActivity
+          console.log(goodsSkuVOList[i].num)
           this.setData({
             numbers: goodsSkuVOList[i].num,
             goodsInfo: goodsInfo
           })
           skuStr = goodsSkuVOList[i].skuName
         }
-      } else {
+      } else {  // 双sku
         if (childArr.indexOf(swichNavCode) != -1 && childArr.indexOf(changeButtonCode) != -1) {
           if (goodsSkuVOList[i].isActivity) {
             goodsInfo.saleBatch=goodsSkuVOList[i].saleBatch
             goodsInfo.saleStockNum = goodsSkuVOList[i].saleStockNum
             goodsInfo.activityPrice = goodsSkuVOList[i].activityPrice
           }
-          if (isTrue) {
+          if (isTrue === 'input') {
+            this.selectedSkuNum(goodsSkuVOList[i], inputNum, true)
+          } else if (isTrue) {
             if (num>0){
               num--
             }
@@ -1106,7 +1131,7 @@ Page({
     var sign = e.currentTarget.dataset.sign //获取是增加还是减少 或者手动输入 input代表手动输入
     const index = e.currentTarget.dataset.index;
     if (sign == "input") {
-      var nums = e.detail.value
+      var nums = e.detail.value ? e.detail.value:0
       this.updateSkuVoList(sign, index, parseInt(nums))
     } else {
       this.updateSkuVoList(sign, index)
@@ -1155,6 +1180,9 @@ Page({
           return
         }
         this.selectedSkuNum(goodsInfo, num - 1,true)
+      }
+      if (sign == "input") {
+        this.selectedSkuNum(goodsInfo, nums)
       }
       this.setData({
         numbers: goodsInfo.num

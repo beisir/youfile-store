@@ -163,7 +163,7 @@
       <view class="ym_goodsstorer">
         <view class='store-goodsNum-data'>{{favoriteNum}}</view>关注人数</view>
       <view class="ym_goodsstorer">
-        <view class='store-goodsNum-data'>{{store.purchaserNum}}</view>云供应商</view>
+        <view class='store-goodsNum-data'>{{store.purchaserNum}}</view>云分销商</view>
     </view>
     <view class="ym_goodsstoreop" hidden='{{likeShow}}'>
       <view class="ui-link" bindtap='likeStore'>
@@ -283,7 +283,7 @@
                     <text wx:if="{{numbers!=0}}" class='ct-xian'></text>
                 <text wx:if="{{numbers==0}}"><text class='ct-xian ct-xian1'></text></text>
                 </text>
-                <text class="cart-count-num">{{numbers}}</text>
+                <input maxlength="6" class="cart-count-num" type="number" value="{{numbers}}" bindfocus="focusNuminput" bindblur="updateSkuNum" data-sign='input'></input>
                 <view class="cart-count-add" data-index="0" bindtap="updateSkuNum" data-sign='add'>
                   <image src="/image/add.png"></image>
                 </view>
@@ -432,7 +432,7 @@
                   <text wx:if="{{numbers!=0}}" class='ct-xian'></text>
               <text wx:if="{{numbers==0}}"><text class='ct-xian ct-xian1'></text></text>
               </text>
-              <text class="cart-count-num">{{numbers}}</text>
+              <input maxlength="6" class="cart-count-num" type="number" value="{{numbers}}" bindfocus="focusNuminput" bindblur="addCount" data-sign='input'></input>
               <view class="cart-count-add" bindtap="addCount" data-index="0" data-sign='add'>
                 <image src="/image/add.png"></image>
               </view>

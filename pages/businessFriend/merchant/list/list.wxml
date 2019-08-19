@@ -1,7 +1,7 @@
 <view class='header-ser-box com-flex-between'>
   <view class='com-flex-center ser-white-box'>
     <image class="ser-icon"  src="/image/search.png"></image>
-    <input class='flexone' placeholder="输入云供应商名称、手机号"   bindconfirm="searchBtn" bindinput='changeValue' value="{{value}}"></input>
+    <input class='flexone' placeholder="输入云分销商名称、手机号"   bindconfirm="searchBtn" bindinput='changeValue' value="{{value}}"></input>
     <image  src="/image/close.png" bindtap='emptyInput' class='close-btn'></image>
   </view>
   <view class='ser-btn flexone' bindtap='searchBtn'>搜索</view>
@@ -10,14 +10,14 @@
   <view class='bf-weui'>
     <navigator class="weui_cells" url="../addMerchant/addMerchant">
       <image  mode="widthFix" src="/image/w1.png"></image>
-      <text class="bf-font">添加云供应商 </text>
+      <text class="bf-font">添加云分销商 </text>
       <view class='weui-view' style='top:10rpx'>
         <image  mode="widthFix" src="/image/icl.png"></image>
       </view>
     </navigator>
   </view>
 </view>
-<view class='bf-all' wx:if='{{totalCount>0}}'>全部云供应商</view>
+<view class='bf-all' wx:if='{{totalCount>0}}'>全部云分销商</view>
 <scroll-view scroll-y="true" style="height:100%;">
 <view class='bf-cont'>
   <view class='bf-weui'>

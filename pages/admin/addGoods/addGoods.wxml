@@ -204,7 +204,7 @@
         <view class="weui-cell1 weui-cell2">
           <view class="weui-cell__bd">
             <text>仅允许商友可见</text>
-            <view class='ag-font'>与您成为商友关系的云供应商可查看</view>
+            <view class='ag-font'>与您成为商友关系的云分销商可查看</view>
           </view>
           <view class='weui-input'>
             <switch color="#f8b616" checked='{{switchChange}}' bindchange="switchChange"/>

@@ -24,7 +24,7 @@
 </view>
 <view class='listData'>
   <view>
-    <view class='aa-top'>云供应商TOP10排行榜</view>
+    <view class='aa-top'>云分销商TOP10排行榜</view>
     <block wx:if="{{customData && customData.length > 0}}">
       <view class='aa-info' wx:for='{{customData}}' wx:key='{{index}}'>
         {{index+1}}
@@ -35,7 +35,7 @@
         </view>
       </view>
     </block>
-    <view wx:else class='no-result-box'>暂无云供应商数据</view>
+    <view wx:else class='no-result-box'>暂无云分销商数据</view>
   </view>
 </view>
 <view class='listData' style='padding-bottom:80rpx;'>

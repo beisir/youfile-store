@@ -9,7 +9,7 @@
   <view class='com-color-back inner-header'>
     <view class='bf-cont bf-cont1 header-content'>
       <view class='bf-title'>云分销商数据</view>
-      <text>已达成商友关系的云供应商</text>
+      <text>已达成商友关系的云分销商</text>
       <view class='bt-view'>
         <view>
           <navigator class="weui_cells" url='../list/list'>
