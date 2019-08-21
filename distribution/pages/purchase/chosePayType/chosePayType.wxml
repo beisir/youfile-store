@@ -1,0 +1,6 @@
+<view class='box'>
+  <view class='type-item com-flex-between' wx:for="{{typeList}}" bindtap='checked' data-index="{{index}}" wx:key="{{index}}">
+    <text>{{item.payWayName}}</text>
+    <image hidden='{{!item.selected}}' class='right' src='/distribution/images/right-gold.png'></image>
+  </view>
+</view>

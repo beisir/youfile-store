@@ -1,0 +1,16 @@
+@import '/distribution/static/template/goodNum/goodsNumItem';
+
+.header{height: 230rpx;position: relative;padding:30rpx 20rpx 0;box-sizing: border-box;}
+/* 搜索 */
+.search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
+.search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
+.ser-btn{text-align: center;color: #fff;}
+/* 商品 */
+.goods-box{position: relative;top: -90rpx;}
+.item-box{width: 710rpx;margin: 0 auto 20rpx;overflow: hidden;}
+.absolut-box{position: relative;left: 0;top: 0;transition:all 0.4s;}
+.delbtn-active{left: -110rpx;}
+.close-btn{height: 100%;width: 100rpx;background: #fb3d3c;color: #fff;border-radius: 10rpx;position: absolute;right: -110rpx;top: 0;display: flex;flex-direction: column;align-items: center;justify-content: center;font-size:24rpx;}
+.template .goods-item{margin: 0;}
+/* 弹框 */
+.layer-btn{width: 420rpx;height: 80rpx;border-radius: 10rpx;color: #fff;font-size: 30rpx;margin-top: 40rpx;}

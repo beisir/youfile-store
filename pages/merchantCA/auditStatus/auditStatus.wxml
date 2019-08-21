@@ -1,0 +1,25 @@
+<view class='com-box'>
+  <image wx:if="{{message.auditStatus == 'fail'}}" src='/image/nopass-icon.png' class='status-img'></image>
+  <image wx:if="{{message.auditStatus == 'success'}}" src='/image/pass-icon.png' class='status-img'></image>
+  <view style='padding:20rpx 30rpx 50rpx;'>
+    <view class='own-title'>{{message.merchantVO.merchantName}}</view>
+    <view class='status'>
+      <text wx:if="{{message.auditStatus == 'init'}}" style='color:#ff9900'>信息审核中</text>
+      <text wx:if="{{message.auditStatus == 'success'}}" style='color:#f8b616'>审核通过</text>
+      <text wx:if="{{message.auditStatus == 'fail'}}" style='color:#f11111'>审核未通过</text>
+    </view>
+    <view class='time' wx:if="{{message.auditTime}}">审核时间：{{message.auditTime}}</view>
+    <view class='des-title'>审核详细信息</view>
+    <view class='des-msg'>
+      <text wx:if="{{message.auditStatus == 'init'}}">我们会尽快为您审核您的资质信息</text>
+      <text wx:if="{{message.auditStatus == 'success'}}">恭喜您审核通过，您已开通在线支付功能</text>
+      <text wx:if="{{message.auditStatus == 'fail'}}" style='color:#f11111'>{{message.auditRemark?message.auditRemark:''}}</text>
+    </view>
+  </view>
+  <view class='btn-box' wx:if="{{message.auditStatus == 'fail' || message.auditStatus == 'success'}}">
+    <view class='btn' bindtap='toDetail'>
+      <text wx:if="{{message.auditStatus == 'success'}}">查看详情</text>
+      <text wx:if="{{message.auditStatus == 'fail'}}">修改提交</text>
+    </view>
+  </view>
+</view>

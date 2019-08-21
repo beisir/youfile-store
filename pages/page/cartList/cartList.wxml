@@ -1,161 +1,275 @@
-<import src='../../login/login/login.wxml'/>
-<login-component id='login' inner-text="Some text"></login-component>
-<view class="main" bindtap='rightList' >
-    <view class='cf-cont'  wx:if="{{hasList}}" >
-      <view class='c-title'  wx:for="{{storeMes}}" wx:key="{{index}}">
-        <image src="/image/ic1.png"></image> {{item.storeName}} <image class='itimg' src="/image/icl.png"></image> 
+<!-- 悬浮球 -->
+<returnBall>
+  <login id="login"></login>
+  <view class='top-b' wx:if="{{detailList.length>0}}"></view>
+  <view class="main" catchtap='rightList' wx:if="{{detailList.length>0}}">
+    <view class='cf-cont'>
+      <view class='c-title' wx:for="{{storeMes}}" wx:key="{{index}}">
+        <view catchtap='urlHome' class='flex-center-store-name'>
+          <image style='margin-right:20rpx;' src="/image/u4.png"></image> {{item.storeName}}
+          <image style='margin-left:10rpx;' class='itimg' src="/image/icl.png"></image>
+        </view>
+        <view wx:if='{{limitShow==3}}' class='new-c-t'>
+          <view wx:if='{{storeAmount!=0 && enjoyCost==true && storeAmount!=0  && differentPrice<0}}'>全场已满{{storeAmount}}元
+            <text>混批</text>
+          </view>
+          <view wx:if='{{!enjoyCost && !enjoyCostNew}}'>
+            <text style='color:#666;border:0' wx:if='{{differentPrice>0}}'>还差<text style='color:red;border:0;margin-left:0'>{{differentPrice}}</text>元全场可享受批发价</text>
+            <text>混批</text>
+          </view>
+          <view wx:if='{{storeAmount==0 && enjoyCost==true}}'>全场已享受批发价
+            <text>混批</text>
+          </view>
+          <view wx:if='{{!enjoyCost && enjoyCostNew==true}}'>全场已享受批发价
+            <text>混批</text>
+          </view>
+          <view wx:if='{{storeAmount!=0 && enjoyCost==true && storeAmount!=0 && differentPrice>0}}'>全场已享受批发价
+            <text>混批</text>
+          </view>
+        </view>
       </view>
       <!--编辑  -->
       <view>
-          <view class="cart-box">
-           <view class="record-box"  wx:for="{{detailList}}" wx:key="{{index}}" wx:for-item="record" style='height:{{record.height}}rpx'>
-              <view class="record  {{record.shoppingCartSkuList.length>0?'hide_table':''}}" style="left:{{record.offsetX}}px;left:{{leftVal}}px" data-index="{{index}}" bindtouchstart="recordStart" catchtouchmove="recordMove" bindtouchend="recordEnd">
+        <view class="cart-box">
+          <scroll-view style='overflow:scroll' scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
+            <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{detailList}}" wx:key="index">
+              <view class='content st-cont' data-index="{{index}}">
                 <view class="cart-list">
-                  <view class='cart-xian-new'></view>
-                  <icon wx:if="{{record.selected}}" type="success" color="#CCAA77" data-index="{{index}}"  class="cart-pro-select" bindtap="selectList"/>
-                  <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList"/>
-                  <navigator><image class="cart-thumb" src="{{record.mainUrl}}"></image></navigator>
-                  <view class='ct-text ct-text1'>￥{{record.sellPrice}}</view>
-                  <view style='width:365rpx' class='ct-title ct-title1'>{{record.goodsName}}</view> 
-                  <view class="cart-pro-name cart-pro-name1 {{record.isExistSku==false?'hide_mes':''}}"  bindtap='showAlert'>规格：{{record.small}}<image class='down' src="/image/down.png"></image></view>
-                  <view class="table"  wx:if="{{record.shoppingCartSkuList.length>0}}" >
-                     <view class="tr">
-                          <view class="th">规格</view>
-                          <view class="th">数量</view>
-                          <view class="th">零售价</view>
-                          <view class="th">批发价</view>
+                  <view class='goods-main-part'>
+                    <icon wx:if="{{item.selected}}" type="success" color="#f8b616" data-index="{{index}}" class="cart-pro-select" catchtap="selectList" />
+                    <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" catchtap="selectList" />
+                    <navigator url="../goodsDetails/goodsDetails?goodsId={{item.goodsId}}">
+                      <image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image>
+                    </navigator>
+                    <view class='ct-title ct-title1 goodsName-box'>{{item.goodsName}} </view>
+                    <view class="cart-pro-name cart-pro-name1" wx:if="{{item.shoppingCartSkuList.length==1}}" wx:for="{{item.shoppingCartSkuList}}" catchtap='showAlert' data-name="one" data-gid='{{item.goodsId}}' wx:for-item="record" wx:key="{{index}}">{{record.skuName}}
+                      <image class='down' src="/image/down.png"></image>
+                    </view>
+
+                    <view class="cart-pro-name cart-pro-name1 cart-pro-name2" data-name="more" data-index="{{index}}" wx:if="{{item.shoppingCartSkuList.length>1}}" catchtap='showAlert'>修改规格 / 数量
+                      <image class='down' src="/image/down.png"></image>
+                    </view>
+                     <!-- <block  wx:if='{{!item.isActivity}}'> -->
+                      <view wx:if='{{limitShow==3 && item.saleBatchNum && storeNum>0}}' class='man-j'>满
+                        <text>{{item.saleBatchNum}}</text>件起批
+                        <text style='color:#333;' wx:if='{{item.saleBatchNum-item.tempLen>0}}'> 还差<text style='color:#f8b616'>{{item.saleBatchNum-item.tempLen}}</text>件</text>
                       </view>
-                      <view class="tr"  wx:for="{{record.shoppingCartSkuList}}" wx:key="{{index}}">
-                          <view class="td">{{item.skuName}}</view>
-                          <view class="td">2件</view>
-                          <view class="td">￥{{item.sellPrice}}</view>
-                          <view class="td">￥{{item.wholesalePrice}}</view>
+                    <!-- </block> -->
+                    <view class='price-n'>
+                      <block wx:if='{{item.isActivity}}'>
+                        <block wx:if='{{item.shoppingCartSkuList.length==1 && item.shoppingCartSkuList[0].isActivity}}'>
+                          <view class='ct-text ct-text1-active'>
+                            <view class="jiage-t jiage-tRed" style='font-size:20rpx'>
+                              <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>
+                            <text class='sm-cny-icon'>￥</text>{{item.shoppingCartSkuList[0].activityPrice}}</view>
+                        </block>
+                        <block wx:if='{{item.shoppingCartSkuList.length==1 && !item.shoppingCartSkuList[0].isActivity}}'>
+                          <view class='ct-text ct-text1' style='right:20rpx;top:42rpx;'>
+                            <text class='sm-cny-icon'>￥</text>{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
+                        </block>
+                        <block wx:if='{{item.shoppingCartSkuList==null}}'>
+                          <view class='ct-text1-active'>
+                            <view class="jiage-t jiage-tRed" style='font-size:20rpx'>
+                              <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>
+                            <text class='sm-cny-icon'>￥</text>{{item.activityPrice}}</view>
+                        </block>
+                      </block>
+                      <block wx:else>
+                        <view class='ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList==null}}'>
+                          <text class='sm-cny-icon'>￥</text>{{item.sellPrice}}</view>
+                        <view class='ct-text1' wx:if='{{limitShow!=3 && item.shoppingCartSkuList.length==1}}'><text class='sm-cny-icon'>￥</text>{{item.shoppingCartSkuList[0].sellPrice}}</view>
+                        <view class='ct-text1' wx:if='{{limitShow==3 && item.shoppingCartSkuList==null}}'>
+                         <view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>
+                          <text class='sm-cny-icon'>￥</text>{{item.enjoyPrice?item.wholesalePrice:item.sellPrice}}</view>
+                        <view class='ct-text1' style='right:20rpx;top:42rpx;' wx:if='{{limitShow==3 && item.shoppingCartSkuList.length==1}}'>
+                         <view class="jiage-t" style='font-size:20rpx'>{{item.enjoyPrice?"批发价":"零售价"}}</view>
+                          <text class='sm-cny-icon'>￥</text>{{item.enjoyPrice?item.shoppingCartSkuList[0].wholesalePrice:item.shoppingCartSkuList[0].sellPrice}}</view>
+                      </block>
+
+                      <view class="cc-coun-new" wx:if="{{item.shoppingCartSkuList.length==1}}">
+                        <view catchtap="addCount" data-sign="reduce" data-obj="{{obj}}" class='{{item.num==1? "classFont": ""}} ' data-index="{{index}}">-</view>
+                        <input class='cc-add ' maxlength='6' data-sign="input" type='number' data-index="{{index}}" bindinput='bindInputValue' bindblur='addCount' value='{{item.num}}'></input>
+                        <view catchtap="addCount" data-sign="add" class='{{item.num==item.shoppingCartSkuList[0].stockNum? "classFontAdd": ""}} ' data-index="{{index}}">+</view>
                       </view>
-                      <view class="delete-box" bindtap="deleteList" data-id='{{record.goodsId}}' data-index="{{index}}">
+                      <view class="cc-coun-new" wx:if="{{item.shoppingCartSkuList==null}}" wx:for-item="record">
+                        <view bindtap="addCountNew" data-sign="reduce" data-obj="{{obj}}" class='{{item.num==1? "classFont": ""}} ' data-index="{{index}}">-</view>
+                        <input class='cc-add ' maxlength='6' data-sign="input" type='number' data-index="{{index}}" bindinput='bindInputValue' bindblur='addCountNew' value='{{item.num}}'></input>
+                        <view bindtap="addCountNew" data-sign="add" class='{{item.num==item.stockNum? "classFontAdd": ""}} ' data-index="{{index}}">+</view>
                       </view>
+
+                    </view>
                   </view>
-                  <view class="cc-coun-new">
-                    <view bindtap="minusCount" data-obj="{{obj}}"  data-index="{{index}}">-</view>
-                    <view class='cc-add'>{{record.num}}</view>
-                    <view bindtap="addCount" data-index="{{index}}">+</view>
+                  <view class="table" wx:if="{{item.shoppingCartSkuList.length>1}}">
+                    <view class="tr" wx:if='{{limitShow!=3}}'>
+                      <view class="th">规格</view>
+                      <view class="th">数量</view>
+                      <view class="th">零售价</view>
+                      <view class="th" wx:if="{{item.isActivity}}">现价</view>
+                    </view>
+                    <view class="tr" wx:if='{{limitShow!=3}}' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}" wx:for-item="record">
+                      <view class="td">{{record.skuName}}</view>
+                      <view class="td">{{record.num}}件</view>
+                      <view class="td {{item.isActivity?'classTd':''}}">
+                        <text class='sm-cny-icon'>￥</text>{{record.sellPrice}}</view>
+                      <view class="td" wx:if="{{item.isActivity}}">
+                        <view class='td-red' wx:if="{{record.isActivity}}">
+                          <view class="jiage-t jiage-tRed" style='font-size:20rpx'>
+                            <image src="/image/ccc.png" mode='widthFix'></image>抢订价</view>
+                          <text class='sm-cny-icon'>￥</text>{{record.activityPrice}}
+                        </view>
+                        <view class='td-nonal' wx:else>
+                          <view class="jiage-t" style='font-size:20rpx'>零售价</view>
+                          <text class='sm-cny-icon'>￥</text>{{record.sellPrice}}
+                        </view>
+                      </view>
+                    </view>
+                    <view class="tr" wx:if='{{limitShow==3}}'>
+                      <view class="th">规格</view>
+                      <view class="th">数量</view>
+                      <view class="th">零售价</view>
+                      <view class="td" style='color:#666' wx:if='{{item.enjoyPrice || item.isActivity}}'>现价</view>
+                    </view>
+                    <view class="tr" wx:if='{{limitShow==3}}' wx:for="{{item.shoppingCartSkuList}}" wx:for-item="record" wx:key="{{index}}">
+                      <view class="td">{{record.skuName}}</view>
+                      <view class="td">{{record.num}}件</view>
+                      <view class="td classTd" wx:if='{{item.enjoyPrice}}'>
+                        <text class='sm-cny-icon'>￥</text>{{record.sellPrice}}</view>
+                      <view class="td" wx:if='{{!item.enjoyPrice}}'>
+                        <text class='sm-cny-icon'>￥</text>{{record.sellPrice}}</view>
+                      <view class="td" wx:if='{{item.enjoyPrice && item.isActivity}}'>
+                        <view class='td-red' wx:if="{{record.isActivity}}">
+                          <view class="jiage-t jiage-tRed" style=' font-size:20rpx '>
+                            <image src="/image/ccc.png" mode='widthFix '></image>抢订价</view>
+                          <text class='sm-cny-icon'>￥</text>{{record.activityPrice}}
+                        </view>
+                        <view class='td-nonal ' wx:else>
+                          <view class="jiage-t" style='font-size:20rpx '>批发价</view>
+                          <text class='sm-cny-icon'>￥</text>{{record.wholesalePrice}}
+                        </view>
+                      </view>
+                      <view class="td" wx:if='{{item.enjoyPrice && !item.isActivity}}'>
+                        <view class='td-nonal '>
+                          <view class="jiage-t" style='font-size:20rpx '>批发价</view>
+                          <text class='sm-cny-icon'>￥</text>{{record.wholesalePrice}}
+                        </view>
+                      </view>
+                      <view class="td" wx:if='{{!item.enjoyPrice && item.isActivity}}'>
+                        <view class='td-red' wx:if="{{record.isActivity}}">
+                          <view class="jiage-t jiage-tRed" style=' font-size:20rpx '>
+                            <image src="/image/ccc.png" mode='widthFix '></image>抢订价</view>
+                          <text class='sm-cny-icon'>￥</text>{{record.activityPrice}}
+                        </view>
+                        <view class='td-nonal ' wx:else>
+                          <view class="jiage-t" style='font-size:20rpx '>零售价</view>
+                          <text class='sm-cny-icon'>￥</text>{{record.sellPrice}}
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                  <view class='allNumShow ' wx:if="{{item.shoppingCartSkuList.length>1}}">共
+                    <text style="font-size:24rpx;"> {{item.num}} </text>件商品 合计：
+                    <text><text class='sm-cny-icon'>￥</text>{{item.enjoyPrice?item.allGoodsPf:item.allGoodsAmount}}</text>
                   </view>
 
                 </view>
-                
               </view>
-              <view class="delete-box" bindtap="deleteList" data-id='{{record.goodsId}}' data-index="{{index}}">
+              <view class="del" catchtap="deleteList" data-id='{{item.goodsId}} ' data-index="{{index}}">
                 <view>删除</view>
               </view>
-              
             </view>
-          </view>
-      </view>
-       
-    </view>
-    <view wx:else>
-        <view class="cart-no-data">
-          <view class='nocar'><image src="/image/nocar.png"></image></view>
-          购物车还是空的哦
-          <view>去挑几件吧</view>
-          <button bindtap='urlHome'>去逛逛</button>
+          </scroll-view>
         </view>
+      </view>
     </view>
-    <view class='cf-cont'>
-      <view class="c-title c-title1 hide{{lostList?'show':''}}">
-        <image src="/image/ic2.png"></image> 失效宝贝  <text bindtap="emptyAll">全部清空</text>
+  </view>
+  <view class="main main1" wx:if="{{lostcarts.length>0}}">
+    <view class='cf-cont '>
+      <view class="c-title c-title1 hide{{lostList?'show ':' '}}">
+        <image src="/image/ic2.png"></image> 失效宝贝
+        <text catchtap="emptyAll">全部清空</text>
       </view>
       <view>
-          <view class="cart-box">
-          <view  wx:for="{{lostcarts}}" wx:key="{{index}}">
-             <view class="cart-list">
-                  <image class='noimg' src="/image/no.png"></image>
-                  <image class='posimg' src="/image/alert.png"></image>
-                  <navigator ><image class="cart-thumb" src="{{item.mainUrl}}"></image></navigator>
-                  <text class='ct-text'>￥{{item.sellPrice}}</text>
-                  <view   style='width:365rpx' class='ct-title ct-t-title'>{{item.goodsName}}</view>
-                  <!-- <text class="cart-pro-name">规格：{{item.small}}</text> -->
+        <view class="cart-box">
+          <view class='lostcarts-table ' wx:for="{{lostcarts}}" wx:key="{{index}}">
+            <view class="cart-list">
+              <image class='noimg ' src="/image/no.png"></image>
+              <image class='posimg ' src="/image/alert.png"></image>
+              <navigator>
+                <image class="cart-thumb" src="{{baseUrl}}{{item.mainUrl}}?x-oss-process=style/goods-small"></image>
+              </navigator>
+              <!-- <text class='ct-text '><text class='sm-cny-icon'>￥</text>{{item.sellPrice}}</text> -->
+              <view class='ct-title ct-t-title goodsName-box'>{{item.goodsName}}</view>
+              <!-- <text class="cart-pro-name">规格：{{item.small}}</text> -->
+            </view>
+            <view class="table" wx:if="{{item.shoppingCartSkuList.length>0}}">
+              <view class="tr" wx:if='{{limitShow=="3"}}'>
+                <view class="th">规格</view>
+                <view class="th">数量</view>
+                <view class="th">零售价</view>
+                <!-- <view class="th">批发价</view> -->
               </view>
-              <view class="table" wx:if="{{item.shoppingCartSkuList.length>0}}">
-                      <view class="tr">
-                          <view class="th">规格</view>
-                          <view class="th">数量</view>
-                          <view class="th">零售价</view>
-                          <view class="th">批发价</view>
-                      </view>
-                      <view class="tr"  wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
-                          <view class="td">{{item.skuName}}</view>
-                          <view class="td">2件</view>
-                          <view class="td">￥{{item.sellPrice}}</view>
-                          <view class="td">￥{{item.wholesalePrice}}</view>
-                      </view>
-                </view>
+              <view class="tr" wx:if='{{limitShow=="3"}}' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
+                <view class="td">{{item.skuName}}</view>
+                <view class="td">{{item.num}}件</view>
+                <view class="td">
+                  <text class='sm-cny-icon'>￥</text>{{item.sellPrice}}</view>
+                <!-- <view class="td"><text class='sm-cny-icon'>￥</text>{{item.wholesalePrice}}</view> -->
+              </view>
+
+              <view class="tr" wx:if='{{limitShow!="3"}}'>
+                <view class="th">规格</view>
+                <view class="th">数量</view>
+                <view class="th">零售价</view>
+              </view>
+              <view class="tr" wx:if='{{limitShow!="3"}}' wx:for="{{item.shoppingCartSkuList}}" wx:key="{{index}}">
+                <view class="td">{{item.skuName}}</view>
+                <view class="td">{{item.num}}件</view>
+                <view class="td">
+                  <text class='sm-cny-icon'>￥</text>{{item.sellPrice}}</view>
+              </view>
             </view>
           </view>
-          <view class='bot-back'></view>
+        </view>
+        <view class='bot-back '></view>
       </view>
     </view>
-    <view  wx:if="{{hasList}}">
-      <view class="cart-footer">
-        <icon wx:if="{{selectAllStatus}}" type="success" color="#CCAA77" class="total-select" bindtap="selectAll"/>
-        <icon wx:else type="circle" color="#A5A5A5" class="total-select" bindtap="selectAll"/>
-        <view class='order-all'>
-          合计：<text>￥{{totalPrice}}</text>
+
+  </view>
+  <view style='height:120rpx;'></view>
+  <view wx:if="{{detailList.length>0}}">
+    <view class="cart-footer">
+      <icon wx:if="{{selectAllStatus}}" type="success" color="#f8b616" class="total-select" catchtap="selectAll" />
+      <icon wx:else type="circle" color="#A5A5A5" class="total-select" catchtap="selectAll" />
+      <view class='order-all '>
+        合计：
+        <text><text class='sm-cny-icon'>￥</text>{{total1}}</text>
+        <view>(不含运费)</view>
+      </view>
+      <!-- <view class='order-all ' wx:if='{{enjoyCost}} '>
+          合计：<text><text class='sm-cny-icon'>￥</text>{{total1}}</text>
           <view>(不含运费)</view>
-        </view>
-        <view class="order-icon">
-           结算(1)
-        </view>
-        <text>全选</text>
-        <!-- <text class="cart-toatl-price">￥{{totalPrice}}</text> -->
+        </view> -->
+      <view class="order-icon" catchtap='creatOrder'>
+        结算
       </view>
+      <text>全选</text>
     </view>
-</view>
-<view hidden="{{hidden}}" class='alertAdd'>
-    <view class='gd-alert' animation='{{animationData}}'>
-      <view class='gd-top'>
-        <image class='gdclose' bindtap='closeAlert' src="/image/close.png"></image>
-        <view class='gd-image'>
-          <image  src="/image/s5.png"></image>
-        </view>
-        <view class='gd-ins'>
-          <view class='gd-title1'>周大福 萤火虫陪伴款 金镶钻石吊坠V102851</view>
-          <view>￥1800</view>
-          <text>库存：86件</text>
-        </view>
+  </view>
+  <view hidden='{{goRetailStore}}'>
+    <retailStore></retailStore>
+  </view>
+  <view hidden='{{indexEmpty}}'>
+    <no></no>
+  </view>
+  <view hidden='{{allEmpty}}'>
+    <view class="cart-no-data">
+      <view class='nocar'>
+        <image src="/image/nocar.png"></image>
       </view>
-      <view class='gd-gg'>
-        <text>规格</text>
-        <view>
-         <block wx:for="{{items}}" wx:key="{{index}}">
-            <view wx:if="{{item.status!=1}}" class='gd-view'><view class="{{specsTab==index?'active':''}}" data-current="{{index}}" bindtap='changeButton'>{{item.message}}</view></view>
-            <view wx:if="{{item.status==1}}" class='gd-view'><view class='nohave'>{{item.message}}</view></view>
-          </block>
-        </view>
-      </view>
-      <view class='gd-gg gd-gg1'>
-        <text>重量</text>
-        <view>
-          <block wx:for="{{weight}}" wx:key="{{index}}">
-            <view class='gd-view'><view class="{{currentTab==index?'active':''}}" data-current="{{index}}" bindtap='weghtSwi'>{{item.weight}}</view></view>
-          </block>
-        </view>
-      </view>
-      <view class='gd-gg gd-gg1'>
-        <text>购买数量</text>
-        <view class='cart-list gd-cart-list'>
-          <view class="cart-count-box">
-            <text class="cart-count-down" bindtap="minusCount1">
-                <text wx:if="{{numbers!=1}}" class='ct-xian'></text>
-                <text wx:if="{{numbers==1}}"><text class='ct-xian ct-xian1'></text></text> 
-              </text>
-              <text class="cart-count-num">{{numbers}}</text>
-              <view class="cart-count-add"  bindtap="addCount1"><image  src="/image/add.png"></image></view>
-          </view>
-        </view>
-      </view>
-      <view class='weui-bottom'>
-        <view bindtap='closeAlert'>取消</view>
-        <view>确定</view>
-      </view>
+      {{limitShow==3?'进货车':'购物车'}}还是空的哦
+      <view>去挑几件吧</view>
+      <button catchtap='urlHome'>去逛逛</button>
     </view>
-</view>
+  </view>
+
+</returnBall>

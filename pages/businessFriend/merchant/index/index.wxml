@@ -1,0 +1,215 @@
+<view class='com-color-back' style="padding-top:10rpx;">
+  <view class='page-header-tab com-flex-center'>
+    <view class='tab-item flexone {{tabType=="distribution"?"tab-item-ac":""}}' bindtap='choseTab' data-type='distribution'>云分销商</view>
+    <view class='tab-item flexone {{tabType=="supplier"?"tab-item-ac":""}}' bindtap='choseTab' data-type='supplier'>云供应商</view>
+  </view>
+</view>
+<!-- 云分销商 -->
+<block wx:if="{{tabType=='distribution'}}">
+  <view class='com-color-back inner-header'>
+    <view class='bf-cont bf-cont1 header-content'>
+      <view class='bf-title'>云分销商数据</view>
+      <text>已达成商友关系的云分销商</text>
+      <view class='bt-view'>
+        <view>
+          <navigator class="weui_cells" url='../list/list'>
+            <view>{{purchaserNumber}}</view>云分销商</navigator>
+        </view>
+        <view>
+          <navigator class="weui_cells" url='../newMerchant/newMerchant'>
+            <view>
+              <text class='com-red-color'>{{waitVerify}}</text>
+            </view>待验证</navigator>
+        </view>
+        <view>
+          <navigator class="weui_cells" url='../newMerchant/newMerchant'>
+            <view>
+              <text class='com-red-color'>{{waitPass}}</text>
+            </view>等待通过</navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='bf-cont'>
+    <view bindtap='addWholesaler' class='view-btn-item com-flex-center'>
+      <image class='view-icon' src='/image/man-add-godls.png'></image>
+      <text>添加云分销商</text>
+    </view>
+    <navigator url='../newMerchant/newMerchant'>
+      <view class='view-btn-item com-flex-center'>
+        <image class='view-icon' src='/image/man-blue.png'></image>
+        <text>新的云分销商</text>
+        <!-- <view class='red-ball'>2</view> -->
+      </view>
+    </navigator>
+  </view>
+
+  <view class='part-title com-flex-center'>
+    <view class='color-chunk'></view>
+    <text>全部云分销商</text>
+  </view>
+
+  <view class='bf-cont'>
+    <navigator wx:for="{{distributor}}" wx:key="{{index}}" url='../reach/reach?accept={{item.purchaserUserId}}'>
+      <view class='list-item com-flex-center'>
+        <image class='img60 com-border-radius' src='{{baseUrl + item.headPic}}'></image>
+        <text class='flexone list-item-title com-text-ellipsis'>{{item.remark?item.remark:item.nickName}}</text>
+        <image class='img30'></image>
+      </view>
+    </navigator>
+  </view>
+  <view class='list-tip'>共 {{purchaserNumber}} 个云分销商</view>
+</block>
+
+<!-- 云供应商 -->
+<block wx:if="{{tabType=='supplier'}}">
+  <view class='com-color-back inner-header'>
+    <view class='bf-cont bf-cont1 header-content' style='padding-left:0;padding-right:0;'>
+      <view style='padding:0 30rpx;'>
+        <view class='bf-title'>供应商数据</view>
+        <text style='color:#666;'>手动添加的供应商</text>
+      </view>
+      <view class='bt-view four-box'>
+        <view>
+          <navigator class="weui_cells">
+            <view>0</view>云供应商</navigator>
+        </view>
+        <view>
+          <navigator class="weui_cells">
+            <view>{{supplierNum}}</view>供应商</navigator>
+        </view>
+        <view>
+          <navigator class="weui_cells">
+            <view>
+              <text class='com-red-color'>0</text>
+            </view>待验证</navigator>
+        </view>
+        <view>
+          <navigator class="weui_cells">
+            <view>
+              <text class='com-red-color'>0</text>
+            </view>等待通过</navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='bf-cont'>
+    <navigator url='/distribution/pages/supplier/createSupplier/createSupplier'>
+      <view class='view-btn-item com-flex-center'>
+        <image class='view-icon' src='/image/man-add-godls.png'></image>
+        <text>添加云供应商</text>
+      </view>
+    </navigator>
+    <view class='view-btn-item com-flex-center'>
+      <image class='view-icon' src='/image/man-blue.png'></image>
+      <text>新的云供应商</text>
+      <!-- <view class='red-ball'>2</view> -->
+    </view>
+  </view>
+
+  <view class='list-tab-box com-flex-center'>
+    <view class='list-tab-item {{supListType=="cloudSup"?"list-tab-item-ac":""}}' bindtap='choseSupType' data-type="cloudSup">云供应商 (0)</view>
+    <view class='list-tab-item {{supListType=="sup"?"list-tab-item-ac":""}}' bindtap='choseSupType' data-type="sup">供应商 ({{supplierNum}})</view>
+  </view>
+
+  <view class='bf-cont'>
+    <navigator class='' url="../../selfinformation/selfinformation?no={{item.no}}" wx:for="{{supList}}" wx:key="{{index}}">
+    <view class='list-item com-flex-center'>
+      <image class='img60 com-border-radius' src='/image/com-user-cion.png'></image>
+      <text class='flexone list-item-title com-text-ellipsis'>{{item.remark?item.remark:item.name}}</text>
+      <image class='img30'></image>
+    </view>
+    </navigator>
+  </view>
+  <view class='list-tip'>共 {{supplierNum}} 个供应商</view>
+</block>
+
+<view style="height:100rpx;"></view>
+<view class='goHome' bindtap='goHome'>
+  <view>
+    <image src="/image/home.png"></image>
+  </view>回首页</view>
+<view class='bottom_M'>
+  <navigator open-type="redirect" url='../../../page/workIndex/workIndex'>
+    <image src="/image/ww1.png"></image>
+    <view>工作台</view>
+  </navigator>
+  <navigator url='/pages/mallActive/yunDist/yunDist'>
+    <image src="/image/fenxiao2.png"></image>
+    <view>云分销</view>
+  </navigator>
+  <view>
+    <image src="/image/admin1.png"></image>
+    <view class='active'>商友录</view>
+  </view>
+  <navigator open-type="redirect" url='../../../page/userM/userM'>
+    <image src="/image/w11.png"></image>
+    <view>我的</view>
+  </navigator>
+</view>
+
+
+<!-- 
+<view class='bf-cont bf-cont1'>
+  <view class='bf-title'>用户统计</view>
+  <text>高价值客户交易行为数据</text>
+  <view class='bt-view'>
+    <view>
+      <navigator url='../follow/follow'>
+        <view>{{followUsers}}</view>关注用户</navigator>
+    </view>
+    <view>
+      <navigator url='../dealUser/dealUser'>
+        <view>{{buyUsers}}</view>成交客户</navigator>
+    </view>
+    <view>
+      <navigator url='../dealCus/dealCus'>
+        <view>{{buyPurchasers}}</view>成交云供应商</navigator>
+    </view>
+  </view>
+</view>
+<view class='bf-cont bf-cont2'>
+  <view class='me-title'>
+    <view></view>云供应商管理</view>
+  <view class='bt-view'>
+    <view>
+      <navigator class="weui_cells" url='../list/list'>
+        <view>{{purchaserNumber}}</view>云供应商总数</navigator>
+    </view>
+    <view>
+      <navigator class="weui_cells" url='../newMerchant/newMerchant'>
+        <view>{{waitVerify}}</view>待验证</navigator>
+    </view>
+    <view>
+      <navigator class="weui_cells" url='../newMerchant/newMerchant'>
+        <view>{{waitPass}}</view>等待通过</navigator>
+    </view>
+  </view>
+  <button class='bf-btn' bindtap='addWholesaler'>添加云供应商</button>
+  <view class='bf-weui'>
+    <navigator class="weui_cells" url='../newMerchant/newMerchant'>
+      <image mode="widthFix" src="/image/w1.png"></image>
+      <text>新增的云供应商 </text>
+      <view class='weui-view'>
+        <image mode="widthFix" src="/image/icl.png"></image>
+      </view>
+    </navigator>
+    <navigator class="weui_cells" url='../list/list'>
+      <image mode="widthFix" src="/image/w2.png"></image>
+      <text>云供应商管理 </text>
+      <view class='weui-view'>
+        <image mode="widthFix" src="/image/icl.png"></image>
+      </view>
+    </navigator>
+    <navigator class="weui_cells" url='../setUp/setUp'>
+      <image mode="widthFix" src="/image/w3.png"></image>
+      <text>商友权限设置 </text>
+      <view class='weui-view'>
+        <image mode="widthFix" src="/image/icl.png"></image>
+      </view>
+    </navigator>
+  </view>
+</view>
+ -->

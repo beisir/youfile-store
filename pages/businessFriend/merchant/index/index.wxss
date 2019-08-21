@@ -1,0 +1,38 @@
+@import '../../index/index';
+.bf-cont1{
+  padding-bottom: 40rpx;
+}
+.me-title{
+  font-size: 32rpx;font-weight: bold;padding:30rpx 0 0 40rpx;position: relative;
+}
+.me-title view{
+  position: absolute;height: 30rpx;width: 4rpx;background: #f8b616;left:15rpx;top: 40rpx;
+}
+.bf-cont2{
+  margin-bottom:150rpx;
+}
+
+.page-header-tab{background:#f7f7f7;width: 410rpx;height: 50rpx;border-radius: 50rpx;margin: auto;}
+.tab-item{height: 50rpx;line-height:50rpx;text-align: center;font-size: 30rpx;color: #666;border-radius: 50rpx;}
+.tab-item-ac{color: #333;background: #fff;font-weight: 600;}
+.inner-header{height: 200rpx;margin-bottom: 200rpx;position: relative;}
+.header-content{position: absolute;width: 710rpx;box-sizing:border-box;left: 0;right: 0;top:20rpx;margin: auto;border-radius: 20rpx;}
+/* 按钮 */
+.view-btn-item{height: 120rpx;font-size: 30rpx;font-weight: 600;position: relative;}
+.view-icon{height: 80rpx;width: 80rpx;margin-right:20rpx;}
+.red-ball{height: 35rpx;line-height:35rpx;text-align:center;min-width: 35rpx;font-size: 24rpx;border-radius: 35rpx;position: absolute;top: 0;bottom: 0;right:0;margin: auto;background: #f55353;color: #fff;padding:0 5rpx;box-sizing: border-box;font-weight: 400;}
+
+.part-title{height: 60rpx;font-size: 30rpx;font-weight: 600;padding: 0 50rpx;}
+.color-chunk{background: #f8b616;width: 10rpx;height: 30rpx;margin-right: 20rpx;}
+.list-item{height: 120rpx;font-size: 30rpx;font-weight: 600;}
+.list-item-title{padding: 0 30rpx;}
+.user-icon{border-radius: 10rpx;}
+
+.four-box>view{width: 24.5%!important;}
+.four-box>view:nth-child(3){border-right:2rpx solid #DDDDDD}
+/* 列表 */
+.list-tab-box{background: #fff;}
+.list-tab-item{height: 100rpx;width: 50%;text-align: center;line-height: 100rpx;position: relative;}
+.list-tab-item-ac{color: #f8b616;}
+.list-tab-item-ac::after{width: 190rpx;height: 5rpx;position: absolute;left: 0;right: 0;bottom: 0;margin: auto;content: '';background: #f8b616;}
+.list-tip{font-size: 24rpx;color: #999;text-align: center;padding: 10rpx 0 40rpx;}

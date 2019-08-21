@@ -1,0 +1,111 @@
+<wxs src='../../../public/filter.wxs' module='filter'></wxs>
+<view class='dr-back'></view>
+<view class='listData'>
+  <view>
+    <view class='yd-top'>
+      <view>
+        <image src='{{baseUrl}}{{storeMes.logo}}'></image>
+      </view>
+      <view>{{storeMes.name}}</view>
+      <view>累计收入(元)
+        <view class='yd-down'></view>
+      </view>
+      <view class='yd-m'>{{staticData.totalSales}}</view>
+      <view class='yd-data'>
+        <view>
+          昨日收入
+          <view>{{staticData.yesterdaySales}}</view>
+          <view class='yd-xian'></view>
+        </view>
+        <view>
+          累计件数
+          <view>{{staticData.countTotalGoodsNum}}</view>
+          <view class='yd-xian'></view>
+        </view>
+        <view>
+          累计订单
+          <view>{{staticData.countTotalOrder}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='yd-datas'>
+    <view class='yd-purch'>共{{totalCount}}个云分销商</view>
+    <navigator wx:for="{{result}}" wx:key='index' url="../distRecords/distRecords?userId={{item.userId}}&index={{index}}" class='yd-pList'>
+      <view class='dr-pic dr-pic1' wx:if='{{index==0}}'>
+        <image src='{{baseUrl}}{{item.headPic}}'></image>
+      </view>
+      <view class='dr-pic dr-pic2' wx:if='{{index==1}}'>
+        <image src='{{baseUrl}}{{item.headPic}}'></image>
+      </view>
+      <view class='dr-pic dr-pic3' wx:if='{{index==2}}'>
+        <image src='{{baseUrl}}{{item.headPic}}'></image>
+      </view>
+      <view class='dr-pic' wx:if='{{index>2}}'>
+        <image src='{{baseUrl}}{{item.headPic}}'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>{{filter.my_slice(item.userName,6)}}
+          <text>{{item.storeNature=="2"?"新零售":"云分销商"}}</text>
+          <image wx:if="{{item.storeNature=='2'}}" src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单{{item.orderNum}}笔</view>
+          <view>进货金额 ¥{{item.orderAmount}}</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+   </navigator>
+       <!-- <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic dr-pic2'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator>
+      <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic dr-pic3'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator>
+      <navigator url="../distRecords/distRecords" class='yd-pList'>
+      <view class='dr-pic'>
+        <image src='/image/user.png'></image>
+      </view>
+      <view class='ydpl-right'>
+        <view>
+          阳光百分百
+          <text>新零售</text>
+          <image src='/image/u4.png'></image>
+        </view>
+        <view>
+          <view>进货单200笔</view>
+          <view>进货金额 ¥30000</view>
+        </view>
+      </view>
+      <view class='ydpl-r'></view>
+    </navigator> -->
+  </view>
+</view>

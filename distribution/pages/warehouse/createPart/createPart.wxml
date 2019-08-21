@@ -1,0 +1,56 @@
+<view class='com-form-box'>
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>库区名称</view>
+      <input value='{{formData.name}}' placeholder='请输入库区名称（必填）' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='name' class='flexone'></input>
+      <view class='img-box'>
+      </view>
+    </view>
+
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>库区编号</view>
+      <input value='{{formData.no}}' placeholder='请输入仓库编号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='no' class='flexone'></input>
+      <view class='img-box'></view>
+    </view>
+  </view>
+
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title' style='width:auto;'>设为默认库区</view>
+      <switch checked='{{formData.defaultFlag}}' color="#fdb813" bindchange='switchChange' data-type='warning' style='padding-right:30rpx;'></switch>
+    </view>
+  </view>
+
+  <view class='com-box'>
+    <view class='com-flex-between form-item' bindtap='toTip'>
+      <view class='form-title'>库区类型</view>
+      <scroll-view scroll-x wx:if="{{selectedTag.length>0}}" class='flexone' style='overflow:hidden;white-space:nowrap;'>
+        <text wx:for="{{selectedTag}}" wx:key="{{index}}" style='background:{{item.iconColor}}' class='com-tag'>{{item.name}}</text>
+      </scroll-view>
+      <input wx:else placeholder='请选择库区类型' placeholder-class='input-placeholder-common-color' disabled class='flexone'></input>
+      <view class='img-box'>
+        <image src='/image/poster-right-in.png' class='com-right-icon'></image>
+      </view>
+    </view>
+  </view>
+
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>所属仓库</view>
+      <text class='flexone'>{{name}}</text>
+      <view class='img-box'></view>
+    </view>
+  </view>
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>备注</view>
+      <input value='{{formData.remark}}' placeholder='请输入备注信息' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='remark' class='flexone'></input>
+      <view class='img-box'></view>
+    </view>
+  </view>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='submit'>确定</button>
+</view>

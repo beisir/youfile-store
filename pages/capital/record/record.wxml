@@ -1,0 +1,17 @@
+ <view class='re-cont'>
+    <navigator class='weui-back' wx:for='{{dataArr}}' wx:key='{{key}}' url='../recordDetails/recordDetails?paymentNumber={{item.paymentNumber}}'>
+      <view class='weui-cell weui-cell_access'>
+        <view  class='user-img'><image src='/image/ca-or.png'></image></view>
+        <view class='weui-cell__bd'>
+          订单-{{item.goodsName==null?'':item.goodsName}}
+          <view>{{item.inAccountDate}}</view>
+        </view>
+        <view class='weui-img'>
+          +{{item.amount}}
+        </view>
+      </view>
+    </navigator>
+    <!-- <view wx:if='{{dataArr.length==0}}'>
+      暂无数据！
+    </view> -->
+  </view>

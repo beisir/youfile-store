@@ -1,0 +1,5 @@
+/* distribution/pages/purchase/chosePayType/chosePayType.wxss */
+.box{margin: 20rpx;border-radius: 10rpx;background: #fff;padding: 0 30rpx;}
+.type-item{height: 100rpx;border-bottom: 1rpx solid #f0f0f0;}
+.box .type-item:last-child{border: 0;}
+.right{width: 35rpx;height: 35rpx;}

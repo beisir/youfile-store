@@ -1,0 +1,67 @@
+<!-- 页面 -->
+<view class='header com-color-back'>
+  <view class='com-flex-between flexone'>
+    <view class='search-input-box com-flex-between'>
+      <view class='com-flex-center'>
+        <image src='/distribution/images/search-white.png' class='search-img'></image>
+        <input value='{{serText}}' bindinput='ser' class='font26' placeholder='输入商品名称、货号' placeholder-style='color:#fff;'></input>
+      </view>
+      <text class='font30 ser-btn' bindtap='search'>搜索</text>
+    </view>
+    <navigator url="/pages/admin/addGoods/addGoods?entryType=createOrder">
+      <view class='addbtn'>
+        <image src='/distribution/images/add-white.png' class='filter-icon' bindtap='showFilter'></image>
+        <text>新增</text>
+      </view>
+    </navigator>
+  </view>
+</view>
+<!-- tab -->
+<view class='com-flex-around tab-box'>
+  <view class='tab {{tabType=="supplier"?"tab-ac":""}}' bindtap='tabclick' data-type='supplier'>供应商商品</view>
+  <view class='line'></view>
+  <view class='tab {{tabType=="store"?"tab-ac":""}}' bindtap='tabclick' data-type='store'>店铺商品</view>
+</view>
+<!-- goods -->
+<view class='template' wx:if="{{goodsList && goodsList.length>0}}">
+  <view class='goods-item com-flex-between' wx:for="{{goodsList}}" bindtap='tosetGoods' data-id="{{item.id}}" wx:key="{{index}}">
+    <image class='goods-icon' src='{{baseUrl + item.mainImgUrl}}'></image>
+    <view class='flexone' style='overflow:hidden;padding-right:10rpx;'>
+      <view class='com-flex-center font28 com-blod-font'>
+        <text class='flexone com-text-ellipsis'>{{item.name}}</text>
+      </view>
+      <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：{{item.serialNumber?item.serialNumber:''}}</view>
+      <view class='font24 com-flex-center' style='min-height:40rpx;'>
+        <block wx:if="{{item.lastPurchasePrice}}">
+          <text>上次采购价：</text>
+          <text class='com-color-font'>￥</text>
+          <text class='com-color-font font30'>{{item.lastPurchasePrice}}</text>
+        </block>
+        <text class='com-gray-color' style='margin-left:auto;' wx:if="{{item.chosenum}}">共{{item.chosenum}}件</text>
+      </view>
+    </view>
+    <image class='img40' src='/distribution/images/add-cir-gold.png'></image>
+  </view>
+</view>
+<view wx:else>
+  <view class="result-null">
+    <view class="nomore">
+      <view>
+        <image src="/image/class-i.png"></image>
+      </view>
+      没有商品哦！
+    </view>
+  </view>
+</view>
+<!-- 公用底部按钮 -->
+<view class='com-half-btn-box'>
+  <view class='chb-msg-box'>
+    <view>合计:
+      <text class='com-color-font font30'>{{allnum}} </text>件</view>
+    <view>共
+      <text class='com-color-font font30'>￥{{allPrice}}</text>
+    </view>
+  </view>
+  <view class='chb-sure-btn' bindtap='sure'>确定</view>
+</view>
+<view class='bottom-replace-box'></view>

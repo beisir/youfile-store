@@ -1,0 +1,36 @@
+<view class='box'>
+  <view class='top-box'>
+    <text class='my-title'>{{cName}}</text>
+    <text class='id-tip'>{{globalData.projectName}}ID：{{storeID}}</text>
+    <view>
+      <image class='success-icon' src="/image/duile.png"></image>
+    </view>
+    <text class='congra'>恭喜您开启{{globalData.projectName}}!</text>
+    <navigator url='../../page/workIndex/workIndex'>
+      <button class='toStore'>快去打理我的{{globalData.projectName}}</button>
+    </navigator>
+  </view>
+</view>
+
+<view class='footer-box'>
+  <view class='f-title'>开启您的{{globalData.projectName}}之旅</view>
+  <navigator url='../../admin/status/status'>
+  <view class='f-item'>
+    <image class='s-icon' src='/image/gift.png'></image>
+    <view class='cute' style="border-bottom: 1px solid #eee;">
+      <text>{{globalData.projectName}}还没有宝贝，赶快去上传吧</text>
+      <image class='more' src='/image/mallr.png'></image>
+    </view>
+  </view>
+  </navigator>
+  <navigator url='../../businessFriend/merchant/index/index'>
+  <view class='f-item'>
+    <image class='s-icon' src='/image/w1.png'></image>
+    <view class='cute' style='border:0;'>
+      <text>加更多商友，赚更多的￥，去设置吧</text>
+      <image class='more' src='/image/mallr.png'></image>
+    </view>
+  </view>
+  </navigator>
+  
+</view>

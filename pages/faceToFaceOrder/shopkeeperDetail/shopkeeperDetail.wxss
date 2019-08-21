@@ -1,0 +1,89 @@
+@import "../customerOrderDetail/customerOrderDetail";
+
+.o-title-box{
+  padding:50rpx 0 60rpx;
+  border-bottom: 1rpx solid #eee;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.o-title-text{
+  font-size: 40rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.time-left{
+  margin-left: 33rpx;
+  color: #f8b616;
+}
+
+.status-img{
+  margin-top: 40rpx;
+  width: 332rpx;
+  height: 70rpx;
+}
+
+.mid-btn{
+  justify-content: space-between;
+}
+
+.user-box{
+  background: #fff;
+  padding-top: 50rpx;
+  padding-bottom: 45rpx;
+  line-height: 1;
+}
+.user-icon{
+  width: 35rpx;
+  height: 35rpx;
+  margin-right: 20rpx;
+}
+.userphone-box{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #666;
+  font-size: 28rpx;
+  padding-left: 55rpx;
+  margin-top: 27rpx;
+}
+.username-box{
+  flex:1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.type-chunk{
+  margin-left: 20rpx;
+}
+
+
+  .cancel-title-icon{
+    width:38rpx;
+    height:38rpx;
+    margin-right:20rpx;
+  }
+  .close-res-box{
+    font-size:30rpx;
+    color:#999;
+    margin-top:30rpx;
+    font-weight: 600;
+  }
+
+.mid-btn{margin: 0 50rpx 25rpx;font-size: 28rpx;}
+.btn-icon{
+    width: 35rpx;
+    height: 35rpx;
+    margin-right: 10rpx;
+  }
+.remark-box{padding-bottom:30rpx;padding-top:30rpx;display: flex;justify-content: space-between;}  
+.remark-detail{max-width: 400rpx;text-align: right;word-break:break-all;}
+.dashed-border{display: flex;justify-content: space-between;}
+.dashed-border view{width: 17rpx;height: 1rpx; background: #eee;}

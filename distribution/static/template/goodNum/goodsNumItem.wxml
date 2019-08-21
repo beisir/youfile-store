@@ -1,0 +1,94 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
+<template name="goodsItem">
+  <view class='template'>
+    <view class='goods-item com-flex-between'>
+      <image class='goods-icon' src='{{baseUrl+goodsMainImgUrl}}'></image>
+      <view class='flexone' style='overflow:hidden;'>
+        <view class='com-flex-center font28 com-blod-font'>
+          <text class='warning-tip font24' wx:if="{{warningFlag}}">预警</text>
+          <text class='flexone com-text-ellipsis'>{{goodsName}}</text>
+        </view>
+        <view class='font24 com-gray-color' style='padding:10rpx 0'>货号：{{stockNum?stockNum:''}}</view>
+        <view class='font26'>
+          <text>库存：</text>
+          <text class='com-red-color' wx:if="{{warningFlag}}">{{stockNum}}</text>
+          <text class='com-yellow-color' wx:else>{{stockNum}}</text>
+        </view>
+      </view>
+      <image class='com-right-icon' src='/image/poster-right-in.png' style='margin-top:60rpx;'></image>
+    </view>
+  </view>
+</template>
+<!-- 库存预警商品 -->
+<template name="goodsWarning">
+  <view class='template'>
+    <view class='goods-item com-flex-between'>
+      <image class='goods-icon' src='{{goodsMainImgUrl}}'></image>
+      <view class='flexone' style='overflow:hidden;'>
+        <view class='com-flex-center font28 com-blod-font'>
+          <text class='flexone com-text-ellipsis'>{{goodsName}}</text>
+        </view>
+        <view class='font24 com-gray-color' style='padding:10rpx 0'>{{skuName?skuName+" ":''}} {{warehouseName?warehouseName:''}}{{regionName?regionName:''}}</view>
+        <view class='font26 com-gray-color'>
+          <text>当前库存：</text>
+          <text class='com-red-color'>{{stockNum}}</text>
+          <block wx:if="{{warningLow}}">
+            <text style='padding-left:30rpx;'>库存下限值: </text>
+            <text class='com-yellow-color'>{{warningLower?warningLower:''}}</text>
+          </block>
+          <block wx:else>
+            <text style='padding-left:30rpx;'>库存上限值: </text>
+            <text class='com-yellow-color'>{{warningUpper?warningUpper:''}}</text>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<!-- 库存流水 -->
+<template name="goodsFlow">
+  <view class='flow-item'>
+    <view class='com-flex-between'>
+      <view class='com-flex-center'>
+        <view class='flow-tag' wx:if="{{changeType=='in'}}" style='background:#f8b616'>入库</view>
+        <view class='flow-tag' wx:if="{{changeType=='out'}}" style='background:#ea5037'>出库</view>
+        <view class='flow-tag' wx:if="{{changeType=='init'}}" style='background:#3dbce6'>初期</view>
+        <text class='font30 com-blod-font'>{{skuName?skuName:'默认规格'}}</text>
+      </view>
+      <text class='flow-num {{changeType=="in"?"com-red-color":""}}'>
+        <text wx:if="{{changeType=='in'}}">+</text>
+      <text>{{changeNum}}</text>
+      </text>
+    </view>
+    <view class='msg-item com-flex-between'>
+      <view>仓库：{{warehouseName}}</view>
+      <view>剩余库存：{{stockRemainNum}}</view>
+    </view>
+    <view class='msg-item com-flex-between'>
+      <view>经手人：{{operationUserName?operationUserName:''}}</view>
+      <view>{{newTime?newTime:filter.filterTime(time,true)}}</view>
+    </view>
+    <view class='msg-item com-flex-between'>
+      <view>供应商：{{supplierName?supplierName:''}}</view>
+      <view class='change-type'>
+        <text wx:if="{{operationType === 'adjust'}}">调整</text>
+        <text wx:if="{{operationType === 'order'}}">订单</text>
+        <text wx:if="{{operationType === 'supply'}}">供货单</text>
+        <text wx:if="{{operationType === 'purchase'}}">采购</text>
+      </view>
+    </view>
+    <view class='remark-flex' wx:if="{{operationType === 'adjust'}}">
+      <block wx:if="{{adjustReason}}"> 
+        <text class='remark-tip' wx:if="{{adjustReason === 'stock_overflow'}}">库存报溢</text>
+        <text class='remark-tip' wx:if="{{adjustReason === 'sale_return'}}">销售退货</text>
+        <text class='remark-tip' wx:if="{{adjustReason === 'breakage'}}">破损</text>
+        <text class='remark-tip' wx:if="{{adjustReason === 'purchase_return'}}">采购退货</text>
+        <text class='remark-tip' wx:if="{{adjustReason === 'other'}}">其他</text>
+      </block>
+      <view class='remark-box' wx:if="{{remark}}">
+        <text>备注：{{remark?remark:''}}</text>
+      </view>
+    </view>
+  </view>
+</template>

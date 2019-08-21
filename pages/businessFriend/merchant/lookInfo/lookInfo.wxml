@@ -1,0 +1,64 @@
+<!-- 设置备注 -->
+<spec
+  show="{{addSpec}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+  <view class='spec-title'>设置备注</view>
+  <input placeholder-class='spec-class'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入文字，最多15个字' />
+  <view class='spec-view' bindtap='cancel'>取消</view><view  class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm'>确定</view>
+</spec>
+<view class='bf-cont'>
+  <view class='lk-img'><image  mode="widthFix" src="/image/icl.png"></image></view>
+  <navigator class='bf-weui' url='../details/details?userId={{userId}}'>
+    <view class="weui_cells new-weui">
+      <view class='bf-img'><image  mode="aspectFill" src="{{data.headPic?baseUrl+data.headPic+'?x-oss-process=style/logo':'https://dev-image.youlife.me/user/head/defaultHeadPic.png?x-oss-process=style/logo'}}"></image></view>
+      <text>{{data.nickName}}</text>
+      <image  class='re-img' wx:if='{{data.gender!=1}}' mode="widthFix" src="/image/ermR.png"></image>
+      <image  class='re-img' wx:if='{{data.gender==1}}' mode="widthFix" src="/image/man.png"></image>
+      <!-- <view class='nbf-font'>昵称：{{data.nickName}}</view> -->
+    </view>
+  </navigator>
+</view>
+<!-- <view class='bf-cont'>
+  <view class='bf-weui add-bf-weui' bindtap='setName'>
+    <view class="weui_cells">
+      <text class="bf-font">设置备注 </text>
+      <view class='weui-view'>
+        <image  mode="widthFix" src="/image/icl.png"></image>
+      </view>
+    </view>
+  </view>
+</view> -->
+<!-- 红包礼金 -->
+<!-- <view class='box-item' wx:if="{{faceOrderIn}}">
+  <text>红包礼金</text>
+  <view class='red-packet'>
+    <text>0</text>
+    <image class='tri-right' src="/image/icl.png"></image>
+  </view>
+</view> -->
+
+<view class='bf-cont info-cont'>
+  <view class='in-cont'>
+   <text>手机号</text><view>{{data.mobile}}<view class='in-cont-img'><image  mode="widthFix" bindtap='calling' src="/image/tel1.png"></image></view></view>
+  </view>
+  <view class='in-cont'>
+   <text>微信号</text><view wx:if='{{data.weixinNumber!=null}}'>{{data.weixinNumber}}</view>
+  </view>
+  <view class='in-cont'>
+   <text>生日</text><view wx:if='{{data.birthday!=null}}'>{{data.birthday}}</view>
+  </view>
+</view>
+
+
+<view class='bottom-btn-box'  wx:if="{{faceOrderIn}}">
+  <!-- <navigator wx:if="{{!ifWholesaler}}" class='btn-item' url="../../../businessFriend/merchant/invite/invite?accept={{data.id}}&remark=&headPic={{baseUrl+data.headPic}}&name={{data.nickName}}">
+    <image class='btn-icon' src='/image/ad4.png'></image>
+    <text>添加到云供应商</text>
+  </navigator>
+  <view wx:if="{{!ifWholesaler}}" class='btn-line'></view> -->
+  <navigator class='btn-item' url="../../../faceToFaceOrder/createOrder/createOrder?user={{data.id}}">
+    <image class='btn-icon' src='/image/exchange.png'></image>
+    <text>帮TA下单</text>
+  </navigator>
+</view>

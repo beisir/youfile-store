@@ -1,0 +1,79 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
+<view class='header com-background-color'>
+  <view class='header-layer'>
+    <view class='header-title com-flex-center'>
+      <image class='img30' src='/distribution/images/warehouse.png'></image>
+      <text class='house-name'>{{warehouse.name}}</text>
+      <text class='com-default-tip' wx:if='{{warehouse.defaultFlag}}'>默认</text>
+    </view>
+    <view class='com-flex-between statistics-box'>
+      <view class='statistics-item'>
+        <view class='font28 com-gray-color'>商品数</view>
+        <view class='font40'>{{filter.parseLongNum(warehouse.goodsNum)}}</view>
+      </view>
+      <view class='statistics-item'>
+        <view class='font28 com-gray-color'>库存数</view>
+        <view class='font40'>{{filter.parseLongNum(warehouse.stockNum)}}</view>
+      </view>
+      <view class='statistics-item'>
+        <!-- <view class='font28 com-gray-color'>库存预警</view>
+        <view class='font40'>{{filter.parseLongNum(1212100)}}</view> -->
+      </view>
+    </view>
+    <view class='more-view' hidden='{{showMsg}}' bindtap='showmsg' data-type='{{true}}'>
+      <image class='com-tri-icon' src='/distribution/images/tri-down.png'></image>
+    </view>
+    <view class='font30' hidden='{{!showMsg}}' bindtap='showmsg' data-type='{{false}}'>
+      <view class='msg-border'></view>
+      <view class='msg-item'>
+        <view class='msg-title'>负责人</view>
+        <view class='msg-content'>{{warehouse.manager}}</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>联系电话</view>
+        <view class='msg-content'>{{warehouse.phone}}</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>地区</view>
+        <view class='msg-content'>{{warehouse.province}} {{warehouse.city}} {{warehouse.county}}</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>详细地址</view>
+        <view class='msg-content'>{{warehouse.address}}</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>邮箱</view>
+        <view class='msg-content'>{{warehouse.email}}</view>
+      </view>
+      <view class='msg-item'>
+        <view class='msg-title'>备注</view>
+        <view class='msg-content'>{{warehouse.remark}}</view>
+      </view>
+      <view class='more-view' style='padding-top:30rpx;'>
+        <image class='com-tri-icon' src='/distribution/images/tri-up.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view style='height:150rpx;'></view>
+
+<navigator wx:for="{{partList}}" wx:key="{{index}}" url='../partDetail/partDetail?code={{item.code}}'>
+  <view class='part-item com-flex-between'>
+    <view class='flexone'>
+      <view class='font36 com-blod-font part-name'>{{item.name}}</view>
+      <view class='font26 com-gray-color'>库区编号：{{item.no?item.no:''}}</view>
+    </view>
+    <scroll-view scroll-x wx:if="{{item.regionTypeList && item.regionTypeList.length>0}}" class='com-flex-center com-scroll-view-style' style='width:50%;'>
+      <view class='com-tag font24' wx:for="{{item.regionTypeList}}" wx:key="{{index}}" style='background:{{item.iconColor}}'>{{item.name}}</view>
+    </scroll-view>
+    <image wx:else src='/image/poster-right-in.png' class='com-right-icon'></image>
+  </view>
+</navigator>
+
+<view class='bottom-replace-box'></view>
+<view class='com-bottom-capsule-btn'>
+  <button bindtap='editHouse' class='group-btn'>编辑仓库</button>
+  <view class='white-line'></view>
+  <button bindtap='toCreate' class='group-btn'>新建库区</button>
+</view>

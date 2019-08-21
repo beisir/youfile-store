@@ -1,0 +1,136 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
+<view class='com-embed-header' style='{{order.status!=="init"?"margin-bottom:230rpx;":""}}'>
+  <view class='com-flex-center'>
+    <view class='self-item com-flex-center'>
+      <image class='header-icon' src='/distribution/images/in-house-white.png'></image>
+      <text wx:if="{{order.status==='init'}}" class='font36 status-text'>待入库</text>
+      <text wx:if="{{order.status==='part'}}" class='font36 status-text'>部分入库</text>
+      <text wx:if="{{order.status==='whole'}}" class='font36 status-text'>已入库</text>
+      <view class='status-tip' wx:if="{{order.source == 'handmade'}}">手动录入</view>
+    </view>
+    <view class='header-msg-box flexone'>
+      <view class='font24'>合计数量：
+        <text class='font30'>{{order.totalNum}}</text>
+      </view>
+      <view class='font24'>合计金额：¥
+        <text class='font30'>{{order.amount}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='com-embed-inner'>
+    <!-- 基本信息 -->
+    <view class='com-flex-between' style='height:160rpx;'>
+      <view>
+        <view class='com-flex-center'>
+          <image class='img30' src='/distribution/images/man-gray.png'></image>
+          <text class='suppler-text'>供应商：{{order.supplierStoreName}}</text>
+          <view class='suppler-tip' wx:if="{{order.supplierType=='platform_merchant'}}">云供应商</view>
+          <view class='suppler-tip' wx:if="{{order.supplierType=='self_maintenance'}}">供应商</view>
+        </view>
+        <view wx:if="{{order.supplierPhone}}" class='font26 com-gray-color tele-text'>联系电话：{{order.supplierPhone?order.supplierPhone:''}}</view>
+      </view>
+      <image wx:if="{{order.supplierPhone}}" class='img30' src='/distribution/images/tele-gold.png' bindtap='call'></image>
+    </view>
+    <!-- 仓库信息 -->
+    <navigator url='../orderInHouseDetail/orderInHouseDetail?no={{no}}'>
+      <view class='house-box com-flex-center font30' wx:if="{{order.status!=='init'}}">
+        <image src='/distribution/images/house-gray.png' class='img30'></image>
+        <text class='flexone com-text-ellipsis house-name'>仓库库区：{{order.warehouseName}}</text>
+        <text class='com-color-font'>入库详情</text>
+      </view>
+    </navigator>
+  </view>
+</view>
+
+<view class='com-margin-box'>
+  <view class='goods-header com-padding-box com-flex-between'>
+    <view class='com-flex-center'>
+      <view class='color-chunk'></view>
+      <text class='font30 com-blod-font'>采购商品</text>
+    </view>
+    <view wx:if="{{allshow}}" bindtap='changeShow'>
+      <text class='font26'>全部收起</text>
+      <image class='tri-icon' src='/distribution/images/douTri-gold-up.png'></image>
+    </view>
+    <view wx:else bindtap='changeShow'>
+      <text class='font26'>全部展开</text>
+      <image class='tri-icon' src='/distribution/images/douTri-gold-down.png'></image>
+    </view>
+  </view>
+
+  <block wx:for="{{order.purchaseGoodsVOS}}" wx:key="{{index}}">
+    <view class='goods-item'>
+      <image class='goods-pic' src='{{baseUrl+item.mainImgUrl}}'></image>
+      <view class='flexone goods-msg'>
+        <view class='goods-name com-blod-font'>{{item.goodsName}}</view>
+        <view class='font24 com-gray-color'>共{{item.goodsNum}}种规格 {{item.totalNum}}件</view>
+      </view>
+      <view class='font24'>¥<text class='goods-price'>{{item.amount}}</text></view>
+    </view>
+    <view hidden="{{!allshow}}">
+      <view class='border-line'></view>
+      <!-- 部分入库表头 -->
+      <block wx:if="{{order.status==='part'}}">
+        <view class='sku-item com-flex-between font24'>
+          <view>规格</view>
+          <view>金额数量</view>
+          <view>已入库</view>
+          <view class='com-red-color'>待入库</view>
+        </view>
+        <view class='border-line'></view>
+      </block>
+      <block wx:for="{{item.purchaseOrderDetailVOList}}" wx:for-item="sku" wx:key="{{index}}">
+        <view class='sku-item com-flex-between font24'>
+          <view>{{sku.goodsDesc?sku.goodsDesc:"默认"}}</view>
+          <view>¥ {{sku.purchasePrice}} * {{sku.totalNum}} 件</view>
+          <view wx:if="{{order.status!=='part'}}">¥ {{sku.amount}}</view>
+          <view wx:if="{{order.status==='part'}}">{{sku.inputNum}}</view>
+          <view wx:if="{{order.status==='part'}}" class='com-red-color'>{{sku.remainNum}}</view>
+        </view>
+      </block>
+    </view>
+    <view class='border-line'></view>
+  </block>
+  <view class='price-box font24'>
+    <text>共{{order.totalNum}}件商品</text>
+    <text style='margin-left:20rpx;'>合计:</text>
+    <text class='com-color-font'>￥</text>
+    <text class='price-text com-color-font'>{{order.amount}}</text>
+  </view>
+  <view class='border-line'></view>
+</view>
+
+<view class='com-margin-box' style='padding:15rpx 30rpx;'>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>采购单号</text>
+    <text class='com-blod-font' bindtap='copy' data-msg='{{order.no}}'>{{order.no}}</text>
+  </view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>采购时间</text>
+    <text class='com-blod-font'>{{filter.filterTime(order.purchaseTime,true)}}</text>
+  </view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>支付方式</text>
+    <text class='com-blod-font'>{{order.payWayName}}</text>
+  </view>
+  <view class='com-flex-between font24 msg-item-box' wx:if="{{order.remark}}">
+    <text style='width:40%;'>备注</text>
+    <text class='com-blod-font flexone' style="text-align:right;">{{order.remark?order.remark:''}}</text>
+  </view>
+  <view class='border-line' style='margin:15rpx 0;'></view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>经办人</text>
+    <text class='com-blod-font'>{{order.operator}}</text>
+  </view>
+  <view class='com-flex-between font24 msg-item-box'>
+    <text>创建时间</text>
+    <text class='com-blod-font'>{{filter.filterTime(order.createTime)}}</text>
+  </view>
+</view>
+
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box' wx:if="{{order.status !=='whole'}}">
+  <button class='bottom-single-btn' bindtap='toInhouse'>去入库</button>
+</view>

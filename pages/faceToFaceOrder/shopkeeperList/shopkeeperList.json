@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "门店订单管理",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616",
+  "usingComponents": {
+    "clo": "../../../assembly/close/close"
+  }
+}

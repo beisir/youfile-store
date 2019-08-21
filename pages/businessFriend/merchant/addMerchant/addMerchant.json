@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "添加云分销商",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616",
+  "usingComponents": {
+    "mes": "../../../../assembly/tips/tips"
+  }
+}

@@ -1,0 +1,50 @@
+<!-- 新功能弹窗 -->
+<view class='com-new-function-layer' wx:if="{{newFunLayer}}">
+  <view class='com-color-back com-new-function-inner'>
+    <image src='/image/close-white.png' style='position:absolute;right:20rpx;top:20rpx;width:35rpx;height:35rpx;' bindtap='closeModal'></image>
+    <image src='/image/appicon-whiteback.png' class='title-pic'></image>
+    <view class='white-title'>开启仓库管理功能</view>
+    <view class='white-box'>
+      <view class='font24'>更新版本：</view>
+      <view class='font36 com-blod-font'>小云店版本 V4.0</view>
+      <image src='/image/new-funciton.png' style='width:140rpx;height:82rpx;margin:30rpx 0 25rpx;'></image>
+      <view class='layer-msg-item'>1.更新了仓库库区功能</view>
+      <view class='layer-msg-item'>2.更新了商品库存一体化功能</view>
+      <view class='layer-msg-item'>3.更新了小云店全新页面风格</view>
+      <button class='layer-bottom-btn com-color-back' hover-class='none' data-type='know' bindtap='closeModal'>体验仓库管理</button>
+    </view>
+  </view>
+</view>
+
+<view class='com-padding-box com-flex-between'>
+  <view class='com-flex-between search-input-box'>
+    <image style='padding:0 20rpx 0 30rpx' src='/distribution/images/search-black.png' class='search-img'></image>
+    <input bindinput='serchinput' value='{{serchText}}' class='flexone' placeholder-class='input-placeholder-common-color' placeholder='输入仓库名称、编号、负责人名称'></input>
+    <image bindtap='clearSerch' style='padding:0 30rpx 0 10rpx' src='/image/close.png' class='search-img'></image>
+  </view>
+  <button class='search-btn font28 com-blod-font' hover-class='none' bindtap='search'>搜索</button>
+</view>
+<!-- 仓库列表 -->
+<view class='com-padding-box'>
+  <navigator url='../warehouseParts/warehouseParts?code={{item.code}}' wx:for="{{houseList}}" wx:key="{{index}}">
+    <view class='house-item com-flex-between'>
+      <view>
+        <view class='com-flex-center' style='padding-bottom:10rpx;'>
+          <image src='/distribution/images/warehouse.png' style='width:30rpx;height:30rpx;'></image>
+          <text class='house-name'>{{item.name}}</text>
+          <text class='com-default-tip' wx:if="{{item.defaultFlag}}">默认</text>
+        </view>
+        <view class='house-des-font'>库区数量：{{item.regionNum}}</view>
+        <view class='house-des-font'>库存数量：{{item.stockNum}}</view>
+      </view>
+      <image src='/distribution/images/right-icon.png' class='com-right-icon'></image>
+    </view>
+  </navigator>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <navigator url='../createWarehouse/createWarehouse'>
+    <button class='bottom-single-btn'>新建仓库</button>
+  </navigator>
+</view>

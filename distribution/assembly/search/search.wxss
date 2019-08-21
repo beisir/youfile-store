@@ -1,0 +1,10 @@
+/* 搜索 */
+.search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
+.search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
+.ser-btn{text-align: center;color: #fff;}
+
+.choseTag{height: 120rpx;width: 710rpx;position: absolute;left: 0;right: 0;margin: auto;bottom: -60rpx;background: #fff;border-radius: 10rpx;}
+.add-icon{margin: 0 40rpx -10rpx 60rpx;}
+
+.com-flex-center{display: flex;align-items: center;}.com-flex-between{display: flex;align-items: center;justify-content: space-between;}.flexone{flex: 1;}
+.font24{font-size: 24rpx}.font26{font-size: 26rpx;}.font28{font-size: 28rpx}

@@ -1,0 +1,209 @@
+/* 店主列表页面详情引用该页面样式 */
+page{
+  font-size: 28rpx;
+  color: #333;
+  padding-bottom:10rpx;
+}
+/* common */
+.padding-box{
+  padding-left: 50rpx;
+  padding-right: 50rpx;
+}
+.flex-center{
+  display: flex;
+  align-items: center;
+
+}
+.flex-between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/* ENDcommon */
+.nav-box{
+  display: flex;
+  justify-content: space-around;
+  height: 80rpx;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 20rpx;
+  padding:0 60rpx;
+}
+.nav-item{
+  height: 77rpx;
+  line-height: 77rpx;
+  border-bottom: 4rpx solid #fff;
+  padding: 0 15rpx;
+}
+.nav-ac{
+  border-color: #f8b616;
+  color: #f8b616
+}
+
+
+/* liebiao*/
+.list-item{
+  background: #fff;
+  margin-bottom: 20rpx;
+}
+.item-title{
+  display: flex;
+  height: 120rpx;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+  .com-name-box{
+    max-width: 330rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+  }
+  .cloud-icon{
+    height: 40rpx;
+    width: 40rpx;
+    margin-right: 15rpx;
+  }
+  .right-icon{
+    height: 40rpx;
+    width: 40rpx;
+    margin-left:10rpx;
+  }
+  .type-chunk{
+    height: 40rpx;
+    width: 80rpx;
+    border: 1rpx solid #f8b616;
+    color: #f8b616;
+    font-size: 24rpx;
+    line-height: 40rpx;
+    text-align: center;
+    margin-top: 1rpx;
+  }
+  .status-text{
+    color: #f8b616;
+  }
+
+  /* 新货物 */
+  .new-goods-box{
+    padding: 0 50rpx 12rpx;
+    position: relative;
+  }
+    .new-goods-box .goods-item{padding-bottom: 38rpx;display: flex;justify-content: space-between;font-size: 26rpx;color: #666;}
+    .goods-item-goodsname{width: 70%;}
+    
+  /* 货物 */
+  .goods-box{
+    background: #f7f7f7;
+    display: flex;
+    padding: 36rpx 50rpx 28rpx;
+    font-size: 26rpx;
+    position: relative;
+  }
+    .gray-layer{
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(255,255,255,0.5)
+    }
+    .goods-icon{
+      width: 136rpx;
+      height:136rpx;
+      border: 1rpx solid #ddd;
+      background: #fff;
+      margin-right: 20rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .goods-icon image{
+      width: 100rpx;
+      height: 88rpx;
+    }
+
+    .tip-box{
+      width: 360rpx;
+      /* display:flex;
+      flex-wrap: wrap; */
+      margin-right: 5rpx;
+    }
+      .tip-box text{
+        float:left;
+        margin-right:10rpx;
+      }
+      .owner-tip-box{
+        min-height: 80rpx;
+        overflow: hidden;
+        /* display: -webkit-box;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        white-space: normal !important;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical; */
+      }
+      
+      .shopkeeper-tip{
+        color: #999;
+        margin-top:20rpx;
+      }
+    .goods-price{
+      flex: 1;
+      text-align: right;
+    }
+
+  .all-price-box{
+    height: 100rpx;
+    padding-top: 30rpx;
+    text-align: right; 
+    font-size: 26rpx;
+    box-sizing: border-box;
+    font-weight: 600;
+    border-top: 1rpx solid #eeeeee; 
+  }  
+
+  .gold-font{
+    color: #f8b616;
+  }
+  .gray-color{
+    color: #999;
+  }
+  .relative-box{position: relative;}
+  .btn-box{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    padding-bottom: 20rpx;
+  }
+  .btn{
+    height: 60rpx;
+    box-sizing: border-box;
+    border: 1rpx solid #fff;
+    text-align: center;
+    line-height: 58rpx;
+    border-radius: 10rpx;
+    margin-left: 20rpx;
+    font-size: 24rpx;
+  }
+  .cancel-btn{
+    width: 160rpx;
+    border-color: #ddd;
+    color: #999;
+  }
+  .pay-btn{
+    width: 160rpx;
+    border-color: #f8b616;
+    background: #f8b616;
+    color: #fff;
+  }
+
+  /* 取消理由 */
+  .layer-reason-item{
+    margin: 20rpx 0;
+  }
+  .layer-reason-btn{
+    margin-top:40rpx;
+  }

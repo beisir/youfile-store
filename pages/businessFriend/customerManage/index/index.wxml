@@ -1,0 +1,24 @@
+<view class='com-color-back inner-header'>
+  <view class='bf-cont bf-cont1 header-content'>
+    <view class='bf-title'>用户统计</view>
+    <text>高价值客户交易行为数据</text>
+    <view class='bt-view'>
+      <view>
+        <navigator class="weui_cells" url='../../merchant/follow/follow'>
+          <view>{{followUsers}}</view>关注用户</navigator>
+      </view>
+      <view>
+        <navigator class="weui_cells" url='../../merchant/dealUser/dealUser'>
+          <view>
+            <text class='com-red-color'>{{buyUsers}}</text>
+          </view>成交客户</navigator>
+      </view>
+      <view>
+        <navigator class="weui_cells" url='../../merchant/dealCus/dealCus'>
+          <view>
+            <text class='com-red-color'>{{buyPurchasers}}</text>
+          </view>成交云分销商</navigator>
+      </view>
+    </view>
+  </view>
+</view>

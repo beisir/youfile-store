@@ -1,0 +1,29 @@
+@import '../list/list';
+@import '/pages/page/home/home';
+@import '../addGoods/addGoods';
+page {background: #fff;}
+.nomore{margin-bottom: 100rpx;}
+.wait-cont{background: #fff;position: relative;padding-top: 20rpx}
+.addgoods{height: 100rpx;color: #fff;line-height: 100rpx;font-size: 32rpx;background:#f8b616;width: 90%;margin: 0rpx 5%;border-radius:10rpx;margin-top: 180rpx;}
+.wr-bottom{position: fixed;bottom: 20rpx;width:690rpx;background: #f8b616;border-radius: 100rpx;height: 100rpx;left: 0;right: 0;margin: auto;display: flex;align-items: center;overflow: hidden;}
+.tab-view .tab-one-1,.tab-view .tab-two{padding-right: 50rpx;}
+.tab-view .tab-one,.tab-view .tab-two-1{padding-left: 50rpx;}
+.add-cont>view{box-shadow: 5rpx 0 30rpx #ededed}
+.tab-cont{padding: 0 25rpx}
+.g-image .nouse{height: 75rpx;padding:45rpx;font-size: 28rpx;width: 60rpx;display: flex;align-content: center;justify-content: space-around}
+.g-image .activing{height: 100rpx;line-height: 100rpx;padding:30rpx;font-size: 28rpx;width: 90rpx;display: flex;align-content: center;justify-content: space-around}
+.more-add{width: 40%;display:inline-block;margin-top: 20rpx;}
+.listData{background: #f7f7f7;overflow:hidden;padding-bottom: 20rpx;}
+
+.white-line{width: 2rpx;height: 30rpx;background: #fff; }
+.wr-bottom button{padding: 0;margin: 0;line-height: 100rpx;background: #f8b616;color: #fff;font-size: 34rpx;}
+.line-btn{height: 100%;width: 100%;}
+.group-btn{height: 100%;width: 50%;}
+/* 分享 */
+.share-item{width: 50%;display: flex;flex-direction: column; align-items: center;padding-top:40rpx;height: 100%;box-sizing: border-box;position: relative;}
+.share-poster-tip{height: 30rpx;padding: 0 13rpx;line-height: 30rpx;background:#f14c38;color: #fff;font-size: 24rpx;border-radius: 30rpx;position:absolute;right:76rpx;top:26rpx;}
+.share-item image{height: 97rpx;width: 97rpx;margin-bottom: 30rpx;}
+.share-item text{font-size: 28rpx;}
+.share-item button{background: rgba(255,255,255,0);padding:0;margin:0;border: 0;position: absolute;width: 90%;height: 90%;box-sizing: border-box;top: 0;}
+.flex-between{display: flex;align-items: center;justify-content: space-between;}
+.layerline{height: 1rpx;background: #eee;}

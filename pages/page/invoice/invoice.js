@@ -1,4 +1,5 @@
 // pages/invoice/invoice.js
+const Api = require("../../../utils/api.js");
 Page({
 
   /**
@@ -6,16 +7,19 @@ Page({
    */
   data: {
     dataInvoice:[
-      { title: "不开发票", selected: true },
-      { title: "个人", selected: false },
-      { title: "普通发票", selected: false },
-      { title: "增值税专用发票", selected:false},
+      { title: "不开发票", selected: true ,show:true},
+      { title: "个人 普通发票", selected: false, show: false},
+      { title: "公司 普通发票", selected: false, show: false},
+      { title: "增值税专用发票", selected: false, show: false},
     ],
     ordinary:true,
     com:true,
     invoice:{}  //发票信息
   },
   selectList(e){
+    this.setData({
+      invoice:{}
+    })
     const index1=e.currentTarget.dataset.index;
     let dataInvoice=this.data.dataInvoice;
     var array=this.data.dataInvoice
@@ -80,6 +84,12 @@ Page({
   },
 
   addWrite(e){
+    if(!this.data.com || !this.data.ordinary){
+      if (!this.data.invoice.invoiceTitle || !this.data.invoice.identificationNumber){
+        Api.showToast('请填写抬头以及识别号')
+        return
+      }
+    }
     var pages = getCurrentPages();
     if (pages.length > 1) {
       //上一个页面实例对象
@@ -88,39 +98,79 @@ Page({
       wx.navigateBack();
     }
   },
+  cancelShow(){
+    Api.getStoreInfo().then(res=>{
+      this.setData({
+        show: res.obj.isReceipt
+      })
+      if (res.obj.isReceipt == true){
+        let str = res.obj.receiptInfo;
+        let arr = str.split(",");
+        if (arr.indexOf("个人发票") > -1){
+          this.setData({
+            ["dataInvoice[1].show"]:true
+          })
+        }
+        if (arr.indexOf("提供增值税普通发票") > -1) {
+          this.setData({
+            ["dataInvoice[2].show"]: true
+          })
+        }
+        if (arr.indexOf("提供增值税专用发票") > -1) {
+          this.setData({
+            ["dataInvoice[3].show"]: true
+          })
+        }
+        
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // if (options != {}){
-    //   let index = 0;
-    //   if (options.invoiceType=="个人"){
-    //     index = 1;
-    //   }else{
-    //     if (options.invoiceCategory == "普通发票"){
-    //       index = 2;
-    //     }else{
-    //       index = 3;
-    //     }
-    //   }
-    //   var array = this.data.dataInvoice
-    //   array.forEach((item, i, arr) => {
-    //     var sItem = "dataInvoice[" + i + "].selected"
-    //     if(i==index){
-    //       this.setData({
-    //         [sItem]: true,
-    //       })
-    //     }
-    //     this.setData({
-    //       [sItem]: false,
-    //     })
-    //   })
 
-      
-    //   this.setData({
-    //     invoice: options
-    //   })
-    // }
+    this.cancelShow()
+    if (options.invoiceType){
+      let index = 0;
+      if (options.invoiceType=="个人"){
+        index = 1;
+      }else{
+        if (options.invoiceCategory == "普通发票"){
+          index = 2;
+        }else{
+          index = 3;
+        }
+      }
+      var array = this.data.dataInvoice
+      array.forEach((item, i, arr) => {
+        if(i==index){
+          item.selected = true;
+        }else{
+          item.selected = false;
+        }
+      })
+      this.setData({
+        invoice: options,
+        dataInvoice:array
+      })
+      if (index == 3) {
+        this.setData({
+          com: false,
+          ordinary: true,
+        })
+      } else if (index == 2) {
+        this.setData({
+          com: true,
+          ordinary: false,
+        })
+      } else {
+        this.setData({
+          com: true,
+          ordinary: true,
+        })
+      }
+    }
   },
 
   /**
@@ -165,10 +215,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

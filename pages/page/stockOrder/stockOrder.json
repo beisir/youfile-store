@@ -2,6 +2,8 @@
   "navigationBarTitleText": "进货单管理",
   "usingComponents": {
     "mes": "../../../assembly/tips/tips",
-    "clo": "../../../assembly/close/close"
+    "clo": "../../../assembly/close/close",
+    "login": "../../login/login/login",
+    "savePayment": "../../payment/savePayment/savePayment"
   }
 }

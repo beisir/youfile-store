@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "tips": "/assembly/tips/tips"
+  },
+  "navigationBarTitleText": "",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616"
+}

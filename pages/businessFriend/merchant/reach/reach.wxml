@@ -1,0 +1,46 @@
+<!-- 确定要删除吗 -->
+<spec show="{{deleteUser}}">
+  <view class='spec-title'>确定解除商友关系？</view>
+  <view class='is-font'><image src="/image/ca1.png"></image>解除商友关系后，您将失去该分销商，他将无法查看您的批发价，确定要解除么？</view>
+  <view class='spec-view' bindtap='cancel'>取消</view>
+  <view class="spec-view spec-view-ac spec-view-active" bindtap='conSpecName'>确定</view>
+</spec>
+<navigator class='bf-cont' url='../details/details?userId={{userId}}'>
+  <view class='bf-weui'>
+    <view class="weui_cells new-weui">
+      <view class='bf-img'  wx:if='{{headPic!=null}}'><image mode="aspectFill" src="{{baseUrl}}{{headPic}}?x-oss-process=style/logo"></image></view>
+      <text>{{remark?remark:nickName}}</text><image  class='re-img' mode="widthFix" src="/image/man.png"></image><view class='re-name'>云分销商</view>
+      <view class='nbf-font' wx:if="{{remark}}">昵称：{{nickName}}</view>
+    </view>
+    <view class='weui-view'>
+      <image class='com-right-icon' src="/image/poster-right-in.png"></image>
+    </view>
+    <view wx:if='{{note!=""}}' class='re-font'>{{note}}</view>
+  </view>
+</navigator>
+<view class='bf-cont'>
+  <view class='re-title com-flex-center'>
+    <view class='com-color-chunk'></view>交易数据
+  </view>
+    <view class='bt-view'>
+      <view><view>{{buyTimes}}</view>交易次数</view>
+      <view><view>{{recentBuy}}</view>最近购买</view>
+      <view><view>{{buyAmount}}</view>总交易额</view>
+    </view>
+</view>
+<view class='bf-cont info-cont'>
+  <view class='in-cont'>
+   <text>手机号</text><view wx:if='{{phone!==""}}'>{{phone}}<view bindtap='call' class='in-cont-img'><image  mode="widthFix" src="/image/tel1.png"></image></view></view>
+  </view>
+  <view class='in-cont'>
+   <text>微信号</text><view wx:if='{{wechart!==""}}'>{{wechart}}</view>
+  </view>
+ <view class='in-cont'>
+   <text>生日</text><view wx:if='{{birthday!==""}}'>{{birthday}}</view>
+  </view>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='deleteFriend'>解除商友关系</button>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "专区设置",
+  "usingComponents": {
+    "layer": "../../../../assembly/layer/layer"
+  }
+}

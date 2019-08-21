@@ -1,81 +1,111 @@
-let timeId = null;
+const app = getApp();
+var that
+import Api from '../../../utils/api.js'
 Page({
   data: {
-    history: ["戒指","项链","钻戒"],
+    history: [],
     hidden: false,
-    result: [
-      {
-        id: 1,
-        thumb: '/image/s5.png',
-        title: '周大福 艳丽动人 18K金镶坦桑石 V103235',
-        price: 0.01
-      },
-      {
-        id: 2,
-        thumb: '/image/s5.png',
-        title: '周大福 艳丽动人 18K金镶坦桑石 V103235',
-        price: 0.02
-      },
-      {
-        
-        id: 1,
-        thumb: '/image/s5.png',
-        title: '周大福 艳丽动人 18K金镶坦桑石 V103235',
-        price: 0.01
-      },
-      {
-        id: 2,
-        thumb: '/image/s5.png',
-        title: '周大福 艳丽动人 18K金镶坦桑石 V103235',
-        price: 0.02
-      }
-    ],
+    baseUrl: app.globalData.imageUrl,
+    result: [],
     value: '',
+    limitShow: '',
     showResult: false,
-    closeCont:false,
+    closeCont: false,
   },
-  
   searchInput(e) {
-    if (e.detail.value==''){
+    if (e.detail.value == '') {
       this.setData({
         value: e.detail.value,
         hidden: false,
       })
-    }else{
+    } else {
       this.setData({
         value: e.detail.value,
         hidden: true,
       })
     }
-      
+
   },
-  //搜索确定键
-  searchBtn(e) {
-    if(this.data.value!=""){
-      this.setData({
-        closeCont: true
-      })
-    }
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.result)
     this.setData({
-      showResult: true,
+      result: data
     })
   },
-  // 清空input的内容
-  emptyInput(e){
+
+  //滑动事件处理
+  touchmove: function (e) {
+    let data = app.touch._touchmove(e, this.data.result)
     this.setData({
-      value:'',
+      result: data
+    })
+  },
+  //搜索确定键
+  getList: function (value) {
+    var keyword = value,
+      _this = this
+    Api.goodsApiSearchList({ keyword: keyword })
+      .then(res => {
+        var obj = res.obj.result,
+          totalCount = res.obj.totalCount
+        if (obj.length > 0) {
+          obj.forEach(el => {
+            if (el.extInfo){
+              el.isHaveActive=true
+              let stockNum = el.extInfo.PRIORITY_SALES_PROMOTION.stockNum,
+                salesNum = el.extInfo.PRIORITY_SALES_PROMOTION.salesNum
+              if (!stockNum || stockNum == 0) {
+                el.salepercent = 100
+              } else {
+                let all = salesNum + stockNum
+                el.salepercent = parseInt(salesNum / all * 100)
+              }
+            }else{
+              el.isHaveActive = false
+            }
+          })
+        }
+        var datas = _this.data.result,
+          newArr = app.pageRequest.addDataList(datas, obj)
+        _this.setData({
+          result: newArr,
+          showResult: true,
+        })
+      })
+  },
+  searchBtn(e) {
+    var value = this.data.value
+    if (!value) { return }
+    app.pageRequest.pageData.pageNum = 0
+    this.setData({
+      result: []
+    })
+    var value = this.data.value
+    if (Api.isNotEmpty(value)) {
+      this.historyHandle(value)
+    }
+    this.getList(value)
+  },
+  // 清空input的内容
+  emptyInput(e) {
+    this.setData({
+      value: '',
       showResult: false,
       hidden: false,
       closeCont: false
     })
+    wx.removeStorageSync('history')
   },
   keywordHandle(e) {
-    const text = e.target.dataset.text;
+    const text = e.target.dataset.name;
     this.setData({
       value: text,
       showResult: true
     })
     this.historyHandle(text);
+    this.getList(text)
   },
   historyHandle(value) {
     let history = this.data.history;
@@ -94,18 +124,144 @@ Page({
       history
     });
   },
-  removeAll(){
+  removeAll() {
     this.setData({
       history: []
     });
+    wx.removeStorageSync('history')
   },
-  onLoad() {
+  onLoad(options) {
+    app.pageRequest.pageData.pageNum = 0
     const history = wx.getStorageSync('history');
     if (history) {
       this.setData({
         history: JSON.parse(history)
       })
-      console.log(this.data.history);
     }
+    var _this = this
+    wx.getSystemInfo({
+      success: function (res) {
+        _this.setData({
+          scrollHeight: res.windowHeight
+        });
+      }
+    });
+  },
+  onShow(){
+    this.setData({
+      limitShow:wx.getStorageSync('admin')
+    })
+  },
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+    var value = this.data.value
+    wx.stopPullDownRefresh();
+    if (!value) { return }
+    app.pageRequest.pageData.pageNum = 0
+    this.setData({
+      result: [],
+    })
+    this.getList(this.data.value)
+  },
+  onShareAppMessage: (res) => {
+    var img = '',
+      name = '',
+      id = ''
+    if (res.from === 'button') {
+      var res = res.target.dataset
+      img = res.img;
+      id = res.id
+      name = res.name
+    }
+    return {
+      title: name,
+      path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id,
+      imageUrl: img,
+      success: (res) => {
+      },
+      fail: (res) => {
+      }
+    }
+  },
+  lookGoodsDetails: function (e) {
+    var id = e.target.dataset.id
+    wx.navigateTo({
+      url: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id,
+    })
+  },
+  editGoods: function (e) {
+    var id = e.target.dataset.id
+    wx.navigateTo({
+      url: '../editGoods/editGoods?goodsId=' + id,
+    })
+  },
+  // 上下架
+  changeStatus: function (e) {
+    const goodId = e.currentTarget.dataset.id,
+      index = e.currentTarget.dataset.index,
+      _this = this,
+      result = this.data.result,
+      goodsIdList = []
+    goodsIdList.push(goodId)
+    Api.goodsApiSearchList(goodsIdList)
+      .then(res => {
+        result[index].status = "1"
+        _this.setData({
+          result: result,
+        })
+        Api.showToast('上架成功')
+      })
+
+  },
+  //删除事件
+  del: function (e) {
+    var indexDel = e.currentTarget.dataset.index,
+      goodsIdDel = e.currentTarget.dataset.id
+    var _this = this
+    _this.setData({
+      show1: true,
+      indexDel: indexDel,
+      goodsIdDel: goodsIdDel
+    })
+  },
+  confirmDetele: function () {
+    var that = this,
+      indexDel = this.data.indexDel,
+      goodsIdDel = this.data.goodsIdDel
+    that.data.detailList.splice(indexDel, 1)
+    Api.adminGoodsDelete({ goodId: goodsIdDel })
+      .then(res => {
+        Api.showToast('删除成功')
+        that.setData({
+          detailList: that.data.detailList
+        })
+        that.cancel()
+      })
+  },
+  upStatus: function (e) {
+    const goodId = e.currentTarget.dataset.id,
+      index = e.currentTarget.dataset.index,
+      _this = this,
+      result = this.data.result,
+      goodsIdList = []
+    goodsIdList.push(goodId)
+    Api.adminGoodsDown(goodsIdList)
+      .then(res => {
+        result[index].status = "0"
+        _this.setData({
+          result: result,
+        })
+        Api.showToast('下架成功')
+      })
+  },
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+    var value = this.data.value
+    if (!value) { return }
+    this.getList(value)
   }
 })

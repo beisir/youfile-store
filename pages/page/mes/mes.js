@@ -1,18 +1,74 @@
-// pages/mes/mes.js
+import Api from '../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    showHide:true
+    globalData: app.globalData,
+    showHide:true,
+    countData:'',
+    floorInfo:null,
+    description:'',
+    storeMes:'',
+    storeGoods:[],
+    isShow:false,
+    baseUrl: app.globalData.imageUrl,
+    limitShow:'',
+  }, 
+  urlHome: function () {
+    wx.switchTab({
+      url: '../home/home'
+    })
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
+  calling: function () {
+    var storeMes = this.data.storeMes
+    wx.makePhoneCall({
+      phoneNumber: storeMes.servicePhone,
+      success: function () {
+      },
+      fail: function () {
+      }
+    })
+  },
+  getMes:function(){
+    var _this = this
+    Api.storeIdInfo()
+      .then(res => {
+        var obj = res.obj,
+          description = ''
+        if (obj.store[0].store.description == "null" || obj.store[0].store.description == null) {
+          description = ''
+        } else {
+          description = obj.store[0].store.description
+        }
+        var floorInfo = Api.isFloorInfo(obj.floor)
+        _this.setData({
+          countData: obj.countData,
+          floorInfo: floorInfo,
+          storeMes: obj.store[0].store,
+          description: description,
+          storeGoods: obj.store[0].goodsList
+        })
+      })
+  },
   onLoad: function (options) {
-  
+    var _this=this
+    if (options.code){
+      this.setData({
+        limitShow: options.code
+      },function(){
+        _this.getMes()
+        _this.setData({
+          isShow:true
+        })
+      })
+    }
+   
   },
   editFun: function () {
     this.setData({
@@ -35,7 +91,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    if (this.data.isShow){
+      this.getMes()
+    }
   },
 
   /**
@@ -66,10 +124,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

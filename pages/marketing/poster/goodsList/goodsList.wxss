@@ -1,0 +1,29 @@
+/* pages/poster/goodsList/goodsList.wxss */
+.flex-between{display: flex;align-items: center;justify-content: space-between;}
+.flex-center{display: flex;align-items: center;}
+.search-own{padding: 20rpx 0;}
+.search-icon-own{width: 30rpx;height: 30rpx;}
+.search-input-own{margin-left: 30rpx;font-size: 28rpx;}
+.list-search-box{height: 100rpx;}
+.search-box-own{flex:1;margin-right:20rpx;height: 100rpx;background: #fff;padding: 0 30rpx 0 40rpx;border-radius: 10rpx;}
+.search-btn{width: 100rpx;font-weight: 600;text-align: center;font-size: 28rpx;}
+/* 商品 */
+.goods-item{background: #fff;border-radius: 10rpx;margin-bottom: 20rpx;}
+.goods-top-box{padding-top:35rpx;padding-bottom:35rpx;padding-left: 40rpx;padding-right: 40rpx;}
+.goods-icon-box{width: 130rpx; height: 130rpx;border: 1rpx solid #eee;margin: 0 30rpx 0 25rpx;box-sizing: border-box;display: flex;align-items: center;justify-content: center;}
+.goods-icon{max-width: 100rpx;max-height: 100rpx;}
+.goods-msg-box{height: 130rpx;flex:1;}
+.goods-name{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;font-size: 28rxp;font-weight: 600;width:380rpx;margin-top:5rpx;margin-bottom: 10rpx;line-height: 1;font-family: 'STSong'}
+.goods-price{min-width: 50%;float: left;font-size: 26rpx;color: #999;line-height: 1;padding-top:10rpx;}
+/* 图片 */
+.goods-img-box{height: 170rpx;display: flex;align-items: center;padding-left: 40rpx;padding-right: 40rpx;}
+.goods-img-item{width: 90rpx;height: 90rpx;background: #fff;display: flex;align-items: center;justify-content: center;border-radius: 10rpx;box-shadow:  0 0  10rpx #eee;position: relative;margin-right: 18rpx;}
+.goods-img-item:last-child{margin-right: 0;}
+.goods-img-item image{width: 75rpx;height: 75rpx;}
+.dotted-line{background: #fff;display: flex;justify-content: space-between;padding:0 40rpx;}
+.dotted-line view{height: 1rpx;width: 10rpx;background: #eee;}
+.goods-img-item .img-chose-icon{position: absolute;right: 0;bottom: 0;width: 20rpx;height: 20rpx;}
+/* 底部按钮 */
+.bottom-btn-box{position: fixed;height: 120rpx;background: #fff;bottom: 0;width: 100%;display: flex;justify-content: space-around;align-items: center;}
+.btn-line{width: 2rpx;height: 30rpx;background: #ddd;}
+.button-type{width: 374rpx;text-align: center;color: #f8b616;font-size: 36rpx;}

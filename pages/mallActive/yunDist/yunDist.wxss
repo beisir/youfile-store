@@ -1,0 +1,29 @@
+@import '../distRecords/distRecords';
+.dr-pic{margin: 0}
+.dr-back{height: 300rpx;}
+.listData>view{margin-top: 90rpx;}
+.yd-top{position: relative;width: 100%;padding-top: 95rpx;padding-bottom: 10rpx;}
+.yd-top>view{text-align: center;}
+.yd-top>view:first-child{height: 150rpx;width: 150rpx;border-radius: 20rpx;box-shadow: 5rpx 0 20rpx rgb(177, 175, 175);overflow: hidden;position: absolute;left: 50%;margin-left:-75rpx;top: -80rpx;background: #fff}
+.yd-top>view image{width: 150rpx;height: 150rpx;}
+.yd-top>view:nth-child(2){font-weight: bold;font-size: 40rpx;margin-bottom: 20rpx;}
+.yd-top>view:nth-child(3){font-size: 26rpx;color: #666;display: flex;align-items: center;justify-content: space-around;width: 200rpx;margin: 0 auto;padding-left: 32rpx;}
+.yd-top>view.yd-m{font-size: 80rpx;color: #BB7916;font-weight: bold;line-height: 1;margin:20rpx 0 30rpx;}
+.yd-data>view{display: inline-block;width: 33.3%;font-size: 26rpx;color: #666;position: relative}
+.yd-data>view view{font-size: 40rpx;color: #f8b616}
+.yd-xian{width: 2rpx;height:36rpx;background: #F5F5F5;position: absolute;right: 0;top: 50%;margin-top:-18rpx;}
+.yd-down{width: 0;height: 0;border-left: 12rpx solid transparent;border-right: 12rpx solid transparent;border-top: 12rpx solid #818181;display: inline}
+.yd-purch{height: 90rpx;line-height: 90rpx;background: #f8b616;color: #fff;font-size: 36rpx;font-weight: bold;padding-left: 65rpx;width: 100%;margin-top: -20rpx;}
+.listData>.yd-datas{overflow: hidden;margin-top: 20rpx;justify-content: unset;align-items: unset;display:block;align-items: unset;margin-bottom: 100rpx}
+.yd-pList{display: flex;align-items: center;padding: 20rpx 55rpx;position: relative}
+.ydpl-left image{width: 105rpx;height: 105rpx;border-radius: 50%;}
+.ydpl-right>view{margin-top: 10rpx;}
+.ydpl-right{margin-left: 30rpx}
+.ydpl-right>view image{width: 40rpx;height: 40rpx;}
+.ydpl-right>view:first-child{font-size: 30rpx;font-weight: bold;display: flex;align-items: center}
+.ydpl-right>view text{position: relative;border-radius: 10rpx;font-weight: bold;margin-left: 0;border: 2rpx solid #f8b616;color: #f8b616;font-size: 24rpx;padding: 0rpx 10rpx;margin: 0 20rpx;}
+.ydpl-right>view:last-child{font-size: 26rpx;color: #666}
+.ydpl-r{width: 20rpx;height: 20rpx;border-top: 6rpx solid #B3B3B3;border-right: 6rpx solid #B3B3B3;transform: rotate(45deg);position: absolute;right:50rpx}
+.dr-pic2{background-size: 66%;background-position-x: center;background-position-y: 15rpx;}
+.dr-pic3{background-size: 53%;background-position-x: center;background-position-y: 18rpx;}
+.ydpl-right>view text{border:1rpx solid #f8b616;text-align: center;}

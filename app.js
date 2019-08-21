@@ -1,53 +1,108 @@
 import http from './utils/http.js'
 import pageRequest from './utils/pageRequest.js'
+import AuthHandler from './utils/authHandler.js'
+import { imageUrl, imageUrlSafe, payUrl, projectName, payAppNum, projectType, servesPhone, navigateToAppID} from './utils/const.js'
+import touch from './utils/touch.js'
+import Navigate from "./utils/navigate.js"
 App({
+  // 监听错误
+  onError: function (err) {
+    wx.showToast({
+      title: err,
+      icon: 'none',
+      duration: 4000,
+    })
+  },
   onLaunch: function (options) {
-    // 购物车
-    // wx.setTabBarItem({
-    //   index: 1,
-    //   text: 'text',
-    //   iconPath: '/image/clo.png',
-    //   selectedIconPath: '/image/clo.png'
-    // })
-    // 展示本地存储能力
-    // var logs = wx.getStorageSync('logs') || []
-    // logs.unshift(Date.now())
-    // wx.setStorageSync('logs', logs)
+    //跳转进入的入口
+    this.navigate.parseExtraDataOnlunch(options)
+    if (options.query && options.query.storeId){
+      wx.setStorageSync("storeId",options.query.storeId)
+    }
+    wx.setStorageSync("storeId", "S1000631")
+    // wx.setStorageSync("storeId", "S1000349")
+    // wx.setStorageSync("storeId", "S001")
+    // wx.setStorageSync("storeId", "S1000323")
+    // 获取小程序更新机制兼容
+    if (wx.canIUse('getUpdateManager')) {
+      const updateManager = wx.getUpdateManager()
+      updateManager.onCheckForUpdate(function (res) {
+        // 请求完新版本信息的回调
+        if (res.hasUpdate) {
+          updateManager.onUpdateReady(function () {
+            wx.showModal({
+              title: '更新提示',
+              content: '新版本已经准备好，是否重启应用？',
+              success: function (res) {
+                if (res.confirm) {
+                  // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                  updateManager.applyUpdate()
+                }
+              }
+            })
+          })
+          updateManager.onUpdateFailed(function () {
+            // 新的版本下载失败
+            wx.showModal({
+              title: '已经有新版本了哟~',
+              content: '新版本已经上线啦~，请您删除当前小程序，重新搜索打开哟~',
+            })
+          })
+        }
+      })
+    } else {
+      // 如果希望用户在最新版本的客户端上体验您的小程序，可以这样子提示
+      wx.showModal({
+        title: '提示',
+        content: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重试。'
+      })
+    }
+    // 获取屏幕大小
+    var _that = this;
+    wx: wx.getSystemInfo({
+      success: function (res) {
+        _that.systemInfo = res;
+      }
+    });
+  },
 
-    // // 登录
-    // wx.login({
-    //   success: res => {
-    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
-    //   }
-    // })
-    // // 获取用户信息
-    // wx.getSetting({
-    //   success: res => {
-    //     if (res.authSetting['scope.userInfo']) eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSB5b3V3ZSIsIm1lcmNoYW50TnVtYmVyIjoiMDQ5NTg2MTMiLCJ1c2VyX25hbWUiOiIxNTg4ODg4ODg4OCIsInNjb3BlIjpbImFsbCJdLCJleHAiOjE1MzY4MDc5MTMsInVzZXJJZCI6IjBiODNiMzQ5ODMzYTY2YmZiM2UxZTg3YjVjNjc2YjBiIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImp0aSI6ImQ5NmRiMTExLTUzMjUtNDNhMS1hNzI0LWNmNzJhNGU3Zjc2NiIsImNsaWVudF9pZCI6IkJlaUppbmdCYWlSb25nU2hpTWFvQ2xpZW50In0.E9XneRhVBO1mu5kCIVwrnF5lDiaFQIi4E
-    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-    //       wx.getUserInfo({
-    //         success: res => {
-    //           // 可以将 res 发送给后台解码出 unionId
-    //           this.globalData.userInfo = res.userInfo
-
-    //           // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-    //           // 所以此处加入 callback 以防止这种情况
-    //           if (this.userInfoReadyCallback) {
-    //             this.userInfoReadyCallback(res)
-    //           }
-    //         }
-    //       })
-    //     }
-    //   }
-    // })
+  /**
+   * 系统信息
+   */
+  systemInfo: null,//系统信息
+  onShow(options){
+    if (!this.globalData.notOnshow){
+      //跳转进入的入口
+      this.navigate.parseExtraDataOnShow(options)
+    }
     
   },
   globalData: {
     userInfo: null,
     skin: "normal",
+    imageUrl: imageUrl,
+    imageUrlSafe: imageUrlSafe,
+    switchStore: false,
+    isFollow: null,
+    projectType,
+    userShowTip:false,
+    payUrl: payUrl,    
+    payAppNum,
+    storeIdRetail:false,
+    projectName,
+    servesPhone,
+    navigateToAppID,
+    returnBall: {
+      x: 10000,
+      y: 50,
+      show: true
+    },
   },
   http: new http(),
-  pageRequest: new pageRequest()
+  pageRequest: new pageRequest(),
+  authHandler: new AuthHandler(),
+  touch: new touch(),
+  navigate: new Navigate()
 });
 
 

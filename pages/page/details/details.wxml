@@ -1,7 +1,16 @@
+<!-- 悬浮球 -->
+<returnBall>
+
+<view hidden='{{indexEmpty}}'>
+  <no></no>
+</view>
+<view hidden='{{goRetailStore}}'>
+  <retailStore></retailStore>
+</view>
 <view class='page'>
 <view class='my-top-line'></view>
-   <view class='page__hd page__hd1'>
-    <navigator class='weui-cell weui-cell_access' url='../serList/serList'>
+   <view class='page__hd page__hd1' style='margin:20rpx 30rpx;border-radius:10rpx'>
+    <navigator class='weui-cell weui-cell_access' url='../classList/classList?name=全部商品&allCode=0'>
       <view class='weui-cell__bd'>
         <view class='my-info'>全部商品</view>
       </view>
@@ -12,9 +21,9 @@
   </view> 
   <view class='page__bd'>
     <view class=''>
-      <navigator class='weui-cell weui-cell_access' url='../classList/classList?name={{item.name}}&code={{item.customCategoryCode}}' wx:for="{{list}}" wx:key="{{index}}">
+      <navigator class='weui-cell weui-cell_access' url='../classList/classList?name={{item.name}}&code={{item.customCategoryCode}}' wx:for="{{list}}" wx:key="{{index}}" wx:if='{{item.customCategoryCode!=0}}'>
         <view class='weui-cell__bd'>
-           {{item.name}}
+           {{item.name}}<view class='num-v'>{{item.count}}件</view>
         </view>
         <view class='weui-img'>
          <image src="/image/icl.png"></image>
@@ -23,3 +32,14 @@
     </view>
   </view>
 </view>
+<view class="result-null" wx:if='{{list.length<2}}'>
+  <view class="nomore">
+    <view>
+      <image src="/image/class-i.png"></image>
+    </view>
+    暂时还没有分类哦！
+  </view>
+</view>
+
+
+</returnBall>

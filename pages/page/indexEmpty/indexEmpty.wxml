@@ -1,0 +1,8 @@
+<view class='home-em'>
+   <view class="cart-no-data">
+          <view class='nocar'><image src="/image/svg.png"></image></view>
+          <view>还未访问过{{globalData.projectName}}</view>
+          <view class='miniDetails returnMall' bindtap='returnMall'>去逛逛</view>
+
+        </view>
+</view>

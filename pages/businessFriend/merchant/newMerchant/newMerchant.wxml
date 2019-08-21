@@ -1,0 +1,48 @@
+<view class='header-ser-box com-flex-between'>
+  <view class='com-flex-center ser-white-box'>
+    <image class="ser-icon"  src="/image/search.png"></image>
+    <input class='flexone' placeholder="输入云分销商名称、手机号"   bindconfirm="searchBtn" bindinput='changeValue' value="{{value}}"></input>
+    <image  src="/image/close.png" bindtap='emptyInput' class='close-btn'></image>
+  </view>
+  <view class='ser-btn flexone' bindtap='searchBtn'>搜索</view>
+</view>  
+<!-- status 1 等待对方认证 2已添加 3等待自己认证 -->
+<view class='bf-cont' wx:if='{{detailList.length>0}}'>
+  <view class='bf-weui'>
+  <scroll-view scroll-y="true" style="height:100%;">
+    <view class="weui_cells" wx:for='{{detailList}}' wx:key='{{index}}'>
+      <navigator wx:if='{{item.status==2}}'  url="../reach/reach?accept={{item.send}}">
+        <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}?x-oss-process=style/logo"></image></view>
+          <text>{{item.remark==null || item.remark==''?item.nickName:item.remark}}</text>
+          <view class='nbf-font'>{{item.greet}}</view>
+          <view class='weui-view'>
+            已添加
+          </view>
+      </navigator>
+      <navigator wx:if='{{item.status!=2}}'  url="../merchantInfo/merchantInfo?status={{item.status}}&send={{item.send}}&accept={{item.accept}}&remark={{item.remark}}&greet={{item.greet}}&name={{item.nickName}}&logo={{baseUrl}}{{item.headPic}}&phone={{item.phone}}">
+        <view class='bf-img'><image  mode="aspectFill" src="{{baseUrl}}{{item.headPic}}?x-oss-process=style/logo"></image></view>
+          <text wx:if='{{item.status!=3}}'>{{item.remark==null || item.remark==''?item.nickName:item.remark}}</text>
+          <text wx:if='{{item.status==3}}'>{{item.nickName}}</text>
+          <view class='nbf-font'>
+            <text wx:if='{{item.status!=1}}'>{{item.greet}}</text>
+            <text wx:else>{{item.createDate}}邀请合作</text>
+          </view>
+          <view class='weui-view' wx:if='{{item.status==1}}'>
+            <text>等待验证</text>
+          </view>
+           <view class='weui-view' wx:if='{{item.status==3}}'>
+            <button>验证</button>
+          </view>
+      </navigator>
+    </view>
+    </scroll-view>
+  </view>
+</view>
+<view class='allData' wx:if='{{detailList.length==0}}'>
+  <view class="nomore">
+      <view>
+        <image src="/image/user.png"></image>
+      </view>
+      暂无新增的云分销商
+  </view>
+</view>

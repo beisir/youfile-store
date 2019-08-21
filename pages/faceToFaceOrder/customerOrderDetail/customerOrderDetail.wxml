@@ -1,0 +1,174 @@
+<wxs src="../../../public/filter.wxs" module="filter" />
+<!-- 取消进货单 -->
+<clo show="{{cancelModal}}">
+  <view class='layer-reason-item' wx:for='{{reason}}' wx:key='{{index}}' data-current="{{index}}" bindtap='swichReason'>
+    <icon wx:if="{{item.selected}}" type="success" color="#f8b616" data-index="{{index}}" size='18' class="cart-pro-select" />
+    <icon wx:else type="circle" class="cart-pro-select" size='18' data-index="{{index}}" /> {{item.title}}
+  </view>
+  <button class='layer-reason-btn' bindtap='sureCancel'>确定</button>
+</clo>
+<!-- 删除订单 -->
+<mes show="{{delModal}}">
+  <view>
+    <text>确认删除订单？</text>
+    <button bindtap='sureDel'>确定</button>
+  </view>
+</mes>
+
+
+<view class='order-title-img title-box padding-box'>
+  <block wx:if="{{order.orderStatus == 'unpaid'}}">
+    <view class='flex-center'>
+      <image src='/image/nz.png' class='title-icon'></image>
+      <text class='status-font'>等待您付款</text>
+    </view>
+    <view>
+      <view class='title-time'>剩余时间：{{clock?clock:''}}</view>
+      <view class='title-price'>需付款：￥{{filter.filterMoney(order.payAmount)}}</view>
+    </view>
+  </block>
+  <block wx:if="{{order.orderStatus == 'finish'}}">
+    <view class='flex-center'>
+      <image src='/image/mon.png' class='title-icon'></image>
+      <text class='status-font'>交易成功</text>
+    </view>
+  </block>
+
+  <block wx:if="{{order.orderStatus == 'canceled'}}">
+    <view class='flex-center'>
+      <image src='/image/qx.png' class='title-icon'></image>
+      <text class='status-font'>交易关闭</text>
+    </view>
+    <view style='font-size:26rpx;' wx:if="{{order.cancelReason}}">原因：{{order.cancelReason}}</view>
+  </block>
+
+</view>
+<!-- 商店 -->
+<view class='store-box padding-box'>
+  <view class='store-line'>
+    <image src='/image/ad.png' class="store-icon"></image>
+    <text class='store-add'>门店地址：{{order.storeInfo.address?order.storeInfo.address:""}}</text>
+  </view>
+  <view class='store-line store-time gray-color'>营业时间：{{order.storeInfo.openingTime?order.storeInfo.openingTime:""}}</view>
+  <view class='store-line store-time'>
+    <image src='/image/pre.png' class='store-icon'></image>
+    <text class='gray-color'>卖家电话：{{order.storeInfo.servicePhone?order.storeInfo.servicePhone:""}}</text>
+  </view>
+  <!-- 按钮 -->
+  <view style='overflow:hidden;'>
+    <view class='mid-btn'>
+      <view class='flex-center'>
+        <image src='/image/mes.png' class='btn-icon'></image>
+        <text>联系卖家</text>
+      </view>
+      <view class='btn-line'></view>
+      <view bindtap='call' class='flex-center'>
+        <image src='/image/tel1.png' class='btn-icon'></image>
+        <text>拨打电话</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 货 -->
+<view class='goods-detail-box'>
+  <view class='item-title padding-box' bindtap='toHome'>
+    <view class='flex-center'>
+      <image src="/image/u4.png" class='cloud-icon'></image>
+      <text class='com-name-box'>{{order.storeInfo.storeName}}</text>
+      <image src='/image/mallr.png' class='right-icon'></image>
+      <!-- <view class='type-chunk'>门店</view> -->
+    </view>
+    <!-- <view class='status-text'>
+      <text wx:if="{{order.orderStatus == 'unpaid'}}">待付款</text>
+      <text wx:if="{{order.orderStatus == 'canceled'}}" class="gray-color">交易关闭</text> 
+      <text wx:if="{{order.orderStatus == 'finish'}}" class="gray-color">交易完成</text>                       
+    </view> -->
+  </view>
+  <!-- <view class='goods-box'>
+    <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
+    <view class='goods-icon'>
+      <image src='/image/default-gift.png'></image>
+    </view>
+    <view class='tip-box'>
+      <text wx:for='{{order.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key='{{index}}'>{{tip.goodsName}}</text>
+    </view>
+    <view class='goods-price gold-font'>￥{{filter.filterMoney(order.orderAmount)}}</view>
+  </view> -->
+  <view class='new-goods-box'>
+    <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
+    <view wx:for='{{order.faceToFaceOrderDetailVOList}}' wx:for-item="tip" wx:key="{{index}}" class='goods-item'>
+      <text class='goods-item-goodsname'>{{tip.goodsName}}</text>
+      <text>x{{tip.num}}</text>
+    </view>
+  </view>
+</view>
+<!-- 订单号 -->
+<view class='msg-list-box padding-box relative-box'>
+  <view class='gray-layer' wx:if="{{order.orderStatus == 'canceled'}}"></view>
+  <view class='msg-item'>
+    <text class='msg-title'>订单号</text>
+    <text class='msg-detail' bindtap='copyCode'>{{order.orderNumber}}</text>
+  </view>
+  <!-- 已付款 -->
+  <view class='msg-item' wx:if="{{order.orderStatus == 'finish'}}">
+    <text class='msg-title'>支付交易号</text>
+    <text class='msg-detail'>{{order.paymentNumber?order.paymentNumber:""}}</text>
+  </view>
+  <view class='msg-item'>
+    <text class='msg-title'>创建时间</text>
+    <text class='msg-detail'>{{order.createDate}}</text>
+  </view>
+  <!-- 已付款 -->
+  <block wx:if="{{order.orderStatus == 'finish'}}">
+    <view class='msg-item'>
+      <text class='msg-title'>支付时间</text>
+      <text class='msg-detail'>{{order.payDate}}</text>
+    </view>
+    <view class='msg-item'>
+      <text class='msg-title'>成交时间</text>
+      <text class='msg-detail'>{{order.finishDate}}</text>
+    </view>
+  </block>
+  <block wx:if="{{order.orderStatus == 'canceled'}}">
+    <view class='msg-item'>
+      <text class='msg-title'>关闭时间</text>
+      <text class='msg-detail'>{{order.cancelDate}}</text>
+    </view>
+  </block>
+</view>
+<view class='border-line'><view></view></view>
+<view class='msg-list-box padding-box'>
+  <view class='msg-item pay-price-title'>
+    <text class='msg-title'>支付方式</text>
+    <text class='msg-detail font-bold'>在线支付</text>
+  </view>
+</view>
+
+<!-- 价格 -->
+<view class='msg-list-box padding-box' style='margin:20rpx 0 130rpx;'>
+  <view class='msg-item pay-price-title'>
+    <text class='msg-title font-bold'>订单金额</text>
+    <text class='msg-detail'>￥{{filter.filterMoney(order.orderAmount)}}</text>
+  </view>
+  <!-- <view class='msg-item'>
+      <text class='msg-title'>红包礼金</text>
+      <text class='msg-detail gray-color'>-￥0.00</text>
+    </view> -->
+  <view class='msg-item font-bold'>
+    <text class='pay-price-title' wx:if="{{order.orderStatus == 'finish'}}">实付金额</text>
+    <text class='pay-price-title' wx:else>应付金额</text>
+    <text class='msg-detail pay-price'>￥{{filter.filterMoney(order.payAmount)}}</text>
+  </view>
+</view>
+
+<!-- 底部按钮 -->
+<view class='bottom-btn-box padding-box'>
+  <block wx:if="{{order.orderStatus == 'unpaid'}}">
+    <view data-code="{{order.orderNumber}}" bindtap='pay' class='btn pay-btn'>付款</view>
+    <view data-code="{{order.orderNumber}}" bindtap="showModal" data-type='close' class='btn cancel-btn'>取消订单</view>
+  </block>
+  <block wx:if="{{order.orderStatus == 'finish' || order.orderStatus == 'canceled'}}">
+    <view data-code="{{order.orderNumber}}" bindtap="showModal" data-type='del' class='btn cancel-btn'>删除订单</view>
+  </block>
+</view>

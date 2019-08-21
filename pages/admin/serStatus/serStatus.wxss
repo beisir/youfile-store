@@ -1,1 +1,4 @@
 @import '../status/status';
+.showHide {left: 0;background:#000;opacity: 0.02;z-index: 8888;top: 0}
+.touch-item{background: #fff;}
+.content{margin-left:-140rpx;}

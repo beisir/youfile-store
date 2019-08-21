@@ -1,0 +1,8 @@
+/* distribution/pages/warehouse/goodsFlow/goodsFlow.wxss */
+@import "/distribution/static/template/goodNum/goodsNumItem";
+
+.goodsName{font-size: 48rpx;color: #fff;font-weight: 600;text-align: center;height: 120rpx;display: flex;align-items: center;justify-content: center;}
+.tab-item{flex: 1;height: 120rpx;display: flex;align-items: center;justify-content: center;flex-direction: column;color: #fff;}
+
+.date-item{padding:40rpx 50rpx 20rpx;line-height: 1;font-size: 24rpx;color: #999;}
+.goodsFlow{margin-top: 20rpx;}

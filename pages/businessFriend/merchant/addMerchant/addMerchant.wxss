@@ -1,0 +1,9 @@
+@import '../../addWholesaler/addWholesaler';
+
+.header-title{line-height: 1;padding: 50rpx;}
+.title-text{font-size: 48rpx;font-weight: 600;padding-bottom: 20rpx;}
+.title-tip{font-size: 30rpx;color: #999;}
+
+.sup-search-box{height: 120rpx;margin: 30rpx 50rpx;border: 1rpx solid #f8b616;background: #fafafa;border-radius: 10rpx;}
+.sup-search-input{font-size: 30rpx;padding-left: 30rpx;}
+.sup-search-btn{padding: 0 50rpx;height: 100%;display: flex;align-items: center;font-weight: 600;}

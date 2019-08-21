@@ -1,15 +1,31 @@
+<!-- 删除-->
+<mes show="{{show1}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确定删除该分类？</text>
+    <button bindtap='confirmFun'>确定</button>
+  </view>
+</mes>
+<!-- 新建分类 -->
+<spec
+  show="{{show}}"
+  bind:sureSelectArea="sureSelectAreaListener"
+>
+  <view class='spec-title'>编辑分类</view>
+  <input placeholder-class='spec-class'  bindinput='watchInput' value='{{value}}'  class='spec-input'  placeholder='请输入文字，最多10个字' />
+  <view class='spec-view' bindtap='cancel'>取消</view><view  class="spec-view spec-view-ac {{watchInput?'spec-view-active':''}}" bindtap='confirm'>确定</view>
+</spec>
 <view class='shop-cont'>
-  <view class='shop-size'>已选定两项</view>
-  <view wx:for='{{list}}' wx:key='{{index}}'>
-     <icon wx:if="{{item.selected}}" data-index="{{index}}" type="success" size="18" color="#CCAA77" bindtap="selectList"/>
-     <icon wx:else data-index="{{index}}" type="circle" size="18" bindtap="selectList"/>
-     {{item.name}}<view>{{item.count}}件</view>
+  <view class='shop-size'>已选定{{numSle}}项</view>
+  <view wx:for='{{list}}' wx:key='{{index}}' wx:if="{{item.customCategoryCode!=0}}">
+     <icon wx:if="{{item.selected}}" data-index="{{index}}" type="success" size="28" color="#f8b616" bindtap="selectList"/>
+     <icon wx:else data-index="{{index}}" type="circle" size="28" bindtap="selectList"/>
+     <text bindtap='updataName' data-code='{{item.customCategoryCode}}' data-name='{{item.name}}'>{{item.name}}</text><view>{{item.count}}件</view>
   </view>
 </view>
 <view class='add-bottom'>
   <view bindtap='addClass'>
-    <icon wx:if="{{selectAllStatus}}" type="success" size="20" color="#CCAA77" class='iconall'  bindtap="selectAll"/>
-    <icon wx:else type="circle" class='iconall' size="20" bindtap="selectAll"/>
+    <icon wx:if="{{selectAllStatus}}" type="success" size="28" color="#f8b616" class='iconall'  bindtap="selectAll"/>
+    <icon wx:else type="circle" class='iconall' size="28" bindtap="selectAll"/>
   全选</view>
   <view bindtap='removeFun'>删除</view>
 </view>

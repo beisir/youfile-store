@@ -1,0 +1,40 @@
+<view class='com-form-box'>
+  <view class="title-box">
+    <view class='msg-title'>库存预警设置</view>
+    <view class='msg-des'>创建新商品时，默认按照该规定设定</view>
+  </view>
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>库存预警</view>
+      <switch checked='{{formData.warningStatus}}' color="#fdb813" bindchange='switchChange' data-type='warningStatus' style='padding-right:30rpx;'></switch>
+    </view>
+  </view>
+
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>商品库存低于</view>
+      <input value='{{formData.warningLower}}' bindinput='watchinput' data-type='warningLower' class='flexone' type='number' maxlength='6'></input>
+      <view class='img-box'></view>
+    </view>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>商品库存高于</view>
+      <input value='{{formData.warningUpper}}' bindinput='watchinput' data-type='warningUpper' class='flexone' type='number' maxlength='6'></input>
+      <view class='img-box'></view>
+    </view>
+  </view>
+  <view class="title-box" style='margin-top:40rpx;'>
+    <view class='msg-title'>仓库功能开启</view>
+    <view class='msg-des'>开启后，入库出库操作可选择对应的仓库和库区</view>
+  </view>
+  <view class='com-box'>
+    <view class='com-flex-between form-item'>
+      <view class='form-title'>仓库 库区</view>
+      <switch checked='{{formData.warehouseStatus}}' color="#fdb813" bindchange='switchChange' data-type='warehouseStatus' style='padding-right:30rpx;'></switch>
+    </view>
+  </view>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='updateSet'>确定</button>
+</view>

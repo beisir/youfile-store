@@ -1,0 +1,17 @@
+.header{height: 190rpx;position: relative;padding:30rpx 20rpx 0;box-sizing: border-box;}
+/* 搜索 */
+.search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
+.search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
+.ser-btn{text-align: center;color: #fff;}
+
+.choseTag{height: 120rpx;width: 710rpx;position: absolute;left: 0;right: 0;margin: auto;bottom: -60rpx;background: #fff;border-radius: 10rpx;}
+.add-icon{margin: 0 40rpx -10rpx 60rpx;}
+/* 标签 */
+.tip{width:26rpx;height:36rpx;border-radius:4rpx;background:#f8b616;position:relative;margin-right: 40rpx;}.tip::after{content:"";position:absolute;left:0;bottom:0;width:0;height:0;border-width:13rpx;border-style:solid;border-color:transparent transparent #fff transparent;}
+.tag-box{margin: 80rpx 20rpx 30rpx;border-radius: 10rpx;background: #fff;}
+.tag-item{color: #333;height: 100rpx;padding: 0 30rpx 0 60rpx;}
+.border-line{border-top:1rpx solid #eee;margin-left: 130rpx;}
+
+.absolut-box{position: relative;left: 0;top: 0;transition:all 0.4s;}
+.delbtn-active{left: -110rpx;}
+.close-btn{height: 100%;width: 100rpx;background: #fb3d3c;color: #fff;border-radius: 10rpx;position: absolute;right: -110rpx;top: 0;display: flex;flex-direction: column;align-items: center;justify-content: center;font-size:22rpx;}

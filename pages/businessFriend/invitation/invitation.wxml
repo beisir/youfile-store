@@ -1,9 +1,9 @@
 <view class='bf-all'>需要发送验证申请,等待对方通过</view>
 <view class='bf-cont'>
   <view class='bf-weui add-bf-weui'>
-    <view class="weui_cells">
-      <input placeholder=''  bindinput="searchBtn" value='{{value}}'></input>
-      <view class='weui-view'>
+    <view class="weui_cells" style='line-height:normal;'>
+      <textarea placeholder=''  bindinput="searchBtn" value='{{value}}'></textarea>
+      <view class='weui-view' style='top:40rpx;right:10rpx;'>
         <image  mode="widthFix"  bindtap='emptyVal' src="/image/ser.png"></image>
       </view>
     </view>
@@ -12,14 +12,14 @@
 <view class='bf-cont'>
   <view class='bf-weui'>
     <view class="weui_cells new-weui">
-      <view class='bf-img'><image  mode="aspectFill" src="/image/wytjimg.png"></image></view>
-      <text>简美佳珠宝</text>
-      <view class='nbf-font'><image  mode="widthFix" src="/image/dp.png"></image>百荣世贸</view>
+      <view class='bf-img'><image wx:if='{{logo!=""}}' mode="aspectFill" src="{{baseUrl}}{{logo}}?x-oss-process=style/logo"></image></view>
+      <text>{{name}}</text>
+      <view class='nbf-font'><image wx:if='{{mallLogo!=""}}'  mode="widthFix" src="{{baseUrl}}{{mallLogo}}"></image>{{mallName}}</view>
     </view>
   </view>
-  <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>邀请成功后，您即可以批发价购买该批发商店铺 的商品</view>
+  <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>申请成功后，您即可以批发价购买该供应商店铺的商品</view>
 </view>
-<view class='add-bottom'>
-  <view bindtap='goBack'>取消</view>
-  <view bindtap='invita'>邀请</view>
+<view class='com-bottom-btn-group'>
+  <view class='btngroup-btn-item' bindtap='goBack'>取消</view>
+  <view class='btngroup-btn-item' bindtap='invita'>申请</view>
 </view>

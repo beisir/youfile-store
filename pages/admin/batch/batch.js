@@ -8,11 +8,12 @@ Page({
   data: {
     hasList: true, 
     datas: [],
-    currentTab:-1,
+    baseUrl: app.globalData.imageUrl,
+    currentTab:0,
     allSelected:false,
-    goodsStatus:'',
+    goodsStatus:1,
     setCode:[],
-    showBottom:true,
+    showBottom:false,
     numSle:0,
   },
 
@@ -20,22 +21,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this = this
-    _this.getList()
+    
   },
-getList:function(){
-  var _this = this
-  Api.adminGoodsList({})
-    .then(res => {
-      var detailList = res.obj.result,
-        datas = _this.data.datas,
-        totalCount = res.obj.totalCount,
-        newArr = app.pageRequest.addDataList(datas, detailList)
-      _this.setData({
-        datas: newArr,
-      })
-    })
-},
+// getList:function(){
+//   var _this = this
+//   Api.adminGoodsList({})
+//     .then(res => {
+//       var detailList = res.obj.result
+//       if (detailList.length==0){
+//         Api.showToast("暂无更多数据了！")
+//       }else{
+//         var datas = _this.data.datas,
+//           totalCount = res.obj.totalCount,
+//           newArr = app.pageRequest.addDataList(datas, detailList)
+//         _this.setData({
+//           datas: newArr,
+//         })
+//       }
+//     })
+// },
  indexOf(val,arr){
     for(var i = 0; i<arr.length; i++){
       if (arr[i] == val) { return i; }
@@ -68,12 +72,14 @@ getList:function(){
     var data = this.data.datas,
         selectAllStatus = this.data.selectAllStatus,
        arr = this.data.setCode
+    arr = []
     for (var i = 0; i < data.length;i++){
       if (selectAllStatus) {
         data[i].selected =false
+        arr=[]
       }else{
         data[i].selected = true
-        arr.push(goodId)
+        arr.push(data[i].id)
       }
     }
     this.setData({
@@ -85,9 +91,24 @@ getList:function(){
   // 分类至
   addClass:function(){
     var code = this.data.setCode
-    wx.navigateTo({
-      url: '../shopClass/shopClass?code='+code,
-    })
+    if(code.length==0){
+      Api.showToast("请选择商品！")
+    }else{
+      wx.navigateTo({
+        url: '../shopClass/shopClass?code=' + code,
+      })
+    }
+  },
+  // 分区至
+  addZone(){
+    var code = this.data.setCode
+    if (code.length == 0) {
+      Api.showToast("请选择商品！")
+    } else {
+      wx.navigateTo({
+        url: '../../goodsZone/allotZone/allotZone?code=' + code,
+      })
+    }
   },
   // 切换
   swichNav: function (e) {
@@ -119,14 +140,21 @@ getList:function(){
   classCode: function () {
     var _this = this,
       goodsStatus = this.data.goodsStatus
+    if (goodsStatus == 0) {
+      goodsStatus = "0,2"
+    }
     Api.adminGoodsStatus({ goodsStatus: goodsStatus, customCategoryCodes: '' })
       .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.datas,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          datas: newArr,
-        })
+        var detailList = res.obj.result
+        if (detailList.length == 0) {
+          // Api.showToast("暂无更多数据了！")
+        }else{
+          var datas = _this.data.datas,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            datas: newArr,
+          })
+        }
       })
   },
   // 下架
@@ -194,7 +222,14 @@ getList:function(){
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    app.pageRequest.pageData.pageNum = 0
+    this.setData({
+      datas: [],
+      setCode:[],
+      numSle:0
+    })
+    var _this = this
+    _this.classCode()
   },
 
   /**
@@ -215,30 +250,14 @@ getList:function(){
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      currentTab: -1
-    })
-    app.pageRequest.pageData.pageNum = 0
-    this.getList()
+    this.onShow()
+    wx.stopPullDownRefresh();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var that = this,
-      goodsStatus = this.data.goodsStatus
-    if (goodsStatus == '') {
-      that.getList()
-    } else {
-      this.classCode()
-    }
+    this.classCode()
   },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

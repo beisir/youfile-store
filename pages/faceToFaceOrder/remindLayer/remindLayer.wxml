@@ -1,0 +1,14 @@
+<wxs src="../../../public/filter.wxs" module="filter" />
+<view wx:if="{{modalShow}}" class='modal'>
+<view class='layer-box'>
+  <view style='text-align:right;'><image src="/image/clo12.png" bindtap='close' class='close-icon'></image></view>
+  <view class='flex-center'>
+    <text class='title-box'>付款提示</text>
+    <text class='bb-font'>您在<text class='gold-font'>【{{ftfNowOrder.storeInfo.storeName}}】</text>有门店购买订单</text>
+    <view class='price'>￥{{filter.filterMoney(ftfNowOrder.payAmount)}}</view>
+    <view>立即支付，把心仪的宝贝带回家！</view>
+    <view class='buy-btn' bindtap='pay'>去付款</view>
+    <view class='cancel-color' bindtap='noTip'>不再提醒</view>
+  </view>
+</view>
+</view>

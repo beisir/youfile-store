@@ -1,19 +1,87 @@
 <view>
-  <view class="result result-box" wx:if="{{result.length > 0}}">
-    <view class="result-list" wx:for="{{result}}" wx:key="index">
-      <navigator url="../goodsDetails/goodsDetails">
-        <image src="{{item.mainImgUrl}}"></image>
-        <view class="result-text">
-          <text>{{item.name}}</text>
+  <scroll-view scroll-y="true" style="height:100%;">
+    <view class="result" wx:if="{{result.length > 0}}">
+      <view class="result-list" wx:for="{{result}}" wx:key="index">
+        <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" />
+        <view wx:if='{{item.isHide}}' class='isHideGoods'>
+          <image src="/image/isshow.png"></image>
+          <view>该商品</view>
+          <view>加商友可见</view>
         </view>
-        <view class="result-text">
-          <text>￥ {{item.marketPrice}}</text>
-        </view>
-      </navigator>
+        <block wx:if='{{item.isHide}}'>
+          <view>
+            <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <view class="result-text result-text-h">
+              <text>{{item.name}}</text>
+            </view>
+            <view class="result-text result-text1">
+              零售
+              <text style='{{limitShow!=1?"color:#666":"#f8b616"}};'>￥ {{item.sellPrice}}</text>
+              <view wx:if='{{limitShow==1}}'>
+                批发
+                <image src='/image/wh.png'></image>
+              </view>
+              <view wx:if='{{limitShow!=1}}'>
+                批发
+                <text>￥ {{item.wholesalePrice}}</text>
+              </view>
+            </view>
+          </view>
+        </block>
+        <block wx:if='{{!item.isHide}}'>
+          <navigator url="../goodsDetails/goodsDetails?goodsId={{item.id}}">
+            <image src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+            <view class="result-text result-text-h">
+              <text>{{item.name}}</text>
+            </view>
+            <view class="result-text result-text1">
+               <block wx:if='{{limitShow==1 && item.extInfo.PRIORITY_SALES_PROMOTION}}'>
+                    <view class='line-font'>
+                     零售
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice}}</text>
+                   </view>
+                </block>
+                 <block wx:if='{{limitShow==1 && !item.extInfo.PRIORITY_SALES_PROMOTION}}'>
+                    零售
+                  <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.sellPrice}}</text>
+                </block>
+                <block wx:if='{{limitShow!=1}}'>
+                   <view class='line-font'>
+                     零售
+                    <text class='h-font' data-id='{{item.id}}' bindtap='lookDetails'>￥ {{item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice?item.extInfo.PRIORITY_SALES_PROMOTION.sellPrice:item.sellPrice}}</text>
+                   </view>
+                </block>
+              <block wx:if="{{!item.extInfo.PRIORITY_SALES_PROMOTION}}">
+                <view wx:if='{{limitShow==1}}'>
+                  批发
+                  <image src='/image/wh.png'></image>
+                </view>
+                <view wx:if='{{limitShow!=1}}'>
+                  批发
+                  <text>￥ {{item.wholesalePrice}}</text>
+                </view>
+              </block>
+              <block wx:else>
+                <view  class='extInfo-color'>
+                  抢订
+                  <text bindtap='lookDetails'>￥ {{item.extInfo.PRIORITY_SALES_PROMOTION.activityPrice}}</text>
+                </view>
+              </block>
+            </view>
+
+          </navigator>
+        </block>
+
+      </view>
+      <view class='nomore'>没有更多了</view>
     </view>
-    <view class='nomore'>没有更多了</view>
-  </view>
-  <view class="result-null" wx:else>
-    <view class="nomore">该分类下暂时为空！</view> 
-  </view>
+    <view class="result-null" wx:else>
+      <view class="nomore">
+        <view>
+          <image src="/image/nohome.png"></image>
+        </view>
+        还没有商品哦！
+      </view>
+    </view>
+  </scroll-view>
 </view>

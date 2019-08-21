@@ -1,66 +1,97 @@
 // pages/set/set.js
+const app = getApp();
+import API from '../../../utils/api.js';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    token: "",
+    closeBall: app.globalData.returnBall.show
+  },
+
+  quit() {
+
+    API.quit({ accesstoken: this.data.token}).then((res) => {
+      API.showToast(res.message)
+      app.authHandler.flushTokenInfo();
+      this.setData({
+        token: ""
+      })
+      app.globalData.switchStore = true
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 800)
+    })
+   
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function(options) {
+    let token = wx.getStorageSync('access_token')
+    if (token) {
+      this.setData({
+        token
+      })
+    }
+  },
+  switchBallChange() {
+    let now = app.globalData.returnBall.show;
+    this.setData({
+      closeBall: !now
+    })
+    app.globalData.returnBall.show = !now
+    if (!now == true) {
+      app.globalData.returnBall.x = 1000;
+      app.globalData.returnBall.y = 50;
+    }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function() {
+    this.setData({
+      closeBall: app.globalData.returnBall.show
+    })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

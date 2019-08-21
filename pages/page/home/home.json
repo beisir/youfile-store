@@ -1,7 +1,15 @@
 {
-  "navigationBarTitleText": "爱恋珠宝华北区总店",
+  "navigationBarTitleText": "小云店",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "mes": "../../../../assembly/tips/tips",
-    "login-component": "../../login/login/login"
+    "login": "../../login/login/login",
+    "no": "../indexEmpty/indexEmpty",
+    "retailStore": "../retailStore/retailStore",
+    "initstroe": "../../cloudOrder/applyStore/applyStore",
+    "storeOrder":"../../faceToFaceOrder/remindLayer/remindLayer",
+    "returnBall": "../../../assembly/returnBall/returnBall",
+    "activityTag": "../../../assembly/activityTag/activityTag",
+    "acBanner": "../../active/acBanner/acBanner"
   }
 }

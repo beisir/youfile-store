@@ -1,0 +1,12 @@
+/* distribution/pages/warehouse/partDetail/partDetail.wxss */
+@import "/distribution/static/wxss/common";
+
+.header-name{height: 120rpx;background: #fff;border-radius: 10rpx;font-size: 36rpx;font-weight: 600;}
+.msg-box{margin: 20rpx 20rpx 0;border-radius: 10rpx;background: #fff;}
+.part-name{height: 100rpx;font-size: 36rpx;font-weight: 600;}
+.part-code{height: 60rpx;}
+.item-box{height: 120rpx;}
+.item-title{width: 130rpx;}
+.tag-box{padding-right: 10rpx;}
+.special-line{border-top: 1rpx solid #f0f0f0;margin-left: 130rpx;}
+.com-tag{display: inline-block;}

@@ -1,0 +1,13 @@
+@import "/distribution/static/template/goodNum/goodsNumItem";
+
+.header{height: 230rpx;position: relative;padding:30rpx 20rpx 0;box-sizing: border-box;margin-bottom: 30rpx;}
+/* 搜索 */
+.search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
+.search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
+.ser-btn{text-align: center;color: #fff;}
+/* 白色悬浮 */
+.filter-box{width: 710rpx;height:120rpx;margin:auto;position: absolute;left: 0;right: 0;bottom: -30rpx;background: #fff;border-radius: 10rpx;padding: 0 30rpx;box-sizing: border-box;}
+.color-chunk{width: 5rpx;height: 30rpx;margin-right: 10rpx;}
+.house-name{font-size: 30rpx;font-weight: 600;padding-right: 30rpx;}
+.lalala{font-size: 24rpx;color: #666;}
+radio-group radio {transform:scale(0.8);}

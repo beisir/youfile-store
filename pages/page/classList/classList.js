@@ -7,32 +7,62 @@ Page({
   data: {
     customCategoryCode: '',
     result: [],
+    baseUrl: app.globalData.imageUrl,
+    allCode:false
+  },
+  // 查看资料
+  addTip: function () {
+    var Id = Api.getThisStoreId()
+    wx.navigateTo({
+      url: '../../businessFriend/information/information?status=0&send=&accept=' + Id + '&remark=',
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   getList: function () {
     var _this = this,
+      allCode = this.data.allCode,
       customCategoryCode = this.data.customCategoryCode
-    Api.classCodeList({ customCategoryCode: customCategoryCode })
-      .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.result,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          result: newArr,
+    if (!allCode){
+      Api.goodsApiSearchList({ customCategoryCode: customCategoryCode })
+        .then(res => {
+          var detailList = res.obj.result,
+            datas = _this.data.result
+          if (detailList.length>0){
+            var newArr = app.pageRequest.addDataList(datas, detailList)
+            _this.setData({
+              result: newArr,
+            })
+          }
         })
-      })
+    }else{
+      Api.goodsApiSearchList()
+        .then(res => {
+          var detailList = res.obj.result,
+            datas = _this.data.result,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            result: newArr,
+          })
+        })
+    }
+   
   },
   onLoad: function (options) {
     app.pageRequest.pageData.pageNum = 0
-    console.log(options)
     wx.setNavigationBarTitle({
       title: options.name
     })
-    this.setData({
-      customCategoryCode: options.code
-    })
+    if (options.allCode){
+      this.setData({
+        allCode:true
+      })
+    }else{
+      this.setData({
+        customCategoryCode: options.code
+      })
+    }
     this.getList()
   },
 
@@ -47,7 +77,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      limitShow: wx.getStorageSync('admin')
+    })
   },
 
   /**
@@ -73,6 +105,7 @@ Page({
       result: []
     })
     this.getList()
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -80,13 +113,6 @@ Page({
    */
   onReachBottom: function () {
     this.getList()
-
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

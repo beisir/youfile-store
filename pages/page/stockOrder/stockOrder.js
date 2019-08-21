@@ -1,5 +1,9 @@
 // pages/page/stockOrder/stockOrder.js
 const app = getApp();
+let searchTimer;
+import API from "../../../utils/api.js";
+var seeImg = false;
+
 Page({
 
   /**
@@ -15,11 +19,11 @@ Page({
       title: "待付款",
       state: 'unpaid'
     }, {
-      title: "已付款",
-      state: "paid"
+        title: "待发货",
+        state: "wait_deliver"
     }, {
       title: "待收货",
-      state: "shipped"
+        state: "delivered"
     }, {
       title: "已完成",
       state: "finish"
@@ -27,13 +31,27 @@ Page({
     navindex: 0,
     whitch: 'all', //切换
     //理由
-    reason: [{ title: "无法联系上买家", selected: true }, { title: "买家误拍或重拍", selected: false }, { title: "买家无诚意完成交易", selected: false }, { title: "缺货无法交易", selected: false }, { title: "其他", selected: false }],
+    reason: [{ title: "我不想买了", selected: true }, { title: "信息填写错误，重新拍", selected: false }, { title: "卖家缺货", selected: false }, { title: "重复下单/误下单", selected: false }, { title: "其他原因", selected: false }],
     cancelIndex: 0,
-   
+
 
   },
-  
-  
+
+  //查看凭证
+  seeVoucher(e) {
+    let num = e.currentTarget.dataset.num;
+    API.seeVoucher({ orderNumber: num }).then((res) => {
+      if (res.obj.payVoucher) {
+        seeImg = true;
+        wx.previewImage({
+          urls: [this.data.baseUrl + res.obj.payVoucher]
+        })
+      } else {
+        API.showToast('未上传付款凭证')
+      }
+    })
+  },
+
   showModal(e) {
     let type = e.currentTarget.dataset.type,
       num = e.currentTarget.dataset.num,
@@ -49,33 +67,46 @@ Page({
         obj = {
           sureModal: true,
           getNum: e.currentTarget.dataset.num
-        }; break;
+        };
+        break;
       case 'del':
         let index = e.currentTarget.dataset.index;
         obj = {
           delModal: true,
-          delNum: { num: num, index: index }
-        }; break;
+          delNum: {
+            num: num,
+            index: index
+          }
+        };
+        break;
       case 'cancel':
         obj = {
           cancelModal: true,
           cancelNum: num
-        }; break;
+        };
+        break;
       case 'after':
         obj = {
           afterModal: true,
           afterTel: e.currentTarget.dataset.tel
-        }
+        };break;
+      case "payment":
+        let i = e.currentTarget.dataset.index;
+        obj = {
+          paymentModal: true,
+          paymentItem: this.data.showList[i]
+        }; break;  
     }
     this.setData(obj)
   },
   closeModal() {
     this.setData({
-      codeModal: false,  //取货码
-      sureModal: false,  //收款
-      delModal: false,  //删除
+      codeModal: false, //取货码
+      sureModal: false, //收款
+      delModal: false, //删除
       cancelModal: false, //取消订单
-      afterModal: false //售后
+      afterModal: false, //售后
+      paymentModal: false //支付二维码      
     })
   },
   //取消理由
@@ -97,31 +128,26 @@ Page({
   sureCancel() {
     let num = this.data.cancelNum,
       index = this.data.cancelIndex;
-    app.http.requestAll("/api/order/" + num + "/cancel", {
-      reason: this.data.reason[index].title
-    }, "PUT").then((res) => {
+    API.cancelOrder({
+      reason: this.data.reason[index].title,
+      orderNumber: num
+    }).then((res) => {
       this.afterOperation();
-      wx.showToast({
-        title: res.message,
-        icon: none
-      })
+      API.showToast(res.message)
     })
   },
   //上传还款凭证
-  uploadVoucher(e){
+  uploadVoucher(e) {
     let num = e.currentTarget.dataset.num;
     wx.navigateTo({
-      url: '../../role/supplyVoucher/supplyVoucher?num'+ num,
+      url: '../../role/supplyVoucher/supplyVoucher?num=' + num,
     })
   },
   // 确认收货
   sureSure(e) {
     let num = this.data.getNum;
-    app.http.requestAll("/api/order/" + num + "/receive", {}, "PUT").then((res) => {
-      wx.showToast({
-        title: res.message,
-        icon: 'none'
-      })
+    API.receiveOrder({ orderNumber: num }).then((res) => {
+      API.showToast(res.message)
       this.afterOperation();
     })
   },
@@ -132,16 +158,14 @@ Page({
 
     if (del) {
       app.http.deleteRequest("/api/order/" + del.num).then((res) => {
-        wx.showToast({
-          title: res.message,
-          icon: 'none'
-        })
+        API.showToast(res.message)
         //删除成功剔除
-        if (code == 0) {
-          list.splice(del.index, 1);
-          this.setData({
-            showList: list
-          })
+        if (res.success ) {
+          // list.splice(del.index, 1);
+          // this.setData({
+          //   showList: list
+          // })
+          this.afterOperation();
         }
       })
     }
@@ -161,246 +185,137 @@ Page({
         whitch: state
       })
     }
-    this.getList();
+    this.getList(true);
   },
   searchBtn(e) {
+    clearTimeout(searchTimer);
     this.setData({
       style: true,
+      keyword: e.detail.value
     })
+    searchTimer = setTimeout(() => {
+      this.getList(true);
+    }, 1000)
   },
 
   //跳转
-  toOrderDetail(e){
+  toOrderDetail(e) {
     let num = e.currentTarget.dataset.num,
+      status = e.currentTarget.dataset.status,
       type = e.currentTarget.dataset.type,
-      tourl="";
-    if(type == 1){
+      tourl = "../allOrder/allOrder";
+    if (type == 1) {
       //自提
-      tourl = "../stockSelf/stockSelf";
-    }else{
-      tourl = "../stockDetail/stockDetail";
-    }  
+      tourl += "?self=true";
+    } else {
+      tourl += "?self=false";
+    }
+
     wx.navigateTo({
-      url: tourl+"?num="+num,
+      url: tourl + "&status=" + status + "&num=" + num + "&type=list",
     })
-  }, 
+  },
 
   //刷新数据
   afterOperation() {
     this.closeModal();
     setTimeout(() => {
-      this.getList();
+      this.getList(true);
     }, 800)
   },
 
 
   //获取订单列表
-  getList() {
-    
-    app.http.getRequest("/api/order/store/123/ordercategory/1/orderstatus/" + this.data.whitch + "/user/" + this.data.userId, {
-      //pageNum:1,
-      //pageSize:100
+  getList(re) {
+    if (re) {
+      app.pageRequest.pageData.pageNum = 0;
+      this.setData({
+        showList: []
+      })
+    }
+    app.pageRequest.pageGet("/api/order/user/store/" + this.data.storeId +"/ordercategory/1/orderstatus/" + this.data.whitch, {
+      keyWords: this.data.keyword ? this.data.keyword : ""
     }).then((res) => {
       //this.resetData(res.obj.result);
       //this.resetData(this.data.orderList.obj.result)
-      this.setData({
-        showList: this.data.orderList.obj.result
-        //showList: res.obj.result
-      })
+      if (res.obj && res.obj.result) {
+        this.setData({
+          showList: this.data.showList.concat(res.obj.result)
+        })
+      }
     })
 
+  },
+  //变化时间
+  // formateDate(data){
+  //   data.forEach(el=>{
+  //     if (el.timeoutExpressSecond){
+  //       util.total_micro_second = el.timeoutExpressSecond
+  //       el.timeoutExpressSecond = util.count_down(this);
+  //     }
+  //   })
+  // },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function(options) {
     this.setData({
-      orderList: {
-        "code": 0,
-        "message": "string",
-        "obj": {
-          "result": [{
-            "bizSystemNo": "string",
-            "cancelReason": "string",
-            "claimGoodsNum": "string",
-            "closedReason": "string",
-            "expressCompany": "string",
-            "expressNumber": "string",
-            "expressStatus": "string",
-            "consigneeInfo": {
-              "userName": 'zzz',
-              "ueerPhone": 13333333333
-            },
-            "orderStatusChildSta": "unForm",
-            "goodsInfos": [{
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [{
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:红色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              }],
-              "qrcode": "脉动",
-              "storeId": "脉动"
-            }, {
-              "goodEnName": "脉动",
-              "goodsId": 1000001,
-              "goodsName": "脉动",
-              "mainImgUrl": "脉动",
-              "orderDetails": [{
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:红色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              },
-              {
-                "amount": 4.5,
-                "cover": "string",
-                "goodsDesc": "颜色:蓝色",
-                "goodsId": 1000001,
-                "goodsName": "脉动",
-                "id": 0,
-                "marketPrice": 4.5,
-                "num": 2,
-                "orderDetailNumber": 1000001,
-                "orderNumber": 1000001,
-                "sellPrice": 4.5,
-                "skuAmount": 4.5,
-                "skuCode": 1000001,
-                "wholesalePrice": 4.5
-              },
-              ],
-              "qrcode": "脉动",
-              "storeId": "脉动"
-            }],
-            "id": 1,
-            "num": 10,
-            "orderAmount": 1000001,
-            "orderCategory": "string",
-            "orderNumber": 1000001,
-            //   "unpaid":
-            //   "paid":
-            //    "shipped":
-            //    "closed":
-            //  "finish":
-            "orderStatus": "closed",
-            "orderType": "2",
-            "payAmount": 100,
-            "payDate": "2018-09-06T02:53:22.470Z",
-            "payWay": "string",
-            "postageinfo": {
-              "postagePrice": 0,
-              "postageType": "string"
-            },
-            "receiptInfo": {
-              "depositBank": "string",
-              "depositBankNumber": "string",
-              "identificationNumber": "string",
-              "invoiceCategory": "string",
-              "invoiceTitle": "string",
-              "invoiceType": "string",
-              "isInvoice": false,
-              "registeredAddress": "string",
-              "registererMobile": "string"
-            },
-            "sort": 0,
-            "storeInfo": {
-              "merchantNumber": 100001,
-              "storeEnName": "nike",
-              "storeId": 100001,
-              "storeName": "耐克"
-            },
-            "timeoutDate": "2018-09-06T02:53:22.470Z",
-            "timeoutExpress": 0,
-            "timeoutExpressSecond": 0,
-            "timeoutExpressType": "string",
-            "totalRefundAmount": 0,
-            "totalRefundTimes": 0,
-            "userInfo": {
-              "nickName": "string",
-              "userId": 100011,
-              "userName": "string"
-            },
-            "userMemo": "string"
-          }],
-          "totalCount": 0
-        },
-        "success": true
+      storeId: API.getThisStoreId(),   //列表请求
+      baseUrl: app.globalData.imageUrl      //图片
+    })
+    API.getPaymentImg().then(res => {
+      if (res.obj) {
+        this.setData({
+          hasPayImg: true
+        })
       }
     })
   },
 
   /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  
-  },
-
-  /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    this.getList();
+  onShow: function() {
+    if (seeImg) {
+      seeImg = false;
+      return;
+    }
+    this.getList(true);
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+    this.getList();
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

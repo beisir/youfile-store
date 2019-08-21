@@ -1,6 +1,6 @@
 <view class='bt-cont' wx:if="{{hasList}}">
   <view class='st-cont' wx:for="{{datas}}" wx:key="{{index}}">
-  <icon type="success"  wx:if="{{item.selected}}" color="#CCAA77" data-index="{{index}}"   bindtap="selectList"/>
+  <icon type="success"  wx:if="{{item.selected}}" color="#f8b616" data-index="{{index}}"   bindtap="selectList"/>
   <icon wx:else type="circle"  data-index="{{index}}" bindtap="selectList"/>
     <image  src="{{item.image}}"></image>
     <view class='st-details'>
@@ -15,7 +15,7 @@
   </view>
   <view class='bt-bottom'>
     <view>
-    <icon type="success"  wx:if="{{allSelected}}" color="#CCAA77" data-index="{{index}}"   bindtap="selectAll"/>
+    <icon type="success"  wx:if="{{allSelected}}" color="#f8b616" data-index="{{index}}"   bindtap="selectAll"/>
     <icon wx:else type="circle"  data-index="{{index}}" bindtap="selectAll"/>全选
     </view>
     <view>删除</view>

@@ -1,0 +1,2 @@
+/* distribution/pages/purchase/orderOutHouseDetail/orderOutHouseDetail.wxss */
+@import '../outHouseLogistics/outHouseLogistics'

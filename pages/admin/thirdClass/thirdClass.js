@@ -24,7 +24,6 @@ Page({
     })
     app.http.getRequest('/admin/shop/category/sublist/{{parentCategoryCode}}', { parentCategoryCode: parentCategoryCode})
       .then(res => {
-        console.log(obj)
         that.setData({
           dataList: obj
         })
@@ -83,10 +82,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

@@ -1,0 +1,6 @@
+@import "/distribution/static/wxss/common";
+.com-form-box .form-item{margin-left: 30rpx;}
+.com-form-box .form-title{width: 246rpx;padding: 0;}
+.msg-title{font-size: 36rpx;font-weight: 600;}
+.msg-des{font-size: 24rpx;color: #999;}
+.title-box{margin: 20rpx 50rpx;}

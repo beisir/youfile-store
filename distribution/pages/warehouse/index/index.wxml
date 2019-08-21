@@ -1,0 +1,73 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
+<view class='header'>
+  <view class='com-flex-between'>
+    <view class='statistics-item'>
+      <view class='font28'>今日入库</view>
+      <view class='font60'>{{filter.parseLongNum(msg.inNumToday)}}</view>
+    </view>
+    <view class='statistics-item'>
+      <view class='font28'>今日出库</view>
+      <view class='font60'>{{filter.parseLongNum(msg.outNumToday)}}</view>
+    </view>
+    <view class='statistics-item'>
+      <view class='font28'>库存不足</view>
+      <view class='font60'>{{filter.parseLongNum(msg.lackNum)}}</view>
+    </view>
+  </view>
+
+  <view class='com-flex-between goods-num-box'>
+    <view class='goods-num-item'>
+      <view class='font28'>商品总数</view>
+      <view class='font40'>{{filter.parseLongNum(msg.goodsNum)}}</view>
+    </view>
+    <view class='goods-num-item'>
+      <view class='font28'>库存总数</view>
+      <view class='font40'>{{filter.parseLongNum(msg.stockNum)}}</view>
+    </view>
+    <view class='goods-num-item'>
+      <view class='font28'>库存总成本</view>
+      <view class='font40'>
+        <text class='font30'>￥</text>{{filter.parseLongNum(msg.procurementCost)}}</view>
+    </view>
+  </view>
+</view>
+<view class='com-flex-between entry-box'>
+  <navigator url='../warehouseGoodsDetail/warehouseGoodsDetail'>
+    <view class='entry-item com-flex-center'>
+      <image src='/distribution/images/goods.png' class='entry-icon'></image>
+      <view>
+        <view class='font30 com-blod-font'>商品库存</view>
+        <view class='font24 com-gray-color'>商品库存总览</view>
+      </view>
+    </view>
+  </navigator>
+  <navigator url='../warningGoods/warningGoods'>
+    <view class='entry-item com-flex-center'>
+      <image src='/distribution/images/warning.png' class='entry-icon'></image>
+      <view>
+        <view class='font30 com-blod-font'>库存预警</view>
+        <view wx:if="{{msg.warningNum>0}}" class='font24 com-gray-color'>预警商品 <text class='com-red-color'>{{filter.filterOrderNum(msg.warningNum)}}</text></view>
+        <view wx:else class='font24 com-gray-color'>上限下限预警</view>
+      </view>
+    </view>
+  </navigator>
+  <navigator url='../warehouseManage/warehouseManage'>
+    <view class='entry-item com-flex-center'>
+      <image src='/distribution/images/warehouse-entry.png' class='entry-icon'></image>
+      <view>
+        <view class='font30 com-blod-font'>仓库</view>
+        <view class='font24 com-gray-color'>管理仓库信息</view>
+      </view>
+    </view>
+  </navigator>
+  <navigator url='../warningSetting/warningSetting'>
+    <view class='entry-item com-flex-center'>
+      <image src='/distribution/images/warehouse-setting.png' class='entry-icon'></image>
+      <view>
+        <view class='font30 com-blod-font'>库存设置</view>
+        <view class='font24 com-gray-color'>销售预警设置</view>
+      </view>
+    </view>
+  </navigator>
+</view>

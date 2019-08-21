@@ -1,99 +1,139 @@
 <!--pages/lpgin/login.wxml-->
 <view class='login' hidden='{{!pageShow}}'>
-  
-  <view class='login-model'>
-    <!--忘记密码  -->
-    <view wx:if="{{forget == true}}">
-
-      <view class='login-title-box'>
-        <text class='login-title-text'>忘记密码</text>
+  <!-- 登录框 登录方式与正常登录 -->
+  <block wx:if="{{!getCodeModal}}">
+    <!-- 登录方式框 -->
+    <view wx:if="{{loginChoseTypeModal}}" class='login-type-box'>
+      <view class='flex-col'>
+        <image class='cloud-icon' src='/image/login-store-icon.png'></image>
+        <text class='single-line type-title'>小云店</text>
+        <view class='green-line'></view>
+        <view class='single-line type-intro'>实体店链接微信生态中进货商、顾客的</view>
+        <view class='single-line type-intro'>智能化移动销售利器</view>
+        <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='green-btn' data-type='wxLogin'>微信用户一键登录</button>
+        <view bindtap='touserLogin' class='single-line' style='font-size:28rpx;color:#333;'>手机号注册/登录></view>
       </view>
-      
-      <view class='padding-box'></view>
+    </view>
+    <!-- 账号密码框 -->
+    <view wx:else class='login-model'>
+      <!--忘记密码  -->
+      <view wx:if="{{forget == true}}">
 
-      <view class='login-box'>
-        <view class='flex-box'>
-          <image src='/image/telephone.png' class='login-icon'></image>
-          <input type='number' value='{{telephone}}' placeholder='请输入手机号' bindinput='savePhone'></input>
+        <view class='login-title-box'>
+          <text class='login-title-text'>忘记密码</text>
         </view>
-      </view>
 
-      <view class='padding-box'></view>
 
-      <view class='flex-box' style='padding-top:30rpx;'>
+        <view class='login-box'>
+          <view class='flex-box'>
+            <image src='/image/telephone.png' class='login-icon'></image>
+            <input type='number' value='{{telephone}}' placeholder-class='pre-input' placeholder='请输入手机号' bindinput='savePhone'></input>
+          </view>
+        </view>
+
+
+        <view class='flex-box' style='padding-top:30rpx;'>
           <view class='code-box'>
             <image src='/image/v-code.png' class='login-icon'></image>
-            <input type='number' value='{{verificationCode}}' placeholder='请输入验证码' bindinput='saveCode'></input>
+            <input type='number' value='{{verificationCode}}' placeholder-class='pre-input' placeholder='请输入验证码' bindinput='saveCode'></input>
           </view>
-          <button disabled='{{disabled}}' bindtap='getCode' class='text-yellow get-code'  plain='true'>{{buttonTimer}}</button>
-        </view>  
+          <button disabled='{{disabled}}' bindtap='getCode' class='text-yellow get-code' plain='true'>{{buttonTimer}}</button>
+        </view> 
 
-<view class='padding-box'></view>
 
-      <view class='login-box'>
-        <view class='flex-box'>
-          <image src='/image/lock.png' class='login-icon'></image>
-          <input type='text' value='{{password}}' placeholder='请输入新密码' bindinput='savePass'></input>
+        <view class='login-box' style='padding-top: 30rpx;'>
+          <view class='flex-box'>
+            <image src='/image/lock.png' class='login-icon'></image>
+            <input type='text' password='{{ifhide}}' value='{{password}}' placeholder='请输入新密码' bindinput='savePass'></input>
+          </view>
+          <image class='pass-img' src='{{see}}' bindtap='showHide'></image>
         </view>
-      </view>
-        
+
         <view class='padding-box'></view>
         <view class='padding-box'></view>
         <view class='padding-box'></view>
 
         <view class='btn loginBtnAc' bindtap='creatNewPassword'>确定</view>
 
-    </view>
-    <!-- 登录 -->
-    <block wx:else>
-      <view class='login-title-box'>
-        <text class='login-title-text'>{{loginTitle}}</text>
-        <text wx:if="{{loginType=='code'}}" class='text-yellow text-underline' bindtap='changeLoginType'>账号登录</text>
-        <text wx:else class='text-yellow text-underline' bindtap='changeLoginType'>快捷登录</text>
       </view>
-
-      <view class='text-sm login-tip-box'>成为进货商即可享受批发价</view>
-      <!-- 输入部分 -->
-      <view class='login-box'>
-        <view class='flex-box'>
-          <image src='/image/telephone.png' class='login-icon'></image>
-          <input type='number' value='{{telephone}}' placeholder='请输入手机号' bindinput='savePhone'></input>
+      <!-- 登录 -->
+      <block wx:else>
+        <view class='login-title-box'>
+          <text wx:if="{{loginType=='code'}}" class='login-title-text'>快捷登录</text>
+          <text wx:else class='login-title-text'>账号登录</text>
+          <text wx:if="{{loginType=='code'}}" class='text-yellow text-underline' bindtap='changeLoginType'>账号登录</text>
+          <text wx:else class='text-yellow text-underline' bindtap='changeLoginType'>快捷登录</text>
         </view>
-        <text class='text-yellow'>自动获取</text>
-      </view>
 
-      <block wx:if="{{loginType=='code'}}">
-        <view class='flex-box' style='padding-top:30rpx;'>
-          <view class='code-box'>
-            <image src='/image/v-code.png' class='login-icon'></image>
-            <input type='number' value='{{verificationCode}}' placeholder='请输入验证码' bindinput='saveCode'></input>
+        <view class='text-sm login-tip-box'>成为进货商即可享受批发价</view>
+        <!-- 输入部分 -->
+        <view class='login-box'>
+          <view class='flex-box'>
+            <image src='/image/telephone.png' class='login-icon'></image>
+            <input type='number' value='{{telephone}}' placeholder='请输入手机号' bindinput='savePhone'></input>
           </view>
-          <button disabled='{{disabled}}' bindtap='getCode' class='text-yellow get-code'  plain='true'>{{buttonTimer}}</button>
+          <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber"  class='autoGetPhone-btn' data-type='onlyGetCode' bindtap='getPhoneNumber'>自动获取</button>
         </view>
+
+        <block wx:if="{{loginType=='code'}}">
+          <view class='flex-box' style='padding-top:30rpx;'>
+            <view class='code-box'>
+              <image src='/image/v-code.png' class='login-icon'></image>
+              <input type='number' value='{{verificationCode}}' placeholder='请输入验证码' bindinput='saveCode'></input>
+            </view>
+            <button disabled='{{disabled}}' bindtap='getCode' class='text-yellow get-code' plain='true'>{{buttonTimer}}</button>
+          </view>
+        </block>
+
+        <view wx:else class='login-box' style='padding-top:30rpx;height:100rpx;'>
+          <view class='flex-box'>
+            <image src='/image/lock.png' class='login-icon'></image>
+            <input type='text' password='{{ifhide}}' value='{{password}}' placeholder='请输入密码' bindinput='savePass'></input>
+          </view>
+          <image class='pass-img' src='{{see}}' bindtap='showHide'></image>
+        </view>
+
+        <view class='flex-box login-register' wx:if="{{loginType=='pass'}}">
+          <navigator class='text-yellow ' url="/pages/login/register/register" hover-class="navigator-hover">注册账户</navigator>
+          <text bindtap='forgetPass' style='color: #8c8c8c;'>忘记密码</text>
+        </view>
+        <view class='flex-box login-register' wx:if="{{loginType=='code'}}">
+          <view class='chose-input'>
+            <image src='/image/checked.png' bindtap='attentionStore' class='la-checkbox' wx:if="{{attention}}"></image>
+            <image src='/image/nocheck.png' bindtap='attentionStore' class='la-checkbox' wx:else></image> 同时关注该小店
+          </view>
+          <navigator class='text-yellow ' url="/pages/login/register/register" hover-class="navigator-hover">注册账户</navigator>
+        </view>
+
+
+
+        <button open-type='getUserInfo' class='btn {{btnID}}' disabled='{{btnID=="loginBtnDis"?true:false}}' bindgetuserinfo='getWXUserInfo'>登录</button>
+
+        <view class='text-sm user-agreement flex-box' style="justify-content:center;">登录后即完成阅读并同意
+          <navigator class='text-yellow text-underline' url="/pages/login/agreement/agreement" hover-class="navigator-hover">《用户协议》 </navigator>
+        </view>
+
       </block>
-
-      <view wx:else class='login-box'>
-        <view class='flex-box'>
-          <image src='/image/lock.png' class='login-icon'></image>
-          <input type='text' password='{{ifhide}}' value='{{password}}' placeholder='请输入密码' bindinput='savePass'></input>
-        </view>
-        <image class='pass-img' src='{{see}}' bindtap='showHide'></image>
-      </view>
-
-      <view class='flex-box login-register'>
-        <navigator class='text-yellow ' url="../register/register"  hover-class="navigator-hover">注册账户</navigator>
-        <text bindtap='forgetPass' wx:if="{{loginType=='pass'}}" style='color: #8c8c8c;'>忘记密码</text>
-      </view>
-      
-      <view class='btn {{btnID}}' bindtap='login'>登录</view>
-
-      <view class='text-sm user-agreement flex-box' style="justify-content:center;">登录后即完成阅读并同意<navigator class='text-yellow text-underline' url=""     hover-class="navigator-hover">《用户协议》 </navigator>
-      </view>
-    
-    
-  
+    </view>
   </block>
-
-  <image src='/image/login-close.png' class='close-btn' bindtap='closePage'></image>
+  <!-- 验证码框 -->
+  <view wx:else class='code-modal-box'>
+    <view class='flex-col'>
+      <view class='single-line code-title'>输入验证码</view>
+      <view class='single-line text-xs' style='color:#666;'>验证码已通过短信发送至：{{telephone}}</view>
+      <input type='number' value='{{verificationCode}}' bindinput='coolCode' class='code-input-hide' focus="{{inputFocus}}"></input>
+      <view class='code-flex-box' bindtap='getFocus'>
+        <view wx:for="{{codearr}}" wx:key="{{index}}" class='show-code-item'>
+          <text>{{item}}</text>
+          <view class='gray-border'></view>
+        </view>
+      </view>
+      <view wx:if="{{!reSendCode}}" class='single-line' style='color:#999;margin:68rpx 0 52rpx;'>{{btnSec}}s可重新发送</view>
+      <view wx:else class='single-line' style='color:#f8b616;margin:68rpx 0 52rpx;'  bindtap='getCode'>重新发送验证码</view>
+      <button open-type='getUserInfo' bindgetuserinfo='getWXUserInfo' class='code-login-btn {{btnID}}' disabled='{{btnID=="loginBtnDis"?true:false}}'>确定</button>
+    </view>
   </view>
+  <!-- 关闭按钮 -->
+  <image src='/image/login-close.png' class='close-btn {{loginChoseTypeModal?"close-btn-pos":""}} {{getCodeModal?"close-btn-code":""}}' bindtap='closePageBtn'></image>
+
 </view>

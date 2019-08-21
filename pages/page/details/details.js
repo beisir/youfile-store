@@ -1,4 +1,5 @@
 import Api from '../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
@@ -6,24 +7,15 @@ Page({
    */
   data: {
     list: [],
+    indexEmpty: true,
+    goRetailStore: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var _this =this
-    Api.classList()
-      .then(res => {
-        const obj = res.obj
-        console.log(obj)
-        for (var i = 0; i < obj.length; i++) {
-          obj[i].selected = false
-        }
-        _this.setData({
-          list: obj
-        })
-      })
+    
   },
 
   /**
@@ -37,7 +29,30 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    if (!Api.getStoreId()) {
+      this.setData({
+        indexEmpty: false,
+      })
+    } else {
+      var _this = this
+      if (app.globalData.storeIdRetail){
+        _this.setData({
+          goRetailStore: false
+        })
+      }else{
+        Api.classListApi()
+          .then(res => {
+            const obj = res.obj
+            for (var i = 0; i < obj.length; i++) {
+              obj[i].selected = false
+            }
+            _this.setData({
+              list: obj
+            })
+          })
+      }
+    }
+    
   },
 
   /**
@@ -68,10 +83,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

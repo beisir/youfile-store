@@ -1,0 +1,205 @@
+/* pages/faceToFaceOrder/createOrder/createOrder.wxss */
+page{
+  font-size: 32rpx;
+  color: #333;
+  border: 0;
+}
+.common-box{
+  padding: 0 50rpx;
+  margin: 20rpx 30rpx;
+  background: #fff;
+  border-radius: 10rpx;
+}
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.flex-center{
+  display: flex;
+  align-items: center;
+}
+.user-title{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 30rpx;
+}
+
+.user-icon-box{
+  width: 122rpx;
+  height: 122rpx;
+  border-radius: 10rpx;
+  margin: 30rpx 0;
+}
+.user-icon{
+  max-width: 122rpx;
+  max-height: 122rpx;
+  border-radius:10rpx;
+}
+.user-name{
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #000;
+  line-height: 1;
+}
+
+.item-title{
+  font-weight: 600;
+  width: 165rpx;
+  margin-right: 10rpx;
+  
+}
+
+/* 订单定位 */
+.gold-box{height: 132rpx;position: relative;}
+.gold-back-box{background: #f8b616;height: 50%;}
+
+/* 金额 */
+.price-box{
+  height: 120rpx;
+  border-radius: 10rpx;
+  font-weight: 600;  
+  position: absolute;
+  bottom: 0;
+  margin: 0 30rpx;
+}
+.yuan{
+  font-size: 32rpx;
+}
+.price-input{
+  text-align: right;
+  margin-right: 20rpx;
+}
+
+.goos-box{
+  min-height: 140rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eee;
+  padding: 30rpx 0;
+}
+
+.right-tri{
+  width: 38rpx;
+  height: 38rpx;
+  margin-left: 20rpx;
+}
+
+.tip-box{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.tip-item{
+  line-height: 1.2;
+  margin:10rpx 0;
+  font-size: 32rpx;
+  color: #f8b616;
+}
+.no-tip{
+ color: #999; 
+}
+/* 备注 */
+.float-left{
+  float: left;
+}
+.remark-box{
+  padding: 25rpx 0;
+  font-size: 26rpx;
+}
+.remark-title{
+  color: #4a6682;
+}
+  .textarea{
+    border: 1rpx solid #ddd;
+    padding: 15rpx;
+    border-radius: 10rpx;
+    width: 100%;
+    height: 200rpx;
+    box-sizing: border-box;
+    font-size: 26rpx;
+    color: #333;
+    position: initial;
+  }
+  .modal-btn{
+    width:240rpx;
+    height:70rpx;
+    color:#fff;
+    line-height:68rpx;
+    border:2rpx solid #f8b616;
+    font-size:30rpx;
+    margin:80rpx auto 0;
+    background:#f8b616;
+    border-radius: 10rpx;
+  }
+
+/* 红包  */
+.red-packet-box{
+  height: 100rpx;
+}
+.packet-num{
+  color: #999;
+  font-size: 36rpx;
+}
+
+.price-font-box{
+  font-size: 90rpx;
+  font-weight: 600;
+  text-align: center;
+  margin: 110rpx 0 50rpx;
+  line-height: 1;
+}
+
+.help-btn{
+  background: #f8b616;
+  width: 600rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.reminder{
+  font-size: 28rpx;
+  color: #999;
+  text-align: center;
+  line-height: 1;
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+/* 警告 */
+.warn-box{
+  /* position: fixed;
+  top: 0;
+  width: 100%;
+  background: #ebcd9a; */
+  color: #d23636;
+  font-size: 26rpx;
+  text-align: center;
+  line-height: 1;
+  padding-top: 20rpx; 
+}
+
+.red-color{
+  color: #d23636;
+}
+.gray-color{
+  color:#999;
+}
+
+/* 商品头部 */
+.money-icon{width: 30rpx;height: 30rpx;margin-right: 10rpx;}
+.goods-title{height: 99rpx;border-bottom: 1rpx solid #eee;}
+.addgoods-icon{width: 50rpx;height: 50rpx;}
+.goods-list-box{padding: 50rpx 0;font-size: 30rpx;}
+/* 商品 */
+.no-goods-tip{font-size: 30rpx;color: #999;line-height: 1; }
+.tag-item{padding: 50rpx 0;font-size: 30rpx;}
+.tag-item-border{border-bottom: 1rpx solid #eee}
+.tag-name-box{width: 350rpx;font-weight: 600;}
+/* 加减器 */
+.stepper{display: flex;justify-content: space-between;align-items: center;width: 200rpx;
+height:55rpx;border: 1rpx solid #ddd;border-radius: 5rpx;font-size: 32rpx;}
+.stepper-sign{width: 55rpx;text-align: center;line-height: 53rpx;font-size: 40rpx;}
+.num-input{flex: 1;text-align: center;font-size: 32rpx;}

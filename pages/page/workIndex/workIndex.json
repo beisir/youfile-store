@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "工作台",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616",
+  "backgroundColor":"#f8b616",
+  "usingComponents": {
+    "login": "../../login/login/login",
+    "initstroe": "../../cloudOrder/applyStore/applyStore"
+  }
+}

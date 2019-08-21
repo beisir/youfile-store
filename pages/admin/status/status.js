@@ -1,104 +1,274 @@
 const app = getApp();
+var that
 import Api from '../../../utils/api.js'
-var recordStartX = 0;
-var currentOffsetX = 0;
+import { saveFormID } from '../../../utils/modelMsg.js'
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab: -1,
-    alertTab:0,
-    hidden:true,
-    keyword:'',
-    currentTabSer:0,
-    showXl:true,
-    list:[],
-    totalCount:'',
-    sImg:'/image/xl.png',
+    currentTab: 0,
+    alertTab: 0,
+    hidden: true,
+    confirmUp: false,
+    confirmDown: false,
+    showIndex: -1,
+    upIndex: 0,
+    keyword: '',
+    indexDel: '',
+    goodsId: '',
+    currentTabSer: 0,
+    list: [],
+    goodsId: '',
+    show1: false,
+    showNum: false,
+    isCopied: '',
+    value: '',
+    className: '本店分类',
+    zoneName: '本店分区',
+    totalCount: '',
+    sImg: '/image/xl.png',
     detailList: [],
-    goodsStatus:'',
-    classStatus:false,
-    code:'',
-    alertData:["全部商品","引用商品","自建商品"],
+    goodsStatus: 1,
+    classStatus: false,
+    selGoods: 0,
+    baseUrl: app.globalData.imageUrl,
+    code: '',
+    zoneNumber: '',
+    showMore: true,
+    allGoodsShow: false,
+    alertData: ["全部商品", "引用商品", "自建商品"],
+    platformIos: '',
+    showHidet: true,
+    showHideb: true,
   },
-  recordStart: function (e) {
-    this.setData({
-      leftVal: ''
-    });
-    var index1 = this.data.index;
-    recordStartX = e.touches[0].clientX;
-    var detailList = this.data.detailList;
-    if (index1 != undefined) {
-      detailList[index1].offsetX =0;
+  // 埋点存储formid
+  getFormId(e) {
+    saveFormID(e)
+  },
+  navigateTo(e) {
+    let path = '',
+      type = e.currentTarget.dataset.type
+    console.log(type)
+    switch (type) {
+      case 'addGoods':
+        path = '../addGoods/addGoods'
+        break;
+      case 'batch':
+        path = '../batch/batch'
+        break;
+      case 'class':
+        path = '../class/class'
+        break;
+      case 'batchSet':
+        path = '../batchSet/batchSet'
+        break;
     }
-    var index = e.currentTarget.dataset.index
-    currentOffsetX = this.data.detailList[index].offsetX;
-  }
-  ,
-  recordMove: function (e) {
-    var detailList = this.data.detailList;
-    var index = e.currentTarget.dataset.index
-    var item = detailList[index];
-    var x = e.touches[0].clientX;
-    var mx = recordStartX - x;
-    var result = currentOffsetX - mx;
-    if (result >= -80 && result <= 0) {
-      item.offsetX = result;
-    }
-    this.setData({
-      detailList: detailList
-    });
-  }
-  ,
-  recordEnd: function (e) {
-    var detailList = this.data.detailList;
-    var index = e.currentTarget.dataset.index
-    var item = detailList[index];
-    this.setData({
-      index: index
-    });
-    if (item.offsetX < -40) {
-      item.offsetX = -80;
-
+    wx.navigateTo({
+      url: path,
+    })
+  },
+  // 分享
+  share(e){
+    Api.goodsPosterNum({ goodsId: e.currentTarget.dataset.item.id}).then(res=> {
+      let posterTip = false
+      res.obj > 0 ? posterTip = true : posterTip = false
+      this.setData({ shareItem: e.currentTarget.dataset.item, posterTip})
+      this.selectComponent("#shareway").open();
+    })
+  },
+  // 判断手机是ios还是安卓
+  getIsIos() {
+    var phone = wx.getSystemInfoSync()
+    var _this = this
+    if (phone.platform == 'ios') {
+      _this.setData({
+        platformIos: true,
+      })
     } else {
-      item.offsetX = 0;
-
+      _this.setData({
+        platformIos: false,
+      })
+    }
+  },
+  // 显示更多操作
+  showMoreClick: function (e) {
+    var index = e.target.dataset.index
+    if (this.data.platformIos) {
+      this.setData({
+        showMore: false,
+        showHidet: false,
+        showHideb: false,
+      })
+    } else {
+      this.setData({
+        showMore: false,
+        showHidet: true,
+        showHideb: true,
+      })
     }
     this.setData({
-      detailList: detailList
-    });
+      showMore: false,
+      showIndex: index
+    })
   },
-  swichNavLast:function(){
-    if (this.data.currentTab>-1){
+  closeShowModal(){
+    this.setData({ showIndex: -1})
+  },
+  // 修改规格
+  updateSpec: function (e) {
+    var id = e.target.dataset.id,
+      storeTd = e.target.dataset.storeid
+    wx.navigateTo({
+      url: '../goodsSpec/goodsSpec?goodsId=' + id + '&storeTd=' + storeTd,
+    })
+  },
+  // 隐藏更多操作
+  closeShow: function () {
+    this.setData({
+      showMore: true,
+      showHideb: true,
+      showHidet: true,
+      showIndex: -1
+    })
+  },
+  allGoodsShow: function () {
+    this.setData({
+      allGoodsShow: !this.data.allGoodsShow
+    })
+  },
+  changeValue: function (e) {
+    var value = e.detail.value
+    this.setData({
+      value: value
+    })
+  },
+  blurInputEvent: function () {
+    wx.navigateTo({
+      url: '../serStatus/serStatus?value=' + this.data.value,
+    })
+  },
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.detailList)
+    this.setData({
+      detailList: data
+    })
+  },
+  goWork: function () {
+    wx.reLaunch({
+      url: '/pages/page/workIndex/workIndex',
+    })
+  },
+  //删除事件
+  del: function (e) {
+    this.closeShowModal()
+    var indexDel = e.currentTarget.dataset.index,
+      goodsId = e.currentTarget.dataset.id
+    var _this = this
+    _this.setData({
+      show1: true,
+      indexDel: indexDel,
+      goodsId: goodsId
+    })
+  },
+  confirmDetele: function () {
+    var that = this,
+      indexDel = this.data.indexDel,
+      goodsId = this.data.goodsId
+    that.data.detailList.splice(indexDel, 1)
+    Api.adminGoodsDelete({
+      goodId: goodsId
+    })
+      .then(res => {
+        Api.showToast("删除成功")
+        that.setData({
+          show1: false,
+          showMore: true,
+          showHidet: true,
+          showHideb: true,
+          detailList: that.data.detailList
+        })
+      })
+  },
+  swichNavLast: function (e) {
+    this.setData({
+      classStatus: e.currentTarget.dataset.type
+    })
+    if (this.data.currentTab > -1) {
       this.setData({
-        hidden: false,
-        sImg: '/image/xl1.png',
-        classStatus: true,
+        hidden: false
+      })
+    }
+  },
+  // 选择自建或者引用
+  selGoods: function (e) {
+    var that = this,
+      index = e.target.dataset.current
+    this.setData({
+      classStatus: false
+    })
+    if (this.data.selGoods === index) {
+      return false;
+    } else {
+      var isCopied = ''
+      if (index == 1) {
+        isCopied = false
+      }
+      if (index == 2) {
+        isCopied = true
+      }
+      that.setData({
+        selGoods: index,
+        allGoodsShow: false,
+        isCopied: isCopied
+      }, function () {
+        that.initData()
       })
     }
   },
   swichNav: function (e) {
     var that = this,
-        status=e.target.dataset.index
+      status = e.target.dataset.index
+
+    this.initNavStyle()
     that.setData({
-      goodsStatus: status,
       hidden: true,
-      classStatus:false,
-      detailList: []
+      allGoodsShow: false,
+      classStatus: false,
+      currentTabSer: 0,
+      goodsStatus: status,
+      showMore: true,
+      showHidet: true,
+      showHideb: true,
+    }, function () {
+      that.initData()
     })
-    app.pageRequest.pageData.pageNum =0
-    this.classCode('')
     if (this.data.currentTab === e.target.dataset.current) {
       return false;
     } else {
-        that.setData({
-          currentTab: e.target.dataset.current,
-          sImg: '/image/xl.png'
-        })
+      that.setData({
+        currentTab: e.target.dataset.current,
+      })
     }
   },
-  alertNav:function(e){
+  initNavStyle(){
+    let arr = this.data.zoneList
+    arr.forEach(el=> {
+      el.selected = false
+    })
+    this.setData({
+      className: "本店分类",
+      zoneName: '本店分区',
+      classStatus: false,
+      code: '',
+      zoneNumber: '',
+      zoneList: arr
+    })
+  },
+  alertNav: function (e) {
     var that = this;
     if (that.data.alertTab === e.target.dataset.current) {
       return false;
@@ -109,43 +279,26 @@ Page({
 
     }
   },
-  hideSer:function(){
+  hideSer: function () {
     this.setData({
       hidden: true,
+      zoneShow: false,
     })
   },
-  /**
- * 删除
- */
-  deleteList(e) {
-    const index = e.currentTarget.dataset.index,
-      goodId = e.currentTarget.dataset.id
-    let detailList = this.data.detailList;
-    detailList.splice(index, 1);
-    this.setData({
-      detailList: detailList
-    });
-    if (!detailList.length) {
-      this.setData({
-        hasList: false
-      });
-    }
-    Api.adminGoodsDelete({ goodId: goodId })
-      .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none',
-          duration: 2000
-        })
-      })
-  },
+
   // 上下架
-  changeStatus:function(e){
-    const goodId = e.currentTarget.dataset.id,
-          index = e.currentTarget.dataset.index,
-          _this=this,
-          detailList = this.data.detailList,
-          goodsIdList=[]
+  confirmTip: function () {
+    var id = this.data.goodsId
+    wx.navigateTo({
+      url: '../editGoods/editGoods?goodsId=' + id,
+    })
+  },
+  confirmUp: function () {
+    var _this = this,
+      goodsIdList = [],
+      index = this.data.upIndex,
+      detailList = this.data.detailList,
+      goodId = this.data.goodsId
     goodsIdList.push(goodId)
     Api.adminGoodsUp(goodsIdList)
       .then(res => {
@@ -153,21 +306,40 @@ Page({
         detailList.splice(index, 1)
         _this.setData({
           detailList: detailList,
+          confirmUp: false
         })
-        wx.showToast({
-          title: '上架成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast("上架成功")
       })
-      
   },
-  upStatus:function(e){
+  changeStatus: function (e) {
+    this.closeShowModal()
     const goodId = e.currentTarget.dataset.id,
-      index = e.currentTarget.dataset.index,
-      _this = this,
+      num = e.currentTarget.dataset.num,
+      index = e.currentTarget.dataset.index
+    this.setData({
+      goodsId: goodId
+    })
+    if (1 > num) {
+      this.setData({
+        // showNum: true // 零库存以前不让上 现在又让上架了~~~
+        confirmUp: true,
+        upIndex: index,
+        confirmUpType: 'zero'
+      })
+    } else {
+      this.setData({
+        confirmUp: true,
+        upIndex: index,
+        confirmUpType: 'normal'
+      })
+    }
+  },
+  confirmDown: function () {
+    var _this = this,
+      goodsIdList = [],
+      index = this.data.upIndex,
       detailList = this.data.detailList,
-      goodsIdList = []
+      goodId = this.data.goodsId
     goodsIdList.push(goodId)
     Api.adminGoodsDown(goodsIdList)
       .then(res => {
@@ -175,36 +347,36 @@ Page({
         detailList.splice(index, 1)
         _this.setData({
           detailList: detailList,
+          confirmDown: false
         })
-        wx.showToast({
-          title: '下架成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast("下架成功")
       })
+  },
+  upStatus: function (e) {
+    this.closeShowModal()
+    const goodId = e.currentTarget.dataset.id,
+      index = e.currentTarget.dataset.index
+    this.setData({
+      confirmDown: true,
+      upIndex: index,
+      goodsId: goodId
+    })
+
+  },
+  getZoneList(){
+    Api.getZoneListAdmin().then(res => {
+      let arr = [{zoneName:'全部商品',zoneNumber:''}]
+      this.setData({
+        zoneList: arr.concat(res.obj)
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面加载
    */
 
-  getList: function () {
-    var _this = this,
-      keyword = this.data.keyword
-    Api.adminGoodsList({ keyword: '' })
-      .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.detailList,
-          totalCount = res.obj.totalCount,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          detailList: newArr,
-          totalCount: totalCount
-        })
-      })
-  },
-  
   onLoad: function (options) {
-    this.getList()
+    this.getZoneList()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -214,103 +386,191 @@ Page({
     Api.adminShopCate()
       .then(res => {
         var obj = res.obj
-        obj.unshift({ name: "全部商品", customCategoryCode: "0000" })
+        obj.unshift({
+          name: "全部商品",
+          customCategoryCode: ""
+        })
         that.setData({
           list: obj
         })
       })
   },
-  classCode:function(code){
+  classCode: function () {
     var _this = this,
-      goodsStatus =this.data.goodsStatus
-    Api.adminGoodsStatus({ goodsStatus: goodsStatus, customCategoryCodes: code })
+      goodsStatus = this.data.goodsStatus,
+      customCategoryCodes = this.data.code,
+      isCopied = this.data.isCopied
+    if (goodsStatus == 0) {
+      goodsStatus = "0,2"
+    }
+    Api.adminGoodsStatus({
+      goodsStatus: goodsStatus,
+      customCategoryCodes: customCategoryCodes,
+      zoneNumber: this.data.zoneNumber,
+      isCopied: isCopied
+    })
       .then(res => {
-        var detailList = res.obj.result,
-          datas = _this.data.detailList,
-          totalCount = res.obj.totalCount,
-          newArr = app.pageRequest.addDataList(datas, detailList)
-        _this.setData({
-          detailList: newArr,
-          totalCount: totalCount
-        })
+        var detailList = res.obj.result
+        if (Api.isNotEmpty(detailList)) {
+          var datas = _this.data.detailList,
+            totalCount = res.obj.totalCount,
+            newArr = app.pageRequest.addDataList(datas, detailList)
+          _this.setData({
+            detailList: newArr,
+            totalCount: totalCount
+          })
+        }
       })
+
+  },
+  initData: function () {
+    app.pageRequest.pageData.pageNum = 0
+    var _this = this
+    this.setData({
+      detailList: [],
+      showIndex: -1,
+      showMore: true,
+      showHidet: true,
+      showHideb: true,
+    }, function () {
+      _this.classCode()
+    })
+
   },
   swichSer: function (e) {
+    this.initNavStyle()  
     var that = this,
-        code=e.target.dataset.code
-    app.pageRequest.pageData.pageNum = 0
-    this.classCode(code)
-    that.setData({
-      detailList: []
-    })
+      code = e.target.dataset.code,
+      name = e.target.dataset.name
     if (that.data.currentTabSer === e.target.dataset.current) {
       return false;
     } else {
       that.setData({
         currentTabSer: e.target.dataset.current,
-        code:code
+        code: code,
+        className: name
+      }, function () {
+        that.initData()
       })
-
     }
+  },
+  swichZone(e){
+    this.initNavStyle()  
+    let arr = this.data.zoneList,
+        thisIndex = e.currentTarget.dataset.index
+    arr.forEach((el,index)=> {
+      if(index == thisIndex){
+        el.selected = true
+        this.setData({ zoneName :el.zoneAlias ? el.zoneAlias : el.zoneName,zoneNumber: el.zoneNumber})
+      }else {
+        el.selected = false
+      }
+    })
+    this.setData({ zoneList: arr },()=> {
+      this.initData()
+    })
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getIsIos()
+    var gS = this.data.goodsStatus,
+      currentTab = this.data.currentTab
+    this.setData({
+      goodsStatus: gS,
+      hidden: true,
+      showNum: false,
+      confirmUp: false,
+      confirmDown: false,
+      allGoodsShow: false
+    })
+    app.globalData.switchStore = true
+    this.initData()
+
+    this.selectComponent("#shareway").close();
   },
   bindDownLoad: function () {
-    var that = this,
-        code = this.data.code,
-        goodsStatus = this.data.goodsStatus
-      if (this.data.goodsStatus == '' && this.data.code == '') {
-        that.getList()
-      }
-      if (this.data.goodsStatus != '' && this.data.code==''){
-        that.classCode('')
-      }
-      if (this.data.goodsStatus != '' && this.data.code != '') {
-        that.classCode(code)
-      }
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
-  },
 
+  },
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-    this.setData({
-      currentTab:-1,
-      detailList: []
-    })
-    app.pageRequest.pageData.pageNum = 0
-    this.getList()
+    this.onShow()
+    wx.stopPullDownRefresh();
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    var that = this
+    that.classCode()
+  },
+  editGoods: function (e) {
+    var id = e.target.dataset.id
+    wx.navigateTo({
+      url: '../editGoods/editGoods?goodsId=' + id,
+    })
+  },
+  //手指触摸动作开始 记录起点X坐标
+  touchstart: function (e) {
+    //开始触摸时 重置所有删除
+    let data = app.touch._touchstart(e, this.data.detailList)
+    this.setData({
+      detailList: data
+    })
   },
 
+  //滑动事件处理
+  touchmove: function (e) {
+    let data = app.touch._touchmove(e, this.data.detailList)
+    this.setData({
+      detailList: data
+    })
+  },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
-  }
+  onShareAppMessage: (res) => {
+    var img = '',
+      name = '',
+      id = '',
+      storeId = wx.getStorageSync('storeId')
+    if (res.from === 'button') {
+      var res = res.target.dataset
+      img = res.img;
+      id = res.id
+      name = res.name
+      return {
+        title: name,
+        path: '/pages/page/goodsDetails/goodsDetails?goodsId=' + id + "&storeId=" + storeId,
+        imageUrl: img,
+        success: (res) => { },
+        fail: (res) => { }
+      }
+    } else {
+      return {
+        path: '/pages/page/home/home?storeId=' + storeId,
+        success: (res) => { },
+        fail: (res) => { }
+      }
+    }
+
+  },
 })

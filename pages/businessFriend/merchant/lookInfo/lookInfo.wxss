@@ -1,0 +1,65 @@
+@import '../merchantInfo/merchantInfo';
+.lk-img{
+  position: absolute;right: 30rpx;top: 100rpx;width: 40rpx;height: 40rpx;z-index: 100;
+}
+.lk-img image{
+ width: 25rpx;
+}
+.weui_cells>image{
+  position: unset;width: 40rpx;height: 40rpx;margin-left: 10rpx;vertical-align: middle;margin-top: -2rpx;
+}
+.nbf-font{
+  margin-top: 10rpx;
+}
+
+/* 红包礼金 */
+.box-item{
+  height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 0 30rpx;
+  margin: 20rpx;
+  font-size: 30rpx;  
+}
+.tri-right{
+  width: 25rpx;
+  height: 30rpx;
+  margin-left: 30rpx;
+}
+.red-packet{
+  color: #999;
+  display: flex;
+  align-items: center;  
+}
+/* 底部按钮 */
+.bottom-btn-box{
+  height: 133rpx;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.btn-line{
+  height:30rpx;
+  width: 2px;
+  background: #ddd;
+}
+.btn-icon{
+  height: 40rpx;
+  width: 40rpx;
+  margin-right: 20rpx;
+}
+.btn-item{
+  display: flex;
+  align-items: center;
+  font-size: 36rpx;
+  color: #f8b616;
+  flex: 1;
+  justify-content: center;
+}

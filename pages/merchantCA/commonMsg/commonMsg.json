@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "formItem": "../formItem/formItem"
+  },
+  "navigationBarTitleText": "资质信息"
+}

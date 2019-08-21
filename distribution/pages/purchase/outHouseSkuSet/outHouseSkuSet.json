@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+  },
+  "navigationBarTitleText": "出库设置",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616"
+}

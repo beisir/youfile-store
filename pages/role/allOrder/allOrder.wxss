@@ -1,0 +1,245 @@
+@import '../order/order';
+.tip-textarea{
+  border:1px solid #dedede;
+  padding:10rpx;
+  width:90%;
+  height: auto;
+  min-height:120rpx;
+  margin:0 auto;
+  text-align:left;
+  font-size: 26rpx;
+}
+.flex-center{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.add-tip-button{
+  display: inline-block;
+  padding:0 20rpx;
+  height:55rpx;
+  line-height:55rpx;
+  color:#999;
+  border:2rpx solid #D8D8D8;
+  background:#fff;
+  font-size:24rpx;
+}
+.no-text{
+  color: #808080;
+}
+.addTip{
+  float: right;
+}
+.zindex{
+  z-index: -1;
+}
+.no-border{
+  border-bottom:0!important; 
+}
+.ct-text{
+  color:#f8b616;
+}
+.ct-text view{
+  color:#999;
+}
+.slide-image{    
+   width: 100%;position:absolute;top: 0;left: 0;    
+}
+.c-title{
+  font-weight: normal
+}
+.np-ct{
+  background: #fff;color: #333;font-size: 30rpx;padding: 10rpx 0 0;
+}
+.np-ct .np-view{
+  margin-left:80rpx;margin-right: 50rpx;border-bottom: 2rpx solid #f3f3f3;position: relative;padding-bottom: 20rpx;box-sizing: border-box;
+}
+.np-ct .np-view1{
+  border-bottom: 0;
+}
+.np-ct .np-view>view{
+  padding-top: 20rpx;font-weight: bold;margin-bottom: 10rpx;
+}
+.np-ct text,.np-ct .np-coden1 text {
+  color: #666;font-weight: normal;font-size: 26rpx;
+}
+.np-ct .np-code text{
+  font-size: 26rpx;color: #333;
+}
+.np-ct .np-code view:last-child{
+  padding-top: 0rpx;
+}
+.np-ct image{
+  position: absolute;width: 35rpx;height: 35rpx;left: -51rpx;top: 28rpx;
+}
+.np-ct .np-text{
+  color: #333;font-size: 30rpx;position: absolute;right: 0;font-weight: bold; top:20rpx;
+}
+.np-ct .new-tel-box{color: #f8b616;font-size: 30rpx;margin-left:15rpx;font-weight: bold;}
+.add-btn-box{position: absolute;color: #f8b616;width: 135rpx; right: 0;top: 27rpx;display: flex;align-items: center;justify-content: space-between;font-size: 26rpx;padding: 0!important;font-weight:normal!important;}
+.half{width: 50%;}
+.textright{text-align: right;}
+.gold-line{background: #f8b616;height: 20rpx;border-right:1rpx solid #f8b616;}
+.np-mes{
+  color: #333; background: #fff;font-size: 28rpx;margin-top: 20rpx;text-align: center;height: 100rpx;font-weight: bold;
+}
+.np-mes view{
+  width: 49%;
+  height: 40rpx;
+  margin-top: 27rpx;
+  display: inline-block;
+  position: relative;
+}
+.kf_button{
+  position: absolute;width: 100%;top: 0px;height: 60rpx;background: none;
+}
+.np-mes view:nth-child(2){
+  border-right: 2rpx solid #f3f3f3;border-left: 2rpx solid #f3f3f3;
+}
+.np-mes image{
+  width: 35rpx;height: 35rpx;vertical-align: middle;margin-top: -2rpx;margin-right: 10rpx;
+}
+.np-order{
+  font-size: 26rpx;color: #333;background: #fff;margin-bottom: 20rpx;padding:20rpx 50rpx;padding-bottom: 30rpx;
+}
+.np-order-bar{
+  margin-bottom: 120rpx;
+}
+.np-order-bar1{
+  margin-bottom: 0rpx;
+}
+.np-order view{
+  margin-top: 15rpx;
+}
+.np-order view text{
+  float: right;font-weight: bold;
+}
+.np-order-bar view text{
+  color: #333;
+}
+.np-order-bar view text.os-text{
+  text-decoration: line-through;color: #999999;margin-right:10rpx;
+}
+.np-order>view:last-child view:last-child{
+  line-height: 20rpx;margin-top: 0rpx;margin-bottom: 10rpx;
+}
+.np-order view.np-o-view{
+  border-top: 0;font-size: 28rpx;color: #333;font-weight: bold;margin-top: 12rpx;margin-bottom: 15rpx;
+}
+.np-order view.np-o-view text{
+  color:#f8b616;font-size: 34rpx;
+}
+.cf-button{
+  height: 105rpx;background: none;padding:15rpx 20rpx 0 0;position: fixed;bottom: 0;width: 100%;background: #fff;
+}
+.cf-button button{
+  height: 75rpx;font-size:30rpx;color: #666;line-height: 75rpx; 
+}
+.cf-button button:first-child{
+  margin-right: 30rpx;
+}
+.np-fapiao{
+  border-top:2rpx solid #f3f3f3;padding-top:20rpx;font-size:26rpx;color:#333;background:#fff;margin-bottom: 20rpx;padding:30rpx 50rpx;
+}
+.np-fapiao view{
+  margin-bottom: 15rpx;
+}
+.np-fapiao text{
+  float: right;font-weight: bold;
+}
+.os-title{
+  color: #666;font-size: 36rpx;font-weight: bold;height: 220rpx;background: #fff;text-align: center;border-bottom: 2rpx solid #EFEFEF;padding-top: 10rpx;
+}
+.os-title text{
+  color:#f8b616;margin-left: 20rpx;
+}
+.os-title image{
+  width: 410rpx;height:30rpx;margin-top: 30rpx;
+}
+.os-title .self-img{
+  width:290rpx;height: 30rpx;
+}
+.os-title .os-close-res{
+  font-size: 30rpx;color: #999;margin-top: 30rpx;
+}
+.os-title view image{
+  width:38rpx;height:38rpx;vertical-align: middle;margin-top: -6rpx;margin-right: 20rpx;
+}
+.os-status{
+  color: #999;font-size: 26rpx;font-weight: normal;width: 496rpx;margin:0 auto;
+}
+.os-status view{
+  display: inline-block;width: 124rpx;
+}
+.os-status view.active{
+  color:#f8b616;font-weight: bold
+}
+.os-mon,.no-child{
+  color: #333333;font-size: 28rpx;padding:30rpx 50rpx;background: #fff;margin-top: 20rpx;margin-bottom: 20rpx;
+}
+.os-mon text{
+  float: right;font-weight: bold;max-width: 70%;text-align: right;word-break: break-all;
+}
+.os-mon view{
+  margin-top: 10rpx;
+  overflow: hidden;
+}
+.os-mon1 view{
+  color: #999;font-size: 26rpx;padding-left: 20rpx;padding-top: 25rpx;
+}
+.cf-button button{
+  font-size:26rpx;
+  min-width: 155rpx;
+  font-weight: 600;
+}
+
+.border-bottom{
+  border-bottom: 2rpx solid #f3f3f3;
+}
+.back-white{
+  background: #fff;
+}
+.table{
+  border-bottom: 0;
+  padding-bottom:40rpx;
+}
+
+.c-title{
+  margin-left: 50rpx;
+  font-weight: 600;
+}
+.cart-list .cart-thumb{
+  left: 50rpx;
+}
+.cart-list {
+  padding-left: 220rpx;
+}
+.ct-text{
+  right: 50rpx;
+}
+.textarea{
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.address-box{
+  color:#666;
+  font-weight:normal;
+  font-size:26rpx;
+  display: flex;
+}
+.address-title{
+  width: 140rpx;
+}
+.address-inner{
+  flex: 1;
+}
+.heji{
+  font-size: 24rpx;color: #999;bottom:30rpx;margin-top:20rpx;
+}
+
+.like-textarea{
+  overflow-y: scroll;
+}
+/* 仓库 */
+.house-num{min-width: 30rpx;height: 30rpx;color: #fff;display: inline-block;border-radius: 5rpx;font-size: 24rpx;text-align: center;line-height: 30rpx;margin: 0 0 -5rpx 10rpx;}

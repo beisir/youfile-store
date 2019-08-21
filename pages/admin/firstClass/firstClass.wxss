@@ -1,9 +1,15 @@
 @import '../shopClass/shopClass';
 .shop-cont{
-  padding:0;
+  padding:0; 
+}
+.shop-cont .shop-size{
+  font-size: 50rpx;
 }
 .shop-cont>view {
   height: 70rpx;padding-top: 27rpx;
+}
+.swiper{
+  height: 100%;overflow: scroll
 }
 .shop-cont1{
   margin-bottom: 20rpx;padding-top: 20rpx;
@@ -25,8 +31,18 @@ navigator{
   border-top:2rpx solid #F1F1F1;border-bottom: 0;
 }
 .shop-cont .shop-size {
-  border-bottom: 0; margin-bottom:20rpx;padding-top:20rpx;padding-bottom:30rpx;border-top: 0;
+  border-bottom: 0; margin-bottom:20rpx;padding-top:20rpx;padding-bottom:20rpx;border-top: 0;
 }
 .shop-cont2 text{
-  margin-left: 10rpx;color: #CCAA77;
+  margin-left: 10rpx;color: #f8b616;
 }
+.search-box{background: #f7f7f7;padding-right: 50rpx}
+.serCont{color: #333;font-size: 28rpx;padding-top: 25px;margin-left: 40rpx;}
+.search-input{background: #fff;height: 95rpx;line-height: 95rpx;margin-top:20rpx;}
+.home-ser-new{width: 50rpx;height: 50rpx;top: 47rpx;}
+.shop-cont{margin-top: 40rpx;}
+.r-new{right: 170rpx;left: unset;width: 30rpx;height: 30rpx;top: 57rpx;}
+.noClass image{width: 60rpx;height: 60rpx;margin-top: 25rpx;}
+.noClass{width: 310rpx;height: 160rpx;background: #fff;border-radius: 10rpx;margin:0 auto;font-size: 26rpx;margin-top:100rpx;
+color: #000;text-align: center}
+.shop-cont>view text{color: #f8b616}

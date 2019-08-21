@@ -1,0 +1,67 @@
+<view class='padding-box'>
+  <view class='title-box'>
+    <text>找到TA下单</text>
+    <image src='/image/scanCode.png' class='scan-icon' bindtap='scan'></image>
+  </view>
+
+  <!-- 搜索 -->
+  <view class='search-box'>
+    <input placeholder-class='place-font' bindconfirm='search' bindinput='searchInput' placeholder='输入用户手机号' type='number'></input>
+    <view bindtap='search' style='height:100%;width:100rpx;display:flex;align-items:center;flex-direction:row-reverse;'>
+      <image src='/image/search1.png' class='o-search-icon'></image>
+    </view>
+  </view>
+
+  <!-- 列表筛选 -->
+  <view class='list-type'>
+    <navigator url='../myCustomerList/myCustomerList?type=gzyh'>
+      <view class='list-item'>关注用户</view>
+    </navigator>
+    <navigator url='../myCustomerList/myCustomerList?type=jhs'>
+     <view class='list-item'>云分销商</view>
+    </navigator>
+    <navigator url='../myCustomerList/myCustomerList?type=cjkh'>
+     <view class='list-item'>成交用户</view>
+    </navigator>
+  </view>
+
+  <!-- 关注用户 -->
+  <block wx:if="{{!afterSearch}}">
+    <view class='focus-user'>刚刚关注的用户</view>
+    <view class='user-list'>
+      <view class='user-item' wx:for='{{list}}' wx:key="{{index}}">
+        <navigator class='flex-center' url="../../businessFriend/merchant/lookInfo/lookInfo?userId={{item.userId}}&mobile={{item.mobile}}&entry=faceOrder">
+          <image class='user-icon' src='{{item.headPic?baseUrl+item.headPic+"?x-oss-process=style/logo":"/image/preson.png"}}'></image>
+          <text>{{item.nickName}}</text>
+        </navigator>        
+        <navigator url="../createOrder/createOrder?user={{item.userId}}">
+          <view class='help-btn'>帮TA下单</view>
+        </navigator>
+      </view>
+    </view>
+  </block>
+  <!-- 搜索用户 -->
+  <block wx:else>
+    <view class='focus-user'>找到当前用户</view>
+    <view class='user-list' wx:if="{{searchUser}}">
+      <view class='user-item'>
+        <navigator class='flex-center' url="../../businessFriend/merchant/lookInfo/lookInfo?userId={{searchUser.id}}&mobile={{searchUser.mobile}}&entry=faceOrder">
+          <image class='user-icon' src='{{searchUser.headPic?baseUrl+searchUser.headPic+"?x-oss-process=style/logo":"/image/preson.png"}}'></image>
+          <text>{{searchUser.nickName}}</text>
+        </navigator>
+        <navigator url="../createOrder/createOrder?user={{searchUser.id}}">
+          <view class='help-btn'>帮TA下单</view>
+        </navigator>
+      </view>
+    </view>
+    <view class='no-user' wx:else>
+      <view class='flex-center nouser-tip'>
+        <image class='warn-icon' src='/image/tip-warning.png'></image>
+        <text>该用户暂未注册！</text>
+      </view>
+      <view class='gold-color-tip'>请用户关注并注册</view>
+      <view class='gold-color-tip'>让TA成为你的老顾客</view>    
+    </view>
+  </block>
+
+</view>

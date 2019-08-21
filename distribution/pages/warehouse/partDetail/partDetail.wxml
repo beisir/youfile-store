@@ -1,0 +1,39 @@
+<view class='com-flex-center com-padding-box header-name com-margin-box'>
+  <image class='img30' src='/distribution/images/warehouse.png' style='padding-right:20rpx;'></image>
+  <text>{{part.warehouse.name}}</text>
+</view>
+
+<view class='com-margin-box'>
+  <view class='com-padding-box'>
+    <view class='com-flex-center part-name'>{{part.name}}</view>
+    <view wx:if="{{part.no}}" class="com-flex-center com-new-gold-font part-code">{{part.no}}</view>
+  </view>
+  <view class='com-flex-between com-padding-box item-box'>
+    <view class='item-title com-flex-center'>
+      <image class='img40' src='/distribution/images/classTag.png'></image>
+    </view>
+    <scroll-view scroll-x class='flexone com-flex-center tag-box' style='overflow:hidden;white-space:nowrap;'>
+      <view class='com-tag' wx:for="{{part.regionTypeList}}" style='background:{{item.iconColor}}'>{{item.name}}</view>
+    </scroll-view>
+    <!-- <image src='/image/poster-right-in.png' class='com-right-icon'></image> -->
+  </view>
+  <view class='special-line'></view>
+  <navigator url='../partGoodsList/partGoodsList?code={{part.code}}'>
+    <view class='com-flex-between com-padding-box item-box font30'>
+      <view class='item-title com-flex-center'>商品数</view>
+      <view class='flexone com-flex-center'>{{part.goodsNum}}</view>
+      <image src='/image/poster-right-in.png' class='com-right-icon'></image>
+    </view>
+  </navigator>
+  <view class='special-line'></view>
+  <view class='com-flex-between com-padding-box item-box font30'>
+    <view class='item-title com-flex-center'>备注</view>
+    <view class='flexone com-flex-center'>{{part.remark}}</view>
+  </view>
+</view>
+
+<view class='com-bottom-capsule-btn'>
+  <button bindtap='del' class='group-btn'>删除库区</button>
+  <view class='white-line'></view>
+  <button bindtap='edit' class='group-btn'>编辑库区</button>
+</view>

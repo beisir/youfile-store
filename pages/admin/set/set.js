@@ -1,4 +1,5 @@
-// pages/admin/set/set.js
+import util from '../../../utils/util.js'
+import Api from '../../../utils/api.js'
 Page({
 
   /**
@@ -15,9 +16,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.modeList)
     let _this=this,
-      goodsListData = JSON.parse(options.model),
+        goodsListData = JSON.parse(options.model),
+        sellPrice = options.sellPrice,
+        wholesalePrice = options.wholesalePrice,
+        newConst = options.newConst,
         skuList0=[],
         skuList1=[],
         skuListAll=[],
@@ -26,33 +29,30 @@ Page({
       if (goodsListData.length == 1) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList
         for (var i = 0; i < skuList0.length; i++) {
-          skuListAll.push({ id: i + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: '', stockNumber: '', wholesalePrice: '' })
+          skuListAll.push({ id: i + '1' + i, skuName: skuList0[i].specValueName, specValueCode: "", specValueCodeList: [skuList0[i].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice })
         }
       } else if (goodsListData.length = 2) {
         skuList0 = goodsListData[0].goodsSpecificationValueVOList
         skuList1 = goodsListData[1].goodsSpecificationValueVOList
         for (var i = 0; i < skuList0.length; i++) {
           for (var j = 0; j < skuList1.length; j++) {
-            skuListAll.push({ id: j + '1' + i, specValueName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: '', stockNumber: '', wholesalePrice: '' })
+            skuListAll.push({ id: j + '1' + i, skuName: skuList0[i].specValueName, specValueCode: skuList1[j].specValueName, specValueCodeList: [skuList0[i].specValueCode, skuList1[j].specValueCode], marketPrice: '600', sellPrice: sellPrice, stockNum: newConst, wholesalePrice: wholesalePrice})
           }
         }
       }
+      _this.setData({
+        skuListAll: skuListAll
+      })
     }
     if (goodsSkuVOList!=undefined){
       goodsSkuVOList = JSON.parse(options.modeList)
       for (var i = 0; i < goodsSkuVOList.length; i++) {
-        for (var j = 0; j < skuListAll.length; j++) {
-          if (goodsSkuVOList[i].specValueCodeList.sort().toString() == skuListAll[j].specValueCodeList.sort().toString()) {
-            skuListAll[j].sellPrice = goodsSkuVOList[i].sellPrice
-            skuListAll[j].wholesalePrice = goodsSkuVOList[i].wholesalePrice
-            skuListAll[j].stockNumber = goodsSkuVOList[i].stockNum
-          }
-        }
+        goodsSkuVOList[i]["id"] = i + '1' + i
       }
+      _this.setData({
+        skuListAll: goodsSkuVOList
+      })
     }
-    _this.setData({
-      skuListAll: skuListAll
-    })
   },
   monitor:function(e){
     let id = e.target.dataset.id,
@@ -61,7 +61,26 @@ Page({
         skuListAll = this.data.skuListAll
     for (var j = 0; j < skuListAll.length; j++) {
       if (id == skuListAll[j].id){
-        skuListAll[j][name]=val
+        if (name =="stockNum"){
+          if(val==0){
+            Api.showToast("输入有效的库存数量!")
+            skuListAll[j][name]=''
+          }else{
+            skuListAll[j][name] = val.substring(0, 9)
+          }
+        }else{
+          if (val.length == 2 && val.charAt(0) == '0') {
+            if (val != "0.") {
+              val = 0
+              skuListAll[j][name] = 0
+              this.setData({
+                skuListAll: skuListAll
+              })
+              return
+            }
+          }
+          skuListAll[j][name] = (util.newVal(val)).substring(0, 9)
+        }
       }
     }
     this.setData({
@@ -69,9 +88,20 @@ Page({
     })
   },
   goback:function(){
-    wx.navigateTo({
-      url: '../addGoods/addGoods'
+    var pages = getCurrentPages();             //  获取页面栈
+    var currPage = pages[pages.length - 1];
+    var prevPage = pages[pages.length - 2];    // 上一个页面
+    wx.navigateBack({
+      data: 1
     })
+  },
+  isEmpty:function(val,mes){
+    if (Api.isNotEmpty(val)){
+      return true
+    }else{
+      Api.showToast(mes)
+      return false
+    }
   },
   setFun:function(e){
     var skuNum = 0,
@@ -80,15 +110,28 @@ Page({
     var currPage = pages[pages.length - 1];
     var prevPage = pages[pages.length - 2];    // 上一个页面
     for (var i = 0; i < skuListAll.length;i++){
-      delete skuListAll[i].specValueName
+      // delete skuListAll[i].specValueName
       delete skuListAll[i].id
-      delete skuListAll[i].specValueCode
-      if(skuListAll[i].stockNumber!=''){
-        skuNum += parseInt(skuListAll[i].stockNumber)
+      // delete skuListAll[i].specValueCode
+      if(!this.isEmpty(skuListAll[i].wholesalePrice, "批发价不能为空!")){
+        return
+      }
+      if (isNaN(skuListAll[i].stockNum)){
+        Api.showToast("库存不能为空!")
+        return
+      }
+      if (!this.isEmpty(skuListAll[i].stockNum, "库存不能为空!")) {
+        return
+      }else{
+        skuNum += parseInt(skuListAll[i].stockNum)
+      }
+      if (!this.isEmpty(skuListAll[i].sellPrice, "零售价不能为空!")) {
+        return
       }
     }
     prevPage.setData({
       skuListAll: skuListAll,
+      editShowSet:true,
       skuNum: skuNum
     })
     wx.navigateBack({
@@ -137,10 +180,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

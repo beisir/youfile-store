@@ -1,0 +1,99 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+<view class='supplier-modal' wx:if="{{supplierShow}}" bindtap='closeModal'>
+  <scroll-view scroll-y class='scroll-modal' catchtouchmove='stopScroll'>
+    <view class='supplier-modal-true-box'>
+      <view class='modal-sku-item' wx:for="{{supSku}}" wx:key="{{index}}">
+        <text style='width:190rpx;padding-right:20rpx;font-weight:600;'>{{item.skuName?item.skuName:'默认'}}</text>
+        <view class='com-color-font flexone'>
+          <view class='com-flex-between flexone' wx:for="{{item.supplierList}}" wx:key="{{index}}" wx:for-item='sku'>
+            <text>{{sku.supplierName}}</text>
+            <text>{{filter.mathAbs(sku.num)}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class='com-color-back' style="height:90rpx;"></view>
+<view class='position-box'>
+  <view class='com-margin-box' wx:for='{{list}}' wx:key='{{index}}'>
+    <view class='house-title com-flex-center'>
+      <image class='img30' src='/distribution/images/house-gray.png'></image>
+      <text class='flexone com-text-ellipsis com-blod-font font30' style='padding:0 15rpx;'>{{item.warehouseRegionName}}</text>
+      <text class='font26'>合计出库：</text>
+      <text class='com-color-font' style='font-size:46rpx;'>{{filter.mathAbs(item.totalNum)}}</text>
+    </view>
+    <view class='goods-header com-padding-box com-flex-between'>
+      <view class='com-flex-center'>
+        <view class='color-chunk'></view>
+        <text class='font30 com-blod-font'>出库商品</text>
+      </view>
+      <view wx:if="{{!item.hide}}" bindtap='showHide' data-index="{{index}}">
+        <text class='font26'>全部收起</text>
+        <image class='tri-icon' src='/distribution/images/douTri-gold-up.png'></image>
+      </view>
+      <view wx:else bindtap='showHide' data-index="{{index}}">
+        <text class='font26'>全部展开</text>
+        <image class='tri-icon' src='/distribution/images/douTri-gold-down.png'></image>
+      </view>
+    </view>
+    <block wx:for="{{item.outGoodsList}}" wx:for-item='goods' wx:for-index="goodsIndex" wx:key="{{goodsIndex}}">
+      <view class='goods-item'>
+        <image class='goods-pic' src='{{baseUrl+goods.goodsMainImgUrl}}'></image>
+        <view class='flexone goods-msg'>
+          <view class='goods-name com-blod-font'>{{goods.goodsName}}</view>
+          <view class='font24 com-gray-color'>共{{goods.skuNum}}种规格 {{filter.mathAbs(goods.totalNum)}}件</view>
+        </view>
+      </view>
+      <view class='border-line'></view>
+      <!-- 部分入库表头 -->
+      <view hidden='{{item.hide}}'>
+        <view class='sku-item com-flex-between font24'>
+          <view>规格</view>
+          <view bindtap='showSupplier' data-index="{{index}}" data-goodsindex="{{goodsIndex}}" class='com-flex-allcenter'>出库数量
+            <image style='width:25rpx;height:25rpx;margin-left:10rpx;' src='/distribution/images/exclamation-gold.png'></image>
+          </view>
+        </view>
+        <view class='border-line'></view>
+        <block wx:for="{{goods.skuList}}" wx:for-item="sku" wx:for-index="skuIndex" wx:key="{{skuIndex}}">
+          <view class='sku-item com-flex-between font24'>
+            <view>{{sku.skuName?sku.skuName:"默认"}}</view>
+            <view>{{filter.mathAbs(sku.totalNum)}}</view>
+          </view>
+        </block>
+        <view class='border-line'></view>
+      </view>
+    </block>
+    <block wx:if="{{orderType!=='ziti'}}">
+      <view class='goods-header com-padding-box com-flex-center'>
+        <view class='color-chunk'></view>
+        <text class='font30 com-blod-font'>物流信息</text>
+      </view>
+      <view class='border-line'></view>
+      <view class='com-form-box'>
+        <view class='com-flex-between form-item'>
+          <view class='form-title'>物流公司</view>
+          <input disabled value='{{item.expressCompany}}' placeholder='请输入物流公司名称' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='expressCompany' class='flexone' data-index="{{index}}"></input>
+        </view>
+        <view class='com-flex-between form-item'>
+          <view class='form-title'>运单号</view>
+          <input disabled value='{{item.expressNumber}}' placeholder='请输入运单号' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='expressNumber' class='flexone' data-index="{{index}}"></input>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- <view class='com-margin-box' wx:if="{{orderType==='ziti'}}">
+    <view class='goods-header com-padding-box com-flex-center'>
+      <view class='color-chunk'></view>
+      <text class='font30 com-blod-font'>验证取货码</text>
+    </view>
+    <view class='border-line'></view>
+    <view class='com-form-box'>
+      <view class='com-flex-between form-item' style='padding: 0 30rpx;'>
+        <input disabled value='{{claimGoodsNum}}' type='number' placeholder='请输入取货码（买家提货时出示）' placeholder-class='input-placeholder-common-color' bindinput='watchinput' data-type='claimGoodsNum' class='flexone'></input>
+      </view>
+    </view>
+  </view> -->
+</view>

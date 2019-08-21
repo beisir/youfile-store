@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "tip": "../..//assembly/layer/layer"
+  },
+  "navigationBarTitleText": "库区商品",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616"
+}

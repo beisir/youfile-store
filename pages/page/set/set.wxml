@@ -1,6 +1,6 @@
 <view class='page'>
   <view class='page__bd'>
-      <navigator class='weui-cell weui-cell_access' url='/pages/updataPwd/updataPwd'>
+      <navigator  wx:if="{{token}}" class='weui-cell weui-cell_access' url='../updataPwd/updataPwd'>
         <view class='weui-cell__bd'>
           修改密码
         </view>
@@ -8,15 +8,15 @@
          <image src="/image/icl.png"></image>
         </view>
       </navigator>
-      <navigator class='weui-cell weui-cell_access' url='/pages/updataPhone/updataPhone'>
+      <view class='weui-cell weui-cell_access'>
         <view class='weui-cell__bd'>
-          修改手机号
+          逛商城悬浮球
         </view>
         <view class='weui-img'>
-         <image src="/image/icl.png"></image>
+          <switch checked="{{closeBall}}" bindchange="switchBallChange" />
         </view>
-      </navigator>
-      <navigator class='weui-cell weui-cell_access' url='/pages/help/help'>
+      </view>
+      <navigator class='weui-cell weui-cell_access' url='../help/help'>
         <view class='weui-cell__bd'>
            帮助与反馈
         </view>
@@ -25,5 +25,5 @@
         </view>
       </navigator>
   </view>
-  <button class='aw-but'>退出登录</button>
+  <button wx:if="{{token}}" bindtap='quit' class='aw-but'>退出登录</button>
 </view>

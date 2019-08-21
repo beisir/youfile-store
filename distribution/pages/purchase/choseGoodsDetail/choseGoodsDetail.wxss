@@ -1,0 +1,28 @@
+@import '/distribution/static/wxss/common';
+.header{height:150rpx;}
+.position-box{position: relative;top:-105rpx;}
+.goods-box{height: 210rpx;border-bottom: 1rpx solid #f0f0f0;}
+.goods-icon{height: 150rpx;width: 150rpx;margin-right: 20rpx;}
+.goods-name{text-overflow:-o-ellipsis-lastline;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;font-size: 30rpx;font-weight: 600;margin-top: -6rpx;}
+.edit-icon{width: 26rpx;height: 26rpx;margin-right: 10rpx;}
+.flex-column{display: flex;flex-direction: column;justify-content: space-between;height: 150rpx;}
+/* sku */
+.sku-tip-item{padding: 15rpx 27rpx;border-radius: 10rpx;background: #eeeeee;display:inline-block;margin-right: 20rpx;position: relative;margin-top:20rpx;}
+.calc-box-title{min-width: 212rpx;margin-right: 30rpx;}
+.sku-red-num{position: absolute;right: -18rpx;top: -18rpx;overflow: hidden;background: #f55353;color: #fff;line-height: 36rpx;height: 36rpx;min-width: 36rpx;padding:0 5rpx;text-align: center;border-radius: 36rpx;font-size: 24rpx;}
+.skubox{padding: 30rpx 0 30rpx;}
+.sku-tip-item-ac{background: #f8b616;color: #fff;}
+.sku-table-title{height: 100rpx;color: #999;font-size: 24rpx;}
+.sku-table-title>view{text-align: center;}
+.calc-box{margin-right:30rpx;background: #fafafa;border-radius: 10rpx;border: 1rpx solid #ddd;padding: 0!important;}
+.calc-btn{width:50rpx;height: 50rpx;line-height: 50rpx;font-size: 36rpx;font-weight: 600;padding: 0;margin: 0;border-radius: 0;}
+.button-hover{background: #fafafa;color: #333;}
+.calc-input{width: 110rpx;color: #333;}
+.border-line{border-bottom: 1rpx solid #f0f0f0;margin: 0 30rpx;}
+.tr-box{padding: 10rpx 0;font-size: 24rpx;min-height: 160rpx;box-sizing: border-box;}
+.tr-box>view{text-align: center;overflow: hidden;word-break: break-all;padding: 5rpx;}
+.pre-tip{font-size: 20rpx;color: #999;}
+.price-box{width: 200rpx;}
+.price-input{width: 135rpx;height: 50rpx;border:1rpx solid #ddd;margin: auto;font-size: 30rpx;}
+/* 弹窗 */
+.layer-input{height: 80rpx;border-bottom: 1rpx solid #ddd;font-size: 30rpx;margin-bottom: 10rpx;}

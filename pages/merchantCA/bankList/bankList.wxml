@@ -1,0 +1,9 @@
+<view class='search-box'>
+  <input bindinput='watchInput' placeholder='请输入总行名称' class='search-input'></input>
+  <image class="home-ser-new" src="/image/searchW.png"></image>
+  <view class='serCont' bindtap='getList'>搜索</view>
+</view>
+
+<view class='list-box'>
+  <view class='list-item com-flex-center' wx:for='{{list}}' wx:key='{{index}}' bindtap='choseThis' data-item='{{item}}'>{{item.bankName}}</view>
+</view>

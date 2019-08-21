@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "选择商品",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616",
+  "usingComponents": {
+    "layer": "/assembly/layer/layer"
+  }
+}

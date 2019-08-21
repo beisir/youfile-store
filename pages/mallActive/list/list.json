@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "云促销",
+  "usingComponents": {
+    "mes": "../../../../assembly/tips/tips"
+  }
+}

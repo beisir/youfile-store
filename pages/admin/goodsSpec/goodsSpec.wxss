@@ -1,0 +1,30 @@
+@import '../specSet/specSet';
+.sp-add{border: 0;background: #fff;margin: 20rpx;border-radius: 10rpx;height: 100rpx;line-height: 100rpx;color:#f8b616;font-size: 36rpx;}
+.sp-add image{transform:rotate(45deg);width: 40rpx;height: 40rpx;margin-right: 18rpx;}
+.add-bottom view{width: 100%;}
+.gs-v,.gs-title,.gv-comp{background:#fff;border-radius: 10rpx;margin: 0 20rpx;}
+.gs-v>view{height: 100rpx;line-height: 100rpx;font-size: 34rpx;padding:0 30rpx;}
+.gs-v>view:last-child{font-size: 26rpx;border-top: 2rpx solid #F7F7F7;color: #666}
+.gs-title{margin-top: 20rpx;font-size: 36rpx;padding: 30rpx;}
+.gs-title>view:last-child{font-size:24rpx;color: #666;}
+.gs-right{width: 20rpx;height: 20rpx;border-top: 4rpx solid #333;border-right: 4rpx solid #333;transform:rotate(45deg);float: right;margin-top: 36rpx}
+.gv-comp{padding-bottom: 50rpx;}
+.gv-comp>view:first-child{font-size: 34rpx;border-bottom: 2rpx solid #F6F6F6}
+.gv-comp>view image{width: 30rpx;height: 30rpx;vertical-align: middle;margin-top: -6rpx;margin-right: 10rpx;}
+.gv-comp>view image.write{width: 50rpx;height: 50rpx;vertical-align: middle;}
+.gv-comp>view:nth-child(2){font-size: 26rpx;}
+.gv-comp>view{padding: 0 30rpx}
+.gv-comp>view:first-child,.gv-comp>view:nth-child(2){min-height: 100rpx;line-height: 100rpx;}
+.gv-comp>view:first-child view{float: right;color: #f8b616;font-size: 32rpx;}
+.gs-sku{border-bottom: 2rpx dashed #F4F4F4;}
+.gv-comp .gs-sku{padding:0;margin:30rpx;}
+.gs-sku>view:first-child{font-size: 34rpx;}
+.gs-sku>view view{display: inline-block;width: 33.3%;text-align: center}
+.gs-sku view input{background: #F1F1F1;width: 196rpx;height: 65rpx;font-size: 26rpx;border-radius: 10rpx;margin: 30rpx 0}
+.gs-tip{color: #888888;font-size: 26rpx;font-weight: normal;margin-top: 15rpx;}
+.spec-class1{color: #888;}
+.spec-input1{height: 95rpx;text-align: center}
+.last-num{position: absolute;right: 80rpx;top: 72rpx;font-weight: bold}
+.font-color{font-size:32rpx;text-align: left;padding:30rpx;}
+/* 删除库存编辑 */
+.gs-sku view .stockNumInput{background: #fff;}

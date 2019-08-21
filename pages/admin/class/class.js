@@ -12,7 +12,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  getList:function(){
     var that = this
     Api.classList()
       .then(res => {
@@ -25,17 +25,29 @@ Page({
         })
       })
   },
+  onLoad: function (options) {
+    
+  },
   // 新建分类
    watchInput: function (event) {
-    if (event.detail.value == '') {
+     var value = event.detail.value, 
+     num = value.length
+     if (value == '' || value.trim().length == 0) {
       this.setData({
         watchInput: false
       })
     } else {
-      this.setData({
-        watchInput: true,
-        value: event.detail.value
-      })
+       if (num > 11) {
+         wx.showToast({
+           title: '超过最长字数限制',
+           icon: 'none',
+           duration: 2000,
+         })
+       }
+       this.setData({
+         value: value.substring(0, 10),
+         watchInput: true,
+       })
     }
   },
   addClass: function (e) {
@@ -57,15 +69,12 @@ Page({
       Api.addClass({ name: name })
         .then(res => {
           const obj = res.obj
-          _this.setData({
-            list: obj
-          })
-          wx.showToast({
-            title: '新建成功',
-            icon: 'none',
-            duration: 2000
-          })
+          Api.showToast("新建成功")
           _this.cancel()
+          _this.getList()
+          _this.setData({
+            watchInput: false
+          })
         })
     }
    
@@ -79,9 +88,9 @@ Page({
   classList:function(e){
     var code = e.target.dataset.code,
         name=e.target.dataset.name
-    wx.navigateTo({
-      url: '../classList/classList?name='+name+'&code='+code,
-    })
+        wx.navigateTo({
+          url: '../../page/classList/classList?name='+name+'&code='+code
+        })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -94,7 +103,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getList()
   },
 
   /**
@@ -125,10 +134,5 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
+
 })

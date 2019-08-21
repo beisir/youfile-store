@@ -1,12 +1,19 @@
 import Api from '../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    value:'我是陈晨，期待与您合作。',
-    accept:''
+    value:'期待与您合作。',
+    accept:'',
+    logo:'',
+    baseUrl: app.globalData.imageUrl,
+    name:'',
+    mallLogo:'',
+    mallName:'',
+    send:''
   },
   goBack:function(){
     wx.navigateBack({
@@ -24,15 +31,18 @@ Page({
       value: val
     })
   },
+  urlHome: function () {
+    wx.switchTab({
+      url: '/pages/page/home/home'
+    })
+  },
   invita:function(){
     var _this=this,
       accept = this.data.accept,
       greet=this.data.value,
-      send = wx.getStorageSync('userId'),
+      send = this.data.send,
       remark = this.data.remark
-    // if()
-    console.log(greet)
-    Api.addWholesaler({ accept: accept, send:send, greet: greet})
+    Api.addWholesaler({ accept: accept, send: send, greet: greet, remark: remark})
     .then(res=>{
       wx.showToast({
         title: '发送成功',
@@ -40,19 +50,26 @@ Page({
         duration: 1000,
         mask: true
       })
-      wx.navigateTo({
-        url: '../mewWholesaler/mewWholesaler',
-      })
+      setTimeout(function () {
+        _this.urlHome()
+      }, 1000)
+    })
+    .catch(res=>{
+      Api.showToast(res.data.message)
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.accept)
       this.setData({
         accept:options.accept,
-        remark: options.remark
+        remark: options.remark,
+        logo: options.logo,
+        name: options.name,
+        send:options.send,
+        mallLogo: options.mallLogo,
+        mallName: options.mallName,
       })
   },
 
@@ -98,10 +115,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })

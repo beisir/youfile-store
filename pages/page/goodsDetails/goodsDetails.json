@@ -1,3 +1,9 @@
 {
-  "navigationBarTitleText": "商品详情"
+  "navigationBarTitleText": "商品详情",
+  "usingComponents": {
+    "login": "../../login/login/login",
+    "mes": "../../../../assembly/tips/tips",
+    "returnBall": "../../../assembly/returnBall/returnBall",
+    "goodsActivityBinding": "../../../assembly/goodsActivityBinding/goodsActivityBinding"
+  }
 }

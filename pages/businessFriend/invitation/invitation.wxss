@@ -6,7 +6,7 @@
   width: 35rpx;position: absolute;top: 5rpx;left:5rpx;
 }
 .bf-all{
-  margin-top: 40rpx;
+  margin-top: 10rpx;
 }
 input{
   height: 120rpx;line-height: 120rpx;
@@ -14,3 +14,19 @@ input{
 .weui-view{
   z-index: 1000
 }
+textarea {
+  height: 100rpx;padding-top: 20rpx;
+}
+.add-bf-weui1 .weui_cells{
+  line-height: 40rpx;
+}
+.add-bf-weui1 .weui-view{
+  top: 43rpx;
+}
+
+page{background: #f7f7f7;}
+.bf-img image{
+  border-radius: 10rpx;
+}
+.com-bottom-btn-group{border-radius: 100rpx;height: 100rpx;bottom: 20rpx;background: #f8b616;color: #fff;overflow: hidden;width: 710rpx;left: 0;right: 0;margin: auto;}
+.com-bottom-btn-group .btngroup-btn-item{background: #f8b616;color: #fff;}

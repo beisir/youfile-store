@@ -1,0 +1,24 @@
+<!-- 编辑弹框 -->
+<layer show="{{editModal}}" title='设置专区别名'>
+  <view class='editName'>
+    <input maxlength='4' value='{{editItem.zoneAlias}}' bindinput='watchInput'></input>
+    <button bindtap='sureName'>确定</button>
+  </view>
+</layer>
+<!-- 正文 -->
+<view class='zone-item com-flex-between' wx:for='{{list}}' wx:key='index'>
+  <view>
+    <view class='zone-name'>{{item.zoneAlias?item.zoneAlias:item.zoneName}}<text class='aliasName' wx:if="{{item.zoneAlias}}">（{{item.zoneName}}）</text></view>
+    <view class='zone-des'>{{item.zoneDesc?item.zoneDesc:''}}</view>
+  </view>
+  <view class='com-flex-center'>
+    <block wx:if="{{item.zoneType!=='all'}}">
+    <view class='icon-box' hidden='{{item.status === "on"}}' bindtap='onOrOff' data-num='{{item.zoneNumber}}' data-type='on'><image src='/image/nosee-gold.png'></image></view>
+    <view class='icon-box' hidden='{{item.status === "off"}}' bindtap='onOrOff' data-num='{{item.zoneNumber}}' data-type='off'><image src='/image/see-gold.png'></image></view>
+    </block>
+    <view class='icon-box' hidden='{{index==0}}' bindtap='toTop' data-num='{{item.zoneNumber}}'><image src='/image/top-gold.png'></image></view>
+    <view class='icon-box' bindtap='edit' wx:if="{{item.zoneType !== 'all'}}" data-item='{{item}}'><image src='/image/edit-gold.png'></image></view>
+  </view>
+</view>
+
+<!-- <button class='bottom-single-btn'>确 定</button> -->

@@ -1,0 +1,40 @@
+<view class='com-flex-between padding-box sku-box'>
+  <view class='flexone skuname com-blod-font'>调整规格“{{name}}”</view>
+  <view class='com-new-gold-font' bindtap='seeFlow'>查看流水</view>
+</view>
+<view class='storckNum padding-box'>
+  <text>当前库存：</text>
+  <text class='font60'>{{stockNum}}</text>
+</view>
+
+<navigator url='/distribution/pages/supplier/choseGoodsSupplier/choseGoodsSupplier?code={{skuCode}}&goodsId={{goodsId}}'>
+  <view class='supplier-box com-flex-center'>
+    <view>选择供应商</view>
+    <view class='flexone supplier-name com-text-ellipsis'>{{supplierObj.name}}</view>
+    <image class='com-right-icon' src='/distribution/images/right-icon.png'></image>
+  </view>
+</navigator>
+
+
+<view class='padding-box'>
+  <view class='part-title'>调整数量</view>
+  <view class='com-flex-center'>
+    <view class='com-flex-center input-box'>
+      <view bindtap='changeNum' data-type="reduce" style='border-right:1rpx solid #eee' class='change-num-btn'>-</view>
+      <input bindblur='testblur' bindinput='watchinput' value='{{num}}' type='text' maxlength='6'></input>
+      <view bindtap='changeNum' data-type="add" style='border-left:1rpx solid #eee' class='change-num-btn'>+</view>
+    </view>
+    <view>{{numStatus}}</view>
+  </view>
+  <view class='part-title'>选择调整原因</view>
+  <view style='overflow:hidden'>
+    <view class='reason-item {{item.checked?"reason-item-ac":""}}' wx:for="{{reason}}" wx:key='{{index}}' data-index="{{index}}" bindtap='choseReason'>{{item.name}}</view>
+  </view>
+  <view class='part-title'>备注</view>
+  <input bindinput='remark' value='{{remark}}' class='remark-textarea' maxlength='100' placeholder='请输入备注信息' type='textarea'></input>
+</view>
+
+<view class='bottom-replace-box'></view>
+<view class='bottom-single-btn-box'>
+  <button class='bottom-single-btn' bindtap='sure'>确定</button>
+</view>

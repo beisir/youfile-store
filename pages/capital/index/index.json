@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "资金中心",
+  "usingComponents": {
+    "mes": "../../../../assembly/tips/tips"
+  }
+}

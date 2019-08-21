@@ -1,66 +1,203 @@
+<form report-submit='true' bindsubmit='getFormId'>
+<bottomLayer closeBtn='{{false}}' title='图文分享更方便' id='shareway' height='475' btn="取消" align='center'>
+  <view class='flex-between' style='height:100%;border-top:1rpx solid #eee;box-sizing:border-box;'>
+    <navigator class='share-item' url='../../marketing/poster/prePoster/prePoster?goodsId={{shareItem.id}}'>
+      <view class='share-poster-tip'><block wx:if="{{!posterTip}}">新功能</block><block wx:else>已生成</block></view>
+      <image src='/image/er-icon.png'></image>
+      <text>商品码海报</text>
+    </navigator>
+    <view class='share-item'>
+      <button form-type='submit' open-type="share" data-name='{{shareItem.name}}' data-img='{{baseUrl}}{{shareItem.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{shareItem.id}}'></button>
+      <image src='/image/wx-icon.png'></image>
+      <text>微信好友</text>
+    </view>
+  </view>
+</bottomLayer>
+
 <login-component id='login' inner-text="Some text"></login-component>
-<view class="goods-ser">
-  <navigator url='../serStatus/serStatus'><input placeholder="输入商品名称" value="{{value}}"  bindblur="blurInputEvent" /></navigator>
-    <image class="home-ser"  src="/image/search.png"></image>
-    <view class='home-img'  bindtap='showXl'>
+<!-- 库存提示-->
+<mes show="{{showNum}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>还未设置库存哦！</text>
+    <view class='showNum'>库存不能为0</view>
+    <button form-type='submit' bindtap='confirmTip' class='show_btn'>立即设置</button>
+  </view>
+</mes>
+<!--是否上架-->
+<mes show="{{confirmUp}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view style='padding:0 20rpx'>
+    <text wx:if="{{confirmUpType=='zero'}}" style='font-size:32rpx;'>您还未设置库存，上架后该商品将进入已售完列表</text>
+    <text wx:if="{{confirmUpType=='normal'}}">确定上架该商品？</text>
+    <button style="{{confirmUpType=='zero'?'margin-bottom:50rpx;':''}}" form-type='submit' bindtap='confirmUp'>确定</button>
+  </view>
+</mes>
+<!--是否下架-->
+<mes show="{{confirmDown}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确定下架该商品？</text>
+    <button form-type='submit' bindtap='confirmDown'>确定</button>
+  </view>
+</mes>
+<!-- 删除-->
+<mes show="{{show1}}" bind:sureSelectArea="sureSelectAreaListener">
+  <view>
+    <text>确认删除？</text>
+    <button form-type='submit' bindtap='confirmDetele'>确定</button>
+  </view>
+</mes>
+</form>
+<view class='topScoll'>
+  <view class="goods-ser">
+    <navigator style='width:100%' url='../serStatus/serStatus'>
+      <input placeholder='输入商品名称' value="{{value}}" disabled='disabled' />
+    </navigator>
+    <image class="home-ser" src="/image/search1.png"></image>
+    <!-- <view class='home-img'>
       <view>
         筛选
       </view>
-      <view hidden='{{showXl}}' class='st-xiala alert-xiala'>
-        <image class="xiala"  src="/image/xiala.png"></image>
-        <view class="{{alertTab==0 ? 'active' : ''}}" data-current="0" bindtap="alertNav">全部商品</view>
-        <view class="{{alertTab==1 ? 'active' : ''}}" data-current="1" bindtap="alertNav">批零商品</view>
-        <view class="{{alertTab==2 ? 'active' : ''}}" data-current="2" bindtap="alertNav">仅批发</view>
+    </view> -->
+  </view>
+  <scroll-view scroll-x="{{true}}">
+    <view class='st-title'>
+      <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中
+        <view></view>
+      </view>
+      <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">待上架
+        <view></view>
+      </view>
+      <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='4' bindtap="swichNav">已售完
+        <view></view>
+      </view>
+      <view class="{{classStatus=='classify'? 'active' : ''}}" bindtap="swichNavLast" data-type='classify'>{{className}}
+        <image src="{{classStatus=='classify'?'/image/xl1.png':'/image/xl.png'}}"></image>
+        <view></view>
+      </view>
+      <view class="{{classStatus=='zone'? 'active' : ''}}" bindtap="swichNavLast" data-type='zone'>{{zoneName}}
+        <image src="{{classStatus=='zone'?'/image/xl1.png':'/image/xl.png'}}"></image>
+        <view></view>
+      </view>
     </view>
-    </view>
-</view>
-<view class='st-title'>
-  <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-index='1' bindtap="swichNav">出售中</view>
-  <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-index='0' bindtap="swichNav">仓库中</view>
-  <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" data-index='2' bindtap="swichNav">已售完</view>
-  <view class="{{classStatus? 'active' : ''}}" bindtap="swichNavLast">本店分类<image  src="{{sImg}}"></image></view>
+  </scroll-view>
 </view>
 <view class='hideSer' hidden='{{hidden}}' bindtap='hideSer'>
-  <view  class='serList'>
-      <view wx:for='{{list}}' wx:key='{{index}}' data-code='{{item.customCategoryCode}}' class="{{currentTabSer==index? 'active' : ''}}" data-current="{{index}}"  bindtap="swichSer">{{item.name}}<image src="/image/dui.png"></image></view>
+  <view class='serList' hidden='{{classStatus!=="classify"}}'>
+    <view wx:for='{{list}}' wx:key='{{index}}' data-name='{{item.name}}' data-code='{{item.customCategoryCode}}' class="{{currentTabSer==index? 'active' : ''}}" data-current="{{index}}" bindtap="swichSer">{{item.name}}
+      <image src="/image/dui.png"></image>
+    </view>
+  </view>
+  <!-- 分区 -->
+  <view class='serList' hidden='{{classStatus!=="zone"}}'>
+    <view wx:for='{{zoneList}}' wx:key='{{index}}' class="{{item.selected? 'active' : ''}}" data-index="{{index}}" bindtap="swichZone">{{item.zoneAlias?item.zoneAlias:item.zoneName}}
+      <image src="/image/dui.png"></image>
+    </view>
   </view>
 </view>
-<scroll-view scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
-  <view>
- <view class="record-box"  wx:for="{{detailList}}" wx:key="{{index}}" wx:for-item="record">
-  <view class="record" style="left:{{record.offsetX}}px;left:{{leftVal}}px" data-index="{{index}}" bindtouchstart="recordStart" catchtouchmove="recordMove" bindtouchend="recordEnd">
-    <view class="st-cont">
-          <image class="cart-thumb" src="{{record.mainImgUrl}}"></image>
-               <view  class='st-d-t'>{{record.name}}</view> 
-                <view class='st-details'>
-                  <view class='st-d-status'>
-                    <view><text>批发:</text><text class='st-mom'>￥{{record.wholesalePrice}}</text></view>
-                    <view><text>零售:</text><text class='st-mom'>￥{{record.sellPrice}}</text></view>
-                    <view>供货：400</view><view>零售：400</view>
-                    <view>库存：{{record.stockNum}}<image class='warn' src="/image/warn.png"></image></view>
-                  </view>
-                   <!-- <view class='not'><view class='triangle_border_up'></view>该商品库存不足 请及时补货</view> -->
-                  </view>
-             
-              </view>
-              <view class='st-bottom'>
-                <view>转发</view>
-                <view><navigator url='../editGoods/editGoods?goodsId={{record.id}}'>预览 </navigator></view>
-                <view wx:if='{{record.status==0}}' data-id='{{record.id}}' data-index='{{index}}' bindtap='changeStatus'>上架</view>
-                <view wx:if='{{record.status==1}}' data-id='{{record.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
-                <view wx:if='{{record.status==2}}'>已下架</view>
-              </view>
+<scroll-view class='scroll-v' style='overflow:scroll' scroll-y="true" style="height:100%;" bindscrolltolower="bindDownLoad">
+  <view class="touch-item {{item.isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" wx:for="{{detailList}}" wx:key="">
+    <view class='babt' bindtap='editGoods' data-id='{{item.id}}'></view>
+    <view class='content st-cont' data-index="{{index}}">
+      <view class='column'>
+        <image class="editGoods" src="/image/mallr.png"></image>
+        <image class="cart-thumb" src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
+        <activityTag wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" extInfo="{{item.extInfo.PRIORITY_SALES_PROMOTION}}" left='40' top='44'/>
+        <view class='st-d-t'>
+          <text wx:if='{{item.zoneType == "substitute"}}' class='name-tag' style='background:#ff9900'>代发</text><text wx:if='{{item.zoneType == "whole"}}' class='name-tag' style='background:#fd4c4c'>拿货</text>{{item.name}}
+        </view>
+        <view class='st-details'>
+          <view class='st-d-status'>
+            <view>
+              <text>批发：</text>
+              <text class='st-mom'>￥{{item.wholesalePrice}}</text>
             </view>
-            <view class="delete-box" bindtap="deleteList" data-id='{{record.id}}' data-index="{{index}}">
-            <view>删除</view>
+            <view>
+              <text>零售：</text>
+              <text class='st-mom'>￥{{item.sellPrice}}</text>
+            </view>
+            <view>
+              <text>库存：</text>
+              <text style='color:#888;font-size:26rpx'>{{item.stockNum}}</text>
+              <image class='warn' wx:if='{{item.stockNum<5}}' src="/image/warn.png"></image>
             </view>
           </view>
+          <view class='not' wx:if='{{item.stockNum<5}}'>
+            <view class='triangle_border_up'></view>该商品库存不足 请及时补货</view>
+        </view>
+      </view>
+      <view class='list-view list-view1'>
+        <view bindtap='share' data-item="{{item}}" data-id='{{item.id}}'>分享</view>
+          <!-- <button open-type="share" data-name='{{item.name}}' data-img='{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small' data-id='{{item.id}}'></button> -->
+        <view data-id='{{item.id}}' data-storeid='{{item.storeId}}' bindtap='updateSpec'>改规格</view>
+        
+         <!-- 有活动 -->
+        <block wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}">
+          <view>
+            <navigator url='../../mallActive/editGoods/editGoods?activityNumber={{item.extInfo.PRIORITY_SALES_PROMOTION.activityNumber}}&goodsId={{item.extInfo.PRIORITY_SALES_PROMOTION.goodsId}}'>活动设置</navigator>
+          </view>
+        </block>
+        <!-- 无活动 -->
+        <block wx:else>
+          <view class='more-btn-item' wx:if='{{item.status==0 || item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'>上架</view>
+          <view class='more-btn-item' wx:if='{{item.status==1 || item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'>下架</view>
+        </block>
+        <view bindtap='showMoreClick' data-index="{{index}}"></view>
+      </view>
+    </view>
+    <view class='showHide' catchtouchmove='true' bindtap='closeShow' wx:if='{{showIndex==index}}'></view>
+    <view class='showMore' wx:if='{{showIndex==index}}'>
+      <!-- 有活动 -->
+      <block wx:if="{{item.extInfo.PRIORITY_SALES_PROMOTION}}">
+        <view class='more-btn-group'>
+          <view class='more-btn-item' wx:if='{{item.status==0 || item.status==2}}' data-id='{{item.id}}' data-index='{{index}}' data-num="{{item.stockNum}}" bindtap='changeStatus'><image mode='widthFix' src="/image/upload-icon.png"></image>上架</view>
+          <view class='more-btn-item' wx:if='{{item.status==1 || item.status==4}}' data-id='{{item.id}}' data-index='{{index}}' bindtap='upStatus'><image mode='widthFix' src="/image/download-icon.png"></image>下架</view>
+          <view class='gray-line'></view>
+          <navigator class='more-btn-item' url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.id}}'>
+            <image mode='widthFix' src="/image/sYan.png"></image>预览
+          </navigator>
+          <view class='gray-line'></view>
+          <view class='more-btn-item' catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>
+            <view class='v-san'></view>
+            <image mode='widthFix' src="/image/sRe.png"></image>删除
+          </view>
+        </view>
+      </block>
+      <!-- 无活动 -->
+      <block wx:else>
+        <navigator url='/pages/page/goodsDetails/goodsDetails?goodsId={{item.id}}'>
+          <image mode='widthFix' src="/image/sYan.png"></image>预览</navigator>
+        <view catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>
+          <view class='v-san'></view>
+          <image mode='widthFix' src="/image/sRe.png"></image>删除</view>
+      </block>  
+    </view>
+    <view class="del" catchtap="del" data-index="{{index}}" data-id='{{item.id}}'>
+      <image mode='widthFix' src="/image/sBai.png"></image>删除</view>
   </view>
-  <view class='st-all'>{{totalCount}}件商品</view>
+  <view class='st-all' wx:if='{{detailList.length>0}}'>{{detailList.length}}件商品</view>
+  <view class='st-all' wx:if='{{detailList.length==0}}'>
+    <view class="nomore">
+      <view>
+        <image src="/image/nohome.png"></image>
+      </view>
+      暂时还没有商品哦！
+    </view>
+  </view>
 </scroll-view>
-<view class='st-bottom st-bottom1'>
-    <view><navigator url="../addGoods/addGoods">添加商品</navigator></view>
-    <view><navigator url="../batch/batch">批量管理</navigator></view>
-    <view><navigator url="../batchSet/batchSet">起批设置</navigator></view>
-    <view><navigator url="../class/class">本店分类</navigator></view>
+<view class='goHome' bindtap='goWork'>
+  <view>
+    <image src="/image/ad5.png"></image>
+  </view>工作台</view>
+
+<form report-submit='true' bindsubmit='getFormId'>
+  <view class="com-bottom-capsule-btn-group-box">
+    <view class='com-bottom-capsule-btn-group'>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='addGoods'>添加商品</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='batch'>批量管理</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='batchSet'>起批设置</button>
+      <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='navigateTo' data-type='class'>本店分类</button>
+    </view>
   </view>
+</form>
+<view class='showHide showHideb' bindtap='closeShow'  hidden='{{showHideb}}'></view>
+<view class='showHide showHidet' bindtap='closeShow' hidden='{{showHidet}}'></view>
+

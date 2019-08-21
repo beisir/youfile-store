@@ -1,0 +1,105 @@
+var filterMoney = function (money) {
+  if(money){
+    money = parseFloat(money)    
+    return money.toFixed(2)
+  }else{
+    return 0
+  }
+}
+var plusNum = function(num){
+ if(num<0){
+   return -num
+ }else{
+   return num
+ }
+}
+
+var filterTime = function (timestamp,only){
+  var str = "";
+  if (timestamp != '' && timestamp != null && timestamp != undefined && timestamp != NaN) {
+    var date = getDate(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+    var Y = date.getFullYear();
+    var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+    var D = date.getDate();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    if (only){
+      return Y + "-" + M + "-" + D ;
+    }
+    return Y + "-" + M + "-" + D + " " + h + ":" + m + ":" + s;
+  }
+  return str
+}
+
+var filterNull = function(val){
+  var str = "";  
+  if (val != '' && val != null && val != undefined && val != NaN) {
+    return val
+  }
+  return str
+}
+
+var my_slice = function(str,a){
+  if(str.length>a){
+    return str.slice(0,a)+"...";
+  }
+  return str;  
+}
+
+var filterOrderNum = function (num) {
+  if (num) {
+    num = parseInt(num)
+    if (num >= 100){
+      return "99+"
+    }
+    return num
+  } else {
+    return 0
+  }
+}
+
+var hideTelephone = function (tel) {
+  if(tel) {
+    return tel.substring(0, 3) + "****" + tel.substring(7);
+  }
+  return tel
+}
+
+var doubleNum = function(num) {
+  num += ""
+  if (num.length == 1){
+    return '0' + num
+  }else{
+    return num
+  }
+}
+
+function parseLongNum(num){
+  if(!num){return 0}
+  if(num > 100000000){
+    return parseInt(num / 100000000) + "亿+"
+  }
+  if(num > 1000000){
+    return parseInt(num / 10000) + "万"
+  }
+  return num
+}
+
+function mathAbs(num){
+  if (!num) { return 0 }
+  return Math.abs(num)
+}
+
+module.exports = {
+  mathAbs: mathAbs,
+  parseLongNum: parseLongNum,
+  filterMoney: filterMoney,
+  plusNum: plusNum,
+  filterTime: filterTime,
+  filterNull: filterNull,
+  my_slice: my_slice,
+  filterOrderNum: filterOrderNum,
+  hideTelephone: hideTelephone,
+  doubleNum: doubleNum
+}

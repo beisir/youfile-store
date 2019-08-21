@@ -1,0 +1,20 @@
+.header{height: 180rpx;position: relative;margin-bottom: 80rpx;padding: 20rpx;box-sizing: border-box;}
+.warehouse-statistics{position: absolute;bottom: -150rpx;left: 0;right: 0;margin: 0 20rpx;background: #fff;border-radius: 10rpx;}
+/* 搜索 */
+.search-input-box{width: 600rpx;height: 80rpx;border-radius: 80rpx;border:1rpx solid #fff;color: #fff;}
+.search-img{width: 40rpx;height: 40rpx;padding: 0 20rpx 0 30rpx;}
+.filter-icon{width: 40rpx;height: 40rpx;padding-right: 20rpx;}
+.ser-btn{text-align: right;color: #fff;padding-right: 15rpx;}
+.choseTag{height: 120rpx;width: 710rpx;position: absolute;left: 0;right: 0;margin: auto;bottom: -60rpx;background: #fff;border-radius: 10rpx;padding: 0 30rpx;box-sizing: border-box;}
+.add-icon{margin-right:30rpx;}
+/* tab */
+.tab-box{background: #fff;padding: 0 50rpx;}
+.line{width: 2rpx;height:30rpx;background:#eee;}
+.tab{height: 100rpx;border-bottom: 5rpx solid #fff;width: 200rpx;display: flex;align-items: center;justify-content: center;color: #999;}
+.tab>text{padding-left: 10rpx;}
+.tab-ac{border-color: #fdb813;color: #fdb813;}
+.list-box{margin: 20rpx;background: #fff;border-radius: 10rpx;}
+
+.supplier-item{padding: 0 30rpx; height: 120rpx;font-size: 30rpx;font-weight: 600;}
+.man-icon{height: 66rpx;width: 66rpx;border-radius: 10rpx;margin-right: 30rpx;}
+.right{width: 40rpx;height: 35rpx;}

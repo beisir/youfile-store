@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "门店订单详情",
+  "usingComponents": {
+    "clo": "../../../assembly/close/close"
+  }
+}

@@ -1,4 +1,6 @@
 // pages/role/supplyVoucher/supplyVoucher.js
+const app = getApp();
+import API from '../../../utils/api.js';
 Page({
 
   /**
@@ -9,18 +11,17 @@ Page({
     val:""
   },
   choseImg(){
-
-    wx.chooseImage({
-      count:1,
-      success: (res)=> {
-        var tempFilePaths = res.tempFilePaths
-        this.setData({
-          url: tempFilePaths
-        })
-        
-      }
+    API.uploadImage().then(res=>{
+      this.setData({
+        url:res[0],
+        showUrl: this.data.base + res[0]
+      })
+    });
+  },
+  showImg(){
+    wx.previewImage({
+      urls: [this.data.url],
     })
-
   },
   //输入
   input(e){
@@ -30,30 +31,40 @@ Page({
     })
   },
   upload(){
-    let url = this.data.url.trim(),
-        txt = this.data.val.trim();
-    if(url && txt){
-      wx.uploadFile({
-        url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
-        filePath: tempFilePaths[0],
-        name: 'file',
-        formData: {
-          'user': 'test'
-        },
-        success: (res) => {
-          var data = res.data
-          //do something
+    let url = this.data.url,
+        txt = this.data.val.trim(),
+        num = this.data.num;
+    if(url){
+      API.uploadVoucher({
+        orderNumber: num,
+        payVoucher: this.data.url,
+        voucherDesc: txt
+      }).then(res => {
+        API.showToast(res.message)
+        if (res.success) {
+          let pages = getCurrentPages();
+          let prevPage = pages[pages.length - 2];
+          prevPage.setData({
+            orderSuccessHiddenBtn:true
+          })
+          setTimeout(() => {
+            wx.navigateBack()
+          }, 800)
         }
       })
-    }else{
       
+    }else{
+      API.showToast('请上传付款凭证')
     }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.setData({
+      num:options.num,
+      base: app.globalData.imageUrl
+    })
   },
 
   /**
@@ -98,10 +109,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

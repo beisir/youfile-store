@@ -1,0 +1,30 @@
+<view class='bf-all'>需要发送验证申请,等待对方通过</view>
+<view class='bf-cont'>
+  <view class='bf-weui add-bf-weui add-bf-weui1'>
+    <view class="weui_cells weui_cells">
+      <textarea  placeholder=''   bindinput="searchBtn" value='{{allName}}'></textarea>
+      <view class='weui-view'  bindtap='emptyVal'>
+        <image  mode="widthFix"  src="/image/ser.png"></image>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='bf-cont'>
+  <view class='bf-weui'>
+    <view class="weui_cells new-weui">
+      <view class='bf-img'><image  mode="aspectFill" src="{{headPic}}"></image></view>
+      <text>{{name}}</text>
+    </view>
+  </view>
+  <view class='invi-i'><image  mode="widthFix" src="/image/icon.png"></image>邀请成功后，该云分销商将以批发价购买您店铺的商品</view>
+</view>
+<!-- <view class='add-bottom'>
+  <view bindtap='goBack'>取消</view>
+  <view bindtap='invita'>邀请</view>
+</view> -->
+
+
+<view class='com-bottom-btn-group'>
+    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='goBack'>取消</button>
+    <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='invita'>邀请</button>
+</view>

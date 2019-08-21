@@ -1,0 +1,32 @@
+<tip show="{{delModal}}" title="提示">
+  <view style='color:#666;font-size:30rpx;text-align:center;'>
+    <view>请先将该商品下的库存清零后</view>
+    <view>才可删除该商品哦~</view>
+  </view>
+  <button class='layer-btn com-background-color' bindtap='closeModal'>知道了</button>
+</tip>
+
+<import src="/distribution/static/template/goodNum/goodsNumItem.wxml" />
+<view class='header com-background-color'>
+  <view class='com-flex-between com-margin-box'>
+    <view class='search-input-box com-flex-center'>
+      <image src='/distribution/images/search-white.png' class='search-img'></image>
+      <input value="{{serText}}" bindinput='watchinput' class='font26 flexone' placeholder='输入商品名称、货号' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
+    </view>
+    <text class='font30 ser-btn flexone' bindtap='search'>搜索</text>
+  </view>
+</view>
+
+<view class='goods-box'>
+  <view class='item-box' wx:for="{{goodsList}}" wx:key='{{index}}'>
+    <view class="absolut-box {{item.isTouchMove?'delbtn-active':''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+      <view bindtap='toDetail' data-id="{{item.goodsId}}">
+        <template is="goodsItem" data="{{...item}}" class='goodsItem'></template>
+      </view>
+      <view class='close-btn' bindtap='delGoods' data-id='{{item.goodsId}}'>
+        <image class='img60' src='/image/sBai.png'></image>
+        <text>删除</text>
+      </view>
+    </view>
+  </view>
+</view>

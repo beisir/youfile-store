@@ -1,0 +1,22 @@
+/* pages/marketing/poster/success/success.wxss */
+.all-box{padding-top: 30rpx;}
+.flex-between{display: flex;align-items: center;justify-content: space-between;}
+.flex-center{display: flex;align-items: center;}
+.icon-box{flex: 1;height:500rpx;display: flex;align-items: center;}
+.tri-icon{width: 40rpx;height: 40rpx;}
+.img-box{width: 512rpx;height:1000rpx;}
+.item{display: flex;align-items: center;justify-content: center;}
+.img-box image{width: 464rpx;height: 986rpx;border-radius: 10rpx;box-shadow: 0 0 15rpx #999;}
+.imgnum{text-align: right;line-height: 1;font-size: 36rpx;color: #999;padding-right: 60rpx;margin-top:15rpx;}
+.bottom-btn{height: 122rpx;position: fixed;bottom: 0;width: 100%;background: #fff;font-size: 30rpx;}
+.btn-line{width: 2rpx;height: 30rpx;background: #ddd;}
+.b-btn{flex: 1;text-align: center;height:100%;display: flex;justify-content: center;align-items: center;}
+.b-btn text{line-height: 1;}
+/* 弹框 */
+.showmodal{padding-top:20rpx;}
+.roomscroll{max-height: 500rpx;padding: 0 50rpx;box-sizing:border-box;}
+.btn-group{display: flex;justify-content: space-between;}
+.btn-group button{margin-top:50rpx;width:240rpx;height:70rpx;color:#fff;line-height:68rpx;border:2rpx solid #f8b616;font-size:30rpx;background:#f8b616;}
+.btn-group .cancel-btn{color: #999;border: 1rpx solid #ddd;background: #fff;}
+.room-checked-icon{width: 40rpx;height: 40rpx;margin-right: 40rpx;}
+.room-item{height: 80rpx;font-size: 36rpx;}

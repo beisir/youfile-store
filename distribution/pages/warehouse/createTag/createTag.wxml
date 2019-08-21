@@ -1,0 +1,18 @@
+<!--pages/floor/choseAdmin/choseAdmin.wxml-->
+<view class='floor-box'>
+  <!-- 搜索 -->
+  <view class='floor-part'>
+    <view class='com-flex-center tag-ser-box'>
+      <view class='tip' style='background:{{background}}'></view>
+      <input bindinput='getVal' type='text' style="width:500rpx;margin-left:40rpx;" placeholder='请输入库区类型名称' maxlength='20'></input>
+    </view>
+    <view class='border-line'></view>
+    <view class='ball-box'>
+      <block wx:for="{{ballList}}" wx:key="{{index}}">
+        <view bindtap='chose' data-index="{{index}}" data-color='{{item}}' style="background:{{item}}" class="ball {{index==whitch?'active':''}}"></view>
+      </block>
+    </view>
+
+    <button bindtap='create' type='default' style='background:#fff;border:1px solid #f8b616;color:#f8b616;margin:40rpx 0;'>创建标签</button>
+  </view>
+</view>

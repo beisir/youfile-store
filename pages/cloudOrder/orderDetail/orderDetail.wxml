@@ -1,0 +1,132 @@
+<wxs src="../../../public/filter.wxs" module="filter" />
+<!-- 返回我的店 -->
+<mes show="{{returnModal}}">
+  <view>
+    <text>是否跳转至您的{{globalData.projectName}}？</text>
+    <navigator wx:if='{{toStatus=="xls"}}' target="miniProgram" open-type="navigate" app-id="{{globalData.navigateToAppID.xls}}" path="pages/page/user/user?layerText=请登陆购买账号后，点击我的工作台初始化账户&appid={{globalData.navigateToAppID.me}}" extra-data="" version="trial">
+      <button bindtap='gotoStore'>确定</button>
+    </navigator>
+     <navigator wx:if='{{toStatus=="xpl"}}' target="miniProgram" open-type="navigate" app-id="{{globalData.navigateToAppID.xpl}}" path="pages/page/user/user?layerText=请登陆购买账号后，点击我的工作台初始化账户&appid={{globalData.navigateToAppID.me}}" extra-data="" version="trial">
+      <button bindtap='gotoStore'>确定</button>
+    </navigator>
+  </view>
+</mes>
+
+<view class='order-box'>
+  <view class='price-box'>
+    <image class='logo' src='/image/cloudStoreIcon.png'></image>
+    <view>
+      <text class="com">新购-优生活{{globalData.projectName}}</text>
+    </view>
+    <view>
+      <text class="price">￥{{msg.orderAmount}}</text>
+    </view>
+  </view>
+
+  <view class='order-title'>
+    <view>
+      <text class='store-name'>{{globalData.projectName}}·{{msg.yunStoreGoodsSnapshot.classifyName}}</text>
+      <!-- <text class='store-type'>新批零</text> -->
+    </view>
+    <text wx:if='{{msg.orderStatus=="unpaid"}}' class='youyou'>待付款</text>
+    <text wx:if='{{msg.orderStatus=="paid"}}' class='youyou'>已付款</text>
+  </view>
+
+  <view class='msg-box'>
+
+    <view class='msg-item'>
+      <text class='msg-title'>服务时间</text>
+      <text class="msg-content b-font">{{msg.yunStoreGoodsSnapshot.serviceReriodMonth}}个月</text>
+    </view>
+    <block wx:if='{{msg.orderStatus=="paid"}}'>
+      <view class='msg-item'>
+        <text class='msg-title'>开始时间</text>
+        <text class="msg-content">{{filter.filterTime(msg.yunStore.serviceTimeStart)}}</text>
+      </view>
+
+      <view class='msg-item'>
+        <text class='msg-title'>结束时间</text>
+        <text class="msg-content">{{filter.filterTime(msg.yunStore.serviceTimeEnd)}}</text>
+      </view>
+    </block>
+    <view class='msg-item'>
+      <text class='msg-title'>电话号码</text>
+      <text class="msg-content">{{msg.userInfoVO.mobile}}</text>
+    </view>
+    <block wx:if='{{msg.orderStatus=="paid"}}'>
+      <view class='msg-item'>
+        <text class='msg-title'>服务状态</text>
+        <text class="msg-content">{{msg.yunStore.status?"已开通":"未开通"}}</text>
+      </view>
+
+      <view class='msg-item'>
+        <text class='msg-title'>剩余时间</text>
+        <text class="msg-content"><text class='gold-price-font'>{{msg.yunStore.surplusDay?msg.yunStore.surplusDay:"0"}}</text> 天</text>
+      </view>
+    </block>
+  </view>
+
+</view>
+
+<view class='order-box'>
+
+  <view>
+    <view class='msg-item'>
+      <text class='msg-title'>订单号</text>
+      <text class="msg-content">{{msg.orderNumber}}</text>
+    </view>
+    <view class='msg-item' wx:if='{{msg.orderStatus=="paid"}}'>
+      <text class='msg-title'>交易单号</text>
+      <text class="msg-content">{{msg.payVoucher}}</text>
+    </view>
+    <view class='msg-item'>
+      <text class='msg-title'>下单时间</text>
+      <text class="msg-content">{{filter.filterTime(msg.createDate)}}</text>
+    </view>
+    <view class='msg-item' wx:if='{{msg.orderStatus=="paid"}}'>
+      <text class='msg-title'>付款时间</text>
+      <text class="msg-content">{{filter.filterTime(msg.payDate)}}</text>
+    </view>
+  </view>
+
+  <view class='border' wx:if="{{msg.receiptInfo}}"></view>
+
+  <view class="invoiceBox" wx:if="{{msg.receiptInfo}}">
+    <view class='msg-item'>
+      <text class='msg-title'>发票信息</text>
+      <text class="msg-content">{{msg.receiptInfo.invoiceCategory}}</text>
+    </view>
+    <view class='msg-item'>
+      <text class='msg-title'>公司名称</text>
+      <text class="msg-content">{{msg.receiptInfo.invoiceTitle}}</text>
+    </view>
+    <view class='msg-item'>
+      <text class='msg-title'>纳税人识别号</text>
+      <text class="msg-content">{{msg.receiptInfo.identificationNumber}}</text>
+    </view>
+  </view>
+
+</view>
+
+<view class='order-box'>
+  <view class='pay-item'>
+    <text class='msg-title'>支付方式</text>
+    <text class="msg-content">微信支付</text>
+  </view>
+  <view class='pay-item'>
+    <text class='msg-title'>优惠码支付</text>
+    <text class="msg-content">￥{{msg.yunStoreGoodsSnapshot.discountAmount?msg.yunStoreGoodsSnapshot.discountAmount:0}}</text>
+  </view>
+  <view class='pay-item'>
+    <text class='msg-title' wx:if='{{msg.orderStatus=="paid"}}'>实付金额</text>  
+    <text class='msg-title' wx:else>应付金额</text>
+    <text class="msg-content red-price-font">￥{{msg.payAmount}}</text>
+  </view>
+</view>
+<view style='padding:80rpx 0'></view>
+<view class='bottom-lr-box' wx:if='{{msg.orderStatus=="unpaid"}}'>
+  <view class='bottom-price'>支付：
+    <text class="msg-content gold">￥{{msg.payAmount}}元</text>
+  </view>
+  <view bindtap='buy' class="buy-button">立即支付</view>
+</view>

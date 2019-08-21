@@ -1,23 +1,35 @@
-<view class='page'>
-<view class='page__hd page__hd1'>
-    <view class='weui-cell weui-cell_access'>
-      <view class='weui-cell__bd'>
-        <view class='my-info'>登录密码</view>
-        <input placeholder='请输入原密码' ></input>
-      </view>
+<!-- <view class='page__bd'>
+  <view class='input-box'>
+    <view>登录密码</view>
+    <input bindinput='watchInput' data-type='old' password='true' placeholder='请输入原密码'></input>
+  </view>
+</view>
+<view class='page__bd'>
+  <view class='input-box'>
+    <view>设置密码</view>
+    <input bindinput='watchInput' data-type='new' password='true' placeholder='请设置新密码'></input>
+  </view>
+  <view class='input-box'>
+    <view>重置密码</view>
+    <input bindinput='watchInput' data-type='re' password='true' placeholder='请再次输入'></input>
+  </view>
+</view>
+<button bindtap='sure' class='aw-but'>完成</button> -->
+<wxs src="../../../public/filter.wxs" module="filter" />
+
+<view class='padding-box'>
+  <view style='font-size:26rpx;color:#333;font-weight:600;margin-bottom:35rpx;'>请输入{{filter.hideTelephone(telephone)}}收到的短信验证码</view>
+  <view class='flex-between common-margin'>
+    <view class='flex-center code-input-box'>
+      <image class='code-icon' src='/image/v-code.png'></image>
+      <input class='c-input' placeholder-class='input-placeholder-common-color' type='number' placeholder='请输入验证码' bindinput='watchInput' data-type='code' />
     </view>
+    <button class='code-btn' bindtap='getCode' disabled='{{disabled}}'>{{buttonTimer}}</button>
   </view>
-  <view class='page__bd'>
-      <view class='weui-cell weui-cell_access'>
-        <view class='weui-cell__bd'>
-           设置密码<input placeholder='请设置新密码'></input>
-        </view>
-      </view>
-      <view class='weui-cell weui-cell_access'>
-        <view class='weui-cell__bd'>
-           重置密码<input placeholder='请再次输入'></input>
-        </view>
-      </view>
+  <view class='flex-center pass-input common-margin'>
+    <text style='font-size:30rpx;font-weight:600;margin-right:30rpx;'>输入新密码</text>
+    <input class='c-input' placeholder-class='input-placeholder-common-color' type='text' placeholder='请输入新密码' password='true' bindinput='watchInput' data-type='pass'/>
   </view>
-  <button class='aw-but'>完成</button>
+  <view style='font-size:24rpx;color:#999;'>密码长度6~16位，建议含数字、字母、符号至少两种或以上</view>
+  <button class='change-btn' bindtap="sure">确定</button>
 </view>

@@ -1,6 +1,13 @@
 {
   "navigationBarTitleText": "购物车",
+  "enablePullDownRefresh": false,
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616",
+  "backgroundColor": "#f8b616",
   "usingComponents": {
-    "login-component": "../../login/login/login"
+    "login": "../../login/login/login",
+    "no": "../indexEmpty/indexEmpty",
+    "retailStore": "../retailStore/retailStore",
+    "returnBall": "../../../assembly/returnBall/returnBall"
   }
 }

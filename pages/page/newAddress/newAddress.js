@@ -5,18 +5,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    province: '',
-    city: '',
-    area: '',
     show: false,
     nameVal:'',
     addressVal:'',
     telephone:'',
     userId: '123',
+    isDefault:false,
     isEdit:false,
+    region: [],
     id:''
   },
-
+  bindRegionChange: function (e) {
+    this.setData({
+      region: e.detail.value
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -36,11 +39,9 @@ Page({
     Api.addressInfo({id:id})
       .then(res => {
         const obj=res.obj
-        console.log(obj)
         _this.setData({
-          province: obj.province,
-          city: obj.city,
-          area: obj.county,
+          isDefault: obj.isDefault,
+          region: [obj.province, obj.city, obj.county],
           nameVal: obj.userName,
           addressVal: obj.detailAddress,
           telephone: obj.userPhone,
@@ -84,11 +85,10 @@ Page({
   },
   checkTel:function(){
     if (!this.testTel()) {
-      wx.showToast({
-        title: '请输入正确手机号码',
-        icon: 'none',
-      })
-      return;
+      Api.showToast('请输入正确手机号码')
+      return false;
+    }else{
+      return true
     }
   },
   testTel() {
@@ -98,29 +98,6 @@ Page({
     }
     return true;
   },
-  //城市选择
-  sureSelectAreaListener: function (e) {
-    var that = this;
-    that.setData({
-      show: false,
-      province: e.detail.currentTarget.dataset.province,
-      city: e.detail.currentTarget.dataset.city,
-      area: e.detail.currentTarget.dataset.area
-    })
-  },
-  chooseAddress: function () {
-    console.log("xuanzedizhi")
-    var that = this;
-    that.setData({
-      show: true
-    })
-  },
-  bindRegionChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      region: e.detail.value
-    })
-  },
   /**
    * 添加地址
    */
@@ -129,11 +106,12 @@ Page({
     var _this = this,
       userName = this.data.nameVal,
       userPhone = this.data.telephone,
-      isDefault = false,
+      isDefault = this.data.isDefault,
       userId = this.data.userId,
-      county = this.data.area,
-      province = this.data.province,
-      city = this.data.city,
+      region = this.data.region,
+      province= region[0],
+      city= region[1],
+      county= region[2],
       detailAddress = this.data.addressVal,
       addressArr = {}
     addressArr = { userName: userName, userPhone: userPhone, isDefault: isDefault, userId: userId, county: county, province: province, city: city, detailAddress: detailAddress }
@@ -141,16 +119,12 @@ Page({
   },
   saveAddress:function(){
     var _this = this
-    Api.saveAddress(this.getInputVal())
-      .then(res => {
-        wx.showToast({
-          title: '添加成功',
-          icon: 'none',
-          duration: 2000
+    if (this.checkTel()){
+      Api.saveAddress(this.getInputVal())
+        .then(res => {
+          _this.goBack()
         })
-        _this.goBack()
-      })
-
+    }
   },
   editAddress:function(){
     var list = this.getInputVal(),
@@ -158,11 +132,7 @@ Page({
     list.id=this.data.id
     Api.editAddress(list)
       .then(res => {
-        wx.showToast({
-          title: '编辑成功',
-          icon: 'none',
-          duration: 2000
-        })
+        Api.showToast('编辑成功')
         _this.goBack()
       })
   },
@@ -208,10 +178,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

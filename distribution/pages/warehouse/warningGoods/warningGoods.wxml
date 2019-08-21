@@ -1,0 +1,33 @@
+<import src="/distribution/static/template/goodNum/goodsNumItem.wxml" />
+<view class='header com-background-color'>
+  <view class='com-flex-between com-margin-box'>
+    <view class='search-input-box com-flex-center'>
+      <image src='/distribution/images/search-white.png' class='search-img'></image>
+      <input value='{{serText}}' bindinput='watchInput' class='font26 flexone' placeholder='输入商品名称、货号' placeholder-style='color:#fff;' style='padding-right:30rpx;'></input>
+    </view>
+    <text class='font30 ser-btn flexone' bindtap='search'>搜索</text>
+  </view>
+
+  <view class='filter-box com-flex-center'>
+    <view class='color-chunk com-background-color'></view>
+    <picker range="{{wareHouse}}" range-key='name' bindchange="setHouse" class='flexone com-text-ellipsis'>
+      <view class='com-flex-center'>
+        <text class='house-name'>{{sureWare.name}}</text>
+        <image class='com-tri-icon' src='/distribution/images/tri-down.png'></image>
+      </view>
+    </picker>
+    <radio-group class='lalala com-flex-center' bindchange='setLow'>
+      <label class='com-flex-center'>
+        <radio color='#f8b616' value='low' checked></radio>
+        <text style='padding-right:20rpx;'>低于下限</text>
+      </label>
+      <label class='com-flex-center'>
+        <radio color='#f8b616' value='high'></radio>
+        <text>高于上限</text>
+      </label>
+      </radio-group>
+  </view>
+</view>
+<view style='overflow:hidden;'>
+  <template wx:for="{{goodsList}}" wx:key='{{index}}' is="goodsWarning" data="{{...item}}"></template>
+</view>

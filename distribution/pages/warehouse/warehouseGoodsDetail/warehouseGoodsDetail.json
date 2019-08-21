@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "sideMenu":"../..//assembly/sideMenu/sideMenu"
+  },
+  "navigationBarTitleText": "商品库存",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#f8b616"
+}

@@ -1,3 +1,10 @@
 {
-  "navigationBarTitleText": "个人中心"
+  "navigationBarTitleText": "个人中心",
+  "usingComponents": {
+    "login": "../../login/login/login",
+    "no": "../indexEmpty/indexEmpty",
+    "initstroe":"../../cloudOrder/applyStore/applyStore",
+    "retailStore": "../retailStore/retailStore",
+    "returnBall": "../../../assembly/returnBall/returnBall"
+  }
 }

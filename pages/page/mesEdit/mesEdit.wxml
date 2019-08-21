@@ -1,80 +1,150 @@
+<wxs src='../../../public/filter.wxs' module='filter'></wxs>
 <view class='mes-cont'>
   <view class="ym_jpstorename">
-  <view class="ym_jpstorelogo">
-      <navigator url='../goodWe/goodWe'><image class="store-logo" src="/image/font.png" ></image></navigator>
+    <view class="ym_jpstorelogo">
+      <image bindtap='editFun' wx:if='{{storeMes!=""}}' class="store-logo" src="{{baseUrl}}{{logo}}?x-oss-process=style/logo"></image>
     </view>
-    爱恋珠宝华北区总店<image class='xyd' src="/image/edit2.png" bindtap='editFun'></image>
-    <view><text> 云商号 ECP0580881</text></view>
+    <view url='../updateMes/updateMes?name=name&value={{storeMes.name}}&types={{globalData.projectName}}名称'>{{storeMes.name}}</view>
+    <!-- <image class='xyd' src="/image/edit2.png"></image> -->
+    <!-- <navigator url='../updateMes/updateMes?name=name&value={{storeMes.name}}&types={{globalData.projectName}}名称'><text> 店铺号 {{storeMes.id}}</text></navigator> -->
   </view>
-  <view class="ym_jpstoredesc">
-    <text class="leftyh">“</text>爱恋珠宝在秉同时，吸收不同风格的时尚元素，努力创新发展，形成了“仁、义、礼、智、信、爱”的经营理念...<text class="rightyh">”</text>
-  </view>
+  <navigator wx:if='{{storeMes.description!=null}}' url='../updateMes/updateMes?name=description&value={{storeMes.description}}&types={{globalData.projectName}}简介' class="ym_jpstoredesc">
+    <text class="leftyh">“</text>{{storeMes.description}}
+    <text class="rightyh">”</text>
+  </navigator>
+  <navigator wx:if='{{storeMes.description==null}}' url='../updateMes/updateMes?name=description&value=&types={{globalData.projectName}}简介' class="ym_jpstoredesc">
+    <text class="leftyh">“</text>
+    <text class="rightyh">”</text>
+  </navigator>
 </view>
 <view class="weui_cells">
-    <view>
-      <image  src="/image/positionico.png"></image>
-      <text>北京市东城区永定门外大街101号</text>
-      <view class='weui-view'>
+  <navigator url='../editStoreAddress/editStoreAddress?address={{address}}&province={{province}}&city={{city}}&county={{county}}'>
+    <image style='position:absolute;top:35rpx' src="/image/positionico.png"></image>
+    <view class='add-style'>{{address}}</view>
+    <view class='weui-view'>
       <image class='img' src="/image/icl.png"></image>
     </view>
-    </view>
-    <view>
-      <image  src="/image/lou.png"></image>
-      <text> 所属商城</text>
-      <view class='new-left'>
-       北京市百荣世贸<image class='img' src="/image/icl.png"></image>
-      </view>
-    </view>
-    <view>
-      <image  src="/image/lou.png"></image>
-      <text>  楼层区域</text>
-      <view class='new-left'>
-        二期 F5 B区 5210<image class='img' src="/image/icl.png"></image>
-      </view>
-    </view>
-</view>
-<view class="weui_cells">
-    <view>
-      <text> 业态</text>
-      <view class='new-left new-left1'>
-       购物
-      </view>
-    </view>
-    <view>
-      <text>  主营范围</text>
-      <view class='new-left'>
-        男装、女装<image class='img' src="/image/icl.png"></image>
-      </view>
-    </view>
-</view>
-<view class="weui_cells">
-    <image  src="/image/mes12.png"></image>
-    <text class="store-address">小云店信息 </text>
-    <view class='weui-view'>
-      <image class='m-img' src="/image/xcx.png"></image><image class='img' src="/image/icl.png"></image>
-    </view>
-   <view class='weui-xian weui-xian1'></view>
-</view>
-<view class='weui-time'>
-  <view>营业时间<text>10:00~22:00</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-  <view>客服电话<text>010-68593566</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-  <view>客服微信<text>linmufan666</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-  <view>公众号<text>戴俪名珠宝</text><view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-</view>
-<view class="weui_cells">
-    <image  src="/image/mes12.png"></image>
-    <text class="store-address">其他设置 </text>
-   <view class='weui-xian weui-xian1'></view>
-</view>
-<view class='weui-time'>
-  <view>发票设置<view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-  <view>邮费设置<view class='mes-tel'><image src="/image/icl.png"></image></view></view>
-</view>
-  <view class='showHide' hidden='{{showHide}}'>
-    <view class='sh-cont'>
-      <view class='sh-title'>更换小云店logo</view>
-      <view bindtap='uploadImg'>拍照</view>
-      <view>从手机相册选取</view>
-      <view bindtap='closeShow'>取消</view>
+  </navigator>
+  <view>
+    <image src="/image/lou.png"></image>
+    <text> 所属商城</text>
+    <view class='new-left' wx:if='{{floorInfo!=null}}' style='padding-right:20rpx'>
+      {{floorInfo.mallName}}
     </view>
   </view>
+  <!--  bindtap='showModal' data-type='floor' -->
+  <view>
+    <image src="/image/lou.png"></image>
+    <text>  楼座楼层</text>
+    <view class='new-left'>
+      {{floorInfo.balconyName}} {{floorInfo.floorName}} {{floorInfo.areaName}}
+      <!-- <image class='img' src="/image/icl.png"></image> -->
+    </view>
+  </view>
+  <view style='padding-left:60rpx'>
+    门牌号
+    <view class='new-left'>{{shopCode}}</view>
+  </view>
+  <!-- <navigator style='padding-left:60rpx' url='../updateArea/mesEdit?value={{shopCode}}&storeId={{storeId}}'>
+        门牌号
+        <view class='new-left'>{{shopCode}}<image class='img' src="/image/icl.png"></image></view>
+    </navigator> -->
+</view>
+<view class='business' wx:if='{{floorModal}}'>
+  <view class='picker-box'>
+    <view class='picker-title'>选择楼座楼层</view>
+    <picker-view value="{{beforeChose}}" class='picker' indicator-class="chosewola" bindchange="choseFloor">
+      <picker-view-column>
+        <view wx:for="{{choseMall}}" wx:key="{{index}}" class='overflow-text'>{{item.name}}</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{choseFloor}}" wx:key="{{index}}" class='overflow-text'>{{item.floorNum}}</view>
+      </picker-view-column>
+      <picker-view-column>
+        <view wx:for="{{choseArea}}" wx:key="{{index}}" class='overflow-text'>{{item.name}}</view>
+      </picker-view-column>
+    </picker-view>
+    <view bindtap='sureFloor' class='picker-sure'>确认</view>
+  </view>
+</view>
+<view class="weui_cells">
+  <view>
+    <text> 从事业态</text>
+    <view class='new-left new-left1'>
+      购物
+    </view>
+  </view>
+  <navigator url='../main/main?name={{storeMes.businessScope}}&mallCode={{floorInfo.mallCode}}'>
+    <text>  主营范围</text>
+    <view class='new-left' wx:if="{{storeMes.businessScope}}">
+      {{filter.my_slice(storeMes.businessScope,10)}}
+      <image class='img' src="/image/icl.png"></image>
+    </view>
+  </navigator>
+</view>
+<navigator class="weui_cells" url="../storeIcon/storeIcon">
+  <image src="/image/mes12.png"></image>
+  <text class="store-address">{{globalData.projectName}}信息 </text>
+  <view class='weui-view'>
+    <image class='m-img' src="/image/xcx.png"></image>
+    <image class='img' src="/image/icl.png"></image>
+  </view>
+  <view class='weui-xian weui-xian1'></view>
+</navigator>
+<view class='weui-time'>
+  <navigator url='../updateMes/updateMes?name=openingTime&value={{openingTime}}&types=营业时间'>营业时间
+    <text>{{openingTime}}</text>
+    <view class='mes-tel'>
+      <image src="/image/icl.png"></image>
+    </view>
+  </navigator>
+  <navigator url='../updateMes/updateMes?name=servicePhone&value={{servicePhone}}&types=客服电话'>客服电话
+    <text>{{servicePhone}}</text>
+    <view class='mes-tel'>
+      <image src="/image/icl.png"></image>
+    </view>
+  </navigator>
+  <navigator url='../updateMes/updateMes?name=wechatNumber&value={{wechatNumber}}&types=客服微信'>客服微信
+    <text>{{wechatNumber}}</text>
+    <view class='mes-tel'>
+      <image src="/image/icl.png"></image>
+    </view>
+  </navigator>
+  <navigator url='../updateMes/updateMes?name=wechatPublicAccount&value={{wechatPublicAccount}}&types=公众号'>公众号
+    <text class='wePublicAccount'>{{wechatPublicAccount}}</text>
+    <view class='mes-tel'>
+      <image src="/image/icl.png"></image>
+    </view>
+  </navigator>
+</view>
+<view class="weui_cells">
+  <image src="/image/mes12.png"></image>
+  <text class="store-address">其他设置 </text>
+  <view class='weui-xian weui-xian1'></view>
+</view>
+<view class='weui-time'>
+  <navigator url='../../payment/uploadPayment/uploadPayment'>收款码
+    <view class='mes-tel'>
+      <image src="/image/icl.png"></image>
+    </view>
+  </navigator>
+  <navigator url='../editInvoice/editInvoice?code={{storeMes.isReceipt}}&name={{storeMes.receiptInfo}}'>发票设置
+    <view class='mes-tel'>
+      <image src="/image/icl.png"></image>
+    </view>
+  </navigator>
+  <navigator url='../postageInfo/postageInfo?code={{storeMes.postageInfo}}'>邮费设置
+    <view class='mes-tel'>
+      <text wx:if='{{storeMes.postageInfo!=null}}'>{{storeMes.postageInfo}}</text>
+      <image src="/image/icl.png"></image>
+    </view>
+  </navigator>
+</view>
+<!-- <view class='showHide' hidden='{{showHide}}'>
+    <view class='sh-cont'>
+      <view class='sh-title'>更换{{globalData.projectName}}logo</view>
+      <view  bindtap="chooseImage">拍照</view>
+      <view  bindtap="chooseImage">从手机相册选取</view>
+      <view bindtap='closeShow'>取消</view>
+    </view>
+  </view> -->

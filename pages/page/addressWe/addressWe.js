@@ -1,5 +1,6 @@
 const app = getApp();
 import Api from '../../../utils/api.js'
+import authHandler from '../../../utils/authHandler.js';
 Page({
 
   /**
@@ -7,11 +8,12 @@ Page({
    */
   data: {
     list:[],
-    userId:'123',
     show1:false,
     id:'',
   },
-  
+  showLogin() {
+    this.selectComponent("#login").showPage();
+  },
   selectAdd(e){
     let obj = this.data.list[e.currentTarget.dataset.index];
     var pages = getCurrentPages();
@@ -28,12 +30,11 @@ Page({
    */
   
   onLoad: function (options) {
-    this.getList()
+   
   },
   getList:function(){
-    var _this = this,
-      userId = this.data.userId
-    Api.addressList({ userId: userId })
+    var _this = this
+    Api.addressList()
       .then(res => {
         var res = res.obj
         _this.setData({
@@ -45,22 +46,24 @@ Page({
   selectList(e){
     const index1=e.currentTarget.dataset.index,
           id = e.target.dataset.id,
-          userId=this.data.userId,
-          array = this.data.list
-    array.forEach((item, index, arr) => {
-      var sItem = "list[" + index + "].isDefault"
-      this.setData({
-        [sItem]: false,
-      })
-    })
-    array[index1].isDefault = true
-    Api.addressDefault({userId: userId,id: id})
-      .then(res => {
-        var res = res.obj
-      })
-    this.setData({
-      list: array
-    })
+          array = this.data.list,
+          _this=this,
+          code =e.currentTarget.dataset.code
+    if (code==0) {
+      Api.removeDefault({ id: id })
+        .then(res => {
+          var res = res.obj
+          _this.getList()
+        })
+    } else {
+      Api.addressDefault({ id: id })
+        .then(res => {
+          var res = res.obj
+          _this.getList()
+        })
+    
+    }
+   
   },
   // 删除
   deleteList(e) {
@@ -74,11 +77,7 @@ Page({
     var _this=this
     Api.addressDelete({ id:this.data.id})
       .then(res => {
-        wx.showToast({
-          title: '删除成功',
-          icon: 'none',
-          duration: 2000,
-        })
+        Api.showToast('删除成功')
         this.getList()
       })
   },
@@ -88,29 +87,15 @@ Page({
     wx.navigateTo({
       url: '../newAddress/newAddress?id='+id,
     })
-    // const index = e.currentTarget.dataset.index,
-    //   id = e.target.dataset.id,
-    //   _this = this
-    //   console.log(id)
-    // let detailList = this.data.list;
-    // detailList.splice(index, 1);
-    // app.http.deleteRequest('/admin/user/usershopaddress/{{id}}', { id: id })
-    //   .then(res => {
-    //     var res = res.obj
-    //     _this.setData({
-    //       list: detailList
-    //     })
-    //     wx.showToast({
-    //       title: '成功',
-    //       icon: 'none',
-    //       duration: 2000
-    //     })
-    //   })
   },
   newAddress(e){
-    wx.navigateTo({
-      url: '../newAddress/newAddress',
-    })
+    if (!authHandler.isLogin()) {
+      this.showLogin()
+    } else {
+      wx.navigateTo({
+        url: '../newAddress/newAddress',
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -154,10 +139,4 @@ Page({
   
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
 })

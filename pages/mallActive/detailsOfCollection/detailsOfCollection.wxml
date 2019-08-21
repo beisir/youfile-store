@@ -1,0 +1,32 @@
+<view class='listData'>
+  <view>
+    <view class='doc-top'>
+      <image src='/image/cloudStoreIcon.png'></image>
+      <view>入帐金额</view>
+      <view>+{{dataDetails.accountAmount}}</view>
+    </view>
+     <view class='doc-details'>
+        <view>商品说明
+          <text>{{dataDetails.goodsName==null?'':dataDetails.goodsName}}</text>
+        </view>
+        <view>订单号
+          <text>{{dataDetails.orderNumber}}</text>
+        </view>
+        <view>交易单号
+          <text>{{dataDetails.paymentNumber}}</text>
+        </view>
+        <view>支付时间
+          <text>{{dataDetails.paidDate}}</text>
+        </view>
+        <view>付款方手机号
+          <text>{{dataDetails.customerPhone}}</text>
+        </view>
+        <view>支付方式
+          <text>{{dataDetails.payWay}}</text>
+        </view>
+        <view>收款总金额
+          <text>￥{{dataDetails.payAmount}}</text>
+        </view>
+      </view>
+  </view>
+</view>

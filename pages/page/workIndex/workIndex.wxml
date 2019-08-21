@@ -1,0 +1,229 @@
+<!-- 新功能弹窗 -->
+<view class='com-new-function-layer' wx:if="{{newFunLayer}}">
+  <view class='com-color-back com-new-function-inner'>
+    <image src='/image/close-white.png' style='position:absolute;right:20rpx;top:20rpx;width:35rpx;height:35rpx;' bindtap='closeModal'></image>
+    <image src='/image/appicon-whiteback.png' class='title-pic'></image>
+    <view class='white-title'>开启小云店库存一体化</view>
+    <view class='white-box'>
+      <view class='font24'>更新版本：</view>
+      <view class='font36 com-blod-font'>小云店版本 V4.0</view>
+      <image src='/image/new-funciton.png' style='width:140rpx;height:82rpx;margin:30rpx 0 25rpx;'></image>
+      <view class='layer-msg-item'>1.更新了新建云享品功能</view>
+      <view class='layer-msg-item'>2.更新了商品库存一体化功能</view>
+      <view class='layer-msg-item'>3.更新了小云店全新页面风格</view>
+      <button class='layer-bottom-btn com-color-back' hover-class='none' data-type='know' bindtap='closeModal'>体验库存一体化</button>
+    </view>
+  </view>
+</view>
+<!-- 初始化店铺 -->
+<view wx:if="{{initOrder && limitShow == 2}}">
+  <initstroe></initstroe>
+</view>
+<!-- 判断进来的身份 -->
+<view wx:if="{{isStoreOwerShow}}" class='isStoreOwer'></view>
+<login id="login"></login>
+<view class='wk-cont wk-cont-title' style='margin:0;background:#f7f7f7;border-radius:0;'>
+  <view class='title-position-box'>
+    <view class='wk-title'>
+      <text>今日收入（元）</text>
+      <view>{{todaySaleNum==null?0.00:todaySaleNum}}</view>
+      <image mode='widthFix' bindtap='goDerm' src='/image/xcx2.png'></image>
+    </view>
+    <view class='tips-box' wx:if="{{!auditStatus || auditStatus=='init' || auditStatus=='fail' || auditStatus=='success' && !indexData.auditBroadcast}}">
+      <navigator url='../userM/userM' class='tip-item com-flex-between'>
+        <view class='com-flex-center'>
+          <image src='/image/tips.png' class='tip-icon' style='padding-right:20rpx;'></image>
+          <text wx:if="{{!auditStatus}}">完善资质信息后，可开通线上支付，去完善</text>
+          <text wx:if="{{auditStatus=='init'}}">开通线上支付资质信息正在审核中，请耐心等待~</text>
+          <text wx:if="{{auditStatus=='fail'}}">开通线上支付资质信息审核未通过，查看原因</text>
+          <text wx:if="{{auditStatus=='success' && !indexData.auditBroadcast}}">恭喜您~您已开通线上支付服务，点击查看</text>
+        </view>
+        <image src='/image/ca-you.png' class='tip-icon'></image>
+      </navigator>
+    </view>
+  </view>
+  <!-- ../follow/follow -->
+  <view class='wk-bot' style="{{auditStatus=='success' && indexData.auditBroadcast?'margin-top:20rpx;':''}}">
+    <navigator url='../../businessFriend/merchant/follow/follow'>{{followNum==null?0:followNum}}
+      <view>关注人数</view>
+    </navigator>
+    <navigator url='../../role/supplyOrder/supplyOrder?navType=wait_deliver'>{{payPurchaseOrders==null?0:payPurchaseOrders}}
+      <view>付款供货单</view>
+      <view class='wk-xian'></view>
+    </navigator>
+    <navigator url='../../role/order/order?navType=wait_deliver'>{{payOrders==null?0:payOrders}}
+      <view>付款订单</view>
+      <view class='wk-xian'></view>
+    </navigator>
+    <navigator class='wk-fg'></navigator>
+    <navigator url='../../businessFriend/merchant/newMerchant/newMerchant'>
+      <text class='{{verifyFriends>0?"com-red-color":""}}'>{{verifyFriends==null?0:verifyFriends}}</text>
+      <view>待验证商友</view>
+    </navigator>
+    <navigator url='../../role/supplyOrder/supplyOrder?navType=wait_deliver'>
+      <text class='{{unshippedPurchaseOrders>0?"com-red-color":""}}'>{{unshippedPurchaseOrders==null?0:unshippedPurchaseOrders}}</text>
+      <view>待发货供货单</view>
+      <view class='wk-xian'></view>
+    </navigator>
+    <navigator url='../../role/order/order?navType=wait_deliver'>
+      <text class='{{unshippedOrders>0?"com-red-color":""}}'>{{unshippedOrders==null?0:unshippedOrders}}</text>
+      <view>待发货订单</view>
+      <view class='wk-xian'></view>
+    </navigator>
+  </view>
+</view>
+<form report-submit='true' bindsubmit='getFormId'>
+  <view class='wk-cont wk-cont'>
+    <view class='fun-title'>管理中心</view>
+    <view class='wx-bot-cont'>
+      <navigator url='/distribution/pages/purchase/orderList/orderList'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-caigou.png'></image>
+          </view>
+          <view>采购</view>
+        </button>
+      </navigator>
+      <navigator url='../../role/order/order'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-order.png'></image>
+          </view>
+          <view>订单管理</view>
+        </button>
+      </navigator>
+       <navigator url='../../role/supplyOrder/supplyOrder'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-order.png'></image>
+          </view>
+          <view>供货单</view>
+        </button>
+      </navigator>
+      <!-- <navigator wx:if="{{onlinePay}}" url='../../faceToFaceOrder/createOrder/createOrder'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-openOrder.png'></image>
+          </view>
+          <view>开单</view>
+        </button>
+      </navigator>
+      <navigator wx:else url='../../faceToFaceOrder/ftfOpenpay/ftfOpenpay'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-openOrder.png'></image>
+          </view>
+          <view>开单</view>
+        </button>
+      </navigator> -->
+      <navigator url='../../admin/status/status'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-goods.png'></image>
+          </view>
+          <view>云享品</view>
+        </button>
+      </navigator>
+
+      <navigator url='/pages/capital/index/index'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-money.png'></image>
+          </view>
+          <view>资金中心</view>
+        </button>
+      </navigator>
+
+      <navigator url='/distribution/pages/warehouse/index/index'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-warehouse.png'></image>
+          </view>
+          <view>库存</view>
+        </button>
+      </navigator>
+
+      <navigator url='../../businessFriend/customerManage/index/index'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-user.png'></image>
+          </view>
+          <view>客户中心</view>
+        </button>
+      </navigator>
+
+      <navigator url='../../page/mesEdit/mesEdit'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-dianpuguanli.png'></image>
+          </view>
+          <view>店铺管理</view>
+        </button>
+      </navigator>
+
+     
+      <!-- <navigator url='../../faceToFaceOrder/shopkeeperList/shopkeeperList'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/indexicon-order.png'></image>
+          </view>
+          <view>门店订单</view>
+        </button>
+      </navigator> -->
+    </view>
+  </view>
+
+  <view class='wk-cont wk-cont'>
+    <view class='fun-title'>营销宝</view>
+    <view class='wx-bot-cont spec-img-box'>
+      <navigator url='../../marketing/poster/posterStoreroom/posterStoreroom'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/pic-icon.png'></image>
+          </view>
+          <view>朋友圈海报</view>
+        </button>
+      </navigator>
+      <navigator url='/pages/mallActive/list/list'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/notice-icon.png' style='height:46rpx;width:55rpx;'></image>
+          </view>
+          <view>云促销</view>
+        </button>
+      </navigator>
+      <navigator url='/pages/active/acList/acList'>
+        <button form-type='submit' class='reset-form-btn'>
+          <view class='entry-icon-box'>
+            <image mode='widthFix' src='/image/thunder-icon.png'></image>
+          </view>
+          <view>限时抢订</view>
+        </button>
+      </navigator>
+    </view>
+  </view>
+</form>
+<view style='height:150rpx;'></view>
+
+<view class='goHome' bindtap='goHome'>
+  <view>
+    <image src="/image/home.png"></image>
+  </view>回首页</view>
+<view class='bottom_M'>
+  <view>
+    <image src="/image/ww.png"></image>
+    <view class='active'>工作台</view>
+  </view>
+  <navigator url='/pages/mallActive/yunDist/yunDist'>
+    <image src="/image/fenxiao2.png"></image>
+    <view>云分销</view>
+  </navigator>
+  <navigator open-type="redirect" url='../../businessFriend/merchant/index/index'>
+    <image src="/image/admin2.png"></image>
+    <view>商友录</view>
+  </navigator>
+  <navigator open-type="redirect" url='../userM/userM'>
+    <image src="/image/w11.png"></image>
+    <view>我的</view>
+  </navigator>
+</view>

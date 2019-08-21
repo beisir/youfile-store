@@ -1,53 +1,143 @@
 import Api from '../../../utils/api.js'
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    globalData: app.globalData,
     watchInput: false,
     value:'',
     addSpec:false,
-    storeId: wx.getStorageSync('storeId'),
     send:'',
     status:'',
     success: false,
     oneGreet: false,
     aginGreet: false,
     accept:'',
-    remark:null,
+    logo:'',
+    name:'',
+    addShow:false,
+    storeName:'',
+    address:'',
+    servicePhone:'',    
+    floor:'',
+    baseUrl: app.globalData.imageUrl,
+    wechatNumber:'',
+    businessScope:'',
+    goodsList:[],
+    remarkChange:false,
+    remarkName:'',
+    mallLogo:'',
+    floorInfo:null
   },
-
+  showLogo: function () {
+    this.selectComponent("#login").showPage();
+  },
   /**
    * 生命周期函数--监听页面加载
    */
+  calling: function () {
+    var mobile = this.data.servicePhone
+    wx.makePhoneCall({
+      phoneNumber: mobile,
+      success: function () {
+      },
+      fail: function () {
+      }
+    })
+  },
+  getMession: function (status, accept) {
+  var _this = this,
+      url=''
+    if (status == 1) {
+      url = '/admin/bizfriend/store/applyinfo/'+accept
+    }
+    if(status == 0) {
+      url = '/api/store/' + accept+'/floorinfo'
+    }
+    if (status == 2){
+      url = '/admin/bizfriend/store/merchantinfo/'+accept
+    }
+    if(status == 3) {
+      url = '/admin/bizfriend/store/applyinfo/'+accept
+    }
+    Api.purchaserUserId(url)
+    .then(res => {
+      var obj = res.obj,
+        store = obj.store[0],
+        goodsList = store.goodsList,
+        storeMes = store.store,
+        floor = Api.isFloorInfo(obj.floor)
+      if (goodsList!=null){
+        _this.setData({
+          goodsList:goodsList
+        })
+      }
+      _this.setData({
+        floorInfo: floor
+      })
+      if (obj != null) {
+        _this.setData({
+          address: storeMes.address,
+          servicePhone: storeMes.servicePhone,
+          wechatNumber: storeMes.wechatNumber, 
+          businessScope: storeMes.businessScope, 
+          // send: storeMes.id,
+          name: storeMes.name == null ? '' :storeMes.name,
+          logo: storeMes.logo,
+        })
+      }
+    })
+},
   onLoad: function (options) {
-    console.log(options)
+    if(!options){return}
     var status = options.status,
         send=options.send,
-        storeId = this.data.storeId,
         accept = options.accept,
         remark = options.remark
     this.setData({
+      send:send
+    })
+    if (remark =="null"){
+      this.setData({
+        value:'',
+        remarkName:'',
+      })
+    }else{
+      this.setData({
+        value: remark,
+        remarkName: remark,
+      })
+    }
+    this.setData({
       status:status,
-      send:send,
       accept: accept,
-      remark: remark
     })
   if(status==2){
     this.setData({
       success:true
     })
-  }else{
-    if (storeId==send) {
-      this.setData({
-        aginGreet: true
-      })
-    } else {
-      this.setData({
-        oneGreet: true
-      })
-    }
+    this.getMession(status, accept)
+  } 
+  if (status == 1){
+    this.setData({
+      aginGreet: true
+    })
+    this.getMession(status, accept)
+  }
+  if (status == 3) {
+    this.setData({
+      oneGreet: true
+    })
+    this.getMession(status, send)
+  } 
+  if(status==0){
+    this.setData({
+      addShow:true
+    })
+    this.getMession(status, accept)
   }
    
   },
@@ -66,6 +156,11 @@ Page({
     }
   },
   setName:function(){
+    if(this.data.value!=''){
+      this.setData({
+        watchInput: true,
+      })
+    }
     this.setData({
       addSpec: true,
     })
@@ -77,30 +172,43 @@ Page({
     })
   },
   confirm:function(){
-    var val = this.data.value,
-    status=this.data.status
-    if (status==1){
-
-    }else{
-      if (val != '') {
-        Api.setName({ purchaserUserId: wx.getStorageSync('purchaserUserId'), remark: val })
+    var _this=this,
+      purchaserUserId = this.data.accept,
+      remark = this.data.value
+    _this.setData({
+      remarkName: remark
+    })
+    if (Api.isNotEmpty(remark)){
+      this.cancel()
+      if (this.data.status == 2) {
+        Api.setName({ remark: remark, storeId: purchaserUserId})
           .then(res => {
             wx.showToast({
-              title: '设置成功',
+              title: '修改成功',
               icon: 'none',
               duration: 1000,
               mask: true
             })
-            this.cancel()
           })
       }
     }
     
   },
   invitation:function(){
-    wx.navigateTo({
-      url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remark,
-    })
+    if (!Api.isNotEmpty(wx.getStorageSync("access_token"))) {
+      this.showLogo()
+      return
+    }
+    var floorInfo = this.data.floorInfo
+    if (Api.isNotEmpty(floorInfo)){
+      wx.navigateTo({
+        url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remarkName + "&name=" + this.data.name + "&logo=" + this.data.logo + "&send=" + this.data.send + "&mallName=" + floorInfo.mallName + "&mallLogo=" + floorInfo.mallLogo,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../invitation/invitation?accept=' + this.data.accept + "&remark=" + this.data.remarkName + "&name=" + this.data.name + "&logo=" + this.data.logo + "&send=" + this.data.send + "&mallName=&mallLogo=",
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -109,18 +217,34 @@ Page({
 
   },
   urlHome: function () {
+    wx.setStorageSync("storeId", this.data.accept)
+    app.globalData.switchStore=true
     wx.switchTab({
       url: '../../page/home/home'
     })
   },
   passFunc:function(){
-
+    var send = this.data.send,
+      accept = this.data.accept,
+      remark = this.data.remarkName
+    Api.acceptmerchant({ accept: accept, send: send, remark: remark })
+      .then(res => {
+        wx.showToast({
+          title: '添加成功',
+          icon: 'none',
+          duration: 1000,
+          mask: true
+        })
+        wx.navigateTo({
+          url: '../mewWholesaler/mewWholesaler'
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    app.globalData.switchStore=true
   },
 
   /**
@@ -151,10 +275,4 @@ Page({
 
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
