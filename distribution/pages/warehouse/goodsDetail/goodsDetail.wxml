@@ -102,6 +102,7 @@
           <text>（库存数：</text>
           <text class="font36 com-red-color">{{filter.parseLongNum(item.totalNum)}}</text>
           <text>）</text>
+          <view class="adjust-btn">调整</view>
         </view>
         <view class='sku-item com-flex-center' wx:for="{{item.resetGoodsList}}" wx:key="{{goodsIndex}}" wx:for-item="goods" wx:for-index="goodsIndex">
           <view class='sku-main'>
@@ -151,9 +152,10 @@
         <view class='house-title com-flex-center font24'>
           <view class='color-chunk'></view>
           <text class='house-name'>{{item.warehouseName}} {{item.regionName}}</text>
-          <text>（库存数：{{item.warehouseName}}</text>
+          <text>（库存数：</text>
           <text class="font36 com-red-color">{{filter.parseLongNum(item.totalNum)}}</text>
           <text>）</text>
+          <view class="adjust-btn">调整</view>
         </view>
         <view class='sku-item com-flex-center' wx:for="{{item.stockList}}" wx:key="{{goodsIndex}}" wx:for-item="goods" wx:for-index="goodsIndex">
           <view class='sku-main'>

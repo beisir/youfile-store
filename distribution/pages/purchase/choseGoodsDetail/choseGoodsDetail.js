@@ -214,9 +214,11 @@ Page({
             skuPriceNumList.forEach(el => {
               let secondArr = JSON.parse(JSON.stringify(skulist[1].goodsSpecificationValueVOList))
               secondArr.forEach(sec => {
-                sec.lastPurchasePrice = allSkuObj[el.specValueCode + "|" + sec.specValueCode].lastPurchasePrice
-                sec.stockNum = allSkuObj[el.specValueCode + "|" + sec.specValueCode].stockNum
-                sec.skuCode = allSkuObj[el.specValueCode + "|" + sec.specValueCode].skuCode
+                let nowItem = allSkuObj[el.specValueCode + "|" + sec.specValueCode] || allSkuObj[sec.specValueCode + "|" + el.specValueCode]
+                if (!nowItem){return}
+                sec.lastPurchasePrice = nowItem.lastPurchasePrice
+                sec.stockNum = nowItem.stockNum
+                sec.skuCode = nowItem.skuCode
                 sec.num = 0
                 sec.price = 0
               })
