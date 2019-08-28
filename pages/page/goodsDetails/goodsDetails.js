@@ -36,7 +36,7 @@ Page({
     goodsInfo: {}, //商品信息
     disLike: false,
     stockNumHide: false,
-    saleBatchNumGoods: 0,
+    saleBatchNumGoods: 1,
     newSkuArrTwo: [],
     nameTwo: '',
     differNum: 0,

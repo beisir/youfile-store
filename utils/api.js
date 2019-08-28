@@ -258,6 +258,8 @@ import {
   warningGoodsListUrl,
   getWarningSettingUrl,
   updateWarningSettingUrl,
+  // 商品分类
+  getGoodsAllClassUrl
 } from './constUrl.js'
 
 const app = getApp()
@@ -1672,7 +1674,11 @@ function updateWarningSetting(data) {
 function getGoodsSupplier(data){
   return app.pageRequest.pageGet(getGoodsSupplierUrl, data)
 }
+function getGoodsAllClass(data) {
+  return app.http.getRequest(getGoodsAllClassUrl, data)
+}
 module.exports = {
+  getGoodsAllClass,
   getGoodsSupplier,
   getWarningSetting,
   updateWarningSetting,

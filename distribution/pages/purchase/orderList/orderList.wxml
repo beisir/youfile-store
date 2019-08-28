@@ -42,7 +42,10 @@
     <!-- 商品列表 -->
     <view class='goods-detail' wx:for="{{item.purchaseGoodsVOS}}" wx:key="{{index}}" wx:for-item="goods" bindtap='toDetail' data-no='{{item.no}}'>
       <image mode='aspectFit' class='goods-img' src='{{baseUrl+goods.mainImgUrl}}'></image>
-      <view class='goods-name flexone font28'>{{goods.goodsName}}</view>
+      <view class='goods-name flexone font28'>
+        <view>{{goods.goodsName}}</view>
+        <view wx:if="{{item.status==='part' && goods.remainNum>0}}" style="font-size:24rpx;color:#bbb;">已入库<text style="color:#333;">{{goods.inputNum}}</text>件 待入库<text class="com-color-font">{{goods.remainNum}}</text>件</view>
+      </view>
       <view class='font24'>共 {{goods.totalNum}} 件</view>
     </view>
     <!-- 价格 -->

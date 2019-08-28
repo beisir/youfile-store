@@ -5,6 +5,12 @@
   </view>
   <button class='layer-btn com-background-color' bindtap='closeModal'>知道了</button>
 </tip>
+<tip show="{{sureDelModal}}" title="提示">
+  <view style='color:#666;font-size:30rpx;text-align:center;'>
+    <view>确认删除该库存商品吗？</view>
+  </view>
+  <button class='layer-btn com-background-color' bindtap='delGoods'>确定</button>
+</tip>
 
 <import src="/distribution/static/template/goodNum/goodsNumItem.wxml" />
 <view class='header com-background-color'>
@@ -23,7 +29,7 @@
       <view bindtap='toDetail' data-id="{{item.goodsId}}">
         <template is="goodsItem" data="{{...item}}" class='goodsItem'></template>
       </view>
-      <view class='close-btn' bindtap='delGoods' data-id='{{item.goodsId}}'>
+      <view class='close-btn' bindtap='ifDel' data-id='{{item.goodsId}}'>
         <image class='img60' src='/image/sBai.png'></image>
         <text>删除</text>
       </view>

@@ -2,6 +2,9 @@ import Api from './api.js'
 class Calculation {
   // 添加商品数量，判断活动商品是否超出库存
   selectedSkuNum(obj, value, isTrue,type) {
+    if (value<0){
+      value = 0
+    }
     // isTrue为true代表减
     var isActivity = obj.isActivity //判断是否是活动商品
     var stockNum = obj.stockNum
@@ -149,16 +152,22 @@ class Calculation {
       // 判断是否享受 起批设置
       if (saleBatchNum == 0) {
         if (saleBatchAmount == 0) {
-          discountShow = false
+          // discountShow = false
+          if ( nums >= saleBatchNumGoods) {
+            discountShow = false
+          } else {
+            discountShow = true
+          }
         } else {
           discountShow = true
-          if (total >= saleBatchAmount) {
+          if (total >= saleBatchAmount || nums >= saleBatchNumGoods) {
             discountShow = false
           } else {
             discountShow = true
           }
         }
         differMoney = saleBatchAmount - total
+        differNum = saleBatchNumGoods - nums
       } else {
         if (saleBatchAmount == 0) {
           if (nums >= saleBatchNum || nums >= saleBatchNumGoods) {

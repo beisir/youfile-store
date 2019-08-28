@@ -18,6 +18,39 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  // 确定关闭
+  sureClose(){
+    let type = this.data.closeType
+    if (type === 'num'){
+      this.setData({
+        switch1Change: true
+      })
+      this.setSaleBatchNum(0)
+    } else if (type === 'price'){
+      this.setData({
+        switch2Change: true
+      })
+      this.setSaleBatchAmount(0)
+    }
+    this.setData({
+      ifclose: false
+    })
+  },
+  closeModal(){
+    let type = this.data.closeType
+    if (type === 'num') {
+      this.setData({
+        switch1Change: false
+      })
+    } else {
+      this.setData({
+        switch2Change: false
+      })
+    }
+    this.setData({
+      ifclose: false
+    })
+  },
   // 开关
   switch1Change: function (e) {
     if (e.detail.value){
@@ -28,9 +61,9 @@ Page({
       this.togetherFun()
     }else{
       this.setData({
-        switch1Change: true
+        closeType: 'num',
+        ifclose: true
       })
-      this.setSaleBatchNum(0)
     }
   },
   switch2Change: function (e) {
@@ -42,16 +75,28 @@ Page({
       this.batchFun()
     } else {
       this.setData({
-        switch2Change: true
+        closeType: 'price',
+        ifclose: true
       })
-      this.setSaleBatchAmount(0)
     }
   },
   onLoad: function (options) {
   
   },
   // 取消
-  cancel: function () {
+  cancel: function (e) {
+    if(e){
+      let type = e.currentTarget.dataset.type
+      if (type === 'price') {
+        this.setData({
+          switch2Change: true
+        })
+      } else if (type === 'num') {
+        this.setData({
+          switch1Change: true
+        })
+      }
+    }
     this.setData({
       together: false,
       batch: false,

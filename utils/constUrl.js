@@ -308,3 +308,5 @@ export const editOrderExpressUrl = '/admin/out-details/{{code}}/express-infos'
 export const warningGoodsListUrl = '/admin/stores/{{storeId}}/warning-stocks'
 export const getWarningSettingUrl = '/admin/warehouses/settings/{{storeId}}'
 export const updateWarningSettingUrl = '/admin/warehouses/settings'
+// 获取商品分类层级
+export const getGoodsAllClassUrl = '/admin/shop/category/three/level/name/{{threeCategoryCode}}'

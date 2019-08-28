@@ -14,8 +14,17 @@ Page({
   search(){
     this.getGoodsList(true)
   },
-  delGoods(e){
-    Api.delRegionGoods({ regionCode: this.data.code, goodsId: e.currentTarget.dataset.id}).then(res=>{
+  ifDel(e){
+    this.setData({
+      sureDelModal: true,
+      delid: e.currentTarget.dataset.id
+    })
+  },
+  delGoods(){
+    this.setData({
+      sureDelModal: false
+    })
+    Api.delRegionGoods({ regionCode: this.data.code, goodsId: this.data.delid}).then(res=>{
       Api.showToast(res.message,()=>{
         this.getGoodsList(true)
       })

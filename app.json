@@ -38,6 +38,7 @@
   ],
   "pages": [
     "pages/page/home/home",
+    "pages/admin/batchSet/batchSet",
     "pages/admin/addGoods/addGoods",
     "pages/page/workIndex/workIndex",
     "pages/businessFriend/selfinformation/selfinformation",
@@ -138,7 +139,6 @@
     "pages/cloudOrder/newCloud/newCloud",
     "pages/page/orderSuccess/orderSuccess",
     "pages/payment/uploadPayment/uploadPayment",
-    "pages/admin/batchSet/batchSet",
     "pages/page/invoice/invoice",
     "pages/businessFriend/index/index",
     "pages/page/newAddress/newAddress",

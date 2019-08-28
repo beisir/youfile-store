@@ -410,6 +410,12 @@ Page({
       stockNumLock: false
     })
   },
+  // 起批量
+  wholesaleSwitch(e) {
+    this.setData({
+      wholesaleSwitch: e.detail.value
+    })
+  },
   stockFun: function(e) {
     var _this = this,
       val = e.detail.value
@@ -499,10 +505,16 @@ Page({
             })
           }
         }
+        // 起批量
         if (obj.saleBatchNum) {
           _this.setData({
             stock: obj.saleBatchNum
           })
+          if (obj.saleBatchNum > 1){
+            this.setData({
+              wholesaleSwitch: true
+            })
+          }
         }
         _this.setData({
           pics: arrs,
@@ -563,7 +575,7 @@ Page({
     })
   },
   onLoad: function(options) {
-    this.getConfig()
+    // this.getConfig()
     this.setData({
       goodsId: options.goodsId
     })
@@ -744,6 +756,7 @@ Page({
   },
   confirmdelete: function() {
     var _this = this
+    this.closeModal()
     Api.adminGoodsDelete({
         goodId: this.data.goodsId
       })
@@ -825,6 +838,12 @@ Page({
       goodsListData = this.data.skuListData,
       clickSpecShow = this.data.clickSpecShow,
       addGoodsDetails = this.data.addGoodsDetails
+
+    // 起批量
+    if (!this.data.wholesaleSwitch) {
+      saleBatchNum = 1
+    }
+
     for (var i = 0; i < addGoodsDetails.length; i++) {
       if (addGoodsDetails[i].input) {
         if (Api.isNotEmpty(addGoodsDetails[i].value)) {
@@ -968,7 +987,8 @@ Page({
   closeModal(){
     this.hideTaleFun()
     this.setData({
-      cantEdit: false
+      cantEdit: false,
+      deleteGoods1: false
     })
   },
   /**
