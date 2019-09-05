@@ -54,33 +54,33 @@ Page({
   getList(re){
     if (re) {
       app.pageRequest.pageData.pageNum = 0
-      this.setData({
-        distributor: [],
-        supList: []
-      })
     }
     if (this.data.tabType === 'distribution') {
-      this.getDistributorList()
+      this.getDistributorList(re)
     } else {
-      this.getSupList()
+      this.getSupList(re)
     }
   },
-  // 获取分销商
+  // 获取进货商
   getDistributorList(re){
+    let arr = this.data.distributor
+    if(re){arr = []}
     Api.merchantList().then(res=>{
       if (res.obj.result){
         this.setData({
-          distributor: this.data.distributor.concat(res.obj.result),
+          distributor: arr.concat(res.obj.result),
         })
       }
     })
   },
   // 获取供应商
-  getSupList(){
+  getSupList(re){
+    let arr = this.data.supList
+    if (re) { arr = [] }
     if(this.data.supListType == 'sup'){
       Api.getSupplierList().then(res => {
         this.setData({
-          supList: this.data.supList.concat(res.obj.result),
+          supList: arr.concat(res.obj.result),
           supplierNum: res.obj.totalCount
         })
       })

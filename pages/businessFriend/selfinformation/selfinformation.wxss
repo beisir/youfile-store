@@ -119,3 +119,12 @@ goods-ser{height:80rpx;position:relative;background:#fff}
 
 .com-bottom-btn-group{border-radius: 100rpx;height: 100rpx;bottom: 20rpx;background: #f8b616;color: #fff;overflow: hidden;width: 710rpx;left: 0;right: 0;margin: auto;}
 .com-bottom-btn-group .btngroup-btn-item{background: #f8b616;color: #fff;}
+
+/* 公用信息展示框 */
+.msg-item{font-size: 30rpx;position: relative;min-height:100rpx;}
+.msg-title{width: 190rpx;display: flex;padding-left: 30rpx;box-sizing: border-box;color: #666;}
+.msg-msg-box{border-bottom: 2rpx solid #f0f0f0;height: 100rpx;color: #333;display: flex;align-items: center;flex: 1;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.right-icon{margin: 0 30rpx 0 auto; }
+.tel-icon{width: 35rpx;margin: 0 30rpx 0 auto; }
+
+.info-cont .msg-item:last-child .msg-msg-box{border: 0;}

@@ -18,7 +18,7 @@
       <view class='list-item'>关注用户</view>
     </navigator>
     <navigator url='../myCustomerList/myCustomerList?type=jhs'>
-     <view class='list-item'>云分销商</view>
+     <view class='list-item'>云进货商</view>
     </navigator>
     <navigator url='../myCustomerList/myCustomerList?type=cjkh'>
      <view class='list-item'>成交用户</view>

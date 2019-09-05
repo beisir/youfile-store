@@ -28,7 +28,7 @@
       <view class='font40 com-red-color'>{{goods.stockNum}}</view>
     </view>
     <view class='num-item' style='color:#ccc;'>
-      <view class='font28'>分销商库存</view>
+      <view class='font28'>进货商库存</view>
       <view class='font40'>0</view>
     </view>
   </view>

@@ -38,7 +38,7 @@
 </view>
 <view wx:if="{{status !== '1'}}">
   <view class='bf-btn'  wx:if='{{success}}'  bindtap='urlHome'>去进货</view>
-  <view class='bf-btn'  wx:if='{{aginGreet}}' bindtap='invitation'>再次添加到云分销商</view>
+  <view class='bf-btn'  wx:if='{{aginGreet}}' bindtap='invitation'>再次添加到云进货商</view>
   <view class='bf-btn'  wx:if='{{oneGreet}}'  bindtap='passFunc'>通过验证</view>
-  <view class='bf-btn'  wx:if='{{pass}}'  bindtap='invitation'>添加到云分销商</view>
+  <view class='bf-btn'  wx:if='{{pass}}'  bindtap='invitation'>添加到云进货商</view>
 </view>

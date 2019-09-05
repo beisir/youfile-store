@@ -15,7 +15,7 @@ Page({
   data: {
     baseUrl: app.globalData.imageUrl,
     activeGoods:[],//商品销量榜
-    customData: [],//云分销商排行榜
+    customData: [],//云进货商排行榜
     activityNumber: '',
   },
 

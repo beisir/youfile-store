@@ -59,6 +59,7 @@
 .cart-list{border-bottom:0;margin-left:245rpx;min-height:200rpx;padding-top:10rpx;}
 .new-c-t{position:absolute;right:30rpx;color:#f8b616;font-size:24rpx;top: 0;}
 .new-c-t text{position:relative;padding:0rpx 10rpx;border:2rpx solid #f8b616;right:0;margin-left:15rpx}
+.new-c-t .normalText{padding: 0;margin: 0;border: 0;}
 .touch-item{display:flex;position:relative;justify-content:space-between;background:#fff;overflow:hidden;margin:10rpx 20rpx;}
 .content{padding-left:20rpx;line-height:50rpx;margin-right:0;-webkit-transition:all 0.4s;transition:all 0.4s;-webkit-transform:translateX(130rpx);transform:translateX(130rpx);margin-left:-130rpx}
 .del{background-color:#FF4141;width:130rpx;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;-webkit-transform:translateX(130rpx);transform:translateX(130rpx);-webkit-transition:all 0.4s;transition:all 0.4s}

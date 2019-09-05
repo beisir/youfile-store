@@ -13,64 +13,61 @@
   </view>
 </view>
 <view class='bf-cont info-cont'>
-  <view class='in-cont'>
-    <text>主营范围</text>
-    <view>{{msg.businessScope}}</view>
+  <view class="com-flex-center msg-item">
+    <view class="msg-title">主营范围</view>
+    <view class="msg-msg-box">{{msg.businessScope}}</view>
   </view>
-  <view class='in-cont'>
-    <text>所在地区</text>
-    <view>{{msg.province + msg.city + msg.county }} </view>
+  <view class="com-flex-center msg-item">
+    <view class="msg-title">所在地区</view>
+    <view class="msg-msg-box">{{msg.province + msg.city + msg.county }}</view>
   </view>
-
-  <view class='in-cont'>
-    <text>详细地址</text>
-    <view>{{msg.address}}</view>
+  <view class="com-flex-center msg-item">
+    <view class="msg-title">详细地址</view>
+    <view class="msg-msg-box">{{msg.address}}</view>
   </view>
-  <view class='in-cont' wx:if="{{goodsList && goodsList.length>0}}">
+  <view class="com-flex-center msg-item">
+    <view class="msg-title">负责人</view>
+    <view class="msg-msg-box">{{msg.principal}}</view>
+  </view>
+  <view class="com-flex-center msg-item">
+    <view class="msg-title">手机号</view>
+    <view class="msg-msg-box">
+      {{msg.principalPhone}}
+      <image  mode="widthFix" class="tel-icon" bindtap='calling' data-tel="{{msg.principalPhone}}" src="/image/tel1.png"></image>
+    </view>
+  </view>
+  <view class="com-flex-center msg-item">
+    <view class="msg-title">联系人</view>
+    <view class="msg-msg-box">{{msg.linkman}}</view>
+  </view>
+  <view class="com-flex-center msg-item">
+    <view class="msg-title">手机号</view>
+    <view class="msg-msg-box">
+      {{msg.linkmanPhone}}
+      <image  mode="widthFix" class="tel-icon" bindtap='calling' data-tel="{{msg.linkmanPhone}}" src="/image/tel1.png"></image>
+    </view>
+  </view>
+  <view class="com-flex-center msg-item">
+    <view class="msg-title">微信号</view>
+    <view class="msg-msg-box">{{msg.weixinNumber}}</view>
+  </view><view class="com-flex-center msg-item">
+    <view class="msg-title">邮箱</view>
+    <view class="msg-msg-box">{{msg.email}}</view>
+  </view>
+  <!-- <view class='in-cont' wx:if="{{goodsList && goodsList.length>0}}">
     <text>商品</text>
     <view style='min-height:120rpx'>
       <view wx:for='{{goodsList}}' wx:key='{{index}}' wx:if='{{index<4}}' class='in-more-img'>
         <image mode="widthFix" src="{{baseUrl}}{{item.mainImgUrl}}?x-oss-process=style/goods-small"></image>
       </view>
       <view class='in-img'>
-        <!-- <image mode="widthFix" src="/image/icl.png"></image> -->
+        <image mode="widthFix" src="/image/icl.png"></image>
       </view>
     </view>
-  </view>
-  <view class='in-cont'>
-    <text>负责人</text>
-    <view>{{msg.principal}}</view>
-  </view>
-  <view class='in-cont'>
-    <text>手机号</text>
-    <view>{{msg.principalPhone}}
-      <view class='in-cont-img'>
-        <image mode="widthFix" bindtap='calling' src="/image/tel1.png" data-tel="{{msg.principalPhone}}"></image>
-      </view>
-    </view>
-  </view>
-  <view class='in-cont'>
-    <text>联系人</text>
-    <view>{{msg.linkman}}</view>
-  </view>
-  <view class='in-cont'>
-    <text>手机号</text>
-    <view>{{msg.linkmanPhone}}
-      <view class='in-cont-img'>
-        <image mode="widthFix" bindtap='calling' src="/image/tel1.png" data-tel="{{msg.linkmanPhone}}"></image>
-      </view>
-    </view>
-  </view>
-  <view class='in-cont'>
-    <text>微信号</text>
-    <view>{{msg.weixinNumber}}</view>
-  </view>
-  <view class='in-cont'>
-    <text>邮箱</text>
-    <view>{{msg.email}}</view>
-  </view>
+  </view> -->
 </view>
 
+<view class="bottom-replace-box"></view>
 <view class='com-bottom-btn-group'>
   <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='edit'>编辑</button>
   <button class='btngroup-btn-item' hover-class="none" form-type='submit' bindtap='del'>删除</button>

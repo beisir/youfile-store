@@ -65,7 +65,7 @@ Page({
       this.getSupList()
     }
   },
-  // 获取分销商
+  // 获取进货商
   getDistributorList(re) {
     Api.merchantList().then(res => {
       if (res.obj.result) {

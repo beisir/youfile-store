@@ -10,22 +10,22 @@
           <image style='margin-left:10rpx;' class='itimg' src="/image/icl.png"></image>
         </view>
         <view wx:if='{{limitShow==3}}' class='new-c-t'>
-          <view wx:if='{{storeAmount!=0 && enjoyCost==true && storeAmount!=0  && differentPrice<0}}'>全场已满{{storeAmount}}元
+          <!--  -->
+          <view wx:if='{{enjoyCost==true || enjoyCostNew==true}}'>全场已享受批发价
+            <text class="tagtext">混批</text>
+          </view>
+          <view wx:elif="{{storeAmount>0 || storeNum>0}}">
+            <text style='color:#666;border:0'>还差<text style='color:red;border:0;margin-left:0' wx:if="{{differentPrice>0}}">{{differentPrice}}<text class="normalText" style="color:#666;">元</text></text>或<text style='color:red;border:0;margin-left:0' wx:if="{{differentNum>0}}">{{differentNum}}<text class="normalText" style="color:#666;">件</text></text>享受批发价</text>
+          </view>
+          
+          <!-- <view wx:if='{{storeAmount!=0 && enjoyCost==true && differentPrice<=0}}'>全场已满{{storeAmount}}元
             <text>混批</text>
           </view>
-          <view wx:if='{{!enjoyCost && !enjoyCostNew}}'>
-            <text style='color:#666;border:0' wx:if='{{differentPrice>0}}'>还差<text style='color:red;border:0;margin-left:0'>{{differentPrice}}</text>元全场可享受批发价</text>
+          <view wx:if='{{!enjoyCost && !enjoyCostNew && differentPrice>0}}'>
+            <text style='color:#666;border:0'>还差<text style='color:red;border:0;margin-left:0'>{{differentPrice}}</text>元全场可享受批发价</text>
             <text>混批</text>
-          </view>
-          <view wx:if='{{storeAmount==0 && enjoyCost==true}}'>全场已享受批发价
-            <text>混批</text>
-          </view>
-          <view wx:if='{{!enjoyCost && enjoyCostNew==true}}'>全场已享受批发价
-            <text>混批</text>
-          </view>
-          <view wx:if='{{storeAmount!=0 && enjoyCost==true && storeAmount!=0 && differentPrice>0}}'>全场已享受批发价
-            <text>混批</text>
-          </view>
+          </view> -->
+          
         </view>
       </view>
       <!--编辑  -->
@@ -50,7 +50,7 @@
                       <image class='down' src="/image/down.png"></image>
                     </view>
                      <!-- <block  wx:if='{{!item.isActivity}}'> -->
-                      <view wx:if='{{limitShow==3 && item.saleBatchNum && storeNum>0}}' class='man-j'>满
+                      <view wx:if='{{limitShow==3 && item.saleBatchNum}}' class='man-j'>满
                         <text>{{item.saleBatchNum}}</text>件起批
                         <text style='color:#333;' wx:if='{{item.saleBatchNum-item.tempLen>0}}'> 还差<text style='color:#f8b616'>{{item.saleBatchNum-item.tempLen}}</text>件</text>
                       </view>

@@ -32,7 +32,7 @@
   <view class='setnum' hidden='{{switch1Change}}' bindtap='togetherFun'>
     混批件数<view>{{value}}<image class='weui-img' src="/image/icl.png"></image></view>
   </view>
-  <view class='nView'><image src="/image/bac.png"></image>设置后，云分销商只要一次性采购数量达到或高于混批件数，则全场可享受批发价，优先于单个商品设置起批件数规则</view>
+  <view class='nView'><image src="/image/bac.png"></image>设置后，云进货商只要一次性采购数量达到或高于混批件数，则全场可享受批发价，优先于单个商品设置起批件数规则</view>
 </view>
 <view class='shop-cont'>
   <view>
@@ -41,5 +41,5 @@
   <view class='setnum'  hidden='{{switch2Change}}' bindtap='batchFun'>
     混批金额<view><text wx:if='{{value1!=""}}'>￥</text>{{value1}}<image class='weui-img' src="/image/icl.png"></image></view>
   </view>
-  <view class='nView'><image src="/image/bac.png"></image>设置后，云分销商只要一次性采购金额达到或高于混批金额，则全场可享受批发价，优先于单个商品设置起批量规则</view>
+  <view class='nView'><image src="/image/bac.png"></image>设置后，云进货商只要一次性采购金额达到或高于混批金额，则全场可享受批发价，优先于单个商品设置起批量规则</view>
 </view>
