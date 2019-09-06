@@ -1,3 +1,5 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
 <view class='head-tab com-flex-center'>
   <view class='flexone com-flex-around font30' style='height:100%;'>
     <view class='tab-item {{tabType=="jinhuo"?"tab-item-ac":""}} com-gray-color' data-type='jinhuo' style='color:#ccc;'>进货单</view>
@@ -32,7 +34,7 @@
     <view class='supplier-name common-padding com-flex-between font28' bindtap='toDetail' data-no='{{item.no}}'>
       <view class='com-flex-center'>
         <image class='img30 ' src='/distribution/images/cloud-gold.png'></image>
-        <text class='name-text'>{{item.supplierStoreName}}</text>
+        <text class='name-text'>{{filter.my_slice(item.supplierStoreName,9)}}</text>
         <text class='com-gray-color' wx:if="{{item.source == 'handmade'}}">手工录入</text>
       </view>
       <view wx:if="{{item.status==='init'}}" class='order-tip com-red-background'>待入库</view>

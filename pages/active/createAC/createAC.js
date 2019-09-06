@@ -141,10 +141,24 @@ Page({
       })
     })
   },
+  setTimePickerData() {
+    let dayArr = []
+    for (let i = 0; i < 30; i++) {
+      dayArr.push(i + '天')
+    }
+    let hourArr = []
+    for (let i = 0; i < 24; i++) {
+      hourArr.push(i + '小时')
+    }
+    this.setData({
+      dayandhour: [dayArr, hourArr]
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setTimePickerData()
     this.getTemList()
     this.initData()
     var phone = wx.getSystemInfoSync();  //调用方法获取机型

@@ -15,7 +15,7 @@
             <text class="tagtext">混批</text>
           </view>
           <view wx:elif="{{storeAmount>0 || storeNum>0}}">
-            <text style='color:#666;border:0'>还差<text style='color:red;border:0;margin-left:0' wx:if="{{differentPrice>0}}">{{differentPrice}}<text class="normalText" style="color:#666;">元</text></text>或<text style='color:red;border:0;margin-left:0' wx:if="{{differentNum>0}}">{{differentNum}}<text class="normalText" style="color:#666;">件</text></text>享受批发价</text>
+            <text style='color:#666;border:0'>还差<text style='color:red;border:0;margin-left:0' wx:if="{{differentPrice>0}}">{{differentPrice}}<text class="normalText" style="color:#666;">元</text></text><text style='border:0;margin-left:0' wx:if="{{differentPrice>0 && differentNum>0}}">或</text><text style='color:red;border:0;margin-left:0' wx:if="{{differentNum>0}}">{{differentNum}}<text class="normalText" style="color:#666;">件</text></text>全场享受批发价</text>
           </view>
           
           <!-- <view wx:if='{{storeAmount!=0 && enjoyCost==true && differentPrice<=0}}'>全场已满{{storeAmount}}元

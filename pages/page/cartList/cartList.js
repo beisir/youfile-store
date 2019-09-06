@@ -761,15 +761,16 @@ Page({
           total1 = newTotalPrice1 + newTotalPrice
         }
       }
-      if (numTrue == len) {
-        this.setData({
-          enjoyCostNew: true
-        })
-      } else {
-        this.setData({
-          enjoyCostNew: false
-        })
-      }
+      // 购物车的所有商品满足批发，则显示全场满足
+      // if (numTrue == len) {
+      //   this.setData({
+      //     enjoyCostNew: true
+      //   })
+      // } else {
+      //   this.setData({
+      //     enjoyCostNew: false
+      //   })
+      // }
       differentPrice = storeAmount - differentPriceNew
       differentNum = storeNum - allGoodsNum
     }
