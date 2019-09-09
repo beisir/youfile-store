@@ -53,7 +53,11 @@ Page({
     obj.outDetailsList = this.data.list
     obj.orderNumber = this.data.orderNum
     Api.sureOutHouse(obj).then(res=>{
-      Api.showToast(res.message,()=>{
+      let msg = res.message
+      if (this.data.orderType === 'ziti'){
+        msg = '验证成功'
+      }
+      Api.showToast(msg,()=>{
         wx.navigateBack({ delta: 2 })
       })
     })
