@@ -135,7 +135,7 @@ class request {
   onlychoseImg(obj) {
     if (!obj) { obj = {} }
     obj.sourceType ? '' : obj.sourceType = ['album', 'camera']
-    obj.sizeType ? '' : obj.sizeType = ['original', 'compressed']
+    obj.sizeType ? '' : obj.sizeType = ['compressed']
     obj.count ? '' : obj.count = 1
     let pages = getCurrentPages(),
       current = pages[pages.length - 1];

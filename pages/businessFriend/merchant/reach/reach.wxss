@@ -40,3 +40,4 @@ page{background-color:#f7f7f7;}
 .re-bottom{color: #F93E3F;}
 .is-font{color: #666;font-size: 30rpx;font-weight: normal}
 .is-font image{width: 35rpx;height: 35rpx;transform: rotate(180deg);margin-right: 10rpx;vertical-align: middle;margin-top: -2rpx;}
+.in-cont-img .tel-icon{width: 35rpx;}

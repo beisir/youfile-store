@@ -10,13 +10,13 @@
 </mes>
 
 <view class='header-title'>
-  <view class='title-text'>搜索云分销商</view>
-  <view class='title-tip'>快捷查找您的云分销商</view>
+  <view class='title-text'>搜索云进货商</view>
+  <view class='title-tip'>快捷查找您的云进货商</view>
 </view>
 
 
 <view class='sup-search-box com-flex-center'>
-  <input class='sup-search-input flexone' placeholder='输入云分销商名称、手机号' bindconfirm='searchBtn' bindinput='changeValue' value="{{value}}"></input>
+  <input class='sup-search-input flexone' placeholder='输入云进货商名称、手机号' bindconfirm='searchBtn' bindinput='changeValue' value="{{value}}"></input>
   <view class='sup-search-btn' bindtap='searchBtn'>搜索</view>
 </view>
 

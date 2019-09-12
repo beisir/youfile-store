@@ -30,7 +30,7 @@
     </view>
   </view>
   <view class='yd-datas'>
-    <view class='yd-purch'>共{{totalCount}}个云分销商</view>
+    <view class='yd-purch'>共{{totalCount}}个云进货商</view>
     <navigator wx:for="{{result}}" wx:key='index' url="../distRecords/distRecords?userId={{item.userId}}&index={{index}}" class='yd-pList'>
       <view class='dr-pic dr-pic1' wx:if='{{index==0}}'>
         <image src='{{baseUrl}}{{item.headPic}}'></image>
@@ -46,7 +46,7 @@
       </view>
       <view class='ydpl-right'>
         <view>{{filter.my_slice(item.userName,6)}}
-          <text>{{item.storeNature=="2"?"新零售":"云分销商"}}</text>
+          <text>{{item.storeNature=="2"?"新零售":"云进货商"}}</text>
           <image wx:if="{{item.storeNature=='2'}}" src='/image/u4.png'></image>
         </view>
         <view>

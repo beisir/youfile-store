@@ -66,7 +66,7 @@ Page({
       _this.getTransList()
     })
   },
-  // 获取云分销商数据详情
+  // 获取云进货商数据详情
   getDetails:function(){
     var _this=this,
       userId = this.data.userId
@@ -87,7 +87,7 @@ Page({
       _this.initData()
     })
   },
-  // 获取云分销商交易记录
+  // 获取云进货商交易记录
   getTransList: function (){
     if (this.data.loadingList) { return }
     var _this=this,

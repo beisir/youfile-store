@@ -178,14 +178,16 @@ Page({
     var that = this,
       indexDel = this.data.indexDel,
       goodsId = this.data.goodsId
-    that.data.detailList.splice(indexDel, 1)
+    that.setData({
+      show1: false
+    })    
     Api.adminGoodsDelete({
       goodId: goodsId
     })
       .then(res => {
+        that.data.detailList.splice(indexDel, 1)
         Api.showToast("删除成功")
         that.setData({
-          show1: false,
           showMore: true,
           showHidet: true,
           showHideb: true,

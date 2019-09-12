@@ -163,7 +163,7 @@
       <view class="ym_goodsstorer">
         <view class='store-goodsNum-data'>{{favoriteNum}}</view>关注人数</view>
       <view class="ym_goodsstorer">
-        <view class='store-goodsNum-data'>{{store.purchaserNum}}</view>云分销商</view>
+        <view class='store-goodsNum-data'>{{store.purchaserNum}}</view>云进货商</view>
     </view>
     <view class="ym_goodsstoreop" hidden='{{likeShow}}'>
       <view class="ui-link" bindtap='likeStore'>
@@ -242,7 +242,21 @@
         <view class='new-man' wx:if='{{!discountShow}}'>
           <text>已享受批发价，共优惠<text>{{difference}}</text>元</text>{{goodsInfo.isActivity?'(不包含活动商品)':''}}
         </view>
-        <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount==0}}'>
+        <!-- saleBatchNumGoods 商品起批量 saleBatchNum 全部起批量  saleBatchAmount 全局金额 -->
+        <view class='new-man' wx:if='{{discountShow && ( numbers || nums)}}'>
+          <block wx:if="{{saleBatchNumGoods>1 && saleBatchNum>0}}">
+            <text wx:if="{{saleBatchNumGoods <= saleBatchNum}}">本品差<text>{{differNum}}</text>件 </text>
+            <text wx:if="{{saleBatchNumGoods > saleBatchNum}}">本店满<text>{{saleBatchNum}}</text>件 </text>
+          </block>
+          <block wx:else>
+            <text wx:if="{{saleBatchNumGoods>1}}">本品差<text>{{differNum}}</text>件 </text>
+            <text wx:if="{{saleBatchNum>0}}">本店满<text>{{saleBatchNum}}</text>件 </text>
+          </block>
+          <text wx:if="{{differMoney>0}}">全场金额差<text>{{differMoney}}</text>元 </text>
+          <text wx:if="{{saleBatchNumGoods>1 || saleBatchNum>0 || differMoney>0}}">可享受批发价</text>
+        </view>
+
+        <!-- <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount==0}}'>
           <text wx:if='{{differNum==0}}'>本店满<text>{{saleBatchNum}}</text>件可享受批发价</text>
           <text wx:if='{{differNum>0}}'>本品差<text>{{differNum}}</text>件可享受批发价</text>
         </view>
@@ -253,6 +267,9 @@
         <view class='new-man' wx:if='{{discountShow && saleBatchNum>0 && saleBatchAmount>0 && differNum>0}}'>
           <text>本品差<text>{{differNum}}</text>件 全场金额差<text>{{differMoney}}</text>元 可享受批发价</text>
         </view>
+        <view class='new-man' wx:if='{{discountShow && saleBatchNum==0 && saleBatchAmount==0 && differNum>0}}'>
+          <text>本品差<text>{{differNum}}</text>件 可享受批发价</text>
+        </view> -->
         <view class='gd-top'>
           <view class='gdclose-box' bindtap='closeAlert'>
             <image class='gdclose' src="/image/close.png"></image>

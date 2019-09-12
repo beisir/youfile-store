@@ -625,6 +625,7 @@ Page({
       totalNew = 0,
       differentPrice = this.data.differentPrice,
       differentPriceNew = 0,
+      differentNum = 0,
       saleBatchGoodsNum = 0,
       allGoodsAmount = 0,
       enjoyCost = false
@@ -678,10 +679,15 @@ Page({
           
           allGoodsNum += allTotalNum
           allGoodsTotal += allGoodsAmount
+
+          if (saleBatchGoodsNum > 0 && allTotalNum < saleBatchGoodsNum) {
+              detailList[i].enjoyPrice = false
+          }
+          
           if (storeNum == 0) {
             if (storeAmount == 0) {
-              detailList[i].enjoyPrice = true
-              enjoyCost = true
+              // detailList[i].enjoyPrice = true
+              // enjoyCost = true
             } else {
               detailList[i].enjoyPrice = false
               enjoyCost = false
@@ -716,18 +722,22 @@ Page({
                 enjoyCost = false
               }
             }
-            if (saleBatchGoodsNum > 0) {
-              if (allGoodsNum >= saleBatchGoodsNum) {
-                detailList[i].enjoyPrice = true
-              } else {
-                detailList[i].enjoyPrice = false
-              }
-            }
+            // if (saleBatchGoodsNum > 0) {
+            //   if (allGoodsNum >= saleBatchGoodsNum) {
+            //     detailList[i].enjoyPrice = true
+            //   } else {
+            //     detailList[i].enjoyPrice = false
+            //   }
+            // }
+          }
+          if (saleBatchGoodsNum > 0 && allTotalNum >= saleBatchGoodsNum) {
+            detailList[i].enjoyPrice = true
           }
         } else {
           detailList[i].enjoyPrice = false
         }
       }
+
       var newTotalPrice = 0
       var newTotalPrice1 = 0
       var len = detailList.length
@@ -751,22 +761,25 @@ Page({
           total1 = newTotalPrice1 + newTotalPrice
         }
       }
-      if (numTrue == len) {
-        this.setData({
-          enjoyCostNew: true
-        })
-      } else {
-        this.setData({
-          enjoyCostNew: false
-        })
-      }
+      // 购物车的所有商品满足批发，则显示全场满足
+      // if (numTrue == len) {
+      //   this.setData({
+      //     enjoyCostNew: true
+      //   })
+      // } else {
+      //   this.setData({
+      //     enjoyCostNew: false
+      //   })
+      // }
       differentPrice = storeAmount - differentPriceNew
+      differentNum = storeNum - allGoodsNum
     }
     this.setData({
       detailList: detailList,
       total1: total1.toFixed(2),
       enjoyCost: enjoyCost,
       differentPrice: parseInt(differentPrice),
+      differentNum: parseInt(differentNum)
     });
   },
   creatOrder: function() {

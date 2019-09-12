@@ -1,7 +1,7 @@
 <view class='header-ser-box com-flex-between'>
   <view class='com-flex-center ser-white-box'>
     <image class="ser-icon"  src="/image/search.png"></image>
-    <input class='flexone' placeholder="输入云分销商名称、手机号"   bindconfirm="searchBtn" bindinput='changeValue' value="{{value}}"></input>
+    <input class='flexone' placeholder="输入云进货商名称、手机号"   bindconfirm="searchBtn" bindinput='changeValue' value="{{value}}"></input>
     <image  src="/image/close.png" bindtap='emptyInput' class='close-btn'></image>
   </view>
   <view class='ser-btn flexone' bindtap='searchBtn'>搜索</view>
@@ -43,6 +43,6 @@
       <view>
         <image src="/image/user.png"></image>
       </view>
-      暂无新增的云分销商
+      暂无新增的云进货商
   </view>
 </view>

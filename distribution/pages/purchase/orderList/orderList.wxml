@@ -1,3 +1,5 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
 <view class='head-tab com-flex-center'>
   <view class='flexone com-flex-around font30' style='height:100%;'>
     <view class='tab-item {{tabType=="jinhuo"?"tab-item-ac":""}} com-gray-color' data-type='jinhuo' style='color:#ccc;'>进货单</view>
@@ -32,7 +34,7 @@
     <view class='supplier-name common-padding com-flex-between font28' bindtap='toDetail' data-no='{{item.no}}'>
       <view class='com-flex-center'>
         <image class='img30 ' src='/distribution/images/cloud-gold.png'></image>
-        <text class='name-text'>{{item.supplierStoreName}}</text>
+        <text class='name-text'>{{filter.my_slice(item.supplierStoreName,9)}}</text>
         <text class='com-gray-color' wx:if="{{item.source == 'handmade'}}">手工录入</text>
       </view>
       <view wx:if="{{item.status==='init'}}" class='order-tip com-red-background'>待入库</view>
@@ -42,7 +44,10 @@
     <!-- 商品列表 -->
     <view class='goods-detail' wx:for="{{item.purchaseGoodsVOS}}" wx:key="{{index}}" wx:for-item="goods" bindtap='toDetail' data-no='{{item.no}}'>
       <image mode='aspectFit' class='goods-img' src='{{baseUrl+goods.mainImgUrl}}'></image>
-      <view class='goods-name flexone font28'>{{goods.goodsName}}</view>
+      <view class='goods-name flexone font28'>
+        <view>{{goods.goodsName}}</view>
+        <view wx:if="{{item.status==='part' && goods.remainNum>0}}" style="font-size:24rpx;color:#bbb;">已入库<text style="color:#333;">{{goods.inputNum}}</text>件 待入库<text class="com-color-font">{{goods.remainNum}}</text>件</view>
+      </view>
       <view class='font24'>共 {{goods.totalNum}} 件</view>
     </view>
     <!-- 价格 -->

@@ -326,6 +326,12 @@ Page({
       nameLen: (val.substring(0, 55)).length
     })
   },
+  // 起批量
+  wholesaleSwitch(e){
+    this.setData({
+      wholesaleSwitch: e.detail.value
+    })
+  },
   stockFun: function(e) {
     var _this = this,
       val = e.detail.value
@@ -439,14 +445,29 @@ Page({
 
       })
   },
+  getClassCode() {
+    let code = wx.getStorageSync('addGoodsClass')
+    if (code) {
+      Api.getGoodsAllClass({ threeCategoryCode: code }).then(res => {
+        if (res.obj) {
+          this.setData({
+            codeName: res.obj.oneCategoryName + '>' + res.obj.twoCategoryName + '>' + res.obj.threeCategoryName,
+            categoryCode: res.obj.threeCategoryCode
+          })
+        }
+      })
+    }
+  },
   onLoad: function(options) {
-    this.getConfig()
+    // this.getConfig() // 起批量设置
     this.getZoneList()
     if(options.entryType){
       this.setData({
         entryType: options.entryType
       })
     }
+    // 返显商品分类
+    this.getClassCode()
   },
   // tab切换
   swichNav: function(e) {
@@ -602,7 +623,7 @@ Page({
       _this=this,
       mainImgUrl = '',
       newConst = this.data.newConst,
-      saleBatchNum = this.data.stock,
+      saleBatchNum = this.data.stock ? this.data.stock:1,
       goodsImageVOList = [],
       description = '',
       skuList0 = [],
@@ -613,6 +634,12 @@ Page({
       goodsSkuVOList = this.data.goodsSkuVOList,
       skuListData = this.data.skuListData,
       addGoodsDetails = this.data.addGoodsDetails
+
+    // 起批量  默认为1  当等于0或为空 原逻辑是代表不参与批发。现逻辑不存在0 不设置起批量，商友购买都参与批发
+    if (!this.data.wholesaleSwitch){
+      saleBatchNum = 1
+    }
+
     // 图片
     for (var i = 0; i < addGoodsDetails.length; i++) {
       if (addGoodsDetails[i].input) {
@@ -684,8 +711,11 @@ Page({
         zoneNum = zoneArr[0].zoneNumber
       }
     }catch(e){}
-    
-
+    // 缓存商品分类下次进来返显
+    wx.setStorage({
+      key: "addGoodsClass",
+      data: this.data.categoryCode
+    })
     var goodsVO = {
       "categoryCode": this.data.categoryCode,
       "customCategoryCode": this.data.categoryCustomCode,

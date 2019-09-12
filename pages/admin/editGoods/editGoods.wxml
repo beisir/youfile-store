@@ -44,8 +44,8 @@
 <!-- 删除商品-->
 <mes show="{{deleteGoods1}}" bind:sureSelectArea="sureSelectAreaListener">
   <view>
-    <text>确认删除？</text>
-    <button form-type='submit' bindtap='confirmdelete'>确定</button>
+    <text style="display:block;padding:0 20rpx;font-size:32rpx;">删除后，将会同步清除库存里的商品记录，确认删除吗？</text>
+    <button style="margin-top:10rpx;" form-type='submit' bindtap='confirmdelete'>确定</button>
   </view>
 </mes>
 </form>
@@ -223,8 +223,11 @@
         </view>
       </view>
       <view class="page__category-content page__new" wx:if='{{!stockHide}}'>
-        <view class='weui-title'>其他设置</view>
-        <view class="weui-cell1 weui-cell2">
+        <view class='weui-title com-flex-between' style="box-sizing:border-box;">
+          <block>商品起批设置</block>
+          <switch color="#f8b616" checked='{{wholesaleSwitch}}' bindchange="wholesaleSwitch"/>
+        </view>
+        <view class="weui-cell1 weui-cell2" wx:if="{{wholesaleSwitch}}">
           <view class="weui-cell__bd" style='width:200rpx'>
             <text>起批量</text>
           </view>
@@ -243,7 +246,7 @@
         <view class="weui-cell1 weui-cell2">
           <view class="weui-cell__bd">
             <text>仅允许商友可见</text>
-            <view class='ag-font'>与您成为商友关系的云分销商可查看</view>
+            <view class='ag-font'>与您成为商友关系的云进货商可查看</view>
           </view>
           <view class='weui-input'>
             <switch color="#f8b616" checked='{{switchChange}}' bindchange="switchChange"/>

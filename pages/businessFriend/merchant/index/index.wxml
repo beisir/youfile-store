@@ -1,19 +1,19 @@
 <view class='com-color-back' style="padding-top:10rpx;">
   <view class='page-header-tab com-flex-center'>
-    <view class='tab-item flexone {{tabType=="distribution"?"tab-item-ac":""}}' bindtap='choseTab' data-type='distribution'>云分销商</view>
+    <view class='tab-item flexone {{tabType=="distribution"?"tab-item-ac":""}}' bindtap='choseTab' data-type='distribution'>云进货商</view>
     <view class='tab-item flexone {{tabType=="supplier"?"tab-item-ac":""}}' bindtap='choseTab' data-type='supplier'>云供应商</view>
   </view>
 </view>
-<!-- 云分销商 -->
+<!-- 云进货商 -->
 <block wx:if="{{tabType=='distribution'}}">
   <view class='com-color-back inner-header'>
     <view class='bf-cont bf-cont1 header-content'>
-      <view class='bf-title'>云分销商数据</view>
-      <text>已达成商友关系的云分销商</text>
+      <view class='bf-title'>云进货商数据</view>
+      <text>已达成商友关系的云进货商</text>
       <view class='bt-view'>
         <view>
           <navigator class="weui_cells" url='../list/list'>
-            <view>{{purchaserNumber}}</view>云分销商</navigator>
+            <view>{{purchaserNumber}}</view>云进货商</navigator>
         </view>
         <view>
           <navigator class="weui_cells" url='../newMerchant/newMerchant'>
@@ -34,12 +34,12 @@
   <view class='bf-cont'>
     <view bindtap='addWholesaler' class='view-btn-item com-flex-center'>
       <image class='view-icon' src='/image/man-add-godls.png'></image>
-      <text>添加云分销商</text>
+      <text>添加云进货商</text>
     </view>
     <navigator url='../newMerchant/newMerchant'>
       <view class='view-btn-item com-flex-center'>
         <image class='view-icon' src='/image/man-blue.png'></image>
-        <text>新的云分销商</text>
+        <text>新的云进货商</text>
         <!-- <view class='red-ball'>2</view> -->
       </view>
     </navigator>
@@ -47,7 +47,7 @@
 
   <view class='part-title com-flex-center'>
     <view class='color-chunk'></view>
-    <text>全部云分销商</text>
+    <text>全部云进货商</text>
   </view>
 
   <view class='bf-cont'>
@@ -59,7 +59,7 @@
       </view>
     </navigator>
   </view>
-  <view class='list-tip'>共 {{purchaserNumber}} 个云分销商</view>
+  <view class='list-tip'>共 {{purchaserNumber}} 个云进货商</view>
 </block>
 
 <!-- 云供应商 -->
@@ -132,11 +132,11 @@
     <image src="/image/home.png"></image>
   </view>回首页</view>
 <view class='bottom_M'>
-  <navigator open-type="redirect" url='../../../page/workIndex/workIndex'>
+  <navigator hover-class='none' open-type="redirect" url='../../../page/workIndex/workIndex'>
     <image src="/image/ww1.png"></image>
     <view>工作台</view>
   </navigator>
-  <navigator url='/pages/mallActive/yunDist/yunDist'>
+  <navigator hover-class='none' url='/pages/mallActive/yunDist/yunDist'>
     <image src="/image/fenxiao2.png"></image>
     <view>云分销</view>
   </navigator>
@@ -144,7 +144,7 @@
     <image src="/image/admin1.png"></image>
     <view class='active'>商友录</view>
   </view>
-  <navigator open-type="redirect" url='../../../page/userM/userM'>
+  <navigator hover-class='none' open-type="redirect" url='../../../page/userM/userM'>
     <image src="/image/w11.png"></image>
     <view>我的</view>
   </navigator>

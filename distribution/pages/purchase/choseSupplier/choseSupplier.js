@@ -31,7 +31,7 @@ Page({
         pre.setData({
           supplierObj: {
             supplierNumber: arr[0].no,
-            name: arr[0].name,
+            name: arr[0].remark ? arr[0].remark:arr[0].name,
             supplierType: 'self_maintenance'
           }
         })
@@ -51,15 +51,16 @@ Page({
   getList(re){
     if (this.reloadList){return}
     this.reloadList = true
+    let arr = this.data.supplierList
     if (re) {
       app.pageRequest.pageData.pageNum = 0
-      this.setData({ supplierList: [] })
+      arr = []
     }
     if (this.data.tabStatus === 'sup'){
       Api.getSupplierList({ keyword: this.data.serText }).then(res => {
         this.reloadList = false
         this.setData({
-          supplierList: this.data.supplierList.concat(res.obj.result),
+          supplierList: arr.concat(res.obj.result),
           totalNum: res.obj.totalCount
         })
       })
