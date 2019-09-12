@@ -1,3 +1,5 @@
+<wxs src="../../../../public/filter.wxs" module="filter" />
+
 <!-- 设置备注 -->
 <spec
   show="{{addSpec}}"
@@ -15,7 +17,7 @@
     </view>
   </view>
   <view class='data-cont'  wx:if='{{greet!=""}}'>
-   <view><text>{{name}}：</text><view>{{greet}}</view></view>
+   <view><text>{{filter.my_slice(name,5)}}：</text><view>{{greet}}</view></view>
   </view>
 </view>
 <view class='bf-cont'>
