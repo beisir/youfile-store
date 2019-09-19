@@ -1,11 +1,11 @@
-export const baseUrl = 'https://dev-store.youlife.net.cn'
-export const imageUrl = 'https://dev-image.youlife.net.cn/'
-export const imageUrlSafe = 'https://dev-image-safe.youlife.net.cn/'
-export const basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnREZXY6YWIwMjE0MjhmMDZiZGQ2MzMwMzhiNWEzYzhmOTQxOWE=';
-export const uploadImg = 'https://dev-store.youlife.net.cn/base/image'
-export const payUrl = "https://dev-pay.youlife.net.cn/api/pay"
-export const indexUrl = "https://www.ecpower.cn"
-export const authUrl = "https://dev-accounts.youlife.net.cn"
+// export const baseUrl = 'https://dev-store.youlife.net.cn'
+// export const imageUrl = 'https://dev-image.youlife.net.cn/'
+// export const imageUrlSafe = 'https://dev-image-safe.youlife.net.cn/'
+// export const basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnREZXY6YWIwMjE0MjhmMDZiZGQ2MzMwMzhiNWEzYzhmOTQxOWE=';
+// export const uploadImg = 'https://dev-store.youlife.net.cn/base/image'
+// export const payUrl = "https://dev-pay.youlife.net.cn/api/pay"
+// export const indexUrl = "https://www.ecpower.cn"
+// export const authUrl = "https://dev-accounts.youlife.net.cn"
 
 // export const baseUrl = 'https://beta-store.youlife.net.cn'
 // export const imageUrl = 'https://beta-image.youlife.net.cn/'
@@ -17,14 +17,14 @@ export const authUrl = "https://dev-accounts.youlife.net.cn"
 // export const authUrl = "https://beta-accounts.youlife.net.cn"
 
 
-// export const indexUrl = "https://www.ecpower.cn"
-// export const payUrl = "https://pay.youlife.net.cn/api/pay"
-// export const baseUrl = 'https://store.youlife.net.cn'
-// export const imageUrl = 'https://image.youlife.net.cn/'
-// export const imageUrlSafe = 'https://image-safe.youlife.net.cn/'
-// export const basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=';
-// export const uploadImg = 'https://store.youlife.net.cn/base/image'
-// export const authUrl = "https://accounts.youlife.net.cn"
+export const indexUrl = "https://www.ecpower.cn"
+export const payUrl = "https://pay.youlife.net.cn/api/pay"
+export const baseUrl = 'https://store.youlife.net.cn'
+export const imageUrl = 'https://image.youlife.net.cn/'
+export const imageUrlSafe = 'https://image-safe.youlife.net.cn/'
+export const basicAuthorization = 'Basic QmVpSmluZ0JhaVJvbmdTaGlNYW9DbGllbnQ6ZTU2YThmMWZkOWJlMmMzMzNmYjdiZTcyNjVkMjRhYTM=';
+export const uploadImg = 'https://store.youlife.net.cn/base/image'
+export const authUrl = "https://accounts.youlife.net.cn"
 
 export const projectName = "小云店"
 export const payAppNum = "APP001"
