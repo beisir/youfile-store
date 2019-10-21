@@ -1,4 +1,4 @@
-<view wx:if="{{item.type=='img'}}" class='upload-img-box flex-center'>
+<view wx:if="{{item.type=='img'}}" class='upload-img-box flex-center' style="{{item.key ==='businessLicenseUrl'?'border-bottom:1rpx solid #eee':''}}">
 <view>
   <view class='upload-title'>{{item.name}}</view>
   <view class='upload-des'>上传您的{{item.name}}</view>
@@ -7,7 +7,10 @@
     <text>预览样例</text>
   </view>
 </view>  
-<image bindtap='uploadImg' mode='aspectFit' src='{{item.showUrl?baseUrl+item.showUrl:item.imgUrl}}' class='upload-img-icon'></image>
+<view class="upload-img-icon-box" bindtap='uploadImg'>
+  <image wx:if="{{item.showUrl}}" src="/image/img-cover.png" mode="aspectFit" style="left:0;right:0;margin:auto;height:150rpx;top:0;position:absolute;width:auto;"></image>
+  <image mode='aspectFit' src='{{item.showUrl?baseUrl+item.showUrl:item.imgUrl}}' class='upload-img-icon'></image>
+</view>
 </view>
 <view wx:else class='common-form-item {{noborder?"noborder":""}}'>
   <view class='com-flex-center content-box'>
@@ -18,6 +21,11 @@
       <!-- 选择框 -->
       <picker wx:if="{{item.type=='select'}}" disabled='{{item.disabled}}' class='flex-one' range="{{item.selectData}}" bindchange='pickerChange' data-index='{{index}}' range-key='name'>
         <text wx:if="{{item.value || item.value === 0}}">{{item.selectData[item.value].name}}</text>
+        <text class='input-placeholder-common-color' wx:else>请选择{{item.name}}</text>
+      </picker>
+      <!-- 选择日期 -->
+      <picker wx:if="{{item.type=='dateselect'}}" disabled='{{item.disabled}}' class='flex-one' bindchange='pickerChange' data-index='{{index}}' mode='date' data-type='date'>
+        <text wx:if="{{item.value}}">{{item.value}}</text>
         <text class='input-placeholder-common-color' wx:else>请选择{{item.name}}</text>
       </picker>
     </view>

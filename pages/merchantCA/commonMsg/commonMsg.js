@@ -16,6 +16,24 @@ Page({
     oneList: [],
     twoList: []
   },
+  get_GoodsRange(str){
+    if (this.data.nowStep == 1){
+      this.data.oneList.forEach((el, index) => {
+        if (el.key === 'merchantScope') {
+          this.setData({
+            ['oneList[' + index + '].value']: str
+          })
+        }
+      })
+    }
+    console.log(str)
+  },
+  showBottom() {
+    this.selectComponent("#rangeLayer").showBottom()
+  },
+  hideBottom() {
+    this.selectComponent("#rangeLayer").hideBottom()
+  },
   pickerChange(e) {
     let nowList = ''
     switch (this.data.nowStep) {
@@ -25,13 +43,21 @@ Page({
     }
     e = e.detail
     let index = e.currentTarget.dataset.index;  //第几个字段
-    if (!this.data[nowList][index].selectData){return}
-    let  item = this.data[nowList][index].selectData[e.detail.value],  //选中的项
-      nowItem = {}
+    if(e.currentTarget.dataset.type == 'date'){
+      // 日期
+      this.setData({
+        [nowList + '[' + index + '].value']: e.detail.value // 选中的index
+      })
+    } else {
+      if (!this.data[nowList][index].selectData) { return }
+      let nowItem = {}
+      var item = this.data[nowList][index].selectData[e.detail.value]  //选中的项
 
-    this.setData({
-      [nowList + '[' + index + '].value']: e.detail.value // 选中的index
-    })
+      this.setData({
+        [nowList + '[' + index + '].value']: e.detail.value // 选中的index
+      })
+    }
+    
     // 选择后
     switch (this.data[nowList][index].key) {
       case 'firstCategory':
@@ -112,6 +138,10 @@ Page({
       wx.navigateTo({
         url: '../bankList/bankList',
       })
+    }
+    // 商户经营范围
+    if (item.key === "merchantScope"){
+      this.showBottom()
     }
   },
   // 一二级分类
@@ -276,6 +306,9 @@ Page({
       return
     }
 
+    obj.businessLicenseValidityPeriod = new Date(obj.businessLicenseValidityPeriod)*1
+    obj.bankAccountOpeningPermitValidityPeriod = new Date(obj.bankAccountOpeningPermitValidityPeriod)*1
+
     obj.merchantNumber = this.data.message.merchantNumber
     Api.merchantCAMsg(obj).then(res => {
       this.setData({
@@ -383,6 +416,12 @@ Page({
           this.setItemData(index,{ value: data[el.key], showUrl: res.obj})
         })
       }
+      if (el.type === 'dateselect') {
+        if (data[el.key]) {
+          let time = new Date(data[el.key])
+          el.value = time.getFullYear() + "-" + (time.getMonth() + 1) + "-" + time.getDate()
+        }
+      }
       if(!el.type){
         if (el.key === 'merchantType'){return}
         if (el.key === 'bankCardType') { return }
@@ -426,7 +465,7 @@ Page({
     },
     {
       name: '商户类型',
-      value: app.globalData.projectType == 'xpl' ? '批发商' : '零售商',
+      value: app.globalData.projectType == 'xpl' ? '新批零商' : '新零售商',
       disabled: true,
       key: "merchantType"
     },
@@ -461,7 +500,8 @@ Page({
     {
       name: '商户经营范围',
       key: 'merchantScope',
-      value: ''
+      value: '',
+      disabled: true,
     },
     {
       name: '商户一级分类',
@@ -521,6 +561,9 @@ Page({
       this.getAddressMes(data.provinceCode, 'cityCode')
       this.getAddressMes(data.cityCode, 'countyCode')
       this.getClassone() //一级分类
+      if (this.data.message.merchantVO.merchantScope){
+        this.selectComponent("#rangeLayer").setChecked(this.data.message.merchantVO.merchantScope)
+      }
     })
   },
   // 动态生成二级列表
@@ -529,19 +572,32 @@ Page({
       name: '统一社会信用代码证号',
       key: 'unifiedCertificateNo',
       role: '3',
-      maxlength: 30
+      maxlength: 30,
+      placeholder: '请输入代码证号'
+    }, {
+      name: '营业执照',
+      key: 'businessLicenseUrl',
+      type: 'img',
+      role: '3',
+      imgUrl: '/image/xydmz.png',
+      eximg: 'default/businessLicense.png'
+    }, {
+      name: '有效期至',
+      key: 'businessLicenseValidityPeriod',
+      role: '3',
+      type: 'dateselect'
+    }, {
+      name: '手持营业执照门头照',
+      key: 'handCorpCodeUrl',
+      type: 'img',
+      imgUrl: '/image/shouchiyingyezhizhao.png',
+      role: '3',
+      eximg: 'default/handCorpCodeUrl.jpeg'
     }, {
       name: '开户许可证编号',
       key: 'openCertificateNo',
       role: '3',
       maxlength: 32
-    }, {
-      name: '统一社会信用代码证',
-      key: 'unifiedCertificateUrl',
-      type: 'img',
-      role: '3',
-      imgUrl: '/image/xydmz.png',
-      eximg: 'default/businessLicense.png'  
     }, {
       name: '银行开户许可证',
       key: 'bankOrganUrl',
@@ -550,20 +606,31 @@ Page({
       role: '3',
       eximg: 'default/licenceForOpeningAccounts.png'  
     }, {
+      name: '有效期至',
+      key: 'bankAccountOpeningPermitValidityPeriod',
+      role: '3',
+      type: 'dateselect'
+    }, {
+      name: '商户姓名',
+      key: 'legalPerson',
+      role: '1',
+      maxlength: 30
+    }, {
+      name: '商户电话',
+      key: 'legalPhone',
+      role: '1',
+      inputType: 'number',
+      maxlength: 18
+    }, {
       name: '法人姓名',
       key: 'legalPerson',
-      role: '1,2,3',
+      role: '2,3',
       maxlength: 30
     }, {
       name: '法人电话',
       key: 'legalPhone',
-      role: '1,2,3',
+      role: '2,3',
       inputType: 'number',
-      maxlength: 18
-    }, {
-      name: '法人身份证号',
-      key: 'legalIdCard',
-      role: '1,2,3',
       maxlength: 18
     }, {
       name: '营业执照编号',
@@ -577,6 +644,28 @@ Page({
       imgUrl: '/image/xydmz.png',
       role: '2',
       eximg: 'default/businessLicense.png'
+    }, {
+      name: '有效期至',
+      key: 'businessLicenseValidityPeriod',
+      role: '2',
+      type: 'dateselect'
+    }, {
+      name: '手持营业执照门头照',
+      key: 'handCorpCodeUrl',
+      type: 'img',
+      imgUrl: '/image/shouchiyingyezhizhao.png',
+      role: '2',
+      eximg: 'default/handCorpCodeUrl.jpeg'
+    }, {
+      name: '商户身份证号',
+      key: 'legalIdCard',
+      role: '1',
+      maxlength: 18
+    },{
+      name: '法人身份证号',
+      key: 'legalIdCard',
+      role: '2,3',
+      maxlength: 18
     }, {
       name: '身份证正面',
       key: 'idCardFaceUrl',
@@ -592,22 +681,22 @@ Page({
       role: '1,2,3',
       eximg: 'default/IDcardReverse.png'
     }, {
-      name: '手持身份证',
-      key: 'handIdCardUrl',
+      name: '手持身份证门头照',
+      key: 'handheldIdCardPhotoUrl',
       type: 'img',
       imgUrl: '/image/scsfz.png',
-      role: '1,2',
-      eximg: 'default/handleIDcard.png'
+      role: '1, 2, 3',
+      eximg: 'default/handheldIdCardPhotoUrl.jpeg'
     }, {
       name: '经营场所门头照',
       key: 'storePhotoUrl',
       type: 'img',
       imgUrl: '/image/mtz.png',
-      role: '1,2,3',
+      role: '2,3',
       eximg: 'default/shopFront.jpg'
     }, {
-      name: '收银台场景照',
-      key: 'scenePhoneUrl',
+      name: '收银台场景照(含店内产品)',
+      key: 'cashierSceneUrl',
       type: 'img',
       imgUrl: '/image/syt.png',
       role: '1,2,3',
@@ -636,11 +725,16 @@ Page({
       disabled: true,
       role: '1,2,3'
     }, {
-      name: '开户名',
+      name: '开户人姓名',
       key: 'accountName',
-      role: '1,2,3',
+      role: '1,2',
       maxlength: 30
     }, {
+      name: '开户企业名',
+      key: 'accountName',
+      role: '3',
+      maxlength: 30
+    },{
       name: '开户银行总行',
       key: 'headBankCode',
       role: '1,2,3',
@@ -654,14 +748,14 @@ Page({
       type: 'select',
       role: '1,2,3'
     }, {
-      name: '开户行城市',
+      name: '开户银行城市',
       key: 'bankCityCode',
       value: '',
       code: '',
       type: 'select',
       role: '1,2,3'
     }, {
-      name: '开户行支行',
+      name: '开户银行支行',
       key: 'subBankCode',
       value: '',
       code: '',
@@ -679,7 +773,14 @@ Page({
       key: 'handBankCardUrl',
       type: 'img',
       imgUrl: '/image/scyhk.png',
-      role: '1,2',
+      role: '1',
+      eximg: '/default/handlebankCard.png'
+    }, {
+      name: '手持银行卡门头照',
+      key: 'handheldBankCardHeadPhotoUrl',
+      type: 'img',
+      imgUrl: '/image/scyhk.png',
+      role: '2',
       eximg: '/default/handlebankCard.png'
     }]
     if (this.data.merchantType) {

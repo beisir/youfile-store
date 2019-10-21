@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "formItem": "../formItem/formItem"
+    "formItem": "../formItem/formItem",
+    "goodsRangeLayer": "/assembly/goodsRangeLayer/goodsRangeLayer"
   },
   "navigationBarTitleText": "资质信息"
 }

@@ -1,25 +1,77 @@
 <view class='com-box'>
-  <image wx:if="{{message.auditStatus == 'fail'}}" src='/image/nopass-icon.png' class='status-img'></image>
-  <image wx:if="{{message.auditStatus == 'success'}}" src='/image/pass-icon.png' class='status-img'></image>
-  <view style='padding:20rpx 30rpx 50rpx;'>
-    <view class='own-title'>{{message.merchantVO.merchantName}}</view>
-    <view class='status'>
-      <text wx:if="{{message.auditStatus == 'init'}}" style='color:#ff9900'>信息审核中</text>
-      <text wx:if="{{message.auditStatus == 'success'}}" style='color:#f8b616'>审核通过</text>
-      <text wx:if="{{message.auditStatus == 'fail'}}" style='color:#f11111'>审核未通过</text>
+  <view class="com-flex-center title-box">
+    <image wx:if="{{message.auditStatus == 'success'}}" src="/image/qrighticon.png" mode='aspectFit' class="title-icon"></image>
+    <image wx:else src="/image/un-qrighticon.png" mode='aspectFit' class="title-icon"></image>
+    <view class="title-msg-box">
+      <view class="title-text">小云店商户认证</view>
+      <view class="gray-text">小云店商户资质认证，开通支付</view>
     </view>
-    <view class='time' wx:if="{{message.auditTime}}">审核时间：{{message.auditTime}}</view>
-    <view class='des-title'>审核详细信息</view>
-    <view class='des-msg'>
-      <text wx:if="{{message.auditStatus == 'init'}}">我们会尽快为您审核您的资质信息</text>
-      <text wx:if="{{message.auditStatus == 'success'}}">恭喜您审核通过，您已开通在线支付功能</text>
-      <text wx:if="{{message.auditStatus == 'fail'}}" style='color:#f11111'>{{message.auditRemark?message.auditRemark:''}}</text>
+    <!-- <image class="com-right-icon rotate-tri" src="/image/poster-right-in.png"></image> -->
+  </view>
+  <view style="border-bottom:1rpx solid #f0f0f0;margin:0 30rpx;"></view>
+  <view class='com-box' style="margin:0;">
+    <image wx:if="{{message.auditStatus == 'fail'}}" src='/image/nopass-icon.png' class='status-img'></image>
+    <image wx:if="{{message.auditStatus == 'success'}}" src='/image/pass-icon.png' class='status-img'></image>
+    <view style='padding:20rpx 30rpx 50rpx;'>
+      <view class='own-title'>{{message.merchantVO.merchantName}}</view>
+      <view class='status'>
+        <text wx:if="{{message.auditStatus == 'init'}}" style='color:#ff9900'>信息审核中</text>
+        <text wx:if="{{message.auditStatus == 'success'}}" style='color:#f8b616'>审核通过</text>
+        <text wx:if="{{message.auditStatus == 'fail'}}" style='color:#f11111'>审核未通过</text>
+      </view>
+      <view class='time' wx:if="{{message.auditTime}}">审核时间：{{message.auditTime}}</view>
+      <view class='des-title'>审核详细信息</view>
+      <view class='des-msg'>
+        <text wx:if="{{message.auditStatus == 'init'}}">我们会尽快为您审核您的资质信息</text>
+        <text wx:if="{{message.auditStatus == 'success'}}">恭喜您审核通过，您已开通在线支付功能</text>
+        <text wx:if="{{message.auditStatus == 'fail'}}" style='color:#f11111'>{{message.auditRemark?message.auditRemark:''}}</text>
+      </view>
+    </view>
+    <view class='btn-box' wx:if="{{message.auditStatus == 'fail' || message.auditStatus == 'success'}}">
+      <view class='btn' bindtap='toDetail'>
+        <text wx:if="{{message.auditStatus == 'success'}}">查看详情</text>
+        <text wx:if="{{message.auditStatus == 'fail'}}">修改提交</text>
+      </view>
     </view>
   </view>
-  <view class='btn-box' wx:if="{{message.auditStatus == 'fail' || message.auditStatus == 'success'}}">
-    <view class='btn' bindtap='toDetail'>
-      <text wx:if="{{message.auditStatus == 'success'}}">查看详情</text>
-      <text wx:if="{{message.auditStatus == 'fail'}}">修改提交</text>
+</view>
+
+<!-- <view class="com-box" bindtap="showLayer">
+  <view class="com-flex-center title-box">
+    <image src="/image/gongicon.png" mode='aspectFit' class="title-icon"></image>
+    <view class="title-msg-box">
+      <view class="title-text">生活猫供应商认证</view>
+      <view class="gray-text">生活猫供应商认证后，您的商品能向万店分销</view>
     </view>
+    <image class="com-right-icon" src="/image/poster-right-in.png"></image>
   </view>
+</view>
+<view class="com-box">
+  <view class="com-flex-center title-box">
+    <image src="/image/xiaoicon.png" mode='aspectFit' class="title-icon"></image>
+    <view class="title-msg-box">
+      <view class="title-text">生活猫分销商认证</view>
+      <view class="gray-text">生活猫分销商认证后，无需囤货，分销商品，赚取5~40%收益</view>
+    </view>
+    <image class="com-right-icon" src="/image/poster-right-in.png"></image>
+  </view>
+</view> -->
+
+<view class="layer-box" hidden="{{layerHide}}">
+  <view class="layer-msg-box"  animation="{{animation}}">
+    <view class="layer-title com-flex-allcenter">生活猫云分销商入驻协议<image src="/image/close.png" class="close-icon" bindtap="hideLayer"></image></view>
+    <view class="layer-text-box">
+    为了规范生活猫供货商平台经营秩序，明确供货商、分销商及生活猫供货商平台的权利义务，保障各方消费者的合法权益，特拟定本协议。
+    一、协议内容
+（一）本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台
+（一）本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台
+（一）本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台
+（一）本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台本协议有生活猫供应商平台提供，亦是生活猫供应商平台
+    </view>
+    <view class="com-flex-allcenter" style="padding:30rpx 0;font-size:24rpx;">
+      <switch style='transform: scale(0.8);' type='checkbox' color='#f8b616'/>我已阅读并同意《分销商服务协议》
+    </view>
+    <view class="sure-btn">确定</view>
+  </view>
+  <image src="/image/envelope.png" class="layer-img"></image>
 </view>

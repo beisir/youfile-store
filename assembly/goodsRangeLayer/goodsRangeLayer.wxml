@@ -1,0 +1,5 @@
+<bottomLayer id='bottom' title="主营范围">
+  <view class='busArea'>
+    <button wx:for='{{shoplist}}' bindtap='selectedFun' data-index='{{index}}' wx:key='index' style='background:{{item.selected?item.colorTrue:"#fff"}};color:{{item.selected?"#fff":""}}' hover-class='none'>{{item.name}}</button>
+  </view>
+</bottomLayer>

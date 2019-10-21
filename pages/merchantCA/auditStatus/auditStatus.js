@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    layerHide: true
   },
   getDetail() {
     Api.merchantDeatail().then(res => {
@@ -29,10 +29,38 @@ Page({
       url: '../commonMsg/commonMsg',
     })
   },
+  showLayer(){
+    this.setData({
+      layerHide: false
+    },()=>{
+      setTimeout(()=>{
+        this.animation.bottom(0).step()
+        this.setData({
+          animation: this.animation.export()
+        })
+      },300)
+    })
+  },
+  hideLayer(){
+    this.animation.bottom('-100%').step()
+    this.setData({
+      animation: this.animation.export()
+    },()=>{
+      setTimeout(() => {
+        this.setData({
+          layerHide: true
+        })
+      }, 800)
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.animation = wx.createAnimation({
+      duration: 1000,
+      timingFunction: 'ease',
+    })
   },
 
   /**
