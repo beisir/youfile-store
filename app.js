@@ -22,7 +22,7 @@ App({
     // wx.setStorageSync("storeId", "S1000631")
     // wx.setStorageSync("storeId", "S1000349")
     // wx.setStorageSync("storeId", "S001")
-    // wx.setStorageSync("storeId", "S1000323")
+    wx.setStorageSync("storeId", "S1000183")  // 默认店铺
     // 获取小程序更新机制兼容
     if (wx.canIUse('getUpdateManager')) {
       const updateManager = wx.getUpdateManager()
